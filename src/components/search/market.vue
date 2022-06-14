@@ -1,7 +1,6 @@
 <template>
   <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
-    <Skeleton :loading="prodLoader" />
 
     <b-alert v-if="products.data.length === 0" show variant="warning"
       ><a href="#" class="alert-link">

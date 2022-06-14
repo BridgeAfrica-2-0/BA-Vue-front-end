@@ -9,7 +9,7 @@
       @load="onMapLoad"
     >
       <MglMarker
-        v-for="(business, key) in businesses"
+        v-for="(business, key) in businessesItems.data"
         :key="business.id"
         :coordinates="[business.lng , business.lat]"
       >
@@ -96,13 +96,15 @@
 </template>
 <script>
 import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   components: {
     MglMap,
     MglMarker,
     MglPopup,
   },
-  props: ["businesses", "products", "networks"],
+  props: ["businesses", "products", "networks", "defaultLocation", "isSearched"],
   data() {
     return {
       filterProduct: null,
@@ -110,8 +112,16 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 12
     };
+  },
+  watch: {
+    isSearched: {
+      immediate: true,
+      handler(newValue, oldValue) {
+          this.updateMapPosition({location: this.defaultLocation});
+      }
+    }
   },
   methods: {
     filtre(id){
@@ -137,9 +147,27 @@ export default {
       ).values()
     ]
     return result;
+    },
+    updateMapPosition({location}) {
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${process.env.VUE_APP_MAPBOX_TOKEN}`;
+      axios.get(endpoint).then((res) => {
+         if (typeof res.data.features[0]['center'] !== 'undefined') {
+          this.center = res.data.features[0]['center'];
+         }
+      }).catch((err) => {
+        console.log({ err: err });
+      });
+     
     }
   },
   computed : {
+    ...mapGetters({
+      businessesItems: "business/getBusiness",
+    }),
+    businessesItems() {
+      
+      return this.$store.getters["allSearch/getBusinesses"];
+    },
     FilterProduct(){
       return this.filterProduct;
     },
@@ -152,8 +180,7 @@ export default {
     let unique = [];
     const subject = [...new Set(products)];
     let rand = Math.floor(Math.random() * 10000) /100000000 ; 
-
-  }
+  },
 };
 </script>
 <style scoped> 

@@ -15,7 +15,7 @@
 
           <router-link
             class="d-inline-block align-top mt-1"
-            :to="{ name: 'home1' }"
+            :to="{ name: 'newHome' }"
           >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
@@ -57,34 +57,19 @@
                   class="input-group-append color-mobile"
                   style="border: none"
                 >
-                  
+                  <multiselect 
+                   :value="city" 
+                    :options="citiesValues" 
+                    placeholder="Select City" 
+                    class="search-hh w-100"
+                    style="border-left: none"
+                    label="label" 
+                    track-by="code"
+                    @input="setSelectedLocation"
+              ></multiselect>
+    
                 </div>
 
-               
-                <vue-bootstrap-typeahead    
-                v-model="credentials.location"
-                :data="neigbourhoods"
-                :minMatchingChars="1"
-                :maxMatches="10"
-               style="border:0px"
-                :serializer="(item) => item.name"
-                :placeholder="credentials.location_placeholder"
-                class="search-hh w-100 balala "
-              >
-
-               <template slot="prepend">
-        <span
-                    class="input-group-text border-left-0 color-mobile"
-                    style=" width: 40px;  border:none"
-                  >
-                    <b-icon
-                      icon="geo-alt"
-                      style="color: #e75c18"
-                      font-scale="1.5"
-                    ></b-icon>
-                  </span>
-      </template>
-</vue-bootstrap-typeahead >
 
               </b-input-group>
             </span>
@@ -103,18 +88,19 @@
                 data-original-title=""
                 title=""
                 v-on:keyup.enter="getKeyword"
-              />
+              />              
 
-              <vue-bootstrap-typeahead
-                v-model="credentials.location"
-                :data="neigbourhoods"
-                :minMatchingChars="1"
-                :maxMatches="10"
-              
-                :serializer="(item) => item.name"
-                :placeholder="credentials.location_placeholder"
-                class="search-hh w-44"
-              />
+              <multiselect 
+             :value="city" 
+              :options="citiesValues" 
+              placeholder="Select City" 
+              class="search-hh w-44 city-search"
+              style="border-left: none"
+               label="label" 
+               track-by="code"
+               @input="setSelectedLocation"
+              ></multiselect>
+
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
@@ -195,7 +181,7 @@
                     /> </span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body">
+                  <div class="popover-body" v-if="messages.length">
                     <p class="font-weight-bold">Messages</p>
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
@@ -233,7 +219,7 @@
                               }}
                             </div>
                             <div class="small text-muted">
-                              {{ message.message.substring(0, 20) }}
+                              {{ checkIfExists(message, 'message') && message.message != null ? message.message.substring(0, 20) : '' }}
                             </div>
                           </div>
                         </div>
@@ -285,7 +271,7 @@
                           
                         </div>
                         <div class="d-flex flex-column ml-3">
-                          <div>{{ notification.notification_text }}</div>
+                          <div class="wrap-text">{{ notification.notification_text }}</div>
                           <div class="small text-muted">
                             <span class="text-capitalize">
                               {{
@@ -625,20 +611,17 @@
 
 <script>
 import _ from "lodash";
-
 import Button from "@/components/ButtonNavBarFind.vue";
 import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
-import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
-    VueBootstrapTypeahead,
     // NavBarNotifications
   },
   props: {
@@ -648,9 +631,8 @@ export default {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
-          location:  '',
-          location_placeholder:this.$t("home.Location"),
-          
+          location:  { code: 62, label: 'Yaoundé' },
+          location_placeholder:this.$t("home.Location")
         };
       },
     },
@@ -665,9 +647,9 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-     // query: "",
       selectedUser: null,
       users: [],
+      citiesValues: [],
     };
   },
 
@@ -677,39 +659,18 @@ export default {
       user: "auth/profilConnected",
       auth: "auth/user",
      // neigbourhoods: "auth/neigbourhoods",
-
-      neigbourhoods: "auth/cities",
+      cities: "auth/cities",
     }),
-
-
-//   neigbourhoods(){
-
-// //     let nei=  this.$store.getters["auth/cities"];
-// // const arrayFailed = Object.entries(nei).map((arr) => ({
-// //   id: arr[0],
-// //   name: arr[1],
-// // }));
-
-// return this.$store.getters["auth/cities"];
-
-
-//   },
-
-
-
-
-    query(){
-
+    city(){
       return this.credentials.location;
     }
   },
   beforeMount() {
-    this.getCities();
-    this.getLocation();
+    // this.getLocation();
   },
   created() {
     //check for authentication
-
+    this.getCities();
     this.islogin = this.$store.getters["auth/profilConnected"];
 
 
@@ -761,6 +722,8 @@ export default {
 
       this.updateNotificationEvent();
     }
+    
+    console.log('updated city: ', this.credentials.location);
   },
 
   watch: {
@@ -783,24 +746,9 @@ export default {
       axios
         .get(`visitor/search/city?city=${newQuery}`)
         .then(({ data }) => {
-
-          console.log(data);
           this.$store.commit("auth/setCities", data.data);
         });
     },
-
-
-    // old query method
-    // query(newQuery) {
-    //   axios
-    //     .get(`neighborhoods/${newQuery}`)
-    //     .then(({ data }) => {
-    //       this.$store.commit("auth/setneigbourhoods", data.data);
-    //     });
-    // },
-
-
-
   },
   
   filters: {
@@ -818,8 +766,11 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
-
-
+    setSelectedLocation(value)
+    {
+      this.city = value;
+      this.credentials.location = {code: value.code, label: value.label };
+    },
     profileSenderImange(image) {
       if (!image)
         return null;
@@ -855,23 +806,21 @@ export default {
 
 
   getCities(){
-
-
-
-this.$store
-          .dispatch("auth/cities", {
-           
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities = this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
           })
           .catch((err) => {
             console.log({err:err});
           });
-
-
-
-
-      },
-
-    getLocation() {
+  },
+  getLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
@@ -932,17 +881,13 @@ this.$store
     },
 
     getKeyword() {
- 
 
       if (!this.credentials.keyword) return false;
-
      
-       if (this.$route.name != "search") {
-   
-      this.$emit('updateSearchKeyword', this.credentials.keyword)
-       }
+      if (this.$route.name != "search") { 
+        this.$emit('updateSearchKeyword', this.credentials.keyword)
+      }
      
-
       if (this.$route.name != "search") {
         
         this.$store
@@ -955,14 +900,14 @@ this.$store
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword,  location:this.credentials.location, },
+          query: { keyword: this.credentials.keyword,  location: this.credentials.location, },
         });
       }
     },
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? { name: "dashboard" } : { name: "home1" };
+          return this.profile ? { name: "dashboard" } : { name: "newHome" };
         },
       };
       try {
@@ -1004,7 +949,7 @@ this.$store
 
         if (response.success) {
           loader.hide();
-         // this.$router.push({ name: "home1" });
+        
           this.Logout();
         }
         return false;
@@ -1094,8 +1039,12 @@ this.$store
         })
         .catch((error) => console.log(error));
     },
+    checkIfExists(object, key) {
+      return _.has(object, key);
+    }
   },
 };
+
 </script>
 <style>
 
@@ -1346,5 +1295,9 @@ this.$store
 .balala .form-control{
   border: 0px;
 }
+}
+
+.city-search .multiselect__tags,.city-search .multiselect__select{
+  height: 100% !important;
 }
 </style>

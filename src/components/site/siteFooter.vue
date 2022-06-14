@@ -138,7 +138,7 @@
                 <li class="white ">
                  
 
-                   <router-link class="over" :to="{ name: 'home1' }">{{
+                   <router-link class="over" :to="{ name: 'newHome' }">{{
                     $t("home.Home")
                   }}</router-link>
                 </li>

@@ -64,11 +64,35 @@
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
 
                 <span
-                  >{{ business_about.address }}
+                  >    <b> {{$t('businessowner.Address')}}: </b>  {{ business_about.address }}
                   <!-- {{ business_about.city }}, 
              {{ business_about.country[0].name }} -->
                 </span>
               </p>
+
+
+               <p>
+                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+
+                <span
+                  > <b> {{ $t("welcome.City") }}: </b>{{ business_about.city }}
+                
+                </span>
+              </p>
+
+
+               <p>
+                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+
+                <span  v-if="business_about.neigborhood[0]"
+                  > <b> {{$t('welcome.Neighbour')}}: </b>{{ business_about.neigborhood[0].name }}
+                
+                </span>
+              </p>
+
+
+
+
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
                 <span v-if="business_about.website">
@@ -504,7 +528,7 @@
               label-size="sm"
             >
               <VuePhoneNumberInput
-                fetch-country
+                 default-country-code="CM"
                 v-model="business_about_input.phone1"
               />
             </b-form-group>
@@ -517,7 +541,7 @@
               label-size="sm"
             >
               <VuePhoneNumberInput
-                fetch-country
+                 default-country-code="CM"
                 v-model="business_about_input.phone2"
               />
             </b-form-group>

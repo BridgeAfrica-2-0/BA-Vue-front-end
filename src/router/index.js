@@ -14,6 +14,7 @@ import RecoverPass3 from "../views/recoverPassword3.vue";
 import verifyAccount from "../views/verifyAccount.vue";
 
 import createService from "@/views/createService";
+import newHome from "@/views/newHome";
 
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
@@ -121,7 +122,7 @@ const routes = [
 
 
   {
-    path: "/",
+    path: "oldhome",
     name: "home1",
     component: home1,
 
@@ -433,6 +434,13 @@ const routes = [
     path: "/search",
     name: "GlobalSearch",
     component: search,
+
+  },
+
+  {
+    path: "/",
+    name: "newHome",
+    component: newHome,
 
   },
 

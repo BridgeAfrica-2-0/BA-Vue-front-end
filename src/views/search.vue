@@ -561,6 +561,8 @@
                 :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
+                :defaultLocation="searchParams.location.label"
+                :isSearched="isSearched"
               />
             </div>
           </div>
@@ -688,22 +690,33 @@ export default {
     }
 
     if (this.islogin) {
-      this.searchParams.location = this.$route.query.location
-        ? this.$route.query.location
-        : this.$store.getters["auth/user"].user.city;
+
+      if (this.$store.getters["auth/user"].user.city_id) {
+          // this.searchParams.location = this.$route.query.city_id; 
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };     
+      } else if (this.$route.query.location) {
+          this.searchParams.location = this.$route.query.location;
+      } else {
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };
+      }
 
       this.searchParams.location_placeholder = this.searchParams.location
         ? this.searchParams.location
         : this.$t("home.Location");
+      
     } else {
-      this.searchParams.location = this.$route.query.location
-        ? this.$route.query.location
-        : "";
+    
+      if (this.$route.query.location) {
+          this.searchParams.location = this.$route.query.location;
+      } else {
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };
+      }
 
       this.searchParams.location_placeholder = this.$route.query.location
         ? this.$route.query.location
         : this.$t("home.Location");
     }
+
 
     this.onProcessQuery();
     this.getLocation();
@@ -763,7 +776,7 @@ export default {
 
       businessPage: 1,
       //selectcategories:[],
-
+      isSearched: false,
       categories_filters: [],
       items: [
         { label: this.$t("search.All") },
@@ -1810,6 +1823,7 @@ export default {
         .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
         .then((res) => {
           // console.log("categories loaded!");
+          this.isSearched = !this.isSearched;
         })
         .catch((err) => {
           console.log("Error erro!");

@@ -188,7 +188,7 @@ export default {
     },
 
     gotoBusiness(id) { 
-      // this.$router.push({name: 'home1'});
+      
       if(this.$route.name == 'BusinessFollower'){
           // this.$emit('gotoabout')
           this.$router.push(`/business/${id}#about`);

@@ -16,25 +16,10 @@
     <br />
 
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
-      <b-form-group
-        v-if="nameOfCategory"
-        label-cols-lg="3"
-        :label="$t('search.Categories')"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
-        class="mb-0 pt-6 text-left"
-      >
-      </b-form-group>
 
-      <b-form-select
-        v-model="nameOfCategory"
-        :options="categoriesAll"
-        class="mb-2"
-        v-if="nameOfCategory && !activateMatching"
-      >
-      </b-form-select>
+  
 
-      <span>
+        <span v-if="suggestedKeyword.length">
         <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
@@ -51,6 +36,26 @@
         <b-link v-b-modal="'suggestedmodal'">{{ $t("search.See_all") }}</b-link>
         <hr />
       </span>
+
+
+
+      <b-form-group
+        v-if="nameOfCategory"
+        class="mb-0 pt-6 text-left"
+        label-cols-lg="12"
+        :label="$t('search.Category')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+      >
+      <b-form-select
+        v-model="nameOfCategory"
+        :options="categoriesAll"
+        class="mb-2 select-category"
+        v-if="nameOfCategory && !activateMatching"
+      >
+      </b-form-select>
+
+      </b-form-group>
 
       <div v-if="activateMatching" class="pb-2">
         <b-badge
@@ -134,13 +139,7 @@
         </div>
 
         <br />
-        <!-- <b-button
-          :disabled="selectedFilter.length < 1"
-          variant="primary"
-          class="m-3 float-right"
-        >
-          {{ $t("search.Search") }}
-        </b-button> -->
+
       </b-modal>
 
       <!--  blec implementation for neigbourhood stuff -->
@@ -177,19 +176,17 @@
                 class="mb-0 text-left"
               >
               </b-form-group>
-
-              <vue-bootstrap-typeahead
-                v-model="city"
-                :data="cities"
-                :minMatchingChars="0"
-                @hit="searchThiscity(city)"
-                v-on:keyup.enter="searchThiscity(city)"
-                :maxMatches="10"
-                :serializer="(item) => item.name"
-                placeholder="City"
-                class=""
-              />
-            </div>
+                  <multiselect 
+                  :value="city" 
+                  :options="citiesValues" 
+                  placeholder="Select City" 
+                  class="search-hh w-100 city-search"
+                  style="border-left: none"
+                  label="label" 
+                  track-by="code"
+                  @input="setSelectedLocation"
+                ></multiselect>
+          </div>
 
             <div>
               <b-form-group
@@ -396,102 +393,10 @@
         <hr />
       </span>
 
-      <!-- <b-form-group
-        label-cols-lg="12"
-        :label="$t('search.Neighbourhood')"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
-        class="mb-0 text-left"
-      >
-        <b-form-radio
-          v-for="(nei, i) in lneighbourhoods.slice(0, 4)"
-          :key="i.value"
-          v-model="selectedneigbourhood"
-          :value="nei.id"
-          @change="searchByNeigbourhood(nei)"
-          name="sub-filters"
-        >
-          {{ nei.name }}
-        </b-form-radio>
-      </b-form-group>
-      <b-link v-b-modal="'Neighbourhood'"> {{ $t("search.See_all") }} </b-link>
-      <br /> -->
-
-      <!-- <b-link v-b-modal="'distance'"> {{ $t("search.See_all") }} </b-link> -->
-
       <div>
-        <!-- <span v-if="filterType == '1' || filterType == '4'">
-          <b-form-group
-            label-cols-lg="12"
-            :label="$t('search.Neighbourhood')"
-            label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0 text-left"
-          >
-            <b-form-radio
-              v-for="(nei, i) in userNeighbourhoods.slice(0, 4)"
-              :key="i.value"
-              v-model="selectedneigbourhood"
-              :value="nei.id"
-              @change="searchByNeigbourhood(nei)"
-              name="sub-filters"
-            >
-              {{ nei.name }}
-            </b-form-radio>
-          </b-form-group>
-
-          <b-link v-b-modal="'userNeighbourhood'">
-            {{ $t("search.See_all") }}
-          </b-link>
-
-          <br />
-
-          <span v-if="filterType == '4'">
-            <label
-              ><b>{{ $t("search.Price_Range") }}</b></label
-            >
-            <b-form-input
-              id="range-2"
-              v-model="priceRange"
-              type="range"
-              min="100"
-              max="2000000"
-              step="0.5"
-              @change="searchByPrice"
-            ></b-form-input>
-            <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
-          </span>
-        </span> -->
+     
       </div>
     </div>
-
-    <!-- Network -->
-    <!-- <div v-if="filterType == '1' || filterType == '4'">
-      <hr />
-      <b-form-group
-        label-cols-lg="12"
-        :label="$t('search.Distance')"
-        label-size="md"
-        label-class="font-weight-bold pt-0 text-left"
-        class="mb-0 text-left"
-      >
-        <b-row>
-          <b-col>
-            <b-form-input
-              v-model="distance"
-              :placeholder="$t('general.distance_in_KM')"
-            ></b-form-input>
-          </b-col>
-          <b-col>
-            <b-button variant="primary" @click="searchByDistance">
-              <b-spinner v-if="prodLoader" small type="grow"></b-spinner>
-              {{ $t("general.search") }}</b-button
-            >
-          </b-col>
-        </b-row>
-      </b-form-group>
-    </div> -->
-    <!-- End Network -->
 
     <!-- Network -->
     <div v-if="filterType == '3'">
@@ -692,14 +597,7 @@
         </b-form-radio>
       </div>
 
-      <!-- <br />
-      <b-button
-        @click="searchByFilter(filter)"
-        :disabled="selected_sub_cat.length < 1"
-        variant="primary"
-        class="m-3 float-right"
-        >{{ $t("search.Search") }}
-      </b-button> -->
+
     </b-modal>
 
     <!-- Sub categories modal -->
@@ -718,14 +616,7 @@
         </b-form-radio>
       </div>
 
-      <!-- <br />
-      <b-button
-        @click="searchByFilter(filter)"
-        :disabled="selected_sub_cat.length < 1"
-        variant="primary"
-        class="m-3 float-right"
-        >{{ $t("search.Search") }}
-      </b-button> -->
+
     </b-modal>
   </div>
 </template>
@@ -748,7 +639,7 @@ export default {
     "activateMatching",
     "Selectedcategory",
     "Selectedparentcategory",
-    "categoryNameSelected",
+    "categoryNameSelected"
   ],
   watch: {
     query(newQuery) {
@@ -757,11 +648,7 @@ export default {
       });
     },
 
-    city(newQuery) {
-      axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
-        this.$store.commit("auth/setCities", data.data);
-      });
-    },
+
 
     categoryNameSelected: function (newValue, oldValue) {
       this.nameOfCategory = newValue;
@@ -1009,7 +896,6 @@ export default {
       loading: false,
       matchingCategory: [],
       query: "",
-      city: "",
       showMore: false,
       // [Edouard] data
       nameOfCategory: null,
@@ -1048,7 +934,7 @@ export default {
 
       networkSelect: {
         category: null,
-        country: null,
+        country: 1,
         region: null,
         division: null,
         council: null,
@@ -1078,6 +964,7 @@ export default {
       default_category: "Agriculture",
       selectedfilter: "",
       map: false,
+      citiesValues: [],
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },
         { value: "Chocolate", text: "Chocolate" },
@@ -1864,6 +1751,9 @@ export default {
   },
 
   computed: {
+    city(){
+     return this.$store.getters["allSearch/getLocation"];
+    },
     categoryRendering() {
       return this.matchingCategory;
     },
@@ -1874,16 +1764,6 @@ export default {
 
     suggestedKeyword() {
       return this.$store.state.allSearch.suggestedKeyword;
-    },
-
-    cities() {
-      let nei = this.$store.getters["auth/cities"];
-      // const arrayFailed = Object.entries(nei).map((arr) => ({
-      //   id: arr[0],
-      //   name: arr[1],
-      // }));
-
-      return nei;
     },
 
     categoriesAll() {
@@ -1936,6 +1816,7 @@ export default {
   created() {
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
+    this.getCities();
     this.getUserNeibourhoods();
     this.strategies = {
       2: () => PeopleFilter,
@@ -1953,7 +1834,7 @@ export default {
         return item.id === cat.id
           ? { ...item, actived: true }
           : { ...item, actived: false };
-      });
+      }); 
     },
 
     changesearchkeyword(keyword) {
@@ -1965,7 +1846,7 @@ export default {
       this.activateMatching = false;
       this.nameOfCategory = null;
       this.query = null;
-      this.city = null;
+      // this.city = null;
       this.$store.commit("marketSearch/setSubCat", []);
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
@@ -1987,7 +1868,7 @@ export default {
       this.searchParams.filter_id = null;
 
       this.searchParams.neighbourhood = null;
-      this.searchParams.city = null;
+      this.searchParams.location = { code: 62, label: 'Yaoundé' };
       this.searchParams.distanceInKM = null;
       this.searchParams.price_range = null;
 
@@ -2499,6 +2380,16 @@ export default {
       // }
     },
 
+    getCities(){
+      const cities =  this.$store.getters["auth/cities"];
+      for (let index in cities) {
+        this.citiesValues.push({
+          label: cities[index].name,
+          code: cities[index].id
+        });
+      }
+    },
+
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);
       const data = { region_id: this.networkSelect.region };
@@ -2902,6 +2793,11 @@ export default {
           break;
       }
     },
+    setSelectedLocation(value)
+    {
+      this.city = value;
+      this.$emit("updateSearchLocation", {code: value.code, label: value.label });
+    }
   },
 };
 </script>

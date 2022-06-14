@@ -22,7 +22,7 @@
           <b-navbar-nav class="ml-auto ">
             <b-nav-item >
 
-              <span class="text-dark font-arvo nav-span " ><router-link :to="{name: 'home1'}" :class="currentRouteName == 'home1' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
+              <span class="text-dark font-arvo nav-span " ><router-link :to="{name: 'newHome'}" :class="currentRouteName == 'newHome' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
               <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item  class="ml-md-3" >

@@ -152,7 +152,7 @@ export default {
             commit("setLoader", true);
             commit("setProducts", { data: [] });
 
-            return axios.get(payload.url+"&page"+payload.page)
+            return axios.get(payload.url+"&page"+payload.page+"&limit=10")
                 .then((res) => {
                     commit("setLoader", false);
 
@@ -198,10 +198,10 @@ export default {
             let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
             
             let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "";
-
+            const limit = 10;
           
             try {
-                const res = await axios.get(`search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
+                const res = await axios.get(`search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
                 commit("setLoader", false);
                 commit("setProducts", res.data);
             } catch (err) {

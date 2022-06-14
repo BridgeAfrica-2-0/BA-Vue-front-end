@@ -12,7 +12,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import vSelect from 'vue-select';
+
 import Vuex from 'vuex';
 import IconifyIcon from '@iconify/vue';
 import homeIconData from '@iconify-icons/mdi-light/home';
@@ -22,12 +22,14 @@ import VueSocialauth from 'vue-social-auth';
 import ShareNetwork from 'vue-social-sharing';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 
+import SequentialEntrance from 'vue-sequential-entrance'
+import 'vue-sequential-entrance/vue-sequential-entrance.css'
+Vue.use(SequentialEntrance);
+
+
+
 Vue.component('BtnCtaMessage', BtnCtaMessage);
 Vue.use(ShareNetwork);
-
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
-
-Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 
 // don't comment that 2 line URGENT
 import plugin from './http';
@@ -127,7 +129,6 @@ Vue.use(VueFormWizard);
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import 'vue-select/dist/vue-select.css';
 
 import '@/assets/css/bootstrap.css';
 import '@/assets/css/bootstrap.css';
@@ -162,11 +163,14 @@ import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
 
 Vue.use(CoolLightBox);
 
-Vue.component('v-select', vSelect);
-
 import i18n from './i18n';
 
 import VueEasyLightbox from 'vue-easy-lightbox';
+
+import Multiselect from 'vue-multiselect'
+
+// register globally
+Vue.component('multiselect', Multiselect);
 
 // Method 1. via Vue.use
 Vue.use(VueEasyLightbox);

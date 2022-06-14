@@ -41,6 +41,9 @@ export default {
         getSuccess(state) {
             return state.success;
         },
+        getLocation(state) {
+            return state.location;
+        },
     },
     mutations: {
         //set data
@@ -117,8 +120,9 @@ export default {
             let councilId = data.council_id ? "&councilId=" + data.council_id : "";
             let city = data.city ? "&city=" + data.city : "";
             let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
-
-            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=" + state.location;
+    
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=" + state.location?.code;
+            // let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=62";
 
             
 
@@ -127,16 +131,10 @@ export default {
             TYPES.map((type) => {
 
                 if (!islogin) {
-
                     url = `/visitor/search/${type}?${catId+subCatId+countryId+regionId+filterId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
-
                 } else {
-                    // console.log(`type => ${type} keyword = ${keyword}`);
                     url = `/search/${type}?${catId+subCatId+filterId+countryId+regionId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
-
-
                 }
-                console.log(url);
                 axios
                     .get(url)
                     .then((res) => {

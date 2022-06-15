@@ -8,6 +8,7 @@ export default {
   state: {
     appLanguage: 'fr',
     user: [],
+    quote:{},
     isVerified: null,
     passwordToken: null, 
     registerData: null,
@@ -35,6 +36,13 @@ export default {
       if (picture !== state.profilConnected.profile_picture)
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
+
+    setquote(state, data) {
+      alert("bbbba");
+        state.quote=data
+    },
+
+
 
     addCoverPicture(state, picture) {
 

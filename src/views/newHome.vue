@@ -304,6 +304,231 @@
     </div>
     <!-- end explore busineses -->
 
+    <!-- bridge africa missions -->
+
+    <div class="pb-100 pt-50">
+      <div class="row px-md-5 px-2">
+        <div class="col-md-6">
+          <b-embed
+            type="iframe"
+            aspect="16by9"
+            src="https://www.youtube.com/embed/X7ZK3elhVGI"
+            allowfullscreen
+            class="s-embed resource-img"
+          ></b-embed>
+        </div>
+        <div class="col-md-6 mt-3">
+          <div class="accordion" role="tablist">
+            <b-card no-body class="mb-1">
+              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
+                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
+                <span
+                  v-b-toggle.accordion-1
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                >
+                </span>
+              </b-card-header>
+              <b-collapse
+                id="accordion-1"
+                visible
+                accordion="my-accordion"
+                role="tabpanel"
+              >
+                <b-card-body>
+                  <b-card-text class="color-black">
+                    <p>{{ $t("general.find_everything_you_need") }}</p>
+
+                    <ul>
+                      <li>{{ $t("general.step1_identify_the_state") }}</li>
+                      <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
+                      <li>{{ $t("general.step3_place_your_order") }}</li>
+                      <li>
+                        {{ $t("general.recieve_and_contact_product_delivery") }}
+                      </li>
+                    </ul>
+                  </b-card-text>
+                </b-card-body>
+              </b-collapse>
+            </b-card>
+
+            <b-card no-body class="mb-1">
+              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
+                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
+                <span
+                  v-b-toggle.accordion-2
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                >
+                </span>
+              </b-card-header>
+
+              <b-collapse
+                id="accordion-2"
+                visible
+                accordion="my-accordion"
+                role="tabpanel"
+              >
+                <b-card-body>
+                  <div>
+                    <splide :options="toptions" class="mr-5 ml-5">
+                      <splide-slide>
+                        <b-card
+                          img-src="https://placekitten.com/1000/300"
+                          img-alt="Card image"
+                          img-top
+                        >
+                          <p>
+                            {{ $t("general.ever_since_i_started_using_ba") }}
+                          </p>
+                        </b-card>
+                      </splide-slide>
+
+                      <splide-slide>
+                        <b-card
+                          img-src="https://placekitten.com/1000/300"
+                          img-alt="Card image"
+                          img-top
+                        >
+                          <p>{{ $t("general.i_will_always_recommend_ba") }}</p>
+                        </b-card>
+                      </splide-slide>
+
+                      <splide-slide>
+                        <b-card
+                          img-src="https://placekitten.com/1000/300"
+                          img-alt="Card image"
+                          img-top
+                        >
+                          <p>
+                            {{ $t("general.ever_since_i_started_using_ba") }}
+                          </p>
+                        </b-card>
+                      </splide-slide>
+                    </splide>
+                  </div>
+                </b-card-body>
+              </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
+                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
+                <span
+                  v-b-toggle.accordion-3
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                  >{{ $t("general.hear_from_our_busineses") }}</span
+                >
+              </b-card-header>
+              <b-collapse
+                id="accordion-3"
+                accordion="my-accordion"
+                role="tabpanel"
+              >
+
+
+                <b-card-body>
+                  <b-card-text class="color-black">
+                    <ul>
+                      <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
+                      <li>{{ $t("general.as_a_busy_mother") }}</li>
+                      <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
+                    </ul>
+                  </b-card-text>
+                </b-card-body>
+              </b-collapse>
+            </b-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of bridge africa mission -->
+
+    <!-- start of the sourcing tabs  -->
+
+    <div>
+      <b-tabs content-class="mt-3" align="center" pills>
+        <b-tab :title="$t('general.new_to_sourcing')">
+          <div class="row">
+            <div class="col-xl-6">
+              <b-embed
+                type="iframe"
+                aspect="16by9"
+                src="https://www.youtube.com/embed/X7ZK3elhVGI"
+                allowfullscreen
+                class="s-embed resource-img"
+              ></b-embed>
+            </div>
+
+            <div class="col-xl-6">
+              <ul>
+                <li>{{ $t("general.step1_identify_the_state") }}</li>
+                <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
+                <li>{{ $t("general.step3_place_your_order") }}</li>
+                <li>
+                  {{ $t("general.recieve_and_contact_product_delivery") }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </b-tab>
+
+        <b-tab :title="$t('general.hear_from_our_buyers')">
+          <div class="row">
+            <div class="col-xl-6">
+              <b-embed
+                type="iframe"
+                aspect="16by9"
+                src="https://www.youtube.com/embed/X7ZK3elhVGI"
+                allowfullscreen
+                class="s-embed resource-img"
+              ></b-embed>
+            </div>
+
+            <div class="col-xl-6">
+              <ul>
+                <li>{{ $t("general.step1_identify_the_state") }}</li>
+                <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
+                <li>{{ $t("general.step3_place_your_order") }}</li>
+                <li>
+                  {{ $t("general.recieve_and_contact_product_delivery") }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab :title="$t('general.hear_from_our_busineses')">
+          <div class="row">
+            <div class="col-xl-6">
+              <b-embed
+                type="iframe"
+                aspect="16by9"
+                src="https://www.youtube.com/embed/X7ZK3elhVGI"
+                allowfullscreen
+                class="s-embed resource-img"
+              ></b-embed>
+            </div>
+
+            <div class="col-xl-6">
+              
+
+                  <ul>
+                      <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
+
+                      <li>{{ $t("general.as_a_busy_mother") }}</li>
+                      
+                      <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
+                    </ul>
+
+
+            </div>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </div>
+
+    <!-- end of the sourcing tabs  -->
+
+    <!-- bridge africa missions -->
+
     <!-- african print titles -->
 
     <div class="africanprints-overlay">
@@ -409,9 +634,132 @@
       </div>
     </div>
 
+    <div class="pt-50">
+      <div class="row px-md-5 px-2">
+        <div class="col-md-6 p-0">
+          <div class="container">
+            <h1 class="h1-text p-md-3 text-center text-md-left mt-2">
+              {{ $t("general.focused_market") }}
+            </h1>
+
+            <div class="row">
+              <div class="col-md-6 pt-5 mt-5">
+                <h3 class="hbaworks-header font-16 font-poppin">
+                  {{ $t("general.7k_business") }}
+                </h3>
+              </div>
+
+              <div class="col-md-6 pt-5 mt-5">
+                <h3 class="hbaworks-header font-16 font-poppin">
+                  {{ $t("general.13k_customers") }}
+                </h3>
+              </div>
+
+              <div class="col-md-6 pt-5 mt-5">
+                <h3 class="hbaworks-header font-16 font-poppin">
+                  {{ $t("general.100_industries") }}
+                </h3>
+              </div>
+
+              <div class="col-md-6 mt-5 pt-5">
+                <h3 class="hbaworks-header font-16 font-poppin">
+                  {{ $t("general.48h_respond_time") }}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" style="background-color: #00bcd4; color: white">
+          <div class="md-layout-item md-small-size-100 m-left">
+            <div class="form mt-2 pt-2 pl-5">
+              <h4 class="h1-text white">
+                {{ $t("general.lets_help_you_find_products_and_service") }}
+              </h4>
+            </div>
+
+            <form novalidate @submit.prevent="validateUser">
+              <div class="form pt-1 pl-5 pr-5">
+                <md-field :class="getValidationClass('pname')">
+                  <label for="name" class="white">
+                    Looking for something?
+                  </label>
+                  <md-input
+                    type="text"
+                    name="name"
+                    id="name"
+                    v-model="form.pname"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.pname.required">
+                    {{ $t("auth.Name_is_required") }}
+                  </span>
+                </md-field>
+
+                <md-field :class="getValidationClass('quantity')">
+                  <label for="qunatity" class="white"> Quantity </label>
+                  <md-input
+                    class="white"
+                    type="number"
+                    name="qunatity"
+                    id="quantity"
+                    v-model="form.quantity"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('name')">
+                  <label for="uname" class="white"> Full Name </label>
+                  <md-input
+                    type="text"
+                    name="uname"
+                    id="uname"
+                    v-model="form.name"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.name.required">
+                    {{ $t("auth.First_Name_is_required") }}
+                  </span>
+                </md-field>
+
+                <md-field class="white">
+                  <label for="email" class="white"> Email </label>
+                  <md-input
+                    type="email"
+                    name="email"
+                    id="email"
+                    v-model="form.email"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('tel')">
+                  <label for="name" class="white"> Tel </label>
+                  <md-input
+                    type="number"
+                    name="tel"
+                    id="tel"
+                    v-model="form.tel"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.tel.required">
+                    {{ $t("auth.tel_is_required") }}
+                  </span>
+                </md-field>
+
+                <b-button type="submit" variant="outline-light" class="mb-3">
+                  Request For Quotation
+                </b-button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of inquiring form  -->
+
     <!-- african print titles -->
 
-    <div class="africanprints-overlay" style="margin-top: -200px">
+    <div class="africanprints-overlay">
       <div class="africanprints">
         <div class="container text-center">
           <sequential-entrance fromLeft>
@@ -539,7 +887,11 @@
                 {{ $t("general.create_an_advance_account") }}
               </h1>
 
-              <p class="white font-14 font-poppin"> While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will give you abilities to do the full e-commerce transaction cycle.</p>
+              <p class="white font-14 font-poppin">
+                While you can use Bridge Africa for free through a basic
+                account, upgrading to an advanced account will give you
+                abilities to do the full e-commerce transaction cycle.
+              </p>
             </div>
           </div>
 
@@ -816,6 +1168,10 @@
 
 <script>
 import axios from "axios";
+
+import { validationMixin } from "vuelidate";
+import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
+
 import Newsletter from "../components/newsletter";
 import Resources from "../components/resources";
 import SiteFooter from "../components/site/siteFooter";
@@ -830,6 +1186,23 @@ export default {
     SemipolarSpinner,
   },
 
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      pname: {
+        required,
+      },
+
+      name: {
+        required,
+      },
+
+      tel: {
+        required,
+      },
+    },
+  },
+
   data() {
     return {
       images: [
@@ -837,6 +1210,18 @@ export default {
         "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
       ],
       currentNumber: 0,
+
+      form: {
+        pname: null,
+        tel: null,
+        name: null,
+        quantity: null,
+        email: null,
+      },
+
+      userSaved: false,
+      sending: false,
+      lastUser: null,
 
       hotbiz_fr: [
         {
@@ -969,8 +1354,7 @@ export default {
         },
       ],
 
-
-         fr_videos: [
+      fr_videos: [
         {
           video: "https://www.youtube.com/embed/CrjFkoU5eqs",
           picture: "assets/images/biz/FR/african culture fr.jpg",
@@ -1019,8 +1403,6 @@ export default {
           name: "Emma Fashion",
         },
       ],
-
-
 
       en_videos: [
         {
@@ -1073,6 +1455,26 @@ export default {
       ],
       selected_video: "",
       show_loader: false,
+
+      toptions: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: true,
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 1,
+            gap: "0rem",
+          },
+          992: {
+            perPage: 1,
+            gap: "1rem",
+          },
+        },
+      },
 
       options: {
         rewind: true,
@@ -1130,6 +1532,35 @@ export default {
   },
 
   methods: {
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
+      if (field) {
+        return {
+          "md-invalid": field.$invalid && field.$dirty,
+        };
+      }
+    },
+
+    saveData() {
+      this.$router.push({
+        name: "quote",
+        query: {
+          name: this.form.pname,
+          email: this.form.email,
+          tel: this.form.tel,
+          pname: this.form.pname,
+          quantity: this.form.quantity,
+        },
+      });
+    },
+
+    validateUser() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        this.saveData();
+      }
+    },
+
     startRotation: function () {
       this.timer = setInterval(this.next, 10000);
     },
@@ -1596,6 +2027,10 @@ export default {
 
 .nav-item {
   text-align: center;
+}
+
+.pr-15 {
+  padding: 15%;
 }
 </style>
 

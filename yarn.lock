@@ -6709,6 +6709,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
+litepie-datepicker@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/litepie-datepicker/-/litepie-datepicker-1.0.14.tgz#8c6fd91e574bbd6d26692133568992510ef80790"
+  integrity sha512-u1BAsvLv5r7grMrKbRXKXPfk5okiYJBF247PWr5MGmbVxxWmDCoqQWtMdaHrQUzA/BQiU6J6L1nri0QkJISjyA==
+
 load-script@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/load-script/-/load-script-1.0.0.tgz"

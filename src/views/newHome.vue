@@ -107,6 +107,9 @@
               </router-link>
             </li>
 
+
+
+
             <li class="nav-item">
               <router-link :to="{ name: 'Login' }">
                 <a class="nav-link" href="#features">{{
@@ -1060,7 +1063,7 @@
             </p>
 
             <div class="text-center m-2 p-2 p-md-2">
-              <router-link to="network_follower/2">
+              <router-link to="network_follower/6">
                 <b-button variant="outline-primary"
                   >{{ $t("general.view_more") }}
                 </b-button>
@@ -2035,6 +2038,24 @@ export default {
 </style>
 
 <style>
+
+@media only screen and (max-width: 768px) {
+    
+    .navbar-light .navbar-nav .nav-link {
+  color: black !important;
+  color: black !important;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.black-text .nav-item .nav-link {
+  color: black !important;
+}
+
+
+}
+
+@media only screen and (min-width: 768px) {
 .navbar-light .navbar-nav .nav-link {
   color: white !important;
 }
@@ -2042,4 +2063,8 @@ export default {
 .black-text .nav-item .nav-link {
   color: black !important;
 }
+
+}
+
+
 </style>

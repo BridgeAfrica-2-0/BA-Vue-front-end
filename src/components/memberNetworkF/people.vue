@@ -147,6 +147,7 @@ export default {
   .s-cardd {
     padding-left: 6px;
     padding-right: 2px;
+    height: 400px;
   }
 }
 

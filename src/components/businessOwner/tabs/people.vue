@@ -217,6 +217,7 @@ export default {
   .s-cardd {
     padding-left: 6px;
     padding-right: 6px;
+    height: 400px;
   }
 
   .btn-text {
@@ -254,6 +255,7 @@ export default {
   .s-cardd {
     padding-left: 4px;
     padding-right: 4px;
+    height: 400px;
   }
 }
 

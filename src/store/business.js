@@ -62,9 +62,6 @@ export default {
                 params: {
                     keyword: state.keyword,
                     main: "vrai",
-                    location: payload.location,
-                   // lat: state.geo.lat,
-                   // lng: state.geo.lng,
                     catId: payload.cat_id,
                     subCatId: payload.sub_cat,
                     filterId: payload.filter_id,
@@ -73,7 +70,7 @@ export default {
                     regionId:payload.region_id,
                     divisionId:payload.division_id,
                     councilId:payload.council_id,
-                    city:payload.city ? payload.city:state.location ,
+                    city:payload.city ? payload.city.code:state.location.code,
                     neighbourhoodId: payload.neighbourhood,
                     limit: 10
                 }

@@ -6,31 +6,31 @@
     </h1>
     <div class="row justify-content-center my-5">
       <div class="col-md-8">
-        <div class="d-flex justify-content-around tabs-resource">
+        <div class="d-flex  tabs-resource">
              
 
               <b-button
               pill
               :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
-              class="f-12"
+              class="f-12 mr-2"
               @click="changeResource('bridgeafrica')"
               >{{$t("about.Show_All")}}</b-button
             >
 
-             <b-button class="f-12"
+             <b-button class="f-12 mr-2"
               pill
               :variant="selectedResource == 'hba' ? 'primary' : 'outline-primary'"
               @click="changeResource('hba')"
               > {{ $t("general.how_to_use_bridgeafrica") }}  </b-button
             >
 
-            <b-button class="f-12"
+            <b-button class="f-12 mr-2"
               pill
               :variant="selectedResource == 'Plan' ? 'primary' : 'outline-primary'"
               @click="changeResource('Plan')"
               > {{ $t("general.business_plan") }}  </b-button
             >
-            <b-button class="f-12"
+            <b-button class="f-12 mr-2"
               pill
               :variant="selectedResource == 'Digital' ? 'primary' : 'outline-primary'"
               @click="changeResource('Digital')"
@@ -38,7 +38,7 @@
             >
 
 
-              <b-button class="f-12"
+              <b-button class="f-12 mr-2"
               pill
               :variant="selectedResource == 'creation' ? 'primary' : 'outline-primary'"
               @click="changeResource('creation')"
@@ -47,7 +47,7 @@
 
 
             
-              <b-button class="f-12"
+              <b-button class="f-12 mr-2"
               pill
               :variant="selectedResource == 'fufulde' ? 'primary' : 'outline-primary'"
               @click="changeResource('fufulde')"
@@ -141,7 +141,7 @@ export default {
   {
           id: "2",
           title: "How To Register Your Business",
-          tag: ["bridgeafrica","hba",'creation'],
+          tag: ["bridgeafrica",'creation'],
            picture: "assets/images/training/mod2/EN.jpg",
           video: "https://youtu.be/BJ1fRB37XRg",
         },
@@ -452,7 +452,7 @@ export default {
           {
           id: "1",
           title: "Comment enregistrer votre entreprise",
-          tag: ["bridgeafrica",'hba','creation'],
+          tag: ["bridgeafrica",'creation'],
            picture: "assets/images/training/mod2/FR.jpg",
           video: "https://youtu.be/6njJyiMZA68",
         },
@@ -862,11 +862,51 @@ export default {
         this.page=this.page+1
 
     }
-  },
+  },  
 };
 </script>
 
 <style scoped>
+
+@media only screen and (min-width: 768px) {
+
+.tabs-resource{
+
+   scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+
+     flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+}
+
+
+@media only screen and (max-width: 768px) {
+     
+     .tabs-resource{
+
+   scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+
+     flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: auto;
+    padding-left: auto;
+}
+
+
+}
+
+
+
+ 
+ .tabs-resource::-webkit-scrollbar {
+    display: none;
+  }
+
+
 @media (max-width: 768px) {
 .h1-text{
 

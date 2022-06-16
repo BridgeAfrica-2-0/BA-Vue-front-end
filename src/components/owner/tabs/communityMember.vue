@@ -385,6 +385,7 @@ export default {
   .s-cardd {
     padding-left: 6px;
     padding-right: 1px;
+    height: 400px;
   }
 }
 

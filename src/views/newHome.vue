@@ -107,9 +107,6 @@
               </router-link>
             </li>
 
-
-
-
             <li class="nav-item">
               <router-link :to="{ name: 'Login' }">
                 <a class="nav-link" href="#features">{{
@@ -307,148 +304,10 @@
     </div>
     <!-- end explore busineses -->
 
-    <!-- bridge africa missions -->
-
-    <div class="pb-100 pt-50">
-      <div class="row px-md-5 px-2">
-        <div class="col-md-6">
-          <b-embed
-            type="iframe"
-            aspect="16by9"
-            src="https://www.youtube.com/embed/X7ZK3elhVGI"
-            allowfullscreen
-            class="s-embed resource-img"
-          ></b-embed>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="accordion" role="tablist">
-            <b-card no-body class="mb-1">
-              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
-                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span
-                  v-b-toggle.accordion-1
-                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                >
-                </span>
-              </b-card-header>
-              <b-collapse
-                id="accordion-1"
-                visible
-                accordion="my-accordion"
-                role="tabpanel"
-              >
-                <b-card-body>
-                  <b-card-text class="color-black">
-                    <p>{{ $t("general.find_everything_you_need") }}</p>
-
-                    <ul>
-                      <li>{{ $t("general.step1_identify_the_state") }}</li>
-                      <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
-                      <li>{{ $t("general.step3_place_your_order") }}</li>
-                      <li>
-                        {{ $t("general.recieve_and_contact_product_delivery") }}
-                      </li>
-                    </ul>
-                  </b-card-text>
-                </b-card-body>
-              </b-collapse>
-            </b-card>
-
-            <b-card no-body class="mb-1">
-              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
-                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span
-                  v-b-toggle.accordion-2
-                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                >
-                </span>
-              </b-card-header>
-
-              <b-collapse
-                id="accordion-2"
-                visible
-                accordion="my-accordion"
-                role="tabpanel"
-              >
-                <b-card-body>
-                  <div>
-                    <splide :options="toptions" class="mr-5 ml-5">
-                      <splide-slide>
-                        <b-card
-                          img-src="https://placekitten.com/1000/300"
-                          img-alt="Card image"
-                          img-top
-                        >
-                          <p>
-                            {{ $t("general.ever_since_i_started_using_ba") }}
-                          </p>
-                        </b-card>
-                      </splide-slide>
-
-                      <splide-slide>
-                        <b-card
-                          img-src="https://placekitten.com/1000/300"
-                          img-alt="Card image"
-                          img-top
-                        >
-                          <p>{{ $t("general.i_will_always_recommend_ba") }}</p>
-                        </b-card>
-                      </splide-slide>
-
-                      <splide-slide>
-                        <b-card
-                          img-src="https://placekitten.com/1000/300"
-                          img-alt="Card image"
-                          img-top
-                        >
-                          <p>
-                            {{ $t("general.ever_since_i_started_using_ba") }}
-                          </p>
-                        </b-card>
-                      </splide-slide>
-                    </splide>
-                  </div>
-                </b-card-body>
-              </b-collapse>
-            </b-card>
-            <b-card no-body class="mb-1">
-              <b-card-header header-tag="header" class="py-2 px-3" role="tab">
-                <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span
-                  v-b-toggle.accordion-3
-                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                  >{{ $t("general.hear_from_our_busineses") }}</span
-                >
-              </b-card-header>
-              <b-collapse
-                id="accordion-3"
-                accordion="my-accordion"
-                role="tabpanel"
-              >
-
-
-                <b-card-body>
-                  <b-card-text class="color-black">
-                    <ul>
-                      <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
-                      <li>{{ $t("general.as_a_busy_mother") }}</li>
-                      <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
-                    </ul>
-                  </b-card-text>
-                </b-card-body>
-              </b-collapse>
-            </b-card>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- end of bridge africa mission -->
-
     <!-- start of the sourcing tabs  -->
 
-    <div>
-      <b-tabs content-class="mt-3" align="center" pills>
+    <div class="mt-5 pt-5">
+      <b-tabs content-class="mt-3 pt-5" align="center" pills>
         <b-tab :title="$t('general.new_to_sourcing')">
           <div class="row">
             <div class="col-xl-6">
@@ -462,14 +321,62 @@
             </div>
 
             <div class="col-xl-6">
-              <ul>
-                <li>{{ $t("general.step1_identify_the_state") }}</li>
-                <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
-                <li>{{ $t("general.step3_place_your_order") }}</li>
-                <li>
-                  {{ $t("general.recieve_and_contact_product_delivery") }}
-                </li>
-              </ul>
+              Find everything you need, anytime, anywhere, all in one place.
+              Find quality ready-to-ship products, or personalised
+              customisations and enjoy rapid deliveries
+
+              <div class="d-flex mt-3">
+                <div class="rounded-circle sourcing-icon">
+                  <b-icon icon="search" class="white mt-3"></b-icon>
+                </div>
+
+                <div>
+                  <span>Step 1 </span>
+                  <p>{{ $t("general.step1_identify_the_state") }}</p>
+                </div>
+              </div>
+
+              
+   
+
+              <div class="d-flex mt-3">
+                <div class="rounded-circle sourcing-icon">
+                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
+                </div>
+
+                <div>
+                  <span>Step 2 </span>
+                <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
+                </div>
+              </div>
+
+
+              <div class="d-flex mt-3">
+                <div class="rounded-circle sourcing-icon">
+                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
+                </div>
+
+                <div>
+                  <span>Step 3 </span>
+                <p>{{ $t("general.step3_place_your_order") }}</p>
+                </div>
+              </div>
+
+
+              <div class="d-flex mt-3">
+                <div class="rounded-circle sourcing-icon">
+                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
+                </div>
+
+                <div>
+                  <span>Step 4</span>
+                <p>  {{ $t("general.recieve_and_contact_product_delivery") }}</p>
+                </div>
+              </div>
+
+
+              
+              
             </div>
           </div>
         </b-tab>
@@ -487,14 +394,55 @@
             </div>
 
             <div class="col-xl-6">
-              <ul>
-                <li>{{ $t("general.step1_identify_the_state") }}</li>
-                <li>{{ $t("general.step2_contact_bridgeafrica") }}</li>
-                <li>{{ $t("general.step3_place_your_order") }}</li>
-                <li>
-                  {{ $t("general.recieve_and_contact_product_delivery") }}
-                </li>
-              </ul>
+              <splide :options="toptions" class="rr-image">
+                <splide-slide>
+                  <div class="card">
+                    <div style="width: 400px">
+                      <b-img
+                        class="quotes"
+                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
+                        alt="alternative"
+                      />
+
+                      <p class="pr-2 pl-2 mt-2">
+                        {{ $t("general.ever_since_i_started_using_ba") }}
+                      </p>
+                    </div>
+                  </div>
+                </splide-slide>
+
+                <splide-slide>
+                  <div class="card">
+                    <div style="width: 400px">
+                      <b-img
+                        class="quotes"
+                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
+                        alt="alternative"
+                      />
+
+                      <p class="pr-2 pl-2 mt-2">
+                        {{ $t("general.i_have_double_my_chiken_production") }}
+                      </p>
+                    </div>
+                  </div>
+                </splide-slide>
+
+                <splide-slide>
+                  <div class="card">
+                    <div style="width: 400px">
+                      <b-img
+                        class="quotes"
+                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
+                        alt="alternative"
+                      />
+
+                      <p class="pr-2 pl-2 mt-2">
+                        {{ $t("general.i_will_always_recommend_ba") }}
+                      </p>
+                    </div>
+                  </div>
+                </splide-slide>
+              </splide>
             </div>
           </div>
         </b-tab>
@@ -511,17 +459,13 @@
             </div>
 
             <div class="col-xl-6">
-              
+              <ul>
+                <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
 
-                  <ul>
-                      <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
+                <li>{{ $t("general.as_a_busy_mother") }}</li>
 
-                      <li>{{ $t("general.as_a_busy_mother") }}</li>
-                      
-                      <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
-                    </ul>
-
-
+                <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
+              </ul>
             </div>
           </div>
         </b-tab>
@@ -1463,7 +1407,7 @@ export default {
         rewind: true,
         autoplay: true,
         perPage: 1,
-        pagination: true,
+        pagination: false,
         type: "loop",
         perMove: 1,
 
@@ -1648,6 +1592,21 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.rr-image {
+  width: 400px;
+  /* height: 410px !important; */
+  object-fit: cover;
+  object-fit: cover;
+}
+
+.sourcing-icon {
+  width: 50px;
+  height: 50px;
+  background: #e75c18;
+  text-align: center;
+  margin-right: 15px;
+}
 
 .pt-50 {
   padding-top: 50px;
@@ -2038,33 +1997,26 @@ export default {
 </style>
 
 <style>
-
 @media only screen and (max-width: 768px) {
-    
-    .navbar-light .navbar-nav .nav-link {
-  color: black !important;
-  color: black !important;
+  .navbar-light .navbar-nav .nav-link {
+    color: black !important;
+    color: black !important;
     font-size: 14px;
     padding: 10px;
-}
+  }
 
-.black-text .nav-item .nav-link {
-  color: black !important;
-}
-
-
+  .black-text .nav-item .nav-link {
+    color: black !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-.navbar-light .navbar-nav .nav-link {
-  color: white !important;
+  .navbar-light .navbar-nav .nav-link {
+    color: white !important;
+  }
+
+  .black-text .nav-item .nav-link {
+    color: black !important;
+  }
 }
-
-.black-text .nav-item .nav-link {
-  color: black !important;
-}
-
-}
-
-
 </style>

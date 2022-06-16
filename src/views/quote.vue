@@ -964,7 +964,7 @@ export default {
 }
 </style>
 
-<style>
+<style scoped>
 .navbar-light .navbar-nav .nav-link {
   color: white !important;
 }

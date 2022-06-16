@@ -107,9 +107,6 @@
               </router-link>
             </li>
 
-
-
-
             <li class="nav-item">
               <router-link :to="{ name: 'Login' }">
                 <a class="nav-link" href="#features">{{
@@ -542,7 +539,11 @@
                 {{ $t("general.create_an_advance_account") }}
               </h1>
 
-              <p class="white font-14 font-poppin"> While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will give you abilities to do the full e-commerce transaction cycle.</p>
+              <p class="white font-14 font-poppin">
+                While you can use Bridge Africa for free through a basic
+                account, upgrading to an advanced account will give you
+                abilities to do the full e-commerce transaction cycle.
+              </p>
             </div>
           </div>
 
@@ -972,8 +973,7 @@ export default {
         },
       ],
 
-
-         fr_videos: [
+      fr_videos: [
         {
           video: "https://www.youtube.com/embed/CrjFkoU5eqs",
           picture: "assets/images/biz/FR/african culture fr.jpg",
@@ -1022,8 +1022,6 @@ export default {
           name: "Emma Fashion",
         },
       ],
-
-
 
       en_videos: [
         {
@@ -1603,33 +1601,26 @@ export default {
 </style>
 
 <style>
-
 @media only screen and (max-width: 768px) {
-    
-    .navbar-light .navbar-nav .nav-link {
-  color: black !important;
-  color: black !important;
+  .navbar-light .navbar-nav .nav-link {
+    color: black !important;
+    color: black !important;
     font-size: 14px;
     padding: 10px;
-}
+  }
 
-.black-text .nav-item .nav-link {
-  color: black !important;
-}
-
-
+  .black-text .nav-item .nav-link {
+    color: black !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-.navbar-light .navbar-nav .nav-link {
-  color: white !important;
+  .navbar-light .navbar-nav .nav-link {
+    color: white !important;
+  }
+
+  .black-text .nav-item .nav-link {
+    color: black !important;
+  }
 }
-
-.black-text .nav-item .nav-link {
-  color: black !important;
-}
-
-}
-
-
 </style>

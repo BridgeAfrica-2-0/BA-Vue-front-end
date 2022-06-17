@@ -110,10 +110,13 @@ export default {
 </script>
 
 <style scoped>
+
+
 @media only screen and (min-width: 768px) {
   .s-cardd {
     padding-left: 20px;
     padding-right: 20px;
+    
   }
   .btn-text {
     margin-left: 8px;
@@ -125,7 +128,17 @@ export default {
     margin-top: 3px;
   }
 }
-@media only screen and (max-width: 768px) {
+
+
+@media only screen and (max-width: 768px) { 
+
+  .s-cardd {
+     height: 400px;
+   overflow: auto;
+   overflow-x: hidden;
+  }
+
+
   .btn-icon {
     margin-top: 3px;
   }
@@ -144,7 +157,10 @@ export default {
   .s-cardd {
     padding-left: 6px;
     padding-right: 1px;
+    height: 400px;
   }
+
+  
 }
 @media only screen and (min-width: 768px) {
   .btnpngs {

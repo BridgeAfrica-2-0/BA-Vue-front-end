@@ -422,7 +422,7 @@ a:hover {
 	padding-top: 8rem;
 	padding-bottom: 4em;
 
-	background: orange url('../images/hero.png') center center no-repeat;
+	background: orange url('../images/hero.jpg') center center no-repeat;
 	background-size: cover;
 	
 	text-align: center;
@@ -1007,8 +1007,9 @@ a:hover {
 	.header {
 		padding-top: 8rem;
 		padding-bottom: 4em;
-		background: url('https://home.maxinemoffett.com/wp-content/uploads/2022/05/Untitled-design-3.png') center center no-repeat;
+		background: url('../images/hero.jpg') center center no-repeat;
 		background-size: cover;
+		background-color: orange;
 		background-position-x: 70%;
 		text-align: center;
 	}

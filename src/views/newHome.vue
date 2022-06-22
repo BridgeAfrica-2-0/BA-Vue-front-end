@@ -306,170 +306,366 @@
 
     <!-- start of the sourcing tabs  -->
 
-    <div class="mt-5 pt-5">
-      <b-tabs content-class="mt-3 pt-5" align="center" pills>
-        <b-tab :title="$t('general.new_to_sourcing')">
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-3 ">
+        <h1 class="h1-text">   {{ $t("general.new_to_sourcing") }} </h1>
+
+        <p>  Find everything you need, anytime, anywhere, all in one place.
+                  Find quality ready-to-ship products, or personalised
+                  customisations and enjoy rapid deliveries  </p>
+        
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-3">
           <div class="row">
-            <div class="col-xl-6">
-              <b-embed
-                type="iframe"
-                aspect="16by9"
-                src="https://www.youtube.com/embed/X7ZK3elhVGI"
-                allowfullscreen
-                class="s-embed resource-img"
-              ></b-embed>
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="search" font-scale="4" class="ico"></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #fbcf00"> 01 </span>
+                </div>
+
+                <p>{{ $t("general.step1_identify_the_state") }}</p>
+              </div>
             </div>
 
-            <div class="col-xl-6">
-              Find everything you need, anytime, anywhere, all in one place.
-              Find quality ready-to-ship products, or personalised
-              customisations and enjoy rapid deliveries
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
+            </div>
+          </div>
+        </div>
 
-              <div class="d-flex mt-3">
-                <div class="rounded-circle sourcing-icon">
-                  <b-icon icon="search" class="white mt-3"></b-icon>
-                </div>
+        
 
-                <div>
-                  <span>Step 1 </span>
-                  <p>{{ $t("general.step1_identify_the_state") }}</p>
-                </div>
+         <div class="col-md-3">
+          <div class="row">
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="chat-text" font-scale="4" class="ico"></b-icon>
+                </span>
               </div>
-
-              
-   
-
-              <div class="d-flex mt-3">
-                <div class="rounded-circle sourcing-icon">
-                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #fbcf00"> 02 </span>
                 </div>
 
-                <div>
-                  <span>Step 2 </span>
                 <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
-                </div>
               </div>
+            </div>
 
-
-              <div class="d-flex mt-3">
-                <div class="rounded-circle sourcing-icon">
-                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
-                </div>
-
-                <div>
-                  <span>Step 3 </span>
-                <p>{{ $t("general.step3_place_your_order") }}</p>
-                </div>
-              </div>
-
-
-              <div class="d-flex mt-3">
-                <div class="rounded-circle sourcing-icon">
-                  <b-icon icon="briefcase" class="white mt-3"></b-icon>
-                </div>
-
-                <div>
-                  <span>Step 4</span>
-                <p>  {{ $t("general.recieve_and_contact_product_delivery") }}</p>
-                </div>
-              </div>
-
-
-              
-              
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
             </div>
           </div>
-        </b-tab>
+        </div>
 
-        <b-tab :title="$t('general.hear_from_our_buyers')">
+
+
+
+
+
+         <div class="col-md-3">
           <div class="row">
-            <div class="col-xl-6">
-              <b-embed
-                type="iframe"
-                aspect="16by9"
-                src="https://www.youtube.com/embed/X7ZK3elhVGI"
-                allowfullscreen
-                class="s-embed resource-img"
-              ></b-embed>
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="card-checklist" font-scale="4" class="ico"></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #fbcf00"> 03 </span>
+                </div>
+
+               <p>{{ $t("general.step3_place_your_order") }}</p>
+              </div>
             </div>
 
-            <div class="col-xl-6">
-              <splide :options="toptions" class="rr-image">
-                <splide-slide>
-                  <div class="card">
-                    <div style="width: 400px">
-                      <b-img
-                        class="quotes"
-                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
-                        alt="alternative"
-                      />
-
-                      <p class="pr-2 pl-2 mt-2">
-                        {{ $t("general.ever_since_i_started_using_ba") }}
-                      </p>
-                    </div>
-                  </div>
-                </splide-slide>
-
-                <splide-slide>
-                  <div class="card">
-                    <div style="width: 400px">
-                      <b-img
-                        class="quotes"
-                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
-                        alt="alternative"
-                      />
-
-                      <p class="pr-2 pl-2 mt-2">
-                        {{ $t("general.i_have_double_my_chiken_production") }}
-                      </p>
-                    </div>
-                  </div>
-                </splide-slide>
-
-                <splide-slide>
-                  <div class="card">
-                    <div style="width: 400px">
-                      <b-img
-                        class="quotes"
-                        src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
-                        alt="alternative"
-                      />
-
-                      <p class="pr-2 pl-2 mt-2">
-                        {{ $t("general.i_will_always_recommend_ba") }}
-                      </p>
-                    </div>
-                  </div>
-                </splide-slide>
-              </splide>
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
             </div>
           </div>
-        </b-tab>
-        <b-tab :title="$t('general.hear_from_our_busineses')">
+        </div>
+
+
+
+
+
+
+         <div class="col-md-3">
           <div class="row">
-            <div class="col-xl-6">
-              <b-embed
-                type="iframe"
-                aspect="16by9"
-                src="https://www.youtube.com/embed/X7ZK3elhVGI"
-                allowfullscreen
-                class="s-embed resource-img"
-              ></b-embed>
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="check2-all" font-scale="4" class="ico"></b-icon>
+                 
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #fbcf00"> 04 </span>
+                </div>
+
+                <p>
+                          {{
+                            $t("general.recieve_and_contact_product_delivery")
+                          }}
+                        </p>
+              </div>
             </div>
 
-            <div class="col-xl-6">
-              <ul>
-                <li>{{ $t("general.with_ba_i_was_able_sew") }}</li>
-
-                <li>{{ $t("general.as_a_busy_mother") }}</li>
-
-                <li>{{ $t("general.i_am_a_restaurant_owner") }}</li>
-              </ul>
-            </div>
+           
           </div>
-        </b-tab>
-      </b-tabs>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="row testi-back mt-5 pt-5">
+      <div class="col-md-8">
+        <div class="accordion" role="tablist">
+          <b-card no-body class="mb-1 bg-trans white">
+            <b-card-header header-tag="header" class="p-3 d-flex" role="tab">
+              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2">
+              </b-icon>
+              <h5 v-b-toggle.accordion-1 class="text-left bg-trans white">
+                {{ $t("general.new_to_sourcing") }}
+              </h5>
+            </b-card-header>
+            <b-collapse
+              id="accordion-1"
+              visible
+              accordion="my-accordion"
+              role="tabpanel"
+            >
+              <b-card-body>
+                <div class="white">
+                  Find everything you need, anytime, anywhere, all in one place.
+                  Find quality ready-to-ship products, or personalised
+                  customisations and enjoy rapid deliveries
+
+                  <div class="row">
+                    <div class="d-inline-flex mt-3 col-md-6">
+                      <div class="rounded-circle sourcing-icon">
+                        <b-icon icon="chat-text" class="white mt-3"></b-icon>
+                      </div>
+
+                      <div class="white flex-base">
+                        <span>Step 2 </span>
+                        <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
+                      </div>
+                    </div>
+
+                    <div class="d-inline-flex mt-3 col-md-6">
+                      <div class="rounded-circle sourcing-icon">
+                        <b-icon
+                          icon="card-checklist"
+                          class="white mt-3"
+                        ></b-icon>
+                      </div>
+
+                      <div class="white flex-base">
+                        <span>Step 3 </span>
+                        <p>{{ $t("general.step3_place_your_order") }}</p>
+                      </div>
+                    </div>
+
+                    <div class="d-flex mt-3 col-md-6">
+                      <div class="rounded-circle sourcing-icon">
+                        <b-icon icon="check2-all" class="white mt-3"></b-icon>
+                      </div>
+
+                      <div class="white flex-base">
+                        <span>Step 4</span>
+                        <p>
+                          {{
+                            $t("general.recieve_and_contact_product_delivery")
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1 bg-trans white">
+            <b-card-header
+              header-tag="header"
+              class="p-3 border-bottom d-flex"
+              role="tab"
+            >
+              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2" />
+              <h5 v-b-toggle.accordion-2 class="text-left bg-trans">
+                {{ $t("general.hear_from_our_busineses") }}
+              </h5>
+            </b-card-header>
+            <b-collapse
+              id="accordion-2"
+              accordion="my-accordion"
+              role="tabpanel"
+            >
+              <b-card-body>
+                <div>
+                  <splide
+                    :options="toptions"
+                    class="r-image text-center"
+                    style="height: 300px !important"
+                  >
+                    <splide-slide>
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy1.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <p class="pr-2 pl-2 mt-2 text-center w-100">
+                            {{ $t("general.ever_since_i_started_using_ba") }}
+                          </p>
+                        </div>
+                      </div>
+                    </splide-slide>
+
+                    <splide-slide style="width: 100%">
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy2.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <div class="w-100 text-center">
+                            <p class="pr-2 pl-2 mt-2 text-center w-100">
+                              {{
+                                $t("general.i_have_double_my_chiken_production")
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </splide-slide>
+
+                    <splide-slide style="width: 100%">
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy3.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <div class="w-100 text-center">
+                            <p class="pr-2 pl-2 mt-2 text-center w-100">
+                              {{ $t("general.i_will_always_recommend_ba") }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </splide-slide>
+                  </splide>
+                </div>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1 bg-trans white">
+            <b-card-header
+              header-tag="header"
+              class="p-3 border-bottom d-flex"
+              role="tab"
+            >
+              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2" />
+              <h5 v-b-toggle.accordion-3 class="text-left bg-trans">
+                {{ $t("general.hear_from_our_buyers") }}
+              </h5>
+            </b-card-header>
+            <b-collapse
+              id="accordion-3"
+              accordion="my-accordion"
+              role="tabpanel"
+            >
+              <b-card-body>
+                <div>
+                  <splide
+                    :options="toptions"
+                    class="r-image text-center"
+                    style="height: 300px !important"
+                  >
+                    <splide-slide>
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy1.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <p class="pr-2 pl-2 mt-2 text-center w-100">
+                            {{ $t("general.ever_since_i_started_using_ba") }}
+                          </p>
+                        </div>
+                      </div>
+                    </splide-slide>
+
+                    <splide-slide style="width: 100%">
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy2.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <div class="w-100 text-center">
+                            <p class="pr-2 pl-2 mt-2 text-center w-100">
+                              {{
+                                $t("general.i_have_double_my_chiken_production")
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </splide-slide>
+
+                    <splide-slide style="width: 100%">
+                      <div class="container">
+                        <div style="" class="text-center">
+                          <b-avatar
+                            src="assets/images/testi/buy3.jfif"
+                            size="6rem"
+                          ></b-avatar>
+
+                          <div class="w-100 text-center">
+                            <p class="pr-2 pl-2 mt-2 text-center w-100">
+                              {{ $t("general.i_will_always_recommend_ba") }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </splide-slide>
+                  </splide>
+                </div>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+        </div>
+      </div>
+
+      <div class="col-md-4 pt-5">
+        <b-embed
+          type="iframe"
+          aspect="16by9"
+          src="https://www.youtube.com/embed/X7ZK3elhVGI"
+          allowfullscreen
+          class="s-embed resource-img"
+        ></b-embed>
+      </div>
     </div>
 
     <!-- end of the sourcing tabs  -->
@@ -590,25 +786,33 @@
             </h1>
 
             <div class="row">
-              <div class="col-md-6 pt-5 mt-5">
-                <h3 class="hbaworks-header font-16 font-poppin">
+              <div class="col-6 pt-2 mt-5 text-center">
+                <h3>7000+</h3>
+
+                <h2 class="hbaworks-header font-16 font-poppin">
                   {{ $t("general.7k_business") }}
-                </h3>
+                </h2>
               </div>
 
-              <div class="col-md-6 pt-5 mt-5">
+              <div class="col-6 pt-2 mt-5 text-center">
+                <h3>13,000+</h3>
+
                 <h3 class="hbaworks-header font-16 font-poppin">
                   {{ $t("general.13k_customers") }}
                 </h3>
               </div>
 
-              <div class="col-md-6 pt-5 mt-5">
+              <div class="col-6 pt-2 mt-5 text-center">
+                <h3>100+</h3>
+
                 <h3 class="hbaworks-header font-16 font-poppin">
                   {{ $t("general.100_industries") }}
                 </h3>
               </div>
 
-              <div class="col-md-6 mt-5 pt-5">
+              <div class="col-6 pt-2 mt-5 text-center">
+                <h3>48H</h3>
+
                 <h3 class="hbaworks-header font-16 font-poppin">
                   {{ $t("general.48h_respond_time") }}
                 </h3>
@@ -617,7 +821,7 @@
           </div>
         </div>
 
-        <div class="col-md-6" style="background-color: #00bcd4; color: white">
+        <div class="col-md-6" style="background-color: black; color: white">
           <div class="md-layout-item md-small-size-100 m-left">
             <div class="form mt-2 pt-2 pl-5">
               <h4 class="h1-text white">
@@ -639,7 +843,7 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.pname.required">
-                    {{ $t("auth.Name_is_required") }}
+                    required
                   </span>
                 </md-field>
 
@@ -1152,6 +1356,16 @@ export default {
 
   data() {
     return {
+      text: `
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+          richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+          brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+          tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+          assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+          vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+          synth nesciunt you probably haven't heard of them accusamus labore VHS.
+        `,
       images: [
         "assets/images/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
         "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
@@ -1405,7 +1619,7 @@ export default {
 
       toptions: {
         rewind: true,
-        autoplay: true,
+        autoplay: false,
         perPage: 1,
         pagination: false,
         type: "loop",
@@ -1593,11 +1807,56 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-.rr-image {
-  width: 400px;
-  /* height: 410px !important; */
+
+.ico{
+  color: #585858  !important;
+}
+.title-xlarge {
+  font-size: 60px;
+  line-height: 70px;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: montserrat;
+}
+
+.arrrow {
+  padding-top: 35%;
+}
+
+.flex-base {
+  flex-basis: 80%;
+}
+
+.md-field.md-theme-default:after {
+  background-color: white;
+}
+
+.bg-trans {
+  background: transparent;
+}
+
+.border-bottom {
+  border-top: 2px solid;
+  margin: 2px;
+}
+
+.testi-back {
+  background: url("/assets/images/testi/bg.jpg");
+}
+
+.md-field.md-theme-default.md-focused .md-input,
+.md-field.md-theme-default.md-focused .md-textarea,
+.md-field.md-theme-default.md-has-value .md-input,
+.md-field.md-theme-default.md-has-value .md-textarea {
+  -webkit-text-fill-color: white !important;
+}
+
+.testi-image {
   object-fit: cover;
-  object-fit: cover;
+  max-height: 400px;
 }
 
 .sourcing-icon {

@@ -5,32 +5,32 @@
       Digital Education to help you make more money online
     </h1>
     <div class="row justify-content-center my-5">
-      <div class="col-md-8">
-        <div class="d-flex  tabs-resource">
+      <div class="col-md-8 text-center">
+        <div class=" tabs-resource">
              
 
               <b-button
               pill
               :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
-              class="f-12 mr-2"
+              class=" mr-2"
               @click="changeResource('bridgeafrica')"
               >{{$t("about.Show_All")}}</b-button
             >
 
-             <b-button class="f-12 mr-2"
+             <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'hba' ? 'primary' : 'outline-primary'"
               @click="changeResource('hba')"
               > {{ $t("general.how_to_use_bridgeafrica") }}  </b-button
             >
 
-            <b-button class="f-12 mr-2"
+            <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'Plan' ? 'primary' : 'outline-primary'"
               @click="changeResource('Plan')"
               > {{ $t("general.business_plan") }}  </b-button
             >
-            <b-button class="f-12 mr-2"
+            <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'Digital' ? 'primary' : 'outline-primary'"
               @click="changeResource('Digital')"
@@ -38,7 +38,7 @@
             >
 
 
-              <b-button class="f-12 mr-2"
+              <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'creation' ? 'primary' : 'outline-primary'"
               @click="changeResource('creation')"
@@ -47,7 +47,7 @@
 
 
             
-              <b-button class="f-12 mr-2"
+              <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'fufulde' ? 'primary' : 'outline-primary'"
               @click="changeResource('fufulde')"

@@ -302,18 +302,151 @@
         </splide>
       </div>
     </div>
+
     <!-- end explore busineses -->
+
+    <!-- start of inquiry form  -->
+
+    <div class="pt-50 mt-5 pt-5">
+      <div class="mb-md-5 pl-md-5 pr-md-5">
+        <h1 class="h1-text text-center pl-md-5 pr-md-5">
+          {{ $t("general.lets_help_you_find_products_and_service") }}
+        </h1>
+      </div>
+
+      <div class="row px-md-5 px-2">
+        <div class="col-md-4 order-2 order-md-1 card pb-3 orange-border">
+          <div class="pr-5 pl-5 pt-5">
+            <div class="">
+              <b-img src="assets/images/black_logo.png" size="6rem"></b-img>
+
+              <h5 class="pr-2 pl-2 mt-4 w-100">+273 697 157 690 <br /></h5>
+
+              <div class="footer-icons-div d-flex flex-row text-center mt-3">
+                <a
+                  href="https://twitter.com/bridgeafricacom"
+                  target="_blank"
+                  class="footer-icons"
+                >
+                  <i class="fab fa-twitter-square"></i>
+                </a>
+                <a
+                  href="http://facebook.com/bridgeafricacom"
+                  target="_blank"
+                  class="footer-icons"
+                >
+                  <i class="fab fa-facebook-square"></i>
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
+                  target="_blank"
+                  class="footer-icons"
+                >
+                  <i class="fab fa-youtube"></i>
+                </a>
+                <a
+                  href="https://twitter.com/bridgeafricacom"
+                  target="_blank"
+                  class="footer-icons"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8 order-1 order-md-2">
+          <div class="md-layout-item md-small-size-100 m-left">
+            <form novalidate @submit.prevent="validateUser">
+              <div class="form pt-1 pl-5 pr-5">
+                <md-field :class="getValidationClass('pname')">
+                  <label for="name" class=""> Looking for something? </label>
+                  <md-input
+                    type="text"
+                    name="name"
+                    id="name"
+                    v-model="form.pname"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.pname.required">
+                    required
+                  </span>
+                </md-field>
+
+                <md-field :class="getValidationClass('quantity')">
+                  <label for="qunatity" class=""> Quantity </label>
+                  <md-input
+                    class=""
+                    type="number"
+                    name="qunatity"
+                    id="quantity"
+                    v-model="form.quantity"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('name')">
+                  <label for="uname" class=""> Full Name </label>
+                  <md-input
+                    type="text"
+                    name="uname"
+                    id="uname"
+                    v-model="form.name"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.name.required">
+                    {{ $t("auth.First_Name_is_required") }}
+                  </span>
+                </md-field>
+
+                <md-field class="">
+                  <label for="email" class=""> Email </label>
+                  <md-input
+                    type="email"
+                    name="email"
+                    id="email"
+                    v-model="form.email"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('tel')">
+                  <label for="name" class=""> Tel </label>
+                  <md-input
+                    type="number"
+                    name="tel"
+                    id="tel"
+                    v-model="form.tel"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.tel.required">
+                    {{ $t("auth.tel_is_required") }}
+                  </span>
+                </md-field>
+                <div>
+                  <b-button type="submit" variant="primary" block class="mb-3">
+                    Request For Quotation
+                  </b-button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of inwuiry form -->
 
     <!-- start of the sourcing tabs  -->
 
     <div class="container mt-5 pt-5">
-      <div class="text-center mb-3 ">
-        <h1 class="h1-text">   {{ $t("general.new_to_sourcing") }} </h1>
+      <div class="text-center mb-5 pb-5">
+        <h1 class="h1-text">{{ $t("general.new_to_sourcing") }}</h1>
 
-        <p>  Find everything you need, anytime, anywhere, all in one place.
-                  Find quality ready-to-ship products, or personalised
-                  customisations and enjoy rapid deliveries  </p>
-        
+        <p>
+          Find everything you need, anytime, anywhere, all in one place. Find
+          quality ready-to-ship products, or personalised customisations and
+          enjoy rapid deliveries
+        </p>
       </div>
 
       <div class="row mt-2">
@@ -340,9 +473,7 @@
           </div>
         </div>
 
-        
-
-         <div class="col-md-3">
+        <div class="col-md-3">
           <div class="row">
             <div class="text-center mt-3 col-md-12 col-xl-10">
               <div class="text-center">
@@ -365,17 +496,16 @@
           </div>
         </div>
 
-
-
-
-
-
-         <div class="col-md-3">
+        <div class="col-md-3">
           <div class="row">
             <div class="text-center mt-3 col-md-12 col-xl-10">
               <div class="text-center">
                 <span>
-                  <b-icon icon="card-checklist" font-scale="4" class="ico"></b-icon>
+                  <b-icon
+                    icon="card-checklist"
+                    font-scale="4"
+                    class="ico"
+                  ></b-icon>
                 </span>
               </div>
               <div class="">
@@ -383,7 +513,7 @@
                   <span style="color: #fbcf00"> 03 </span>
                 </div>
 
-               <p>{{ $t("general.step3_place_your_order") }}</p>
+                <p>{{ $t("general.step3_place_your_order") }}</p>
               </div>
             </div>
 
@@ -393,18 +523,12 @@
           </div>
         </div>
 
-
-
-
-
-
-         <div class="col-md-3">
+        <div class="col-md-3">
           <div class="row">
             <div class="text-center mt-3 col-md-12 col-xl-10">
               <div class="text-center">
                 <span>
                   <b-icon icon="check2-all" font-scale="4" class="ico"></b-icon>
-                 
                 </span>
               </div>
               <div class="">
@@ -413,258 +537,12 @@
                 </div>
 
                 <p>
-                          {{
-                            $t("general.recieve_and_contact_product_delivery")
-                          }}
-                        </p>
+                  {{ $t("general.recieve_and_contact_product_delivery") }}
+                </p>
               </div>
             </div>
-
-           
           </div>
         </div>
-
-
-      </div>
-    </div>
-
-    <div class="row testi-back mt-5 pt-5">
-      <div class="col-md-8">
-        <div class="accordion" role="tablist">
-          <b-card no-body class="mb-1 bg-trans white">
-            <b-card-header header-tag="header" class="p-3 d-flex" role="tab">
-              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2">
-              </b-icon>
-              <h5 v-b-toggle.accordion-1 class="text-left bg-trans white">
-                {{ $t("general.new_to_sourcing") }}
-              </h5>
-            </b-card-header>
-            <b-collapse
-              id="accordion-1"
-              visible
-              accordion="my-accordion"
-              role="tabpanel"
-            >
-              <b-card-body>
-                <div class="white">
-                  Find everything you need, anytime, anywhere, all in one place.
-                  Find quality ready-to-ship products, or personalised
-                  customisations and enjoy rapid deliveries
-
-                  <div class="row">
-                    <div class="d-inline-flex mt-3 col-md-6">
-                      <div class="rounded-circle sourcing-icon">
-                        <b-icon icon="chat-text" class="white mt-3"></b-icon>
-                      </div>
-
-                      <div class="white flex-base">
-                        <span>Step 2 </span>
-                        <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
-                      </div>
-                    </div>
-
-                    <div class="d-inline-flex mt-3 col-md-6">
-                      <div class="rounded-circle sourcing-icon">
-                        <b-icon
-                          icon="card-checklist"
-                          class="white mt-3"
-                        ></b-icon>
-                      </div>
-
-                      <div class="white flex-base">
-                        <span>Step 3 </span>
-                        <p>{{ $t("general.step3_place_your_order") }}</p>
-                      </div>
-                    </div>
-
-                    <div class="d-flex mt-3 col-md-6">
-                      <div class="rounded-circle sourcing-icon">
-                        <b-icon icon="check2-all" class="white mt-3"></b-icon>
-                      </div>
-
-                      <div class="white flex-base">
-                        <span>Step 4</span>
-                        <p>
-                          {{
-                            $t("general.recieve_and_contact_product_delivery")
-                          }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-
-          <b-card no-body class="mb-1 bg-trans white">
-            <b-card-header
-              header-tag="header"
-              class="p-3 border-bottom d-flex"
-              role="tab"
-            >
-              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2" />
-              <h5 v-b-toggle.accordion-2 class="text-left bg-trans">
-                {{ $t("general.hear_from_our_busineses") }}
-              </h5>
-            </b-card-header>
-            <b-collapse
-              id="accordion-2"
-              accordion="my-accordion"
-              role="tabpanel"
-            >
-              <b-card-body>
-                <div>
-                  <splide
-                    :options="toptions"
-                    class="r-image text-center"
-                    style="height: 300px !important"
-                  >
-                    <splide-slide>
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy1.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <p class="pr-2 pl-2 mt-2 text-center w-100">
-                            {{ $t("general.ever_since_i_started_using_ba") }}
-                          </p>
-                        </div>
-                      </div>
-                    </splide-slide>
-
-                    <splide-slide style="width: 100%">
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy2.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <div class="w-100 text-center">
-                            <p class="pr-2 pl-2 mt-2 text-center w-100">
-                              {{
-                                $t("general.i_have_double_my_chiken_production")
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </splide-slide>
-
-                    <splide-slide style="width: 100%">
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy3.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <div class="w-100 text-center">
-                            <p class="pr-2 pl-2 mt-2 text-center w-100">
-                              {{ $t("general.i_will_always_recommend_ba") }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </splide-slide>
-                  </splide>
-                </div>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-
-          <b-card no-body class="mb-1 bg-trans white">
-            <b-card-header
-              header-tag="header"
-              class="p-3 border-bottom d-flex"
-              role="tab"
-            >
-              <b-icon icon="plus-square-fill" font-scale="1.5" class="mr-2" />
-              <h5 v-b-toggle.accordion-3 class="text-left bg-trans">
-                {{ $t("general.hear_from_our_buyers") }}
-              </h5>
-            </b-card-header>
-            <b-collapse
-              id="accordion-3"
-              accordion="my-accordion"
-              role="tabpanel"
-            >
-              <b-card-body>
-                <div>
-                  <splide
-                    :options="toptions"
-                    class="r-image text-center"
-                    style="height: 300px !important"
-                  >
-                    <splide-slide>
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy1.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <p class="pr-2 pl-2 mt-2 text-center w-100">
-                            {{ $t("general.ever_since_i_started_using_ba") }}
-                          </p>
-                        </div>
-                      </div>
-                    </splide-slide>
-
-                    <splide-slide style="width: 100%">
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy2.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <div class="w-100 text-center">
-                            <p class="pr-2 pl-2 mt-2 text-center w-100">
-                              {{
-                                $t("general.i_have_double_my_chiken_production")
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </splide-slide>
-
-                    <splide-slide style="width: 100%">
-                      <div class="container">
-                        <div style="" class="text-center">
-                          <b-avatar
-                            src="assets/images/testi/buy3.jfif"
-                            size="6rem"
-                          ></b-avatar>
-
-                          <div class="w-100 text-center">
-                            <p class="pr-2 pl-2 mt-2 text-center w-100">
-                              {{ $t("general.i_will_always_recommend_ba") }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </splide-slide>
-                  </splide>
-                </div>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-        </div>
-      </div>
-
-      <div class="col-md-4 pt-5">
-        <b-embed
-          type="iframe"
-          aspect="16by9"
-          src="https://www.youtube.com/embed/X7ZK3elhVGI"
-          allowfullscreen
-          class="s-embed resource-img"
-        ></b-embed>
       </div>
     </div>
 
@@ -777,135 +655,6 @@
       </div>
     </div>
 
-    <div class="pt-50">
-      <div class="row px-md-5 px-2">
-        <div class="col-md-6 p-0">
-          <div class="container">
-            <h1 class="h1-text p-md-3 text-center text-md-left mt-2">
-              {{ $t("general.focused_market") }}
-            </h1>
-
-            <div class="row">
-              <div class="col-6 pt-2 mt-5 text-center">
-                <h3>7000+</h3>
-
-                <h2 class="hbaworks-header font-16 font-poppin">
-                  {{ $t("general.7k_business") }}
-                </h2>
-              </div>
-
-              <div class="col-6 pt-2 mt-5 text-center">
-                <h3>13,000+</h3>
-
-                <h3 class="hbaworks-header font-16 font-poppin">
-                  {{ $t("general.13k_customers") }}
-                </h3>
-              </div>
-
-              <div class="col-6 pt-2 mt-5 text-center">
-                <h3>100+</h3>
-
-                <h3 class="hbaworks-header font-16 font-poppin">
-                  {{ $t("general.100_industries") }}
-                </h3>
-              </div>
-
-              <div class="col-6 pt-2 mt-5 text-center">
-                <h3>48H</h3>
-
-                <h3 class="hbaworks-header font-16 font-poppin">
-                  {{ $t("general.48h_respond_time") }}
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6" style="background-color: black; color: white">
-          <div class="md-layout-item md-small-size-100 m-left">
-            <div class="form mt-2 pt-2 pl-5">
-              <h4 class="h1-text white">
-                {{ $t("general.lets_help_you_find_products_and_service") }}
-              </h4>
-            </div>
-
-            <form novalidate @submit.prevent="validateUser">
-              <div class="form pt-1 pl-5 pr-5">
-                <md-field :class="getValidationClass('pname')">
-                  <label for="name" class="white">
-                    Looking for something?
-                  </label>
-                  <md-input
-                    type="text"
-                    name="name"
-                    id="name"
-                    v-model="form.pname"
-                  />
-
-                  <span class="md-error" v-if="!$v.form.pname.required">
-                    required
-                  </span>
-                </md-field>
-
-                <md-field :class="getValidationClass('quantity')">
-                  <label for="qunatity" class="white"> Quantity </label>
-                  <md-input
-                    class="white"
-                    type="number"
-                    name="qunatity"
-                    id="quantity"
-                    v-model="form.quantity"
-                  />
-                </md-field>
-
-                <md-field :class="getValidationClass('name')">
-                  <label for="uname" class="white"> Full Name </label>
-                  <md-input
-                    type="text"
-                    name="uname"
-                    id="uname"
-                    v-model="form.name"
-                  />
-
-                  <span class="md-error" v-if="!$v.form.name.required">
-                    {{ $t("auth.First_Name_is_required") }}
-                  </span>
-                </md-field>
-
-                <md-field class="white">
-                  <label for="email" class="white"> Email </label>
-                  <md-input
-                    type="email"
-                    name="email"
-                    id="email"
-                    v-model="form.email"
-                  />
-                </md-field>
-
-                <md-field :class="getValidationClass('tel')">
-                  <label for="name" class="white"> Tel </label>
-                  <md-input
-                    type="number"
-                    name="tel"
-                    id="tel"
-                    v-model="form.tel"
-                  />
-
-                  <span class="md-error" v-if="!$v.form.tel.required">
-                    {{ $t("auth.tel_is_required") }}
-                  </span>
-                </md-field>
-
-                <b-button type="submit" variant="outline-light" class="mb-3">
-                  Request For Quotation
-                </b-button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- end of inquiring form  -->
 
     <!-- african print titles -->
@@ -914,7 +663,7 @@
       <div class="africanprints">
         <div class="container text-center">
           <sequential-entrance fromLeft>
-            <h1 class="h1-text white p-1 p-md-5">
+            <h1 class="h1-text p-1 p-md-5">
               {{ $t("general.helping_small_medium_size_biz") }}
             </h1>
           </sequential-entrance>
@@ -1150,6 +899,7 @@
     </div>
 
     <!-- end advance account section -->
+
     <!-- start explore network section -->
 
     <div class="pt-100">
@@ -1223,6 +973,10 @@
     </div>
 
     <!-- end explore network section -->
+
+    <!-- statistic section    -->
+
+    <!-- end statistics section -->
 
     <!-- resources section -->
     <Resources />
@@ -1312,6 +1066,120 @@
       </div>
     </div>
 
+    <div class="container-flex mt-5 pt-5 bg-counter">
+      <div class="text-center mb-5 pb-5">
+        <h1 class="h1-text">{{ $t("general.focused_market") }}</h1>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <b-icon icon="search" font-scale="4" class="ico"></b-icon>
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="color: #fbcf00"> 7000+ </span>
+              </div>
+
+              <p class="font-16 font-poppin">{{ $t("general.7k_business") }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <b-icon icon="chat-text" font-scale="4" class="ico"></b-icon>
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="color: #fbcf00"> 13,000+ </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.13k_customers") }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <b-icon
+                  icon="card-checklist"
+                  font-scale="4"
+                  class="ico"
+                ></b-icon>
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="color: #fbcf00"> 100+ </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.100_industries") }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <b-icon icon="check2-all" font-scale="4" class="ico"></b-icon>
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="color: #fbcf00"> 48H </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.48h_respond_time") }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-3">
+        <h1 class="h1-text mb-5 pb-5">
+          {{ $t("general.hear_from_our_buyers") }}
+        </h1>
+      </div>
+
+      <div>
+        <splide
+          :options="toptions"
+          class="r-image text-center"
+          style="height: 300px !important"
+        >
+          <splide-slide v-for="testi in testimonials" :key="testi.Id">
+            <div class="container">
+              <div style="" class="text-center p20px">
+                <b-avatar :src="testi.image" size="6rem"></b-avatar>
+                <h3 class="gem-testimonial-name mt-1 mb-1">{{ testi.name }}</h3>
+                <p class="pr-2 pl-2 mt-2 text-center w-100">
+                  {{ testi.testimoney }}
+                </p>
+              </div>
+            </div>
+          </splide-slide>
+        </splide>
+      </div>
+    </div>
+
     <Newsletter class="mt-100" />
     <SiteFooter />
   </div>
@@ -1356,6 +1224,28 @@ export default {
 
   data() {
     return {
+      testimonials: [
+        {
+          id: 1,
+          name: "User 1",
+          image: "assets/images/testi/buy1.jfif",
+          testimoney: this.$t("general.ever_since_i_started_using_ba"),
+        },
+
+        {
+          id: 1,
+          image: "assets/images/testi/buy2.jfif",
+          name: "User 2",
+          testimoney: this.$t("general.i_have_double_my_chiken_production"),
+        },
+
+        {
+          id: 1,
+          name: "User 3",
+          image: "assets/images/testi/buy3.jfif",
+          testimoney: this.$t("general.i_will_always_recommend_ba"),
+        },
+      ],
       text: `
           Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
           richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
@@ -1807,10 +1697,61 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-
-.ico{
-  color: #585858  !important;
+.p20px {
+  padding-right: 20px;
+  padding-right: 20px;
 }
+
+.orange-border {
+  border-bottom: 2px solid orange;
+}
+
+.footer-icons {
+  font-size: 32px;
+  text-decoration: none;
+  color: #e75c18;
+}
+.footer-icons-div {
+  width: 70%;
+}
+.color-white {
+  color: #ffffff;
+}
+
+.bg-counter {
+  background-image: url(https://codex-themes.com/thegem/wp-content/uploads/2016/01/counter-page_road_background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+
+  transform: translate3d(0px, -11.7408px, 0px);
+}
+
+.ico {
+  color: #585858 !important;
+}
+
+.gem-testimonial-name {
+  font-size: 18px;
+  line-height: 25px;
+  font-style: normal;
+  font-weight: 700;
+  font-family: "Montserrat";
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.title-counter {
+  font-size: 40px;
+  line-height: 70px;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: montserrat;
+}
+
 .title-xlarge {
   font-size: 60px;
   line-height: 70px;
@@ -1830,10 +1771,6 @@ export default {
   flex-basis: 80%;
 }
 
-.md-field.md-theme-default:after {
-  background-color: white;
-}
-
 .bg-trans {
   background: transparent;
 }
@@ -1845,13 +1782,6 @@ export default {
 
 .testi-back {
   background: url("/assets/images/testi/bg.jpg");
-}
-
-.md-field.md-theme-default.md-focused .md-input,
-.md-field.md-theme-default.md-focused .md-textarea,
-.md-field.md-theme-default.md-has-value .md-input,
-.md-field.md-theme-default.md-has-value .md-textarea {
-  -webkit-text-fill-color: white !important;
 }
 
 .testi-image {
@@ -2252,6 +2182,21 @@ export default {
 
 .pr-15 {
   padding: 15%;
+}
+
+.footer-icons {
+  font-size: 18px;
+  display: inline-block;
+  background: #e75c18;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
 }
 </style>
 

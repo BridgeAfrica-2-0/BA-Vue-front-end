@@ -6,7 +6,7 @@
     </h1>
     <div class="row justify-content-center my-5">
       <div class="col-md-8 text-center">
-        <div class=" tabs-resource">
+        <div class="d-flex  tabs-resource">
              
 
               <b-button
@@ -24,42 +24,22 @@
               > {{ $t("general.how_to_use_bridgeafrica") }}  </b-button
             >
 
-            <!-- <b-button class=" mr-2"
-              pill
-              :variant="selectedResource == 'Plan' ? 'primary' : 'outline-primary'"
-              @click="changeResource('Plan')"
-              > {{ $t("general.business_plan") }}  </b-button
-            > -->
+
             <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'Digital' ? 'primary' : 'outline-primary'"
               @click="changeResource('Digital')"
               >  {{ $t("general.digital_busines") }}  </b-button
             >
-
-
-              <!-- <b-button class=" mr-2"
-              pill
-              :variant="selectedResource == 'creation' ? 'primary' : 'outline-primary'"
-              @click="changeResource('creation')"
-              > {{ $t("general.business_creation") }}  </b-button
-            > -->
-
-
-            
-              <b-button class=" mr-2"
+        
+          <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'fufulde' ? 'primary' : 'outline-primary'"
               @click="changeResource('fufulde')"
               >Fufulde</b-button
             >
-
-
-
-         
-         
-         
-        </div>
+            
+               </div>
       </div>
     </div>
 

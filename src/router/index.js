@@ -15,7 +15,7 @@ import verifyAccount from "../views/verifyAccount.vue";
 
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
-
+import Quote from "@/views/quote";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
 import market from "@/views/market";
@@ -142,6 +142,14 @@ const routes = [
     component: about,
    
   },
+
+  {
+    path: "/quote",
+    name: "quote",
+    component: Quote,
+
+  },
+
   {
     path: '/contact',
     name: 'contact',
@@ -443,6 +451,12 @@ const routes = [
     component: newHome,
 
   },
+
+
+  
+
+
+
 
   {
     path: "/services/:id",

@@ -5509,6 +5509,11 @@ grid-index@^1.1.0:
   resolved "https://registry.npmjs.org/grid-index/-/grid-index-1.1.0.tgz"
   integrity sha512-HZRwumpOGUrHyxO5bqKZL0B0GlUpwtCAzZ42sgxUPniu33R1LSFH5yrIcBCHjkctCAh3mtWKcKd9J4vDDdeVHA==
 
+gsap@^3.6.0:
+  version "3.10.4"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.10.4.tgz#db89a6b8f6d5cb76e274eae822cbc1aa4d31e88f"
+  integrity sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==
+
 gzip-size@^5.0.0:
   version "5.1.1"
   resolved "https://registry.npmjs.org/gzip-size/-/gzip-size-5.1.1.tgz"
@@ -6708,6 +6713,11 @@ lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
+
+litepie-datepicker@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/litepie-datepicker/-/litepie-datepicker-1.0.14.tgz#8c6fd91e574bbd6d26692133568992510ef80790"
+  integrity sha512-u1BAsvLv5r7grMrKbRXKXPfk5okiYJBF247PWr5MGmbVxxWmDCoqQWtMdaHrQUzA/BQiU6J6L1nri0QkJISjyA==
 
 load-script@^1.0.0:
   version "1.0.0"
@@ -11342,6 +11352,13 @@ vue-notification@^1.3.20:
   version "1.3.20"
   resolved "https://registry.npmjs.org/vue-notification/-/vue-notification-1.3.20.tgz"
   integrity sha512-vPj67Ah72p8xvtyVE8emfadqVWguOScAjt6OJDEUdcW5hW189NsqvfkOrctxHUUO9UYl9cTbIkzAEcPnHu+zBQ==
+
+vue-number-animation@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vue-number-animation/-/vue-number-animation-1.1.2.tgz#242072ede1e9ba2c7574b9c240fb11fc45e5151a"
+  integrity sha512-3tPgGl8OSWpEVOcoUSl/sikhx8AufYQL+oFAy/xzfQap7o7PeppD3W9WLOn9RvhMi9cXrja5aSeFnfdLS8iFww==
+  dependencies:
+    gsap "^3.6.0"
 
 vue-observe-visibility@^0.4.4:
   version "0.4.6"

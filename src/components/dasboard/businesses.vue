@@ -18,7 +18,7 @@
 
                   <div class="flex80">
                     <p class="textt text">
-                     <strong class="title"><router-link :to="'business_owner/'+business.id"> 
+                     <strong class="title"><router-link :to="'business_owner/'+business.slug"> 
                         {{ business.name }} </router-link>
                       </strong> 
                       <br />

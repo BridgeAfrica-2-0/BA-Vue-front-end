@@ -17,7 +17,7 @@
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <strong class="net-title">
-                   <router-link :to="'/network_follower/' + item.id">
+                   <router-link :to="'/network_follower/' + item.slug">
                       {{ item.name }}
                     </router-link> 
                 </strong> 

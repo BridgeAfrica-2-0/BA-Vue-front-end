@@ -28,7 +28,7 @@
                 <div class="pl-3 flx100">
                   <p class="textt">
                     <strong class="title">
-                      <router-link :to="{name: 'BusinessOwner', params: { id: item.id } }">
+                      <router-link :to="{name: 'BusinessOwner', params: { id: item.slug } }">
                         {{ item.name }}
                       </router-link>
                     </strong>
@@ -119,7 +119,7 @@
                     <b-button
                       block
                       size="sm"
-                      @click="gotoBusiness(item.id)"
+                      @click="gotoBusiness(item.slug)"
                       class="b-background shadow"
                       variant="primary"
                     >

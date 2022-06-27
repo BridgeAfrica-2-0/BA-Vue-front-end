@@ -24,7 +24,7 @@
                 <router-link
                   :to="{
                     name: 'Membar Network Follower',
-                    params: { id: item.id },
+                    params: { id: item.slug },
                   }"
                 >
                   <strong class="title">{{ item.name }}</strong>
@@ -283,7 +283,7 @@ export default {
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
-        path: `/business_owner/${this.activeAccount.id}`,
+        path: `/business_owner/${this.activeAccount.slug}`,
         query: { tabId: 1, msgTabId: 0 },
       });
     },

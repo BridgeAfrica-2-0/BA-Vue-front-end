@@ -23,7 +23,7 @@
         </b-col>
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
           <div class="title textt bold username">
-            <router-link :to="'business/' + value.id">
+            <router-link :to="'business/' + value.slug">
               <strong> {{ value.name }} </strong>
             </router-link>
           </div>
@@ -107,7 +107,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
-                  @click="gotoBusiness(value.id)"
+                  @click="gotoBusiness(value.slug)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>

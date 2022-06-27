@@ -24,7 +24,7 @@
         <img class="img-fluid picture" :src="business.picture" />
         <div class="text-lost">
           <b>
-            <router-link  :to="{name:'BusinessOwner', params:{id:business.id}}">
+            <router-link  :to="{name:'BusinessOwner', params:{id:business.slug}}">
               {{ business.name }}
             </router-link>
           </b>
@@ -44,7 +44,7 @@
           </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-            <router-link :to="'business_owner/' + business.id">
+            <router-link :to="'business_owner/' + business.slug">
               {{ $t("dashboard.Visit_Profile") }}
             </router-link>
           </p>

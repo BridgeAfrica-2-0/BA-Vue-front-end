@@ -19,7 +19,7 @@
             <div class="pl-3 flx100">
               <p class="textt">
                 <strong class="title">
-                   <router-link :to="{name: 'networks', params: {id: item.id}}">
+                   <router-link :to="{name: 'networks', params: {id: item.slug}}">
               <strong class="net-title">{{ item.name }}</strong>
             </router-link><br />
                 </strong>

@@ -66,7 +66,7 @@ a:hover {
 
 .bg-gray {
 	background-color: #fcfafb;
-}
+}   
 
 .section-title {
 	margin-bottom: 0.5rem;
@@ -385,10 +385,21 @@ a:hover {
 
 
 .about-bg{
-    background: url('https://home.maxinemoffett.com/wp-content/uploads/2022/05/DSC09065-scaled-1-1024x683-1.jpg');
+    /* background: url('https://home.maxinemoffett.com/wp-content/uploads/2022/05/DSC09065-scaled-1-1024x683-1.jpg'); */
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+.quote-bg{
+  
+	background: url("../images/about.png");
+	background-color: #722828 !important; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-blend-mode: difference;
+	
+}
+
 
 
 
@@ -435,6 +446,16 @@ a:hover {
 	background-size: cover;
 
   }
+
+
+  .bg-counter {
+	background: url("../images/about.png");
+	background-color: #722828 !important; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+  }
+
 
   
 

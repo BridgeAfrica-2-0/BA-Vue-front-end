@@ -24,12 +24,12 @@
               > {{ $t("general.how_to_use_bridgeafrica") }}  </b-button
             >
 
-            <b-button class=" mr-2"
+            <!-- <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'Plan' ? 'primary' : 'outline-primary'"
               @click="changeResource('Plan')"
               > {{ $t("general.business_plan") }}  </b-button
-            >
+            > -->
             <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'Digital' ? 'primary' : 'outline-primary'"
@@ -38,12 +38,12 @@
             >
 
 
-              <b-button class=" mr-2"
+              <!-- <b-button class=" mr-2"
               pill
               :variant="selectedResource == 'creation' ? 'primary' : 'outline-primary'"
               @click="changeResource('creation')"
               > {{ $t("general.business_creation") }}  </b-button
-            >
+            > -->
 
 
             
@@ -75,11 +75,11 @@
 
         </div>
         <div class="resource-title mt-3">
-          <p v-if="resource.title.length > 115">
+          <p v-if="resource.title.length > 115" class="text-capitalised">
             {{ resource.title.substring(0, 115) }}...
           </p>
           <p v-else>
-          <b-link :href="resource.video"> {{ resource.title }}  </b-link> 
+          <b-link :href="resource.video" class="text-capitalised"> {{ resource.title }}  </b-link> 
           </p>
 
           <div class="resource-line"></div>
@@ -129,7 +129,7 @@ export default {
 
          {
           id: "1",
-          title: "developing competitive products",
+          title: "Developing competitive products",
           tag: ["bridgeafrica","Plan"],  
            picture: "assets/images/training/mod1/EN.jpg",
           video: "https://youtu.be/X7ZK3elhVGI",
@@ -165,7 +165,7 @@ export default {
 
           {
           id: "5",
-          title: "BRANDING",
+          title: "Branding",
           tag: ["bridgeafrica","Plan"],
            picture: "assets/images/training/mod5/EN.jpg",
           video: "https://youtu.be/BJtABiNS0LU",
@@ -206,7 +206,7 @@ export default {
 
          {
           id: "9",
-          title: "UNDERSTANDING DIGITAL PAYMENT SYSTEMS MOBILE MONEY SYSTEMS",
+          title: "Understanding Digital Payment System Mobile Money System",
           tag: ["bridgeafrica","Digital"],
            picture: "assets/images/training/mod9/EN.jpg",
           video: "https://youtu.be/A2ioGy5SJXA",
@@ -215,7 +215,7 @@ export default {
 
          {
           id: "10",
-          title: "IDENTIFYING AND DEVELOPING MARKET LINKS: BUILDING YOUR NETWORK",
+          title: "IDENTIFYING AND DEVELOPING MARKET LINKS BUILDING YOUR NETWORK",
           tag: ["bridgeafrica","Digital"],
            picture: "assets/images/training/mod10/EN.jpg",
           video: "https://youtu.be/-SwMF8jqmAk",
@@ -232,7 +232,7 @@ export default {
 
  {
           id: "12",
-          title: "KEEPING RECORDS: TRACK YOUR BUSINESS’ PROGRESS",
+          title: "KEEPING RECORDS TRACK YOUR BUSINESS’ PROGRESS",
           tag: ["bridgeafrica",'creation'],
            picture: "assets/images/training/mod12/EN.jpg",
           video: "https://youtu.be/ePeiO76aVAc",
@@ -317,7 +317,7 @@ export default {
 
           {
           id: "20",
-          title: "BRANDING",
+          title: "Branding",
           tag: ["bridgeafrica","fufulde"],
            picture: "assets/images/training/mod5/FFU.jpg",
           video: "https://youtu.be/qoigtzeTCu8",
@@ -384,7 +384,7 @@ export default {
 
  {
           id: "27",
-          title: "KEEPING RECORDS: TRACK YOUR BUSINESS’ PROGRESS",
+          title: "KEEPING RECORDS TRACK YOUR BUSINESS’ PROGRESS",
           tag: ["bridgeafrica",'fufulde'],
            picture: "assets/images/training/mod12/FFU.jpg",
           video: "https://youtu.be/ePeiO76aVAc",
@@ -481,7 +481,7 @@ export default {
 
 {
           id: "10",
-          title: "BRANDING",
+          title: "Branding",
           tag: ["bridgeafrica","Plan"],
            picture: "assets/images/training/mod5/FR.jpg",
           video: "https://youtu.be/ePeiO76aVAc",
@@ -623,7 +623,7 @@ export default {
 
 {
           id: "20",
-          title: "BRANDING",
+          title: "Branding",
           tag: ["bridgeafrica","fufulde"],
            picture: "assets/images/training/mod5/FFU.jpg",
           video: "https://youtu.be/qoigtzeTCu8",
@@ -868,6 +868,10 @@ export default {
 
 <style scoped>
 
+.text-capitalised{
+  text-transform: uppercase
+}
+
 @media only screen and (min-width: 768px) {
 
 .tabs-resource{
@@ -955,6 +959,7 @@ font-size: 18px;
   color: #000000;
   text-align: center;
   margin-top: -30px !important;
+  text-transform: uppercase;
 }
 .resource-title p {
   text-align: center;
@@ -962,6 +967,7 @@ font-size: 18px;
   letter-spacing: 0px;
   font-weight: 700;
   font-family: "Arvo";
+  text-transform: uppercase;
 }
 .resource-line {
   border: 1px solid black;

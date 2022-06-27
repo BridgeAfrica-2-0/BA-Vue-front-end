@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hompage">
     <nav
       id="navbarExample"
       class="navbar navbar-expand-lg fixed-top navbar-light"
@@ -195,12 +195,12 @@
                   >
                     {{ $t("general.Tailors") }}
                   </b-button>
-                  <b-button
+                  <!-- <b-button
                     @click="searchCategory('hair_dresser')"
                     class="cat-btn ml-1"
                   >
                     {{ $t("general.hair_dresser") }}
-                  </b-button>
+                  </b-button> -->
                 </div>
               </div>
             </div>
@@ -315,53 +315,24 @@
       </div>
 
       <div class="row px-md-5 px-2">
-        <div class="col-md-4 order-2 order-md-1 card pb-3 orange-border">
-          <div class="pr-5 pl-5 pt-5">
-            <div class="">
-              <b-img src="assets/images/black_logo.png" size="6rem"></b-img>
-
-              <h5 class="pr-2 pl-2 mt-4 w-100">+273 697 157 690 <br /></h5>
-
-              <div class="footer-icons-div d-flex flex-row text-center mt-3">
-                <a
-                  href="https://twitter.com/bridgeafricacom"
-                  target="_blank"
-                  class="footer-icons"
-                >
-                  <i class="fab fa-twitter-square"></i>
-                </a>
-                <a
-                  href="http://facebook.com/bridgeafricacom"
-                  target="_blank"
-                  class="footer-icons"
-                >
-                  <i class="fab fa-facebook-square"></i>
-                </a>
-                <a
-                  href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
-                  target="_blank"
-                  class="footer-icons"
-                >
-                  <i class="fab fa-youtube"></i>
-                </a>
-                <a
-                  href="https://twitter.com/bridgeafricacom"
-                  target="_blank"
-                  class="footer-icons"
-                >
-                  <i class="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-6 order-2 order-md-1 card pb-3 orange-border">
+          <b-embed
+            type="iframe"
+            aspect="16by9"
+            src="//www.youtube.com/embed/U8TgG0nQpdI?rel=0?version=3&mute=1&autoplay=1&controls=0&showinfo=0&loop=1&playlist=U8TgG0nQpdI"
+            autoplay
+            class="s-embed resource-img"
+          ></b-embed>
         </div>
 
-        <div class="col-md-8 order-1 order-md-2">
+        <div class="col-md-6 order-1 order-md-2">
           <div class="md-layout-item md-small-size-100 m-left">
             <form novalidate @submit.prevent="validateUser">
               <div class="form pt-1 pl-5 pr-5">
                 <md-field :class="getValidationClass('pname')">
-                  <label for="name" class=""> Looking for something? </label>
+                  <label for="name" class="">
+                    {{ $t("general.looking_for_something") }}
+                  </label>
                   <md-input
                     type="text"
                     name="name"
@@ -375,7 +346,9 @@
                 </md-field>
 
                 <md-field :class="getValidationClass('quantity')">
-                  <label for="qunatity" class=""> Quantity </label>
+                  <label for="qunatity" class="">
+                    {{ $t("general.Quantity") }}
+                  </label>
                   <md-input
                     class=""
                     type="number"
@@ -386,7 +359,9 @@
                 </md-field>
 
                 <md-field :class="getValidationClass('name')">
-                  <label for="uname" class=""> Full Name </label>
+                  <label for="uname" class="">
+                    {{ $t("general.full_name") }}
+                  </label>
                   <md-input
                     type="text"
                     name="uname"
@@ -400,7 +375,9 @@
                 </md-field>
 
                 <md-field class="">
-                  <label for="email" class=""> Email </label>
+                  <label for="email" class="">
+                    {{ $t("general.Email") }}
+                  </label>
                   <md-input
                     type="email"
                     name="email"
@@ -410,7 +387,7 @@
                 </md-field>
 
                 <md-field :class="getValidationClass('tel')">
-                  <label for="name" class=""> Tel </label>
+                  <label for="name" class=""> {{ $t("general.Tel") }} </label>
                   <md-input
                     type="number"
                     name="tel"
@@ -424,7 +401,7 @@
                 </md-field>
                 <div>
                   <b-button type="submit" variant="primary" block class="mb-3">
-                    Request For Quotation
+                    {{ $t("general.Request_For_Quotation") }}
                   </b-button>
                 </div>
               </div>
@@ -659,11 +636,11 @@
 
     <!-- african print titles -->
 
-    <div class="africanprints-overlay">
+    <div class="africanprints-overlay" style="margin-top: -150px">
       <div class="africanprints">
         <div class="container text-center">
           <sequential-entrance fromLeft>
-            <h1 class="h1-text p-1 p-md-5">
+            <h1 class="h1-text white p-1 p-md-5">
               {{ $t("general.helping_small_medium_size_biz") }}
             </h1>
           </sequential-entrance>
@@ -1066,22 +1043,32 @@
       </div>
     </div>
 
-    <div class="container-flex mt-5 pt-5 bg-counter">
+    <div class="container-flex mt-5 pt-5 pb-5 bg-counter">
       <div class="text-center mb-5 pb-5">
-        <h1 class="h1-text">{{ $t("general.focused_market") }}</h1>
+        <h1 class="h1-text white">{{ $t("general.focused_market") }}</h1>
       </div>
 
-      <div class="row mt-2">
+      <div class="row mt-2 white">
         <div class="col-md-3">
           <div class="text-center">
             <div class="text-center">
               <span>
-                <b-icon icon="search" font-scale="4" class="ico"></b-icon>
+                <img class="countt" src="assets/images/business.png" />
               </span>
             </div>
             <div class="">
               <div class="title-counter">
-                <span style="color: #fbcf00"> 7000+ </span>
+                <span style="" @click="playAnimation" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="7000"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
               </div>
 
               <p class="font-16 font-poppin">{{ $t("general.7k_business") }}</p>
@@ -1093,12 +1080,22 @@
           <div class="text-center">
             <div class="text-center">
               <span>
-                <b-icon icon="chat-text" font-scale="4" class="ico"></b-icon>
+                <img class="countt" src="assets/images/customers.png" />
               </span>
             </div>
             <div class="">
               <div class="title-counter">
-                <span style="color: #fbcf00"> 13,000+ </span>
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="13000"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
               </div>
 
               <p class="font-16 font-poppin">
@@ -1112,16 +1109,22 @@
           <div class="text-center">
             <div class="text-center">
               <span>
-                <b-icon
-                  icon="card-checklist"
-                  font-scale="4"
-                  class="ico"
-                ></b-icon>
+                <img class="countt" src="assets/images/industry.png" />
               </span>
             </div>
             <div class="">
               <div class="title-counter">
-                <span style="color: #fbcf00"> 100+ </span>
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="100"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
               </div>
 
               <p class="font-16 font-poppin">
@@ -1135,12 +1138,22 @@
           <div class="text-center">
             <div class="text-center">
               <span>
-                <b-icon icon="check2-all" font-scale="4" class="ico"></b-icon>
+                <img class="countt" src="assets/images/clock.png" />
               </span>
             </div>
             <div class="">
               <div class="title-counter">
-                <span style="color: #fbcf00"> 48H </span>
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="1"
+                    :to="48"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />H
+                </span>
               </div>
 
               <p class="font-16 font-poppin">
@@ -1160,17 +1173,35 @@
       </div>
 
       <div>
-        <splide
-          :options="toptions"
-          class="r-image text-center"
-          style="height: 300px !important"
-        >
+        <splide :options="toptions" class="text-center card p-md-5 rounded-b">
           <splide-slide v-for="testi in testimonials" :key="testi.Id">
-            <div class="container">
-              <div style="" class="text-center p20px">
-                <b-avatar :src="testi.image" size="6rem"></b-avatar>
-                <h3 class="gem-testimonial-name mt-1 mb-1">{{ testi.name }}</h3>
-                <p class="pr-2 pl-2 mt-2 text-center w-100">
+            <div
+              style=""
+              class="
+                text-center
+                p20px
+                pl-md-5
+                pr-md-5
+                mr-md-5
+                ml-md-5
+                mt-2
+                d-md-flex
+              "
+            >
+              <b-avatar :src="testi.image" size="8rem"></b-avatar>
+              <div class="pl-3 pr-3 mt-2">
+                <h2
+                  class="
+                    gem-testimonial-name
+                    pl-3
+                    mt-1
+                    mb-1
+                    text-center text-md-left
+                  "
+                >
+                  {{ testi.name }}
+                </h2>
+                <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
                   {{ testi.testimoney }}
                 </p>
               </div>
@@ -1183,7 +1214,7 @@
     <Newsletter class="mt-100" />
     <SiteFooter />
   </div>
-</template>
+</template>  
 
 <script>
 import axios from "axios";
@@ -1227,23 +1258,45 @@ export default {
       testimonials: [
         {
           id: 1,
-          name: "User 1",
+          name: "Natashia Bellenga Ebo",
           image: "assets/images/testi/buy1.jfif",
           testimoney: this.$t("general.ever_since_i_started_using_ba"),
         },
 
         {
-          id: 1,
+          id: 4,
           image: "assets/images/testi/buy2.jfif",
-          name: "User 2",
+          name: "Easter Yaya",
           testimoney: this.$t("general.i_have_double_my_chiken_production"),
         },
 
         {
-          id: 1,
-          name: "User 3",
+          id: 3,
+          name: "James Eba ego",
           image: "assets/images/testi/buy3.jfif",
           testimoney: this.$t("general.i_will_always_recommend_ba"),
+        },
+
+        {
+          id: 4,
+          name: "Maria Ebam",
+          image: "assets/images/testi/buy1.jfif",
+          testimoney: this.$t("general.as_a_busy_mother"),
+        },
+
+        {
+          id: 5,
+          image: "assets/images/testi/buy2.jfif",
+          name: " yvon Eboto",
+          testimoney: this.$t("general.i_am_a_restaurant_owner"),
+        },
+
+        {
+          id: 6,
+
+          name: " Martin Olinga",
+          image: "assets/images/testi/buy3.jfif",
+          testimoney: this.$t("general.with_ba_i_was_able_sew"),
         },
       ],
       text: `
@@ -1299,7 +1352,7 @@ export default {
         },
 
         {
-          id: "36",
+          id: "76",
           picture: "assets/images/emma.jpg",
           name: "Emma Fashion",
           description: "Embroidery , hand-made",
@@ -1314,7 +1367,7 @@ export default {
         },
 
         {
-          id: "3272",
+          id: "3709",
           picture: "assets/images/edo.jpg",
           name: "Saveurs du Lapin",
           description:
@@ -1322,7 +1375,7 @@ export default {
         },
 
         {
-          id: "3709",
+          id: "3272",
           picture: "assets/images/aissa.jpg",
 
           name: "Aissa Couture",
@@ -1364,7 +1417,7 @@ export default {
         },
 
         {
-          id: "36",
+          id: "76",
           picture: "assets/images/EN/emma.jpg",
           name: "Emma Fashion",
           description: "Embroidery , hand-made",
@@ -1379,7 +1432,7 @@ export default {
         },
 
         {
-          id: "3272",
+          id: "3709",
           picture: "assets/images/EN/edo.jpg",
           name: "Saveurs du Lapin",
 
@@ -1388,7 +1441,7 @@ export default {
         },
 
         {
-          id: "3709",
+          id: "3272",
           picture: "assets/images/EN/ETS AISSA.jpg",
 
           name: "Aissa Couture",
@@ -1583,6 +1636,17 @@ export default {
   },
 
   methods: {
+    playAnimation() {
+      this.$refs.number1.play();
+    },
+
+    theFormat(number) {
+      return number.toFixed(0);
+    },
+    completed() {
+      console.log("Animation ends!");
+    },
+
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -1697,9 +1761,13 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
+.countt {
+  width: 100px;
+}
+
 .p20px {
-  padding-right: 20px;
-  padding-right: 20px;
+  padding-right: 20px !important;
+  padding-right: 20px !important;
 }
 
 .orange-border {
@@ -1719,34 +1787,39 @@ export default {
 }
 
 .bg-counter {
-  background-image: url(https://codex-themes.com/thegem/wp-content/uploads/2016/01/counter-page_road_background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
-
   transform: translate3d(0px, -11.7408px, 0px);
+  background-blend-mode: difference;
 }
 
 .ico {
   color: #585858 !important;
 }
 
+.rounded-b {
+  border-radius: 25px !important;
+}
+
 .gem-testimonial-name {
-  font-size: 18px;
+  text-transform: uppercase;
   line-height: 25px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   font-family: "Montserrat";
-  margin-top: 1px;
+
+  margin-top: 3px;
   margin-bottom: 1px;
 }
 
 .title-counter {
-  font-size: 40px;
+  font-size: 30px;
   line-height: 70px;
   font-style: normal;
   font-weight: 700;
-  margin: 0.5em 0;
+  margin: 0.3em 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-family: montserrat;
@@ -2009,6 +2082,17 @@ export default {
   border-color: #e75c18;
 }
 @media (min-width: 768px) {
+  .gem-testimonial-text {
+    line-height: 36px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+
+    margin-top: 3px;
+    margin-bottom: 1px;
+  }
+
   .herro {
     margin-top: 190px;
   }
@@ -2047,6 +2131,17 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .gem-testimonial-text {
+    line-height: 30px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+
+    margin-top: 3px;
+    margin-bottom: 1px;
+  }
+
   .expln-header {
     font-size: 18px;
     color: black;
@@ -2201,6 +2296,66 @@ export default {
 </style>
 
 <style>
+@media only screen and (min-width: 768px) {
+  .hompage .splide__arrow--prev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hompage .splide__arrow--next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hompage .splide__arrow {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+
+    height: 2em;
+    border-radius: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    opacity: 0.7;
+    background: #ccc;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hompage .splide__arrow--prev {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .hompage .splide__arrow--next {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .hompage .splide__arrow {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+
+    height: 2em;
+    border-radius: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    opacity: 0.7;
+    background: #ccc;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .navbar-light .navbar-nav .nav-link {
     color: black !important;

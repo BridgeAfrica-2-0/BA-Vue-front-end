@@ -153,16 +153,9 @@
     </div>
     <header id="header" class="header">
       <div class="container herro">
-        <div class="row">
-          <div class="col-lg-7 col-xl-6">
-            <div class="text-container">
-              <sequential-entrance fromLeft delay="2000">
-                <h1 class="h1-large">Request for Quotation</h1>
-              </sequential-entrance>
-            </div>
-          </div>
-          <div class="col-lg-5 col-xl-6"></div>
-        </div>
+        <h1 class="h1-large text-left">
+          {{ $t("general.Request_For_Quotation") }}
+        </h1>
       </div>
     </header>
 
@@ -170,14 +163,10 @@
 
     <!-- bridge africa missions -->
 
-    <div class="pt-50"> 
-
-     
-
-      
-        <div class="row px-md-5 px-2">
-          <div class="col-xl-6">
-            <form novalidate class="md-layout" @submit.prevent="validateUser">
+    <div class="pt-50 padding-quote quote-bg">
+      <div class="row px-md-5 px-2">
+        <div class="col-xl-12">
+          <form novalidate class="md-layout" @submit.prevent="validateUser">
             <div class="md-layout-item md-small-size-100 m-left">
               <!-- 
              <div class="form mt-2 pt-2 pl-5 "> 
@@ -186,10 +175,12 @@
 
               <div class="">
                 <b-card>
-                  <h5>Basic product information</h5>
+                  <h5>{{ $t("general.basic_product_information") }}</h5>
 
                   <md-field :class="getValidationClass('pname')">
-                    <label for="pname" class=""> Product name </label>
+                    <label for="pname" class="">
+                      {{ $t("general.Product_name") }}
+                    </label>
                     <md-input
                       type="text"
                       name="pname"
@@ -198,12 +189,14 @@
                     />
 
                     <span class="md-error" v-if="!$v.form.pname.required">
-                      Name is required
+                      {{ $t("general.Name_is_required") }}
                     </span>
                   </md-field>
 
                   <md-field :class="getValidationClass('category')">
-                    <label for="category" class=""> Categories </label>
+                    <label for="category" class="">
+                      {{ $t("general.Categories") }}
+                    </label>
 
                     <md-select
                       v-model="form.category"
@@ -220,12 +213,14 @@
                     </md-select>
 
                     <span class="md-error" v-if="!$v.form.category.required">
-                      category is required
+                      {{ $t("general.category_is_required") }}
                     </span>
                   </md-field>
 
                   <md-field :class="getValidationClass('quantity')">
-                    <label for="qunatity" class=""> Quantity </label>
+                    <label for="qunatity" class="">
+                      {{ $t("general.Quantity") }}
+                    </label>
                     <md-input
                       class="white"
                       type="number"
@@ -235,14 +230,16 @@
                     />
 
                     <span class="md-error" v-if="!$v.form.quantity.required">
-                      Name is required
+                      {{ $t("general.Name_is_required") }}
                     </span>
                   </md-field>
 
                   <div class="row">
                     <div class="col-md-6">
                       <md-field :class="getValidationClass('budget')">
-                        <label for="budget" class=""> Max Budget </label>
+                        <label for="budget" class="">
+                          {{ $t("general.Max_Budget") }}
+                        </label>
                         <md-input
                           class="white"
                           type="number"
@@ -252,14 +249,16 @@
                         />
 
                         <span class="md-error" v-if="!$v.form.budget">
-                          Max Budget is required
+                          {{ $t("general.Max_Budget_is_required") }}
                         </span>
                       </md-field>
                     </div>
 
                     <div class="col-md-6">
                       <md-field :class="getValidationClass('pmethod')">
-                        <label for="pmethod" class=""> Payment Method </label>
+                        <label for="pmethod" class="">
+                          {{ $t("general.Payment_Method") }}
+                        </label>
                         <md-input
                           class="white"
                           type="text"
@@ -269,14 +268,14 @@
                         />
 
                         <span class="md-error" v-if="!$v.form.pmethod">
-                          Payment method is required
+                          {{ $t("general.Payment_method_is_required") }}
                         </span>
                       </md-field>
                     </div>
                   </div>
 
                   <md-field>
-                    <label>Textarea</label>
+                    <label>Description</label>
                     <md-textarea v-model="form.description"></md-textarea>
                   </md-field>
 
@@ -292,10 +291,12 @@
                 </b-card>
 
                 <b-card class="mt-3">
-                  <h5>Shipping & Payment</h5>
+                  <h5>{{ $t("general.shipping_payment") }}</h5>
 
                   <md-field class="">
-                    <label for="qunatity" class=""> Shipping method </label>
+                    <label for="qunatity" class="">
+                      {{ $t("general.shipping_method") }}
+                    </label>
                     <md-input
                       class="white"
                       type="text"
@@ -321,7 +322,9 @@
                   </div>
 
                   <md-field class="">
-                    <label for="l-time" class=""> Lead Time </label>
+                    <label for="l-time" class="">
+                      {{ $t("general.lead_time") }}
+                    </label>
                     <md-input
                       class="white"
                       type="text"
@@ -330,11 +333,13 @@
                       v-model="form.ltime"
                     />
 
-                    day(s) after supplier receives the initial payment
+                    {{ $t("general.days_after_suppier_receives") }}
                   </md-field>
 
                   <md-field class="">
-                    <label for="budget" class=""> Payment method </label>
+                    <label for="budget" class="">
+                      {{ $t("general.Payment_method") }}
+                    </label>
                     <md-input
                       class=""
                       type="text"
@@ -346,35 +351,17 @@
                 </b-card>
 
                 <b-card class="mt-3 p-1 text-center">
-                  <b-button
-                    variant="outline-primary"
-                    type="submit"
-                    class="mb-3"
-                  >
-                    Submit Form
+                  <b-button variant="primary" type="submit" class="mb-3" block>
+                    {{ $t("general.Submit_Form") }}
                   </b-button>
                 </b-card>
               </div>
             </div>
-
-             </form>
-          </div>
-     
-
-      <div class="col-xl-6 p-0  b-div"> 
-             
-             
-             
-            </div>
-
-
-            
-
-
+          </form>
         </div>
-     
 
-      
+        <div class="col-xl-6 p-0 b-div"></div>
+      </div>
     </div>
 
     <!-- end of inquiring form  -->
@@ -564,7 +551,12 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-
+@media (min-width: 768px) {
+  padding-quote {
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+  }
+}
 
 .b-div {
   background-image: url("ash.jpg");
@@ -572,8 +564,6 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-
 
 .pt-50 {
   padding-top: 50px;
@@ -844,7 +834,7 @@ export default {
     font-size: 18px;
   }
   .herro {
-    margin-top: 220px;
+    margin-top: 150px;
   }
   .cat-btn {
     background: white;

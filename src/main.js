@@ -123,6 +123,10 @@ Vue.component('fab-icon', FontAwesomeIcon);
 import vueCountryRegionSelect from 'vue-country-region-select';
 Vue.use(vueCountryRegionSelect);
 
+import VueNumber from 'vue-number-animation'
+
+Vue.use(VueNumber)
+
 import VueFormWizard from 'vue-form-wizard';
 
 Vue.use(VueFormWizard);

@@ -392,7 +392,7 @@ export default {
 
       this.loader = true;
       this.currentPage = value;
-      let url = "/market?business_id=" + this.businessId + "&page=" + value;
+      let url = "/market?slug=" + this.businessId + "&page=" + value;
 
       this.$store
         .dispatch("market/bPnextPage", url)
@@ -409,7 +409,7 @@ export default {
     getProducts: async function() {
       const basePrefix = this.isGuestUser ? "/guest" : "";
 
-      let url = basePrefix + "/market?business_id=" + this.businessId;
+      let url = basePrefix + "/market?slug=" + this.businessId;
       await this.$store
         .dispatch("market/getBproducts", url)
         .then((res) => {

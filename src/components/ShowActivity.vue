@@ -187,17 +187,17 @@ export default {
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: item.id,
+          routeId: item.slug,
         };
 
         const request =
           "network" == type
             ? await this.$repository.share.switch(
-                item.id,
+                item.slug,
                 "network"
               )
             : await this.$repository.share.switch(
-                item.id,
+                item.slug,
                 "business"
               );
 

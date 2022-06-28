@@ -76,7 +76,7 @@ export default {
 
    
      getProducts: async function () {
-        let url="/market?business_id="+this.businessId;
+        let url="/market?slug="+this.businessId;
        await this.$store
         .dispatch("market/getBproducts", url).then((res) => {
           console.log(res);

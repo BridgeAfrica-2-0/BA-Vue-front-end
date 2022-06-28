@@ -599,7 +599,7 @@ selectedcategories: function() {
       
       this.loader=true;
       this.currentPage = value;
-     let url="/market?business_id="+this.businessId+"&page="+value;    
+     let url="/market?slug="+this.businessId+"&page="+value;    
 
       this.$store
         .dispatch("market/bPnextPage", url).then((res) => {
@@ -618,7 +618,7 @@ selectedcategories: function() {
 
 
       getProducts: async function () {
-        let url="/market?business_id="+this.businessId;
+        let url="/market?slug="+this.businessId;
        await this.$store
         .dispatch("market/getBproducts", url).then((res) => {
         

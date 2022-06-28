@@ -63,7 +63,7 @@
               <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
-                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.id">
+                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.slug">
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->
@@ -72,7 +72,7 @@
                        
                     </router-link>
 
-                     <router-link v-else :to="'/network/' + network.id">
+                     <router-link v-else :to="'/network/' + network.slug">
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->

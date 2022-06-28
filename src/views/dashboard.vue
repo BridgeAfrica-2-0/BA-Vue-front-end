@@ -352,7 +352,7 @@ export default {
         )
       ).business;
 
-      const businessesData = businesses.map((value) => ({ text: value.name, value: value.id }) );
+      const businessesData = businesses.map((value) => ({ text: value.name, value: value.slug }) );
 
       data = [ ...businessesData, ...ownerData]
 

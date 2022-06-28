@@ -581,6 +581,8 @@
 
       <Post
         v-for="item in owner_post"
+        usertype="business"
+
         :key="item.updated_at"
         :post="item"
         :mapvideo="() => mapvideo(item.media)"
@@ -595,7 +597,7 @@
   </div>
 </template>
 
-<script>
+<script>  
 
 import moment from "moment";
 import axios from "axios";

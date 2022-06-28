@@ -22,13 +22,13 @@
 
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
-        <b-row class="profile">
+        <b-row class="profile ml-md-0 ">
           <div>
             <img class="logo" :src="business_info.logo_path" />
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
             <b-link>
-              <h5 class="font-weight-bolder name">{{ business_info.name }}</h5>
+              <h5 class="font-weight-bolder name w-md-bizname">{{ business_info.name }}</h5>
             </b-link>
             <p>
               <br />
@@ -96,7 +96,7 @@
               <img class="logo" :src="business_info.logo_path" />
             </div>
             <div class="d-inline-block mt-4 ml-4 float-left texts">
-              <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
+              <h6 class="font-weight-bolder name w-biznam">{{ business_info.name }}</h6>
               <p class="details">
                 {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
@@ -383,6 +383,13 @@ export default {
 </script>
 
 <style scoped>
+
+.w-md-bizname{
+  max-width: 150px;
+}
+.w-biznam{
+   max-width: 150px;
+}
 .place_holder {
   width: 50% !important;
   height: 50% !important;

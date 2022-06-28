@@ -13,7 +13,7 @@
         </b-col>
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
-            <strong class="title"> <router-link :to="'/network/' + member.id">
+            <strong class="title"> <router-link :to="'/network/' + member.slug">
                 {{ member.name }} 
               </router-link>   </strong> <br />
             {{ member.category[0].name }}

@@ -28,7 +28,7 @@
                     >
                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
                         <router-link
-                          :to="{ name: 'Follower', params: { id: people.id } }"
+                          :to="{ name: 'Follower', params: { id: people.slug } }"
                         >
                           <b>{{ people.name }}</b>
                         </router-link>

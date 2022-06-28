@@ -18,7 +18,7 @@
           <div class="py-4">
             <div
               class="d-flex justify-content-center flex-column pointer"
-              @click="gotoBusiness(business.id)"
+              @click="gotoBusiness(business.slug)"
             >
               <img :src="business.logo_path" alt="..." class="img-map" />
               <h6 class="text-center my-3">

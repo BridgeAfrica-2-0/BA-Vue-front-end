@@ -31,7 +31,7 @@
             <div class="flx100">
               <p class="textt">
                 <strong class="title">
-                  <router-link :to="'business/' + item.id">
+                  <router-link :to="'business/' + item.slug">
                     {{ item.name }}
                   </router-link>
                 </strong>
@@ -125,7 +125,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
-                  @click="gotoBusiness(item.id)"
+                  @click="gotoBusiness(item.slug)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>

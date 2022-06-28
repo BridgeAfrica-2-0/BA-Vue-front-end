@@ -33,7 +33,7 @@
                     <b-row>
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
                         <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <router-link :to="'profile/' + item.id">
+                          <router-link :to="'profile/' + item.slug">
                             <b> {{ item.name }} </b>
                           </router-link>
                         </div>

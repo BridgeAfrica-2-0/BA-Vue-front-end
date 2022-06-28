@@ -1,5 +1,5 @@
 <template>
-  <div class="t-color">
+  <div class="t-color"> 
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> {{$t("general.Network")}} </span>
@@ -125,11 +125,11 @@ export default {
         business_image: "",
         allow_business: 0,
       },
-      isGuestUser: isGuestUser
+      isGuestUser: isGuestUser()
     };
   },
   beforeMount() {
-    this.getNetworks();
+   // this.getNetworks();
   },
 
   mounted() {
@@ -141,7 +141,7 @@ export default {
       return this.$route.name;
     },
     network() {
-      return this.$store.state.businessOwner.networks;
+     return this.$store.state.businessOwner.networks;
     },
 
     getNetworksFromStore() {
@@ -162,7 +162,10 @@ export default {
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page, dispatchMethod = "businessOwner/loadMore";
+      let url = "business/network/" + this.biz_id + "/" + this.page,
+      
+      dispatchMethod = "businessOwner/loadMore";
+
       if (this.isGuestUser ) {
         url = "guest/business/network/" + this.biz_id + "/" + this.page;
         dispatchMethod = "businessGuest/loadMore";

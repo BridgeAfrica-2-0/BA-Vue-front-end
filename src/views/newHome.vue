@@ -315,17 +315,18 @@
       </div>
 
       <div class="row px-md-5 px-2">
-        <div class="col-md-6 order-2 order-md-1 card pb-3 orange-border">
-          <b-embed
-            type="iframe"
-            aspect="16by9"
-            src="//www.youtube.com/embed/U8TgG0nQpdI?rel=0?version=3&mute=1&autoplay=1&controls=0&showinfo=0&loop=1&playlist=U8TgG0nQpdI"
-            autoplay
-            class="s-embed resource-img"
-          ></b-embed>
+        <div class="col-md-5 order-2 order-md-1 pb-3 pt-md-5">
+          <video
+            width="100%"
+            style="max-height: 350px; object-fit: cover"
+            controls
+            poster="assets/images/poster.jpg"
+          >
+            <source src="assets/video/intro.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        <div class="col-md-6 order-1 order-md-2">
+        <div class="col-md-7 order-1 order-md-2">
           <div class="md-layout-item md-small-size-100 m-left">
             <form novalidate @submit.prevent="validateUser">
               <div class="form pt-1 pl-5 pr-5">
@@ -460,7 +461,7 @@
               </div>
               <div class="">
                 <div class="title-xlarge">
-                  <span style="color:#e75c18"> 02 </span>
+                  <span style="color: #e75c18"> 02 </span>
                 </div>
 
                 <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
@@ -1211,10 +1212,7 @@
       </div>
     </div>
 
-
-
     <!-- customers testimonials -->
-
 
     <div class="container mt-5 pt-5">
       <div class="text-center mb-3">
@@ -1327,27 +1325,19 @@ export default {
           image: "assets/images/testi/buy3.jfif",
           testimoney: this.$t("general.i_will_always_recommend_ba"),
         },
-
-        
-
-       
       ],
 
-
-
-        ctestimonials: [
-       
-
+      ctestimonials: [
         {
           id: 4,
-          name: "Maria Ebam",
-          image: "assets/images/testi/buy1.jfif",
+          name: "Kaneka Taylor",
+          image: "assets/images/testi/taylor.jpg",
           testimoney: this.$t("general.as_a_busy_mother"),
         },
 
         {
           id: 5,
-          image: "assets/images/testi/buy2.jfif",
+          image: "assets/images/testi/f6b.jpg",
           name: " yvon Eboto",
           testimoney: this.$t("general.i_am_a_restaurant_owner"),
         },
@@ -1355,12 +1345,11 @@ export default {
         {
           id: 6,
 
-          name: " Martin Olinga",
-          image: "assets/images/testi/buy3.jfif",
+          name: "Sharon Vetti",
+          image: "assets/images/testi/vetti.jpg",
           testimoney: this.$t("general.with_ba_i_was_able_sew"),
         },
       ],
-
 
       text: `
           Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry

@@ -315,17 +315,18 @@
       </div>
 
       <div class="row px-md-5 px-2">
-        <div class="col-md-6 order-2 order-md-1 card pb-3 orange-border">
-          <b-embed
-            type="iframe"
-            aspect="16by9"
-            src="//www.youtube.com/embed/U8TgG0nQpdI?rel=0?version=3&mute=1&autoplay=1&controls=0&showinfo=0&loop=1&playlist=U8TgG0nQpdI"
-            autoplay
-            class="s-embed resource-img"
-          ></b-embed>
+        <div class="col-md-5 order-2 order-md-1 pb-3 pt-md-5">
+          <video
+            width="100%"
+            style="max-height: 350px; object-fit: cover"
+            controls
+            poster="assets/images/poster.jpg"
+          >
+            <source src="assets/video/intro.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        <div class="col-md-6 order-1 order-md-2">
+        <div class="col-md-7 order-1 order-md-2">
           <div class="md-layout-item md-small-size-100 m-left">
             <form novalidate @submit.prevent="validateUser">
               <div class="form pt-1 pl-5 pr-5">
@@ -437,7 +438,7 @@
               </div>
               <div class="">
                 <div class="title-xlarge">
-                  <span style="color: #fbcf00"> 01 </span>
+                  <span style="color: #e75c18"> 01 </span>
                 </div>
 
                 <p>{{ $t("general.step1_identify_the_state") }}</p>
@@ -460,7 +461,7 @@
               </div>
               <div class="">
                 <div class="title-xlarge">
-                  <span style="color: #fbcf00"> 02 </span>
+                  <span style="color: #e75c18"> 02 </span>
                 </div>
 
                 <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
@@ -487,7 +488,7 @@
               </div>
               <div class="">
                 <div class="title-xlarge">
-                  <span style="color: #fbcf00"> 03 </span>
+                  <span style="color: #e75c18"> 03 </span>
                 </div>
 
                 <p>{{ $t("general.step3_place_your_order") }}</p>
@@ -510,7 +511,7 @@
               </div>
               <div class="">
                 <div class="title-xlarge">
-                  <span style="color: #fbcf00"> 04 </span>
+                  <span style="color: #e75c18"> 04 </span>
                 </div>
 
                 <p>
@@ -636,7 +637,7 @@
 
     <!-- african print titles -->
 
-    <div class="africanprints-overlay" style="margin-top: -150px">
+    <div class="africanprints-overlay" style="margin-top: -250px">
       <div class="africanprints">
         <div class="container text-center">
           <sequential-entrance fromLeft>
@@ -1062,7 +1063,7 @@
                   <number
                     ref="number1"
                     :from="10"
-                    :to="7000"
+                    :to="7500"
                     :format="theFormat"
                     :duration="10"
                     :delay="4"
@@ -1174,6 +1175,54 @@
 
       <div>
         <splide :options="toptions" class="text-center card p-md-5 rounded-b">
+          <splide-slide v-for="testi in ctestimonials" :key="testi.Id">
+            <div
+              style=""
+              class="
+                text-center
+                p20px
+                pl-md-5
+                pr-md-5
+                mr-md-5
+                ml-md-5
+                mt-2
+                d-md-flex
+              "
+            >
+              <b-avatar :src="testi.image" size="8rem"></b-avatar>
+              <div class="pl-3 pr-3 mt-2">
+                <h2
+                  class="
+                    gem-testimonial-name
+                    pl-3
+                    mt-1
+                    mb-1
+                    text-center text-md-left
+                  "
+                >
+                  {{ testi.name }}
+                </h2>
+                <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
+                  {{ testi.testimoney }}
+                </p>
+              </div>
+            </div>
+          </splide-slide>
+        </splide>
+      </div>
+    </div>
+
+    <!-- customers testimonials -->
+
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-3">
+        <h1 class="h1-text mb-5 pb-5">
+          {{ $t("general.hear_from_our_busineses") }}
+        </h1>
+      </div>
+
+      <div>
+        <splide :options="toptions" class="text-center card p-md-5 rounded-b">
           <splide-slide v-for="testi in testimonials" :key="testi.Id">
             <div
               style=""
@@ -1276,17 +1325,19 @@ export default {
           image: "assets/images/testi/buy3.jfif",
           testimoney: this.$t("general.i_will_always_recommend_ba"),
         },
+      ],
 
+      ctestimonials: [
         {
           id: 4,
-          name: "Maria Ebam",
-          image: "assets/images/testi/buy1.jfif",
+          name: "Kaneka Taylor",
+          image: "assets/images/testi/taylor.jpg",
           testimoney: this.$t("general.as_a_busy_mother"),
         },
 
         {
           id: 5,
-          image: "assets/images/testi/buy2.jfif",
+          image: "assets/images/testi/f6b.jpg",
           name: " yvon Eboto",
           testimoney: this.$t("general.i_am_a_restaurant_owner"),
         },
@@ -1294,11 +1345,12 @@ export default {
         {
           id: 6,
 
-          name: " Martin Olinga",
-          image: "assets/images/testi/buy3.jfif",
+          name: "Sharon Vetti",
+          image: "assets/images/testi/vetti.jpg",
           testimoney: this.$t("general.with_ba_i_was_able_sew"),
         },
       ],
+
       text: `
           Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
           richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor

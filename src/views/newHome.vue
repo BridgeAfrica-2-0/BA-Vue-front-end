@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hompage">
     <nav
       id="navbarExample"
       class="navbar navbar-expand-lg fixed-top navbar-light"
@@ -195,12 +195,12 @@
                   >
                     {{ $t("general.Tailors") }}
                   </b-button>
-                  <b-button
+                  <!-- <b-button
                     @click="searchCategory('hair_dresser')"
                     class="cat-btn ml-1"
                   >
                     {{ $t("general.hair_dresser") }}
-                  </b-button>
+                  </b-button> -->
                 </div>
               </div>
             </div>
@@ -302,7 +302,231 @@
         </splide>
       </div>
     </div>
+
     <!-- end explore busineses -->
+
+    <!-- start of inquiry form  -->
+
+    <div class="pt-50 mt-5 pt-5">
+      <div class="mb-md-5 pl-md-5 pr-md-5">
+        <h1 class="h1-text text-center pl-md-5 pr-md-5">
+          {{ $t("general.lets_help_you_find_products_and_service") }}
+        </h1>
+      </div>
+
+      <div class="row px-md-5 px-2">
+        <div class="col-md-5 order-2 order-md-1 pb-3 pt-md-5">
+          <video
+            width="100%"
+            style="max-height: 350px; object-fit: cover"
+            controls
+            poster="assets/images/poster.jpg"
+          >
+            <source src="assets/video/intro.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="col-md-7 order-1 order-md-2">
+          <div class="md-layout-item md-small-size-100 m-left">
+            <form novalidate @submit.prevent="validateUser">
+              <div class="form pt-1 pl-5 pr-5">
+                <md-field :class="getValidationClass('pname')">
+                  <label for="name" class="">
+                    {{ $t("general.looking_for_something") }}
+                  </label>
+                  <md-input
+                    type="text"
+                    name="name"
+                    id="name"
+                    v-model="form.pname"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.pname.required">
+                    required
+                  </span>
+                </md-field>
+
+                <md-field :class="getValidationClass('quantity')">
+                  <label for="qunatity" class="">
+                    {{ $t("general.Quantity") }}
+                  </label>
+                  <md-input
+                    class=""
+                    type="number"
+                    name="qunatity"
+                    id="quantity"
+                    v-model="form.quantity"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('name')">
+                  <label for="uname" class="">
+                    {{ $t("general.full_name") }}
+                  </label>
+                  <md-input
+                    type="text"
+                    name="uname"
+                    id="uname"
+                    v-model="form.name"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.name.required">
+                    {{ $t("auth.First_Name_is_required") }}
+                  </span>
+                </md-field>
+
+                <md-field class="">
+                  <label for="email" class="">
+                    {{ $t("general.Email") }}
+                  </label>
+                  <md-input
+                    type="email"
+                    name="email"
+                    id="email"
+                    v-model="form.email"
+                  />
+                </md-field>
+
+                <md-field :class="getValidationClass('tel')">
+                  <label for="name" class=""> {{ $t("general.Tel") }} </label>
+                  <md-input
+                    type="number"
+                    name="tel"
+                    id="tel"
+                    v-model="form.tel"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.tel.required">
+                    {{ $t("auth.tel_is_required") }}
+                  </span>
+                </md-field>
+                <div>
+                  <b-button type="submit" variant="primary" block class="mb-3">
+                    {{ $t("general.Request_For_Quotation") }}
+                  </b-button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of inwuiry form -->
+
+    <!-- start of the sourcing tabs  -->
+
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-5 pb-5">
+        <h1 class="h1-text">{{ $t("general.new_to_sourcing") }}</h1>
+
+        <p>
+          Find everything you need, anytime, anywhere, all in one place. Find
+          quality ready-to-ship products, or personalised customisations and
+          enjoy rapid deliveries
+        </p>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <div class="row">
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="search" font-scale="4" class="ico"></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #e75c18"> 01 </span>
+                </div>
+
+                <p>{{ $t("general.step1_identify_the_state") }}</p>
+              </div>
+            </div>
+
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="row">
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="chat-text" font-scale="4" class="ico"></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #e75c18"> 02 </span>
+                </div>
+
+                <p>{{ $t("general.step2_contact_bridgeafrica") }}</p>
+              </div>
+            </div>
+
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="row">
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon
+                    icon="card-checklist"
+                    font-scale="4"
+                    class="ico"
+                  ></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #e75c18"> 03 </span>
+                </div>
+
+                <p>{{ $t("general.step3_place_your_order") }}</p>
+              </div>
+            </div>
+
+            <div class="col-xl-2 d-none d-xl-block arrrow">
+              <img src="assets/images/horizontal_arrow.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="row">
+            <div class="text-center mt-3 col-md-12 col-xl-10">
+              <div class="text-center">
+                <span>
+                  <b-icon icon="check2-all" font-scale="4" class="ico"></b-icon>
+                </span>
+              </div>
+              <div class="">
+                <div class="title-xlarge">
+                  <span style="color: #e75c18"> 04 </span>
+                </div>
+
+                <p>
+                  {{ $t("general.recieve_and_contact_product_delivery") }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of the sourcing tabs  -->
+
+    <!-- bridge africa missions -->
 
     <!-- african print titles -->
 
@@ -409,9 +633,11 @@
       </div>
     </div>
 
+    <!-- end of inquiring form  -->
+
     <!-- african print titles -->
 
-    <div class="africanprints-overlay" style="margin-top: -200px">
+    <div class="africanprints-overlay" style="margin-top: -250px">
       <div class="africanprints">
         <div class="container text-center">
           <sequential-entrance fromLeft>
@@ -651,6 +877,7 @@
     </div>
 
     <!-- end advance account section -->
+
     <!-- start explore network section -->
 
     <div class="pt-100">
@@ -724,6 +951,10 @@
     </div>
 
     <!-- end explore network section -->
+
+    <!-- statistic section    -->
+
+    <!-- end statistics section -->
 
     <!-- resources section -->
     <Resources />
@@ -813,13 +1044,233 @@
       </div>
     </div>
 
+    <div class="container-flex mt-5 pt-5 pb-5 bg-counter">
+      <div class="text-center mb-5 pb-5">
+        <h1 class="h1-text white">{{ $t("general.focused_market") }}</h1>
+      </div>
+
+      <div class="row mt-2 white">
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <img class="countt" src="assets/images/business.png" />
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="" @click="playAnimation" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="7500"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
+              </div>
+
+              <p class="font-16 font-poppin">{{ $t("general.7k_business") }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <img class="countt" src="assets/images/customers.png" />
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="13000"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.13k_customers") }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <img class="countt" src="assets/images/industry.png" />
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="10"
+                    :to="100"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />+
+                </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.100_industries") }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center">
+            <div class="text-center">
+              <span>
+                <img class="countt" src="assets/images/clock.png" />
+              </span>
+            </div>
+            <div class="">
+              <div class="title-counter">
+                <span style="" class="">
+                  <number
+                    ref="number1"
+                    :from="1"
+                    :to="48"
+                    :format="theFormat"
+                    :duration="10"
+                    :delay="4"
+                    easing="Power1.easeOut"
+                  />H
+                </span>
+              </div>
+
+              <p class="font-16 font-poppin">
+                {{ $t("general.48h_respond_time") }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-3">
+        <h1 class="h1-text mb-5 pb-5">
+          {{ $t("general.hear_from_our_buyers") }}
+        </h1>
+      </div>
+
+      <div>
+        <splide :options="toptions" class="text-center card p-md-5 rounded-b">
+          <splide-slide v-for="testi in ctestimonials" :key="testi.Id">
+            <div
+              style=""
+              class="
+                text-center
+                p20px
+                pl-md-5
+                pr-md-5
+                mr-md-5
+                ml-md-5
+                mt-2
+                d-md-flex
+              "
+            >
+              <b-avatar :src="testi.image" size="8rem"></b-avatar>
+              <div class="pl-3 pr-3 mt-2">
+                <h2
+                  class="
+                    gem-testimonial-name
+                    pl-3
+                    mt-1
+                    mb-1
+                    text-center text-md-left
+                  "
+                >
+                  {{ testi.name }}
+                </h2>
+                <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
+                  {{ testi.testimoney }}
+                </p>
+              </div>
+            </div>
+          </splide-slide>
+        </splide>
+      </div>
+    </div>
+
+    <!-- customers testimonials -->
+
+    <div class="container mt-5 pt-5">
+      <div class="text-center mb-3">
+        <h1 class="h1-text mb-5 pb-5">
+          {{ $t("general.hear_from_our_busineses") }}
+        </h1>
+      </div>
+
+      <div>
+        <splide :options="toptions" class="text-center card p-md-5 rounded-b">
+          <splide-slide v-for="testi in testimonials" :key="testi.Id">
+            <div
+              style=""
+              class="
+                text-center
+                p20px
+                pl-md-5
+                pr-md-5
+                mr-md-5
+                ml-md-5
+                mt-2
+                d-md-flex
+              "
+            >
+              <b-avatar :src="testi.image" size="8rem"></b-avatar>
+              <div class="pl-3 pr-3 mt-2">
+                <h2
+                  class="
+                    gem-testimonial-name
+                    pl-3
+                    mt-1
+                    mb-1
+                    text-center text-md-left
+                  "
+                >
+                  {{ testi.name }}
+                </h2>
+                <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
+                  {{ testi.testimoney }}
+                </p>
+              </div>
+            </div>
+          </splide-slide>
+        </splide>
+      </div>
+    </div>
+
     <Newsletter class="mt-100" />
     <SiteFooter />
   </div>
-</template>
+</template>  
 
 <script>
 import axios from "axios";
+
+import { validationMixin } from "vuelidate";
+import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
+
 import Newsletter from "../components/newsletter";
 import Resources from "../components/resources";
 import SiteFooter from "../components/site/siteFooter";
@@ -834,13 +1285,99 @@ export default {
     SemipolarSpinner,
   },
 
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      pname: {
+        required,
+      },
+
+      name: {
+        required,
+      },
+
+      tel: {
+        required,
+      },
+    },
+  },
+
   data() {
     return {
+      testimonials: [
+        {
+          id: 1,
+          name: "Natashia Bellenga Ebo",
+          image: "assets/images/testi/buy1.jfif",
+          testimoney: this.$t("general.ever_since_i_started_using_ba"),
+        },
+
+        {
+          id: 4,
+          image: "assets/images/testi/buy2.jfif",
+          name: "Easter Yaya",
+          testimoney: this.$t("general.i_have_double_my_chiken_production"),
+        },
+
+        {
+          id: 3,
+          name: "James Eba ego",
+          image: "assets/images/testi/buy3.jfif",
+          testimoney: this.$t("general.i_will_always_recommend_ba"),
+        },
+      ],
+
+      ctestimonials: [
+        {
+          id: 4,
+          name: "Kaneka Taylor",
+          image: "assets/images/testi/taylor.jpg",
+          testimoney: this.$t("general.as_a_busy_mother"),
+        },
+
+        {
+          id: 5,
+          image: "assets/images/testi/f6b.jpg",
+          name: " yvon Eboto",
+          testimoney: this.$t("general.i_am_a_restaurant_owner"),
+        },
+
+        {
+          id: 6,
+
+          name: "Sharon Vetti",
+          image: "assets/images/testi/vetti.jpg",
+          testimoney: this.$t("general.with_ba_i_was_able_sew"),
+        },
+      ],
+
+      text: `
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+          richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+          brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+          tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+          assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+          vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+          synth nesciunt you probably haven't heard of them accusamus labore VHS.
+        `,
       images: [
         "assets/images/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
         "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
       ],
       currentNumber: 0,
+
+      form: {
+        pname: null,
+        tel: null,
+        name: null,
+        quantity: null,
+        email: null,
+      },
+
+      userSaved: false,
+      sending: false,
+      lastUser: null,
 
       hotbiz_fr: [
         {
@@ -867,7 +1404,7 @@ export default {
         },
 
         {
-          id: "36",
+          id: "76",
           picture: "assets/images/emma.jpg",
           name: "Emma Fashion",
           description: "Embroidery , hand-made",
@@ -882,7 +1419,7 @@ export default {
         },
 
         {
-          id: "3272",
+          id: "3709",
           picture: "assets/images/edo.jpg",
           name: "Saveurs du Lapin",
           description:
@@ -890,7 +1427,7 @@ export default {
         },
 
         {
-          id: "3709",
+          id: "3272",
           picture: "assets/images/aissa.jpg",
 
           name: "Aissa Couture",
@@ -932,7 +1469,7 @@ export default {
         },
 
         {
-          id: "36",
+          id: "76",
           picture: "assets/images/EN/emma.jpg",
           name: "Emma Fashion",
           description: "Embroidery , hand-made",
@@ -947,7 +1484,7 @@ export default {
         },
 
         {
-          id: "3272",
+          id: "3709",
           picture: "assets/images/EN/edo.jpg",
           name: "Saveurs du Lapin",
 
@@ -956,7 +1493,7 @@ export default {
         },
 
         {
-          id: "3709",
+          id: "3272",
           picture: "assets/images/EN/ETS AISSA.jpg",
 
           name: "Aissa Couture",
@@ -1075,6 +1612,26 @@ export default {
       selected_video: "",
       show_loader: false,
 
+      toptions: {
+        rewind: true,
+        autoplay: false,
+        perPage: 1,
+        pagination: false,
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 1,
+            gap: "0rem",
+          },
+          992: {
+            perPage: 1,
+            gap: "1rem",
+          },
+        },
+      },
+
       options: {
         rewind: true,
         autoplay: true,
@@ -1131,6 +1688,46 @@ export default {
   },
 
   methods: {
+    playAnimation() {
+      this.$refs.number1.play();
+    },
+
+    theFormat(number) {
+      return number.toFixed(0);
+    },
+    completed() {
+      console.log("Animation ends!");
+    },
+
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
+      if (field) {
+        return {
+          "md-invalid": field.$invalid && field.$dirty,
+        };
+      }
+    },
+
+    saveData() {
+      this.$router.push({
+        name: "quote",
+        query: {
+          name: this.form.pname,
+          email: this.form.email,
+          tel: this.form.tel,
+          pname: this.form.pname,
+          quantity: this.form.quantity,
+        },
+      });
+    },
+
+    validateUser() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        this.saveData();
+      }
+    },
+
     startRotation: function () {
       this.timer = setInterval(this.next, 10000);
     },
@@ -1215,6 +1812,115 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.countt {
+  width: 100px;
+}
+
+.p20px {
+  padding-right: 20px !important;
+  padding-right: 20px !important;
+}
+
+.orange-border {
+  border-bottom: 2px solid orange;
+}
+
+.footer-icons {
+  font-size: 32px;
+  text-decoration: none;
+  color: #e75c18;
+}
+.footer-icons-div {
+  width: 70%;
+}
+.color-white {
+  color: #ffffff;
+}
+
+.bg-counter {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  transform: translate3d(0px, -11.7408px, 0px);
+  background-blend-mode: difference;
+}
+
+.ico {
+  color: #585858 !important;
+}
+
+.rounded-b {
+  border-radius: 25px !important;
+}
+
+.gem-testimonial-name {
+  text-transform: uppercase;
+  line-height: 25px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  font-family: "Montserrat";
+
+  margin-top: 3px;
+  margin-bottom: 1px;
+}
+
+.title-counter {
+  font-size: 30px;
+  line-height: 70px;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0.3em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: montserrat;
+}
+
+.title-xlarge {
+  font-size: 60px;
+  line-height: 70px;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: montserrat;
+}
+
+.arrrow {
+  padding-top: 35%;
+}
+
+.flex-base {
+  flex-basis: 80%;
+}
+
+.bg-trans {
+  background: transparent;
+}
+
+.border-bottom {
+  border-top: 2px solid;
+  margin: 2px;
+}
+
+.testi-back {
+  background: url("/assets/images/testi/bg.jpg");
+}
+
+.testi-image {
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.sourcing-icon {
+  width: 50px;
+  height: 50px;
+  background: #e75c18;
+  text-align: center;
+  margin-right: 15px;
+}
 
 .pt-50 {
   padding-top: 50px;
@@ -1428,6 +2134,17 @@ export default {
   border-color: #e75c18;
 }
 @media (min-width: 768px) {
+  .gem-testimonial-text {
+    line-height: 36px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+
+    margin-top: 3px;
+    margin-bottom: 1px;
+  }
+
   .herro {
     margin-top: 190px;
   }
@@ -1466,6 +2183,17 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .gem-testimonial-text {
+    line-height: 30px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+
+    margin-top: 3px;
+    margin-bottom: 1px;
+  }
+
   .expln-header {
     font-size: 18px;
     color: black;
@@ -1598,9 +2326,88 @@ export default {
 .nav-item {
   text-align: center;
 }
+
+.pr-15 {
+  padding: 15%;
+}
+
+.footer-icons {
+  font-size: 18px;
+  display: inline-block;
+  background: #e75c18;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
 </style>
 
 <style>
+@media only screen and (min-width: 768px) {
+  .hompage .splide__arrow--prev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hompage .splide__arrow--next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hompage .splide__arrow {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+
+    height: 2em;
+    border-radius: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    opacity: 0.7;
+    background: #ccc;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hompage .splide__arrow--prev {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .hompage .splide__arrow--next {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .hompage .splide__arrow {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+
+    height: 2em;
+    border-radius: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    opacity: 0.7;
+    background: #ccc;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .navbar-light .navbar-nav .nav-link {
     color: black !important;

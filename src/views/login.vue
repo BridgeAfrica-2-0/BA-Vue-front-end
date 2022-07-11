@@ -241,6 +241,7 @@ export default {
           console.log(data);
 
           this.$store.commit("auth/setUserData", data.data);
+           this.$store.dispatch("auth/profilePackage")
           this.flashMessage.show({
             status: "success",
 
@@ -284,6 +285,8 @@ export default {
           // }
 
 
+           this.$store.dispatch("auth/profilePackage")
+
            this.$router.push(this.$route.query.redirect || '/dashboard')
 
         })
@@ -298,7 +301,20 @@ export default {
               status: "error",
               message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
             });
-          } else {
+          } else if (err.response.status == 403) {
+            
+            console.log(err.response.data); 
+          //  this.$store.commit("auth/setUserData",err.response.data);
+
+          this.$store.commit("auth/setSignupData",err.response.data.data);
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message, 
+            });
+
+            this.$router.push({ name: "verifyAccount" });
+          }
+           else {
             this.flashMessage.show({
               status: "error",
 

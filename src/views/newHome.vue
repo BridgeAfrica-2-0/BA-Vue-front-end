@@ -320,7 +320,7 @@
             width="100%"
             style="max-height: 350px; object-fit: cover"
             controls
-            poster="assets/images/poster.jpg"
+            poster="assets/images/posterr.jpg"
           >
             <source src="assets/video/intro.mp4" type="video/mp4" />
           </video>

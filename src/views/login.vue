@@ -304,9 +304,7 @@ export default {
           } else if (err.response.status == 403) {
             
             console.log(err.response.data); 
-          //  this.$store.commit("auth/setUserData",err.response.data);
-
-          this.$store.commit("auth/setSignupData",err.response.data.data);
+           this.$store.commit("auth/setSignupData",err.response.data.data);
             this.flashMessage.show({
               status: "error",
               message: err.response.data.message, 

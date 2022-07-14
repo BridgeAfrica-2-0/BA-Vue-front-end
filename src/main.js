@@ -219,16 +219,9 @@ new Vue({
             this.$store.commit('auth/setUserData', userData);
 
             if (profile_package){  
-
-            console.log('changing this studd');
-            console.log(profile_package);
-
-            this.$store.commit('auth/setprofilePackage',JSON.parse(profile_package));
-           
-
-        }
-
-
+                 this.$store.commit('auth/setprofilePackage',JSON.parse(profile_package));
+            }
+        
         }
 
 
@@ -239,7 +232,6 @@ new Vue({
               if (error.response.status === 401) {
               
                 this.$store.dispatch('auth/logout');
-                console.log('error has ocurred', error);
               }
             }
             return Promise.reject(error);

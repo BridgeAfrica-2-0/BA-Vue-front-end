@@ -105,10 +105,6 @@ export default {
 
     setSignupData(state, userData) {
       state.user = userData;
-      console.log("yoo this G");
-      console.log(userData);
-
-      console.log(state.user);
       localStorage.setItem("signup", JSON.stringify(userData.user))
     },
 
@@ -190,11 +186,6 @@ export default {
   
 
       var currentUrl = window.location.pathname;
-
-     
-
-      // console.log(router.app._route);
-     
       router.push({ name: 'Login', query: { redirect: currentUrl } });     
 
       window.location.href = "/login";     

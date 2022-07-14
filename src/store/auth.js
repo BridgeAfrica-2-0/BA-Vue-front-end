@@ -1,5 +1,6 @@
 import axios from 'axios';
 import router from '../router';
+import { state } from './search/state';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -28,6 +29,7 @@ export default {
     profilConnected: null,
     password_reset: [],
     last_path:null,
+    profile_package:''
   },
 
   mutations: {
@@ -37,8 +39,18 @@ export default {
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
 
+
+    setprofilePackage(state, data) {
+     
+      localStorage.removeItem('profile_package');
+      state.profile_package=data
+      localStorage.setItem('profile_package', JSON.stringify(data));
+
+    },
+
+
     setquote(state, data) {
-      alert("bbbba");
+     
         state.quote=data
     },
 
@@ -174,11 +186,6 @@ export default {
   
 
       var currentUrl = window.location.pathname;
-
-     
-
-      // console.log(router.app._route);
-     
       router.push({ name: 'Login', query: { redirect: currentUrl } });     
 
       window.location.href = "/login";     
@@ -205,6 +212,13 @@ export default {
         commit("setUserData", data.data);
       });
     },
+
+    profilePackage({ commit }) {
+      return axios.get("profile/package").then(({ data }) => {
+        commit("setprofilePackage", data.data);
+      });
+    },
+
 
 
     neigbourhoods({ commit }, payload) {
@@ -376,7 +390,7 @@ export default {
     isLogged: state => !!state.user.accessToken,
     isVerified: state => !!state.user,
     user: state => state.user,
-
+    profile_package: state=> state.profile_package,
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`;
     },

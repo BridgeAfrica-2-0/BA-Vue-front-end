@@ -2,9 +2,8 @@
   <div style="overflow-x: hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify p-card pr-1">    
-    
-      <CompleteProfile class="mb-2"  v-if="!Profile_complete" />
+    <div class="text-justify p-card pr-1"> 
+       <CompleteProfile class="mb-2"  v-if="!Profile_complete" />
       <CarousselDashboard class="mm-top" /> <br />
 
       <div v-if="selectedb == 'owner'"> 
@@ -174,7 +173,7 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
-
+import { isPremium } from '@/helpers';
 import { mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
@@ -185,6 +184,7 @@ export default {
   data() {
     return {
       slide: 0,
+       isPremium: isPremium(),
       sliding: null,
       url_data: null,
       selectedb: "owner",

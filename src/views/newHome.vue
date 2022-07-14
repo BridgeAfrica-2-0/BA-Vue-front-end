@@ -320,7 +320,7 @@
             width="100%"
             style="max-height: 350px; object-fit: cover"
             controls
-            poster="assets/images/poster.jpg"
+            poster="assets/images/posterr.jpg"
           >
             <source src="assets/video/intro.mp4" type="video/mp4" />
           </video>
@@ -988,7 +988,7 @@
 
       <div class="hotbiz">
         <splide :options="optionss" class="r-image">
-          <splide-slide v-for="item in fr_videos" :key="item.id">
+          <splide-slide v-for="(item,i) in fr_videos" :key="item.id">
             <div class="container">
               <div class="row">
                 <div class="col-md-4">
@@ -998,8 +998,8 @@
                     <br />
                     <span>
                       <b-link
-                        v-b-modal.videomodal
-                        @click="playVideo(item.video)"
+                       
+                        @click="openGallery(i)"
                       >
                         {{ $t("general.play_video") }}
                       </b-link>
@@ -1013,28 +1013,19 @@
                   <div class="biz-konnect-video">
                     <b-img-lazy
                       class="quotes biz-cover"
-                      :src="item.picture"
+                      :src="item.thumb"
                       alt="alternative"
                     />
 
                     <div>
                       <b-icon
-                        v-b-modal.videomodal
-                        @click="playVideo(item.video)"
+                      
+                        @click="openGallery(i)"
                         icon="play-circle"
                         scale="3"
                         class="play-icon"
                       ></b-icon>
                     </div>
-
-                    <!-- <iframe
-          width="1440"
-          :src="item.video"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe> -->
                   </div>
                 </div>
               </div>
@@ -1262,12 +1253,21 @@
 
     <Newsletter class="mt-100" />
     <SiteFooter />
+
+     <LightBox 
+      ref="lightbox"
+      :media="fr_videos"
+      :show-caption="true"
+      :show-light-box="false"
+      ></LightBox>
+
   </div>
 </template>  
 
 <script>
 import axios from "axios";
-
+import LightBox from 'vue-it-bigger'
+import('vue-it-bigger/dist/vue-it-bigger.min.css')
 import { validationMixin } from "vuelidate";
 import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 
@@ -1282,6 +1282,7 @@ export default {
     Newsletter,
     SiteFooter,
     Resources,
+    LightBox,
     SemipolarSpinner,
   },
 
@@ -1511,102 +1512,118 @@ export default {
       ],
 
       fr_videos: [
-        {
-          video: "https://www.youtube.com/embed/CrjFkoU5eqs",
-          picture: "assets/images/biz/FR/african culture fr.jpg",
+        { 
+          id:"CrjFkoU5eqs",
+          thumb: "assets/images/biz/FR/african culture fr.jpg",
           name: "African Culture",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/FR/bibi fr.jpg",
+          id:"7XZ4SAKiQMM",
+          thumb: "assets/images/biz/FR/bibi fr.jpg",
           name: "Vin Bibi",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/1eIXf4Nu-F0",
-          picture: "assets/images/biz/FR/Gerar fr.jpg",
+          id:"1eIXf4Nu-F0",
+          thumb: "assets/images/biz/FR/Gerar fr.jpg",
           name: "Gerar Fashion",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/vO53J95E2GA",
-          picture: "assets/images/biz/FR/EDO RAISSA 2.jpg",
+          id:"vO53J95E2GA",
+          thumb: "assets/images/biz/FR/EDO RAISSA 2.jpg",
           name: "Edo Raissa",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/FR/OKAPI 1.jpg",
+          id:"7XZ4SAKiQMM",
+          thumb: "assets/images/biz/FR/OKAPI 1.jpg",
           name: "Okapi",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/xyD30G01nOg",
-          picture: "assets/images/biz/FR/ETS Aissa 3.jpg",
+          id:"xyD30G01nOg",
+          thumb: "assets/images/biz/FR/ETS Aissa 3.jpg",
           name: "ETS Aissa ",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/BqgkXMUm858",
-          picture: "assets/images/biz/FR/SILAS FR.jpg",
+          id:"BqgkXMUm858",
+          thumb: "assets/images/biz/FR/SILAS FR.jpg",
           name: "George Silas",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7aIMDB6_tWg",
-          picture: "assets/images/biz/FR/emma fr.jpg",
+          id:"7aIMDB6_tWg",
+          thumb: "assets/images/biz/FR/emma fr.jpg",
           name: "Emma Fashion",
+          type: 'youtube',
         },
       ],
 
       en_videos: [
         {
-          video: "https://www.youtube.com/embed/CrjFkoU5eqs",
-          picture: "assets/images/biz/EN/AFRICAN CULTURE.jpg",
+          id:"CrjFkoU5eqs",
+          thumb: "assets/images/biz/EN/AFRICAN CULTURE.jpg",
           name: "African Culture",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/EN/Bibi.jpg",
+          id:"7XZ4SAKiQMM",
+          thumb: "assets/images/biz/EN/Bibi.jpg",
           name: "Vin Bibi",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/1eIXf4Nu-F0",
-          picture: "assets/images/biz/EN/Gerar Fashion.jpg",
+          id:"1eIXf4Nu-F0",
+          thumb: "assets/images/biz/EN/Gerar Fashion.jpg",
           name: "Gerar Fashion",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/vO53J95E2GA",
-          picture: "assets/images/biz/EN/edo en.jpg",
+          id:"vO53J95E2GA",
+          thumb: "assets/images/biz/EN/edo en.jpg",
           name: "Edo Raissa",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/EN/OKAPI EN.jpg",
+          id:"7XZ4SAKiQMM",
+          thumb: "assets/images/biz/EN/OKAPI EN.jpg",
           name: "Okapi",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/xyD30G01nOg",
-          picture: "assets/images/biz/EN/aissa.jpg",
+          id:"xyD30G01nOg",
+          thumb: "assets/images/biz/EN/aissa.jpg",
           name: "ETS Aissa ",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/BqgkXMUm858",
-          picture: "assets/images/biz/EN/SILAS.jpg",
+          id:"BqgkXMUm858",
+          thumb: "assets/images/biz/EN/SILAS.jpg",
           name: "George Silas",
+          type: 'youtube',
         },
 
         {
-          video: "https://www.youtube.com/embed/7aIMDB6_tWg",
-          picture: "assets/images/biz/EN/Emma Fashion.jpg",
+          id:"7aIMDB6_tWg",
+          thumb: "assets/images/biz/EN/Emma Fashion.jpg",
           name: "Emma Fashion",
+          type: 'youtube',
         },
       ],
       selected_video: "",
@@ -1688,9 +1705,15 @@ export default {
   },
 
   methods: {
+     openGallery(index) {
+      this.$refs.lightbox.showImage(index);
+    },
+
+
     playAnimation() {
       this.$refs.number1.play();
     },
+    
 
     theFormat(number) {
       return number.toFixed(0);

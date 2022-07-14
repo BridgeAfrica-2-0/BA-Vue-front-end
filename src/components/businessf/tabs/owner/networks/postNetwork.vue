@@ -515,6 +515,16 @@ export default {
       postCreate: "networkProfile/createPost",
     }),
 
+    
+ flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
     editPage() {
       console.log("editPage");
       this.$emit('changeSelected');
@@ -626,12 +636,12 @@ export default {
           this.sending = false;
 
           if (err.response.status == 422) {
-            console.log({ err: err });
+            
 
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
             });
             // loader.hide();
           } else {
@@ -891,11 +901,10 @@ if(this.postStatus== "editors"){
           this.isUploading = false;
           this.loading = false;
           if (err.response.status == 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
+
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+               message: this.flashErrors(err.response.data.errors),
               blockClass: "custom-block-class",
             });
             // loader.hide()

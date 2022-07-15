@@ -1590,7 +1590,13 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
                 message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
-            } else {
+            } else if (err.response.status == 403) {
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message, 
+            });
+
+          }else {
               this.flashMessage.show({
                 status: "error",
 

@@ -512,7 +512,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
-              message: err.response.data.message,
+               message: this.flashErrors(err.response.data.errors),
             });
 
             loader.hide();
@@ -742,6 +742,16 @@ export default {
     },
     
 
+ flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
+
     submitPost() {
       this.isUploading = true;
       let loader = this.$loading.show({
@@ -811,13 +821,12 @@ export default {
         })
         .catch((err) => {
           if (err.response.status == 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
+            
 
             this.flashMessage.show({
               status: 'error',
 
-              message: err.response.data.message,
+               message: this.flashErrors(err.response.data.errors),
               blockClass: 'custom-block-class',
             });
 

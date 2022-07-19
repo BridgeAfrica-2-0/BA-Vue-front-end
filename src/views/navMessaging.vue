@@ -951,6 +951,7 @@
                       </b-row>
 
                       <div class="messages">
+                      <div v-if="chatList.length > 0">
                         <b-row
                           v-for="(chat, index) in chatList"
                           :key="index"
@@ -1036,6 +1037,10 @@
                             </small>
                           </b-col>
                         </b-row>
+                        </div>
+                        <!--if no chats found-->
+                        <div v-else class="text-center">No chats found!</div>
+                        <!--if no chats found-->
                       </div>
 
                       <!-- End Chats -->
@@ -2017,18 +2022,15 @@ export default {
       return image;
     },
     formatName(value) {
-      var name = "";
+      let name = "";
 
-      // console.log("Value:", value);
-      // console.log("Current:", this.currentUser);
       if (this.type == "user") {
-        name = value.sender
-          ? value.sender.id == this.currentUser.user.id
-            ? value.receiver.name
-            : value.sender
-            ? value.sender.name
-            : value.name
-          : value.name;
+        console.log('user chat name', value);
+        if (value.sender?.id == this.currentUser.user.id) {
+          name = value.receiver ? value.receiver.name : 'Unknown User';
+        } else {
+          name = value.sender ? value.sender.name : 'Unknown User';
+        }
       } else if (this.type == "business") {
         name = value.receiver_business
           ? value.receiver_business.name

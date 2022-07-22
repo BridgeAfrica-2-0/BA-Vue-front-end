@@ -53,6 +53,7 @@ import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -90,16 +91,20 @@ export default {
       console.log("pageChange")
       this.selectedId = 6
     },
-    businessInfo() {
-      this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+
+   
+    async  businessInfo() {
+       
+      let url=`business/info/${this.$route.params.id}`;
+
+      await axios.get(url)
+      .then(({ data }) => {
+         this.$store.commit("businessOwner/setBusinessInfo", data.data);
+         this.auth({ ...data.data,profile_picture: data.data.logo_path, user_type: 'business' });
+          })
+  
     },
+
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
@@ -180,6 +185,7 @@ export default {
             });
             break;
         }
+         this.businessInfo();
         this.isloaded = true;
         loader.hide()
       })
@@ -200,7 +206,7 @@ export default {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-    this.businessInfo();
+   
     this.CommunityBusiness();
     this.CommunityPeople();
     this.businessCommunityTotal();

@@ -101,7 +101,7 @@ class Repository {
       if (localStorage.getItem('isGuestUser')) return { success: true, data: [] };
       const link = networkId ? `user-business-network?networkId=${networkId}` : `user-business-network`
 
-      console.log(link)
+     
       const response = await axios.get(link)
       return {
         success: true,
@@ -151,8 +151,8 @@ class Repository {
   async switch(uuid, type = "network") {
     try {
       const response = ("network" == type)
-        ? await axios.post(`switch`, { networkId: uuid })
-        : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
+        ? await axios.post(`switch`, { networkId: uuid, networkSlug: uuid, })
+        : (uuid) ? await axios.post(`switch?slug=${uuid}`) : await axios.post(`switch`)
 
       return {
         success: true,

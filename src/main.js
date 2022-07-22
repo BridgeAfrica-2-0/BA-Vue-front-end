@@ -208,6 +208,7 @@ new Vue({
     created() {
         
         let userInfo = localStorage.getItem('user');
+        let profile_package=localStorage.getItem('profile_package');
 
         
         let lang = this.setDefaultLanguage()
@@ -216,6 +217,11 @@ new Vue({
             let userData = JSON.parse(userInfo);
             user = userData;
             this.$store.commit('auth/setUserData', userData);
+
+            if (profile_package){  
+                 this.$store.commit('auth/setprofilePackage',JSON.parse(profile_package));
+            }
+        
         }
 
 
@@ -226,7 +232,6 @@ new Vue({
               if (error.response.status === 401) {
               
                 this.$store.dispatch('auth/logout');
-                console.log('error has ocurred', error);
               }
             }
             return Promise.reject(error);

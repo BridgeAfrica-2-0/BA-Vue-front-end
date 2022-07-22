@@ -9,6 +9,7 @@ export default {
         networks: [],
         businesses: [],
         currentBizId: null,
+        currentBizSlug:null,
         currentBiz: [],
         bizs: [],
         chats: [],
@@ -30,6 +31,10 @@ export default {
         getCurrentBizId(state) {
             return state.currentBizId;
         },
+        getCurrentBizSlug(state) {
+            return state.currentBizSlug;
+        },
+
         getAll(state) {
             return state.all;
         },
@@ -112,6 +117,11 @@ export default {
         setCurrentBizId(state, data) {
             state.currentBizId = data
         },
+
+        setCurrentBizSlug(state, data) {
+            state.currentBizSlug = data
+        },
+
         setCurrentBiz(state, data) {
             state.currentBiz = data
         },

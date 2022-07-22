@@ -68,9 +68,9 @@ import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
 import General from "@/components/businessf/tabs/owner/networks/general";
 
 import LyTab from "@/tab/src/index.vue";
-
+import axios from "axios";
 import Parent from "@/components/businessf/tabs/owner/networks/parent";
-
+import { mapGetters, mapMutations } from "vuex";
 import { WhoIsIt } from "@/mixins";
 
 export default {
@@ -143,6 +143,7 @@ export default {
             });
             break;
           case "network_editor":
+            this.getNetworkInfo();
             this.$router.push({
               name: "NetworkEditors",
               params: { id: this.foll_id },
@@ -156,7 +157,7 @@ export default {
             });
             break;
         }
-
+        this.getNetworkInfo();
         this.isloaded = true;
         loader.hide()
       })
@@ -171,7 +172,9 @@ export default {
 
 
   beforeCreate() {
+    
     this.$repository.share.switch(this.$route.params.id, "network");
+  
   },
 
   // watch: {
@@ -184,10 +187,32 @@ export default {
 
 
   methods: {
+
+     ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
+
     changer(){
         this.selectedId = 4
         console.log("evenement arrive au parent network",  this.selectedId )
     },
+
+async  getNetworkInfo() {
+       
+      let url=`network/${this.$route.params.id}/about/information`;
+
+      await axios.get(url)
+      .then(({ data }) => {
+         this.$store.commit("networkProfile/setNetworkInfo", data.data);
+         this.auth({ ...data.data,profile_picture: data.data.image, user_type: 'network' });
+          })
+
+
+
+       
+    },
+
+
     handleChange(item, index) {
       console.log(item, index);
       // this.selectedId = this.$store.state.networkProfile.selected

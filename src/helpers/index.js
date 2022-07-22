@@ -1,6 +1,5 @@
 
 import moment from 'moment'
-
 import axios from "axios"
 
 export const getRootSchemeForRedis = () => axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
@@ -80,20 +79,21 @@ export const isGuestUser = () => {
 
 
 export const isPremium = () => {
-    let check = false;
-    let user=localStorage.getItem('user');
-    if(user.user_package){
+   
+    let check = true;
+    let profile_package= JSON.parse(localStorage.getItem('profile_package'));
+    if(profile_package.user_package){
       
-       if(user.user_package=="premium"){
+       if(profile_package.user_package.name=="premium"){
            check=true;
-       }else if(user.user_package=="basic"){
+       }else if(profile_package.user_package.name=="basic"){
            check =false;
        }
        
     }
      
  
-    return check;
+    return check
 
 }
 

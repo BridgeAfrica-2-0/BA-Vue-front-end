@@ -652,6 +652,16 @@ export default {
       postCreate: "businessOwner/createPost",
     }),
 
+
+ flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+    
     async getAuth() {
       const type = [
         "NetworkEditors",
@@ -765,12 +775,12 @@ export default {
           this.sending = false;
 
           if (err.response.status == 422) {
-            console.log({ err: err });
+           
 
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
             });
 
             loader.hide();
@@ -849,13 +859,12 @@ export default {
         })
         .catch((err) => {
           if (err.response.status == 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
+           
 
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+               message: this.flashErrors(err.response.data.errors),
               blockClass: "custom-block-class",
             });
 
@@ -1064,7 +1073,7 @@ export default {
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
               blockClass: "custom-block-class",
             });
           } else {

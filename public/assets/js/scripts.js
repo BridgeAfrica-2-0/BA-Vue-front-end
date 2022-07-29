@@ -36,7 +36,7 @@ setTimeout(function () {
 
 		if (document.documentElement.scrollTop > 30) {
 
-			navbarsExampleDefault
+			
 			document.getElementById("navbarsExampleDefault").classList.remove("open");
 
 			document.getElementById("navbarExample").classList.add("top-nav-collapse");

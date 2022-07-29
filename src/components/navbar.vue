@@ -181,8 +181,9 @@
                     /> </span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body" v-if="messages.length">
+                  <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
+                    <div v-if="messages.length">
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
@@ -227,6 +228,7 @@
                           {{ message.created_at | moment("from", "now") }}
                         </div>
                       </div>
+                    </div>
                     </div>
                     <hr class="h-divider" />
                     <router-link :to="newRedirection('message')" v-if="islogin">

@@ -336,7 +336,7 @@
         options: ["list", "of", "options"],
         orders: false,
         archive: false,
-       businessId:null,
+       businessSlug:null,
         market: true,
         my_orders: this.$t('businessowner.orders'),
         selectedImagePrv: "",
@@ -425,7 +425,7 @@
     
   
        getProducts: async function () {
-          let url="/market?business_id="+this.businessId;
+          let url="/market?slug="+this.businessSlug;
          await this.$store
           .dispatch("market/getBproducts", url).then((res) => {
             console.log(res);
@@ -469,7 +469,7 @@
         let fd = new FormData();
   
         //init data
-        this.newProduct.business_id = this.$route.params.id;
+        this.newProduct.slug = this.$route.params.id;
        
         this.newProduct.categoryId = this.multiselecvalue.id;
      
@@ -488,7 +488,7 @@
         }
         console.log("NEW PRODUCT", this.newProduct);
         axios
-          .post("market?business_id="+this.businessId, fd)
+          .post("market?slug="+this.businessSlug, fd)
           .then((res) => {
             this.load = false;
             (this.success = true), (this.val = "success");
@@ -598,7 +598,7 @@
     },
     beforeMount() {
       //this.loader = true;
-      this.businessId = this.$route.params.id;
+      this.businessSlug = this.$route.params.id;
 
       this.categories();
       this.subcategories();

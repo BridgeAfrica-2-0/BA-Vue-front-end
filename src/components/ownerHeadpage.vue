@@ -525,9 +525,9 @@ export default {
     },
 
     viewAs() {
-      let id = this.info.user.id;
+      let slug = this.info.user.slug;
 
-      this.$router.push({ name: "Follower", params: { id: id } });
+      this.$router.push({ name: "Follower", params: { id: slug } });
     },
 
     RemoveProfile() {

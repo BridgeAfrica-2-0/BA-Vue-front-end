@@ -49,8 +49,10 @@ export const Redis = {
     '$store.state.auth.profilConnected': {
       deep: true,
       handler: function (newValue) {
-        initRedis(this.$store.state.auth.user.accessToken)
-        this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+        console.log(newValue);
+        console.log('hey yoo G')
+       // initRedis(this.$store.state.auth.user.accessToken)
+       // this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
       }
     },
 
@@ -108,6 +110,7 @@ export const Redis = {
 
     updateEventListener(type) {
       console.log(type)
+      console.log("blldjj djjdjd")
       try {
         this.strategy[type]()
       } catch (error) {
@@ -119,7 +122,7 @@ export const Redis = {
 
   created() {
     console.log('in notification mixins, check it')
-    initRedis(this.$store.state.auth.user.accessToken)
+   // initRedis(this.$store.state.auth.user.accessToken)
 
     /* this.strategy = {
       user: () => this.listenProfileEvent(),
@@ -128,9 +131,9 @@ export const Redis = {
     } */
 
 
-    this.listenProfileEvent()
-    this.listenNetworkeEvent()
-    this.listenBusinessEvent()
+    // this.listenProfileEvent()
+    // this.listenNetworkeEvent()
+    // this.listenBusinessEvent()
 
   }
 }

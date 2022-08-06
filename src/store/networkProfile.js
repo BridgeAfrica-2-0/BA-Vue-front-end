@@ -235,11 +235,11 @@ export default {
       .get(url)
       .then(({ data }) => {
           commit("setNetworkInfo", data.data);
-        console.log(data);
+      
 
       })
     },
-
+    
     getAlbumImages( {commit}, networkId){
       return axios
       .get('network/album/show/'+networkId )

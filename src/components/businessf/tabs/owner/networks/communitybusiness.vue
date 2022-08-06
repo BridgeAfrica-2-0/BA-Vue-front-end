@@ -13,7 +13,7 @@
         </b-col>
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
-            <strong class="title">     <router-link :to="'/business/' + member.id">
+            <strong class="title">     <router-link :to="'/business/' + member.slug">
                     {{ member.name }} 
                   </router-link> </strong> <br />
             <span v-if="member.category.length">
@@ -101,7 +101,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
-                  @click="goToBusinessAbout(member.id)"
+                  @click="goToBusinessAbout(member.slug)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("network.Direction") }}</span>

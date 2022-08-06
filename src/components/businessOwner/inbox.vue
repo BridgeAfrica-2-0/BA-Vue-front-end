@@ -178,7 +178,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  (chat.sender_business_id == currentBizId
+                                  (chat.sender_business_id == currentBizSlug
                                     ? chat.receiver_business_id
                                     : chat.sender_business_id) ==
                                   (chatSelected.clickedId != null
@@ -193,7 +193,7 @@
                                 type: 'business',
                                 chat: chat,
                                 id:
-                                  chat.sender_business_id == currentBizId
+                                  chat.sender_business_id == currentBizSlug
                                     ? chat.receiver_business_id
                                     : chat.sender_business_id,
                               })
@@ -1672,7 +1672,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  (chat.sender_business_id == currentBizId
+                                  (chat.sender_business_id == currentBizSlug
                                     ? chat.receiver_business_id
                                     : chat.sender_business_id) ==
                                   (chatSelected.clickedId != null
@@ -1687,7 +1687,7 @@
                                 type: 'business',
                                 chat: chat,
                                 id:
-                                  chat.sender_business_id == currentBizId
+                                  chat.sender_business_id == currentBizSlug
                                     ? chat.receiver_business_id
                                     : chat.sender_business_id,
                               })
@@ -1729,7 +1729,7 @@
                                       type: 'business',
                                       chat: chat,
                                       id:
-                                        chat.sender_business_id == currentBizId
+                                        chat.sender_business_id == currentBizSlug
                                           ? chat.receiver_business_id
                                           : chat.sender_business_id,
                                     }
@@ -3130,6 +3130,10 @@ export default {
   },
 
   computed: {
+     business_info() {
+      return this.$store.state.businessOwner.businessInfo;
+    },
+    
     all() {
       return this.$store.getters["businessChat/getAll"];
     },
@@ -3164,6 +3168,11 @@ export default {
     currentBizId() {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
+
+     currentBizSlug() {
+      return this.$store.getters["businessChat/getCurrentBizSlug"];
+    },
+
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
@@ -3235,14 +3244,26 @@ export default {
     });
   },
   created() {
+     
+     
+
+     
+
+     this.$store.commit(
+      "businessChat/setCurrentBizId",
+         this.$route.params.id
+    );
+
+      this.$store.commit(
+      "businessChat/setCurrentBizSlug",
+        this.$store.state.businessOwner.businessInfo.id
+    );
+
     this.socketListenners();
     this.getCurBiz();
     this.getUserInfo();
 
-    this.$store.commit(
-      "businessChat/setCurrentBizId",
-      Number(this.$route.params.id)
-    );
+   
     console.log("router params:", this.currentBizId);
     this.tabIndex = this.$route.query.msgTabId
       ? Number(this.$route.query.msgTabId)
@@ -3303,7 +3324,7 @@ export default {
           : user;
       } else if (this.type == "business") {
         image = data.sender_business_id
-          ? data.sender_business_id == this.currentBizId
+          ? data.sender_business_id == this.currentBizSlug
             ? data.receiver_business.logo_path
             : data.sender_business
             ? data.sender_business.logo_path
@@ -3333,7 +3354,7 @@ export default {
           : value.name;
       } else if (this.type == "business") {
         name = value.sender_business_id
-          ? value.sender_business_id == this.currentBizId
+          ? value.sender_business_id == this.currentBizSlug
             ? value.receiver_business.name
             : value.sender_business
             ? value.sender_business.name
@@ -3431,7 +3452,7 @@ export default {
               this.groupMembers.push({ type: elm.accountType, id: elm.id });
             });
           } else {
-            selected = this.bizs.filter((biz) => {
+            selected = this.bizs.filter((biz) => {  
               return biz.statusType === "following";
             });
             selected.map((elm) => {
@@ -3733,7 +3754,7 @@ export default {
         this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
           data: data,
           group_id: this.chatId,
-          sender_id: this.currentBizId,
+          sender_id: this.currentBizSlug,
           type: this.type,
         });
       } else {
@@ -3870,7 +3891,7 @@ export default {
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBizId,
+        sender_business_id: this.currentBizSlug,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,

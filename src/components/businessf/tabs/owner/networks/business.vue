@@ -23,7 +23,7 @@
             <div class="flx100">
               <p class="textt">
                 <strong class="title"> 
-                  <router-link :to="'/business/' + item.id">
+                  <router-link :to="'/business/' + item.slug">
                     {{ item.name }} 
                   </router-link>
                 </strong> <br />

@@ -15,7 +15,7 @@
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <router-link
-              :to="{ name: 'Membar Network Follower', params: { id: item.id } }"
+              :to="{ name: 'Membar Network Follower', params: { id: item.slug } }"
             >
               <strong class="title"> {{ item.name }} </strong>
             </router-link>

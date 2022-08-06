@@ -17,7 +17,7 @@
         <div class="flx100">
           <p class="textt">
             <strong class="title"> 
-              <router-link :to="'/network/' + item.id">
+              <router-link :to="'/network/' + item.slug">
                 {{ item.name }} 
               </router-link>
             </strong> <br />

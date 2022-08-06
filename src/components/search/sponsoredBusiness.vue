@@ -10,7 +10,7 @@
           </b-col>
           <b-col md="7" cols="7" lg="5" sm="5">
             <p class="textt">
-              <router-link :to="{name: 'BusinessFollower', params:{id:item.id}}">
+              <router-link :to="{name: 'BusinessFollower', params:{id:item.slug}}">
                 <strong class="title">
                   {{ item.name }}
                 </strong>
@@ -90,7 +90,7 @@
                     size="sm"
                     class="b-background shadow"
                     variant="primary"
-                    @click="gotoBusiness(item.id)"
+                    @click="gotoBusiness(item.slug)"
                   >
                     <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                     <span class="btn-text">{{ $t("search.Direction") }}</span>

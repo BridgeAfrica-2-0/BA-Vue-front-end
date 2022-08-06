@@ -72,7 +72,7 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow"
-                          @click="ApproveRequest(request.user_id)"
+                          @click="ApproveRequest(request.slug)"
                         >
                           <span class="btn-text text-center">Approve</span>
                         </b-button>
@@ -91,7 +91,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow text-center"
                           variant="primary"
-                          @click="DeclineRequest(request.user_id)"
+                          @click="DeclineRequest(request.slug)"
                         >
                           <span class="btn-com text-center">Decline</span>
                         </b-button>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col md="12" lg="5" xl="4">
+      <b-col md="12" lg="12" xl="5">
         <Intro />
 
         <comunitiDashboard />
@@ -50,7 +50,7 @@
         </b-card>
       </b-col>
 
-      <b-col md="8" lg="7" xl="8" class="postpadding">
+      <b-col md="12" lg="12" xl="7" class="postpadding  mt-2  mt-xl-0 ">
         <Post />
       </b-col>
     </b-row>

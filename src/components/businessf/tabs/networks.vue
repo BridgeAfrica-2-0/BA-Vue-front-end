@@ -1,5 +1,5 @@
 <template>
-  <div class="t-color">
+  <div class="t-color"> 
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> {{$t("general.Network")}} </span>
@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       page: 1,
-      biz_id: null,
+      biz_slug: null,
 
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
@@ -125,15 +125,15 @@ export default {
         business_image: "",
         allow_business: 0,
       },
-      isGuestUser: isGuestUser
+      isGuestUser: isGuestUser()
     };
   },
   beforeMount() {
-    this.getNetworks();
+   // this.getNetworks();
   },
 
   mounted() {
-    this.biz_id = this.$route.params.id;
+    this.biz_slug = this.$route.params.id;
   },
 
   computed: {
@@ -141,7 +141,7 @@ export default {
       return this.$route.name;
     },
     network() {
-      return this.$store.state.businessOwner.networks;
+     return this.$store.state.businessOwner.networks;
     },
 
     getNetworksFromStore() {
@@ -162,9 +162,12 @@ export default {
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page, dispatchMethod = "businessOwner/loadMore";
+      let url = "business/network/" + this.biz_slug + "/" + this.page,
+      
+      dispatchMethod = "businessOwner/loadMore";
+
       if (this.isGuestUser ) {
-        url = "guest/business/network/" + this.biz_id + "/" + this.page;
+        url = "guest/business/network/" + this.biz_slug + "/" + this.page;
         dispatchMethod = "businessGuest/loadMore";
       }
       if (this.page == 1) {

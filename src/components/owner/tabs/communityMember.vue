@@ -30,7 +30,7 @@
                             
 
 
-                               <router-link :to="'/profile/' + item.id">
+                               <router-link :to="'/profile/' + item.slug">
                       {{ item.name }}
                     </router-link> 
 

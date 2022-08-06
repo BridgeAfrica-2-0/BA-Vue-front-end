@@ -389,7 +389,7 @@ export default {
   data() {
     return {
       viewProduct: false,
-      businessId:null,
+      businessSlug:null,
      // products:[],
      sendingp:false,
       product:[],
@@ -488,7 +488,7 @@ selectedcategories: function() {
   beforeMount() {
 
      this.loader = true;
-     this.businessId = this.$route.params.id;
+     this.businessSlug = this.$route.params.id;
       this.getProducts();
     this.categories();
    
@@ -599,7 +599,7 @@ selectedcategories: function() {
       
       this.loader=true;
       this.currentPage = value;
-     let url="/market?business_id="+this.businessId+"&page="+value;    
+     let url="/market?slug="+this.businessSlug+"&page="+value;    
 
       this.$store
         .dispatch("market/bPnextPage", url).then((res) => {
@@ -618,7 +618,7 @@ selectedcategories: function() {
 
 
       getProducts: async function () {
-        let url="/market?business_id="+this.businessId;
+        let url="/market?slug="+this.businessSlug;
        await this.$store
         .dispatch("market/getBproducts", url).then((res) => {
         

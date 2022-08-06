@@ -31,7 +31,7 @@
         <b-col md="7" cols="7" lg="5" sm="5">
           <p class="textt">
             <strong class="net-title">
-              <router-link :to="'network/' + network.id">
+              <router-link :to="'network/' + network.slug">
                 {{ network.name }}
               </router-link>
             </strong>

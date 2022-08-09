@@ -17,9 +17,9 @@
           </b-dropdown>
         </span>
 
-        <p class="username mb-0" v-if="!proccesEdit">
+        <p class=" mb-0" v-if="!proccesEdit">
           <router-link
-            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+            :to="{ name: 'Follower', params: { id: comment.user_id } }" class="card-title"
           >
             {{ comment.name }}
           </router-link>
@@ -332,6 +332,19 @@ export default {
 </script>
 
 <style scoped>
+
+
+.card-title{
+
+  font-size: 16px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 400;
+  color: #455a64 !important;
+
+}
+
+
 .cursor {
   cursor: pointer;
 }

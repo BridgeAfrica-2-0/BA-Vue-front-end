@@ -1,6 +1,6 @@
 <template>
-    <div class="lalala">
-    <div class=" border mt-2 ">  
+    <div class="lalala"  >
+    <b-card class=" border mt-2  blecrr shadow border ">  
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -91,7 +91,7 @@
           </div>
         </b-tab>
       </b-tabs>
-    </div>
+    </b-card>
   </div>
 </template>
 
@@ -117,7 +117,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
 
@@ -132,7 +132,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
 
@@ -144,7 +144,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
      
@@ -155,7 +155,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
      
@@ -165,7 +165,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
 
@@ -177,7 +177,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
       
@@ -187,7 +187,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
   },
@@ -209,20 +209,20 @@ export default {
       .dispatch("dashboardcommunity/getdetails")
 
       .then(() => {
-        console.log("the response");
+       
       })
       .catch(err => {
-        console.log({ err: err });
+        
       });
 
     // this.$store
     //   .dispatch("dashboardcommunity/gettotalcommunity")
 
     //   .then(() => {
-    //     console.log("the response");
+    //    
     //   })
     //   .catch(err => {
-    //     console.log({ err: err });
+    //
     //   });
 
 
@@ -230,7 +230,7 @@ export default {
       .dispatch('profile/Tcommunity', null)
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
 
 
@@ -265,9 +265,13 @@ export default {
 </script>
 
 <style scoped>
-.card-body {
-  padding: 0px;
+
+ .blecrr .card-body{
+  padding-left: 4px !important;
+
+   padding-right: 2px !important;
 }
+
 </style>
 
 <style>

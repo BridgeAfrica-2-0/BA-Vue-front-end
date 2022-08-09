@@ -21,9 +21,9 @@
         </span>
         <div class="pl-2 pl-md-3 pt-md-2 mt-3 mt-md-0">
           <router-link :to="onRedirect">
-            <h5 class="m-0 usernamee">
+            <h6 class="m-0 card-title">
               {{ item.user_name }}
-            </h5>
+            </h6>
           </router-link>
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
@@ -565,6 +565,15 @@ export default {
 };
 </script>
 <style>
+
+.card-title{
+  font-size: 18px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 400;
+  color: #455a64;
+}
+
 .card-border {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -849,9 +858,10 @@ export default {
 }
 
 .duration {
-  font-weight: 400;
-  font-size: 15px;
-  color: black;
+  font-weight: 500;
+      color: #67757c;
+  
+  font-size: .75rem!important;
 }
 
 .usernamee:hover {

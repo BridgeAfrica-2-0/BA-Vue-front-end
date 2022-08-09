@@ -1,8 +1,24 @@
 <template>
   <div>
-    <div class="people-style shadow" v-for="item in business" :key="item.id">
+
+    <b-card class=" border   blecrr shadow border "  style=" height: 540px; padding-bottom:50px">  
+      <span>
+        <h6 class="title m-3">
+    <fas-icon
+                  class="icons"
+                  :icon="['fas', 'hands-helping']"
+                  size="lg"
+                />
+          <span class="ml-2">  {{ $t("dashboard.HOT_BUSINESSES")}}  </span> 
+        </h6>
+      </span>
+
+
+
+   <div class="s-comcardd">   
+    <div class="people-style shadow " v-for="item in business" :key="item.id">
       <b-row>  
-        <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">
               <splide :options="options" class="r-image">
@@ -59,21 +75,22 @@
           </div>
         </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
               >
                 <b-button
                   block
+                  
                   size="sm"
-                  :disabled="disable"
+                  
                   :class="item.is_follow !== 0 && 'u-btn'"
                   :id="'followbtn' + item.id"
                   variant="primary"
@@ -92,7 +109,7 @@
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -103,7 +120,7 @@
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -125,6 +142,8 @@
       </b-row>
     </div>
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   </div>
+    </b-card>
   </div>
 </template>
 
@@ -147,7 +166,7 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
+        disable:false,
         type: "loop",
         perMove: 1,
       },
@@ -161,7 +180,7 @@ export default {
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
     },
 
@@ -192,13 +211,13 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+        
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -219,7 +238,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -227,6 +246,18 @@ export default {
 </script>
 
 <style scoped>
+
+.s-comcardd {
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  padding-bottom: 5px;
+}
+
+
+.card-body{
+  padding-left: 5px;
+}
 .flx100 {
   flex-basis: 80% !important;
 }
@@ -270,9 +301,7 @@ export default {
   border-radius: 5px;
 }
 
-.card {
-  color: orange;
-}
+
 
 .s-button {
   align-content: center;
@@ -291,18 +320,11 @@ export default {
     margin-top: -15px;
   }
 
-  .title {
-    font-size: 16px;
-    color: black;
-
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+  
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -344,21 +366,13 @@ export default {
 @media only screen and (min-width: 768px) {
 
    .btn{
-    font-size:13px !important;
+    font-size:11.5px !important;
   }
-  
-  .title {
-    font-size: 20px;
-    color: black;
-
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+ 
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -387,7 +401,7 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 110px;
   }
 
   .r-image {
@@ -432,7 +446,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+   
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -455,7 +469,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+   
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

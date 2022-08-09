@@ -1,5 +1,8 @@
 <template>
   <div>
+
+  <div class="card s-card shadow" style="height: 400px ; overflow:auto">   
+
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
@@ -9,7 +12,7 @@
       <b-row>
      
 
-       <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+       <b-col md="8" xl="12" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">
               
@@ -47,12 +50,12 @@
           </div>
         </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
 
 
           <div class="s-button">
             <b-row>
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col md="12" lg="4" xl="4" sm="4" cols="4" class="mt-2">
                 <b-button
                   block
                   size="sm"
@@ -71,11 +74,11 @@
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col md="12" lg="4" xl="4" sm="4" cols="4" class="mt-2">
                 <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col md="12" lg="4" xl="4" sm="4" cols="4" class="mt-2">
                 <b-button
                   block
                   size="sm"
@@ -101,6 +104,7 @@
     </div>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+  </div>
   </div>
 </template>
 
@@ -134,10 +138,10 @@ export default {
     this.$store
       .dispatch("networkDetails/getndetails")
       .then(() => {
-        console.log("the response");
+    
       })
       .catch((err) => {
-        console.log({ err: err });
+      
       });
   },
 
@@ -151,7 +155,7 @@ getTotalCommunity(){
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
     },
 
@@ -181,7 +185,7 @@ getTotalCommunity(){
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+        
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
@@ -195,7 +199,7 @@ getTotalCommunity(){
 
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
@@ -206,7 +210,7 @@ getTotalCommunity(){
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          console.log(data)
+        
           if (data.data.length) {
 
             this.page += 1;
@@ -217,7 +221,7 @@ getTotalCommunity(){
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
 
@@ -242,7 +246,7 @@ getTotalCommunity(){
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -377,7 +381,7 @@ getTotalCommunity(){
   }
 
  .btn{
-    font-size:13px !important;
+    font-size:11.5px !important;
   }
   
   .textt {
@@ -412,7 +416,7 @@ getTotalCommunity(){
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 110px;
   }
 
   .r-image {

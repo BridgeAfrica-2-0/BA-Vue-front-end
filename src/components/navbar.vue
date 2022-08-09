@@ -258,6 +258,8 @@
                       :key="notification.id"
                     >
                       <hr class="h-divider" />
+
+                      <router-link  v-if="islogin" :to="newRedirection('notification')">
                       <div
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
@@ -281,6 +283,8 @@
                           </div>
                         </div>
                       </div>
+
+                      </router-link>
                     </div>
                     <hr class="h-divider" />
 

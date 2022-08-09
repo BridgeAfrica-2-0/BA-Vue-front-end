@@ -134,8 +134,7 @@ export default {
   },
   methods: {
     cta_business(data) {
-      console.log(data);
-      console.log("active accounts: ", this.activeAccount);
+     
       this.$store.commit("businessChat/setSelectedChat", data);
 
       let path = "";
@@ -162,7 +161,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+   
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -174,13 +173,13 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
+        
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -188,12 +187,12 @@ export default {
     async infiniteHandler($state) {
       let url = "people/around?page=" + this.page;
 
-      console.log(url);
+    
 
       await axios
         .get(url)
         .then(({ data }) => {
-          console.log(data.data);
+         
 
           if (data.data.length) {
             this.people_around.push(...data.data);
@@ -205,7 +204,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },

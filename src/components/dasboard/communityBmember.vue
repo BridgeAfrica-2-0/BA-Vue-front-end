@@ -144,10 +144,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
-          console.log("hey yeah");
+          
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -162,8 +162,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
-      document.getElementById("followbtn" + user.id).disabled = true;
+        document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -174,7 +173,7 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
+         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
@@ -182,7 +181,7 @@ export default {
         })
 
         .catch((err) => {
-          console.log({ err: err });
+          
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -217,7 +216,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -258,10 +257,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+ 
 }
 
 @media only screen and (min-width: 768px) {
@@ -270,10 +266,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 29px;
-    padding-right: 29px;
-  }
+ 
 }
 
 .btn {

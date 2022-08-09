@@ -99,7 +99,7 @@ export default {
         )
         .then(({ data }) => {
           // commit('ownerPost', data.data);
-          //  console.log(data);
+         
           if (data.data.length) {
             this.page += 1;
 
@@ -110,7 +110,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -148,7 +148,7 @@ export default {
     },
 
     owner_post() {
-      console.log(this.$store.state.dashboard.bdasboard_post);
+    
       return this.$store.state.dashboard.bdasboard_post;
     },
 

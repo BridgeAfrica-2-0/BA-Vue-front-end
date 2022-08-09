@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-card class="border shadow blecrr">
+    <b-card class="border shadow blecrr" style=" height: 710px;     padding-bottom: 50px; ">
       <span>
         <h6 class="title mt-3">
           <fas-icon class="icons icon-color ml-2 ml-md-0" :icon="['fab', 'readme']" size="lg" />
-          <b class="ml-2">{{ $t('dashboard.Posts') }} </b>
+          <span class="ml-2"> {{ $t('dashboard.Posts') }} </span>
         </h6>
       </span>
 
@@ -117,7 +117,7 @@ export default {
         .dispatch('follower/loadMore', url)
 
         .then(({ data }) => {
-          console.log(data);
+       
           if (data.data.length) {
             this.page += 1;
 
@@ -128,7 +128,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -405,8 +405,9 @@ export default {
 
 
 .ss-card{
-
-  height: 540px;
+  height: 100%;
+ 
+    /* overflow: auto; */
     overflow: auto;
     overflow-x: hidden;
     padding: 15px;

@@ -133,10 +133,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
 
@@ -153,7 +153,7 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+         
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
@@ -166,8 +166,7 @@ export default {
 
         })
         .catch((err) => {
-          console.log(err);
-          document.getElementById("joinbtn" + user.id).disabled = false;
+            document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
@@ -187,7 +186,7 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -222,7 +221,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },

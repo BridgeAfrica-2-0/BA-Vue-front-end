@@ -174,10 +174,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -198,13 +198,13 @@ gotoBusiness(id) {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -248,7 +248,7 @@ gotoBusiness(id) {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
   },

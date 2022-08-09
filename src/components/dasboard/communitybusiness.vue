@@ -1,10 +1,9 @@
 <template>
   <div>
-    <b-row>
-      <b-col
-        lg="6"
-        sm="12"
-        class="p-2"
+   
+      <div
+       
+        class="p-0"
         v-for="item in businesses"
         :key="item.id"
       >
@@ -12,7 +11,7 @@
    
         <div class="people-style shadow h-100">
           <b-row>
-            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+            <b-col md="8" xl="12" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
                 <div class="center-img">
                   <splide :options="options" class="r-image">
@@ -73,13 +72,13 @@
               </div>
             </b-col>
 
-            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+            <b-col lg="12" xl="12" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
                   <b-col
                     md="12"
                     lg="4"
-                    xl="12"
+                    xl="4"
                     sm="12"
                     cols="4"
                     class="mt-2 text-center"
@@ -109,7 +108,7 @@
   <b-col
                     md="12"
                     lg="4"
-                    xl="12"
+                    xl="4"
                     sm="12"
                     cols="4"
                     class="mt-2 text-center"
@@ -120,7 +119,7 @@
                   <b-col
                     md="12"
                     lg="4"
-                    xl="12"
+                    xl="4"
                     sm="12"
                     cols="4"
                     class="mt-2 text-center"
@@ -143,8 +142,8 @@
             </b-col>
           </b-row>
         </div>
-      </b-col>
-    </b-row>
+      </div>
+ 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -194,7 +193,7 @@ export default {
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+      
       });
     },
 
@@ -213,13 +212,13 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+          
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log(err);
+       
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -268,7 +267,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -433,8 +432,8 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 125px;
-    font-size: 13px;
+    width: 117px;
+    font-size: 12px;
   }
 
   .r-image {

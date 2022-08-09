@@ -49,8 +49,11 @@ export const Redis = {
     '$store.state.auth.profilConnected': {
       deep: true,
       handler: function (newValue) {
+       this.textnotix();
         initRedis(this.$store.state.auth.user.accessToken)
         this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+       
+      
       }
     },
 
@@ -75,6 +78,34 @@ export const Redis = {
         })
     },
 
+
+
+
+    
+
+textnotix() {
+
+  const $event = `user.13`;
+
+  console.log($event)
+
+  window.Redis.private($event)
+    .listen(".TestUserNotification", payload => {
+      console.log(payload);
+      console.log('yoo bababananaanna');
+     // const type  = notification(payload.notification)
+      
+      // this.$notify({
+      //   text: `new notification for user: ${payload.notification.notification_text}`,
+      // });
+
+     // this.newNotificationProfile({ init: false, data: payload.notification })
+    })
+},
+
+
+
+
     listenProfileEvent() {
 
       const $event = `user.${this.profile.id}`;
@@ -83,7 +114,7 @@ export const Redis = {
 
       window.Redis.private($event)
         .listen(".UserNotification", payload => {
-          
+          console.log(payload);
           const type  = notification(payload.notification)
           
           this.$notify({
@@ -107,7 +138,7 @@ export const Redis = {
     },
 
     updateEventListener(type) {
-      console.log(type)
+      console.log('blllll'+type)
       try {
         this.strategy[type]()
       } catch (error) {
@@ -121,13 +152,13 @@ export const Redis = {
     console.log('in notification mixins, check it')
     initRedis(this.$store.state.auth.user.accessToken)
 
-    /* this.strategy = {
+     this.strategy = {
       user: () => this.listenProfileEvent(),
       network: () => this.listenNetworkeEvent(),
       business: () => this.listenBusinessEvent()
-    } */
+    } 
 
-
+    this.textnotix();
     this.listenProfileEvent()
     this.listenNetworkeEvent()
     this.listenBusinessEvent()

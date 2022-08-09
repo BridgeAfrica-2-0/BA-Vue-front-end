@@ -1,13 +1,16 @@
 <template>
   <div>
     <b-card class=" border shadow ">
-      <h6 class="title">
+      <h6 class="title"> 
 
-        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.Tutorial') }}</b>
+        <fas-icon class="icons" :icon="['fas', 'video']" /> {{ $t('dashboard.Tutorial') }}
 
       </h6>
+<VuePerfectScrollbar class="scroll-area s-card" v-once :settings="settings" >
+     
 
-      <div class="s-card">
+     
+
         <b-row>
           <b-col
             cols="6"
@@ -32,6 +35,8 @@
             </div>
           </b-col>
         </b-row>
+
+          
    <br>  
 
    <p class="text-center"> 
@@ -39,15 +44,25 @@
     
      </p> 
      
-      </div>
+    
+</VuePerfectScrollbar>
+      
     </b-card>
+    
   </div>
 </template>
 
 <script>
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   data() {
     return {
+
+       settings: {
+        maxScrollbarLength: 60
+      },
+
+
       posts: [
         {
           id: 1,
@@ -124,6 +139,11 @@ export default {
       ]
     };
   },
+
+   components: {
+    VuePerfectScrollbar,
+  },
+
   methods: {
     /**
     Used for opening modal to have a proper view of the picture
@@ -150,19 +170,16 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 768px) {
-  .title {
-    font-size: 20px;
-  }
+  
 
   .text {
     font-size: 14px;
   }
+
 }
 
 @media only screen and (max-width: 768px) {
-  .title {
-    font-size: 16px;
-  }
+  
 
   .text {
     font-size: 12px;

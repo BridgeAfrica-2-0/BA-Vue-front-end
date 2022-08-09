@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="s-ccard">
-      <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+    
+        <div  class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -16,14 +16,14 @@
               <b-col md="8" cols="8" sm="8">
                 <div>
                   <b-row class="shift">
-                    <b-col md="12" lg="6" xl="6">
+                    <b-col md="12" lg="12" xl="12">
                       <div class="e-name">
                         <b-row>
                           <b-col
                             md="6"
                             lg="12"
                             cols="6"
-                            xl="12"
+                            xl="6"
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
@@ -37,7 +37,7 @@
                             md="6"
                             lg="12"
                             cols="6"
-                            xl="12"
+                            xl="6"
                             class="mt-3 mt-lg-1 mt-xl-3"
                           >
                             <h6 class="follower m-15">
@@ -49,25 +49,25 @@
                       </div>
                     </b-col>
 
-                    <b-col lg="6" xl="6" cols="12" md="12">
+                    <b-col lg="6" xl="12" cols="12" md="12">
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col
                             md="6"
-                            lg="12"
+                            lg="6"
                             cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                            xl="6"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 "
                           >
                             <BtnCtaMessage :element="item" type="people" />
                           </b-col>
 
                           <b-col
                             md="6"
-                            lg="12"
+                            lg="6"
                             cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                            xl="6"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 "
                           >
                             <b-button
                               block
@@ -100,8 +100,8 @@
               </b-col>
             </b-row>
           </div>
-        </b-col>
-      </b-row>
+        </div>
+    
 
       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
@@ -148,7 +148,7 @@ export default {
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
     },
 
@@ -164,7 +164,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+      
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -176,20 +176,20 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
+         
           this.getTotalCommunity();
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-      console.log("hahahahahahahah");
+     
 
       let url = null;
 
@@ -221,10 +221,10 @@ export default {
             }
           }
 
-          console.log(data);
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -265,10 +265,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+ 
 }
 
 @media only screen and (min-width: 768px) {
@@ -277,10 +274,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 29px;
-    padding-right: 29px;
-  }
+ 
 }
 
 .btn {
@@ -392,9 +386,9 @@ f-right {
 
 @media only screen and (min-width: 1200px) {
   .btn {
-    width: 123px;
+    width: 110px;
     height: 38px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .center {
@@ -463,12 +457,12 @@ f-right {
   }
 
   .btn-2 {
-    margin-left: -15px;
+    /* margin-left: -15px; */
     width: 90px;
   }
 
   .btn-1 {
-    margin-left: -20px;
+    /* margin-left: -20px; */
     width: 90px;
   }
 
@@ -541,13 +535,13 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
 
   .follower {
     font-size: 10px;
-    margin-top: 5px;
+    margin-top: 1px;
   }
 }
 

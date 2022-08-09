@@ -81,6 +81,7 @@ const businessOwner = () => import('@/views/businessOwner');
 const profile_owner = () => import('@/views/profileOwner');
 
 const dashboard = () => import('@/views/dashboard');
+const newdashboard = () => import('@/views/NewDashBoard');
 
 const about = () => import('@/views/about');
 const contact = () => import('@/views/contact');
@@ -92,19 +93,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/notFound",
-    name: "notFound",
+    name: "notFoundd",
     component: notFound,
   },
-  {
-    path: "/cart",
-    name: "cart",
-    component: cart,
-  },
-
+ 
 
   {
     path: "/myorders/detail/:id",
-    name: "ordersdetail",
+    name: "pordersdetail",
     component: OrderDetails,
      meta: {
       auth: true,
@@ -231,15 +227,16 @@ const routes = [
   },
 
   {
-    path: "/market",
-    name: "market",
-    component: market,
+    path: "/newdashboard",
+    name: "newdashboard",
+    component: newdashboard,
+    meta: {
+      auth: true,
+    },
   },
-  {
-    path: "/checkout",
-    name: "payment",
-    component: payment
-  },
+
+  
+ 
   {
     path: "/welcome",
     name: "welcome",
@@ -352,14 +349,7 @@ const routes = [
 
   },
 
-  {
-    path: "/network_member/:id?",
-    name: "memberNetwork",
-    component: memberNetwork,
-    meta: {
-      auth: true,
-    },
-  },
+ 
 
   {
     path: "/login",
@@ -370,13 +360,13 @@ const routes = [
 
   {
     path: "/auth/facebook/callback",
-    name: "Login",
+    name: "Loginfacebook",
     component: Login,
   },
    
   {
     path: "/auth/google/callback",
-    name: "Login",
+    name: "Logingoogle",
     component: Login,
   },
 
@@ -490,11 +480,7 @@ const routes = [
     component: navMessage,
   },
 
-  {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
+ 
   {
     path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",

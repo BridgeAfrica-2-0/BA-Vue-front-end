@@ -240,10 +240,10 @@ export default {
       .dispatch("dashboardcommunity/getdetails")
 
       .then(() => {
-        console.log("the response");
+       
       })
       .catch(err => {
-        console.log({ err: err });
+        
       });
 
 
@@ -267,10 +267,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.businessId)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 

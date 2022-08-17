@@ -1,36 +1,94 @@
 <template>
-  <div class="h-100">
-    
-    <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-    
-          <Person v-for="item in users" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
-       
-     <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
-   </VuePerfectScrollbar>
+  <div>
    
+      <div class="people-style  p-2"  >
+        <div class="d-flex"  >
+          <b-avatar
+            class="p-avater ml-2"
+            variant="light"
+            :src="person.profile_picture"
+          ></b-avatar>
 
+          <div class=" mt-3 ml-3 w-100">
+            <div >
+              <router-link :to="'profile/' + person.id">
+               <span class="username">   {{ person.name }} </span>
+              </router-link>
+            </div>
+
+            <h6 class="follower m-15">
+              {{ count(person.followers) }}
+              {{ $t("dashboard.Community") }}
+            </h6>
+          </div>
+
+         
+           
+           <b-button
+          variant="light"
+          class="rounded-circle hov-btn mr-3"
+          :id="'person'+person.id"
+        >
+          <b-icon icon="three-dots"> </b-icon>
+        </b-button>
+
+
+        </div>
+      </div>
+
+
+       <b-popover :target="'person'+person.id" triggers="hover" placement="top">
+        <div class="pt-3 pb-3">
+          <div class="mt-1">
+            
+      <b-button
+              block
+              size="sm"
+              class="b-background flexx pobtn shadow"
+              :class="person.is_follow !== 0 && 'u-btn'"
+              :id="'followbtn' + person.id"
+              variant="primary"
+              @click="handleFollow(person)"
+            >
+              <i
+                class="fas fa-lg btn-icon"
+                :class="person.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+              ></i>
+
+              <span class="btn-com">{{ $t("dashboard.Community") }}</span>
+            </b-button>
+          </div>
+
+          <div class="mt-1">
+            <BtnCtaMessage :element="person" type="people" />
+          </div>
+
+        
+        </div>
+      </b-popover>
+
+
+      
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Person from "@/components/Person";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+
 export default {
-  props: ["type"],
-  
-   components: {
-    Person, VuePerfectScrollbar
+
+  props: {
+    person: {
+      required: true,
+      type: Object,
+    },
+   
   },
 
   data() {
     return {
       page: 1,
-
       users: [],
-
       options: {
         rewind: true,
         autoplay: true,
@@ -39,30 +97,24 @@ export default {
 
         type: "loop",
         perMove: 1,
-      },
+      }, 
     };
   },
 
   computed: {
-    biz_id() {
-      return this.$store.state.dashboard.dBusinessId;
+    old_users() {
+      if (this.type == "Follower") {
+        return this.$store.state.profile.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.profile.UcommunityFollowing.user_following;
+      }
     },
   },
 
   methods: {
-
-    
-     businessCommunityTotal() {
-      this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-          
-        })
-        .catch((err) => {
-        
-        });
+    getTotalCommunity() {
+           this.$emit('getTotalCommunity');
     },
-
 
     count(number) {
       if (number >= 1000000) {
@@ -74,7 +126,7 @@ export default {
     },
 
     async handleFollow(user) {
-        document.getElementById("followbtn" + user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -85,25 +137,24 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-         
+          this.getTotalCommunity();
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
-
-          this.businessCommunityTotal();
         })
 
         .catch((err) => {
-          
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-      const url =
-        this.type === "Follower"
-          ? `business/community/people-follower/${this.biz_id}/`
-          : `business/community/people-following/${this.biz_id}/`;
+      let url = null;
 
+      if (this.type == "Follower") {
+        url = "profile/user/follower/";
+      } else {
+        url = "profile/user/following/";
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
@@ -127,15 +178,41 @@ export default {
             }
           }
         })
-        .catch((err) => {
-         
-        });
+        .catch((err) => {});
     },
   },
 };
 </script>
     
 <style scoped>
+
+.hov-btn {
+  width: 40px !important;
+  height: 40px !important;
+  vertical-align: center;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  color: #455a64;
+}
+
+ .username{
+  font-size: 18px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 500;
+  color: #455a64;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.username:hover {
+  color: #e75c18;
+}
+
+
+
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -168,8 +245,6 @@ export default {
     width: 16px;
     margin-right: 5px;
   }
-
- 
 }
 
 @media only screen and (min-width: 768px) {
@@ -177,8 +252,6 @@ export default {
     width: 20px;
     margin-right: 5px;
   }
-
- 
 }
 
 .btn {
@@ -213,17 +286,9 @@ hr {
   border: solid 1px dimgray;
 }
 
-.btn {
-  background-color: #fff;
-  color: #e75c18;
-  border: solid 1px #e75c18;
-}
 
-.btn:hover {
-  color: #fff;
-  border: none;
-  background-color: #e75c18;
-}
+
+
 
 f-right {
   text-align: right;
@@ -272,13 +337,14 @@ f-right {
 }
 
 .people-style {
-  border-top-left-radius: 40px;
+ 
+  border-top-left-radius: 5px;
 
-  border-bottom-left-radius: 40px;
+    border-bottom-left-radius: 5px;
 
-  border-top-right-radius: 45px;
+    border-top-right-radius: 5px;
 
-  border-bottom-right-radius: 45px;
+    border-bottom-right-radius: 5px;
 
   background: white;
 
@@ -290,9 +356,9 @@ f-right {
 
 @media only screen and (min-width: 1200px) {
   .btn {
-    width: 123px;
+    width: 110px;
     height: 38px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .center {
@@ -317,13 +383,13 @@ f-right {
   }
 
   .people-style {
-    border-top-left-radius: 40px;
+     border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 40px;
+    border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 45px;
+    border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 45px;
+    border-bottom-right-radius: 5px;
 
     background: white;
 
@@ -361,23 +427,23 @@ f-right {
   }
 
   .btn-2 {
-    margin-left: -15px;
+    /* margin-left: -15px; */
     width: 90px;
   }
 
   .btn-1 {
-    margin-left: -20px;
+    /* margin-left: -20px; */
     width: 90px;
   }
 
   .people-style {
-    border-top-left-radius: 40px;
+    border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 40px;
+    border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 45px;
+    border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 45px;
+    border-bottom-right-radius: 5px;
 
     background: white;
 
@@ -418,8 +484,8 @@ f-right {
   }
 
   .p-avater {
-    width: 95px;
-    height: 95px;
+    width: 70px;
+    height: 70px;
     margin-bottom: -4px;
     margin-left: -5px;
   }
@@ -434,18 +500,14 @@ f-right {
     text-align: right;
   }
 
-  .username {
-    font-size: 20px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    height: 1.2em;
-    white-space: nowrap;
-  }
+ 
+ 
+
+
 
   .follower {
     font-size: 10px;
-    margin-top: 5px;
+    margin-top: 1px;
   }
 }
 
@@ -456,15 +518,7 @@ f-right {
 }
 
 @media only screen and (max-width: 762px) {
-  .username {
-    font-size: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    height: 1.2em;
-    white-space: nowrap;
-  }
-
+ 
   .btn {
     width: 97px;
     height: 28px;
@@ -472,8 +526,8 @@ f-right {
   }
 
   .p-avater {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     margin-bottom: -8px;
     margin-left: -5px;
     margin-top: -4px;

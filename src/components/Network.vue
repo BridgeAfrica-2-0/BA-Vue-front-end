@@ -1,62 +1,159 @@
 <template>
-  <div class="h-100">
-    <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("dashboard.Do_you_want_to_join_this_network") }}
-    </b-modal>
+  <div>  
 
-  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
-   
-  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-    
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-  </VuePerfectScrollbar>
+    <div class="people-style border">
+     
       
+          <div class="d-inline-flex w-100">
+            <div class="center-img">
+              
+           <img :src="network.picture" class="r-image" />
+              
+            </div>
+            <div class="pl-3 flx100 mr-1">
+              <p class="textt">
+                <span>
+                   <router-link :to="{name: 'networks', params: {id: network.id}}">
+              <span class="net-name ">{{ network.name }}</span>
+            </router-link><br />
+                </span>
+                
+                {{ count(network.followers) }}
+                {{ $t("dashboard.Community") }} <br />
 
-   
+                <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ network.location_description }}
+            </span>
 
-  </div>
+                <br />
+                 <read-more
+              :more-str="$t('dashboard.read_more')"
+              class="readmore"
+              :text="network.about_network"
+              link="#"
+              :less-str="$t('dashboard.read_less')"
+              :max-chars="50"
+            >
+            </read-more>
+              </p>
+            </div>
+
+
+
+             <b-button
+          variant="light"
+          class="rounded-circle hov-btn"
+          :id="'network'+network.id"
+        >
+          <b-icon icon="three-dots"> </b-icon>
+        </b-button>  </div>
+     
+     
+
+           <b-popover :target="'network'+network.id" triggers="hover" placement="top">
+        <div class="pt-3 pb-3">
+          <div class="mt-1">
+             <b-button
+                  block
+                  size="sm"
+                  :id="'followbtn' + network.id"
+                  :class="network.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(network)"
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("dashboard.Community") }}</span>
+                </b-button>
+          </div>
+
+          <div class="mt-1">
+            <BtnCtaMessage :element="network" type="network" />
+          </div>
+
+          <div class="mt-1">
+            
+             <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="network.is_member !== 0 && 'u-btn'"
+                  variant="primary"
+                  :id="'joinbtn' + network.id"
+                  @click="handleJoin(network)"
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("general.Join") }}</span>
+                </b-button>
+
+          </div>
+        </div>
+      </b-popover>
+
+    </div>
+
+    </div>
+  
 </template>
 
 <script>
-import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import Network from "@/components/Network";
 import axios from "axios";
 export default {
-  props: ["type"],
-  components: {
-    Network,VuePerfectScrollbar
+   props: {
+    network: {
+      required: true,
+      type: Object,
+    },
   },
 
   data() {
     return {
       page: 1,
-      network:[],
+    
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
     };
   },
 
+  
   computed: {
-    old_network() {
-      if (this.type == "Follower") {
-        return this.$store.state.profile.NcommunityFollower.network_followers;
-      } else {
-        return this.$store.state.profile.NcommunityFollowing.network_following;
-      }
+    business() {
+      return this.$store.getters["networkDetails/getdetails.category"];
     },
   },
+  created() {
+    this.$store
+      .dispatch("networkDetails/getndetails")
+      .then(() => {
+    
+      })
+      .catch((err) => {
+      
+      });
+  },
+
   methods: {
 
 
-    getTotalCommunity(){
+
+
+getTotalCommunity(){
          this.$store
       .dispatch("profile/Tcommunity")
       .then((response) => {})
@@ -66,6 +163,17 @@ export default {
     },
 
 
+
+    
+
+     count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
 
 
     async handleJoin(user) {
@@ -80,10 +188,11 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-         
+        
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
+          
            this.flashMessage.show({
             status: "success",
             message: response.data.message,
@@ -93,15 +202,20 @@ export default {
 
         })
         .catch((err) => {
-       
+        
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
+  
+
     async handleFollow(user) {
+
       document.getElementById("followbtn" + user.id).disabled = true;
+      
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      
       const data = {
         id: user.id,
         type: "network",
@@ -112,59 +226,50 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+         
           this.getTotalCommunity();
         })
         .catch((err) => {
-        
-          document.getElementById("followbtn" + user.id).disabled = false;
-        });
-    },
-
-    infiniteHandler($state) {
-      
-
-      let url = null;
-
-      if (this.type == "Follower") {
-        url = "profile/network/follower/";
-      } else {
-        url = "profile/network/following/";
-      }
-      axios
-        .get(url + this.page)
-        .then(({ data }) => {
          
-       
-          if (this.type == "Follower") {
-            if (data.data.network_followers.length) {
-              this.page += 1;
-              this.network.push(...data.data.network_followers);
-
-              $state.loaded();
-            } else {
-              $state.complete();
-            }
-          } else {
-            if (data.data.network_following.length) {
-              this.page += 1;
-
-              this.network.push(...data.data.network_following);
-
-              $state.loaded();
-            } else {
-              $state.complete();
-            }
-          }
-        })
-        .catch((err) => {
-          
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
   },
 };
 </script>
 
+
+
 <style scoped>
+
+
+.hov-btn {
+  width: 40px !important;
+  height: 40px !important;
+  vertical-align: center;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  color: #455a64;
+}
+
+.net-name {
+  font-size: 1.0625rem;
+    font-weight: 500;
+  line-height: 1.2;
+  font-family: poppins;
+
+  color: #455a64;
+  text-transform: capitalize;
+}
+
+.net-name:hover {
+  color: #e75c18;
+}
+
+.flx100 {
+  flex-basis: 80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -206,7 +311,7 @@ export default {
 }
 
 .card {
-  color: orange;
+ 
 }
 
 .s-button {
@@ -226,7 +331,7 @@ export default {
     margin-top: -15px;
   }
 
-  .net-title {
+  .title {
     font-size: 16px;
     color: black;
 
@@ -239,7 +344,7 @@ export default {
 
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -250,8 +355,6 @@ export default {
 
     padding: 1px;
     text-align: left;
-
-    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -279,12 +382,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-
- .btn{
-    font-size:12px !important;
-  }
-  
-  .net-title {
+  .title {
     font-size: 20px;
     color: black;
 
@@ -292,6 +390,10 @@ export default {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
+ .btn{
+    font-size:11.5px !important;
+  }
+  
   .textt {
     color: #000;
 
@@ -309,7 +411,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 35px;
+    margin-left: 60px;
 
     margin-right: -5px;
 
@@ -324,15 +426,17 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 116px;
+    width: 110px;
   }
 
-  .r-image {
+   .r-image {
     border-radius: 8px;
 
-    height: 160px;
-    width: 160px;
+    height: 100px;
+    width: 100px;
   }
+
+  
 }
 
 .stock {
@@ -390,16 +494,15 @@ export default {
     border-top-right-radius: 5px;
 
     border-bottom-right-radius: 5px;
-    height: 100%;
 
     background: white;
-
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 8px;
+    margin-right: -8px;
+    margin-left: -8px;
 
     padding: 7px;
   }
@@ -419,5 +522,19 @@ export default {
   .btn {
     display: flex;
   }
+}
+
+.s-comcardd {
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  padding-bottom: 25px;
+}
+
+</style>
+
+<style>
+.u-btn {
+  filter: grayscale(0.6);
 }
 </style>

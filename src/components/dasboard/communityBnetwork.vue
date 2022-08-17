@@ -1,108 +1,33 @@
 <template>
-  <div>
+  <div class="h-100">
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-    <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img :src="item.picture" class="r-image" />
-              </div>
-            </b-col>
-            
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <router-link :to="'network/' + item.id">
-                  {{ item.name }}
-                </router-link>
-                <br />
-                {{ item.category }}
-                <br />
-                {{ item.followers }} {{ $t("dashboard.Community") }} <br />
-
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.location_description }}
-                </span>
-                <br />
-
-                <read-more
-                  :more-str="$t('search.read_more')"
-                  class="readmore"
-                  :text="item.about_network"
-                  link="#"
-                  :less-str="$t('search.read_less')"
-                  :max-chars="100"
-                >
-                 
-                </read-more>
-              </p>
-            </b-col>
-
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'followbtn' + item.id"
-                      @click="handleFollow(item)"
-                    >
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{
-                        $t("profileowner.Community")
-                      }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <BtnCtaMessage :element="item" type="network" />
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_member !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'joinbtn' + item.id"
-                      @click="handleJoin(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_member !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com"> {{ $t("general.Join") }} </span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-    </b-row>
+    
+  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
+   
+  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+    
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+  </VuePerfectScrollbar>
+
+
+
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import Network from "@/components/Network";
+
 export default {
   props: ["type"],
+   components: {
+    Network,VuePerfectScrollbar
+  },
 
   data() {
     return {

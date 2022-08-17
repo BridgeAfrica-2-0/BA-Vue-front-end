@@ -1,63 +1,64 @@
 <template>
-  <div style="overflow-x: hidden" class="dashboard">
+  <div style="overflow-x: hidden" class="dashboard" >
     <navbar></navbar>
 
-    <div class="text-justify p-card pr-1">
-      <CompleteProfile class="mb-2" v-if="!Profile_complete" />
-    </div>
-
     <div class="main row">
-      <div class="sidebar"><SideBar /> </div>
+      <div class="sidebar d-none d-lg-block"><SideBar /></div>
 
-      <div class="main-content row">
-        <div class="col-md-7">  
-          
-          <CommunityActivity v-if="selectedb == 'owner'" />
-          <CommunityBactivity v-if="selectedb != 'owner'" />
+      <div class="main-content row wi-100">
+        <div class="col-md-6 col-lg-7"> 
+          <div class="text-justify p-card pr-1">
+            <CompleteProfile class="mb-2" v-if="!Profile_complete" />
+          </div>
+
+          <div class="">
+            <b-card>
+              <span class="d-flex text-center">
+                <b-avatar
+                  :src="profille.user.profile_picture"
+                  variant="primary"
+                   size="3em"
+                ></b-avatar>
+
+                <span class="mt-2 ml-3">
+                  Your current plan:
+                  <span class="sub-title">
+                    {{ profile_package.user_package.name }} Account
+                  </span>
+                </span>
+              </span>
+              <div class="text-center">
+             <router-link to="/settings?tab=account">  <b-button variant="outline-primary"> Upgrade Account </b-button> </router-link>  
+              </div>
+            </b-card>
+          </div>
+ 
+          <DashboardTab class="mt-2" />
+       
+
+          <ProductActivities class="mt-2" />
 
           <Tutorial class="mt-2" />
+        </div>
 
-           <comuniti-dashboard
-          v-if="selectedb == 'owner'"
-          class=""
-        ></comuniti-dashboard>
+        <div class=" col-md-6 col-lg-5 pl-0">
+          <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
+          
+           <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
 
-        <comuniti-Bdashboard
-          v-if="selectedb != 'owner'"
-          class=""
-        ></comuniti-Bdashboard>
-
-
-
-         
-
-          <ProductActivities />
+          <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
 
           
-            
-        </div>
+          <comuniti-dashboard   v-if="selectedb == 'owner'"  class="mt-2"></comuniti-dashboard>
+  
+          <comuniti-Bdashboard  v-if="selectedb != 'owner'"  class="mt-2" ></comuniti-Bdashboard>
 
-        <div class="col-md-5 pl-0">  
 
-          <NewProfile />
-
-          <ProfileInsight class="mt-2" :selectedb="selectedb" />
-
-           <Business  class="mt-2"/>
+          <Business class="mt-2" />
           <Popularnetwork class="mt-2" />
-
-
-   
-       
-     
-
-
-         
+          
         </div>
-
-
       </div>
-
     </div>
   </div>
 </template>
@@ -69,22 +70,18 @@ import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
 import ProductActivities from "@/components/dasboard/ProductActivities";
+import DashboardTab from "@/components/dasboard/DashboardTab";
 
 //import Insights from "@/components/dasboard/insights";
 import ProfileInsight from "@/components/dasboard/profileInsight";
 
-
 import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
 import CompleteProfile from "@/components/dasboard/completeProfile";
-
-import CommunityActivity from "@/components/dasboard/communityActivity";
-
-import CommunityBactivity from "@/components/dasboard/communityBactivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
 import Profile from "@/components/dasboard/profile";
 import NewProfile from "@/components/dasboard/NewProfile";
-
+import newBusiness from "@/components/dasboard/newBusiness";
 import Business from "@/components/dasboard/hotbusiness";
 
 // import Map from "@/components/dasboard/map";
@@ -114,23 +111,24 @@ export default {
       detail: null,
       data1: null,
       showcompleteprofile: true,
+    
     };
   },
 
   components: {
-     ComunitiDashboard,
-    // ComunitiBdashboard,
+    ComunitiDashboard,
+     ComunitiBdashboard,
     // BusinessDashboard,
+    DashboardTab,
     ProductActivities,
-     Business,
-     CommunityActivity,
-     CommunityBactivity,
-     NewProfile,
-    
-     Tutorial,
+    Business,
+    newBusiness,
+    NewProfile,
+
+    Tutorial,
     //Insights,
-    ProfileInsight,
-     Popularnetwork,
+    //ProfileInsight,
+    Popularnetwork,
     // Map,
     CompleteProfile,
     SideBar,
@@ -144,7 +142,7 @@ export default {
   methods: {
     ...mapMutations({
       auth: "auth/profilConnected",
-    }),
+    }), 
 
     async checkIfItNetwork() {
       if ("network" == this.profile.user_type) {
@@ -155,7 +153,8 @@ export default {
     },
     async switchBusiness(value) {
       this.data1 = false;
-
+      console.log(this.selectedb);
+      this.selectedb=value;
       if (value != "Owner") {
         let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.loader,
@@ -274,6 +273,12 @@ export default {
   },
 
   mounted() {
+
+    let externalScript = document.createElement("script");
+    externalScript.setAttribute("src", "/assets/js/dashboard.js");
+    document.head.appendChild(externalScript);
+
+
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -284,10 +289,20 @@ export default {
     this.dashboardPpost();
   },
 
+   
+
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
+    profille() {
+      return this.$store.state.auth.user;
+    },
+
+    profile_package() {
+      return this.$store.state.auth.profile_package;
+    },
+
     selectedBusiness: function () {
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat = data.latitute;
@@ -309,9 +324,58 @@ export default {
 };
 </script>
 
-<style>
+<style >
+.title {
+  font-size: 18px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 400;
+  color: #455a64;
+}
+
+.sub-title {
+  font-weight: 500;
+}
+
+.title-linkClass {
+  color: #455a64;
+}
+
+.title-linkClass :hover {
+  color: #455a64;
+  background-color: white !important;
+}
+
+.active-tab-item :hover {
+  color: red !important;
+}
+
+.nav-tabs .nav-link.active-tab-item {
+  background-color: white !important;
+
+  border-left: none;
+  border-right: none;
+  border-top: none;
+
+  font-family: poppins;
+  color: #455a64;
+
+  border-bottom: 2px solid red !important;
+
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.nav-tabs:hover {
+  background-color: white !important;
+}
+
+/* .active-tab {
+  color: white;
+} */
+
 .sidebar {
   width: 250px !important;
+  position: relative;
 }
 
 .main-content {
@@ -334,6 +398,23 @@ export default {
 </style>
 
 <style scoped>
+
+@media only screen and (min-width: 768px) {
+
+ 
+}
+
+@media only screen and (max-width: 992px) {
+
+    .wi-100{
+    width: 100%;
+
+  }
+
+}
+
+
+
 .card-body {
   padding: 8px;
 }
@@ -462,10 +543,9 @@ select {
   overflow-x: hidden;
 }
 
-
-.dashboard{
+.dashboard {
   font-family: poppins;
   color: #455a64;
+  overflow: hidden;
 }
-
 </style>

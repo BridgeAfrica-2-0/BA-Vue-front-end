@@ -1,33 +1,45 @@
 <template>
-  <div style="overflow-x: hidden pr-1">
-    <div class="text-left show-sidebar dashboardsidebar">
-      <aside class="sidebar">
-        <!-- <div class="toggle">
-      
-      </div> -->
-        <div class="side-inner d-block">
-          <VuePerfectScrollbar class="scroll-area" v-once :settings="settings">
-            <div class="text-center">
+  <div id="dashsidebar" >  
+
+     <!-- position: fixed;
+  
+    margin-top: -85px; -->
+
+     <div  class="text-left border-bottom" style=" background-size: cover; background:url('https://demos.wrappixel.com/premium-admin-templates/bootstrap/materialpro-bootstrap/package/assets/images/background/user-info.jpg')">
 
           
-
-              <b-avatar
+      <div class="user-profile"> 
+          <b-avatar
           class="p-avater bg-white"
           variant="primary"
           :src="profile.picture"
-          size="6em"
+          size="3em"
         ></b-avatar>
 
-        <div class="text-lost">
+      </div>
+
+        <div class="text-lost text-center">
           <h6 class="">
             <router-link :to="{ name: 'profile_owner' }" class="card-title">
              {{ profile.name }} 
             </router-link>
           </h6> 
         </div>
+
+          <!-- <hr class="mt-2"> -->
             </div>
+
+
+    <div class="text-left show-sidebar dashboardsidebar">
+      <aside class="sidebar">  
+        <!-- <div class="toggle">
+       
+      </div> -->
+        <div class="side-inner d-block">
+          <VuePerfectScrollbar class="scroll-area" v-once :settings="settings">
+           
   
-            <hr class="mt-2">
+          
 
             <div class="nav-menu">
               <ul>
@@ -226,6 +238,25 @@ export default {
 </script>
 
 <style  scoped>
+
+.dash-fixed-top{
+  overflow-x: hidden;
+   position: fixed;
+  
+    margin-top: -9%;
+}
+
+
+
+.user-profile{
+
+    width: 50px;
+    margin-left: 30px;
+    padding: 35px 0;
+
+}
+
+
 .scroll-area {
   position: relative;
   margin: auto;
@@ -354,7 +385,7 @@ aside .side-inner {
   line-height: 1.2;
   font-family: poppins;
   font-weight: 400;
-  color: #455a64;
+  color: white;
 }
 
 h6{
@@ -473,7 +504,7 @@ aside .side-inner .nav-menu ul li .collapsible {
   position: relative;
 }
 aside .side-inner .nav-menu ul li .collapsible:after {
-  content: "\e315";
+  /* content: "\e315"; */
   font-size: 14px;
  
   position: absolute;

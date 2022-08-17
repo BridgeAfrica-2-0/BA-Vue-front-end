@@ -1,34 +1,16 @@
+
+
 <template>
   <div ref="wrapper">
-    <Navbar />
+   
     <div class="container wahala" >
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div class="mbl-wrap">
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-              v-model="activeTab"
-              lazy
-            >
-              <!-- NOTIFICATIONS TAB -->
-              <b-tab :title="$t('settings.Notifications')">
-                <b-card-text class="mt-3">
-                  <b-row>
-                    <b-col cols="12" md="12">
-                      <SettingsNotifications />
-                    </b-col>
-                  </b-row>
-                </b-card-text>
-              </b-tab>
+            
+             
 
-             <b-tab :title="$t('businessowner.Account_Type')">
-                <b-card-text> <Website /> </b-card-text
-              ></b-tab> 
 
-              <b-tab :title="$t('settings.General')">
                 <b-card-text class="mt-3">
                   <b-row>
                     <b-col cols="12" md="12">
@@ -346,106 +328,7 @@
                     </b-col>
                   </b-row>
                 </b-card-text>
-              </b-tab>
-
-              <b-tab :title="$t('settings.Payment')">
-                <Payment :profileId="getUserInfos.id" />
-              </b-tab>
-
-              <b-tab :title="$t('settings.Blocking')">
-                <Blocking :profileId="getUserInfos.id" />
-              </b-tab>
-
-              <b-tab :title="`${$t('settings.Password')}`">
-                <b-card-text class="mt-3 text">
-                  <h3 class="username">
-                    {{ $t("settings.Change_current_password") }}
-                  </h3>
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Current_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-                        <b-form-input
-                          id="bname"
-                          type="password"
-                          placeholder=""
-                          required
-                          v-model="currentPass"
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.New_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-                        <VuePassword
-                          v-model="newPass"
-                          id="password1"
-                          :strength="psw1Strength"
-                          type="password"
-                          @input="update1Strength"
-                          required
-                        />
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Confirm_password')}`"
-                        label-size="md"
-                        label-class="text"
-                        class="mb-0"
-                      >
-                        <VuePassword
-                          v-model="newPass1"
-                          id="password2"
-                          type="password"
-                          :strength="psw2Strength"
-                          @input="update2Strength"
-                          required
-                        />
-                        <br />
-                        <button
-                          class=" btn btn-primary"
-                          @click="changePassword"
-                        >
-                          {{$t("settings.Change")}}
-                        </button>
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-                </b-card-text>
-              </b-tab>
-
-              
-              <b-tab :title="$t('settings.delete_account')">
-                <Delete  />
-              </b-tab>
-
-            </b-tabs>
+             
           </div>
         </b-col>
         <b-col> </b-col>
@@ -458,26 +341,18 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import SettingsNotifications from '@/components/SettingsNotifications.vue';
-import Payment from "@/components/owner/settings/payment";
-import Blocking from "@/components/owner/settings/blocking";
-import Delete from "@/components/owner/settings/delete";
-import Website from "@/components/owner/settings/website";
-import VuePassword from 'vue-password';
+
+
+
 import VuePhoneNumberInput from "vue-phone-number-input";
 
 export default {
   components: {
-    Navbar,
-    Footer,
-    SettingsNotifications,
-    Payment,
-    Blocking,
-    Website,
-    VuePassword,
-    Delete,
+   
+  
+   
+
+   
     VuePhoneNumberInput
   },
 
@@ -852,7 +727,7 @@ watch: {
   },
   created() {
     if ("account" === this.$route.query.tab) {
-      this.activeTab = 1;
+      this.activeTab = 2;
     }
   }
 
@@ -861,6 +736,12 @@ watch: {
 </script>
 
 <style>
+
+ .mbl-wrap {
+   height: 100%;
+   overflow: auto;
+ }
+
 @media only screen and (max-width: 768px) {
   .wahala .nav-pills .nav-link {
     border-radius: 0.25rem;
@@ -873,6 +754,12 @@ watch: {
     width: 100%;
     display: flex;
     flex-direction: row;
+     padding-top: 10px;
+        height: 70%;
+    
+    overflow: auto;
+    overflow-x: hidden;
+
   }
   .nav.nav-pills {
     flex-wrap: nowrap;

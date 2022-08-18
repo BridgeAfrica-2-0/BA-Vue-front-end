@@ -3,7 +3,7 @@
     <b-card
       class="border shadow card pr-3"
       style="height: 500px; padding-bottom: 50px"
-    >
+    >  lalalal  {{ite}}
       <h6>Market Activites</h6>
       <div class="product-activi mt-2">
         <VuePerfectScrollbar
@@ -33,6 +33,7 @@
               </div>
             </template>
           </b-table>
+    <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
         </VuePerfectScrollbar>
       </div>
     </b-card>
@@ -41,11 +42,17 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import axios from "axios";
 export default {
   components: { VuePerfectScrollbar },
 
   data() {
     return {
+
+      products:[],
+       page: 1,
+
+
       fields: [
         {
           // A column that needs custom formatting,
@@ -154,11 +161,58 @@ export default {
       ],
     };
   },
-  methods: {
-    fullName(value) {
-      return `${value.first} ${value.last}`;
+
+  computed: {
+    
+    ite() {
+
+      let items=[];
+
+   this.products.forEach(function (item) {
+        let  topush={prodct:{image:item.product_picture, name:item.product_name },
+     qty: item.quantity,
+    date: item.date,
+    price: item.price,
+    status:item.status,
+        }
+       items.push(topush);
+  });
+
+
+   return items
+
+     
     },
   },
+
+
+  methods: {
+   
+     infiniteHandler($state) {
+    let url = "user-order/items/1?id=23/";
+   alert('yoo')
+    axios
+      .get(url + this.page)
+      .then(({ data }) => {
+        if (data.data.length) {
+          this.page += 1;
+
+          this.products.push(...data.data);
+          $state.loaded();
+           this.$nextTick(() => {
+        
+      });
+
+        } else {
+          $state.complete();
+        }
+      })
+      .catch((err) => {});
+  },
+
+  },
+
+ 
 };
 </script>
 

@@ -1,9 +1,11 @@
 <template>
 	<b-card class="">
-		<b-card-title class="headline-font-size font-weight-bold">
-			{{$t("general.Shipping_Address")}}
-			<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
-			<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
+		<b-card-title class="headline-font-size font-weight-bold headline_and_btns">
+			<span>{{$t("general.Shipping_Address")}}</span>
+			<div class="buttons">
+				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
+				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
+			</div>
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">
@@ -242,5 +244,41 @@
 	color: #fff;
     background-color: #cc4d0d;
     border-color: #cc4d0d;
+}
+
+.headline_and_btns {
+	display: flex;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+    .headline_and_btns {
+        flex-direction: column;
+		align-items: flex-start;
+    }
+
+	.buttons {
+		margin-top: 7px;
+		margin-bottom: -12px;
+	}
+}
+
+@media screen and (max-width: 376px) {
+    .btnx, .backBtn {
+		float: left;
+	}
+
+	.btnx {
+		margin-right: 6px;
+		margin-bottom: 4px;
+	}
+}
+
+@media screen and (max-width: 290px) {
+	.btnx {
+		padding: 0.275rem 0.65rem;
+		font-size: 0.9rem;
+		/* line-height: 1.5; */
+	}
 }
 </style>

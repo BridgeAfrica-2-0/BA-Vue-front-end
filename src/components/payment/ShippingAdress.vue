@@ -2,6 +2,8 @@
 	<b-card class="">
 		<b-card-title class="headline-font-size font-weight-bold">
 			{{$t("general.Shipping_Address")}}
+			<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
+			<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">
@@ -180,6 +182,14 @@
 			showConfirmModal() {
 				this.$emit("showconfirm");
 			},
+
+			loadActualComponent3() {
+				this.$emit('loadActualComponent3')
+			},
+
+			loadActualComponent1() {
+				this.$emit('loadActualComponent1')
+			}
 		},
 		computed: {
 			shippingsTab() {
@@ -206,4 +216,31 @@
 	/* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
+
+.btnx{
+	/* display: inline-block; */
+    font-weight: 400;
+    color: white;
+	background-color: #E75C18;
+    text-align: center;
+    vertical-align: middle;
+	align-items: center;
+	text-transform: capitalize;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+	float: right;
+    border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btnx:hover {
+	color: #fff;
+    background-color: #cc4d0d;
+    border-color: #cc4d0d;
+}
 </style>

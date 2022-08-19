@@ -86,6 +86,8 @@
 					>
 						Pay: {{ formatMoney(price) }}
 					</button>
+
+					<button class="backBtn mt-2" @click="loadActualComponent2"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
 				</div>
 			</div>
 		</div>
@@ -122,6 +124,9 @@
 			formatMoney(money) {
 				return this.formatObject.format(money);
 			},
+			loadActualComponent2() {
+				this.$emit('loadActualComponent2')
+			}
 		},
 	};
 </script>
@@ -168,4 +173,5 @@
 			float: right;
 		}
 	}
+
 </style>

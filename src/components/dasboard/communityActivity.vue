@@ -1,14 +1,18 @@
 <template>
   <div>
-    <b-card class="border shadow blecrr" style=" height: 710px;     padding-bottom: 50px; ">
+    <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
       <span>
-        <h6 class="title mt-3">
+        <!-- <h6 class="title mt-3">
           <fas-icon class="icons icon-color ml-2 ml-md-0" :icon="['fab', 'readme']" size="lg" />
           <span class="ml-2"> {{ $t('dashboard.Posts') }} </span>
-        </h6>
+        </h6> -->
       </span>
 
       <div class="ss-card">
+
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
       
          <Post
           v-for="(item, index) in owner_post"
@@ -21,20 +25,23 @@
           :deletePost="(f) => f"
         />
         <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+     
+      </VuePerfectScrollbar>
+
       </div>
-    </b-card>
+    </div>
   </div>
 </template>
 
 <script>
 import { isYourOwnPostMixins } from '@/mixins';
 import Post from '@/components/businessOwner/ownerPostComponent';
-
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   name: 'postNetwork',
   mixins: [isYourOwnPostMixins],
   components: {
-    Post,
+    Post, VuePerfectScrollbar
   },
   data() {
     return {
@@ -408,7 +415,7 @@ export default {
   height: 100%;
  
     /* overflow: auto; */
-    overflow: auto;
+    overflow: hidden;
     overflow-x: hidden;
     padding: 15px;
     
@@ -425,7 +432,7 @@ export default {
 .ss-card{
 
   height: 540px;
-    overflow: auto;
+    overflow: hidden !important;
     overflow-x: hidden;
     padding: 2px;
     

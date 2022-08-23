@@ -20,23 +20,27 @@
         <b-avatar
           class="p-avater bg-white"
           variant="primary"
-          :src="profile.picture"
+          square
+          :src="business.picture"
           size="6em"
         ></b-avatar>
 
         <div class="text-lost mt-2">
           <h6 class="">
             <router-link :to="{ name: 'profile_owner' }" class="card-title">
-              {{ profile.name }}
+              {{ business.name }} 
             </router-link>
           </h6>
+            <span class="text" v-for="cat in business.category" :key="cat.name">
+              {{ cat.name }}
+            </span> <br>
 
-           <span class="mr-3"> <b-icon icon="people"></b-icon> {{profile.follower}} </span>
+           <span class="mr-3"> <b-icon icon="people"></b-icon> {{ business.followers }} </span>
          
 
           <hr />
 
-          <div class=" text-left">
+          <div class="card-body text-left">
 
              <!-- <span class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
@@ -47,12 +51,13 @@
           <p class="mb-1">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             <router-link to="/messaging">
-           <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link
-            >
-            <span class="badge  bg-white  float-right mt-1">
-              {{ profile.message }}
+           <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link>
+            <span class="badge  bg-primary white float-right mt-1">
+               {{ business.message }}
             </span>
           </p>
+
+
           <p class="mb-1">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
          
@@ -60,22 +65,25 @@
           <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
              </router-link>   
 
-            <span class="badge  bg-white  float-right mt-1">
-            {{ profile.notification }}
+            <span class="badge  bg-primary white float-right mt-1">
+             {{ business.notification }}
             </span>
           </p>
 
+      <p class="mb-1">
+            <b-icon-globe class="text-primary"></b-icon-globe>
+            <a> {{ $t("dashboard.Visit_Website") }}</a>
+          </p>
 
-            <!-- <small class="text-muted"> Email </small>
-            <h6>{{ profile.email }} hannagover@gmail.com</h6>
+          <!-- <p class="mb-1">
+            <b-icon-person-fill class="text-primary"></b-icon-person-fill>
+            <router-link :to="'business_owner/' + business.id">
+              {{ $t("dashboard.Visit_Profile") }}
+            </router-link>
+          </p> -->
+          
+           </div>
 
-            <small class="text-muted"> Phone </small>
-            <h6>{{ profile.tel }} +237 82325969</h6> -->
-          </div>
-
-          <!-- <h6 class="name"> Phone </h6> <p> {{profile.tel}} +237 82325969 </p> -->
-
-          <!-- <p class="mb-1">   {{ profile.followers }} {{ community }}   </p> -->
         </div>
       </div>
     </b-card>
@@ -84,22 +92,32 @@
 
 <script>
 export default {
-  name: "profile",
+  name: "NewBusiness",
   props: {
     boptions: {
       type: Array,
       required: true,
     },
+
+
+    selectedb:{
+        type:String,
+        required:true
+    }
+
   },
 
   data() {
     return {
-      selectedb: "owner",
+      selected: "owner",
     };
   },
   computed: {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    },
+     business() {
+      return this.$store.state.dashboard.dashboard_business;
     },
     community() {
       if (this.$i18n.locale === "en") {
@@ -132,9 +150,24 @@ export default {
 
   methods: {
     async switchBusiness(value) {
+
+      console.log('swtching start here')
+      console.log(value)
       this.$emit("switchBusiness", value);
     },
   },
+
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(() => {
+        
+      })
+      .catch((err) => {
+    
+      });
+  },
+
 };
 </script>
 
@@ -187,7 +220,7 @@ small {
     font-size: 14px;
 
     flex-basis: 90%;
-   
+    padding-left: 30px;
   }
 }
 
@@ -219,7 +252,7 @@ small {
     font-size: 12px;
 
     flex-basis: 100%;
-    
+    padding-left: 10px;
   }
 }
 

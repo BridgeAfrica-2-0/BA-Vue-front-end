@@ -1,41 +1,56 @@
 <template>
-  <div style="overflow-x: hidden pr-1">
-    <div class="text-left show-sidebar dashboardsidebar">
-      <aside class="sidebar">
-        <!-- <div class="toggle">
+  <div id="dashsidebar">
+    <!-- position: fixed;
+  
+    margin-top: -85px; -->
+
+    <div
+      class="text-left border-bottom"
+      style="
+        background-size: cover;
+        background: url('https://demos.wrappixel.com/premium-admin-templates/bootstrap/materialpro-bootstrap/package/assets/images/background/user-info.jpg');
+      "
+    >
       
-      </div> -->
-        <div class="side-inner d-block">
-          <VuePerfectScrollbar class="scroll-area" v-once :settings="settings">
-            <div class="text-center">
 
-          
-
-              <b-avatar
+      <div class="user-profile">
+        <!-- <b-avatar
           class="p-avater bg-white"
           variant="primary"
           :src="profile.picture"
-          size="6em"
-        ></b-avatar>
+          size="3em"
+        ></b-avatar> -->
+      </div>
 
-        <div class="text-lost">
-          <h6 class="">
-            <router-link :to="{ name: 'profile_owner' }" class="card-title">
-             {{ profile.name }} 
-            </router-link>
-          </h6> 
-        </div>
-            </div>
-  
-            <hr class="mt-2">
+      <div class="text-lost text-center">
+        <h6 class="">
+          <router-link :to="{ name: 'profile_owner' }" class="card-title">
+            {{ profile.name }}
+          </router-link>
+        </h6>
+      </div>
 
+      <!-- <hr class="mt-2"> -->
+    </div>
+
+    <div class="text-left show-sidebar dashboardsidebar">
+      <aside class="sidebar">
+        <!-- <div class="toggle">
+       
+      </div> -->
+        <div class="side-inner d-block">
+          <VuePerfectScrollbar class="scroll-area" :settings="settings">
             <div class="nav-menu">
               <ul>
                 <li>
-                  <a href="#"
-                    ><span class="icon-location-arrow mr-3"> <fas-icon class="icons" :icon="['fas', 'user']" size="lg" />  </span>
-                    
-                    Your Profile</a
+                  <router-link :to="userOwnPage">
+                     <span class="icon-location-arrow mr-3">
+                      <fas-icon
+                        class="icons"
+                        :icon="['fas', 'user']"
+                        size="lg"
+                      />
+                    </span>  Profile </router-link
                   >
                 </li>
 
@@ -48,20 +63,25 @@
                     class="collapsible"
                   >
                     <span class="icon-home mr-3">
-                    <fas-icon
-                      class="icons"
-                      :icon="['fas', 'hands-helping']"
-                      size="sm"
-                    /> </span>
-                    Your Businesses
+                      <fas-icon
+                        class="icons"
+                        :icon="['fas', 'hands-helping']"
+                        size="lg"
+                      />
+                    </span>
+                    Your Businesses 
                   </a>
 
                   <b-collapse id="my-collapse">
                     <div class="ml-3">
                       <ul>
-                        <li><a href="#"> Business 1</a></li>
-                        <li><a href="#">Business 2</a></li>
-                        <li><a href="#">Business 3</a></li>
+                        <li
+                          @click="activedBusiness(item)"
+                          v-for="(item, index) in business"
+                          :key="index"
+                        >
+                          <a href="#"> {{ item.name }} </a>
+                        </li>
                       </ul>
                     </div>
                   </b-collapse>
@@ -81,17 +101,22 @@
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'project-diagram']"
-                        size="sm"
-                      /> </span>
-                    Your Networks
+                        size="lg"
+                      />
+                    </span>
+                    Your Networks 
                   </a>
 
                   <b-collapse id="my-collapsenetwork">
                     <div class="ml-3">
                       <ul>
-                        <li><a href="#">Network 1</a></li>
-                        <li><a href="#">Network 2</a></li>
-                        <li><a href="#">Network 3</a></li>
+                        <li
+                          @click="activedNetwork(item)"
+                          v-for="(item, index) in networks"
+                          :key="index"
+                        >
+                          <a href="#"> {{ item.name }} </a>
+                        </li>
                       </ul>
                     </div>
                   </b-collapse>
@@ -100,89 +125,70 @@
                 <li>
                   <a href="#"
                     ><span class="icon-location-arrow mr-3">
-                      <fas-icon
-                        class="icons"
-                        :icon="['fas', 'cog']"
-                        size="sm"
+                      <fas-icon class="icons" :icon="['fas', 'cog']"  size="lg"
                     /></span>
                     Account Settings</a
                   >
                 </li>
                 <li>
-                  <a href="#"
-                    >  
-                    
+                  <router-link  :to="{ name: 'orders' }"  class="" >
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
-                        :icon="['fas', 'card']"
-                        size="sm"
-                      /> </span>
+                        :icon="['fas', 'cart-arrow-down']" 
+                         size="lg"
+                      />
+                    </span>
 
-                    
-                    Order</a
-                  >
+                    Order  </router-link>
                 </li>
                 <li>
-                  <a href="#">
-                    
+                  <router-link  v-if="islogin" :to="newRedirection('message')">
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'comments']"
-                        size="sm"
-                      /> </span>
+                        size="lg"
+                      />
+                    </span>
 
-                    Inbox</a
-                  >
+                    Inbox
+                  </router-link>
+                  
                 </li>
                 <li>
-                  <a href="#"
-                    >
-
+                  <router-link  v-if="islogin" :to="newRedirection('notification')">
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'bell']"
-                        size="sm"
-                      /> </span>
+                         size="lg"
+                      />
+                    </span>
 
-                    Notifications</a
-                  >
+                    Notifications   
+                  </router-link>
+                  
                 </li>
 
                 <li>
-                  <a href="#"
-                    >
+                  <router-link
+                  :to="{ name: 'GlobalSearch' }"
+                  
+                >
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
-                        :icon="['fas', 'market-place']"
-                        size="sm"
-                      /> </span>
+                        :icon="['fas', 'store']"
+                         size="lg"
+                      />
+                    </span>
 
-
-                    Market</a
-                  >
+                    Market  </router-link>
+                
                 </li>
-                <!-- <li>
-                  <a href="#"
-                    ><span class="icon-sign-out mr-3"></span> Community
-                  </a>
-                </li> -->
-                <li>
-                  <a href="#">
-                   
-                   <span class="icon-search2 mr-3">
-                      <fas-icon
-                        class="icons"
-                        :icon="['fas', 'project-diagram']"
-                        size="sm"
-                      /> </span>
-
-                    Account Type</a
-                  >
-                </li>
+               
+               
               </ul>
             </div>
           </VuePerfectScrollbar>
@@ -194,7 +200,9 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
-
+import _ from "lodash";
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import axios from "axios";
 export default {
   name: "newdashboard",
 
@@ -203,6 +211,20 @@ export default {
       settings: {
         maxScrollbarLength: 60,
       },
+
+      isActive: false,
+      islogin: null,
+
+      notifications: [],
+      messages: [],
+      notificationPatterns: null,
+      messagePatterns: null,
+      redirectionPatterns: null,
+      selectedUser: null,
+      users: [],
+
+      pending: false,
+      strategy: null,
     };
   },
 
@@ -214,18 +236,333 @@ export default {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
-    
-    profile() {
-      return this.$store.state.ProfileAndBusinessDetails.profile;
+
+    // profile() {
+    //   return this.$store.state.ProfileAndBusinessDetails.profile;
+    // },
+
+    ...mapGetters({
+      hasLauchNetworkRequest: "social/INIT",
+      user: "auth/profilConnected",
+      //auth: "auth/user",
+      networks: "social/FIND_USER_NETWORK",
+      business: "social/FIND_USER_BUSNESS",
+
+      profile: "auth/profilConnected",
+    }),
+  },
+
+  created() {
+    this.strategy = {
+      business: {
+        newType: (item) => ({
+          name: item.name,
+          profile_picture: item.logo_path,
+          id: item.id,
+          user_type: "business",
+        }),
+        redirect: (obj) => this.redirection(obj),
+      },
+
+      network: {
+        newType: (item) => ({
+          name: item.name,
+          profile_picture: item.image,
+          id: item.id,
+          user_type: "network",
+        }),
+        redirect: (obj) => this.redirection(obj),
+      },
+    };
+
+     this.islogin = this.$store.getters["auth/profilConnected"];
+      if (this.islogin) {
+        this.init();
+        this.userOwnPage = this.onRedirect();
+
+        this.notificationPatterns = {
+          user: () => "user/notification",
+          business: () => `/notification/business/${this.user.id}`,
+          network: () => `/notification/network/${this.user.id}`,
+        };
+
+        this.messagePatterns = {
+          user: () => "/messages/latest/user",
+          business: () => `/messages/latest/${this.user.id}/business`,
+          network: () => `/messages/latest/${this.user.id}/network`,
+        };
+
+        this.redirectionPatterns = {
+          message: {
+            user: () => ({
+              name: "Nav Meassage",
+            }),
+            business: () => ({
+              name: "BusinessOwner",
+              params: { id: this.user.id },
+              query: { tabId: 1 },
+            }),
+            network: () => null,
+          },
+          notification: {
+            business: () => ({
+              name: "BusinessOwner",
+              params: { id: this.user.id },
+              query: { tabId: 2 },
+            }),
+
+            user: () => ({
+              name: "settings",
+            }),
+            network: () => ({
+              name: "networks",
+              params: { id: this.user.id },
+              query: { tabId: 2 },
+            }),
+          },
+        };
+
+        this.updateNotificationEvent();
+      }
+  },
+
+  filters: {
+    stringify(value) {
+      return JSON.stringify(value, null, 2);
     },
   },
 
+  methods: {
+    ...mapActions({
+      setNetworks: "social/FIND_USER_NETWORK",
+      setBusiness: "social/FIND_USER_BUSNESS",
+      lauchNetworkRequest: "social/INIT",
+    }),
 
-  methods: {},
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
+
+    onRedirect() {
+      const link = {
+        network: () => ({ name: "networks", params: { id: this.user.id } }),
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+        }),
+        user: () => ({ name: "profile_owner" }),
+      };
+      return link[this.user.user_type]();
+    },
+
+    //from business activity
+
+    redirection(obj) {
+      if (obj.routeName !== this.$router.name)
+        this.$router.push({
+          name: obj.routeName,
+          params: { id: obj.routeId },
+        });
+    },
+
+    process: async function (item, type) {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      try {
+        const data = {
+          routeName: "network" == type ? "networks" : "BusinessOwner",
+          routeId: item.id,
+        };
+
+        const request =
+          "network" == type
+            ? await this.$repository.share.switch(item.id, "network")
+            : await this.$repository.share.switch(item.id, "business");
+
+        if (request.success) {
+          this.flashMessage.success({
+            time: 5000,
+            message:
+              "business" == type
+                ? item.is_owner
+                  ? `You are now connected as ${item.name}`
+                  : `You are now redirect to ${item.name}`
+                : item.is_owner || item.is_editor
+                ? `You are now connected as ${item.name}`
+                : `You are now redirect to ${item.name}`,
+          });
+
+          this.auth(this.strategy[type].newType(item));
+        }
+
+        loader.hide();
+        this.strategy[type].redirect(data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    activedBusiness(item) {
+      if (!this.pending) this.process(item, "business");
+    },
+
+    activedNetwork(item) {
+      if (!this.pending) this.process(item, "network");
+    },
+
+    updateNotificationEvent() {
+      try {
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        this.newNotification(newRouteNotificationApi);
+        this.newMessage(newRouteMessageApi);
+      } catch (error) {
+        return new Error(error);
+      }
+    },
+
+    newRedirection(type) {
+      try {
+        const newPath = this.redirectionPatterns[type][this.user.user_type]();
+
+        if (newPath) {
+          let path = { name: newPath.name };
+
+          if (newPath.params)
+            path = Object.assign(path, { params: newPath.params });
+
+          if (newPath.query)
+            path = Object.assign(path, { query: newPath.query });
+
+          return path;
+        }
+
+        return { name: this.$route.name };
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    navLink(type) {
+      const link = {
+        home: () => {
+          return this.profile ? { name: "dashboard" } : { name: "newHome" };
+        },
+      };
+      try {
+        return link[type]();
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+
+    getUsers() {
+      this.$store
+        .dispatch("userChat/GET_USERS", "")
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+
+    switchToProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const response = await this.$repository.share.switch(null, "reset");
+
+      if (response.success) {
+        this.profile({ ...this.auth.user, user_type: "user" });
+        this.$router.push({
+          name: "profile_owner",
+        });
+      }
+
+      loader.hide();
+    },
+
+    getNetworks: async function () {
+      let request = await this.$repository.share.getNetworks();
+      if (request.success) this.setNetworks(request.data);
+    },
+
+    getBusiness: async function () {
+      let request = await this.$repository.share.getBusiness();
+      if (request.success) this.setBusiness(request.data);
+    },
+
+    init() {
+      try {
+        if (!this.hasLauchNetworkRequest) {
+          this.getNetworks();
+          this.getBusiness();
+          this.lauchNetworkRequest();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async newNotification(url) {
+      await axios
+        .get(url)
+        .then((response) => {
+          this.notifications = response.data.data.slice(0, 5);
+        })
+        .catch((error) => console.log("Error In newNotification  => " + error));
+    },
+
+    async newMessage(url) {
+      await axios
+        .get(url)
+        .then((response) => {
+          this.messages = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
+    checkIfExists(object, key) {
+      return _.has(object, key);
+    },
+  },
 };
 </script>
 
 <style  scoped>
+.dash-fixed-top {
+  overflow-x: hidden;
+  position: fixed;
+
+  margin-top: -10%;
+}
+
+.user-profile {
+  width: 50px;
+  margin-left: 30px;
+  padding: 35px 0;
+}
+
 .scroll-area {
   position: relative;
   margin: auto;
@@ -241,18 +578,13 @@ export default {
   display: block !important;
 }
 
-
 .dashboardsidebar {
- 
   background-color: #fcfcfc;
 }
 
 p {
- 
   font-weight: 300;
 }
-
-
 
 a {
   -webkit-transition: 0.3s all ease;
@@ -347,29 +679,27 @@ aside .side-inner {
   -webkit-overflow-scrolling: touch;
 }
 
-
-
-.card-title{
+.card-title {
   font-size: 18px;
   line-height: 1.2;
   font-family: poppins;
   font-weight: 400;
-  color: #455a64;
+  color: white;
 }
 
-h6{
-    font-size: .875rem;
-    font-weight: 400;
+h6 {
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
-small{
-  font-size: .875em;
-  color: #a1aab2!important;
+small {
+  font-size: 0.875em;
+  color: #a1aab2 !important;
 }
 
-.text-muted{
+.text-muted {
   --bs-text-opacity: 1;
-    color: #a1aab2!important;
+  color: #a1aab2 !important;
 }
 
 /* aside .side-inner .profile {
@@ -385,7 +715,6 @@ small{
   margin: 0 auto 20px auto;
   border-radius: 50%;
 } */
-
 
 aside .side-inner .profile .name {
   font-size: 14px;
@@ -425,7 +754,7 @@ aside .side-inner .nav-menu ul li a {
   font-size: 15px !important;
 
   line-height: 25px;
-   font-family: poppins;
+  font-family: poppins;
   font-weight: 200;
   position: relative;
   -webkit-transition: 0.3s padding-left ease;
@@ -473,9 +802,9 @@ aside .side-inner .nav-menu ul li .collapsible {
   position: relative;
 }
 aside .side-inner .nav-menu ul li .collapsible:after {
-  content: "\e315";
+  /* content: "\e315"; */
   font-size: 14px;
- 
+
   position: absolute;
   right: 20px;
   width: 20px;

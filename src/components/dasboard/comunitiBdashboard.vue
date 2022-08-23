@@ -5,15 +5,15 @@
       style="
     padding: 3px;"
     >  
-      <div class=" border shadow   p-tab p-3">
+      <div class=" border shadow   p-tab p-3"> 
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b class="ml-2">  {{ $t('dashboard.Community') }} </b> <span class="h4-color">  {{ nFormatter(total.total) }}  </span>
+            <span class="ml-2">  {{ $t('dashboard.Community') }} </span> <span class="h4-color">  {{ nFormatter(total.total) }}  </span>
           </h6>
         </span>
 
-        <b-tabs lazy pills content-class="mt-3  f-left ">
+        <b-tabs lazy  class="pr-2 pl-2"  content-class="mt-3 p-1 f-left " active-nav-item-class="active-tab-item">
           <b-tab active>
             <template slot="title">
               {{ $t('dashboard.People') }}
@@ -23,9 +23,9 @@
             </template>
 
             <div>
-              <b-row>
-                <b-col class="p-2">
-                  <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
+              
+                <div class="p-2">
+                  <b-tabs lazy fill justified class="pr-2 pl-2" content-class="mt-3  f-left m-up"  active-nav-item-class="active-tab-item" >
 
                     <b-tab active>
                       <template slot="title">
@@ -65,8 +65,8 @@
                       </div>
                     </b-tab>
                   </b-tabs>
-                </b-col>
-              </b-row>
+                </div>
+             
             </div>
           </b-tab>
 
@@ -79,7 +79,7 @@
             </template>
 
             <div>
-              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs lazy fill justified class="pr-2 pl-2" content-class="mt-3  f-left m-up"  active-nav-item-class="active-tab-item" >
                 <b-tab active>
                   <template slot="title">
                      {{ $t('dashboard.Followers') }}
@@ -132,7 +132,7 @@
             </template>
 
             <div>
-              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs lazy fill justified class="pr-2 pl-2" content-class="mt-3  f-left m-up"  active-nav-item-class="active-tab-item">
                 <b-tab active>
                   <template slot="title">
                    {{ $t('dashboard.Followers') }}
@@ -299,6 +299,14 @@ export default {
 .card-body {
   padding: 0px;
 }
+
+.s-comcard {
+ 
+  overflow: auto;
+  overflow-x: hidden;
+      height: 430px !important;
+}
+
 </style>
 
 <style>
@@ -307,11 +315,7 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.s-comcard {
-  height: 350px;
-  overflow: auto;
-  overflow-x: hidden;
-}
+
 
 .spa-color {
   color: white;

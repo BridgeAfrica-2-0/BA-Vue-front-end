@@ -1,52 +1,124 @@
 <template>
   <div>
-    <b-card
-      class="border blecrr shadow border pt-0"
-      style="height: 500px; padding-bottom: 50px"
-    >
-      <span>
-        <h6 class=" m-3 mt-1">
-          <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <span class="ml-2"> {{ $t("dashboard.HOT_BUSINESSES") }} </span>
-        </h6>
-      </span>
+    <div class="people-style border">
+      <div class="d-inline-flex w-100">
+        <div class="center-img">
+          <splide :options="options" class="r-image">
+            <splide-slide cl>
+              <img :src="business.picture" class="r-image" />
+            </splide-slide>
 
-      <div class="s-comcardd pt-0"  infinite-wrapper >
+            <splide-slide v-for="cover in business.covers" :key="cover" cl>
+              <img :src="cover" class="r-image" />
+            </splide-slide>
+          </splide>
+        </div>
+        <div class="pl-3 flx100 mr-1">
+          <p class="textt">
+            <span class="">
+              <router-link
+                :to="{ name: 'BusinessOwner', params: { id: business.id } }"
+              >
+                <span class="biz-name"> {{ business.name }} </span>
+              </router-link>
+            </span>
+            <br />
 
-         <VuePerfectScrollbar   class="scroll-area s-card"  settings="{maxScrollbarLength: 60px}"  @ps-y-reach-end="scrollHandle" >
-  
-        <Business v-for="item in business" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
-         
-              <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
-  
-         </VuePerfectScrollbar>
+            <span v-for="cat in business.category" :key="cat.name">
+              {{ cat.name }}
+            </span>
+            <br />
+            {{ count(business.followers) }}
+            {{ $t("dashboard.Community") }} <br />
 
-            
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              <span class="" v-for="nie in business.neigborhood" :key="nie.id">
+                {{ nie.name }}
+              </span>
+            </span>
+            <br />
+            <read-more
+              :more-str="$t('search.read_more')"
+              class="readmore"
+              :text="business.about_business"
+              link="#"
+              :less-str="$t('search.read_less')"
+              :max-chars="50"
+            >
+            </read-more>
+          </p>
+        </div>
+
+        <b-button
+          variant="light"
+          class="rounded-circle hov-btn"
+          :id="'business'+business.id"
+        >
+          <b-icon icon="three-dots"> </b-icon>
+        </b-button>
       </div>
-    </b-card>
+
+      <b-popover :target="'business'+business.id" triggers="hover" placement="top">
+        <div class="pt-3 pb-3">
+          <div class="mt-1">
+            <b-button
+              block
+              size="sm"
+              :class="business.is_follow !== 0 && 'u-btn'"
+              :id="'followbtn' + business.id"
+              variant="primary"
+              @click="handleFollow(business)"
+            >
+              <i
+                class="fas fa-lg btn-icon"
+                :class="business.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+              ></i>
+              <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
+            </b-button>
+          </div>
+
+          <div class="mt-1">
+            <BtnCtaMessage :element="business" type="business" />
+          </div>
+
+          <div class="mt-1">
+            <b-button
+              block
+              size="sm"
+              class="b-background shadow"
+              variant="primary"
+              @click="gotoBusiness(business.id)"
+            >
+              <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+              <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
+            </b-button>
+          </div>
+        </div>
+      </b-popover>
+    </div>
   </div>
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import Ps from 'perfect-scrollbar';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-import Business from "@/components/Business";
 
 import axios from "axios";
 export default {
-  props: ["title", "image"],
+  props: {
+    business: {
+      required: true,
+      type: Object,
+    },
+  },
   components: {
-    //  BtnCtaMessage,
-    Business,
-     VuePerfectScrollbar
+    BtnCtaMessage,
   },
   data() {
     return {
       page: 1,
       isloading: false,
-      business: [],
-      options: {
+       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
@@ -58,26 +130,18 @@ export default {
     };
   },
 
-mounted(){
-  this.$refs.infiniteLoading.attemptLoad();
-},
   methods: {
     getTotalCommunity() {
-      this.$store
-        .dispatch("profile/Tcommunity")
-        .then((response) => {})
-        .catch((error) => {});
+      
+        this.$emit('getTotalCommunity');
     },
 
- scrollHandle(evt) {
-   
-        this.$refs.infiniteLoading.attemptLoad();
-        console.log(evt);
-    },
+
 
     gotoBusiness(id) {
       this.$router.push(`/business/${id}?tabId=1`);
     },
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -109,27 +173,7 @@ mounted(){
         });
     },
 
-    infiniteHandler($state) {
-      let url = "profile/hot/business/";
-     console.log('loading page '+this.page)
-      axios
-        .get(url + this.page)
-        .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-
-            this.business.push(...data.data);
-            $state.loaded();
-             this.$nextTick(() => {
-          
-        });
-
-          } else {
-            $state.complete();
-          }
-        })
-        .catch((err) => {});
-    },
+   
   },
 };
 </script>
@@ -140,17 +184,18 @@ mounted(){
   height: 40px !important;
   vertical-align: center;
   text-align: center;
-  align-items: center;
+  align-items: center; 
   align-self: center;
-  color: #455a64;
 }
 
 .biz-name {
-  font-size: 16px;
+  font-size: 1.0625rem;
+    font-weight: 500;
   line-height: 1.2;
   font-family: poppins;
-  font-weight: 400;
+
   color: #455a64;
+  text-transform: capitalize;
 }
 
 .biz-name:hover {
@@ -158,7 +203,7 @@ mounted(){
 }
 .s-comcardd {
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   overflow-x: hidden;
   padding-bottom: 5px;
 }

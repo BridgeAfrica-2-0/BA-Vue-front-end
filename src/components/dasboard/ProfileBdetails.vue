@@ -1,694 +1,155 @@
 <template>
-  <div ref="about">
-    <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b> {{ $t("businessowner.About") }} </b>
 
-    <hr />
+    <div ref="wrapper">   
+        <div class="container wahala" >
+            <b-row v-if="loading">
+                <b-col cols="12" md="12" lg="12" xl="12">
+                    <div class="mbl-wrap">
+                        <b-card-text class="mt-3">
+                            <b-row>
+                                <b-col cols="12" md="12">
+                                    <div>
+                                        <b-table-simple hover small caption-top responsive>
+                                            <b-tbody>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Category
+                                                    </b-td>
 
-    <b-card>
-      <div class="mb-3" v-if="loading">
-        <mapbox :business="business_about" />
-      </div>
+                                                    <b-td class="a-text text td">
+                                                        <span v-for="category in business_about.category" :key="category.id"> {{ category.name }}</span>
+                                                    </b-td>
+                                                </b-tr> <br/>
 
-      <b-card>
-        <b-row v-if="loading">
-          <b-col>
-            <div
-              v-if="showPen"
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Busniness Name
+                                                    </b-td>
 
-            <h4 class="mb-4 text-center username">
-              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.about_business }}
-            </p>
-          </b-col>
-          <b-col>
-            <b-card-text>
-              <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
-                  v-if="showPen"
-                  icon="pencil-fill"
-                  variant="primary"
-                  @click="load"
-                ></b-icon>
-              </div>
+                                                    <b-td class="a-text text td">
+                                                        {{ business_about.name }}
+                                                    </b-td>
+                                                </b-tr> <br/>
 
-              <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                <span
-                  v-for="category in business_about.category"
-                  :key="category.id"
-                  >{{ category.name }},
-                </span>
-              </p>
-              <p>
-                <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Address
+                                                    </b-td>
 
-                <span
-                  >    <b> {{$t('businessowner.Address')}}: </b>  {{ business_about.address }}
-                  <!-- {{ business_about.city }}, 
-             {{ business_about.country[0].name }} -->
-                </span>
-              </p>
+                                                    <b-td class="a-text text td">
+                                                        <span>    
+                                                            {{ business_about.address }}
+                                                        </span>
+                                                    </b-td>
+                                                </b-tr> <br/>
 
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        City
+                                                    </b-td>
 
-               <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+                                                    <b-td class="a-text text td">
+                                                        <span>
+                                                            {{ business_about.city }}
+                                                        </span>
+                                                    </b-td>
+                                                </b-tr> <br/>
 
-                <span
-                  > <b> {{ $t("welcome.City") }}: </b>{{ business_about.city }}
-                
-                </span>
-              </p>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Neighbour
+                                                    </b-td>
 
+                                                    <b-td class="a-text text td">
+                                                        <span  v-if="business_about.neigborhood[0]">
+                                                            {{ business_about.neigborhood[0].name }}
+                                                        </span>
+                                                    </b-td>
+                                                </b-tr> <br/>
 
-               <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Public URL
+                                                    </b-td>
 
-                <span  v-if="business_about.neigborhood[0]"
-                  > <b> {{$t('welcome.Neighbour')}}: </b>{{ business_about.neigborhood[0].name }}
-                
-                </span>
-              </p>
+                                                    <b-td class="a-text text td">
+                                                        <span v-if="business_about.website">
+                                                            {{ business_about.website }}
+                                                        </span>
+                                                    </b-td>
+                                                </b-tr> <br/>
 
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        People
+                                                    </b-td>
 
+                                                    <b-td class="a-text text td">
+                                                        {{ business_about.community }}
+                                                        {{ business_about.community > 1000 ? "K" : "" }} Community
+                                                    </b-td>
+                                                </b-tr> <br/>
 
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Phone Number
+                                                    </b-td>
 
-              <p>
-                <b-icon icon="link" class="primary icon-size"></b-icon>
-                <span v-if="business_about.website">
-                  {{ business_about.website }}
-                </span>
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} Community
-              </p>
-              <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.phone1 }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                {{ business_about.email }}
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now </b-link>
-                <br />
-                <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    {{ hoursOpen }}
-                  </template>
-                  <b-dropdown-item
-                    v-for="day in business_about.business_open_hours"
-                    :key="day.day"
-                    @click="selectHour(day)"
-                  >
-                    {{ day.opening_time }}AM -
-                    {{ day.closing_time }}PM</b-dropdown-item
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-col>
-        </b-row>
-      </b-card>
+                                                    <b-td class="a-text text td">
+                                                        {{ business_about.phone1 }}
+                                                    </b-td>
+                                                </b-tr> <br/>
 
-      <!-- original card -->
-      <!-- <b-row v-if="loading">
-        <b-col>
-          <b-card>
-            <b-card-text>
-              <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  @click="load"
-                ></b-icon>
-              </div>
-              <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.category }}
-              </p>
-              <p>
-                <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.address }}, {{ business_about.city }},
-                {{ business_about.country }}
-              </p>
-              <p>
-                <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website }}
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} {{ $t('businessowner.Community') }}
-              </p>
-              <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.phone }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                {{ business_about.email }}
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> {{ $t('businessowner.Open_now') }} </b-link>
-                <br />
-                <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    {{ hoursOpen }}
-                  </template>
-                  <b-dropdown-item
-                    v-for="day in business_about.business_open_hours"
-                    :key="day.day"
-                    @click="selectHour(day)"
-                  >
-                    {{ day.opening_time }}AM -
-                    {{ day.closing_time }}PM</b-dropdown-item
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-card>
-        </b-col>
-        <b-col>
-          <b-card class="mb-2">
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-card>
-        </b-col>
-      </b-row> -->
-    </b-card>
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Email
+                                                    </b-td>
 
-    <b-modal
-      id="biographyModal"
-      hide-footer
-      :title="$t('businessowner.Business_Biography')"
-      size="md"
-      ref="biographyModal"
-      @close="cancel"
-      @ok="validate('editAddress')"
-      @keyup="validate('editAddress')"
-    >
-      <b-form @submit.prevent="validate('modifyBiography')">
-        <div class="form-group">
-          <label for="title">{{ $t("businessowner.Bussiness_Name") }}:</label
-          ><br />
-          <input
-            type="text"
-            name="title"
-            id="title"
-            :placeholder="$t('businessowner.Title')"
-            class="form-control"
-            v-model="business_about_input.name"
-            required
-          />
+                                                    <b-td class="a-text text td">
+                                                        {{ business_about.email }}
+                                                    </b-td>
+                                                </b-tr> <br/>
+
+                                                <b-tr>
+                                                    <b-td class="a-text text">
+                                                        Opening Hours
+                                                    </b-td>
+
+                                                    <b-td class="a-text text td">
+                                                        <b-link> Open now </b-link>
+                                                        <br />
+                                                        <b-dropdown size="sm" variant="transperent">
+                                                            <template #button-content>
+                                                            {{ hoursOpen }}
+                                                            </template>
+                                                            <b-dropdown-item
+                                                            v-for="day in business_about.business_open_hours"
+                                                            :key="day.day"
+                                                            @click="selectHour(day)"
+                                                            >
+                                                            {{ day.opening_time }}AM -
+                                                            {{ day.closing_time }}PM</b-dropdown-item
+                                                            >
+                                                        </b-dropdown>
+                                                    </b-td>
+                                                </b-tr>
+
+                                            </b-tbody> 
+                                        </b-table-simple>
+                                    </div>
+                                </b-col>
+                            </b-row>
+                        </b-card-text>
+                        
+                    </div>
+                </b-col>
+            </b-row>
         </div>
 
-        <div class="form-group">
-          <label for="description">{{ $t("businessowner.Description") }}:</label
-          ><br />
-          <textarea
-            type="text"
-            id="description"
-            name="description"
-            v-model="business_about_input.about_business"
-            class="mb-3 form-control"
-            :placeholder="$t('businessowner.description')"
-            required
-          ></textarea>
-        </div>
-
-        <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t("businessowner.Modify") }}
-        </b-button>
-      </b-form>
-    </b-modal>
-
-    <b-modal
-      id="addressBusinessModal"
-      ref="addressBusinessModal"
-      hide-footer
-      :title="$t('businessowner.Edit_Business')"
-      size="lg"
-      @close="cancel"
-      @keyup="validate('editAddress')"
-    >
-      <b-form @submit.prevent="validate('editAddress')">
-        <div class="form-group">
-          <label for="username">{{ $t("businessowner.Business_Name") }}:</label
-          ><br />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            :placeholder="$t('businessowner.Business_Name')"
-            v-model="business_about_input.name"
-            class="form-control"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
-          <multiselect
-            v-model="multiselecvalue"
-            @input="subcategories"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
-            :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            label="name"
-            track-by="id"
-            :options="pcategories"
-            :multiple="true"
-            :taggable="true"
-            @tag="addTag"
-          ></multiselect>
-        </div>
-
-        <div class="form-group">
-          <label for="alias">{{ $t("businessowner.Sub_Category") }}:</label
-          ><br />
-          <multiselect
-            v-model="filterselectvalue"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
-            :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            label="name"
-            track-by="subcategory_id"
-            :options="scategories"
-            :multiple="true"
-            :taggable="true"
-            @tag="addFilter"
-          ></multiselect>
-        </div>
-
-        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
-        <div>
-          <b-card no-body>
-            <b-tabs pills card vertical>
-              <b-tab
-                :title="filters.name"
-                v-for="filters in filterselectvalue"
-                :key="filters.id"
-                active
-                ><b-card-text>
-                  <b-form-group
-                    :label="$t('businessowner.Filters')"
-                    class="colorblack"
-                  >
-                    <b-form-checkbox-group
-                      id=""
-                      class="colorblack"
-                      v-model="select_filterss"
-                      name="filters"
-                    >
-                      <b-form-checkbox
-                        class="colorblack"
-                        v-for="fil in filters.filters"
-                        :key="fil.id"
-                        :value="fil.id"
-                      >
-                        {{ fil.name }}
-                      </b-form-checkbox>
-                    </b-form-checkbox-group>
-                  </b-form-group>
-                </b-card-text>
-              </b-tab>
-            </b-tabs>
-          </b-card>
-        </div>
-
-        <div class="form-group">
-          <label for="username">{{ $t("businessowner.Keywords") }}</label
-          ><br />
-          <b-form-tags
-            input-id="tags-separators"
-            v-model="business_about_input.keywords"
-            tag-variant="primary"
-            separator=" ,;"
-            :limit="limit"
-            :tag-validator="validator"
-            :placeholder="$t('businessowner.Enter_your_Keywords')"
-            no-add-on-enter
-            required
-          ></b-form-tags>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <b-form-group
-              id="input-group-1"
-              :label="$t('businessowner.Country')"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <multiselect
-                v-model="country"
-                @input="Region"
-                track-by="id"
-                label="name"
-                :options="countries"
-                :multiple="true"
-              ></multiselect>
-            </b-form-group>
-          </div>
-          <div class="col-6">
-            <b-form-group
-              id="input-group-1"
-              :label="$t('businessowner.Region')"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <multiselect
-                v-model="region"
-                @input="Division"
-                track-by="id"
-                label="name"
-                :options="regions"
-                :multiple="true"
-              ></multiselect>
-            </b-form-group>
-          </div>
-          <div class="col-6">
-            <label for="country" class="username">
-              {{ $t("profileowner.Division") }} :</label
-            ><br />
-            <multiselect
-              v-model="division"
-              @input="Municipality"
-              :placeholder="$t('profileowner.Search')"
-              label="name"
-              track-by="id"
-              :options="divisions"
-              :multiple="true"
-            ></multiselect>
-          </div>
-
-          <div class="col-6">
-            <label for="country" class="username">
-              {{ $t("profileowner.Municipality") }}/ {{$t('businessowner.City')}} :</label
-            ><br />
-
-            
-
-            <multiselect
-              v-model="municipality"
-              @input="Locality"
-              :placeholder="$t('profileowner.Search')"
-              label="name"
-              track-by="id"
-              :options="municipalities"
-              :multiple="true"
-            ></multiselect>
-          </div>
-          <div class="col-6">
-            <!-- <label for="Neighbor" class="username">
-          {{ $t("profileowner.Neighbor") }} :</label
-        ><br /> -->
-            <b-form-group
-              id="input-group-2"
-              :label="$t('profileowner.Neighbor')"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <multiselect
-                v-model="locality"
-                :placeholder="$t('profileowner.Search')"
-                label="name"
-                track-by="id"
-                :options="localities"
-                :multiple="true"
-              ></multiselect>
-            </b-form-group>
-          </div>
-
-          
-          <!-- <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              :label="$t('businessowner.City')"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                v-model="business_about_input.city"
-                required
-              ></b-form-input>
-            </b-form-group>
-          </div> -->
-        </div>
-
-        <div class="row">
-          <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              label="Address :"
-              label-for="input-2"
-              label-size="sm"
-            >
-                  <input
-                        type="text"
-                        name="alias"
-                        id="Neighbor"
-                        v-model="business_about_input.address"
-                        placeholder="Neighborhood"
-                        class="form-control text"
-                      />
-
-              <div class="" style="height: 250px; overflow:hidden">
-                <AutocompleteLocation
-                  :infos="business_about_input"
-                  :region="region"
-                  @get-address-details="getGeoCoderResult"
-                />
-              </div>
-            </b-form-group>
-          </div>
-          
-
-        </div>
-
-        <div class="row">
-          <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              :label="$t('businessowner.Phone_Contact')"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <VuePhoneNumberInput
-                 default-country-code="CM"
-                v-model="business_about_input.phone1"
-              />
-            </b-form-group>
-          </div>
-          <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              label="secondary phone"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <VuePhoneNumberInput
-                 default-country-code="CM"
-                v-model="business_about_input.phone2"
-              />
-            </b-form-group>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              :label="$t('businessowner.Website')"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                v-model="business_about_input.website"
-                required
-              ></b-form-input>
-            </b-form-group>
-          </div>
-
-          <div class="col-6">
-            <b-form-group
-              id="input-group-2"
-              :label="$t('businessowner.Business_Email')"
-              label-for="input-2"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                v-model="business_about_input.email"
-                type="email"
-                :placeholder="$t('businessowner.Enter_your_email')"
-                required
-              ></b-form-input>
-            </b-form-group>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label @click="input1" for="description">{{
-            $t("businessowner.Description")
-          }}</label
-          ><br />
-          <textarea
-            type="text"
-            id="description"
-            name="description"
-            v-model="business_about_input.about_business"
-            class="mb-3 form-control"
-            placeholder="description"
-            required
-          ></textarea>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="b-bottom">
-          <b-container>
-            <b-form-group
-              label-cols-lg="12"
-              :label="$t('businessowner.Business_Hours')"
-              label-size="md"
-              label-class=" pt-0 "
-              class="mb-0"
-            >
-              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">       
-                <b-form-radio-group
-                  class="a-text text"
-                  :options="['Always Open', 'Open for selected hours']"
-                  name="open"
-                  :aria-describedby="ariaDescribedby"
-                  v-model="open"
-                  :disabled="false"
-                ></b-form-radio-group>
-                <br />
-                <b-container v-if="displayHour1">
-                  <b-row v-for="(day, index) in dayOfWorks" :key="index">
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name="works"
-                        v-model="day.check"
-                        :checked="day.check"
-                      >
-                        {{ day.day }}</b-form-checkbox
-                      ></b-col
-                    >
-
-                    <b-col
-                      ><b-form-input
-                        @change="input(index, day)"
-                        name="start"
-                        type="time"
-                        v-model="day.opening_time"
-                        :required="day.check ? 'required' : null"
-                      ></b-form-input
-                    ></b-col>
-                    --
-                    <b-col
-                      ><b-form-input
-                        @change="input(index, day)"
-                        name="end"
-                        type="time"
-                        v-model="day.closing_time"
-                        :required="day.check ? 'required' : null"
-                      ></b-form-input
-                    ></b-col>
-                  </b-row>
-                  <br />
-                </b-container>
-              </b-form-group>
-            </b-form-group>
-          </b-container>
-        </div>
-
-        <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t("businessowner.Modify") }}
-        </b-button>
-      </b-form>
-    </b-modal>
-  </div>
+    </div>
+     
 </template>
+
 
 <script>
 /**
@@ -699,20 +160,13 @@ import VuePhoneNumberInput from "vue-phone-number-input";
 //import moment from "moment";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
-import mapbox from "@/components/mapbox";
-import Multiselect from "vue-multiselect";
-import AutocompleteLocation from "@/components/AutocompleteLocation";
+
 import { isGuestUser } from '@/helpers';
 
 export default {
   components: {
-    Multiselect,
-    VuePhoneNumberInput,
-    AutocompleteLocation,
-    // MglMap,
-    mapbox,
-    // MglMarker,
-    // VuePhoneNumberInput,
+   
+    
   },
   data() {
     return {
@@ -808,7 +262,7 @@ export default {
     this.$store
       .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
-        business_id: this.$route.params.id,
+        business_id: this.biz_id,
       })
       .then((response) => {
         this.business_about = JSON.parse(
@@ -842,12 +296,17 @@ export default {
       });
   },
   mounted() {
-    this.business_id = this.$route.params.id;
+    this.business_id = this.biz_id;
     this.categories();
     this.Country();
     this.editBusiness();
   },
   computed: {
+
+     biz_id() {
+      return this.$store.state.dashboard.dBusinessId;
+    },
+
     isCheck(data) {
       if (data.opening_time && data.closing_time) {
         return true;
@@ -1116,7 +575,7 @@ export default {
       this.$store
         .dispatch("businessOwner/loadUserBusinessAbout", {
           // business_abobusiness_id: this.business_about_input,
-          business_id: this.$route.params.id,
+          business_id: this.biz_id,
         })
         .then((res) => {
           this.business_about = JSON.parse(
@@ -1207,7 +666,7 @@ export default {
           );
           this.test();
           var data = {
-            business_id: this.business_id,
+            business_id: this.biz_id,
             data: {
               about_business: this.business_about_input.about_business,
               name: this.business_about_input.name,
@@ -1259,7 +718,7 @@ export default {
 
 
           var dat = {
-            business_id: this.$route.params.id,
+            business_id: this.biz_id,
             data: {
               name: this.business_about_input.name,
               about_business: this.business_about_input.about_business,
@@ -1561,50 +1020,71 @@ export default {
 };
 </script>
 
+<style>
+.mbl-wrap {
+   height: 100%;
+   overflow: auto;
+ }
+
+@media only screen and (max-width: 768px) {
+  .wahala .nav-pills .nav-link {
+    border-radius: 0.25rem;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .mbl-wrap {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+     padding-top: 10px;
+        height: 70%;
+    
+    overflow: auto;
+    overflow-x: hidden;
+
+  }
+  .nav.nav-pills {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 500px;
+    overflow: auto;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .nav.nav-pills::-webkit-scrollbar {
+    display: none;
+  }
+}
+</style>
+
 <style scoped>
-.map {
-  border: 0;
-  width: 50%;
+.td {
+    padding-left: 15%;
+    font-weight: 600;
+    display: block;
 }
-.btn-item {
-  color: green;
-}
-.edit {
+
+.buynow {
+  width: 120px;
+  margin-bottom: -80px;
+  margin-left: -10px;
   position: relative;
-  left: 98%;
-  cursor: pointer;
-  display: inline-block;
 }
-h4,
-p {
-  text-align: left;
+
+.mt-15 {
+  margin-top: 15px;
 }
-@media (min-width: 762px) {
-  .primary {
-    margin-right: 6px;
-  }
+.button {
+  background-color: rgb(238, 119, 40);
+  border: none;
+  border-radius: 4px;
 }
-@media (min-width: 762px) {
-  .primary {
-    margin-right: 8px;
-  }
-}
-@media (max-width: 768px) {
-  .primary {
-    margin-right: 6px;
-    font-size: 12px !important;
-  }
-  .card-text {
-    font-size: 14px !important;
-  }
-}
-@media (min-width: 768px) {
-  .primary {
-    margin-right: 8px;
-    font-size: 14px !important;
-  }
-  .card-text {
-    font-size: 14px !important;
+@media only screen and (min-width: 768px) {
+  .cent {
+    margin-left: 170px;
   }
 }
 </style>

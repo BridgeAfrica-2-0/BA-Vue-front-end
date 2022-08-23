@@ -1,290 +1,8 @@
 <template>
   <div ref="about">
-    <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b> {{ $t("businessowner.About") }} </b>
-
-    <hr />
-
-    <b-card>
-      <div class="mb-3" v-if="loading">
-        <mapbox :business="business_about" />
-      </div>
-
-      <b-card>
-        <b-row v-if="loading">
-          <b-col>
-            <div
-              v-if="showPen"
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-
-            <h4 class="mb-4 text-center username">
-              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.about_business }}
-            </p>
-          </b-col>
-          <b-col>
-            <b-card-text>
-              <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
-                  v-if="showPen"
-                  icon="pencil-fill"
-                  variant="primary"
-                  @click="load"
-                ></b-icon>
-              </div>
-
-              <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                <span
-                  v-for="category in business_about.category"
-                  :key="category.id"
-                  >{{ category.name }},
-                </span>
-              </p>
-              <p>
-                <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-
-                <span
-                  >    <b> {{$t('businessowner.Address')}}: </b>  {{ business_about.address }}
-                  <!-- {{ business_about.city }}, 
-             {{ business_about.country[0].name }} -->
-                </span>
-              </p>
+   
 
 
-               <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-
-                <span
-                  > <b> {{ $t("welcome.City") }}: </b>{{ business_about.city }}
-                
-                </span>
-              </p>
-
-
-               <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-
-                <span  v-if="business_about.neigborhood[0]"
-                  > <b> {{$t('welcome.Neighbour')}}: </b>{{ business_about.neigborhood[0].name }}
-                
-                </span>
-              </p>
-
-
-
-
-              <p>
-                <b-icon icon="link" class="primary icon-size"></b-icon>
-                <span v-if="business_about.website">
-                  {{ business_about.website }}
-                </span>
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} Community
-              </p>
-              <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.phone1 }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                {{ business_about.email }}
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now </b-link>
-                <br />
-                <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    {{ hoursOpen }}
-                  </template>
-                  <b-dropdown-item
-                    v-for="day in business_about.business_open_hours"
-                    :key="day.day"
-                    @click="selectHour(day)"
-                  >
-                    {{ day.opening_time }}AM -
-                    {{ day.closing_time }}PM</b-dropdown-item
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-col>
-        </b-row>
-      </b-card>
-
-      <!-- original card -->
-      <!-- <b-row v-if="loading">
-        <b-col>
-          <b-card>
-            <b-card-text>
-              <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  @click="load"
-                ></b-icon>
-              </div>
-              <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.category }}
-              </p>
-              <p>
-                <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.address }}, {{ business_about.city }},
-                {{ business_about.country }}
-              </p>
-              <p>
-                <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website }}
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} {{ $t('businessowner.Community') }}
-              </p>
-              <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.phone }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                {{ business_about.email }}
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> {{ $t('businessowner.Open_now') }} </b-link>
-                <br />
-                <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    {{ hoursOpen }}
-                  </template>
-                  <b-dropdown-item
-                    v-for="day in business_about.business_open_hours"
-                    :key="day.day"
-                    @click="selectHour(day)"
-                  >
-                    {{ day.opening_time }}AM -
-                    {{ day.closing_time }}PM</b-dropdown-item
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-card>
-        </b-col>
-        <b-col>
-          <b-card class="mb-2">
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-card>
-        </b-col>
-      </b-row> -->
-    </b-card>
-
-    <b-modal
-      id="biographyModal"
-      hide-footer
-      :title="$t('businessowner.Business_Biography')"
-      size="md"
-      ref="biographyModal"
-      @close="cancel"
-      @ok="validate('editAddress')"
-      @keyup="validate('editAddress')"
-    >
-      <b-form @submit.prevent="validate('modifyBiography')">
-        <div class="form-group">
-          <label for="title">{{ $t("businessowner.Bussiness_Name") }}:</label
-          ><br />
-          <input
-            type="text"
-            name="title"
-            id="title"
-            :placeholder="$t('businessowner.Title')"
-            class="form-control"
-            v-model="business_about_input.name"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="description">{{ $t("businessowner.Description") }}:</label
-          ><br />
-          <textarea
-            type="text"
-            id="description"
-            name="description"
-            v-model="business_about_input.about_business"
-            class="mb-3 form-control"
-            :placeholder="$t('businessowner.description')"
-            required
-          ></textarea>
-        </div>
-
-        <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t("businessowner.Modify") }}
-        </b-button>
-      </b-form>
-    </b-modal>
-
-    <b-modal
-      id="addressBusinessModal"
-      ref="addressBusinessModal"
-      hide-footer
-      :title="$t('businessowner.Edit_Business')"
-      size="lg"
-      @close="cancel"
-      @keyup="validate('editAddress')"
-    >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
           <label for="username">{{ $t("businessowner.Business_Name") }}:</label
@@ -686,7 +404,7 @@
           {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
-    </b-modal>
+    
   </div>
 </template>
 
@@ -699,7 +417,7 @@ import VuePhoneNumberInput from "vue-phone-number-input";
 //import moment from "moment";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
-import mapbox from "@/components/mapbox";
+
 import Multiselect from "vue-multiselect";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 import { isGuestUser } from '@/helpers';
@@ -709,10 +427,7 @@ export default {
     Multiselect,
     VuePhoneNumberInput,
     AutocompleteLocation,
-    // MglMap,
-    mapbox,
-    // MglMarker,
-    // VuePhoneNumberInput,
+    
   },
   data() {
     return {
@@ -808,7 +523,7 @@ export default {
     this.$store
       .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
-        business_id: this.$route.params.id,
+        business_id: this.biz_id,
       })
       .then((response) => {
         this.business_about = JSON.parse(
@@ -842,12 +557,17 @@ export default {
       });
   },
   mounted() {
-    this.business_id = this.$route.params.id;
+    this.business_id = this.biz_id;
     this.categories();
     this.Country();
     this.editBusiness();
   },
   computed: {
+
+     biz_id() {
+      return this.$store.state.dashboard.dBusinessId;
+    },
+
     isCheck(data) {
       if (data.opening_time && data.closing_time) {
         return true;
@@ -1116,7 +836,7 @@ export default {
       this.$store
         .dispatch("businessOwner/loadUserBusinessAbout", {
           // business_abobusiness_id: this.business_about_input,
-          business_id: this.$route.params.id,
+          business_id: this.biz_id,
         })
         .then((res) => {
           this.business_about = JSON.parse(
@@ -1207,7 +927,7 @@ export default {
           );
           this.test();
           var data = {
-            business_id: this.business_id,
+            business_id: this.biz_id,
             data: {
               about_business: this.business_about_input.about_business,
               name: this.business_about_input.name,
@@ -1259,7 +979,7 @@ export default {
 
 
           var dat = {
-            business_id: this.$route.params.id,
+            business_id: this.biz_id,
             data: {
               name: this.business_about_input.name,
               about_business: this.business_about_input.about_business,

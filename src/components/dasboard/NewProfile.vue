@@ -31,12 +31,12 @@
             </router-link>
           </h6>
 
-           <span class="mr-3"> <b-icon icon="people"></b-icon> 1123 </span>
+           <span class="mr-3"> <b-icon icon="people"></b-icon> {{profile.follower}} </span>
          
 
           <hr />
 
-          <div class="card-body text-left">
+          <div class=" text-left">
 
              <!-- <span class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
@@ -49,7 +49,7 @@
             <router-link to="/messaging">
            <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link
             >
-            <span class="badge  bg-primary white float-right mt-1">
+            <span class="badge  bg-white  float-right mt-1">
               {{ profile.message }}
             </span>
           </p>
@@ -60,7 +60,7 @@
           <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
              </router-link>   
 
-            <span class="badge  bg-primary white float-right mt-1">
+            <span class="badge  bg-white  float-right mt-1">
             {{ profile.notification }}
             </span>
           </p>
@@ -187,7 +187,7 @@ small {
     font-size: 14px;
 
     flex-basis: 90%;
-    padding-left: 30px;
+   
   }
 }
 
@@ -219,7 +219,7 @@ small {
     font-size: 12px;
 
     flex-basis: 100%;
-    padding-left: 10px;
+    
   }
 }
 

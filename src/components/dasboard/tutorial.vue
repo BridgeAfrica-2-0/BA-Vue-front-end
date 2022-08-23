@@ -19,25 +19,20 @@
          <b-img-lazy   :src="resource.thumb" alt="..." class="resource-img"/>
 
         </div>
-        <div class="mt-1">
-          <p v-if="resource.title.length > 115" class="">
+        <div class="mt-1 text-center">
+          <p v-if="resource.title.length > 115" class="text-center">
             {{ resource.title.substring(0, 115) }}...
           </p>
           <p v-else>
-          <b-link  id="youtubelink" href="#youtubelink" class=""> {{ resource.title }}  </b-link> 
+          <b-link  id="youtubelink" href="#youtubelink" class="text-center"> {{ resource.title }}  </b-link> 
           </p>
 
           <div class="resource-line"></div>
         </div>
       </div>
   </div>
-
-
-     
-    
-</VuePerfectScrollbar>
-      
-    </b-card>
+  </VuePerfectScrollbar>
+</b-card>
 
 
     <LightBox 
@@ -1001,6 +996,7 @@ font-size: 18px;
   border: 1px solid black;
   width: 30%;
   margin: auto;
+      margin-top: -10px;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }

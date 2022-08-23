@@ -7,7 +7,7 @@
 
       <div class="main-content row wi-100">
         <div class="col-md-6 col-lg-7"> 
-          <div class="text-justify p-card pr-1">
+          <div class="text-justify p-card ">
             <CompleteProfile class="mb-2" v-if="!Profile_complete" />
           </div>
 
@@ -22,9 +22,15 @@
 
                 <span class="mt-2 ml-3">
                   Your current plan:
-                  <span class="sub-title">
-                    {{ profile_package.user_package.name }} Account
+                  <span class="sub-title"  v-if="profile_package.user_package">
+                     {{ profile_package.user_package.name }} Account
                   </span>
+
+                  <span class="sub-title"  v-else >
+                     Basic Account
+                  </span>
+
+
                 </span>
               </span>
               <div class="text-center">
@@ -33,10 +39,11 @@
             </b-card>
           </div>
  
-          <DashboardTab class="mt-2" />
-       
+          <DashboardTab :usertype="selectedb" class="mt-2" />
+      
 
-          <ProductActivities class="mt-2" />
+          <ProductActivities  v-if="selectedb == 'owner'"  class="mt-2" />
+           <ProductBactivities  v-if="selectedb != 'owner'"  class="mt-2" />
 
           <Tutorial class="mt-2" />
         </div>
@@ -70,6 +77,7 @@ import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
 import ProductActivities from "@/components/dasboard/ProductActivities";
+import ProductBactivities from "@/components/dasboard/ProductBactivities";
 import DashboardTab from "@/components/dasboard/DashboardTab";
 
 //import Insights from "@/components/dasboard/insights";
@@ -100,11 +108,11 @@ export default {
 
   data() {
     return {
+      selectedb: "owner",
       slide: 0,
       isPremium: isPremium(),
       sliding: null,
       url_data: null,
-      selectedb: "owner",
       map: false,
       category: "",
       boptions: [],
@@ -121,6 +129,7 @@ export default {
     // BusinessDashboard,
     DashboardTab,
     ProductActivities,
+    ProductBactivities,
     Business,
     newBusiness,
     NewProfile,
@@ -151,11 +160,51 @@ export default {
         if (request.status) this.auth();
       }
     },
+
+     async ProfileProcess() {
+      console.log('swtichin')
+      const response = await this.$repository.share.switch(null, 'reset');
+
+      if (response.success) this.auth({ ...this.profille.user, user_type: 'user' });
+
+     console.log(this.profille)
+
+  
+
+    },
+
+
+     BusinessProcess: async function (id, type) {
+      console.log(this.selectedBusiness);
+      try {
+          const request = await this.$repository.share.switch( id,  type );
+      if (request.success) {
+
+  this.auth({
+    name: this.selectedBusiness.name,
+    profile_picture: this.selectedBusiness.logo_path,
+    id: this.selectedBusiness.id,
+    user_type: "business",
+  });
+          
+        }
+
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
     async switchBusiness(value) {
       this.data1 = false;
-      console.log(this.selectedb);
+     
       this.selectedb=value;
-      if (value != "Owner") {
+      if(value == "owner"){
+        console.log('swtching owner')
+        this.ProfileProcess();
+      }
+
+      if (value != "owner") {
         let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
@@ -177,6 +226,8 @@ export default {
         this.businessCommunityTotal();
 
         this.dashboardBpost();
+         this.BusinessProcess(value, 'business');
+        
 
         loader.hide();
       }
@@ -278,7 +329,7 @@ export default {
     externalScript.setAttribute("src", "/assets/js/dashboard.js");
     document.head.appendChild(externalScript);
 
-
+  this.ProfileProcess();
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -302,7 +353,7 @@ export default {
     profile_package() {
       return this.$store.state.auth.profile_package;
     },
-
+    
     selectedBusiness: function () {
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat = data.latitute;
@@ -318,9 +369,7 @@ export default {
     },
   },
 
-  watch: {
-    selectedb(newvalue) {},
-  },
+  
 };
 </script>
 
@@ -350,6 +399,15 @@ export default {
   color: red !important;
 }
 
+
+
+ .nav-tabs > li.active    {
+   background-color: #272727 !important;
+   color: red;
+  
+}
+
+
 .nav-tabs .nav-link.active-tab-item {
   background-color: white !important;
 
@@ -365,6 +423,11 @@ export default {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+ .nav-tabs .nav-link.active-tab-item .spa-color{
+   color: #e75c18 !important;
+ }
+
 .nav-tabs:hover {
   background-color: white !important;
 }

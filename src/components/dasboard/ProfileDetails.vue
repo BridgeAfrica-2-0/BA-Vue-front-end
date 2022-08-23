@@ -188,136 +188,9 @@
                             </b-tr>
                             <br />
                             <div>
-                              <b-button
-                                variant="ligth"
-                                class="btn btn-primary button"
-                                v-b-modal.modal-10
-                                >{{ $t("settings.Edit") }}
-                              </b-button>
+                              
 
-                              <b-modal
-                                id="modal-10"
-                                ref="modal-10"
-                                :title="$t('settings.Edit_your_information_here')"
-                                hide-footer
-                              >
-                                <form>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Name")
-                                    }}</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="getUserInfos.name"
-                                    />
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Email")
-                                    }}</label>
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      v-model="getUserInfos.email"
-                                    />
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Phone")
-                                    }}</label>
-
-                                    <VuePhoneNumberInput
-                                      default-country-code="CM"
-                                      v-model="getUserInfos.phone"
-                                      required
-                                    />
-                                    
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.DOB")
-                                    }}</label>
-                                    <input
-                                      type="date"
-                                      class="form-control"
-                                      v-model="getUserInfos.dob"
-                                    />
-                                  </div>
-                                  <div class="mb-3">
-                                    {{ $t("settings.Gender") }}
-
-                                    <b-form-select
-                                      v-model="selectedGender"
-                                      :options="genderOptions"
-                                    ></b-form-select>
-                                  </div>
-                                  <div class="mb-3">
-                                    {{ $t("settings.Country") }}
-                                    <b-form-select
-                                      v-model="selectedCounty"
-                                      :options="country"
-                                      @change="getRegion"
-                                    ></b-form-select>
-                                  </div>
-                                  <div class="mb-3">
-                                    {{ $t("settings.Region") }}
-                                    <b-form-select
-                                      v-model="selectedRegion"
-                                      :options="region"
-                                      @change="getDivision"
-                                      required
-                                    ></b-form-select>
-                                  </div>
-
-                                  <div class="mb-3">
-                                    {{ $t("settings.Division") }}
-                                    <b-form-select
-                                      v-model="selectedDivision"
-                                      :options="division"
-                                      @change="getMunicipality"
-                                      required
-                                    ></b-form-select>
-                                  </div>
-
-                                  <div class="mb-3">
-                                    {{ $t("settings.Municipality") }}
-                                    <b-form-select
-                                      v-model="selectedMunicipality"
-                                      :options="municipality"
-                                      @change="getNeighbor"
-                                      required
-                                    ></b-form-select>
-                                  </div>
-
-                                  <div class="mb-3">
-                                    {{ $t("settings.Neighbourhood") }}
-                                    <b-form-select
-                                      v-model="selectedNeighbor"
-                                      :options="neighbor"
-                                      required
-                                    ></b-form-select>
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.City")
-                                    }}</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="getUserInfos.city"
-                                    />
-                                  </div>
-                                  <button
-                                    class="btn btn-primary"
-                                    @click="update"
-                                  >
-                                    {{ $t("settings.Save_Changes") }}
-                                  </button>
-                                </form>
-                              </b-modal>
+                              
                             </div>
                             <br />
 
@@ -344,17 +217,9 @@
 
 
 
-import VuePhoneNumberInput from "vue-phone-number-input";
 
 export default {
-  components: {
-   
-  
-   
-
-   
-    VuePhoneNumberInput
-  },
+ 
 
   computed: {
     vertical() {

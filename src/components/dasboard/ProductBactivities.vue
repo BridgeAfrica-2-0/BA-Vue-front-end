@@ -35,7 +35,7 @@
               </div>
             </template>
 
-             <template #cell(price)="data">
+            <template #cell(price)="data">
                <span class="mt-1  d-flex">
                   {{ data.item.price }} Fcfa
                  
@@ -45,8 +45,8 @@
 
           </b-table>
 
-          <div v-if="items.length == 0" class="text-center mt-5"> No  Activity </div>
-
+           <div v-if="items.length == 0" class="text-center mt-5"> No  Activity </div>
+           
           <infinite-loading
             @infinite="infiniteHandler"
             ref="infiniteLoading"
@@ -106,6 +106,11 @@ export default {
   },
 
  computed: {
+
+     biz_id() {
+      return this.$store.state.dashboard.dBusinessId;
+    },
+
     items() {
       let items = [];
 
@@ -126,9 +131,10 @@ export default {
 
   methods: {
     infiniteHandler($state) {
-      let url = `user-order/items/${this.page}`;
-
-       axios.get(url)
+      let url = `business-order/items/${this.page}?id=${this.biz_id}/`;
+    
+      axios
+        .get(url)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;

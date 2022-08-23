@@ -14,12 +14,12 @@
       
 
       <div class="user-profile">
-        <b-avatar
+        <!-- <b-avatar
           class="p-avater bg-white"
           variant="primary"
           :src="profile.picture"
           size="3em"
-        ></b-avatar>
+        ></b-avatar> -->
       </div>
 
       <div class="text-lost text-center">
@@ -554,7 +554,7 @@ export default {
   overflow-x: hidden;
   position: fixed;
 
-  margin-top: -9%;
+  margin-top: -10%;
 }
 
 .user-profile {

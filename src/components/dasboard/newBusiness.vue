@@ -8,7 +8,7 @@
 
         <div class="col-md-6">
           <b-form-select
-            v-model="selected"
+            v-model="selectedb"
             class="mr-3"
             :options="boptions"
             @input="switchBusiness"
@@ -150,6 +150,9 @@ export default {
 
   methods: {
     async switchBusiness(value) {
+
+      console.log('swtching start here')
+      console.log(value)
       this.$emit("switchBusiness", value);
     },
   },

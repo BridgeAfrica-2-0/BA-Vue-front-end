@@ -1,18 +1,13 @@
 <template>
   <div>
-    <b-card class="px-md-3 border shadow blecrr">
-      <span>
-        <h6 class="title mt-3">
-          <fas-icon
-            class="icons icon-color  ml-2 ml-md-0"
-            :icon="['fab', 'readme']"
-            size="lg"
-          />
-          <b> {{ $t("dashboard.Post") }} </b>
-        </h6>
-      </span>
+     <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
+    
 
       <div class="ss-card">
+         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
+
         <Post 
           v-for="(item, index) in owner_post"
           :key="index"
@@ -25,8 +20,10 @@
         />
 
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+         </VuePerfectScrollbar>
       </div>
-    </b-card>
+    </div>
   </div>
 </template>
 
@@ -34,12 +31,12 @@
 import { isYourOwnPostMixins } from "@/mixins";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import axios from "axios";
-
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   name: "postNetwork",
   mixins: [isYourOwnPostMixins],
   components: {
-    Post,
+    Post,VuePerfectScrollbar
   },
   data() {
     return {

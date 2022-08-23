@@ -220,7 +220,8 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: dashboard,
+    component: newdashboard,
+    //component: dashboard,
     meta: {
       auth: true,
     },
@@ -537,6 +538,15 @@ We operate a 3 in 1 software a service platform, that helps people create websit
   document.querySelector('meta[name="description"]').setAttribute('content', metaContent)
   
   next();
+});
+
+
+router.afterEach((to, from) => {
+ 
+  const appLoading = document.getElementById("loading-bg");
+  if (appLoading) {
+    appLoading.style.display = "none";
+  }
 });
 
 export default router;

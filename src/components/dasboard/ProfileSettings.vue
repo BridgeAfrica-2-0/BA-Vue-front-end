@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper" class="main-sub-con">
 
-    <VuePerfectScrollbar class="" v-once :settings="settings" >
+    <VuePerfectScrollbar class="scrool-area"  :settings="settings" >
 
     <div class="container wahala">
       <b-row>
@@ -536,7 +536,7 @@ export default {
 <style>
 .mbl-wrap {
   height: 100%;
-  overflow: auto;
+ 
 }
 
 @media only screen and (max-width: 768px) {
@@ -596,9 +596,12 @@ export default {
 
 .main-sub-con{
 
-  height: 600px;
+  height: 800px;
   
   overflow: hidden;
 
+}
+.scrool-area{
+  height: inherit;
 }
 </style>

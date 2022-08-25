@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
+import './assets/fontawesome5.15.4/css/all.min.css'
 import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
@@ -172,6 +173,8 @@ import i18n from './i18n';
 import VueEasyLightbox from 'vue-easy-lightbox';
 
 import Multiselect from 'vue-multiselect'
+
+import "./assets/css/backBtnStyle.css"
 
 // register globally
 Vue.component('multiselect', Multiselect);

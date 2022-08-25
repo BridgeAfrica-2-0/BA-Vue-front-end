@@ -1,147 +1,21 @@
+
 <template>
-  <div>
-    <b-row>
-      <b-col
-        lg="6"
-        sm="12"
-        class="p-2"
-        v-for="item in businesses"
-        :key="item.id"
-      >
-        <div class="people-style shadow h-100">
-          <b-row>
-            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">
-                <div class="center-img">
-                  <splide :options="options" class="r-image">
-                    <splide-slide cl>
-                      <img :src="item.logo_path" class="r-image" />
-                    </splide-slide>
+  <div class="h-100">
 
-                    
-                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
-                      <img :src="cover" class="r-image" />   
-                    </splide-slide>
-                    
-                  </splide>
-                </div>
-                <div class="pl-3 flx100">
-                  <p class="textt">
-                    <strong class="title">
-                      <router-link :to="{name: 'BusinessOwner', params: { id: item.slug } }">
-                        {{ item.name }}
-                      </router-link>
-                    </strong>
-                    <br />
+      <VuePerfectScrollbar   class="scroll-area s-card"  settings="{maxScrollbarLength: 60px}"  >
+  
+       <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+         
+       <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+       </VuePerfectScrollbar>
 
-                    <span v-for="cat in item.category" :key="cat.name">
-                      {{ cat.name }}
-                    </span>
-                    <br />
-                    {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }} <br />
-
-                    <span class="location">
-                      <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                      >{{ item.country }}
-                    </span>
-                    <br />
-                    <read-more
-                      :more-str="$t('search.read_more')"
-                      class="readmore"
-                      :text="item.about_business"
-                      link="#"
-                      :less-str="$t('search.read_less')"
-                      :max-chars="100"
-                    >
-
-                    </read-more>
-                  </p>
-                </div>
-              </div>
-            </b-col>
-
-            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      :disabled="disable"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'followbtn' + item.id"
-                      @click="handleFollow(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com">
-                        {{ $t("dashboard.Community") }}</span
-                      >
-                    </b-button>
-                  </b-col>
-
-                  
-                    <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <BtnCtaMessage :element="item" type="business" />
-                  </b-col>
-
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      @click="gotoBusiness(item.slug)"
-                      class="b-background shadow"
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">{{
-                        $t("dashboard.Direction")
-                      }}</span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-    </b-row>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Business from "@/components/Business";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   props: ["type"],
   data() {
@@ -167,6 +41,11 @@ export default {
     },
   },
 
+ components: {
+     Business,
+     VuePerfectScrollbar
+  },
+  
   methods: {
 
     
@@ -174,10 +53,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -198,13 +77,13 @@ gotoBusiness(id) {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -248,7 +127,7 @@ gotoBusiness(id) {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
   },

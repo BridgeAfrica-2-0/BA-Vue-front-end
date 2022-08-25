@@ -423,7 +423,7 @@ export default {
       return axios
         .delete(url)
         .then(({ data }) => {
-          console.log(data);
+         
         });
     },
 
@@ -478,32 +478,30 @@ export default {
 
     createContact({ commit }, payload) {
 
-      console.log(payload)
+   
       return axios.post("user/contact-create", { phone: payload.phone }, {
 
       })
         .then((res) => {
-          console.log(res.data);
+      
         })
         .catch((err) => {
-          console.log("Something went wrong");
-          console.log({ err: err })
+       
         });
 
     },
 
     updateContact({ commit }, payload) {
 
-      console.log(payload)
+    
       return axios.post("user/contact-update/" + payload.id, { phone: payload.phone }, {
 
       })
         .then((res) => {
-          console.log(res.data);
+       
         })
         .catch((err) => {
-          console.log("Something went wrong");
-          console.log({ err: err })
+         
         });
 
 
@@ -512,16 +510,15 @@ export default {
 
     deleteContact({ commit }, id) {
 
-      console.log(id)
+      
       return axios.post("user/contact-delete/" + id, {
 
       })
         .then((res) => {
-          console.log(res.data);
+         
         })
         .catch((err) => {
-          console.log("Something went wrong");
-          console.log({ err: err })
+        
         });
 
 
@@ -535,7 +532,7 @@ export default {
         .get('profile/network/follower')
         .then(({ data }) => {
           commit('setNcommunityFollower', data.data);
-          console.log(data);
+        
         });
     },
     NcommunityFollowing({ commit }) {
@@ -543,7 +540,7 @@ export default {
         .get('profile/network/following')
         .then(({ data }) => {
           commit('setNcommunityFollowing', data.data);
-          console.log(data);
+         
         });
     },
     BcommunityFollower({ commit }) {
@@ -551,7 +548,7 @@ export default {
         .get('profile/business/follower')
         .then(({ data }) => {
           commit('setBcommunityFollower', data.data);
-          console.log(data);
+         
         });
     },
     BcommunityFollowing({ commit }) {
@@ -559,7 +556,7 @@ export default {
         .get('profile/business/following')
         .then(({ data }) => {
           commit('setBcommunityFollowing', data.data);
-          console.log(data);
+         
         });
     },
 
@@ -568,7 +565,7 @@ export default {
         .get('profile/user/follower')
         .then(({ data }) => {
           commit('setUcommunityFollower', data.data);
-          console.log(data);
+        
         });
     },
     UcommunityFollowing({ commit }) {
@@ -576,7 +573,7 @@ export default {
         .get('profile/user/following')
         .then(({ data }) => {
           commit('setUcommunityFollowing', data.data);
-          console.log(data);
+        
         });
     },
 
@@ -586,7 +583,7 @@ export default {
         .get('business/userBusiness')
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
-          console.log(data);
+         
         });
 
     },
@@ -598,7 +595,7 @@ export default {
         .get('network')
         .then(({ data }) => {
           commit('setProfileNetwork', data.data);
-          console.log(data);
+      
         });
 
     },
@@ -612,7 +609,7 @@ export default {
         .get('business/album/show/' + busineeId)
         .then(({ data }) => {
           commit('setAlbumImages', data.data.media);
-          console.log(data);
+        
         });
     },
 
@@ -630,35 +627,35 @@ export default {
 
       return axios.get(url).then(({ data }) => {
         commit("setImages", data.data);
-        console.log(data);
+       
       });
     },
 
     getAlbums({ commit }, busineeId) {
       return axios.get("business/album/index/" + busineeId).then(({ data }) => {
         commit("setAlbums", data.data);
-        console.log(data);
+       
       });
     },
 
     ownerPost({ commit }) {
       return axios.get("post").then(({ data }) => {
         commit("ownerPost", data.data);
-        console.log(data);
+      
       });
     },
 
     ownerPostImages({ commit }, busineeId) {
       return axios.get("business/show/images/" + busineeId).then(({ data }) => {
         commit("ownerPostImages", data.data);
-        console.log(data);
+      
       });
     },
 
     businessInfo({ commit }, busineeId) {
       return axios.get("business/info/" + busineeId).then(({ data }) => {
         commit("setBusinessInfo", data.data);
-        console.log(data);
+       
       });
     },
 
@@ -667,7 +664,7 @@ export default {
         .get("business/community/business/" + businessId)
         .then(({ data }) => {
           commit("setCommunityBusiness", data.data);
-          console.log(data);
+         
         });
     },
 
@@ -676,7 +673,7 @@ export default {
         .get("business/community/people/" + businessId)
         .then(({ data }) => {
           commit("setCommunityPeople", data.data);
-          console.log(data);
+        
         });
     },
 
@@ -686,16 +683,16 @@ export default {
         .then(({ data }) => {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
-          console.log(data);
+        
         });
     },
 
     Block({ commit }, blockData) {
-      console.log("Block");
+    
       return axios
         .post(`profile/${blockData.path}`, blockData.formData)
         .then(({ data }) => {
-          console.log(data);
+       
           return data;
         });
     },
@@ -707,7 +704,7 @@ export default {
 
 
     async editPostUserIntro(context, payload) {
-      //console.log(payload);
+   
       //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
       //const url = state.url_update_user_infos;
       context.commit("editPostUserIntro", {
@@ -735,14 +732,11 @@ export default {
         )
 
         .then(response => {
-          console.log("user intro edited successssssssssss ++++++++++");
-          console.log("edit user intro test1 fuckk blec response");
-          console.log(response);
+         
           context.commit("editPostUserIntro", response.data);
         })
         .catch(error => {
-          console.log("erreur liée au navigateur ou au serveur +++");
-          console.log(error);
+         
         });
     },
 
@@ -772,12 +766,8 @@ export default {
           commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
-          console.log("Load User Intro Echec");
-          if (error instanceof TypeError) {
-            console.log(error.message);
-          } else {
-            console.log(error);
-          }
+        
+         
         });
       return response_;
     },
@@ -788,16 +778,14 @@ export default {
       let response_ = null;
       await axios.get('userIntro/biography')
         .then(({ data }) => {
-          console.log(data, "load user biography response (1) +++++++");
+         
 
           return data;
         })
         .then(({ data }) => {
-          console.log(data,
-            "load user biography response (2) successsss +++"
-          );
+         
           if (!data) {
-            console.log("Error from the server+++++++");
+           
             throw new Error("Error of load Biography+++++");
           }
           context.commit("updateUserBiography", {
@@ -814,7 +802,7 @@ export default {
         })
 
         .catch(error => {
-          console.log(error, "error from browser or server error(1) +++++++");
+         
           throw error;
         });
       return response_;
@@ -824,28 +812,26 @@ export default {
 
 
     async updateUserBiography(context, payload) {
-      console.log(payload, "edit user biography start +++++");
+    
       let response_ = null;
       await axios.post("userIntro/biography?" + "biography=" + payload.description + "&value=" + payload.info_access)
 
         .then(response => {
-          console.log("edit user biography response successsss +++", response);
+         
 
           context.commit("updateUserBiography", response.data.data);
-          console.log(response);
+      
           response_ = response;
         })
         .catch(error => {
-          console.log(
-            { erroe: error }
-          );
+         
           throw error;
         });
       return response_;
     },
 
     async loadUserProfileAbout({ commit }, payload) {
-      console.log(payload, "load user Profile About start +++++");
+    
 
       let response_ = null;
       await axios.get("userIntro", {
@@ -856,35 +842,31 @@ export default {
         }
       })
         .then(response => {
-          console.log("load user profile about response (1) +++++++", response);
+      
           if (response.status !== 200 && response.status !== 201) {
-            console.log("error from the server ++++");
+          
             throw "Error from the Server";
           }
           return response;
         })
         .then(response => {
-          console.log(
-            "load user profile about response (2) successsss +++",
-            response
-          );
+         
           if (!response) {
-            console.log("Error from the server+++++++");
+       
             throw new Error("Error of load profile about ++++++++");
           }
           commit("updateUserProfileAbout", response.data.data);
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error(1)", error);
+         
           throw error;
         });
       return response_;
     },
 
     async loadUserBasicInfosBirthDate(context, payload) {
-      console.log(payload);
-      console.log("load user birth date start +++++");
+      
 
       let response_ = null;
       await axios.get("userIntro/dob?", {
@@ -895,19 +877,17 @@ export default {
         }
       })
         .then(response => {
-          console.log("load user birthDate response (1) +++++++");
-          console.log(response);
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error Form The Server ");
+          
             throw "Error from the Server";
           }
           return response;
         })
         .then(response => {
-          console.log("load user birthDate response (2) successsss +++");
-          console.log(response);
+         
           if (!response) {
-            console.log("Error from the server+++++++");
+           
             throw new Error("Error of load Biography+++++");
           }
           context.commit("updateUserBirthDate", {
@@ -919,8 +899,7 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error(1)");
-          console.log({ error: error });
+         
           throw error;
         });
       return response_;
@@ -940,18 +919,17 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user birthDate response (1) +++++++");
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error from the server");
+          
             throw "Error Form The Server";
           }
-          console.log(response);
+        
           return response;
         })
 
         .catch(error => {
-          console.log("error from Server or browser");
-          console.log(error);
+      
           throw error;
         });
       return response_;
@@ -959,14 +937,9 @@ export default {
 
 
     async updateUserBasicInfosGender(context, payload) {
-      console.log(payload, "edit user gender start +++++");
+      
       const gender = payload.gender === "F" ? "female" : "male";
-      console.log(
-
-        "userIntro/gender" +
-        "?gender=" +
-        gender
-      );
+      
       let response_ = null;
       await axios.post(
 
@@ -982,31 +955,31 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user gender response (1) +++++++", response);
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
+           
             throw "Error From The Server";
           }
           return response;
         })
         .then(response => {
-          console.log("edit user gender response successsss +++", response);
+         
           if (!response) {
-            console.log("Erreur liée au serveur+++++++");
+         
             throw new Error("Erreur d edition du BirthDate+++++");
           }
 
           response_ = response;
         })
         .catch(error => {
-          console.log("erreur liée au serveur ou au navigateur", error);
+         
           throw error;
         });
       return response_;
     },
 
     async updateUserBasicInfosMobilePhones(context, payload) {
-      console.log(payload, "edit user mobile Phones start +++++");
+      
       const lastPhoneNumber =
         payload.mobilePhones;
       let response_ = null;
@@ -1020,35 +993,32 @@ export default {
           },
 
         }).then(response => {
-          console.log("edit user mobile phones response (1) +++++++", response);
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
+         
             throw "Error From The Server";
           }
           return response;
         })
           .then(response => {
-            console.log(
-              "edit user mobile phones response successsss (2) +++",
-              response
-            );
+           
 
             if (!response) {
-              console.log("Error From The Server +++++++");
+             
               throw new Error("Error To Add MobilesPhones+++++");
             }
 
             response_ = response;
           })
           .catch(error => {
-            console.log("Error From The Server or the Browser", error);
+     
             throw error;
           });
       return response_;
     },
 
     async updateUserBasicInfosCurrentCity(context, payload) {
-      console.log(payload, "edit user currentcity start +++++");
+     
       let response_ = null;
       await axios.patch(
 
@@ -1056,36 +1026,26 @@ export default {
         
       )
         .then(response => {
-          console.log("edit user current city response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            // throw "Error From The Server";
-          }
+         
+         
           return response;
         })
         .then(response => {
-          console.log(
-            "edit user current city response successsss (2) +++",
-            response
-          );
-          if (!response) {
-            console.log("Error From The Server +++++++");
-            // throw new Error("Error From Add New Current City+++++");
-          }
+          
+        
           context.commit("storeCurrentCity", {
             currentCity: payload.currentCity
           });
           response_ = response;
         })
         .catch(error => {
-          console.log("Error From The Server or The Browser", error);
-          // throw error;
+        
         });
       return response_;
     },
     async updateUserBasicInfosHomeTown(context, payload) {
 
-      console.log(payload);
+     
 
       let response_ = null;
       await axios.post("userIntro/addHomeTown" + "?home_town=" + payload.homeTown,
@@ -1101,27 +1061,21 @@ export default {
           return response;
         })
         .then(response => {
-          console.log(
-            "edit user homeTown response successsss response (1) +++",
-            response
-          );
-          if (!response) {
-            console.log("Error From the server +++++++");
-            throw new Error("Error From update or add new homeTown+++++");
-          }
+         
+       
           context.commit("storeHomeTown", {
             homeTown: payload.homeTown
           });
           response_ = response;
         })
         .catch(error => {
-          console.log({ error: error });
+         
         });
       return response_;
     },
 
     async updateUserBasicInfosWebsites(context, payload) {
-      console.log(payload, "edit user website start +++++");
+      
 
       let response_ = null;
       let url = "/userIntro/storeWebLink";
@@ -1129,44 +1083,37 @@ export default {
       formData.append('webUrl', payload.websites)
       await axios.post(url, formData)
         .then(response => {
-          console.log("edit user websites response (1) +++++++", response);
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
+           
             throw "Error From The Server";
           }
           return response;
         })
         .then(response => {
-          console.log(
-            "edit user websites response successsss response (1) +++",
-            response
-          );
+        
           if (!response) {
-            console.log("Error From The Server +++++++");
+         
             throw new Error("Error From Add Website+++++");
           }
 
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error (1)", error);
-          console.log({ error: error });
+         
           throw error;
         });
       return response_;
     },
 
     async deleteUserBasicInfosWebsites(context, payload) {
-      console.log(payload, "edit user website start +++++");
+     
 
       let response_ = null;
       await axios.delete("/userIntro/deleteWebLink/" + payload.id)
         .then(response => {
-          console.log("edit user websites response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
+        
+         
           return response;
         })
         .then(response => {
@@ -1175,14 +1122,14 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log({ error: error });
+         
 
         });
       return response_;
     },
 
     async updateUserBasicInfosEWebsites(context, payload) {
-      console.log(payload, "edit user website start +++++");
+      
 
       let response_ = null;
       let url = "/userIntro/updateWebLink/" + payload.id
@@ -1190,35 +1137,22 @@ export default {
       formData.append('webUrl', payload.websites);
       await axios.post(url, formData)
         .then(response => {
-          console.log("edit user websites response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
+         
+          
           return response;
         })
         .then(response => {
-          console.log(
-            "edit user websites response successsss response (1) +++",
-            response
-          );
-          if (!response) {
-            console.log("Error From The Server +++++++");
-            throw new Error("Error From Add Website+++++");
-          }
-
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error (1)", error);
-          console.log({ error: error });
+          
           throw error;
         });
       return response_;
     },
 
     async updateUserBasicInfosSocialLinks(context, payload) {
-      console.log(payload, "edit user socialLinks start +++++");
+      
 
       let response_ = null;
       await axios(
@@ -1238,19 +1172,12 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user socialLinks response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
+         
+         
           return response;
         })
         .then(response => {
-          console.log("edit user socialLinks response successsss +++", response);
-          if (!response) {
-            console.log("Error From The Server+++++++");
-            throw new Error("Error to add socialLinks+++++");
-          }
+         
           context.commit("storeSocialLinks", {
             socialLinks: payload.socialLinks
           });
@@ -1258,14 +1185,13 @@ export default {
         })
         .catch(err => {
 
-          console.log({ err: err });
-          console.log("error from the server or the browser", err);
+        
           throw err;
         });
       return response_;
     },
     async updateUserWorkPlaces(context, payload) {
-      console.log(payload, "save/edit/delete user workplace start +++++");
+      
       let url = null;
       let config = {};
       if (payload.method === "POST") {
@@ -1319,15 +1245,12 @@ export default {
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log("save/edit/delete user workPlace response (1) +++++++", response);
+         
           return response;
         })
         .then(response => {
-          console.log("save/edit/delete user workPlace response successsss +++", response);
-          if (response.errors) {
-            console.log("Error from the server +++++++");
-            throw new Error("Error from save/edit/delete workplace+++++");
-          };
+        
+         
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method
@@ -1335,19 +1258,18 @@ export default {
           response_ = response;
         })
         .catch(err => {
-          console.group({ err: err });
-          console.log("error from the server or the browser", err);
+         
           throw err;
         });
       return response_;
     },
 
     async updateUserEducation(context, payload) {
-      console.log(payload, "save/edit/delete user education start +++++");
+     
       let url = "",
         config = {};
       if (payload.method.toLowerCase() === "post") {
-        console.log("Method: " + payload.method.toLowerCase());
+      
         url = "userIntro/addSchool";
         config = {
           method: "POST",
@@ -1372,7 +1294,7 @@ export default {
         };
       } else if (payload.method.toLowerCase() === "put") {
         const workplace = payload.education === true ? 1 : 0;
-        console.log("Method: " + payload.method.toLowerCase());
+        
         url = "userIntro/updateSchool/" + payload.education.id;
         config = {
           method: "POST",
@@ -1397,25 +1319,13 @@ export default {
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log(
-            "save/edit/delete user education response (1) +++++++",
-            response
-          );
-          if (response.status !== 200 || response.status !== 201) {
-            console.log("Error From The server +++++++");
-            
-          }
+         
+         
           return response;
         })
         .then(response => {
-          console.log(
-            "save/edit/delete user education response successsss response (2) +++",
-            response
-          );
-          if (response.errors) {
-            console.log("Error From Server +++++++");
-            
-          }
+        
+       
           context.commit("storeEducation", {
             education: payload.education,
             method: payload.method
@@ -1423,15 +1333,14 @@ export default {
           response_ = response;
         })
         .catch(err => {
-          console.log({ err: err });
-          console.log("error From The Server or a Browser", err);
+        
           throw err;
         });
       return response_;
     },
 
     async updateUserProfession(context, payload) {
-      console.log(payload, "edit user profession start +++++");
+      
 
       let response_ = null;
       await axios.post("userIntro/updateWorki",
@@ -1448,18 +1357,16 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user workPlace response (1) +++++++", response);
-          console.log();
           if (response.status !== 201 || response.status !== 200) {
-            console.log("Erreur liée au serveur+++++++");
+           
             throw new Error("Erreur d 'ajout de workPlace+++++");
           }
           return response;
         })
         .then(response => {
-          console.log("edit user workPlace response successsss +++", response);
+         
           if (response.errors) {
-            console.log("Erreur liée au serveur+++++++");
+         
             throw new Error("Erreur d 'ajout de workPlace+++++");
           }
           context.commit("storeProfession", {
@@ -1468,7 +1375,6 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log("erreur liée au serveur ou au navigateur", error);
           throw error;
         });
       return response_;
@@ -1476,7 +1382,7 @@ export default {
     setbdetails({ commit }) {
       return axios.get("/business/details", {}).then(function ({ data }) {
         commit("set_details", data.data);
-        console.log(data);
+     
       });
     },
     getblockusers( {commit}, path ){
@@ -1484,7 +1390,7 @@ export default {
       .get(`profile/${path}`)
       .then(({ data }) => {
           commit("setblockusers", data.data);
-        console.log(data);
+       
       })
     },
     getblockbusiness( {commit}, path ){
@@ -1492,7 +1398,7 @@ export default {
       .get(`profile/${path}`)
       .then(({ data }) => {
           commit("setblockbusiness", data.data);
-        console.log(data);
+      
       })
     },
     getblocknetwork( {commit}, path ){
@@ -1500,7 +1406,7 @@ export default {
       .get(`profile/${path}`)
       .then(({ data }) => {
           commit("setblocknetwork", data.data);
-        console.log(data);
+       
       })
     },
 

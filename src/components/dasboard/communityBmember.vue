@@ -1,117 +1,29 @@
 <template>
-  <div>
-    <div class="s-ccard">
-      <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
-          <div class="people-style border shadow">
-            <b-row class="mb-1">
-              <b-col md="3" cols="4" sm="4" class="my-auto">
-                <b-avatar
-                  class="p-avater"
-                  variant="light"
-                  :src="item.profile_picture"
-                ></b-avatar>
-              </b-col>
+  <div class="h-100">
+    
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
+    
+          <Person v-for="item in users" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+       
+     <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
+   </VuePerfectScrollbar>
+   
 
-              <b-col md="8" cols="8" sm="8">
-                <div>
-                  <b-row class="shift">
-                    <b-col md="12" lg="6" xl="6">
-                      <div class="e-name">
-                        <b-row>
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-lg-2"
-                          >
-                            <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <router-link :to="'profile/' + item.slug">
-                                <b> {{ item.name }} </b>
-                              </router-link>
-                            </div>
-                          </b-col>
-
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
-                          >
-                            <h6 class="follower m-15">
-                              {{ count(item.followers) }}
-                              {{ $t("dashboard.Community") }}
-                            </h6>
-                          </b-col>
-                        </b-row>
-                      </div>
-                    </b-col>
-
-                    <b-col lg="6" xl="6" cols="12" md="12">
-                      <div>
-                        <b-row class="mt-lg-0">
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                          >
-                            <BtnCtaMessage :element="item" type="people" />
-                          </b-col>
-
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                          >
-                            <b-button
-                              block
-                              size="sm"
-                              class="b-background flexx pobtn shadow"
-                              :class="item.is_follow !== 0 && 'u-btn'"
-                              variant="primary"
-                              :id="'followbtn' + item.id"
-                              @click="handleFollow(item)"
-                            >
-                              <i
-                                class="fas fa-lg btn-icon"
-                                :class="
-                                  item.is_follow !== 0
-                                    ? 'fa-user-minus'
-                                    : 'fa-user-plus'
-                                "
-                              ></i>
-
-                              <span class="btn-com">{{
-                                $t("dashboard.Community")
-                              }}</span>
-                            </b-button>
-                          </b-col>
-                        </b-row>
-                      </div>
-                    </b-col>
-                  </b-row>
-                </div>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Person from "@/components/Person";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["type"],
+  
+   components: {
+    Person, VuePerfectScrollbar
+  },
 
   data() {
     return {
@@ -144,10 +56,10 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
-          console.log("hey yeah");
+          
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -162,8 +74,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
-      document.getElementById("followbtn" + user.id).disabled = true;
+        document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -174,7 +85,7 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
+         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
@@ -182,7 +93,7 @@ export default {
         })
 
         .catch((err) => {
-          console.log({ err: err });
+          
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -217,7 +128,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },
@@ -258,10 +169,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+ 
 }
 
 @media only screen and (min-width: 768px) {
@@ -270,10 +178,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 29px;
-    padding-right: 29px;
-  }
+ 
 }
 
 .btn {

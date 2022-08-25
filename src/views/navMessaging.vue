@@ -2229,7 +2229,7 @@ export default {
       }
     },
     getList(keyword) {
-      console.log(keyword);
+     
       if (this.type == "user") {
         this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {

@@ -464,7 +464,7 @@ export default {
 
             commit("setLoader", true);
 
-            let keyword = data.keyword ? '/' + data.keyword : ''
+            let keyword = data ? '/' + data.keyword : ''
 
             await axios.get(`/business-community/business-follower/${state.currentBizId + keyword}`)
                 .then((res) => {

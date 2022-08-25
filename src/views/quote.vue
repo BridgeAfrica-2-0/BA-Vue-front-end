@@ -309,6 +309,7 @@
                   <div class="md-field md-theme-default md-select">
                     <country-select
                       v-model="form.country"
+                      :country="form.country"
                       topCountry="US"
                       class="md-input form-control"
                     />
@@ -317,6 +318,7 @@
                   <div class="md-field md-theme-default md-select">
                     <region-select
                       v-model="form.region"
+                      :country="form.country" :region="form.region"
                       class="md-input form-control"
                     />
                   </div>
@@ -352,7 +354,7 @@
 
                 <b-card class="mt-3 p-1 text-center">
                   <b-button variant="primary" type="submit" class="mb-3" block>
-                    {{ $t("general.Submit_Form") }}
+                    {{ $t("general.Submit_Form") }} <b-spinner v-if="sending" variant="light" small>  </b-spinner>
                   </b-button>
                 </b-card>
               </div>
@@ -526,6 +528,7 @@ export default {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
+        
         return {
           "md-invalid": field.$invalid && field.$dirty,
         };
@@ -534,8 +537,14 @@ export default {
 
     validateUser() {
       this.$v.$touch();
+       
       if (!this.$v.$invalid) {
         this.saveForm();
+      }else{
+        this.flashMessage.show({
+            status: "error",
+            title: "Fill In All Required Form",
+          });
       }
     },
   },

@@ -176,12 +176,12 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -192,12 +192,12 @@ export default {
     async infiniteHandler($state) {
       let url = "business/around?page=" + this.page;
 
-      console.log(url);
+     
 
       await axios
         .get(url)
         .then(({ data }) => {
-          console.log(data.data);
+       
 
           if (data.data.length) {
             this.business_around.push(...data.data);
@@ -209,7 +209,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+       
         });
     },
   },

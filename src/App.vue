@@ -300,9 +300,9 @@ width: 20px !important;
 }
 
 @media only screen and (max-width: 768px) {
-  .nav-link {
-    font-size: 9px;
-  }
+  // .nav-link {
+  //   font-size: 9px;
+  // }
 }
 
 .no-js #loader { display: none;  }

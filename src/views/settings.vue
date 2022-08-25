@@ -852,7 +852,7 @@ watch: {
   },
   created() {
     if ("account" === this.$route.query.tab) {
-      this.activeTab = 2;
+      this.activeTab = 1;
     }
   }
 

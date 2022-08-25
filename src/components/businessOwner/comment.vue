@@ -17,9 +17,9 @@
           </b-dropdown>
         </span>
 
-        <p class="username mb-0" v-if="!proccesEdit">
+        <p class=" mb-0" v-if="!proccesEdit">
           <router-link
-            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+            :to="{ name: 'Follower', params: { id: comment.user_id } }" class="card-title"
           >
             {{ comment.name }}
           </router-link>

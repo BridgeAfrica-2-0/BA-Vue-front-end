@@ -1,7 +1,7 @@
 <template>
   <div>
   
-   <b-card  style=" max-height: 900px;overflow: auto;padding-bottom: 50px;"  >
+   <b-card  style=" height: 900px;overflow: hidden;padding-bottom: 50px;"  >
       <b-tabs class="pr-2 pl-2" content-class=" p-1" Fill justified  active-nav-item-class="active-tab-item"
         active-tab-class="active-tab">   
        

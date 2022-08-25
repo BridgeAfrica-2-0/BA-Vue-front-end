@@ -1,7 +1,7 @@
 <template>
 
-    <div ref="wrapper">   
-        <div class="container wahala" >
+     <div ref="wrapper">
+       <div class="container wahala" >
             <b-row v-if="loading">
                 <b-col cols="12" md="12" lg="12" xl="12">
                     <div class="mbl-wrap">
@@ -1023,7 +1023,7 @@ export default {
 <style>
 .mbl-wrap {
    height: 100%;
-   overflow: auto;
+   overflow: hidden;
  }
 
 @media only screen and (max-width: 768px) {

@@ -1,9 +1,7 @@
 <template>
-  <div ref="about">
-   
-
-
-      <b-form @submit.prevent="validate('editAddress')">
+  <div ref="wrapper" class="main-sub-con" > 
+     <VuePerfectScrollbar class="scrool-area"  :settings="settings" >
+     <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
           <label for="username">{{ $t("businessowner.Business_Name") }}:</label
           ><br />
@@ -319,27 +317,6 @@
           ></textarea>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="b-bottom">
           <b-container>
             <b-form-group
@@ -404,7 +381,7 @@
           {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
-    
+     </VuePerfectScrollbar>
   </div>
 </template>
 
@@ -421,13 +398,13 @@ import { required, email, minLength } from "vuelidate/lib/validators";
 import Multiselect from "vue-multiselect";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 import { isGuestUser } from '@/helpers';
-
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
     AutocompleteLocation,
-    
+    VuePerfectScrollbar
   },
   data() {
     return {
@@ -1282,6 +1259,9 @@ export default {
 </script>
 
 <style scoped>
+.scrool-area{
+  height: inherit;
+}
 .map {
   border: 0;
   width: 50%;
@@ -1303,6 +1283,16 @@ p {
   .primary {
     margin-right: 6px;
   }
+
+  .main-sub-con{
+
+  height: 800px;
+  
+  overflow: hidden;
+
+}
+
+
 }
 @media (min-width: 762px) {
   .primary {

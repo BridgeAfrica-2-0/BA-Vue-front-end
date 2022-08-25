@@ -52,7 +52,7 @@
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             <router-link to="/messaging">
            <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link>
-            <span class="badge  bg-primary white float-right mt-1">
+            <span class="badge  float-right mt-1">
                {{ business.message }}
             </span>
           </p>
@@ -65,7 +65,7 @@
           <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
              </router-link>   
 
-            <span class="badge  bg-primary white float-right mt-1">
+            <span class="badge    float-right mt-1">
              {{ business.notification }}
             </span>
           </p>

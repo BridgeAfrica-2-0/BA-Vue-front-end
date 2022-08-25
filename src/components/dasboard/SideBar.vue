@@ -7,8 +7,8 @@
     <div
       class="text-left border-bottom"
       style="
-        background-size: cover;
-        background: url('https://demos.wrappixel.com/premium-admin-templates/bootstrap/materialpro-bootstrap/package/assets/images/background/user-info.jpg');
+        background-size: cover !important;
+        background: url('assets/images/tissu-choisit.jpg');
       "
     >
       

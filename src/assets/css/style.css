@@ -577,7 +577,7 @@ a:hover {color: #333; text-decoration: none;}
 
 .mediadesc {position: absolute;top: 0;right: 3%;}
 .centmedia{position: absolute;text-align: center; top:0%; height: 100%;width: 100%;}
-.botmedia{position: absolute;text-align: center;top:0%; height: 100%;width: 100%;}
+.botmedia{position: absolute;text-align: center;top:0%; height: 100%;width: 100%; display:flex; }
 .botmediades{position: absolute;text-align: center;bottom: -5%;width: 100%;}
 .centmedialink{position: absolute; top:50%; width: 100%;}
 .createdesc.centmedia:hover {background: #00000078;	color: #ffff;}

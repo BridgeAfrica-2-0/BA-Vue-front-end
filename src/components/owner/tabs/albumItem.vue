@@ -1,10 +1,10 @@
 <template>
-  <div class ="createp img-gall predit2"
+  <div class ="createp img-gall predit2 "
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-  >
+  > 
     
-      <img :src="cover(album.cover)"  alt="" class="card-img">
+      <img :src="cover(album.cover)"  alt="" class="card-img h-100">
       
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">

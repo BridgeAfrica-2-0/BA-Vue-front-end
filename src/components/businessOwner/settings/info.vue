@@ -177,24 +177,6 @@
           </b-container>
         </div>
 
-        <!-- <div class="b-bottom">
-          <b-container>
-            <b-form-group
-              label-cols-lg="3"
-              label="Language"
-              label-size="md"
-              label-class="font-weight-bold pt-0 username"
-              class="mb-0"
-            >
-              <b-form-select id="timezone" v-model="time_zone" name="language">
-                <option value="" selected="" disabled="true"> Select Language </option>
-                <option>English</option>
-                <option>Hindi</option>
-              </b-form-select>
-            </b-form-group>
-          </b-container>
-        </div> -->
-
         <div class="b-bottom">
           <b-container>
             <b-form-group
@@ -539,7 +521,7 @@
                   v-model="open"
                   :disabled="false"
                 ></b-form-radio-group>
-                <br />
+                <br /> 
                 <b-container v-if="displayHour1">
                   <b-row v-for="(day, index) in dayOfWorks" :key="index">
                     <b-col cols="6"

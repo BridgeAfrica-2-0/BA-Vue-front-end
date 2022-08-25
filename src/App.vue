@@ -141,7 +141,15 @@ export default {
 }
 
 
-.dropdown-menu li, .dropdown-menu li a {
+.sharebtn .dropdown-menu li, .dropdown-menu li a {
+    white-space: nowrap !important;
+    float: left;
+    
+    height: auto;
+    word-wrap: break-word;
+}
+
+.searchpage .dropdown-menu li, .dropdown-menu li a {
     white-space: normal;
     float: left;
     

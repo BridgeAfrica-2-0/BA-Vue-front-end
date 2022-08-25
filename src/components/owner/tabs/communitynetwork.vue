@@ -314,7 +314,7 @@ export default {
           }
 
       axios
-        .get(url + this.page + '?keyword=' + this.searchh + '&id=' + this.foll_id)
+        .get(url + this.page + '?keyword=' + this.searchh + '&slug=' + this.foll_id)
         .then(({ data }) => {
           console.log('lading network after response');
           console.log(data);

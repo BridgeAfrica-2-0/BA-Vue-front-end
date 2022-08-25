@@ -293,7 +293,7 @@ export default {
     },
 
     getImages({ commit}, id) {
-      return axios.get("guest/profile/user/media?id="+id).then(({ data }) => {
+      return axios.get("guest/profile/user/media?slug="+id).then(({ data }) => {
         commit("setImagess", data.data);
         console.log(data);
       });
@@ -325,7 +325,7 @@ export default {
     Tcommunity({ commit }, id) {
      
       return axios
-        .get('guest/profile/total/community?id=' + id)
+        .get('guest/profile/total/community?slug=' + id)
         .then(({ data }) => {
           commit('setTcommunity', data.data);
           console.log(data);
@@ -335,7 +335,7 @@ export default {
 
     NcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/network/follower?id=' + id)
+        .get('guest/profile/network/follower?slug=' + id)
         .then(({ data }) => {
           commit('setNcommunityFollower', data.data);
           console.log(data);
@@ -343,7 +343,7 @@ export default {
     },
     NcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/network/following?id=' + id)
+        .get('guest/profile/network/following?slug=' + id)
         .then(({ data }) => {
           commit('setNcommunityFollowing', data.data);
           console.log(data);
@@ -351,7 +351,7 @@ export default {
     },
     BcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/business/follower?id=' + id)
+        .get('guest/profile/business/follower?slug=' + id)
         .then(({ data }) => {
           commit('setBcommunityFollower', data.data);
           console.log(data);
@@ -359,7 +359,7 @@ export default {
     },
     BcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/business/following?id=' + id)
+        .get('guest/profile/business/following?slug=' + id)
         .then(({ data }) => {
           commit('setBcommunityFollowing', data.data);
           console.log(data);
@@ -368,7 +368,7 @@ export default {
 
     UcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/user/follower?id=' + id)
+        .get('guest/profile/user/follower?slug=' + id)
         .then(({ data }) => {
           commit('setUcommunityFollower', data.data);
           console.log(data);
@@ -376,7 +376,7 @@ export default {
     },
     UcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/user/following?id=' + id)
+        .get('guest/profile/user/following?slug=' + id)
         .then(({ data }) => {
           commit('setUcommunityFollowing', data.data);
           console.log(data);
@@ -388,7 +388,7 @@ export default {
     profileBusiness({ commit }, id) {
 
       return axios
-        .get('guest/profile/business/userBusiness?id=' + id)
+        .get('guest/profile/business/userBusiness?slug=' + id)
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
           console.log(data);
@@ -400,7 +400,7 @@ export default {
     profileNetwork({ commit }, id) {
 
       return axios
-        .get('guest/profile/network?id=' + id)
+        .get('guest/profile/network?slug=' + id)
         .then(({ data }) => {
           commit('setprofileNetwork', data.data);
           console.log(data);
@@ -421,7 +421,7 @@ export default {
 
 
     ownerPost({ commit }, id) {
-      return axios.get("guest/profile/post?id=" + id).then(({ data }) => {
+      return axios.get("guest/profile/post?slug=" + id).then(({ data }) => {
         commit("ownerPost", data.data);
         console.log(data);
       });
@@ -432,7 +432,7 @@ export default {
 
     profilecommunity({ commit }, id) {
       return axios
-        .get("guest/profile/community?id=" + id)
+        .get("guest/profile/community?slug=" + id)
         .then(({ data }) => {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
@@ -450,20 +450,19 @@ export default {
 
     async loadUserPostIntro({ commit, rootGetters }, id) {
 
-
+    
       let auth=rootGetters['auth/isLogged'];
-      let url='userIntro?id='+id;
+      let url='userIntro?slug='+id;
 
       if(!auth){    
-        url = 'guest/profile/userIntro?id='+id;  
+        url = 'guest/profile/userIntro?slug='+id;  
       }
     
       let response_ = null;
       await axios.get(url)
 
         .then(response => {
-          console.log("load user Intro Post test1 successsss +++");
-          console.log(response);
+
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
@@ -473,8 +472,6 @@ export default {
         })
         .catch(error => {
 
-          console.log({ error: error });
-          console.log("Load User Intro Echec");
           if (error instanceof TypeError) {
             console.log(error.message);
           } else {
@@ -489,10 +486,8 @@ export default {
    
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro/biography?id=' + id)
+      await axios.get('guest/profile/userIntro/biography?slug=' + id)
         .then(({ data }) => {
-          console.log(data, "load user biography response (1) +++++++");
-
           return data;
         })
         .then(({ data }) => {
@@ -541,7 +536,7 @@ export default {
     async loadUserProfileAbout({ commit }, id) {
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro?id=' + id, {
+      await axios.get('guest/profile/userIntro?slug=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -577,7 +572,7 @@ export default {
       console.log("load user birth date start +++++");
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro/dob?id=' + id, {
+      await axios.get('guest/profile/userIntro/dob?slug=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",

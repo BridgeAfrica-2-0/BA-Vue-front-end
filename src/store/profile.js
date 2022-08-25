@@ -437,10 +437,10 @@ export default {
 
       let auth=rootGetters['auth/isLogged'];  
 
-      let url='profile/total/community?id='+id;
+      let url='profile/total/community?slug='+id;
 
       if(!auth){    
-        url = 'guest/profile/total/community?id='+id;  
+        url = 'guest/profile/total/community?slug='+id;  
       }
 
 

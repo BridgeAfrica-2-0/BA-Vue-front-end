@@ -190,10 +190,9 @@ export default {
           }
 
       axios
-        .get(url + this.page + "?id=" + this.foll_id)
+        .get(url + this.page + "?slug=" + this.foll_id)
         .then(({ data }) => {
-          console.log("lading network after response");
-          console.log(data);
+        
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;

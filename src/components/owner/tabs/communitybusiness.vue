@@ -335,7 +335,7 @@ export default {
           } 
 
       axios.get(
-          url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id
+          url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id
         )
         .then(({ data }) => {
           console.log(data);

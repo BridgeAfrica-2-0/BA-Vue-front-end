@@ -441,8 +441,9 @@ export default {
   }
 
   .drag-textt {
+    margin: auto;
     height: 290px !important;
-    padding-top: 95px;
+    /* padding-top: 95px; */
   }
 
   .f-20 {
@@ -530,7 +531,7 @@ export default {
 
   .drag-textt {
     height: 290px !important;
-    padding-top: 95px;
+    /* padding-top: 95px; */
   }
 
   .img-gall {
@@ -578,7 +579,7 @@ export default {
 
   .drag-textt {
     height: 190px !important;
-    padding-top: 55px;
+    /* padding-top: 55px; */
   }
 
   .img-gall {

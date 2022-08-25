@@ -24,7 +24,7 @@
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <router-link
-                            :to="'/profile/'+item.id"
+                            :to="'/profile/'+item.slug"
                             ><b>{{ item.name }} </b></router-link
                           >
                         </div>
@@ -170,7 +170,7 @@ export default {
             url='guest/'+url;
           }
       axios
-        .get(url + this.page + "?id=" + this.foll_id)
+        .get(url + this.page + "?slug=" + this.foll_id)
         .then(({ data }) => {
           if (this.type == "Follower") {
             if (data.data.user_followers.length) {

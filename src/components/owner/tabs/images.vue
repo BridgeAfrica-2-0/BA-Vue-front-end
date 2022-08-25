@@ -40,11 +40,11 @@
       <div class="row">
       <div
         
-        class="createp img-gall dasher"
+        class="createp img-gall dasher d-flex"
         v-if="isEditor ? (!canUpload ? true : false) : false"
         @click="$refs.movie.click()"
       >
-        <div class="">
+        <div class="m-auto">
           <input
             type="file"
             id="chosefile"
@@ -56,7 +56,7 @@
           <a>
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
-              <h3>{{ $t("profileowner.Add_Item") }}</h3>
+              <h3>{{ $t("profileowner.Add_Item") }}   </h3>
             </div>
           </a>
         </div>
@@ -525,7 +525,7 @@ export default {
 
 .botmediadess-position {
   text-align: center;
-  bottom: -45%;
+  margin: auto;
   width: 100%;
   font-size: 20px;
   position: relative;
@@ -686,7 +686,7 @@ export default {
     margin: 5px;
     float: left;
     /* width: 45.5%; */
-    height: 175px;
+    /* height: 175px; */
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -719,8 +719,8 @@ export default {
   color: #000;
   width: 120px;
   height: 120px;
-  position: absolute;
-  top: 25%;
-  left: 25%;
+  /* position: absolute; */
+  /* top: 25%;
+  left: 25%; */
 }
 </style>

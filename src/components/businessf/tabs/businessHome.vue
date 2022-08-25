@@ -10,7 +10,7 @@
         <HotBusiness  class="mb-md-3"  />
       </b-col>
 
-      <b-col md="12" lg="12" xl="7">
+      <b-col md="12" lg="12" xl="7" class="pt-0 mt-0">
         <Post />
       </b-col>
     </b-row>

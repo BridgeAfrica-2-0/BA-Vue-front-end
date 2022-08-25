@@ -211,7 +211,7 @@ export default {
       console.log(this.foll_id);
 
       axios
-        .get(url + this.page + "?id=" + this.foll_id)
+        .get(url + this.page + "?slug=" + this.foll_id)
         .then(({ data }) => {
           if (this.type == "Follower") {
             if (data.data.business_followers.length) {

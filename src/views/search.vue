@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden; color: black">
+  <div style="overflow-x: hidden; color: black" class="searchpage">
     <Nav
       :credentials.sync="searchParams"
       @updateSearchKeyword="updateSearchKeyword"

@@ -116,6 +116,7 @@ export default {
   data() {
     return {
       page: 1,
+      foll_id: "",
       users: [],
       infiniteId: +new Date(),
       options: {
@@ -128,6 +129,10 @@ export default {
         perMove: 1,
       },
     };
+  },
+  
+ mounted() {
+    this.foll_id = this.$route.params.id;
   },
 
   computed: {
@@ -144,7 +149,7 @@ export default {
 
   methods: {
     async handleFollow(user) {
-      console.log("yoo ma gee");
+     
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -207,7 +212,7 @@ export default {
       }
 
       axios
-        .get(url + this.page + "?keyword=" + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id)
         .then(({ data }) => {
           console.log(data);
           if (this.type == "Follower") {

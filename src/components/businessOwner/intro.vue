@@ -1,7 +1,7 @@
 <template>
-  <div> 
+  <div>   
     <b-card title="" header-tag="header" footer-tag="footer">
-      <div
+      <div 
         style="float:right"
         class="edit cursor-pointer"
         v-b-modal.bv-edit-about
@@ -37,16 +37,20 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.community }} {{ $t("businessowner.Community") }}
+         {{business_info.community}} {{ $t("businessowner.Community") }}
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
         <span v-if="business_intro.phone1 !='null' ">    {{ business_intro.phone1 }}  </span>
+        <span v-if="business_intro.phone2 !='null' ">  {{business_intro.phone2}}  </span>
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
         <span v-if="business_intro.email !='null'">      {{ business_intro.email }}  </span>
         </p>
+
+       
+
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="clock" class="primary icon-size"></b-icon>
           <b-link class="mr-2"> {{ $t("businessowner.Open_now") }}</b-link>
@@ -62,9 +66,9 @@
                       business_intro.business_open_hours[0].opening_time <
                         '12:00:00'
                   "
-                  >AM</span
+                  >H</span
                 >
-                <span v-else>PM</span> -
+                <span v-else>H</span> -
                 {{ business_intro.business_open_hours[0].closing_time }}
                 <span
                   v-if="
@@ -73,9 +77,9 @@
                       business_intro.business_open_hours[0].closing_time <
                         '12:00:00'
                   "
-                  >AM</span
+                  >H</span
                 >
-                <span v-else>PM</span>)
+                <span v-else>H</span>)
               </span>
             </template>
             <b-dropdown-item
@@ -91,18 +95,18 @@
                     open_hours.opening_time >= '00:00:00' &&
                       open_hours.opening_time < '12:00:00'
                   "
-                  >AM</span
+                  >H</span
                 >
-                <span v-else>PM</span>
+                <span v-else>H</span>
                 - {{ open_hours.closing_time }}
                 <span
                   v-if="
                     open_hours.closing_time >= '00:00:00' &&
                       open_hours.closing_time < '12:00:00'
                   "
-                  >AM</span
+                  >H</span
                 >
-                <span v-else>PM</span>)
+                <span v-else>H</span>)
               </span>
             </b-dropdown-item>
           </b-dropdown>
@@ -862,6 +866,10 @@ export default {
   },
 
   computed: {
+  
+   business_info() {
+      return this.$store.state.businessOwner.businessInfo;
+    },
 
      scategories() {
       return this.$store.state.auth.subcategories;

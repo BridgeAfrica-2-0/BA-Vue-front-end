@@ -675,14 +675,14 @@ selectedcategories: function() {
       formData.append("in_stock", Product.in_stock);
       formData.append("tax_amount", 200);  
       formData.append("kg", Product.kg);
-      formData.append("categories",  this.multiselecvalue.id);
-      formData.append("subcategories",this.filterselectvalue
+      formData.append("categoryId",  this.multiselecvalue.id);
+      formData.append("subCategoryId",this.filterselectvalue
         .map((el) => el.subcategory_id)
         .join());
 
 
      
-      formData.append("filters",  this.select_filterss.join());
+      formData.append("filterId",  this.select_filterss.join());
       formData.append("picture", this.pro_img);
 
       console.log(this.pro_img);

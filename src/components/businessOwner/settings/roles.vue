@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container> 
     <h5 class="a-text">{{ $t('businessowner.Assign_Role') }}</h5>
     <b-container class="b-bottom">
       <b-row>
@@ -95,8 +95,8 @@
                         font-scale="1"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('businessowner.Edit') }}</b-dropdown-item>
-                    
+                    <!-- <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('businessowner.Edit') }}</b-dropdown-item>
+                     -->
                      <b-dropdown-item href="#" @click="deleteEditor(editor,index)"> {{ $t('businessowner.Delete') }} </b-dropdown-item> 
                     <!-- <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('businessowner.Delete') }} </b-dropdown-item> -->
                   </b-dropdown>
@@ -187,6 +187,11 @@ export default {
     editors() {
       return this.$store.state.businessRole.editors;
     },
+
+    businessInfo() {
+      return this.$store.state.businessSettingInfo.businessInfo;
+    },
+
   },
 
   mounted() {
@@ -308,7 +313,7 @@ export default {
             if (confirm) {
                    
                 
-
+  
 
       this.$store
         .dispatch("businessRole/deleteEditor", {

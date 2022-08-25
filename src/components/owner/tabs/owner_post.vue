@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- DOM to Create Post By A UserOwner-->
+  <div> 
+    <!-- DOM to Create Post By A UserOwner-->  
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
         <b-col cols="2" md="1" class="m-md-0 p-0">
@@ -226,7 +226,7 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="light" :src="info.user.profile_picture"></b-avatar>
+              <b-avatar class="d-inline-block avat" variant="light" :src="profile.profile_picture"></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder">{{ info.user.name }}</h5>

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 pt-0 card-border my-3" style="position: relative">
+  <div class="p-3 pt-0 card-border  mt-0 mb-1" style="position: relative">
 
     
     <div class="mt-0">
@@ -199,7 +199,7 @@
         ></b-avatar>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative;">
+      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative; overflow:hidden">
         <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
@@ -564,7 +564,11 @@ export default {
   },
 };
 </script>
+
 <style>
+.comment {
+   overflow: hidden !important;
+}
 .card-border {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -683,6 +687,7 @@ export default {
 }
 .inline-comment {
   width: 95%;
+  overflow: hidden;
 }
 
 @media (min-width: 762px) {

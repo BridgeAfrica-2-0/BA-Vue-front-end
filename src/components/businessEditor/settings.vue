@@ -134,7 +134,7 @@ export default {
     currenttab: {
       immediate: true,
       handler(newVal, oldVal) {
-        console.log(newVal, oldVal);
+       
 
         if (newVal == 3) {
           this.selectedIdd = "8";

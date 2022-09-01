@@ -1,8 +1,6 @@
 <template>
   <div class="p-3 pt-0 card-border  mt-0 mb-1" style="position: relative">
-
-    
-    <div class="mt-0">
+     <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <!-- <b-avatar
@@ -30,13 +28,7 @@
 
         <div
           class="toright"
-          v-if="
-            'dashboard' !== $route.name
-              ? !isDisplayInSearch
-                ? (isYourOwnPost && canBeDelete)||from=='network'
-                : false
-              : false
-          "
+          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? (isYourOwnPost && canBeDelete)||this.$route.name=='networks': false: false"
         >
           <b-dropdown
             variant="link"
@@ -181,13 +173,7 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        !isDisplayInSearch
-          ? !isMemberNetworkFollower
-            ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) &&
-              canBeDelete
-            : false
-          : false
-      "
+        !isDisplayInSearch ? !isMemberNetworkFollower ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) && canBeDelete: false: false"
     >   
       <div class="m-md-0 p-md-0">
         <b-avatar
@@ -221,7 +207,7 @@
         />
       </div>
     </div>
-
+  
     <Comment 
       v-for="comment in comments"
       :key="comment.updated_at"
@@ -336,7 +322,7 @@ export default {
           ? { name: "BusinessOwner", params: { id: this.posterID } }
           : { name: "BusinessFollower", params: { id: this.posterID } };
       },
-
+ 
       network: () => {
         return "network" == (this.profile && this.profile.user_type) &&
           "business" == this.post.poster_type &&
@@ -519,7 +505,7 @@ export default {
       let data = { comment: this.comment };
 
       if (["networks", "NetworkEditors"].includes(this.$route.name))
-        data = Object.assign(data, { networkId: this.$route.params.id });
+        data = Object.assign(data, { networkSlug: this.$route.params.id });
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,

@@ -1,7 +1,7 @@
 <template>
   <div class="container" style="">  
     <div class="container">
-      <b-row>
+      <b-row>   
         <b-col md="4">
           <div class="b-bottom f-left">
             <b-form-checkbox
@@ -42,7 +42,7 @@
           Selected: <strong>{{ selected }}</strong
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
-        </div> -->
+        </div> -->  {{all}}
         <b-col cols="12" v-for="(notification, index) in all" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">

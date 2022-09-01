@@ -32,11 +32,11 @@
         >
           <b-skeleton-wrapper :loading="loading">
             <template #loading>
-              <b-card>
+              <!-- <b-card>
                 <b-skeleton width="85%"></b-skeleton>
                 <b-skeleton width="55%"></b-skeleton>
                 <b-skeleton width="70%"></b-skeleton>
-              </b-card>
+              </b-card> -->
             </template>
             <b-card class="mb-2">
               <b-card-text>
@@ -146,7 +146,12 @@ export default {
       console.log(this.filterData);
       this.$nextTick(() => {
         this.currentPage = 1;
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+         this.page = 0;
+        this.filters=[]
+
+        this.$nextTick(() => {
+           this.$refs.infiniteLoading.attemptLoad();
+        });
       });
     },
 
@@ -202,24 +207,28 @@ export default {
         data: info
       })
       .then(response => {
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        this.feedbacks=[];
+          this.currentPage = 1; 
+
+        this.$nextTick(() => { 
+          this.$refs.infiniteLoading.attemptLoad();
         });
+
         this.loading = false;
-        console.log(response);
-        console.log('ohh yeah');
+      
         this.flashMessage.show({
           status: "success",
           message: "Feedback Deleted"
         });
       })
       .catch( err => {
+
+        this.currentPage = 0;
+        this.filters=[]
+
         this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+           this.$refs.infiniteLoading.attemptLoad();
         });
-        console.log({ err: err });
         this.loading = false;
         this.flashMessage.show({
           status: "error",

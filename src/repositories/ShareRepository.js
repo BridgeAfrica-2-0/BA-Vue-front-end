@@ -169,9 +169,9 @@ class Repository {
 
   async WhoIsConnect({ networkId, type }) {
     try {
-      if (localStorage.getItem('isGuestUser')) return { success: true, data: [] };
+     // if (localStorage.getItem('isGuestUser')) return { success: true, data: [] };
 
-      const response = await axios.get(type ? `interface?networkId=${networkId}` : `interface`)
+      const response = await axios.get(type ? `interface?networkSlug=${networkId}` : `interface`)
       return {
         success: true,
         data: response.data.data
@@ -203,7 +203,7 @@ class Repository {
 
   async postLike(data) {
     try {
-      const response = await axios.post(`post/${data.post}/like`, { networkId: data.network })
+      const response = await axios.post(`post/${data.post}/like`, { networkSlug: data.network })
       return {
         success: true,
       }

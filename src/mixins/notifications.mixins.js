@@ -26,7 +26,7 @@ export const Pusher = {
   },
 
   created() {
-    console.log("call echo pusher")
+   
     this.pusher()
   }
 }
@@ -70,10 +70,10 @@ export const Redis = {
     listenBusinessEvent() {
 
       const $event = `business-channel.${this.profile.id}`
-      console.log($event)
+     
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
-          console.log(payload)
+       
           this.newNotificationBusiness({ init: false, data: payload.data })
         })
     },
@@ -87,12 +87,11 @@ textnotix() {
 
   const $event = `user.13`;
 
-  console.log($event)
+  
 
   window.Redis.private($event)
     .listen(".TestUserNotification", payload => {
-      console.log(payload);
-      console.log('yoo bababananaanna');
+    
      // const type  = notification(payload.notification)
       
       // this.$notify({
@@ -110,11 +109,11 @@ textnotix() {
 
       const $event = `user.${this.profile.id}`;
 
-      console.log($event)
+     
 
       window.Redis.private($event)
         .listen(".UserNotification", payload => {
-          console.log(payload);
+         
           const type  = notification(payload.notification)
           
           this.$notify({
@@ -129,7 +128,7 @@ textnotix() {
 
       const $event = `network-channel.${this.profile.id}`;
 
-      console.log($event)
+    
 
       window.Redis.private($event)
         .listen(".NetworkNotification", payload => {
@@ -149,8 +148,8 @@ textnotix() {
 
 
   created() {
-    console.log('in notification mixins, check it')
-   // initRedis(this.$store.state.auth.user.accessToken)
+   
+    initRedis(this.$store.state.auth.user.accessToken)
 
      this.strategy = {
       user: () => this.listenProfileEvent(),

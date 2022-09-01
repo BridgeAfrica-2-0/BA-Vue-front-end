@@ -4,10 +4,10 @@ setTimeout(function () {
 
     };
 
-    var lastScrollTop = 70;
+    var lastScrollTop = 100;
     
     function scrollFunction() {
-        if (document.documentElement.scrollTop > 60) {
+        if (document.documentElement.scrollTop > 90) {
             if (lastScrollTop > document.documentElement.scrollTop) {
                
                   
@@ -16,7 +16,7 @@ setTimeout(function () {
 
 
             }
-          } else if (document.documentElement.scrollTop < 60) {
+          } else if (document.documentElement.scrollTop < 90) {
              
             document.getElementById("dashsidebar").classList.remove("dash-fixed-top");
           }

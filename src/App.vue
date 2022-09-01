@@ -200,12 +200,13 @@ width: 20px !important;
 @import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
 
 #app {
-  font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: poppins, Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #455a64;
   margin-left: 5px;
 }
+
 
 #flashmessage {
   position: absolute;
@@ -340,5 +341,56 @@ width: 20px !important;
 }
 }
 
+</style>
+
+<style>
+
+ 
+.title-linkClass {
+  color: #455a64;
+}
+
+.title-linkClass :hover {
+  color: #455a64;
+  background-color: white !important;
+}
+
+.active-tab-item :hover {
+  color: red !important;
+}
+
+
+
+ .nav-tabs > li.active    {
+   background-color: #272727 !important;
+   color: red;
+  
+}
+
+
+.nav-tabs .nav-link.active-tab-item {
+  background-color: white !important;
+
+  border-left: none;
+  border-right: none;
+  border-top: none;
+
+  font-family: poppins !important;
+  color: #455a64;
+
+  border-bottom: 2px solid red !important;
+
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+ .nav-tabs .nav-link.active-tab-item .spa-color{
+   color: #e75c18 !important;
+ }
+
+.nav-tabs:hover {
+  background-color: white !important;
+}
+ 
 </style>
 

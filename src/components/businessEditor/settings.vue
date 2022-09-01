@@ -11,37 +11,21 @@
         >
         </ly-tab>
       </div>
-
-      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
-        <General />
-      </div> -->
-
-      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
-        <Website />
-      </div> -->
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
-        <Payment />
-      </div>
-
-      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
-        <Roles />
-      </div> -->
-
-      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
+    
+     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '1'">
         <Info />
-      </div> -->
+      </div> 
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '5'">
+      <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
         <Blocking />
       </div>
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
+     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <Notification />
-    </div>
+    </div> 
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
       <Insight />
     </div>
 
@@ -69,9 +53,9 @@
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <!-- <b-tab title="Business Info">
+              <b-tab title="Business Info">
                 <b-card-text> <Info /> </b-card-text
-              ></b-tab> -->
+              ></b-tab> 
 
               <!-- <b-tab title="Business Roles">
                 <b-card-text> <Roles /> </b-card-text
@@ -95,7 +79,11 @@
               <b-tab title="Blocking">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
-            </b-tabs>
+
+
+              
+
+            </b-tabs>  
           </div>
         </div>
 
@@ -134,11 +122,11 @@ export default {
     currenttab: {
       immediate: true,
       handler(newVal, oldVal) {
-       
+         console.log(newVal);
 
         if (newVal == 3) {
-          this.selectedIdd = "8";
-          this.tabIndex = "5";
+          this.selectedIdd = "1";
+          this.tabIndex = "1";
         }
 
         if (newVal == 2) {
@@ -166,7 +154,7 @@ export default {
    // Pending,
     LyTab,
     Insight,
-    // Info,
+    Info,
     // Website,
     // Payment,
     Blocking,
@@ -180,13 +168,10 @@ export default {
       seetings_id: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "General" },
-
+       
+        { label: "Notification" },
         { label: "Business Info" },
-        { label: "Business Roles" },
-        { label: "payment " },
-        { label: "Account Type" },
-
+        {label:"Insight"},
         { label: "Blocking" },
       ],
       options: {

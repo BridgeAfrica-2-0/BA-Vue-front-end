@@ -2220,7 +2220,7 @@ export default {
     },
     getCreatedAt(data) {
       const date = moment().diff(moment(data), "days");
-      console.log(date >= 1);
+    
       if (date >= 1) {
         return moment(data).format("L");
       } else {

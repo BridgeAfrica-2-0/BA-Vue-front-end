@@ -6,7 +6,7 @@
           <b-avatar
             class="p-avater ml-2"
             variant="light"
-            :src="person.profile_picture"
+            :src="person.profile_picture?person.profile_picture:person.profile_picutre"
           ></b-avatar>
 
           <div class=" mt-3 ml-3 w-100">

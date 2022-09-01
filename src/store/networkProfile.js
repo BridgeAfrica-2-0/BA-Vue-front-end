@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     networkInfo: [],
+    NetworkRole:'',
     networks: [],
     loader: false,
     success: false, 
@@ -66,7 +67,10 @@ export default {
     setBusinesses(state, data){
       state.businesses=data;
     },
-
+   
+    setNetworkRole(state, data){
+    state.NetworkRole=data;
+    },
     
     setSelected(state, val){
       state.selected = val;

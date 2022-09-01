@@ -513,10 +513,10 @@
                 <div v-else v-for="chat in chats" :key="chat.id">
                   <div
                     v-if="
-                      currentBizId != chat.sender_business_id &&
-                        currentBizId != chat.businessID
+                      currentBizSlug != chat.sender_business_id &&
+                        currentBizSlug != chat.businessID
                     "
-                  >
+                  > 
                     <b-row class="p-2">
                       <b-col>
                         <b v-if="type == 'group'">
@@ -3233,7 +3233,7 @@ export default {
   },
   mounted() {
     this.mobile = this.screenWidth < 930;
-    console.log("mobile:", this.mobile);
+    
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -3244,13 +3244,9 @@ export default {
     });
   },
   created() {
-     
-     
-
-     
 
      this.$store.commit(
-      "businessChat/setCurrentBizId",
+      "businessChat/setCurrentBizId", 
          this.$route.params.id
     );
 
@@ -3263,32 +3259,26 @@ export default {
     this.getCurBiz();
     this.getUserInfo();
 
-   
-    console.log("router params:", this.currentBizId);
     this.tabIndex = this.$route.query.msgTabId
       ? Number(this.$route.query.msgTabId)
       : "no";
 
-    console.log("this.tabIndex:", this.tabIndex);
-    // console.log("call to action checked:", this.ctaSelected);
-
     if ([0, 1, 2].includes(this.tabIndex)) {
-      console.log("here am i!");
+     
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
       } else {
         this.tabIndex = 0;
-        console.log("111 call ");
+       
 
         this.getChatList({ type: "user" });
-        console.log("222 call ");
+  
       }
-      console.log("call to action checked:", this.ctaSelected);
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
-      console.log("Am here again!");
+    
       this.tabIndex = 1;
       this.getChatList({ type: "business" });
     }
@@ -3302,7 +3292,7 @@ export default {
   },
   methods: {
     onPressSearchNewChat: _.debounce(function(e) {
-      console.log("press...");
+     
       this.getList(e);
     }, 1000),
     chatListImage(value) {
@@ -3339,13 +3329,12 @@ export default {
           ? data.image
           : network;
       } else image = group;
-      // console.log("chatlist image:", image);
+      
       return image;
     },
     formatName(value) {
       var name = "";
-      // console.log("Value:", value);
-      // console.log("Current:", this.currentBizId);
+     
       if (this.type == "user") {
         name = value.sender
           ? value.sender.name
@@ -3371,7 +3360,7 @@ export default {
       return name;
     },
     getImage(data) {
-      // console.log("data IN", data);
+     
       let image = data.image;
       let finale = "";
       let user = require("@/assets/profile_white.png");
@@ -3398,8 +3387,6 @@ export default {
           : business;
       }
 
-      // console.log("debug ", finale);
-      // console.log(this.type);
       return finale;
     },
     getCurBiz() {
@@ -3433,8 +3420,6 @@ export default {
     },
 
     selectedAllMulty(val) {
-      console.log("new val:", val);
-      console.log(this.tabMemberType , "case here ")
       let selected = [];
       switch (this.tabMemberType) {
         case 1:
@@ -3569,7 +3554,7 @@ export default {
 
       this.selectedEditor = [];
       if (val == "all") {
-        console.log("editor ,")
+    
         this.allEditors.map((biz) => {
           this.selectedEditor.push(biz.id);
         });
@@ -3606,8 +3591,9 @@ export default {
           type: this.type,
         });
       });
+
       this.socket.on("privateMessage", (data) => {
-    
+     
         this.chats.push(data);
         this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
@@ -3652,9 +3638,10 @@ export default {
 
     createRoom(receiver_business_id) {
    
-      let sender_business_id = this.currentBizId;
+      let sender_business_id = this.currentBizSlug;
       this.room = [receiver_business_id, sender_business_id];
       this.socket.emit("create", this.room);
+   
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
@@ -3669,7 +3656,7 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network");
+      
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
@@ -3792,13 +3779,6 @@ export default {
 
     },
     async deleteChat(data , chatList , type){
-
-
-       console.log(type , "ASdasdas chat lisr");
-
-
-   
-
       let dataChat = chatList.filter((b) => { return b.id !== data.id;});
 
       let mainData = {data:dataChat , type:type}
@@ -3827,7 +3807,8 @@ export default {
       });
 
     },
-    selectedChat(data) {  
+    selectedChat(data) {
+       
       this.chatId = data.id;
       this.createRoom(data.id);
       if (this.type == "group") {
@@ -3869,6 +3850,7 @@ export default {
         })
         .catch(() => console.log("error"));
     },
+    
     send() {
       if (this.file || (this.input.length > 0 && this.input.length < 500)) {
         if (this.type == "group") {
@@ -3897,7 +3879,6 @@ export default {
         receiver_id: this.chatId,
         attachment: this.file,
       });
-     
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3990,11 +3971,11 @@ export default {
     showInfo(arg) {
       this.info = arg;
       this.newMsg = arg;
-      console.log(this.checked);
+    
     },
     newMessage(arg) {
       this.rightSide = false;
-      console.log("hey");
+   
       this.getList();
       this.newMsg = true;
       this.show = false;

@@ -1,18 +1,20 @@
 <template>
   <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
-
+   
     <b-alert v-if="products.data.length === 0" show variant="warning"
       ><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
-
-    <div
+ 
+ <div v-if="!prodLoader">  
+     <div
       v-for="(product, index) in products.data"
       :key="index"
       class="people-style p-3 shadow h-100"
-    >
+    >  
+     <span v-if="product">  
       <div class="d-inline-flex">
         <div>
           <div class="center-img">
@@ -74,8 +76,10 @@
 
       <br />
       <br />
-    </div>
-
+     </span>
+    </div> 
+    
+     </div>
     <!-- pagination -->
     <b-pagination
       v-if="products.next || products.previous"
@@ -91,7 +95,7 @@
     <!-- End pagination -->
 
     <ProductDetails
-      @closemodal="closeDetailsProduct"
+     
       :showModal="viewProduct"
       :product="product"
     />
@@ -145,7 +149,6 @@ export default {
   created() {
     this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
     if (this.islogin) {
       this.getProducts();
     }

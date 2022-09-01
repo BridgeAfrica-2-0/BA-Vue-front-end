@@ -5,7 +5,7 @@
         <div class="center-img">
           <splide :options="options" class="r-image">
             <splide-slide cl>
-              <img :src="business.picture" class="r-image" />
+              <img :src="business.picture?business.picture:business.logo_path" class="r-image" />
             </splide-slide>
 
             <splide-slide v-for="cover in business.covers" :key="cover" cl>

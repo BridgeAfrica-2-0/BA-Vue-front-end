@@ -174,9 +174,9 @@ export default {
         path = "/messaging";
       } else {
         if (this.activeAccount.user_type == "business") {
-          path = "/business_owner/" + this.activeAccount.id;
+          path = "/business_owner/" + this.activeAccount.slug;
         } else if (this.activeAccount.user_type == "network") {
-          path = "/network/" + this.activeAccount.id;
+          path = "/network/" + this.activeAccount.slug;
         } else path = "/messaging";
       }
 

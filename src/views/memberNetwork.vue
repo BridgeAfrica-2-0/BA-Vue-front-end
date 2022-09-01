@@ -79,7 +79,7 @@ created(){
       .then((data) => {
       
         let role = data.data.data;
-        console.log(role);
+        this.$store.commit("networkProfile/setNetworkRole", role);
         switch (role) {
           case "follower":
             this.$router.push({

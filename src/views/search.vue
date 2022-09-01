@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden; color: black" class="searchpage">
+  <div style="" class="searchpage">
     <Nav
       :credentials.sync="searchParams"
       @updateSearchKeyword="updateSearchKeyword"
@@ -9,7 +9,7 @@
         <Button
           media="desktop"
           @click.native="strategY['all']"
-          v-if="selectedId == 0"
+          v-if="selectedId == 5"
         />
 
         <Button
@@ -26,13 +26,13 @@
         <Button
           media="desktop"
           @click.native="strategY['market']"
-          v-if="selectedId == 4"
+          v-if="selectedId == 0"
         />
 
         <Button
           media="desktop"
           @click.native="strategies"
-          v-if="[2, 5].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId)"
         />
       </template>
 
@@ -40,7 +40,7 @@
         <Button
           media="mobile"
           @click.native="strategY['all']"
-          v-if="selectedId == 0"
+          v-if="selectedId == 5"
         />
 
         <Button
@@ -58,13 +58,13 @@
         <Button
           media="mobile"
           @click.native="strategY['market']"
-          v-if="selectedId == 4"
+          v-if="selectedId == 0"
         />
 
         <Button
           media="mobile"
           @click.native="strategies"
-          v-if="[2, 5].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId)"
         />
       </template>
     </Nav>
@@ -334,7 +334,7 @@
           <div class="container-flex a-flex">
             <!--filter for all takes just two fields at a time  -->
 
-            <div id="all" v-if="selectedId == '0'">
+            <div id="all" v-if="selectedId == '5'">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -409,7 +409,7 @@
 
               <MiniMarket :products="miniproducts" />
 
-              <span class="float-right mb-3" @click="selectedId = 4">
+              <span class="float-right mb-3" @click="selectedId = 0">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
               </span>
               <br />
@@ -423,7 +423,7 @@
 
               <MiniPost />
 
-              <span class="float-right mb-3" @click="selectedId = 5">
+              <span class="float-right mb-3" @click="selectedId = 4">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
               </span>
               <br />
@@ -495,7 +495,7 @@
 
             <!-- Filter out just the market -->
 
-            <div v-if="selectedId == '4'">
+            <div v-if="selectedId == '0'">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -553,10 +553,10 @@
             <div v-if="selectedId == '1'">
               <businessmap :businesses="businessess.data" />
             </div>
-            <div v-if="selectedId == '4'">
+            <div v-if="selectedId == '0'">
               <mapbox :products="allproducts.data" />
             </div>
-            <div v-if="selectedId == '0'">
+            <div v-if="selectedId == '5'">
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
@@ -693,11 +693,13 @@ export default {
 
       if (this.$store.getters["auth/user"].user.city_id) {
           // this.searchParams.location = this.$route.query.city_id; 
-          this.searchParams.location = { code: 62, label: 'Yaoundé' };     
+          // this.searchParams.location = { code: 62, label: 'Yaoundé' }; 
+          this.searchParams.location = { code: '', label: 'Location' };     
       } else if (this.$route.query.location) {
           this.searchParams.location = this.$route.query.location;
       } else {
-          this.searchParams.location = { code: 62, label: 'Yaoundé' };
+          //this.searchParams.location = { code: 62, label: 'Yaoundé' };
+          this.searchParams.location = { code: '', label: 'Location' };
       }
 
       this.searchParams.location_placeholder = this.searchParams.location
@@ -709,7 +711,8 @@ export default {
       if (this.$route.query.location) {
           this.searchParams.location = this.$route.query.location;
       } else {
-          this.searchParams.location = { code: 62, label: 'Yaoundé' };
+          //this.searchParams.location = { code: 62, label: 'Yaoundé' };
+           this.searchParams.location = { code: '', label: 'Location' };
       }
 
       this.searchParams.location_placeholder = this.$route.query.location
@@ -779,13 +782,14 @@ export default {
       isSearched: false,
       categories_filters: [],
       items: [
-        { label: this.$t("search.All") },
-
+        { label: this.$t("search.Market") },
         { label: this.$t("search.Business") },
         { label: this.$t("search.People") },
         { label: this.$t("search.Network") },
-        { label: this.$t("search.Market") },
-        { label: this.$t("search.Post") },
+         { label: this.$t("search.Post") },
+        { label: this.$t("search.All") },
+
+        
       ],
 
       Finished_Branded_Products_filters: [
@@ -1697,13 +1701,13 @@ export default {
       handler(newValue, oldValue) {
         // this.activateSuggestion(newValue.keyword);
 
-        if (this.selectedId == 0) {
+        if (this.selectedId == 5) {
           this.$store.commit("allSearch/setKeyword", newValue.keyword);
           this.$store.commit("allSearch/setLocation", newValue.location);
         } else if (this.selectedId == 1) {
           this.$store.commit("business/setLocation", newValue.location);
           this.$store.commit("business/setKeyword", newValue.keyword);
-        } else if (this.selectedId == 4) {
+        } else if (this.selectedId == 0) {
           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
 
           this.$store.commit("marketSearch/setLocation", newValue.location);
@@ -1751,13 +1755,13 @@ export default {
     updateSearchKeyword(keyword) {
       //  this.activateSuggestion(keyword);
       this.searchParams.keyword = keyword;
-      if (this.selectedId == 0) {
+      if (this.selectedId == 5) {
         this.getKeyword();
       } else if (this.selectedId == 1) {
         this.onFindBusiness();
       } else if (this.selectedId == 3) {
         this.searchNetworks();
-      } else if (this.selectedId == 4) {
+      } else if (this.selectedId == 0) {
         this.searchProducts({});
       }
     },
@@ -1786,11 +1790,11 @@ export default {
 
     onProcessQuery() {
       if (this.$route.query.market) {
-        this.selectedId = 4;
+        this.selectedId = 0;
         return true;
       }
 
-      if (this.$route.query.uuid) this.selectedId = 5;
+      if (this.$route.query.uuid) this.selectedId = 4;
     },
     // [ED]----------
 
@@ -1854,7 +1858,7 @@ export default {
       console.log("loader: ", this.prodLoader);
       this.showDismissibleAlert = false;
 
-      this.$store.commit("setProducts", []);
+     // this.$store.commit("setProducts", []);
       // this.products = []
       await this.$store
         .dispatch("marketSearch/getProducts")
@@ -1925,16 +1929,16 @@ export default {
     initialize() {
       this.strategy = {
         2: () => this.onFindUser(),
-        5: () => this.onFindPost(),
+        4: () => this.onFindPost(),
         1: () => this.onFindBusiness(),
         3: () => this.searchNetworks(),
-        4: () => this.searchProducts({}),
+        0: () => this.searchProducts({}),
       };
 
       this.strategyForPlaceHolder = {
         2: () => this.$t("general.Find_User"),
-        5: () => this.$t("general.Find_Post"),
-        0: () => this.$t("general.All"),
+        4: () => this.$t("general.Find_Post"),
+        5: () => this.$t("general.All"),
         1: () => this.$t("general.Find_Businesses"),
       };
 
@@ -1943,7 +1947,7 @@ export default {
           component: PeopleComponent,
           filter: PeopleFilter,
         }),
-        5: () => ({
+        4: () => ({
           component: PostComponent,
           filter: PostFilter,
         }),
@@ -1955,7 +1959,7 @@ export default {
 
       this.strategyForNotFoundComponentTitle = {
         2: () => this.$t("general.Not_Find_users"),
-        5: () => this.$t("general.Not_Find_posts"),
+        4: () => this.$t("general.Not_Find_posts"),
         1: () => this.$t("general.Not_Find_Business"),
       };
 
@@ -2200,11 +2204,11 @@ export default {
       var subCatId = this.subCatChose ? this.subCatChose.id : "";
       var filterId = this.filterChose ? this.filterChose : "";
       var data = { cat_id: catId, sub_cat: subCatId, filter_id: filterId };
-      if (this.selectedId == 4) {
+      if (this.selectedId == 0) {
         // this.searchProducts(data);
       } else if (this.selectedId == 1) {
         //  this.searchBusiness(data);
-      } else if (this.selectedId == 0) {
+      } else if (this.selectedId == 5) {
         //  this.allSearchByCat(data);
       }
 
@@ -2214,11 +2218,11 @@ export default {
     getCategory(value) {
       this.Selectedcategory = value;
 
-      if (this.selectedId == 4) {
+      if (this.selectedId == 0) {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 1) {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 0) {
+      } else if (this.selectedId == 5) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 3) {
         this.searchNetworks({
@@ -2226,7 +2230,7 @@ export default {
           sub_cat: value.id,
           keyword: this.searchParams.keyword,
         });
-      } else if (this.selectedId == 5) {
+      } else if (this.selectedId == 4) {
         this._onFindPost();
       } else if (this.selectedId == 2) {
         this._onFindUser();
@@ -2569,6 +2573,12 @@ export default {
 </script>
 
 <style scoped>
+.searchpage{
+  font-family: poppins !important;
+  color: #455a64 !important;
+  overflow-x: hidden;
+}
+
 .icon-color {
   color: #e75c18;
 }
@@ -2587,8 +2597,8 @@ export default {
 .cat {
   font-size: 12px !important;
   text-align: center;
-  color: #333;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  /* color: #333;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif; */
 }
 
 .upp {
@@ -2610,7 +2620,7 @@ export default {
 
   .mob-btn {
     background-color: white;
-    color: black;
+    color: #455a64 !important;
     border-color: white;
     width: 80px;
     padding: 3px;

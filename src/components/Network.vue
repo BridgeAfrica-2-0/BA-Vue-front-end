@@ -2,12 +2,10 @@
   <div>  
 
     <div class="people-style border">
-     
-      
-          <div class="d-inline-flex w-100">
+        <div class="d-inline-flex w-100">
             <div class="center-img">
               
-           <img :src="network.picture" class="r-image" />
+           <img :src="network.picture?network.picture:network.image" class="r-image" />
               
             </div>
             <div class="pl-3 flx100 mr-1">
@@ -18,19 +16,19 @@
             </router-link><br />
                 </span>
                 
-                {{ count(network.followers) }}
+                {{ count(network.followers ?network.followers:network.community ) }}
                 {{ $t("dashboard.Community") }} <br />
 
                 <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.location_description }}
+              {{ network.location_description?network.location_description:network.address }}
             </span>
 
                 <br />
                  <read-more
               :more-str="$t('dashboard.read_more')"
               class="readmore"
-              :text="network.about_network"
+              :text="network.about_network ? network.about_network:network.description"
               link="#"
               :less-str="$t('dashboard.read_less')"
               :max-chars="50"

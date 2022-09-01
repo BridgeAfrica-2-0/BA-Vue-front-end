@@ -141,6 +141,7 @@ export default {
                     commit("setLoader", false);
                     console.log("products list: ", res.data);
                     commit("setProducts", res.data);
+                    alert('yoo baba')
                 })
                 .catch((err) => {
                     commit("setLoader", false);

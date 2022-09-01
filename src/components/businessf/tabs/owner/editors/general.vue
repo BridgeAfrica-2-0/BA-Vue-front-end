@@ -5,7 +5,7 @@
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
-      <MemberShip />
+      <MemberShip />  
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '4'">
@@ -15,6 +15,10 @@
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '5'">
       <KeywordAlert />
     </div>
+
+     <div class="mt-3 d-block d-md-none" v-if="seetings_id == '7'">
+        <Settings />
+      </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
       <!-- <div class="d-block d-md-none" style="margin-top: 30px">
@@ -31,8 +35,8 @@
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
-          <div>
-            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+          <div  v-if="window.width >= 768">
+            <b-tabs  lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
@@ -52,6 +56,11 @@
               <b-tab :title="$t('network.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
+
+               <b-tab :title="$t('network.Network_Info')">
+                <b-card-text> <Settings /> </b-card-text
+              ></b-tab>
+
             </b-tabs>
           </div>
         </div>
@@ -71,7 +80,7 @@ import MemberShip from '@/components/businessf/tabs/owner/networks/memberShip';
 import KeywordAlert from '@/components/businessf/tabs/owner/networks/keywordAlert';
 
 import PendingPost from '@/components/businessf/tabs/owner/networks/pendingPost';
-
+import Settings from '@/components/businessf/tabs/owner/networks/settings';
 import Notification from '@/components/businessf/tabs/owner/networks/notification';
 
 import Blocking from '@/components/businessf/tabs/owner/networks/settings/blocking';
@@ -122,6 +131,24 @@ export default {
     },
   },
 
+
+   mounted() {
+    var that = this;
+    window.onresize = function() {
+      that.size = window.innerWidth;
+    };
+  },
+
+ created(){
+   window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+ }, 
+
+   destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+
+
   components: {
     // Roles,
     Notification,
@@ -130,13 +157,18 @@ export default {
     MemberShip,
     KeywordAlert,
     PendingPost,
-    // Settings,
+    Settings,
    // LyTab,
   },
 
   data() {
     return {
       size: 0,
+     
+      window: {
+        width: 0,
+        height: 0,
+      },
       tabIndex: 1,
       selectedIdd: 0,
       seetings_id: 0,
@@ -148,7 +180,12 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+      handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
+  },
 };
 </script>
 

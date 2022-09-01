@@ -2,9 +2,7 @@
   <div>
 <b-modal hide-footer id="modal-addm" ref="modal-addm" :title="$t('network.add_members')">
         <div>
-         
-
-          <addmember   @hideModal="hideModal"  />
+           <addmember   @hideModal="hideModal"  />
 
         </div>
       </b-modal>
@@ -16,7 +14,7 @@
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
       <MemberShip />
-    </div>
+    </div>   
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '4'">
       <PendingPost />
@@ -36,7 +34,7 @@
       </div>
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
-        <Roles />
+         <Roles  v-if="window.width < 768" /> 
       </div>
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
@@ -54,8 +52,8 @@
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
-        <div class="bv-example-row">
-            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+        <div  v-if="window.width >= 768" class="bv-example-row">
+            <b-tabs  lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
@@ -173,6 +171,10 @@ watch: {
   data() {
     return {
       size: 0,
+      window: {
+        width: 0,
+        height: 0,
+      },
       tab: this.$route.params.currenttab != 0 ? this.$route.params.currenttab : 0,
       tabIndex: 1,
       selectedIdd: 0,
@@ -185,7 +187,30 @@ watch: {
     }
   },
 
+
+ mounted() {
+    var that = this;
+    window.onresize = function() {
+      that.size = window.innerWidth;
+    };
+  },
+
+ created(){
+   window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+ }, 
+
+   destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+
+
   methods: {
+
+     handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
 
     hideModal(){
 

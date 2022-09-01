@@ -45,7 +45,7 @@ export default {
     text-align: center;
     cursor: default;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: poppins !important;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
@@ -61,8 +61,7 @@ export default {
     text-decoration: none;
     text-align: center;
     cursor: default;
-
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-family: poppins !important;
     font-weight: normal;
     font-size: 12px;
     line-height: 20px;

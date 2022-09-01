@@ -28,10 +28,10 @@
                      
                      @click="callactions(product)" v-b-modal="`modal-${product.id}`">   {{ $t("profileowner.Edit") }}</b-dropdown-item
                       >
-                      <b-dropdown-item @click="callactions(product)"  v-b-modal="`modal-D${product.id}`">
+                      <b-dropdown-item @click="deleteProduct(product)"  v-b-modal="`modal-D${product.id}`">
                         {{ $t("profileowner.Delete") }}</b-dropdown-item
                       >
-                    </b-dropdown>
+                    </b-dropdown> 
                   </div>
                 </b-link>
 
@@ -729,11 +729,24 @@ selectedcategories: function() {
             
             
           });
-    },
+    },  
+
+
     deleteProduct(Product) {
-      console.log("deleteProduct");
-      console.log(Product);
-      this.$store
+
+      this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+        
+          callback: confirm => {
+            if (confirm) { 
+
+            
+            this.$store
         .dispatch("market/DeleteProduct", {
           path: "market/"+Product.id,
         })
@@ -755,7 +768,9 @@ selectedcategories: function() {
             status: "error",
             message: this.$t('general.Unable_To_Delete_Product')
           });
-        });
+        }); 
+            }
+       }})  
     },
     
     categories(){

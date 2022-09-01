@@ -35,8 +35,10 @@ export default {
       return axios
       .get(`${dataInfo.id}${dataInfo.path}`)
       .then(({ data }) => {
-          commit("setNotifications", data.data);
-          commit("setNotificationDetails", data.data);
+          console.log('hey yoouu');
+          console.log(data.data);
+          commit("setNotifications", data);
+          commit("setNotificationDetails", data);
       })
     },
 

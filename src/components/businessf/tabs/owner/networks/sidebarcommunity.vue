@@ -16,7 +16,7 @@
           >
         </h6>
       </span>
-      <b-tabs lazy pills content-class="mt-3  f-left ">
+      <b-tabs lazy active-nav-item-class="active-tab-item" content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
             {{ $t("network.People") }}
@@ -27,7 +27,7 @@
           <div>
             <b-row>
               <b-col>
-                <b-tabs fill lazy pills content-class="mt-3  f-left m-up">
+                <b-tabs fill lazy active-nav-item-class="active-tab-item" content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
                       {{ $t("network.Followers") }}
@@ -66,7 +66,7 @@
           <div>
             <b-tabs
               fill
-              pills
+              active-nav-item-class="active-tab-item"
               lazy
               content-class="mt-3  f-left m-up checkcheck"
             >
@@ -105,7 +105,7 @@
           <div>
             <b-tabs
               fill
-              pills
+              active-nav-item-class="active-tab-item"
               lazy
               content-class="mt-3  f-left m-up checkcheck"
             >

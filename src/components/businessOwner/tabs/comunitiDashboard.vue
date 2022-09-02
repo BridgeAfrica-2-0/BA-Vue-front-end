@@ -6,12 +6,12 @@
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
           <b> {{ $t('businessowner.COMMUNITY') }}</b> 
           <span class="h4-color"> 
-            {{ nFormatter(total.total) }} 
+            {{ nFormatter(total.total) }}   
           </span>
         </h6>
       </span>
 
-      <b-tabs pills lazy content-class="mt-3  f-left ">
+      <b-tabs active-nav-item-class="active-tab-item"  lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
             {{ $t("businessowner.People") }}
@@ -23,7 +23,7 @@
           <div>
             <b-row>
               <b-col>
-                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
+                <b-tabs lazy fill active-nav-item-class="active-tab-item"  content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
                       {{ $t("businessowner.Followers") }}
@@ -63,7 +63,7 @@
             <b-tabs
               lazy
               fill
-              pills
+              active-nav-item-class="active-tab-item" 
               content-class="mt-3  f-left m-up checkcheck"
             >
               <b-tab active>
@@ -103,7 +103,7 @@
             <b-tabs
               lazy
               fill
-              pills
+              active-nav-item-class="active-tab-item" 
               content-class="mt-3  f-left m-up checkcheck"
             >
               <b-tab active>

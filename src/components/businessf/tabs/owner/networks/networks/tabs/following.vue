@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="(member, index) in displayfollowing"
+        v-for="(item, index) in displayfollowing"
         :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
@@ -32,9 +32,12 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <div style="display:none;">{{member['type'] = "network"}}</div>
-        <CommunityNetworks :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow" />
+        <div style="display:none;">{{item['communityNum'] = nFormatter(item.followers)}}</div>
+        <div style="display:none;">{{item['type'] = "network"}}</div>
+       
+         <Network  :network="item" :key="item.id" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" @handleFollow="handleFollow" />
+   
+
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -52,10 +55,10 @@
 </template>
 
 <script>
-import CommunityNetworks from "../../communitynetwork"
+import Network from "@/components/Network";
 export default {
   components: {
-    CommunityNetworks
+    Network
   },
   data() {
     return {

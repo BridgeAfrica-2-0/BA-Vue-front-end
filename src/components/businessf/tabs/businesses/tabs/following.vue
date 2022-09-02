@@ -7,7 +7,7 @@
             aria-label="Text input with checkbox"
             :placeholder="$('general.Search_Something')"
             v-model="searchQuery"
-          ></b-form-input>
+          ></b-form-input>   
 
           <b-input-group-prepend is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+import Business from "@/components/Business";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {

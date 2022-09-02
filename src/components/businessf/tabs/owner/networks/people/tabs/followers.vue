@@ -32,9 +32,12 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
+
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
-        <CommunityMembers :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow" />
+
+      <Person  v-for="item in users"  :index="index" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser"  @handleFollow="handleFollow" />
+      
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -52,11 +55,12 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import Person from "@/components/Person";
 export default {
   components: {
-    CommunityMembers
+    Person
   },
+ 
   data() {
     return {
       url:null,

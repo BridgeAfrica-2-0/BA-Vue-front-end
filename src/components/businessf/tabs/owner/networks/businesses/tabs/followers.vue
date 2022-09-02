@@ -4,7 +4,7 @@
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend
-            @click="search"
+            @click="search" 
             is-text
             style="cursor:pointer;"
           >
@@ -25,7 +25,7 @@
     <b-row cols="1">
       <b-col
         class="ml-0 mr-0"
-        v-for="(member, index) in displayfollowers"
+        v-for="(item, index) in displayfollowers"
         :key="index"
       >
         <b-skeleton-wrapper :loading="loading">
@@ -37,15 +37,12 @@
             </b-card>
           </template>
           <div style="display:none;">
-            {{ (member["communityNum"] = nFormatter(member.followers)) }}
+            {{ (item["communityNum"] = nFormatter(item.followers)) }}
           </div>
-          <div style="display:none;">{{ (member["type"] = "business") }}</div>
-          <CommunityBusiness
-            :member="member"
-            @BlockUser="BlockUser"
-            :index="index"
-            @handleFollow="handleFollow"
-          />
+          <div style="display:none;">{{ (item["type"] = "business") }}</div>
+                  
+    <Business  :key="item.id"  :index="index" :business="item"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" @handleFollow="handleFollow" />
+   
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -67,10 +64,10 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+import Business from "@/components/Business";
 export default {
   components: {
-    CommunityBusiness,
+    Business,
   },
   data() {
     return {

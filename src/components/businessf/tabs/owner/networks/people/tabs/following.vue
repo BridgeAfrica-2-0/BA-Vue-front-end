@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for=" (member, index) in displayfollowing"
+        v-for=" (item, index) in displayfollowing"
         :key="index"
       >
 
@@ -35,7 +35,9 @@
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
-        <CommunityMembers :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow"/>
+
+          <Person    :index="index" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser"  @handleFollow="handleFollow" />
+      
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -54,9 +56,10 @@
 
 <script>
 import CommunityMembers from "../../communityMember"
+import Person from "@/components/Person";
 export default {
   components: {
-    CommunityMembers
+    Person
   },
   data() {
     return {

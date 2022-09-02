@@ -1,6 +1,6 @@
 <template>
   <div class="lalala">
-    <b-tabs content-class="mt-3" lazy fill pills>
+    <b-tabs content-class="mt-3" lazy fill active-nav-item-class="active-tab-item">
       <b-tab >
 
          <template slot="title">

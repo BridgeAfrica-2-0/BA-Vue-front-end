@@ -1,66 +1,8 @@
 <template>
   <div>
     <div class="s-cardd"> 
-      <div class="people-style border shadow" v-for="item in users" :key="item.id">
-        <b-row class="mb-1">      
-          <b-col md="3" cols="4" lg="3" class="my-auto">  
-            <b-avatar class="p-avater" variant="light" :src="item.profile_picutre"></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                            <router-link :to="'/profile/' + item.slug">
-                              {{ item.name }} 
-                            </router-link>
-                        </div>
-                      </b-col>
-
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ count(item.followers) }} {{ $t('businessowner.Community') }}</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <BtnCtaMessage :element="item" type="people" />
-                      </b-col>
-
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <b-button
-                          block
-                          size="sm"
-                           :id="'followbtn'+item.id"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          :class="item.is_follow !== 0 && 'u-btn'"
-                          variant="primary"
-                          @click="handleFollow(item)"
-                        >
-                          <i
-                            class="fas fa-lg btn-icon"
-                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
-                          <span class="btn-com"> {{ $t('businessowner.Community') }}</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-    </div>
+      <Person  v-for="item in users"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+ </div>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -69,6 +11,7 @@
 
 <script>
 import axios from 'axios';
+import Person from "@/components/Person";
 export default {
   props: ['type'],
   data() {
@@ -87,6 +30,10 @@ export default {
         perMove: 1,
       },
     };
+  },
+  
+  components: {
+  Person
   },
 
   mounted() {

@@ -17,7 +17,13 @@
                 </span>
                 
                 {{ count(network.followers ?network.followers:network.community ) }}
-                {{ $t("dashboard.Community") }} <br />
+                {{ $t("dashboard.Community") }}   <span v-if="canBlock" class="ml-2"  @click="BlockUser(person.id, index)" style="cursor: pointer">   <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Network"
+                              variant="danger"
+                            ></b-icon>  </span> <br />
 
                 <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -112,6 +118,15 @@ export default {
       required: true,
       type: Object,
     },
+     index:{
+      type:Number,
+      default:0
+    },
+
+    canBlock:{
+      type:Boolean,
+      default:false
+    }
   },
 
   data() {
@@ -162,7 +177,10 @@ getTotalCommunity(){
 
 
 
-    
+      BlockUser(id,index){
+        this.$emit('BlockUser',id, index );
+    },
+
 
      count(number) {
       if (number >= 1000000) {

@@ -1,7 +1,7 @@
 <template>
   <div> 
 
-        <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+        <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity'  />
           
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>

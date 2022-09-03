@@ -19,6 +19,15 @@
             <h6 class="follower m-15">
               {{ count(person.followers) }}
               {{ $t("dashboard.Community") }}
+
+               <span v-if="canBlock" class="ml-2"  @click="BlockUser(person.id, index)" style="cursor: pointer">   <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This User"
+                              variant="danger"
+                            ></b-icon>  </span>
+
             </h6>
           </div>
 
@@ -82,6 +91,16 @@ export default {
       required: true,
       type: Object,
     },
+
+    index:{
+      type:Number,
+      default:0
+    },
+
+    canBlock:{
+      type:Boolean,
+      default:false
+    }
    
   },
 
@@ -114,6 +133,11 @@ export default {
   methods: {
     getTotalCommunity() {
            this.$emit('getTotalCommunity');
+    },
+
+    BlockUser(id,index){
+       console.log('blocking user');
+        this.$emit('BlockUser',id, index );
     },
 
     count(number) {

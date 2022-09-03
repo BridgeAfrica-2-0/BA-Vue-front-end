@@ -29,7 +29,14 @@
             </span>
             <br />
             {{ count(business.followers) }}
-            {{ $t("dashboard.Community") }} <br />
+            {{ $t("dashboard.Community") }}    <span v-if="canBlock" class="ml-2"  @click="BlockUser(business.id, index)" style="cursor: pointer">   <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Business"
+                              variant="danger"
+                            ></b-icon>  </span>
+                             <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -110,6 +117,16 @@ export default {
       required: true,
       type: Object,
     },
+
+     index:{
+      type:Number,
+      default:0
+    },
+
+    canBlock:{
+      type:Boolean,
+      default:false
+    }
   },
   components: {
     BtnCtaMessage,
@@ -136,6 +153,9 @@ export default {
         this.$emit('getTotalCommunity');
     },
 
+     BlockUser(id, index){
+        this.$emit('BlockUser',id, index );
+    },
 
 
     gotoBusiness(id) {

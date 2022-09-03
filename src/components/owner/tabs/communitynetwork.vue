@@ -5,10 +5,10 @@
     </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="(item) in network" :key="item.id">
+      <b-col lg="6" sm="12" class="p-2" v-for="(item,index) in network" :key="index">
 
 
-        <Network  :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+        <Network  :network="item" :key="item.id" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
  
       </b-col>
     </b-row>
@@ -45,11 +45,12 @@ export default {
     };
   },
   computed: {
-    old_network() {
-      if (this.type == 'Follower') {
-        return this.$store.state.profile.NcommunityFollower.network_followers;
-      } else {
-        return this.$store.state.profile.NcommunityFollowing.network_following;
+     canBlock(){
+     
+      if(!this.foll_id){
+        return true;
+      }else{
+        return false;
       }
     },
   },

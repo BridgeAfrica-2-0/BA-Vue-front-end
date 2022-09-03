@@ -3,7 +3,7 @@
     <div class="s-ccard">
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="index">
-          <Person :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+          <Person :key="item.id" :person="item" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
         </b-col>
       </b-row>
       <infinite-loading
@@ -49,6 +49,14 @@ export default {
   },
 
   computed: {
+    canBlock(){
+     
+      if(!this.foll_id){
+        return true;
+      }else{
+        return false;
+      }
+    },
     old_users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
@@ -62,8 +70,6 @@ export default {
 
   methods: {
 
-    
-
  getTotalCommunity(){
          this.$store
       .dispatch("profile/Tcommunity", this.foll_id)
@@ -76,7 +82,6 @@ export default {
 
 
   BlockUser(id, index) {
-
 
      this.$confirm(
         {

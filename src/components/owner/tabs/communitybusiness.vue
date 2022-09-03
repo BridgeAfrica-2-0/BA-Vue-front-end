@@ -5,11 +5,11 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="(item) in businesses"
-        :key="item.id"
+        v-for="(item,index) in businesses"
+        :key="index"
       >
 
-        <Business  :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+        <Business  :key="item.id" :business="item" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
          
 
       </b-col>
@@ -57,7 +57,14 @@ export default {
   },
 
   computed: {
-  
+      canBlock(){
+     
+      if(!this.foll_id){
+        return true;
+      }else{
+        return false;
+      }
+    },
   },
 
   methods: {

@@ -5,7 +5,7 @@
         <div class="border people-style shadow h-100">
           <div class="row">
             <b-col md="3" cols="4" sm="3" class="my-auto">
-              <b-skeleton type="avatar" class="p-avater"></b-skeleton>
+              <b-skeleton type="avatar" class="p-avater ml-2"></b-skeleton>
             </b-col>
             <b-col
               md="8"
@@ -44,13 +44,7 @@ export default {
 
 <style scoped>
 .people-style {
-  border-top-left-radius: 40px;
-
-  border-bottom-left-radius: 40px;
-
-  border-top-right-radius: 45px;
-
-  border-bottom-right-radius: 45px;
+ 
 
   background: white;
 
@@ -62,18 +56,12 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .p-avater {
-    margin-right: -15px;
+    
     margin-top: 3px;
   }
 
   .people-style {
-    border-top-left-radius: 40px;
-
-    border-bottom-left-radius: 40px;
-
-    border-top-right-radius: 45px;
-
-    border-bottom-right-radius: 45px;
+  
 
     background: white;
 
@@ -89,18 +77,12 @@ export default {
 
 @media only screen and (max-width: 520px) {
   .p-avater {
-    margin-right: -15px;
+ 
     margin-top: 3px;
   }
 
   .people-style {
-    border-top-left-radius: 40px;
 
-    border-bottom-left-radius: 40px;
-
-    border-top-right-radius: 45px;
-
-    border-bottom-right-radius: 45px;
 
     background: white;
 

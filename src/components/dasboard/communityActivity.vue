@@ -1,13 +1,7 @@
 <template>
   <div>
     <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
-      <span>
-        <!-- <h6 class="title mt-3">
-          <fas-icon class="icons icon-color ml-2 ml-md-0" :icon="['fab', 'readme']" size="lg" />
-          <span class="ml-2"> {{ $t('dashboard.Posts') }} </span>
-        </h6> -->
-      </span>
-
+     
       <div class="ss-card">
 
     <VuePerfectScrollbar

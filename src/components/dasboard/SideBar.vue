@@ -25,7 +25,7 @@
 
       <div class="text-lost text-center">
         <h6 class="">
-          <router-link :to="{ name: 'profile_owner' }" class="card-title">
+          <router-link :to="{ name: 'profile_owner' }" class="card-title p-3">
             {{ profile.name }}
           </router-link>
         </h6>
@@ -283,14 +283,14 @@ export default {
 
         this.notificationPatterns = {
           user: () => "user/notification",
-          business: () => `/notification/business/${this.user.id}`,
-          network: () => `/notification/network/${this.user.id}`,
+          business: () => `/notification/business/${this.user.slug}`,
+          network: () => `/notification/network/${this.user.slug}`,
         };
 
         this.messagePatterns = {
           user: () => "/messages/latest/user",
-          business: () => `/messages/latest/${this.user.id}/business`,
-          network: () => `/messages/latest/${this.user.id}/network`,
+          business: () => `/messages/latest/${this.user.slug}/business`,
+          network: () => `/messages/latest/${this.user.slug}/network`,
         };
 
         this.redirectionPatterns = {

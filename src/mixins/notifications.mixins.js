@@ -49,7 +49,7 @@ export const Redis = {
     '$store.state.auth.profilConnected': {
       deep: true,
       handler: function (newValue) {
-       this.textnotix();
+     
         initRedis(this.$store.state.auth.user.accessToken)
         this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
        
@@ -78,40 +78,10 @@ export const Redis = {
         })
     },
 
-
-
-
-    
-
-textnotix() {
-
-  const $event = `user.13`;
-
-  
-
-  window.Redis.private($event)
-    .listen(".TestUserNotification", payload => {
-    
-     // const type  = notification(payload.notification)
-      
-      // this.$notify({
-      //   text: `new notification for user: ${payload.notification.notification_text}`,
-      // });
-
-     // this.newNotificationProfile({ init: false, data: payload.notification })
-    })
-},
-
-
-
-
     listenProfileEvent() {
 
       const $event = `user.${this.profile.id}`;
-
-     
-
-      window.Redis.private($event)
+        window.Redis.private($event)
         .listen(".UserNotification", payload => {
          
           const type  = notification(payload.notification)
@@ -157,7 +127,7 @@ textnotix() {
       business: () => this.listenBusinessEvent()
     } 
 
-    this.textnotix();
+    
     this.listenProfileEvent()
     this.listenNetworkeEvent()
     this.listenBusinessEvent()

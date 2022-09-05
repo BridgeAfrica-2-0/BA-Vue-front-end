@@ -37,12 +37,6 @@
       <br />
 
       <b-row>
-        <!-- {{getNotificationsStore}} -->
-        <!-- <div>
-          Selected: <strong>{{ selected }}</strong
-          ><br />
-          All Selected: <strong>{{ selectAll }}</strong>
-        </div> -->  {{all}}
         <b-col cols="12" v-for="(notification, index) in all" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">

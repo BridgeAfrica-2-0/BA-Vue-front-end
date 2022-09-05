@@ -2,9 +2,9 @@
   <div class="p-2">
     <div class="s-ccard">  
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="item.id">
 
-           <Person :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+           <Person :canBlock="canBlock" :index="index"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
 
         
         </b-col>
@@ -55,6 +55,14 @@ export default {
     from(){
         return  this.$route.name;
     },
+      canBlock(){
+     
+      if(this.from=='BusinessOwner'){
+        return true;
+      }else{
+        return false;
+      }
+    },
 
 
     old_users() {
@@ -75,7 +83,7 @@ export default {
 
      
 
-        businessCommunityTotal() {
+       businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
@@ -164,7 +172,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+    
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;

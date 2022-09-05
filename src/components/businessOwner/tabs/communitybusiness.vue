@@ -11,7 +11,7 @@
         :key="index"
       >
 
-     <Business  :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+     <Business  :canBlock="canBlock" :index="index"  :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
        
       </b-col>
     </b-row>
@@ -61,7 +61,14 @@ export default {
         return  this.$route.name;
     },
 
-
+    canBlock(){
+     
+      if(this.from=='BusinessOwner'){
+        return true;
+      }else{
+        return false;
+      }
+    },
 
     old_businesses() {
       if (this.type == "Follower") {

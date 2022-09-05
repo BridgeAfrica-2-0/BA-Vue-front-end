@@ -554,6 +554,7 @@ export default {
 <style>
 .comment {
    overflow: hidden !important;
+   font-size: 14px;
 }
 
 .card-title{

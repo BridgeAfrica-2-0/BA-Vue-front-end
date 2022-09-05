@@ -38,6 +38,14 @@
               </div>
             </b-card>
           </div>
+
+
+          <div class="d-block d-md-none">  
+          <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
+          
+           <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
+           </div>
+
  
           <DashboardTab :usertype="selectedb" class="mt-2" />
       
@@ -49,10 +57,12 @@
         </div>
 
         <div class=" col-md-6 col-lg-5 pl-0">
+
+          <div class="d-none d-md-block">  
           <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
           
            <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
-
+           </div>
           <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
 
           

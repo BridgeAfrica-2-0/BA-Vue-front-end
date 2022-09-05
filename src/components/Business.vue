@@ -126,7 +126,12 @@ export default {
     canBlock:{
       type:Boolean,
       default:false
+    },
+     callerType:{
+      type:String,
+      default:''
     }
+   
   },
   components: {
     BtnCtaMessage,
@@ -176,11 +181,19 @@ export default {
 
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      const data = {
+       let data = ''
+      if(this.callerType=='network'){
+          data = {
         id: user.id,
-        type: "business",
+        type: "user",
+        network_id: this.$route.params.id
       };
-
+      }else{ 
+       data = {
+        id: user.id,
+        type: "user",
+      };
+       }
       await axios
         .post(uri, data)
         .then((response) => {

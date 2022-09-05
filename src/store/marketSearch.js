@@ -100,7 +100,7 @@ export default {
                                 `subcategory/${data.cat_id}`
                             )
                             .then(res => {
-                                console.log("all loaded!");
+                              
                                 let sub_categories = []
                                 res.data.data.map((sub) => {
                                         sub_categories.push({ cat_id: cat.id, ...sub })
@@ -141,7 +141,7 @@ export default {
                     commit("setLoader", false);
                     console.log("products list: ", res.data);
                     commit("setProducts", res.data);
-                    alert('yoo baba')
+                   
                 })
                 .catch((err) => {
                     commit("setLoader", false);

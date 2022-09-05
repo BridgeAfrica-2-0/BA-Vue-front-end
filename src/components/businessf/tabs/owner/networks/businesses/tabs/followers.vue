@@ -41,7 +41,7 @@
           </div>
           <div style="display:none;">{{ (item["type"] = "business") }}</div>
                   
-    <Business  :key="item.id"  :index="index" :business="item"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" @handleFollow="handleFollow" />
+    <Business  :canBlock="canBlock"  callerType='network'  :key="item.id"  :index="index" :business="item" @getTotalCommunity='businessDetails'  @BlockUser="BlockUser"  />
    
         </b-skeleton-wrapper>
       </b-col>
@@ -79,6 +79,19 @@ export default {
       displayfollowers: [],
     };
   },
+
+   computed:{
+    canBlock(){
+     
+     if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
+
   mounted() {
     this.url = this.$route.params.id;
   },
@@ -212,7 +225,7 @@ export default {
 
 
     async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata);
+      document.getElementById("followbtn" + Comdata.id).disabled = true;
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
       console.log("uri", url);
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
@@ -227,6 +240,7 @@ export default {
         .then((response) => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+           document.getElementById("followbtn" + Comdata.id).disabled = true;
           this.businessDetails();
         })
         .catch((err) => console.log(err));

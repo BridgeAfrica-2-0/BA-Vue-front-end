@@ -36,7 +36,7 @@
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
 
-      <Person  v-for="item in users"  :index="index" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser"  @handleFollow="handleFollow" />
+      <Person callerType='network' :canBlock="canBlock"   :index="index" :key="member.id" :person="member"  @BlockUser="BlockUser"  @getTotalCommunity='UserDetails'  />
       
         </b-skeleton-wrapper>
       </b-col>
@@ -71,6 +71,18 @@ export default {
       displayfollowers: []
     };
   },
+
+   computed:{
+     canBlock(){
+     
+      if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
   mounted(){
     this.url = this.$route.params.id;
   },
@@ -93,7 +105,7 @@ export default {
       this.$store
         .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
-          console.log("ohh year");
+         
         })
         .catch((err) => {
           console.log({ err: err });
@@ -196,16 +208,16 @@ export default {
     },
 
     async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata)
+     
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      console.log("uri", url)
+      
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
         id: Comdata.id,
         type: Comdata.type,
         network_id: this.url
       };
-      console.log("data", data)
+      
 
       await this.axios
         .post(url, data)

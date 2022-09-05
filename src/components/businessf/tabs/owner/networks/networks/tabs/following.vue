@@ -35,7 +35,7 @@
         <div style="display:none;">{{item['communityNum'] = nFormatter(item.followers)}}</div>
         <div style="display:none;">{{item['type'] = "network"}}</div>
        
-         <Network  :network="item" :key="item.id" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" @handleFollow="handleFollow" />
+         <Network callerType='network' :network="item" :key="item.id" :canBlock="canBlock" :index="index" @getTotalCommunity='networkDetails' />
    
 
         </b-skeleton-wrapper>
@@ -70,6 +70,24 @@ export default {
       displayfollowing: []
     };
   },
+
+   computed:{
+    from() {
+      return this.$route.name;
+    },
+ 
+    canBlock(){
+     
+      if(this.from=='networks'|| this.from=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+
+  },
+
+  
   mounted(){
     this.url = this.$route.params.id;
   },

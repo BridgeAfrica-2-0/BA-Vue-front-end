@@ -63,7 +63,7 @@ export default {
     });
 
     this.foll_id = this.$route.params.id;  
-    alert('loading profile');
+  
     this.$store
       .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {

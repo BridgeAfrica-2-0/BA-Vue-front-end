@@ -36,7 +36,7 @@
         <div style="display:none;">{{item['type'] = "business"}}</div>
 
         
-    <Business  :key="item.id"  :index="index" :business="item"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" @handleFollow="handleFollow" />
+    <Business  callerType='network'  :canBlock="canBlock"  :key="item.id"  :index="index" :business="item"   @BlockUser="BlockUser" @getTotalCommunity='businessDetails' />
    
         </b-skeleton-wrapper>
       </b-col>
@@ -68,6 +68,19 @@ export default {
       displayfollowing: []
     };
   },
+
+   computed:{
+    canBlock(){ 
+     
+      if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
+
   mounted(){
     this.url = this.$route.params.id;
   },
@@ -146,7 +159,7 @@ export default {
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
       console.log("uri", url)
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
-      const data = {
+      const data = { 
         id: Comdata.id,
         type: Comdata.type,
         network_id: this.url

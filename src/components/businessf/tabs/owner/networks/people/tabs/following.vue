@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for=" (item, index) in displayfollowing"
+        v-for=" (member, index) in displayfollowing"
         :key="index"
       >
 
@@ -36,7 +36,7 @@
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
 
-          <Person    :index="index" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser"  @handleFollow="handleFollow" />
+          <Person  callerType='network'  :index="index"  :canBlock="canBlock"  :key="member.id" :person="member"  @BlockUser="BlockUser"  @getTotalCommunity='UserDetails'  />
       
         </b-skeleton-wrapper>
       </b-col>
@@ -73,6 +73,18 @@ export default {
        displayfollowers: []
     };
   },
+
+   computed:{
+    canBlock(){
+     
+      if(this.from=='networks'|| this.from=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
   mounted(){
     this.url = this.$route.params.id;
   },

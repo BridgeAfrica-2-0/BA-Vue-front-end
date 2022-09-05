@@ -12,10 +12,10 @@
         v-for="(item, index) in network"
         :key="index"
       >
-       <Network  :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+       <Network  :network="item" :key="item.id"  :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity'  @BlockUser="BlockUser" />
 
         </b-col>
-    </b-row>
+    </b-row> 
 
     <infinite-loading
       :identifier="infiniteId"
@@ -55,6 +55,15 @@ export default {
   computed: {
     from() {
       return this.$route.name;
+    },
+ 
+    canBlock(){
+     
+      if(this.from=='BusinessOwner'){
+        return true;
+      }else{
+        return false;
+      }
     },
 
     old_network() {

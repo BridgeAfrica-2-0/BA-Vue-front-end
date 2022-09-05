@@ -195,7 +195,7 @@ export default {
 
        if(!this.islogin){
             url='guest/'+url;
-            alert("fuck you");
+            
           }
 
       axios

@@ -3503,15 +3503,7 @@ nbizs() {
           this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
             type: this.type,
           });
-        } else {
-          // this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
-          //   type: this.type,
-          // });
-         
-          // this.$store.dispatch("userChat/GET_USERS_CHAT_LIST", {type:data.type})
-        }
-        // this.saveMessage(this.formData);
-        //  if(data.newChatLoad) this.getList({type:data.type})
+        } 
       });
      
     },
@@ -3538,24 +3530,12 @@ nbizs() {
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
       }).then(()=>{
-
-       
-
-    
-
-
                      this.selectedChat({
                                 type: 'group',
                                 chat: this.lastcreatedgroup,
                                 id: this.chatId,
                               });
-
-
-
-
-    
-
-
+                              
       });
 
 

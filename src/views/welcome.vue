@@ -3,24 +3,19 @@
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
-
-
-
-     
-
   <div>
-
+  
   <b-modal id="modal-center" ref="welcomemodal" centered hide-footer hide-header>
   
       <div class="container-fluid">      
 
         <img src="@/assets/welcome.png" class="w-image" alt="">
 
-         <h2 class="text-center  ">
+         <h4 class="text-center  mt-1">
           {{ $t("welcome.Hello") }} <b> {{ username }}    </b
           >    {{$t("auth.you_are_ready_to_start")}}
-        </h2>
-        <br />
+        </h4>
+      
        
 
         <p class="text f-16">
@@ -1961,23 +1956,18 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  
   }
 
-  .username {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  }
+
 }
 
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  
   }
 
-  .username {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  }
 }
 
 .modal-body {
@@ -1993,12 +1983,12 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .f-30 {
   font-size: 30px !important;
-  font-family: Abril Fatface;
+
 }
 
 .f-20 {
   font-size: 18px !important;
-  font-family: Abril Fatface;
+
 }
 
 .f-16 {

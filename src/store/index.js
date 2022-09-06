@@ -62,7 +62,7 @@ export default new Vuex.Store({
     modules: {
         auth,
         networkDetails,
-        dashboardcommunity,
+        dashboardcommunity,     
         ProfileAndBusinessDetails,
         businessOwner,
         businessBlocking,

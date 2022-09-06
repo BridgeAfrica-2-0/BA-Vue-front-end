@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       page: 1,
-      biz_id: null,
+      biz_slug: null,
 
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
@@ -133,7 +133,7 @@ export default {
   },
 
   mounted() {
-    this.biz_id = this.$route.params.id;
+    this.biz_slug = this.$route.params.id;
   },
 
   computed: {
@@ -162,12 +162,12 @@ export default {
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page,
+      let url = "business/network/" + this.biz_slug + "/" + this.page,
       
       dispatchMethod = "businessOwner/loadMore";
 
       if (this.isGuestUser ) {
-        url = "guest/business/network/" + this.biz_id + "/" + this.page;
+        url = "guest/business/network/" + this.biz_slug + "/" + this.page;
         dispatchMethod = "businessGuest/loadMore";
       }
       if (this.page == 1) {

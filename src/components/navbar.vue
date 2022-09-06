@@ -1,6 +1,5 @@
 <template>
   <header class=""> 
-
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -699,7 +698,7 @@ export default {
           }),
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.id },
+            params: { id: this.user.user_slug },
             query: { tabId: 1 },
           }),
           network: () => null,
@@ -707,7 +706,7 @@ export default {
         notification: {
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.id },
+            params: { id: this.user.user_slug },
             query: { tabId: 2 },
           }),
 
@@ -799,7 +798,7 @@ export default {
         network: () => ({ name: "networks", params: { id: this.user.id } }),
         business: () => ({
           name: "BusinessOwner",
-          params: { id: this.user.id },
+          params: { id: this.user.user_slug },
         }),
         user: () => ({ name: "profile_owner" }),
       };

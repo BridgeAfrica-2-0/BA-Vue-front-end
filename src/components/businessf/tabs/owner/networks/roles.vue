@@ -2,7 +2,8 @@
   <b-container>
     
     <h5 class="a-text">{{ $t('network.Assign_Role') }}</h5>
-
+ 
+     
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="7">
@@ -74,9 +75,9 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">{{ $t('network.Existing_Editors') }}</h5>
-        <div >
+        <div > 
           <b-list-group v-for=" ( editor , index) in editors" :key="editor.user_id">
-            <b-list class="d-flex align-items-center m-list">
+            <span class="d-flex align-items-center m-list">
               <b-avatar 
                 class="mr-3" 
                 :text="editor.fullname.charAt(0)"
@@ -104,13 +105,12 @@
                   </b-dropdown>
                 </div>
               </span>
-            </b-list>
+            </span>
           </b-list-group>
 
-           <infinite-loading
+        <infinite-loading
           @infinite="EinfiniteHandler"
-          ref="EinfiniteLoading"
-          :identifier="einfiniteId" >
+          ref="ErinfiniteLoading">
         
          <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
@@ -118,7 +118,7 @@
           <div class="text-red" slot="no-results">
             {{ $t("network.No_More_Request") }}
           </div>
-        </infinite-loading>
+        </infinite-loading> 
 
 
         </div>
@@ -164,7 +164,7 @@
         </div>
       </b-container>
     </div>
-
+   
   </b-container>
 </template>
 
@@ -175,7 +175,7 @@ export default {
 			return {
         url: null,
         SPassign: false,
-        editors:[],
+         editors:[],
          editorspage: 1,
          einfiniteId:1,
         clickedObject: {},
@@ -203,20 +203,14 @@ export default {
     this.url = this.$route.params.id
     this.getFollowers() 
     this.getRoles() 
-    this.displayEditor() 
+   // this.displayEditor() 
   },
 
   methods:{
 
-
-
-
     
     deleteEditorr(editor, index){
-     
-       
-      
-       this.$confirm(
+        this.$confirm(
         {
           message: `Are you sure?`,
           button: {
@@ -255,9 +249,6 @@ export default {
           message: this.$t('network.Unable_To_Delete_Editor')
         });
       });
-
-
-
             }
           }
         }
@@ -268,23 +259,20 @@ export default {
 
      EinfiniteHandler($state) {
     
-
+     console.log('reloading page');
       let lien = "";
      
         lien = "network/" + this.$route.params.id + "/members/editor/" + this.editorspage;
-     
-
-      this.axios
+        this.axios
         .post(lien)
         .then(({ data }) => {
           if (data.data.editor.length) {
             this.editors.push(...data.data.editor);
-           
             this.editorspage += 1;
             $state.loaded();
-          } else {
+          } else {  
             $state.complete();
-          }
+          }  
         })
         .catch((err) => {
         
@@ -310,7 +298,7 @@ export default {
     this.$store
       .dispatch("NetworkSettings/getroles")
       .then(() => {
-        console.log('ohh yeah');
+      
       })
       .catch( err => {
         console.log({ err: err });
@@ -320,27 +308,34 @@ export default {
     this.$store
       .dispatch("NetworkSettings/geteditors", this.url)
       .then(() => {
-        console.log('ohh yeah');
+        
       })
       .catch( err => {
         console.log({ err: err });
       });
     },
-    editEditor: function(clickedObject){
-      console.log(clickedObject);
-      let formData = new FormData();
+
+    async editEditor(clickedObject){
+       let formData = new FormData();
       formData.append('user_id', clickedObject.user_id);
       formData.append('role', this.form.role);
-      this.$store
+    await   this.$store
         .dispatch("NetworkSettings/updateEditor", {
           path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {
-        console.log(data);
-        console.log('ohh yeah');
-        
        
+        
+        console.log(data);
+        console.log('lalal gjth');
+        console.log(this.$refs.ErinfiniteLoading);
+        this.editorspage = 1;
+        this.editors=[];
+
+        this.$nextTick(() => {
+        this.$refs.ErinfiniteLoading.attemptLoad(); 
+      });
       
         this.flashMessage.show({
           status: "success",
@@ -355,26 +350,25 @@ export default {
         });
       });
 		},
-    assignRole: function(){
+
+
+     assignRole: async function(){
       this.SPassign = true;
       let formData = new FormData();
       formData.append('user_id', this.form.name);
       formData.append('role', this.form.role);
-      console.log('user_id: ', this.form.name);
-      console.log('role: ', this.form.role);
-      console.log(formData);
-      this.$store
+
+     await this.$store
         .dispatch("NetworkSettings/updateEditor", {
           path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {
-
-           this.einfiniteId +=1
-        
-      this.$refs.EinfiniteLoading.attemptLoad();
-        console.log(data);
-        console.log('ohh yeah');
+          this.editorspage = 1;
+          this.editors=[];
+        this.$nextTick(() => {
+        this.$refs.ErinfiniteLoading.attemptLoad(); 
+      });
         this.getFollowers();
         this.displayEditor();
         this.SPassign = false;
@@ -393,6 +387,7 @@ export default {
         });
       });
 		},
+
     deleteEditor: function(clickedObject){
       console.log("deleteEditor");
       this.$store
@@ -400,10 +395,13 @@ export default {
           path: "network/role/delete/"+clickedObject.user_id,
         })
         .then(({ data }) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.displayEditor();
-        this.flashMessage.show({
+            
+            this.editorspage = 1;
+            this.editors=[];
+        this.$nextTick(() => {
+        this.$refs.ErinfiniteLoading.attemptLoad(); 
+      });
+          this.flashMessage.show({
           status: "success",
           message: this.$t('network.Editor_Deleted')
         });

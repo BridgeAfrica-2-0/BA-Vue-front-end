@@ -223,7 +223,7 @@ export default {
     
     this.urlData = this.$route.params.id
       ? this.$route.params.id
-      : this.profile.id;
+      : this.profile.slug;
 
     if (this.isablum) {
       this.tabIndex = 1;

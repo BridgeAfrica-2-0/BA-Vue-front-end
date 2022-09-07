@@ -9,17 +9,17 @@
       ></b-avatar>
 
       <div class="msg text" v-if="!proccesEdit">
-        <span class="float-right" style="margin-right: -10px" v-if="'dashboard' !== $route.name ? isEditMode :false">
-          <b-dropdown size="sm" variant="outline primary " class="primary">
-            <template class="more" #button-content> </template>
+        <span class="float-right post-options" style="margin-right: -10px" v-if="'dashboard' !== $route.name ? isEditMode :false">
+          <b-dropdown size="sm" variant="outline primary " no-caret class="primary">
+            <template class="more" #button-content> <div class="post-options-btn rounded-circle">  <b-icon icon="three-dots-vertical" class="m-auto"> </b-icon>  </div></template>
             <b-dropdown-item @click.prevent="() => {reply = false; toggle()}"> {{ $t("businessowner.Edit") }} </b-dropdown-item>
             <b-dropdown-item @click.prevent="onDelete">{{ $t("businessowner.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
 
-        <p class="username mb-0" v-if="!proccesEdit">
+        <p class=" mb-0" v-if="!proccesEdit">
           <router-link
-            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+            :to="{ name: 'Follower', params: { id: comment.user_id } }" class="card-title"
           >
             {{ comment.name }}
           </router-link>
@@ -31,7 +31,7 @@
           link="#"
           :less-str="$t('businessowner.read_less')"
           :max-chars="15000"
-          class="mb-1 text-left"
+          class=" text-left"
         >
         </read-more>
       </div>
@@ -54,6 +54,7 @@
           style="background: transparent"
           v-model="updateCommentText"
           @keypress.enter="onProcess"
+          :max-height="47"
         />
         
         <b-spinner
@@ -93,7 +94,7 @@
 
       <div v-if="reply">
         <b-row class="mt-2">
-          <b-col cols="1">
+          <b-col cols="1" class="p-0">
             <b-avatar
               v-if="(comment.user_type = 'user')"
               variant="light"
@@ -115,6 +116,7 @@
               type="text"
               @keypress.enter="onReply"
               v-model="text"
+              :max-height="47"
             />
             <b-spinner
               class="send-cmt"
@@ -332,8 +334,24 @@ export default {
 </script>
 
 <style scoped>
+.post-options-btn{
+  height: 30px;
+  width: 30px;
+  display: flex;
+  background: white;
+
+}
 .cursor {
   cursor: pointer;
+}
+
+.post-options{
+  
+   opacity: 0;
+}
+
+.msg:hover .post-options{
+  opacity: 1;
 }
 
 .square {
@@ -365,6 +383,7 @@ export default {
   background-color: #ddd;
   height: 35px;
   padding-left: 10px;
+  overflow: hidden;
 }
 .comment:focus {
   outline: none;

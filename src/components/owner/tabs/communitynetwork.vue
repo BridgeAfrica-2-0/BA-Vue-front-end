@@ -5,102 +5,11 @@
     </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="(item,index) in network" :key="item.id">
-        
-        <div class="people-style h-100 shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img :src="item.picture" class="r-image" />
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <strong class="net-title">
-                   <router-link :to="'/network_follower/' + item.slug">
-                      {{ item.name }}
-                    </router-link> 
-                </strong> 
-                {{ item.category }}
-                <br />
-                {{ count(item.followers)  }} {{ $t('profileowner.Community') }}     <span  v-if="!foll_id"  @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer"> 
+      <b-col lg="6" sm="12" class="p-2" v-for="(item,index) in network" :key="index">
 
-                      
-                      <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Network"
-                              variant="danger"
-                            ></b-icon>
-                            
-                              </span>  <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.location_description }}
-                </span>
-                <br />
-
-                <read-more
-                  :more-str="$t('profileowner.Read_More')"
-                  class="readmore"
-                  :text="item.about_network"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="50"
-                ></read-more>
-              </p>
-            </b-col>
-
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      :disabled="disable"
-                      :id="'followbtn' + item.id"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      @click="handleFollow(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                      ></i>
-                      <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <BtnCtaMessage :element="item" type="network" />
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_member !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'joinbtn' + item.id"
-                      @click="handleJoin(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                      ></i>
-                      <span class="btn-com"> {{ $t("general.Join") }} </span>
-                    </b-button>
-                  </b-col>
-
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
+        <Network  :network="item" :key="item.id" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
+ 
       </b-col>
     </b-row>
 
@@ -109,13 +18,13 @@
 </template>
 
 <script>
-import BtnCtaMessage from '@/components/messagesCTA/Btn-cta-message';
+import Network from "@/components/Network";
 import axios from 'axios';
 
 export default {
   props: ['type', 'searchh'],
   components: {
-    BtnCtaMessage,
+    Network,
   },
   data() {
     return {
@@ -136,11 +45,12 @@ export default {
     };
   },
   computed: {
-    old_network() {
-      if (this.type == 'Follower') {
-        return this.$store.state.profile.NcommunityFollower.network_followers;
-      } else {
-        return this.$store.state.profile.NcommunityFollowing.network_following;
+     canBlock(){
+     
+      if(!this.foll_id){
+        return true;
+      }else{
+        return false;
       }
     },
   },
@@ -314,7 +224,7 @@ export default {
           }
 
       axios
-        .get(url + this.page + '?keyword=' + this.searchh + '&id=' + this.foll_id)
+        .get(url + this.page + '?keyword=' + this.searchh + '&slug=' + this.foll_id)
         .then(({ data }) => {
           console.log('lading network after response');
           console.log(data);

@@ -7,7 +7,7 @@
           :src="comment.user_picture"
           class="avat-comment"
         ></b-avatar>
-        <span class="float-right">
+        <span class="float-right post-options">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item>{{ $t('network.Edit') }}</b-dropdown-item>
@@ -43,7 +43,7 @@
         <span @click="showReply" class="primary ml-2 reply"><b>{{ $t('network.Reply') }}</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
-            <b-col cols="1">
+            <b-col cols="1" class="p-0">
               <b-avatar
                 variant="info"
                 src="https://placekitten.com/300/300"

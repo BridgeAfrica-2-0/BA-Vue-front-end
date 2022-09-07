@@ -5,7 +5,7 @@
 			:class="step.status ? 'progress-item-check' : ''"
 			v-for="(step, i) in steps"
 			:key="i"
-			@click="switchStep(i)"
+			
 		>
 			<div class="d-flex align-items-center flex-row justify-content-start">
 				<div
@@ -69,9 +69,9 @@
 		display: block;
 		width: 100% !important;
 	}
-	.progress-item-box {
+	/* .progress-item-box {
 		cursor: pointer;
-	}
+	} */
 	.progress-item-name{
 		width: fit-content;
 	}
@@ -81,7 +81,6 @@
 
 	.title-font-size {
 		font-size: 16px;
-		cursor: pointer !important;
 		color: #000;
 	}
 	.avatar-size {
@@ -157,5 +156,9 @@
 		.progress-item-name{
 			margin: 0 !important;
 		}
+	}
+
+	.title-font-size {
+		cursor: default !important;
 	}
 </style>

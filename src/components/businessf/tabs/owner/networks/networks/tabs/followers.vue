@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="(member, index) in displayfollowers"
+        v-for="(item, index) in displayfollowers"
         :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
@@ -32,10 +32,12 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <div style="display:none;">{{member['type'] = "netwrok"}}</div>
-        <CommunityNetworks :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow" />
-        </b-skeleton-wrapper>
+        <div style="display:none;">{{item['communityNum'] = nFormatter(member.followers)}}</div>
+        <div style="display:none;">{{item['type'] = "netwrok"}}</div>
+        
+   <Network callerType='network' :network="item" :canBlock="canBlock" :index="index" :key="item.id"  @BlockUser="BlockUser" @getTotalCommunity='networkDetails' />
+   
+    </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
@@ -52,10 +54,10 @@
 </template>
 
 <script>
-import CommunityNetworks from "../../communitynetwork"
+import Network from "@/components/Network";
 export default {
   components: {
-    CommunityNetworks
+     Network
   },
   data() {
     return {
@@ -66,6 +68,21 @@ export default {
       networkfollowers: [],
       displayfollowers: []
     };
+  },
+
+  computed:{
+    from() {
+      return this.$route.name;
+    },
+ 
+    canBlock(){
+     
+      if(this.from=='networks'|| this.from=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
   },
   mounted(){
     this.url = this.$route.params.id;

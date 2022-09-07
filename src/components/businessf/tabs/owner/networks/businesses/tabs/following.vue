@@ -6,7 +6,7 @@
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
-          </b-input-group-prepend>
+          </b-input-group-prepend>  
           <b-form-input
             aria-label="Text input with checkbox"
             :placeholder="$t('network.Search_Something')"
@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="(member, index) in displayfollowing"
+        v-for="(item, index) in displayfollowing"
         :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
@@ -32,9 +32,12 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <div style="display:none;">{{member['type'] = "business"}}</div>
-        <CommunityBusiness :index="index" :member="member" @BlockUser="BlockUser"  @handleFollow="handleFollow" />
+        <div style="display:none;">{{item['communityNum'] = nFormatter(item.followers)}}</div>
+        <div style="display:none;">{{item['type'] = "business"}}</div>
+
+        
+    <Business  callerType='network'  :canBlock="canBlock"  :key="item.id"  :index="index" :business="item"   @BlockUser="BlockUser" @getTotalCommunity='businessDetails' />
+   
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -50,10 +53,10 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness"
+import Business from "@/components/Business";
 export default {
   components: {
-    CommunityBusiness
+    Business
   },
   data() {
     return {
@@ -65,6 +68,19 @@ export default {
       displayfollowing: []
     };
   },
+
+   computed:{
+    canBlock(){ 
+     
+      if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
+
   mounted(){
     this.url = this.$route.params.id;
   },
@@ -143,7 +159,7 @@ export default {
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
       console.log("uri", url)
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
-      const data = {
+      const data = { 
         id: Comdata.id,
         type: Comdata.type,
         network_id: this.url

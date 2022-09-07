@@ -1,7 +1,11 @@
 <template>
 	<b-card class="">
-		<b-card-title class="headline-font-size font-weight-bold">
-			{{$t("general.Shipping_Address")}}
+		<b-card-title class="headline-font-size font-weight-bold headline_and_btns">
+			<span>{{$t("general.Shipping_Address")}}</span>
+			<div class="buttons">
+				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
+				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
+			</div>
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">
@@ -180,6 +184,14 @@
 			showConfirmModal() {
 				this.$emit("showconfirm");
 			},
+
+			loadActualComponent3() {
+				this.$emit('loadActualComponent3')
+			},
+
+			loadActualComponent1() {
+				this.$emit('loadActualComponent1')
+			}
 		},
 		computed: {
 			shippingsTab() {
@@ -206,4 +218,67 @@
 	/* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
+
+.btnx{
+	/* display: inline-block; */
+    font-weight: 400;
+    color: white;
+	background-color: #E75C18;
+    text-align: center;
+    vertical-align: middle;
+	align-items: center;
+	text-transform: capitalize;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+	float: right;
+    border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btnx:hover {
+	color: #fff;
+    background-color: #cc4d0d;
+    border-color: #cc4d0d;
+}
+
+.headline_and_btns {
+	display: flex;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+    .headline_and_btns {
+        flex-direction: column;
+		align-items: flex-start;
+    }
+
+	.buttons {
+		margin-top: 7px;
+		margin-bottom: -12px;
+	}
+}
+
+@media screen and (max-width: 376px) {
+    .btnx, .backBtn {
+		float: left;
+	}
+
+	.btnx {
+		margin-right: 6px;
+		margin-bottom: 4px;
+	}
+}
+
+@media screen and (max-width: 290px) {
+	.btnx {
+		padding: 0.275rem 0.65rem;
+		font-size: 0.9rem;
+		/* line-height: 1.5; */
+	}
+}
 </style>

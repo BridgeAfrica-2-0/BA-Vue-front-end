@@ -18,16 +18,16 @@
     <!-- Stepper header end-->
 
     <b-container fluid="lg">
-      <b-row v-if="current_step === 1 && !showRequestPayment">
+      <b-row v-if="current_step === 1 && actualComponent1">
         <b-col class="my-4" cols="12">
           <CreateShippingAddress @switchstep="handleSwitchStep" />
         </b-col>
       </b-row>
 
-      <b-row v-if="current_step === 2 && !showRequestPayment">
+      <b-row v-if="current_step === 2 && actualComponent2">
         <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
-          <ShippingAdress />
+          <ShippingAdress @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" />
         </b-col>
         <!-- Card Stepper for Shipping Address End -->
 
@@ -39,9 +39,10 @@
       </b-row>
       <!-- Stepper Page 1  End -->
 
-      <b-row v-if="current_step === 3 && !showRequestPayment">
+      <b-row v-if="current_step === 3 && actualComponent3">
         <b-col class="my-4" cols="12">
           <PaymentOperator
+            @loadActualComponent2="showActualComponent2"
             @requestpayment="handleRequestPayment"
             @showreview="handleShowReview"
             :price="order_price"
@@ -123,7 +124,10 @@ export default {
       order_price: 0,
       order_ids:[],
       operator:"",
-      loading:false
+      loading:false,
+      actualComponent1: true,
+      actualComponent2: false,
+      actualComponent3: false
     };
   },
   computed: {
@@ -154,6 +158,30 @@ export default {
       // this.steps[step - 1].status = true;
       this.changeStatusProgress(this.current_step, step);
       this.current_step = step;
+      this.actualComponent1 = false
+      this.actualComponent2 = true
+    },
+    showActualComponent1() {
+      this.current_step = 1
+      this.steps[0].status = true;
+      this.steps[1].status = false;
+      this.actualComponent1 = true
+      this.actualComponent2 = false
+    },
+    showActualComponent2() {
+      this.current_step = 2
+      this.steps[0].status = false;
+      this.steps[1].status = true;
+      this.steps[2].status = false;
+      this.actualComponent1 = false
+      this.actualComponent2 = true
+    },
+    showActualComponent3() {
+      this.current_step = 3
+      this.steps[1].status = false;
+      this.steps[2].status = true;
+      this.actualComponent2 = false
+      this.actualComponent3 = true
     },
     changeStatusProgress(current_step, next_step) {
       this.steps[current_step - 1].status = false;
@@ -281,6 +309,10 @@ export default {
 
      
     },
+
+    shownextComponent() {
+
+    }
   },
 };
 </script>

@@ -385,7 +385,7 @@ export default {
 <style scoped>
 
 .w-md-bizname{
-  max-width: 150px;
+  max-width: 250px;
 }
 .w-biznam{
    max-width: 150px;

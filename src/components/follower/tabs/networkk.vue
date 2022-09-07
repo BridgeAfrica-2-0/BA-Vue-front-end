@@ -206,7 +206,7 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = "network?id=" + this.foll_id + "&page=" + this.page;
+      let url = "network?slug=" + this.foll_id + "&page=" + this.page;
 
       if(!this.islogin){
             url='guest/'+url;

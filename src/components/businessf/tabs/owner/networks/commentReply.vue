@@ -7,7 +7,7 @@
           :src="item.network_picture"
           class="avat-comment"
         ></b-avatar>
-        <span class="float-right">
+        <span class="float-right post-options">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item>{{ $t('network.Edit') }}</b-dropdown-item>

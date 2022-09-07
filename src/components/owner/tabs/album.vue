@@ -2,16 +2,12 @@
   <div>
     <div class="container-fluid">
       <div class="row" v-if="!showalbum">
-        
-          <div  class="createp img-gall dasher" v-if="isEditor" v-b-modal.createalbumModal>
-            
-                <div class="drag-textt">
+        <div  class="createp img-gall dasher d-flex album-height" v-if="isEditor" v-b-modal.createalbumModal>
+           <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3 style="font-size: 1.60">{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
-             
           </div>
-
           <b-modal hide-footer :title="$t('profileowner.Create_album')" id="createalbumModal">
             <div ref="creatform">
               <b-form @submit="createAlbums">
@@ -34,6 +30,7 @@
             :type="type"
             :isEditor="isEditor"
             :showCoverAlbum=" showCoverAlbum ?  'Cover' == album.name ? true : false: false"
+            class="album-height"
           />
 
         </div>
@@ -478,6 +475,9 @@ export default {
 </script>
 
 <style scoped>
+.album-height{
+  height:250px;
+}
 .img-size {
   width: 266px ;
   height: 266px;
@@ -496,6 +496,7 @@ export default {
 
 .dasher{
   border: 4px dashed #e75c18;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .text-design {
@@ -509,6 +510,7 @@ export default {
 @media (min-width: 960px) {
   .img-gall {
     background-size: contain;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     cursor: pointer;
     margin: 10px;
     border-radius: 3px;
@@ -541,6 +543,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   @media (min-width: 1400px) {
@@ -561,6 +564,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .image-wrapp {
@@ -599,6 +603,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .image-wrapp {
@@ -637,6 +642,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .image-wrapp {
@@ -662,9 +668,10 @@ export default {
   color: #000;
   width: 120px;
   height: 120px;
-  position: absolute;
+  margin: auto;
+  /* position: absolute;
   top: 15%;
-  left: 2%;
+  left: 2%; */
 }
 }
 
@@ -677,9 +684,10 @@ export default {
   color: #000;
   width: 120px;
   height: 120px;
-  position: absolute;
+  margin: auto;
+  /* position: absolute;
   top: 25%;
-  left: 25%;
+  left: 25%; */
 
 }
 

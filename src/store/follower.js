@@ -293,15 +293,15 @@ export default {
     },
 
     getImages({ commit}, id) {
-      return axios.get("guest/profile/user/media?id="+id).then(({ data }) => {
+      return axios.get("guest/profile/user/media?slug="+id).then(({ data }) => {
         commit("setImagess", data.data);
-        console.log(data);
+      
       });
     },
 
     loadMoreUserBusiness({ commit }, url) {
 
-      console.log(url);
+   
       return axios.get(url)
         .then(({ data }) => {
 
@@ -316,8 +316,7 @@ export default {
         .then((data) => {
           return data;
         }).catch((err) => {
-        console.log("Something went wrong");
-          console.log({ err: err })
+      
         });
 
     },
@@ -325,61 +324,61 @@ export default {
     Tcommunity({ commit }, id) {
      
       return axios
-        .get('guest/profile/total/community?id=' + id)
+        .get('guest/profile/total/community?slug=' + id)
         .then(({ data }) => {
           commit('setTcommunity', data.data);
-          console.log(data);
+         
         });
 
     },
 
     NcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/network/follower?id=' + id)
+        .get('guest/profile/network/follower?slug=' + id)
         .then(({ data }) => {
           commit('setNcommunityFollower', data.data);
-          console.log(data);
+        
         });
     },
     NcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/network/following?id=' + id)
+        .get('guest/profile/network/following?slug=' + id)
         .then(({ data }) => {
           commit('setNcommunityFollowing', data.data);
-          console.log(data);
+      
         });
     },
     BcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/business/follower?id=' + id)
+        .get('guest/profile/business/follower?slug=' + id)
         .then(({ data }) => {
           commit('setBcommunityFollower', data.data);
-          console.log(data);
+       
         });
     },
     BcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/business/following?id=' + id)
+        .get('guest/profile/business/following?slug=' + id)
         .then(({ data }) => {
           commit('setBcommunityFollowing', data.data);
-          console.log(data);
+      
         });
     },
 
     UcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/user/follower?id=' + id)
+        .get('guest/profile/user/follower?slug=' + id)
         .then(({ data }) => {
           commit('setUcommunityFollower', data.data);
-          console.log(data);
+         
         });
     },
     UcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/user/following?id=' + id)
+        .get('guest/profile/user/following?slug=' + id)
         .then(({ data }) => {
           commit('setUcommunityFollowing', data.data);
-          console.log(data);
+         
         });
     },
 
@@ -388,10 +387,10 @@ export default {
     profileBusiness({ commit }, id) {
 
       return axios
-        .get('guest/profile/business/userBusiness?id=' + id)
+        .get('guest/profile/business/userBusiness?slug=' + id)
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
-          console.log(data);
+        
         });
 
     },
@@ -400,10 +399,10 @@ export default {
     profileNetwork({ commit }, id) {
 
       return axios
-        .get('guest/profile/network?id=' + id)
+        .get('guest/profile/network?slug=' + id)
         .then(({ data }) => {
           commit('setprofileNetwork', data.data);
-          console.log(data);
+        
         });
 
     },
@@ -415,15 +414,15 @@ export default {
         .get('guest/profile/business/album/show/' + busineeId)
         .then(({ data }) => {
           commit('setAlbumImages', data.data.media);
-          console.log(data);
+        
         });
     },
 
 
     ownerPost({ commit }, id) {
-      return axios.get("guest/profile/post?id=" + id).then(({ data }) => {
+      return axios.get("guest/profile/post?slug=" + id).then(({ data }) => {
         commit("ownerPost", data.data);
-        console.log(data);
+      
       });
     },
 
@@ -432,38 +431,28 @@ export default {
 
     profilecommunity({ commit }, id) {
       return axios
-        .get("guest/profile/community?id=" + id)
+        .get("guest/profile/community?slug=" + id)
         .then(({ data }) => {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
-          console.log(data);
+         
         });
     },
 
-
-
-
-
-
-
-
-
     async loadUserPostIntro({ commit, rootGetters }, id) {
 
-
+    
       let auth=rootGetters['auth/isLogged'];
-      let url='userIntro?id='+id;
+      let url='userIntro?slug='+id;
 
       if(!auth){    
-        url = 'guest/profile/userIntro?id='+id;  
+        url = 'guest/profile/userIntro?slug='+id;  
       }
     
       let response_ = null;
       await axios.get(url)
 
         .then(response => {
-          console.log("load user Intro Post test1 successsss +++");
-          console.log(response);
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
@@ -473,8 +462,6 @@ export default {
         })
         .catch(error => {
 
-          console.log({ error: error });
-          console.log("Load User Intro Echec");
           if (error instanceof TypeError) {
             console.log(error.message);
           } else {
@@ -489,20 +476,13 @@ export default {
    
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro/biography?id=' + id)
+      await axios.get('guest/profile/userIntro/biography?slug=' + id)
         .then(({ data }) => {
-          console.log(data, "load user biography response (1) +++++++");
-
           return data;
         })
         .then(({ data }) => {
-          console.log(data,
-            "load user biography response (2) successsss +++"
-          );
-          if (!data) {
-            console.log("Error from the server+++++++");
-            throw new Error("Error of load Biography+++++");
-          }
+         
+         
           commit("updateUserBiography", {
             info_access: data.data !== null
               ? data.data.biography[0].biography
@@ -517,7 +497,7 @@ export default {
         })
 
         .catch(error => {
-          console.log(error, "error from browser or server error(1) +++++++");
+         
           throw error;
         });
       return response_;
@@ -541,7 +521,7 @@ export default {
     async loadUserProfileAbout({ commit }, id) {
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro?id=' + id, {
+      await axios.get('guest/profile/userIntro?slug=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -549,21 +529,18 @@ export default {
         }
       })
         .then(response => {
-          console.log("load user profile about response (1) +++++++", response);
+         
 
           return response;
         })
         .then(response => {
 
-          if (!response) {
-            console.log("Error from the server+++++++");
-            throw new Error("Error of load profile about ++++++++");
-          }
+         
           commit("updateUserProfileAbout", response.data.data);
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error(1)", error);
+        
           throw error;
         });
       return response_;
@@ -573,11 +550,9 @@ export default {
 
 
     async loadUserBasicInfosBirthDate(context, id) {
-
-      console.log("load user birth date start +++++");
-
+      
       let response_ = null;
-      await axios.get('guest/profile/userIntro/dob?id=' + id, {
+      await axios.get('guest/profile/userIntro/dob?slug=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -585,21 +560,16 @@ export default {
         }
       })
         .then(response => {
-          console.log("load user birthDate response (1) +++++++");
-          console.log(response);
+         
           if (response.status !== 200 && response.status !== 201) {
-            console.log("Error Form The Server ");
+          
             throw "Error from the Server";
           }
           return response;
         })
         .then(response => {
-          console.log("load user birthDate response (2) successsss +++");
-          console.log(response);
-          if (!response) {
-            console.log("Error from the server+++++++");
-            throw new Error("Error of load Biography+++++");
-          }
+        
+         
           context.commit("updateUserBirthDate", {
             dateOfBirth:
               response.data === null
@@ -619,8 +589,7 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log("error from browser or server error(1)");
-          console.log({ error: error });
+         
           throw error;
         });
       return response_;

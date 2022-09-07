@@ -1,5 +1,5 @@
 <template>
-  <div>  
+  <div> 
     <b-container>
       <!-- Mobile -->
       <div v-if="mobile">
@@ -44,7 +44,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item  v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -316,6 +316,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
+                    v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -1056,7 +1057,7 @@
                           </b-tab>
                           <b-tab
                             :title="$t('general.Business')"
-                            @click="getBizs()"
+                            @click="getBizs('')"
                           >
                             <b-row>
                               <b-col>
@@ -2505,7 +2506,7 @@
                           </b-tab>
                           <b-tab
                             :title="$t('general.Business')"
-                            @click="getBizs()"
+                            @click="getBizs('')"
                           >
                             <b-row>
                               <b-col>
@@ -2945,7 +2946,7 @@ import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 import _ from "lodash";
-
+import { isPremium } from '@/helpers';
 export default {
   components: {
     EmojiPicker,
@@ -2959,7 +2960,7 @@ export default {
       rightSide: true,
       leftSide: true,
       audio: new Audio("@/assets/sound/message.mp3"),
-
+      isPremium: isPremium(),
       formData: new FormData(),
       groupName: "",
       tabMemberType: 0,
@@ -3137,7 +3138,7 @@ nbizs() {
       this.getChatList({ type: "business" });
     }
     this.getAll();
-    this.getBizs();
+    this.getBizs('');
     window.addEventListener("resize", () => {
       this.screenWidth = window.screen.width;
     });
@@ -3158,9 +3159,7 @@ nbizs() {
          this.$store.state.networkProfile.networkInfo.id
     );
 
-    this.tabIndex = this.$route.query.msgTabId
-      ? Number(this.$route.query.msgTabId)
-      : "no";
+    this.tabIndex = this.$route.query.msgTabId ? Number(this.$route.query.msgTabId): "no";
 
    
 
@@ -3464,7 +3463,7 @@ nbizs() {
     getAll() {
       this.getUsers();
       this.getNetworks();
-      this.getBizs();
+      this.getBizs('');
       this.getEditors();
       this.getNetworkMembers();
     },
@@ -3474,12 +3473,10 @@ nbizs() {
     },
     async socketListenners() {
       this.socket.on("groupMessage", (data) => {
-       
-        // this.audio.play();
-   
-        this.chats.push(data);
 
-        this.formData.append("message", data.message);
+        // this.audio.play();
+         this.chats.push(data);
+         this.formData.append("message", data.message);
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
@@ -3548,7 +3545,7 @@ nbizs() {
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = this.currentBizId;
+      let sender_business_id = this.currentBizSlug; 
       this.room = [receiver_business_id, sender_business_id];
       
       this.socket.emit("create", this.room);
@@ -3614,6 +3611,7 @@ nbizs() {
       
     },
     getBizs(keyword) {
+   
       this.initFilter();
       this.$store
         .dispatch("networkChat/GET_BIZS", {
@@ -3625,7 +3623,7 @@ nbizs() {
         .catch(() => console.log("error"));
     },
     getChatList(data) {
-      // alert("Clicked!")
+     
       this.type = data.type;
       this.chatSelected.active = false;
       this.newMsg = false;

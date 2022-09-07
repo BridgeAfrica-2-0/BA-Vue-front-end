@@ -2220,7 +2220,7 @@ export default {
     },
     getCreatedAt(data) {
       const date = moment().diff(moment(data), "days");
-      console.log(date >= 1);
+    
       if (date >= 1) {
         return moment(data).format("L");
       } else {
@@ -2229,7 +2229,7 @@ export default {
       }
     },
     getList(keyword) {
-      console.log(keyword);
+     
       if (this.type == "user") {
         this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {

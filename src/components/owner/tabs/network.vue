@@ -3,127 +3,20 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("profileowner.Do_you_want_to_join_this_network") }}
     </b-modal>
-
-    <div class="people-style shadow" v-for="item in network" :key="item.id">
-      <b-row>
-        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-          <div class="center-img">
-            <img :src="item.picture" class="r-image" />
-          </div>
-        </b-col>
-
-        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
-          <p class="textt">
-            <router-link
-              :to="{ name: 'Membar Network Follower', params: { id: item.slug } }"
-            >
-              <strong class="title"> {{ item.name }} </strong>
-            </router-link>
-            <br />
-            {{ item.category }}
-            <br />
-            {{ item.followers }} {{ $t("profileowner.Community") }}<br />
-
-            <read-more
-              :more-str="$t('search.read_more')"
-              class="readmore"
-              :text="item.about_network"
-              link="#"
-              :less-str="$t('search.read_less')"
-              :max-chars="100"
-            >
-            </read-more>
-          </p>
-        </b-col>
-
-        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-              
-
-                <b-button
-              
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  :id="'followbtn' + item.id"
-                  variant="primary"
-                  @click="handleFollow(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{
-                    $t("profileowner.Community")
-                  }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <BtnCtaMessage :element="item" type="network" />
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="item.is_member !== 0 && 'u-btn'"
-                  variant="primary"
-                  :id="'joinbtn' + item.id"
-                  @click="handleJoin(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com"> {{ $t("general.Join") }} </span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
+    
+   <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Network from "@/components/Network";
 export default {
   props: ["type"],
-
+  components: {
+    Network
+  },
   data() {
     return {
       page: 1,
@@ -190,10 +83,9 @@ export default {
           }
 
       axios
-        .get(url + this.page + "?id=" + this.foll_id)
+        .get(url + this.page + "?slug=" + this.foll_id)
         .then(({ data }) => {
-          console.log("lading network after response");
-          console.log(data);
+        
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;

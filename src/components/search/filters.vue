@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="filterType == '0' || filterType == '1' || filterType == '4'"
+      v-if="filterType == '0' || filterType == '1' || filterType == '5'"
       class="mt-2 mb-2"
     >
       <b-button
@@ -15,7 +15,7 @@
 
     <br />
 
-    <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
+    <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
 
   
 
@@ -144,7 +144,7 @@
 
       <!--  blec implementation for neigbourhood stuff -->
 
-      <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
+      <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
         <div>
           <div>
             <b-form-group
@@ -1820,7 +1820,7 @@ export default {
     this.getUserNeibourhoods();
     this.strategies = {
       2: () => PeopleFilter,
-      5: () => PostFilter,
+      4: () => PostFilter,
     };
   },
 
@@ -1907,7 +1907,7 @@ export default {
 
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
-      if (this.filterType == 4) {
+      if (this.filterType == 5) {
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
@@ -2040,7 +2040,7 @@ export default {
         this.searchBusiness(this.searchParams);
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         console.log("[DEBUG] Filter: ", filter);
         // this.searchProducts({
         //   cat_id: filter.cat_id,
@@ -2082,7 +2082,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType ==5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2098,7 +2098,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType ==5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2112,7 +2112,7 @@ export default {
 
       this.searchParams.neighbourhood = nei;
 
-      if (this.filterType == 4) {
+      if (this.filterType == 77) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
@@ -2199,7 +2199,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2218,7 +2218,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2256,7 +2256,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2293,7 +2293,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2305,7 +2305,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2317,7 +2317,7 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
@@ -2340,7 +2340,7 @@ export default {
         });
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
+      } else if (this.filterType == 5) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);

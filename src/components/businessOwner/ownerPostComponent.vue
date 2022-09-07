@@ -1,8 +1,6 @@
 <template>
-  <div class="p-3 pt-0 card-border my-3" style="position: relative">
-
-    
-    <div class="mt-0">
+  <div class="p-3 pt-0 card-border  mt-0 mb-1" style="position: relative">
+     <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <!-- <b-avatar
@@ -21,22 +19,16 @@
         </span>
         <div class="pl-2 pl-md-3 pt-md-2 mt-3 mt-md-0">
           <router-link :to="onRedirect">
-            <h5 class="m-0 usernamee">
+            <h6 class="m-0 card-title">
               {{ item.user_name }}
-            </h5>
+            </h6>
           </router-link>
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
         <div
           class="toright"
-          v-if="
-            'dashboard' !== $route.name
-              ? !isDisplayInSearch
-                ? (isYourOwnPost && canBeDelete)||from=='network'
-                : false
-              : false
-          "
+          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? (isYourOwnPost && canBeDelete)||this.$route.name=='networks': false: false"
         >
           <b-dropdown
             variant="link"
@@ -181,13 +173,7 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        !isDisplayInSearch
-          ? !isMemberNetworkFollower
-            ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) &&
-              canBeDelete
-            : false
-          : false
-      "
+        !isDisplayInSearch ? !isMemberNetworkFollower ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) && canBeDelete: false: false"
     >   
       <div class="m-md-0 p-md-0">
         <b-avatar
@@ -199,7 +185,7 @@
         ></b-avatar>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative;">
+      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative; overflow:hidden">
         <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
@@ -221,7 +207,7 @@
         />
       </div>
     </div>
-
+  
     <Comment 
       v-for="comment in comments"
       :key="comment.updated_at"
@@ -336,7 +322,7 @@ export default {
           ? { name: "BusinessOwner", params: { id: this.posterID } }
           : { name: "BusinessFollower", params: { id: this.posterID } };
       },
-
+ 
       network: () => {
         return "network" == (this.profile && this.profile.user_type) &&
           "business" == this.post.poster_type &&
@@ -519,7 +505,7 @@ export default {
       let data = { comment: this.comment };
 
       if (["networks", "NetworkEditors"].includes(this.$route.name))
-        data = Object.assign(data, { networkId: this.$route.params.id });
+        data = Object.assign(data, { networkSlug: this.$route.params.id });
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
@@ -564,7 +550,21 @@ export default {
   },
 };
 </script>
+
 <style>
+.comment {
+   overflow: hidden !important;
+   font-size: 14px;
+}
+
+.card-title{
+  font-size: 18px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 400;
+  color: #455a64;
+}
+
 .card-border {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -683,6 +683,7 @@ export default {
 }
 .inline-comment {
   width: 95%;
+  overflow: hidden;
 }
 
 @media (min-width: 762px) {
@@ -849,9 +850,10 @@ export default {
 }
 
 .duration {
-  font-weight: 400;
-  font-size: 15px;
-  color: black;
+  font-weight: 500;
+      color: #67757c;
+  
+  font-size: .75rem!important;
 }
 
 .usernamee:hover {

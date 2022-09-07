@@ -237,10 +237,7 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 7px;
-    padding-right: 5px;
-  }
+ 
 }
 
 @media only screen and (min-width: 768px) {

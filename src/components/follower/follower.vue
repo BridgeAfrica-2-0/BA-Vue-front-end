@@ -218,10 +218,10 @@ export default {
 
   created() {
 
-    this.currentAuthType = 'profile'
+    this.currentAuthType = 'profile'   
 
      this.foll_id = this.$route.params.id;
-
+ 
     // this.$store
     //   .dispatch("follower/loadUserPostIntro", this.foll_id)
     //   .then((response) => {})
@@ -264,7 +264,7 @@ export default {
     console.log("Info: ", this.info.user);
     
     this.$store
-      .dispatch("follower/Tcommunity", this.foll_id)
+      .dispatch("profile/Tcommunity", this.foll_id)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });

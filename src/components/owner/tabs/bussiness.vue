@@ -868,10 +868,7 @@
                         <splide-slide cl>
                           <img :src="business.logo_path" class="r-image" />
                         </splide-slide>
-
-                        
-                        
-                      </splide>
+                       </splide>
                     </div>
                   </div>
 
@@ -953,7 +950,7 @@ export default {
   data() {
     return {
       useas: "",
-      selectedFile:null,
+      selectedFile:'',
       updateloading:false,
       page: 1,
       bizId: "",
@@ -977,7 +974,7 @@ export default {
       municipality: [],
       locality: [],
       username: this.$store.state.auth.user.user.name, 
-      img_url: null,
+      img_url: '',
       select_filterss: [],
       sendingP: false,
       sendingB: false,
@@ -989,7 +986,7 @@ export default {
       step1: false,
       step2: false,
       logo_pic: "",
-      logoimg_url: null,
+      logoimg_url: '',
       form: {
         business_name: null,
       },
@@ -1154,7 +1151,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: "Business deleted",
-            blockClass: "custom-block-class",
+          
           });
         })
         .catch((err) => {
@@ -1163,7 +1160,7 @@ export default {
           this.flashMessage.show({
             status: "error",
             message: "Unable to delete your Business",
-            blockClass: "custom-block-class",
+           
           });
         });
             }
@@ -1562,7 +1559,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
-              blockClass: "custom-block-class",
+             
               message: "Business Profile Created",
             });
 
@@ -1588,7 +1585,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
                 status: "error",
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+               
               });
             } else if (err.response.status == 403) {
             this.flashMessage.show({
@@ -1601,7 +1598,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
                 status: "error",
 
                 message: this.$t("general.Unable_to_Create_Your_Business"),
-                blockClass: "custom-block-class",
+               
               });
               console.log({ err: err });
             }
@@ -1665,7 +1662,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
             this.$refs["updateBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
-              blockClass: "custom-block-class",
+             
               message: this.$t("general.Business_Updated"),
             });
 
@@ -1689,7 +1686,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
                 status: "error",
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+               
               });
             } else {
               this.flashMessage.show({

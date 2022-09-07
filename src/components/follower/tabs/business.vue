@@ -186,7 +186,7 @@ mounted(){
           url="profile/business/following/";
          }
       axios
-        .get(url + this.page+"?id="+this.foll_id)
+        .get(url + this.page+"?slug="+this.foll_id)
         .then(({ data }) => {
         
           if(this.type=="Follower"){  

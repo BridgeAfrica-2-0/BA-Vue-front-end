@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row>
+    <b-row> 
       <b-col md="12" lg="5" xl="4" class="p-0 m-0">
         <!-- User Posts SideBar-->
         <b-card title="" header-tag="header" footer-tag="footer">

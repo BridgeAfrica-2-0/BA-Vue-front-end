@@ -26,7 +26,7 @@ export const Pusher = {
   },
 
   created() {
-    console.log("call echo pusher")
+   
     this.pusher()
   }
 }
@@ -49,10 +49,11 @@ export const Redis = {
     '$store.state.auth.profilConnected': {
       deep: true,
       handler: function (newValue) {
-        console.log(newValue);
-        console.log('hey yoo G')
-       // initRedis(this.$store.state.auth.user.accessToken)
-       // this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+     
+        initRedis(this.$store.state.auth.user.accessToken)
+        this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+       
+      
       }
     },
 
@@ -69,10 +70,10 @@ export const Redis = {
     listenBusinessEvent() {
 
       const $event = `business-channel.${this.profile.id}`
-      console.log($event)
+     
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
-          console.log(payload)
+       
           this.newNotificationBusiness({ init: false, data: payload.data })
         })
     },
@@ -80,12 +81,9 @@ export const Redis = {
     listenProfileEvent() {
 
       const $event = `user.${this.profile.id}`;
-
-      console.log($event)
-
-      window.Redis.private($event)
+        window.Redis.private($event)
         .listen(".UserNotification", payload => {
-          
+         
           const type  = notification(payload.notification)
           
           this.$notify({
@@ -100,7 +98,7 @@ export const Redis = {
 
       const $event = `network-channel.${this.profile.id}`;
 
-      console.log($event)
+    
 
       window.Redis.private($event)
         .listen(".NetworkNotification", payload => {
@@ -109,8 +107,7 @@ export const Redis = {
     },
 
     updateEventListener(type) {
-      console.log(type)
-      console.log("blldjj djjdjd")
+    
       try {
         this.strategy[type]()
       } catch (error) {
@@ -121,19 +118,19 @@ export const Redis = {
 
 
   created() {
-    console.log('in notification mixins, check it')
-   // initRedis(this.$store.state.auth.user.accessToken)
+   
+    initRedis(this.$store.state.auth.user.accessToken)
 
-    /* this.strategy = {
+     this.strategy = {
       user: () => this.listenProfileEvent(),
       network: () => this.listenNetworkeEvent(),
       business: () => this.listenBusinessEvent()
-    } */
+    } 
 
-
-    // this.listenProfileEvent()
-    // this.listenNetworkeEvent()
-    // this.listenBusinessEvent()
+    
+    this.listenProfileEvent()
+    this.listenNetworkeEvent()
+    this.listenBusinessEvent()
 
   }
 }

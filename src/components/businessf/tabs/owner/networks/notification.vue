@@ -1,6 +1,6 @@
    
 <template>
-  <div class="container" style=" ">
+  <div class="container" style=" "> 
     <div class="container">
       <b-row>
         <b-col cols="4">
@@ -43,7 +43,7 @@
         <hr width="100%" />
         <b-col cols="12"
           :class="{ active: index == currentPage }"
-          v-for="(notification, index) in notifications"
+          v-for="(notification, index) in notifications.data"
           :key="notification.updated_at"
         >
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
@@ -58,7 +58,7 @@
                 ></b-form-checkbox>
                 <b-avatar
                   class="d-inline-block profile-pic"
-                  variant="primary"
+                  variant=""
                   :text="notification.full_name.charAt(0,1)"
                   :src="notification.profile_picture"
                 ></b-avatar>

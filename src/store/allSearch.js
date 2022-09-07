@@ -113,7 +113,7 @@ export default {
             let filterId = data.filter_id ? "&filterId=" + data.filter_id : "";
 
             //blec implementation for location search 
-
+            let main = "&main=false";
             let countryId = data.country_id ? "&countryId=" + data.country_id : "";
             let regionId = data.region_id ? "&regionId=" + data.region_id : "";
             let divisionId = data.division_id ? "&divisionId=" + data.division_id : "";
@@ -131,9 +131,9 @@ export default {
             TYPES.map((type) => {
 
                 if (!islogin) {
-                    url = `/visitor/search/${type}?${catId+subCatId+countryId+regionId+filterId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
+                    url = `/visitor/search/${type}?${main+catId+subCatId+countryId+regionId+filterId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
                 } else {
-                    url = `/search/${type}?${catId+subCatId+filterId+countryId+regionId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
+                    url = `/search/${type}?${main+catId+subCatId+filterId+countryId+regionId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
                 }
                 axios
                     .get(url)

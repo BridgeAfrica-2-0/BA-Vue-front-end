@@ -3,111 +3,10 @@
     <div class="s-ccard">  
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="item.id">
-          <div class="people-style border shadow">
-            <b-row class="mb-1">
-              <b-col md="3" cols="4" sm="4" class="my-auto">
-                <b-avatar
-                  class="p-avater"
-                  variant="light"
-                  :src="item.profile_picture"
-                ></b-avatar>
-              </b-col>
 
-              <b-col md="8" cols="8" sm="8">    
-                <div>
-                  <b-row class="shift">
-                    <b-col md="12" lg="6" xl="6">
-                      <div class="e-name">
-                        <b-row>
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-lg-2"
-                          >
-                            <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'ProfileFollower', params: {id:item.slug}}">
-                              <strong class="title"> {{ item.name }}</strong>
-                            </router-link>
-                            </div>
-                          </b-col>
+           <Person :canBlock="canBlock" :index="index"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
 
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"  
-                            xl="12"
-                            class="mt-2 mt-lg-1 mt-xl-2"
-                          >
-                            <h6 class="follower">
-                              {{ count(item.followers) }}
-                              {{ $t("businessowner.Community") }}    <span   v-if="from !='BusinessFollower' " class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This User"
-                              variant="danger"
-                            ></b-icon>  </span>
-                            </h6>
-                          </b-col>
-                       
-                        </b-row>
-                      </div>
-                    </b-col>
-
-                    <b-col lg="6" xl="6" cols="12" md="12">
-                      <div>
-                        <b-row class="mt-lg-0">
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                          >
-                            <BtnCtaMessage :element="item" type="people" />
-                          </b-col>
-
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                          >
-                            <b-button
-                              block
-                              size="sm"
-                              :id="'followbtn' + item.id"
-                              class="b-background flexx pobtn shadow"
-                              :class="item.is_follow !== 0 && 'u-btn'"
-                              variant="primary"
-                              @click="handleFollow(item)"
-                            >
-                              <i
-                                class="fas fa-lg btn-icon"
-                                :class="
-                                  item.is_follow !== 0
-                                    ? 'fa-user-minus'
-                                    : 'fa-user-plus'
-                                "
-                              ></i>
-
-                              <span class="btn-com">{{
-                                $t("dashboard.Community")
-                              }}</span>
-                            </b-button>
-                          </b-col>
-                          
-                        </b-row>
-                      </div>
-                    </b-col>
-                  </b-row>
-                </div>
-              </b-col>
-            </b-row>
-          </div>
+        
         </b-col>
       </b-row>
       <infinite-loading
@@ -122,7 +21,7 @@
 <script>
 import axios from "axios";
 import { isGuestUser } from '@/helpers';
-
+import Person from "@/components/Person";
 export default {
   props: ["type", "searchh"],
   data() {
@@ -144,6 +43,10 @@ export default {
     };
   },
 
+  components: {
+  Person
+  },
+  
   computed: {
     activeAccount() {
       return this.$store.getters["auth/profilConnected"];
@@ -151,6 +54,14 @@ export default {
 
     from(){
         return  this.$route.name;
+    },
+      canBlock(){
+     
+      if(this.from=='BusinessOwner'){
+        return true;
+      }else{
+        return false;
+      }
     },
 
 
@@ -172,7 +83,7 @@ export default {
 
      
 
-        businessCommunityTotal() {
+       businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
@@ -261,7 +172,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+    
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;

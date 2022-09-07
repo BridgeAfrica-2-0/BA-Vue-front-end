@@ -1,113 +1,47 @@
 <template>
-  <div>
-    <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("dashboard.Do_you_want_to_join_this_network") }}
-    </b-modal>
+  <div>  
+
+  <b-card class=" border pt-0  blecrr shadow border "  style=" height: 500px; padding-bottom:50px">  
+   
+   <span>
+        <h6 class=" m-3 ">
+     <fas-icon
+                  class="icons"
+                  :icon="['fas', 'project-diagram']"
+                  size="lg"
+                />
+          <span class="ml-2">  {{ $t("dashboard.POPULAR_NETWORKS")}}  </span> 
+        </h6>
+      </span>
 
 
-    <div class="people-style shadow" v-for="item in network" :key="item.id">
-      <b-row>
-     
 
-       <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-          <div class="d-inline-flex">
-            <div class="center-img">
-              
-           <img :src="item.picture" class="r-image" />
-              
-            </div>
-            <div class="pl-3 flx100">
-              <p class="textt">
-                <strong class="title">
-                   <router-link :to="{name: 'networks', params: {id: item.slug}}">
-              <strong class="net-title">{{ item.name }}</strong>
-            </router-link><br />
-                </strong>
-                
-                {{ count(item.followers) }}
-                {{ $t("dashboard.Community") }} <br />
+ <div class="s-comcardd pt-0"  >
 
-                <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ item.location_description }}
-            </span>
-
-                <br />
-                 <read-more
-              :more-str="$t('dashboard.read_more')"
-              class="readmore"
-              :text="item.about_network"
-              link="#"
-              :less-str="$t('dashboard.read_less')"
-              :max-chars="50"
-            >
-            </read-more>
-              </p>
-            </div>
-          </div>
-        </b-col>
-
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-
-
-          <div class="s-button">
-            <b-row>
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  :id="'followbtn' + item.id"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="handleFollow(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{ $t("dashboard.Community") }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <BtnCtaMessage :element="item" type="network" />
-              </b-col>
-
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="item.is_member !== 0 && 'u-btn'"
-                  variant="primary"
-                  :id="'joinbtn' + item.id"
-                  @click="handleJoin(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{ $t("general.Join") }}</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
+  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
+   
+  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+    
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+  </VuePerfectScrollbar>
+      
+
+    </div>
+      </b-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Network from "@/components/Network";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   props: ["title", "image"],
+ 
+ components: {
+    
+    Network, VuePerfectScrollbar
+  },
 
   data() {
     return {
@@ -134,10 +68,10 @@ export default {
     this.$store
       .dispatch("networkDetails/getndetails")
       .then(() => {
-        console.log("the response");
+    
       })
       .catch((err) => {
-        console.log({ err: err });
+      
       });
   },
 
@@ -151,7 +85,7 @@ getTotalCommunity(){
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
     },
 
@@ -181,7 +115,7 @@ getTotalCommunity(){
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+        
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
@@ -195,29 +129,33 @@ getTotalCommunity(){
 
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
       let url = "profile/popular/network/";
-
+      console.log(this.page);
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          console.log(data)
+        
           if (data.data.length) {
 
             this.page += 1;
             this.network = [...this.network, ...data.data ]
             $state.loaded();
+             this.$nextTick(() => {
+          VuePerfectScrollbar.update(this.$refs.scrollWrapper);
+        });
+
           } else {
             $state.complete();
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
 
@@ -242,7 +180,7 @@ getTotalCommunity(){
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -250,9 +188,15 @@ getTotalCommunity(){
 };
 </script>
 
-
+<style >
+.scroll-area{
+  height: inherit;
+}
+</style>
 
 <style scoped>
+
+
 .flx100 {
   flex-basis: 80% !important;
 }
@@ -297,7 +241,7 @@ getTotalCommunity(){
 }
 
 .card {
-  color: orange;
+ 
 }
 
 .s-button {
@@ -377,7 +321,7 @@ getTotalCommunity(){
   }
 
  .btn{
-    font-size:13px !important;
+    font-size:11.5px !important;
   }
   
   .textt {
@@ -412,7 +356,7 @@ getTotalCommunity(){
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 110px;
   }
 
   .r-image {
@@ -507,6 +451,14 @@ getTotalCommunity(){
     display: flex;
   }
 }
+
+.s-comcardd {
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  padding-bottom: 25px;
+}
+
 </style>
 
 <style>

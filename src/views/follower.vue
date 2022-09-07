@@ -62,13 +62,14 @@ export default {
       color: "#e75c18",
     });
 
-    this.foll_id = this.$route.params.id;
-
+    this.foll_id = this.$route.params.id;  
+  
     this.$store
       .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {
         this.isloaded = true;
         loader.hide()
+        console.log('yeah loaded');
       })
       .catch((error) => {
         loader.hide()

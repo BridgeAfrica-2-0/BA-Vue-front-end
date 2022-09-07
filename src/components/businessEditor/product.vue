@@ -659,6 +659,7 @@ input:focus {
   height: 35px;
   padding-left: 10px;
   margin-left: 20px;
+  font-size: 14px;
 }
 .comment:focus {
   outline: none;

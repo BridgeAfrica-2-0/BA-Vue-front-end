@@ -262,7 +262,7 @@ export default {
 }
 .botmediadess-position {
   text-align: center;
-  bottom: -45%;
+  margin: auto;
   width: 100%;
   font-size: 20px;
   position: relative;

@@ -1,6 +1,6 @@
 <template>
   <div class="lalala">
-    <b-tabs lazy content-class="mt-3" fill pills>
+    <b-tabs lazy content-class="mt-3" fill active-nav-item-class="active-tab-item" >
       <b-tab>
         <template slot="title">
           {{ $t("businessowner.Followers") }}

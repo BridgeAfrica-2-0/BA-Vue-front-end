@@ -6706,10 +6706,10 @@ klona@^2.0.4, klona@^2.0.5:
   resolved "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz"
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
-laravel-echo@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.13.0.tgz#9955e773b2c66ab810ba9f5eb4c80dbfcbdd672e"
-  integrity sha512-KWcr9Sthr8DUfrFtCKNMGq4IRTmswW+Xu92eL1yH2V7/C/3XGOxrTgzTB98jnk423gy+1DMyaavnujG9HeY3Jg==
+laravel-echo@^1.11.3:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.13.1.tgz#fe7d0c997a38a6fb6eb36f147a57b23b4090cdd9"
+  integrity sha512-tvJtbE0ppEwlO/rcFyN1JCLunDUG5pIVFWORSCkzkGEcJQzB+Eevs9PpIvsMtkz2JTNbUPHU+5GSkSh1/TIr4A==
 
 launch-editor-middleware@^2.2.1:
   version "2.3.0"
@@ -8189,6 +8189,11 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+perfect-scrollbar@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.5.tgz#41a211a2fb52a7191eff301432134ea47052b27f"
+  integrity sha512-dzalfutyP3e/FOpdlhVryN4AJ5XDVauVWxybSkLZmakFE2sS3y3pc4JnSprw8tGmHvkaG5Edr5T7LBTZ+WWU2g==
 
 performance-now@^2.1.0:
   version "2.1.0"
@@ -11472,6 +11477,11 @@ vue-password@^3.1.0:
   resolved "https://registry.npmjs.org/vue-password/-/vue-password-3.1.0.tgz"
   integrity sha512-78ZFb8jkLJg/6F3Qz0Lqx6pmaR/oW1jwbJ5NGIkMx/EdKjZBbCsu8VXjGLVaZ/4bzfQZheCO1mQfYi4WkI32VA==
 
+vue-perfect-scrollbar@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-perfect-scrollbar/-/vue-perfect-scrollbar-0.2.1.tgz#2fecab975512f7c8c37e1610dee48faf46d649f3"
+  integrity sha512-45rOonNrZaKX0mu0N9v422+c3Ngm8iTnVAP0N2iUwPfWZJds4S6eRGdmiNbrVFqmUc8IfRNI0Dpa3Zk8ntjaZQ==
+
 vue-phone-number-input@^1.1.10:
   version "1.1.12"
   resolved "https://registry.npmjs.org/vue-phone-number-input/-/vue-phone-number-input-1.1.12.tgz"
@@ -12104,7 +12114,7 @@ ws@~8.2.3:
 
 xmlhttprequest-ssl@~2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz#91360c86b914e67f44dce769180027c0da618c67"
   integrity sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@^4.0.2, xtend@~4.0.1:

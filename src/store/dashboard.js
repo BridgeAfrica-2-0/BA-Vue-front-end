@@ -36,7 +36,7 @@ export default {
   actions: {
     dashboardBusiness({ commit }, id) {
       return axios.get("profile/businessInfo/" + id).then(({ data }) => {
-        console.log(data);
+       
         commit("setDashboardBusiness", data.data);
       });
     },
@@ -49,7 +49,7 @@ export default {
 
     dashboardPpost({ commit }) {
       return axios.get("profile/dashboard/post/user").then(({ data }) => {
-        console.log(data);
+       
         commit("setPdashboardPost", data.data);
       });
     },

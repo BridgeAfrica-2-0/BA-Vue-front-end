@@ -1,141 +1,45 @@
 <template>
   <div>
-    <div class="people-style shadow" v-for="item in business" :key="item.id">
-      <b-row>  
-        <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-          <div class="d-inline-flex">
-            <div class="center-img">
-              <splide :options="options" class="r-image">
-                <splide-slide cl>
-                  <img :src="item.picture" class="r-image" />
-                </splide-slide>
+    <b-card
+      class="border blecrr shadow border pt-0"
+      style="height: 500px; padding-bottom: 50px"
+    >
+      <span>
+        <h6 class=" m-3 mt-1">
+          <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
+          <span class="ml-2"> {{ $t("dashboard.HOT_BUSINESSES") }} </span>
+        </h6>
+      </span>
 
-                
-                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
-                      <img :src="cover" class="r-image" />   
-                    </splide-slide>
-                    
-              </splide>
-            </div>
-            <div class="pl-3 flx100">
-              <p class="textt">
-                <strong class="title">
-                  <router-link :to="{name:'BusinessOwner', params:{id: item.slug}}">
-                    {{ item.name }}
-                  </router-link>
-                </strong>
-                <br />
+      <div class="s-comcardd pt-0"  infinite-wrapper >
 
-                <span v-for="cat in item.category" :key="cat.name">
-                  {{ cat.name }}
-                </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t("dashboard.Community") }} <br />
+         <VuePerfectScrollbar   class="scroll-area s-card"  settings="{maxScrollbarLength: 60px}"  @ps-y-reach-end="scrollHandle" >
+  
+        <Business v-for="item in business" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+         
+              <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+  
+         </VuePerfectScrollbar>
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  <span
-                    class="ml-2"
-                    v-for="nie in item.neigborhood"
-                    :key="nie.id"
-                  >
-                    {{ nie.name }}
-                  </span>
-                </span>
-                <br />
-                <read-more
-                  :more-str="$t('search.read_more')"
-                  class="readmore"
-                  :text="item.about_business"
-                  link="#"
-                  :less-str="$t('search.read_less')"
-                  :max-chars="100"
-                >
-                      
-                </read-more>
-              </p>
-            </div>
-          </div>
-        </b-col>
-
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  :disabled="disable"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  :id="'followbtn' + item.id"
-                  variant="primary"
-                  @click="handleFollow(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <BtnCtaMessage :element="item" type="business" />
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="gotoBusiness(item.slug)"
-                >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+            
+      </div>
+    </b-card>
   </div>
 </template>
 
 <script>
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import Ps from 'perfect-scrollbar';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+import Business from "@/components/Business";
 
 import axios from "axios";
 export default {
   props: ["title", "image"],
   components: {
-    BtnCtaMessage,
+    //  BtnCtaMessage,
+    Business,
+     VuePerfectScrollbar
   },
   data() {
     return {
@@ -147,25 +51,29 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
+        disable: false,
         type: "loop",
         perMove: 1,
       },
     };
   },
 
+mounted(){
+  this.$refs.infiniteLoading.attemptLoad();
+},
   methods: {
-
-    getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity")
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity")
+        .then((response) => {})
+        .catch((error) => {});
     },
 
-
+ scrollHandle(evt) {
+   
+        this.$refs.infiniteLoading.attemptLoad();
+        console.log(evt);
+    },
 
     gotoBusiness(id) {
       this.$router.push(`/business/${id}?tabId=1`);
@@ -192,20 +100,18 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
       let url = "profile/hot/business/";
-
+     console.log('loading page '+this.page)
       axios
         .get(url + this.page)
         .then(({ data }) => {
@@ -214,19 +120,52 @@ export default {
 
             this.business.push(...data.data);
             $state.loaded();
+             this.$nextTick(() => {
+          
+        });
+
           } else {
             $state.complete();
           }
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+        .catch((err) => {});
     },
   },
 };
 </script>
 
 <style scoped>
+.hov-btn {
+  width: 40px !important;
+  height: 40px !important;
+  vertical-align: center;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  color: #455a64;
+}
+
+.biz-name {
+  font-size: 16px;
+  line-height: 1.2;
+  font-family: poppins;
+  font-weight: 400;
+  color: #455a64;
+}
+
+.biz-name:hover {
+  color: #e75c18;
+}
+.s-comcardd {
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  padding-bottom: 5px;
+}
+
+.card-body {
+  padding-left: 5px;
+}
 .flx100 {
   flex-basis: 80% !important;
 }
@@ -270,10 +209,6 @@ export default {
   border-radius: 5px;
 }
 
-.card {
-  color: orange;
-}
-
 .s-button {
   align-content: center;
   text-align: center;
@@ -291,18 +226,9 @@ export default {
     margin-top: -15px;
   }
 
-  .title {
-    font-size: 16px;
-    color: black;
-
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -342,23 +268,13 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-
-   .btn{
-    font-size:13px !important;
-  }
-  
-  .title {
-    font-size: 20px;
-    color: black;
-
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  .btn {
+    font-size: 11.5px !important;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -387,14 +303,14 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 110px;
   }
 
   .r-image {
     border-radius: 8px;
 
-    height: 160px;
-    width: 160px;
+    height: 100px;
+    width: 100px;
   }
 }
 
@@ -432,7 +348,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -455,7 +371,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

@@ -1,8 +1,7 @@
 <template>
   <div class="img-gall-item">
-    <a v-if="typeOfMedia() == 'image' && !loading"
-      ><b-img
-        class="card-img btn p-0 album-img"
+   <b-img v-if="typeOfMedia() == 'image' && !loading"
+        class="card-img btn p-0 album-img h-100"
         thumbnail
         fluid
         rounded
@@ -11,7 +10,7 @@
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
       ></b-img>
-    </a>
+  
     <video controls v-else-if="typeOfMedia() == 'video' && !loading" class="card-img btn p-0 album-img">
       <source :src="getFullMediaLink()" />
     </video>
@@ -97,6 +96,9 @@ export default {
 </script>
 
 <style scoped>
+.card-img{
+  object-fit: cover;
+}
 .botmediadess-position {
   text-align: center;
   bottom: -45%;
@@ -287,4 +289,23 @@ export default {
   text-transform: uppercase;
   color: #000;
 }
+</style>
+
+<style>
+ 
+ .mediadesc{
+  opacity: 0;
+ }
+  .img-gall-item:hover .mediadesc{
+   
+    opacity: 1;
+ }
+
+
+ .img-gall:hover .mediadesc{
+   
+    opacity: 1;
+ }
+
+
 </style>

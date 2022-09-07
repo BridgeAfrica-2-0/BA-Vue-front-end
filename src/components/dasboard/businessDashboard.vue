@@ -91,10 +91,10 @@ export default {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(() => {
-        console.log("the response");
+        
       })
       .catch((err) => {
-        console.log({ err: err });
+    
       });
   },
 };

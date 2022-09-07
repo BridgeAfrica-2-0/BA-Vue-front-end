@@ -90,7 +90,12 @@
                       $emit('onChangeCategoryName', category.category.name);
                       bcategory({ cat_id: category.category.id })
                       $emit('activate:matching:category', null)
-                      $emit('activateSuggestion', subCat.name)
+                      $emit('activateSuggestion',  category.category.name)  
+                       $emit('update:keyword', {
+                           keyword: category.category.name,
+                           cat_id: category.category.id
+                          })
+                      
                     }"
                   >
                     {{ category.category.name }}
@@ -197,7 +202,7 @@ export default {
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
-
+     console.log(category);
       this.$emit('update:keyword', {
         keyword: category.name,
         cat_id: category.id

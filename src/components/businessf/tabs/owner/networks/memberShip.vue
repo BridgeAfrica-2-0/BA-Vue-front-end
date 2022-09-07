@@ -52,13 +52,13 @@
                     </template>
                     <b-dropdown-item
                       href="#"
-                    @click="ApproveRequest(editor.slug, index)"
+                    @click="ApproveRequest(editor.user_slug, index)"
                     >
                      {{ $t('network.Approve') }}
                     </b-dropdown-item>
                     <b-dropdown-item
                       href="#"
-                      @click="DeclineRequest(editor.slug, index )"
+                      @click="DeclineRequest(editor.user_slug, index )"
                     >
                       
                       {{ $t('network.Decline') }}
@@ -123,7 +123,7 @@
                     </template>
                     <b-dropdown-item
                       href="#"
-                      @click="BApproveRequest(editor.slug, index)"
+                      @click="BApproveRequest(editor.business_slug, index)"
                     >
                      
 
@@ -132,7 +132,7 @@
                     </b-dropdown-item>
                     <b-dropdown-item
                       href="#"
-                       @click="BDeclineRequest(editor.slug, index )"
+                       @click="BDeclineRequest(editor.business_slug, index )"
                     >
                       
                     {{ $t('network.Decline') }}

@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section>
+    <section class="p-0">
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 p-0">
             <div class="orange-bg p-3">
               <div class="row">
                 <div class="col-md-6">
@@ -13,11 +13,14 @@
                     Setup your e-commerce shop and sell to millions around you
                     and the world.
                   </h5>
-
-                  <button class="mt-5">Sign Up</button>
+                <div class="pt-2"> <button class="mt-5">Register</button> </div>
+                  
                 </div>
-
-                <div>image section</div>
+             
+              <div class="col-md-6">
+             <div> <img src="assets/home/topbanner.png" alt=""></div>
+              </div> 
+                
               </div>
             </div>
           </div>
@@ -41,9 +44,9 @@
     </section>
 
     <section style="background: #f8f8f8">
-      <div class="container">
-        <h3>About Us</h3>
-        <p>
+      <div class="container pt-6">
+        <h3> <span> About </span>  Us  </h3>
+        <p class="pt-2">
           98% of businesses in Cameroon have never done business online, lacking
           digital tools and skills. Our platform helps overcome those barriers
           so they can do business locally and internationally. Currently based
@@ -59,6 +62,7 @@
                 All-in-one platform helping businesses in Africa to sell online
                 worldwide for the very first time
               </p>
+              <div> <img src="assets/home/about_sell.png" alt=""> </div>
             </div>
           </div>
 
@@ -69,6 +73,9 @@
                 All-in-one platform helping businesses in Africa to sell online
                 worldwide for the very first time
               </p>
+              <div> 
+                <img src="assets/home/about_buy.png" alt="">
+              </div>
             </div>
           </div>
 
@@ -79,25 +86,28 @@
                 All-in-one platform helping businesses in Africa to sell online
                 worldwide for the very first time
               </p>
+              <div> <img src="assets/home/about_sell.png" alt=""></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+
+
     <section class="bg-white">
-      <div class="container">
+      <div class="container pt-6">
         <div class="market">
           <h3>
             <span class="m-header-color">Buy quality products </span> from our
             Marketplace in Cameroon and around the world
           </h3>
-          <p>
+          <p class="mt-2">
             With over 100 categories of products, easily shop from businesses in
             Cameroon anytime, anywhere.
           </p>
-          <div>
-            <b-button variant="primary" class="float-right moreproducts-btn">
+          <div class="d-flex">
+            <b-button variant="primary" class=" moreproducts-btn">
               More Products <b-icon icon="arrow-right"> </b-icon>
             </b-button>
           </div>
@@ -119,13 +129,16 @@
       </div>
     </section>
 
+
     <section style="background: #f8f8f8">
-      <div class="container ba-business">
+      <div class="container ba-business pt-6">
         <div class="row">
           <div class="col-md-6">
             <h3>
               <span class="m-header-color">Bridge Africa </span> for Businesses
             </h3>
+
+            <div class="border-left-biz"> 
 
             <div class="babiz-list">
               <h5>Business Identity and Online Marketplace</h5>
@@ -135,7 +148,7 @@
               </p>
             </div>
 
-            <div class="babiz-list">
+            <div class="babiz-list ">
               <h5>Online business database</h5>
               <p>
                 Make your business visible and locatable with the help of our
@@ -143,12 +156,13 @@
               </p>
             </div>
 
-            <div class="babiz-list">
+            <div class="babiz-list ">
               <h5>Unified back-office</h5>
               <p>
                 Use your dashboard to manage all your products, see how your
                 business is doing, and engage with your customers.
               </p>
+            </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -162,51 +176,52 @@
       <div class="container ba-business">
         <div class="row">
           <div class="col-md-6">
-            <img src="assets/home/forbiz.png" alt="" />
+            <img src="assets/home/forcus.png" alt="" />
           </div>
 
           <div class="col-md-6">
-            <h3>
+            <h3 class="white">
               <span class="m-header-color">Bridge Africa </span> for customers
             </h3>
-
-            <div class="babiz-list">
-              <h5>Large marketplace and digital payment solution.</h5>
-              <p>
+           <div class="border-left-biz mt-2"> 
+            <div class="babiz-list ">
+              <h5 class="white">Large marketplace and digital payment solution.</h5>
+              <p class="white">
                 We help customers worldwide to buy products and services from
                 Cameroon, and seamlessly pay using local and international
                 payment solutions.
               </p>
             </div>
 
-            <div class="babiz-list">
-              <h5>Localised business directory</h5>
-              <p>
+            <div class="babiz-list ">
+              <h5 class="white">Localised business directory</h5>
+              <p class="white">
                 We help you easily find businesses with affordable prices,
                 giving you the ability to compare businesses with the best
                 pricing around you..
               </p>
             </div>
 
-            <div class="babiz-list">
-              <h5>Community engagement</h5>
-              <p>
+            <div class="babiz-list ">
+              <h5 class="white" >Community engagement</h5>
+              <p class="white">
                 Follow and communicate with businesses to remain up to date on
                 latest offers.
               </p>
             </div>
+          </div>
           </div>
         </div>
       </div>
     </section>
 
     <section class="bg-whitee">
-      <div class="container bafind">
+      <div class="container bafind bg-whitee pt-6">
         <div class="row px-md-5 px-2">
-          <div class="col-md-5 order-2 order-md-1 pb-3 pt-md-5">
+          <div class="col-md-5 order-2 order-md-1 ">
             <video
               width="100%"
-              style="max-height: 350px; object-fit: cover"
+              style="object-fit:contain; border-radius: 10px; "
               controls
               poster="assets/home/quotevid.png"
             >
@@ -220,9 +235,9 @@
               Cameroon
             </h3>
 
-            <div class="md-layout-item md-small-size-100 m-left">
+            <div class="m-left">
               <form novalidate @submit.prevent="validateUser">
-                <div class="form pt-1 pl-5 pr-5 row">
+                <div class="form pt-1 row">
                   <div class="col-md-12">
                     <b-form-group :class="getValidationClass('pname')" class="">
                       <label for="name" class="">
@@ -346,8 +361,8 @@
       </div>
     </section>
 
-    <section class="bg-whitee">
-      <div class="container explore-network">
+    <section style="background: #f8f8f8">
+      <div class="container explore-network pt-6 pb-2">
         <h3><span> Explore </span> Networks</h3>
         <p>
           Our network accounts can help you work with key sectors of Cameroon's
@@ -357,15 +372,15 @@
         <div class="row">
           <div class="col-md-6">
             <div class="card h-100 p-3">
-              <div class="row">
-                <div class="col-6">
+              <div class="row h-100">
+                <div class="col-7">
                   <h5>Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
-                  <b-button variant="primary"> View More </b-button>
+                  <b-button variant="primary" class="mt-auto"> View More </b-button>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                   <b-img-lazy
-                    class="explore-network-img"
+                    class="explore-network-img h-100"
                     src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
                     alt="alternative"
                   />
@@ -377,14 +392,14 @@
           <div class="col-md-6">
             <div class="card h-100 p-3">
               <div class="row">
-                <div class="col-6">
+                <div class="col-7">
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
                   <b-button variant="primary"> View More </b-button>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                   <b-img-lazy
-                    class="explore-network-img"
+                    class="explore-network-img h-100"
                     src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
                     alt="alternative"
                   />
@@ -396,26 +411,177 @@
       </div>
     </section>
 
-    <section class="bg-whitee"> 
-      <div class="container resources"> 
-        <div class="row"> 
-        <div class="col-10"> 
-        <h3> <span> Digital Education  </span>  to help you make more money online </h3>
-         <p> Use our specially designed training curriculum to help enhance your entrepreneurial and digital skills, learn how to properly use your bridgeafrica.com online shop, and comfortably engage in global e-commerce.   </p>
+    <section class="bg-whitee">
+      <div class="container resources pt-5">
+        <div class="row">
+          <div class="col-10">
+            <h3>
+              <span> Digital Education </span> to help you make more money
+              online
+            </h3>
+            <p>
+              Use our specially designed training curriculum to help enhance
+              your entrepreneurial and digital skills, learn how to properly use
+              your bridgeafrica.com online shop, and comfortably engage in
+              global e-commerce.
+            </p>
           </div>
 
-          <div class="col-2 text-center m-auto"> 
-             <b-icon icon="chevron-left" font-scale="2"> </b-icon>  <b-icon icon="chevron-right" font-scale="2"> </b-icon>
+          <div class="col-2 text-center m-auto">
+            <b-icon icon="chevron-left" font-scale="2"> </b-icon>
+            <b-icon icon="chevron-right" font-scale="2"> </b-icon>
           </div>
+        </div>
 
-        </div> 
-
-         <Resources />
-
+        <Resources />
       </div>
-   </section>
+    </section>
 
+    <section style="background: #f8f8f8">
+      <div class="container crtv">
+        <div class="row">
+          <div class="col-md-6">
+            <h3><span> Checkout our </span> Biz Konnect Show on CRTV</h3>
+            <img src="assets/home/crtv.png" alt="" />
 
+            <h5>Segment description:</h5>
+
+            <p>
+              Biz Konnect is a 15-minute TV program that highlights the
+              integration of businesses into the world of e-commerce through the
+              bridgeafrica.com platform. Each episode highlights the online shop
+              of the business and its products, prompting viewers to buy from
+              the business. The show is aired every Wednesday on Cameroon’s
+              national public broadcaster, CRTV, and has been running for over 2
+              years.
+            </p>
+
+            <h5 class="mt-5">Episode description</h5>
+            <p>
+              Olivier Mapoure is an Agro Pastoral Engineer who specializes in
+              chicken farming. Located in Yaounde, Cameroon, he is one of the
+              largest providers of chicken in the country.
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <img class="crtv-ban" src="assets/home/crtv_ban.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gradient">
+      <div class="container">
+        <h3><span> Cameroon-Focused </span> Marketplace</h3>
+        <div class="d-flex w-75">
+          <span class="text-center m-auto">
+            7500+ <br />
+            Businesses</span
+          >
+          <span class="text-center m-auto">
+            13000+ <br />
+            Customers</span
+          >
+          <span class="text-center m-auto">
+            100+ <br />
+            Industries</span
+          >
+          <span class="text-center m-auto">
+            7500+ <br />
+            Respond Time</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- upgrade account section -->
+    <section class="bg-white p-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <img src="assets/home/upgrade_account.png" alt="" />
+          </div>
+          <div class="col-md-5">
+            <div class="card p-4 mt-5" style="margin-left:-40%; border-radius:20px">
+              <h4>
+                Upgrade your Account Today and Start Selling to the World.
+              </h4>
+              <p>
+                While you can use Bridge Africa for free through a basic
+                account, upgrading to an advanced account will enable you to do
+                the full e-commerce transaction cycle.
+              </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="d-flex">
+                    <b-icon icon="bookmarks-fill"> </b-icon>
+                    <span>
+                      <h6>Marketplace access:</h6>
+                      <p>
+                        Unlimited marketplace to sell to millions around you and
+                        the world
+                      </p>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex">
+                     <b-icon icon="bookmarks-fill"> </b-icon>
+                    <span>
+                      <h6>Online Payment System:</h6>
+                      <p>
+                        
+                      Sell, get paid and accept payment from buyers in and out of Cameroon
+                      </p>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex">
+                     <b-icon icon="bookmarks-fill"> </b-icon>
+                    <span>
+                     <h6> Rank top on search results:</h6>
+                       <p>
+                       Businesses on advanced accounts are ranked first on our search results.
+                      </p>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex">
+                     <b-icon icon="bookmarks-fill"> </b-icon>
+                    <span>
+                      <h6> Advanced messaging system:</h6>
+                      <p>
+                     Reach a wider community with our group messaging functionality.
+                      </p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center"> <b-button variant="primary" > Upgrade </b-button> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section class="bg-white">  
+   
+   <div class="container"> 
+    <div class="text-center">  
+     <h4 >
+          {{ $t("general.hear_from_our_buyers") }}
+      </h4>
+      <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+  </div>
+
+    <Testimonial /> </div>
+
+  </section>
+
+<SiteFooter />
   </div>
 </template>
 
@@ -430,6 +596,7 @@ import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 // import "../assets/js/js.js";
 import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
+import Testimonial from "../components/site/Testimonial";
 import Products from "../components/site/products";
 import VLazyImage from "v-lazy-image/v2";
 import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -442,8 +609,10 @@ import Resources from "../components/resources";
 export default {
   components: {
     SiteHeader,
-    Products,Resources
-    // SiteFooter
+    Products,
+    Resources,
+    SiteFooter,
+    Testimonial
   },
   data() {
     return {
@@ -677,6 +846,20 @@ export default {
 </script>
 
 <style>
+
+.pt-7{
+  padding-top: 7rem;
+}
+
+.pt-6{
+  padding-top: 6rem;
+}
+
+.crtv-ban {
+  max-height: 627px;
+  border-radius: 20px;
+}
+
 .request-quote {
   width: 416.64px;
 
@@ -694,6 +877,32 @@ export default {
   border-radius: 5px;
 }
 
+.bridge-home h3 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 44px;
+}
+
+.bridge-home h3 span {
+  color: #e75b17;
+}
+
+.bridge-home h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  align-items: center;
+}
+
+.bridge-home p {
+  font-size: 14px;
+  line-height: 26px;
+}
+
 .bafind h3 {
   font-family: "Poppins";
   font-style: normal;
@@ -706,8 +915,8 @@ export default {
   color: #e75b17;
 }
 
-.resources h3{
-    font-family: "Poppins";
+.resources h3 {
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
@@ -715,12 +924,12 @@ export default {
 }
 
 .resources h3 span {
-   color: #e75b17;
+  color: #e75b17;
 }
 
-.resources p{
+.resources p {
   font-size: 16px;
-line-height: 26px;
+  line-height: 26px;
 }
 
 .explore-network h3 {
@@ -740,6 +949,19 @@ line-height: 26px;
   color: #e75b17;
 }
 
+
+
+.border-left-biz{
+  border-left: solid 4px white;
+
+}
+
+.babiz-list{
+  padding-left: 10px;
+  margin-left:-6px;
+  margin-top: 10px;
+}
+
 .babiz-list:hover {
   border-left: solid 4px #e75b17;
 }
@@ -753,6 +975,8 @@ line-height: 26px;
 }
 
 .moreproducts-btn {
+  margin-left: auto;
+      margin-bottom: -35px;
 }
 .orange-bg {
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
@@ -761,10 +985,20 @@ line-height: 26px;
 }
 
 .about-box {
-  height: 411px;
+  
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(187, 187, 187, 0.25);
   border-radius: 20px;
+}
+
+.about-box img{
+    max-height: 152px;
+    width: 100%;
+    object-fit: contain;
+}
+.about-box h6{
+  font-size: 22px;
+line-height: 33px;
 }
 
 .market h3 {
@@ -810,7 +1044,6 @@ line-height: 26px;
   font-size: 22px;
   line-height: 33px;
   align-items: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .ba-business h3 .m-header-color {

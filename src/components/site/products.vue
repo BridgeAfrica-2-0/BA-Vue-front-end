@@ -8,12 +8,12 @@
         <splide :options="options" class="r-image">
           <splide-slide v-for="item in hotbiz" class="p-4" :key="item.id">
             <div class="hotbizz text-center">
-              <b-img-lazy :src="item.picture" class="r-image" />
+              <b-img :src="item.picture" class="p-image" />
 
               <div class="hotbizcontent">
                 <div class="text-center hotbizname">
                   <router-link :to="'business/' + item.id">
-                  <h5 class="mt-4"> {{item.price}} </h5> 
+                  <h6 class="mt-4"> {{item.price}} </h6> 
                   </router-link>
                    </div>
               </div>
@@ -36,7 +36,7 @@ export default {
       options: {
         rewind: true,
         autoplay: true,
-        perPage: 4,
+        perPage: 5,
         pagination: false,
         type: "loop",
         perMove: 1,
@@ -56,74 +56,49 @@ export default {
       hotbiz: [
         {
           id: "516",
-          picture: "assets/images/AFRICAN CULTURE.jpg",
-          name: "African Tradition",
+          picture: "assets/home/products/img1.png",
+        
           price: "$100 ",
-          description:
-            "Production de vêtements africains de toutes les régions du Cameroun, avec une spécialisation dans les vêtements des champs.",
-        },
+         },
 
         {
           id: "3711",
-          picture: "assets/images/bibi.jpg",
+          picture: "assets/home/products/img2.png",
            price: "$100 ",
-          name: "Vin Bibi",
-          description: "Production de vin blanc moueleux",
+         
         },
 
         {
           id: "3712",
-          picture: "assets/images/silas.jpg",
-          name: "Silas Construction",
+          picture: "assets/home/products/img3.png",
+         
            price: "$100 ",
-          description:
-            "Silas Construction peut répondre à tous vos besoins en matière de construction. ",
         },
 
         {
           id: "76",
-          picture: "assets/images/emma.jpg",
-          name: "Emma Fashion",
+          picture: "assets/home/products/img4.png",
+          
            price: "$100 ",
-          description: "Embroidery , hand-made",
+        
         },
 
         {
           id: "3705",
-          picture: "assets/images/GERAR.jpg",
-          name: "Gerar Fashion",
+          picture: "assets/home/products/img5.png",
+        
            price: "$100 ",
-          description:
-            "Customisation des bijoux, sac et chaussures avec du tissu pagne et formation sur la customisation",
-        },
+         },
 
         {
           id: "3709",
-          picture: "assets/images/edo.jpg",
-          name: "Saveurs du Lapin",
+          picture: "assets/home/products/img1.png",
            price: "$100 ",
-          description:
-            "Entreprise de production de viande de lapin et autres produits connexes.",
         },
 
-        {
-          id: "3272",
-          picture: "assets/images/aissa.jpg",
-           price: "$100 ",
-          name: "Aissa Couture",
+       
 
-          description:
-            "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres.",
-        },
-
-        {
-          id: "3708",
-          picture: "assets/images/okapi.jpg",
-          name: "OKAPI",
-           price: "$100 ",
-          description:
-            "OKAPI est spécialisé dans la transformation de fruits exotiques en jus naturelles et dérivés. Elle innove dans la conception de nouvelles saveurs originales.",
-        },
+       
       ],
 
 
@@ -142,6 +117,11 @@ export default {
 
 
 <style scoped>
+  
+  .p-image{
+    height: 150px;
+    object-fit: contain;
+  }
 
 </style>
 
@@ -158,23 +138,6 @@ export default {
     height: 40px !important;
   }
 
-  .product-slide .splide__arrow {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2em;
-
-    height: 2em;
-    border-radius: 0px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 0;
-    opacity: 0.7;
-    background: #ccc;
-  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -188,23 +151,7 @@ export default {
     height: 30px !important;
   }
 
-  .product-slide .splide__arrow {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2em;
-
-    height: 2em;
-    border-radius: 0px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 0;
-    opacity: 0.7;
-    background: #ccc;
-  }
+ 
 }
 
 

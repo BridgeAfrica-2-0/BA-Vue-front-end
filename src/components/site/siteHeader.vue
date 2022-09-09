@@ -100,7 +100,7 @@
 
       </div>
     </b-navbar>
- <hr class="w-100">
+ <hr class="w-100" style="margin-top:1px">
       </div>
   <!-- </header>  -->
 </template>

@@ -173,7 +173,7 @@
     </section>
 
     <section class="bg-gradient">
-      <div class="container ba-business">
+      <div class="container ba-business pt-3 pb-3" >
         <div class="row">
           <div class="col-md-6">
             <img src="assets/home/forcus.png" alt="" />
@@ -186,7 +186,7 @@
            <div class="border-left-biz mt-2"> 
             <div class="babiz-list ">
               <h5 class="white">Large marketplace and digital payment solution.</h5>
-              <p class="white">
+              <p class="">
                 We help customers worldwide to buy products and services from
                 Cameroon, and seamlessly pay using local and international
                 payment solutions.
@@ -195,7 +195,7 @@
 
             <div class="babiz-list ">
               <h5 class="white">Localised business directory</h5>
-              <p class="white">
+              <p class="">
                 We help you easily find businesses with affordable prices,
                 giving you the ability to compare businesses with the best
                 pricing around you..
@@ -204,7 +204,7 @@
 
             <div class="babiz-list ">
               <h5 class="white" >Community engagement</h5>
-              <p class="white">
+              <p class="">
                 Follow and communicate with businesses to remain up to date on
                 latest offers.
               </p>
@@ -438,30 +438,22 @@
     </section>
 
     <section style="background: #f8f8f8">
-      <div class="container crtv">
+      <div class="container crtv mt-3">
         <div class="row">
           <div class="col-md-6">
-            <h3><span> Checkout our </span> Biz Konnect Show on CRTV</h3>
-            <img src="assets/home/crtv.png" alt="" />
+            <h3><span> Checkout our Biz  </span> Konnect Show on CRTV</h3>
+            <img class="mt-1" src="assets/home/crtv.png" alt="" />
 
-            <h5>Segment description:</h5>
+          
 
-            <p>
-              Biz Konnect is a 15-minute TV program that highlights the
-              integration of businesses into the world of e-commerce through the
-              bridgeafrica.com platform. Each episode highlights the online shop
-              of the business and its products, prompting viewers to buy from
-              the business. The show is aired every Wednesday on Cameroon’s
-              national public broadcaster, CRTV, and has been running for over 2
-              years.
+            <p class="mt-2">
+             Biz Konnect is a 15-minute TV program that highlights the integration of businesses into the world of e-commerce through the bridgeafrica.com platform. Each episode highlights the online shop of the business and its products, prompting viewers to buy from the business. <br> 
+
+        The show is aired every Wednesday on Cameroon’s national public broadcaster, CRTV, and has been running for over 2 years.
+
             </p>
 
-            <h5 class="mt-5">Episode description</h5>
-            <p>
-              Olivier Mapoure is an Agro Pastoral Engineer who specializes in
-              chicken farming. Located in Yaounde, Cameroon, he is one of the
-              largest providers of chicken in the country.
-            </p>
+           
           </div>
 
           <div class="col-md-6">
@@ -472,24 +464,23 @@
     </section>
 
     <section class="bg-gradient">
-      <div class="container">
+      <div class="container mt-5 mb-5 pb-5 pt-5 white">
         <h3><span> Cameroon-Focused </span> Marketplace</h3>
-        <div class="d-flex w-75">
+        <div class="d-flex w-75 mt-5">
           <span class="text-center m-auto">
-            7500+ <br />
-            Businesses</span
+           <h3>  7500+ </h3> 
+            <span style="color:#9F9F9F"> Businesses </span>  </span>
+          <span class="text-center m-auto">
+           <h3> 13000+ </h3> 
+          <span style="color:#9F9F9F">Customers </span>  </span
           >
           <span class="text-center m-auto">
-            13000+ <br />
-            Customers</span
+           <h3>  100+ </h3> 
+            <span style="color:#9F9F9F">  Industries </span> </span
           >
           <span class="text-center m-auto">
-            100+ <br />
-            Industries</span
-          >
-          <span class="text-center m-auto">
-            7500+ <br />
-            Respond Time</span
+           <h3> 7500+ </h3> 
+            <span style="color:#9F9F9F"> Respond Time </span>   </span
           >
         </div>
       </div>
@@ -500,12 +491,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-7">
-            <img src="assets/home/upgrade_account.png" alt="" />
+            <img class="upgrade-cover" src="assets/home/upgrade_account.png" alt="" />
           </div>
           <div class="col-md-5">
-            <div class="card p-4 mt-5" style="margin-left:-40%; border-radius:20px">
-              <h4>
-                Upgrade your Account Today and Start Selling to the World.
+            <div class="card p-4  mr-2 mt-5" style="margin-left:-40%; margin-right:40%; border-radius:20px">
+              <h4 class="upgrade-text">
+               <span>   Upgrade your Account Today and </span> Start Selling to the World.
               </h4>
               <p>
                 While you can use Bridge Africa for free through a basic
@@ -515,7 +506,8 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="d-flex">
-                    <b-icon icon="bookmarks-fill"> </b-icon>
+                    
+                    <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
                       <h6>Marketplace access:</h6>
                       <p>
@@ -527,7 +519,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex">
-                     <b-icon icon="bookmarks-fill"> </b-icon>
+                     <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
                       <h6>Online Payment System:</h6>
                       <p>
@@ -539,7 +531,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex">
-                     <b-icon icon="bookmarks-fill"> </b-icon>
+                    <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
                      <h6> Rank top on search results:</h6>
                        <p>
@@ -550,7 +542,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex">
-                     <b-icon icon="bookmarks-fill"> </b-icon>
+                    <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
                       <h6> Advanced messaging system:</h6>
                       <p>
@@ -560,24 +552,27 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center"> <b-button variant="primary" > Upgrade </b-button> </div>
+              <div class="text-center"> <b-button variant="primary" class="upgrade-btn" > Upgrade </b-button> </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-  <section class="bg-white">  
-   
-   <div class="container"> 
+  <section style="background: #f8f8f8">  
+  
+   <div class="container pt-6"> 
+    <div class="d-flex">  
+       <img class="mr-auto" style="    width: 80px;" src="assets/home/quote-left.svg" alt="">
     <div class="text-center">  
-     <h4 >
-          {{ $t("general.hear_from_our_buyers") }}
-      </h4>
+     <h3 >
+        <span>  Hear from </span>  our customers
+      </h3>
       <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
   </div>
-
-    <Testimonial /> </div>
+   <img class="ml-auto" style="    width: 80px;" src="assets/home/quote-right.svg" alt="">
+   </div>
+    <Testimonial class="mt-3" /> </div>
 
   </section>
 
@@ -847,6 +842,35 @@ export default {
 
 <style>
 
+.upgrade-acc-img{
+  width: 20px !important;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+.upgrade-cover{
+  height: 650px !important;
+    object-fit: cover !important;
+}
+
+.upgrade-btn{
+  width: 207px;
+
+background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+border-radius: 10px;
+}
+
+.upgrade-text{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+}
+
+.upgrade-text span{
+     color: #e75b17;
+}
+
 .pt-7{
   padding-top: 7rem;
 }
@@ -881,7 +905,7 @@ export default {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 
@@ -907,7 +931,7 @@ export default {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 
@@ -919,7 +943,7 @@ export default {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 
@@ -928,7 +952,7 @@ export default {
 }
 
 .resources p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 26px;
 }
 
@@ -936,7 +960,7 @@ export default {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 .explore-network-img {
@@ -957,8 +981,8 @@ export default {
 }
 
 .babiz-list{
-  padding-left: 10px;
-  margin-left:-6px;
+      padding-left: 20px;
+    margin-left: -4.5px;
   margin-top: 10px;
 }
 
@@ -1005,7 +1029,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 
@@ -1017,7 +1041,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 26px;
 }
 
@@ -1025,7 +1049,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
 }
 
@@ -1033,7 +1057,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 26px;
 }
 
@@ -1066,7 +1090,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 44px;
   /* or 110% */
   color: #ffffff;
@@ -1085,7 +1109,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 26px;
 }
 
@@ -1108,7 +1132,7 @@ line-height: 33px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 26px;
 }
 

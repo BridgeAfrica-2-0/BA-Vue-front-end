@@ -44,6 +44,10 @@
                <hr class="mobile navstyle" />
 
             </b-nav-item>
+            <b-nav-item class="ml-md-1">
+              <div class="border-right" style="border-right:1px solid black"> </div>
+            </b-nav-item>
+            
             <b-nav-item  class="ml-md-1">
               <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />
@@ -67,16 +71,24 @@
             
              <b-navbar-nav class="mr-auto "> 
 
-            <b-nav-item class="ml-md-1">  <b-form-input v-model="text" placeholder="Search "></b-form-input> </b-nav-item>
+            <b-nav-item class="ml-md-1">   
+               <b-input-group>
+              <b-input-group-prepend>
+       <div class="border" style="color:#495057 !important"> <b-icon   class="mt-2 ml-2" icon="search"></b-icon> </div> 
+    </b-input-group-prepend>
+    
+     <b-form-input style="border-left:none" type="search" v-model="text" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
               <b-nav-item class="ml-md-1 m-auto">  
-               <span class="nav-span"> <b-icon icon="person" font-scale="2"> </b-icon> </span> 
+               <span class="nav-span"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
                </b-nav-item>   
             
              <b-nav-item class="ml-md-1 m-auto">
               <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
                <hr class="mobile navstyle" />
               </b-nav-item>
-
+             
+              <div class="border-right m-auto" style=" height: 20px;"> </div>
+           
             <b-nav-item  class="ml-md-1 m-auto">
               <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />

@@ -1,11 +1,11 @@
 <template>
   <!-- Our Resources -->
-  <section class="">
+  <section class="pl-3">
     <div class="row justify-content-center">
       <div class=" text-center">
         <b-tabs active-nav-item-class="active-tab-item">
           <b-tab
-            :title="$t('about.Show_All')"
+            title="All"
             title-link-class="title-linkClass"
             @click="changeResource('bridgeafrica')"
           > 
@@ -753,6 +753,11 @@ export default {
 </script>
 
 <style scoped>
+
+/* .title-linkClass{
+ padding-left: 20px !important;
+} */
+
 .text-capitalised {
   text-transform: uppercase;
 }

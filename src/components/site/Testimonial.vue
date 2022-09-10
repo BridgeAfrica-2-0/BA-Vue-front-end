@@ -3,15 +3,15 @@
 
     
 
-    <div class="container ">
+    <div class="container testimony ">
       
 
       <div>
-        <splide :options="toptions" class="text-center card p-md-5 rounded-b">
+        <splide :options="toptions" class="text-center p-md-5 rounded-b">
           <splide-slide v-for="testi in ctestimonials" :key="testi.Id">
             <div
               style=""
-              class="
+              class=" testi-back
                 text-center
                 p20px
                 pl-md-5
@@ -20,11 +20,17 @@
                 ml-md-5
                 mt-2
                 d-md-flex
+                pt-5 pb-5
               "
             >
               <b-avatar :src="testi.image" size="8rem"></b-avatar>
               <div class="pl-3 pr-3 mt-2">
-                <h2
+
+                 <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
+                  {{ testi.testimoney }}
+                </p>
+
+                <h4
                   class="
                     gem-testimonial-name
                     pl-3
@@ -34,12 +40,12 @@
                   "
                 >
                   {{ testi.name }}
-                </h2>
-                <p class="pr-2 pl-3 mt-2 text-left w-100 gem-testimonial-text">
-                  {{ testi.testimoney }}
-                </p>
+                </h4>
+              
+               
               </div>
             </div>
+
           </splide-slide>
         </splide>
       </div>
@@ -112,6 +118,42 @@ export default {
 };
 </script>
 
+<style scoped>
+.testi-back{
+  background: #FFFFFF;
+ box-shadow: 0px 4px 10px rgba(187, 187, 187, 0.25);
+ border-radius: 20px;
+}
+</style>
 
+<style>
+@media only screen and (min-width: 768px) {
+  .testimony .splide__arrow--prev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .testimony .splide__arrow--next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .testimony .splide__arrow--prev {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .testimony .splide__arrow--next {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+ 
+}
+
+</style>
 
 

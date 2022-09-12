@@ -1,59 +1,28 @@
 <template>
   <!-- Our Resources -->
   <section class="pl-3">
-    <div class="row justify-content-center">
+    <div class="">
       <div class=" text-center">
-        <b-tabs active-nav-item-class="active-tab-item">
+        <b-tabs lazy active-nav-item-class="active-tab-item">
           <b-tab
             title="All"
             title-link-class="title-linkClass"
             @click="changeResource('bridgeafrica')"
           > 
-           <div class="d-flex"> 
-            <div
-              v-for="(resource, i) in renderResources"
-              :key="resource.id"
-              class="col-md-4 mt-4 resource-div"
-            >
-              <div class="resource-img-div" @click="openGallery(i)">
-                <b-img-lazy
-                  :src="resource.thumb"
-                  alt="..."
-                  class="resource-img"
-                />
-              </div>
-              
-            </div>
-            </div>
+         
+            <Videos :videos="renderResources" />
+        
           </b-tab>
-
-
-
-
-
-
 
            <b-tab
             :title='$t("general.how_to_use_bridgeafrica")'
             title-link-class="title-linkClass"
             @click="changeResource('hba')"
           > 
-           <div class="d-flex"> 
-            <div
-              v-for="(resource, i) in renderResources"
-              :key="resource.id"
-              class="col-md-4 mt-4 resource-div"
-            >
-              <div class="resource-img-div" @click="openGallery(i)">
-                <b-img-lazy
-                  :src="resource.thumb"
-                  alt="..."
-                  class="resource-img"
-                />
-              </div>
-              
-            </div>
-            </div>
+         
+            <Videos :videos="renderResources" />
+     
+
           </b-tab>
 
 
@@ -66,22 +35,9 @@
             title-link-class="title-linkClass"
             @click="changeResource('Digital')"
           > 
-           <div class="d-flex"> 
-            <div
-              v-for="(resource, i) in renderResources"
-              :key="resource.id"
-              class="col-md-4 mt-4 resource-div"
-            >
-              <div class="resource-img-div" @click="openGallery(i)">
-                <b-img-lazy
-                  :src="resource.thumb"
-                  alt="..."
-                  class="resource-img"
-                />
-              </div>
-             
-            </div>
-            </div>
+      
+            <Videos :videos="renderResources" />
+     
           </b-tab>
 
 
@@ -92,22 +48,10 @@
             title-link-class="title-linkClass"
              @click="changeResource('fufulde')"
           > 
-           <div class="d-flex"> 
-            <div
-              v-for="(resource, i) in renderResources"
-              :key="resource.id"
-              class="col-md-4 mt-4 resource-div"
-            >
-              <div class="resource-img-div" @click="openGallery(i)">
-                <b-img-lazy
-                  :src="resource.thumb"
-                  alt="..."
-                  class="resource-img"
-                />
-              </div>
-             
-            </div>
-            </div>
+       
+            <Videos :videos="renderResources" />
+       
+          
           </b-tab>
 
 
@@ -145,16 +89,36 @@
 <script>
 import LightBox from "vue-it-bigger";
 import("vue-it-bigger/dist/vue-it-bigger.min.css");
-
+import Videos from "./videos";
 export default {
   name: "Resources",
 
   components: {
-    LightBox,
+    LightBox, Videos
   },
 
   data() {
     return {
+        options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 5,
+        pagination: false,
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 2,
+            gap: "0rem",
+          },
+          992: {
+            perPage: 2,
+            gap: "1rem",
+          },
+        },
+      },
+
       subEmail: "",
       page: 0,
       show_more: true,

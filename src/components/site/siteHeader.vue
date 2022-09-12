@@ -6,11 +6,11 @@
 
     <div class="container-flex"> 
 
-     <b-navbar toggleable="lg" >
+     <b-navbar toggleable="lg" class="p-0 p-lg-1 " >
       
     <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
-          <a class="d-inline-block align-top mt-1" href="#">
+        <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-1">
+          <a class="d-inline-block align-top mt-1 float-left" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
@@ -18,7 +18,7 @@
 
       <div class="container p-0">
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="mr-auto ">
@@ -69,7 +69,7 @@
             </b-navbar-nav>
         </b-collapse>
             
-             <b-navbar-nav class="mr-auto "> 
+             <b-navbar-nav class="mr-auto d-none d-lg-flex "> 
 
             <b-nav-item class="ml-md-1">   
                <b-input-group>
@@ -160,7 +160,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
+.b-none{
+  border: none !important;
+}
 .size{
   height: 15px;
   width: 15px;

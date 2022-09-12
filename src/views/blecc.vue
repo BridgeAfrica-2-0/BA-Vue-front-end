@@ -45,7 +45,7 @@
 
     <section style="background: #f8f8f8">
       <div class="container pt-6">
-        <h3> <span> About </span>  Us  </h3>
+        <h3 class="text-center text-md-left"> <span> About </span>  Us  </h3>
         <p class="pt-2">
           98% of businesses in Cameroon have never done business online, lacking
           digital tools and skills. Our platform helps overcome those barriers
@@ -55,7 +55,7 @@
         </p>
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 pt-2">
             <div class="card about-box p-3">
               <h6>Sell worldwide</h6>
               <p>
@@ -66,7 +66,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 pt-2">
             <div class="card about-box p-3">
               <h6>Buy worldwide</h6>
               <p>
@@ -79,7 +79,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 pt-2">
             <div class="card about-box p-3">
               <h6>Logistics support</h6>
               <p>
@@ -95,8 +95,8 @@
 
 
 
-    <section class="bg-white">
-      <div class="container pt-6">
+    <section class="bg-white pb-3">
+      <div class="container pt-2 pt-md-5 pb-3">
         <div class="market">
           <h3>
             <span class="m-header-color">Buy quality products </span> from our
@@ -106,12 +106,12 @@
             With over 100 categories of products, easily shop from businesses in
             Cameroon anytime, anywhere.
           </p>
-          <div class="d-flex">
+          <div class="d-none d-lg-flex">
             <b-button variant="primary" class=" moreproducts-btn">
               More Products <b-icon icon="arrow-right"> </b-icon>
             </b-button>
           </div>
-          <b-tabs active-nav-item-class="active-tab-item">
+          <b-tabs   active-nav-item-class="active-tab-item">
             <b-tab
               title="Available in cameroon"
               title-link-class="title-linkClass"
@@ -125,6 +125,13 @@
               <products />
             </b-tab>
           </b-tabs>
+
+           <div class=" d-lg-none text-center">
+            <b-button variant="primary" class=" moreproducts-btn">
+              More Products <b-icon icon="arrow-right"> </b-icon>
+            </b-button>
+          </div>
+
         </div>
       </div>
     </section>
@@ -137,6 +144,7 @@
             <h3>
               <span class="m-header-color">Bridge Africa </span> for Businesses
             </h3>
+            <p> Sell online, in person, or both with the marketing tools, aocial integrations, ans sales channels you need to get your products in frotn of customers-and out the door. </p>
 
             <div class="border-left-biz"> 
 
@@ -175,14 +183,15 @@
     <section class="bg-gradient">
       <div class="container ba-business pt-3 pb-3" >
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6  order-2 order-md-1" >
             <img src="assets/home/forcus.png" alt="" />
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 order-1 order-md-2">
             <h3 class="white">
               <span class="m-header-color">Bridge Africa </span> for customers
             </h3>
+            <p>Sell online, in person, or both with the marketing tools, aocial integrations, ans sales channels you need to get your products in frotn of customers-and out the door.</p>
            <div class="border-left-biz mt-2"> 
             <div class="babiz-list ">
               <h5 class="white">Large marketplace and digital payment solution.</h5>
@@ -216,9 +225,9 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container bafind bg-whitee pt-6">
+      <div class="container bafind bg-whitee ">
         <div class="row px-md-5 px-2">
-          <div class="col-md-5 order-2 order-md-1 ">
+          <div class="col-md-5 p-0 p-md-2  ">
             <video
               width="100%"
               style="object-fit:contain; border-radius: 10px; "
@@ -229,7 +238,7 @@
             </video>
           </div>
 
-          <div class="col-md-7 order-1 order-md-2">
+          <div class="col-md-7  ">
             <h3>
               <span> Let’s help you </span> find products and service from
               Cameroon
@@ -361,8 +370,30 @@
       </div>
     </section>
 
+
+<section> 
+
+  <div class="container"> 
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <img src="assets/home/hire_professional.png" alt="">
+        </div>
+      </div>
+      <div class="col-md-6 d-flex">
+        <div class="card m-auto p-5" style="border-radius: 15px;"> 
+          <h3> <span> Hire a  </span> <br>
+professional tailor </h3>
+   <div class="d-block">  
+   <p > Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+industry's standard dummy text ever since</p>
+</div>
+        </div>
+        </div> 
+       </div> </div>
+</section>
     <section style="background: #f8f8f8">
-      <div class="container explore-network pt-6 pb-2">
+      <div class="container explore-network pt-3 pb-2">
         <h3><span> Explore </span> Networks</h3>
         <p>
           Our network accounts can help you work with key sectors of Cameroon's
@@ -370,17 +401,17 @@
         </p>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 mt-3">
             <div class="card h-100 p-3">
               <div class="row h-100">
-                <div class="col-7">
+                <div class="col-lg-7 order-2 order-md-1 ">
                   <h5>Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
-                  <b-button variant="primary" class="mt-auto"> View More </b-button>
+                  <div class="text-center">  <b-button variant="primary" class="mt-auto explore-btn"> View More </b-button> </div>
                 </div>
-                <div class="col-5">
+                <div class="col-lg-5 order-1 order-md-2">
                   <b-img-lazy
-                    class="explore-network-img h-100"
+                    class="explore-network-img "
                     src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
                     alt="alternative"
                   />
@@ -389,17 +420,17 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 mt-3">
             <div class="card h-100 p-3">
               <div class="row">
-                <div class="col-7">
+                <div class="col-md-7 order-2 order-md-1">
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
-                  <b-button variant="primary"> View More </b-button>
+                 <div class="text-center">   <b-button variant="primary" class="explore-btn"> View More </b-button>  </div> 
                 </div>
-                <div class="col-5">
+                <div class="col-md-5 order-1 order-md-2">
                   <b-img-lazy
-                    class="explore-network-img h-100"
+                    class="explore-network-img "
                     src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
                     alt="alternative"
                   />
@@ -412,9 +443,9 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container resources pt-5">
+      <div class="container resources pt-3">
         <div class="row">
-          <div class="col-10">
+          <div class="col-lg-10">
             <h3>
               <span> Digital Education </span> to help you make more money
               online
@@ -427,7 +458,7 @@
             </p>
           </div>
 
-          <div class="col-2 text-center m-auto">
+          <div class=" d-none d-lg-block col-lg-2 text-center m-auto">
             <b-icon icon="chevron-left" font-scale="2"> </b-icon>
             <b-icon icon="chevron-right" font-scale="2"> </b-icon>
           </div>
@@ -464,9 +495,9 @@
     </section>
 
     <section class="bg-gradient">
-      <div class="container mt-5 mb-5 pb-5 pt-5 white">
+      <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 white">
         <h3><span> Cameroon-Focused </span> Marketplace</h3>
-        <div class="d-flex w-75 mt-5">
+        <div class=" d-none d-lg-flex w-75 mt-5">
           <span class="text-center m-auto">
            <h3>  7500+ </h3> 
             <span style="color:#9F9F9F"> Businesses </span>  </span>
@@ -483,18 +514,46 @@
             <span style="color:#9F9F9F"> Respond Time </span>   </span
           >
         </div>
+
+        <div  class="row d-lg-none">  
+         
+          <div class="col-6 mt-2"> <span class="text-left">
+           <h3>  7500+ </h3> 
+            <span style="color:#9F9F9F"> Businesses </span>  </span></div>
+          <div class="col-6 mt-2">
+             <span class="text-left">
+           <h3> 13000+ </h3> 
+          <span style="color:#9F9F9F">Customers </span>  </span
+          >
+
+          </div>
+          <div class="col-6 mt-2">
+
+            <span class="text-left">
+           <h3>  100+ </h3> 
+            <span style="color:#9F9F9F">  Industries </span> </span
+          >
+
+          </div>
+           <div class="col-6 mt-2">
+             <span class="text-left">
+           <h3> 7500+ </h3> 
+            <span style="color:#9F9F9F"> Respond Time </span>   </span
+          >
+           </div>
+        </div>
       </div>
     </section>
 
     <!-- upgrade account section -->
-    <section class="bg-white p-5">
+    <section class="bg-white p-md-5">
       <div class="container">
         <div class="row">
           <div class="col-md-7">
             <img class="upgrade-cover" src="assets/home/upgrade_account.png" alt="" />
           </div>
           <div class="col-md-5">
-            <div class="card p-4  mr-2 mt-5" style="margin-left:-40%; margin-right:40%; border-radius:20px">
+            <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " >
               <h4 class="upgrade-text">
                <span>   Upgrade your Account Today and </span> Start Selling to the World.
               </h4>
@@ -697,7 +756,7 @@ export default {
       this.showfadde = true;
 
       setTimeout(() => {
-        this.loadfinish();
+       
       }, 2000);
     },
 
@@ -842,15 +901,6 @@ export default {
 
 <style>
 
-.upgrade-acc-img{
-  width: 20px !important;
-  margin-bottom: auto;
-  margin-right: 10px;
-}
-.upgrade-cover{
-  height: 650px !important;
-    object-fit: cover !important;
-}
 
 .upgrade-btn{
   width: 207px;
@@ -901,7 +951,86 @@ line-height: 44px;
   border-radius: 5px;
 }
 
-.bridge-home h3 {
+
+@media only screen and (max-width: 768px) {
+
+
+  .upgrade-acc-img{
+  width: 20px !important;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+.upgrade-cover{
+  height: 290px !important;
+    object-fit: contain !important;
+}
+
+.upgrade-side-box{
+ border: none;
+}
+   
+   .bridge-home h3 {
+  font-family: "Poppins";
+  font-style: normal;
+ font-weight: 700;
+font-size: 22px;
+line-height: 33px;
+}
+
+.bridge-home h3 span {
+  color: #e75b17;
+}
+
+
+.bridge-home h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+  align-items: center;
+}
+
+.bridge-home p {
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.explore-network-img {
+ 
+  object-fit: cover;
+  border-radius: 10px;
+  height: 210px !important;
+}
+
+}
+
+@media only screen and (min-width: 768px) {
+
+  .upgrade-acc-img{
+  width: 20px !important;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+
+.upgrade-cover{
+  height: 650px !important;
+    object-fit: cover !important;
+}
+
+
+.upgrade-side-box{
+
+ margin-left:-40%;
+  margin-right:40%;
+
+   background: #FFFFFF;
+box-shadow: 0px 20px 55px rgba(0, 0, 0, 0.13);
+border-radius: 20px;
+padding: 2rem;
+}
+
+   .bridge-home h3 {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
@@ -911,6 +1040,13 @@ line-height: 44px;
 
 .bridge-home h3 span {
   color: #e75b17;
+}
+ 
+ .explore-network-img {
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 10px;
+  
 }
 
 .bridge-home h5 {
@@ -927,50 +1063,15 @@ line-height: 44px;
   line-height: 26px;
 }
 
-.bafind h3 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 44px;
 }
 
-.bafind h3 span {
-  color: #e75b17;
-}
 
-.resources h3 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 44px;
-}
 
-.resources h3 span {
-  color: #e75b17;
-}
-
-.resources p {
-  font-size: 14px;
-  line-height: 26px;
-}
-
-.explore-network h3 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 44px;
-}
-.explore-network-img {
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.explore-network h3 span {
-  color: #e75b17;
+.explore-btn{
+  width: 207px;
+height: 43.5px;
+background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+border-radius: 10px;
 }
 
 
@@ -1025,50 +1126,10 @@ line-height: 44px;
 line-height: 33px;
 }
 
-.market h3 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 44px;
-}
 
-.market h3 .m-header-color {
-  color: #e75b17;
-}
 
-.market p {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 26px;
-}
 
-.ba-business h3 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 44px;
-}
 
-.ba-business p {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 26px;
-}
-
-.ba-business h5 {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 33px;
-  align-items: center;
-}
 
 .ba-business h3 .m-header-color {
   color: #e75b17;
@@ -1152,4 +1213,48 @@ line-height: 33px;
   color: #e75b17;
   border-color: #ffffff;
 }
+</style>
+
+<style>
+@media only screen and (max-width: 768px) {
+  .bridge-home .nav-tabs .nav-link {
+    border-radius: 0.25rem;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .mbl-wrap {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .nav.nav-tabs {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 500px;
+    overflow: auto;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .nav.nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+   
+
+    .nav-tabs .nav-link.active-tab-item {
+    background-color: white !important;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-family: poppins !important;
+    color: #455a64;
+    border-bottom: 4px solid red !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    }
+
 </style>

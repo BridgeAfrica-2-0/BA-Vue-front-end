@@ -2,49 +2,55 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 p-0">
-            <div class="orange-bg p-3">
-              <div class="row">
-                <div class="col-md-6">
-                  <h5>
-                    Setup your e-commerce shop and sell to millions around you
-                    and the world.
-                  </h5>
-                <div class="pt-2"> <button class="mt-5">Register</button> </div>
-                  
-                </div>
+    <section class="p-0 pt-md-4 pb-2">
+  
+     <div class="d-md-none">  
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        controls
+        indicators
+     
+      
+      >
+        <!-- Text slides with image -->
+        <!-- <b-carousel-slide class="cover"
+          img-src="assets/home/leftslide.png"
+        ></b-carousel-slide>   -->
+
+        <b-carousel-slide class="cover"
+          img-src="assets/home/leftslide-sm.png"
+        ></b-carousel-slide>
+
+          <b-carousel-slide class="cover"
+             img-src="assets/home/right-slide-sm.png"
+        ></b-carousel-slide>
+         </b-carousel>
+    </div>
+
+
+      <div class="container d-none d-md-block main-banner"  >
+        <div class="row h-100">
+          <div class="col-md-8 h-100 pl-0 "> 
+           
+
+            
+            <img src="assets/home/middleslide.png" class="h-100 w-100 cover" alt=""> 
              
-              <div class="col-md-6">
-             <div> <img src="assets/home/topbanner.png" alt=""></div>
-              </div> 
-                
-              </div>
-            </div>
+            
+     
           </div>
 
-          <div class="col-md-4">
-            <div class="bg-gray p-3">
-              <p>Find products and services you need, anytime, anywhere</p>
-              <br />
-              <small class="mt-2">
-                98% of businesses in Cameroon have never done business online,
-                lacking digital tools and skills.
-              </small>
-              <br /><br /><br />
-              <span class="percent mt-3"> 15% Off </span> <br />
-              <br />
-              <button>shop Now</button>
-            </div>
+          <div class="col-md-4 h-100 pr-0">
+            <img src="assets/home/rightslider.png" class="h-100 w-100" alt="">
           </div>
         </div>
       </div>
     </section>
 
     <section style="background: #f8f8f8">
-      <div class="container pt-6">
+      <div class="container pt-5  pb-5 ">
         <h3 class="text-center text-md-left"> <span> About </span>  Us  </h3>
         <p class="pt-2">
           98% of businesses in Cameroon have never done business online, lacking
@@ -54,9 +60,9 @@
           years.
         </p>
 
-        <div class="row">
-          <div class="col-md-4 pt-2">
-            <div class="card about-box p-3">
+        <div class="row h-100">
+          <div class="col-md-4 pt-2 ">
+            <div class="about-box p-3 h-100">
               <h6>Sell worldwide</h6>
               <p>
                 All-in-one platform helping businesses in Africa to sell online
@@ -67,7 +73,7 @@
           </div>
 
           <div class="col-md-4 pt-2">
-            <div class="card about-box p-3">
+            <div class=" about-box h-100 p-3">
               <h6>Buy worldwide</h6>
               <p>
                 All-in-one platform helping businesses in Africa to sell online
@@ -80,7 +86,7 @@
           </div>
 
           <div class="col-md-4 pt-2">
-            <div class="card about-box p-3">
+            <div class=" about-box h-100 p-3">
               <h6>Logistics support</h6>
               <p>
                 All-in-one platform helping businesses in Africa to sell online
@@ -351,7 +357,7 @@
                   </span> -->
                     </b-form-group>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12 col-lg-6">
                     <b-button
                       type="submit"
                       variant="primary"
@@ -380,15 +386,16 @@
           <img src="assets/home/hire_professional.png" alt="">
         </div>
       </div>
-      <div class="col-md-6 d-flex">
-        <div class="card m-auto p-5" style="border-radius: 15px;"> 
-          <h3> <span> Hire a  </span> <br>
-professional tailor </h3>
+      <div class="col-md-6 ">
+        <div class=""> 
+        <div class="hire-dev m-auto mt-md-3  p-2 p-lg-5" style="border-radius: 15px;"> 
+          <h3> <span> Hire a  </span> <br>    
+       professional tailor </h3>
    <div class="d-block">  
-   <p > Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-industry's standard dummy text ever since</p>
-</div>
+   <p > Lorem Ipsum is simply dummy text</p>
+      </div>
         </div>
+         </div>
         </div> 
        </div> </div>
 </section>
@@ -404,12 +411,14 @@ industry's standard dummy text ever since</p>
           <div class="col-md-6 mt-3">
             <div class="card h-100 p-3">
               <div class="row h-100">
-                <div class="col-lg-7 order-2 order-md-1 ">
+                <div class="col-lg-7 order-2 order-lg-1 ">
                   <h5>Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
-                  <div class="text-center">  <b-button variant="primary" class="mt-auto explore-btn"> View More </b-button> </div>
+                  <div class="text-center"> 
+                     <b-button variant="primary" class="mt-auto explore-btn"> View More </b-button> 
+                  </div>
                 </div>
-                <div class="col-lg-5 order-1 order-md-2">
+                <div class="col-lg-5 order-1 order-lg-2">
                   <b-img-lazy
                     class="explore-network-img "
                     src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
@@ -423,12 +432,13 @@ industry's standard dummy text ever since</p>
           <div class="col-md-6 mt-3">
             <div class="card h-100 p-3">
               <div class="row">
-                <div class="col-md-7 order-2 order-md-1">
+                <div class="col-lg-7 order-2 order-lg-1">
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
-                 <div class="text-center">   <b-button variant="primary" class="explore-btn"> View More </b-button>  </div> 
+                 <div class="text-center">  
+                   <b-button variant="primary" class="explore-btn "> View More </b-button>  </div> 
                 </div>
-                <div class="col-md-5 order-1 order-md-2">
+                <div class="col-lg-5 order-1 order-lg-2">
                   <b-img-lazy
                     class="explore-network-img "
                     src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
@@ -497,7 +507,7 @@ industry's standard dummy text ever since</p>
     <section class="bg-gradient">
       <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 white">
         <h3><span> Cameroon-Focused </span> Marketplace</h3>
-        <div class=" d-none d-lg-flex w-75 mt-5">
+        <div class=" d-none d-md-flex w-75 mt-5">
           <span class="text-center m-auto">
            <h3>  7500+ </h3> 
             <span style="color:#9F9F9F"> Businesses </span>  </span>
@@ -515,7 +525,7 @@ industry's standard dummy text ever since</p>
           >
         </div>
 
-        <div  class="row d-lg-none">  
+        <div  class="row d-md-none">  
          
           <div class="col-6 mt-2"> <span class="text-left">
            <h3>  7500+ </h3> 
@@ -549,10 +559,10 @@ industry's standard dummy text ever since</p>
     <section class="bg-white p-md-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-7">
-            <img class="upgrade-cover" src="assets/home/upgrade_account.png" alt="" />
+          <div class="col-md-6 col-lg-7">
+            <img class="upgrade-cover w-100" src="assets/home/upgrade_account.png" alt="" />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6 col-lg-5">
             <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " >
               <h4 class="upgrade-text">
                <span>   Upgrade your Account Today and </span> Start Selling to the World.
@@ -674,7 +684,8 @@ export default {
       location: "",
       word1: "",
       word2: "",
-
+      slide: 0,
+      sliding: null,
       showblock: true,
       showfadde: false,
       showfaddeB: true,
@@ -899,9 +910,42 @@ export default {
 };
 </script>
 
+<style scoped>
+
+@media only screen and (max-width: 960px) { 
+   .main-banner{
+    height:200px;
+   }
+   .cover{
+      border-radius: 10px;
+   }
+
+   .explore-network-img {
+ 
+  object-fit: cover;
+  border-radius: 10px;
+  height: 210px !important;
+}
+}
+
+@media only screen and (min-width: 960px) {
+   .main-banner{
+    height:417px;
+   }
+
+   .cover{
+        object-fit: revert !important;
+   }
+}
+
+</style>
+
 <style>
 
+.cover{
+  object-fit: cover;
 
+}
 .upgrade-btn{
   width: 207px;
 
@@ -963,6 +1007,7 @@ line-height: 44px;
 .upgrade-cover{
   height: 290px !important;
     object-fit: contain !important;
+    border-radius: 10px;
 }
 
 .upgrade-side-box{
@@ -996,16 +1041,36 @@ line-height: 24px;
   line-height: 26px;
 }
 
-.explore-network-img {
- 
-  object-fit: cover;
-  border-radius: 10px;
-  height: 210px !important;
+
+
+}
+
+@media only screen and (min-width: 960px) {
+   
+.upgrade-side-box{
+
+ margin-left:-40%;
+  /* margin-right:40%; */
+
+   background: #FFFFFF;
+box-shadow: 0px 20px 55px rgba(0, 0, 0, 0.13);
+border-radius: 20px;
+padding: 2rem;
 }
 
 }
+
 
 @media only screen and (min-width: 768px) {
+
+ .hire-dev{
+
+background: #FFFFFF;
+border: 1px solid #DEDEDE;
+box-shadow: 0px 4px 10px rgba(227, 227, 227, 0.25);
+border-radius: 15px;
+
+ }
 
   .upgrade-acc-img{
   width: 20px !important;
@@ -1016,19 +1081,10 @@ line-height: 24px;
 .upgrade-cover{
   height: 650px !important;
     object-fit: cover !important;
+    border-radius: 10px;
 }
 
 
-.upgrade-side-box{
-
- margin-left:-40%;
-  margin-right:40%;
-
-   background: #FFFFFF;
-box-shadow: 0px 20px 55px rgba(0, 0, 0, 0.13);
-border-radius: 20px;
-padding: 2rem;
-}
 
    .bridge-home h3 {
   font-family: "Poppins";

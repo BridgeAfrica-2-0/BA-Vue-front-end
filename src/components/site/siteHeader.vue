@@ -6,17 +6,17 @@
 
     <div class="container-flex"> 
 
-     <b-navbar toggleable="lg" class="p-0 p-lg-1 " >
-      
+     <b-navbar toggleable="lg" class=" p-0 border-bottom"  >
+        <div class="container p-0 m-0"> 
     <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-1">
+        <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-2">
           <a class="d-inline-block align-top mt-1 float-left" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
         </div>
 
-      <div class="container p-0">
+      <div class="d-flex w-100 p-0">
 
         <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
 
@@ -79,7 +79,7 @@
     
      <b-form-input style="border-left:none" type="search" v-model="text" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
               <b-nav-item class="ml-md-1 m-auto">  
-               <span class="nav-span"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
+               <span class="nav-span" style="color:#455a64"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
                </b-nav-item>   
             
              <b-nav-item class="ml-md-1 m-auto">
@@ -110,9 +110,9 @@
 
                </b-navbar-nav>
 
-      </div>
+      </div> </div>
     </b-navbar>
- <hr class="w-100" style="margin-top:1px">
+ 
       </div>
   <!-- </header>  -->
 </template>
@@ -153,6 +153,13 @@ export default {
   }
 };
 </script>
+
+<style >
+  a{
+    color: #455a64 !important;
+  }
+</style>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -246,7 +253,7 @@ export default {
 
 @media only screen and (min-width: 768px) {
   .balogo{
-    width: 200px ;
+    width: 165px ;
    
   }
   .mobile{

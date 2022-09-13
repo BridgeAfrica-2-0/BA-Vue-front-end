@@ -47,7 +47,7 @@ export default {
             gap: "0rem",
           },
           992: {
-            perPage: 2,
+            perPage: 3,
             gap: "1rem",
           },
         },

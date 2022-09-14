@@ -73,11 +73,11 @@
 
             <b-nav-item class="ml-md-1">   
                <b-input-group>
-              <b-input-group-prepend>
+              <b-input-group-prepend @click="Search">
        <div class="border" style="color:#495057 !important"> <b-icon   class="mt-2 ml-2" icon="search"></b-icon> </div> 
     </b-input-group-prepend>
     
-     <b-form-input style="border-left:none" type="search" v-model="text" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
+     <b-form-input v-on:keyup.enter='Search' style="border-left:none" type="search" v-model="keyword" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
               <b-nav-item class="ml-md-1 m-auto">  
                <span class="nav-span" style="color:#455a64"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
                </b-nav-item>   
@@ -124,7 +124,8 @@ export default {
   data(){
     return {
       img: require("../../assets/img/about/en.png"),
-      lang: 'EN'
+      lang: 'EN',
+      keyword:''
     }
   },
   computed: {
@@ -139,6 +140,18 @@ export default {
  * this fuction is use to change the user language
  * @private
  */
+
+    Search() {
+      if (!this.keyword) return false;
+
+      if (this.$route.name != "Search") {
+        this.$router.push({
+          name: "GlobalSearch",
+          query: { keyword: this.keyword },
+        });
+      }
+    },
+
     change(lang){
       this.$i18n.locale = lang;
 

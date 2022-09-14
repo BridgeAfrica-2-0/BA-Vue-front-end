@@ -48,36 +48,32 @@
         </div>
       </div>
     </section>
-
-    <section style="background: #f8f8f8">
-      <div class="container pt-5  pb-5 ">
-        <h3 class="text-center text-md-left"> <span> About </span>  Us  </h3>
+ 
+    <section style="background: #f8f8f8" class="pt-1 pb-1">
+      <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
+        <h3 class="text-center text-md-left"> <span>  {{ $t("general.About") }}  </span>  {{ $t("general.Us") }}   </h3>
         <p class="pt-2">
-          98% of businesses in Cameroon have never done business online, lacking
-          digital tools and skills. Our platform helps overcome those barriers
-          so they can do business locally and internationally. Currently based
-          in Cameroon, we plan to expand to the rest of Africa in the next few
-          years.
+           {{ $t("general.help_small_and_medium_size") }}
         </p>
 
         <div class="row h-100">
           <div class="col-md-4 pt-2 ">
-            <div class="about-box p-3 h-100">
-              <h6>Sell worldwide</h6>
+            <div class="about-box p-3 h-100"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500" >
+              <h6>   {{ $t("general.sell_world_wide") }}  </h6>
               <p>
-                All-in-one platform helping businesses in Africa to sell online
-                worldwide for the very first time
+                {{ $t("general.all_in_one") }}
+                
               </p>
               <div> <img src="assets/home/about_sell.png" alt=""> </div>
             </div>
           </div>
 
           <div class="col-md-4 pt-2">
-            <div class=" about-box h-100 p-3">
-              <h6>Buy worldwide</h6>
+            <div class=" about-box h-100 p-3"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+              <h6> {{ $t("general.buy_world_wide") }} </h6>
               <p>
-                All-in-one platform helping businesses in Africa to sell online
-                worldwide for the very first time
+              {{ $t("general.buy_world_wide_customers") }} 
+
               </p>
               <div> 
                 <img src="assets/home/about_buy.png" alt="">
@@ -86,11 +82,11 @@
           </div>
 
           <div class="col-md-4 pt-2">
-            <div class=" about-box h-100 p-3">
-              <h6>Logistics support</h6>
-              <p>
-                All-in-one platform helping businesses in Africa to sell online
-                worldwide for the very first time
+            <div class=" about-box h-100 p-3"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+              <h6> {{ $t("general.logistics_support") }} </h6>
+              <p>{{ $t("general.we_support_businese_throughout") }}
+
+      
               </p>
               <div> <img src="assets/home/about_sell.png" alt=""></div>
             </div>
@@ -100,32 +96,30 @@
     </section>
 
 
-
-    <section class="bg-white pb-3">
+ 
+    <section class="bg-white pb-3 pt-1" >
+      
       <div class="container pt-2 pt-md-5 pb-3">
         <div class="market">
-          <h3>
-            <span class="m-header-color">Buy quality products </span> from our
-            Marketplace in Cameroon and around the world
+           <h3 data-aos="zoom-in" data-aos-offset="70px" data-aos-duration="1500">
+            <span class="m-header-color"> {{ $t("general.buy_quality_product") }}  </span> {{ $t("general.from_ourMarket_place") }} 
           </h3>
-          <p class="mt-2">
-            With over 100 categories of products, easily shop from businesses in
-            Cameroon anytime, anywhere.
+          <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
           </p>
           <div class="d-none d-lg-flex">
             <b-button variant="primary" class=" moreproducts-btn">
-              More Products <b-icon icon="arrow-right"> </b-icon>
+             {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
             </b-button>
           </div>
           <b-tabs   active-nav-item-class="active-tab-item">
-            <b-tab
-              title="Available in cameroon"
+            <b-tab 
+              :title="$t('general.avaliable_in_cameroon')" 
               title-link-class="title-linkClass"
             >
               <products />
             </b-tab>
             <b-tab
-              title="Available world wide"
+              :title="$t('general.avaliable_in_worlwide')" 
               title-link-class="title-linkClass"
             >
               <products />
@@ -134,52 +128,52 @@
 
            <div class=" d-lg-none text-center">
             <b-button variant="primary" class=" moreproducts-btn">
-              More Products <b-icon icon="arrow-right"> </b-icon>
+            {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
             </b-button>
           </div>
 
         </div>
       </div>
+      
     </section>
 
 
     <section style="background: #f8f8f8">
-      <div class="container ba-business pt-6">
+      <div class="container ba-business pt-5 pb-5">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
             <h3>
-              <span class="m-header-color">Bridge Africa </span> for Businesses
+              <span class="m-header-color">Bridge Africa </span> {{ $t("general.for_busineses") }} 
             </h3>
-            <p> Sell online, in person, or both with the marketing tools, aocial integrations, ans sales channels you need to get your products in frotn of customers-and out the door. </p>
+            <p> {{ $t("general.sell_online_in_person") }}  </p>
 
             <div class="border-left-biz"> 
 
             <div class="babiz-list">
-              <h5>Business Identity and Online Marketplace</h5>
+              <h5> {{ $t("general.business_identity_and_oline") }} </h5>
               <p>
-                Create your business page and sell to millions around you and
-                the world though our online marketplace.
+                {{ $t("general.create_your_business_page") }}
               </p>
             </div>
 
             <div class="babiz-list ">
-              <h5>Online business database</h5>
+              <h5> {{ $t("general.online_business_database") }} </h5>
               <p>
-                Make your business visible and locatable with the help of our
-                business directory to reach a wider market.
+               {{ $t("general.make_your_business_visible") }} 
               </p>
             </div>
 
             <div class="babiz-list ">
-              <h5>Unified back-office</h5>
+              <h5> {{ $t("general.unified_back_office") }} </h5>
               <p>
-                Use your dashboard to manage all your products, see how your
-                business is doing, and engage with your customers.
+                 {{ $t("general.easily_manage_your_business") }}
+
+                
               </p>
             </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">
             <img src="assets/home/forbiz.png" alt="" />
           </div>
         </div>
@@ -187,41 +181,35 @@
     </section>
 
     <section class="bg-gradient">
-      <div class="container ba-business pt-3 pb-3" >
+      <div class="container ba-business pt-5 pb-5" >
         <div class="row">
-          <div class="col-md-6  order-2 order-md-1" >
+          <div class="col-md-6  order-2 order-md-1" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500" >
             <img src="assets/home/forcus.png" alt="" />
           </div>
 
-          <div class="col-md-6 order-1 order-md-2">
+          <div class="col-md-6 order-1 order-md-2" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
             <h3 class="white">
-              <span class="m-header-color">Bridge Africa </span> for customers
+              <span class="m-header-color">Bridge Africa </span>  {{ $t("general.for_customers") }}
             </h3>
-            <p>Sell online, in person, or both with the marketing tools, aocial integrations, ans sales channels you need to get your products in frotn of customers-and out the door.</p>
-           <div class="border-left-biz mt-2"> 
+             <div class="border-left-biz mt-2"> 
             <div class="babiz-list ">
-              <h5 class="white">Large marketplace and digital payment solution.</h5>
+              <h5 class="white"> {{ $t("general.large_marketplace_and_digital") }}</h5>
               <p class="">
-                We help customers worldwide to buy products and services from
-                Cameroon, and seamlessly pay using local and international
-                payment solutions.
+                {{ $t("general.we_help_customers_online_to") }}
               </p>
             </div>
 
             <div class="babiz-list ">
-              <h5 class="white">Localised business directory</h5>
+              <h5 class="white"> {{ $t("general.localize_business_directory") }} </h5>
               <p class="">
-                We help you easily find businesses with affordable prices,
-                giving you the ability to compare businesses with the best
-                pricing around you..
+                {{ $t("general.we_help_you_easily_find") }}
               </p>
             </div>
 
             <div class="babiz-list ">
-              <h5 class="white" >Community engagement</h5>
+              <h5 class="white" > {{ $t("general.community_engageMent") }} </h5>
               <p class="">
-                Follow and communicate with businesses to remain up to date on
-                latest offers.
+                {{ $t("general.follow_and_communicate_with") }}
               </p>
             </div>
           </div>
@@ -231,7 +219,7 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container bafind bg-whitee ">
+      <div class="container bafind bg-whitee  pt-5 pb-5"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row px-md-5 px-2">
           <div class="col-md-5 p-0 p-md-2  ">
             <video
@@ -246,123 +234,108 @@
 
           <div class="col-md-7  ">
             <h3>
-              <span> Let’s help you </span> find products and service from
-              Cameroon
+              <span>{{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
             </h3>
 
             <div class="m-left">
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
                   <div class="col-md-12">
-                    <b-form-group :class="getValidationClass('pname')" class="">
-                      <label for="name" class="">
-                        {{ $t("general.looking_for_something") }}
-                      </label>
-                      <b-form-input
-                        id="name"
-                        name="name"
-                        class="ba-input"
-                        v-model="form.pname"
-                        placeholder="Looking for something"
-                      >
-                      </b-form-input>
 
-                      <!-- <span class="error" v-if="!$v.form.pname.required">
+                 <md-field :class="getValidationClass('pname')">
+                  <label for="name" class=" p-2">
+                    {{ $t("general.looking_for_something") }}
+                  </label>
+                  <md-input
+                    type="text"
+                    name="name"
+                    class="ba-input "
+                    id="name"
+                    v-model="form.pname"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.pname.required">
                     required
-                  </span> -->
-                    </b-form-group>
+                  </span>
+                </md-field>
+
+
+
                   </div>
 
                   <div class="col-md-6">
-                    <b-form-group
-                      :class="getValidationClass('quantity')"
-                      class=""
-                    >
-                      <label for="qunatity" class="">
-                        {{ $t("general.Quantity") }}
-                      </label>
-                      <b-form-input
-                        type="number"
-                        id="quantity"
-                        name="qunatity"
-                        class="ba-input"
-                        v-model="form.quantity"
-                        placeholder="quantity"
-                      >
-                      </b-form-input>
-                      <!-- <span class="error" v-if="!$v.form.pname.required">
-                    required
-                  </span> -->
-                    </b-form-group>
+                     <md-field :class="getValidationClass('quantity')">
+                  <label for="qunatity" class="p-2">
+                    {{ $t("general.Quantity") }}
+                  </label>
+                  <md-input
+                     class="ba-input "
+                    type="number"
+                    name="qunatity"
+                    id="quantity"
+                    v-model="form.quantity"
+                  />
+                </md-field>
                   </div>
 
                   <div class="col-md-6">
-                    <b-form-group :class="getValidationClass('name')" class="">
-                      <label for="uname" class="">
-                        {{ $t("general.full_name") }}
-                      </label>
-                      <b-form-input
-                        type="text"
-                        id="uname"
-                        name="uname"
-                        class="ba-input"
-                        v-model="form.name"
-                        placeholder="quantity"
-                      >
-                      </b-form-input>
-                      <!-- <span class="md-error" v-if="!$v.form.name.required">
+                     
+                  <md-field :class="getValidationClass('name')">
+                  <label for="uname" class="p-2">
+                    {{ $t("general.full_name") }}
+                  </label>
+                  <md-input
+                    type="text"
+                    name="uname"
+                    id="uname"
+                     class="ba-input "
+                    v-model="form.name"
+                  />
+
+                  <span class="md-error" v-if="!$v.form.name.required">
                     {{ $t("auth.First_Name_is_required") }}
-                  </span> -->
-                    </b-form-group>
+                  </span>
+                </md-field>
+
                   </div>
 
                   <div class="col-md-6">
-                    <b-form-group :class="getValidationClass('email')" class="">
-                      <label for="email" class="">
-                        {{ $t("general.Email") }}
-                      </label>
-
-                      <b-form-input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="ba-input"
-                        v-model="form.email"
-                        placeholder="email"
-                      >
-                      </b-form-input>
-                      <!-- <span class="error" v-if="!$v.form.email.required">
-                    required
-                  </span> -->
-                    </b-form-group>
+                     <md-field class="">
+                  <label for="email" class="p-2">
+                    {{ $t("general.Email") }}
+                  </label>
+                  <md-input
+                    type="email"
+                    name="email"
+                    id="email"
+                     class="ba-input "
+                    v-model="form.email"
+                  />
+                </md-field>
                   </div>
 
                   <div class="col-md-6">
-                    <b-form-group :class="getValidationClass('tel')" class="">
-                      <label for="tel" class="">
-                        {{ $t("general.Tel") }}
-                      </label>
+                  <md-field :class="getValidationClass('tel')">
+                  <label for="name" class="p-2"> {{ $t("general.Tel") }} </label>
+                  <md-input
+                    type="number"
+                    name="tel"
+                    id="tel"
+                     class="ba-input "
+                    v-model="form.tel"
+                  />
 
-                      <b-form-input
-                        type="text"
-                        id="tel"
-                        name="tel"
-                        class="ba-input"
-                        v-model="form.tel"
-                        placeholder="Phone"
-                      >
-                      </b-form-input>
-                      <!-- <span class="error" v-if="!$v.form.tel.required">
-                    required
-                  </span> -->
-                    </b-form-group>
+                  <span class="md-error" v-if="!$v.form.tel.required">
+                    {{ $t("auth.tel_is_required") }}
+                  </span>
+                </md-field>
                   </div>
                   <div class="col-md-12 col-lg-6">
                     <b-button
                       type="submit"
                       variant="primary"
                       block
-                      class="mb-3 request-quote"
+                      class="mb-3 quote-btn"
                     >
                       {{ $t("general.Request_For_Quotation") }}
                     </b-button>
@@ -379,32 +352,38 @@
 
 <section> 
 
-  <div class="container"> 
+  <div class="container pt-5 pb-5"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
     <div class="row">
-      <div class="col-md-6">
+      
+      <div class="col-md-6 ">
+        <div class=""> 
+        <div class=" m-auto mt-md-3  p-2 p-lg-5" style="border-radius: 15px;"> 
+          <h3> <span> {{ $t("general.Tailor") }} </span> <br>     
+       - {{ $t("general.Transformed") }} </h3>
+   <div class="d-block">  
+   <p > {{ $t("general.hire_a_professional_tailor") }} </p>
+      </div>
+        </div>
+       <div class=" p-2 p-lg-5 text-left">  
+        <b-button variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }} </b-button>
+        </div>
+         </div>
+        </div> 
+
+
+        <div class="col-md-6">
         <div>
           <img src="assets/home/hire_professional.png" alt="">
         </div>
       </div>
-      <div class="col-md-6 ">
-        <div class=""> 
-        <div class="hire-dev m-auto mt-md-3  p-2 p-lg-5" style="border-radius: 15px;"> 
-          <h3> <span> Hire a  </span> <br>    
-       professional tailor </h3>
-   <div class="d-block">  
-   <p > Lorem Ipsum is simply dummy text</p>
-      </div>
-        </div>
-         </div>
-        </div> 
+
        </div> </div>
 </section>
     <section style="background: #f8f8f8">
-      <div class="container explore-network pt-3 pb-2">
-        <h3><span> Explore </span> Networks</h3>
+      <div class="container explore-network pt-5 pb-5"   data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500"  >
+        <h3><span> {{ $t("general.Explore") }}  </span> {{ $t("general.Networks") }} </h3>
         <p>
-          Our network accounts can help you work with key sectors of Cameroon's
-          business spectrum
+          {{ $t("general.our_network_accounts") }}
         </p>
 
         <div class="row">
@@ -412,10 +391,10 @@
             <div class="card h-100 p-3">
               <div class="row h-100">
                 <div class="col-lg-7 order-2 order-lg-1 ">
-                  <h5>Textile Artisans of Cameroon</h5>
+                  <h5> Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
                   <div class="text-center"> 
-                     <b-button variant="primary" class="mt-auto explore-btn"> View More </b-button> 
+                     <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> 
                   </div>
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2">
@@ -436,7 +415,7 @@
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
                  <div class="text-center">  
-                   <b-button variant="primary" class="explore-btn "> View More </b-button>  </div> 
+                   <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button>  </div> 
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2">
                   <b-img-lazy
@@ -453,18 +432,14 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container resources pt-3">
+      <div class="container resources pt-5 pb-5"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row">
           <div class="col-lg-10">
             <h3>
-              <span> Digital Education </span> to help you make more money
-              online
+              <span> {{ $t("general.digital_education") }}   </span> {{ $t("general.to_help_you_make_more_money") }}  
             </h3>
             <p>
-              Use our specially designed training curriculum to help enhance
-              your entrepreneurial and digital skills, learn how to properly use
-              your bridgeafrica.com online shop, and comfortably engage in
-              global e-commerce.
+              {{ $t("general.use_our_special_design_training") }} 
             </p>
           </div>
 
@@ -478,21 +453,19 @@
       </div>
     </section>
 
-    <section style="background: #f8f8f8">
-      <div class="container crtv mt-3">
+    <section class="bg-gradient">
+      <div class="container crtv pt-3 pb-3 pt-md-5 pb-md-5"  data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row">
           <div class="col-md-6">
-            <h3><span> Checkout our Biz  </span> Konnect Show on CRTV</h3>
+            <h3 class="white"><span> {{ $t("general.checkout_our") }} Biz  </span>  Konnect Show on CRTV {{ $t("general.show_on_crtv") }} </h3>
             <img class="mt-1" src="assets/home/crtv.png" alt="" />
 
           
 
-            <p class="mt-2">
-             Biz Konnect is a 15-minute TV program that highlights the integration of businesses into the world of e-commerce through the bridgeafrica.com platform. Each episode highlights the online shop of the business and its products, prompting viewers to buy from the business. <br> 
+            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.bizconnect_show_is_a15_min") }}
+               </p>
 
-        The show is aired every Wednesday on Cameroon’s national public broadcaster, CRTV, and has been running for over 2 years.
-
-            </p>
+            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.the_show_is_aired") }}  </p>
 
            
           </div>
@@ -504,24 +477,24 @@
       </div>
     </section>
 
-    <section class="bg-gradient">
-      <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 white">
-        <h3><span> Cameroon-Focused </span> Marketplace</h3>
+    <section class="bg-whitee">
+      <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+        <h3><span>  {{ $t("general.cameroon_focus") }}  </span> $t('network.Marketplace') </h3>
         <div class=" d-none d-md-flex w-75 mt-5">
           <span class="text-center m-auto">
            <h3>  7500+ </h3> 
-            <span style="color:#9F9F9F"> Businesses </span>  </span>
+            <span style="color:#9F9F9F"> {{ $t("general.7k_business") }} </span>  </span>
           <span class="text-center m-auto">
            <h3> 13000+ </h3> 
-          <span style="color:#9F9F9F">Customers </span>  </span
+          <span style="color:#9F9F9F"> {{ $t("general.13k_customers") }} </span>  </span
           >
           <span class="text-center m-auto">
            <h3>  100+ </h3> 
-            <span style="color:#9F9F9F">  Industries </span> </span
+            <span style="color:#9F9F9F">   {{ $t("general.100_industries") }} </span> </span
           >
           <span class="text-center m-auto">
            <h3> 7500+ </h3> 
-            <span style="color:#9F9F9F"> Respond Time </span>   </span
+            <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
           >
         </div>
 
@@ -529,11 +502,11 @@
          
           <div class="col-6 mt-2"> <span class="text-left">
            <h3>  7500+ </h3> 
-            <span style="color:#9F9F9F"> Businesses </span>  </span></div>
+            <span style="color:#9F9F9F"> {{ $t("general.7k_business") }} </span>  </span></div>
           <div class="col-6 mt-2">
              <span class="text-left">
            <h3> 13000+ </h3> 
-          <span style="color:#9F9F9F">Customers </span>  </span
+          <span style="color:#9F9F9F"> {{ $t("general.13k_customers") }} </span>  </span
           >
 
           </div>
@@ -541,14 +514,14 @@
 
             <span class="text-left">
            <h3>  100+ </h3> 
-            <span style="color:#9F9F9F">  Industries </span> </span
+            <span style="color:#9F9F9F">   {{ $t("general.100_industries") }} </span> </span
           >
 
           </div>
            <div class="col-6 mt-2">
              <span class="text-left">
            <h3> 7500+ </h3> 
-            <span style="color:#9F9F9F"> Respond Time </span>   </span
+            <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
           >
            </div>
         </div>
@@ -556,21 +529,19 @@
     </section>
 
     <!-- upgrade account section -->
-    <section class="bg-white p-md-5">
-      <div class="container">
+    <section class=" p-md-5" style="background: #f8f8f8">
+      <div class="container"  data-aos="fade-up-left" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row">
           <div class="col-md-6 col-lg-7">
             <img class="upgrade-cover w-100" src="assets/home/upgrade_account.png" alt="" />
           </div>
           <div class="col-md-6 col-lg-5">
-            <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " >
+            <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " data-aos="flip-left" data-aos-offset="70px" data-aos-duration="1500" >
               <h4 class="upgrade-text">
-               <span>   Upgrade your Account Today and </span> Start Selling to the World.
+               <span>   {{ $t("general.upgrade_your_account") }}  </span>   {{ $t("general.start_selling_to_the") }} .
               </h4>
-              <p>
-                While you can use Bridge Africa for free through a basic
-                account, upgrading to an advanced account will enable you to do
-                the full e-commerce transaction cycle.
+              <p>  {{ $t("general.while_you_can_use") }}
+               
               </p>
               <div class="row">
                 <div class="col-md-6">
@@ -578,10 +549,9 @@
                     
                     <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
-                      <h6>Marketplace access:</h6>
-                      <p>
-                        Unlimited marketplace to sell to millions around you and
-                        the world
+                      <h6>  {{ $t("general.market_place_access") }} :</h6>
+                      <p> {{ $t("general.unlimited_market_place_to_sell") }}
+                        
                       </p>
                     </span>
                   </div>
@@ -590,10 +560,10 @@
                   <div class="d-flex">
                      <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
-                      <h6>Online Payment System:</h6>
+                      <h6>  {{ $t("general.online_buying_system") }}:</h6>
                       <p>
                         
-                      Sell, get paid and accept payment from buyers in and out of Cameroon
+                      {{ $t("general.sell_get_paid_and_recieive") }}  
                       </p>
                     </span>
                   </div>
@@ -602,9 +572,9 @@
                   <div class="d-flex">
                     <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
-                     <h6> Rank top on search results:</h6>
+                     <h6>  {{ $t("general.rank_top_on_search") }} </h6>
                        <p>
-                       Businesses on advanced accounts are ranked first on our search results.
+                       {{ $t("general.business_on_advance") }}
                       </p>
                     </span>
                   </div>
@@ -613,24 +583,24 @@
                   <div class="d-flex">
                     <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
                     <span>
-                      <h6> Advanced messaging system:</h6>
+                      <h6>  {{ $t("general.advance_messaging") }} :</h6>
                       <p>
-                     Reach a wider community with our group messaging functionality.
+                      {{ $t("general.reach_a_wider_community") }}.
                       </p>
                     </span>
                   </div>
                 </div>
               </div>
-              <div class="text-center"> <b-button variant="primary" class="upgrade-btn" > Upgrade </b-button> </div>
+              <div class="text-center"> <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button> </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-  <section style="background: #f8f8f8">  
+  <section class="bg-whitee" >  
   
-   <div class="container pt-6"> 
+   <div class="container pt-6" > 
     <div class="d-flex">  
        <img class="mr-auto" style="    width: 80px;" src="assets/home/quote-left.svg" alt="">
     <div class="text-center">  
@@ -655,18 +625,13 @@
  */
 
 import SiteFooter from "../components/site/siteFooter";
-import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
-//import "../assets/js/main.js";
-// import "../assets/js/js.js";
-import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
 import Testimonial from "../components/site/Testimonial";
 import Products from "../components/site/products";
-import VLazyImage from "v-lazy-image/v2";
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import { SemipolarSpinner } from "epic-spinners";
 import axios from "axios";
-
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import { validationMixin } from "vuelidate";
 import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 import Resources from "../components/resources";
@@ -678,6 +643,11 @@ export default {
     SiteFooter,
     Testimonial
   },
+
+    mounted() {
+    AOS.init()
+  },
+
   data() {
     return {
       expanded: true,
@@ -910,7 +880,68 @@ export default {
 };
 </script>
 
+<style>
+
+.bridge-home .md-field.md-theme-default:after {
+    background-color: white !important;
+}
+
+.bridge-home .md-focused .p-2{
+   padding: 0rem !important;
+   margin-top: -10px;
+}
+
+.bridge-home .md-has-value .p-2{
+   padding: 0rem !important;
+   margin-top: -10px;
+}
+
+
+
+
+.ba-input {
+    
+     background: #fafafa;
+  border: 1px solid #e7e7e7;
+  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
+  border-radius: 5px;
+ height: 60px !important;
+     padding-left: 1rem !important;
+        padding-right: 1rem !important
+
+ }
+
+
+ .ba-input .form-control{
+    
+     background: #fafafa;
+  border: 1px solid #e7e7e7;
+  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
+  border-radius: 5px;
+ height: 60px !important;
+ padding: 2px;
+
+ }
+</style>
+
 <style scoped>
+
+.hire-btn{
+
+width: 274px;
+height: 67.12px;
+
+background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+border-radius: 10px;
+}
+
+.quote-btn{
+
+height: 67.12px;
+
+background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+border-radius: 10px;
+}
 
 @media only screen and (max-width: 960px) { 
    .main-banner{
@@ -993,6 +1024,8 @@ line-height: 44px;
   border: 1px solid #e7e7e7;
   box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
   border-radius: 5px;
+ height: 60px !important;
+
 }
 
 
@@ -1272,6 +1305,20 @@ line-height: 33px;
 </style>
 
 <style>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .bridge-home .nav-tabs .nav-link {
     border-radius: 0.25rem;

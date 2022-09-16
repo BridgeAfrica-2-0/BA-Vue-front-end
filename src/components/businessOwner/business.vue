@@ -19,7 +19,7 @@
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business" class="p-3"
               /></b-tab>
-              <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
+              <b-tab :title="$t('businessowner.Market')"><MarketPlace  :isPremium="isPremium"/></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
                 <Networks type="business" />
               </b-tab>
@@ -42,6 +42,8 @@ import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
 import Networks from "@/components/owner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
+import { isPremium } from '@/helpers';
+
 export default {
   name: "Home",
   components: {
@@ -60,6 +62,7 @@ export default {
       tabIndex: null,
       isCover: false,
       tabs: ["#post", "#about", "#media", "#market", "#network", "#community"],
+      isPremium: isPremium()
     };
   },
 

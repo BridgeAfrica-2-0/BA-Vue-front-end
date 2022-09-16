@@ -54,6 +54,7 @@ import LyTab from "@/tab/src/index.vue";
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 import axios from "axios";
+import { isPremium } from '@/helpers';
 
 export default {
   name: "Home",
@@ -77,13 +78,12 @@ export default {
         { label: this.$t('search.Home'), icon: "" },
         { label: this.$t('search.Inbox'), icon: "" },
         { label: this.$t('search.Notification'), icon: "" },
-        { label: this.$t('search.Pending_Post'), icon: "" },
-        { label: this.$t('search.Insight'), icon: "" },
         { label: this.$t('search.Settings'), icon: "" },
       ],
       options: {
         activeColor: "#1d98bd",
       },
+      isPremium: isPremium()
     };
   },
   methods: {
@@ -157,6 +157,12 @@ export default {
   },
 
   created() {
+
+    //Insight is only for premium account
+    if (this.isPremium) {
+      this.items.push({ label: this.$t('search.Insight'), icon: "" });
+      this.items.push({ label: this.$t('search.Pending_Post'), icon: "" });
+    }
 
     let loader = this.$loading.show({
       container: this.$refs.wrapper,

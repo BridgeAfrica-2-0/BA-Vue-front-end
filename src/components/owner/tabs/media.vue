@@ -6,7 +6,9 @@
     />{{ $t("profileowner.Media") }}
 
     <hr />
-    <b-tabs content-class="mt-3" v-model="tabIndex" pills>
+    <b-card-text v-if="!isPremium && type == 'business'"> {{$t('general.PREMIUM_ACCOUNT_FEATURE')}} </b-card-text>
+
+    <b-tabs content-class="mt-3" v-model="tabIndex" v-if="isPremium || type !== 'business'" pills>
       <b-tab :title="$t('profileowner.Posts')" @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner
@@ -52,12 +54,12 @@ import Album from "./album";
 import Images from "./images";
 import { mapGetters, mapMutations } from "vuex";
 import { isGuestUser } from '@/helpers';
+import { isPremium } from '@/helpers';
 
 import _ from "lodash";
 
 export default {
   props: {
-    
     type: {
       type: String,
       validator: function(value) {
@@ -118,7 +120,8 @@ export default {
       tabIndex: 0,
       addItem: false,
       isGuestUser: isGuestUser(),
-      forReload:0
+      forReload:0,
+      isPremium: isPremium()
     };
   },
 

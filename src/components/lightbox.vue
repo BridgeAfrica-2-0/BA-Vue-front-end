@@ -8,7 +8,7 @@
 
             </div>
         </div>
-        
+           
        </div>
 
    <div class=""  style="position:relative" v-else-if="items.length==2"  > 
@@ -18,7 +18,7 @@
             
             
             <b-col cols="6" class="p-0"  v-for="(src, i) in items" :key="i" @click="show(i)" >      
-                <img :src="src" class="single-image pr-1" style="object-fit:cover; height:100%">
+                <img :src="src" class="double-image pr-1" style="object-fit:cover; height:100%">
                 </b-col>    </b-row>
    </div>
 
@@ -233,7 +233,12 @@
 
 .single-image{
     width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
 
+.double-image{
+  width: 100%;
 }
 
 

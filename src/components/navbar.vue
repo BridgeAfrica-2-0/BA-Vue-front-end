@@ -14,7 +14,7 @@
 
           <router-link
             class="d-inline-block align-top mt-1"
-            :to="{ name: 'newHome' }"
+            :to="{ name: 'Bridge-home' }"
           >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
@@ -912,7 +912,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? { name: "dashboard" } : { name: "newHome" };
+          return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
         },
       };
       try {

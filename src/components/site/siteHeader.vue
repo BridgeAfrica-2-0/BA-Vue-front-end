@@ -15,7 +15,7 @@
             <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
         </div>
-
+      
       <div class="d-flex w-100 p-0">
 
         <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
@@ -24,36 +24,49 @@
           <b-navbar-nav class="mr-auto ">
             <b-nav-item >
 
-              <span class=" font-arvo nav-span " ><router-link :to="{name: 'newHome'}" :class="currentRouteName == 'newHome' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
+              <span class=" font-arvo nav-span  text-center" ><router-link :to="{name: 'Bridge-home'}" :class="currentRouteName == 'Bridge-home' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
               <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-1" >
+            <b-nav-item  class="ml-md-1  text-center" >
               <span class=" font-arvo nav-span "> <router-link :to="{name: 'about'}" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link></span>
                <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-1" >
+            <b-nav-item  class="ml-md-1  text-center" >
               <span class=" font-arvo nav-span "> <router-link :to="{name: 'contact'}" :class="currentRouteName == 'contact' ? 'active' : ''" >{{ $t("general.Contact_Us") }}</router-link> </span>
                <hr class="mobile navstyle" />
             </b-nav-item>
 
 
           <div class="d-block d-md-none">  
-         
-            <b-nav-item class="ml-md-1">
+           
+            <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
               <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
                <hr class="mobile navstyle" />
 
             </b-nav-item>
-            <b-nav-item class="ml-md-1">
+
+            <b-nav-item v-if="islogin" class="ml-md-1  text-center">
+              <span class="  nav-span "> <router-link :to="{name: 'dashboard'}">{{ $t("general.dashboard") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+
+            </b-nav-item>
+
+            <b-nav-item  class="ml-md-1">
               <div class="border-right" style="border-right:1px solid black"> </div>
             </b-nav-item>
             
-            <b-nav-item  class="ml-md-1">
+            <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
               <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />
             </b-nav-item>
+           
+              <b-nav-item v-if="islogin" class="ml-md-1  text-center">
+              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
+               <hr class="mobile navstyle" />
 
-            <b-nav-item  class="ml-md-1 ">
+            </b-nav-item>
+
+            <b-nav-item  class="ml-md-1  text-center">
           
               <b-dropdown variant="ligth">
                   <template #button-content>
@@ -81,20 +94,31 @@
               <b-nav-item class="ml-md-1 m-auto">  
                <span class="nav-span" style="color:#455a64"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
                </b-nav-item>   
-            
-             <b-nav-item class="ml-md-1 m-auto">
+             
+             
+             <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
               <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
                <hr class="mobile navstyle" />
               </b-nav-item>
              
               <div class="border-right m-auto" style=" height: 20px;"> </div>
            
-            <b-nav-item  class="ml-md-1 m-auto">
+            <b-nav-item  v-if="!islogin" class="ml-md-1 m-auto">
               <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />
             </b-nav-item>
 
+             <b-nav-item v-if="islogin" class="ml-md-1">
+              <span class="  nav-span "> <router-link :to="{name: 'dashboard'}">{{ $t("general.dashboard") }} </router-link> </span>
+               <hr class="mobile navstyle" />
             
+             </b-nav-item>
+                <b-nav-item v-if="islogin" class="ml-md-1">
+              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+
+            </b-nav-item>
+          
              <b-nav-item  class="ml-md-1 m-auto">
           
                 <b-dropdown variant="ligth">
@@ -125,8 +149,12 @@ export default {
     return {
       img: require("../../assets/img/about/en.png"),
       lang: 'EN',
-      keyword:''
+      keyword:'',
+      islogin: false,
     }
+  },
+  created(){
+     this.islogin = this.$store.getters["auth/isLogged"];
   },
   computed: {
     currentRouteName() {
@@ -216,7 +244,7 @@ export default {
   color: #e75c18 !important;
 }
 .active{
-  color: #e75c18;
+  color: #e75c18 !important;
 }
 .container{
   margin-left: 10px !important;

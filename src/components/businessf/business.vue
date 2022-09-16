@@ -40,18 +40,19 @@
       <b-col cols="6">
         <div class="float-right d-inline-flex">
           <b-button
-            class="community size"
+            class="community size d-flex"
             size="sm"
             id="followbtn"
             :class="hasBeFollow !== 0 && 'u-btn'"
             @click="handleFollow"
-          >
+          > <span class=" d-flex m-auto">   
             <i
               :class="`fas ${
                 hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
               } fa-lg btn-icon`"
             ></i>
-            <span> {{ $t("businessf.Community") }}</span>
+            <span class="f-14"> {{ $t("businessf.Community") }}</span>
+            </span>
           </b-button>
 
           <BtnCtaMessage
@@ -68,7 +69,7 @@
             @click="gotoAbout()"
           >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Direction") }}</span>
+            <span class="f-14">{{ $t("businessf.Direction") }}</span>
           </b-button>
 
           <b-dropdown
@@ -148,7 +149,7 @@
         >
       </b-dropdown>
     </div>
-    <div class="body">
+    <div class="body container">
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" v-model="currentTab" fill pills>
@@ -384,8 +385,12 @@ export default {
 
 <style scoped>
 
+.f-14{
+  font-size: 14px;
+}
+
 .w-md-bizname{
-  max-width: 250px;
+  max-width: 300px;
 }
 .w-biznam{
    max-width: 150px;
@@ -400,10 +405,10 @@ export default {
   width: 100%;
 }
 
-.body {
+/* .body {
   margin: 63px;
   margin-top: 10px;
-}
+} */
 .profile {
   position: relative;
   left: 52px;
@@ -448,16 +453,14 @@ img {
   display: flex;
 }
 
-p {
-  font-family: "Open Sans Helvetica";
-}
+
 span {
   font-size: 16px;
   margin-left: 4px;
-  font-family: "Open Sans Helvetica";
+ 
 }
 p {
-  font-family: "Open Sans Helvetica";
+
   font-size: 14px;
 }
 .btns {
@@ -498,7 +501,7 @@ p {
   position: relative;
   top: 11px;
   font-size: 20px;
-  font-family: "Open Sans Helvetica";
+ 
 }
 
 .name-block {
@@ -603,10 +606,10 @@ p {
   .name {
     position: relative;
     font-size: 16px;
-    font-family: "Open Sans Helvetica";
+   
   }
   p {
-    font-family: "Open Sans Helvetica";
+  
     font-size: 12px;
   }
   .m-fol {

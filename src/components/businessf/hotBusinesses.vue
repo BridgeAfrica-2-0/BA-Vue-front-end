@@ -2,130 +2,23 @@
   <div>
     <div class="border mt-2">
       <span>
-        <h6 class="title m-1">
+        <h6 class="title m-2">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> {{ $t("general.Hot_Businesses") }} </b>
+      {{ $t("general.Hot_Businesses") }} 
         </h6>
       </span>
 
       <div class="ovver">
-        <div
-          class="people-style shadow"
-          v-for="item in business"
-          :key="item.id"
-        >
-          <b-row>
-            <b-col md="8" xl="12" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">
-                <div class="center-img">
-                  <splide :options="options" class="r-image">
-                    <splide-slide cl>
-                      <img :src="item.picture" class="r-image" />
-                    </splide-slide>
-                  </splide>
-                </div>
-                <div class="flx100">
-                  <p class="textt">
-                    <strong class="title"> {{ item.name }} </strong> <br />
 
-                    <span v-for="cat in item.category" :key="cat.name">
-                      {{ cat.name }}
-                    </span>
-                    <br />
-                    {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }} <br />
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
 
-                    <span class="location"  v-for="country in item.country" :key="country.name">
-                      <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                      >{{ country.name }}
-                    </span>
-                    <br />
-                    <read-more
-                      :more-str="$t('search.read_more')"
-                      class="readmore"
-                      :text="item.about_business"
-                      link="#"
-                      :less-str="$t('search.read_less')"
-                      :max-chars="75"
-                    >
-
-                  
-                    </read-more>
-                  </p>
-                </div>
-              </div>
-            </b-col>
-
-            <b-col lg="12" xl="12" md="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="4"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :id="'followbtn' + item.id"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      @click="handleFollow(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com">{{ $t("general.Community") }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="4"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <BtnCtaMessage :element="item" :type="$t('general.business')" />
-                  </b-col>
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="4"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      @click="gotoBusiness(item.id)"
-                      class="b-background shadow"
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-
-                      <span class="btn-text">{{ $t("general.Direction") }}</span>
-
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
+         <Business  v-for="item in business" :key="item.id" :canBlock="canBlock" :index="index"  :business="item"  @getTotalCommunity='getTotalCommunity'  />
+        
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+    </VuePerfectScrollbar>
       </div>
     </div>
   </div>
@@ -134,7 +27,8 @@
 <script>
 import axios from "axios";
 import { isGuestUser } from '@/helpers';
-
+import Business from "@/components/Business";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   props: ["title", "image"],
 
@@ -153,6 +47,10 @@ export default {
       },
       isGuestUser: isGuestUser,
     };
+  },
+
+  components: {
+    Business,VuePerfectScrollbar
   },
 
   methods: {
@@ -228,9 +126,12 @@ export default {
 </script>
 
 <style scoped>
+.scroll-area{
+  height: inherit;
+}
 .ovver {
-  height: 300px;
-  overflow: auto;
+  height: 400px;
+  overflow: hidden;
   overflow-x: hidden;
 }
 @media only screen and (min-width: 768px) {
@@ -300,16 +201,11 @@ export default {
 
   .title {
     font-size: 16px;
-    color: black;
-
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
-
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -353,16 +249,12 @@ export default {
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
-    color: black;
-
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     line-height: 35px;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

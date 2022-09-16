@@ -63,7 +63,7 @@
                 <li class="white ">
                  
 
-                   <router-link class="over" :to="{ name: 'newHome' }">{{
+                   <router-link class="over" :to="{ name: 'Bridge-home' }">{{
                     $t("home.Home")
                   }}</router-link>
                 </li>

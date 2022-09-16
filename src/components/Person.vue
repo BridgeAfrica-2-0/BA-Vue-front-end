@@ -11,7 +11,7 @@
 
           <div class=" mt-3 ml-3 w-100">
             <div >
-              <router-link :to="'profile/' + person.slug">
+              <router-link :to="person.slug.indexOf('profile') !== -1 ?'profile/' + person.slug : person.slug">
                <span class="username">   {{ person.name }} </span>
               </router-link>
             </div>

@@ -681,15 +681,16 @@ export default {
 
 
         bridge_for_cus: [
+         "assets/home/marketplace.png",
         "assets/home/search.png",
         "assets/home/community.png",
-        "assets/home/marketplace.png",
+       
       ],
 
         bridge_for_biz: [
-        "assets/home/ba-search.png",
         "assets/home/ba-community.png",
-        "assets/home/ba-dashboard.png",
+        "assets/home/ba-search.png",
+          "assets/home/ba-dashboard.png",
       ],
       
 

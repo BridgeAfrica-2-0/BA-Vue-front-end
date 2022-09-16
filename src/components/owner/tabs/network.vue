@@ -1,21 +1,24 @@
 <template>
-  <div>
-    <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("profileowner.Do_you_want_to_join_this_network") }}
-    </b-modal>
+  <div class="community-box">
+     <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
     
    <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+     </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Network from "@/components/Network";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   props: ["type"],
   components: {
-    Network
+    Network,VuePerfectScrollbar
   },
   data() {
     return {

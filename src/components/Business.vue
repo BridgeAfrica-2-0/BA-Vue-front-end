@@ -185,13 +185,13 @@ export default {
       if(this.callerType=='network'){
           data = {
         id: user.id,
-        type: "user",
+         type: "business",
         network_id: this.$route.params.id
       };
       }else{ 
        data = {
         id: user.id,
-        type: "user",
+         type: "business",
       };
        }
       await axios

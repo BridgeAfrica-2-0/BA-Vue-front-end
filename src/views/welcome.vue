@@ -42,10 +42,10 @@
       ref="modal-3"
     >
       <div>
-        <h4 class="text-center username f-30">
+        <h3 class="text-center ">
           {{ $t("welcome.Hello") }} <b> {{ username }}</b
           >{{ $t("welcome.letsget_started") }}
-        </h4>
+        </h3>
         <br />
         <br />
 
@@ -56,10 +56,10 @@
           {{ $t("welcome.On_Bridge_Africa") }}
           {{ $t("welcome.you_can_quickly") }} {{ $t("welcome.create") }}
           {{ $t("welcome.your") }} {{ $t("welcome.website") }}
-          {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }};
+          {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }},
           {{ $t("welcome.access_an_online_marketplace") }}
           {{ $t("welcome.for") }} {{ $t("welcome.buying") }}
-          {{ $t("welcome.and") }} {{ $t("welcome.selling") }} ;
+          {{ $t("welcome.and") }} {{ $t("welcome.selling") }},
           {{ $t("welcome.search_for_and_compare") }}
           {{ $t("welcome.product_prices") }} {{ $t("welcome.through") }}
           {{ $t("welcome.our") }}
@@ -176,7 +176,7 @@
                       ><br />
    
 
-                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker   :minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -1546,14 +1546,8 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
-       
-
-  console.log("((((((jr ------")
+      
       return new Promise((resolve, reject) => {
-        console.log("sending user data");
-
-        console.log(this.profile_pic );
 
         let formData = new FormData();
 
@@ -1981,10 +1975,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
   padding-bottom: 20px;
 }
 
-.f-30 {
-  font-size: 30px !important;
 
-}
 
 .f-20 {
   font-size: 18px !important;

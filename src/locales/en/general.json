@@ -476,9 +476,6 @@
     "Direction":"Direction",
     "Hot_Businesses":"Hot Businesses",
     "No_item":"No item",
-    "Unable_to_Create_Your_Business":"Unable to Create Your Business"
-
-   
-
-
+    "Unable_to_Create_Your_Business":"Unable to Create Your Business",
+    "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account."
 }

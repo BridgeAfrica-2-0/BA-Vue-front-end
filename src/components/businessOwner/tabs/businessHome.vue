@@ -4,14 +4,20 @@
       <b-col md="12" lg="6" xl="4">
         <Intro />
 
-        <comunitiDashboard />
+        <comunitiDashboard/>
 
         <br />
+
+      </b-col>
+
+      <b-col md="12" lg="6" xl="8" class="postpadding  mt-2  mt-xl-0 ">
+        <Post v-if="isPremium"/>
+
 
         <b-card v-if="!isPremium">
           <div class="text-center">
             <span class="username text-center mb-3">
-              <b> {{ $t("businessowner.Upgrade_Your_Business_Account") }} </b>
+              <b> {{ $t('general.PREMIUM_ACCOUNT_FEATURE') }} </b>
             </span>
           </div>
 
@@ -48,10 +54,6 @@
             </b-button>
           </div>
         </b-card>
-      </b-col>
-
-      <b-col md="12" lg="6" xl="8" class="postpadding  mt-2  mt-xl-0 ">
-        <Post />
       </b-col>
     </b-row>
   </div>

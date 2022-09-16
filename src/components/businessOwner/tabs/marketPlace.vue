@@ -26,7 +26,7 @@
             >
          
                 <!-- <div class="col col-md"> -->
-            <b-button variant="outline-primary" @click="createProduct"
+            <b-button variant="outline-primary" v-if="isPremium" @click="createProduct"
               >{{ $t('businessowner.Add_Product') }}</b-button
             >
            </div>
@@ -41,7 +41,8 @@
         <!-- MARKET HEADER BAR -->
   
         <!-- MARKET PRODUCT LIST -->
-  
+      <b-card-text v-if="!isPremium"> {{$t('general.PREMIUM_ACCOUNT_FEATURE')}} </b-card-text>
+
           
             
           <!-- <div class="col-md-6" v-for="(product, index) in products" :key="index">

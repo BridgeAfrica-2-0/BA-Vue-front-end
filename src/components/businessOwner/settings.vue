@@ -75,11 +75,11 @@
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('businessowner.Insight')">
+              <b-tab :title="$t('businessowner.Insight')" *ngIf="isPremium">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('businessowner.Pending_Post')">
+              <b-tab :title="$t('businessowner.Pending_Post')" *ngIf="isPremium">
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 
@@ -116,6 +116,7 @@ import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
 import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
+import { isPremium } from '@/helpers';
 
 export default {
   name: "settings",
@@ -193,6 +194,7 @@ export default {
       options: {
         activeColor: "#1d98bd",
       },
+      isPremium: isPremium()
     };
   },
 

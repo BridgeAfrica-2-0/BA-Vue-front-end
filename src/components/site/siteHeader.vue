@@ -4,7 +4,7 @@
 <!-- <header class="position-relative"> -->
 
 
-    <div class="container-flex"> 
+    <div class="container-flex home-nav"> 
 
      <b-navbar toggleable="lg" class=" p-0 border-bottom"  >
         <div class="container p-0 m-0"> 
@@ -59,6 +59,8 @@
               <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />
             </b-nav-item>
+
+            
            
               <b-nav-item v-if="islogin" class="ml-md-1  text-center">
               <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
@@ -108,12 +110,12 @@
               <hr class="mobile navstyle" />
             </b-nav-item>
 
-             <b-nav-item v-if="islogin" class="ml-md-1">
+             <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
               <span class="  nav-span "> <router-link :to="{name: 'dashboard'}">{{ $t("general.dashboard") }} </router-link> </span>
                <hr class="mobile navstyle" />
             
              </b-nav-item>
-                <b-nav-item v-if="islogin" class="ml-md-1">
+                <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
               <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
                <hr class="mobile navstyle" />
 
@@ -195,13 +197,11 @@ export default {
 };
 </script>
 
-<style >
-  a{
-    color: #455a64 !important;
-  }
-</style>
 
 <style scoped>
+ a{
+    color: #455a64 !important;
+  }
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');

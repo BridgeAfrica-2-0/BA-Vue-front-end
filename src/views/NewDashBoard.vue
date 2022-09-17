@@ -1,7 +1,5 @@
 <template>
   <div style="overflow-x: hidden" class="dashboard" >
-
-    yoo {{isPremium}}
     <navbar></navbar>
 
     <div class="main row">
@@ -122,7 +120,7 @@ export default {
     return {
       selectedb:"owner",
       slide: 0,
-      isPremium: isPremium(),
+      //isPremium: isPremium(),
       sliding: null,
       url_data: null,
       map: false,

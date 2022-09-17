@@ -1397,6 +1397,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-17.0.9.tgz"
   integrity sha512-5dNBXu/FOER+EXnyah7rn8xlNrfMOQb/qXnw4NQgLkCygKBKhdmF/CA5oXVOKZLBEahw8s2WP9LxIcN/oDDRgQ==
 
+"@types/node@^14.14.31":
+  version "14.18.29"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.29.tgz#a0c58d67a42f8953c13d32f0acda47ed26dfce40"
+  integrity sha512-LhF+9fbIX4iPzhsRLpK5H7iPdvW8L4IwGciXQIOEcuF62+9nw/VQVsOViAOOGxY3OlOKGLFv0sWwJXdwQeTn6A==
+
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
   resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz"
@@ -6725,6 +6730,11 @@ laravel-echo@^1.11.3:
   resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.13.1.tgz#fe7d0c997a38a6fb6eb36f147a57b23b4090cdd9"
   integrity sha512-tvJtbE0ppEwlO/rcFyN1JCLunDUG5pIVFWORSCkzkGEcJQzB+Eevs9PpIvsMtkz2JTNbUPHU+5GSkSh1/TIr4A==
 
+laravel-echo@^1.11.4:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.14.0.tgz#983bbed69bc3ae336a926f79f3bef1d3a53aa6db"
+  integrity sha512-5tirx4TKZjyySIUgr3HKnimpVOmdOUdcFamuzNxF2dSftGC5fY1bpGhjOHzBKqHL/XzMRiWQO1FItrvp3iipmw==
+
 launch-editor-middleware@^2.2.1:
   version "2.3.0"
   resolved "https://registry.npmjs.org/launch-editor-middleware/-/launch-editor-middleware-2.3.0.tgz"
@@ -9111,6 +9121,14 @@ pusher-js@^7.0.3:
   dependencies:
     tweetnacl "^1.0.3"
 
+pusher-js@^7.0.6:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-7.4.0.tgz#45205ecc159708af3021f41b15b07b390899124b"
+  integrity sha512-4ewETSlJEdRZ2eHGEMH3pHxMVB+sB4oMmOWbgYbSRsYbTFPOpRBumSEm9NSNse3pfjiluTrB98PaXijJ6BL3lg==
+  dependencies:
+    "@types/node" "^14.14.31"
+    tweetnacl "^1.0.3"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
@@ -9952,9 +9970,9 @@ socket.io-adapter@~2.4.0:
   integrity sha512-W4N+o69rkMEGVuk2D/cvca3uYsvGlMwsySWV447y99gUPghxq42BxqLNMndb+a1mm/5/7NeXVQS7RLa2XyXvYg==
 
 socket.io-client@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-4.5.1.tgz#cab8da71976a300d3090414e28c2203a47884d84"
-  integrity sha512-e6nLVgiRYatS+AHXnOnGi4ocOpubvOUCGhyWw8v+/FxW8saHkinG6Dfhi9TU0Kt/8mwJIAASxvw6eujQmjdZVA==
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-4.5.2.tgz#9481518c560388c980c88b01e3cf62f367f04c96"
+  integrity sha512-naqYfFu7CLDiQ1B7AlLhRXKX3gdeaIMfgigwavDzgJoIUYulc1qHH5+2XflTsXTPY7BlPH5rppJyUjhjrKQKLg==
   dependencies:
     "@socket.io/component-emitter" "~3.1.0"
     debug "~4.3.2"
@@ -11290,6 +11308,14 @@ vue-easy-lightbox@^0.16.2:
   version "0.16.2"
   resolved "https://registry.npmjs.org/vue-easy-lightbox/-/vue-easy-lightbox-0.16.2.tgz"
   integrity sha512-pkfLBk9dZ9T+fk6bRgehDpIvaS81hOgDqsGpVEDgw8cGtO9FLfAT8hakaqNQOgMTCwrnkQcdfLTLqnad2rq46w==
+
+vue-echo-laravel@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-echo-laravel/-/vue-echo-laravel-1.0.0.tgz#a42feb2d425465518efb52cbb29b68601bbfd805"
+  integrity sha512-U6r+js0lmIkrsw/z+pRtK56RzlRfmO81ULDhkNG5M8W+f3X/vhiubGxoSgNQIBB1YFjs2NqbjxkPNlPeXEIgOA==
+  dependencies:
+    laravel-echo "^1.11.4"
+    pusher-js "^7.0.6"
 
 vue-emoji-picker@^1.0.3:
   version "1.0.3"

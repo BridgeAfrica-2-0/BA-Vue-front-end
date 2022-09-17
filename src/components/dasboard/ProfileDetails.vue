@@ -343,21 +343,17 @@ export default {
 
           
           this.selected = this.$store.state.profileSettingsEdit.userInfos.payement_method;
-         
-          // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
 
-          //   }else { this.selectedGender = 1 }
           this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
-          // this.selectedCounty = this.getUserInfos.country.id;
-          // console.log("-----------------"+this.selectedCounty);
+    
         })
         .catch((err) => {
-          console.error(err);
+        
         });
     },
     update(e) {
       e.preventDefault();
-      console.log(this.getUserInfos.name);
+     
       let formData = new FormData();
       formData.append("name", this.getUserInfos.name);
       formData.append("email", this.getUserInfos.email);
@@ -374,8 +370,7 @@ export default {
       this.$store
         .dispatch("profileSettingsEdit/updateUserInfos", formData)
         .then((response) => {
-          console.log(response);
-          console.log(this.getUserInfos);
+        
           this.flashMessage.show({
             status: "success",
             message: response.data.message
@@ -384,8 +379,7 @@ export default {
           this.userInfos();
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+      
         });
     },
 
@@ -395,12 +389,10 @@ export default {
       this.$store
         .dispatch("profileSettingsEdit/changePayment", formData1)
         .then((response) => {
-          console.log(response);
-          console.log(this.getUserInfos);
+      
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+
         });
     },
 
@@ -414,12 +406,11 @@ export default {
       this.$store
         .dispatch("auth/country")
         .then((response) => {
-          console.log(this.country);
+        
           
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+
         })
         .finally(() => {
           loader.hide();
@@ -446,8 +437,7 @@ export default {
         this.$store
       .dispatch("profileSettingsEdit/changePassword",formData2)
       .then(response =>{
-        console.log("------------------------");
-        console.log(response.data.message);
+     
         this.flashMessage.show({
           status: "success",
           message: response.data.message
@@ -460,28 +450,24 @@ export default {
           status: "error",
           message: "An error occured"
         }); 
-        console.log('--------- error: ');
-          console.error(err);
+    
            this.loading=false;
         });
         }
     },
 
     getRegion() {
-      console.log(this.country,'id country: ',this.selectedCounty)
+     
       let data = { countryId: this.selectedCounty };
       this.$store
         .dispatch("auth/region", data)
         .then((response) => {
-          console.log("------------------------");
+        
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+        
         });
 
-      console.log("getregion clicked");
-      console.log(this.selectedCounty);
     },
 
     getDivision() {
@@ -489,14 +475,12 @@ export default {
       this.$store
         .dispatch("auth/division", data)
         .then((response) => {
-          console.log("------------------------");
+       
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+        
         });
-      console.log("getDivision clicked");
-      console.log(this.selectedDivision);
+    
     },
 
     getMunicipality() {
@@ -504,11 +488,10 @@ export default {
       this.$store
         .dispatch("auth/municipality", data)
         .then((response) => {
-          console.log("------------------------");
+          
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+   
         });
     },
 
@@ -517,11 +500,10 @@ export default {
       this.$store
         .dispatch("auth/locality", data)
         .then((response) => {
-          console.log("------------------------");
+        
         })
         .catch((err) => {
-          console.log("--------- error: ");
-          console.error(err);
+     
         });
     },
 
@@ -529,7 +511,7 @@ export default {
       this.$store
         .dispatch("profileSettingsEdit/redirection")
         .then((response) => {
-          // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
+         
           this.$router.push(`business_owner/${1}`);
         });
     },
@@ -542,8 +524,7 @@ export default {
     //   })
     //   .catch((err) => {
 
-    //       console.log('--------- error: ');
-    //       console.error(err);
+   
     //     });
     // }
   },
@@ -555,13 +536,24 @@ beforeMount(){
 
 watch: {
   "$store.state.profileSettingsEdit.userInfos": function(){
+
+    if( this.$store.state.profileSettingsEdit.userInfos.country){ 
      this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+    }
+     if( this.$store.state.profileSettingsEdit.userInfos.region){ 
      this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
-
+   }
+   
+     if( this.$store.state.profileSettingsEdit.userInfos.division){ 
      this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division ?this.$store.state.profileSettingsEdit.userInfos.division.id:'';
+     }
+       if( this.$store.state.profileSettingsEdit.userInfos.council){ 
     this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council?this.$store.state.profileSettingsEdit.userInfos.council.id:'';
-    this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood ? this.$store.state.profileSettingsEdit.userInfos.neigborhood.id:'';
+       }
 
+         if( this.$store.state.profileSettingsEdit.userInfos.neigborhood){ 
+   this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood ? this.$store.state.profileSettingsEdit.userInfos.neigborhood.id:'';
+         }
     this.getCountry();
     this.getRegion();
     this.getDivision();

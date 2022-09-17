@@ -312,7 +312,7 @@
          
 
             <tab-content :title="$t('welcome.Tutorial')">
-              <div class="div-h">
+              <div class="div-h h-tutorial">
                 <Tutorial />
               </div>
             </tab-content>
@@ -1879,6 +1879,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style>
+
+.h-tutorial{
+  height: 400px;
+}
 .w-image{
   max-height: 300px;
   object-fit: cover;

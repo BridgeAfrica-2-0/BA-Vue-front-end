@@ -14,10 +14,10 @@
         </b-col>
         <b-col cols="12" sm="12" md="8">
           <div>
-            <h4 class="font-weight-bold">{{ product.name }}</h4>
+            <h4 class="">{{ product.name }}</h4>
             <span class="text-success" v-if="product.in_stock">In Stock</span>
             <span class="text-danger" v-else>Out of stock</span>
-            <h4 class="font-weight-bold">
+            <h4 class="">
               {{ formatMoney(Number(product.price)) }}
             </h4>
           </div>
@@ -38,11 +38,12 @@
               justify-content-between
               align-items-center
             "
-          >
+          > 
             <BtnCtaMessage
               v-if="packageProduct === 'basic'"
               :element="product"
               :isProduct="true"
+              :buyNow="true"
               type="business"
             />
             <b-button
@@ -53,7 +54,7 @@
               <span>{{ $t("general.Buy_Now") }}</span>
             </b-button>
             <b-button
-              variant="success"
+              variant="light"
               class="font-weight-light shadow-sm"
               @click="goToWebsiteMarket(product)"
               >{{ $t("general.Check_On_Website") }}</b-button

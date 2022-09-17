@@ -11,7 +11,7 @@
 
       <div
         v-for="(resource, i) in renderResources"
-        :key="resource.id"
+        :key="i"
         class="col-md-6 mt-1 resource-div"
       >
         <div class="resource-img-div" @click="openGallery(i)"  >

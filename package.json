@@ -43,6 +43,7 @@
         "secure-ls": "^1.2.6",
         "socket.io": "^4.5.1",
         "socket.io-client": "^4.5.1",
+        
         "uuid": "^8.3.2",
         "v-emoji-picker": "^2.3.3",
         "v-lazy-image": "^2.1.1",

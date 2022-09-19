@@ -26,7 +26,7 @@
       <div class="text-lost text-center">
         <h6 class="white">
           <router-link :to="{ name: 'profile_owner' }" class="card-title p-3 white">
-            {{ profile.name }}   lalala
+            {{ profile.name }} 
           </router-link>
         </h6>
       </div>

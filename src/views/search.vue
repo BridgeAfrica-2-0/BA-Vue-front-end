@@ -1747,9 +1747,11 @@ export default {
     },
 
     updateSearchLocation(location) {
+     
+      this.searchParams.location_placeholder = location;
       this.searchParams.location = location;
 
-      this.searchParams.location_placeholder = location;
+       this.$store.commit("allSearch/setLocation", location);
     },
 
     updateSearchKeyword(keyword) {
@@ -1894,11 +1896,11 @@ export default {
     },
 
     searchNetworks(data) {
-      const newParams = data ? data : { keyword: this.searchParams.keyword };
 
-      if (this.searchParams.keyword)
+     
+      if (this.searchParams.keyword) {  
         this.activateMatching = { name: this.searchParams.keyword };
-      this.activateSuggestion(this.searchParams.keyword);
+      this.activateSuggestion(this.searchParams.keyword);  }
 
       this.$store
         .dispatch("networkSearch/SEARCH", data)

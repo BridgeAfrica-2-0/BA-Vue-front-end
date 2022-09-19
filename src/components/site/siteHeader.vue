@@ -4,46 +4,71 @@
 <!-- <header class="position-relative"> -->
 
 
-      
+    <div class="container-flex home-nav "> 
 
-     <b-navbar toggleable="lg" type="light" variant="light">
+     <b-navbar toggleable="lg" class=" p-0 border-bottom "  >
+        <div class="container p-0 m-0"> 
     <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
-          <a class="d-inline-block align-top mt-1" href="#">
+        <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-2">
+          <a class="d-inline-block align-top mt-1 float-left" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
         </div>
-      <div class="container p-0">
+      
+      <div class="d-flex w-100 p-0">
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav class="ml-auto ">
+          <b-navbar-nav class="mr-auto ">
             <b-nav-item >
 
-              <span class="text-dark font-arvo nav-span " ><router-link :to="{name: 'newHome'}" :class="currentRouteName == 'newHome' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
+              <span class=" font-arvo nav-span  text-center" ><router-link :to="{name: 'Bridge-home'}" :class="currentRouteName == 'Bridge-home' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
               <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-3" >
-              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'about'}" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link></span>
+            <b-nav-item  class="ml-md-1  text-center" >
+              <span class=" font-arvo nav-span "> <router-link :to="{name: 'about'}" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link></span>
                <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-3" >
-              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'contact'}" :class="currentRouteName == 'contact' ? 'active' : ''" >{{ $t("general.Contact_Us") }}</router-link> </span>
+            <b-nav-item  class="ml-md-1  text-center" >
+              <span class=" font-arvo nav-span "> <router-link :to="{name: 'contact'}" :class="currentRouteName == 'contact' ? 'active' : ''" >{{ $t("general.Contact_Us") }}</router-link> </span>
                <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item class="ml-md-3">
-              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
+
+
+          <div class="d-block d-md-none">  
+           
+            <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
+              <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
                <hr class="mobile navstyle" />
 
             </b-nav-item>
-            <b-nav-item  class="ml-md-3">
-              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
+
+            <b-nav-item v-if="islogin" class="ml-md-1  text-center">
+              <span class="  nav-span "> <router-link :to="{name: 'dashboard'}">{{ $t("general.dashboard") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+
+            </b-nav-item>
+
+            <b-nav-item  class="ml-md-1">
+              <div class="border-right" style="border-right:1px solid black"> </div>
+            </b-nav-item>
+            
+            <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
+              <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
               <hr class="mobile navstyle" />
             </b-nav-item>
 
-            <b-nav-item  class="ml-md-3 ">
+            
+           
+              <b-nav-item v-if="islogin" class="ml-md-1  text-center">
+              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+
+            </b-nav-item>
+
+            <b-nav-item  class="ml-md-1  text-center">
           
               <b-dropdown variant="ligth">
                   <template #button-content>
@@ -53,17 +78,68 @@
                   <b-dropdown-item @click="change('fr')" ><img src="../../assets/img/la-france.png" class="size" alt=""> FR</b-dropdown-item>
                 </b-dropdown>
             
+            </b-nav-item> 
+
+           </div>
+            </b-navbar-nav>
+        </b-collapse>
+            
+             <b-navbar-nav class="mr-auto d-none d-lg-flex "> 
+
+            <b-nav-item class="ml-md-1">   
+               <b-input-group>
+              <b-input-group-prepend @click="Search">
+       <div class="border" style="color:#495057 !important"> <b-icon   class="mt-2 ml-2" icon="search"></b-icon> </div> 
+    </b-input-group-prepend>
+    
+     <b-form-input v-on:keyup.enter='Search' style="border-left:none" type="search" v-model="keyword" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
+              <b-nav-item class="ml-md-1 m-auto">  
+               <span class="nav-span" style="color:#455a64"> <b-icon icon="person" font-scale="1.8"> </b-icon> </span> 
+               </b-nav-item>   
+             
+             
+             <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
+              <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+              </b-nav-item>
+             
+              <div class="border-right m-auto" style=" height: 20px;"> </div>
+           
+            <b-nav-item  v-if="!islogin" class="ml-md-1 m-auto">
+              <span class=" nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
+              <hr class="mobile navstyle" />
             </b-nav-item>
 
-
+             <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
+              <span class="  nav-span "> <router-link :to="{name: 'dashboard'}">{{ $t("general.dashboard") }} </router-link> </span>
+               <hr class="mobile navstyle" />
             
+             </b-nav-item>
+                <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
+              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
+               <hr class="mobile navstyle" />
 
-             
+            </b-nav-item>
+          
+             <b-nav-item  class="ml-md-1 m-auto">
+          
+                <b-dropdown variant="ligth">
+                  <template #button-content>
+                   <img :src="img" class="size poslang" alt=""> <span class="poslang">{{lang}}</span>
+                  </template>
+                   <b-dropdown-item  @click="change('en')"> <img src="../../assets/img/about/en.png" class="size" alt=""> EN</b-dropdown-item>
+                  <b-dropdown-item @click="change('fr')" ><img src="../../assets/img/la-france.png" class="size" alt=""> FR</b-dropdown-item>
+                </b-dropdown>
+            
+            </b-nav-item> 
 
-          </b-navbar-nav>
-        </b-collapse>
-      </div>
+
+               </b-navbar-nav>
+
+      </div> </div>
     </b-navbar>
+ 
+      </div>
   <!-- </header>  -->
 </template>
 <script>
@@ -74,8 +150,13 @@ export default {
   data(){
     return {
       img: require("../../assets/img/about/en.png"),
-      lang: 'EN'
+      lang: 'EN',
+      keyword:'',
+      islogin: false,
     }
+  },
+  created(){
+     this.islogin = this.$store.getters["auth/isLogged"];
   },
   computed: {
     currentRouteName() {
@@ -89,6 +170,18 @@ export default {
  * this fuction is use to change the user language
  * @private
  */
+
+    Search() {
+      if (!this.keyword) return false;
+
+      if (this.$route.name != "Search") {
+        this.$router.push({
+          name: "GlobalSearch",
+          query: { keyword: this.keyword },
+        });
+      }
+    },
+
     change(lang){
       this.$i18n.locale = lang;
 
@@ -103,14 +196,21 @@ export default {
   }
 };
 </script>
+
+
 <style scoped>
+ a{
+    color: #455a64 !important;
+  }
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
+.b-none{
+  border: none !important;
+}
 .size{
   height: 15px;
   width: 15px;
@@ -124,13 +224,17 @@ export default {
 .navbar-expand-lg {
     
     padding-right: 0px;
+    justify-content: center;
 }
 }
 
 
 .nav-span {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
+  line-height: 21px;
+  color: #282828;
+
 }
 
 .nav-item.active .nav-link span {
@@ -140,7 +244,7 @@ export default {
   color: #e75c18 !important;
 }
 .active{
-  color: #e75c18;
+  color: #e75c18 !important;
 }
 .container{
   margin-left: 10px !important;
@@ -157,7 +261,7 @@ export default {
   
   .balogo{
     width: 70px ;
-    height: 50px ;
+   
   }
   .desktop{
     /* display: none; */
@@ -190,8 +294,8 @@ export default {
 
 @media only screen and (min-width: 768px) {
   .balogo{
-    width: 200px ;
-    height: 70px ;
+    width: 165px ;
+   
   }
   .mobile{
     display: none;

@@ -118,9 +118,9 @@ export default {
 
   data() {
     return {
-      selectedb: "owner",
+      selectedb:"owner",
       slide: 0,
-      isPremium: isPremium(),
+      //isPremium: isPremium(),
       sliding: null,
       url_data: null,
       map: false,

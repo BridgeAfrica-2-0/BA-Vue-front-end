@@ -229,7 +229,7 @@
               <b-avatar class="d-inline-block avat" variant="light" :src="profile.profile_picture"></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
-              <h5 class="m-0 font-weight-bolder">{{ info.user.name }}</h5>
+              <h4 class="m-0 username">{{ info.user.name }}</h4>
             </b-col>
           </b-row>
           <b-row>
@@ -459,8 +459,9 @@ export default {
       let url = 'user/post/' + this.page;
 
       if (this.page == 1) {
-        this.owner_post.splice(0);
+       // this.owner_post.splice(0);
       }
+
       this.$store
         .dispatch('profile/loadMore', url)
 
@@ -468,8 +469,9 @@ export default {
           console.log(data);
           if (data.data.length) {
             this.page += 1;
-
+           if (this.page != 1) {
             this.owner_post.push(...data.data);
+           }
             $state.loaded();
           } else {
             $state.complete();
@@ -961,7 +963,7 @@ export default {
   .usernamee {
     font-weight: 600;
     font-size: 15px;
-    color: black;
+  
   }
 
   .videoh {
@@ -980,7 +982,15 @@ export default {
   .usernamee {
     font-weight: 600;
     font-size: 20px;
-    color: black;
+   
+  }
+
+  
+  .username {
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: capitalize;
+   
   }
 
   .avat {
@@ -1110,9 +1120,7 @@ export default {
   padding: 6px;
   border-radius: 10px;
 }
-.username {
-  color: black;
-}
+
 .btn {
   border-radius: 5px;
   text-align: center;
@@ -1149,7 +1157,8 @@ export default {
   .usernamee {
     font-weight: 600;
     font-size: 15px;
-    color: black;
+    text-transform: capitalize;
+   
   }
 
   .videoh {

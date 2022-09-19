@@ -11,14 +11,15 @@ setTimeout(function () {
             if (lastScrollTop > document.documentElement.scrollTop) {
                
                   
-                
+                if(document.getElementById("dashsidebar")){  
                  document.getElementById("dashsidebar").classList.add("dash-fixed-top");
-
+                }
 
             }
           } else if (document.documentElement.scrollTop < 90) {
-             
+            if(document.getElementById("dashsidebar")){ 
             document.getElementById("dashsidebar").classList.remove("dash-fixed-top");
+            }
           }
           }
 

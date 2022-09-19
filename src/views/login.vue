@@ -192,6 +192,13 @@ export default {
       }
     }
   },
+
+   created(){
+   if(this.$store.getters["auth/isLogged"]){
+       this.$router.push({ name: "dashboard" });
+   }
+  },
+
   methods: {
     getValidationClass(fieldName) { 
       const field = this.$v.form[fieldName];

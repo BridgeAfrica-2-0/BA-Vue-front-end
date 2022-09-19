@@ -2,8 +2,8 @@
   <div> 
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
-      <div class="text-justify mt-2 container-fluid wahala">
-        <b-row class="center-content">
+      <div class="text-justify mt-2 container wahala">
+        <b-row class="">
           <b-col cols="12">
             <b-tabs
               lazy
@@ -143,11 +143,11 @@ img {
   }
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .center-content {
     padding-right: 63px;
 
     padding-left: 63px;
   }
-}
+} */
 </style>

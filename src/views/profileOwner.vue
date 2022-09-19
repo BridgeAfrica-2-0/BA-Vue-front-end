@@ -2,7 +2,7 @@
   <div class="mx-auto" style="overflow-x: clip;">
     <navbar></navbar>
     <head-page></head-page>
-    <div class="container-fluid text-justify corps prof center-content wahala">
+    <div class="container text-justify corps prof center-content wahala">
       <b-row class="">
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
@@ -195,10 +195,10 @@ export default {
   }
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .center-content {
     padding-left: 64px;
     padding-right: 64px;
   }
-}
+} */
 </style>

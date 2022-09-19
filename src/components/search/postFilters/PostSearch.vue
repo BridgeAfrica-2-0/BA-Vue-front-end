@@ -5,7 +5,7 @@
       {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
-
+  
     <div>
       <Sponsor />
     </div>
@@ -13,8 +13,12 @@
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
       {{ $t("search.Posting") }}
     </h6>
-    <Loader v-if="!pageHasLoad || loaderState" />
   
+    <Postskeleton :loading="loaderState" />
+     <Postskeleton :loading="loaderState" />
+     <div class="text-center">  
+    <Loader v-if="!pageHasLoad || loaderState" />
+     </div>
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
     <div v-else>
       <Post
@@ -50,7 +54,7 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import { loader, search, PostComponentMixin } from "@/mixins";
-
+import Postskeleton from "@/components/Postskeleton";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
 import login from "@/components/search/login";
@@ -60,7 +64,7 @@ export default {
   components: {
     Sponsor,
     Post,
-    login,
+    login, Postskeleton,
         Loader,
   },
 

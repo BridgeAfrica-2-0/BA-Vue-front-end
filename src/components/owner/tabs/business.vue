@@ -1,9 +1,13 @@
 <template>
-  <div> 
+  <div class="community-box"> 
+     <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}" >
 
         <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity'  />
           
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+     </VuePerfectScrollbar>
   </div>
 </template>
 
@@ -11,10 +15,11 @@
 
 import axios from "axios";
 import Business from "@/components/Business";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   props: ["type", "from"],
   components: {
-    Business
+    Business,VuePerfectScrollbar
   },
 
   data() {

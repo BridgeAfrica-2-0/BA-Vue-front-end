@@ -15,6 +15,7 @@ import verifyAccount from "../views/verifyAccount.vue";
 
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
+import BridgeHome from "@/views/BridgeHome";
 import Quote from "@/views/quote";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
@@ -438,8 +439,15 @@ const routes = [
 
   {
     path: "/",
-    name: "newHome",
-    component: newHome,
+    name: "Bridge-home",
+    component: BridgeHome,
+
+  },
+
+  {
+    path: "/blecc",
+    name: "Blecc",
+    component: BridgeHome,
 
   },
 

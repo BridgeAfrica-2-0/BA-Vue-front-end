@@ -1,7 +1,12 @@
 <template>
-  <b-button variant="primary" v-if="isBuyNow" @click="handleAddToCard" style="width:100%">
-    <span>Buy now</span>
+  <b-button variant="primary" class="btn-sm p-2" v-if="isBuyNow" @click="handleAddToCard" style="width:100%;">
+    Buy now 
   </b-button>
+
+ <b-button variant="primary" v-else-if="buyNow"  @click="cta()">
+  <i v-if="buyNow" class="fas fa-envelope btn-icon "></i>
+     {{ $t("businessf.Message") }}
+ </b-button>
 
   <b-button v-else
     :block="header"
@@ -20,8 +25,9 @@
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
     <!-- <span v-else-if="isBuyNow" >Buy Now</span> -->
-    <span v-else style="display: inline-flex">
-      <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
+    <span v-else style="display: inline-flex" :class="{'p-1':buyNow}">
+      <i v-if="buyNow" class="fas fa-envelope fa-lg btn-icon   mt-1 mr-1 mt-sm-1"></i>
+      <i v-else class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
       <span class="btn-text blecmsg mt-md-0" >
         {{ $t("businessf.Message") }}</span
       >
@@ -60,6 +66,11 @@ export default {
     header: {
       default: false,
       type: Boolean,
+    },
+
+    buyNow:{
+      type:Boolean,
+      default:false
     },
     /**
      * Boolean that will later be used in the inbox to extrat the business ID of the product

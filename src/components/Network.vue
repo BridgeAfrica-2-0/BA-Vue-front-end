@@ -241,13 +241,13 @@ getTotalCommunity(){
       if(this.callerType=='network'){
           data = {
         id: user.id,
-        type: "user",
+        type: "network",
         network_id: this.$route.params.id
       };
       }else{ 
        data = {
         id: user.id,
-        type: "user",
+        type: "network",
       };
        }
 

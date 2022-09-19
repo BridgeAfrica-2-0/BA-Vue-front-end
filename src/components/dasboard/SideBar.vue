@@ -24,9 +24,9 @@
       </div>
 
       <div class="text-lost text-center">
-        <h6 class="">
-          <router-link :to="{ name: 'profile_owner' }" class="card-title p-3">
-            {{ profile.name }}
+        <h6 class="white">
+          <router-link :to="{ name: 'profile_owner' }" class="card-title p-3 white">
+            {{ profile.name }} 
           </router-link>
         </h6>
       </div>
@@ -464,7 +464,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? { name: "dashboard" } : { name: "newHome" };
+          return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
         },
       };
       try {

@@ -1,17 +1,18 @@
 <template>
   <div v-if="islogin">  
     <Skeleton  :loading="prodLoader" />
-    
+    <Skeleton  :loading="prodLoader" />
      <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
     /> 
+    <div class="text-center"> 
     <b-spinner
       v-if="prodLoader"
       variant="primary"
       :label="$t('search.Spinning')"
     ></b-spinner>
-  
+     </div>
 
    <Business
         v-for="item in business.data"

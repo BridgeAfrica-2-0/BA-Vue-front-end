@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <div
       v-if="filterType == '0' || filterType == '1' || filterType == '5'"
       class="mt-2 mb-2"
@@ -16,8 +16,6 @@
     <br />
 
     <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
-
-  
 
         <span v-if="suggestedKeyword.length">
         <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
@@ -41,11 +39,11 @@
 
       <b-form-group
         v-if="nameOfCategory"
-        class="mb-0 pt-6 text-left"
+        class="mb-0  text-left"
         label-cols-lg="12"
         :label="$t('search.Category')"
         label-size="md"
-        label-class="font-weight-bold pt-0"
+        label-class=" pt-0"
       >
       <b-form-select
         v-model="nameOfCategory"
@@ -62,6 +60,7 @@
           v-for="item in categoryRendering"
           :key="item.id"
           :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
+          variant="light"
           @click="matching(item)"
         >
           {{ item.category }}
@@ -151,8 +150,8 @@
               label-cols-lg="3"
               :label="$t('search.Country')"
               label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 pt-6 text-left"
+              label-class=" pt-0"
+              class="mb-0 pt-2 text-left"
             >
             </b-form-group>
             <b-form-select
@@ -172,9 +171,9 @@
                 label-cols-lg="3"
                 :label="$t('search.City')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class=" pt-0"
                 class="mb-0 text-left"
-              >
+              > 
               </b-form-group>
                   <multiselect 
                   :value="city" 
@@ -193,7 +192,7 @@
                 label-cols-lg="3"
                 :label="$t('search.Neighbourhood')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class=" pt-0"
                 class="mb-0 mt-3 text-left"
               >
               </b-form-group>
@@ -229,7 +228,7 @@
                 label-cols-lg="3"
                 :label="$t('search.Region')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class=" pt-0"
                 class="mb-0 text-left"
               >
               </b-form-group>
@@ -252,7 +251,7 @@
                 label-cols-lg="3"
                 :label="$t('search.Division')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class=" pt-0"
                 class="mb-0 text-left"
               >
               </b-form-group>
@@ -272,7 +271,7 @@
                 label-cols-lg="3"
                 :label="$t('search.Council')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class=" pt-0"
                 class="mb-0 text-left"
               >
               </b-form-group>
@@ -294,7 +293,7 @@
                 label-cols-lg="3"
                 :label="$t('search.Neighbourhood')"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="pt-0"
                 class="mb-0 text-left"
               >
               </b-form-group>
@@ -328,7 +327,7 @@
           label-cols-lg="3"
           :label="$t('search.Region')"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class="pt-0"
           class="mb-0 text-left"
         >
         </b-form-group>
@@ -345,7 +344,7 @@
           label-cols-lg="3"
           :label="$t('search.Division')"
           label-size="md"
-          label-class="font-weight-bold pt-0 text-left"
+          label-class=" pt-0 text-left"
           class="mb-0"
         >
         </b-form-group>
@@ -362,7 +361,7 @@
           label-cols-lg="12"
           :label="$t('search.Sub_Division')"
           label-size="md"
-          label-class="font-weight-bold pt-0 text-left"
+          label-class="pt-0 text-left"
           class="mb-0"
         >
         </b-form-group>
@@ -379,7 +378,7 @@
           label-cols-lg="3"
           :label="$t('search.City')"
           label-size="md"
-          label-class="font-weight-bold pt-0 text-left"
+          label-class=" pt-0 text-left"
           class="mb-0"
         >
         </b-form-group>
@@ -416,8 +415,8 @@
             label-cols-lg="3"
             :label="$t('search.Categories')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0 pt-6 text-left"
+            label-class=" pt-0"
+            class="mb-0 pt-2 text-left"
           >
           </b-form-group>
           <b-form-select
@@ -435,8 +434,8 @@
             label-cols-lg="3"
             :label="$t('search.Country')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0 pt-6 text-left"
+            label-class=" pt-0"
+            class="mb-0 pt-2 text-left"
           >
           </b-form-group>
           <b-form-select
@@ -455,7 +454,7 @@
             label-cols-lg="3"
             :label="$t('search.Region')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0 text-left"
           >
           </b-form-group>
@@ -476,7 +475,7 @@
             label-cols-lg="3"
             :label="$t('search.Division')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0 text-left"
           >
           </b-form-group>
@@ -496,7 +495,7 @@
             label-cols-lg="3"
             :label="$t('search.Council')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0 text-left"
           >
           </b-form-group>
@@ -516,7 +515,7 @@
             label-cols-lg="3"
             :label="$t('search.Neighbourhood')"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0 text-left"
           >
           </b-form-group>
@@ -544,7 +543,7 @@
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"
         label-size="md"
-        label-class="font-weight-bold pt-0"
+        label-class=" pt-0"
         class="mb-0 text-left"
       >
         <b-form-radio
@@ -565,7 +564,7 @@
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"
         label-size="md"
-        label-class="font-weight-bold pt-0"
+        label-class="pt-0"
         class="mb-0 text-left"
       >
         <b-form-radio
@@ -1907,7 +1906,7 @@ export default {
 
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
-      if (this.filterType == 5) {
+      if (this.filterType == 0) {
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
@@ -1940,7 +1939,7 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1 || this.filterType == 0) {
+      } else if (this.filterType == 1 || this.filterType == 5) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -1975,7 +1974,7 @@ export default {
             // this.filterLoader = false;
           });
 
-        if (this.filterType == 0) {
+        if (this.filterType == 5) {
           this.allSearch({
             cat_id: subCat.cat_id,
             sub_cat: subCat.id,
@@ -2040,7 +2039,7 @@ export default {
         this.searchBusiness(this.searchParams);
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType == 5) {
+      } else if (this.filterType ==0) {
         console.log("[DEBUG] Filter: ", filter);
         // this.searchProducts({
         //   cat_id: filter.cat_id,
@@ -2051,7 +2050,7 @@ export default {
         this.searchProducts(this.searchParams);
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType == 0) {
+      } else if (this.filterType == 5) {
         console.log("[DEBUG] Filter: ", filter);
         // this.allSearch({
         //   cat_id: filter.cat_id,
@@ -2082,25 +2081,24 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType ==5) {
+      } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 0) {
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
 
     searchThiscity(keyword) {
-      let data = { city: keyword };
+    
+      let data = { city: keyword.code };
 
-      this.$emit("updateSearchLocation", keyword);
-
-      this.searchParams.city = keyword;
+      this.searchParams.city = keyword.code;
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType ==5) {
+      } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 0) {
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
@@ -2112,7 +2110,7 @@ export default {
 
       this.searchParams.neighbourhood = nei;
 
-      if (this.filterType == 77) {
+      if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
@@ -2199,9 +2197,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
@@ -2218,9 +2216,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
 
@@ -2256,9 +2254,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
 
@@ -2293,9 +2291,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
@@ -2305,9 +2303,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
@@ -2317,9 +2315,9 @@ export default {
 
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
 
@@ -2340,9 +2338,9 @@ export default {
         });
       if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 5) {
-        this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 5) {
         this.allSearch(this.searchParams);
       }
     },
@@ -2382,7 +2380,7 @@ export default {
 
     getCities(){
       const cities =  this.$store.getters["auth/cities"];
-      for (let index in cities) {
+        for (let index in cities) {
         this.citiesValues.push({
           label: cities[index].name,
           code: cities[index].id
@@ -2794,9 +2792,9 @@ export default {
       }
     },
     setSelectedLocation(value)
-    {
-      this.city = value;
-      this.$emit("updateSearchLocation", {code: value.code, label: value.label });
+    {  
+       this.$emit("updateSearchLocation", {code: value.code, label: value.label });
+       this.searchThiscity(value);
     }
   },
 };
@@ -2806,8 +2804,9 @@ export default {
 .inactied {
   cursor: pointer;
   font-size: 14px;
-  color: #e75c18;
-  border: 1px solid #e75c18;
+   color: #455a64;
+   font-weight: 400;
+  border: 1px solid #455a64; 
   background: transparent;
 }
 
@@ -2857,8 +2856,7 @@ export default {
 select option {
   margin: 40px;
   background: white;
-  color: black;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
 }
 .wi-25 {
   width: 25%;

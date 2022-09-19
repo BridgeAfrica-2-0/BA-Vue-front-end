@@ -4,9 +4,9 @@
 <!-- <header class="position-relative"> -->
 
 
-    <div class="container-flex home-nav"> 
+    <div class="container-flex home-nav "> 
 
-     <b-navbar toggleable="lg" class=" p-0 border-bottom"  >
+     <b-navbar toggleable="lg" class=" p-0 border-bottom "  >
         <div class="container p-0 m-0"> 
     <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
         <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-2">

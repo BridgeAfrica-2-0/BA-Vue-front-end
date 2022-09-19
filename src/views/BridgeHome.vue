@@ -2,7 +2,7 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0 pt-md-4 pb-2">
+    <section class="p-0 pt-md-2 pb-2">
   
      <div class="d-md-none">  
       <b-carousel
@@ -23,9 +23,10 @@
           img-src="assets/home/leftslide-sm.png"
         ></b-carousel-slide>
 
-          <b-carousel-slide class="cover"
+          <!-- <b-carousel-slide class="cover"
              img-src="assets/home/right-slide-sm.png"
-        ></b-carousel-slide>
+        ></b-carousel-slide> -->
+
          </b-carousel>
     </div>
 
@@ -1035,7 +1036,7 @@ border-radius: 10px;
 
 @media only screen and (min-width: 960px) {
    .main-banner{
-    height:417px;
+    height:460px;
    }
 
    .cover{
@@ -1141,6 +1142,7 @@ line-height: 33px;
 font-size: 16px;
 line-height: 24px;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .bridge-home p {
@@ -1212,6 +1214,8 @@ border-radius: 15px;
   
 }
 
+
+
 .bridge-home h5 {
   font-family: "Poppins";
   font-style: normal;
@@ -1219,6 +1223,7 @@ border-radius: 15px;
   font-size: 22px;
   line-height: 33px;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .bridge-home p {

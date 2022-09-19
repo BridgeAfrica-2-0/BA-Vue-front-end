@@ -2,13 +2,13 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0 pt-md-2 pb-2">
+    <section class="p-0 pt-md-3 pb-2">
   
      <div class="d-md-none">  
       <b-carousel
         id="carousel-1"
         v-model="slide"
-        :interval="4000"
+        :interval="10000"
         controls
         indicators
      
@@ -20,12 +20,12 @@
         ></b-carousel-slide>   -->
 
         <b-carousel-slide class="cover"
-          img-src="assets/home/leftslide-sm.png"
+          img-src="assets/home/leftslide-sm.jpg"
         ></b-carousel-slide>
 
-          <!-- <b-carousel-slide class="cover"
-             img-src="assets/home/right-slide-sm.png"
-        ></b-carousel-slide> -->
+       <b-carousel-slide class="cover"
+             img-src="assets/home/rightslider.png"
+        ></b-carousel-slide> 
 
          </b-carousel>
     </div>
@@ -1036,7 +1036,7 @@ border-radius: 10px;
 
 @media only screen and (min-width: 960px) {
    .main-banner{
-    height:460px;
+    height:440px;
    }
 
    .cover{

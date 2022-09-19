@@ -574,6 +574,7 @@ export default {
   background-color: #ddd;
   height: 34px;
   padding-left: 10px;
+  font-size: 14px;
 }
 .comment:focus {
   outline: none;

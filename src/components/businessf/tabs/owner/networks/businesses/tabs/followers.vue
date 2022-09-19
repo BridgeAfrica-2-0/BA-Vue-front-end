@@ -4,7 +4,7 @@
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend
-            @click="search"
+            @click="search" 
             is-text
             style="cursor:pointer;"
           >
@@ -25,7 +25,7 @@
     <b-row cols="1">
       <b-col
         class="ml-0 mr-0"
-        v-for="(member, index) in displayfollowers"
+        v-for="(item, index) in displayfollowers"
         :key="index"
       >
         <b-skeleton-wrapper :loading="loading">
@@ -37,15 +37,12 @@
             </b-card>
           </template>
           <div style="display:none;">
-            {{ (member["communityNum"] = nFormatter(member.followers)) }}
+            {{ (item["communityNum"] = nFormatter(item.followers)) }}
           </div>
-          <div style="display:none;">{{ (member["type"] = "business") }}</div>
-          <CommunityBusiness
-            :member="member"
-            @BlockUser="BlockUser"
-            :index="index"
-            @handleFollow="handleFollow"
-          />
+          <div style="display:none;">{{ (item["type"] = "business") }}</div>
+                  
+    <Business  :canBlock="canBlock"  callerType='network'  :key="item.id"  :index="index" :business="item" @getTotalCommunity='businessDetails'  @BlockUser="BlockUser"  />
+   
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -67,10 +64,10 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+import Business from "@/components/Business";
 export default {
   components: {
-    CommunityBusiness,
+    Business,
   },
   data() {
     return {
@@ -82,6 +79,19 @@ export default {
       displayfollowers: [],
     };
   },
+
+   computed:{
+    canBlock(){
+     
+     if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
+
   mounted() {
     this.url = this.$route.params.id;
   },
@@ -215,7 +225,7 @@ export default {
 
 
     async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata);
+      document.getElementById("followbtn" + Comdata.id).disabled = true;
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
       console.log("uri", url);
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
@@ -230,6 +240,7 @@ export default {
         .then((response) => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+           document.getElementById("followbtn" + Comdata.id).disabled = true;
           this.businessDetails();
         })
         .catch((err) => console.log(err));

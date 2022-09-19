@@ -12,6 +12,7 @@ export default {
         networks: [],
         businesses: [],
         currentBizId: null,
+        currentBizSlug:null,
         currentBiz: [],
         userInfo: [],
         bizs: [],
@@ -32,6 +33,9 @@ export default {
         },
         getCurrentBizId(state) {
             return state.currentBizId;
+        },
+        getCurrentBizSlug(state) {
+            return state.currentBizSlug;
         },
         getAll(state) {
             return state.all;
@@ -111,6 +115,9 @@ export default {
         //set data
         setCurrentBizId(state, data) {
             state.currentBizId = data
+        },
+        setCurrentBizSlug(state, data){
+            state.currentBizSlug = data
         },
         setCurrentBiz(state, data) {
             state.currentBiz = data
@@ -449,7 +456,7 @@ export default {
 
             commit("setLoader", true);
 
-            let keyword = data.keyword ? '/' + data.keyword : ''
+            let keyword = data ? '/' + data.keyword : ''
 
             await axios.get(`/network/${state.currentBizId}/business/follower${keyword}`)
                 .then((res) => {
@@ -634,6 +641,8 @@ export default {
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });
+
+                        commit("setLoader", false);
                     })
                     .catch((err) => {
                         commit("setLoader", false);

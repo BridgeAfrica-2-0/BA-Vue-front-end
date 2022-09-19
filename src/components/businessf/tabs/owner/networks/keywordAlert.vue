@@ -161,7 +161,7 @@ export default {
       listTag = listTag.substring(1);
 
       let data = {
-        networkId:  this.$route.params.id,
+        slug:  this.$route.params.id,
         keywork: listTag,
       };
       //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);
@@ -169,7 +169,10 @@ export default {
       this.$store
         .dispatch("keywordOperationOnNetwork/newKeyWord", data)
         .then(() => {
-          console.log("hey yeah");
+          this.flashMessage.show({
+          status: "success",
+          message: this.$t('general.Changes_Made_Successfuly')
+        });
         })
         .catch((err) => {
           console.log({ err: err });

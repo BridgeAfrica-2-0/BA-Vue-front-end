@@ -33,7 +33,7 @@
                   <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
                    
 
-                    <router-link :to="'/profile/'+editor.user_id" >
+                    <router-link :to="'/profile/'+editor.slug" >
                           {{ editor.fullname }}
                       </router-link>      
 
@@ -52,13 +52,13 @@
                     </template>
                     <b-dropdown-item
                       href="#"
-                    @click="ApproveRequest(editor.user_id, index)"
+                    @click="ApproveRequest(editor.user_slug, index)"
                     >
                      {{ $t('network.Approve') }}
                     </b-dropdown-item>
                     <b-dropdown-item
                       href="#"
-                      @click="DeclineRequest(editor.user_id, index )"
+                      @click="DeclineRequest(editor.user_slug, index )"
                     >
                       
                       {{ $t('network.Decline') }}
@@ -103,7 +103,7 @@
                    
 
                     <router-link
-                        :to="'/business/'+editor.user_id"
+                        :to="'/business/'+editor.slug"
                       >
                           {{ editor.fullname }}
                       </router-link>
@@ -123,7 +123,7 @@
                     </template>
                     <b-dropdown-item
                       href="#"
-                      @click="BApproveRequest(editor.user_id, index)"
+                      @click="BApproveRequest(editor.business_slug, index)"
                     >
                      
 
@@ -132,7 +132,7 @@
                     </b-dropdown-item>
                     <b-dropdown-item
                       href="#"
-                       @click="BDeclineRequest(editor.user_id, index )"
+                       @click="BDeclineRequest(editor.business_slug, index )"
                     >
                       
                     {{ $t('network.Decline') }}

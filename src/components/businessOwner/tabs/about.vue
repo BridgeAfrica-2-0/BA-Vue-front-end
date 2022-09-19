@@ -275,6 +275,7 @@
         </b-button>
       </b-form>
     </b-modal>
+
     <b-modal
       id="addressBusinessModal"
       ref="addressBusinessModal"
@@ -990,7 +991,6 @@ export default {
     },
   },
   methods: {
-  
 
     input1(){
          

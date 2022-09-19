@@ -1,4 +1,53 @@
-{
+{  
+ "sell_world_wide":"Sell worldwide",
+"all_in_one":"All-in-one platform helping businesses in Africa to sell online worldwide for the very first time",
+"buy_world_wide":"Buy worldwide",
+"Us":"Us",
+"buy_world_wide_customers":"Helping customers around the world to buy dynamic products and services from Cameroon.",
+"logistics_support":"Support and Security",
+"we_support_businese_throughout":" We support businesses throughout the selling process, and ensure customers receive good value for money.",
+"buy_quality_product":"Buy quality products",
+"from_ourMarket_place":"from our Marketplace in Cameroon and around the world",
+"with_over_100_categories":"With over 100 categories of products, easily shop from businesses in Cameroon anytime,anywhere. ",
+"more_products":" More Products",
+"avaliable_in_worlwide":"Available Worldwide",
+"avaliable_in_cameroon":"Available Cameroon",
+"for_busineses":"for Businesses",
+"sell_online_in_person":"Sell online, in person, or both with the marketing tools, aocial integrations, ans sales channels you need to get your products in frotn of customers-and out the door.",
+"business_identity_and_oline":"Business Identity and Online Marketplace",
+
+"create_your_business_page":"Create your business page and sell to millions around you and the world though our online marketplace.",
+"unified_back_office":"Unified back-office ",
+"easily_manage_your_business":"Easily manage your business page and market Use your dashboard to manage all your products, see how your business is doing, and engage with your customers.",
+"for_customers":"for Customers",
+"large_marketplace_and_digital":"Large marketplace and digital payment solution.",
+"localize_business_directory":"Localised business directory",
+"we_help_customers_online_to":"We help customers worldwide to buy products and services from Cameroon, and seamlessly pay using local and international payment solutions. ",
+"we_help_you_easily_find":"We help you easily find businesses with affordable prices, giving you the ability to compare businesses with the best pricing around you.",
+"find_products_and_services":"find products and service from Cameroon",
+"let_help_u":"Let’s help you",
+"Transformed":"Transformed",
+"Explore":"Explore",
+"hire_a_professional_tailor":"Hire a professional tailor today to enjoy personalised, high quality, Made to Measure tailoring service that represents outstanding value for money",
+"hire_tailor":"Hire Tailor",
+"Tailor":"Tailor",
+"to_help_you_make_more_money":"to help you make more money online",
+"digital_education":"Digital Education",
+"use_our_special_design_training":"Use our specially designed training curriculum to help enhance your entrepreneurial and digital skills, learn how to properly use your bridgeafrica.com online shop, and comfortably engage in global e-commerce",
+"checkout_our":"Checkout our",
+"show_on_crtv":" Show on CRTV",
+"bizconnect_show_is_a15_min":"Biz Konnect is a 15-minute TV program that highlights the integration of businesses into the world of e-commerce through the bridgeafrica.com platform. Each episode highlights the online shop of the business and its products, prompting viewers to buy from the business.",
+"the_show_is_aired":" The show is aired every Wednesday on Cameroon’s national public broadcaster, CRTV, and has been running for over 2 years.",
+"cameroon_focus":"Cameroon-Focused",
+"Upgrade":"Upgrade",
+"reach_a_wider_community":"Reach a wider community with our group messaging functionality",
+"upgrade_your_account":" Upgrade your Account Today and",
+"start_selling_to_the":"Start Selling to the World",
+"while_you_can_use":" While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will enable you to do the full e-commerce transaction cycle.",
+"market_place_access":"Marketplace access",
+"unlimited_market_place_to_sell":"Unlimited marketplace to sell to millions around you and the world",
+
+
 
     "KEEP_IN_TOUCH":"KEEP IN TOUCH",
     "International_Handricraft_Center":"International Handricraft Center",
@@ -98,9 +147,9 @@
     "business_identity_and_online_marketplace":" BUSINESS IDENTITY & ONLINE MARKETPLACE",
     "we_help_you_easily_create":" We help you easily create websites for your businesses, buy and sell online through our online marketplace",
     "online_business_database":"ONLINE BUSINESS DATABASE",
-    "make_your_business_visible":"Make your business visible and locatable with the help of our business directory to reach a wider market",
-    "community_engageMent":" COMMUNITY ENGAGEMENT",
-    "engage_with_your_customers":"Engage with your customers today through messaging; follow each other, and receive instant notifications",
+    "make_your_business_visible":"Increase the visibility of your business with the help of our business directory to reach a wider market.",
+    "community_engageMent":"Community engagement ",
+    "follow_and_communicate_with":"Follow and communicate with businesses to remain up to date on latest offers.",
     "helping_small_medium_size_biz":"HELPING SMALL AND MEDIUM BUSINESES GO DIGITAL, MAKE MONEY, AND TRADE WITH THE WORLD",
     "explore_biz":"EXPLORE BUSINESES",
     "about_us":"ABOUT US",
@@ -330,8 +379,9 @@
     "Bussiness":"Bussiness",
     "No_Result_On_Networks":"No result on networks",
     "All_Members":"All members",
-    "No_More_Request":"No more request",
-
+    "No_More_Request":"No more data",
+    "dashboard":"Dashboard",
+    "profile":"Profile",
     "Suggestion_for_Improvement": "Suggestion For Improvement",
     "Complaints":"Complaints",
     "Open_now":"Open now",
@@ -427,9 +477,6 @@
     "Direction":"Direction",
     "Hot_Businesses":"Hot Businesses",
     "No_item":"No item",
-    "Unable_to_Create_Your_Business":"Unable to Create Your Business"
-
-   
-
-
+    "Unable_to_Create_Your_Business":"Unable to Create Your Business",
+    "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account."
 }

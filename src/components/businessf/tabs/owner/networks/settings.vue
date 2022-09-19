@@ -37,7 +37,7 @@
             track-by="id"
             :options="pcategories"
             :multiple="true"
-            :taggable="true"
+            :taggable="false"
             @tag="addTag"
           ></multiselect>
         </b-form-group>
@@ -383,6 +383,7 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
+
     selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
@@ -390,6 +391,7 @@ export default {
       });
       return selectedUsers;
     },
+    
     selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
@@ -553,7 +555,7 @@ export default {
 
       let formData = new FormData();
       formData.append('name', editnetworkinfo.name);
-      formData.append('network_categories_id', this.selectedcategories);
+      formData.append('network_categories', this.selectedcategories);
       formData.append("country_id", this.selectedcountry);
       formData.append("region_id", this.selectedregion);
       formData.append("division_id", this.selecteddivision);

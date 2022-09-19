@@ -2,12 +2,14 @@
   <div v-if="hasLoadPicture">
     <b-spinner class="custom-loader" label="Large Spinner"></b-spinner>
   </div>
+ 
   <div class="row" v-else>
+     
     <div class="container-fluid">
       <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
        {{$t('profileowner.No_items_found')}} 
       </p>
-
+     
       <b-modal
         id="modalxl"
         ref="modalxl"
@@ -35,7 +37,7 @@
       </b-modal>
 
       <div v-for="(image, cmp) in allImages" :key="cmp">
-        <div class="img-gall" v-for="(im, index) in image.media" :key="index">
+        <div class="img-gall img-gall-height" v-for="(im, index) in image.media" :key="index">
           <Picture
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
@@ -48,6 +50,7 @@
             :deleteImage="() => deleteImage(im.id, cmp)"
             :content="image.content"
             :imageProps="imageProps"
+            class="h-100"
           />
 
           <!-- <a v-if="typeOfMedia(im.path) == 'image' && !loading"
@@ -520,9 +523,13 @@ export default {
 </script>
 
 <style scoped>
+
+.img-gall-height{
+  height: 200px;
+}
 .botmediadess-position {
   text-align: center;
-  bottom: -45%;
+  margin: auto;
   width: 100%;
   font-size: 20px;
   position: relative;

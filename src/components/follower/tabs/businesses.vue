@@ -211,7 +211,7 @@ export default {
 
     infiniteHandler($state) {
      
-      let url = "business/user?page=" + this.page + "&id=" + this.foll_id;
+      let url = "business/user?page=" + this.page + "&slug=" + this.foll_id;
 
       if(!this.islogin){
             url='guest/'+url;

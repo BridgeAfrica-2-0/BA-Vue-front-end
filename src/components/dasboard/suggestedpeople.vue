@@ -1,111 +1,20 @@
 <template>
   <div>
-    <div
-      v-for="value in people_around"
-      v-bind:key="value.name"
-      class="people-style border shadow"
-    > 
-      <b-row class="mb-1">
-        <b-col md="3" cols="4" sm="4" class="my-auto">
-          <b-avatar
-            class="p-avater"
-          
-            :src="value.profile_picutre"
-          ></b-avatar>  
-        </b-col>
 
-        <b-col md="8" cols="8" sm="8">
-          <div>
-            <b-row class="shift">
-              <b-col md="12" lg="6" xl="6">
-                <div class="e-name">
-                  <b-row>
-                    <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
-                      <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                        <router-link :to="'profile/' + value.id">
-                          <b> {{ value.name }} </b></router-link
-                        >
-                      </div>
-                    </b-col>
+     <Person v-for="item in people_around" :key="item.id" :person="item"  />
 
-                    <b-col
-                      md="6"
-                      lg="12"
-                      cols="6"
-                      xl="12"
-                      class="mt-3 mt-lg-1 mt-xl-3"
-                    >
-                      <h6 class="follower m-15">
-                        {{ value.followers }} {{ $t("dashboard.Community") }}
-                      </h6>
-                    </b-col>
-                  </b-row>
-                </div>
-              </b-col>
-
-              <b-col lg="6" xl="6" cols="12" md="12">
-                <div>
-                  <b-row class="mt-lg-0">
-                    <b-col
-                      md="6"
-                      lg="12"
-                      cols="6"
-                      xl="12"
-                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                    >
-                      <b-button
-                        block
-                        size="sm"
-                        class="b-background flexx pobtn shadow"
-                        :class="value.is_follow !== 0 && 'u-btn'"
-                        variant="primary"
-                        :id="'followbtn' + value.id"
-                        @click="handleFollow(value)"
-                      >
-                        <i
-                          class="fas fa-lg btn-icon"
-                          :class="
-                            value.is_follow !== 0
-                              ? 'fa-user-minus'
-                              : 'fa-user-plus'
-                          "
-                        ></i>
-
-                        <span class="btn-com">{{
-                          $t("dashboard.Community")
-                        }}</span>
-                      </b-button>
-                    </b-col>
-
-                    <b-col
-                      md="6"
-                      lg="12"
-                      cols="6"
-                      xl="12"
-                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                    >
-                      <BtnCtaMessage :element="value" type="people" />
-                    </b-col>
-                  </b-row>
-                </div>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
+  
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-
+import Person from "@/components/Person";
 import axios from "axios";
 export default {
   components: {
-    BtnCtaMessage,
+    Person
   },
   data() {
     return {
@@ -134,8 +43,7 @@ export default {
   },
   methods: {
     cta_business(data) {
-      console.log(data);
-      console.log("active accounts: ", this.activeAccount);
+     
       this.$store.commit("businessChat/setSelectedChat", data);
 
       let path = "";
@@ -162,7 +70,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+   
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -174,13 +82,13 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
+        
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
         .catch((err) => {
-          console.log({ err: err });
+         
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -188,12 +96,12 @@ export default {
     async infiniteHandler($state) {
       let url = "people/around?page=" + this.page;
 
-      console.log(url);
+    
 
       await axios
         .get(url)
         .then(({ data }) => {
-          console.log(data.data);
+         
 
           if (data.data.length) {
             this.people_around.push(...data.data);
@@ -205,7 +113,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
   },

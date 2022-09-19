@@ -142,10 +142,10 @@ export default {
 
 
         let auth=rootGetters['auth/isLogged'];
-        let url="profile/album/show?id="+id;
+        let url="profile/album/show?slug="+id;
   
         if(!auth){    
-          url ="guest/profile/album/show?id="+id ; 
+          url ="guest/profile/album/show?slug="+id ; 
         }
 
 
@@ -172,10 +172,10 @@ export default {
     async getImages({commit, rootGetters}, id) {
 
         let auth=rootGetters['auth/isLogged'];
-        let url="profile/post/media?id="+id
+        let url="profile/post/media?slug="+id
   
         if(!auth){    
-          url ="guest/profile/post/media?id="+id  
+          url ="guest/profile/post/media?slug="+id  
         }
 
 

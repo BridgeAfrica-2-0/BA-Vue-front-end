@@ -47,7 +47,7 @@ import Business from "../components/businessEditor/business";
 import Settings from "../components/businessEditor/settings";
 
 import Inbox from "@/components/businessOwner/inbox";
-
+import axios from "axios";
 import LyTab from "@/tab/src/index.vue";
 
 import Footer from "../components/footer";
@@ -118,16 +118,19 @@ export default {
   },
 
   methods: {
-    businessInfo() {
-      this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+   
+    async  businessInfo() {
+       
+      let url=`business/info/${this.$route.params.id}`;
+
+      await axios.get(url)
+      .then(({ data }) => {
+         this.$store.commit("businessOwner/setBusinessInfo", data.data);
+         this.auth({ ...data.data,profile_picture: data.data.logo_path, user_type: 'business' });
+          })
+  
     },
+
 
     CommunityBusiness() {
       this.$store

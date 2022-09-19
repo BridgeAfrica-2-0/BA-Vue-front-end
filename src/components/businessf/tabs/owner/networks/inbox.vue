@@ -1,5 +1,5 @@
 <template>
-  <div>  
+  <div> 
     <b-container>
       <!-- Mobile -->
       <div v-if="mobile">
@@ -44,7 +44,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item  v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -268,7 +268,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                (chat.sender_network_id == currentBizId
+                                (chat.sender_network_id == currentBizSlug
                                   ? chat.receiver_network_id
                                   : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
@@ -283,7 +283,7 @@
                               type: 'network',
                               chat: chat,
                               id:
-                                chat.sender_network_id == currentBizId
+                                chat.sender_network_id == currentBizSlug
                                   ? chat.receiver_network_id
                                   : chat.sender_network_id,
                             })
@@ -316,6 +316,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
+                    v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -1056,7 +1057,7 @@
                           </b-tab>
                           <b-tab
                             :title="$t('general.Business')"
-                            @click="getBizs()"
+                            @click="getBizs('')"
                           >
                             <b-row>
                               <b-col>
@@ -1701,7 +1702,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                (chat.sender_network_id == currentBizId
+                                (chat.sender_network_id == currentBizSlug
                                   ? chat.receiver_network_id
                                   : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
@@ -1716,7 +1717,7 @@
                               type: 'network',
                               chat: chat,
                               id:
-                                chat.sender_network_id == currentBizId
+                                chat.sender_network_id == currentBizSlug
                                   ? chat.receiver_network_id
                                   : chat.sender_network_id,
                             })
@@ -2505,7 +2506,7 @@
                           </b-tab>
                           <b-tab
                             :title="$t('general.Business')"
-                            @click="getBizs()"
+                            @click="getBizs('')"
                           >
                             <b-row>
                               <b-col>
@@ -2945,7 +2946,7 @@ import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 import _ from "lodash";
-
+import { isPremium } from '@/helpers';
 export default {
   components: {
     EmojiPicker,
@@ -2959,7 +2960,7 @@ export default {
       rightSide: true,
       leftSide: true,
       audio: new Audio("@/assets/sound/message.mp3"),
-
+      isPremium: isPremium(),
       formData: new FormData(),
       groupName: "",
       tabMemberType: 0,
@@ -3065,9 +3066,15 @@ lastcreatedgroup() {
     currentBizId() {
       return this.$store.getters["networkChat/getCurrentBizId"];
     },
+
+    currentBizSlug() {
+      return this.$store.getters["networkChat/getCurrentBizSlug"];
+    },
+
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
+
     userInfo() {
       return this.$store.getters["networkChat/getUserInfo"];
     },
@@ -3131,7 +3138,7 @@ nbizs() {
       this.getChatList({ type: "business" });
     }
     this.getAll();
-    this.getBizs();
+    this.getBizs('');
     window.addEventListener("resize", () => {
       this.screenWidth = window.screen.width;
     });
@@ -3144,35 +3151,35 @@ nbizs() {
 
     this.$store.commit(
       "networkChat/setCurrentBizId",
-      Number(this.$route.params.id)
+     this.$route.params.id
     );
-    console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId
-      ? Number(this.$route.query.msgTabId)
-      : "no";
 
-    console.log("this.tabIndex:", this.tabIndex);
-    console.log("Current biz:", this.currentBiz);
+     this.$store.commit(
+      "networkChat/setCurrentBizSlug",
+         this.$store.state.networkProfile.networkInfo.id
+    );
 
-    // console.log("call to action checked:", this.ctaSelected);
+    this.tabIndex = this.$route.query.msgTabId ? Number(this.$route.query.msgTabId): "no";
+
+   
 
     if ([0, 1, 2].includes(this.tabIndex)) {
-      console.log("here am i!");
+    
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
       } else {
         this.tabIndex = 0;
-        console.log("111 call ");
+      
 
         this.getChatList({ type: "user" });
-        console.log("222 call ");
+       
       }
-      console.log("call to action checked:", this.ctaSelected);
+     
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
-      console.log("Am here again!");
+      
       this.tabIndex = 1;
       this.getChatList({ type: "business" });
     }
@@ -3190,7 +3197,7 @@ nbizs() {
      * @private
      */
     onPressSearchNewChat: _.debounce(function (e) {
-      console.log("press...", e);
+     
       this.getList(e);
     }, 1000),
 
@@ -3204,7 +3211,7 @@ nbizs() {
       let out = [
         ...new Map(objArr.map((item) => [item["name"], item])).values(),
       ];
-      console.log("ZZZ:", out);
+     
       return out;
     },
 
@@ -3214,8 +3221,7 @@ nbizs() {
      */
     formatName(value) {
       var name = "";
-      // console.log("Value:", value);
-      // console.log("Current:", this.currentBizId);
+     
       if (this.type == "user") {
         name = value.sender
           ? value.sender.name
@@ -3246,7 +3252,7 @@ nbizs() {
      * @private
      */
     getImage(data) {
-      // console.log("data IN", data);
+     
       let image = data.image;
       let finale = "";
       let user = require("@/assets/profile_white.png");
@@ -3276,8 +3282,7 @@ nbizs() {
         finale = group;
       }
 
-      // console.log("debug ", finale);
-      // console.log(this.type);
+     
       return finale;
     },
 
@@ -3320,7 +3325,7 @@ nbizs() {
             : data.image
           : network;
       } else image = group;
-      // console.log("chatlist image:", image);
+    
       return image;
     },
 
@@ -3374,7 +3379,7 @@ nbizs() {
     },
 
     selectedAllMulty(val) {
-      console.log("new val:", val);
+     
       let selected = [];
       switch (this.tabMemberType) {
         case 1:
@@ -3458,7 +3463,7 @@ nbizs() {
     getAll() {
       this.getUsers();
       this.getNetworks();
-      this.getBizs();
+      this.getBizs('');
       this.getEditors();
       this.getNetworkMembers();
     },
@@ -3468,12 +3473,10 @@ nbizs() {
     },
     async socketListenners() {
       this.socket.on("groupMessage", (data) => {
-        console.log("group message Received");
-        // this.audio.play();
-        console.log(data);
-        this.chats.push(data);
 
-        this.formData.append("message", data.message);
+        // this.audio.play();
+         this.chats.push(data);
+         this.formData.append("message", data.message);
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
@@ -3486,33 +3489,23 @@ nbizs() {
         });
       });
       this.socket.on("privateMessage", (data) => {
-        console.log("Received");
-        // this.audio.play();
-        console.log(data);
+       
         this.chats.push(data);
-        console.log(this.chats);
+      
         this.formData.append("sender_network_id", data.sender_network_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
         this.formData.append("receiver_network_id", data.receiver_business_id);
         this.formData.append("receiver_id", data.receiver_business_id);
         this.formData.append("type", data.type);
-        if (this.currentBizId == data.sender_network_id) {
+        if (this.currentBizSlug == data.sender_network_id) {
           this.saveMessage(this.formData);
           this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
             type: this.type,
           });
-        } else {
-          // this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
-          //   type: this.type,
-          // });
-          console.log("Here here 3");
-          // this.$store.dispatch("userChat/GET_USERS_CHAT_LIST", {type:data.type})
-        }
-        // this.saveMessage(this.formData);
-        //  if(data.newChatLoad) this.getList({type:data.type})
+        } 
       });
-      console.log("listenning...");
+     
     },
     async createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
@@ -3526,7 +3519,7 @@ nbizs() {
         ...this.selectedMember,
         ...this.selectedEditor,
       ];
-      console.log("ROOMS: ", this.room);
+
       this.tabIndex = 3;
       await this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
@@ -3537,24 +3530,12 @@ nbizs() {
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
       }).then(()=>{
-
-       
-
-    
-
-
                      this.selectedChat({
                                 type: 'group',
                                 chat: this.lastcreatedgroup,
                                 id: this.chatId,
                               });
-
-
-
-
-    
-
-
+                              
       });
 
 
@@ -3564,9 +3545,9 @@ nbizs() {
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = this.currentBizId;
+      let sender_business_id = this.currentBizSlug; 
       this.room = [receiver_business_id, sender_business_id];
-      console.log("ROOMS: ", this.room);
+      
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
@@ -3574,7 +3555,7 @@ nbizs() {
         return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
         return moment(data).format("LT");
-        // return moment(data).fromNow();
+      
       }
     },
     getList(keyword) {
@@ -3583,14 +3564,14 @@ nbizs() {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network", keyword);
+        
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
 
     getUserInfo() {
       this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
-        console.log("user info: ", this.userInfo);
+      
       });
     },
     initFilter() {
@@ -3627,38 +3608,39 @@ nbizs() {
       });
 
       let users = this.getUniqueListBy(this.users, "id");
-      console.log("Users upDown:", users);
+      
     },
     getBizs(keyword) {
+   
       this.initFilter();
       this.$store
         .dispatch("networkChat/GET_BIZS", {
           keyword: keyword,
         })
         .then(() => {
-          console.log("currentBiz: ", this.currentBiz);
+         
         })
         .catch(() => console.log("error"));
     },
     getChatList(data) {
-      // alert("Clicked!")
+     
       this.type = data.type;
       this.chatSelected.active = false;
       this.newMsg = false;
-      console.log("tab type:", this.tabIndex);
+     
 
       this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
-      console.log("search data:", data);
+    
       if (data.type == "user") {
         await this.$store.dispatch("networkChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
         await this.$store.dispatch("networkChat/GET_BIZ_TO_NETWORK", data);
       } else if (data.type == "group") {
-        console.log("Here...");
+       
         await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", data);
       } else {
         await this.$store.dispatch("networkChat/GET_BIZ_TO_BIZ", data);
@@ -3678,15 +3660,15 @@ nbizs() {
     },
     async histBizToGroup(receiverId) {
       await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", receiverId);
-      console.log("group members: ++++>", this.groupMembers);
+     
     },
     saveMessage(data) {
-      console.log("[DEBUG SAVE]", { data: data, type: this.type });
+    
       if (this.type == "group") {
         this.$store.dispatch("networkChat/SAVE_GROUP_CHAT", {
           data: data,
           group_id: this.chatId,
-          sender_id: this.currentBizId,
+          sender_id: this.currentBizSlug,
           type: this.type,
         });
       } else {
@@ -3698,8 +3680,7 @@ nbizs() {
     },
     selectedMultyChat() {
       this.$bvModal.hide("group-name");
-      console.log("type tabs:", this.tabIndex);
-      // console.log("selected Chat:", data);
+     
       this.createGroup();
 
       // let receiver = { receiverID: dumId, keyword: null };
@@ -3712,14 +3693,13 @@ nbizs() {
       //   clickedId: this.chatId, 
       //   name: this.groupName,
       // };
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
+     
      // this.groupName = "";
     },
     selectedChat(data) {
-      console.log("[type tabs]", this.tabIndex);
+     
       this.type = data.type;
-      // this.scrollToBottom();
-      console.log("[selected Chat]", data);
+  
       this.createRoom(data.id);
       if (this.type == "group") {
        // this.createGroup();
@@ -3764,14 +3744,14 @@ nbizs() {
       this.groupAdminId = data.chat.admin_networkID
         ? data.chat.admin_networkID
         : null;
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
+     
     },
 
     searchChatList(keyword) {
       this.$store
         .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
-          console.log("->[Data logged]<-");
+        
         })
         .catch(() => console.log("error"));
     },
@@ -3804,15 +3784,7 @@ nbizs() {
         receiver_id: this.chatId,
         attachment: this.file,
       });
-      console.log("SENT...", {
-        type: this.type,
-        message: this.input,
-        sender_business_id: this.currentBiz.id,
-        room: this.room,
-        receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
-        // attachment: this.file,
-      });
+
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3824,7 +3796,6 @@ nbizs() {
       var membersEditor = [];
       var membersMember = [];
 
-      console.log("Group members:", this.groupMembers);
       let data = {};
       if (this.groupMembers.length > 0) {
         // this.groupMembers.map((member)=>{
@@ -3882,12 +3853,12 @@ nbizs() {
         //   message: this.input,
         //   attachment: this.file,
         // };
-        console.log("here:...", data);
+       
         this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);
       }
 
-      console.log("group SENT...");
+   
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3902,8 +3873,7 @@ nbizs() {
       if (validImageTypes.includes(fileType)) {
         this.$bvModal.show("preview-file");
       }
-      console.log("file:", this.preview);
-      console.log("preview:", this.filePreview);
+      
     },
 
     //---------------
@@ -3927,11 +3897,11 @@ nbizs() {
     showInfo(arg) {
       this.info = arg;
       this.newMsg = arg;
-      console.log(this.checked);
+    
     },
     newMessage(arg) {
       this.rightSide = false;
-      console.log("hey");
+   
       this.getList();
       this.newMsg = true;
       this.show = false;
@@ -3947,7 +3917,7 @@ nbizs() {
         behavior: "smooth",
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
-      console.log(this.$refs.feed.scrollTop);
+    
     },
   },
 };

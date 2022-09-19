@@ -35,7 +35,9 @@
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
-        <CommunityMembers :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow"/>
+
+          <Person  callerType='network'  :index="index"  :canBlock="canBlock"  :key="member.id" :person="member"  @BlockUser="BlockUser"  @getTotalCommunity='UserDetails'  />
+      
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -54,9 +56,10 @@
 
 <script>
 import CommunityMembers from "../../communityMember"
+import Person from "@/components/Person";
 export default {
   components: {
-    CommunityMembers
+    Person
   },
   data() {
     return {
@@ -70,6 +73,18 @@ export default {
        displayfollowers: []
     };
   },
+
+   computed:{
+    canBlock(){
+     
+      if(this.from=='networks'|| this.from=='NetworkEditors' ){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+
   mounted(){
     this.url = this.$route.params.id;
   },

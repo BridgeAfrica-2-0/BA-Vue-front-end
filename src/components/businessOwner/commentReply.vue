@@ -1,21 +1,22 @@
 <template>
     <b-row class="mt-2 px-4">
-      <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
+      <b-col :class="`${proccesEdit ? 'd-flex' : ''}`"> 
         <b-avatar
           variant="light"
+          v-if="comment.picture"
           :src="comment.picture"
           :square="'user' == comment.user_type ? false : true"
           class="avat-comment b-r"
-        ></b-avatar>
+        ></b-avatar> <div class="mt-2" v-else>  <br > </div> 
 
         <div class="msg text" v-if="!proccesEdit">
           <span
-            class="float-right"
+            class="float-right post-optionss"
             style="margin-right: -10px"
             v-if="isEditMode"
           >
-            <b-dropdown size="sm" variant="outline primary " class="primary">
-              <template class="more" #button-content> </template>
+            <b-dropdown size="sm" variant="outline primary " no-caret class="primary">
+              <template class="more" #button-content>  <div class="post-options-btn rounded-circle">  <b-icon icon="three-dots-vertical" class="m-auto"> </b-icon>  </div> </template>
               <b-dropdown-item @click="toggle">{{
                 $t("businessowner.Edit")
               }}</b-dropdown-item>
@@ -33,6 +34,7 @@
             </router-link>
           </p>
           <read-more
+           class="post-readmore"
             :more-str="$t('businessowner.read_more')"
             :text="item.comment"
             link="#"
@@ -60,6 +62,7 @@
               style="background: transparent"
               v-model="updateCommentText"
               @keypress.enter="onProcess"
+              :max-height="47"
             />
           <!-- <input
             placeholder="Edit a Reply Comment"
@@ -179,6 +182,24 @@ export default {
 };
 </script>
 <style scoped>
+
+.post-optionss{
+  
+   opacity: 0;
+   margin-top: -10px !important;
+}
+
+.post-options-btn{
+  height: 30px;
+  width: 30px;
+  display: flex;
+  background: white;
+
+}
+
+.msg:hover .post-optionss{
+  opacity: 1;
+}
 .msg {
   background-color: #ddd;
   padding: 13px;
@@ -200,6 +221,7 @@ export default {
   background-color: #ddd;
   height: 35px;
   padding-left: 10px;
+  overflow: hidden;
 }
 .comment:focus {
   outline: none;
@@ -231,5 +253,9 @@ export default {
 <style>
 #readmore {
   color: #e75c18;
+}
+
+.post-readmore p{
+  margin-bottom: 0px !important;
 }
 </style>

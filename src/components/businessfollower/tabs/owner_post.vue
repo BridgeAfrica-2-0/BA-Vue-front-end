@@ -443,7 +443,7 @@ export default {
 
     infiniteHandler($state) {
     
-      let url = 'user/post/' + this.page+'?id='+this.$route.params.id;
+      let url = 'user/post/' + this.page+'?slug='+this.$route.params.id;
 
        if(!this.islogin){
             url='guest/profile/'+url;

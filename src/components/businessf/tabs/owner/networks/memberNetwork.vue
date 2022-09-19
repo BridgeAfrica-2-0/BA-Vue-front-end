@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <div>
-      <b-tabs lazy pills content-class="mt-3 f-left">
+      <b-tabs lazy active-nav-item-class="active-tab-item" content-class="mt-3 f-left">
         <b-tab :title="$t('network.People')" active> 
 
            <template slot="title">
@@ -9,10 +9,7 @@
             <span class="spa-color">
               {{ nFormatter(userdetails.total_people) }}
             </span>
-          </template>
-
-
-         <People /> 
+          </template> <People /> 
         </b-tab>
 
         

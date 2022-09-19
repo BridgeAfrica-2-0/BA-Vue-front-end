@@ -9,110 +9,18 @@
       <b-alert v-if="users.total == 0" show variant="warning"
         ><a href="#" class="alert-link">
           {{ $t("search.No_data_available_for_that_search") }}!
-        </a></b-alert
-      >
+        </a></b-alert>
 
-      <div
-        class="people-style border shadow"
-        v-for="item in users.data"
-        :key="item.id"
-      >
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="4" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              :src="getImage(item.profile_picutre)"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" sm="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="6" xl="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
-                        <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <router-link :to="'profile/' + item.id">
-                            <b> {{ item.name }} </b>
-                          </router-link>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-3"
-                      >
-                        <h6 class="follower m-15">
-                          {{ count(item.followers) }}
-                          {{ $t("profileowner.Community") }}
-                        </h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="6" xl="6" cols="12" md="12">
-                  <div>
-                    <b-row class="mt-lg-0 ml-md-0 btns-mobile">
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <BtnCtaMessage :element="item" type="people" />
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 ml-n2 ml-md-0 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          :class="item.is_follow !== 0 && 'u-btn'"
-                          :id="'followbtn' + item.id"
-                          variant="primary"
-                          @click="handleFollow(item)"
-                        >
-                          <i
-                            class="fas fa-lg btn-icon"
-                            :class="
-                              item.is_follow !== 0
-                                ? 'fa-user-minus'
-                                : 'fa-user-plus'
-                            "
-                          ></i>
-
-                          <span class="btn-com">{{
-                            $t("dashboard.Community")
-                          }}</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-    </div>
+ <Person v-for="item in users.data" :key="item.id" :person="item"  />
+       
+ </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import peopleSkeleton from "@/components/peopleSkeleton";
+import Person from "@/components/Person";
 export default {
   computed: {
     users() {
@@ -125,7 +33,7 @@ export default {
 
   
    components: {
-    peopleSkeleton
+    peopleSkeleton,Person
     
   },
 

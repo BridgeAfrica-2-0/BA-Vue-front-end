@@ -331,7 +331,7 @@ export default {
     return {
       viewProduct: false,
 
-      businessId: null,
+      businessSlug: null,
       // products:[],
       product: [],
       load: false,
@@ -376,7 +376,7 @@ export default {
 
   beforeMount() {
     this.loader = true;
-    this.businessId = this.$route.params.id;
+    this.businessSlug = this.$route.params.id;
     this.getProducts();
   },
 
@@ -392,7 +392,7 @@ export default {
 
       this.loader = true;
       this.currentPage = value;
-      let url = "/market?business_id=" + this.businessId + "&page=" + value;
+      let url = "/market?slug=" + this.businessSlug + "&page=" + value;
 
       this.$store
         .dispatch("market/bPnextPage", url)
@@ -409,7 +409,7 @@ export default {
     getProducts: async function() {
       const basePrefix = this.isGuestUser ? "/guest" : "";
 
-      let url = basePrefix + "/market?business_id=" + this.businessId;
+      let url = basePrefix + "/market?slug=" + this.businessSlug;
       await this.$store
         .dispatch("market/getBproducts", url)
         .then((res) => {

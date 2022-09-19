@@ -13,7 +13,7 @@
     <div
       v-for="(product, index) in products.data"
       :key="index"
-      class="people-style p-3 shadow h-100"
+      class="people-style p-3 border h-100"
     >
       <div class="d-inline-flex">
         <div>
@@ -28,12 +28,12 @@
 
         <div class="flx50">
           <p class="text">
-            <strong
+            <span
               class="title cursor-pointer"
               @click="productDetails(product)"
             >
               {{ product.name }}
-            </strong>
+            </span>
             <br />
 
             <read-more
@@ -45,7 +45,7 @@
               :max-chars="100"
             >
             </read-more>
-            <span class="price username mt-2"> {{ product.price }} FCFA </span>
+            <span class="price  mt-2"> {{ product.price }} FCFA </span>
           </p>
         </div>
       </div>
@@ -91,6 +91,7 @@ export default {
     return {
       viewProduct: false,
       total: 0,
+      product:{},
       per_page: 10,
       list: [],
       currentPage: 1,
@@ -114,7 +115,7 @@ export default {
 
   methods: {
     productDetails(product) {
-      console.log(product);
+   
       this.product = product;
       this.viewProduct = true;
     },
@@ -222,13 +223,14 @@ input:focus {
 }
 h6 {
   text-align: center;
-  font-weight: bold;
+
 }
 .short {
   text-align: center;
 }
 .price {
   text-align: center;
+  font-weight: 500;
 }
 .buy {
   border-radius: 0px;
@@ -256,7 +258,8 @@ h6 {
   float: right;
 }
 .price {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
 }
 .people-style {
   border-top-left-radius: 10px;
@@ -271,12 +274,9 @@ h6 {
 }
 @media only screen and (max-width: 540px) {
   .text {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -296,10 +296,10 @@ h6 {
     padding: 4px;
   }
   .title {
-    font-size: 16px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
   }
   .btn {
     padding-top: 6px;
@@ -310,12 +310,10 @@ h6 {
 }
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+  
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -341,10 +339,10 @@ h6 {
     min-width: 123px;
   }
   .title {
-    font-size: 20px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
   }
 }
 .discount {
@@ -398,13 +396,14 @@ input:focus {
 }
 h6 {
   text-align: center;
-  font-weight: bold;
+
 }
 .short {
   text-align: center;
 }
 .price {
   text-align: center;
+  font-weight: 500;
 }
 .buy {
   border-radius: 0px;
@@ -415,12 +414,10 @@ h6 {
 }
 @media only screen and (min-width: 762px) {
   .text {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+   
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -446,10 +443,10 @@ h6 {
     width: 123px;
   }
   .title {
-    font-size: 20px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
   }
 }
 </style>

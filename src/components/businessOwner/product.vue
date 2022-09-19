@@ -28,10 +28,10 @@
                      
                      @click="callactions(product)" v-b-modal="`modal-${product.id}`">   {{ $t("profileowner.Edit") }}</b-dropdown-item
                       >
-                      <b-dropdown-item @click="callactions(product)"  v-b-modal="`modal-D${product.id}`">
+                      <b-dropdown-item @click="deleteProduct(product)"  v-b-modal="`modal-D${product.id}`">
                         {{ $t("profileowner.Delete") }}</b-dropdown-item
                       >
-                    </b-dropdown>
+                    </b-dropdown> 
                   </div>
                 </b-link>
 
@@ -389,7 +389,7 @@ export default {
   data() {
     return {
       viewProduct: false,
-      businessId:null,
+      businessSlug:null,
      // products:[],
      sendingp:false,
       product:[],
@@ -488,7 +488,7 @@ selectedcategories: function() {
   beforeMount() {
 
      this.loader = true;
-     this.businessId = this.$route.params.id;
+     this.businessSlug = this.$route.params.id;
       this.getProducts();
     this.categories();
    
@@ -599,7 +599,7 @@ selectedcategories: function() {
       
       this.loader=true;
       this.currentPage = value;
-     let url="/market?business_id="+this.businessId+"&page="+value;    
+     let url="/market?slug="+this.businessSlug+"&page="+value;    
 
       this.$store
         .dispatch("market/bPnextPage", url).then((res) => {
@@ -618,7 +618,7 @@ selectedcategories: function() {
 
 
       getProducts: async function () {
-        let url="/market?business_id="+this.businessId;
+        let url="/market?slug="+this.businessSlug;
        await this.$store
         .dispatch("market/getBproducts", url).then((res) => {
         
@@ -675,14 +675,14 @@ selectedcategories: function() {
       formData.append("in_stock", Product.in_stock);
       formData.append("tax_amount", 200);  
       formData.append("kg", Product.kg);
-      formData.append("categories",  this.multiselecvalue.id);
-      formData.append("subcategories",this.filterselectvalue
+      formData.append("categoryId",  this.multiselecvalue.id);
+      formData.append("subCategoryId",this.filterselectvalue
         .map((el) => el.subcategory_id)
         .join());
 
 
      
-      formData.append("filters",  this.select_filterss.join());
+      formData.append("filterId",  this.select_filterss.join());
       formData.append("picture", this.pro_img);
 
       console.log(this.pro_img);
@@ -729,11 +729,24 @@ selectedcategories: function() {
             
             
           });
-    },
+    },  
+
+
     deleteProduct(Product) {
-      console.log("deleteProduct");
-      console.log(Product);
-      this.$store
+
+      this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+        
+          callback: confirm => {
+            if (confirm) { 
+
+            
+            this.$store
         .dispatch("market/DeleteProduct", {
           path: "market/"+Product.id,
         })
@@ -755,7 +768,9 @@ selectedcategories: function() {
             status: "error",
             message: this.$t('general.Unable_To_Delete_Product')
           });
-        });
+        }); 
+            }
+       }})  
     },
     
     categories(){

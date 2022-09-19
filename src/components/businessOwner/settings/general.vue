@@ -1,5 +1,5 @@
 <template>
-  <b-container v-if="business_form">
+  <b-container v-if="business_form">  
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
         <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> {{ $t('businessowner.Save_Changes') }}
@@ -182,13 +182,13 @@ export default {
   },
 
   watch : {
-    permission:function(val) {
-      console.log(val);
-      this.business_form.permissions = this.permission;
-      console.log("permissions: "+this.business_form.permissions);
-      this.business_form.post_approval = "0";
-      console.log("Unchecked: "+this.business_form.post_approval);
-    }
+    // permission:function(val) {
+    //   console.log(val);
+    //   this.business_form.permissions = this.permission;
+    //   console.log("permissions: "+this.business_form.permissions);
+    //   this.business_form.post_approval = "0";
+    //   console.log("Unchecked: "+this.business_form.post_approval);
+    // }
   },
   
   mounted() {
@@ -213,12 +213,12 @@ export default {
       return tag.length > 2 && tag.length < 20
     },
 
-    getBusiness() {
+   async getBusiness() {
       console.log("getBusiness")
-    this.$store
+   await this.$store
       .dispatch("businessGeneral/getbusiness", "general/infoSettings/" + this.url)
       .then(() => {
-        console.log("this.business", this.business);
+        
         this.permission = this.business.permissions;
         this.business_form = {
           visibility: this.business.visibility,

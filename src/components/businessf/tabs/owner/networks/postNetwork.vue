@@ -1,8 +1,7 @@
 <template>
   <div class="p-post">   
-
     <!-- DOM to Create Post By A UserOwner-->
-    <b-card class="px-md-3 mb-3 mt-2">
+    <b-card  v-if="canPost" class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
@@ -434,8 +433,8 @@
     />
 
     <infinite-loading
-      :identifier="infiniteId"
-      ref="infiniteLoading"
+     
+      ref="PinfiniteLoading"
       @infinite="infiniteHandler"
     ></infinite-loading>
   </div>
@@ -465,6 +464,7 @@ export default {
       infiniteId: +new Date(),
       uploadPercentage: 0,
       isUploading: false,
+      owner_post:[],
       // post:this.$store.state.networkProfile.ownerPost,
       url: null,
       delete: [],
@@ -488,12 +488,47 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
-      owner_post: "networkProfile/getOwnerPost",
+     // owner_post: "networkProfile/getOwnerPost",
       pending_post:"networkSetting/allPendingPost"
     }),
+    
+    Role(){
+     return this.$store.state.networkProfile.NetworkRole;  
+    },
+
+    networkInfo(){
+     return this.$store.state.networkProfile.networkInfo;  
+    },
 
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.image;
+    },
+
+    canPost(){
+      let canPost=false;
+
+       if(this.Role=='network_editor' ){
+      if(this.networkInfo.postPermission=='Allow editor to post' || this.networkInfo.postPermission=='Allow member to post'){
+        
+            canPost=true;
+         }
+      }
+
+      if(this.Role == 'network_member'){
+          
+           if(this.networkInfo.postPermission=='Allow member to post'){
+        
+            canPost=true;
+         }
+
+      }
+
+
+      if(this.Role=='network_admin'){
+         canPost=true;
+      }
+
+      return canPost;
     },
 
     profileNamePost() {
@@ -578,7 +613,9 @@ export default {
       return this.$youtube.getIdFromUrl(video_url);
     },
 
+
     async getAuth() {
+
       const type = [
         "NetworkEditors",
         "networks",
@@ -587,26 +624,27 @@ export default {
       ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
-
+       
       const response = await this.$repository.share.WhoIsConnect({
         networkId: type,
         type,
       });
+  
+      if (response.success){  
+    this.auth(response.data);
 
-      if (response.success) this.auth(response.data);
+      } 
     },
 
     infiniteHandler($state) {
-      if (this.page == 1) {
-        this.owner_post.splice(0);
-      }
-
+      
       this.axios
         .get("network/show/post/" + this.url + "/" + this.page)
         .then(({ data }) => {
           if (data.data.length) {
-            this.page += 1;
-            this.owner_post.push(...data.data);
+              this.owner_post.push(...data.data);
+               this.page += 1;
+           
             $state.loaded();
           } else {
             $state.complete();
@@ -624,7 +662,11 @@ export default {
         .then(() => {
           this.postRemove(uuid);
           this.page = 1;
-          this.infiniteId += 1;
+          
+          this.owner_post=[];  
+           this.$nextTick(() => {
+        this.$refs.PinfiniteLoading.attemptLoad();
+      });
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -674,12 +716,10 @@ export default {
         formData2.append("deleteImg[" + index + "]", value.id);
       });
       
-
       this.fileImageArr.forEach((value, index) => {
           formData2.append("media[" + index + "]", value.thisfile);
         });
-
-
+        
       formData2.append("type", "image");
       formData2.append("content", this.edit_description);
       formData2.append("networkId", this.$route.params.id);
@@ -694,7 +734,10 @@ export default {
         })
         .then(() => {
           this.page = 1;
-          this.infiniteId += 1;
+         this.owner_post=[];  
+          this.$nextTick(() => {
+        this.$refs.PinfiniteLoading.attemptLoad();
+      });
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -846,7 +889,7 @@ export default {
       }   
 
 
-if(this.postStatus== "editors"){    
+  if(this.postStatus== "editors"){    
            
            url = "network/editor-post/create/" + this.url ;
       }   
@@ -894,7 +937,13 @@ if(this.postStatus== "editors"){
           this.isUploading = false;
           this.loading = false;
           this.page = 1;
-          this.infiniteId += 1;
+          this.owner_post=[];  
+
+       this.$nextTick(() => {
+        this.$refs.PinfiniteLoading.attemptLoad();
+      });
+
+         
         })
         .catch((err) => {
           this.loading = false;

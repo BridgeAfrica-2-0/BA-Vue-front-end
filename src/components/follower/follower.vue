@@ -157,7 +157,7 @@
 
     </div>
 
-    <div class="body p-2">
+    <div class="body container text-center "> 
       <b-row>
         <b-col cols="12" class=" p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>
@@ -218,10 +218,10 @@ export default {
 
   created() {
 
-    this.currentAuthType = 'profile'
+    this.currentAuthType = 'profile'   
 
      this.foll_id = this.$route.params.id;
-
+ 
     // this.$store
     //   .dispatch("follower/loadUserPostIntro", this.foll_id)
     //   .then((response) => {})
@@ -264,7 +264,7 @@ export default {
     console.log("Info: ", this.info.user);
     
     this.$store
-      .dispatch("follower/Tcommunity", this.foll_id)
+      .dispatch("profile/Tcommunity", this.foll_id)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
@@ -282,8 +282,8 @@ export default {
 
 <style scoped>
 .body {
-  margin-left: 63px;
-  margin-right: 63px;
+  /* margin-left: 63px;
+  margin-right: 63px; */
   margin-top: 20px;
 }
 

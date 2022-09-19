@@ -17,17 +17,22 @@
 
     <!-- <Loader v-if="!pageHasLoad || loaderState" /> -->
      <peopleSkeleton  :loading="!pageHasLoad" />
-           <peopleSkeleton  :loading="!pageHasLoad" />
+
+    <peopleSkeleton  :loading="!pageHasLoad" />
 
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
 
     <div v-else>
-      <People
+      <!-- <People
         v-for="(people, index) in peoples"
         :people="people"     
         :key="index"
-      />
-    </div>
+      /> -->
+
+      
+          <Person v-for="item in peoples" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+       
+    </div>   
 
     <ScrollLoader
       :loading="loadingIsActive"
@@ -46,7 +51,7 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 import { loader, search } from "@/mixins";
 import peopleSkeleton from "@/components/peopleSkeleton";
 import Sponsor from "@/components/search/sponsoredBusiness";
-import People from "@/components/search/people";
+import Person from "@/components/Person";
 import login from "@/components/search/login";
 // import Loader from "@/components/Loader";
 
@@ -54,7 +59,7 @@ export default {
   mixins: [loader, search],
   components: {
     Sponsor,
-    People,
+    Person,
    // Loader,
     login,
     peopleSkeleton

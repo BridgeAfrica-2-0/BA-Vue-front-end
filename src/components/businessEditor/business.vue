@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import HomePage from "./tabs/businessHome";   
+import HomePage from "@/components/businessOwner/tabs/businessHome";   
 import About from "@/components/businessOwner/tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "@/components/businessOwner/tabs/marketPlace";

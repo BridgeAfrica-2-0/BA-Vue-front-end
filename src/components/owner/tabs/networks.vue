@@ -63,7 +63,7 @@
               <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
-                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.id">
+                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.slug">
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->
@@ -72,7 +72,7 @@
                        
                     </router-link>
 
-                     <router-link v-else :to="'/network/' + network.id">
+                     <router-link v-else :to="'/network/' + network.slug">
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->
@@ -664,13 +664,13 @@ export default {
       
       multiselecvalue: [],
       infiniteId: 1,
-      logoimg_url: null,
+      logoimg_url: '',
       profileNetworks: [],
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
       editNet: false,
-      logo: null,
+      logo: '',
       country: [],
       region: [],
       division: [],
@@ -1054,6 +1054,7 @@ export default {
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
+      
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
@@ -1070,10 +1071,8 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-
             message: "Network created",
-
-            blockClass: "custom-block-class",
+             blockClass: "custom-block-class",
           });
 
           this.profileNetworks.push(data.data)
@@ -1086,15 +1085,25 @@ export default {
         })
         .catch((err) => {
           
-          if (err.response.data.errors){
-            const errors = wrapperErrors(err.response.data.errors)
-            errors.map(e => this.flashMessage.show({
-                  status: "error",
-                  message: e,
-                  blockClass: "custom-block-class",
-                })
-            )
+          // if (err.response.data.errors){
+          //   const errors = wrapperErrors(err.response.data.errors)
+          //   errors.map(e => this.flashMessage.show({
+          //         status: "error",
+          //         message: e,
+          //         blockClass: "custom-block-class",
+          //       })
+          //   )
+          // }
+
+           if (err.response.status == 422) {
+            this.flashMessage.show({
+              status: "error",
+              message: this.flashErrors(err.response.data.errors),
+              
+            });
           }
+
+
           
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
@@ -1145,7 +1154,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+             
             });
           } else {
             this.wrapperError(err.response.data.errors).map(er => {

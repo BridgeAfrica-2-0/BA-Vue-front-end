@@ -247,7 +247,7 @@ export default {
       formData.append("phone", this.PaymentForm.phone);
       this.$store
         .dispatch("profileAccountType/confirmPayment", {
-          path: `update-payement-method/${this.url}`,
+          path: `business/update-payement-method/${this.url}`,
           formData: formData,
         })
         .then(({ data }) => {

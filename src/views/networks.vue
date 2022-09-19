@@ -19,7 +19,7 @@
             <b-col lg="5" xl="4" class="">
               <Parent />
             </b-col>
-            
+
             <b-col
               lg="7"
               xl="8"
@@ -68,9 +68,9 @@ import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
 import General from "@/components/businessf/tabs/owner/networks/general";
 
 import LyTab from "@/tab/src/index.vue";
-
+import axios from "axios";
 import Parent from "@/components/businessf/tabs/owner/networks/parent";
-
+import { mapGetters, mapMutations } from "vuex";
 import { WhoIsIt } from "@/mixins";
 
 export default {
@@ -79,19 +79,19 @@ export default {
   components: {
     General,
     LyTab,
-    Default,
+    Default, 
     Inbox,
     navbar,
     Footer,
     Parent,
   },
   watch: {
-    "$route.query.selectedId": function(){
-      
-      this.selectedId = this.$route.params.selectedId != 0 ? this.$route.params.selectedId : 0
+    "$route.query.selectedId": function () {
+      this.selectedId =
+        this.$route.params.selectedId != 0 ? this.$route.params.selectedId : 0;
     },
 
-     "$route.query.tabId": function () {
+    "$route.query.tabId": function () {
       this.selectedId = this.$route.query.tabId;
     },
   },
@@ -131,10 +131,10 @@ export default {
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch("networkDetails/roleCheck", this.foll_id)  
+      .dispatch("networkDetails/roleCheck", this.foll_id)
       .then((data) => {
         let role = data.data.data;
-        console.log(role);
+       this.$store.commit("networkProfile/setNetworkRole", role);
         switch (role) {
           case "follower":
             this.$router.push({
@@ -143,6 +143,7 @@ export default {
             });
             break;
           case "network_editor":
+            this.getNetworkInfo();
             this.$router.push({
               name: "NetworkEditors",
               params: { id: this.foll_id },
@@ -156,46 +157,47 @@ export default {
             });
             break;
         }
-
+        this.getNetworkInfo();
         this.isloaded = true;
-        loader.hide()
+        loader.hide();
       })
       .catch((error) => {
-        console.log(error.response.data.message)
+        console.log(error.response.data.message);
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
-        loader.hide()
+        loader.hide();
       });
   },
-
 
   beforeCreate() {
     this.$repository.share.switch(this.$route.params.id, "network");
   },
 
-  // watch: {
-  //   "$route.query.tabId": function () {
-  //     this.selectedId = this.$route.query.tabId;
-  //   },
-  // },
-
- 
-
-
   methods: {
-    changer(){
-        this.selectedId = 4
-        console.log("evenement arrive au parent network",  this.selectedId )
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
+
+    changer() {
+      this.selectedId = 4;
+      console.log("evenement arrive au parent network", this.selectedId);
     },
-    handleChange(item, index) {
-      console.log(item, index);
-      // this.selectedId = this.$store.state.networkProfile.selected
+
+    async getNetworkInfo() {
+      let url = `network/${this.$route.params.id}/about/information`;
+
+      await axios.get(url).then(({ data }) => {
+        this.$store.commit("networkProfile/setNetworkInfo", data.data);
+        this.auth({
+          ...data.data,
+          profile_picture: data.data.image,
+          user_type: "network",
+        });
+      });
     },
-    // setSelected(){
-    //     this.selectedId = 4
-    //  console.log("url change",this.selectedId);
-    // }
+
+    handleChange(item, index) {},
   },
 };
 </script>

@@ -6,7 +6,7 @@
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
       >
-        <b-tabs pills lazy content-class="mt-3 f-left">
+        <b-tabs  lazy content-class="mt-3 f-left" active-nav-item-class="active-tab-item">
           <b-tab  active>
 
                <template slot="title">

@@ -3,24 +3,19 @@
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
-
-
-
-     
-
   <div>
-
+  
   <b-modal id="modal-center" ref="welcomemodal" centered hide-footer hide-header>
   
       <div class="container-fluid">      
 
         <img src="@/assets/welcome.png" class="w-image" alt="">
 
-         <h2 class="text-center  ">
+         <h4 class="text-center  mt-1">
           {{ $t("welcome.Hello") }} <b> {{ username }}    </b
           >    {{$t("auth.you_are_ready_to_start")}}
-        </h2>
-        <br />
+        </h4>
+      
        
 
         <p class="text f-16">
@@ -47,10 +42,10 @@
       ref="modal-3"
     >
       <div>
-        <h4 class="text-center username f-30">
+        <h3 class="text-center ">
           {{ $t("welcome.Hello") }} <b> {{ username }}</b
           >{{ $t("welcome.letsget_started") }}
-        </h4>
+        </h3>
         <br />
         <br />
 
@@ -61,10 +56,10 @@
           {{ $t("welcome.On_Bridge_Africa") }}
           {{ $t("welcome.you_can_quickly") }} {{ $t("welcome.create") }}
           {{ $t("welcome.your") }} {{ $t("welcome.website") }}
-          {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }};
+          {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }},
           {{ $t("welcome.access_an_online_marketplace") }}
           {{ $t("welcome.for") }} {{ $t("welcome.buying") }}
-          {{ $t("welcome.and") }} {{ $t("welcome.selling") }} ;
+          {{ $t("welcome.and") }} {{ $t("welcome.selling") }},
           {{ $t("welcome.search_for_and_compare") }}
           {{ $t("welcome.product_prices") }} {{ $t("welcome.through") }}
           {{ $t("welcome.our") }}
@@ -181,7 +176,7 @@
                       ><br />
    
 
-                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker   :minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -317,7 +312,7 @@
          
 
             <tab-content :title="$t('welcome.Tutorial')">
-              <div class="div-h">
+              <div class="div-h h-tutorial">
                 <Tutorial />
               </div>
             </tab-content>
@@ -1551,14 +1546,8 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
-       
-
-  console.log("((((((jr ------")
+      
       return new Promise((resolve, reject) => {
-        console.log("sending user data");
-
-        console.log(this.profile_pic );
 
         let formData = new FormData();
 
@@ -1890,6 +1879,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style>
+
+.h-tutorial{
+  height: 400px;
+}
 .w-image{
   max-height: 300px;
   object-fit: cover;
@@ -1961,23 +1954,18 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  
   }
 
-  .username {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  }
+
 }
 
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  
   }
 
-  .username {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  }
 }
 
 .modal-body {
@@ -1991,14 +1979,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
   padding-bottom: 20px;
 }
 
-.f-30 {
-  font-size: 30px !important;
-  font-family: Abril Fatface;
-}
+
 
 .f-20 {
   font-size: 18px !important;
-  font-family: Abril Fatface;
+
 }
 
 .f-16 {

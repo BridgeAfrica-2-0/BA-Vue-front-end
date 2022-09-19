@@ -11,7 +11,10 @@ export default {
         neighbourhoods: [],
 
         prodLoader: false,
-        success: false
+        success: false,
+
+        keyword: null,
+        location: null,
     },
 
     getters: {
@@ -65,6 +68,17 @@ export default {
         setNeighbourhoods(state, data) {
             state.neighbourhoods = data;
         },
+
+
+        setKeyword(state, data) {
+         
+            state.keyword = data;
+        },
+
+        setLocation(state, data) {
+            state.location = data;
+        },
+
 
         setLoader(state, payload) {
             state.prodLoader = payload;
@@ -143,10 +157,13 @@ export default {
             let councilId
             let neighborhood_id
             let distanceInKM
+            let city
 
             if (data) {
+               
                 page = data.page ? data.page : 1
-                keyword = data.keyword ? data.keyword : ''
+                keyword = state.keyword ? state.keyword : ''
+                city = data.city ? "&city=" + data.city : "&city=" + state.location.code;
                 catId = data.cat_id ? "&cat_id=" + data.cat_id : ''
                 countryId = data.country_id ? "&countryId=" + data.country_id : ''
                 regionId = data.region_id ? "&regionId=" + data.region_id : ''
@@ -154,11 +171,13 @@ export default {
                 councilId = data.council_id ? "&councilId=" + data.council_id : ''
                 neighborhood_id = data.neighborhood_id ? "&neighborhood_id=" + data.neighborhood_id : ''
                 distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
+            }else{
+                city = "&city=" + state.location.code;
             }
 
             
             try {
-                const res = await axios.get(`network/search?keyword=${keyword}&page=${page + catId+countryId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`);
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page + city+ catId+countryId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);

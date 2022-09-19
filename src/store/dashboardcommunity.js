@@ -12,14 +12,14 @@ export default {
     getdetails({ commit }) {
       return axios.get("/profile/community", {}).then(function({ data }) {
         commit("setdetails", data.data);
-        console.log(data);
+        
       });
     },
 
     gettotalcommunity({ commit }) {
       return axios.get("/profile/total/community", {}).then(function({ data }) {
         commit("setcom", data.data);
-        console.log(data);
+        
       });
     },
   },

@@ -3,121 +3,8 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
     </b-modal>
-
-    <div class="people-style shadow" v-for="item in network" :key="item.id">
-      <b-row>
-        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
-          <div class="d-inline-flex">
-
-          <div class="center-img">
-            <img :src="item.picture" class="r-image" />
-          </div>
-        
-
-        <div class="flx100">
-          <p class="textt">
-            <strong class="title"> 
-              <router-link :to="'/network_follower/' + item.id">
-                {{ item.name }} 
-              </router-link>
-            </strong> <br />
-            {{ item.category }}
-            <br />
-            {{ item.followers }} {{ $t("businessowner.Community") }}<br />
-       
-           
-                      <read-more
-                        :more-str="$t('search.read_more')"
-                        class="readmore"
-                        :text="item.about_network"
-                        link="#"
-                        :less-str="$t('search.read_less')"
-                        :max-chars="100"
-                      >
-                     
-                      </read-more>
-          </p>  </div> </div>
-    
-        </b-col>
-        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  :id="'followbtn' + item.id"
-                  @click="handleFollow(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">
-                    {{ $t("businessowner.Community") }}</span
-                  >
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <BtnCtaMessage :element="item" type="network" />
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  :id="'followbtn'+item.id"
-                  class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="networkJoin(item)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                  ></i>
-                    <span class="btn-com">Join</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
+ 
+  <Network v-for="item in network"  :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -125,9 +12,12 @@
 <script>
 import axios from "axios";
 import { isGuestUser } from '@/helpers';
-
+import Network from "@/components/Network";
 export default {
   props: ["type"],
+   components: {
+    Network,
+  },
   data() {
     return {
       page: 1,

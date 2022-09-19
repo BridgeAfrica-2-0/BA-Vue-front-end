@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>  
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <div class="d-block d-md-none" style="margin-top: 30px">
         <ly-tab
@@ -47,7 +47,7 @@
       <Pending />
     </div>
 
-    <b-row class="center-content d-none d-md-block">
+    <b-row class="center-content d-none d-md-block" v-if="window.width >= 768">
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
@@ -75,11 +75,11 @@
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('businessowner.Insight')">
+              <b-tab :title="$t('businessowner.Insight')" *ngIf="isPremium">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('businessowner.Pending_Post')">
+              <b-tab :title="$t('businessowner.Pending_Post')" *ngIf="isPremium">
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 
@@ -116,6 +116,7 @@ import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
 import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
+import { isPremium } from '@/helpers';
 
 export default {
   name: "settings",
@@ -126,8 +127,7 @@ export default {
     currenttab: {
       immediate: true,
       handler(newVal, oldVal) {
-        console.log(newVal, oldVal);
-
+        
         if (newVal == 3) {
           this.selectedIdd = "8";
           this.tabIndex = "5";
@@ -177,6 +177,11 @@ export default {
       selectedIdd: 0,
       seetings_id: 0,
       bottomSelectedId: 0,
+      window: {
+        width: 0,
+        height: 0,
+      },
+      
       items: [
         { label: "General" },
 
@@ -189,15 +194,41 @@ export default {
       options: {
         activeColor: "#1d98bd",
       },
+      isPremium: isPremium()
     };
   },
 
-  methods: {},
+  
+
+
+   mounted() {
+    var that = this;
+    window.onresize = function() {
+      that.size = window.innerWidth;
+    };
+  },
+
+ created(){
+   window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+ }, 
+
+   destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+
+  methods: {
+     handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
+
+  },
 };
 </script>
 
 <style scoped>
-.border-none {
+.border-none { 
   border: none;
 }
 .card-header {

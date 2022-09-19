@@ -16,98 +16,12 @@
         {{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
+    
 
-    <div
-      class="people-style shadow"
-      v-for="(network, index) in networks.data"
-      :key="index"
-    >
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <img :src="network.image" class="r-image" />
-          </div>
-        </b-col>
-        <b-col md="7" cols="7" lg="5" sm="5">
-          <p class="textt">
-            <strong class="net-title">
-              <router-link :to="'network/' + network.id">
-                {{ network.name }}
-              </router-link>
-            </strong>
-           
-            {{ count(network.community) }}  {{ $t("dashboard.Community") }} 
-            <br />
+      
+  <Network v-for="item in networks.data" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.address }}
-            </span>
-            <br />
-            <read-more
-              :more-str="$t('search.read_more')"
-              class="readmore"
-              :text="network.description"
-              link="#"
-              :less-str="$t('search.read_less')"
-              :max-chars="30"
-            >
-            </read-more>
-            <!-- <b-link>{{ $t("search.Read_More") }}</b-link> -->
-          </p>
-        </b-col>
-
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  :id="'followbtn' + network.id"
-                  :class="network.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="handleFollow(network)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <BtnCtaMessage :element="network" type="network" />
-              </b-col>
-
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="network.is_member !== 0 && 'u-btn'"
-                  variant="primary"
-                  :id="'joinbtn' + network.id"
-                  @click="handleJoin(network)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_member != 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com"> {{ $t("general.Join") }} </span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-    <!-- pagination -->
+ <!-- pagination -->
 
     <b-pagination
       v-if="networks.next || networks.previous"
@@ -136,6 +50,7 @@
 import axios from "axios";
 import login from "@/components/search/login";
 import Skeleton from "@/components/skeleton";
+import Network from "@/components/Network";
 export default {
   props: ["title", "image"],
   data() {
@@ -153,7 +68,8 @@ export default {
 
   components: {
     login,
-    Skeleton
+    Skeleton,
+    Network
   },
 
   computed: {

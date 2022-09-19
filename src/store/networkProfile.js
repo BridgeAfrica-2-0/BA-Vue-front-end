@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     networkInfo: [],
+    NetworkRole:'',
     networks: [],
     loader: false,
     success: false, 
@@ -66,7 +67,10 @@ export default {
     setBusinesses(state, data){
       state.businesses=data;
     },
-
+   
+    setNetworkRole(state, data){
+    state.NetworkRole=data;
+    },
     
     setSelected(state, val){
       state.selected = val;
@@ -235,11 +239,11 @@ export default {
       .get(url)
       .then(({ data }) => {
           commit("setNetworkInfo", data.data);
-        console.log(data);
+      
 
       })
     },
-
+    
     getAlbumImages( {commit}, networkId){
       return axios
       .get('network/album/show/'+networkId )

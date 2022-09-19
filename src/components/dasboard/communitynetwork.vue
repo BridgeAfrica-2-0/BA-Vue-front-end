@@ -1,113 +1,31 @@
 <template>
-  <div>
+  <div class="h-100">
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-    <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img :src="item.picture" class="r-image" />
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <strong class="net-title">
-                  <router-link :to="'network/' + item.id">
-                    {{ item.name }}
-                  </router-link>
-                </strong>
-                <br />
-                {{ item.category }}
-                <br />
-                {{ item.followers }} {{ $t("dashboard.Community") }} <br />
-
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.location_description }}
-                </span>
-                <br />
-
-                <read-more
-                  :more-str="$t('search.read_more')"
-                  class="readmore"
-                  :text="item.about_network"
-                  link="#"
-                  :less-str="$t('search.read_less')"
-                  :max-chars="100"
-                >
-                   
-                </read-more>
-              </p>
-            </b-col>
-
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'followbtn' + item.id"
-                      @click="handleFollow(item)"
-                    >
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{
-                        $t("profileowner.Community")
-                      }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <BtnCtaMessage :element="item" type="network" />
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_member !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'joinbtn' + item.id"
-                      @click="handleJoin(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_member !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com"> {{ $t("general.Join") }} </span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-    </b-row>
+  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
+   
+  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+    
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+  </VuePerfectScrollbar>
+      
+
+   
+
   </div>
 </template>
 
 <script>
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import Network from "@/components/Network";
 import axios from "axios";
 export default {
   props: ["type"],
   components: {
-    BtnCtaMessage,
+    Network,VuePerfectScrollbar
   },
 
   data() {
@@ -143,7 +61,7 @@ export default {
       .dispatch("profile/Tcommunity")
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
     },
 
@@ -162,7 +80,7 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
+         
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
@@ -175,7 +93,7 @@ export default {
 
         })
         .catch((err) => {
-          console.log(err);
+       
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
@@ -197,13 +115,13 @@ export default {
           this.getTotalCommunity();
         })
         .catch((err) => {
-          console.log(err);
+        
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-      console.log("loading network 1 1");
+      
 
       let url = null;
 
@@ -215,8 +133,8 @@ export default {
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          console.log("lading network after response");
-          console.log(data);
+         
+       
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
@@ -239,7 +157,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+          
         });
     },
   },
@@ -363,7 +281,7 @@ export default {
 @media only screen and (min-width: 768px) {
 
  .btn{
-    font-size:13px !important;
+    font-size:12px !important;
   }
   
   .net-title {
@@ -391,7 +309,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 35px;
 
     margin-right: -5px;
 
@@ -406,7 +324,7 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 116px;
   }
 
   .r-image {

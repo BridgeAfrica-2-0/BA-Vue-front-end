@@ -50,7 +50,7 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    <router-link :to="'/profile/' + admin.user_id">
+                    <router-link :to="'/profile/' + admin.slug">
                       {{ admin.fullname }}
                     </router-link>
                   </h5>
@@ -133,7 +133,7 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    <router-link :to="'/profile/' + editor.user_id">
+                    <router-link :to="'/profile/' + editor.slug">
                       {{ editor.fullname }}
                     </router-link>
                   </h5>
@@ -154,7 +154,7 @@
                     </template>
                     <b-dropdown-item
                       href="#"
-                      @click="removeAsEditor(editor.user_id, index)"
+                      @click="removeAsEditor(editor.slug, index)"
                     >
                       <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
                       Remove as Editor
@@ -162,7 +162,7 @@
                     <b-dropdown-item
                       href="#"
                       @click="
-                        removeFromNetworks(editor.user_id, index, 'editor')
+                        removeFromNetworks(editor.slug, index, 'editor')
                       "
                     >
                       <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
@@ -223,7 +223,7 @@
                   ></b-avatar>
                   <h5 class="m-0 username d-inline-block ml-2">
                     
-                    <router-link :to="'/business/' + busines.business_id">
+                    <router-link :to="'/business/' + busines.slug">
                       {{ busines.name }}
                     </router-link>
                   </h5>
@@ -301,7 +301,7 @@
                   size="3.5rem"
                 ></b-avatar>
                 <h5 class="m-0 username d-inline-block ml-2">
-                  <router-link :to="'/profile/' + member.user_id">
+                  <router-link :to="'/profile/' + member.slug">
                     {{ member.fullname }}
                   </router-link>
                 </h5>
@@ -319,7 +319,7 @@
                     ></b-icon-three-dots-vertical
                     ><span class="sr-only">{{ $t("network.Settings") }}</span>
                   </template>
-                  <b-dropdown-item  v-if="from=='admin'|| from=='editor'"  href="#" @click="makeAdmin(member.user_id)">
+                  <b-dropdown-item  v-if="from=='admin'|| from=='editor'"  href="#" @click="makeAdmin(member.slug)">
                     <b-icon-person-plus-fill
                       variant="primary"
                     ></b-icon-person-plus-fill>
@@ -338,7 +338,7 @@
 
                   <b-dropdown-item v-if="from=='admin'|| from=='editor'"
                     href="#"
-                    @click="removeFromNetworks(member.user_id, index, 'member')"
+                    @click="removeFromNetworks(member.slug, index, 'member')"
                   >
                     <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
                     {{ $t("network.Remove_From_Networks") }}
@@ -568,7 +568,7 @@ export default {
             this.editorspage += 1;
             $state.loaded();
           } else {
-             this.editorss = 0;
+            //  this.editorss = 0;
             $state.complete();
           }
         })

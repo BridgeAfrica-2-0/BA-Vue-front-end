@@ -7,7 +7,8 @@
           type="text border"
           v-model.trim="reply"
           class="reply--text"
-          :placeholder="$t('general.Post_a_comment')"
+          placeholder="Post a comment"
+         
           maxlength="250"
           required
           @keyup.enter="submitComment"

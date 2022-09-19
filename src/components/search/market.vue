@@ -1,18 +1,20 @@
 <template>
   <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
-
-    <b-alert v-if="products.data.length === 0" show variant="warning"
+     <Skeleton :loading="prodLoader" />
+    <b-alert v-if="products.data.length === 0 && !prodLoader" show variant="warning"
       ><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
-
-    <div
+ 
+ <div v-if="!prodLoader">  
+     <div
       v-for="(product, index) in products.data"
       :key="index"
-      class="people-style p-3 shadow h-100"
-    >
+      class="people-style p-3 border h-100"
+    >  
+     <span v-if="product">  
       <div class="d-inline-flex">
         <div>
           <div class="center-img">
@@ -26,12 +28,12 @@
 
         <div class="flx50">
           <p class="text">
-            <strong
+            <span
               class="title cursor-pointer"
               @click="productDetails(product)"
             >
               {{ product.name }}
-            </strong>
+            </span>
             <br />
 
             <read-more
@@ -43,7 +45,7 @@
               :max-chars="100"
             >
             </read-more>
-            <span class="price username mt-2"> {{ product.price }} FCFA </span>
+            <span class="price  mt-2"> {{ product.price }} FCFA </span>
           </p>
         </div>
       </div>
@@ -74,8 +76,10 @@
 
       <br />
       <br />
-    </div>
-
+     </span>
+    </div> 
+    
+     </div>
     <!-- pagination -->
     <b-pagination
       v-if="products.next || products.previous"
@@ -90,11 +94,14 @@
     ></b-pagination>
     <!-- End pagination -->
 
+   
+
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
       :product="product"
     />
+
   </div>
   <div v-else>
     <login />
@@ -145,7 +152,6 @@ export default {
   created() {
     this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
     if (this.islogin) {
       this.getProducts();
     }
@@ -156,6 +162,10 @@ export default {
      * This will be ignored on rendering
      * @private
      */
+     closeDetailsProduct() {
+      this.viewProduct = false;
+    },
+
     getProductDetails(product) {
       /**
        * Fired when the button is clicked.
@@ -164,6 +174,14 @@ export default {
       this.product = product;
       this.viewProduct = true;
     },
+
+
+     productDetails(product) {
+    
+      this.product = product;
+      this.viewProduct = true;
+    },
+    
 
     /**
      * This will be ignored on rendering
@@ -319,6 +337,7 @@ h6 {
 }
 .price {
   text-align: center;
+  font-weight: 600;
 }
 .buy {
   border-radius: 0px;
@@ -347,6 +366,7 @@ h6 {
 }
 .price {
   font-size: 18px;
+  font-weight: 400;
 }
 .people-style {
   border-top-left-radius: 10px;
@@ -356,13 +376,12 @@ h6 {
   background: white;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+ 
   margin-bottom: 10px;
 }
 @media only screen and (max-width: 540px) {
   .text {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -386,10 +405,11 @@ h6 {
     padding: 4px;
   }
   .title {
-    font-size: 16px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
+ 
   }
   .btn {
     padding-top: 6px;
@@ -400,12 +420,12 @@ h6 {
 }
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
-    color: #000;
+
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+  
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -431,10 +451,10 @@ h6 {
     min-width: 123px;
   }
   .title {
-    font-size: 20px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
   }
 }
 .discount {
@@ -495,6 +515,7 @@ h6 {
 }
 .price {
   text-align: center;
+  font-weight: 400;
 }
 .buy {
   border-radius: 0px;
@@ -505,12 +526,11 @@ h6 {
 }
 @media only screen and (min-width: 762px) {
   .text {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+ 
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -536,10 +556,10 @@ h6 {
     width: 123px;
   }
   .title {
-    font-size: 20px;
-    color: black;
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
   }
 }
 </style>

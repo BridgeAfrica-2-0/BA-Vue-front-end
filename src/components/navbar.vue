@@ -1,6 +1,5 @@
 <template>
   <header class=""> 
-
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -15,7 +14,7 @@
 
           <router-link
             class="d-inline-block align-top mt-1"
-            :to="{ name: 'newHome' }"
+            :to="{ name: 'Bridge-home' }"
           >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
@@ -260,6 +259,8 @@
                       :key="notification.id"
                     >
                       <hr class="h-divider" />
+
+                      <router-link  v-if="islogin" :to="newRedirection('notification')">
                       <div
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
@@ -283,6 +284,8 @@
                           </div>
                         </div>
                       </div>
+
+                      </router-link>
                     </div>
                     <hr class="h-divider" />
 
@@ -682,14 +685,14 @@ export default {
 
       this.notificationPatterns = {
         user: () => "user/notification",
-        business: () => `/notification/business/${this.user.id}`,
-        network: () => `/notification/network/${this.user.id}`,
+        business: () => `/notification/business/${this.user.slug?this.user.slug:this.user.user_slug}`,
+        network: () => `/notification/network/${this.user.slug?this.user.slug:this.user.user_slug}`,
       };
 
       this.messagePatterns = {
         user: () => "/messages/latest/user",
-        business: () => `/messages/latest/${this.user.id}/business`,
-        network: () => `/messages/latest/${this.user.id}/network`,
+        business: () => `/messages/latest/${this.user.slug?this.user.slug:this.user.user_slug}/business`,
+        network: () => `/messages/latest/${this.user.slug?this.user.slug:this.user.user_slug}/network`,
       };
 
       this.redirectionPatterns = {
@@ -699,7 +702,7 @@ export default {
           }),
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.id },
+            params: { id: this.user.slug?this.user.slug:this.user.user_slug },
             query: { tabId: 1 },
           }),
           network: () => null,
@@ -707,7 +710,7 @@ export default {
         notification: {
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.id },
+            params: { id: this.user.slug?this.user.slug:this.user.user_slug },
             query: { tabId: 2 },
           }),
 
@@ -716,7 +719,7 @@ export default {
           }),
           network: () => ({
             name: "networks",
-            params: { id: this.user.id },
+            params: { id: this.user.slug?this.user.slug:this.user.user_slug  },
             query: { tabId: 2 },
           }),
         },
@@ -796,10 +799,10 @@ export default {
 
     onRedirect() {
       const link = {
-        network: () => ({ name: "networks", params: { id: this.user.id } }),
+        network: () => ({ name: "networks", params: { id: this.user.slug?this.user.slug:this.user.user_slug } }),
         business: () => ({
           name: "BusinessOwner",
-          params: { id: this.user.id },
+          params: { id: this.user.slug?this.user.slug:this.user.user_slug },
         }),
         user: () => ({ name: "profile_owner" }),
       };
@@ -909,7 +912,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? { name: "dashboard" } : { name: "newHome" };
+          return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
         },
       };
       try {

@@ -72,7 +72,7 @@
       :class="{ active: index == currentIndex }"
       v-for="(feedback, index) in feedbacks"
       :key="index"
-      class="mt-5"
+      class="mt-1"
     >
       <div style="display: inline-flex">
         <b-avatar
@@ -197,20 +197,16 @@ export default {
       this.axios
         .post(url, formData)
         .then(({ data }) => {
-          console.log(data);
-          console.log(this.currentPage);
-          console.log("converting to object");
-          console.log(Object.values(data.data));
+         
           let object = Object.values(data.data);
           if (object.length) {
-            console.log("load more");
+          
             object.map((item) => {
               this.feedbacks.push(item);
-              console.log(item);
+            
             });
             this.currentPage += 1;
-            console.log(this.currentPage);
-            console.log(...data.data);
+            
             // this.feedbacks.push(...data.data);
             this.loading = false;
             $state.loaded();
@@ -231,21 +227,18 @@ export default {
       let formData = new FormData();
       formData.append("title", this.feedbackForm.title);
       formData.append("description", this.feedbackForm.description);
-      console.log("title", this.feedbackForm.title);
-      console.log("description", this.feedbackForm.description);
+    
       this.axios
         .post("network/" + this.url + "/feedback/create", formData)
         .then(() => {
-          this.feedbacks = [];
+          this.feedbackForm = {title:'Improvement',description: "" };
 
           this.currentPage = 1;
-          this.$refs.infiniteLoading.attemptLoad();
-
-          // this.$nextTick(() => {
-          //   this.page = 0;
-          //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-
-          // });
+        
+          this.feedbacks=[];
+          this.$nextTick(() => {
+            this.$refs.infiniteLoading.attemptLoad();
+          });
 
           this.spinner = false;
           this.flashMessage.show({

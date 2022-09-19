@@ -1,9 +1,9 @@
 <template>
-  <div>   
+  <div> 
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
-      <div class="text-justify mt-2 container-fluid wahala">
-        <b-row class="center-content">
+      <div class="text-justify mt-2 container wahala">
+        <b-row class="">
           <b-col cols="12">
             <b-tabs
               lazy
@@ -19,7 +19,7 @@
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business" class="p-3"
               /></b-tab>
-              <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
+              <b-tab :title="$t('businessowner.Market')"><MarketPlace  :isPremium="isPremium"/></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
                 <Networks type="business" />
               </b-tab>
@@ -42,6 +42,8 @@ import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
 import Networks from "@/components/owner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
+import { isPremium } from '@/helpers';
+
 export default {
   name: "Home",
   components: {
@@ -60,6 +62,7 @@ export default {
       tabIndex: null,
       isCover: false,
       tabs: ["#post", "#about", "#media", "#market", "#network", "#community"],
+      isPremium: isPremium()
     };
   },
 
@@ -140,11 +143,11 @@ img {
   }
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .center-content {
     padding-right: 63px;
 
     padding-left: 63px;
   }
-}
+} */
 </style>

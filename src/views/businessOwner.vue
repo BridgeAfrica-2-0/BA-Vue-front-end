@@ -53,6 +53,8 @@ import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
+import axios from "axios";
+import { isPremium } from '@/helpers';
 
 export default {
   name: "Home",
@@ -76,13 +78,12 @@ export default {
         { label: this.$t('search.Home'), icon: "" },
         { label: this.$t('search.Inbox'), icon: "" },
         { label: this.$t('search.Notification'), icon: "" },
-        { label: this.$t('search.Pending_Post'), icon: "" },
-        { label: this.$t('search.Insight'), icon: "" },
         { label: this.$t('search.Settings'), icon: "" },
       ],
       options: {
         activeColor: "#1d98bd",
       },
+      isPremium: isPremium()
     };
   },
   methods: {
@@ -90,16 +91,20 @@ export default {
       console.log("pageChange")
       this.selectedId = 6
     },
-    businessInfo() {
-      this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+
+   
+    async  businessInfo() {
+       
+      let url=`business/info/${this.$route.params.id}`;
+
+      await axios.get(url)
+      .then(({ data }) => {
+         this.$store.commit("businessOwner/setBusinessInfo", data.data);
+         this.auth({ ...data.data,profile_picture: data.data.logo_path, user_type: 'business' });
+          })
+  
     },
+
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
@@ -153,6 +158,12 @@ export default {
 
   created() {
 
+    //Insight is only for premium account
+    if (this.isPremium) {
+      this.items.push({ label: this.$t('search.Insight'), icon: "" });
+      this.items.push({ label: this.$t('search.Pending_Post'), icon: "" });
+    }
+
     let loader = this.$loading.show({
       container: this.$refs.wrapper,
       canCancel: true,
@@ -180,6 +191,7 @@ export default {
             });
             break;
         }
+         this.businessInfo();
         this.isloaded = true;
         loader.hide()
       })
@@ -200,7 +212,7 @@ export default {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-    this.businessInfo();
+   
     this.CommunityBusiness();
     this.CommunityPeople();
     this.businessCommunityTotal();

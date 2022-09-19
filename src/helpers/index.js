@@ -80,7 +80,7 @@ export const isGuestUser = () => {
 
 export const isPremium = () => {
    
-    let check = false;
+    let check = true;
     let profile_package= JSON.parse(localStorage.getItem('profile_package'));
     if(profile_package.user_package){
       

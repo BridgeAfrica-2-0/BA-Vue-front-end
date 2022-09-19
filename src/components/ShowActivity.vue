@@ -138,6 +138,7 @@ export default {
           name: item.name,
           profile_picture: item.logo_path,
           id: item.id,
+          slug:item.slug,
           user_type: "business",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -148,6 +149,7 @@ export default {
           name: item.name,
           profile_picture: item.image,
           id: item.id,
+           slug:item.slug,
           user_type: "network",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -187,17 +189,18 @@ export default {
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: item.id,
+          routeId: item.slug,
         };
+
 
         const request =
           "network" == type
             ? await this.$repository.share.switch(
-                item.id,
+                item.slug,
                 "network"
               )
             : await this.$repository.share.switch(
-                item.id,
+                item.slug,
                 "business"
               );
 

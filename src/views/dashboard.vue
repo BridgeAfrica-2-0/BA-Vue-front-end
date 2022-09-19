@@ -93,12 +93,12 @@
       <div class="com-dash">
         <comuniti-dashboard
           v-if="selectedb == 'owner'"
-          class="m-component m-3"
+          class=""
         ></comuniti-dashboard>
 
         <comuniti-Bdashboard
           v-if="selectedb != 'owner'"
-          class="m-component m-3"
+          class=""
         ></comuniti-Bdashboard>
       </div>
 
@@ -232,7 +232,7 @@ export default {
     },
     async switchBusiness(value) {
       this.data1 = false;
-      console.log("business switch" + value);
+     
 
       if (value != "Owner") {
         let loader = this.$loading.show({
@@ -242,7 +242,7 @@ export default {
           color: "#e75c18",
         });
 
-        console.log(value);
+      
         this.url_data = value;
 
         this.$store.commit("dashboard/setdBusinessId", value);
@@ -250,11 +250,11 @@ export default {
         await this.$store
           .dispatch("dashboard/dashboardBusiness", value)
           .then((res) => {
-            console.log("business switch----", res);
+            
              this.data1 = true;
           })
           .catch((err) => {
-            console.log({ err: err });
+         
           });
 
         this.businessCommunityTotal();
@@ -269,10 +269,10 @@ export default {
       this.$store
         .dispatch("dashboard/dashboardPpost")
         .then(() => {
-          console.log("hey yeah");
+         
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
 
@@ -280,10 +280,10 @@ export default {
       this.$store
         .dispatch("dashboard/dashboardBpost", this.url_data)
         .then(() => {
-          console.log("hey yeah");
+         
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
 
@@ -291,10 +291,10 @@ export default {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+       
         });
     },
 
@@ -302,10 +302,10 @@ export default {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {
-          console.log("hey yeah");
+         
         })
         .catch((err) => {
-          console.log({ err: err });
+         
         });
     },
 
@@ -313,20 +313,14 @@ export default {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
-          console.log("hey yeah");
+        
         })
         .catch((err) => {
-          console.log({ err: err });
+        
         });
     },
     getbusiness() {
-      console.log(
-        JSON.parse(
-          JSON.stringify(
-            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
-          )
-        )
-      );
+      
 
       let owner = JSON.parse(
         JSON.stringify(
@@ -338,13 +332,7 @@ export default {
 
       let data = ownerData
 
-      /* console.log(
-        JSON.parse(
-          JSON.stringify(
-            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
-          )
-        ).business
-      ); */
+     
 
       let businesses = JSON.parse(
         JSON.stringify(
@@ -352,11 +340,11 @@ export default {
         )
       ).business;
 
-      const businessesData = businesses.map((value) => ({ text: value.name, value: value.id }) );
+      const businessesData = businesses.map((value) => ({ text: value.name, value: value.slug }) );
 
       data = [ ...businessesData, ...ownerData]
 
-      console.log(data)
+    
       
       this.boptions = data
 

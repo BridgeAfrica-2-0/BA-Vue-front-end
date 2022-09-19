@@ -581,6 +581,8 @@
 
       <Post
         v-for="item in owner_post"
+        usertype="business"
+
         :key="item.updated_at"
         :post="item"
         :mapvideo="() => mapvideo(item.media)"
@@ -595,7 +597,7 @@
   </div>
 </template>
 
-<script>
+<script>  
 
 import moment from "moment";
 import axios from "axios";
@@ -722,9 +724,9 @@ export default {
 
     infiniteHandler($state) {
       let url = "business/show/post/" + this.url + "/" + this.page;
-      if (this.page == 1) {
-        this.owner_post.splice(0);
-      }
+      if (this.page != 1) {
+        // this.owner_post.splice(0);
+      
       this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
@@ -740,6 +742,9 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
+    }else{
+       this.page += 1;
+    }
     },
 
     deletePost(post) {
@@ -1234,7 +1239,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 92%;
     top: -28px;
     cursor: pointer;
   }

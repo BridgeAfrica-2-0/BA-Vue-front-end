@@ -1,106 +1,13 @@
 <template>
-  <splide :options="options" v-if="items.length">
+  <splide :options="options" v-if="items.length"  style="max-height:200px">
     <splide-slide v-for="(item, index) in items" :key="index">
-      <div class="people-style shadow">
-        <b-row>
-          <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-            <div class="center-img">
-              <img :src="item.logo_path" class="r-image" />
-            </div>
-          </b-col>
-          <b-col md="7" cols="7" lg="5" sm="5">
-            <p class="textt">
-              <router-link :to="{name: 'BusinessFollower', params:{id:item.id}}">
-                <strong class="title">
-                  {{ item.name }}
-                </strong>
-              </router-link>
-              
-              <br />
-              {{ item.category.map(category => category.name).join(", ") }} 
-              <br />
-              {{ item.followers | formatNumber }} Community<br />
 
-              <span class="location">
-                <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                {{ item.location_description }}
-              </span>
-              <br />
-
-              {{ item.about_business | format }}
-              <b-link>{{ $t("search.Read_More") }}</b-link>
-            </p>
-          </b-col>
-
-          <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-            <div class="s-button">
-              <b-row>
-                <b-col
-                  md="4"
-                  lg="12"
-                  xl="12"
-                  sm="12"
-                  cols="4"
-                  class="mt-2 text-center"
-                >
-                  <b-button
-                      block
-                      size="sm"
-                      :disabled="disable"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'followbtn' + item.id"
-                      @click="handleFollow(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com">
-                        {{ $t("search.Community") }}</span
-                      >
-                    </b-button>
-                </b-col>
-
-                <b-col
-                  md="4"
-                  lg="12"
-                  xl="12"
-                  sm="12"
-                  cols="4"
-                  class="mt-2 text-center"
-                >
-                  <BtnCtaMessage :element="item" type="business" />
-                </b-col>
-
-                <b-col
-                  md="4"
-                  lg="12"
-                  xl="12"
-                  sm="12"
-                  cols="4"
-                  class="mt-2 text-center"
-                >
-                  <b-button
-                    block
-                    size="sm"
-                    class="b-background shadow"
-                    variant="primary"
-                    @click="gotoBusiness(item.id)"
-                  >
-                    <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                    <span class="btn-text">{{ $t("search.Direction") }}</span>
-                  </b-button>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
+      <Business
+       
+        :key="item.id"
+        :business="item"
+      />
+      
     </splide-slide>
   </splide>
   <div v-else></div>
@@ -108,6 +15,7 @@
 
 <script>
 import { formatNumber } from "@/helpers";
+import Business from "@/components/Business";
 import axios from "axios"
 export default {
   props: ["title", "image"],
@@ -120,6 +28,9 @@ export default {
           ? `${value.substring(0, 25)} ...`
           : value
         : "",
+  },
+   components: {
+    Business
   },
 
   data() {

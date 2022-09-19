@@ -1,14 +1,15 @@
 <template>
-    <div class="lalala">
-    <div class=" border mt-2 ">  
+    <div class="lalala"  >
+    <b-card class=" border  blecrr shadow border ">  
       <span>
-        <h6 class="title m-3">
+        <h6 class=" m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b class="ml-2">{{ $t('dashboard.COMMUNITY') }}  </b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
+          <span class="ml-2">{{ $t('dashboard.COMMUNITY') }}  </span> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
         </h6>
       </span>
 
-      <b-tabs pills lazy content-class="mt-3  f-left ">
+      <b-tabs class="pr-2 pl-2"  lazy content-class="mt-3 p-1 f-left " active-nav-item-class="active-tab-item">
+       
         <b-tab active>
           <template slot="title">
             {{ $t('dashboard.People') }} <span class="spa-color"> {{ nFormatter(total.total_people) }} </span>
@@ -17,7 +18,8 @@
           <div>
             <b-row>
               <b-col>
-                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
+      
+                <b-tabs lazy fill justified class="pr-2 pl-2" content-class="mt-3  f-left m-up"  active-nav-item-class="active-tab-item" >
                   <b-tab active>
                     <template slot="title">
                       {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_user_follower) }} </span>
@@ -44,8 +46,8 @@
             {{ $t('dashboard.Businesses') }} <span class="spa-color"> {{ nFormatter(total.total_business) }} </span>
           </template>
 
-          <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+          <div>             
+            <b-tabs lazy fill   justified class="pr-2 pl-2" content-class="mt-3  f-left m-up checkcheck" active-nav-item-class="active-tab-item">
               <b-tab active>
                 <template slot="title">
                   {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_business_follower) }} </span>
@@ -70,8 +72,8 @@
             {{ $t('dashboard.Network') }} <span class="spa-color"> {{ nFormatter(total.total_network) }}</span>
           </template>
 
-          <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+          <div>   
+            <b-tabs class="pr-2 pl-2" lazy fill justified content-class="mt-3  f-left m-up checkcheck" active-nav-item-class="active-tab-item">
               <b-tab active>
                 <template slot="title">
                   {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_network_follower) }} </span>
@@ -91,7 +93,7 @@
           </div>
         </b-tab>
       </b-tabs>
-    </div>
+    </b-card>
   </div>
 </template>
 
@@ -117,7 +119,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
 
@@ -132,7 +134,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
 
@@ -144,7 +146,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
      
@@ -155,7 +157,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
      
@@ -165,7 +167,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
 
@@ -177,7 +179,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+       
       });
 
       
@@ -187,7 +189,7 @@ export default {
        
       })
       .catch((error) => {
-        console.log({error:error});
+      
       });
 
   },
@@ -209,20 +211,20 @@ export default {
       .dispatch("dashboardcommunity/getdetails")
 
       .then(() => {
-        console.log("the response");
+       
       })
       .catch(err => {
-        console.log({ err: err });
+        
       });
 
     // this.$store
     //   .dispatch("dashboardcommunity/gettotalcommunity")
 
     //   .then(() => {
-    //     console.log("the response");
+    //    
     //   })
     //   .catch(err => {
-    //     console.log({ err: err });
+    //
     //   });
 
 
@@ -230,7 +232,7 @@ export default {
       .dispatch('profile/Tcommunity', null)
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+       
       });
 
 
@@ -265,20 +267,24 @@ export default {
 </script>
 
 <style scoped>
-.card-body {
-  padding: 0px;
+
+ .blecrr .card-body{
+  padding-left: 4px !important;
+
+   padding-right: 2px !important;
 }
+
 </style>
 
-<style>
+<style> 
 .lala .nav-fill {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .s-comcard {
-  height: 350px;
-  overflow: auto;
+ height: 415px !important;
+  overflow: hidden !important;
   overflow-x: hidden;
 }
 

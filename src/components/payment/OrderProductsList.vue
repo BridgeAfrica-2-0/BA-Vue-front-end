@@ -12,14 +12,14 @@
 				<img :src="cart_item.product_picture" class="r-image" alt="">
 			</div>
 			<div
-				class=" flex-fill order-info body-font-size  "
+				class=" flex-fill order-info body-font-size m-auto "
 			>
 				
 						<b-tr>
-							<b-td>
+							<b-td class="capitalized">
 								{{$t('general.Name')}}
 							</b-td>
-							<b-th>
+							<b-th>    
 								{{ cart_item.product_name }}
 								
 							</b-th>
@@ -46,15 +46,7 @@
 
 
 
-                        <b-tr>
-							<b-td>
-								{{$t('general.tax')}} :
-							</b-td>
-							<b-th>
-								{{ formatMoney(Number(cart_item.tax_amount)) }}
-								
-							</b-th>
-						</b-tr>
+                     
 
 
 						<b-tr>
@@ -286,7 +278,9 @@
 
 <style scoped>
 
-
+.capitalized{
+	text-transform: capitalize;
+}
 
 @media only screen and (min-width: 768px) {
   .title {

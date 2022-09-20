@@ -135,7 +135,7 @@
   
           <b-form-group
             id="input-group-1"
-            :label="$t('businessowner.Product_Price')+(Fcfa)"
+            :label="$t('businessowner.Product_Price')+'(Fcfa)'"
             label-for="input-1"
             label-size="sm"
           >
@@ -236,6 +236,7 @@
               class="mt-1"
               id="kg"
               type="number"
+              min="0"
               required
             ></b-form-input>
           </b-form-group>

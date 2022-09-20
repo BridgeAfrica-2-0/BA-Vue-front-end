@@ -54,7 +54,7 @@
 					></b-form-radio>
 				</div>
 			</div>
-			<div class="my-4 operator">
+			<!-- <div class="my-4 operator">
 				<div class="operator-img-box">
 					<img
 						:src="require('@/assets/img/payment/expressU.jpg')"
@@ -76,7 +76,7 @@
 						class="operator-select"
 					></b-form-radio>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="row p-2">
 				<div class="col">
@@ -86,9 +86,7 @@
 					>
 						Pay: {{ formatMoney(price) }}
 					</button>
-
-					<button class="backBtn mt-2" @click="loadActualComponent2"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-				</div>
+</div>
 			</div>
 		</div>
 	</b-card>

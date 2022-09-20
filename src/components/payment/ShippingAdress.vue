@@ -2,10 +2,10 @@
 	<b-card class="">
 		<b-card-title class="headline-font-size font-weight-bold headline_and_btns">
 			<span>{{$t("general.Shipping_Address")}}</span>
-			<div class="buttons">
+			<!-- <div class="buttons">
 				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
 				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-			</div>
+			</div> -->
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">

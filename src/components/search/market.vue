@@ -246,6 +246,30 @@ export default {
      * This will be ignored on rendering
      * @private
      */
+
+
+      handleAddToCard(product) {
+      this.product = product;
+  
+      this.$store
+        .dispatch("cart/addToCart", product)
+        .then((response) => {
+        
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
+
+    
     AddToCard(id, val) {
       /**
        * Fired when the button is clicked.

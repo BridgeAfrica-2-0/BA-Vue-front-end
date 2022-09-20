@@ -16,7 +16,7 @@
     <b-row v-if="!loader">
             <b-col md="12" lg="6" class=" mb-2" v-for="product in products.data" :key="product.id">
 
-    <div class="people-style shadow h-100 "> 
+    <div class="people-style  h-100 "> 
 
        <b-link>
                   <div class="float-right others">
@@ -52,9 +52,9 @@
            <div class="flx50" > 
         
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails(product)">
+            <span class="title cursor-pointer" @click="productDetails(product)">
               {{ product.name }}
-            </strong>
+            </span>
 
             <br />
 
@@ -247,6 +247,7 @@
           :label="$t('businessowner.Tax')"
           label-for="input-tax"
           label-size="sm"
+          hidden
         >
           <b-form-input
             v-model="product.tax_amount"
@@ -355,7 +356,7 @@
 
 
 
-      <b-modal :id="`modal-D${product.id}`" centered hide-footer  v-model="delModal" title="Edit product">
+      <b-modal :id="`modal-D${product.id}`" centered hide-footer  v-model="delModal" title="Edit product" size="lg">
         <template #modal-title>
           <span>WARNING!!!</span>
         </template>
@@ -673,7 +674,7 @@ selectedcategories: function() {
       formData.append("condition", Product.condition);
       formData.append("is_service", Product.is_service);
       formData.append("in_stock", Product.in_stock);
-      formData.append("tax_amount", 200);  
+      formData.append("tax_amount", 0);  
       formData.append("kg", Product.kg);
       formData.append("categoryId",  this.multiselecvalue.id);
       formData.append("subCategoryId",this.filterselectvalue
@@ -987,10 +988,9 @@ h6 {
 
   .title {
     font-size: 16px;
-    color: black;
+     font-weight: 600;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .btn {
@@ -1046,13 +1046,12 @@ h6 {
     height: 38px;
     min-width: 123px;
   }
-
+ 
   .title {
     font-size: 20px;
-    color: black;
+     font-weight: 600;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
@@ -1174,10 +1173,9 @@ h6 {
 
   .title {
     font-size: 20px;
-    color: black;
+    font-weight: 600;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 </style>

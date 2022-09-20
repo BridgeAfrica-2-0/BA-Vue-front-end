@@ -98,7 +98,7 @@ export default {
         {
           id: 1,
           name: "Blec blezour blec",
-          startMessage: "yoo nigga sup lola blec",
+        
           timeStamp: "7:00am",
           messageCount: "60",
         },

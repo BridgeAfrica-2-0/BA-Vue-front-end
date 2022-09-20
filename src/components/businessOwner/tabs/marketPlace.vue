@@ -75,7 +75,7 @@
   
       </div>
       <!-- ADDPRODUCT FORM -->
-      <b-modal hide-footer :title="$t('businessowner.Add_product')"   @hidden="resetPostData" v-model="showModal">
+      <b-modal hide-footer :title="$t('businessowner.Add_product')"  size="lg" @hidden="resetPostData" v-model="showModal">
         <b-form>
           <b-row>
             <b-col cols="12" md="6">
@@ -135,7 +135,7 @@
   
           <b-form-group
             id="input-group-1"
-            :label="$t('businessowner.Product_Price')"
+            :label="$t('businessowner.Product_Price')+(Fcfa)"
             label-for="input-1"
             label-size="sm"
           >
@@ -215,20 +215,16 @@
             </b-form-checkbox>
           </div>
           <!-- TAX and KG -->
-          <b-form-group
-            id="tax"
-            :label="$t('businessowner.Tax')"
-            label-for="input-tax"
-            label-size="sm"
-          >
+         
             <b-form-input
               v-model="newProduct.tax_amount"
               class="mt-1"
               id="tax"
               type="number"
               required
+              hidden
             ></b-form-input>
-          </b-form-group>
+        
           <b-form-group
             id="kg"
             :label="$t('businessowner.Kilogramme')"

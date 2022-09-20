@@ -5,13 +5,13 @@
         <div class="border people-style shadow h-100">
           <div class="row">
             <b-col cols="4" md="2" lg="3">
-              <b-skeleton-img width="100px" height="100px"></b-skeleton-img>
+              <b-skeleton-img animation="fade" width="100px" height="100px"></b-skeleton-img>
             </b-col>
             <b-col cols="8" md="10" lg="9" class="mt-2">
               <b-skeleton class="" width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
-              <b-skeleton width="70%"></b-skeleton>
-              <b-skeleton width="90%"></b-skeleton>
+              <b-skeleton animation="fade" width="55%"></b-skeleton>
+              <b-skeleton animation="fade" width="70%"></b-skeleton>
+              <b-skeleton animation="fade" width="90%"></b-skeleton>
             </b-col>
           </div>
         </div>

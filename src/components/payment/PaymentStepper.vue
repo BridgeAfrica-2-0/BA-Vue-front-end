@@ -39,14 +39,23 @@
       </b-row>
       <!-- Stepper Page 1  End -->
 
-      <b-row v-if="current_step === 3 && actualComponent3">
+      <!-- <b-row v-if="current_step === 3 && actualComponent3"> -->
+        <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <PaymentOperator
+          <!-- <PaymentOperator
             @loadActualComponent2="showActualComponent2"
             @requestpayment="handleRequestPayment"
             @showreview="handleShowReview"
             :price="order_price"
+          /> -->
+         {{order_price}}
+          <PaymentOperator
+          
+            @requestpayment="handleRequestPayment"
+            @showreview="handleShowReview"
+            :price="order_price"
           />
+
         </b-col>
       </b-row>
       <b-row>
@@ -74,7 +83,7 @@
     </b-container>
 
   </div>
-</template>
+</template> 
 <script>
 import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
@@ -144,6 +153,7 @@ export default {
   },
   methods: {
     onClickNext: function () {
+    
       this.changeStatusProgress(this.current_step, this.current_step + 1);
       this.current_step++;
     },
@@ -184,6 +194,7 @@ export default {
       this.actualComponent3 = true
     },
     changeStatusProgress(current_step, next_step) {
+     
       this.steps[current_step - 1].status = false;
       this.steps[next_step - 1].status = true;
     },
@@ -194,6 +205,7 @@ export default {
       this.order_ids=order_ids;
       this.onClickNext();
     },
+
     handleShowReview() {
       this.showReview = true;
       this.showOperators = false;

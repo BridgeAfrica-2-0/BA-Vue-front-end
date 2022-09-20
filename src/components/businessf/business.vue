@@ -270,13 +270,9 @@ export default {
 
   created() {
     this.currentTab = this.$route.query.tabId ? this.$route.query.tabId :this.tabs.findIndex((tab) => tab === this.$route.hash) ;
-
-    
-
-    
-    this.currentAuthType = "business";
+     this.currentAuthType = "business";
     this.url_data = this.$route.params.id;
-    this.businessInfo();
+   
   },
 
   watch: {
@@ -329,7 +325,7 @@ export default {
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then((response) => { 
           console.log(response);
           this.hasBeFollow = nextFollowState;
           // document.getElementById("followbtn").disabled = nextFollowState;
@@ -344,17 +340,7 @@ export default {
       this.currentTab = 1;
     },
 
-    businessInfo() {
-      const dispatchMethod = this.isGuestUser ? "businessGuest/businessInfo": "businessOwner/businessInfo";
-      this.$store
-        .dispatch(dispatchMethod, this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
+   
 
     businessCommunityTotal() {
       const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";

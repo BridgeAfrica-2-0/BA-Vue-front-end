@@ -244,7 +244,7 @@
             </splide-slide>
           </splide>
         </div>  
-        <div class="col-lg-3 col-4 font-weight-bold text-left">
+        <div class="col-lg-3 col-4 font-weight-bold text-left m-auto">
           <h3 class="text-small text-capitalize">
             {{ $t("myOrders.Product_Qty") }} :
           </h3>
@@ -258,7 +258,7 @@
             {{ $t("myOrders.Total") }} :
           </h3>
         </div>
-        <div class="col-lg-3 col-4 text-left">
+        <div class="col-lg-2 col-4 text-left m-auto">
           <h3 class="text-small">
             {{ order.order_items_count }}
           </h3>
@@ -271,7 +271,7 @@
             XAF
           </h3>
         </div>
-        <div class="col-lg-3 d-none d-lg-block">
+        <div class="col-lg-2 d-none d-lg-block m-auto text-center">
           <h3 class="font-weight-bold text-small text-capitalize">
             {{ $t("myOrders.status") }}
           </h3>
@@ -281,12 +281,28 @@
             {{ order.status }}
           </h3>
         </div>
+
+        <div class="col-lg-2 d-none d-lg-block m-auto text-right">
+          
+           <b-button
+          variant="primary"
+          class="px-3"
+          @click="reOrder(order)"
+          >   <b-spinner
+          style="width: 1.2rem; height: 1.5rem"
+          variant="light"
+          v-if="order_loading"
+          label="Loading"
+        ></b-spinner>    {{ $t("myOrders.Reorder") }}     </b-button
+        >
+        
+         </div>
       </div>
       <div
         class="
-          d-flex
+          d-flex d-lg-none
           justify-content-lg-end justify-content-center
-          my-lg-5 my-3
+          my-3
         "
       >
         <b-button
@@ -301,6 +317,7 @@
         ></b-spinner>    {{ $t("myOrders.Reorder") }}     </b-button
         >
       </div>
+
     </div>
     <div class="row my-4" v-if="loading">
       <div class="col-12 d-flex justify-content-center align-items-center">

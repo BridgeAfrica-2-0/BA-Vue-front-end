@@ -2,7 +2,7 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0 pt-md-3 pb-2">
+    <section class="p-0 pt-md-2 pb-2">
       
        <div class="container d-none d-md-block main-banner"  >
         <div class="row h-100">
@@ -441,7 +441,7 @@
                   <h5> Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
                   <div class="text-center"> 
-                     <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> 
+                    <router-link to="network_follower/les-artisans-textile-du-cameroun-the-textile-artisans-of-cameroon-g0ax5dj1v">  <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> </router-link>
                   </div>
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2">
@@ -462,8 +462,8 @@
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
                  <div class="text-center">  
-                   <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button>  </div> 
-                </div>
+                 <router-link to="network_follower/pea-jeunes-qgmhghur5">    <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button> </router-link>  </div> 
+                </div> 
                 <div class="col-lg-5 order-1 order-lg-2">
                   <b-img-lazy
                     class="explore-network-img "
@@ -1112,7 +1112,7 @@ border-radius: 10px;
 
 @media only screen and (min-width: 960px) {
    .main-banner{
-    height:490px;
+    height:470px;
    }
 
    .cover{

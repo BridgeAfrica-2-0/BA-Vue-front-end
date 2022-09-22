@@ -65,7 +65,7 @@ import axios from "axios"
        
      
 
-      let url=`order/Business/list?businessId=${payload.id}&status=${payload.status}&page=${payload.page}`;
+      let url=`order/Business/list?slug=${payload.id}&status=${payload.status}&page=${payload.page}`;
    // let url=`order/Business/list?businessId=${payload.id}$page=${payload.page}`;
 
   

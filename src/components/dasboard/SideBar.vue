@@ -381,13 +381,13 @@ export default {
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: item.id,
+          routeId: item.slug,
         };
 
         const request =
           "network" == type
-            ? await this.$repository.share.switch(item.id, "network")
-            : await this.$repository.share.switch(item.id, "business");
+            ? await this.$repository.share.switch(item.slug, "network")
+            : await this.$repository.share.switch(item.slug, "business");
 
         if (request.success) {
           this.flashMessage.success({

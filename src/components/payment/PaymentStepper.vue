@@ -151,9 +151,7 @@ export default {
     progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
-
-    
-			order() {
+    order() {
 				return this.$store.state.checkout.order.data;
 				
 			},
@@ -172,12 +170,8 @@ export default {
       this.current_step = 1;
     },
     handleSwitchStep(step) {
-      // this.steps[this.current_step - 1].status = false;
-      // this.steps[step - 1].status = true;
       this.changeStatusProgress(this.current_step, step);
       this.current_step = step;
-      // this.actualComponent1 = false
-      // this.actualComponent2 = true
     },
     showActualComponent1() {
       this.current_step = 1

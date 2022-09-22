@@ -2,52 +2,82 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0 pt-md-3 pb-2">
-  
-     <div class="d-md-none">  
-      <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="10000"
-        controls
-        indicators
-     
+    <section class="p-0 pt-md-2 pb-2">
       
-      >
-        <!-- Text slides with image -->
-        <!-- <b-carousel-slide class="cover"
-          img-src="assets/home/leftslide.png"
-        ></b-carousel-slide>   -->
-
-        <b-carousel-slide class="cover"
-          img-src="assets/home/leftslide-sm.jpg"
-        ></b-carousel-slide>
-
-       <b-carousel-slide class="cover"
-             img-src="assets/home/rightslider.png"
-        ></b-carousel-slide> 
-
-         </b-carousel>
-    </div>
-
-
-      <div class="container d-none d-md-block main-banner"  >
+       <div class="container d-none d-md-block main-banner"  >
         <div class="row h-100">
-          <div class="col-md-8 h-100 pl-0 "> 
+          <div class="col-md-8 h-100 pl-0 "  > 
            
-
-            
-            <img src="assets/home/middleslide.png" class="h-100 w-100 cover" alt=""> 
+   
+            <div style="background-image:url('/assets/home/desk-banner.png'); background-size: cover;     border-radius: 10px;" class="h-100"> 
              
-            
-     
-          </div>
+            <div data-aos="zoom-out"  data-aos-duration="1000" style="position:absoulute; width:40%;" class="p-3">  <h3> Set up an ecommerce shop and sell  </h3>
+            <p> to millions around you and the world</p> </div>
+           
+            <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
+             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+            </div>
+         </div>
+          </div>  
 
-          <div class="col-md-4 h-100 pr-0">
-            <img src="assets/home/rightslider.png" class="h-100 w-100" alt="">
-          </div>
+          <div class="col-md-4 h-100 pr-0"  >
+            <div style="background-image:url('/assets/home/right-banner.jpg'); background-size: cover;     border-radius: 10px;" class="h-100"> 
+            <div data-aos="zoom-out"  data-aos-duration="1000"  class="p-3">  <h3> Find and buy products and services </h3>
+            <p> you need anytime anywhere</p> </div>
+           
+            <div class="p-3" > 
+             <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button>
+             <br>
+            </div>
+            </div>
+              </div>
         </div>
       </div>
+
+
+
+
+      
+      <div class="container d-block d-md-none main-banner p-0"  data-aos="zoom-out"  data-aos-duration="1000"  >
+       
+  <div v-if="showbanner1" class="h-100 pl-0 "    >
+            <div style="background-image:url('/assets/home/phone-right-banner.jpg'); background-size: cover;" class="h-100"> 
+             
+            <div style="position:absoulute; width:40%;" class="p-3">  <h3> Set up an ecommerce shop and sell  </h3>
+            <p> to millions around you and the world</p> </div>
+           
+            <div class="p-3"> 
+             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+            </div>
+         </div>
+          </div> 
+       
+         <div v-if="showbanner2" class=" h-100 pr-0"    >
+            <div style="background-image:url('/assets/home/phone-banner.jpg'); background-size: cover;" class="h-100"> 
+            <div  class="p-3">  <h3> Find and buy products and services </h3>
+            <p> you need anytime anywhere</p> </div>
+           
+            <div class="p-3 mt-5"> 
+             <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button>
+             <br>
+            </div>
+            </div>
+              </div> 
+
+      </div>
+
+      <div class="container d-lg-none pb-3"> 
+ 
+          <div class="d-flex text-center mt-3"> 
+            <div class="m-auto d-flex">  
+           <span @click="showBanner(1)" role="button" class="progress-indicator shadow  mr-1"  :class="{'progress-active':showbanner1}"> </span> 
+           <span @click="showBanner(2)" role="button" class="progress-indicator shadow" :class="{'progress-active':showbanner2}" > </span>
+           </div>
+            </div>
+       </div>
+
+
+
     </section>
  
     <section style="background: #f8f8f8" class="pt-1 pb-1">
@@ -237,12 +267,13 @@
     <section class="bg-whitee">
       <div class="container bafind bg-whitee  pt-5 pb-5"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row px-md-5 px-2">
-          <div class="col-md-5 p-0 p-md-2  ">
+          <div class="col-md-5 p-0 p-md-2 m-auto ">
             <video
               width="100%"
-              style="object-fit:contain; border-radius: 10px; "
+            
+              style="object-fit:contain; border-radius: 10px;  border-radius:10px"
               controls
-              poster="assets/home/quotevid.png"
+              poster="assets/home/quotevideo.jpg"
             >
               <source src="assets/video/intro_video.mp4" type="video/mp4" />
             </video>
@@ -410,7 +441,7 @@
                   <h5> Textile Artisans of Cameroon</h5>
                   <p>{{ $t("general.our_network_accounts") }}</p>
                   <div class="text-center"> 
-                     <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> 
+                    <router-link to="network_follower/les-artisans-textile-du-cameroun-the-textile-artisans-of-cameroon-g0ax5dj1v">  <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> </router-link>
                   </div>
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2">
@@ -431,8 +462,8 @@
                   <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
                   <p>{{ $t("general.get_in_touch_with") }}</p>
                  <div class="text-center">  
-                   <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button>  </div> 
-                </div>
+                 <router-link to="network_follower/pea-jeunes-qgmhghur5">    <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button> </router-link>  </div> 
+                </div> 
                 <div class="col-lg-5 order-1 order-lg-2">
                   <b-img-lazy
                     class="explore-network-img "
@@ -663,6 +694,7 @@ export default {
     mounted() {
     AOS.init();
     this.startRotation();
+    this.bannerRotation();
   },
 
   data() {
@@ -679,8 +711,8 @@ export default {
        currentNumber: 0,
       placeholder: this.$t("home.Location"),
       img1: require("../assets/img/coach.png"),
-
-
+      showbanner1:true,
+      showbanner2:false,
         bridge_for_cus: [
          "assets/home/marketplace.png",
         "assets/home/search.png",
@@ -771,6 +803,32 @@ export default {
       setTimeout(() => {
        
       }, 2000);
+    },
+
+    showBanner(id){
+    
+      if(id==1){
+       this.showbanner1=true;
+         this.showbanner2=false;
+      }else{
+        this.showbanner2=true;
+         this.showbanner1=false;
+      }
+    
+    },
+
+    bannernext(){
+        if(this.showbanner1==true){
+       this.showbanner1=false;
+        this.showbanner2=true;
+      }else{
+       this.showbanner1=true;
+        this.showbanner2=false;
+      }
+    },
+
+    bannerRotation: function () {
+      setInterval(this.bannernext, 10000);
     },
 
     changephoto(id){
@@ -1001,6 +1059,15 @@ export default {
 
 <style scoped>
 
+.progress-indicator{
+  width: 30px;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.progress-active{
+ background: #e75b17;
+}
 .hire-btn{
 
 width: 274px;
@@ -1009,6 +1076,15 @@ height: 57.12px;
 background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
 border-radius: 10px;
 }
+
+.buy-btn{
+   
+  height: 47.12px;
+  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+border-radius: 10px; 
+width: 190px;
+}
+
 
 .quote-btn{
 
@@ -1020,7 +1096,7 @@ border-radius: 10px;
 
 @media only screen and (max-width: 960px) { 
    .main-banner{
-    height:200px;
+    height:400px;
    }
    .cover{
       border-radius: 10px;
@@ -1036,7 +1112,7 @@ border-radius: 10px;
 
 @media only screen and (min-width: 960px) {
    .main-banner{
-    height:440px;
+    height:470px;
    }
 
    .cover{

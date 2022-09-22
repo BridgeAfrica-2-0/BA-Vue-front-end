@@ -465,7 +465,7 @@ export default {
             commit("setLoader", true);
 
             let keyword = data ? '/' + data.keyword : ''
-
+           if(state.currentBizId){ 
             await axios.get(`/business-community/business-follower/${state.currentBizId + keyword}`)
                 .then((res) => {
                     let business = res.data.data.data
@@ -497,7 +497,7 @@ export default {
                     console.log(err);
                 })
 
-            console.log("Business >: ", state.businesses);
+        }
 
         },
 

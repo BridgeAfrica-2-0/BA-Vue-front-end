@@ -185,15 +185,17 @@ export default {
 
 
      BusinessProcess: async function (id, type) {
-      console.log(this.selectedBusiness);
+   
       try {
           const request = await this.$repository.share.switch( id,  type );
       if (request.success) {
 
+
   this.auth({
     name: this.selectedBusiness.name,
-    profile_picture: this.selectedBusiness.logo_path,
+    profile_picture: this.selectedBusiness.picture,
     id: this.selectedBusiness.id,
+    slug:this.selectedBusiness.slug,
     user_type: "business",
   });
           
@@ -210,7 +212,7 @@ export default {
      
       this.selectedb=value;
       if(value == "owner"){
-        console.log('swtching owner')
+     
         this.ProfileProcess();
       }
 
@@ -299,7 +301,7 @@ export default {
 
       const businessesData = businesses.map((value) => ({
         text: value.name,
-        value: value.id,
+        value: value.slug,
       }));
 
       data = [...businessesData, ...ownerData];

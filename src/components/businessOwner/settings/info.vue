@@ -1267,7 +1267,7 @@ export default {
     },
 
     setOpenHours(day, startTime, endDay) {
-      console.log("yoo ma gee");
+   
 
       switch (day) {
         //  this.businessInfo.business_open_hours.forEach((item) => {

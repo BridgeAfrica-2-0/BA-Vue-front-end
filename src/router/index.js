@@ -62,7 +62,7 @@ import profileFollower from "@/views/profileFollower";
 //import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 //import networks from "@/views/networks";
-//import search from "@/views/search";
+
 
 
 const search = () => import('@/views/search');
@@ -97,8 +97,7 @@ const routes = [
     name: "notFoundd",
     component: notFound,
   },
- 
-
+  
   {
     path: "/myorders/detail/:id",
     name: "pordersdetail",

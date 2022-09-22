@@ -452,7 +452,7 @@ export default {
 }
 
 .b-div {
-  background-image: url("ash.jpg");
+  background-image: url("/assets/home/login-ban.jpg");
   background-position: center;
   background-size: cover;
 }

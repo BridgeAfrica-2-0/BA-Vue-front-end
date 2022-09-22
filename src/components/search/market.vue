@@ -16,7 +16,7 @@
     >  
      <span v-if="product">  
       <div class="d-inline-flex">
-        <div>
+        <div class="mr-2">
           <div class="center-img">
             <img
               :src="product.picture"
@@ -63,6 +63,7 @@
 
         <div class="ml-2">
           <b-button
+          size="sm"
             v-if="product.user_package_name == 'premium'"
             variant="primary"
             @click="handleAddToCard(product)"
@@ -125,6 +126,7 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
+      product:{},
       islogin: true,
       currentPage: 1,
       nextLoad: false,
@@ -244,6 +246,30 @@ export default {
      * This will be ignored on rendering
      * @private
      */
+
+
+      handleAddToCard(product) {
+      this.product = product;
+  
+      this.$store
+        .dispatch("cart/addToCart", product)
+        .then((response) => {
+        
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
+
+    
     AddToCard(id, val) {
       /**
        * Fired when the button is clicked.
@@ -415,7 +441,7 @@ h6 {
     padding-top: 6px;
     font-size: 10px;
     height: 28px;
-    width: 85px;
+    /* width: 85px; */
   }
 }
 @media only screen and (min-width: 540px) and (max-width: 762px) {
@@ -448,7 +474,7 @@ h6 {
   .btn {
     padding-top: 6px;
     height: 38px;
-    min-width: 123px;
+    /* min-width: 123px; */
   }
   .title {
      font-size: 1.0625rem;

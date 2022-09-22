@@ -532,13 +532,10 @@ export default {
     },
 
     updateStatus(order_id, status) {
-      console.log("updateStatus");
-      console.log("order_id", order_id);
-      console.log("business_id", this.url);
-      console.log("status", status);
+     
       let formData = new FormData();
       formData.append("order_id", order_id);
-      formData.append("business_id", this.url);
+      formData.append("slug", this.url);
       formData.append("status", status);
       this.$store
         .dispatch("orderBusiness/updateOrderStatus", {
@@ -546,8 +543,7 @@ export default {
           formData: formData,
         })
         .then(({ data }) => {
-          console.log("ohh year");
-          console.log(data);
+        
           this.flashMessage.show({
             status: "success",
             message: "Status Changed To " + status,

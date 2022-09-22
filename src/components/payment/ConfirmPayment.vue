@@ -14,14 +14,17 @@
 			<div class="row my-3">
 				<div
 					class="col-12 back-buttons-group d-flex justify-content-between flex-wrap align-items-center"
-				>
+				>  <router-link  to="/dashboard">
 					<b-button
 						variant="success"
-						href="/"
+						
 						class="btn-custom text-14 font-weight-light mb-3  shadow-sm"
 						size="lg"
-						><b-icon icon="arrow-left-circle-fill"></b-icon> To Home</b-button
+						><b-icon icon="arrow-left-circle-fill"></b-icon> To Dashboard</b-button
 					>
+             </router-link>
+
+					 <router-link  to="/search">
 					<b-button
 						variant="primary"
 						class="btn-custom text-14 mb-3 font-weight-light  shadow-sm"
@@ -29,6 +32,7 @@
 						><b-icon icon="arrow-right-circle-fill"></b-icon> To
 						Search</b-button
 					>
+					</router-link>
 				</div>
 			</div>
 		</div>

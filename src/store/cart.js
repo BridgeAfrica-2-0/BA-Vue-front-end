@@ -17,16 +17,20 @@ export default {
 
         async addToCart({ commit }, payload) {
             console.log("add to cart:", payload);
-            await axios
+          return  await axios
                 .post(`market/product/${payload.id}/cart/add?business_id=${payload.business_id}`)
-                .then((response) => {
-
-                    console.log(response.data);
-                    console.log(response.data.message);
-                    commit('setStatus', response.data.message);
+                .then(( data ) => {
+                 console.log(data);
+                    commit('setStatus', data.data.message);
                 })
                 .catch((error) => {
                     console.log({ error: error });
+                   
+                   if(error.response.status==403){
+                      commit('setStatus', error.response.data.message);
+                   }else{
+                    commit('setStatus', 'Can not add prodct to cart');
+                   }
                 });
         },
     }

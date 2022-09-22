@@ -12,7 +12,7 @@
         v-for="product in products.data"
         :key="product.id"
       >
-        <div class="people-style p-3 shadow h-100">
+        <div class="people-style p-3  h-100">
           <div class="d-inline-flex">
             <div>
               <div class="center-img">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="ml-2">
-              <b-button  v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
+              <b-button size="sm" v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
                 >
                 <b-icon icon="cart4"></b-icon>
                 {{ $t("general.Add_to_Cart") }}
@@ -438,10 +438,11 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-      console.log("add to card ", this.product);
+  
       this.$store
         .dispatch("cart/addToCart", product)
         .then((response) => {
+        
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,

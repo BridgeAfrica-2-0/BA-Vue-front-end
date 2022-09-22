@@ -1,12 +1,14 @@
 <template>
 	<b-row class="progress-content P-0">
-		<b-col
+		<b-col 
+		    :disable='step.complete'
 			class="progress-item-box p-2"
 			:class="step.status ? 'progress-item-check' : ''"
 			v-for="(step, i) in steps"
 			:key="i"
+			@click="switchStep(step, i)"
 			
-		>
+		> 
 			<div class="d-flex align-items-center flex-row justify-content-start">
 				<div
 					class="mx-2 progress-item-name d-flex align-items-center flex-row justify-content-start"
@@ -56,15 +58,29 @@
 			};
 		},
 		methods: {
-			switchStep(step) {
-				const goTo = step + 1;
-				this.$emit("switchstep", goTo);
+			switchStep(step,i) {
+				
+
+	     if(step.complete == true){
+          
+		  const goTo = i + 1;
+		  this.$emit("switchstep", goTo);
+		 }
+      
+
+				
 			},
 		},
 	};
 </script>
 
 <style scoped>
+.disable {
+    width: 128px;
+    height: 128px;
+    background-color: gray;
+}
+
 	.payment-progress-bar {
 		display: block;
 		width: 100% !important;

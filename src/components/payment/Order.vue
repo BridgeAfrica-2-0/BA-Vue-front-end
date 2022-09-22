@@ -67,7 +67,7 @@
 				this.$emit("showoperator");
 			},
 		 	 handleCreateOrder() {
-
+              
 				if(this.cartLenght){  
 				this.loading = true;
 				let order_data = {};
@@ -79,10 +79,6 @@
 			  	this.$store
 					.dispatch("checkout/createOrder")
 					.then(({ data }) => {
-						   
-						
-
-						 console.log("yoo thee mother fucker ");
 						 console.log(data);
 					
 

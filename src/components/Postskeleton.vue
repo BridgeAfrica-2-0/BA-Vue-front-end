@@ -7,7 +7,7 @@
         <div class="border people-style border h-100 p-2">
           <div class="row">
             <b-col md="3" cols="4" sm="3" class="my-auto">
-              <b-skeleton type="avatar" class="p-avater ml-2"></b-skeleton>
+              <b-skeleton animation="fade" type="avatar" class="p-avater ml-2"></b-skeleton>
             </b-col>
             <b-col
               md="8"
@@ -16,10 +16,10 @@
               class="mt-2"
               style="margin-left: -15px"
             >
-              <b-skeleton class="" width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton  animation="fade" class="" width="85%"></b-skeleton>
+              <b-skeleton animation="fade" width="55%"></b-skeleton>
 
-              <b-skeleton width="90%"></b-skeleton>
+              <b-skeleton animation="fade" width="90%"></b-skeleton>
             </b-col>
 
           

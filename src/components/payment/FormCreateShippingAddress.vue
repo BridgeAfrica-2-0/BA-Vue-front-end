@@ -177,6 +177,7 @@
 
 			</div>
 		</b-form>
+		<button @click="closesipping"> skip </button>
 	</div>
 </template>
 
@@ -237,6 +238,16 @@
 			}
 		},
 		methods: {
+			closesipping(){
+               
+			 
+								this.$emit("closecshippingm");
+						
+								this.$emit("switchstep", 2);
+						
+
+			},
+
 			onSubmit(event) {
 				event.preventDefault();
 				this.loading = true;

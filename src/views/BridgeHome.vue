@@ -15,7 +15,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
             </div>
          </div>
           </div>  
@@ -26,7 +26,7 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3" > 
-             <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -47,7 +47,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div class="p-3"> 
-             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+           <router-link to="/signup">   <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
             </div>
          </div>
           </div> 
@@ -58,7 +58,7 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3 mt-5"> 
-             <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -479,7 +479,8 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container resources pt-5 pb-5"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500">
+      
+      <div class="container resources pt-5 pb-5"  >
         <div class="row">
           <div class="col-lg-10">
             <h3>

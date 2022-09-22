@@ -1,12 +1,16 @@
 <template>
-	<div id="orderList">    
+	<div id="orderList">  
+   {{cart.business_items}}
+		<div v-for="(business, i) in cart "   :key="i"  > 
+			<div class="d-block d-md-flex"> 
+	<div >  
 		<div
 			class=" order-item mb-4"
-			v-for="(cart_item, i) in cart.data "
+			v-for="(cart_item, i) in business.business_items "
 			:key="i"
 		>  
 
-<div  class="d-inline-flex">   
+          <div  class="d-inline-flex">   
 			<div class="">
 				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
 				<img :src="cart_item.product_picture" class="r-image" alt="">
@@ -14,8 +18,7 @@
 			<div
 				class=" flex-fill order-info body-font-size m-auto "
 			>
-				
-						<b-tr>
+			<b-tr>
 							<b-td class="capitalized">
 								{{$t('general.Name')}}
 							</b-td>
@@ -33,22 +36,7 @@
 								
 							</b-th>
 						</b-tr>
-
-						<b-tr>
-							<b-td>
-								{{$t('general.Shipping')}} :
-							</b-td>
-							<b-th>
-								{{ formatMoney(Number( cart_item.shipping_cost )) }}
-								
-							</b-th>
-						</b-tr>
-
-
-
-                     
-
-
+						
 						<b-tr>
 							<b-td>
 								{{$t('general.Quantity')}} :
@@ -76,17 +64,7 @@
 							<b-th>
 								 {{ formatMoney(Number(cart_item.sub_total) ) }} 
 								
-								<!-- {{
-									formatMoney(
-										Number(cart_item.product_price) * cart_item.quantity + 1000
-									)
-								}} -->
-								<!-- {{
-									formatMoney(
-										Number(cart_item.amount) * cart_item.quantity +
-											cart_item.shipping
-									)
-								}} -->
+								
 							</b-th>
 						</b-tr>
 				
@@ -94,6 +72,17 @@
 
 			 </div>
 		</div>
+      </div> 
+		
+          <div class="m-auto">  <h6> Business name: <span class="shipping-t"> {{business.business_name}} </span>  </h6>
+			<h6> Shipping Fee: <span class="shipping-t">  {{ formatMoney(Number(business.business_shipping_cost)) }} </span> </h6>
+		 </div>
+	   </div>		
+    <hr>
+	
+		 </div>
+
+ 
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">
 				<b-spinner variant="primary"
@@ -110,27 +99,21 @@
 		<div class="row my-4">
 			<div class="col-12 d-flex justify-content-center">
 				
-
-				  
-              <b-pagination
-      v-if="cart.next || cart.previous"
-      v-model="currentPage"
-      pills
-      :total-rows="cart.total"
-      :per-page="cart.per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-    ></b-pagination>
+    		  
+   
 
 
 			</div>
 		</div>
+
+		 <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
+		
 	</div>
 </template>
 
 <script>
 	// import ProductCaroussel from "./ProductCaroussel.vue";
+	import axios from "axios";
 	export default {
 		name: "OrderProductsList",
 		components: {
@@ -139,7 +122,7 @@
 		async created() {
 			this.loading = true;
 			await this.$store
-				.dispatch("checkout/getCart")
+				.dispatch("checkout/getshippingsummary")
 				.then(() => {
 					this.loading = false;
 					this.error = false;  
@@ -152,6 +135,32 @@
 		},
 		methods: {
 
+     
+	 
+    infiniteHandler($state) {
+		
+		let url = 'cart/shippingSummary/';axios
+        .get(url + this.page)
+        .then(({ data }) => {
+            console.log(data);
+            if (data.data.length) {
+              this.page += 1;
+             if(data.data[0].business_items.length){
+                this.cart.push(...data.data);
+			 }else{
+				$state.complete();
+			 }
+             
+
+              $state.loaded();
+            } else {
+              $state.complete();
+            }  
+        })
+        .catch((err) => {
+         
+        });
+    },
 
 			
         changePage(value) {
@@ -227,6 +236,8 @@
 				per_page: 3,
 				loading: false,
 				error: false,
+				cart:[],
+				page: 1,
 				formatObject: new Intl.NumberFormat("fr-FR", {
 					style: "currency",
 					currency: "XAF",
@@ -260,8 +271,8 @@
 				return rows;
 				// return this.order_items.length;
 			},
-			cart() {
-				return this.$store.state.checkout.cart;
+			 cartt() {
+			 	return this.$store.state.checkout.shippingsummary;
 				
 			},
 		},
@@ -278,6 +289,10 @@
 
 <style scoped>
 
+.shipping-t{
+	font-weight: 600;
+	text-transform: capitalize;
+}
 .capitalized{
 	text-transform: capitalize;
 }

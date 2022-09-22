@@ -1,7 +1,10 @@
 <template>
   <div  style="overflow-x: clip;">
-    <span v-if="isloaded">
-      <navbar />
+        <navbar />
+          <Skeleton  :loading="isloading" />
+    <span v-if="!isloading">
+      
+       
       <Business :key="foll_id"  class="wahala" />
       <Footer />
     </span>
@@ -12,21 +15,24 @@
 import navbar from "@/components/navbar";
 import Business from "../components/businessf/business";
 import Footer from "../components/footer";
-
+import Skeleton from "@/components/businessPageSkeleton";
+import { isGuestUser } from '@/helpers';
 export default {
   name: "Home",
-  props: ['isGuestUser'],
+
   components: {
     navbar,
     Business,
     Footer,
+    Skeleton
   },
 
   data() {
     return {
       tabIndex: null,
       foll_id: null,
-      isloaded: false,
+      isloading: true,
+      isGuestUser: isGuestUser(),
       tabs: ["#post", "#about", "#business", "#media", "#community"],
     };
   },
@@ -36,16 +42,35 @@ export default {
     this.foll_id = to.params.id;
     next();
   },
+ 
+ methods:{
+    
+     businessInfo() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessInfo": "businessOwner/businessInfo";
+      this.$store
+        .dispatch(dispatchMethod, this.foll_id)
+        .then(() => {
+          this.isloading = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
+
+ },
   
   created() {
+    
     this.foll_id = this.$route.params.id;
-    this.isloaded = true;
+    this.isloading = true;
+
+    
     if (!this.isGuestUser) {
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
-        this.isloaded = true;
+       
       })
       .catch((error) => {
         if (error.response.status == 404) {
@@ -53,6 +78,8 @@ export default {
         }
       });
     }
+
+     this.businessInfo();
 
     //add guest user flag
     if (this.isGuestUser) {

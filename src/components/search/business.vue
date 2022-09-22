@@ -33,7 +33,7 @@
   </div>  
   <div v-else> 
        <login />
-  </div>
+  </div>  
 </template>
 
 <script>

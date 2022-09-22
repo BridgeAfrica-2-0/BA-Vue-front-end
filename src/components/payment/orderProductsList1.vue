@@ -12,7 +12,7 @@
 				<img :src="cart_item.product_picture" class="r-image" alt="">
 			</div>
 			<div
-				class=" flex-fill order-info body-font-size  "
+				class=" flex-fill order-info body-font-size m-auto "
 			>
 				
 						<b-tr>
@@ -34,15 +34,7 @@
 							</b-th>
 						</b-tr>
 
-                        <b-tr>
-							<b-td>
-								{{$t('general.tax')}} :
-							</b-td>
-							<b-th>
-								{{ formatMoney(Number(cart_item.tax_amount)) }}
-								
-							</b-th>
-						</b-tr>
+                      
 
 
 						<b-tr>

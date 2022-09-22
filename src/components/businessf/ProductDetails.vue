@@ -128,12 +128,17 @@ export default {
     const dispatchMethod = this.isGuestUser ? 'getProductDetailsForGuest' : 'getProductDetails';
     
     //get prooduct package type
+
+    if(this.product){
     this.$store
       .dispatch("productDetails/"+dispatchMethod, this.product.id)
       .then((product) => {
+        if(product){ 
         this.packageProduct = product.package[0] || this.packageProduct;
         console.log("Package for product : ", this.packageProduct);
+        }
       });
+        }
   },
 };
 </script>

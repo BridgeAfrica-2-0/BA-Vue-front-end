@@ -4,7 +4,7 @@
     <div class="row">
 
 
-     
+       
       
       
       <div class="col-12 col-md-12 col-lg-9 ">
@@ -13,9 +13,12 @@
           <div class="col d-none d-md-block"><h3 class="mx-5">{{$t("general.PRODUCT_DETAILS")}}</h3></div>
           <div class="col">
             <div class="row desktop">
-              <h3 class="mx-5">{{$t("general.Quantity")}}</h3>
-              <h3 class="mx-5">{{$t("general.price")}}</h3>
-              <h3 class="mx-5">{{$t("general.Total")}}</h3>
+              <div class="col-2"> <h3 class="text-center">{{$t("general.Quantity")}}</h3> </div>
+              <div class="col-4"> <h3 class="text-center">{{$t("general.price")}}</h3> </div>
+              <div class="col-5">   <h3 class="text-center">{{$t("general.Total")}}</h3> </div>
+              
+              
+            
             </div>
           </div>
         </div>
@@ -33,7 +36,7 @@
           <div v-for="(cart_item, i) in cart.data" :key="i"> 
            
             <div class="row ">
-              <div class="col-4 col-md-3">
+              <div class="">
                 <splide :options="{ rewind: true }" class="r-image">
                   <splide-slide>
                     <img
@@ -44,7 +47,7 @@
                 </splide>
               </div>
 
-              <div class="col-8 col-md-4 text-end text-start bold ">
+              <div class="col-8 col-md-4 text-end text-start bold m-auto ">
                 <div >
                   
 
@@ -69,16 +72,16 @@
 
                 
               </div>
-              <div class="row line"></div>
-              <div class="col mt-2 d-none d-md-block">
+             
+              <div class="col mt-2 d-none d-md-block m-auto">
                 <div class="row ">
-                  <div class="col-2 p-0 bg-y ">
+                  <div class="col-2  bg-y ">
                     <input
                       type="number"
                     
                       @change="changeQuantity($event,cart_item.item_id)"
                       v-model="cart_item.quantity"
-                      class="numbersize  form-control"
+                      class="numbersize  form-control m-auto"
                     />
 
 
@@ -86,22 +89,26 @@
 
 
                   </div>
-                  <div class="col-3 text-success p-0 ">
+                  <div class="col-4 text-center  p-0 ">
                     <h3 class="marg2">{{ formatMoney(cart_item.product_price) }} </h3>
                   </div>
-                  <div class="col-3 p-0 text-success  text-center">
+                  <div class="col-5 p-0   text-center">
                     <h3 class="marg3">
                       {{formatMoney(cart_item.product_price * cart_item.quantity) }}
                       
                     </h3>
                   </div>
                   <div class="col-1 p-0  ">
+
+                    <span style="margin-left:-2rem"> 
                     <fas-icon
                       @click="removeIconFromCart(cart_item.product_id)"
                       class="couleur search   cursor "
                       :icon="['fas', 'trash-alt']"
-                      style="margin-right:2px"
+                      
                     />
+
+                      </span>
                   </div>
                 </div>
               </div>
@@ -111,7 +118,7 @@
 
         
               
-                  <div class="col-3 d-block d-md-none ">
+                  <div class="col-3 d-block d-md-none mt-2 ">
                     <input
                       type="number"
                     
@@ -125,16 +132,16 @@
 
 
                   </div>
-                  <div class="col-3 text-success p-0  d-block d-md-none">
+                  <div class="col-3  p-0  mt-2 d-block d-md-none">
                     <h3 class="">{{ formatMoney(cart_item.product_price) }} </h3>
                   </div>
-                  <div class="col-3 p-0 text-success  text-center d-block d-md-none">
+                  <div class="col-3 p-0  text-center d-block d-md-none  mt-2">
                     <h3 class="">
                       {{ formatMoney(cart_item.product_price * cart_item.quantity) }}
                       
                     </h3>
                   </div>
-                  <div class=" d-block d-md-none col-3   text-center ">
+                  <div class=" d-block d-md-none col-3   text-center  mt-2 ">
                     <fas-icon
                       @click="removeIconFromCart(cart_item.product_id)"
                       class="couleur search   cursor"
@@ -381,9 +388,9 @@ export default {
 </script>
 <style scoped>
 @media only screen and (max-width: 1201px) {
-  .desktop {
+  /* .desktop {
     display: none;
-  }
+  } */
   .color {
     background-color: #c5c5c546;
     margin-top: 15px;
@@ -429,6 +436,9 @@ export default {
     color: white;
     line-height: 10px;
   }
+
+
+
   .btn1 {
     background-color: #e75c18;
     /* margin-top: 10px;
@@ -622,6 +632,16 @@ export default {
 
 
 
+  .btn1:hover{
+    color:white !important;
+    background-color: #e75c;
+  
+  }
 
+  .btncolor:hover{
+    color:white !important;
+    background-color: #e75c;
+
+  }
 
 </style>

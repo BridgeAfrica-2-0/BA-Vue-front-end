@@ -2,10 +2,10 @@
 	<b-card class="">
 		<b-card-title class="headline-font-size font-weight-bold headline_and_btns">
 			<span>{{$t("general.Shipping_Address")}}</span>
-			<div class="buttons">
+			<!-- <div class="buttons">
 				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
 				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-			</div>
+			</div> -->
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">
@@ -31,13 +31,7 @@
 					class="ship-add w-100 col-12 d-flex justify-content-between align-items-start"
 					v-for="shipping_item in shippingsTab"
 					:key="shipping_item.id"
-				>  
-
-			
-    
-
-
-					<div class="d-inline-flex">
+				>  <div class="d-inline-flex">
 
 					
                         <div class="col-1">
@@ -46,10 +40,8 @@
 	   <input type="radio" :v-model="shipping_item.id"  @change="shipping(shipping_item)"   :checked="shipping_item.active==1"     name="shipping" value="">   </div>
 	
 
-	      <div>     
-
-	   
-						<p class="body-font-size"> 
+	      <div>   
+			<p class="body-font-size"> 
 							{{ shipping_item.name }}, {{ shipping_item.phone }},{{
 								shipping_item.country
 							}}, {{shipping_item.email}}
@@ -57,10 +49,6 @@
 						<p class="body-font-size">
 							{{ shipping_item.region }},{{ shipping_item.city }}
 							
-							<!-- ,{{
-								shipping_item.division
-							}}.{{ shipping_item.council_name }},
-							{{ shipping_item.neighbourhood_name }} -->
 						</p>   </div>
 					</div>
 					<div class="">

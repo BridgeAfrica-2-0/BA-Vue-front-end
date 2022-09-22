@@ -54,30 +54,7 @@
 					></b-form-radio>
 				</div>
 			</div>
-			<div class="my-4 operator">
-				<div class="operator-img-box">
-					<img
-						:src="require('@/assets/img/payment/expressU.jpg')"
-						alt="EXPRESS UNION"
-
-						style="width:40px"
-					/>
-				</div>
-				<div class="operator-name">
-					<p class="mb-0 mx-4 title-font-size font-weight-bold">
-						Express Union
-					</p>
-				</div>
-				<div class="operator-select-box ml-md-2">
-					<b-form-radio
-						v-model="operator"
-						name="operator"
-						value="EXPRESS"
-						class="operator-select"
-					></b-form-radio>
-				</div>
-			</div>
-
+			
 			<div class="row p-2">
 				<div class="col">
 					<button
@@ -86,9 +63,7 @@
 					>
 						Pay: {{ formatMoney(price) }}
 					</button>
-
-					<button class="backBtn mt-2" @click="loadActualComponent2"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-				</div>
+</div>
 			</div>
 		</div>
 	</b-card>

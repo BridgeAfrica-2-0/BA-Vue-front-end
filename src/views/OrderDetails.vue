@@ -33,6 +33,7 @@
 
           <div class="card box-shadow border-0">
             <div class="d-flex justify-content-between top p-3">
+             
               <span class="text-small font-weight-bold mt-2">
                 <p class="mb-0">
                   Sold By: <span>{{ details.businessesName[0] }}</span>
@@ -69,7 +70,7 @@
                     </splide-slide>
                   </splide>
                 </div>
-                <div class="col-lg-3 col-4 font-weight-bold text-left">
+                <div class="col-lg-3 col-4 font-weight-bold text-left m-auto">
                   <h3 class="text-small text-capitalize">
                     {{ $t("myOrders.Product_Qty") }} :
                   </h3>
@@ -83,7 +84,7 @@
                     {{ $t("myOrders.Total") }} :
                   </h3>
                 </div>
-                <div class="col-lg-3 col-4 text-left">
+                <div class="col-lg-3 col-4 text-left m-auto">
                   <h3 class="text-small">
                     {{ order.quantity }}
                   </h3>
@@ -98,7 +99,7 @@
                     XAF
                   </h3>
                 </div>
-                <div class="col-lg-3 d-none d-lg-block">
+                <div class="col-lg-3 d-none d-lg-block m-auto">
                   <h3 class="font-weight-bold text-small text-capitalize">
                     {{ $t("myOrders.status") }}
                   </h3>

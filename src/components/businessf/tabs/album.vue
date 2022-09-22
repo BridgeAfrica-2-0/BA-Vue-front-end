@@ -162,7 +162,7 @@ export default {
       this.album_name = album_name;
       this.album_id = abum_id;
       console.log(abum_id);
-      console.log("yoo yoo yooy ");
+      
       console.log(this.url);
 
       let loader = this.$loading.show({

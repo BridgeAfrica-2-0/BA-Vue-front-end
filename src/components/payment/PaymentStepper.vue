@@ -18,13 +18,14 @@
     <!-- Stepper header end-->
 
     <b-container fluid="lg">
-      <b-row v-if="current_step === 1 && actualComponent1">
+      <!-- <b-row v-if="current_step === 1 && actualComponent1"> -->
+         <b-row v-if="current_step === 1 && !showRequestPayment">
         <b-col class="my-4" cols="12">
           <CreateShippingAddress @switchstep="handleSwitchStep" />
         </b-col>
       </b-row>
-
-      <b-row v-if="current_step === 2 && actualComponent2">
+     <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
+     <b-row v-if="current_step === 2 && !showRequestPayment">
         <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
           <ShippingAdress @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" />
@@ -39,14 +40,23 @@
       </b-row>
       <!-- Stepper Page 1  End -->
 
-      <b-row v-if="current_step === 3 && actualComponent3">
+      <!-- <b-row v-if="current_step === 3 && actualComponent3"> -->
+        <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <PaymentOperator
+          <!-- <PaymentOperator
             @loadActualComponent2="showActualComponent2"
             @requestpayment="handleRequestPayment"
             @showreview="handleShowReview"
             :price="order_price"
+          /> -->
+        
+          <PaymentOperator
+          
+            @requestpayment="handleRequestPayment"
+            @showreview="handleShowReview"
+            :price="order_price"
           />
+
         </b-col>
       </b-row>
       <b-row>
@@ -71,10 +81,14 @@
           <ConfirmPayment />
         </b-col>
       </b-row>
+
+      <!-- <div class="text-center">
+					<button class="backBtn mt-2 float-left" @click="onClickBack"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
+				 </div> -->
     </b-container>
 
   </div>
-</template>
+</template> 
 <script>
 import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
@@ -106,14 +120,17 @@ export default {
           
           text: this.$t("general.Shipping_Address"),
           status: true,
+          complete:false
         },
         {
           text: this.$t("general.Checkout"),
           status: false,
+          complete:false
         },
         {
           text: this.$t("general.Confirm_Payment"),
           status: false,
+          complete:false
         },
       ],
       sizeStepperIndicator: "md",
@@ -134,9 +151,7 @@ export default {
     progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
-
-    
-			order() {
+    order() {
 				return this.$store.state.checkout.order.data;
 				
 			},
@@ -144,6 +159,7 @@ export default {
   },
   methods: {
     onClickNext: function () {
+    
       this.changeStatusProgress(this.current_step, this.current_step + 1);
       this.current_step++;
     },
@@ -154,12 +170,8 @@ export default {
       this.current_step = 1;
     },
     handleSwitchStep(step) {
-      // this.steps[this.current_step - 1].status = false;
-      // this.steps[step - 1].status = true;
       this.changeStatusProgress(this.current_step, step);
       this.current_step = step;
-      this.actualComponent1 = false
-      this.actualComponent2 = true
     },
     showActualComponent1() {
       this.current_step = 1
@@ -183,10 +195,17 @@ export default {
       this.actualComponent2 = false
       this.actualComponent3 = true
     },
+
     changeStatusProgress(current_step, next_step) {
+     
       this.steps[current_step - 1].status = false;
+      this.steps[current_step - 1].complete = true;
       this.steps[next_step - 1].status = true;
+
+    
+
     },
+
     handleShowOperator(price, order_ids ) {
       // this.showOperators = true;
       // this.showReview = false;
@@ -194,6 +213,7 @@ export default {
       this.order_ids=order_ids;
       this.onClickNext();
     },
+
     handleShowReview() {
       this.showReview = true;
       this.showOperators = false;
@@ -207,10 +227,12 @@ export default {
         {
           text: "Request Payment",
           status: true,
+          complete:false
         },
         {
           text: "Confirm Payment",
           status: false,
+          complete:false
         },
       ];
     },
@@ -221,14 +243,17 @@ export default {
         {
           text: "Shipping Address",
           status: true,
+          complete:false
         },
         {
           text: "Checkout",
           status: false,
+          complete:false
         },
         {
           text: "Confirm Payment",
           status: false,
+          complete:false
         },
       ];
     },

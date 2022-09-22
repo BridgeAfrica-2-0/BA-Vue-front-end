@@ -27,7 +27,7 @@
 
         <div class="text-lost mt-2">
           <h6 class="">
-            <router-link :to="{ name: 'profile_owner' }" class="card-title">
+            <router-link :to="{ name: 'profile_owner', params:{id:business.slug} }" class="card-title">
               {{ business.name }} 
             </router-link>
           </h6>
@@ -151,8 +151,6 @@ export default {
   methods: {
     async switchBusiness(value) {
 
-      console.log('swtching start here')
-      console.log(value)
       this.$emit("switchBusiness", value);
     },
   },

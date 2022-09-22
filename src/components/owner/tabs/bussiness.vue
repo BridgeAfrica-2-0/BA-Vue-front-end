@@ -830,7 +830,7 @@
               v-for="business in profileBusinesss"
               :key="business.business_id"
             >
-              <div class="people-style shadow h-100">
+              <div class="people-style  h-100">
                 <b-link>
                   <div class="float-right others">
                     <b-dropdown

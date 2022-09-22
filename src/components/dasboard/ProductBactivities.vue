@@ -131,7 +131,7 @@ export default {
 
   methods: {
     infiniteHandler($state) {
-      let url = `business-order/items/${this.page}?id=${this.biz_id}/`;
+      let url = `business-order/items/${this.page}?slug=${this.biz_id}`;
     
       axios
         .get(url)

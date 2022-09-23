@@ -4,8 +4,6 @@
 		<ProductDetails/> -->
     <!-- Stepper header start-->     
 
-   
-
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
       <PaymentProgress
@@ -21,20 +19,20 @@
       <!-- <b-row v-if="current_step === 1 && actualComponent1"> -->
          <b-row v-if="current_step === 1 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <CreateShippingAddress @switchstep="handleSwitchStep" />
+          <CreateShippingAddress :currentStep="current_step" @switchstep="handleSwitchStep" />
         </b-col>
       </b-row>
      <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
      <b-row v-if="current_step === 2 && !showRequestPayment">
         <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
-          <ShippingAdress @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" />
+          <ShippingAdress @RefreshSipping="RefreshSipping" @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" />
         </b-col>
         <!-- Card Stepper for Shipping Address End -->
 
         <!-- Card Stepper for Order Start -->
         <b-col class="my-4" cols="12">
-          <Order @showoperator="handleShowOperator" />
+          <Order @showoperator="handleShowOperator" ref="checkoutorder" />
         </b-col>
         <!-- Card Stepper for Order End -->
       </b-row>
@@ -157,7 +155,27 @@ export default {
 			},
 
   },
+
+  mounted() {
+			this.loading = true;
+			this.$store
+				.dispatch("checkout/getAllShippingAdd")
+				.then(() => {
+					this.loading = false;
+				})
+				.catch(() => {
+					this.loading = false;
+				});
+		},
+
+
   methods: {
+    
+    RefreshSipping(){
+     
+       this.$refs.checkoutorder.RefreshSipping();
+    },
+
     onClickNext: function () {
     
       this.changeStatusProgress(this.current_step, this.current_step + 1);

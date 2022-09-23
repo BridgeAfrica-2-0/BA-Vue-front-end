@@ -30,7 +30,7 @@
              <br>
             </div>
             </div>
-              </div>
+          </div>
         </div>
       </div>
 
@@ -138,9 +138,9 @@
           <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
           </p>
           <div class="d-none d-lg-flex">
-            <b-button variant="primary" class=" moreproducts-btn">
+           <b-button @click="gotoSearch" variant="primary" class=" moreproducts-btn">
              {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
-            </b-button>
+            </b-button>  
           </div>
           <b-tabs   active-nav-item-class="active-tab-item">
             <b-tab 
@@ -279,7 +279,7 @@
             </video>
           </div>
 
-          <div class="col-md-7  ">
+          <div class="col-md-7  " id="quote">
             <h3>
               <span>{{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
             </h3>
@@ -412,7 +412,7 @@
       </div>
         </div>
        <div class=" p-2 p-lg-5 text-left">  
-        <b-button variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }} </b-button>
+    <b-button  @click="scrollTo" variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }} </b-button>
         </div>
          </div>
         </div> 
@@ -798,6 +798,15 @@ export default {
   },
 
   methods: {
+
+     scrollTo() {
+    window.scrollTo(2800,2800);
+  },
+
+  gotoSearch(){
+    this.$router.push(`/search`);
+  },
+
     onWindowLoad() {
       this.showfadde = true;
 

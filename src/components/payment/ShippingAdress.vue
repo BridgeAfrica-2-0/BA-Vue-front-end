@@ -142,6 +142,10 @@
 
 
 			 this.$store.dispatch("checkout/choseShipping", data).then(() => {
+
+				this.$emit('RefreshSipping');
+				 loader.hide();
+
 					  this.$store.dispatch("checkout/getCartt").then(() => {
 					     loader.hide();
 

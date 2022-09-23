@@ -106,7 +106,7 @@
 			</div>
 		</div>
 
-		 <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
+		 <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
 		
 	</div>
 </template>
@@ -135,7 +135,12 @@
 		},
 		methods: {
 
-     
+     RefreshSipping(){
+		this.page=1
+             this.cart=[];
+			  this.infiniteId += 1;
+			 this.$refs.infiniteLoading.attemptLoad();
+		},
 	 
     infiniteHandler($state) {
 		
@@ -237,6 +242,7 @@
 				loading: false,
 				error: false,
 				cart:[],
+				 infiniteId: +new Date(),
 				page: 1,
 				formatObject: new Intl.NumberFormat("fr-FR", {
 					style: "currency",

@@ -329,7 +329,7 @@ export default {
            url="mtn/start-momo-transaction";
 
             axios
-        .post(url, data)
+        .get(url, {params:data} )
         .then((response) => {
           this.showConfirmPayment = true;
           this.onClickNext();

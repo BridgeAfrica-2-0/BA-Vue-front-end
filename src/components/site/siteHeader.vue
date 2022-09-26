@@ -62,9 +62,9 @@
 
             
            
-              <b-nav-item v-if="islogin" class="ml-md-1  text-center">
-              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
-               <hr class="mobile navstyle" />
+              <b-nav-item v-if="islogin" @click="logout" class="ml-md-1  text-center">
+              <span class="  nav-span ">  {{ $t("general.Logout") }} </span>
+               <hr class="mobile navstyle" /> 
 
             </b-nav-item>
 
@@ -115,8 +115,8 @@
                <hr class="mobile navstyle" />
             
              </b-nav-item>
-                <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
-              <span class="  nav-span "> <router-link :to="{name: 'profile_owner'}">{{ $t("general.profile") }} </router-link> </span>
+                <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
+              <span class="  nav-span ">  {{ $t("general.Logout") }}</span>
                <hr class="mobile navstyle" />
 
             </b-nav-item>
@@ -146,6 +146,8 @@
 /**
  * this component is the header of the site page of the system
  */
+
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   data(){
     return {
@@ -166,10 +168,43 @@ export default {
 
   methods:{
 
+
+    ...mapActions({
+      Logout: "auth/logout",
+    }),
+
+
 /**
  * this fuction is use to change the user language
  * @private
- */
+ */  
+
+    logout: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const requestForReset = await this.$repository.share.switch(
+        null,
+        "reset"
+      );
+
+      if (requestForReset.success) {
+        const response = await this.$repository.notification.logOut();
+
+        if (response.success) {
+          loader.hide();
+        
+          this.Logout();
+        }
+        return false;
+      }
+      loader.hide();
+    },
+
 
     Search() {
       if (!this.keyword) return false;

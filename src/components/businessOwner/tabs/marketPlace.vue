@@ -48,7 +48,7 @@
           <!-- <div class="col-md-6" v-for="(product, index) in products" :key="index">
             <Product v-show="!orders && market"  :product="products" />
           </div> -->
-    <Product v-show="!orders && market"  />
+    <Product v-show="!orders && market && isPremium"  />
          
     
         <b-col v-if="loader" class="load">

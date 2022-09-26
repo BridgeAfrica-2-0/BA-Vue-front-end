@@ -50,7 +50,7 @@
 
           <p class="mb-1">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            <router-link to="/messaging">
+           <router-link :to="'/business_owner/'+ business.slug+'?tabId=1'">
            <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link>
             <span class="badge  float-right mt-1">
                {{ business.message }}
@@ -61,7 +61,7 @@
           <p class="mb-1">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
          
-             <router-link to="/notification">
+             <router-link :to="'/business_owner/'+ business.slug+'?tabId=2'">
           <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
              </router-link>   
 
@@ -72,9 +72,15 @@
 
       <p class="mb-1">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a> {{ $t("dashboard.Visit_Website") }}</a>
-          </p>
+       
+             <router-link :to="'/business_owner/'+ business.slug">
+          <span class="text">  {{ $t("dashboard.Visit_Website") }}  </span>      
+       </router-link> 
 
+      </p>
+
+      
+ 
           <!-- <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             <router-link :to="'business_owner/' + business.id">

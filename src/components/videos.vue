@@ -5,13 +5,10 @@
     <div class=" mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
-          <splide-slide v-for="item in videos" class="p-2" :key="item.id">
+          <splide-slide v-for="(item,i) in videos" class="p-2" :key="item.id">
             <div class="hotbizz text-center">
-              <b-img :src="item.thumb" class="" />
-
-
-
-            </div>
+              <b-img :src="item.thumb" @click="openGallery(i)" class="" />
+             </div>
           </splide-slide>
         </splide>
       </div>
@@ -96,6 +93,10 @@ export default {
  
 
   methods: {
+
+    openGallery(i){
+      this.$emit('openGallery',i)
+    }
 },
 
 };

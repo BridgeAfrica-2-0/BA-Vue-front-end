@@ -1,6 +1,14 @@
 <template>
   <!-- Our Resources -->
   <section class="pl-3">
+     <LightBox
+      ref="lightboxx"
+      :media="renderResources"
+      :show-caption="true"
+      :show-light-box="false"
+      style="z-index:999999999999999"
+    ></LightBox>
+
     <div class="">
       <div class=" text-center">
         <b-tabs lazy active-nav-item-class="active-tab-item">
@@ -10,7 +18,7 @@
             @click="changeResource('bridgeafrica')"
           > 
          
-            <Videos :videos="renderResources" />
+            <Videos :videos="renderResources" @openGallery="openGallery" />
         
           </b-tab>
 
@@ -19,17 +27,8 @@
             title-link-class="title-linkClass"
             @click="changeResource('hba')"
           > 
-         
-            <Videos :videos="renderResources" />
-     
-
-          </b-tab>
-
-
-
-
-
-
+           <Videos :videos="renderResources" />
+             </b-tab>
            <b-tab
             :title='$t("general.digital_busines")'
             title-link-class="title-linkClass"
@@ -39,48 +38,16 @@
             <Videos :videos="renderResources" />
      
           </b-tab>
-
-
-
-
-          <b-tab
+            <b-tab
             title='Fufulde'
             title-link-class="title-linkClass"
              @click="changeResource('fufulde')"
           > 
        
-            <Videos :videos="renderResources" />
-       
-          
-          </b-tab>
-
-
-        </b-tabs>
-
-
-
-      </div>
+            <Videos :videos="renderResources" /> </b-tab>
+             </b-tabs> </div>
     </div>
 
-   
-    <!-- <div class="text-center">
-      <b-button
-        v-if="show_more"
-        class="mt-3"
-        style="width: 200px"
-        pill
-        variant="primary"
-        @click="loadMore"
-        >{{ $t("general.Load_more") }}</b-button
-      >
-    </div> -->
-
-    <LightBox
-      ref="lightbox"
-      :media="renderResources"
-      :show-caption="true"
-      :show-light-box="false"
-    ></LightBox>
   </section>
 </template>
 
@@ -656,9 +623,8 @@ export default {
     },
 
     openGallery(index) {
-      console.log(index);
-      console.log("yoooo");
-      this.$refs.lightbox.showImage(index);
+     
+      this.$refs.lightboxx.showImage(index);
     },
 
     loadMore() {

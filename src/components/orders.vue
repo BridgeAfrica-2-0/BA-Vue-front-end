@@ -14,7 +14,9 @@
 
 
 
-            <RequestPayment  v-if="showRequestPayment"
+            <RequestPayment 
+            
+             v-if="showRequestPayment"
             :price="order_price"
             :operator="operator"
             :loading="loading"
@@ -486,7 +488,7 @@ export default {
         url = "mtn/start-momo-transaction";
 
         axios
-          .post(url, data)
+          .get(url, data)
           .then((response) => {
 
             this.flashMessage.show({

@@ -15,7 +15,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> <img src="/assets/home/logo.png" width= "35px" alt="">  Go Digital </b-button> </router-link>
             </div>
          </div>
           </div>  
@@ -519,7 +519,10 @@
           </div>
 
           <div class="col-md-6 m-auto">
-            <img @click="playVideo(0)" class="crtv-ban" src="assets/home/crtv_ban.jpg" alt="" />
+            <div class="crtv-ban d-flex"  style="background-image:url('assets/home/crtv_ban.jpg')">  
+                <span role="button" @click="playVideo(0)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
+           </div>
+           
           </div>
         </div>
       </div>
@@ -806,7 +809,7 @@ export default {
 
      scrollTo() {
     window.scrollTo(2800,2800);
-    this.form.name=this.$t("general.hire_a_professional_tailor") ;
+    this.form.pname=this.$t("general.hire_a_professional_tailor") ;
   },
 
   
@@ -1110,7 +1113,7 @@ border-radius: 10px;
   height: 47.12px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
 border-radius: 10px; 
-width: 190px;
+    width: 155px;
 }
 
 
@@ -1184,8 +1187,14 @@ line-height: 44px;
 }
 
 .crtv-ban {
-  max-height: 627px;
-  border-radius: 20px;
+ 
+  height: 357px;
+    border-radius: 10px;
+    border-radius: 20px;
+    padding: 2rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 .request-quote {

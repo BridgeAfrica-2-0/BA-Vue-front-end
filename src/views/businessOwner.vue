@@ -1,8 +1,9 @@
 <template>
   <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper"> 
     <navbar />
+     <Skeleton  :loading="!isloaded" />
     <div v-if="isloaded">
-      <div class="container-fluid">
+      <div class="container-fluid">  
         <ly-tab
           v-model="selectedId"
           :items="items"
@@ -55,12 +56,13 @@ import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 import axios from "axios";
 import { isPremium } from '@/helpers';
-
+import Skeleton from "@/components/businessPageSkeleton";
 export default {
   name: "Home",
   mixins: [WhoIsIt],
   components: {
     navbar,
+    Skeleton,
     Business,
     LyTab,
     Settings,

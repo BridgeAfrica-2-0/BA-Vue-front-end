@@ -2,12 +2,7 @@
   <div class="container-fluid">
     <navbar />
     <div class="row">
-
-
-       
-      
-      
-      <div class="col-12 col-md-12 col-lg-9 ">
+       <div class="col-12 col-md-12 col-lg-9 ">
         <hr />
         <div class="row">
           <div class="col d-none d-md-block"><h3 class="mx-5">{{$t("general.PRODUCT_DETAILS")}}</h3></div>
@@ -69,10 +64,8 @@
                        </p>
                  
                 </div>
-
-                
               </div>
-             
+          
               <div class="col mt-2 d-none d-md-block m-auto">
                 <div class="row ">
                   <div class="col-2  bg-y ">
@@ -127,11 +120,9 @@
                       class="numbersize  form-control"
                     />
 
-
-             
-
-
                   </div>
+
+                  
                   <div class="col-3  p-0  mt-2 d-block d-md-none">
                     <h3 class="">{{ formatMoney(cart_item.product_price) }} </h3>
                   </div>
@@ -330,7 +321,8 @@ export default {
         });
     },
     changeQuantity(event, index) {
-
+    
+   
       let quantity = event.target.value;
       if(quantity > 1 ){  
       this.$store

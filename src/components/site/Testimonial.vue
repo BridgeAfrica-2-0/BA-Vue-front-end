@@ -98,12 +98,7 @@ export default {
           testimoney: "I have been selling custom-made accessories for years now. Meeting Bridge Africa has completely revolutionized the way I do business. I no longer need to rely on customers who come to my shop, but can now sell to customers worldwide. ",
         },
         
-        {
-          id: 4,
-          name: "Kaneka Taylor",
-          image: "assets/images/testi/taylor.jpg",
-          testimoney: "yvon Eboto",
-        },
+       
       ],
 
     }

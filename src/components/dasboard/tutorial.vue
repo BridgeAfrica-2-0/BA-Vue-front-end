@@ -9,6 +9,7 @@
          
          <div class="row  m-0">    
 
+
       <div
         v-for="(resource, i) in renderResources"
         :key="i"

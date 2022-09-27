@@ -172,11 +172,16 @@
 
 				<b-button class="btn-custom mr-3" type="submit" variant="primary">
 					<b-spinner v-if="loading" small variant="light"></b-spinner>
-					{{$t("general.Save")}}</b-button
-				>
+					{{$t("general.Save")}}</b-button>
 
 			</div>
+
+			<div class="mt-3 pr-3" v-if="shippingsTab.length && current_step==1"> 
+				<p role="button" class="text-center" @click="closesipping" > Skip <b-icon variant="primary" icon="arrow-right-circle-fill"> </b-icon> </p>
+			</div>
+
 		</b-form>
+		
 	</div>
 </template>
 
@@ -184,11 +189,15 @@
 	import axios from "axios";
 	export default {
 		name: "FormCreateShippingAddress",
+
 		props: {
 			form: {
 				type: Object,
 				require: true,
 			},
+			 current_step:{
+			 require: true,
+		 },
 			modal: Boolean,
 			mode: {
 				type: String,
@@ -213,6 +222,13 @@
 			username() {
 				return this.$store.state.auth.user.user.name;
 			},
+
+			 shippingsTab() {
+				return this.$store.state.checkout.allShipping;
+				
+			},
+
+
 			// countries() {
 			// 	return this.$store.state.auth.country;
 			// },
@@ -237,6 +253,16 @@
 			}
 		},
 		methods: {
+			closesipping(){
+               
+			 
+								this.$emit("closecshippingm");
+						
+								this.$emit("switchstep", 2);
+						
+
+			},
+
 			onSubmit(event) {
 				event.preventDefault();
 				this.loading = true;

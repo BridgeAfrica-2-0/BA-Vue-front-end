@@ -2,7 +2,7 @@
   <div class="bridge-home">
     <site-header class="topbar" />
 
-    <section class="p-0 pt-md-2 pb-2">
+  <section class="p-0 pt-md-2 pb-2">
       
        <div class="container d-none d-md-block main-banner"  >
         <div class="row h-100">
@@ -15,7 +15,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
             </div>
          </div>
           </div>  
@@ -26,11 +26,11 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3" > 
-             <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
-              </div>
+          </div>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div class="p-3"> 
-             <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button>
+           <router-link to="/signup">   <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
             </div>
          </div>
           </div> 
@@ -58,7 +58,7 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3 mt-5"> 
-             <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -138,22 +138,22 @@
           <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
           </p>
           <div class="d-none d-lg-flex">
-            <b-button variant="primary" class=" moreproducts-btn">
+           <b-button @click="gotoSearch" variant="primary" class=" moreproducts-btn">
              {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
-            </b-button>
+            </b-button>  
           </div>
           <b-tabs   active-nav-item-class="active-tab-item">
             <b-tab 
               :title="$t('general.avaliable_in_cameroon')" 
               title-link-class="title-linkClass"
             >
-              <products />
+              <products type="cameroon" />
             </b-tab>
             <b-tab
               :title="$t('general.avaliable_in_worlwide')" 
               title-link-class="title-linkClass"
             >
-              <products />
+              <products type="international" />
             </b-tab>
           </b-tabs>
 
@@ -279,7 +279,7 @@
             </video>
           </div>
 
-          <div class="col-md-7  ">
+          <div class="col-md-7  " id="quote">
             <h3>
               <span>{{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
             </h3>
@@ -412,7 +412,7 @@
       </div>
         </div>
        <div class=" p-2 p-lg-5 text-left">  
-        <b-button variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }} </b-button>
+    <b-button  @click="scrollTo" variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }} </b-button>
         </div>
          </div>
         </div> 
@@ -420,7 +420,7 @@
 
         <div class="col-md-6">
         <div>
-          <img src="assets/home/hire_professional.png" alt="">
+          <img class="hire-tailor-img" src="assets/home/hire_professional.png" alt="">
         </div>
       </div>
 
@@ -479,7 +479,8 @@
     </section>
 
     <section class="bg-whitee">
-      <div class="container resources pt-5 pb-5"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500">
+      
+      <div class="container resources pt-5 pb-5"  >
         <div class="row">
           <div class="col-lg-10">
             <h3>
@@ -517,8 +518,8 @@
            
           </div>
 
-          <div class="col-md-6">
-            <img class="crtv-ban" src="assets/home/crtv_ban.png" alt="" />
+          <div class="col-md-6 m-auto">
+            <img @click="playVideo(0)" class="crtv-ban" src="assets/home/crtv_ban.jpg" alt="" />
           </div>
         </div>
       </div>
@@ -527,37 +528,21 @@
     <section class="bg-whitee">
       <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <h3><span>  {{ $t("general.cameroon_focus") }}  </span>  {{$t('network.Marketplace')}}  </h3>
-        <div class=" d-none d-md-flex w-75 mt-5">
-          <span class="text-center m-auto">
-           <h3>  7500+ </h3> 
-            <span style="color:#9F9F9F"> {{ $t("general.7k_business") }} </span>  </span>
-          <span class="text-center m-auto">
-           <h3> 13000+ </h3> 
-          <span style="color:#9F9F9F"> {{ $t("general.13k_customers") }} </span>  </span
-          >
-          <span class="text-center m-auto">
-           <h3>  100+ </h3> 
-            <span style="color:#9F9F9F">   {{ $t("general.100_industries") }} </span> </span
-          >
-          <span class="text-center m-auto">
-           <h3> 7500+ </h3> 
-            <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
-          >
-        </div>
+       
 
-        <div  class="row d-md-none">  
+        <div  class="row ">  
          
-          <div class="col-6 mt-2"> <span class="text-left">
+          <div class="col-6 col-md-3 mt-2"> <span class="text-left">
            <h3>  7500+ </h3> 
             <span style="color:#9F9F9F"> {{ $t("general.7k_business") }} </span>  </span></div>
-          <div class="col-6 mt-2">
+          <div class="col-6 col-md-3 mt-2">
              <span class="text-left">
            <h3> 13000+ </h3> 
           <span style="color:#9F9F9F"> {{ $t("general.13k_customers") }} </span>  </span
           >
 
           </div>
-          <div class="col-6 mt-2">
+          <div class="col-6 col-md-3 mt-2">
 
             <span class="text-left">
            <h3>  100+ </h3> 
@@ -565,7 +550,7 @@
           >
 
           </div>
-           <div class="col-6 mt-2">
+           <div class="col-6 col-md-3 mt-2">
              <span class="text-left">
            <h3> 7500+ </h3> 
             <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
@@ -580,7 +565,7 @@
       <div class="container"  data-aos="fade-up-left" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row">
           <div class="col-md-6 col-lg-7">
-            <img class="upgrade-cover w-100" src="assets/home/upgrade_account.png" alt="" />
+            <img class="upgrade-cover w-100" src="assets/home/upgrade_accoun.jpeg" alt="" />
           </div>
           <div class="col-md-6 col-lg-5">
             <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " data-aos="flip-left" data-aos-offset="70px" data-aos-duration="1500" >
@@ -654,7 +639,7 @@
      <h3 >
         <span>  Hear from </span>  our customers
       </h3>
-      <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+    
   </div>
    <img class="ml-auto" style="    width: 80px;" src="assets/home/quote-right.svg" alt="">
    </div>
@@ -663,6 +648,15 @@
   </section>
 
 <SiteFooter />
+
+ <LightBox
+      ref="lightboxh"
+      :media="crtv_show"
+      :show-caption="true"
+      :show-light-box="false"
+     
+   ></LightBox>
+
   </div>
 </template>
 
@@ -670,7 +664,7 @@
 /**
  * this page is the home page of the system
  */
-
+import LightBox from "vue-it-bigger";
 import SiteFooter from "../components/site/siteFooter";
 import SiteHeader from "../components/site/siteHeader";
 import Testimonial from "../components/site/Testimonial";
@@ -682,13 +676,14 @@ import 'aos/dist/aos.css'
 import { validationMixin } from "vuelidate";
 import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 import Resources from "../components/resources";
+
 export default {
   components: {
     SiteHeader,
     Products,
     Resources,
     SiteFooter,
-    Testimonial
+    Testimonial,LightBox
   },
 
     mounted() {
@@ -725,6 +720,17 @@ export default {
         "assets/home/ba-search.png",
           "assets/home/ba-dashboard.png",
       ],
+
+
+      crtv_show:[
+        {
+          title: "packaging",
+          type: "youtube",
+          tag: ["bridgeafrica", "fufulde"],
+          thumb: "assets/images/training/mod4/FFU.jpg",
+          id: "fTs87IawpN4",
+        },
+       ],
       
 
       form: {
@@ -797,7 +803,24 @@ export default {
   },
 
   methods: {
-    onWindowLoad() {
+
+     scrollTo() {
+    window.scrollTo(2800,2800);
+    this.form.name=this.$t("general.hire_a_professional_tailor") ;
+  },
+
+  
+    playVideo(index) {
+     
+      this.$refs.lightboxh.showImage(index);
+    },
+
+
+  gotoSearch(){
+    this.$router.push(`/search`);
+  },
+
+    onWindowLoad() {      
       this.showfadde = true;
 
       setTimeout(() => {
@@ -994,6 +1017,11 @@ export default {
 </script>
 
 <style>
+
+.hire-tailor-img{
+  max-height: 420px;
+    border-radius: 10px;
+}
 
 .v-enter-active,
 .v-leave-active {

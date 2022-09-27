@@ -49,6 +49,21 @@
         </div>
       </div>
     </div>
+
+    
+    
+  <b-modal ref="paymentmodal" id="modal-xl" size="xl" hide-footer  > 
+     <div v-if="!error_msg" class="container tex-center p-5 mb-5">
+      <div>  
+      <h2 class="text-center">  Your payment has been initiated! </h2>
+      <p class="mt-5 text-center"> You will receive a payment request on your phone. </p>
+      <p class="text-center"> If you don't, dial <span style="font-weight:bold; color: #fc0!important;
+       text-shadow: 1px 1px #f1f1f1;">  *126# </span> to initiate the payment  </p>
+    </div>
+     </div> 
+    </b-modal>
+
+
   </b-card>
 </template>
 
@@ -88,18 +103,24 @@ export default {
     return {
 
       	// loading: true,
-      formatObject: new Intl.NumberFormat("fr-FR", {
+       error_msg:false,
+       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
         minimumFractionDigits: 2,
+       
       }),
       number: "",
     };
   },
   methods: {
     confirmPayment() {
-     
-      
+      this.error_msg=false;
+
+      if (this.operator == "MTN") {
+      this.$refs['paymentmodal'].show()
+      }
+
       this.$emit("confirmpayment", {
         number: this.number,
         amount: this.price,
@@ -109,6 +130,13 @@ export default {
 
       this.loading=false;
     },
+
+    paymenterror(error){
+      alert('yoo  am here')
+      console.log(error);
+      this.error_msg=error;
+    },
+
     formatMoney(money) {
       return this.formatObject.format(money);
     },

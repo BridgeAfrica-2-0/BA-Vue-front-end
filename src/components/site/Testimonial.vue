@@ -82,26 +82,27 @@ export default {
       },
  
     ctestimonials: [
-        {
-          id: 4,
-          name: "Kaneka Taylor",
-          image: "assets/images/testi/taylor.jpg",
-          testimoney: this.$t("general.as_a_busy_mother"),
-        },
 
         {
           id: 5,
-          image: "assets/images/testi/f6b.jpg",
-          name: " yvon Eboto",
-          testimoney: this.$t("general.i_am_a_restaurant_owner"),
+          image: "assets/images/testi/godlove.jpeg",
+          name: "Godlove Rafa",
+          testimoney: "Bridge Africa played a major role in moving my business forward with the creation of a website and all of the networking opportunities that it offered to me.I now have a bigger client-base as customers can easily find me online",
         },
 
         {
           id: 6,
 
-          name: "Sharon Vetti",
-          image: "assets/images/testi/vetti.jpg",
-          testimoney: this.$t("general.with_ba_i_was_able_sew"),
+          name: "Lele Fadimatou",
+          image: "assets/images/testi/fadimatou.jpeg",
+          testimoney: "I have been selling custom-made accessories for years now. Meeting Bridge Africa has completely revolutionized the way I do business. I no longer need to rely on customers who come to my shop, but can now sell to customers worldwide. ",
+        },
+        
+        {
+          id: 4,
+          name: "Kaneka Taylor",
+          image: "assets/images/testi/taylor.jpg",
+          testimoney: "yvon Eboto",
         },
       ],
 

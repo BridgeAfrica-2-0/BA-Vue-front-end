@@ -9,7 +9,7 @@
 		</div>
 		<div class="order card-body">
 			<div>
-				<OrderProductsList />
+				<OrderProductsList  ref="checkoutorderr" />         
 				<div class="row">
 					<div class="col d-flex justify-content-end mt-4">
 						<button
@@ -62,6 +62,11 @@
 			},
 		},
 		methods: {
+
+			RefreshSipping(){
+              this.$refs.checkoutorderr.RefreshSipping();
+			},
+
 			showOperator() {
 				this.prepareOrder();
 				this.$emit("showoperator");

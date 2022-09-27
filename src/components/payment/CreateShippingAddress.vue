@@ -1,12 +1,13 @@
 <template>
-	<b-card class="border-0">
+	<b-card class="border-0"> 
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-5 col-lg-5 mb-4">
 				<b-card-title class="headline-font-size mb-3">
 					{{$t("general.Create_Shipping_Address")}}
-				</b-card-title>
+				</b-card-title> 
 				<FormCreateShippingAddress
 					:form="shippingAddress"
+					:current_step="currentStep"
 					@switchstep="handleSwitchStep"
 				/>
 			</div>
@@ -48,6 +49,11 @@
 			FormCreateShippingAddress,
 			OrderProductsList,
 		},
+		props:{
+         currentStep:{
+			require: true,
+		 }
+		},
 		methods: {
 			handleSwitchStep() {
 				this.$emit("switchstep", 2);
@@ -56,7 +62,7 @@
 				this.$router.push('/cart');
 			},
 			gotoMarket(){
-				this.$router.push('/market');
+				this.$router.push('/search');
 			}
 		},
 		data() {

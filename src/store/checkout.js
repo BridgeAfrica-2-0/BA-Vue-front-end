@@ -11,7 +11,8 @@ const state = {
    { order_id: "",
     total_cost: 0}
   },
-
+ 
+  shippingsummary:[],
 
   cart: [],
   cart_summary:{},
@@ -50,6 +51,15 @@ const actions = {
       })
   },
 
+
+ async getshippingsummary({ commit }) {
+  await axios.get('cart/shippingSummary/1').then((response) => {
+    console.log(response)
+    commit('setshippingsummary', response.data)
+  }).catch((error) => {
+    console.log({error:error})
+  })
+},
 
 
   async getTotal({ commit }) {
@@ -223,6 +233,11 @@ const mutations = {
     state.cart = newCart
 
   },
+
+  setshippingsummary(state, data){
+    state.shippingsummary=data
+  },
+ 
   setBuisiness: (state, newBuis) => { state.buisinessOrdered = newBuis },
   upShippingAdd: (state, shippingUp) => {
     let shippingData = {

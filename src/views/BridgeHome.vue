@@ -15,7 +15,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> <img src="/assets/home/logo.png" width= "35px" alt="">  Go Digital </b-button> </router-link>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn buy-btn-white m-2">  Go digital <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
             </div>
          </div>
           </div>  
@@ -1020,6 +1020,12 @@ export default {
 </script>
 
 <style>
+
+.buy-btn-white{
+  background: white !important;
+  border-color:white !important;
+  color: #455a64 !important;
+}
 
 .hire-tailor-img{
   max-height: 420px;

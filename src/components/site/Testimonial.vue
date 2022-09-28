@@ -90,6 +90,14 @@ export default {
           testimoney: "Bridge Africa played a major role in moving my business forward with the creation of a website and all of the networking opportunities that it offered to me.I now have a bigger client-base as customers can easily find me online",
         },
 
+       {
+          id: 7,
+          image: "assets/images/testi/godlove.jpeg",
+          name: "Alima Leila",
+          testimoney: "I am restaurant owner and I can tell you, with Bridge Africa I am able to find food supplies like vegetables, chickens, oil and more at great prices",
+        },
+
+
         {
           id: 6,
 

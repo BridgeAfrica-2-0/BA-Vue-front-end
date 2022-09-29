@@ -42,7 +42,7 @@
         <Settings v-bind:currenttab="selectedId" />
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -52,7 +52,7 @@ import Business from "../components/businessOwner/business";
 import Settings from "../components/businessOwner/settings";
 import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
-import Footer from "../components/footer";
+// import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 import axios from "axios";
 import { isPremium } from '@/helpers';
@@ -67,7 +67,7 @@ export default {
     LyTab,
     Settings,
     Inbox,
-    Footer,
+    // Footer,
   },
   data() {
     return {

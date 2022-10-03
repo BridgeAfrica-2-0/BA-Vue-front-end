@@ -645,7 +645,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin: null,
+      
       shownav: false,
       notifications: [],
       messages: [],
@@ -668,7 +668,9 @@ export default {
     }),
     city(){
       return this.credentials.location;
-    }
+    },
+
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
   },
   beforeMount() {
     // this.getLocation();

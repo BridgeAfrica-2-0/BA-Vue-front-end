@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       page: 1,
-       islogin:'',
+      
       foll_id: null,
       users: [],
       infiniteId: +new Date(),
@@ -49,6 +49,7 @@ export default {
   },
 
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     canBlock(){
      
       if(!this.foll_id){

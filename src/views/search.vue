@@ -651,6 +651,8 @@ export default {
       user: "auth/user",
     }),
 
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
@@ -754,7 +756,7 @@ export default {
       subCatChose: "",
       filterChose: "",
       categoryName: "",
-      islogin: false,
+    
       searchParams: {
         keyword: "",
         cat_id: "",

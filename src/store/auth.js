@@ -9,6 +9,13 @@ export default {
   state: {
     appLanguage: 'fr',
     user: [],
+    authModal:{
+      visibility:false,
+      callbackAction:{
+        name:null,
+        payload:null
+      }
+    },
     quote:{},
     isVerified: null,
     passwordToken: null, 
@@ -39,6 +46,10 @@ export default {
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
 
+     updateAuthVisibility(state, payload){
+    
+       state.authModal.visibility=payload.visibility;
+     },
 
     setprofilePackage(state, data) {
      
@@ -200,6 +211,21 @@ export default {
 
 
   actions: {
+
+    showAuthModal({ commit }) {
+     
+       commit("updateAuthVisibility", {visibility:true});
+     
+    },
+
+    hideAuthModal({ commit }) {
+      
+      commit("updateAuthVisibility", {visibility:false});
+    
+   },
+
+
+
     sendOtp({ commit }, payload) {
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data);
@@ -394,6 +420,8 @@ export default {
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`;
     },
+
+    authModal:(state) => state.authModal,
 
     profilConnected: state => state.profilConnected,
 

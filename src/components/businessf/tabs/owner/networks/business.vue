@@ -19,10 +19,15 @@ export default {
     Business
   },
 
+   computed:{
+    
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
+   },
+
   data() {
     return {
 
-      islogin:'',
+    
       options: {
         rewind: true,
         autoplay: true,

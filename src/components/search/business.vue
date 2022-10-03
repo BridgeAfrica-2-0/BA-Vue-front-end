@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div v-if="islogin">  
     <Skeleton  :loading="prodLoader" />
     <Skeleton  :loading="prodLoader" />
@@ -31,7 +31,8 @@
       align="center"
     ></b-pagination>
   </div>  
-  <div v-else> 
+  <div v-else>  
+  
        <login />
   </div>  
 </template>
@@ -54,7 +55,7 @@ export default {
   data() {
     return {
       total: 0,
-      islogin:true,
+     
       per_page: 10,
       list: [],
       currentPage: 1,
@@ -77,6 +78,8 @@ export default {
       sponsorbusiness: "business/getSponsorBusinesses",
       prodLoader: "business/getloadingState",
     }),
+    
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
   },
   mounted() {
     if(this.islogin){

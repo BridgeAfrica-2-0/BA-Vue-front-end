@@ -7,6 +7,12 @@
         <vue-confirm-dialog></vue-confirm-dialog>
     </div> 
 
+  <b-modal id="authModal" ref="authModal" @hidden="hideAuthModal" hide-footer  size="xl">
+     <login   @success="success" @hideAuthModal="hideAuthModal"  />
+  </b-modal>
+
+
+
     <transition
       name="fade"
       mode="out-in"
@@ -21,13 +27,13 @@
 </template>
 <script>
 import { Redis } from "@/mixins";
+import login from "@/components/Login";
 
-
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions,mapState } from "vuex";
 
 export default {
   mixins: [Redis],
-  
+  components:{login},
   data() {
     return {
       prevHeight: 0,
@@ -39,10 +45,23 @@ export default {
   },
  
 
-  computed: mapGetters({
+  // computed: mapGetters({
+  //   auth: "auth/profilConnected",
+  //   authModal:"auth/authModal"
+  // }),
+
+ computed:{
+
+  ...mapGetters({
     auth: "auth/profilConnected",
+    // authModal:"auth/authModal"
   }),
 
+  authModal(){
+    return this.$store.state.auth.authModal.visibility;
+  }
+
+ },
   watch: {
     "$store.state.auth.profilConnected": function (newProfile) {
       const uuid = "network" === newProfile.user_type ? newProfile.id : null;
@@ -54,7 +73,18 @@ export default {
 
     "$i18n.locale": function(newLanguage){
       localStorage.setItem('lang', newLanguage) 
+    },
+
+    authModal(newvalue){
+    
+     newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
+   
     }
+
+    // "authModal": function(newvalue){
+    //   newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
+
+    // }
   },
 
   
@@ -65,22 +95,20 @@ export default {
   methods: {
 
      onWindowLoad() {
-         
-
-          
-            this.showfadde=true;
-
-         
-
-         
-
+       this.showfadde=true;
        setTimeout(() => {
         this.loadfinish()
         }, 2000);
+         },
 
+      hideAuthModal(){
+      
+        this.$store.dispatch("auth/hideAuthModal")
+      },
 
-        },
-
+      success(){
+     console.log("success");
+      },
 
        loadfinish(){
 

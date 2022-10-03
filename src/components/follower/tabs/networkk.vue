@@ -130,7 +130,7 @@ export default {
   data() {
     return {
       page: 1,
-      islogin:'',
+    
       loading:false,
       network: [],
       foll_id: "",
@@ -145,11 +145,17 @@ export default {
       },
     };
   },
+
+  computed:{
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+  },
  
   mounted() {
      this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id;
   },
+
+
 
   methods: {
 

@@ -358,7 +358,7 @@ export default {
       },
       moment: moment,
       owner_post:[],
-      islogin:'',
+     
       page: 1,
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
@@ -827,7 +827,9 @@ export default {
     imageProfile() {
       return 'yoo';
     },
-
+   
+    islogin(){  return this.$store.getters["auth/profilConnected"]; },
+    
     info: function() {
       return this.$store.getters['profile/getUserPostIntro'];
     },

@@ -386,7 +386,7 @@ export default {
       businessPage: 1,
       adminpage: 1,
       editorspage: 1,
-      islogin:'',
+     
       infiniteId: 1,
       ainfiniteId: 188,
       einfiniteId: 889,
@@ -410,6 +410,11 @@ export default {
   },
 
   props: ['from'],
+
+  computed:{
+    
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
+  },
 
   mounted() {
        this.islogin=this.$store.getters["auth/isLogged"];

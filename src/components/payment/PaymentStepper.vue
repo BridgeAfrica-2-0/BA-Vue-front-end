@@ -66,6 +66,7 @@
           <RequestPayment
             :price="order_price"
             :operator="operator"
+            ref="request_payment"
             :loading="loading"
             @changepayment="handleChangePayment"
             @confirmpayment="handleConfirmPayment"
@@ -86,7 +87,7 @@
     </b-container>
 
   </div>
-</template> 
+</template>    
 <script>
 import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
@@ -323,7 +324,7 @@ export default {
 
 
        if(operator=="MTN"){
-
+       
          this.loading=true;
 
            url="mtn/start-momo-transaction";
@@ -337,6 +338,7 @@ export default {
             this.loading=false;
         })
         .catch((error) => {
+          this.$refs.request_payment.paymenterror(error);
           this.flashMessage.show({
             status: "error",
 

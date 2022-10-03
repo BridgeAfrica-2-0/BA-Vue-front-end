@@ -11,7 +11,7 @@
 
         <img src="@/assets/welcome.png" class="w-image" alt="">
 
-         <h4 class="text-center  mt-1">
+         <h4 class="text-center  mt-2">
           {{ $t("welcome.Hello") }} <b> {{ username }}    </b
           >    {{$t("auth.you_are_ready_to_start")}}
         </h4>
@@ -1882,6 +1882,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .h-tutorial{
   height: 400px;
+  overflow: auto;
 }
 .w-image{
   max-height: 300px;

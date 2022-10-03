@@ -55,13 +55,13 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+// import Footer from "@/components/footer";
 import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
 
 import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
@@ -82,7 +82,7 @@ export default {
     Default, 
     Inbox,
     navbar,
-    Footer,
+   // Footer,
     Parent,
   },
   watch: {

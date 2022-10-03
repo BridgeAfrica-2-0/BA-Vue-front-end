@@ -453,7 +453,7 @@ export default {
       this.$store
         .dispatch("auth/categories")
         .then(() => {
-          console.log("hey yeah");
+     
         })
         .catch((err) => {
           console.log({ err: err });
@@ -484,8 +484,8 @@ export default {
           phone: this.form.tel,
           quantity: this.form.quantity,
           max_budget: this.form.budget,
-          payment_method: this.form.pmethod,
-
+          payment_mode: this.form.pmethod,
+          payment_method:this.form.pmethod,
           details: this.form.description,
           shipping_location: this.form.shipping,
 
@@ -499,7 +499,8 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-            title: "Successfully Send",
+             message:"Successfully Send",
+            title: "success",
           });
         })
         .catch((err) => {
@@ -518,7 +519,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              title: "error sending form",
+              message: "error sending form",
             });
             console.log({ err: err });
           }

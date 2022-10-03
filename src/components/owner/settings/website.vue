@@ -65,7 +65,7 @@
           header-bg-variant="light"
           body-bg-variant="light"
         >
-          <b-row>
+          <b-row class="pt-5 pb-5">
             <b-col cols="8">
               <h5>
                 <b-icon icon="check-circle-fill" variant="success"></b-icon>
@@ -245,7 +245,7 @@
                 />
               </div>
               <div class="operator-name">
-                <p class="mb-0 mx-4 title-font-size font-weight-bold">
+                <p class="mb-0 mx-4 title-font-size">
                   MTN Mobile Money
                 </p>
               </div>
@@ -267,7 +267,7 @@
                 />
               </div>
               <div class="operator-name">
-                <p class="mb-0 mx-4 title-font-size font-weight-bold">
+                <p class="mb-0 mx-4 title-font-size ">
                   Orange Money
                 </p>
               </div>
@@ -459,7 +459,7 @@ export default {
     
       let formData = new FormData();
       formData.append("subscribe", this.PaymentForm.subscribe);
-      formData.append("phone", this.PaymentForm.phone);
+      formData.append("phone", "+237"+this.PaymentForm.phone);
       formData.append("operator", this.PaymentForm.operator);
       formData.append("package_id", this.PaymentForm.package_id);
     
@@ -567,9 +567,6 @@ export default {
   text-align: left;
 }
 
-.h3-color {
-  color: #000;
-}
 
 .b-color {
   color: #7952b3;

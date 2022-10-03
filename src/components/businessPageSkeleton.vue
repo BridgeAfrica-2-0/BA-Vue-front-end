@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="container d-flex mt-2">   
+        <div class="container d-flex mt-5 mb-5">   
             <b-skeleton-img  height="100px" width="100px"  class="r-image mr-2" animation="fade"></b-skeleton-img>
            <div class=" mr-auto mt-auto mb-auto p-2">  <b-skeleton width="200px"></b-skeleton>
             <b-skeleton width="200px"></b-skeleton>  <b-skeleton width="200px"></b-skeleton> 
@@ -34,7 +34,7 @@
 
         </div>
 
-        <div class="container mt-3 mb-3"> <b-skeleton width="100%"></b-skeleton>  </div>
+        <div class="container mt-5 mb-5"> <b-skeleton width="100%"></b-skeleton>  </div>
          <div class="container"> 
         <div class="row"> 
             <div class="col-md-4 border p-2 d-none d-md-block">

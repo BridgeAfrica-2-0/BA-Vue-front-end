@@ -96,7 +96,7 @@ const actions = {
     })
       .then((response) => {
         console.log(response)
-        console.log("yooo the mother fucker");
+       
       //  commit('setCartSummary', response.data.data)
       })
       .catch((error) => {
@@ -227,9 +227,9 @@ const mutations = {
   deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),
   setOrder: (state, newOrder) => state.order = newOrder,
   setCart: (state, newCart) => {
-    newCart.data.map((el) => {
-      el.quantity = 1;
-    });
+    // newCart.data.map((el) => {
+    //   el.quantity = 1;
+    // });
     state.cart = newCart
 
   },

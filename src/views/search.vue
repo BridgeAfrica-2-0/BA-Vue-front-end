@@ -828,6 +828,8 @@ export default {
        if (this.selectedId == 5) {
            this.getKeyword();
         }
+        
+        localStorage.setItem("searchTab", this.selectedId);
       
     },
  
@@ -928,12 +930,47 @@ export default {
     },
 
     onProcessQuery() {
-      if (this.$route.query.market) {
+      let tab=  localStorage.getItem("searchTab");
+
+
+       if (this.$route.query.tab==0) {
+        this.selectedId = 0;
+        return true;
+      }else{
+      
+      if (tab==0) {
         this.selectedId = 0;
         return true;
       }
 
-      if (this.$route.query.uuid) this.selectedId = 4;
+       if (tab==1) {
+        this.selectedId = 1;
+        return true;
+      }
+
+       if (tab==2) {
+        this.selectedId = 2;
+        return true;
+      }
+
+
+       if (tab==3) {
+        this.selectedId = 3;
+        return true;
+      }
+
+       if (tab==4) {
+        this.selectedId = 4;
+        return true;
+      }
+
+       }
+
+      if (this.$route.query.uuid) { 
+        this.selectedId = 4;
+       } 
+
+
     },
     // [ED]----------
 

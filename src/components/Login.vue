@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="modal-auth">
     <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
       <div class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
@@ -102,15 +102,15 @@
               </md-button>
             </b-col>
             <b-col cols="6">
-              <router-link to="signup">
-                <md-button class="md-raised f-right"
+             
+                <md-button @click="toSignup" class="md-raised f-right"
                   >{{ $t("auth.signup") }}
                 </md-button>
-              </router-link>
+             
             </b-col>
           </b-row>
 
-          <router-link to="password" class="nav-link text">
+          <router-link @click="toForgetPassword" to="password" class="nav-link text">
             {{ $t("auth.forget_password") }}
           </router-link>
         </div>
@@ -192,7 +192,17 @@ export default {
       }
     },
 
-  
+   toSignup(){
+    this.closeModal();
+  this.$router.push({ name: "signup" });
+   },
+
+   toForgetPassword(){
+    
+  this.closeModal();
+  this.$router.push({ name: "Password" });
+
+   },
 
     flashErrors(errors) {
       let err = "";
@@ -314,6 +324,17 @@ export default {
 };
 </script>
 
+<style>
+ .modal-auth .modal-header{
+  border: none !important;
+  padding: .4rem !important;
+ }
+
+ .modal-auth .modal-body{
+  padding: 0px;
+ }
+</style>
+
 <style scoped>
 .vl {
   border-left: 1px solid green;
@@ -366,7 +387,7 @@ export default {
 }
 
 .b-w {
-  width: 230px;
+  width: 210px;
 }
 
 .f-22 {

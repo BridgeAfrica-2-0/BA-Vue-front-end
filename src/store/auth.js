@@ -197,9 +197,9 @@ export default {
   
 
       var currentUrl = window.location.pathname;
-      router.push({ name: 'Login', query: { redirect: currentUrl } });     
+     // router.push({ name: 'Login', query: { redirect: currentUrl } });     
 
-      window.location.href = "/login";     
+      window.location.href = "/login?redirect="+currentUrl;     
   
     },
 

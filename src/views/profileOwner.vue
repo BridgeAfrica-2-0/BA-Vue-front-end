@@ -6,6 +6,7 @@
       <b-row class="">
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
+           
             <b-tab :title="$t('profileowner.Posts')" href="#post">
               <Post @on:media="(value) => goToMedia(value)" />
             </b-tab>
@@ -76,6 +77,11 @@ export default {
       console.log(to.hash);
       this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
     },
+
+    tabIndex(newvalue){
+    
+        localStorage.setItem("profileTab", newvalue);
+    }
   },
 
   methods: {
@@ -122,7 +128,19 @@ export default {
       color: '#e75c18',
     });
     this.getAuth();
+    if(this.$route.hash){ 
     this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
+    }else{
+   
+   let tab=  localStorage.getItem("profileTab");
+     
+      if (tab) {
+        this.tabIndex=tab;
+      }
+
+    }
+
+   
 
     this.$store
       .dispatch('profile/loadUserPostIntro', null)

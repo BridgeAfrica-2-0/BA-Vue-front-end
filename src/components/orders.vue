@@ -487,8 +487,7 @@ export default {
 
         url = "mtn/start-momo-transaction";
 
-        axios
-          .get(url, data)
+        axios.post(url, data)
           .then((response) => {
 
             this.flashMessage.show({

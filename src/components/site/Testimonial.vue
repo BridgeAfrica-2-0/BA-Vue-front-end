@@ -92,7 +92,7 @@ export default {
 
        {
           id: 7,
-          image: "assets/images/testi/godlove.jpeg",
+          image: "assets/images/testi/f6b.jpg",
           name: "Alima Leila",
           testimoney: "I am restaurant owner and I can tell you, with Bridge Africa I am able to find food supplies like vegetables, chickens, oil and more at great prices",
         },

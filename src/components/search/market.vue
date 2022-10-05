@@ -50,8 +50,14 @@
         </div>
       </div>
       <br />
-      <div class="d-inline-flex float-right mt-2">
-        <div class="">
+    
+    <div class="d-flex"> 
+
+        <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
+         </div> 
+         
+          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+        <div v-if="product.in_stock" class=""> 
           <BtnCtaMessage
             :element="product"
             :isProduct="true"
@@ -63,7 +69,8 @@
 
         <div class="ml-2">
           <b-button
-          size="sm"
+           :disabled="!product.in_stock"
+           size="sm"
             v-if="product.user_package_name == 'premium'"
             variant="primary"
             @click="handleAddToCard(product)"

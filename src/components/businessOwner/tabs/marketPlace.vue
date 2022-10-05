@@ -160,7 +160,7 @@
 
  <b-form-group    v-if="newProduct.on_discount==1"
             id="input-group-1"
-            :label="$t('businessowner.discount_Price')"
+            :label="$t('businessowner.discount_percentage')"
             label-for="input-1"
             label-size=""
           >
@@ -214,6 +214,25 @@
               {{ $t('businessowner.Published') }}
             </b-form-checkbox>
           </div>
+
+      
+      <b-form-group
+            id="kg"
+            :label="$t('businessowner.quantity')"
+            label-for="quantity"
+            label-size="sm"
+          >
+           <b-form-input
+              v-model="newProduct.quantity"
+              class="mt-1"
+              id="quantity"
+              type="number"
+              
+              
+            ></b-form-input>
+      </b-form-group>
+
+
           <!-- TAX and KG -->
          
             <b-form-input
@@ -347,6 +366,7 @@
           description: "",
           picture: null,
           price: "",
+          quantity:"",
           in_stock: 1,
           on_discount: 0,
           discount_price: 0,
@@ -408,6 +428,7 @@
         console.log("archive: ", this.archive);
         console.log("archive: ", this.market);
       },
+
       displayOrders() {
         this.status = !this.status;
         this.orders = !this.orders;
@@ -427,10 +448,8 @@
          await this.$store
           .dispatch("market/getBproducts", url).then((res) => {
             console.log(res);
-               
-               
-            
-          })
+          
+           })
           .catch((error) => {
             console.log(error);
           })

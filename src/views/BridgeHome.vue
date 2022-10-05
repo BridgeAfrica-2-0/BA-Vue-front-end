@@ -26,7 +26,7 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3" > 
-            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button> </router-link>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 10px; bottom: 30px;"> Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -240,21 +240,21 @@
              <div class="border-left-biz mt-2"> 
             <div class="babiz-list " @mouseover="changephoto(0)" :class="{ active: currentNumber==0 }">
               <h5 class="white"> {{ $t("general.large_marketplace_and_digital") }}</h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.we_help_customers_online_to") }}
               </p>
             </div>
 
             <div class="babiz-list " @mouseover="changephoto(1)" :class="{ active: currentNumber==1 }">
               <h5 class="white"> {{ $t("general.localize_business_directory") }} </h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.we_help_you_easily_find") }}
               </p>
             </div>
 
             <div class="babiz-list " @mouseover="changephoto(2)" :class="{ active: currentNumber==2 }">
               <h5 class="white" > {{ $t("general.community_engageMent") }} </h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.follow_and_communicate_with") }}
               </p>
             </div>
@@ -507,15 +507,13 @@
           <div class="col-md-6">
             <h3 class="white">
               <span> {{ $t("general.checkout_our") }} Biz 
-                 </span>  Konnect Show on CRTV {{ $t("general.show_on_crtv") }} </h3>
-            <img class="mt-1" src="assets/home/crtv.png" alt="" />
+                 </span> {{ $t("general.show_on_crtv") }} </h3>
+    
 
-          
-
-            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.bizconnect_show_is_a15_min") }}
+            <p class="mt-2" style="color:white"> {{ $t("general.bizconnect_show_is_a15_min") }}
                </p>
 
-            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.the_show_is_aired") }}  </p>
+            <p class="mt-2" style="color:white"> {{ $t("general.the_show_is_aired") }}  </p>
 
            
           </div>

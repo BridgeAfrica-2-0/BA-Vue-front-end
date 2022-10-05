@@ -87,9 +87,9 @@
              <b-navbar-nav class="mr-auto d-none d-lg-flex "> 
 
             <b-nav-item class="ml-md-1">   
-               <b-input-group>
+               <b-input-group class="shadow">
               <b-input-group-prepend @click="Search">
-       <div class="border" style="color:#495057 !important"> <b-icon   class="mt-2 ml-2" icon="search"></b-icon> </div> 
+       <div class="border" style="color:#495057 !important"> <b-icon  style="color:red" class="mt-2 ml-2" icon="search"></b-icon> </div> 
     </b-input-group-prepend>
     
      <b-form-input v-on:keyup.enter='Search' style="border-left:none" type="search" v-model="keyword" placeholder="Search "></b-form-input> </b-input-group> </b-nav-item>
@@ -154,7 +154,7 @@ export default {
       img: require("../../assets/img/about/en.png"),
       lang: 'EN',
       keyword:'',
-      islogin: false,
+     
     }
   },
   created(){
@@ -164,6 +164,8 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
+
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
   },
 
   methods:{

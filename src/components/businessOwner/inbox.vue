@@ -1,31 +1,31 @@
 <template>
   <div>
-    <b-container>
+    <b-container  class="messaging">
       <div v-if="mobile">
-        <b-row class="chat-box">
+        <b-row class="chat-box border border-bottom-none">   
           <b-col class="pr-0" v-if="rightSide">
-            <div class="right">
-              <b-row>
-                <b-col class="p-2">
+            <div class="right border-right">
+              <div class="d-flex">
+                <div class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
-                </b-col>
-                <b-col>
+                </div>
+                <div>
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentBiz.name
-                        ? currentBiz.name.length > 7
-                          ? currentBiz.name.substring(0, 6) + "..."
+                        ? currentBiz.name.length > 15
+                          ? currentBiz.name.substring(0, 4) + "..."
                           : currentBiz.name
                         : "loading..."
                     }}
                   </h1>
-                </b-col>
-                <b-col>
+                </div>
+                <div class="ml-auto">
                   <!-- <b-icon
                     @click="newMessage(true)"
                     class="new-message primary icon-size float-right"
@@ -39,7 +39,7 @@
                   >
                     <template #button-content>
                       <b-icon
-                        class="h2 primary float-right"
+                        class="h2  float-right"
                         icon="pencil-square"
                       ></b-icon>
                     </template>
@@ -54,14 +54,14 @@
                       {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown>
-                </b-col>
-              </b-row>
+                </div>
+              </div>
 
               <b-row class="mt-12">
                 <b-col>
                   <b-tabs
                     v-model="tabIndex"
-                    content-class="mt-12 ma-4 pt-6"
+                    content-class="mt-12 ma-4 "
                     fill
                   >
                     <b-tab
@@ -85,8 +85,11 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
-                        
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -142,7 +145,9 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }} ---</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }} ---</h3>
+
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -168,7 +173,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                     <div class="messages contacts-height">
+                      
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         
                         <div v-if="chatList.length > 0">
                           <b-row
@@ -229,7 +239,9 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }}</h3>
+
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -255,7 +267,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      <div class="messages contacts-height">
+                        
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="primary"
@@ -318,6 +335,7 @@
                             </p> -->
                           </b-col>
                         </b-row>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -343,7 +361,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                     <div class="messages contacts-height">
+                      
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         <div v-if="loader" class="text-center">
                           <b-spinner
                             variant="light"
@@ -403,7 +426,8 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }}</h3>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -503,6 +527,13 @@
                 style="margin-left: 1px"
                 ref="feed"
               >
+
+              
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+
                 <div v-if="loader" class="text-center mt-12 pt-12">
                   <b-spinner
                     variant="primary"
@@ -626,9 +657,11 @@
                     </b-row>
                   </div>
                 </div>
+                         </VuePerfectScrollbar>
               </section>
 
-              <div class="bottom">
+     <div  v-if="chatSelected.active" class="bottom mt-3">
+              <div style="width: 100%;"> 
                 <b-row class="text-center">
                   <!-- <p class="py-2 text-primary" v-if="this.file">
                     {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
@@ -765,6 +798,7 @@
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
                 </p> -->
               </div>
+              </div>
             </div>
           </b-col>
           <!-- End selected Chat -->
@@ -873,7 +907,7 @@
                           Network: {{ selectedNetwork }} -->
                           <b-tabs
                             v-model="tabMemberType"
-                            content-class=" ma-4 pt-6"
+                            content-class=" ma-4 "
                             fill
                             pills
                             card
@@ -1459,35 +1493,31 @@
         </b-row>
       </div>
       <div v-else>
-        <b-row class="chat-box">
+        <b-row class="chat-box border border-bottom-none">
           <b-col class="col-4 pr-0">
-            <div class="right">
-              <b-row>
-                <b-col class="p-2">
+            <div class="right  border-right">
+              <div class="d-flex">
+                <div class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
-                </b-col>
-                <b-col>
+                </div>
+                <div>
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentBiz.name
-                        ? currentBiz.name.length > 8
-                          ? currentBiz.name.substring(0, 6) + "..."
+                        ? currentBiz.name.length > 15
+                          ? currentBiz.name.substring(0, 14) + "..."
                           : currentBiz.name
                         : "loading..."
                     }}
                   </h1>
-                </b-col>
-                <b-col>
-                  <!-- <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
-                    icon="pencil-square"
-                  ></b-icon> -->
+                </div>
+                <div class="ml-auto">
+                 
                   <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
@@ -1496,7 +1526,7 @@
                   >
                     <template #button-content>
                       <b-icon
-                        class="h2 primary icon-size float-right"
+                        class="h2   float-right"
                         icon="pencil-square"
                       ></b-icon>
                     </template>
@@ -1511,14 +1541,14 @@
                       {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown>
-                </b-col>
-              </b-row>
+                </div>
+              </div>
 
               <b-row class="mt-12">
                 <b-col>
                   <b-tabs
                     v-model="tabIndex"
-                    content-class="mt-12 ma-4 pt-6"
+                    content-class="mt-12 ma-4 "
                     fill
                   >
                     <b-tab
@@ -1542,7 +1572,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                     
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                        
                         <div v-if="chatList.length > 0">
                           <b-row
@@ -1630,7 +1665,8 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }}</h3>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1656,7 +1692,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         <div v-if="loader" class="text-center">
                           <b-spinner
                             variant="primary"
@@ -1750,7 +1791,8 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }}</h3>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1776,7 +1818,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         
                         <b-row
                       
@@ -1857,6 +1904,7 @@
                             </p> -->
                           </b-col>
                         </b-row>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1882,7 +1930,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         
                         <div v-if="chatList.length > 0">
                           <b-row
@@ -1958,7 +2011,8 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h3 v-else>{{ $t("businessowner.No_chat") }}</h3>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1972,7 +2026,7 @@
           <!-- selected Chat  -->
           <b-col v-if="newMsg == false && info == false" class="p-0 back-image">
             <div>
-              <div class="chat-nav shadow">
+              <div class="chat-nav shadow" v-if="chatSelected.active">
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
@@ -2038,6 +2092,11 @@
                 style="margin-left: 1px"
                 ref="feed"
               >
+
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                 <div v-if="loader" class="text-center mt-12 pt-12">
                   <b-spinner
                     variant="primary"
@@ -2174,18 +2233,20 @@
                       </b-col>
                     </b-row>
                   </div>
-                </div>
+                </div>z
+                         </VuePerfectScrollbar>
               </section>
 
-              <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div class="mt-12 pt-12">
-                  <h1 class="text-center">
-                    {{ $t("businessowner.Select_a_chat") }}
-                  </h1>
-                </div>
-              </section>
 
-              <div class="bottom">
+              <section v-else class="" style="margin-left: 1px; height:80vh" ref="feed">
+              <div class="mt-6 pt-12 d-flex h-100">
+                <h3 class="text-center m-auto">  {{ $t("businessowner.Select_a_chat") }} </h3>
+              </div>
+            </section>
+
+
+<div  v-if="chatSelected.active" class="bottom mt-3">
+              <div style="width: 60%;"> 
                 <b-row class="text-center">
                   <!-- <p class="py-2 text-primary" v-if="this.file">
                     {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
@@ -2322,6 +2383,7 @@
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
                 </p> -->
               </div>
+              </div>
             </div>
           </b-col>
           <!-- End selected Chat -->
@@ -2391,7 +2453,7 @@
             class="p-0 back-image"
             style="border: 1px solid gray"
           >
-            <div class="new-msg back-image" style="margin-right: 17px">
+            <div class=" back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
                   <b-col class="col-1 mt-3"> {{ $t("general.To") }} </b-col>
@@ -2421,10 +2483,10 @@
                           Network: {{ selectedNetwork }} -->
                           <b-tabs
                             v-model="tabMemberType"
-                            content-class=" ma-4 pt-6"
+                            content-class=" ma-4 "
                             fill
                             pills
-                            card
+                            
                           >
                             <b-tab :title="$t('general.All')" @click="getAll()">
                               <!-- All Selection -->
@@ -3042,11 +3104,12 @@
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import _ from "lodash";
 import { isPremium } from '@/helpers';
 export default {
   components: {
-    EmojiPicker,
+    EmojiPicker,VuePerfectScrollbar
   },
   data() {
     
@@ -3997,6 +4060,14 @@ export default {
 </script>
 
 <style scoped>
+
+.contacts-height{
+  height: calc(100vh - 190px);
+}
+
+.scroll-area{
+  height: inherit;
+}
 .filePreview {
   width: 100px;
 }
@@ -4022,39 +4093,51 @@ export default {
   width: 3rem;
   height: 3rem;
 }
+
 .right {
   padding: 10px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
 }
+
 .primary-bg,
 .primary-bg:hover {
   background-color: #e75c18;
   border: none;
 }
 
-.chat-box {
+/* .chat-box {
   position: relative;
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
-}
+} */
 
+
+.chat-box {
+  position: relative;
+  height: 100vh;
+  border-radius: 10px;
+  /* border: solid 2px rgb(223, 223, 223); */
+  /* margin-bottom: 100px; */
+  border-bottom: hidden !important;
+}
 .chat-nav {
   position: relative;
   min-height: 70px;
   /* border-right: 2px solid #ccc; */
   width: 100%;
-  /* padding: 10px; */
+  padding: 10px;
 }
-
 .chats {
-  /* border: 2px solid green; */
-  height: 540px;
-  overflow-y: auto;
+  height: calc(100vh - 160px);
+  overflow-y: hidden;
   overflow-x: hidden;
+  background-image: url("/assets/images/messaging.png"); 
+   background-repeat: no-repeat;
+  background-size: cover;
+  
 }
-
 .back-image {
-  background-image: url("../../assets/message_back.jpg");
+ 
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -4071,10 +4154,13 @@ h1 {
 }
 
 .messages {
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
-  height: 500px;
+
 }
+
+
+
 .txt {
   font-size: 13px;
 }
@@ -4127,12 +4213,18 @@ h1 {
 .sent-name {
   margin-left: 400px;
 }
+
 .bottom {
   padding-left: 50px;
   min-height: 60px;
   border-bottom-right-radius: 15px;
   background-color: white;
+  position: fixed;
+    width: 100%;
+    bottom: 0;
 }
+
+
 .detail {
   margin-left: -40px;
   cursor: pointer;
@@ -4184,7 +4276,6 @@ li {
   .chat-nav {
     position: relative;
     min-height: 70px;
-
     width: 100%;
     padding: 10px;
     border-right: none;
@@ -4419,4 +4510,18 @@ li {
   background: #ececec;
   cursor: pointer;
 }
+</style>
+<style>
+
+.messaging .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: white !important;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+
+.messaging  .nav-tabs {
+    border-bottom: 0px solid #dee2e6;
+}
+ 
 </style>

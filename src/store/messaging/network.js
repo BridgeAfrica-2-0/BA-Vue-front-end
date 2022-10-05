@@ -458,6 +458,8 @@ export default {
 
             let keyword = data ? '/' + data.keyword : ''
 
+            if(state.currentBizId){ 
+
             await axios.get(`/network/${state.currentBizId}/business/follower${keyword}`)
                 .then((res) => {
                     let business = res.data.data.data
@@ -486,6 +488,7 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
+            }
         },
 
         async GET_CUR_BIZ({ commit, state }) {

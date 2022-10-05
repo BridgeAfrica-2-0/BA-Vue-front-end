@@ -137,7 +137,7 @@ export default {
   data() {
     return {
       page: 1,
-    
+     
       options: {
         rewind: true,
         autoplay: true,
@@ -154,8 +154,13 @@ export default {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];
     },
+    
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
   },
   created() {
+     this.islogin = this.$store.getters["auth/isLogged"];
+
+     if(this.islogin){ 
     this.$store
       .dispatch("networkDetails/getndetails")
       .then(() => {
@@ -164,6 +169,7 @@ export default {
       .catch((err) => {
       
       });
+       }
   },
 
   methods: {

@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       items: [],
-         islogin:true,
+      
       disable:false,
       options: {
         rewind: true,
@@ -73,6 +73,9 @@ export default {
     this.init();
   },
 
+computed:{
+   islogin(){  return this.$store.getters["auth/profilConnected"]; },
+},
   methods: {
     init: async function () {
     if(this.islogin) { const request = await this.$repository.search.sponsors();

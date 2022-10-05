@@ -6,9 +6,9 @@
       <!-- selected Chat  -->
 
       <div v-if="mobile">
-        <b-row class="chat-box">
+        <b-row class="chat-box border border-bottom-none">
           <b-col class="pr-0" v-if="rightSide">
-            <div class="right">
+            <div class="right border-right">
               <b-row>
                 <b-col class="p-2">
                   <b-avatar
@@ -36,7 +36,7 @@
                   <b-icon
                     style="font-size: 38px !important"
                     @click="newMessage(true)"
-                    class="h2 new-message primary icon-size float-right pr-3"
+                    class="h2 new-message  float-right pr-3"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
@@ -46,7 +46,7 @@
                 <b-col>
                   <b-tabs
                     v-model="tabIndex"
-                    content-class="mt-12 ma-4 pt-6"
+                    content-class="mt-12 ma-4 "
                     fill
                     pills
                   >
@@ -68,8 +68,9 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
-                        <!-- <div v-if="loader" class="text-center mt-6 pt-6">
+                      <div class="messages"> 
+                    
+                        <!-- <div v-if="loader" class="text-center mt-6 ">
                           <b-spinner
                             variant="light"
                             label="Spinning"
@@ -188,6 +189,7 @@
                       </b-row>
 
                       <div class="messages">
+                     
                         <!-- <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="light"
@@ -305,6 +307,7 @@
                       </b-row>
 
                       <div class="messages">
+                     
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="light"
@@ -410,7 +413,7 @@
             v-if="newMsg == false && info == false && rightSide == false"
             class="p-0 back-image"
           >
-            <div class="chat-nav shadow">
+            <div class="chat-nav shadow"  v-if="chatSelected.active">
               <b-row class="desk" v-if="chatSelected.active">
                 <b-col class="col-1 mt-3 ma-4">
                   <b-icon
@@ -466,6 +469,11 @@
               style="margin-left: 1px"
               ref="feed"
             >
+      <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+
               <div v-if="loader" class="text-center mt-12 pt-12">
                 <b-spinner
                   variant="light"
@@ -550,15 +558,16 @@
                   </b-row>
                 </div>
               </div>
+      </VuePerfectScrollbar>
             </section>
 
-            <section v-else class="chats" style="margin-left: 1px" ref="feed">
-              <div class="mt-12 pt-12">
-                <h1 class="text-center">Select a chat</h1>
+            <section v-else class="" style="margin-left: 1px; height:80vh" ref="feed">
+              <div class="mt-6 pt-12 d-flex h-100">
+                <h3 class="text-center m-auto">Select a chat</h3>
               </div>
             </section>
 
-            <div class="bottom">
+            <div   v-if="chatSelected.active" class="bottom mt-3">
               <b-row class="text-center">
                 <b-alert
                   :show="this.filePreview"
@@ -688,7 +697,7 @@
           </b-col>
           <!-- End selected Chat -->
 
-          <b-col v-if="info" class="chat-box">
+          <b-col v-if="info" class="chat-box border-bottom-none">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
@@ -889,9 +898,9 @@
       </div>
 
       <div v-else>
-        <b-row class="chat-box">
+        <b-row class="chat-box border">
           <b-col class="col-4 pr-0">
-            <div class="right">
+            <div class="right border-right">
               <b-row>
                 <b-col class="p-2">
                   <b-avatar
@@ -918,17 +927,17 @@
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message primary icon-size float-right h3 pr-6"
+                    class="new-message float-right h3 pr-6"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
               </b-row>
 
-              <b-row class="mt-12">
+              <b-row class="mt-12 ">
                 <b-col>
                   <b-tabs
                     v-model="tabIndex"
-                    content-class="mt-12 ma-4 pt-6"
+                    content-class="mt-12 ma-4 "
                     fill
                     pills
                   >
@@ -950,7 +959,12 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+                     
                       <div v-if="chatList.length > 0">
                         <b-row
                           v-for="(chat, index) in chatList"
@@ -1038,9 +1052,13 @@
                           </b-col>
                         </b-row>
                         </div>
-                        <!--if no chats found-->
+
+                          <!--if no chats found-->
                         <div v-else class="text-center">No chats found!</div>
                         <!--if no chats found-->
+
+                         </VuePerfectScrollbar>
+                      
                       </div>
 
                       <!-- End Chats -->
@@ -1066,8 +1084,12 @@
                           />
                         </b-col>
                       </b-row>
-
-                      <div class="messages">
+      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+                  
                         <b-row
                           v-for="(chat, index) in chatList"
                           :key="index"
@@ -1152,6 +1174,7 @@
                             </small>
                           </b-col>
                         </b-row>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1178,7 +1201,11 @@
                         </b-col>
                       </b-row>
 
-                      <div class="messages">
+                      <div class="messages contacts-height">
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
                         <b-row
                           v-for="(chat, index) in chatList"
                           :key="index"
@@ -1264,6 +1291,7 @@
                             </small>
                           </b-col>
                         </b-row>
+                         </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1274,9 +1302,9 @@
             </div>
           </b-col>
           <b-col v-if="newMsg == false && info == false" class="p-0 back-image">
-            <div class="chat-nav shadow">
+            <div class="chat-nav shadow"  v-if="chatSelected.active">
               <b-row class="desk" v-if="chatSelected.active">
-                <b-col class="col-3" @click="info = true">
+                <b-col class="col-3 m-auto" @click="info = true">
                   <b-avatar
                     variant="light"
                     :square="type == 'user' ? false : true"
@@ -1285,7 +1313,7 @@
                   ></b-avatar>
                 </b-col>
 
-                <b-col class="col-sm-5" @click="info = true">
+                <b-col class="col-sm-7 m-auto" @click="info = true">
                   <h4>{{ formatHeadChatName(chatSelected) }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
@@ -1303,13 +1331,15 @@
                         placeholder="Search message"
                       />
                     </b-col> -->
-                <b-col class="col-2 text-center mr-6">
+                <b-col class="col-2 text-center m-auto">
+                  <span  style="cursor: pointer">  
                   <b-icon
                     v-b-toggle.collapse-1
                     class="msg-icon primary icon-size text-center"
                     icon="search"
-                    style="cursor: pointer"
+                   
                   ></b-icon>
+                  </span>
                 </b-col>
               </b-row>
             </div>
@@ -1336,6 +1366,12 @@
               style="margin-left: 1px"
               ref="feed"
             >
+            
+                         <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+
               <div v-if="loader" class="text-center mt-12 pt-12">
                 <b-spinner
                   variant="primary"
@@ -1433,15 +1469,17 @@
                   </b-row>
                 </div>
               </div>
+                         </VuePerfectScrollbar>
             </section>
 
-            <section v-else class="chats" style="margin-left: 1px" ref="feed">
-              <div class="mt-12 pt-12">
-                <h1 class="text-center">Select a chat</h1>
+            <section v-else class="" style="margin-left: 1px; height:80vh" ref="feed">
+              <div class="mt-12 pt-12 d-flex h-100">
+                <h3 class="text-center m-auto">Select a chat</h3>
               </div>
             </section>
 
-            <div class="bottom">
+            <div  v-if="chatSelected.active" class="bottom mt-3">
+              <div style="width: 60%;">  
               <b-row class="text-center">
                 <b-alert
                   :show="this.filePreview"
@@ -1573,6 +1611,7 @@
                   You have blocked messages and calls from this user.
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
                 </p> -->
+                 </div>
             </div>
           </b-col>
 
@@ -1783,11 +1822,12 @@ import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 import _ from "lodash";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   components: {
     Navbar,
-    EmojiPicker,
+    EmojiPicker, VuePerfectScrollbar
   },
   data() {
     return {
@@ -2530,6 +2570,12 @@ export default {
 </script>
 
 <style scoped>
+.contacts-height{
+  height: calc(100vh - 190px);
+}
+.scroll-area{
+  height: inherit;
+}
 .count {
   background: #e75c18 !important;
   color: white;
@@ -2568,7 +2614,7 @@ export default {
 }
 .right {
   padding: 10px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
 }
 .primary-bg,
 .primary-bg:hover {
@@ -2578,26 +2624,34 @@ export default {
 
 .chat-box {
   position: relative;
-  border: solid 2px rgb(223, 223, 223);
+  height: 100vh;
+  border-radius: 10px;
+  /* border: solid 2px rgb(223, 223, 223); */
   /* margin-bottom: 100px; */
+  border-bottom: hidden !important;
 }
 
 .chat-nav {
   position: relative;
   min-height: 70px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
   width: 100%;
   padding: 10px;
 }
 .chats {
   /* border: 2px solid green; */
-  height: 540px;
-  overflow-y: auto;
+  
+  height: calc(100vh - 160px);
+  overflow-y: hidden;
   overflow-x: hidden;
+  background-image: url("/assets/images/messaging.png"); 
+   background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .back-image {
-  background-image: url("../assets/message_back.jpg");
+  /* background-image: url("../assets/message_back.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -2615,7 +2669,7 @@ h1 {
 .messages {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 500px;
+
 }
 .txt {
   font-size: 13px;
@@ -2674,6 +2728,9 @@ h1 {
   min-height: 60px;
   border-bottom-right-radius: 15px;
   background-color: white;
+  position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 .detail {
   margin-left: -40px;
@@ -2727,14 +2784,14 @@ li {
     height: 500px !important;
   }
   .messages {
-    height: 480px !important;
+    /* height: 480px !important; */
   }
   .newMsg-bottom {
     margin-top: 480px !important;
   }
   .chats {
     /* border: 2px solid green; */
-    min-height: 430px;
+    /* min-height: 430px; */
   }
 
   .m-10 {

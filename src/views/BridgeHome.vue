@@ -15,7 +15,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-              <router-link to="/signup"> <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn buy-btn-white m-2">  Go digital <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
             </div>
          </div>
           </div>  
@@ -502,10 +502,12 @@
     </section>
 
     <section class="bg-gradient">
-      <div class="container crtv pt-3 pb-3 pt-md-5 pb-md-5"  data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500">
+      <div class="container crtv pt-3 pb-3 pt-md-5 pb-md-5"  >
         <div class="row">
           <div class="col-md-6">
-            <h3 class="white"><span> {{ $t("general.checkout_our") }} Biz  </span>  Konnect Show on CRTV {{ $t("general.show_on_crtv") }} </h3>
+            <h3 class="white">
+              <span> {{ $t("general.checkout_our") }} Biz 
+                 </span>  Konnect Show on CRTV {{ $t("general.show_on_crtv") }} </h3>
             <img class="mt-1" src="assets/home/crtv.png" alt="" />
 
           
@@ -519,7 +521,32 @@
           </div>
 
           <div class="col-md-6 m-auto">
-            <img @click="playVideo(0)" class="crtv-ban" src="assets/home/crtv_ban.jpg" alt="" />
+
+          
+
+
+        <div class=" mt-3 bridge-resources">
+        <splide :options="options" class="r-image">
+
+          <splide-slide v-for="(item,i) in crtv_show" class="p-2" :key="item.id">
+            
+
+             <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
+                <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
+           </div> 
+
+            <!-- <div class="hotbizz text-center d-flex">
+              <b-img :src="item.thumb" @click="openGallery(i)" class="" />
+              <span role="button" @click="playVideo(0)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
+            </div> -->
+
+          </splide-slide>
+
+        </splide>
+      </div>
+
+
+           
           </div>
         </div>
       </div>
@@ -668,6 +695,7 @@ import LightBox from "vue-it-bigger";
 import SiteFooter from "../components/site/siteFooter";
 import SiteHeader from "../components/site/siteHeader";
 import Testimonial from "../components/site/Testimonial";
+
 import Products from "../components/site/products";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
@@ -683,7 +711,7 @@ export default {
     Products,
     Resources,
     SiteFooter,
-    Testimonial,LightBox
+    Testimonial,LightBox,
   },
 
     mounted() {
@@ -721,14 +749,52 @@ export default {
           "assets/home/ba-dashboard.png",
       ],
 
+     
+       options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 1,
+            gap: "0rem",
+          },
+          992: {
+            perPage: 1,
+            gap: "1rem",
+          },
+        },
+      },
+
+
 
       crtv_show:[
         {
-          title: "packaging",
           type: "youtube",
-          tag: ["bridgeafrica", "fufulde"],
-          thumb: "assets/images/training/mod4/FFU.jpg",
+          thumb: "assets/home/crtv/1.jpg",
           id: "fTs87IawpN4",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/2.jpg",
+          id: "vO53J95E2GA",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/3.jpg",
+          id: "EEsHZTkWNIU",
+        },
+
+         {
+           type: "youtube",
+          thumb: "assets/home/crtv/4.jpg",
+          id: "i0crKkQDJ6I",
         },
        ],
       
@@ -806,7 +872,7 @@ export default {
 
      scrollTo() {
     window.scrollTo(2800,2800);
-    this.form.name=this.$t("general.hire_a_professional_tailor") ;
+    this.form.pname=this.$t("general.hire_a_professional_tailor") ;
   },
 
   
@@ -1018,6 +1084,12 @@ export default {
 
 <style>
 
+.buy-btn-white{
+  background: white !important;
+  border-color:white !important;
+  color: #455a64 !important;
+}
+
 .hire-tailor-img{
   max-height: 420px;
     border-radius: 10px;
@@ -1110,7 +1182,7 @@ border-radius: 10px;
   height: 47.12px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
 border-radius: 10px; 
-width: 190px;
+    width: 155px;
 }
 
 
@@ -1184,8 +1256,14 @@ line-height: 44px;
 }
 
 .crtv-ban {
-  max-height: 627px;
-  border-radius: 20px;
+ 
+  height: 357px;
+    border-radius: 10px;
+    border-radius: 20px;
+    padding: 2rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 .request-quote {

@@ -1,8 +1,9 @@
 <template>
   <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper"> 
     <navbar />
+     <Skeleton  :loading="!isloaded" />
     <div v-if="isloaded">
-      <div class="container-fluid">
+      <div class="container-fluid">  
         <ly-tab
           v-model="selectedId"
           :items="items"
@@ -41,7 +42,7 @@
         <Settings v-bind:currenttab="selectedId" />
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -51,21 +52,22 @@ import Business from "../components/businessOwner/business";
 import Settings from "../components/businessOwner/settings";
 import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
-import Footer from "../components/footer";
+// import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 import axios from "axios";
 import { isPremium } from '@/helpers';
-
+import Skeleton from "@/components/businessPageSkeleton";
 export default {
   name: "Home",
   mixins: [WhoIsIt],
   components: {
     navbar,
+    Skeleton,
     Business,
     LyTab,
     Settings,
     Inbox,
-    Footer,
+    // Footer,
   },
   data() {
     return {
@@ -150,6 +152,8 @@ export default {
     "$route.query.tabId": function () {
       this.selectedId = this.$route.query.tabId;
     },
+
+   
   },
 
   beforeCreate: async function () {
@@ -171,7 +175,11 @@ export default {
       color: "#e75c18",
     });
 
+  
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
+    
+   
+
     this.foll_id = this.$route.params.id;
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)

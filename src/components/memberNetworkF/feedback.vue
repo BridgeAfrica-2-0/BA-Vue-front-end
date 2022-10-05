@@ -124,7 +124,7 @@ export default {
     return {
       url: null,
       moment: moment,
-      islogin: "",
+     
       filter: "0",
       filterData: false,
       spinner: false,
@@ -154,7 +154,9 @@ export default {
       },
     };
   },
-  computed: {},
+  computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+  },
   mounted() {
     this.islogin = this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;

@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       page: 1,
-      islogin:'',
+   
       url: null,
       delete: [],
       edit_description: null,
@@ -98,6 +98,7 @@ export default {
     };
   },
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     imageProfile() {
       return 'yoo';
     },

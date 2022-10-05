@@ -67,7 +67,7 @@ export default {
 
   data: () => ({
     pageHasLoad: false,
-     islogin:true,
+   
   }),
 
   computed: {
@@ -79,7 +79,7 @@ export default {
       getKeywork: "search/POST_KEYWORD",
       getStack: "search/STACK_VALUE"
     }),
-
+    islogin(){  return this.$store.getters["auth/profilConnected"]; },
     loadingIsActive: function () {
       return this.loaderState && this.peoples.length ? true : false;
     },

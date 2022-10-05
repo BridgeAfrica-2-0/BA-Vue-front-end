@@ -35,7 +35,7 @@
         <Settings v-bind:currenttab="selectedId" />
       </div>
 
-      <Footer />
+      <!-- <Footer /> -->
     </span>
   </div>
 </template>
@@ -50,7 +50,7 @@ import Inbox from "@/components/businessOwner/inbox";
 import axios from "axios";
 import LyTab from "@/tab/src/index.vue";
 
-import Footer from "../components/footer";
+// import Footer from "../components/footer";
 
 export default {
   name: "Home",
@@ -63,7 +63,7 @@ export default {
 
     Inbox,
 
-    Footer,
+    // Footer,
   },
   data() {
     return {

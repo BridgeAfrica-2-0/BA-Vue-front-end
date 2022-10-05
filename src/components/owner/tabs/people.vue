@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       page: 1,
-       islogin:'',
+       
       foll_id: null,
       users: [],
       options: {
@@ -45,6 +45,7 @@ export default {
   },
 
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     show() {
       return this.$route.name;
     },

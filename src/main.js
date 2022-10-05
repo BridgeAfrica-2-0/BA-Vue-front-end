@@ -233,8 +233,12 @@ new Vue({
           error => {
             if (error.response) {
               if (error.response.status === 401) {
-              
-                this.$store.dispatch('auth/logout');
+            
+                
+                this.$store.dispatch('auth/showAuthModal');
+               // this.$store.dispatch('auth/logout');
+
+                 
               }
             }
             return Promise.reject(error);

@@ -16,7 +16,7 @@ export default {
   props: ['type'],
   data() {
     return {
-      islogin:'',
+    
       page: 1,
       net_id: null,
       users: [],
@@ -42,6 +42,7 @@ export default {
   },
 
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
     },

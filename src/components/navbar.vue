@@ -140,7 +140,7 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'GlobalSearch' }"
+                   :to="{ name: 'GlobalSearch',query: { tab: 0 } }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}
@@ -483,7 +483,7 @@
 
             <div class="other-menu suggest-item cursor-pointer">
               <router-link
-                :to="{ name: 'GlobalSearch' }"
+                :to="{ name: 'GlobalSearch',query: { tab: 0 } }"
                 class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
               >
                 <span class="mr-3"
@@ -645,7 +645,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin: null,
+      
       shownav: false,
       notifications: [],
       messages: [],
@@ -668,7 +668,9 @@ export default {
     }),
     city(){
       return this.credentials.location;
-    }
+    },
+
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
   },
   beforeMount() {
     // this.getLocation();
@@ -906,6 +908,7 @@ export default {
         this.$router.push({
           name: "GlobalSearch",
           query: { keyword: this.credentials.keyword,  location: this.credentials.location, },
+          
         });
       }
     },

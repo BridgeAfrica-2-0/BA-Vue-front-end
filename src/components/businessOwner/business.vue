@@ -66,6 +66,16 @@ export default {
     };
   },
 
+  created(){
+
+       let tab=  localStorage.getItem("businessTab");
+      
+      if (tab) {
+        this.currentTab=tab;
+      }
+
+  },
+
   methods: {
     gotoCoverImages() {
       console.log("parent cover method");
@@ -82,6 +92,8 @@ export default {
   watch: {
     currentTab: (newVal, oldVal) => {
       localStorage.setItem("ba-business-active-tab", newVal);
+      localStorage.setItem("businessTab", newVal);
+      
       if (2 != newVal){
         this.showCoverAlbum = false
         this.key = this.key - 1

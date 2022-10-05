@@ -127,12 +127,13 @@ export default {
       per_page: 10,
       list: [],
       product:{},
-      islogin: true,
+      
       currentPage: 1,
       nextLoad: false,
     };
   },
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     products() {
       return this.$store.getters["marketSearch/getProducts"];
     },

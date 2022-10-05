@@ -214,8 +214,6 @@ export default {
       },
 
       isActive: false,
-      islogin: null,
-
       notifications: [],
       messages: [],
       notificationPatterns: null,
@@ -234,6 +232,7 @@ export default {
   },
 
   computed: {
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },

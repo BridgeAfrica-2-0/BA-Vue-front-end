@@ -152,6 +152,8 @@ export default {
     "$route.query.tabId": function () {
       this.selectedId = this.$route.query.tabId;
     },
+
+   
   },
 
   beforeCreate: async function () {
@@ -173,7 +175,11 @@ export default {
       color: "#e75c18",
     });
 
+  
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
+    
+   
+
     this.foll_id = this.$route.params.id;
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)

@@ -154,7 +154,7 @@ export default {
       img: require("../../assets/img/about/en.png"),
       lang: 'EN',
       keyword:'',
-      islogin: false,
+     
     }
   },
   created(){
@@ -164,6 +164,8 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
+
+     islogin(){  return this.$store.getters["auth/profilConnected"]; },
   },
 
   methods:{

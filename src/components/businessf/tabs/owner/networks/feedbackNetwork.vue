@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       url: null,
-      islogin:'',
+    
       moment: moment,
       filter: "0",
       filterData: false,
@@ -117,6 +117,10 @@ export default {
         description: "",
       },
     };
+  },
+  computed:{
+    
+    islogin(){  return this.$store.getters["auth/profilConnected"]; }
   },
   mounted(){
     this.islogin=this.$store.getters["auth/isLogged"];

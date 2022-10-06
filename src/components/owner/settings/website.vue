@@ -19,7 +19,7 @@
                     </b-th>
                   </b-tr>
                 </b-thead>
-
+  
                 <b-tbody v-for="Package in Packages.packages" :key="Package.id"> 
                   <b-tr
                     @click="ToggleModal(Package.name, Package.id)"
@@ -31,10 +31,12 @@
                     style="cursor:pointer"
                   >
                     <b-td class="a-text" style="text-transform: capitalize;">
-                      {{ Package.name }}
+                      {{ Package.name }} 
                     </b-td>
                     <b-td class="a-text">
-                      <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Upgrade"}}</b-link>
+                      <b-link  v-if="Package.name==='premium'">{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": " Upgrade "}}</b-link>
+
+                       <b-link v-if="Package.name==='basic'"> {{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Downgrade"}}</b-link>
                       <span class="text-success">
                         {{
                           Package.id ===

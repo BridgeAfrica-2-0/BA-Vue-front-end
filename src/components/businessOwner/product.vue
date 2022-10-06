@@ -218,7 +218,7 @@
 
           <b-form-checkbox
             value="1"
-            v-model="product.quantity"
+            v-model="product.in_stock"
              unchecked-value="0"
           >
             {{ $t('businessowner.In_stock') }}

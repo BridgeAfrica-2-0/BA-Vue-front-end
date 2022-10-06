@@ -208,7 +208,7 @@
               unchecked-value="0"
             >
               {{ $t('businessowner.In_stock') }}
-            </b-form-checkbox>
+            </b-form-checkbox>   
   
             <b-form-checkbox value="1" unchecked-value="0">
               {{ $t('businessowner.Published') }}

@@ -329,11 +329,12 @@ export default {
      
      await this.$store.dispatch("checkout/updateCart", {quantity:quantity, index:index }) 
         .then((response) => {
-        
+           this.getCartSummary(); 
         })
         .catch((err) => {
         
          if(err){
+            this.getCartSummary(); 
            this.flashMessage.show({
             status: "error",
           
@@ -342,7 +343,7 @@ export default {
          }
           
         }); }
-      this.getCartSummary(); 
+    
     },
 
     formatMoney(money) {

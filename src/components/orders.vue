@@ -1,8 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container-flex">
     <navbar />
     <hr />
     <!-- Desktop Top Bar -->
+    <div class="container"> 
 
     <div v-if="showPayment">   
 
@@ -340,7 +341,7 @@
         @change="handlePageChange"
       ></b-pagination>
     </div>
-    
+  </div>
   </div>  
    </div>
 </template>
@@ -575,7 +576,9 @@ export default {
         OrderId: id,
         status: status,
       };
-      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+     // axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
+     console.log(data);
       await axios
         .post(`order/actionUserOrder/${id}/${status}`, data)
         .then((res) => {

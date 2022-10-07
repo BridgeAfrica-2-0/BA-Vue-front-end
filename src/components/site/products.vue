@@ -2,14 +2,15 @@
     <div class="container-flex"> 
       <div class=" mt-3 product-slide">
         <splide :options="options" class="r-image">
-          <splide-slide v-for="item in render_products" class="p-4" :key="item.id">
-            <div class="hotbizz text-center" @click="gotoproduct(item)">
-              <b-img  :src="item.picture" class="p-image" />
+          <splide-slide  v-for="item in render_products" class="p-4" :key="item.id">
+           
+            <div @click="gotoBproduct(item)" class="hotbizz text-center">
+              <b-img    :src="item.picture" class="p-image" />
 
               <div class="hotbizcontent">
                 <div class="text-center hotbizname">
                  
-                  <h6 class="mt-4"> {{item.price}} </h6> 
+                  <h6  @click="gotoBproduct(item)" role="button" class="mt-4"> {{item.price}} </h6> 
                 
                    </div>
               </div>
@@ -19,11 +20,7 @@
         </splide>
       </div>
 
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
+   
 
     </div>
 
@@ -32,19 +29,18 @@
 </template>
 <script>
 import axios from "axios";
-import ProductDetails from "@/components/businessf/ProductDetails.vue";
+
 export default {
   components: {
-    ProductDetails
+  
   },
 
   data(){
     return {
-      viewProduct:false,
-      product:{},
+      
        options: {
         rewind: true,
-        autoplay: true,
+        autoplay: false,
         perPage: 5,
         pagination: false,
         type: "loop",
@@ -81,7 +77,7 @@ export default {
         {
           id: "3712",
           picture: "https://store.bridgeafrica.com/wp-content/uploads/2022/09/sofa.jpg",
-          link:"",
+          link:"https://store.bridgeafrica.com/product/contemporary-footstool-and-ottomans-pouf-boost-2/",
            price: "$80 ",
         },
 
@@ -168,21 +164,13 @@ export default {
  }, 
 
   methods:{
- gotoproduct(pro){
-  if(this.type=="cameroon"){
-     
-     this.product =pro;
-      this.viewProduct = true;
-
-  }else{
+ gotoBproduct(pro){
+  console.log(pro.link);
+  
    window.location.href =pro.link;
-     }
+  
  },
   
-
-   closeDetailsProduct() {
-      this.viewProduct = false;
-    },
 
   },
 

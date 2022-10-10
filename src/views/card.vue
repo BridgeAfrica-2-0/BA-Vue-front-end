@@ -320,21 +320,30 @@ export default {
           this.error = true;
         });
     },
-    changeQuantity(event, index) {
+
+    async changeQuantity(event, index) {
     
-   
+    
       let quantity = event.target.value;
       if(quantity > 1 ){  
-      this.$store
-        .dispatch("checkout/updateCart", {quantity:quantity, index:index }) 
-        .then(() => {
-          this.getCartSummary();
+     
+     await this.$store.dispatch("checkout/updateCart", {quantity:quantity, index:index }) 
+        .then((response) => {
+           this.getCartSummary(); 
         })
         .catch((err) => {
-          console.log({err:err});
+        
+         if(err){
+            this.getCartSummary(); 
+           this.flashMessage.show({
+            status: "error",
+          
+            message: "Quantity unavailable"
+          });  
+         }
           
         }); }
-     
+    
     },
 
     formatMoney(money) {

@@ -1,19 +1,13 @@
 <template>
   <div>
-
-
-
-    <div class="text-center" v-if="loader" >
+      <div class="text-center" v-if="loader" >
 
         <b-spinner
            class="spin"
           variant="primary">   </b-spinner> 
       
-     </div>      
-
-  
-
-    <b-row v-if="!loader">
+     </div> 
+      <b-row v-if="!loader">
             <b-col md="12" lg="6" class=" mb-2" v-for="product in products.data" :key="product.id">
 
     <div class="people-style  h-100 "> 
@@ -54,7 +48,11 @@
           <p class="text">
             <span class="title cursor-pointer" @click="productDetails(product)">
               {{ product.name }}
-            </span>
+            </span> <br>
+
+            <span> <b> Quantity:</b>  {{product.quantity}} </span> 
+
+
 
             <br />
 
@@ -112,18 +110,7 @@
     </b-modal> -->
 
 
-
-
-
-
-
-
-
-    
-
-
-    
-    <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product" v-model="showModal"  >
+    <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product" v-model="showModal"  size="lg" >
 
       <b-form>
         <b-row>
@@ -232,7 +219,7 @@
           <b-form-checkbox
             value="1"
             v-model="product.in_stock"
-            unchecked-value="0"
+             unchecked-value="0"
           >
             {{ $t('businessowner.In_stock') }}
           </b-form-checkbox>
@@ -257,6 +244,24 @@
             required
           ></b-form-input>
         </b-form-group>
+
+          <b-form-group
+            id="kg"
+            :label="$t('businessowner.quantity')"
+            label-for="quantity"
+            label-size="sm"
+          >
+           <b-form-input
+              v-model="product.quantity"
+              class="mt-1"
+              id="quantity"
+              type="number"
+              
+              
+            ></b-form-input>
+      </b-form-group>
+
+
         <b-form-group
           id="kg"
           :label="$t('businessowner.Kilogramme')"
@@ -675,6 +680,7 @@ selectedcategories: function() {
       formData.append("is_service", Product.is_service);
       formData.append("in_stock", Product.in_stock);
       formData.append("tax_amount", 0);  
+       formData.append("quantity", Product.quantity);  
       formData.append("kg", Product.kg);
       formData.append("categoryId",  this.multiselecvalue.id);
       formData.append("subCategoryId",this.filterselectvalue

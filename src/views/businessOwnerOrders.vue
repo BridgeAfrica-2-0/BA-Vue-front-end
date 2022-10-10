@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <hr />
+    <hr />  
     <!-- partie mobile--------------------------------------------------------------------- 
     
     ----------------------DEBUT -----------------------------------------------------
@@ -128,7 +128,7 @@
                 </splide>
               </div>
 
-              <div class="col-4 text-end">
+              <div class="col-4 text-end m-auto">
                 <h3 class="h3 margm2">
                   {{ $t("businessowner.Product_Qte") }} :
                 </h3>
@@ -140,7 +140,7 @@
                 <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
               </div>
 
-              <div class="col-4">
+              <div class="col-4 m-auto">
                 <h3 class="h3">{{ item.Totalproduct }}</h3>
 
                 <h3 class="h3">{{ item.Totalprice }} XAF</h3>
@@ -155,14 +155,14 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button
+                <!-- <button
                   @click="updateStatus(9, 'shipped')"
                   class="buttonm btn shadow text-center"
                 >
                   <h3 class="h3 button-text">
                     {{ $t("businessowner.shipped") }}
                   </h3>
-                </button>
+                </button> -->
               </div>
             </div>
             <div class="justify-content-center container row">
@@ -355,7 +355,7 @@
                 </splide>
               </div>
 
-              <div class="col-2 text-end text-start bold">
+              <div class="col-2 text-end text-start bold m-auto">
                 <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
                 <h3>{{ $t("businessowner.Price") }} :</h3>
 
@@ -363,27 +363,27 @@
                 <h3>{{ $t("businessowner.Total") }} :</h3>
               </div>
 
-              <div class="col-3 text-start">
+              <div class="col-3 text-start m-auto">
                 <h3>{{ item.Totalproduct }}</h3>
                 <h3>{{ item.Totalprice }} XAF</h3>
                 <h3>{{ item.shippingCost }} XAF</h3>
                 <h3>{{ item.total }} XAF</h3>
               </div>
 
-              <div class="col" id="hidedesktop1">
+              <div class="col m-auto" id="hidedesktop1">
                 <h3 class="bold1">{{ $t("businessowner.status") }}</h3>
                 <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button
+                <!-- <button
                   @click="updateStatus(9, 'shipped')"
                   class="button btn shadow"
                 >
                   <h3 class="h3 button-text">
                     {{ $t("businessowner.Shipped") }}
                   </h3>
-                </button>
+                </button> -->
               </div>
 
               <div class="justify-content-center container row">
@@ -659,9 +659,18 @@ h3 {
 /*  start style mobile------------------------- */
 .r-img1 {
   border-radius: 4px;
-  height: 110px;
+  object-fit: cover;
   width: 125px;
+  max-height: 200px;
 }
+
+.r-img{
+    border-radius: 5px;
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+
 .margm {
   margin-left: 30px;
   margin-right: 10px;

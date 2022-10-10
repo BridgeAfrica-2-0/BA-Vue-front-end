@@ -29,6 +29,8 @@
               <span class="col"> <h3>sold by: marcellin , danaz</h3></span>
 
               <div>
+
+                
                 <button v-b-modal="'my-modal'" variant="ligth" class="border mx-4 button">
                   <span class="mr-3 row"
                     ><fas-icon class="couleur1 search margbtn" :icon="['fas', 'envelope']" />

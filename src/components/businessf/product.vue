@@ -53,8 +53,13 @@
 
           <br />
 
-          <div class="d-inline-flex float-right mt-2">
-            <div class="">
+          <div class="d-flex"> 
+
+        <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
+         </div> 
+
+          <div  v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+            <div v-if="product.in_stock" class="">
               <!-- <b-button variant="primary" @click="buyNow(product)"
                 ><span>{{ $t("general.Buy_Now") }}</span>
               </b-button> -->
@@ -68,7 +73,7 @@
             </div>
 
             <div class="ml-2">
-              <b-button size="sm" v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
+              <b-button   :disabled="!product.in_stock" size="sm" v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
                 >
                 <b-icon icon="cart4"></b-icon>
                 {{ $t("general.Add_to_Cart") }}

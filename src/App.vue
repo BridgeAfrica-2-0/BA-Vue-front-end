@@ -185,7 +185,24 @@ export default {
     word-wrap: break-word;
 }
 
- .splide__arrow--next{
+@media only screen and (min-width: 768px) {
+    .splide__arrow--next{
+
+width: 40px !important;
+    height: 40px !important;
+}
+
+ .splide__arrow--prev{
+
+width: 40px !important;
+    height: 40px !important
+
+}
+
+}
+
+@media only screen and (max-width: 768px) {
+    .splide__arrow--next{
 
 width: 20px !important;
     height: 20px !important;
@@ -197,6 +214,11 @@ width: 20px !important;
     height: 20px !important
 
 }
+
+}
+
+
+ 
 
 .fade-enter-active,
 .fade-leave-active {
@@ -231,7 +253,7 @@ width: 20px !important;
   font-family: poppins, Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #455a64;
+  color: #455a64 ;
   margin-left: 5px;
 }
 
@@ -418,6 +440,17 @@ width: 20px !important;
 
 .nav-tabs:hover {
   background-color: white !important;
+}
+
+.modal-header{
+  border-bottom: none !important;
+}
+
+.modal-header .close {
+    padding: 0.7rem 1rem !important;
+    margin: -0.5rem -0.5rem -1rem auto !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 50px #ccc !important;
 }
  
 </style>

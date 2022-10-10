@@ -8,6 +8,7 @@
         <div class="row my-4" v-if="loading">
           <div class="col-12 d-flex justify-content-center align-items-center">
             <b-spinner
+             variant="primary"
               style="width: 3rem; height: 3rem;"
               label="Loading"
             ></b-spinner>
@@ -39,9 +40,15 @@
                   Sold By: <span>{{ details.businessesName[0] }}</span>
                 </p>
               </span>
-              <b-button variant="primary">
+              <!-- <b-button variant="primary">
                 <i class="fas fa-envelope"></i> Chat Now
-              </b-button>
+              </b-button> -->
+             <div class="mt-1">
+            <BtnCtaMessage :element="details.businessDetails" header="true" type="business" />
+          </div>
+              
+
+
               <!-- <span class="text-small font-weight-bold mt-2">
                 Total {{ details.Total }} FCFA
               </span> -->
@@ -122,22 +129,20 @@
               ></b-pagination>
             </div>
           </div>
-
-          <div class="row justify-content-end mx-1">
-            <div class="card col-md-6 p-md-4 py-4">
+   
+          <div class="row justify-content-center mx-1">
+            <div class=" col-md-6 p-md-4 py-4">
               <div class="p-md-4">
                 <div class="d-flex justify-content-between">
                   <p class="text-small font-weight-bold mb-0">
-                    Total Summary :
+                    Total Summary 
                   </p>
-                  <p class="text-small font-weight-bold mb-0">
-                    {{ details.Total }} FCFA
-                  </p>
+                  <br>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="text-small font-weight-bold mb-0">Total Price :</p>
                   <p class="text-small font-weight-bold mb-0">
-                    {{ details.TotalPrice }} XAF
+                    {{ details.Totalprice }} XAF
                   </p>
                 </div>
                 <div class="d-flex justify-content-between">

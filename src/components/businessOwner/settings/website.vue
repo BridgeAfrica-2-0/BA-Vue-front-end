@@ -149,17 +149,17 @@
         >
           <b-row>
             <b-col cols="7">
-              <h5>
+              <h6>
                 <b-icon icon="check-circle-fill" variant="success"></b-icon>
                 {{ $t("businessowner.UPGRADE_TO_PREMIUM") }}
-              </h5>
+              </h6>
               <br />
               <p>
-                <b>{{
+                <span>{{
                   $t(
                     "businessowner.By_upgrading_your_account_you_can_get_all_feature_to_improve_your_business"
                   )
-                }}</b>
+                }}</span>
               </p>
               <p class="descrip">
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
@@ -393,7 +393,6 @@
 
 <script>
 import VuePhoneNumberInput from "vue-phone-number-input";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import moment from "moment";
 export default {
   name: "website",
@@ -610,6 +609,7 @@ export default {
 <style scoped>
 .descrip {
   font-size: 14px;
+      font-family: poppins !important;
 }
 .btn-custom {
   height: 38px;

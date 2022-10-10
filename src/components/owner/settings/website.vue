@@ -1,10 +1,8 @@
 <template>
-  <b-container class="container-fluid">
+  <b-container class="container-fluid account-type">
     <b-container class="text">
       <b-container class="bv-example-row">  
         <b-row>
-        
-        
           <b-col cols="12" md="12">
             <div>
               <b-table-simple hover caption-top responsive>
@@ -19,7 +17,7 @@
                     </b-th>
                   </b-tr>
                 </b-thead>
-
+   
                 <b-tbody v-for="Package in Packages.packages" :key="Package.id"> 
                   <b-tr
                     @click="ToggleModal(Package.name, Package.id)"
@@ -31,10 +29,12 @@
                     style="cursor:pointer"
                   >
                     <b-td class="a-text" style="text-transform: capitalize;">
-                      {{ Package.name }}
+                      {{ Package.name }} 
                     </b-td>
                     <b-td class="a-text">
-                      <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Upgrade"}}</b-link>
+                      <b-link  v-if="Package.name==='premium'">{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": " Upgrade "}}</b-link>
+
+                       <b-link v-if="Package.name==='basic'"> {{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Downgrade"}}</b-link>
                       <span class="text-success">
                         {{
                           Package.id ===
@@ -58,8 +58,9 @@
         <!-- Basics -->
         <b-modal
           v-model="modalShowBasics"
+          ref="modalShowBasics"
           centered
-          size="xl"
+          size="lg"
           hide-footer
           no-stacking
           header-bg-variant="light"
@@ -74,7 +75,7 @@
                 }})
               </h5>
               <br />
-              <p>
+              <p class="poppins">
                 <b>{{
                   $t(
                     "businessowner.These_are_the_features_with_the_normal_account"
@@ -82,16 +83,23 @@
                 }}</b>
               </p>
               <p class="descrip">
-                <b-icon icon="check2" variant="success" class="h5"></b-icon>
+               <span class="p-2 mt-2">  <b-icon icon="check2" variant="success" class="h5"></b-icon>
                 {{ $t("businessowner.Website_with_a_unique_domain_name") }},{{
                   $t("businessowner.phone_number")
-                }}, {{ $t("businessowner.GPS_location") }}.<br />
+                }}, {{ $t("businessowner.GPS_location") }}. </span> 
+                <br /><br />
+
+                <span class="p-2 mt-2"> 
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
                 {{
                   $t(
                     "businessowner.Have_community_engagement_untionality_like_messaging_and_gathering_of_followers"
                   )
-                }}.<br />
+                }}.   </span>
+                
+                <br /><br />
+
+                <span class="p-2 mt-2" >  
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
                 {{
                   $t(
@@ -103,6 +111,8 @@
                     "businessowner.price_and_will_allow_interaction_with_customers"
                   )
                 }}.
+
+                </span>
               </p>
             </b-col>
             <b-col>
@@ -139,7 +149,7 @@
         <b-modal
           v-model="modalShowPremium"
           centered
-          size="xl"
+          size="lg"
           hide-footer
           header-bg-variant="light"
           body-bg-variant="light"
@@ -152,7 +162,7 @@
                 {{ $t("businessowner.UPGRADE_TO_PREMIUM") }}
               </h5>
               <br />
-              <p>
+              <p class="poppins">
                 <b>{{
                   $t(
                     "businessowner.By_upgrading_your_account_you_can_get_all_feature_to_improve_your_business"
@@ -160,22 +170,31 @@
                 }}</b>
               </p>
               <p class="descrip">
+
+                <span class="p-2">
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
                 {{
                   $t(
                     "businessowner.All_the_functionalities_as_in_the_normal_account"
                   )
-                }}.<br />
+                }}.  </span><br /><br />
+
+                <span class="p-2">
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
                 {{
                   $t(
                     "businessowner.Ability_to_directy_exchange_money_between_the_customer_and_the_business_owner"
                   )
-                }}.<br />
+                }}. </span> <br /><br />
+
+                <span class="p-2">
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
-                {{ $t("businessowner.Shipping_calculation") }}.<br />
+                {{ $t("businessowner.Shipping_calculation") }}.</span>
+                <br /><br />
+
+                <span class="p-2">
                 <b-icon icon="check2" variant="success" class="h5"></b-icon>
-                {{ $t("businessowner.Advanced_business_verification") }}.
+                {{ $t("businessowner.Advanced_business_verification") }}. </span>
               </p>
             </b-col>
             <b-col>
@@ -191,9 +210,8 @@
                   }}</b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices }}XAF/{{
-                    $t("businessowner.Month")
-                  }}
+                  >{{ Packages.premium_package_prices[0] }}XAF 
+                  <br>
                   <b-button
                     v-b-modal.PackageSelection
                     @click="PaymentForm.subscribe = 'one month'"
@@ -202,19 +220,20 @@
                   ></b-col
                 >
               </b-row>
-              <br />
+              <br /><br />
               <b-row>
                 <b-col
                   ><span class="text-success"
-                    ><b>{{ $t("businessowner.Best_Value") }}:</b></span
+                    ><b>{{ $t("businessowner.Best_Value") }}:</b> <br>
+                    </span
                   >
                   {{ $t("businessowner.Yearly") }}<br />{{
                     $t("businessowner.Billed_Anually")
                   }}
-                  - 36000XAF</b-col
+                 </b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices }}XAF/{{ $t("businessowner.Month") }}
+                  >{{ Packages.premium_package_prices[1] }}XAF <br>
                   <b-button
                     v-b-modal.PackageSelection
                     @click="PaymentForm.subscribe = 'one year'"
@@ -258,7 +277,7 @@
                 ></b-form-radio>
               </div>
             </div>
-
+   
             <div class="my-4 operator">
               <div class="">
                 <img
@@ -298,6 +317,7 @@
         <b-modal
           id="AcRequestPayment"
           ref="AcRequestPayment"
+          class="poppins"
           centered
           :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')"
           size="md"
@@ -320,22 +340,27 @@
               </div>
               <div class="row my-3">
                 <div class="col body-font-size">
-                  <p>
+                  <p class="">
                     {{
                       $t(
                         "businessowner.Please_make_sure_your_account_balance_is_greater_than"
                       )
                     }}
-                    13 000XAF,
+
+                    <span v-if="PaymentForm.subscribe=='one month'">  
+                        {{ Packages.premium_package_prices[0] }}XAF 
+                        </span>
+                        <span v-else>   
+                          {{ Packages.premium_package_prices[1] }}XAF 
+                        </span>
+                     
                     {{
                       $t(
                         "businessowner.Otherwise_your_payment_will_not_be_completed"
                       )
                     }}.
                   </p>
-                  <p>
-                    Reference NO: XXXXXXXXXXXX
-                  </p>
+                 
                 </div>
               </div>
             </b-overlay>
@@ -353,7 +378,7 @@
 
 <script>
 import VuePhoneNumberInput from "vue-phone-number-input";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
+
 import moment from "moment";
 export default {
   name: "website",
@@ -456,12 +481,16 @@ export default {
     confirmPayment() {
       this.show = true;
       let date = this.getNow();
-    
+      console.log(this.PaymentForm);
       let formData = new FormData();
+
       formData.append("subscribe", this.PaymentForm.subscribe);
       formData.append("phone", "+237"+this.PaymentForm.phone);
       formData.append("operator", this.PaymentForm.operator);
       formData.append("package_id", this.PaymentForm.package_id);
+    console.log('lalallala');
+    console.log(this.PaymentForm);
+       
     
       this.$store
         .dispatch("profileAccountType/confirmPayment", {
@@ -486,10 +515,23 @@ export default {
           });
          }
 
+         if(this.PaymentForm.type=='basic'){
+            this.getAccounts();
+           
+           this.$refs["modalShowBasics"].hide();
+
+           this.flashMessage.show({
+            status: "success",
+            message: this.$t("businessowner.Transaction_Completed"),
+          });
+          
+         }
+
         })
         .catch((err) => {
           console.log({ err: err });
           this.$refs["AcRequestPayment"].hide();
+          this.$refs["modalShowBasics"].hide();
           this.show = false;
           this.flashMessage.show({
             status: "error",
@@ -553,6 +595,8 @@ export default {
 <style scoped>
 .descrip {
   font-size: 14px;
+      font-family: poppins !important;
+      font-weight: 500;
 }
 .btn-custom {
   height: 38px;
@@ -648,4 +692,21 @@ export default {
     float: right;
   }
 }
+
+.h5{
+  font-family: poppins;
+}
+.h6{
+  font-family: poppins;
+}
+.poppins{
+  font-family: poppins;
+}
+.account-type{
+  font-family: poppins, Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #455a64 !important;
+}
 </style>
+

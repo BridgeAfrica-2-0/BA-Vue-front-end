@@ -685,6 +685,21 @@ export default {
   },
 
   created() {
+
+    this.searchParams.location = this.$route.query.location;
+   
+   if(!this.searchParams.location.code){
+    this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
+   
+   }else{
+     localStorage.setItem("searchLocation", JSON.stringify(this.searchParams.location) );
+
+   }
+
+   if(!this.searchParams.location){
+     this.searchParams.location = { code: '', label: 'Location' }; 
+   }
+
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.$route.query.keyword) {
@@ -693,16 +708,7 @@ export default {
 
     if (this.islogin) {
 
-      if (this.$store.getters["auth/user"].user.city_id) {
-          // this.searchParams.location = this.$route.query.city_id; 
-          // this.searchParams.location = { code: 62, label: 'Yaoundé' }; 
-          this.searchParams.location = { code: '', label: 'Location' };     
-      } else if (this.$route.query.location) {
-          this.searchParams.location = this.$route.query.location;
-      } else {
-          //this.searchParams.location = { code: 62, label: 'Yaoundé' };
-          this.searchParams.location = { code: '', label: 'Location' };
-      }
+     
 
            this.$store.commit("marketSearch/setKeyword",this.searchParams.keyword );
         
@@ -718,15 +724,9 @@ export default {
       
     } else {
     
-      if (this.$route.query.location) {
-          this.searchParams.location = this.$route.query.location;
-      } else {
-          //this.searchParams.location = { code: 62, label: 'Yaoundé' };
-           this.searchParams.location = { code: '', label: 'Location' };
-      }
-
-      this.searchParams.location_placeholder = this.$route.query.location
-        ? this.$route.query.location
+     
+      this.searchParams.location_placeholder = this.searchParams.location
+        ? this.searchParams.location
         : this.$t("home.Location");
     }
 

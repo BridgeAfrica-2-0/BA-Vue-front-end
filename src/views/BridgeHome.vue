@@ -26,7 +26,7 @@
             <p> you need anytime anywhere</p> </div>
            
             <div class="p-3" > 
-            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 0; bottom: 30px;"> Buy now </b-button> </router-link>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 10px; bottom: 30px;"> Buy now </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -137,17 +137,35 @@
           </h3>
           <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
           </p>
-          <div class="d-none d-lg-flex">
+          <!-- <div class="d-none d-lg-flex">
            <b-button @click="gotoSearch" variant="primary" class=" moreproducts-btn">
              {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
             </b-button>  
-          </div>
-          <b-tabs   active-nav-item-class="active-tab-item">
+          </div> -->
+          <b-tabs    active-nav-item-class="active-tab-item">
             <b-tab 
               :title="$t('general.avaliable_in_cameroon')" 
               title-link-class="title-linkClass"
             >
-              <products type="cameroon" />
+           
+
+              <div class="product-slide" v-if="products.length"> 
+                
+             <splide :options="poptions" >
+          <splide-slide v-for="item in products" class="p-4" :key="item.id">
+            <div role="button" class="hotbizz text-center" @click="gotoproduct(item)">
+              <b-img  :src="item.picture" class="p-image" />
+               <div class="hotbizcontent">
+                <div class="text-center hotbizname">
+                 <h6 class="mt-4"> {{item.price}} </h6> 
+                </div>
+              </div> 
+              </div>
+          </splide-slide>
+        </splide>
+
+
+              </div>
             </b-tab>
             <b-tab
               :title="$t('general.avaliable_in_worlwide')" 
@@ -240,21 +258,21 @@
              <div class="border-left-biz mt-2"> 
             <div class="babiz-list " @mouseover="changephoto(0)" :class="{ active: currentNumber==0 }">
               <h5 class="white"> {{ $t("general.large_marketplace_and_digital") }}</h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.we_help_customers_online_to") }}
               </p>
             </div>
 
             <div class="babiz-list " @mouseover="changephoto(1)" :class="{ active: currentNumber==1 }">
               <h5 class="white"> {{ $t("general.localize_business_directory") }} </h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.we_help_you_easily_find") }}
               </p>
             </div>
 
             <div class="babiz-list " @mouseover="changephoto(2)" :class="{ active: currentNumber==2 }">
               <h5 class="white" > {{ $t("general.community_engageMent") }} </h5>
-              <p class="">
+              <p class="white">
                 {{ $t("general.follow_and_communicate_with") }}
               </p>
             </div>
@@ -507,15 +525,13 @@
           <div class="col-md-6">
             <h3 class="white">
               <span> {{ $t("general.checkout_our") }} Biz 
-                 </span>  Konnect Show on CRTV {{ $t("general.show_on_crtv") }} </h3>
-            <img class="mt-1" src="assets/home/crtv.png" alt="" />
+                 </span> {{ $t("general.show_on_crtv") }} </h3>
+    
 
-          
-
-            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.bizconnect_show_is_a15_min") }}
+            <p class="mt-2" style="color:white"> {{ $t("general.bizconnect_show_is_a15_min") }}
                </p>
 
-            <p class="mt-2" style="color:#9F9F9F"> {{ $t("general.the_show_is_aired") }}  </p>
+            <p class="mt-2" style="color:white"> {{ $t("general.the_show_is_aired") }}  </p>
 
            
           </div>
@@ -579,7 +595,7 @@
           </div>
            <div class="col-6 col-md-3 mt-2">
              <span class="text-left">
-           <h3> 7500+ </h3> 
+           <h3> 72H </h3> 
             <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
           >
            </div>
@@ -676,6 +692,13 @@
 
 <SiteFooter />
 
+ <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+    />
+
+
  <LightBox
       ref="lightboxh"
       :media="crtv_show"
@@ -695,7 +718,7 @@ import LightBox from "vue-it-bigger";
 import SiteFooter from "../components/site/siteFooter";
 import SiteHeader from "../components/site/siteHeader";
 import Testimonial from "../components/site/Testimonial";
-
+import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import Products from "../components/site/products";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
@@ -711,7 +734,7 @@ export default {
     Products,
     Resources,
     SiteFooter,
-    Testimonial,LightBox,
+    Testimonial,LightBox,ProductDetails
   },
 
     mounted() {
@@ -731,7 +754,8 @@ export default {
       showblock: true,
       showfadde: false,
       showfaddeB: true,
-       currentNumber: 0,
+      currentNumber: 0,
+      products:[],
       placeholder: this.$t("home.Location"),
       img1: require("../assets/img/coach.png"),
       showbanner1:true,
@@ -748,6 +772,30 @@ export default {
         "assets/home/ba-search.png",
           "assets/home/ba-dashboard.png",
       ],
+       
+
+        poptions: {
+        rewind: true,
+        autoplay: false,
+        perPage: 5,
+        pagination: false,
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 2,
+            gap: "0rem",
+          },
+          992: {
+            perPage: 3,
+            gap: "1rem",
+          },
+        },
+      },
+
+      product:{},
+      viewProduct:false,
 
      
        options: {
@@ -845,6 +893,16 @@ export default {
   created() {
     window.addEventListener("load", this.onWindowLoad);
     this.getLocation();
+
+    axios.get('guest/home/products').then(({ data }) => {
+           
+          this.products=data.data;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        }); 
+
+
   },
 
   computed: {
@@ -869,6 +927,20 @@ export default {
   },
 
   methods: {
+
+     gotoproduct(pro){
+ 
+     
+     this.product =pro;
+      this.viewProduct = true;
+
+
+ },
+
+ closeDetailsProduct() {
+      this.viewProduct = false;
+    },
+
 
      scrollTo() {
     window.scrollTo(2800,2800);
@@ -1158,6 +1230,12 @@ export default {
 </style>
 
 <style scoped>
+
+.p-image{
+    height: 150px;
+    object-fit: cover;
+  }
+
 
 .progress-indicator{
   width: 30px;

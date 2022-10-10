@@ -91,16 +91,12 @@ const actions = {
 
 
   async updateCart({ commit },payload) {
-    await axios.post('cart/update-quantity/'+payload.index, {
+
+   return  await axios.post('cart/update-quantity/'+payload.index, {
       quantity:payload.quantity
     })
       .then((response) => {
         console.log(response)
-       
-      //  commit('setCartSummary', response.data.data)
-      })
-      .catch((error) => {
-        console.log({error:error});
       })
   },
 

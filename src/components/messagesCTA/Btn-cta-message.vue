@@ -27,7 +27,7 @@
     <!-- <span v-else-if="isBuyNow" >Buy Now</span> -->
     <span v-else style="display: inline-flex" :class="{'p-1':buyNow}">
       <i v-if="buyNow" class="fas fa-envelope fa-lg btn-icon   mt-1 mr-1 mt-sm-1"></i>
-      <i v-else class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
+      <i v-else class="fas fa-envelope fa-lg btn-icon pb-2 mt-1 mr-1 mt-sm-1"></i>
       <span class="btn-text blecmsg mt-md-0" >
         {{ $t("businessf.Message") }}</span
       >

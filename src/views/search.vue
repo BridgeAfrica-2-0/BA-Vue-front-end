@@ -688,7 +688,8 @@ export default {
 
     this.searchParams.location = this.$route.query.location;
    
-   if(!this.searchParams.location.code){
+   if(!this.searchParams.location){
+    
     this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
    
    }else{

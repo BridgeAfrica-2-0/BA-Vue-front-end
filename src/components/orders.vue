@@ -179,7 +179,7 @@
         <b-form-select
           v-model="selectedShow"
           :options="showOptions"
-          @change="filterOrderByTime"
+          @change="getOrderByStatus(status)"
           class="mx-3 align-self-center"
         ></b-form-select>
       </div>
@@ -265,13 +265,11 @@
           <h3 class="text-small">
             {{ order.order_items_count }}
           </h3>
-          <h3 class="text-small">{{ order.total_amount }} Fcfa</h3>
+          <h3 class="text-small">  {{order.order_price}} Fcfa</h3>
           <h3 class="text-small">{{ order.shipping_amount }} Fcfa</h3>
           <h3 class="text-small">
-            {{
-              parseFloat(order.shipping_amount) + parseFloat(order.total_amount)
-            }}
-            XAF
+          
+               {{ order.total_amount }} Fcfa
           </h3>
         </div>
         <div class="col-lg-2 d-none d-lg-block m-auto text-center">
@@ -332,8 +330,7 @@
       </div>
     </div>
     <div class="row d-flex justify-content-center">
-      <b-pagination  v-if="!loading  && next   && prev "
-     
+      <b-pagination  v-if="!loading  && next || prev "
         v-model="currentPage"
         pills
         :total-rows="totalOrders"
@@ -370,13 +367,14 @@ export default {
       order_loading:false,
       next: "",
       prev: "",
+      status:'',
       selectedShow: null,
       loading: false,
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       showOptions: [
         { value: null, text: this.$t("general.Please_select_an_option") },
-        { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: "5", text: "last 5 days" },
+        { value: "10", text: "last 10 days" },
       ],
     };
   },
@@ -387,6 +385,7 @@ export default {
   },
   methods: {
     changeTab(index) {
+      this.currentPage=1;
       this.isTabActive = index;
       if (index == 2) {
         this.getOrderByStatus(this.$t("myOrders.pending"));
@@ -531,10 +530,11 @@ export default {
     },
 
     async getAllOrders() {
+      this.status='all';
       let page = this.currentPage;
       this.loading = true;
       await axios
-        .get(`orders/all?page=${page}`)
+        .get(`orders/all?period=${this.selectedShow}&page=${page}`)
         .then((res) => {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
@@ -549,11 +549,13 @@ export default {
           this.loading = false;
         });
     },
+
     async getOrderByStatus(status) {
       let page = this.currentPage;
+      this.status=status;
       this.loading = true;
       await axios
-        .get(`shipping-checkout/orders/${status}?page=${page}`)
+        .get(`shipping-checkout/orders/${status}?period=${this.selectedShow}&page=${page}`)
         .then((res) => {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
@@ -588,7 +590,7 @@ export default {
               message: `Order status is updated to ${status}`,
               blockClass: "custom-block-class",
             });
-            this.getOrders();
+            this.getOrders(this.status);
           }
         })
         .catch((err) => {
@@ -602,7 +604,7 @@ export default {
     },
     handlePageChange(value) {
       this.currentPage = value;
-      this.getOrders();
+      this.getOrders(this.status);
     },
     getOrders() {
       let index = this.isTabActive;

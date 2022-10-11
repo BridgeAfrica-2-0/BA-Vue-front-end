@@ -219,7 +219,7 @@ export default {
               this.page += 1;
 
               this.users.push(...data.data.user_following);
-              console.log("yoo the motherfucker");
+             
               $state.loaded();
             } else {
               $state.complete();

@@ -951,7 +951,7 @@ export default {
 }
 .r-img {
   border-radius: 5px;
-  height: 150px;
+  height: 200px;
   width: 250px;
 }
 .button-text {

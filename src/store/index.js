@@ -5,6 +5,7 @@ import axios from 'axios';
 import auth from './auth';
 
 import profileOrderDetail from './profileOrderDetail';
+import businessOrderDetails from './businessOrderDetails';
 import businessBlocking from './businessBlocking';
 import dashboard from './dashboard';
 import businessGeneral from './businessGeneral';
@@ -57,9 +58,12 @@ Vue.use(Vuex);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = 'https://edson.maxinemoffett.com/api/v1/';
+
+
 export default new Vuex.Store({
     modules: {
         auth,
+        businessOrderDetails,
         networkDetails,
         dashboardcommunity,     
         ProfileAndBusinessDetails,

@@ -541,7 +541,7 @@
           
 
 
-        <div class=" mt-3 bridge-resources">
+       <div class="d-none d-md-block mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
           <splide-slide v-for="(item,i) in crtv_show" class="p-2" :key="item.id">
@@ -551,15 +551,27 @@
                 <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
            </div> 
 
-            <!-- <div class="hotbizz text-center d-flex">
-              <b-img :src="item.thumb" @click="openGallery(i)" class="" />
-              <span role="button" @click="playVideo(0)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
-            </div> -->
+          </splide-slide>
+
+        </splide>
+       </div>
+
+
+
+      <div class="d-md-none mt-3 bridge-resources">
+        <splide :options="options" class="r-image">
+
+          <splide-slide v-for="(item,i) in crtv_showm" class="p-2" :key="item.id">
+            
+
+             <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
+                <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
+           </div> 
 
           </splide-slide>
 
         </splide>
-      </div>
+       </div>
 
 
            
@@ -817,6 +829,36 @@ export default {
           },
         },
       },
+   
+
+   
+      crtv_showm:[
+        {
+          type: "youtube",
+          thumb: "assets/home/crtv/1m.jpg",
+          id: "fTs87IawpN4",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/2m.jpg",
+          id: "vO53J95E2GA",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/3m.jpg",
+          id: "EEsHZTkWNIU",
+        },
+
+         {
+           type: "youtube",
+          thumb: "assets/home/crtv/4m.jpg",
+          id: "i0crKkQDJ6I",
+        },
+       ],
+      
+
 
 
 

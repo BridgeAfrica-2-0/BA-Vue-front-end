@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div> 
     <navbar />
-    <div class="px-md-5 px-4">
+    <div class="px-md-5 px-4"> 
       <hr />
       <div class="row d-block px-md-3">
         <h3>Order Details</h3>
@@ -36,26 +36,23 @@
             <div class="d-flex justify-content-between top p-3">
              
               <span class="text-small font-weight-bold mt-2">
-                <p class="mb-0">
-                  Sold By: <span>{{ details.businessesName[0] }}</span>
+                <p class="mb-0"> 
+                  Sold By: <router-link :to="'business/'+details.businessDetails"> <span>{{ details.businessDetails.name }}</span>  </router-link>
                 </p>
               </span>
               <!-- <b-button variant="primary">
                 <i class="fas fa-envelope"></i> Chat Now
               </b-button> -->
              <div class="mt-1">
-            <BtnCtaMessage :element="details.businessDetails" header="true" type="business" />
-          </div>
-              
-
-
-              <!-- <span class="text-small font-weight-bold mt-2">
+            <BtnCtaMessage :element="details.businessDetails" type="business" />
+          </div>  <!-- <span class="text-small font-weight-bold mt-2">
                 Total {{ details.Total }} FCFA
               </span> -->
             </div>
           </div>
+          
 
-          <div class="card my-3">
+          <div class="card my-3 p-2">
             <div v-for="order in details.orderItems" :key="order.id">
               <div class="row d-flex justify-content-between px-3 mb-3">
                 <span class="flou align-self-center ">
@@ -119,8 +116,9 @@
               </div>
               <hr />
             </div>
-            <div class="d-flex justify-content-center">
+            <div   class="d-flex justify-content-center">
               <b-pagination
+                v-if="next || prev "
                 v-model="currentPage"
                 pills
                 :per-page="perPage"
@@ -131,7 +129,35 @@
           </div>
    
           <div class="row justify-content-center mx-1">
-            <div class=" col-md-6 p-md-4 py-4">
+
+             <div class="col-md-6">
+          <div class="card shipad h-100">
+            <div class="card-body ">
+              <div class="row font-weight-bold text-center"><h6 class="font-weight-bold">shipping Address</h6></div>
+              <br />
+              <div class="row">
+                <div class="col-3 "><p class="text-small font-weight-bold mb-0">city</p></div>
+                <div class="col">{{ details.shippingAdress.city }}</div>
+              </div>
+              <div class="row">
+                <div class="col-3"><p class="text-small font-weight-bold mb-0">name</p></div>
+                <div class="col">{{ details.shippingAdress.name }}</div>
+              </div>
+              <div class="row">
+                <div class="col-3 "><p class="text-small font-weight-bold mb-0">phone</p></div>
+                <div class="col">{{ details.shippingAdress.phone }}</div>
+              </div>
+              <div class="row">
+                <div class="col-3 "><p class="text-small font-weight-bold mb-0">email</p></div>
+                <div class="col">{{ details.shippingAdress.email }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+            <div class=" col-md-6 ">
+              <div class="card h-100 p-2"> 
               <div class="p-md-4">
                 <div class="d-flex justify-content-between">
                   <p class="text-small font-weight-bold mb-0">
@@ -160,7 +186,7 @@
                 <p class="text-small font-weight-bold mb-0">
                   {{ details.Total }} XAF
                 </p>
-              </div>
+              </div></div>
             </div>
           </div>
         </div>
@@ -180,6 +206,8 @@ export default {
       orderID: null,
       details: [],
       totalItems: 0,
+      next:'',
+      prev:'',
       currentPage: 1,
       perPage: 5,
       loading: false,
@@ -199,6 +227,14 @@ export default {
         .then((res) => {
           this.loading = false;
           this.details = res.data.data;
+
+          this.totalItems = res.data.total;
+          this.perPage = res.data.per_page;
+
+          this.next = res.data.next;
+          this.prev = res.data.previous;
+
+
           console.log(res.data);
         })
         .catch((err) => {

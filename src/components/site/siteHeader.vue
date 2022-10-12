@@ -37,7 +37,7 @@
             </b-nav-item>
 
 
-          <div class="d-block d-md-none">  
+          <div class="d-block d-lg-none">  
            
             <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
               <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>

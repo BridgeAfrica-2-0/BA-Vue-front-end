@@ -3,10 +3,10 @@
     <navbar></navbar>
 
     <div class="main row">
-      <div class="sidebar d-none d-lg-block"><SideBar /></div>
+      <div class="sidebar d-none d-xl-block"><SideBar /></div>
 
       <div class="main-content row wi-100">
-        <div class="col-md-6 col-lg-7"> 
+        <div class=" col-lg-7"> 
           <div class="text-justify p-card ">
             <CompleteProfile class="mb-2" v-if="!Profile_complete" />
           </div>
@@ -40,7 +40,7 @@
           </div>
 
 
-          <div class="d-block d-md-none">  
+          <div class="d-block d-lg-none">  
           <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
           
            <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
@@ -53,12 +53,12 @@
           <ProductActivities  v-if="selectedb == 'owner'"  class="mt-2" />
            <ProductBactivities  v-if="selectedb != 'owner'"  class="mt-2" />
 
-          <Tutorial class="mt-2" />
+          <Tutorial class="mt-2"  style="overflow:hidden"/>
         </div>
 
-        <div class=" col-md-6 col-lg-5 pl-0">
+        <div class=" col-lg-5 pl-0">
 
-          <div class="d-none d-md-block">  
+          <div class="d-none d-lg-block">  
           <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
           
            <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 

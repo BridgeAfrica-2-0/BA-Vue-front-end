@@ -828,7 +828,7 @@ export default {
       return 'yoo';
     },
    
-    islogin(){  return this.$store.getters["auth/profilConnected"]; },
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     
     info: function() {
       return this.$store.getters['profile/getUserPostIntro'];

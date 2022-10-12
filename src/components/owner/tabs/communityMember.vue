@@ -49,7 +49,7 @@ export default {
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     canBlock(){
      
       if(!this.foll_id){

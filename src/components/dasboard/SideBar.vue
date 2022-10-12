@@ -232,7 +232,7 @@ export default {
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },

@@ -155,7 +155,7 @@ export default {
       return this.$store.getters["networkDetails/getdetails.category"];
     },
     
-    islogin(){  return this.$store.getters["auth/profilConnected"]; }
+    islogin(){  return this.$store.getters["auth/isLogged"];; }
   },
   created() {
      this.islogin = this.$store.getters["auth/isLogged"];

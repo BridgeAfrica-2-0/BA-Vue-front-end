@@ -348,6 +348,8 @@
                 <Sponsor />
               </div>
 
+              <br>
+
               <h6>
                 <fas-icon
                   class="icons"
@@ -446,6 +448,8 @@
               <div>
                 <Sponsor />
               </div>
+
+              <br>
               <h6>
                 <fas-icon
                   class="icons"
@@ -481,6 +485,7 @@
               <div>
                 <Sponsor />
               </div>
+              <br>
               <h6>
                 <fas-icon
                   class="icons"
@@ -508,7 +513,7 @@
               <div>
                 <Sponsor />
               </div>
-
+              <br>
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
@@ -651,7 +656,7 @@ export default {
       user: "auth/user",
     }),
 
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
 
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
@@ -687,29 +692,36 @@ export default {
   created() {
 
     this.searchParams.location = this.$route.query.location;
-   
-   if(!this.searchParams.location){
-    
-    this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
-   
-   }else{
-     localStorage.setItem("searchLocation", JSON.stringify(this.searchParams.location) );
+ 
+   let code=null;
 
-   }
+   if(this.searchParams.location){
+    //try to get the location code
+    code=this.searchParams.location.code
+   
+    if(!code){ 
+    this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
+      }else{
+      localStorage.setItem("searchLocation", JSON.stringify(this.searchParams.location) );
+
+      }
+
+   }else{
+     this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
+    } 
+
+   console.log(this.searchParams.location);
 
    if(!this.searchParams.location){
      this.searchParams.location = { code: '', label: 'Location' }; 
    }
 
-    this.islogin = this.$store.getters["auth/isLogged"];
-
+   
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
 
-    if (this.islogin) {
-
-     
+   
 
            this.$store.commit("marketSearch/setKeyword",this.searchParams.keyword );
         
@@ -723,13 +735,7 @@ export default {
         ? this.searchParams.location
         : this.$t("home.Location");
       
-    } else {
-    
-     
-      this.searchParams.location_placeholder = this.searchParams.location
-        ? this.searchParams.location
-        : this.$t("home.Location");
-    }
+   
 
 
     this.onProcessQuery();
@@ -951,6 +957,7 @@ export default {
 
        if (tab==2) {
         this.selectedId = 2;
+       
         return true;
       }
 
@@ -962,6 +969,7 @@ export default {
 
        if (tab==4) {
         this.selectedId = 4;
+        
         return true;
       }
 
@@ -1143,6 +1151,7 @@ export default {
       };
 
       this.changePlaceHolder();
+       this.strategyForComponent[this.selectedId]();
     },
 
     changeNotFoundTitle() {

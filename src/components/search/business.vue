@@ -79,7 +79,7 @@ export default {
       prodLoader: "business/getloadingState",
     }),
     
-    islogin(){  return this.$store.getters["auth/profilConnected"]; }
+    islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
   mounted() {
     if(this.islogin){

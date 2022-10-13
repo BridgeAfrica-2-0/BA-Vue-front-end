@@ -75,8 +75,8 @@
             <div class="ml-2">
               <b-button   :disabled="!product.in_stock" size="sm" v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
                 >
-                <b-icon icon="cart4"></b-icon>
-                {{ $t("general.Add_to_Cart") }}
+                <b-icon icon="cart-plus"></b-icon>
+                {{ $t("general.cart") }}
               </b-button>
             </div>
           </div>

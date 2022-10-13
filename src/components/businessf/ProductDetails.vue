@@ -7,7 +7,7 @@
     title="Product Details"
     @close="closeModal"
   >
-      
+     
 
    <LightBox
       ref="lightboxh"
@@ -33,11 +33,9 @@
             <h4 class="">{{ product.name }}</h4>
             <span class="text-success" v-if="product.in_stock">In Stock</span>
             <span class="text-danger" v-else>Out of stock</span>
-            <h4 class="">
-              {{ formatMoney(Number(product.price)) }}
-            </h4>
+            <h4 class=""> {{ formatMoney(Number(product.price)) }} </h4>
           </div>
-          <hr class="h-divider" />
+          <hr class="h-divider" />    
           <div>
             <h4>{{ $t("general.Product_Desciption") }}</h4>
             <p class="text-justify">
@@ -56,19 +54,20 @@
             "
           > 
             <BtnCtaMessage
-              v-if="packageProduct === 'basic'"
-              :element="product"
+              v-if=" product.user_package_name == 'basic'"  :element="product"
               :isProduct="true"
               :buyNow="true"
               type="business"
             />
-            <b-button
-              v-else-if="packageProduct === 'premium'"
+
+            <b-button @click="handleAddToCard"
+              v-else-if="product.user_package_name == 'premium'"
               variant="primary"
               class="font-weight-light shadow-sm"
-            >
-              <span>{{ $t("general.Buy_Now") }}</span>
-            </b-button>
+            > 
+            <span>{{ $t("general.Buy_Now") }}</span>
+            </b-button>   
+
             <b-button
               variant="light"
               class="font-weight-light shadow-sm"
@@ -120,14 +119,44 @@ export default {
       isGuestUser: isGuestUser
     };
   },
-  computed: {},
+  computed: {
+      getStatus() {
+      return this.$store.state.cart.status;
+    },
+  },
   methods: {
+
+    
+    async  handleAddToCard() {
+     
+  
+     await this.$store
+        .dispatch("cart/addToCart", this.product)
+        .then((response) => {
+        
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+
+           this.$router.push({ name: "payment" });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
+
     goToWebsiteMarket(product) {
       this.$router.push({
-        path: `/business/${product.business_id}`,
+        path: `/business/${product.business_slug}`,
         query: { tabId: 3 },
       });
     },
+
     formatMoney(money) {
       return this.formatObject.format(money);
     },
@@ -146,16 +175,16 @@ export default {
     
     //get prooduct package type
 
-    if(this.product){
-    this.$store
-      .dispatch("productDetails/"+dispatchMethod, this.product.id)
-      .then((product) => {
-        if(product){ 
-        this.packageProduct = product.package[0] || this.packageProduct;
-        console.log("Package for product : ", this.packageProduct);
-        }
-      });
-        }
+    // if(this.product){
+    // this.$store
+    //   .dispatch("productDetails/"+dispatchMethod, this.product.id)
+    //   .then((product) => {
+    //     if(product){ 
+    //     this.packageProduct = product.package[0] || this.packageProduct;
+    //     console.log("Package for product : ", this.packageProduct);
+    //     }
+    //   });
+    //     }
   },
 };
 </script>

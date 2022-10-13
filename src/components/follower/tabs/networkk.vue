@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div> 
     <fas-icon
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
     {{ $t("profilefollower.Network") }}
-
+ 
     <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("profilefollower.Do_you_want_to_join_this_network") }}
@@ -25,98 +25,8 @@
         v-for="item in network"
         :key="item.id"
       >
-        <div class="people-style shadow h-100">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img :src="item.image" class="r-image" />
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <router-link :to="({name:'Membar Network Follower', params:{id: item.id}})">
-                <strong class="net-title over"> {{ item.name }} </strong> </router-link>
-                <span class="m-1" v-for="cat in item.categories" :key="cat">
-                  {{ cat }}
-                </span>
-                <br />
-                {{ item.followers }} {{ $t("profilefollower.Community") }}
-                <br />
-
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.address }}
-                </span>
-                <br />
-
-                <read-more
-                  v-if="item.description"
-                  :more-str="$t('search.read_more')"
-                  :text="item.description"
-                  link="#"
-                  :less-str="$t('search.read_less')"
-                  :max-chars="100"
-                ></read-more>
-              </p>
-            </b-col>
-
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      :disabled="disable"
-                      :id="'followbtn' + item.id"
-                      :class="item.is_follow !== 0 && 'u-btn'"
-                      variant="primary"
-                      @click="handleFollow(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
-                      <span class="btn-com">
-                        {{ $t("dashboard.Community") }}</span
-                      >
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <BtnCtaMessage :element="item" type="network" />
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-
-                     <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      :class="item.is_member !== 0 && 'u-btn'"
-                      variant="primary"
-                      :id="'joinbtn' + item.id"
-                      @click="handleJoin(item)"
-                    >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                      ></i>
-                      <span class="btn-com"> {{ $t("general.Join") }} </span>
-                    </b-button>
-
-
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
+     <Network  class="h-100" :network="item" :key="item.id"  :index="index"  @getTotalCommunity='getTotalCommunity' />
+     </b-col>
     </b-row>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -125,6 +35,7 @@
 
 <script>
 import axios from "axios";
+import Network from "@/components/Network";
 export default {
   props: ["type"],
   data() {
@@ -145,7 +56,9 @@ export default {
       },
     };
   },
-
+ components: {
+    Network,
+  },
   computed:{
      islogin(){  return this.$store.getters["auth/isLogged"]; },
   },

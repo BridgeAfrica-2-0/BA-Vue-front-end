@@ -1,7 +1,7 @@
 <template>
   <div>  
 
-    <div class="people-style border">
+    <div class="people-style border h-100">
         <div class="d-inline-flex w-100">
             <div class="center-img">
               

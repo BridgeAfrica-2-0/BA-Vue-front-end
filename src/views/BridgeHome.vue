@@ -11,22 +11,22 @@
    
             <div style="background-image:url('/assets/home/desk-banner.png'); background-size: cover;     border-radius: 10px;" class="h-100"> 
              
-            <div data-aos="zoom-out"  data-aos-duration="1000" style="position:absoulute; width:40%;" class="p-3">  <h3> Set up an ecommerce shop and sell  </h3>
-            <p> to millions around you and the world</p> </div>
+            <div data-aos="zoom-out"  data-aos-duration="1000" style="position:absoulute; width:40%;" class="p-3">  <h3>  {{ $t("general.setup_an_ecommerce") }}   </h3>
+            <p>  {{ $t("general.to_millions") }} </p> </div>
            
             <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-              <router-link to="/signup"> <b-button variant="primary" class="buy-btn buy-btn-white m-2">  Go digital <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
+              <router-link to="/signup"> <b-button variant="primary" class="buy-btn buy-btn-white m-2">{{ $t("general.go_digital") }}  <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
             </div>
          </div>
           </div>  
 
           <div class="col-md-4 h-100 pr-0"  >
             <div style="background-image:url('/assets/home/right-banner.jpg'); background-size: cover;     border-radius: 10px;" class="h-100"> 
-            <div data-aos="zoom-out"  data-aos-duration="1000"  class="p-3">  <h3> Find and buy products and services </h3>
-            <p> you need anytime anywhere</p> </div>
+            <div data-aos="zoom-out"  data-aos-duration="1000"  class="p-3">  <h3> {{ $t("general.find_product_and_services") }}  </h3>
+            <p>  {{ $t("general.you_need_anytime_anywhere") }} </p> </div>
            
             <div class="p-3" > 
-            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 10px; bottom: 30px;"> Buy now </b-button> </router-link>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 10px; bottom: 30px;"> {{ $t("general.buy_now") }}  </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -43,22 +43,22 @@
   <div v-if="showbanner1" class="h-100 pl-0 "    >
             <div style="background-image:url('/assets/home/phone-right-banner.jpg'); background-size: cover;" class="h-100"> 
              
-            <div style="position:absoulute; width:40%;" class="p-3">  <h3> Set up an ecommerce shop and sell  </h3>
-            <p> to millions around you and the world</p> </div>
+            <div style="position:absoulute; width:40%;" class="p-3">  <h3>  {{ $t("general.setup_an_ecommerce") }}  </h3>
+            <p>  {{ $t("general.to_millions") }} </p> </div>
            
             <div class="p-3"> 
-           <router-link to="/signup">   <b-button variant="primary" class="buy-btn buy-btn-white m-2"> Go Digital <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
+           <router-link to="/signup">   <b-button variant="primary" class="buy-btn buy-btn-white m-2">{{ $t("general.go_digital") }}  <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
             </div>
          </div>
           </div> 
        
          <div v-if="showbanner2" class=" h-100 pr-0"    >
             <div style="background-image:url('/assets/home/phone-banner.jpg'); background-size: cover;" class="h-100"> 
-            <div  class="p-3">  <h3> Find and buy products and services </h3>
-            <p> you need anytime anywhere</p> </div>
+            <div  class="p-3">  <h3> {{ $t("general.find_product_and_services") }}  </h3>
+            <p> {{ $t("general.you_need_anytime_anywhere") }} </p> </div>
            
             <div class="p-3 mt-5"> 
-            <router-link to="/search">  <b-button variant="primary" class="buy-btn mt-2" > Buy now </b-button> </router-link>
+            <router-link to="/search">  <b-button variant="primary" class="buy-btn mt-2" > {{ $t("general.buy_now") }}  </b-button> </router-link>
              <br>
             </div>
             </div>
@@ -157,7 +157,7 @@
               <b-img  :src="item.picture" class="p-image" />
                <div class="hotbizcontent">
                 <div class="text-center hotbizname">
-                 <h6 class="mt-4"> {{item.price}} </h6> 
+                 <h6 class="mt-4"> {{item.price}} Fcfa </h6> 
                 </div>
               </div> 
               </div>
@@ -544,7 +544,7 @@
        <div class="d-none d-lg-block mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
-          <splide-slide v-for="(item,i) in crtv_show" class="p-2" :key="item.id">
+          <splide-slide v-for="(item,i) in crtv_vid" class="p-2" :key="item.id">
             
 
              <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
@@ -561,7 +561,7 @@
       <div class="d-lg-none mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
-          <splide-slide v-for="(item,i) in crtv_showm" class="p-2" :key="item.id">
+          <splide-slide v-for="(item,i) in crtv_vidM" class="p-2" :key="item.id">
             
 
              <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
@@ -857,8 +857,63 @@ export default {
           id: "i0crKkQDJ6I",
         },
        ],
+
       
 
+       crtv_showmf:[
+        // {
+        //   type: "youtube",
+        //   thumb: "assets/home/crtv/1m.jpg",
+        //   id: "fTs87IawpN4",
+        // },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/2mf.jpg",
+          id: "vO53J95E2GA",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/3mf.jpg",
+          id: "EEsHZTkWNIU",
+        },
+
+         {
+           type: "youtube",
+          thumb: "assets/home/crtv/4mf.jpg",
+          id: "i0crKkQDJ6I",
+        },
+       ],
+
+      
+
+      
+      crtv_showf:[
+        // {
+        //   type: "youtube",
+        //   thumb: "assets/home/crtv/1f.jpg",
+        //   id: "fTs87IawpN4",
+        // },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/2f.jpg",
+          id: "vO53J95E2GA",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/3f.jpg",
+          id: "EEsHZTkWNIU",
+        },
+
+         {
+           type: "youtube",
+          thumb: "assets/home/crtv/4f.jpg",
+          id: "i0crKkQDJ6I",
+        },
+       ],
 
 
 
@@ -958,6 +1013,22 @@ export default {
     query() {
       return this.credentials.location;
     },
+
+    crtv_vidM(){
+       if (this.$i18n.locale == "en") { 
+        return this.crtv_showm; 
+       } else{
+         return this.crtv_showmf; 
+       }
+    },
+
+    crtv_vid(){
+       if (this.$i18n.locale == "en") { 
+        return this.crtv_show; 
+       } else{
+         return this.crtv_showf; 
+       }
+    }
   },
 
   watch: {

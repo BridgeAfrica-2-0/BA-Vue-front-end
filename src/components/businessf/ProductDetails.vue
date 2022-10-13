@@ -7,12 +7,28 @@
     title="Product Details"
     @close="closeModal"
   >
-    <b-container>
+      
+
+   <LightBox
+      ref="lightboxh"
+      :media="[{
+          type: 'image',
+          thumb: product.picture,
+          src:product.picture,
+          id: 'fTs87IawpN4',
+        },]"
+      :show-caption="true"
+      :show-light-box="false"
+     
+   ></LightBox>
+
+    <b-container> 
       <b-row>
-        <b-col cols="12" sm="12" md="4">
-          <ProductCaroussel :productImages="[{ img: product.picture }]" />
+        <b-col cols="12" sm="12" md="5">
+          <!-- <ProductCaroussel :productImages="[{ img: product.picture }]" /> -->
+          <b-img :src="product.picture" class="w-100" @click="$refs.lightboxh.showImage(0);" > </b-img>
         </b-col>
-        <b-col cols="12" sm="12" md="8">
+        <b-col cols="12" sm="12" md="7">
           <div>
             <h4 class="">{{ product.name }}</h4>
             <span class="text-success" v-if="product.in_stock">In Stock</span>
@@ -71,9 +87,10 @@
 </template>
 
 <script>
-import ProductCaroussel from "./ProductCaroussel";
+//import ProductCaroussel from "./ProductCaroussel";
+import LightBox from "vue-it-bigger";
 import ProductComments from "./ProductComments";
-import { isGuestUser } from "@/helpers";
+import { isGuestUser } from "@/helpers"; 
 
 export default {
   name: "ProductDetails",
@@ -88,8 +105,8 @@ export default {
     },
   },
   components: {
-    ProductCaroussel,
-    ProductComments,
+   // ProductCaroussel,
+    ProductComments, LightBox
   },
   data() {
     return {

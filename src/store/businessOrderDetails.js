@@ -41,7 +41,7 @@ export default {
 
   actions: {
     getOrderDetails({ commit , state}, data) {
-      return axios.get(`/order/${data.orderId}/${data.businessId}/items`).then( response  => {
+      return axios.get(`/order/${data.orderId}/${data.businessSlug}/items`).then( response  => {
         console.log("----------------------------------s");
         console.log(response);
         commit('setOrderDetails', response.data.data);

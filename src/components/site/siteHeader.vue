@@ -22,10 +22,10 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="mr-auto ">
-            <b-nav-item >
-
-              <span class=" font-arvo nav-span  text-center" ><router-link :to="{name: 'Bridge-home'}" :class="currentRouteName == 'Bridge-home' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
-              <hr class="mobile navstyle" />
+            <b-nav-item  class=" text-center">
+    
+          <span class=" font-arvo nav-span " ><router-link :to="{name: 'Bridge-home'}" :class="currentRouteName == 'Bridge-home' ? 'active' : ''">{{ $t("general.Home") }}  </router-link></span>
+           <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item  class="ml-md-1  text-center" >
               <span class=" font-arvo nav-span "> <router-link :to="{name: 'about'}" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link></span>
@@ -37,7 +37,7 @@
             </b-nav-item>
 
 
-          <div class="d-block d-md-none">  
+          <div class="d-block d-lg-none">  
            
             <b-nav-item v-if="!islogin" class="ml-md-1  text-center">
               <span class="  nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
@@ -87,7 +87,7 @@
              <b-navbar-nav class="mr-auto d-none d-lg-flex "> 
 
             <b-nav-item class="ml-md-1">   
-               <b-input-group class="shadow">
+               <b-input-group class="binput">
               <b-input-group-prepend @click="Search">
        <div class="border" style="color:#495057 !important"> <b-icon  style="color:red" class="mt-2 ml-2" icon="search"></b-icon> </div> 
     </b-input-group-prepend>
@@ -165,7 +165,7 @@ export default {
       return this.$route.name;
     },
 
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
   },
 
   methods:{
@@ -236,6 +236,15 @@ export default {
 
 
 <style scoped>
+
+.binput {
+    background: #fafafa;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0px 10px 35px rgb(0 0 0 / 11%);
+    border-radius: 5px;
+}
+
+
  a{
     color: #455a64 !important;
   }

@@ -851,7 +851,7 @@ export default {
     getGeoCoderResult(response) {console.log(response);
       this.coordinates = response.coordinates;
       this.createdNetwork.address = response.address;
-      console.log("yoo mother fuckers");
+    
       console.log(response);
     },
 

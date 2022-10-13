@@ -1,14 +1,14 @@
 <template>
-  <splide :options="options" v-if="items.length"  style="max-height:200px">
-    <splide-slide v-for="(item, index) in items" :key="index">
+  <splide :options="options" v-if="items.length" class="spnsor"  style="max-height:220px">
+    <splide-slide style="margin-right:-12px; margin-left:-12px " v-for="(item, index) in items" :key="index">
 
       <Business
-       
+        class="pl-5 pr-5 m-1 sponsor-bix"
         :key="item.id"
         :business="item"
       />
       
-    </splide-slide>
+    </splide-slide>  
   </splide>
   <div v-else></div>
 </template>
@@ -69,12 +69,12 @@ export default {
   },
 
   created() {
-     this.islogin=this.$store.getters["auth/isLogged"];
+     
     this.init();
   },
 
 computed:{
-   islogin(){  return this.$store.getters["auth/profilConnected"]; },
+   islogin(){  return this.$store.getters["auth/isLogged"]; },
 },
   methods: {
     init: async function () {
@@ -364,4 +364,33 @@ computed:{
     display: flex;
   }
 }
+</style>
+
+<style >
+
+.spnsor .splide__arrow--next{
+
+width: 35px !important;
+    height: 35px !important;
+}
+
+ .spnsor .splide__arrow--prev{
+
+width: 35px !important;
+    height: 35px !important
+
+}
+
+.sponsor-bix .splide__arrow--next{
+width: 25px !important;
+    height: 25px !important;
+}
+
+ .sponsor-bix .splide__arrow--prev{
+
+   width: 25px !important;
+    height: 25px !important
+
+}
+ 
 </style>

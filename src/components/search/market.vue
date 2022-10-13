@@ -140,7 +140,7 @@ export default {
     };
   },
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     products() {
       return this.$store.getters["marketSearch/getProducts"];
     },

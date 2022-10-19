@@ -39,7 +39,7 @@ export default {
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     show() {
       return this.$route.name;
     },

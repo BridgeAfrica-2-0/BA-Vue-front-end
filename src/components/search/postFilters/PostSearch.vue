@@ -9,6 +9,8 @@
     <div>
       <Sponsor />
     </div>
+
+    <br>
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
       {{ $t("search.Posting") }}
@@ -95,7 +97,7 @@ export default {
       getStack: "search/STACK_VALUE",
       getKeywork: "search/POST_KEYWORD",
     }),
-   islogin(){  return this.$store.getters["auth/profilConnected"]; },
+   islogin(){  return this.$store.getters["auth/isLogged"]; },
     loadingIsActive: function () {
       return this.loaderState && this.posts.length ? true : false;
     },
@@ -107,8 +109,7 @@ export default {
 
   created() {
 
-    this.islogin=this.$store.getters["auth/isLogged"];
-
+    
     if (this.$store.getters["auth/isLogged"])
       this.getAuth();
     

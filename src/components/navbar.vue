@@ -670,7 +670,7 @@ export default {
       return this.credentials.location;
     },
 
-    islogin(){  return this.$store.getters["auth/profilConnected"]; }
+    islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
   beforeMount() {
     // this.getLocation();
@@ -678,9 +678,7 @@ export default {
   created() {
     //check for authentication
     this.getCities();
-    this.islogin = this.$store.getters["auth/profilConnected"];
-
-
+   
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();

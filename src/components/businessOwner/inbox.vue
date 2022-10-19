@@ -2233,7 +2233,7 @@
                       </b-col>
                     </b-row>
                   </div>
-                </div>z
+                </div>
                          </VuePerfectScrollbar>
               </section>
 

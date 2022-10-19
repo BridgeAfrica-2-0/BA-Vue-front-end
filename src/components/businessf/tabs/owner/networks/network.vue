@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     
-    islogin(){  return this.$store.getters["auth/profilConnected"]; },
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     old_network() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.NcommunityFollower

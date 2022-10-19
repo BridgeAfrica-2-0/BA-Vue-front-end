@@ -10,6 +10,7 @@
     <div>
       <Sponsor />
     </div>
+    <br>
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       {{ $t("search.People") }}
@@ -30,7 +31,7 @@
       /> -->
 
       
-          <Person v-for="item in peoples" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+          <Person v-for="item in peoples" :key="item.id" :person="item"  />
        
     </div>   
 
@@ -79,7 +80,7 @@ export default {
       getKeywork: "search/POST_KEYWORD",
       getStack: "search/STACK_VALUE"
     }),
-    islogin(){  return this.$store.getters["auth/profilConnected"]; },
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     loadingIsActive: function () {
       return this.loaderState && this.peoples.length ? true : false;
     },
@@ -92,7 +93,7 @@ export default {
 
   created() {
     //this.getAuth();
-    this.islogin=this.$store.getters["auth/isLogged"];
+   
     this.init();
   },
 

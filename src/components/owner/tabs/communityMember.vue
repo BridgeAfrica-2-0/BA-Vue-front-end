@@ -49,7 +49,7 @@ export default {
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     canBlock(){
      
       if(!this.foll_id){
@@ -219,7 +219,7 @@ export default {
               this.page += 1;
 
               this.users.push(...data.data.user_following);
-              console.log("yoo the motherfucker");
+             
               $state.loaded();
             } else {
               $state.complete();

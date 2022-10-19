@@ -42,7 +42,7 @@ export default {
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/profilConnected"]; },
+     islogin(){  return this.$store.getters["auth/isLogged"]; },
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
     },

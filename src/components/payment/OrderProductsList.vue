@@ -19,7 +19,7 @@
 				class=" flex-fill order-info body-font-size m-auto "
 			>
 			<b-tr>
-							<b-td class="capitalized">
+							<b-td class="capitalized b-none">
 								{{$t('general.Name')}}
 							</b-td>
 							<b-th>    
@@ -28,7 +28,7 @@
 							</b-th>
 						</b-tr>
 						<b-tr>
-							<b-td>
+							<b-td class="b-none">
 								{{$t('general.Amount')}} :
 							</b-td>
 							<b-th>
@@ -38,7 +38,7 @@
 						</b-tr>
 						
 						<b-tr>
-							<b-td>
+							<b-td class="b-none">
 								{{$t('general.Quantity')}} :
 							</b-td>
 							<b-th>
@@ -58,7 +58,7 @@
 							
 						</b-tr>
 						<b-tr>
-							<b-td>
+							<b-td class="b-none">
 								{{$t('general.Total')}}:
 							</b-td>
 							<b-th>

@@ -47,7 +47,7 @@
             <p> to millions around you and the world</p> </div>
            
             <div class="p-3"> 
-           <router-link to="/signup">   <b-button variant="primary" class="buy-btn m-2"> Go Digital </b-button> </router-link>
+           <router-link to="/signup">   <b-button variant="primary" class="buy-btn buy-btn-white m-2"> Go Digital <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
             </div>
          </div>
           </div> 
@@ -175,11 +175,11 @@
             </b-tab>
           </b-tabs>
 
-           <div class=" d-lg-none text-center">
+           <!-- <div class=" d-lg-none text-center">
             <b-button variant="primary" class=" moreproducts-btn">
             {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
             </b-button>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -190,7 +190,7 @@
     <section style="background: #f8f8f8">
       <div class="container ba-business pt-5 pb-5">
         <div class="row">
-          <div class="col-md-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
+          <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
             <h3>
               <span class="m-header-color">Bridge Africa </span> {{ $t("general.for_busineses") }} 
             </h3>
@@ -222,7 +222,7 @@
             </div>
             </div>
           </div>
-          <div class="col-md-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">
+          <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">
             <!-- <img src="assets/home/forbiz.png" alt="" /> -->
 
               <b-img transition="fade" :src="bridge_for_biz[currentNumber]" />
@@ -234,7 +234,7 @@
     <section class="bg-gradient">
       <div class="container ba-business pt-5 pb-5" >
         <div class="row">
-          <div class="col-md-6  order-2 order-md-1" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500" >
+          <div class="col-lg-6  order-2 order-md-1" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500" >
             <!-- <img src="assets/home/forcus.png" alt="" /> -->
                <transition name="fade">
              <b-img  data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500"  :src="bridge_for_cus[currentNumber]" />
@@ -251,7 +251,7 @@
                </transition> -->
           </div>
 
-          <div class="col-md-6 order-1 order-md-2" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
+          <div class="col-lg-6 order-1 order-md-2" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
             <h3 class="white">
               <span class="m-header-color">Bridge Africa </span>  {{ $t("general.for_customers") }}
             </h3>
@@ -285,7 +285,7 @@
     <section class="bg-whitee">
       <div class="container bafind bg-whitee  pt-5 pb-5"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row px-md-5 px-2">
-          <div class="col-md-5 p-0 p-md-2 m-auto ">
+          <div class="col-lg-5 p-0 p-md-2 m-auto ">
             <video
               width="100%"
             
@@ -297,7 +297,7 @@
             </video>
           </div>
 
-          <div class="col-md-7  " id="quote">
+          <div class="col-lg-7  " id="quote">
             <h3>
               <span>{{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
             </h3>
@@ -541,7 +541,7 @@
           
 
 
-        <div class=" mt-3 bridge-resources">
+       <div class="d-none d-lg-block mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
           <splide-slide v-for="(item,i) in crtv_show" class="p-2" :key="item.id">
@@ -551,15 +551,27 @@
                 <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
            </div> 
 
-            <!-- <div class="hotbizz text-center d-flex">
-              <b-img :src="item.thumb" @click="openGallery(i)" class="" />
-              <span role="button" @click="playVideo(0)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
-            </div> -->
+          </splide-slide>
+
+        </splide>
+       </div>
+
+
+
+      <div class="d-lg-none mt-3 bridge-resources">
+        <splide :options="options" class="r-image">
+
+          <splide-slide v-for="(item,i) in crtv_showm" class="p-2" :key="item.id">
+            
+
+             <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
+                <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
+           </div> 
 
           </splide-slide>
 
         </splide>
-      </div>
+       </div>
 
 
            
@@ -607,10 +619,10 @@
     <section class=" p-md-5" style="background: #f8f8f8">
       <div class="container"  data-aos="fade-up-left" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row">
-          <div class="col-md-6 col-lg-7">
+          <div class=" col-lg-7">
             <img class="upgrade-cover w-100" src="assets/home/upgrade_accoun.jpeg" alt="" />
           </div>
-          <div class="col-md-6 col-lg-5">
+          <div class=" col-lg-5">
             <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " data-aos="flip-left" data-aos-offset="70px" data-aos-duration="1500" >
               <h4 class="upgrade-text">
                <span>   {{ $t("general.upgrade_your_account") }}  </span>   {{ $t("general.start_selling_to_the") }} .
@@ -817,6 +829,36 @@ export default {
           },
         },
       },
+   
+
+   
+      crtv_showm:[
+        {
+          type: "youtube",
+          thumb: "assets/home/crtv/1m.jpg",
+          id: "fTs87IawpN4",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/2m.jpg",
+          id: "vO53J95E2GA",
+        },
+
+         {
+          type: "youtube",
+          thumb: "assets/home/crtv/3m.jpg",
+          id: "EEsHZTkWNIU",
+        },
+
+         {
+           type: "youtube",
+          thumb: "assets/home/crtv/4m.jpg",
+          id: "i0crKkQDJ6I",
+        },
+       ],
+      
+
 
 
 
@@ -1662,6 +1704,10 @@ line-height: 33px;
 }
 
 @media only screen and (max-width: 768px) {
+
+  .nav-tabs a:hover {
+    color: #e75b17 !important ;
+  }
   .bridge-home .nav-tabs .nav-link {
     border-radius: 0.25rem;
     font-size: 12px;

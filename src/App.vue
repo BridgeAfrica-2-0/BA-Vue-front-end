@@ -188,14 +188,14 @@ export default {
 @media only screen and (min-width: 768px) {
     .splide__arrow--next{
 
-width: 40px !important;
-    height: 40px !important;
+width: 25px !important;
+    height: 25px !important;
 }
 
  .splide__arrow--prev{
 
-width: 40px !important;
-    height: 40px !important
+width: 25px !important;
+    height: 25px !important
 
 }
 

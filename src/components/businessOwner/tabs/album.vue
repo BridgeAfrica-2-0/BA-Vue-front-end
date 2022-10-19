@@ -197,9 +197,7 @@ export default {
     showlbum(abum_id, album_name) {
       this.album_name = album_name;
       this.album_id = abum_id;
-      console.log(abum_id);
-      console.log("yoo yoo yooy ");
-      console.log(this.url);
+      
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,

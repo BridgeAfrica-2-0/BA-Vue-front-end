@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="people-style border">
+    <div class=" h-100 people-style border">
       <div class="d-inline-flex w-100">
         <div class="center-img">
           <splide :options="options" class="r-image">

@@ -157,7 +157,7 @@
 
     </div>
 
-    <div class="body container text-center "> 
+    <div class="body container"> 
       <b-row>
         <b-col cols="12" class=" p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>

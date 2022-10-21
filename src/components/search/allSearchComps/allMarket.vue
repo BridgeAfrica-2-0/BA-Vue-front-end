@@ -72,7 +72,7 @@
 
         <div class="ml-2">
           <b-button   :disabled="!product.in_stock" size="sm"  v-if="product.user_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
-            ><span>{{ $t("general.Add_to_Cart") }}</span>
+            ><span> <b-icon icon="cart-plus"></b-icon> {{ $t("general.cart") }}</span>
           </b-button>
         </div>
       </div>
@@ -302,7 +302,7 @@ h6 {
     padding: 4px;
   }
   .title {
-   font-size: 1.0625rem;
+   font-size: 1.2625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
@@ -446,7 +446,7 @@ h6 {
   .btn {
     padding-top: 6px;
     height: 38px;
-    /* width: 123px; */
+    width: 80px; 
   }
   .title {
    font-size: 1.0625rem;

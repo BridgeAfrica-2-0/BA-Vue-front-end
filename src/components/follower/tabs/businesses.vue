@@ -1,137 +1,21 @@
 <template>
   <div>
+    
     <fas-icon
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
-    {{ $t("profilefollower.Businesses") }}
-
+    {{ $t("profilefollower.Businesses") }} 
+  
     <hr />
-
-
-
-    <div class="business" v-if="noBusiness == false">
+    
+     <div class="business" v-if="noBusiness == false">
       <b-row>
         <b-col lg="6" class="p-1 mb-2" v-for="item in busineses" :key="item.id">
+
+       <Business  class="h-100" :key="item.id" :business="item"   @getTotalCommunity='getTotalCommunity'/>
          
-          <div class="people-style shadow h-100">
-            <b-row>
-              <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-                <div class="d-inline-flex">
-                  <div class="center-img">
-                    <splide :options="options" class="r-image">
-                      <splide-slide cl>
-                        <img :src="item.logo_path" class="r-image" />
-                      </splide-slide>
-                    </splide>
-                  </div>
-                  <div class="flx100 text-left">
-                    <p class="ml-3 textt text-left">
-                     
-                       
-                          <router-link :to="'/business/'+item.id">
-
-                      <strong class="title over" > {{ item.name }}</strong> </router-link>   <br />
-
-                      <span v-for="cat in item.category" :key="cat.name">
-                        {{ cat.name }}
-                      </span>
-                      <br />
-                      {{ count(item.followers) }}
-                      {{ $t("dashboard.Community") }} <br />
-
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                        <span v-for="cat in item.country" :key="cat.name">
-                          {{ cat.name }}
-                        </span>
-                      </span>
-                      <br />
-                      <read-more
-                        :more-str="$t('search.read_more')"
-                        class="readmore"
-                        :text="item.about_business"
-                        link="#"
-                        :less-str="$t('search.read_less')"
-                        :max-chars="100"
-                      >
-                      
-                      </read-more>
-                    </p>
-                  </div>
-                </div>
-              </b-col>
-
-              <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-                <div class="s-button">
-                  <b-row>
-                    <b-col
-                      md="12"
-                      lg="4"
-                      xl="12"
-                      sm="12"
-                      cols="4"
-                      class="mt-2 text-center"
-                    >
-                      <b-button
-                        block
-                        size="sm"
-                        :disabled="disable"
-                        :id="'followbtn' + item.id"
-                        :class="item.is_follow !== 0 && 'u-btn'"
-                        variant="primary"
-                        @click="handleFollow(item)"
-                      >
-                        <i
-                          class="fas fa-lg btn-icon"
-                          :class="
-                            item.is_follow !== 0
-                              ? 'fa-user-minus'
-                              : 'fa-user-plus'
-                          "
-                        ></i>
-                        <span class="btn-com ml-1">
-                          {{ $t("dashboard.Community") }}</span
-                        >
-                      </b-button>
-                    </b-col>
-
-                    <b-col
-                      md="12"
-                      lg="4"
-                      xl="12"
-                      sm="12"
-                      cols="4"
-                      class="mt-2 text-center"
-                    >
-                      <BtnCtaMessage :element="item" type="business" />
-                    </b-col>
-
-                    <b-col
-                      md="12"
-                      lg="4"
-                      xl="12"
-                      sm="12"
-                      cols="4"
-                      class="mt-2 text-center"
-                    >
-                      <b-button
-                        block
-                        size="sm"
-                        class="b-background shadow"
-                        variant="primary"
-                      >
-                        <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                        <span class="btn-text">{{
-                          $t("dashboard.Direction")
-                        }}</span>
-                      </b-button>
-                    </b-col>
-                  </b-row>
-                </div>
-              </b-col>
-            </b-row>
-          </div>
+         
         </b-col>
       </b-row>
 
@@ -160,6 +44,7 @@
 
 <script>
 import axios from "axios";
+import Business from "@/components/Business";
 export default {
   data() {
     return {
@@ -170,7 +55,9 @@ export default {
       busineses: [],
     };
   },
-
+ components: {
+    Business
+  },
   methods: {
 
     // bizzFollower(id){

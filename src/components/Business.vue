@@ -17,7 +17,7 @@
           <p class="textt">
             <span class="">
               <router-link
-                :to="{ name: 'BusinessOwner', params: { id: business.slug } }"
+                :to="{ name: 'BusinessFollower', params: { id: business.slug } }" 
               >
                 <span class="biz-name"> {{ business.name }} </span>
               </router-link>

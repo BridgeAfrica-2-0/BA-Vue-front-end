@@ -2107,9 +2107,11 @@
                 <div v-else v-for="chat in chats" :key="chat.id">
                   <div
                     v-if="
-                      currentBizId != chat.sender_business_id &&
-                        currentBizId != chat.businessID
+                    currentBizSlug != chat.sender_business_id &&
+                    currentBizSlug != chat.businessID
                     "
+
+
                   >
                     <b-row class="p-2">
                       <b-col>
@@ -2119,7 +2121,7 @@
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
-                        >
+                        />
                         <span class="text-center float-right mt-n0">
                             <b-dropdown
                               variant="link"

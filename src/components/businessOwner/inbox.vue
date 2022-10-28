@@ -15,7 +15,7 @@
                   ></b-avatar>
                 </div>
                 <div>
-                  <h1 class="mt-4 title text-bold">
+                  <h3 class="mt-3 title text-bold">
                     {{
                       currentBiz.name
                         ? currentBiz.name.length > 15
@@ -23,7 +23,7 @@
                           : currentBiz.name
                         : "loading..."
                     }}
-                  </h1>
+                  </h3>
                 </div>
                 <div class="ml-auto">
                   <!-- <b-icon
@@ -866,7 +866,7 @@
           <b-col
             v-if="newMsg == true && info == false && rightSide == false"
             class="p-0 back-image"
-            style="border: 1px solid gray"
+           
           >
             <div class="new-msg back-image" style="margin-right: 17px">
               <div>
@@ -1752,7 +1752,7 @@
 
                             <b-col class="col-4 text-center">
 
-                              <span class="text-center float-right mt-n0">
+                              <span class="text-center mr-1 float-right mt-n0">
                                 <b-dropdown
                                   variant="link"
                                   size="lg"
@@ -1870,7 +1870,7 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
-                            <span class="text-center float-right mt-n0">
+                            <span class="text-center mr-1 float-right mt-n0">
                                 <b-dropdown
                                   variant="link"
                                   size="lg"
@@ -1970,7 +1970,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.groupName }}</b>
+                                  <b class="bold"> {{ chat.groupName }} </b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -1978,7 +1978,7 @@
 
                             <b-col class="col-4 text-center">
 
-                              <span class="text-center float-right mt-n0 d-none">
+                              <span class="text-center float-right mt-n0 mr-2">
                                 <b-dropdown
                                   variant="link"
                                   size="lg"
@@ -2109,10 +2109,7 @@
                     v-if="
                     currentBizSlug != chat.sender_business_id &&
                     currentBizSlug != chat.businessID
-                    "
-
-
-                  >
+                    " >
                     <b-row class="p-2">
                       <b-col>
                         <b v-if="type == 'group'">
@@ -2407,7 +2404,7 @@
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <h3 class="info-name">{{ chatSelected.name }}</h3>
                 <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
                 }}</b-link> -->
@@ -2451,9 +2448,9 @@
 
           <!-- New message -->
           <b-col
-            v-if="newMsg == true && info == false"
+            v-if="newMsg == true && info == false"  
             class="p-0 back-image"
-            style="border: 1px solid gray"
+           
           >
             <div class=" back-image" style="margin-right: 17px">
               <div class="info-nav">
@@ -3844,10 +3841,14 @@ export default {
 
     },
     async deleteChat(data , chatList , type){
+      console.log(type);
+
+      console.log(chatList);
+
       let dataChat = chatList.filter((b) => { return b.id !== data.id;});
 
-      let mainData = {data:dataChat , type:type}
-
+      let mainData = {data:dataChat , type:type}  
+      
       this.$store.dispatch("businessChat/DELETE_BUSINESS", mainData)
      
     },
@@ -4076,7 +4077,7 @@ export default {
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
-  max-height: 530px !important;
+  max-height: 82vh !important;
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */

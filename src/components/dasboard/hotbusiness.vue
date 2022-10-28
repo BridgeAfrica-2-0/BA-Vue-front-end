@@ -13,7 +13,7 @@
 
       <div class="s-comcardd pt-0"  infinite-wrapper >
 
-         <VuePerfectScrollbar   class="scroll-area s-card"  settings="{maxScrollbarLength: 60px}"  @ps-y-reach-end="scrollHandle" >
+         <VuePerfectScrollbar   class="scroll-area s-card p-1"  settings="{maxScrollbarLength: 60px}"  @ps-y-reach-end="scrollHandle" >
   
         <Business v-for="item in business" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
          

@@ -3841,10 +3841,7 @@ export default {
 
     },
     async deleteChat(data , chatList , type){
-      console.log(type);
-
-      console.log(chatList);
-
+      
       let dataChat = chatList.filter((b) => { return b.id !== data.id;});
 
       let mainData = {data:dataChat , type:type}  

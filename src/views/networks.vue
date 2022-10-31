@@ -143,7 +143,6 @@ export default {
             });
             break;
           case "network_editor":
-            //this.getNetworkInfo();
             this.$router.push({
               name: "NetworkEditors",
               params: { id: this.foll_id },

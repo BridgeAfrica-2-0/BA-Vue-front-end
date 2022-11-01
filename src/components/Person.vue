@@ -509,9 +509,7 @@ f-right {
     font-size: 10px;
   }
 
-  .m-15 {
-    margin-left: -15px;
-  }
+  
 }
 
 @media only screen and (min-width: 764px) {

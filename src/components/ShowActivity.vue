@@ -12,7 +12,7 @@
         </p>
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
-        <b-card-body>
+        <b-card-body> 
           <div
             v-for="(item, index) in business"
             :key="index"

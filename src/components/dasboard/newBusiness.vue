@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card class="border shadow card pr-3" style="height: 380px">
+    <b-card class="border shadow card pr-3" style="height: 100%">
       <div class="row">
         <div class="col-md-6">
           <span class="mt-1"> Use BridgeAfrica as </span>
@@ -25,9 +25,9 @@
           size="6em"
         ></b-avatar>
 
-        <div class="text-lost mt-2">
+        <div class="text-lost mt-2">  
           <h6 class="">
-            <router-link :to="{ name: 'profile_owner', params:{id:business.slug} }" class="card-title">
+            <router-link :to="{ name: 'BusinessOwner', params:{id:business.slug} }" class="card-title">
               {{ business.name }} 
             </router-link>
           </h6>

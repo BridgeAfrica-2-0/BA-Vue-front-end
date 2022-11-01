@@ -881,7 +881,7 @@ export default {
         },
 
         async DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID({ commit, state, dispatch }, data) {
-            commit("setLoader", true);
+          
             console.log("[DEBUG]: DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID ", data);
             let messageId = data.id;
             let businessId = data.businessId;

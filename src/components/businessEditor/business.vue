@@ -7,7 +7,7 @@
           <b-col cols="12">
             <b-tabs lazy content-class="mt-3 mobile-tab"  v-model="currentTab"  fill pills >
               <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
-              <b-tab :title="$t('general.About')"><About /></b-tab>
+              <b-tab :title="$t('general.About')"><About /></b-tab> 
               <b-tab :title="$t('general.Media')"><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
               <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('general.Networks')"><Networks type="business" /></b-tab> 

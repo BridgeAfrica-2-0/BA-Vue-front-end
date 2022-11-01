@@ -8,7 +8,7 @@
         </h6>
       </span>
 
-      <b-tabs class="pr-2 pl-2"  lazy content-class="mt-3 p-1 f-left " active-nav-item-class="active-tab-item">
+      <b-tabs class="pr-lg-2 pl-lg-2"  lazy content-class="mt-3 p-lg-1 f-left " active-nav-item-class="active-tab-item">
        
         <b-tab active>
           <template slot="title">

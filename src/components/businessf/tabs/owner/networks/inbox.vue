@@ -6,7 +6,7 @@
        <b-row class="chat-box border border-bottom-none">  
           <b-col class="pr-0" v-if="rightSide">
              <div class="right border-right">
-              <div class="d-flex">
+              <div class="d-flex"> 
                 <div class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
@@ -798,7 +798,7 @@
           <b-col
             v-if="newMsg == true && info == false && !rightSide"
             class="p-0 col-xl-8 col-12 back-image"
-            style="border: 1px solid gray"
+            
           >
             <div class="new-msg back-image" style="margin-right: 07px">
               <b-row>
@@ -3996,7 +3996,7 @@ nbizs() {
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
-  max-height: 600px !important;
+  max-height: 82vh !important;
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */

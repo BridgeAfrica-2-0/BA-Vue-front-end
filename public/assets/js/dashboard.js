@@ -4,10 +4,10 @@ setTimeout(function () {
 
     };
 
-    var lastScrollTop = 100;
+    var lastScrollTop = 200;
     
     function scrollFunction() {
-        if (document.documentElement.scrollTop > 90) {
+        if (document.documentElement.scrollTop > 110) {
             if (lastScrollTop > document.documentElement.scrollTop) {
                
                   

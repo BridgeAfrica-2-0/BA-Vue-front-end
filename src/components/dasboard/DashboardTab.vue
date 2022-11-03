@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboard-tab">
   
    <b-card  style=" height: 900px;overflow: hidden;padding-bottom: 50px;"  >
       <b-tabs lazy class="pr-2 pl-2" content-class=" p-1" Fill justified  active-nav-item-class="active-tab-item"

@@ -41,9 +41,9 @@
 
 
           <div class="d-block d-lg-none">  
-          <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
+          <NewProfile class="mt-1"  v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
           
-           <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
+           <new-business class="mt-1"  style="height: 400px" v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
            </div>
 
  
@@ -61,7 +61,7 @@
           <div class="d-none d-lg-block">  
           <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
           
-           <new-business  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
+           <new-business  style="height: 380px"  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
            </div>
           <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
 
@@ -469,6 +469,10 @@ export default {
 
 .dashboard .card-body {
   padding-right: 0px !important;
+ 
+}
+.dashboard .dashboard-tab .card-body {
+  padding-left: 0px !important;
 }
 </style>
 

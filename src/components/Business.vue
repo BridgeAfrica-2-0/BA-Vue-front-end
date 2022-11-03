@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="people-style border">
+    <div class=" h-100 people-style border">
       <div class="d-inline-flex w-100">
         <div class="center-img">
           <splide :options="options" class="r-image">
@@ -17,7 +17,7 @@
           <p class="textt">
             <span class="">
               <router-link
-                :to="{ name: 'BusinessOwner', params: { id: business.slug } }"
+                :to="{ name: 'BusinessFollower', params: { id: business.slug } }" 
               >
                 <span class="biz-name"> {{ business.name }} </span>
               </router-link>
@@ -61,6 +61,7 @@
           variant="light"
           class="rounded-circle hov-btn"
           :id="'business'+business.id"
+         
         >
           <b-icon icon="three-dots"> </b-icon>
         </b-button>
@@ -454,16 +455,13 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    margin-right: -8px;
-    margin-left: -8px;
+    
 
     padding: 7px;
   }
 
   .btn {
     display: flex;
-
-    padding-right: 60px;
   }
 
   h4 {

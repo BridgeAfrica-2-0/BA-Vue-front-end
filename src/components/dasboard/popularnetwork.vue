@@ -18,7 +18,7 @@
 
  <div class="s-comcardd pt-0"  >
 
-  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
+  <VuePerfectScrollbar class="scroll-area s-card p-1" settings="{maxScrollbarLength: 60px}" >
    
   <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
     

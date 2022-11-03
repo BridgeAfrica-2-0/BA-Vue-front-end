@@ -62,7 +62,7 @@
             :element="product"
             :isProduct="true"
             :isBuyNow="true"
-            type="business"
+            type="business"  
             :isPremium="product.user_package_name"
           />
         </div>
@@ -75,8 +75,8 @@
             variant="primary"
             @click="handleAddToCard(product)"
             ><span>
-              <b-icon icon="cart4"></b-icon>
-              {{ $t("general.Add_to_Cart") }}</span
+              <b-icon icon="cart-plus"></b-icon>
+              {{ $t("general.cart") }}</span
             >
           </b-button>
         </div>
@@ -485,7 +485,7 @@ h6 {
     /* min-width: 123px; */
   }
   .title {
-     font-size: 1.0625rem;
+     font-size: 1.2625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
@@ -587,7 +587,7 @@ h6 {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 123px;
+    width: 80px;
   }
   .title {
      font-size: 1.0625rem;

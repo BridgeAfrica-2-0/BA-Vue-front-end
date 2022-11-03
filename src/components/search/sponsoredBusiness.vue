@@ -3,7 +3,7 @@
     <splide-slide style="margin-right:-12px; margin-left:-12px " v-for="(item, index) in items" :key="index">
 
       <Business
-        class="pl-5 pr-5 m-1 sponsor-bix"
+        class=" m-1 sponsor-bix"
         :key="item.id"
         :business="item"
       />

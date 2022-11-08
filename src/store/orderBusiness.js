@@ -100,9 +100,7 @@ import axios from "axios"
   
   
       updateOrderStatus( {commit}, data ){
-        console.log("updateOrderStatus");
-        console.log("data.path",data.path);
-        console.log("data.status",data.formData);
+        
         return axios
         .post(`/${data.path}`, data.formData)
         .then(({ data }) => {

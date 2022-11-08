@@ -42,7 +42,7 @@
           @click="changeElementType(4)"
         >
           <div class="cercle2 align-self-center">4</div>
-          <h2 class="h2 align-self-center ml-1 mb-0">{{ $t("myOrders.Cancel") }}</h2>
+          <h2 class="h2 align-self-center ml-1 mb-0">{{ $t("myOrders.Unpaid") }}</h2>
         </div>
       </div>
 
@@ -488,7 +488,7 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">{{$t("myOrders.Cancel")}}</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">{{$t("myOrders.Unpaid")}}</h2>
         <div
           id="p4"
           class="progress prog cursor gris"

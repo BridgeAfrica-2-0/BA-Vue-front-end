@@ -116,7 +116,7 @@
         @click="changeTab(4)"
       ></b-avatar>
       <h2 class="text cursor" @click="changeTab(4)">
-        {{ $t("myOrders.Cancel") }}
+        {{ $t("myOrders.Unpaid") }}
       </h2>
       <div
         id="p4"
@@ -160,7 +160,7 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeTab(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">{{ $t("myOrders.Cancel") }}</h2>
+          <h2 class="h2 text-position text-center">{{ $t("myOrders.Unpaid") }}</h2>
         </div>
       </div>
     </div>
@@ -199,9 +199,9 @@
           <span class="font-weight-bold">
             {{ $t("myOrders.Order") }}
           </span>
-          <span
+          <span role="button"  @click="gotoOrderDetails(order.order_id)"
             class="text-success cursor"
-            @click="gotoOrderDetails(order.order_id)"
+           
             >#{{ order.order_id }}</span
           >
         </p>
@@ -238,9 +238,9 @@
       <hr />
       <div
         class="row px-3 my-4 cursor"
-        @click="gotoOrderDetails(order.order_id)"
+        
       >
-        <div class="col-lg-3 col-4">
+        <div class="col-lg-3 col-4"   @click="gotoOrderDetails(order.order_id)" role="button">
           <splide :options="{ rewind: true }" class="r-img">
             <splide-slide cl v-for="(im, index) in order.images" :key="index">
               <img :src="im" class="r-img" />
@@ -584,14 +584,14 @@ export default {
       await axios
         .post(`order/actionUserOrder/${id}/${status}`, data)
         .then((res) => {
-          if (res.status == 200) {
+             console.log(res);
+             console.log(res.data.message);
             this.flashMessage.show({
               status: "success",
-              message: `Order status is updated to ${status}`,
-              blockClass: "custom-block-class",
+              message: res.data.message,
             });
             this.getOrders(this.status);
-          }
+          
         })
         .catch((err) => {
           console.dir(err);
@@ -601,6 +601,8 @@ export default {
             blockClass: "custom-block-class",
           });
         });
+
+        this.loading = false;
     },
     handlePageChange(value) {
       this.currentPage = value;

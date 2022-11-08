@@ -599,13 +599,12 @@ export default {
           path: "order/updateOrderBusiness", 
           formData: formData,
         })
-        .then(({ data }) => {
-        
+        .then((data) => {
         this.getOrder(this.status);
 
           this.flashMessage.show({
             status: "success",
-            message: "Status Changed To " + status,
+            message: data.message,
           });
         })
         .catch((err) => {

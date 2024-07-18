@@ -524,7 +524,7 @@
         <div class="row">
           <div class="col-md-6">
             <h3 class="white">
-              <span> {{ $t("general.checkout_our") }} Biz 
+              <span> {{ $t("general.checkout_our") }}  <br>
                  </span> {{ $t("general.show_on_crtv") }} </h3>
     
 
@@ -678,7 +678,11 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center"> <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button> </div>
+              <div class="text-center">
+                  <router-link to="/settings?tab=account"> 
+                      <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button>
+                  </router-link>  
+                </div>
             </div>
           </div>
         </div>

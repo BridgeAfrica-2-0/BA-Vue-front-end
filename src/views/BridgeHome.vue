@@ -320,7 +320,7 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.pname.required">
-                    required
+                    This field is required
                   </span>
                 </md-field>
 
@@ -365,7 +365,7 @@
                   </div>
 
                   <div class="col-md-6">
-                     <md-field class="">
+                     <md-field :class="getValidationClass('email')">
                   <label for="email" class="p-2">
                     {{ $t("general.Email") }}
                   </label>
@@ -376,6 +376,9 @@
                      class="ba-input "
                     v-model="form.email"
                   />
+                  <span class="md-error" v-if="!$v.form.email.required">
+                    {{ $t("auth.email_is_required") }}
+                  </span>
                 </md-field>
                   </div>
 
@@ -974,6 +977,9 @@ export default {
       },
 
       tel: {
+        required,
+      },
+      email: {
         required,
       },
     },

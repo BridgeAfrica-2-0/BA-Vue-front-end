@@ -230,7 +230,7 @@
                     />
 
                     <span class="md-error" v-if="!$v.form.quantity.required">
-                      {{ $t("general.Name_is_required") }}
+                      {{ $t("general.quantity_is_required") }}
                     </span>
                   </md-field>
 
@@ -248,7 +248,7 @@
                           v-model="form.budget"
                         />
 
-                        <span class="md-error" v-if="!$v.form.budget">
+                        <span class="md-error" v-if="!$v.form.budget.required">
                           {{ $t("general.Max_Budget_is_required") }}
                         </span>
                       </md-field>
@@ -267,16 +267,19 @@
                           v-model="form.pmethod"
                         />
 
-                        <span class="md-error" v-if="!$v.form.pmethod">
+                        <span class="md-error" v-if="!$v.form.pmethod.required">
                           {{ $t("general.Payment_method_is_required") }}
                         </span>
                       </md-field>
                     </div>
                   </div>
 
-                  <md-field>
+                  <md-field :class="getValidationClass('description')">
                     <label>Description</label>
                     <md-textarea v-model="form.description"></md-textarea>
+                    <span class="md-error" v-if="!$v.form.description.required">
+                      {{ $t("general.Description_is_required") }}
+                    </span>
                   </md-field>
 
                   <md-field>
@@ -293,7 +296,7 @@
                 <b-card class="mt-3">
                   <h5>{{ $t("general.shipping_payment") }}</h5>
 
-                  <md-field class="">
+                  <md-field :class="getValidationClass('shipping')">
                     <label for="qunatity" class="">
                       {{ $t("general.shipping_method") }}
                     </label>
@@ -304,26 +307,36 @@
                       id="shipping"
                       v-model="form.shipping"
                     />
+
+                        <span class="md-error" v-if="!$v.form.shipping.required">
+                          {{ $t("general.Payment_method_is_required") }}
+                        </span>
                   </md-field>
 
-                  <div class="md-field md-theme-default md-select">
+                  <div class="md-field md-theme-default md-select" :class="getValidationClass('country')">
                     <country-select
                       v-model="form.country"
                       :country="form.country"
                       topCountry="US"
                       class="md-input form-control"
                     />
+                    <span class="md-error" v-if="!$v.form.country.required">
+                      {{ $t("general.Country_is_required") }}
+                    </span>
                   </div>
 
-                  <div class="md-field md-theme-default md-select">
+                  <div class="md-field md-theme-default md-select" :class="getValidationClass('region')">
                     <region-select
                       v-model="form.region"
                       :country="form.country" :region="form.region"
                       class="md-input form-control"
                     />
+                    <span class="md-error" v-if="!$v.form.region.required">
+                      {{ $t("general.Region_is_required") }}
+                    </span>
                   </div>
 
-                  <md-field class="">
+                  <md-field :class="getValidationClass('ltime')">
                     <label for="l-time" class="">
                       {{ $t("general.lead_time") }}
                     </label>
@@ -334,6 +347,9 @@
                       id="l-time"
                       v-model="form.ltime"
                     />
+                    <span class="md-error" v-if="!$v.form.ltime.required">
+                      {{ $t("general.Lead_time_is_required") }}
+                    </span>
 
                     {{ $t("general.days_after_suppier_receives") }}
                   </md-field>
@@ -425,6 +441,26 @@ export default {
       quantity: {
         required,
       },
+
+      description: {
+        required,
+      },
+
+      shipping: {
+        required,
+      },
+
+      country: {
+        required,
+      },
+
+      region: {
+        required,
+      },
+
+      ltime: {
+        required,
+      },
     },
   },
 
@@ -490,7 +526,7 @@ export default {
           shipping_location: this.form.shipping,
 
           country: this.form.country,
-          time_of_shipping: this.form.shipping,
+          time_of_shipping: this.form.ltime,
           city: this.form.region,
           attachment: this.form.attachement,
         })

@@ -320,7 +320,7 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.pname.required">
-                    This field is required
+                    {{ $t("auth.product_name_is_required") }}
                   </span>
                 </md-field>
 
@@ -358,7 +358,7 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.name.required">
-                    {{ $t("auth.First_Name_is_required") }}
+                    {{ $t("auth.fullname_is_required") }}
                   </span>
                 </md-field>
 

@@ -122,14 +122,17 @@
                     </div>
                   </b-collapse>
                 </li>
-
                 <li>
-                  <a href="#"
-                    ><span class="icon-location-arrow mr-3">
-                      <fas-icon class="icons" :icon="['fas', 'cog']"  size="lg"
-                    /></span>
-                    Account Settings</a
-                  >
+                  <router-link  :to="{ name: 'settings' }"  class="" >
+                    <span class="icon-location-arrow mr-3">
+                      <fas-icon
+                        class="icons"
+                        :icon="['fas', 'cog']"
+                        size="lg"
+                      />
+                    </span>
+
+                    Account Settings  </router-link>
                 </li>
                 <li>
                   <router-link  :to="{ name: 'orders' }"  class="" >

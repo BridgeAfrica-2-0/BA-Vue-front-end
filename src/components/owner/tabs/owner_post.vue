@@ -400,6 +400,7 @@ export default {
       postRemove: 'profile/removePost',
       postUpdate: 'profile/UpdatePost',
       postCreate: 'profile/createPost',
+      setPosts: "profile/setPosts"
     }),
 
     mapmediae(media) {
@@ -470,7 +471,7 @@ export default {
           if (data.data.length) {
             this.page += 1;
            if (this.page != 1) {
-            this.owner_post.push(...data.data);
+            this.setPosts(data.data);
            }
             $state.loaded();
           } else {

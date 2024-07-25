@@ -647,9 +647,10 @@
           </div>
         </div>
       </section>
-  
+      <SiteFooter />
+      
       <!-- upgrade account section -->
-      <section class=" p-md-5" style="background: #f8f8f8">
+      <!-- <section class=" p-md-5" style="background: #f8f8f8">
         <div class="container"  data-aos="fade-up-left" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row">
             <div class=" col-lg-7">
@@ -716,26 +717,23 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
   
-    <section class="bg-whitee" >  
+    <!-- <section class="bg-whitee">  
     
      <div class="container pt-6" > 
       <div class="d-flex">  
-         <img class="mr-auto" style="    width: 80px;" src="assets/home/quote-left.svg" alt="">
       <div class="text-center">  
        <h3 >
           <span>  Hear from </span>  our customers
         </h3>
       
     </div>
-     <img class="ml-auto" style="    width: 80px;" src="assets/home/quote-right.svg" alt="">
      </div>
-      <Testimonial class="mt-3" /> </div>
+     </div>
   
-    </section>
-  
-  <SiteFooter />
+    </section> -->
+    
   
    <ProductDetails
         @closemodal="closeDetailsProduct"
@@ -762,7 +760,6 @@
   import LightBox from "vue-it-bigger";
   import SiteFooter from "../components/home/updatedSiteFooter";
   import SiteHeader from "../components/home/updatedSiteHeader";
-  import Testimonial from "../components/home/updatedTestimonial";
   import ProductDetails from "@/components/businessf/ProductDetails.vue";
   import Products from "../components/home/updatedProducts";
   import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -779,7 +776,7 @@
       Products,
       Resources,
       SiteFooter,
-      Testimonial,LightBox,ProductDetails
+      LightBox,ProductDetails
     },
   
       mounted() {
@@ -1442,11 +1439,10 @@
   .progress-active{
    background: #e75b17;
   }
+
   .hire-btn{
-  
   width: 174px;
   height: 46px;
-  
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 30px;
   border: none;

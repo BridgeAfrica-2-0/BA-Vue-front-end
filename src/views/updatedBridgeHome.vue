@@ -476,78 +476,18 @@
         </div>
   
          </div> </div>
-  </section>
-      <section style="background: #f8f8f8">
-        <div class="container explore-network pt-5 pb-5"   data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500"  >
-          <h3><span> {{ $t("general.Explore") }}  </span> {{ $t("general.Networks") }} </h3>
-          <p>
-            {{ $t("general.our_network_accounts") }}
-          </p>
-  
-          <div class="row">
-            <div class="col-md-6 mt-3">
-              <div class="card h-100 p-3">
-                <div class="row h-100">
-                  <div class="col-lg-7 order-2 order-lg-1 ">
-                    <h5> Textile Artisans of Cameroon</h5>
-                    <p>{{ $t("general.our_network_accounts") }}</p>
-                    <div class="text-center"> 
-                      <router-link to="network_follower/les-artisans-textile-du-cameroun-the-textile-artisans-of-cameroon-g0ax5dj1v">  <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> </router-link>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 order-1 order-lg-2">
-                    <b-img-lazy
-                      class="explore-network-img "
-                      src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
-                      alt="alternative"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-md-6 mt-3">
-              <div class="card h-100 p-3">
-                <div class="row">
-                  <div class="col-lg-7 order-2 order-lg-1">
-                    <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
-                    <p>{{ $t("general.get_in_touch_with") }}</p>
-                   <div class="text-center">  
-                   <router-link to="network_follower/pea-jeunes-qgmhghur5">    <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button> </router-link>  </div> 
-                  </div> 
-                  <div class="col-lg-5 order-1 order-lg-2">
-                    <b-img-lazy
-                      class="explore-network-img "
-                      src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
-                      alt="alternative"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-  
-      <section class="bg-whitee">
+  </section>  
+      <section style="background: rgba(243, 243, 243, 1)">
         
         <div class="container resources pt-5 pb-5"  >
-          <div class="row">
-            <div class="col-lg-10">
+          <div class="text-center">
               <h3>
-                <span> {{ $t("general.digital_education") }}   </span> {{ $t("general.to_help_you_make_more_money") }}  
+                <span> {{ $t("general.digital_education") }}   </span> <span style="color: black !important">{{ $t("general.to_help_you_make_more_money") }}  </span>
               </h3>
-              <p>
+              <p class="pl-5 pr-5">
                 {{ $t("general.use_our_special_design_training") }} 
               </p>
-            </div>
-  
-            <div class=" d-none d-lg-block col-lg-2 text-center m-auto">
-              <b-icon icon="chevron-left" font-scale="2"> </b-icon>
-              <b-icon icon="chevron-right" font-scale="2"> </b-icon>
-            </div>
-          </div>
-  
+            </div>  
           <Resources />
         </div>
       </section>
@@ -1955,18 +1895,34 @@
     }
   }
   
+  .nav-tabs:hover {
+    background-color: transparent !important;
+  }
+
+  .nav-tabs a:hover{
+      background:rgba(243, 243, 243, 1) !important;
+      border-radius: 0px;
+      color: #e75b17!important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+  }
+
+  .nav-tabs .nav-item {
+    padding-right: 10px !important;
+  }
      
   
-      .nav-tabs .nav-link.active-tab-item {
-      background-color: white !important;
+      #__BVID__93 .nav-tabs .nav-link.active-tab-item {
+      background-color: rgba(243, 243, 243, 1) !important;
       border-left: none;
       border-right: none;
       border-top: none;
       font-family: poppins !important;
-      color: #455a64;
-      border-bottom: 4px solid red !important;
+      color: #e75b17;
+      border-bottom: 2px solid #e75b17 !important;
       padding-left: 5px;
-      padding-right: 5px;
+      padding-right: 8px !important;
       }
   
   </style>

@@ -1,15 +1,16 @@
 <template>
   <div>
     <!-- Top Bar with Contact Information and Language Selection -->
-<div class="top-bar d-flex justify-content-between align-items-center">
+<!-- <div class="top-bar d-flex justify-content-between align-items-center">
+  <div class="container p-0 m-0">
   <div class="contact-info">
-    <span><i class="fas fa-phone-alt"></i> +123 456 7890</span>
-    <span><i class="fas fa-envelope"></i> contact@example.com</span>
+    <span> <img src="../../../public//assets//home/phone.png" class="size2" alt=""> +123 456 7890</span>
+    <span><img src="../../../public//assets//home/email.png" class="size2" alt=""> infobridgeafrica.com@gmail.com</span>
     <span class="media-icons">
-      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i class="fab fa-youtube"></i></a>
     </span>
   </div>
   <div class="language-selection">
@@ -24,6 +25,38 @@
         <img src="../../assets/img/la-france.png" class="size" alt=""> FR
       </b-dropdown-item>
     </b-dropdown>
+  </div>
+</div>
+</div> -->
+<div class="top-bar d-none d-md-flex justify-content-between align-items-center">
+  <div class="container p-0 m-0 d-flex justify-content-between align-items-center">
+    <div class="contact-info d-flex align-items-center">
+      <div>
+        <span><img src="../../../public/assets/home/phone.png" class="size2" alt=""> +123 456 7890</span>
+        <span><img src="../../../public/assets/home/email.png" class="size2" alt=""> infobridgeafrica.com@gmail.com</span>
+      </div>
+      <div>
+        <span class="media-icons">
+          <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i class="fab fa-youtube"></i></a>
+        </span>
+      </div>
+    </div>
+    <div class="language-selection">
+      <b-dropdown variant="light">
+        <template #button-content>
+          <span class="poslang">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
+        </template>
+        <b-dropdown-item @click="change('en')">
+          <img src="../../assets/img/about/en.png" class="size" alt=""> EN
+        </b-dropdown-item>
+        <b-dropdown-item @click="change('fr')">
+          <img src="../../assets/img/la-france.png" class="size" alt=""> FR
+        </b-dropdown-item>
+      </b-dropdown>
+    </div>
   </div>
 </div>
 
@@ -243,6 +276,10 @@ export default {
 .size {
   height: 15px;
   width: 15px;
+}
+.size2 {
+  height: 20px;
+  width: 20px;
 }
 .poslang {
   margin-right: 10px;

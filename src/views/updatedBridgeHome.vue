@@ -2,109 +2,219 @@
     <div class="bridge-home">
       <site-header class="topbar" />
   
-    <section class="p-0 pt-md-2 pb-2">
-        
-         <div class="container d-none d-md-block main-banner"  >
-          <div class="row h-100">
-            <div class="col-md-8 h-100 pl-0 "  > 
-             
-     
-              <div style="background-image:url('/assets/home/desk-banner.png'); background-size: cover;     border-radius: 10px;" class="h-100"> 
-               
-              <div data-aos="zoom-out"  data-aos-duration="1000" style="position:absoulute; width:40%;" class="p-3">  <h3>  {{ $t("general.setup_an_ecommerce") }}   </h3>
-              <p>  {{ $t("general.to_millions") }} </p> </div>
-             
-              <div data-aos="zoom-in"  data-aos-duration="1000" class="p-3"> 
-                <router-link to="/signup"> <b-button variant="primary" class="buy-btn buy-btn-white m-2">{{ $t("general.go_digital") }}  <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
+ 
+
+<!-- <section class="p-0">
+  <div>
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div>
+          <splide :options="options" class="r-image">
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
+                <button class="shop-now-btn">Shop Now</button>
               </div>
-           </div>
-            </div>  
-  
-            <div class="col-md-4 h-100 pr-0"  >
-              <div style="background-image:url('/assets/home/right-banner.jpg'); background-size: cover;     border-radius: 10px;" class="h-100"> 
-              <div data-aos="zoom-out"  data-aos-duration="1000"  class="p-3">  <h3> {{ $t("general.find_product_and_services") }}  </h3>
-              <p>  {{ $t("general.you_need_anytime_anywhere") }} </p> </div>
-             
-              <div class="p-3" > 
-              <router-link to="/search">  <b-button variant="primary" class="buy-btn" style="    position: absolute; right: 10px; bottom: 30px;"> {{ $t("general.buy_now") }}  </b-button> </router-link>
-               <br>
+            </splide-slide>
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/header_slide_1.png" alt="Image 2" class="slide-img">
+                <button class="shop-now-btn">Shop Now</button>
               </div>
-              </div>
-            </div>
-          </div>
+            </splide-slide>
+          </splide>
         </div>
-  
-  
-  
-  
-        
-        <div class="container d-block d-md-none main-banner p-0"  data-aos="zoom-out"  data-aos-duration="1000"  >
-         
-    <div v-if="showbanner1" class="h-100 pl-0 "    >
-              <div style="background-image:url('/assets/home/phone-right-banner.jpg'); background-size: cover;" class="h-100"> 
-               
-              <div style="position:absoulute; width:40%;" class="p-3">  <h3>  {{ $t("general.setup_an_ecommerce") }}  </h3>
-              <p>  {{ $t("general.to_millions") }} </p> </div>
-             
-              <div class="p-3"> 
-             <router-link to="/signup">   <b-button variant="primary" class="buy-btn buy-btn-white m-2">{{ $t("general.go_digital") }}  <img src="/assets/home/logo.png" width= "35px" alt="">  </b-button> </router-link>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="p-0">
+  <div>
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="position-relative">
+          <splide :options="options" class="r-image">
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
               </div>
-           </div>
-            </div> 
-         
-           <div v-if="showbanner2" class=" h-100 pr-0"    >
-              <div style="background-image:url('/assets/home/phone-banner.jpg'); background-size: cover;" class="h-100"> 
-              <div  class="p-3">  <h3> {{ $t("general.find_product_and_services") }}  </h3>
-              <p> {{ $t("general.you_need_anytime_anywhere") }} </p> </div>
-             
-              <div class="p-3 mt-5"> 
-              <router-link to="/search">  <b-button variant="primary" class="buy-btn mt-2" > {{ $t("general.buy_now") }}  </b-button> </router-link>
-               <br>
+            </splide-slide>
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/header_slide_1.png" alt="Image 2" class="slide-img">
               </div>
-              </div>
+            </splide-slide>
+          </splide>
+          <button class="shop-now-btn"><span style=" border-bottom: 2px solid white; ">Shop Now</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="product-section">
+  <div class="container">
+    <h2 class="section-title">Our Quality Products</h2>
+    <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
+    <div class="button-group">
+      <button class="filter-button active">Available Cameroon</button>
+      <button class="filter-button">Available Worldwide</button>
+    </div>
+    <div class="grid">
+      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
+        <img :src="product.image" :alt="product.title">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description }}</p>
+        <div class="bottom-info">
+          <span class="price">{{ product.price }}</span>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+<!-- <section class="product-section">
+  <div class="container">
+    <h3 class="section-title">Our Quality Products</h3>
+    <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
+    <div class="button-group">
+      <button class="filter-button active">Available Cameroon</button>
+      <button class="filter-button">Available Worldwide</button>
+    </div>
+    <div class="grid">
+      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
+        <div class="image-container">
+          <img :src="product.image" :alt="product.title" class="product-image">
+        </div>
+        <div class="content-container">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="bottom-info">
+          <span class="price">{{ product.price }}</span>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="product-section">
+  <div class="container">
+    <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
+    <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
+    <div class="button-group">
+  <div class="button-start">
+    <button class="filter-button">Available Cameroon</button>
+    <button class="filter-button">Available Worldwide</button>
+  </div>
+  <div class="button-end">
+    <button class="filter-button">
+      Sort: Best Match
+      <i class="fas fa-caret-down"></i> <!-- Font Awesome icon for the dropdown -->
+    </button>
+    <button class="filter-button"> <i class="fas fa-caret-down"></i></button>
+  </div>
+</div>
+<div class="see-all-p">
+  <p>See All Cameron</p>
+</div>
+    <div class="grid">
+      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
+        <div class="image-container">
+          <img :src="product.image" :alt="product.title" class="product-image">
+          <button class="favorite-button">
+            <i class="fas fa-heart"></i>
+          </button>
+        </div>
+        <div class="content-container">
+        <div class="stock-status" :class="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
+          {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+        </div>
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="bottom-info">
+          <span class="price">{{ product.price }}</span>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+   
+      <section class="bg-white pb-3 pt-1">       
+        <div class="container pt-2 pt-md-5 pb-3">
+          <div class="market">
+             <h3 data-aos="zoom-in" data-aos-offset="70px" data-aos-duration="1500">
+              <span class="m-header-color"> {{ $t("general.buy_quality_product") }}  </span> {{ $t("general.from_ourMarket_place") }} 
+            </h3>
+            <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
+            </p>
+            <b-tabs    active-nav-item-class="active-tab-item">
+              <b-tab 
+                :title="$t('general.avaliable_in_cameroon')" 
+                title-link-class="title-linkClass"
+              >
+                <div class="product-slide" v-if="products.length"> 
+               <splide :options="poptions" >
+            <splide-slide v-for="item in products" class="p-4" :key="item.id">
+              <div role="button" class="hotbizz text-center" @click="gotoproduct(item)">
+                <b-img  :src="item.picture" class="p-image" />
+                 <div class="hotbizcontent">
+                  <div class="text-center hotbizname">
+                   <h6 class="mt-4"> {{item.price}} Fcfa </h6> 
+                  </div>
                 </div> 
-  
-        </div>
-  
-        <div class="container d-lg-none pb-3"> 
-   
-            <div class="d-flex text-center mt-3"> 
-              <div class="m-auto d-flex">  
-             <span @click="showBanner(1)" role="button" class="progress-indicator shadow  mr-1"  :class="{'progress-active':showbanner1}"> </span> 
-             <span @click="showBanner(2)" role="button" class="progress-indicator shadow" :class="{'progress-active':showbanner2}" > </span>
-             </div>
-              </div>
-         </div>
-  
-  
-  
+                </div>
+            </splide-slide>
+          </splide>
+                </div>
+              </b-tab>
+              <b-tab
+                :title="$t('general.avaliable_in_worlwide')" 
+                title-link-class="title-linkClass"
+              >
+                <products type="international" />
+              </b-tab>
+            </b-tabs>
+          </div>
+        </div>  
       </section>
-   
+  
       <section class="pt-1 pb-1 bg-gradient">
-        <div class="custom-container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
+        <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
           <!-- <h3 class="text-center text-md-left"> <span>  {{ $t("general.About") }}  </span>  {{ $t("general.Us") }}   </h3> -->
           <div class="flex-container">
-    <h3>
+          <h3>
         <span class="line1">Sales channel</span><br>
         <span class="line2">Sell to Every Buyer,</span><br>
         <span class="line3">Everywhere</span>
-    </h3>
+         </h3>
 
-    <p>{{ $t("general.help_small_and_medium_size") }} 
-      <br>
-      <b-button
+         <p>{{ $t("general.help_small_and_medium_size") }} 
+        <br>
+         <b-button
           type="submit"
           variant="primary"
           block
           class="mb-3 mt-3 selling-btn"
-      >
+          >
           Start Selling
           <span class="arrow-icon-wrapper">
               <i class="fas fa-arrow-right"></i>
           </span>
-      </b-button>
-    </p>
-</div>
+           </b-button>
+          </p>
+          </div>
 
   
           <div class="row h-100">
@@ -141,68 +251,8 @@
           </div>
         </div>
       </section>
-  
-  
-   
-      <section class="bg-white pb-3 pt-1" >
-        
-        <div class="container pt-2 pt-md-5 pb-3">
-          <div class="market">
-             <h3 data-aos="zoom-in" data-aos-offset="70px" data-aos-duration="1500">
-              <span class="m-header-color"> {{ $t("general.buy_quality_product") }}  </span> {{ $t("general.from_ourMarket_place") }} 
-            </h3>
-            <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
-            </p>
-            <!-- <div class="d-none d-lg-flex">
-             <b-button @click="gotoSearch" variant="primary" class=" moreproducts-btn">
-               {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
-              </b-button>  
-            </div> -->
-            <b-tabs    active-nav-item-class="active-tab-item">
-              <b-tab 
-                :title="$t('general.avaliable_in_cameroon')" 
-                title-link-class="title-linkClass"
-              >
-             
-  
-                <div class="product-slide" v-if="products.length"> 
-                  
-               <splide :options="poptions" >
-            <splide-slide v-for="item in products" class="p-4" :key="item.id">
-              <div role="button" class="hotbizz text-center" @click="gotoproduct(item)">
-                <b-img  :src="item.picture" class="p-image" />
-                 <div class="hotbizcontent">
-                  <div class="text-center hotbizname">
-                   <h6 class="mt-4"> {{item.price}} Fcfa </h6> 
-                  </div>
-                </div> 
-                </div>
-            </splide-slide>
-          </splide>
-  
-  
-                </div>
-              </b-tab>
-              <b-tab
-                :title="$t('general.avaliable_in_worlwide')" 
-                title-link-class="title-linkClass"
-              >
-                <products type="international" />
-              </b-tab>
-            </b-tabs>
-  
-             <!-- <div class=" d-lg-none text-center">
-              <b-button variant="primary" class=" moreproducts-btn">
-              {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>
-              </b-button>
-            </div> -->
-  
-          </div>
-        </div>
-        
-      </section>
-  
-  
+
+
       <section style="background: #f8f8f8">
         <div class="container ba-business pt-5 pb-5">
           <div class="row">
@@ -247,61 +297,10 @@
         </div>
       </section>
   
-      <section class="bg-gradient">
-        <div class="container ba-business pt-5 pb-5" >
-          <div class="row">
-            <div class="col-lg-6  order-2 order-md-1" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500" >
-              <!-- <img src="assets/home/forcus.png" alt="" /> -->
-                 <transition name="fade">
-               <b-img  data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500"  :src="bridge_for_cus[currentNumber]" />
-            
-                 </transition>
-  
-                 <!-- <transition name="fade">
-            
-                <b-img  data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" v-if="currentNumber==1"  :src="bridge_for_cus[currentNumber]" />
-                 </transition>
-                 <transition name="fade">
-  
-                  <b-img  data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" v-if="currentNumber==2"   :src="bridge_for_cus[currentNumber]" />
-                 </transition> -->
-            </div>
-  
-            <div class="col-lg-6 order-1 order-md-2" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
-              <h3 class="white">
-                <span class="m-header-color">Bridge Africa </span>  {{ $t("general.for_customers") }}
-              </h3>
-               <div class="border-left-biz mt-2"> 
-              <div class="babiz-list " @mouseover="changephoto(0)" :class="{ active: currentNumber==0 }">
-                <h5 class="white"> {{ $t("general.large_marketplace_and_digital") }}</h5>
-                <p class="white">
-                  {{ $t("general.we_help_customers_online_to") }}
-                </p>
-              </div>
-  
-              <div class="babiz-list " @mouseover="changephoto(1)" :class="{ active: currentNumber==1 }">
-                <h5 class="white"> {{ $t("general.localize_business_directory") }} </h5>
-                <p class="white">
-                  {{ $t("general.we_help_you_easily_find") }}
-                </p>
-              </div>
-  
-              <div class="babiz-list " @mouseover="changephoto(2)" :class="{ active: currentNumber==2 }">
-                <h5 class="white" > {{ $t("general.community_engageMent") }} </h5>
-                <p class="white">
-                  {{ $t("general.follow_and_communicate_with") }}
-                </p>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </section>
-  
-      <section >
-        <div class="pt-5 pb-5 mx-lg-5 mt-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-          <div class="row px-2  mx-lg-5 mt-0">
-            <div class="col-lg-4 p-0 p-md-2 m-5 ">
+      <section class="p-0 m-0" >
+        <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+          <div class="row mt-0">
+            <div class="col-lg-5 p-0 h-100">
               <!-- <video
                 width="100%"
               
@@ -314,7 +313,7 @@
               <img src="assets/home/quotation.png" alt="">
             </div>
   
-            <div class="col-lg-6 d-flex align-items-center mx-md-5" id="quote">
+            <div class="col-lg-7 mt-md-5 align-items-center " id="quote">
               
               <div class="m-left">
                 <h3>
@@ -417,7 +416,7 @@
                         type="submit"
                         variant="primary"
                         block
-                        class="mb-3 quote-btn"
+                        class=" quote-btn"
                       >
                         {{ $t("general.Request_For_Quotation") }}
                         <span class="arrow-icon-wrapper">
@@ -437,8 +436,8 @@
   
   <section class="bg-whitee"> 
   
-    <div class="pt-5 pb-5 mx-lg-5"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
-      <div class="row mx-lg-5">
+    <div class="container pt-5 pb-5 "  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
+      <div class="row ">
         
         <div class="col-md-6 ">
           <div class=""> 
@@ -477,6 +476,91 @@
   
          </div> </div>
   </section>
+  <section class="bg-whitee network">
+        <div class="container row  "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+          <div class="col-3">
+            <div class="card-container">
+  <div class="card">
+    <div class="card-content">
+      <img src="assets/home/m_1.png" alt="Icon" class="icon">
+      <span class="percentage">98%</span>
+      <span class="text">Satisfaction</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content">
+      <img src="assets/home/m_2.png" alt="Icon" class="icon">
+      <span class="percentage">98%</span>
+      <span class="text">Satisfaction</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content">
+      <img src="assets/home/m_3.png" alt="Icon" class="icon">
+      <span class="percentage">98%</span>
+      <span class="text">Satisfaction</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content">
+      <img src="assets/home/m_3.png" alt="Icon" class="icon">
+      <span class="percentage">98%</span>
+      <span class="text">Satisfaction</span>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+          <div class="col-5">
+            <img src="/assets/home/globe2.png"  alt=""> 
+          </div>
+          
+          <div class="col-4">
+  <div>
+    <img src="/assets/home/logo.png"  alt="">
+    <h3>
+      <span>{{ $t("general.cameroon_focus") }}</span>
+      Focused {{ $t('network.Marketplace') }}
+    </h3>
+    <h3 style="font-weight: normal;">
+      Some of our statistics on stage performances in Cameroon
+    </h3>
+  </div>
+  
+  <div class="row mt-2">
+    <div class="col-6 statistic-box">
+      <span class="text-left">
+        <h3>7500+</h3>
+        <span style="color:#9F9F9F">{{ $t("general.7k_business") }}</span>
+      </span>
+    </div>
+    <div class="col-6 statistic-box">
+      <span class="text-left">
+        <h3>13000+</h3>
+        <span style="color:#9F9F9F">{{ $t("general.13k_customers") }}</span>
+      </span>
+    </div>
+  </div>
+  
+  <div class="row mt-2">
+    <div class="col-6 statistic-box">
+      <span class="text-left">
+        <h3>100+</h3>
+        <span style="color:#9F9F9F">{{ $t("general.100_industries") }}</span>
+      </span>
+    </div>
+    <div class="col-6 statistic-box">
+      <span class="text-left">
+        <h3>72H</h3>
+        <span style="color:#9F9F9F">{{ $t("general.48h_respond_time") }}</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </section>
       <section style="background: #f8f8f8">
         <div class="container explore-network pt-5 pb-5"   data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500"  >
           <h3><span> {{ $t("general.Explore") }}  </span> {{ $t("general.Networks") }} </h3>
@@ -615,124 +699,13 @@
   
       <section class="bg-whitee">
         <div class="container mt-1 mt-md-5 mb-2 mb-md-5 pb-2 pb-md-5  pt-3 pt-md-5 "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-          <h3><span>  {{ $t("general.cameroon_focus") }}  </span>  {{$t('network.Marketplace')}}  </h3>
-         
-  
-          <div  class="row ">  
-           
-            <div class="col-6 col-md-3 mt-2"> <span class="text-left">
-             <h3>  7500+ </h3> 
-              <span style="color:#9F9F9F"> {{ $t("general.7k_business") }} </span>  </span></div>
-            <div class="col-6 col-md-3 mt-2">
-               <span class="text-left">
-             <h3> 13000+ </h3> 
-            <span style="color:#9F9F9F"> {{ $t("general.13k_customers") }} </span>  </span
-            >
-  
-            </div>
-            <div class="col-6 col-md-3 mt-2">
-  
-              <span class="text-left">
-             <h3>  100+ </h3> 
-              <span style="color:#9F9F9F">   {{ $t("general.100_industries") }} </span> </span
-            >
-  
-            </div>
-             <div class="col-6 col-md-3 mt-2">
-               <span class="text-left">
-             <h3> 72H </h3> 
-              <span style="color:#9F9F9F">   {{ $t("general.48h_respond_time") }} </span>   </span
-            >
-             </div>
-          </div>
+        
         </div>
       </section>
+   
       <SiteFooter />
       
-      <!-- upgrade account section -->
-      <!-- <section class=" p-md-5" style="background: #f8f8f8">
-        <div class="container"  data-aos="fade-up-left" data-aos-offset="70px" data-aos-duration="1500">
-          <div class="row">
-            <div class=" col-lg-7">
-              <img class="upgrade-cover w-100" src="assets/home/upgrade_accoun.jpeg" alt="" />
-            </div>
-            <div class=" col-lg-5">
-              <div class="lg-card card-lg p-ld-4  mr-lg-2 mt-lg-5 upgrade-side-box " data-aos="flip-left" data-aos-offset="70px" data-aos-duration="1500" >
-                <h4 class="upgrade-text">
-                 <span>   {{ $t("general.upgrade_your_account") }}  </span>   {{ $t("general.start_selling_to_the") }} .
-                </h4>
-                <p>  {{ $t("general.while_you_can_use") }}
-                 
-                </p>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="d-flex">
-                      
-                      <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
-                      <span>
-                        <h6>  {{ $t("general.market_place_access") }} :</h6>
-                        <p> {{ $t("general.unlimited_market_place_to_sell") }}
-                          
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="d-flex">
-                       <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
-                      <span>
-                        <h6>  {{ $t("general.online_buying_system") }}:</h6>
-                        <p>
-                          
-                        {{ $t("general.sell_get_paid_and_recieive") }}  
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="d-flex">
-                      <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
-                      <span>
-                       <h6>  {{ $t("general.rank_top_on_search") }} </h6>
-                         <p>
-                         {{ $t("general.business_on_advance") }}
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="d-flex">
-                      <img class="upgrade-acc-img" src="assets/home/Vector.svg" alt="">
-                      <span>
-                        <h6>  {{ $t("general.advance_messaging") }} :</h6>
-                        <p>
-                        {{ $t("general.reach_a_wider_community") }}.
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center"> <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button> </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
-  
-    <!-- <section class="bg-whitee">  
-    
-     <div class="container pt-6" > 
-      <div class="d-flex">  
-      <div class="text-center">  
-       <h3 >
-          <span>  Hear from </span>  our customers
-        </h3>
-      
-    </div>
-     </div>
-     </div>
-  
-    </section> -->
+
     
   
    <ProductDetails
@@ -787,6 +760,64 @@
   
     data() {
       return {
+        products: [
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Set of bags and hats',
+          description: 'Hand made set of bags and hats',
+          price: '6 000,00 FCFA',
+          inStock: true,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Set of matching bags and hats',
+          description: 'Hand made set of matching bags and hats',
+          price: '5 000,00 FCFA',
+          inStock: false,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Hibiscus',
+          description: 'Use this beautiful Hibiscus to keep your office material...',
+          price: '5 000,00 FCFA',
+          inStock: true,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Faugipanier',
+          description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
+          price: '8 000,00 FCFA',
+          inStock: true,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Set of bags and hats',
+          description: 'Hand made set of bags and hats',
+          price: '6 000,00 FCFA',
+          inStock: false,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Set of matching bags and hats',
+          description: 'Hand made set of matching bags and hats',
+          price: '5 000,00 FCFA',
+          inStock: true,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Hibiscus',
+          description: 'Use this beautiful Hibiscus to keep your office material...',
+          price: '5 000,00 FCFA',
+          inStock: false,
+        },
+        {
+          image: 'assets/home/header_slide_1.png',
+          title: 'Faugipanier',
+          description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
+          price: '8 000,00 FCFA',
+          inStock: true,
+        },
+      ],
         expanded: true,
         location: "",
         word1: "",
@@ -797,7 +828,7 @@
         showfadde: false,
         showfaddeB: true,
         currentNumber: 0,
-        products:[],
+        // products:[],
         placeholder: this.$t("home.Location"),
         img1: require("../assets/img/coach.png"),
         showbanner1:true,
@@ -1298,19 +1329,243 @@
   </script>
   
   <style>
+  .see-all-p{
+    text-align: right;
+    text-decoration: underline;
+    color: #FF9E19;
+  }
+/* ////////// */
+.product-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sections-title {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px !important;
+}
+
+.section-description {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button-start,
+.button-end {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #A4A4A4;
+  background-color: white;
+  color: #A4A4A4;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.filter-button.active, .filter-button:hover {
+  /* background-color: #ff9e19; */
+  border: 1px solid #ff9e19;
+  color: #ff9e19;
+}
+.filter-button i {
+  margin-left: 5px;
+}
+
+
+/* //////////// */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.grid-item {
+  background-color: white;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  flex: 1 1 calc(25% - 20px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+.stock-status {
+  text-align: left;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: flex;
+  justify-content: start;
+}
+
+.in-stock {
+  color: #23C73D;
+}
+
+.out-of-stock {
+  color: #dc3545;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: red;
+}
+
+/* .favorite-button:hover {
+  color: #e68a00;
+} */
+
+.content-container {
+  flex-grow: 1;
+}
+
+.content-container h3 {
+  font-size: 20px !important;
+  line-height: 20px !important;
+  color: #000000;
+  text-align: left !important;
+}
+
+.content-container p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  text-align: left !important;
+  color: #000000;
+}
+
+.bottom-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.price {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.add-to-cart {
+  padding: 10px 20px;
+  background-color: #ff9e19;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-to-cart:hover {
+  background-color: #e68a00;
+}
+
+
+
+
+
+/*  ///////////////// */
+  .statistic-box {
+  border-left: 4px solid #E75B17; 
+  padding-left: 10px; 
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.network {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  width: 50px; 
+  height: 50px; 
+  margin-bottom: 10px;
+}
+
+.percentage {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+.text {
+  font-size: 14px;
+  color: #757575;
+}
+
+
   @media only screen and (min-width: 960px) {
     .custom-container {
-            padding-left: 150px; /* Adjust as needed */
-            padding-right: 150px; /* Adjust as needed */
+            padding-left: 150px; 
+            padding-right: 150px; 
         }
         .flex-container  {
-    margin: 30px;
+    margin: 30px 0;
 }
   }
   @media only screen and (max-width: 760px) {
     .custom-container {
-            padding-left: 20px; /* Adjust as needed */
-            padding-right: 20px; /* Adjust as needed */
+            padding-left: 20px; 
+            padding-right: 20px; 
         }
   }
   .about-p{
@@ -1339,15 +1594,15 @@
 
 .flex-container {
         display: flex;
-        align-items: center; /* Align items vertically */
+        align-items: center; 
     }
     .flex-container h3 {
-        flex: 35%; /* Adjust the width for the heading */
-        margin-right: 20px; /* Adjust margin as needed */
+        flex: 35%; 
+        margin-right: 20px; 
     }
     .flex-container p {
-        flex: 65%; /* Adjust the width for the paragraph */
-        padding-top: 8px; /* Adjust padding as needed */
+        flex: 65%; 
+        padding-top: 8px; 
     }
   .buy-btn-white{
     background: white !important;
@@ -1403,7 +1658,7 @@
     border: 1px solid #e7e7e7;
     box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
     border-radius: 5px;
-   height: 50px !important;
+   height: 60px !important;
    padding-left: 1rem !important;
    padding-right: 1rem !important
   
@@ -1588,15 +1843,51 @@
   
   .crtv-ban {
    
-    height: 357px;
+    /* height: 357px; */
       border-radius: 10px;
       border-radius: 20px;
       padding: 2rem;
-      background-size: cover;
-      background-repeat: no-repeat;
+      /* background-size: cover;
+      background-repeat: no-repeat; */
   
   }
-  
+  .crtv-bans {
+  width: 100%;
+  text-align: center;
+}
+
+.slide-img {
+  max-width: 100%;
+  max-height: 750px;
+  height: auto;
+  display: block;
+  margin: 0 !important;
+  width: 100%;
+}
+.position-relative {
+  position: relative;
+}
+
+.shop-now-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: transparent !important; 
+  color: white;
+  border: none !important;
+ 
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is on top */
+}
+
+.shop-now-btn:hover {
+  /* background-color: #e68a00; */
+  color: #E75B17;
+}
   .request-quote {
     width: 416.64px;
   

@@ -611,22 +611,14 @@
       <section class="bg-whitee">
         
         <div class="container resources pt-5 pb-5"  >
-          <div class="row">
-            <div class="col-lg-10">
+          <div class="text-center">
               <h3>
-                <span> {{ $t("general.digital_education") }}   </span> {{ $t("general.to_help_you_make_more_money") }}  
+                <span> {{ $t("general.digital_education") }}   </span> <span style="color: black !important">{{ $t("general.to_help_you_make_more_money") }}  </span>
               </h3>
-              <p>
+              <p class="pl-5 pr-5">
                 {{ $t("general.use_our_special_design_training") }} 
               </p>
-            </div>
-  
-            <div class=" d-none d-lg-block col-lg-2 text-center m-auto">
-              <b-icon icon="chevron-left" font-scale="2"> </b-icon>
-              <b-icon icon="chevron-right" font-scale="2"> </b-icon>
-            </div>
-          </div>
-  
+            </div>  
           <Resources />
         </div>
       </section>
@@ -2265,18 +2257,34 @@
     }
   }
   
+  .nav-tabs:hover {
+    background-color: transparent !important;
+  }
+
+  .nav-tabs a:hover{
+      background:rgba(243, 243, 243, 1) !important;
+      border-radius: 0px;
+      color: #e75b17!important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+  }
+
+  .nav-tabs .nav-item {
+    padding-right: 10px !important;
+  }
      
   
-      .nav-tabs .nav-link.active-tab-item {
-      background-color: white !important;
+      #__BVID__93 .nav-tabs .nav-link.active-tab-item {
+      background-color: rgba(243, 243, 243, 1) !important;
       border-left: none;
       border-right: none;
       border-top: none;
       font-family: poppins !important;
-      color: #455a64;
-      border-bottom: 4px solid red !important;
+      color: #e75b17;
+      border-bottom: 2px solid #e75b17 !important;
       padding-left: 5px;
-      padding-right: 5px;
+      padding-right: 8px !important;
       }
   
   </style>

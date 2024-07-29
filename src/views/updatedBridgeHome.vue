@@ -622,6 +622,19 @@
           <Resources />
         </div>
       </section>
+
+      
+      <section class="bg-whitee">
+        
+        <div class="container pt-5 pb-5"  >
+          <div class="text-left">
+              <h3>
+                <span> {{ $t("general.television_show") }}   </span> <br> <span style="color: black !important">{{ $t("general.from_our_television_show") }}  </span>
+              </h3>
+            </div>  
+            <TelevisionShow />
+        </div>
+      </section>
   
       <section class="bg-gradient">
         <div class="container crtv pt-3 pb-3 pt-md-5 pb-md-5"  >
@@ -729,12 +742,14 @@
   import { validationMixin } from "vuelidate";
   import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
   import Resources from "../components/resources";
+  import TelevisionShow from "../components/televisionShow";
   
   export default {
     components: {
       SiteHeader,
       Products,
       Resources,
+      TelevisionShow,
       SiteFooter,
       LightBox,ProductDetails
     },

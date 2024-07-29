@@ -300,7 +300,7 @@
       <section class="p-0 m-0" >
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
-            <div class="col-lg-5 p-0 h-100">
+            <div class="col-lg-4 p-0 h-100">
               <!-- <video
                 width="100%"
               
@@ -313,7 +313,7 @@
               <img src="assets/home/quotation.png" alt="">
             </div>
   
-            <div class="col-lg-7 mt-md-5 align-items-center " id="quote">
+            <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5" id="quote">
               
               <div class="m-left">
                 <h3>
@@ -323,15 +323,16 @@
                   <div class="form pt-1 row">
                     <div class="col-md-12">
   
+                      <label for="name" class="pb-0 label-color">
+                        {{ $t("general.looking_for_something") }}
+                      </label>
                   <md-field :class="getValidationClass('pname')">
-                    <label for="name" class=" p-2">
-                      {{ $t("general.looking_for_something") }}
-                    </label>
                     <md-input
                       type="text"
                       name="name"
                       class="ba-input"
                       id="name"
+                      placeholder="Looking for something"
                       v-model="form.pname"
                     />
   
@@ -345,31 +346,32 @@
                     </div>
   
                     <div class="col-md-6">
+                      <label for="qunatity" class="pb-0 label-color">
+                        {{ $t("general.Quantity") }}
+                      </label>
                   <md-field :class="getValidationClass('quantity')">
-                    <label for="qunatity" class="p-2">
-                      {{ $t("general.Quantity") }}
-                    </label>
                     <md-input
                        class="ba-input "
                       type="tel"
                       name="qunatity"
                       id="quantity"
+                      placeholder="Quantity"
                       v-model="form.quantity"
                     />
                   </md-field>
                     </div>
   
                     <div class="col-md-6">
-                       
+                      <label for="uname" class="pb-0 label-color">
+                        {{ $t("general.full_name") }}
+                      </label>
                     <md-field :class="getValidationClass('name')">
-                    <label for="uname" class="p-2">
-                      {{ $t("general.full_name") }}
-                    </label>
                     <md-input
                       type="text"
                       name="uname"
                       id="uname"
-                       class="ba-input "
+                       class="ba-input"
+                       placeholder="Full Name"
                       v-model="form.name"
                     />
   
@@ -381,27 +383,29 @@
                     </div>
   
                     <div class="col-md-6">
+                      <label for="email" class="pb-0 label-color">
+                        {{ $t("general.Email") }}
+                      </label>
                        <md-field class="">
-                    <label for="email" class="p-2">
-                      {{ $t("general.Email") }}
-                    </label>
                     <md-input
                       type="email"
                       name="email"
                       id="email"
-                       class="ba-input "
+                      placeholder="Email"
+                       class="ba-input"
                       v-model="form.email"
                     />
                   </md-field>
                     </div>
   
                     <div class="col-md-6">
+                      <label for="name" class="pb-0 label-color"> {{ $t("general.Tel") }} </label>
                     <md-field :class="getValidationClass('tel')">
-                    <label for="name" class="p-2"> {{ $t("general.Tel") }} </label>
                     <md-input
                       type="tel"
                       name="tel"
                       id="tel"
+                      placeholder="Tel."
                        class="ba-input "
                       v-model="form.tel"
                     />
@@ -411,12 +415,12 @@
                     </span>
                   </md-field>
                     </div>
-                    <div class="col-md-12 col-lg-6">
+                    <div class="col-md-12 col-lg-5 mt-3">
                       <b-button
                         type="submit"
                         variant="primary"
                         block
-                        class=" quote-btn"
+                        class="quote-btn"
                       >
                         {{ $t("general.Request_For_Quotation") }}
                         <span class="arrow-icon-wrapper">
@@ -1329,6 +1333,14 @@
   </script>
   
   <style>
+.ba-input::placeholder {
+  color: #A5A5A5; 
+  opacity: 0.5; 
+}
+  .label-color{
+    color: black;
+  }
+  /* /////// */
   .see-all-p{
     text-align: right;
     text-decoration: underline;
@@ -1638,7 +1650,11 @@
   .bridge-home .md-field.md-theme-default:after {
       background-color: white !important;
   }
-  
+  .md-field{
+    padding-top:0 !important;
+    margin: 0 !important;
+    margin-bottom: 10px !important
+  }
   .bridge-home .md-focused .p-2{
      padding: 0rem !important;
      margin-top: -10px;
@@ -1658,7 +1674,7 @@
     border: 1px solid #e7e7e7;
     box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
     border-radius: 5px;
-   height: 60px !important;
+   height: 55px !important;
    padding-left: 1rem !important;
    padding-right: 1rem !important
   
@@ -1671,7 +1687,7 @@
     border: 1px solid #e7e7e7;
     box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
     border-radius: 5px;
-   height: 50px !important;
+   height: 55px !important;
    padding: 2px;
   
    }
@@ -1716,14 +1732,14 @@
   
   
   .quote-btn{
-  
-  height: 57.12px;
+  height: 47.12px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 30px;
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
   }
   .selling-btn {
   /* width: 25%; */
@@ -1903,7 +1919,7 @@
     border: 1px solid #e7e7e7;
     box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.11);
     border-radius: 5px;
-   height: 50px !important;
+   height: 55px !important;
   
   }
   

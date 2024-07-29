@@ -300,20 +300,11 @@
       <section class="p-0 m-0" >
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
-            <div class="col-lg-4 p-0 h-100">
-              <!-- <video
-                width="100%"
-              
-                style="object-fit:contain; border-radius: 10px;  border-radius:10px"
-                controls
-                poster="assets/home/quotevideo.jpg"
-              >
-                <source src="assets/video/intro_video.mp4" type="video/mp4" />
-              </video> -->
+            <div class="col-lg-4 p-0 h-100 quote-img">
               <img src="assets/home/quotation.png" alt="">
             </div>
   
-            <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5" id="quote">
+            <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
               
               <div class="m-left">
                 <h3>
@@ -436,20 +427,20 @@
           </div>
         </div>
       </section>
-  
+     
   
   <section class="bg-whitee"> 
   
-    <div class="container pt-5 pb-5 "  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
+    <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
         
-        <div class="col-md-6 ">
+        <div class="col-md-6 p-0">
           <div class=""> 
           <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;"> 
             <h3> <span> {{ $t("general.Tailor") }} </span>    
          - {{ $t("general.Transformed") }} </h3>
      <div class="d-block">  
-     <p > {{ $t("general.hire_a_professional_tailor") }} </p>
+     <p style="color: black;"> {{ $t("general.hire_a_professional_tailor") }} </p>
         </div>
           </div>
          <div class=" p-2  text-left">  
@@ -1333,6 +1324,18 @@
   </script>
   
   <style>
+  @media (max-width: 768px) {
+  .quote-img {
+    padding: 1rem !important;
+  }
+  .quote-form {
+    margin: 1rem !important;
+  }
+  .quote-btn {
+    width: 50%;
+  }
+}
+  /* /////// */
 .ba-input::placeholder {
   color: #A5A5A5; 
   opacity: 0.5; 

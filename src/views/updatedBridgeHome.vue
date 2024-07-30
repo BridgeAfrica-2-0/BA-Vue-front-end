@@ -252,6 +252,22 @@
         </div>
       </section>
 
+      <section class="bg-whitee">
+        
+        <div class="container pt-5 pb-5"  >
+          <div class="text-center">
+              <h3>
+                <span> Our </span> <span style="color: black !important">{{ $t("general.categories") }}  </span>
+              </h3>
+              <p class="pl-5 pr-5">
+                {{ $t("general.categories_sub_title") }} 
+              </p>
+            </div>  
+          <Categories />
+        </div>
+      </section>
+  
+
 
       <section style="background: #f8f8f8">
         <div class="container ba-business pt-5 pb-5">
@@ -743,6 +759,7 @@
   import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
   import Resources from "../components/resources";
   import TelevisionShow from "../components/televisionShow";
+  import Categories from "../components/categories";
   
   export default {
     components: {
@@ -750,6 +767,7 @@
       Products,
       Resources,
       TelevisionShow,
+      Categories,
       SiteFooter,
       LightBox,ProductDetails
     },

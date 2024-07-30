@@ -32,8 +32,8 @@
   <div class="container p-0 m-0 d-flex justify-content-between align-items-center">
     <div class="contact-info d-flex align-items-center">
       <div>
-        <span><img src="../../../public/assets/home/phone.png" class="size2" alt=""> +123 456 7890</span>
-        <span><img src="../../../public/assets/home/email.png" class="size2" alt=""> infobridgeafrica.com@gmail.com</span>
+        <span><img src="../../../public/assets/home/phone.png" class="size2" alt=""> +237697157690</span>
+        <span><img src="../../../public/assets/home/email.png" class="size2" alt=""> info@bridgeafrica.com</span>
       </div>
       <div>
         <span class="media-icons">

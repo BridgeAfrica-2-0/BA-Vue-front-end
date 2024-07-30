@@ -17,7 +17,7 @@
 
     <footer id="footer">
       <div class="footer-top black-back">
-        <div class="footer-box">
+        <div class="container footer-box">
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
@@ -30,12 +30,12 @@
                   />
                 </div>
                 <div class="col-9 logo-div">
-                  <p>
+                  <p style="color: white;">
                   International Handicraft Center,
                   Rond-point Intendance, Yaounde 
                   Cameroon
                   </p>
-                  <p style="color: #e75c18;">
+                  <p style="color: #FF9E19;">
                     bridgeafricaventures.com
                   </p>
                 </div>
@@ -156,6 +156,11 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.footer h4 {
+		margin-right: auto;
+		margin-left: auto;
+	}
 .logo-div
 {
   text-align: left;
@@ -184,7 +189,7 @@ export default {
 }
 .bridge-icon {
   background-color: transparent !important;
-  color:#FF6200 !important;
+  color:#FF9E19 !important;
 }
 .social-text{
   margin-left: 15px;

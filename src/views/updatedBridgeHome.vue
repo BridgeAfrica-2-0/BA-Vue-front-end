@@ -122,7 +122,7 @@
   </div>
 </div>
 <div class="see-all-p">
-  <p>See All Cameron</p>
+  <p>See All Cameroon</p>
 </div>
     <div class="grid">
       <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
@@ -313,7 +313,7 @@
         </div>
       </section>
   
-      <section class="p-0 m-0" >
+      <section class="p-0 m-0 bg-color" >
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
             <div class="col-lg-4 p-0 h-100 quote-img">
@@ -324,7 +324,7 @@
               
               <div class="m-left">
                 <h3>
-                  <span> {{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
+                  <span> {{ $t("general.let_help_u") }} </span>   <span style="color: black;">{{ $t("general.find_products_and_services") }}</span>
                 </h3>
                 <form novalidate @submit.prevent="validateUser">
                   <div class="form pt-1 row">
@@ -426,7 +426,6 @@
                       <b-button
                         type="submit"
                         variant="primary"
-                        block
                         class="quote-btn"
                       >
                         {{ $t("general.Request_For_Quotation") }}
@@ -445,16 +444,16 @@
       </section>
      
   
-  <section class="bg-whitee"> 
+  <section style="background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%);"> 
   
-    <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
+    <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
         
         <div class="col-md-6 p-0">
           <div class=""> 
           <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;"> 
             <h3> <span> {{ $t("general.Tailor") }} </span>    
-         - {{ $t("general.Transformed") }} </h3>
+        <span style="color: black;">- {{ $t("general.Transformed") }} </span> </h3>
      <div class="d-block">  
      <p style="color: black;"> {{ $t("general.hire_a_professional_tailor") }} </p>
         </div>
@@ -471,14 +470,14 @@
   
   
           <div class="col-md-6">
-          <div>
+          <div class="hire-div">
             <!-- <img class="hire-tailor-img" src="assets/home/hire_professional.png" alt=""> -->
              <video
                 width="100%"
               
                 style="object-fit:contain; border-radius: 10px;  border-radius:10px"
                 controls
-                poster="assets/home/hire_professional.png"
+                poster="assets/home/new_hire.png"
               >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
@@ -1252,6 +1251,9 @@
   </script>
   
   <style>
+  .bg-color{
+    background-color: #F3F3F3;
+  }
   @media (max-width: 768px) {
   .quote-img {
     padding: 1rem !important;
@@ -1266,7 +1268,10 @@
   /* /////// */
 .ba-input::placeholder {
   color: #A5A5A5; 
-  opacity: 0.5; 
+  opacity: 1; 
+}
+.ba-input {
+  background-color: white !important;
 }
   .label-color{
     color: black;
@@ -1643,16 +1648,23 @@
   }
 
   .hire-btn{
-  width: 174px;
-  height: 46px;
+  height: 40px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 30px;
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+  padding-left: 20px;
   }
-  
+  .hire-div{
+    max-height: 400px;
+    max-width: 500px;
+  }
+  .border-class{
+    border-bottom: 1px solid #DCDCDC;
+  }
   .buy-btn{
      
     /* height: 47.12px; */
@@ -1670,7 +1682,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
+  padding: 15px;
+  padding-left: 20px !important;
   }
   .selling-btn {
   /* width: 25%; */
@@ -1685,6 +1699,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 }
 
 /* .selling-btn:hover {
@@ -1703,7 +1718,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 0;
-  margin-left: auto;
+  margin-left: 15px;
 }
 
 .arrow-icon-wrapper i {

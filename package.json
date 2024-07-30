@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "vue-cli-service serve --port 3111",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build && npm run postbuild",
+        "postbuild": "cp .htaccess_sample dist/.htaccess",
         "lint": "vue-cli-service lint",
         "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
     },

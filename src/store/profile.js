@@ -232,6 +232,10 @@ export default {
       state.ownerPost = [payload, ...state.ownerPost]
     },
 
+    setPosts(state, payload){
+      state.ownerPost = payload;
+    },
+
     //set community data  
     setTcommunity(state, data) {
       state.Tcommunity = data;

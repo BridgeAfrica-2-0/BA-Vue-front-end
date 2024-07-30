@@ -254,7 +254,7 @@ width: 20px !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #455a64 ;
-  margin-left: 5px;
+  // margin-left: 5px;
 }
 
 

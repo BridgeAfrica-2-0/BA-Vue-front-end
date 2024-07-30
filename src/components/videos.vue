@@ -5,7 +5,7 @@
     <div class=" mt-3 bridge-resources">
         <splide :options="options" class="r-image">
 
-          <splide-slide v-for="(item,i) in videos" class="p-2" :key="item.id">
+          <splide-slide v-for="(item,i) in videos" :key="item.id">
             <div class="hotbizz text-center">
               <b-img :src="item.thumb" @click="openGallery(i)" class="" />
              </div>
@@ -57,7 +57,7 @@ export default {
 
         rewind: true,
         autoplay: true,
-        perPage: 3,
+        perPage: 1,
         pagination: false,
         type: "loop",
         perMove: 1,
@@ -121,7 +121,24 @@ export default {
 
 
 
-<style>@media only screen and (min-width: 768px) {
+<style>
+
+.splide__arrow {
+  opacity: unset !important;
+  color: #fff !important;
+}
+
+.splide__arrow--prev {
+  left: 0 !important;
+  background: linear-gradient(90deg, rgba(224, 119, 21, 1), rgba(255, 158, 25, 1)) !important;
+}
+
+.splide__arrow--next {
+  right: 0 !important;
+  background: linear-gradient(90deg, rgba(224, 119, 21, 1), rgba(255, 158, 25, 1)) !important;
+}
+
+@media only screen and (min-width: 768px) {
   .bridge-resources .splide__arrow--prev {
     width: 40px !important;
     height: 40px !important;

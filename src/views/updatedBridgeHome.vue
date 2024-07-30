@@ -108,7 +108,7 @@
   <div class="container">
     <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
     <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-    <div class="button-group">
+    <!-- <div class="button-group">
   <div class="button-start">
     <button class="filter-button">Available Cameroon</button>
     <button class="filter-button">Available Worldwide</button>
@@ -116,11 +116,25 @@
   <div class="button-end">
     <button class="filter-button">
       Sort: Best Match
-      <i class="fas fa-caret-down"></i> <!-- Font Awesome icon for the dropdown -->
+      <i class="fas fa-caret-down"></i> 
     </button>
     <button class="filter-button"> <i class="fas fa-caret-down"></i></button>
   </div>
+</div> -->
+<div class="button-group">
+  <div class="button-start">
+    <button class="filter-button">Available Cameroon</button>
+    <button class="filter-button">Available Worldwide</button>
+  </div>
+  <div class="button-end">
+    <button class="filter-button">
+      Sort: Best Match
+      <img src="assets/home/drop_down.svg" alt="Image 1" class="padding-img">
+    </button>
+    <button class="filter-button">  <img src="assets/home/grid_icon.svg" alt="Image 1" ></button>
+  </div>
 </div>
+
 <div class="see-all-p">
   <p>See All Cameroon</p>
 </div>
@@ -141,7 +155,20 @@
         </div>
         <div class="bottom-info">
           <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart">Add to Cart</button>
+          <button class="add-to-cart"><span style="font-size: 12px; font-weight: bold; ">Add to Cart</span><span class="arrow-icon-wrapper">
+              <i class="fas fa-arrow-right"></i>
+          </span></button>
+          <!-- <b-button
+          type="submit"
+          variant="primary"
+          block
+          class="mb-3 mt-3 selling-btn"
+          >
+          Start Selling
+          <span class="arrow-icon-wrapper">
+              <i class="fas fa-arrow-right"></i>
+          </span>
+           </b-button> -->
         </div>
       </div>
     </div>
@@ -278,36 +305,49 @@
               </h3>
               <p> {{ $t("general.sell_online_in_person") }}  </p>
   
-              <div class="border-left-biz"> 
-  
-              <div class="babiz-list" @mouseover="changephoto(0)"  :class="{ active: currentNumber==0 }" >
-                <h5> {{ $t("general.business_identity_and_oline") }} </h5>
+              <div class="border-left-biz">   
+              <div class="babiz-list"   >
+                <h5> 
+                  <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"> 
+                  {{ $t("general.business_identity_and_oline") }} 
+                </h5>
                 <p>
                   {{ $t("general.create_your_business_page") }}
                 </p>
               </div>
   
-              <div class="babiz-list "  @mouseover="changephoto(1)" :class="{ active: currentNumber==1 }" >
-                <h5> {{ $t("general.online_business_database") }} </h5>
+              <div class="babiz-list "  >
+                <h5> 
+                  <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"> 
+                  {{ $t("general.online_business_database") }} 
+                </h5>
                 <p>
                  {{ $t("general.make_your_business_visible") }} 
                 </p>
-              </div>
-  
-              <div class="babiz-list "  @mouseover="changephoto(2)" :class="{ active: currentNumber==2 }">
-                <h5> {{ $t("general.unified_back_office") }} </h5>
+              </div>  
+              <div class="babiz-list "  >
+                <h5>
+                  <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"> 
+                   {{ $t("general.unified_back_office") }}
+                </h5>
                 <p>
-                   {{ $t("general.easily_manage_your_business") }}
-  
-                  
+                   {{ $t("general.easily_manage_your_business") }}                    
                 </p>
               </div>
               </div>
             </div>
-            <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">
-              <!-- <img src="assets/home/forbiz.png" alt="" /> -->
-  
-                <b-img transition="fade" :src="bridge_for_biz[currentNumber]" />
+            <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
+              <div>
+             <video
+                width="100%"
+              
+                style="object-fit:contain; border-radius: 10px;  border-radius:10px"
+                controls
+                poster="assets/home/ba_business.png"
+              >
+                <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
+              </video>
+              </div>
             </div>
           </div>
         </div>
@@ -1251,9 +1291,24 @@
   </script>
   
   <style>
+
+.padding-img{
+  padding-left: 20px;
+}
+
+/* //////////// */
+.icon-spacing {
+      margin-right: 10px; 
+      width: 20px; 
+      height: 20px; 
+    }
+/* //////////////// */
+
+
   .bg-color{
     background-color: #F3F3F3;
   }
+
   @media (max-width: 768px) {
   .quote-img {
     padding: 1rem !important;
@@ -1306,12 +1361,12 @@
   text-align: center;
   margin-bottom: 20px;
 }
-
 .button-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
 
 .button-start,
@@ -1330,15 +1385,37 @@
   border-radius: 50px;
 }
 
-.filter-button.active, .filter-button:hover {
-  /* background-color: #ff9e19; */
+.filter-button.active,
+.filter-button:hover {
   border: 1px solid #ff9e19;
   color: #ff9e19;
 }
+
 .filter-button i {
   margin-left: 5px;
 }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .padding-img{
+    padding-left: 2px;
+  }
+  .button-group {
+    flex-direction: column; 
+  }
+  .button-start, .button-end {
+    width: 100%; 
+    justify-content: center; 
+    margin-bottom: 10px; 
+  }
+  .filter-button {
+    padding: 5px !important;
+    font-size: 12px;
+    height: fit-content;
+    width: 100%;
+    margin: 5px 0; 
+  }
+}
 
 /* //////////// */
 .grid {
@@ -1349,7 +1426,7 @@
 
 .grid-item {
   background-color: white;
-  padding: 15px;
+  /* padding: 15px; */
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   text-align: center;
@@ -1405,6 +1482,7 @@
 } */
 
 .content-container {
+  padding: 10px 15px;
   flex-grow: 1;
 }
 
@@ -1423,24 +1501,40 @@
 }
 
 .bottom-info {
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .price {
+  font-weight: bold;
   font-size: 16px;
   color: #333;
   margin-bottom: 5px;
 }
 
 .add-to-cart {
-  padding: 10px 20px;
+  /* padding: 10px 20px;
   background-color: #ff9e19;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; */
+  padding: 4px 7px;
   cursor: pointer;
+
+  width: 115px;
+  height:auto;
+  /* background: linear-gradient(to right, #FF9E19, #FF6200); */
+  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  /* font-weight: bold; */
+  /* padding: 10px 20px; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-to-cart:hover {
@@ -2011,22 +2105,21 @@
   
   
   .border-left-biz{
-    border-left: solid 4px white;
-  
+    border-bottom: solid 4px white !important;  
   }
   
   .babiz-list{
         padding-left: 20px;
       margin-left: -4.5px;
-    margin-top: 10px;
+    margin-top: 40px;
   }
   
   .babiz-list:hover {
-    border-left: solid 4px #e75b17;
+    border-bottom: solid 4px #e75b17 !important;
   }
   
   .border-left-biz .active{
-      border-left: solid 4px #e75b17 !important;
+      border-bottom: solid 4px #e75b17 !important;
   }
   .bg-white {
     background: white;

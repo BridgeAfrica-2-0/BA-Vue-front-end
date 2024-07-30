@@ -107,7 +107,8 @@ export default {
 }
 
 .accordion .card-header button .fas {
-  font-weight: 400 !important;
+  font-weight: 300 !important;
+  font-size: 18px !important;
 }
 
 .accordion .card-body {

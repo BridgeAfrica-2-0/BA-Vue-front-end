@@ -136,7 +136,7 @@
 </div>
 
 <div class="see-all-p">
-  <p>See All Cameron</p>
+  <p>See All Cameroon</p>
 </div>
     <div class="grid">
       <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
@@ -279,6 +279,22 @@
         </div>
       </section>
 
+      <section class="bg-whitee">
+        
+        <div class="container pt-5 pb-5"  >
+          <div class="text-center">
+              <h3>
+                <span> Our </span> <span style="color: black !important">{{ $t("general.categories") }}  </span>
+              </h3>
+              <p class="pl-5 pr-5">
+                {{ $t("general.categories_sub_title") }} 
+              </p>
+            </div>  
+          <Categories />
+        </div>
+      </section>
+  
+
 
       <section style="background: #f8f8f8">
         <div class="container ba-business pt-5 pb-5">
@@ -337,7 +353,7 @@
         </div>
       </section>
   
-      <section class="p-0 m-0" >
+      <section class="p-0 m-0 bg-color" >
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
             <div class="col-lg-4 p-0 h-100 quote-img">
@@ -348,7 +364,7 @@
               
               <div class="m-left">
                 <h3>
-                  <span> {{ $t("general.let_help_u") }} </span>   {{ $t("general.find_products_and_services") }}
+                  <span> {{ $t("general.let_help_u") }} </span>   <span style="color: black;">{{ $t("general.find_products_and_services") }}</span>
                 </h3>
                 <form novalidate @submit.prevent="validateUser">
                   <div class="form pt-1 row">
@@ -450,7 +466,6 @@
                       <b-button
                         type="submit"
                         variant="primary"
-                        block
                         class="quote-btn"
                       >
                         {{ $t("general.Request_For_Quotation") }}
@@ -469,16 +484,16 @@
       </section>
      
   
-  <section class="bg-whitee"> 
+  <section style="background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%);"> 
   
-    <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
+    <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
         
         <div class="col-md-6 p-0">
           <div class=""> 
           <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;"> 
             <h3> <span> {{ $t("general.Tailor") }} </span>    
-         - {{ $t("general.Transformed") }} </h3>
+        <span style="color: black;">- {{ $t("general.Transformed") }} </span> </h3>
      <div class="d-block">  
      <p style="color: black;"> {{ $t("general.hire_a_professional_tailor") }} </p>
         </div>
@@ -495,14 +510,14 @@
   
   
           <div class="col-md-6">
-          <div>
+          <div class="hire-div">
             <!-- <img class="hire-tailor-img" src="assets/home/hire_professional.png" alt=""> -->
              <video
                 width="100%"
               
                 style="object-fit:contain; border-radius: 10px;  border-radius:10px"
                 controls
-                poster="assets/home/hire_professional.png"
+                poster="assets/home/new_hire.png"
               >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
@@ -596,61 +611,11 @@
 
         </div>
       </section>
-      <section style="background: #f8f8f8">
-        <div class="container explore-network pt-5 pb-5"   data-aos="zoom-in-down" data-aos-offset="70px" data-aos-duration="1500"  >
-          <h3><span> {{ $t("general.Explore") }}  </span> {{ $t("general.Networks") }} </h3>
-          <p>
-            {{ $t("general.our_network_accounts") }}
-          </p>
+     
   
-          <div class="row">
-            <div class="col-md-6 mt-3">
-              <div class="card h-100 p-3">
-                <div class="row h-100">
-                  <div class="col-lg-7 order-2 order-lg-1 ">
-                    <h5> Textile Artisans of Cameroon</h5>
-                    <p>{{ $t("general.our_network_accounts") }}</p>
-                    <div class="text-center"> 
-                      <router-link to="network_follower/les-artisans-textile-du-cameroun-the-textile-artisans-of-cameroon-g0ax5dj1v">  <b-button variant="primary" class="mt-auto explore-btn"> {{ $t("general.view_more") }} </b-button> </router-link>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 order-1 order-lg-2">
-                    <b-img-lazy
-                      class="explore-network-img "
-                      src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
-                      alt="alternative"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-md-6 mt-3">
-              <div class="card h-100 p-3">
-                <div class="row">
-                  <div class="col-lg-7 order-2 order-lg-1">
-                    <h5>PEA-Jeunes ({{ $t("general.agriculture") }})</h5>
-                    <p>{{ $t("general.get_in_touch_with") }}</p>
-                   <div class="text-center">  
-                   <router-link to="network_follower/pea-jeunes-qgmhghur5">    <b-button variant="primary" class="explore-btn ">{{ $t("general.view_more") }}  </b-button> </router-link>  </div> 
-                  </div> 
-                  <div class="col-lg-5 order-1 order-lg-2">
-                    <b-img-lazy
-                      class="explore-network-img "
-                      src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
-                      alt="alternative"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-  
-      <section class="bg-whitee">
+      <section style="background: #F3F3F3">
         
-        <div class="container resources pt-5 pb-5"  >
+        <div class="container resources pt-5 pb-4"  >
           <div class="text-center">
               <h3>
                 <span> {{ $t("general.digital_education") }}   </span> <span style="color: black !important">{{ $t("general.to_help_you_make_more_money") }}  </span>
@@ -675,65 +640,16 @@
             <TelevisionShow />
         </div>
       </section>
-  
-      <section class="bg-gradient">
-        <div class="container crtv pt-3 pb-3 pt-md-5 pb-md-5"  >
-          <div class="row">
-            <div class="col-md-6">
-              <h3 class="white">
-                <span> {{ $t("general.checkout_our") }} Biz 
-                   </span> {{ $t("general.show_on_crtv") }} </h3>
-      
-  
-              <p class="mt-2" style="color:white"> {{ $t("general.bizconnect_show_is_a15_min") }}
-                 </p>
-  
-              <p class="mt-2" style="color:white"> {{ $t("general.the_show_is_aired") }}  </p>
-  
-             
-            </div>
-  
-            <div class="col-md-6 m-auto">
-  
-            
-  
-  
-         <div class="d-none d-lg-block mt-3 bridge-resources">
-          <splide :options="options" class="r-image">
-  
-            <splide-slide v-for="(item,i) in crtv_vid" class="p-2" :key="item.id">
-              
-  
-               <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
-                  <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
-             </div> 
-  
-            </splide-slide>
-  
-          </splide>
-         </div>
-  
-  
-  
-        <div class="d-lg-none mt-3 bridge-resources">
-          <splide :options="options" class="r-image">
-  
-            <splide-slide v-for="(item,i) in crtv_vidM" class="p-2" :key="item.id">
-              
-  
-               <div class="crtv-ban d-flex"  :style="'background-image:url('+item.thumb+')'">  
-                  <span role="button" @click="playVideo(i)" style="position:absoulute;    color: red;" class="m-auto"> <b-icon font-scale="4" icon="play-circle"> </b-icon> </span>
-             </div> 
-  
-            </splide-slide>
-  
-          </splide>
-         </div>
-  
-  
-             
-            </div>
-          </div>
+
+      <section class="bg-whitee faq">
+        
+        <div class="container pb-5"  >
+          <div class="text-center">
+              <h3 style="color: #e75b17">
+                {{ $t("general.faq") }}
+              </h3>
+          </div>  
+         <FAQ />
         </div>
       </section>
   
@@ -783,6 +699,8 @@
   import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
   import Resources from "../components/resources";
   import TelevisionShow from "../components/televisionShow";
+  import Categories from "../components/categories";
+  import FAQ from "../components/faq";
   
   export default {
     components: {
@@ -790,6 +708,8 @@
       Products,
       Resources,
       TelevisionShow,
+      Categories,
+      FAQ,
       SiteFooter,
       LightBox,ProductDetails
     },
@@ -1371,6 +1291,7 @@
   </script>
   
   <style>
+
 .padding-img{
   padding-left: 20px;
 }
@@ -1382,6 +1303,11 @@
       height: 20px; 
     }
 /* //////////////// */
+
+
+  .bg-color{
+    background-color: #F3F3F3;
+  }
 
   @media (max-width: 768px) {
   .quote-img {
@@ -1397,7 +1323,10 @@
   /* /////// */
 .ba-input::placeholder {
   color: #A5A5A5; 
-  opacity: 0.5; 
+  opacity: 1; 
+}
+.ba-input {
+  background-color: white !important;
 }
   .label-color{
     color: black;
@@ -1813,16 +1742,23 @@
   }
 
   .hire-btn{
-  width: 174px;
-  height: 46px;
+  height: 40px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 30px;
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+  padding-left: 20px;
   }
-  
+  .hire-div{
+    max-height: 400px;
+    max-width: 500px;
+  }
+  .border-class{
+    border-bottom: 1px solid #DCDCDC;
+  }
   .buy-btn{
      
     /* height: 47.12px; */
@@ -1840,7 +1776,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
+  padding: 15px;
+  padding-left: 20px !important;
   }
   .selling-btn {
   /* width: 25%; */
@@ -1855,6 +1793,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 }
 
 /* .selling-btn:hover {
@@ -1873,7 +1812,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 0;
-  margin-left: auto;
+  margin-left: 15px;
 }
 
 .arrow-icon-wrapper i {
@@ -2373,6 +2312,7 @@
       border-top: none !important;
       border-left: none !important;
       border-right: none !important;
+      border-bottom: none !important;
   }
 
   .nav-tabs .nav-item {
@@ -2380,13 +2320,12 @@
   }
      
   
-      #__BVID__93 .nav-tabs .nav-link.active-tab-item {
+    .nav-tabs .nav-link.active-tab-item {
       background-color: rgba(243, 243, 243, 1) !important;
-      border-left: none;
       border-right: none;
       border-top: none;
       font-family: poppins !important;
-      color: #e75b17;
+      color: #e75b17 !important;
       border-bottom: 2px solid #e75b17 !important;
       padding-left: 5px;
       padding-right: 8px !important;

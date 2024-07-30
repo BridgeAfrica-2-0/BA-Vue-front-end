@@ -99,6 +99,11 @@
   
   <style scoped>  
 
+  .card {
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
   .right-card {
     margin-bottom: 15px;
     border-radius: 5px;
@@ -119,7 +124,7 @@
   }
 
   .right-card .card-body {
-    padding: 0 1,25rem !important;
+    padding: 0 1.25rem !important;
   }
 
   .left-card .card-title {
@@ -130,6 +135,7 @@
   .right-card .card-title {
     font-size : 18px !important;
     color : black !important;
+    line-height : 20px !important;
   }
 
 
@@ -139,6 +145,7 @@
 
   .view-text {
     color: rgba(231, 91, 23, 1);
+    cursor: pointer;
   }
 
   @media screen and (min-width: 768px) {

@@ -6,13 +6,14 @@
         and be the first to know about new arrivals, exclusive offers, and handicraft.
       </p>
       <form @submit.prevent="subscribe">
-        <input type="email" v-model="email" placeholder="Enter your email" required>
-        <b-button @click="scrollTo" variant="primary" class="hire-btn"> Subscribe
+        <input type="email" v-model="email" placeholder="Enter your email">
+        <b-button type="submit" variant="primary" class="hire-btn"> Subscribe
           <span class="arrow-icon-wrapper">
             <i class="fas fa-arrow-right"></i>
           </span>
         </b-button>
       </form>
+
     </div>
 
     <footer id="footer">
@@ -124,6 +125,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -132,13 +134,38 @@ export default {
     };
   },
   methods: {
-    subscribe() {
-      // Handle subscription logic
-      console.log('Subscribed with:', this.email);
+    async subscribe() {
+      if (this.email.trim() === '') {
+        alert('Email cannot be empty');
+        return;
+      }
+     
+      const newSubscription = {
+        email: this.email
+      };
+
+      try {
+        const response = await axios.post("/guest/news", newSubscription);
+        this.flashMessage.show({
+          status: "success",
+          message: "Subscription successful."
+        });
+        // Clear the email input after a successful subscription
+        this.email = '';
+      } catch (error) {
+        console.error('Error subscribing:', error);
+        this.flashMessage.show({
+          status: "error",
+          message: "Subscription failed. Please try again."
+        });
+      }
     },
     handleResize() {
       this.isSmallScreen = window.innerWidth <= 768;
     },
+    scrollTo() {
+      // Assuming this method is required for some functionality
+    }
   },
   mounted() {
     this.handleResize();

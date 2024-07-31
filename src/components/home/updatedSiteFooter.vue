@@ -1,5 +1,6 @@
 <template>
   <section class="footer">
+   <div class="container">
     <div :class="['subscription-box', { 'footer-subscription': isSmallScreen }]">
       <p style="color: black;" class="subs-p">
         <span style="color: #e75c18;">Subscribe to our newsletter</span>
@@ -25,13 +26,13 @@
                 <div class="col-8 footer-img-col">
                   <img
                     src="../../assets/img/bavlogo.png"
-                    width="200px"
+                    width="227px"
                     class="size px-n1 px-md-0"
                     alt=""
                   />
                 </div>
                 <div class="col-9 logo-div">
-                  <p style="color: white;">
+                  <p class="white">
                   International Handicraft Center,
                   Rond-point Intendance, Yaounde 
                   Cameroon
@@ -51,7 +52,7 @@
                 {{ $t("home.USEFUL_LINKS") }}
               </h4>
               <ul class="white">
-                <li class="white ">
+                <li class="white">
                   <router-link class="over" :to="{ name: 'Bridge-home' }">{{
                     $t("home.Home")
                   }}</router-link>
@@ -117,10 +118,9 @@
           </div>
         </div>
       </div>
-      <div class="bottom-bar d-flex">
-        <span>©2021 Bridge Africa</span>
-      </div>
     </footer>
+   </div>
+  
   </section>
 </template>
 
@@ -214,6 +214,9 @@ export default {
   display: inline-block;
   line-height: 0;
 }
+.footer-links h4{
+  font-size: 18px !important;
+}
 .bridge-icon {
   background-color: transparent !important;
   color:#FF9E19 !important;
@@ -257,31 +260,23 @@ export default {
 .footer {
   overflow: visible;
   margin-top: 2px !important;
-  margin-bottom: 2px !important;
   padding: 2px;
   width: 100%;
-  min-height: 50vh;
   align-content: end;
   background-color: #000000;
   color: #ffffff;
 }
-.footer-box {
-  margin: 8% 10% 2% 10%;
-}
+
 .subscription-box {
-  position: absolute;
-  top: -190px; /* Adjust this value to control the overlap */
-  left: 50%;
-  transform: translateX(-50%);
   background-color: #fff;
   padding: 60px 150px 30px 150px;
   box-shadow: 0 0 10px rgba(193, 194, 206, 0.8);
   text-align: center;
   z-index: 10;
-  width: 80%;
   max-width: 100%;
   border-radius: 5px;
   border: 1px solid #C1C2CE;
+  margin-top: -220px;
 }
 .subscription-box.footer-subscription {
   position: static;
@@ -326,11 +321,7 @@ export default {
 .subscription-box button:hover {
   background-color: #e68a00;
 }
-.bottom-bar {
-  justify-content: center;
-  background-color: #2D2D2D;
-  padding: 5px 200px;
-}
+
 .footer-icon-text {
   left: 30%;
 }
@@ -347,6 +338,13 @@ export default {
 }
 .over:hover {
   color: #e75c18 !important;
+}
+.white{
+  font-size: 16px;
+}
+
+.over{
+  font-weight: 500 !important;
 }
 
 @media only screen and (max-width: 768px) {

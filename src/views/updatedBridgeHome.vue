@@ -618,6 +618,9 @@
       </section>
    
       <SiteFooter />
+      <div class="bottom-bar">
+        <span>©2021 Bridge Africa</span>
+      </div>
       
 
     
@@ -2287,6 +2290,14 @@
       padding-left: 5px;
       padding-right: 8px !important;
       }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: center;
+      background-color: #2D2D2D;
+      padding: 5px 0;
+      color: white
+    }
   
   </style>
   

@@ -4,30 +4,6 @@
   
  
 
-<!-- <section class="p-0">
-  <div>
-    <div class="row">
-      <div class="col-md-12 p-0">
-        <div>
-          <splide :options="options" class="r-image">
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
-                <button class="shop-now-btn">Shop Now</button>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 2" class="slide-img">
-                <button class="shop-now-btn">Shop Now</button>
-              </div>
-            </splide-slide>
-          </splide>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <section class="p-0">
   <div>
@@ -46,7 +22,7 @@
               </div>
             </splide-slide>
           </splide>
-          <button class="shop-now-btn"><span style=" border-bottom: 2px solid white; ">Shop Now</span></button>
+          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
         </div>
       </div>
     </div>
@@ -1893,15 +1869,28 @@
   background-color: transparent !important; 
   color: white;
   border: none !important;
+  margin-bottom: 30px;
  
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 44px;
+  font-weight: 600;
   cursor: pointer;
   z-index: 10; /* Ensure the button is on top */
 }
+.splide__arrow--prev {
+    margin-left: 20px;
+  }
 
-.shop-now-btn:hover {
-  /* background-color: #e68a00; */
+  .splide__arrow--next {
+    margin-right: 20px; 
+  }
+
+.shop-span{
+  padding-bottom: 5px;
+  border-bottom: 2px solid white;
+}
+.shop-span:hover{
+  border-bottom: 2px solid #E75B17;
   color: #E75B17;
 }
   .request-quote {

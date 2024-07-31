@@ -313,7 +313,7 @@
                       name="name"
                       class="ba-input"
                       id="name"
-                      placeholder="Looking for something"
+                      placeholder="Input Product Keyword or Name"
                       v-model="form.pname"
                     />
   

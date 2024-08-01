@@ -157,39 +157,50 @@
           <div class="row">
             <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
               <h3>
-                <span class="m-header-color">Bridge Africa </span> {{ $t("general.for_busineses") }} 
+                <span class="m-header-color">Bridge Africa </span>  <br> {{ $t("general.for_busineses") }} 
               </h3>
               <p> {{ $t("general.sell_online_in_person") }}  </p>
   
               <div class="border-left-biz">   
-              <div class="babiz-list"   >
-                <h5> 
-                  <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"> 
-                  {{ $t("general.business_identity_and_oline") }} 
-                </h5>
-                <p>
-                  {{ $t("general.create_your_business_page") }}
-                </p>
-              </div>
-  
-              <div class="babiz-list "  >
-                <h5> 
-                  <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"> 
-                  {{ $t("general.online_business_database") }} 
-                </h5>
-                <p>
-                 {{ $t("general.make_your_business_visible") }} 
-                </p>
-              </div>  
-              <div class="babiz-list "  >
-                <h5>
-                  <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"> 
-                   {{ $t("general.unified_back_office") }}
-                </h5>
-                <p>
-                   {{ $t("general.easily_manage_your_business") }}                    
-                </p>
-              </div>
+                <div class="babiz-list d-flex">
+                  <span class="p-1 d-inline create-your-shop">
+                    <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing">
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.business_identity_and_oline") }} 
+                    </h5>
+                    <p>
+                      {{ $t("general.create_your_business_page") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="babiz-list d-flex">
+                  <span class="p-1 d-inline ship-globally">
+                    <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing">
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.online_business_database") }}  
+                    </h5>
+                    <p>
+                      {{ $t("general.make_your_business_visible") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="babiz-list d-flex">
+                  <span class="p-1 d-inline get-paid">
+                    <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing">
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.unified_back_office") }}  
+                    </h5>
+                    <p>
+                      {{ $t("general.easily_manage_your_business") }}
+                    </p>
+                  </div>
+                </div>  
               </div>
             </div>
             <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
@@ -1228,6 +1239,46 @@
   
   <style>
 
+.create-your-shop {
+  height: 30px !important; 
+  width: 45px; 
+  border-radius: 50% ; 
+  background-color: #FEE6DB
+}
+
+.ship-globally {
+  height: 30px !important; 
+  width: 30px; 
+  border-radius: 50% ; 
+  background-color: #E8FBEE
+}
+
+.get-paid {
+  height: 30px !important; 
+  width: 30px; 
+  border-radius: 50% ; 
+  background-color: #F2E8FB
+}
+
+.d-flex img {
+  width : 16px !important;
+  height: 16px !important;
+  margin-left: 3px;
+  margin-top: -4px;
+}
+
+.bottom-border {
+  border-bottom: 2px solid #EBEBEB;
+  margin-left: 20px;
+  opacity: 0.7;
+}
+
+.bottom-border:hover {
+  border-bottom: 2px solid #E75B17;
+  opacity: 0.9;
+  color: black !important;
+}
+
 .padding-img{
   padding-left: 20px;
 }
@@ -2054,22 +2105,21 @@
   
   
   .border-left-biz{
-    border-bottom: solid 4px white !important;  
+    border-left: none !important;
   }
   
   .babiz-list{
-        padding-left: 20px;
-      margin-left: -4.5px;
+        padding-left: 0 !important;
+      margin-left: 0 !important;
     margin-top: 40px;
+    border-left: none !important;
   }
   
   .babiz-list:hover {
-    border-bottom: solid 4px #e75b17 !important;
+    border-bottom: none !important;
+    border-left: none !important;
   }
-  
-  .border-left-biz .active{
-      border-bottom: solid 4px #e75b17 !important;
-  }
+
   .bg-white {
     background: white;
   }

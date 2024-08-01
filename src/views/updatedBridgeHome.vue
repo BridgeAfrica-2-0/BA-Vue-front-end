@@ -157,9 +157,9 @@
           <div class="row">
             <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
               <h3>
-                <span class="m-header-color">Bridge Africa </span>  <br> {{ $t("general.for_busineses") }} 
+                <span class="m-header-color">Bridge Africa </span>  <br> <span style="color: black;">{{ $t("general.for_busineses") }} </span> 
               </h3>
-              <p> {{ $t("general.sell_online_in_person") }}  </p>
+              <p style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
   
               <div class="border-left-biz">   
                 <div class="babiz-list d-flex">
@@ -203,12 +203,12 @@
                 </div>  
               </div>
             </div>
-            <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
+            <div class="col-lg-6 pl-5" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
               <div>
              <video
                 width="100%"
               
-                style="object-fit:contain; border-radius: 10px;  border-radius:10px"
+                style="object-fit:contain; border-radius: 10px;"
                 controls
                 poster="assets/home/ba_business.png"
               >
@@ -223,7 +223,6 @@
   
       <section class="pt-1 pb-1 bg-gradient">
         <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
-          <!-- <h3 class="text-center text-md-left"> <span>  {{ $t("general.About") }}  </span>  {{ $t("general.Us") }}   </h3> -->
           <div class="flex-container">
           <h3>
         <span class="line1">Sales channel</span><br>

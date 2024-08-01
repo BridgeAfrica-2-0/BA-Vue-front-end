@@ -553,13 +553,13 @@
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>7500+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.7k_business") }}</span>
+        <span style="color: black;">{{ $t("general.7k_business") }}</span>
       </span>
     </div>
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>13000+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.13k_customers") }}</span>
+        <span style="color: black;">{{ $t("general.13k_customers") }}</span>
       </span>
     </div>
   </div>
@@ -568,13 +568,13 @@
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>100+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.100_industries") }}</span>
+        <span style="color: black;">{{ $t("general.100_industries") }}</span>
       </span>
     </div>
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>72H</h3>
-        <span style="color:#9F9F9F">{{ $t("general.48h_respond_time") }}</span>
+        <span style="color: black;">{{ $t("general.48h_respond_time") }}</span>
       </span>
     </div>
   </div>
@@ -1574,7 +1574,7 @@
 
 .text {
   font-size: 12px;
-  color: #757575;
+  color: black;
   margin-top: 5px; 
 }
 

@@ -20,13 +20,13 @@
     <footer id="footer">
       <div class="footer-top black-back">
         <div class="container footer-box">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
+          <div class="row p-0">
+            <div class="col-lg-3 col-md-6 p-0 footer-contact">
               <div class="row">
                 <div class="col-8 footer-img-col">
                   <img
                     src="../../assets/img/bavlogo.png"
-                    width="227px"
+                    width="250px"
                     class="size px-n1 px-md-0"
                     alt=""
                   />
@@ -48,7 +48,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">
+              <h4 class="bridge-header text-left white pt-2">
                 {{ $t("home.USEFUL_LINKS") }}
               </h4>
               <ul class="white">
@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">
+              <h4 class="bridge-header text-left white pt-2">
                 {{ $t("home.FOLLOW_US") }}
               </h4>
               <ul class="text-left white ">
@@ -103,7 +103,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">
+              <h4 class="bridge-header text-left white pt-2">
                 {{ $t("home.WORKING_HOURS") }}
               </h4>
               <ul class="white">
@@ -302,7 +302,7 @@ export default {
 .subscription-box input[type="email"] {
   padding: 10px;
   width: 100%;
-  max-width: 60%;
+  max-width: 75%;
   margin-bottom: 10px;
   border: 1px solid #E7E7E7;
   border-radius: 3px;
@@ -340,10 +340,15 @@ export default {
   color: #e75c18 !important;
 }
 .white{
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .over{
+  font-weight: 400 !important;
+}
+
+#footer .footer-top h4 {
+  padding-bottom: 0 !important;
   font-weight: 500 !important;
 }
 

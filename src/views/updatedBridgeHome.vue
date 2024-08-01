@@ -5,6 +5,30 @@
  
 
 
+<!-- <section class="p-0">
+  <div>
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="position-relative">
+          <splide :options="options" class="r-image">
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
+              </div>
+            </splide-slide>
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
+              </div>
+            </splide-slide>
+          </splide>
+          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
 <section class="p-0">
   <div>
     <div class="row">
@@ -18,7 +42,7 @@
             </splide-slide>
             <splide-slide>
               <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 2" class="slide-img">
+                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
               </div>
             </splide-slide>
           </splide>
@@ -29,74 +53,11 @@
   </div>
 </section>
 
-<!-- <section class="product-section">
-  <div class="container">
-    <h2 class="section-title">Our Quality Products</h2>
-    <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-    <div class="button-group">
-      <button class="filter-button active">Available Cameroon</button>
-      <button class="filter-button">Available Worldwide</button>
-    </div>
-    <div class="grid">
-      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-        <img :src="product.image" :alt="product.title">
-        <h3>{{ product.title }}</h3>
-        <p>{{ product.description }}</p>
-        <div class="bottom-info">
-          <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
-
-<!-- <section class="product-section">
-  <div class="container">
-    <h3 class="section-title">Our Quality Products</h3>
-    <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-    <div class="button-group">
-      <button class="filter-button active">Available Cameroon</button>
-      <button class="filter-button">Available Worldwide</button>
-    </div>
-    <div class="grid">
-      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-        <div class="image-container">
-          <img :src="product.image" :alt="product.title" class="product-image">
-        </div>
-        <div class="content-container">
-          <h3>{{ product.title }}</h3>
-          <p>{{ product.description }}</p>
-        </div>
-        <div class="bottom-info">
-          <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 
 <section class="product-section">
   <div class="container">
     <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
     <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-    <!-- <div class="button-group">
-  <div class="button-start">
-    <button class="filter-button">Available Cameroon</button>
-    <button class="filter-button">Available Worldwide</button>
-  </div>
-  <div class="button-end">
-    <button class="filter-button">
-      Sort: Best Match
-      <i class="fas fa-caret-down"></i> 
-    </button>
-    <button class="filter-button"> <i class="fas fa-caret-down"></i></button>
-  </div>
-</div> -->
 <div class="button-group">
   <div class="button-start">
     <button class="filter-button">Available Cameroon</button>
@@ -131,20 +92,9 @@
         </div>
         <div class="bottom-info">
           <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart"><span style="font-size: 12px; font-weight: bold; ">Add to Cart</span><span class="arrow-icon-wrapper">
+          <button class="add-to-cart"><span style="font-size: 12px; font-weight: bold; ">Add to Cart</span><span class="arrow-icon">
               <i class="fas fa-arrow-right"></i>
           </span></button>
-          <!-- <b-button
-          type="submit"
-          variant="primary"
-          block
-          class="mb-3 mt-3 selling-btn"
-          >
-          Start Selling
-          <span class="arrow-icon-wrapper">
-              <i class="fas fa-arrow-right"></i>
-          </span>
-           </b-button> -->
         </div>
       </div>
     </div>
@@ -697,56 +647,56 @@
       return {
         products: [
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p1.png',
           title: 'Set of bags and hats',
           description: 'Hand made set of bags and hats',
           price: '6 000,00 FCFA',
           inStock: true,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p2.png',
           title: 'Set of matching bags and hats',
           description: 'Hand made set of matching bags and hats',
           price: '5 000,00 FCFA',
           inStock: false,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p3.png',
           title: 'Hibiscus',
           description: 'Use this beautiful Hibiscus to keep your office material...',
           price: '5 000,00 FCFA',
           inStock: true,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p1.png',
           title: 'Faugipanier',
           description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
           price: '8 000,00 FCFA',
           inStock: true,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p2.png',
           title: 'Set of bags and hats',
           description: 'Hand made set of bags and hats',
           price: '6 000,00 FCFA',
           inStock: false,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p3.png',
           title: 'Set of matching bags and hats',
           description: 'Hand made set of matching bags and hats',
           price: '5 000,00 FCFA',
           inStock: true,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p1.png',
           title: 'Hibiscus',
           description: 'Use this beautiful Hibiscus to keep your office material...',
           price: '5 000,00 FCFA',
           inStock: false,
         },
         {
-          image: 'assets/home/header_slide_1.png',
+          image: 'assets/home/p2.png',
           title: 'Faugipanier',
           description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
           price: '8 000,00 FCFA',
@@ -1323,14 +1273,14 @@
 
 .sections-title {
   font-size: 24px;
-  color: #333;
+  color: black;
   text-align: center;
   margin-bottom: 10px !important;
 }
 
 .section-description {
   font-size: 16px;
-  color: #666;
+  color: black;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -1360,8 +1310,8 @@
 
 .filter-button.active,
 .filter-button:hover {
-  border: 1px solid #ff9e19;
-  color: #ff9e19;
+  border: 1px solid #E75B17;
+  color: #E75B17;
 }
 
 .filter-button i {
@@ -1399,9 +1349,7 @@
 
 .grid-item {
   background-color: white;
-  /* padding: 15px; */
   border: 1px solid #e0e0e0;
-  border-radius: 10px;
   text-align: center;
   position: relative;
   flex: 1 1 calc(25% - 20px);
@@ -1409,26 +1357,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 6px;
 }
 
 .image-container {
   position: relative;
   width: 100%;
+  padding: 1px 10px;
 }
 
 .product-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px 10px 0 0;
+  height: 200px !important;
+  border-radius: 6px;
 }
 
 .stock-status {
   text-align: left;
-  margin-top: 10px;
   border-radius: 5px;
   font-size: 12px;
   display: flex;
   justify-content: start;
+  margin-bottom: 5px;
 }
 
 .in-stock {
@@ -1450,17 +1399,13 @@
   color: red;
 }
 
-/* .favorite-button:hover {
-  color: #e68a00;
-} */
 
 .content-container {
-  padding: 10px 15px;
-  flex-grow: 1;
+  padding: 0px 15px;
 }
 
 .content-container h3 {
-  font-size: 20px !important;
+  font-size: 17px !important;
   line-height: 20px !important;
   color: #000000;
   text-align: left !important;
@@ -1474,7 +1419,7 @@
 }
 
 .bottom-info {
-  padding: 15px;
+  padding: 2px 15px 10px 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1488,23 +1433,13 @@
 }
 
 .add-to-cart {
-  /* padding: 10px 20px;
-  background-color: #ff9e19;
-  color: white;
-  border: none;
-  border-radius: 5px; */
-  padding: 4px 7px;
+  padding: 5px 7px;
   cursor: pointer;
-
-  width: 115px;
   height:auto;
-  /* background: linear-gradient(to right, #FF9E19, #FF6200); */
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border: none;
   border-radius: 30px;
   color: white;
-  /* font-weight: bold; */
-  /* padding: 10px 20px; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1513,7 +1448,21 @@
 .add-to-cart:hover {
   background-color: #e68a00;
 }
+.arrow-icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+  margin-left: 10px;
+}
 
+.arrow-icon i {
+  color: #FF6200;
+}
 
 
 
@@ -1745,7 +1694,6 @@
   }
   .buy-btn{
      
-    /* height: 47.12px; */
     background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 10px; 
       width: 155px;
@@ -1765,28 +1713,18 @@
   padding-left: 20px !important;
   }
   .selling-btn {
-  /* width: 25%; */
   width: 174px;
-  /* background: linear-gradient(to right, #FF9E19, #FF6200); */
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border: none;
   border-radius: 30px;
   color: white;
-  /* font-weight: bold; */
-  /* padding: 10px 20px; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
 }
 
-/* .selling-btn:hover {
-  background: linear-gradient(to right, #FF6200, #FF9E19);
-} */
 
-.selling-btn i {
-  /* margin-left: 10px; */
-}
 .arrow-icon-wrapper {
   background-color: white;
   border-radius: 50%;
@@ -1802,24 +1740,6 @@
 .arrow-icon-wrapper i {
   color: #FF6200;
 }
-
-  /* .selling-btn{
-    width: 25%;
-  padding: 10px 20px;;
-  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
-  border-radius: 25px;
-  }
-  .selling-btn::after {
-    content: '\2192'; 
-    font-size: 24px;
-    color: black; 
-    right: 10px;
-    width: 50px;
-    height: 40px;
-    background-color: white;
-    border-radius: 50%;
-    align-items: center;
-  } */
   @media only screen and (max-width: 960px) { 
      .main-banner{
       height:400px;
@@ -1883,19 +1803,25 @@
   
   .crtv-ban {
    
-    /* height: 357px; */
       border-radius: 10px;
       border-radius: 20px;
       padding: 2rem;
-      /* background-size: cover;
-      background-repeat: no-repeat; */
-  
   }
-  .crtv-bans {
-  width: 100%;
-  text-align: center;
+.r-image {
+  position: relative;
 }
 
+.crtv-bans {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 700px; 
+}
+.crtv-bans img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
 .slide-img {
   max-width: 100%;
   max-height: 750px;
@@ -1918,7 +1844,6 @@
   color: white;
   border: none !important;
   margin-bottom: 30px;
- 
   border-radius: 5px;
   font-size: 44px;
   font-weight: 600;

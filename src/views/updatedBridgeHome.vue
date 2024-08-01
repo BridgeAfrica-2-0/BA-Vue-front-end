@@ -1694,7 +1694,6 @@
   }
   .buy-btn{
      
-    /* height: 47.12px; */
     background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border-radius: 10px; 
       width: 155px;
@@ -1714,28 +1713,18 @@
   padding-left: 20px !important;
   }
   .selling-btn {
-  /* width: 25%; */
   width: 174px;
-  /* background: linear-gradient(to right, #FF9E19, #FF6200); */
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border: none;
   border-radius: 30px;
   color: white;
-  /* font-weight: bold; */
-  /* padding: 10px 20px; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
 }
 
-/* .selling-btn:hover {
-  background: linear-gradient(to right, #FF6200, #FF9E19);
-} */
 
-.selling-btn i {
-  /* margin-left: 10px; */
-}
 .arrow-icon-wrapper {
   background-color: white;
   border-radius: 50%;
@@ -1751,24 +1740,6 @@
 .arrow-icon-wrapper i {
   color: #FF6200;
 }
-
-  /* .selling-btn{
-    width: 25%;
-  padding: 10px 20px;;
-  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
-  border-radius: 25px;
-  }
-  .selling-btn::after {
-    content: '\2192'; 
-    font-size: 24px;
-    color: black; 
-    right: 10px;
-    width: 50px;
-    height: 40px;
-    background-color: white;
-    border-radius: 50%;
-    align-items: center;
-  } */
   @media only screen and (max-width: 960px) { 
      .main-banner{
       height:400px;
@@ -1832,18 +1803,10 @@
   
   .crtv-ban {
    
-    /* height: 357px; */
       border-radius: 10px;
       border-radius: 20px;
       padding: 2rem;
-      /* background-size: cover;
-      background-repeat: no-repeat; */
-  
   }
-  /* .crtv-bans {
-  width: 100%;
-  text-align: center;
-} */
 .r-image {
   position: relative;
 }
@@ -1852,12 +1815,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 700px; /* Set a fixed height for the image container */
+  height: 700px; 
 }
 .crtv-bans img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure the image covers the container without distortion */
+  object-fit: cover; 
 }
 .slide-img {
   max-width: 100%;
@@ -1871,23 +1834,6 @@
   position: relative;
 }
 
-/* .shop-now-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background-color: transparent !important; 
-  color: white;
-  border: none !important;
-  margin-bottom: 30px;
- 
-  border-radius: 5px;
-  font-size: 44px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 10; 
-} */
 .shop-now-btn {
   position: absolute;
   bottom: 10px;

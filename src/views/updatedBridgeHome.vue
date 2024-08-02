@@ -78,16 +78,16 @@
     <div class="grid">
       <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
         <div class="image-container">
-          <img :src="product.image" :alt="product.title" class="product-image">
+          <img :src="product.picture" :alt="product.name" class="product-image">
           <button class="favorite-button">
             <i class="fas fa-heart"></i>
           </button>
         </div>
         <div class="content-container">
         <div class="stock-status" :class="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
-          {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+          {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
         </div>
-          <h3>{{ product.title }}</h3>
+          <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
         </div>
         <div class="bottom-info">
@@ -655,64 +655,7 @@
   
     data() {
       return {
-        products: [
-        {
-          image: 'assets/home/p1.png',
-          title: 'Set of bags and hats',
-          description: 'Hand made set of bags and hats',
-          price: '6 000,00 FCFA',
-          inStock: true,
-        },
-        {
-          image: 'assets/home/p2.png',
-          title: 'Set of matching bags and hats',
-          description: 'Hand made set of matching bags and hats',
-          price: '5 000,00 FCFA',
-          inStock: false,
-        },
-        {
-          image: 'assets/home/p3.png',
-          title: 'Hibiscus',
-          description: 'Use this beautiful Hibiscus to keep your office material...',
-          price: '5 000,00 FCFA',
-          inStock: true,
-        },
-        {
-          image: 'assets/home/p1.png',
-          title: 'Faugipanier',
-          description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
-          price: '8 000,00 FCFA',
-          inStock: true,
-        },
-        {
-          image: 'assets/home/p2.png',
-          title: 'Set of bags and hats',
-          description: 'Hand made set of bags and hats',
-          price: '6 000,00 FCFA',
-          inStock: false,
-        },
-        {
-          image: 'assets/home/p3.png',
-          title: 'Set of matching bags and hats',
-          description: 'Hand made set of matching bags and hats',
-          price: '5 000,00 FCFA',
-          inStock: true,
-        },
-        {
-          image: 'assets/home/p1.png',
-          title: 'Hibiscus',
-          description: 'Use this beautiful Hibiscus to keep your office material...',
-          price: '5 000,00 FCFA',
-          inStock: false,
-        },
-        {
-          image: 'assets/home/p2.png',
-          title: 'Faugipanier',
-          description: 'Faugipanier D : 27cm H : 35cm Prix : 8 000 FCFA',
-          price: '8 000,00 FCFA',
-          inStock: true,
-        },
-      ],
+        products: [],
         expanded: true,
         location: "",
         word1: "",
@@ -762,7 +705,7 @@
           },
         },
   
-        product:{},
+        product:[],
         viewProduct:false,
   
        

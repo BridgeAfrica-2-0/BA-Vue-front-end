@@ -438,12 +438,12 @@ const routes = [
 
   },
 
-  {
-    path: "/",
-    name: "Bridge-home",
-    component: BridgeHome,
+  // {
+  //   path: "/",
+  //   name: "Bridge-home",
+  //   component: BridgeHome,
 
-  },
+  // },
 
   {
     path: "/blecc",
@@ -453,7 +453,7 @@ const routes = [
   },
   
   {
-    path: "/updatedBridgeHome",
+    path: "/",
     name: "updatedBridgeHome",
     component: updatedBridgeHome,
   },

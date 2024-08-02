@@ -28,12 +28,12 @@
   </div>
 </div>
 </div> -->
-<div class="top-bar d-none d-md-flex justify-content-between align-items-center">
-  <div class="container p-0 m-0 d-flex justify-content-between align-items-center">
+<div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
+  <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
     <div class="contact-info d-flex align-items-center">
-      <div>
-        <span><img src="../../../public/assets/home/phone.png" class="size2" alt=""> +237697157690</span>
-        <span><img src="../../../public/assets/home/email.png" class="size2" alt=""> info@bridgeafrica.com</span>
+      <div class="d-flex">
+        <span class="d-flex justify-content-center align-items-center"><img src="../../../public/assets/home/phone.png" class="size2 mr-2" alt=""><span style="color: #8C8C8C !important"> +237697157690</span></span>
+        <span class="d-flex justify-content-center align-items-center"><img src="../../../public/assets/home/email.png" id="mail-icon" class="mr-2" alt=""><span style="color: #8C8C8C !important">info@bridgeafrica.com</span></span>
       </div>
       <div>
         <span class="media-icons">
@@ -47,13 +47,13 @@
     <div class="language-selection">
       <b-dropdown variant="light">
         <template #button-content>
-          <span class="poslang">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
+          <span class="poslang pr-1">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
         </template>
         <b-dropdown-item @click="change('en')">
-          <img src="../../assets/img/about/en.png" class="size" alt=""> EN
+          <img src="../../assets/img/about/en.png" class="size mr-1" alt=""> English
         </b-dropdown-item>
         <b-dropdown-item @click="change('fr')">
-          <img src="../../assets/img/la-france.png" class="size" alt=""> FR
+          <img src="../../assets/img/la-france.png" class="size mr-1" alt=""> French
         </b-dropdown-item>
       </b-dropdown>
     </div>
@@ -66,7 +66,7 @@
     <div class="container-flex home-nav"> 
       <b-navbar toggleable="lg" class="p-0 ">
         <div class="container p-0 m-0">
-          <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 p-lg-2">
+          <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
             <a class="d-inline-block align-top mt-1 float-left" href="#">
               <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             </a>
@@ -178,7 +178,7 @@ export default {
   data() {
     return {
       img: require("../../assets/img/about/en.png"),
-      lang: "EN",
+      lang: "English",
       keyword: "",
     };
   },
@@ -244,13 +244,25 @@ export default {
 </script>
 
 <style scoped>
-.container
-{
-  max-width: 1440px;;
+
+.contact-info .btn-light {
+  background-color: #F2F2F2 !important;
+  border-color: #F2F2F2 !important;
 }
+
+.d-flex img {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+#mail-icon {
+  width: 28px !important;
+  height: 25px !important;
+  margin-top: 6px;
+}
+
 .top-bar {
   background-color: #F2F2F2;
-  padding: 5px 200px;
   border-bottom: 1px solid #dee2e6;
 }
 .contact-info span {
@@ -280,10 +292,12 @@ export default {
 .size2 {
   height: 20px;
   width: 20px;
+  color: #8C8C8C !important;
 }
 .poslang {
   margin-right: 10px;
   margin-left: -10px;
+  font-weight: 600 !important;
 }
 .media-icon {
   color: #FF9E19;
@@ -347,11 +361,6 @@ a {
 
 .active {
   color: #e75c18 !important;
-}
-
-.container {
-  margin-left: 10px !important;
-  margin-right: 50px !important;
 }
 
 @media only screen and (max-width: 768px) {

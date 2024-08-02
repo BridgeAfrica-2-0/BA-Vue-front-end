@@ -3,7 +3,7 @@
     <div class="accordion" id="accordionExample">
       <div class="card" v-for="(item, index) in items" :key="index">
         <div class="card-header" :id="'heading' + index">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between align-items-center">
             <h6>{{ item.title }}</h6>
             <h2 class="mb-0">
               <button
@@ -85,6 +85,7 @@ export default {
 
 .accordion .card {
   box-shadow: unset !important;
+  padding: 25px 30px;
 }
 
 .accordion .card-header {
@@ -96,6 +97,7 @@ export default {
 .accordion .card-header h6 {
   font-weight: 600;
   color: black;
+  margin-bottom: 0 !important;
 }
 
 .accordion .card-header button {

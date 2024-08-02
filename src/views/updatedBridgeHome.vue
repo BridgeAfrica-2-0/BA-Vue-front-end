@@ -503,7 +503,7 @@
       </h3>
     </div>
     <div class="col-12 pl-0">
-      <h3 style="font-weight: normal; color: black">
+      <h3 class="statistics">
         Some of our statistics on stage performances in Cameroon
       </h3>
     </div>
@@ -1246,11 +1246,21 @@
   background-color: #F2E8FB
 }
 
-.d-flex img {
+/* .d-flex img {
   width : 16px !important;
   height: 16px !important;
   margin-left: 3px;
   margin-top: -4px;
+} */
+ .statistics{
+  font-size: 25px !important;
+  font-weight: normal !important;
+  color: black !important;
+ }
+.logo-img {
+  width: 60px !important;
+  margin-right: 30px;
+  max-width: 100%;
 }
 
 .bottom-border {
@@ -1271,9 +1281,11 @@
 
 /* //////////// */
 .icon-spacing {
-      margin-right: 10px; 
-      width: 20px; 
-      height: 20px; 
+  width: 20px; 
+  width : 16px !important;
+  height: 16px !important;
+  margin-left: 3px;
+  margin-top: -4px;
     }
 /* //////////////// */
 
@@ -1339,7 +1351,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  flex-wrap: wrap; 
 }
 
 .button-start,
@@ -1522,10 +1534,6 @@
   border-left: 4px solid #E75B17; 
   padding-left: 10px; 
   color: black;
-}
-.logo-img{
-  max-height: 50px;
-  max-width: 100%;
 }
 .globe-img{
   height: 488px !important;

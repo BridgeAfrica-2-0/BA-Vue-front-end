@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-md-6 col-lg-6">
         <div class="home-decor">
-          <h3>Home Decor</h3>
+          <h1>Home Decor</h1>
           <i class="fas fa-arrow-right"></i>
         </div>
       </div>
       <div class="col-md-6 col-lg-6">
         <div class="fashion">
-          <h3>Fashion</h3>
+          <h1>Fashion</h1>
           <i class="fas fa-arrow-right"></i>
         </div>
       </div>
@@ -47,18 +47,18 @@ export default {
   opacity: 1
 }
 
-.home-decor h3, .fashion h3,
+.home-decor h1, .fashion h1,
 .home-decor i, .fashion i {
   color: #fff;
   position: absolute;
-  bottom: 80px;  
+  bottom: 140px;  
   left: 50%;
   transform: translateX(-50%);
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+  font-weight: 700;
 }
 
 .home-decor i, .fashion i {
-  bottom: 70px;  
+  bottom: 125px;  
   font-weight: 400 !important;
 }
 

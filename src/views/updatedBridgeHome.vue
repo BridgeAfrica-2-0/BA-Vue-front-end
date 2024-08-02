@@ -4,30 +4,6 @@
   
  
 
-<!-- <section class="p-0">
-  <div>
-    <div class="row">
-      <div class="col-md-12 p-0">
-        <div>
-          <splide :options="options" class="r-image">
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
-                <button class="shop-now-btn">Shop Now</button>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 2" class="slide-img">
-                <button class="shop-now-btn">Shop Now</button>
-              </div>
-            </splide-slide>
-          </splide>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <section class="p-0">
   <div>
@@ -46,7 +22,7 @@
               </div>
             </splide-slide>
           </splide>
-          <button class="shop-now-btn"><span style=" border-bottom: 2px solid white; ">Shop Now</span></button>
+          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
         </div>
       </div>
     </div>
@@ -176,46 +152,63 @@
 </section>
 
 
-
-   
-      <section class="bg-white pb-3 pt-1">       
-        <div class="container pt-2 pt-md-5 pb-3">
-          <div class="market">
-             <h3 data-aos="zoom-in" data-aos-offset="70px" data-aos-duration="1500">
-              <span class="m-header-color"> {{ $t("general.buy_quality_product") }}  </span> {{ $t("general.from_ourMarket_place") }} 
-            </h3>
-            <p class="mt-2"> {{ $t("general.with_over_100_categories") }}
-            </p>
-            <b-tabs    active-nav-item-class="active-tab-item">
-              <b-tab 
-                :title="$t('general.avaliable_in_cameroon')" 
-                title-link-class="title-linkClass"
+<section style="background: #f8f8f8">
+        <div class="container ba-business pt-5 pb-5">
+          <div class="row">
+            <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
+              <h3>
+                <span class="m-header-color">Bridge Africa </span> {{ $t("general.for_busineses") }} 
+              </h3>
+              <p> {{ $t("general.sell_online_in_person") }}  </p>
+  
+              <div class="border-left-biz">   
+              <div class="babiz-list"   >
+                <h5> 
+                  <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"> 
+                  {{ $t("general.business_identity_and_oline") }} 
+                </h5>
+                <p>
+                  {{ $t("general.create_your_business_page") }}
+                </p>
+              </div>
+  
+              <div class="babiz-list "  >
+                <h5> 
+                  <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"> 
+                  {{ $t("general.online_business_database") }} 
+                </h5>
+                <p>
+                 {{ $t("general.make_your_business_visible") }} 
+                </p>
+              </div>  
+              <div class="babiz-list "  >
+                <h5>
+                  <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"> 
+                   {{ $t("general.unified_back_office") }}
+                </h5>
+                <p>
+                   {{ $t("general.easily_manage_your_business") }}                    
+                </p>
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
+              <div>
+             <video
+                width="100%"
+              
+                style="object-fit:contain; border-radius: 10px;  border-radius:10px"
+                controls
+                poster="assets/home/ba_business.png"
               >
-                <div class="product-slide" v-if="products.length"> 
-               <splide :options="poptions" >
-            <splide-slide v-for="item in products" class="p-4" :key="item.id">
-              <div role="button" class="hotbizz text-center" @click="gotoproduct(item)">
-                <b-img  :src="item.picture" class="p-image" />
-                 <div class="hotbizcontent">
-                  <div class="text-center hotbizname">
-                   <h6 class="mt-4"> {{item.price}} Fcfa </h6> 
-                  </div>
-                </div> 
-                </div>
-            </splide-slide>
-          </splide>
-                </div>
-              </b-tab>
-              <b-tab
-                :title="$t('general.avaliable_in_worlwide')" 
-                title-link-class="title-linkClass"
-              >
-                <products type="international" />
-              </b-tab>
-            </b-tabs>
+                <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
+              </video>
+              </div>
+            </div>
           </div>
-        </div>  
+        </div>
       </section>
+  
   
       <section class="pt-1 pb-1 bg-gradient">
         <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
@@ -286,70 +279,11 @@
               <h3>
                 <span> Our </span> <span style="color: black !important">{{ $t("general.categories") }}  </span>
               </h3>
-              <p class="pl-5 pr-5">
+              <p class="pl-5 pr-5" style="color: black !important">
                 {{ $t("general.categories_sub_title") }} 
               </p>
             </div>  
           <Categories />
-        </div>
-      </section>
-  
-
-
-      <section style="background: #f8f8f8">
-        <div class="container ba-business pt-5 pb-5">
-          <div class="row">
-            <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
-              <h3>
-                <span class="m-header-color">Bridge Africa </span> {{ $t("general.for_busineses") }} 
-              </h3>
-              <p> {{ $t("general.sell_online_in_person") }}  </p>
-  
-              <div class="border-left-biz">   
-              <div class="babiz-list"   >
-                <h5> 
-                  <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"> 
-                  {{ $t("general.business_identity_and_oline") }} 
-                </h5>
-                <p>
-                  {{ $t("general.create_your_business_page") }}
-                </p>
-              </div>
-  
-              <div class="babiz-list "  >
-                <h5> 
-                  <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"> 
-                  {{ $t("general.online_business_database") }} 
-                </h5>
-                <p>
-                 {{ $t("general.make_your_business_visible") }} 
-                </p>
-              </div>  
-              <div class="babiz-list "  >
-                <h5>
-                  <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"> 
-                   {{ $t("general.unified_back_office") }}
-                </h5>
-                <p>
-                   {{ $t("general.easily_manage_your_business") }}                    
-                </p>
-              </div>
-              </div>
-            </div>
-            <div class="col-lg-6" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
-              <div>
-             <video
-                width="100%"
-              
-                style="object-fit:contain; border-radius: 10px;  border-radius:10px"
-                controls
-                poster="assets/home/ba_business.png"
-              >
-                <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
-              </video>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
   
@@ -379,7 +313,7 @@
                       name="name"
                       class="ba-input"
                       id="name"
-                      placeholder="Looking for something"
+                      placeholder="Input Product Keyword or Name"
                       v-model="form.pname"
                     />
   
@@ -511,7 +445,6 @@
   
           <div class="col-md-6">
           <div class="hire-div">
-            <!-- <img class="hire-tailor-img" src="assets/home/hire_professional.png" alt=""> -->
              <video
                 width="100%"
               
@@ -528,34 +461,68 @@
   </section>
   <section class="bg-whitee network">
         <div class="container row  "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-          <div class="col-3">
+          <div class="col-2 mt-5">
             <div class="card-container">
   <div class="card">
     <div class="card-content">
-      <img src="assets/home/m_1.png" alt="Icon" class="icon">
-      <span class="percentage">98%</span>
-      <span class="text">Satisfaction</span>
+      <div class="row">
+  <div class="col-4 pr-0">
+    <img src="assets/home/m_1.png" alt="Icon" class="icon">
+  </div>
+  <div class="col-8 card-padding">
+    <div class="d-flex flex-column">
+      <span class="percentage">4</span>
+      <span class="text">Countries</span>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
   <div class="card">
     <div class="card-content">
-      <img src="assets/home/m_2.png" alt="Icon" class="icon">
-      <span class="percentage">98%</span>
-      <span class="text">Satisfaction</span>
+      <div class="row">
+  <div class="col-3 pr-0">
+    <img src="assets/home/m_2.png" alt="Icon" class="icon">
+  </div>
+  <div class="col-9 card-padding">
+    <div class="d-flex flex-column">
+      <span class="percentage pl-1">500+</span>
+      <span class="text">Deals Globally</span>
+    </div>
+  </div>
+</div>
     </div>
   </div>
   <div class="card">
     <div class="card-content">
-      <img src="assets/home/m_3.png" alt="Icon" class="icon">
+      <div class="row">
+  <div class="col-4 pr-0">
+    <img src="assets/home/m_3.png" alt="Icon" class="icon">
+  </div>
+  <div class="col-8 card-padding">
+    <div class="d-flex flex-column">
+      <span class="percentage">70M+</span>
+      <span class="text">Revenue</span>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <div class="row">
+  <div class="col-4 pr-0">
+    <img src="assets/home/m_4.png" alt="Icon" class="icon">
+  </div>
+  <div class="col-8 card-padding">
+    <div class="d-flex flex-column">
       <span class="percentage">98%</span>
       <span class="text">Satisfaction</span>
     </div>
   </div>
-  <div class="card">
-    <div class="card-content">
-      <img src="assets/home/m_3.png" alt="Icon" class="icon">
-      <span class="percentage">98%</span>
-      <span class="text">Satisfaction</span>
+</div>
     </div>
   </div>
 </div>
@@ -566,44 +533,48 @@
             <img src="/assets/home/globe2.png"  alt=""> 
           </div>
           
-          <div class="col-4">
-  <div>
-    <img src="/assets/home/logo.png"  alt="">
-    <h3>
-      <span>{{ $t("general.cameroon_focus") }}</span>
-      Focused {{ $t('network.Marketplace') }}
-    </h3>
-    <h3 style="font-weight: normal;">
-      Some of our statistics on stage performances in Cameroon
-    </h3>
+          <div class="col-5 pl-5">
+  <div class="row">
+    <div class="col-12 d-flex align-items-center pl-0">
+      <img src="/assets/home/new_logo.svg" alt="" class="logo-img">
+      <h3 class="mb-0">
+        <span>{{ $t("general.cameroon_focus") }}</span>
+        <span style="color: black;">Focused {{ $t('network.Marketplace') }}</span>
+      </h3>
+    </div>
+    <div class="col-12 pl-0">
+      <h3 style="font-weight: normal; color: black">
+        Some of our statistics on stage performances in Cameroon
+      </h3>
+    </div>
   </div>
   
-  <div class="row mt-2">
+  <div class="row mt-3">
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>7500+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.7k_business") }}</span>
+        <span style="color: black;">{{ $t("general.7k_business") }}</span>
       </span>
     </div>
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>13000+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.13k_customers") }}</span>
+        <span style="color: black;">{{ $t("general.13k_customers") }}</span>
       </span>
     </div>
   </div>
   
-  <div class="row mt-2">
+  <div class="row mt-5 mb-5">
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>100+</h3>
-        <span style="color:#9F9F9F">{{ $t("general.100_industries") }}</span>
+        <span style="color: black;">{{ $t("general.100_industries") }}</span>
       </span>
     </div>
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>72H</h3>
-        <span style="color:#9F9F9F">{{ $t("general.48h_respond_time") }}</span>
+        <span style="color: black;">{{ $t("general.48h_respond_time") }}</span>
       </span>
     </div>
   </div>
@@ -620,7 +591,7 @@
               <h3>
                 <span> {{ $t("general.digital_education") }}   </span> <span style="color: black !important">{{ $t("general.to_help_you_make_more_money") }}  </span>
               </h3>
-              <p class="pl-5 pr-5">
+              <p class="pl-5 pr-5" style="color: black !important">
                 {{ $t("general.use_our_special_design_training") }} 
               </p>
             </div>  
@@ -660,6 +631,9 @@
       </section>
    
       <SiteFooter />
+      <div class="bottom-bar">
+        <span>©2021 Bridge Africa</span>
+      </div>
       
 
     
@@ -705,7 +679,6 @@
   export default {
     components: {
       SiteHeader,
-      Products,
       Resources,
       TelevisionShow,
       Categories,
@@ -1549,8 +1522,17 @@
   .statistic-box {
   border-left: 4px solid #E75B17; 
   padding-left: 10px; 
+  color: black;
 }
-
+.logo-img{
+  max-height: 50px;
+  max-width: 100%;
+}
+.globe-img{
+  height: 488px !important;
+  width: 488px !important;
+  max-width: 500px;
+}
 .card-container {
   display: flex;
   flex-direction: column;
@@ -1565,7 +1547,7 @@
 .card {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1574,24 +1556,26 @@
 .card-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-
+.card-padding{
+  padding-left: 5px !important;
+  text-align: left;
+}
 .icon {
-  width: 50px; 
+  width: 30px; 
   height: 50px; 
-  margin-bottom: 10px;
 }
 
 .percentage {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: #000;
 }
 
 .text {
-  font-size: 14px;
-  color: #757575;
+  font-size: 12px;
+  color: black;
+  margin-top: 5px; 
 }
 
 
@@ -1933,15 +1917,28 @@
   background-color: transparent !important; 
   color: white;
   border: none !important;
+  margin-bottom: 30px;
  
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 44px;
+  font-weight: 600;
   cursor: pointer;
   z-index: 10; /* Ensure the button is on top */
 }
+.splide__arrow--prev {
+    margin-left: 20px;
+  }
 
-.shop-now-btn:hover {
-  /* background-color: #e68a00; */
+  .splide__arrow--next {
+    margin-right: 20px; 
+  }
+
+.shop-span{
+  padding-bottom: 5px;
+  border-bottom: 2px solid white;
+}
+.shop-span:hover{
+  border-bottom: 2px solid #E75B17;
   color: #E75B17;
 }
   .request-quote {
@@ -2330,6 +2327,14 @@
       padding-left: 5px;
       padding-right: 8px !important;
       }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: center;
+      background-color: #2D2D2D;
+      padding: 5px 0;
+      color: white
+    }
   
   </style>
   

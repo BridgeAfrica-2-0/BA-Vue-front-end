@@ -46,7 +46,9 @@
               </div>
             </splide-slide>
           </splide>
-          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
+          <router-link to="/search">
+            <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -73,7 +75,10 @@
 </div>
 
 <div class="see-all-p">
-  <p>See All Cameroon</p>
+  <router-link to="/search">
+   <p>See All Cameroon</p>
+  </router-link>
+ 
 </div>
     <div class="grid">
       <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
@@ -1249,6 +1254,14 @@
   }
   /* /////// */
   .see-all-p{
+    text-align: right;
+    text-decoration: underline;
+    color: #FF9E19;
+  }
+  .see-all-p a{
+    color: #FF9E19;
+  }
+  .see-all-p :hover{
     text-align: right;
     text-decoration: underline;
     color: #FF9E19;

@@ -50,10 +50,10 @@
           <span class="poslang pr-1">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
         </template>
         <b-dropdown-item @click="change('en')">
-          <img src="../../assets/img/about/en.png" class="size mr-1" alt=""> English
+          English <img src="../../assets/img/about/en.png" class="size ml-2" alt=""> 
         </b-dropdown-item>
         <b-dropdown-item @click="change('fr')">
-          <img src="../../assets/img/la-france.png" class="size mr-1" alt=""> French
+          French <img src="../../assets/img/la-france.png" class="size ml-2" alt=""> 
         </b-dropdown-item>
       </b-dropdown>
     </div>

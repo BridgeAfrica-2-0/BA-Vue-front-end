@@ -37,12 +37,12 @@
           <splide :options="options" class="r-image">
             <splide-slide>
               <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
+                <v-lazy-image src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img"/>
               </div>
             </splide-slide>
             <splide-slide>
               <div class="crtv-bans">
-                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
+                <v-lazy-image src="assets/home/slide2.png" alt="Image 2" class="slide-img"/>
               </div>
             </splide-slide>
           </splide>
@@ -68,9 +68,9 @@
   <div class="button-end">
     <button class="filter-button">
       Sort: Best Match
-      <img src="assets/home/drop_down.svg" alt="Image 1" class="padding-img">
+      <v-lazy-image src="assets/home/drop_down.svg" alt="Image 1" class="padding-img"/>
     </button>
-    <button class="filter-button">  <img src="assets/home/grid_icon.svg" alt="Image 1" ></button>
+    <button class="filter-button">  <v-lazy-image src="assets/home/grid_icon.svg" alt="Image 1" /></button>
   </div>
 </div>
 
@@ -83,7 +83,7 @@
     <div class="grid">
       <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
         <div class="image-container">
-          <img :src="product.picture" :alt="product.name" class="product-image">
+          <v-lazy-image :src="product.picture" :alt="product.name" class="product-image"/>
           <button class="favorite-button">
             <i class="fas fa-heart"></i>
           </button>
@@ -119,7 +119,7 @@
               <div class="border-left-biz">   
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline create-your-shop">
-                    <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -132,7 +132,7 @@
                 </div>
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline ship-globally">
-                    <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -145,7 +145,7 @@
                 </div>
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline get-paid">
-                    <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -205,7 +205,7 @@
           <div class="row h-100">
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500" >
-                <div class="mb-3"> <img src="assets/home/new_about_5.png" alt=""> </div>
+                <div class="mb-3"> <v-lazy-image src="assets/home/new_about_5.png" alt=""/> </div>
                 <h6 class="bold">   {{ $t("general.sell_world_wide") }}  </h6>
                 <p>
                   {{ $t("general.all_in_one") }}
@@ -216,7 +216,7 @@
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
                 <div class="mb-3"> 
-                  <img src="assets/home/new_about_1.png" alt="">
+                  <v-lazy-image src="assets/home/new_about_1.png" alt=""/>
                 </div>
                 <h6 class="bold"> {{ $t("general.buy_world_wide") }} </h6>
                 <p>
@@ -227,7 +227,7 @@
   
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
-                <div class="mb-3"> <img src="assets/home/new_about_3.png" alt=""></div>
+                <div class="mb-3"> <v-lazy-image src="assets/home/new_about_3.png" alt=""/></div>
                 <h6 class="bold"> {{ $t("general.logistics_support") }} </h6>
                 <p>{{ $t("general.we_support_businese_throughout") }}
                 </p>
@@ -256,7 +256,7 @@
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
             <div class="col-lg-4 p-0 h-100 quote-img">
-              <img src="assets/home/quotation.png" alt="">
+              <v-lazy-image src="assets/home/quotation.png" alt=""/>
             </div>
   
             <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
@@ -432,7 +432,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_1.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_1.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -448,7 +448,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-3 pr-0">
-    <img src="assets/home/m_2.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-9 card-padding">
     <div class="d-flex flex-column">
@@ -463,7 +463,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_3.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_3.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -479,7 +479,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_4.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_4.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -495,13 +495,13 @@
 
           </div>
           <div class="col-5">
-            <img src="/assets/home/globe2.png"  alt=""> 
+            <v-lazy-image src="/assets/home/globe2.png"  alt=""/> 
           </div>
           
           <div class="col-5 pl-5">
   <div class="row">
     <div class="col-12 d-flex align-items-center pl-0">
-      <img src="/assets/home/new_logo.svg" alt="" class="logo-img">
+      <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img"/>
       <h3 class="mb-0">
         <span>{{ $t("general.cameroon_focus") }}</span>
         <span style="color: black;">Focused {{ $t('network.Marketplace') }}</span>
@@ -640,6 +640,7 @@
   import TelevisionShow from "../components/televisionShow";
   import Categories from "../components/categories";
   import FAQ from "../components/faq";
+  import VLazyImage from "v-lazy-image/v2";
   
   export default {
     components: {
@@ -649,7 +650,8 @@
       Categories,
       FAQ,
       SiteFooter,
-      LightBox,ProductDetails
+      LightBox,ProductDetails,
+      VLazyImage
     },
   
       mounted() {

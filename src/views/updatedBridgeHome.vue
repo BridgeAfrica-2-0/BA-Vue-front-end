@@ -495,11 +495,11 @@
 
           </div>
           <div class="col-5">
-            <v-lazy-image src="/assets/home/globe2.png"  alt=""/> 
+            <v-lazy-image src="/assets/home/globe.png"  alt=""/> 
           </div>
           
           <div class="col-5 pl-5">
-  <div class="row">
+  <div class="row pt-3">
     <div class="col-12 d-flex align-items-center pl-0">
       <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img"/>
       <h3 class="mb-0">

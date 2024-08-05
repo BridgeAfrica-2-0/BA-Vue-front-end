@@ -16,7 +16,7 @@
           <div class="d-inline-flex">
             <div>
               <div class="center-img">
-                <img
+                <v-lazy-image
                   :src="product.picture"
                   class="r-image cursor-pointer  sizee"
                   @click="productDetails(product)"
@@ -330,7 +330,7 @@
 <script>
 import ProductDetails from "./ProductDetails.vue";
 import { isGuestUser } from "@/helpers";
-
+import VLazyImage from "v-lazy-image/v2";
 export default {
   data() {
     return {
@@ -355,6 +355,7 @@ export default {
   },
   components: {
     ProductDetails,
+    VLazyImage,
   },
 
   

@@ -60,10 +60,10 @@
   <div class="container">
     <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
     <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-<div class="button-group">
-  <div class="button-start">
-    <button class="filter-button">Available Cameroon</button>
-    <button class="filter-button">Available Worldwide</button>
+    <div class="button-group">
+      <div class="button-start">
+    <button class="filter-button" :class="{ active: activeTab === 'cameroon' }" @click="setActiveTab('cameroon')">Available Cameroon</button>
+    <button class="filter-button" :class="{ active: activeTab === 'worldwide' }" @click="setActiveTab('worldwide')">Available Worldwide</button>
   </div>
   <div class="button-end">
     <button class="filter-button">
@@ -72,36 +72,39 @@
     </button>
     <button class="filter-button">  <v-lazy-image src="assets/home/grid_icon.svg" alt="Image 1" /></button>
   </div>
-</div>
+    </div>
 
-<div class="see-all-p">
-  <router-link to="/search">
-   <p>See All Cameroon</p>
-  </router-link>
- 
-</div>
-    <div class="grid">
-      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-        <div class="image-container">
-          <v-lazy-image :src="product.picture" :alt="product.name" class="product-image"/>
-          <button class="favorite-button">
-            <i class="fas fa-heart"></i>
-          </button>
-        </div>
-        <div class="content-container">
-        <div class="stock-status" :class="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
-          {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
-        </div>
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-        </div>
-        <div class="bottom-info">
-          <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart"><span style="font-size: 12px; font-weight: bold; ">Add to Cart</span><span class="arrow-icon">
-              <i class="fas fa-arrow-right"></i>
-          </span></button>
+    <div v-if="activeTab === 'cameroon'">
+      <div class="grid">
+        <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
+          <div class="image-container">
+            <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+            <button class="favorite-button">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="content-container">
+            <div class="stock-status" :class="{'in-stock': product.in_stock, 'out-of-stock': !product.in_stock}">
+              {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description.length > 50 ? product.description.slice(0, 50) + '...' : product.description }}</p>
+          </div>
+          <div class="bottom-info">
+            <span class="price">{{ product.price }} FCFA </span>
+            <button class="add-to-cart">
+              <span style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+              <span class="arrow-icon">
+                <i class="fas fa-arrow-right"></i>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div v-if="activeTab === 'worldwide'">
+      <products type="international" />
     </div>
   </div>
 </section>
@@ -495,11 +498,11 @@
 
           </div>
           <div class="col-5">
-            <v-lazy-image src="/assets/home/globe2.png"  alt=""/> 
+            <v-lazy-image src="/assets/home/globe.png"  alt=""/> 
           </div>
           
           <div class="col-5 pl-5">
-  <div class="row">
+  <div class="row pt-3">
     <div class="col-12 d-flex align-items-center pl-0">
       <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img"/>
       <h3 class="mb-0">
@@ -648,6 +651,7 @@
       Resources,
       TelevisionShow,
       Categories,
+      Products,
       FAQ,
       SiteFooter,
       LightBox,ProductDetails,
@@ -662,6 +666,7 @@
   
     data() {
       return {
+        activeTab: 'cameroon',
         products: [],
         expanded: true,
         location: "",
@@ -947,6 +952,9 @@
   
     methods: {
   
+      setActiveTab(tab) {
+      this.activeTab = tab;
+    },
        gotoproduct(pro){
    
        
@@ -1362,9 +1370,12 @@
 
 /* //////////// */
 .grid {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; 
 }
 
 .grid-item {
@@ -1387,7 +1398,10 @@
 }
 
 .product-image {
-  height: 200px !important;
+  /* height: 200px !important; */
+  width: 100%;
+  height: 50% !important;
+  object-fit: cover;
   border-radius: 6px;
 }
 
@@ -1443,6 +1457,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /*  */
+  justify-content: space-between;
 }
 
 .price {

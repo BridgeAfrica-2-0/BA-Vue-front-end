@@ -155,7 +155,7 @@
               </b-nav-item>
               <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
-                  <router-link :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>

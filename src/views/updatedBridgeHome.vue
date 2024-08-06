@@ -65,19 +65,17 @@
     <button class="filter-button" :class="{ active: activeTab === 'cameroon' }" @click="setActiveTab('cameroon')">Available Cameroon</button>
     <button class="filter-button" :class="{ active: activeTab === 'worldwide' }" @click="setActiveTab('worldwide')">Available Worldwide</button>
   </div>
-  <div class="button-end">
-    <button class="filter-button">
-      Sort: Best Match
-      <v-lazy-image src="assets/home/drop_down.svg" alt="Image 1" class="padding-img"/>
-    </button>
-    <button class="filter-button">  <v-lazy-image src="assets/home/grid_icon.svg" alt="Image 1" /></button>
-  </div>
+  
     </div>
-
     <div v-if="activeTab === 'cameroon'">
+      <div class="see-all-p">
+<router-link to="/search">
+ <p>See All Cameroon</p>
+</router-link>
+</div>
       <div class="grid">
         <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-          <div class="image-container">
+          <div class="image-container mb-2">
             <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
             <button class="favorite-button">
               <i class="fas fa-heart"></i>
@@ -92,7 +90,7 @@
           </div>
           <div class="bottom-info">
             <span class="price">{{ product.price }} FCFA </span>
-            <button class="add-to-cart">
+            <button class="add-to-cart" @click="gotoproduct(product)">
               <span style="font-size: 12px; font-weight: bold;">Add to Cart</span>
               <span class="arrow-icon">
                 <i class="fas fa-arrow-right"></i>
@@ -190,17 +188,19 @@
 
          <p>{{ $t("general.help_small_and_medium_size") }} 
         <br>
-         <b-button
-          type="submit"
-          variant="primary"
-          block
-          class="mb-3 mt-3 selling-btn"
-          >
-          Start Selling
-          <span class="arrow-icon-wrapper">
-              <i class="fas fa-arrow-right"></i>
-          </span>
-           </b-button>
+        <router-link to="/search">
+          <b-button
+           type="submit"
+           variant="primary"
+           block
+           class="mb-3 mt-3 selling-btn"
+           >
+           Start Selling
+           <span class="arrow-icon-wrapper">
+               <i class="fas fa-arrow-right"></i>
+           </span>
+            </b-button>
+        </router-link>
           </p>
           </div>
 
@@ -1394,15 +1394,20 @@
 .image-container {
   position: relative;
   width: 100%;
-  padding: 1px 10px;
+  height: 200px !important;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  /* padding: 1px 10px; */
 }
 
 .product-image {
-  /* height: 200px !important; */
+  height: 200px !important;
   width: 100%;
-  height: 50% !important;
+  /* height: 50% !important; */
   object-fit: cover;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  /* border-radius: 6px; */
 }
 
 .stock-status {

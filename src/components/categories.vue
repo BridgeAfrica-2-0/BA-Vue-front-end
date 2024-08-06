@@ -3,14 +3,18 @@
     <div class="row">
       <div class="col-md-6 col-lg-6">
         <div class="home-decor">
-          <h1>Home Decor</h1>
-          <i class="fas fa-arrow-right"></i>
+          <router-link to="/search">
+            <h1>Home Decor</h1>
+            <i class="fas fa-arrow-right"></i>
+          </router-link>
         </div>
       </div>
       <div class="col-md-6 col-lg-6">
         <div class="fashion">
-          <h1>Fashion</h1>
-          <i class="fas fa-arrow-right"></i>
+          <router-link to="/search">
+            <h1>Fashion</h1>
+            <i class="fas fa-arrow-right"></i>
+          </router-link>
         </div>
       </div>
     </div>

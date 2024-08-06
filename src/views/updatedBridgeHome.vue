@@ -188,17 +188,19 @@
 
          <p>{{ $t("general.help_small_and_medium_size") }} 
         <br>
-         <b-button
-          type="submit"
-          variant="primary"
-          block
-          class="mb-3 mt-3 selling-btn"
-          >
-          Start Selling
-          <span class="arrow-icon-wrapper">
-              <i class="fas fa-arrow-right"></i>
-          </span>
-           </b-button>
+        <router-link to="/search">
+          <b-button
+           type="submit"
+           variant="primary"
+           block
+           class="mb-3 mt-3 selling-btn"
+           >
+           Start Selling
+           <span class="arrow-icon-wrapper">
+               <i class="fas fa-arrow-right"></i>
+           </span>
+            </b-button>
+        </router-link>
           </p>
           </div>
 

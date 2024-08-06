@@ -538,6 +538,7 @@ export default {
              message:"Successfully Send",
             title: "success",
           });
+          this.$router.push("/search");
         })
         .catch((err) => {
           this.sending = false;

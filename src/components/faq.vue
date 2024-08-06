@@ -3,15 +3,14 @@
     <div class="accordion" id="accordionExample">
       <div class="card" v-for="(item, index) in items" :key="index">
         <div class="card-header" :id="'heading' + index">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center" style="cursor: pointer" @click="toggleCollapse(index)"
+                :aria-expanded="expandedIndex === index"
+                :aria-controls="'collapse' + index">
             <h6>{{ item.title }}</h6>
             <h2 class="mb-0">
               <button
                 class="btn btn-block"
                 type="button"
-                @click="toggleCollapse(index)"
-                :aria-expanded="expandedIndex === index"
-                :aria-controls="'collapse' + index"
               >
                 <span v-if="expandedIndex !== index"><i class="fas fa-plus"></i></span>
                 <span v-else><i class="fas fa-times"></i></span>

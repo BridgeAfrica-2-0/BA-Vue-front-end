@@ -28,9 +28,6 @@ import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 
-
-
-
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 
@@ -40,18 +37,16 @@ import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 
-
-
-import myorders from "@/views/myOders"
-import orders from "@/views/orders"
-import notFound from "@/components/404"
+import myorders from "@/views/myOders";
+import orders from "@/views/orders";
+import notFound from "@/components/404";
 
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
 import OrderDetails from "@/views/OrderDetails";
-import businessordersdetail from "@/views/businessordersdetail"
-import businessOwnerOrders from "@/views/businessOwnerOrders"
+import businessordersdetail from "@/views/businessordersdetail";
+import businessOwnerOrders from "@/views/businessOwnerOrders";
 import payment from "@/views/payment";
 
 import memberNetworkFollower from "@/views/memberNetworkFollower";
@@ -65,14 +60,12 @@ import businessVisitor from "@/views/businessVisitor";
 //import networks from "@/views/networks";
 //import search from "@/views/search";
 
-
-const search = () => import('@/views/search');
-const networks = () => import('@/views/networks');
-const businessOwner = () => import('@/views/businessOwner');
- const businessEditor = () => import('@/views/businessEditor');
+const search = () => import("@/views/search");
+const networks = () => import("@/views/networks");
+const businessOwner = () => import("@/views/businessOwner");
+const businessEditor = () => import("@/views/businessEditor");
 // const dashboard = () => import('@/views/dashboard');
 // const dashboard = () => import('@/views/dashboard');
-
 
 // import about from "@/views/about";
 // import contact from "@/views/contact";
@@ -80,13 +73,13 @@ const businessOwner = () => import('@/views/businessOwner');
 
 //import profile_owner from "@/views/profileOwner";
 
-const profile_owner = () => import('@/views/profileOwner');
+const profile_owner = () => import("@/views/profileOwner");
 
-const dashboard = () => import('@/views/dashboard');
-const newdashboard = () => import('@/views/NewDashBoard');
+const dashboard = () => import("@/views/dashboard");
+const newdashboard = () => import("@/views/NewDashBoard");
 
-const about = () => import('@/views/about');
-const contact = () => import('@/views/contact');
+const about = () => import("@/views/about");
+const contact = () => import("@/views/contact");
 
 import cart from "@/views/card";
 
@@ -98,59 +91,53 @@ const routes = [
     name: "notFoundd",
     component: notFound,
   },
- 
 
   {
     path: "/myorders/detail/:id",
     name: "pordersdetail",
     component: OrderDetails,
-     meta: {
+    meta: {
       auth: true,
-     },
+    },
   },
 
   {
     path: "/orders/detail/:id",
     name: "OrderDetail",
     component: OrderDetails,
-     meta: {
-       auth: true,
-     },
+    meta: {
+      auth: true,
+    },
   },
-
 
   {
     path: "oldhome",
     name: "home1",
     component: home1,
-
   },
   {
     path: "/cart",
     name: "cart",
-    component: cart, 
+    component: cart,
     meta: {
       auth: true,
     },
-
   },
   {
-    path: '/about',
-    name: 'about',
+    path: "/about",
+    name: "about",
     component: about,
-   
   },
 
   {
     path: "/quote",
     name: "quote",
     component: Quote,
-
   },
 
   {
-    path: '/contact',
-    name: 'contact',
+    path: "/contact",
+    name: "contact",
     component: contact,
     // meta: {
     //   auth: true,
@@ -168,7 +155,6 @@ const routes = [
     name: "success",
     component: success,
   },
-
 
   {
     path: "/failure",
@@ -192,7 +178,6 @@ const routes = [
     meta: {
       auth: true,
     },
-
   },
 
   {
@@ -238,8 +223,6 @@ const routes = [
     },
   },
 
-  
- 
   {
     path: "/welcome",
     name: "welcome",
@@ -260,7 +243,7 @@ const routes = [
     name: "profile_owner",
     component: profile_owner,
     meta: {
-     // auth: true,
+      // auth: true,
     },
   },
   {
@@ -347,12 +330,9 @@ const routes = [
     name: "Membar Network Follower",
     component: memberNetworkFollower,
     meta: {
-     // auth: true,
+      // auth: true,
     },
-
   },
-
- 
 
   {
     path: "/login",
@@ -360,13 +340,12 @@ const routes = [
     component: Login,
   },
 
-
   {
     path: "/auth/facebook/callback",
     name: "Loginfacebook",
     component: Login,
   },
-   
+
   {
     path: "/auth/google/callback",
     name: "Logingoogle",
@@ -396,7 +375,7 @@ const routes = [
     name: "verifyAccount",
     component: verifyAccount,
     meta: {
-    //  auth: true,
+      //  auth: true,
     },
   },
 
@@ -410,7 +389,7 @@ const routes = [
     name: "RecoverPass3",
     component: RecoverPass3,
   },
-  
+
   {
     path: "/business/:id?",
     name: "BusinessFollower",
@@ -419,7 +398,7 @@ const routes = [
       auth: true,
     },
   },
-  
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -435,33 +414,25 @@ const routes = [
     path: "/search",
     name: "GlobalSearch",
     component: search,
-
   },
 
-  // {
-  //   path: "/",
-  //   name: "Bridge-home",
-  //   component: BridgeHome,
-
-  // },
+  {
+    path: "/",
+    name: "Bridge-home",
+    component: updatedBridgeHome,
+  },
 
   {
     path: "/blecc",
     name: "Blecc",
     component: BridgeHome,
-
-  },
-  
-  {
-    path: "/",
-    name: "updatedBridgeHome",
-    component: updatedBridgeHome,
   },
 
-  
-
-
-
+  // {
+  //   path: "/",
+  //   name: "updatedBridgeHome",
+  //   component: updatedBridgeHome,
+  // },
 
   {
     path: "/services/:id",
@@ -474,10 +445,9 @@ const routes = [
     name: "Follower",
     component: Follower,
     meta: {
-    //  auth: true,
+      //  auth: true,
     },
   },
-  
 
   {
     path: "/search/:id",
@@ -495,7 +465,6 @@ const routes = [
     component: navMessage,
   },
 
- 
   {
     path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",
@@ -511,8 +480,8 @@ const routes = [
     path: "/business/:id/guest",
     name: "BusinessFollowerGuest",
     component: businessFollower,
-    props: { isGuestUser: true }
-  }
+    props: { isGuestUser: true },
+  },
 ];
 
 const router = new VueRouter({
@@ -525,12 +494,11 @@ router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
 
   if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    
-    if (to.name == 'BusinessFollower') {
-      next("/business/"+to.params.id+"/guest");
+    if (to.name == "BusinessFollower") {
+      next("/business/" + to.params.id + "/guest");
       return;
     }
-    
+
     next("/login");
     return;
   }
@@ -540,23 +508,27 @@ router.beforeEach((to, from, next) => {
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-       next("/verify");
+      next("/verify");
     }
   }
-  
-  document.title = (to.name) ? `BrigeAfrica - ${to.name}` : `BrigeAfrica - ${to.name.toLocaleLowerCase()}`
 
-  const metaContent = (to.meta.content) ? to.meta.content : `The Best Communication Platform for Business 
-We operate a 3 in 1 software a service platform, that helps people create websites, access directories, and network. The best part is that the site works online and offline through SMS`
-  
-  document.querySelector('meta[name="description"]').setAttribute('content', metaContent)
-  
+  document.title = to.name
+    ? `BrigeAfrica - ${to.name}`
+    : `BrigeAfrica - ${to.name.toLocaleLowerCase()}`;
+
+  const metaContent = to.meta.content
+    ? to.meta.content
+    : `The Best Communication Platform for Business 
+We operate a 3 in 1 software a service platform, that helps people create websites, access directories, and network. The best part is that the site works online and offline through SMS`;
+
+  document
+    .querySelector('meta[name="description"]')
+    .setAttribute("content", metaContent);
+
   next();
 });
 
-
 router.afterEach((to, from) => {
- 
   const appLoading = document.getElementById("loading-bg");
   if (appLoading) {
     appLoading.style.display = "none";

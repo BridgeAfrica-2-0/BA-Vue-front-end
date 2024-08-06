@@ -1,13 +1,11 @@
-
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
 
-import NotFound from "@/components/NotFoundComponent"
-import NoMoreData from "@/components/businessOwner/PaginationMessage"
-import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+import NotFound from "@/components/NotFoundComponent";
+import NoMoreData from "@/components/businessOwner/PaginationMessage";
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
-
-export { Redis, Pusher } from './notifications.mixins'
+export { Redis, Pusher } from "./notifications.mixins";
 
 export const loader = {
   methods: {
@@ -21,39 +19,38 @@ export const loader = {
       });
     },
     ...mapActions({
-      setLoaderState: "search/LOADING"
-    })
+      setLoaderState: "search/LOADING",
+    }),
   },
   computed: {
     ...mapGetters({
-      loaderState: "search/LOADING"
-    })
+      loaderState: "search/LOADING",
+    }),
   },
   data: () => ({
-    overlay: null
+    overlay: null,
   }),
-
-}
+};
 
 export const search = {
   components: {
     NotFound,
-    ScrollLoader: ClipLoader
+    ScrollLoader: ClipLoader,
   },
   props: {
     title: {
-      type: String
-    }
+      type: String,
+    },
   },
 
   data: () => ({
-    haveNotData: false
+    haveNotData: false,
   }),
 
   destroyed() {
     this.page(1);
-    this.$store.commit('search/RESET_RESULT');
-    window.removeEventListener('scroll', this.onscroll)
+    this.$store.commit("search/RESET_RESULT");
+    window.removeEventListener("scroll", this.onscroll);
   },
 
   computed: {
@@ -66,92 +63,95 @@ export const search = {
     ...mapActions({
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
-  }
-}
+  },
+};
 
 export const NoMoreDataForComment = {
   components: {
-    NoMoreData
+    NoMoreData,
   },
   data: () => ({
     hasData: true,
-    page: 1
-  })
-}
+    page: 1,
+  }),
+};
 
 export const WhoIsIt = {
   computed: {
     ...mapGetters({
-      profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken',
-      isLogin: 'auth/isLogged'
-    })
+      profile: "auth/profilConnected",
+      token: "auth/getAuthToken",
+      isLogin: "auth/isLogged",
+    }),
   },
 
   methods: {
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected",
     }),
     async getAuth() {
-
-      const type = ([
-        'NetworkEditors',
-        'networks',
+      const type = [
+        "NetworkEditors",
+        "networks",
         "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
+        "memberNetwork",
+      ].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
 
-      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
+      const response = await this.$repository.share.WhoIsConnect({
+        networkId: type,
+        type,
+      });
       if (response.success) this.auth(response.data);
-      
     },
   },
 
   created() {
-    if(this.isLogin){    
-    this.getAuth()
-
+    if (this.isLogin) {
+      this.getAuth();
     }
-  }
-}
+  },
+};
 
 export const knowWhoIsConnected = {
-
-
   computed: {
     ...mapGetters({
-      profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken',
-      isLogin: 'auth/isLogged'
-    })
+      profile: "auth/profilConnected",
+      token: "auth/getAuthToken",
+      isLogin: "auth/isLogged",
+    }),
   },
-  
+
   methods: {
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected",
     }),
     async getAuth() {
-      const type = ([
-        'NetworkEditors',
-        'networks',
+      const type = [
+        "NetworkEditors",
+        "networks",
         "Membar Network Follower",
-        "memberNetwork"].includes(this.$route.name)) ? this.$route.params.id : null
+        "memberNetwork",
+      ].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
 
-      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
+      const response = await this.$repository.share.WhoIsConnect({
+        networkId: type,
+        type,
+      });
 
       if (response.success) this.auth(response.data);
-
     },
   },
 
   created() {
-   
-
-    if(this.isLogin){    
-      this.getAuth()
-  
-      }
-  }
-}
+    if (this.isLogin) {
+      this.getAuth();
+    }
+  },
+};
 
 export const commentMixinsBuisness = {
   data() {
@@ -163,7 +163,7 @@ export const commentMixinsBuisness = {
       createPostRequestIsActive: false,
       loadComment: false,
       replyCommentHasBeload: false,
-      loading: false
+      loading: false,
     };
   },
 
@@ -173,7 +173,7 @@ export const commentMixinsBuisness = {
 
   computed: {
     ...mapGetters({
-      profile: 'auth/profilConnected',
+      profile: "auth/profilConnected",
     }),
     icon() {
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
@@ -187,18 +187,21 @@ export const commentMixinsBuisness = {
 
   methods: {
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected",
     }),
 
-    onLike: async function () {
-      let data = { comment: this.comment.id }
+    onLike: async function() {
+      let data = { comment: this.comment.id };
 
-      if ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name))
-        data = Object.assign(data, { network: this.profile.id })
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { network: this.profile.id });
 
       const request = await this.$repository.share.commentLike(data);
 
@@ -208,13 +211,12 @@ export const commentMixinsBuisness = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-              ? this.comment.comment_likes - 1
-              : 0,
+            ? this.comment.comment_likes - 1
+            : 0,
         });
-
     },
 
-    onShowReply: async function () {
+    onShowReply: async function() {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
@@ -228,32 +230,35 @@ export const commentMixinsBuisness = {
         this.page = request.data.length ? this.page + 1 : this.page;
       }
 
-      this.loadComment = false
+      this.loadComment = false;
     },
 
-    onReply: async function () {
+    onReply: async function() {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
-      this.createPostRequestIsActive = true
-      this.loadComment = true
+      this.createPostRequestIsActive = true;
+      this.loadComment = true;
 
-      let data = { comment: this.text }
-      if ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name))
-        data = Object.assign(data, { networkId: this.profile.id })
+      let data = { comment: this.text };
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { networkId: this.profile.id });
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data
+        data,
       });
 
       if (request.success) {
-        this.comments = [request.data, ...this.comments]
+        this.comments = [request.data, ...this.comments];
 
         this.text = "";
 
@@ -262,24 +267,22 @@ export const commentMixinsBuisness = {
         });
       }
 
-      this.createPostRequestIsActive = false
-      this.loadComment = false
+      this.createPostRequestIsActive = false;
+      this.loadComment = false;
     },
 
     showReply() {
       const state = !this.reply;
-      this.reply = state
+      this.reply = state;
 
-      if (!this.replyCommentHasBeload)
-        this.replyCommentHasBeload = true
+      if (!this.replyCommentHasBeload) this.replyCommentHasBeload = true;
 
       if (state) this.onShowReply();
     },
   },
-}
+};
 
 export const commentMixins = {
-
   data() {
     return {
       reply: false,
@@ -304,7 +307,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function () {
+    onLike: async function() {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.id,
         network: this.profile.id,
@@ -316,42 +319,43 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-              ? this.comment.comment_likes - 1
-              : 0,
+            ? this.comment.comment_likes - 1
+            : 0,
         });
     },
 
-    onShowReply: async function () {
-
+    onShowReply: async function() {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
         page: 1,
       });
 
-
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function () {
+    onReply: async function() {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
-      this.createPostRequestIsActive = true
+      this.createPostRequestIsActive = true;
 
-      let data = { comment: this.text }
+      let data = { comment: this.text };
 
-      if ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork"].includes(this.$route.name))
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
         data = Object.assign(data, { networkId: this.$route.params.id });
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data
+        data,
       });
 
       if (request.success) {
@@ -363,7 +367,7 @@ export const commentMixins = {
         });
       }
 
-      this.createPostRequestIsActive = false
+      this.createPostRequestIsActive = false;
     },
 
     showReply() {
@@ -371,34 +375,34 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
-}
+};
 
 export const isYourOwnPostMixins = {
-
   computed: {
     isYourOwnPost() {
-      return ( (this.profile && this.profile.id) == this.item.user_id) && ( (this.profile && this.profile.user_type) == this.item.poster_type)
+      return (
+        (this.profile && this.profile.id) == this.item.user_id &&
+        (this.profile && this.profile.user_type) == this.item.poster_type
+      );
     },
     ...mapGetters({
-      profile: 'auth/profilConnected',
+      profile: "auth/profilConnected",
     }),
-
-  }
-}
+  },
+};
 
 export const PostComponentMixin = {
-
   methods: {
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
-    
+
     mapmediae(media) {
       let mediaarr = [];
 
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -410,66 +414,77 @@ export const PostComponentMixin = {
       let mediaarr = [];
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
 
       return mediaarr;
     },
-  }
-}
+  },
+};
 
 export const AllPostFeatureMixin = {
   mixins: [PostComponentMixin],
-}
-
+};
 
 export const defaultCoverImage = {
-
   data: () => ({
     limit: 1117,
     currentAuthType: null,
     strategy: null,
     isMobile: false,
-    placeholderImage: null
+    placeholderImage: null,
   }),
 
   created() {
     this.strategy = {
-      mobile:{
-        
-        business: () =>  {
-          this.placeholderImage = '/covers/business-msg-en.png'
+      mobile: {
+        business: () => {
+          this.placeholderImage = "/covers/business-msg-en.png";
           return "fr" == this.$i18n.locale
-            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
-            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+            ? [
+                "/covers/business-one.png",
+                "/covers/business-two.jpg",
+                "/covers/business-tree.jpg",
+              ]
+            : [
+                "/covers/business-one.png",
+                "/covers/business-two.jpg",
+                "/covers/business-tree.jpg",
+              ];
         },
-        
-        profile: () => { 
-          return "fr" == this.$i18n.locale
-          ? ['/covers/profile mobile FR.png']
-          : ['/covers/profile mobile.png']
-        }
 
-      },
-
-      desktop:{
-        
-        business: () =>  {
-          this.placeholderImage = '/covers/business-msg-en.png'
-          return "fr" == this.$i18n.locale
-            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
-            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
-        },
-        
         profile: () => {
           return "fr" == this.$i18n.locale
-          ? ['/covers/profile FR.png']
-          : ['/covers/profile.png']
-        }
-      }
-    }
+            ? ["/covers/profile mobile FR.png"]
+            : ["/covers/profile mobile.png"];
+        },
+      },
+
+      desktop: {
+        business: () => {
+          this.placeholderImage = "/covers/business-msg-en.png";
+          return "fr" == this.$i18n.locale
+            ? [
+                "/covers/business-one.png",
+                "/covers/business-two.jpg",
+                "/covers/business-tree.jpg",
+              ]
+            : [
+                "/covers/business-one.png",
+                "/covers/business-two.jpg",
+                "/covers/business-tree.jpg",
+              ];
+        },
+
+        profile: () => {
+          return "fr" == this.$i18n.locale
+            ? ["/covers/profile FR.png"]
+            : ["/covers/profile.png"];
+        },
+      },
+    };
 
     window.addEventListener("resize", this.onChangeSize);
   },
@@ -479,49 +494,48 @@ export const defaultCoverImage = {
   },
 
   watch: {
-    "$i18n.locale": function(){
-
-    }
+    "$i18n.locale": function() {},
   },
 
-  computed:{
-    
-    getPlaceHolderImage(){
+  computed: {
+    getPlaceHolderImage() {
       return this.placeholderImage;
     },
 
-    getCustomCover(){
-      try{
-        return this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]()
-      }catch(error){
-        console.log(error)
-      }  
-    }
+    getCustomCover() {
+      try {
+        return this.strategy[this.isMobile ? "mobile" : "desktop"][
+          this.currentAuthType
+        ]();
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
-  
+
   methods: {
     onChangeSize(e) {
       const newWidth = document.documentElement.clientWidth;
-      this.updateStatus(newWidth)
+      this.updateStatus(newWidth);
     },
 
-    updateStatus(width){
-      this.isMobile = (width <= this.limit) ? true : false
+    updateStatus(width) {
+      this.isMobile = width <= this.limit ? true : false;
     },
-
-  }
-}
+  },
+};
 
 export const ResizeMediaImage = {
-
   computed: {
     getStyle() {
-      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 160px !important;height: 160px !important"
-    }
+      return ["network"].includes(this.type)
+        ? "width: 226px !important;height: 226px !important"
+        : "width: 160px !important;height: 160px !important";
+    },
   },
 
-  data:() => ({
-    style: null
+  data: () => ({
+    style: null,
   }),
 
   mounted() {
@@ -532,11 +546,10 @@ export const ResizeMediaImage = {
     window.removeEventListener("resize", this.onResize);
   },
 
-
   methods: {
-    onResize(){
+    onResize() {
       const newWidth = document.documentElement.clientWidth;
       //console.log(newWidth)
-    }
-  }
-}
+    },
+  },
+};

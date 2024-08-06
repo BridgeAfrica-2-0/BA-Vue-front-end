@@ -129,7 +129,7 @@
                     <router-link
                       :to="{ name: 'Bridge-home' }"
                       :class="
-                        currentRouteName == 'updatedBridgeHome'
+                        currentRouteName == 'Bridge-home'
                           ? 'active'
                           : 'inactive'
                       "
@@ -280,7 +280,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -290,9 +290,6 @@ export default {
       keyword: "",
     };
   },
-  // created() {
-  //   return this.$store.getters["auth/isLogged"];
-  // },
   computed: {
     currentRouteName() {
       return this.$route.name;

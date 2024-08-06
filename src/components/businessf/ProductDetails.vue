@@ -7,35 +7,39 @@
     title="Product Details"
     @close="closeModal"
   >
-     
-
-   <LightBox
+    <LightBox
       ref="lightboxh"
-      :media="[{
+      :media="[
+        {
           type: 'image',
           thumb: product.picture,
-          src:product.picture,
+          src: product.picture,
           id: 'fTs87IawpN4',
-        },]"
+        },
+      ]"
       :show-caption="true"
       :show-light-box="false"
-     
-   ></LightBox>
+    ></LightBox>
 
-    <b-container> 
+    <b-container>
       <b-row>
         <b-col cols="12" sm="12" md="5">
           <!-- <ProductCaroussel :productImages="[{ img: product.picture }]" /> -->
-          <b-img :src="product.picture" class="w-100" @click="$refs.lightboxh.showImage(0);" > </b-img>
+          <b-img
+            :src="product.picture"
+            class="w-100"
+            @click="$refs.lightboxh.showImage(0)"
+          >
+          </b-img>
         </b-col>
         <b-col cols="12" sm="12" md="7">
           <div>
             <h4 class="">{{ product.name }}</h4>
             <span class="text-success" v-if="product.in_stock">In Stock</span>
             <span class="text-danger" v-else>Out of stock</span>
-            <h4 class=""> {{ formatMoney(Number(product.price)) }} </h4>
+            <h4 class="">{{ formatMoney(Number(product.price)) }}</h4>
           </div>
-          <hr class="h-divider" />    
+          <hr class="h-divider" />
           <div>
             <h4>{{ $t("general.Product_Desciption") }}</h4>
             <p class="text-justify">
@@ -52,21 +56,23 @@
               justify-content-between
               align-items-center
             "
-          > 
+          >
             <BtnCtaMessage
-              v-if=" product.user_package_name == 'basic'"  :element="product"
+              v-if="product.user_package_name == 'basic'"
+              :element="product"
               :isProduct="true"
               :buyNow="true"
               type="business"
             />
 
-            <b-button @click="handleAddToCard"
+            <b-button
+              @click="handleAddToCard"
               v-else-if="product.user_package_name == 'premium'"
               variant="primary"
               class="font-weight-light shadow-sm"
-            > 
-            <span>{{ $t("general.Buy_Now") }}</span>
-            </b-button>   
+            >
+              <span>{{ $t("general.Buy_Now") }}</span>
+            </b-button>
 
             <b-button
               variant="light"
@@ -89,7 +95,7 @@
 //import ProductCaroussel from "./ProductCaroussel";
 import LightBox from "vue-it-bigger";
 import ProductComments from "./ProductComments";
-import { isGuestUser } from "@/helpers"; 
+import { isGuestUser } from "@/helpers";
 
 export default {
   name: "ProductDetails",
@@ -99,13 +105,14 @@ export default {
       default: false,
     },
     product: {
-      type: Object,
+      type: [Array, Object],
       required: true,
     },
   },
   components: {
-   // ProductCaroussel,
-    ProductComments, LightBox
+    // ProductCaroussel,
+    ProductComments,
+    LightBox,
   },
   data() {
     return {
@@ -116,30 +123,25 @@ export default {
       }),
       canShowModal: false,
       packageProduct: "basic",
-      isGuestUser: isGuestUser
+      isGuestUser: isGuestUser,
     };
   },
   computed: {
-      getStatus() {
+    getStatus() {
       return this.$store.state.cart.status;
     },
   },
   methods: {
-
-    
-    async  handleAddToCard() {
-     
-  
-     await this.$store
+    async handleAddToCard() {
+      await this.$store
         .dispatch("cart/addToCart", this.product)
         .then((response) => {
-        
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,
           });
 
-           this.$router.push({ name: "payment" });
+          this.$router.push({ name: "payment" });
         })
         .catch((err) => {
           console.log({ err: err });
@@ -171,15 +173,17 @@ export default {
     },
   },
   mounted() {
-    const dispatchMethod = this.isGuestUser ? 'getProductDetailsForGuest' : 'getProductDetails';
-    
+    const dispatchMethod = this.isGuestUser
+      ? "getProductDetailsForGuest"
+      : "getProductDetails";
+
     //get prooduct package type
 
     // if(this.product){
     // this.$store
     //   .dispatch("productDetails/"+dispatchMethod, this.product.id)
     //   .then((product) => {
-    //     if(product){ 
+    //     if(product){
     //     this.packageProduct = product.package[0] || this.packageProduct;
     //     console.log("Package for product : ", this.packageProduct);
     //     }

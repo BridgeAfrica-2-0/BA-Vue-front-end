@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Top Bar with Contact Information and Language Selection -->
-<!-- <div class="top-bar d-flex justify-content-between align-items-center">
+    <!-- <div class="top-bar d-flex justify-content-between align-items-center">
   <div class="container p-0 m-0">
   <div class="contact-info">
     <span> <img src="../../../public//assets//home/phone.png" class="size2" alt=""> +123 456 7890</span>
@@ -28,69 +28,137 @@
   </div>
 </div>
 </div> -->
-<div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
-  <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
-    <div class="contact-info d-flex align-items-center">
-      <div class="d-flex">
-        <span class="d-flex justify-content-center align-items-center"><img src="../../../public/assets/home/phone.png" class="size2 mr-2" alt=""><span style="color: #8C8C8C !important"> +237697157690</span></span>
-        <span class="d-flex justify-content-center align-items-center"><img src="../../../public/assets/home/email.png" id="mail-icon" class="mr-2" alt=""><span style="color: #8C8C8C !important">info@bridgeafrica.com</span></span>
-      </div>
-      <div>
-        <span class="media-icons">
-          <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i class="fab fa-youtube"></i></a>
-        </span>
+    <div
+      class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto"
+    >
+      <div
+        class="container p-0 m-auto d-flex justify-content-between align-items-center"
+      >
+        <div class="contact-info d-flex align-items-center">
+          <div class="d-flex">
+            <span class="d-flex justify-content-center align-items-center"
+              ><img
+                src="../../../public/assets/home/phone.png"
+                class="size2 mr-2"
+                alt=""
+              /><span style="color: #8C8C8C !important">
+                +237697157690</span
+              ></span
+            >
+            <span class="d-flex justify-content-center align-items-center"
+              ><img
+                src="../../../public/assets/home/email.png"
+                id="mail-icon"
+                class="mr-2"
+                alt=""
+              /><span style="color: #8C8C8C !important"
+                >info@bridgeafrica.com</span
+              ></span
+            >
+          </div>
+          <div>
+            <span class="media-icons">
+              <a href="https://twitter.com/bridgeafricacom" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="http://facebook.com/bridgeafricacom" target="_blank"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://instagram.com/bridgeafricacom" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
+                target="_blank"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </span>
+          </div>
+        </div>
+        <div class="language-selection">
+          <b-dropdown variant="light">
+            <template #button-content>
+              <span class="poslang pr-1">{{ lang }}</span>
+              <img :src="img" class="size poslang" alt="" />
+            </template>
+            <b-dropdown-item @click="change('en')">
+              <img
+                src="../../assets/img/about/en.png"
+                class="size mr-1"
+                alt=""
+              />
+              English
+            </b-dropdown-item>
+            <b-dropdown-item @click="change('fr')">
+              <img
+                src="../../assets/img/la-france.png"
+                class="size mr-1"
+                alt=""
+              />
+              French
+            </b-dropdown-item>
+          </b-dropdown>
+        </div>
       </div>
     </div>
-    <div class="language-selection">
-      <b-dropdown variant="light">
-        <template #button-content>
-          <span class="poslang pr-1">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
-        </template>
-        <b-dropdown-item @click="change('en')">
-          <img src="../../assets/img/about/en.png" class="size mr-1" alt=""> English
-        </b-dropdown-item>
-        <b-dropdown-item @click="change('fr')">
-          <img src="../../assets/img/la-france.png" class="size mr-1" alt=""> French
-        </b-dropdown-item>
-      </b-dropdown>
-    </div>
-  </div>
-</div>
-
-
 
     <!-- Header Bar -->
-    <div class="container-flex home-nav"> 
+    <div class="container-flex home-nav">
       <b-navbar toggleable="lg" class="p-0 ">
         <div class="container p-0 m-0">
           <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
             <a class="d-inline-block align-top mt-1 float-left" href="#">
-              <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
+              <img
+                src="@/assets/logo.png"
+                alt=""
+                class="balogo desktop mobile1"
+                loading="lazy"
+              />
             </a>
           </div>
-          
+
           <div class="d-flex w-100 p-0">
-            <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
+            <b-navbar-toggle
+              target="nav-collapse"
+              class="b-none"
+            ></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav class="mr-auto">
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'updatedBridgeHome' ? 'active' : 'inactive'">{{ $t("general.Home") }}</router-link>
+                    <router-link
+                      :to="{ name: 'Bridge-home' }"
+                      :class="
+                        currentRouteName == 'updatedBridgeHome'
+                          ? 'active'
+                          : 'inactive'
+                      "
+                      >{{ $t("general.Home") }}</router-link
+                    >
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'">{{ $t("general.About_Us") }}</router-link>
+                    <router-link
+                      :to="{ name: 'about' }"
+                      :class="
+                        currentRouteName == 'about' ? 'active' : 'inactive'
+                      "
+                      >{{ $t("general.About_Us") }}</router-link
+                    >
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'">{{ $t("general.Contact_Us") }}</router-link>
+                    <router-link
+                      :to="{ name: 'contact' }"
+                      :class="
+                        currentRouteName == 'contact' ? 'active' : 'inactive'
+                      "
+                      >{{ $t("general.Contact_Us") }}</router-link
+                    >
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
@@ -98,26 +166,39 @@
                 <div class="d-block d-lg-none">
                   <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
                     <span class="nav-span">
-                      <router-link class="inactive" :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
+                      <router-link class="inactive" :to="{ name: 'signup' }">{{
+                        $t("general.Sign_Up")
+                      }}</router-link>
                     </span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
                   <b-nav-item v-if="islogin" class="ml-md-1 text-center">
                     <span class="nav-span">
-                      <router-link :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
+                      <router-link :to="{ name: 'dashboard' }">{{
+                        $t("general.dashboard")
+                      }}</router-link>
                     </span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
                   <b-nav-item class="ml-md-1">
-                    <div class="border-right" style="border-right:1px solid black"></div>
+                    <div
+                      class="border-right"
+                      style="border-right:1px solid black"
+                    ></div>
                   </b-nav-item>
                   <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
                     <span class="nav-span">
-                      <router-link class="inactive" :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
+                      <router-link class="inactive" :to="{ name: 'Login' }">{{
+                        $t("general.Login")
+                      }}</router-link>
                     </span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
-                  <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 text-center">
+                  <b-nav-item
+                    v-if="islogin"
+                    @click="logout"
+                    class="ml-md-1 text-center"
+                  >
                     <span class="nav-span">{{ $t("general.Logout") }}</span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
@@ -128,34 +209,61 @@
               <b-nav-item class="ml-md-1">
                 <b-input-group class="binput">
                   <b-input-group-prepend @click="Search">
-                    <div class="border" style="color: white !important; background-color: #fff">
-                      <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
+                    <div
+                      class="border"
+                      style="color: white !important; background-color: #fff"
+                    >
+                      <b-icon
+                        style="color: #DDDDDD"
+                        class="mt-2 ml-2"
+                        icon="search"
+                      ></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input v-on:keyup.enter='Search' class="search" style="border-left:none" type="search" v-model="keyword" placeholder="Search"></b-form-input>
+                  <b-form-input
+                    v-on:keyup.enter="Search"
+                    class="search"
+                    style="border-left:none"
+                    type="search"
+                    v-model="keyword"
+                    placeholder="Search"
+                  ></b-form-input>
                 </b-input-group>
               </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto">
                 <span class="nav-span" style="color:#455a64">
-                  <img src="../../assets/user.svg" alt="User Icon" id="user-icon">
+                  <img
+                    src="../../assets/user.svg"
+                    alt="User Icon"
+                    id="user-icon"
+                  />
                 </span>
               </b-nav-item>
               <b-nav-item v-if="!islogin" class="m-auto">
                 <span class="nav-span">
-                  <router-link class="inactive" :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'signup' }">{{
+                    $t("general.Sign_Up")
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-              <div class="m-auto py-1" style="height: 15px; border-right: 2px solid #282828"></div>
+              <div
+                class="m-auto py-1"
+                style="height: 15px; border-right: 2px solid #282828"
+              ></div>
               <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
-                  <router-link class="inactive" :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'Login' }">{{
+                    $t("general.Login")
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
               <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
-                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                    $t("general.dashboard")
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -182,9 +290,9 @@ export default {
       keyword: "",
     };
   },
-  created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
-  },
+  // created() {
+  //   return this.$store.getters["auth/isLogged"];
+  // },
   computed: {
     currentRouteName() {
       return this.$route.name;
@@ -197,7 +305,7 @@ export default {
     ...mapActions({
       Logout: "auth/logout",
     }),
-    logout: async function () {
+    logout: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -205,7 +313,10 @@ export default {
         color: "#e75c18",
       });
 
-      const requestForReset = await this.$repository.share.switch(null, "reset");
+      const requestForReset = await this.$repository.share.switch(
+        null,
+        "reset"
+      );
 
       if (requestForReset.success) {
         const response = await this.$repository.notification.logOut();
@@ -244,7 +355,6 @@ export default {
 </script>
 
 <style scoped>
-
 li .nav-link:hover {
   background-color: none !important;
 }
@@ -254,11 +364,11 @@ li .nav-link:hover {
 }
 
 .form-control:focus {
-  border-color: #CCCCCC !important
+  border-color: #cccccc !important;
 }
 
 .search::placeholder {
-  color: #DDDDDD;
+  color: #dddddd;
 }
 
 .search:hover {
@@ -271,8 +381,8 @@ li .nav-link:hover {
 }
 
 .contact-info .btn-light {
-  background-color: #F2F2F2 !important;
-  border-color: #F2F2F2 !important;
+  background-color: #f2f2f2 !important;
+  border-color: #f2f2f2 !important;
 }
 
 .d-flex img {
@@ -287,7 +397,7 @@ li .nav-link:hover {
 }
 
 .top-bar {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   border-bottom: 1px solid #dee2e6;
 }
 .contact-info span {
@@ -297,18 +407,18 @@ li .nav-link:hover {
 }
 .contact-info i {
   margin-right: 5px;
-  color: #8C8C8C;
+  color: #8c8c8c;
 }
 .contact-info a {
   margin-left: 10px;
-  color: #FF9E19;
+  color: #ff9e19;
 }
 .media-icons i {
-  color: #FF9E19;
+  color: #ff9e19;
   margin-left: 15px;
 }
 .contact-info a:hover {
-  color: #FF9E19;
+  color: #ff9e19;
 }
 .size {
   height: 15px;
@@ -317,7 +427,7 @@ li .nav-link:hover {
 .size2 {
   height: 20px;
   width: 20px;
-  color: #8C8C8C !important;
+  color: #8c8c8c !important;
 }
 .poslang {
   margin-right: 10px;
@@ -325,7 +435,7 @@ li .nav-link:hover {
   font-weight: 600 !important;
 }
 .media-icon {
-  color: #FF9E19;
+  color: #ff9e19;
 }
 
 .language-selection {
@@ -342,11 +452,11 @@ a {
   color: #455a64 !important;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .b-none {
   border: none !important;
@@ -416,12 +526,12 @@ a {
   }
 
   .navbar-toggler {
-    padding: .25rem .75rem;
+    padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     position: absolute !important;
     top: 18px !important;
     right: 13px !important;
@@ -445,44 +555,44 @@ a {
 
 @media (max-width: 768px) {
   .top-bar {
-    padding: 5px 20px; 
+    padding: 5px 20px;
   }
 
   .contact-info span {
-    margin-right: 15px; 
+    margin-right: 15px;
   }
 
   .media-icons i {
-    margin-left: 10px; 
+    margin-left: 10px;
   }
 }
 
 @media (max-width: 576px) {
   .top-bar {
-    flex-direction: row; 
+    flex-direction: row;
     align-items: flex-start;
-    padding: 10px 20px; 
+    padding: 10px 20px;
   }
 
   .contact-info {
-    flex-direction: column; 
+    flex-direction: column;
     align-items: flex-start;
   }
 
   .contact-info span {
-    margin-bottom: 10px; 
-    margin-right: 0; 
+    margin-bottom: 10px;
+    margin-right: 0;
   }
 
   .media-icons {
     display: flex;
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
     margin-bottom: 10px;
   }
 
   .media-icons i {
-    margin-left: 0; 
-    margin-right: 10px; 
+    margin-left: 0;
+    margin-right: 10px;
   }
 }
 </style>

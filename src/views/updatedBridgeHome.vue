@@ -37,12 +37,12 @@
           <splide :options="options" class="r-image">
             <splide-slide>
               <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
+                <v-lazy-image src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img"/>
               </div>
             </splide-slide>
             <splide-slide>
               <div class="crtv-bans">
-                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
+                <v-lazy-image src="assets/home/slide2.png" alt="Image 2" class="slide-img"/>
               </div>
             </splide-slide>
           </splide>
@@ -60,48 +60,49 @@
   <div class="container">
     <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
     <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
-<div class="button-group">
-  <div class="button-start">
-    <button class="filter-button">Available Cameroon</button>
-    <button class="filter-button">Available Worldwide</button>
+    <div class="button-group">
+      <div class="button-start">
+    <button class="filter-button" :class="{ active: activeTab === 'cameroon' }" @click="setActiveTab('cameroon')">Available Cameroon</button>
+    <button class="filter-button" :class="{ active: activeTab === 'worldwide' }" @click="setActiveTab('worldwide')">Available Worldwide</button>
   </div>
-  <div class="button-end">
-    <button class="filter-button">
-      Sort: Best Match
-      <img src="assets/home/drop_down.svg" alt="Image 1" class="padding-img">
-    </button>
-    <button class="filter-button">  <img src="assets/home/grid_icon.svg" alt="Image 1" ></button>
-  </div>
+  
+    </div>
+    <div v-if="activeTab === 'cameroon'">
+      <div class="see-all-p">
+<router-link to="/search">
+ <p>See All Cameroon</p>
+</router-link>
 </div>
-
-<div class="see-all-p">
-  <router-link to="/search">
-   <p>See All Cameroon</p>
-  </router-link>
- 
-</div>
-    <div class="grid">
-      <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-        <div class="image-container">
-          <img :src="product.picture" :alt="product.name" class="product-image">
-          <button class="favorite-button">
-            <i class="fas fa-heart"></i>
-          </button>
-        </div>
-        <div class="content-container">
-        <div class="stock-status" :class="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
-          {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
-        </div>
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-        </div>
-        <div class="bottom-info">
-          <span class="price">{{ product.price }}</span>
-          <button class="add-to-cart"><span style="font-size: 12px; font-weight: bold; ">Add to Cart</span><span class="arrow-icon">
-              <i class="fas fa-arrow-right"></i>
-          </span></button>
+      <div class="grid">
+        <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
+          <div class="image-container mb-2">
+            <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+            <button class="favorite-button">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="content-container">
+            <div class="stock-status" :class="{'in-stock': product.in_stock, 'out-of-stock': !product.in_stock}">
+              {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description.length > 50 ? product.description.slice(0, 50) + '...' : product.description }}</p>
+          </div>
+          <div class="bottom-info">
+            <span class="price">{{ product.price }} FCFA </span>
+            <button class="add-to-cart" @click="gotoproduct(product)">
+              <span style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+              <span class="arrow-icon">
+                <i class="fas fa-arrow-right"></i>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div v-if="activeTab === 'worldwide'">
+      <products type="international" />
     </div>
   </div>
 </section>
@@ -119,7 +120,7 @@
               <div class="border-left-biz">   
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline create-your-shop">
-                    <img src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -132,7 +133,7 @@
                 </div>
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline ship-globally">
-                    <img src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -145,7 +146,7 @@
                 </div>
                 <div class="babiz-list d-flex">
                   <span class="p-1 d-inline get-paid">
-                    <img src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing">
+                    <v-lazy-image src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
                     <h5> 
@@ -187,17 +188,19 @@
 
          <p>{{ $t("general.help_small_and_medium_size") }} 
         <br>
-         <b-button
-          type="submit"
-          variant="primary"
-          block
-          class="mb-3 mt-3 selling-btn"
-          >
-          Start Selling
-          <span class="arrow-icon-wrapper">
-              <i class="fas fa-arrow-right"></i>
-          </span>
-           </b-button>
+        <router-link to="/search">
+          <b-button
+           type="submit"
+           variant="primary"
+           block
+           class="mb-3 mt-3 selling-btn"
+           >
+           Start Selling
+           <span class="arrow-icon-wrapper">
+               <i class="fas fa-arrow-right"></i>
+           </span>
+            </b-button>
+        </router-link>
           </p>
           </div>
 
@@ -205,7 +208,7 @@
           <div class="row h-100">
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500" >
-                <div class="mb-3"> <img src="assets/home/new_about_5.png" alt=""> </div>
+                <div class="mb-3"> <v-lazy-image src="assets/home/new_about_5.png" alt=""/> </div>
                 <h6 class="bold">   {{ $t("general.sell_world_wide") }}  </h6>
                 <p>
                   {{ $t("general.all_in_one") }}
@@ -216,7 +219,7 @@
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
                 <div class="mb-3"> 
-                  <img src="assets/home/new_about_1.png" alt="">
+                  <v-lazy-image src="assets/home/new_about_1.png" alt=""/>
                 </div>
                 <h6 class="bold"> {{ $t("general.buy_world_wide") }} </h6>
                 <p>
@@ -227,7 +230,7 @@
   
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
-                <div class="mb-3"> <img src="assets/home/new_about_3.png" alt=""></div>
+                <div class="mb-3"> <v-lazy-image src="assets/home/new_about_3.png" alt=""/></div>
                 <h6 class="bold"> {{ $t("general.logistics_support") }} </h6>
                 <p>{{ $t("general.we_support_businese_throughout") }}
                 </p>
@@ -256,7 +259,7 @@
         <div class="container mt-0 p-0"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="row mt-0">
             <div class="col-lg-4 p-0 h-100 quote-img">
-              <img src="assets/home/quotation.png" alt="">
+              <v-lazy-image src="assets/home/quotation.png" alt=""/>
             </div>
   
             <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
@@ -432,7 +435,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_1.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_1.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -448,7 +451,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-3 pr-0">
-    <img src="assets/home/m_2.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-9 card-padding">
     <div class="d-flex flex-column">
@@ -463,7 +466,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_3.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_3.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -479,7 +482,7 @@
     <div class="card-content">
       <div class="row">
   <div class="col-4 pr-0">
-    <img src="assets/home/m_4.png" alt="Icon" class="icon">
+    <v-lazy-image src="assets/home/m_4.png" alt="Icon" class="icon"/>
   </div>
   <div class="col-8 card-padding">
     <div class="d-flex flex-column">
@@ -495,13 +498,13 @@
 
           </div>
           <div class="col-5">
-            <img src="/assets/home/globe2.png"  alt=""> 
+            <v-lazy-image src="/assets/home/globe.png"  alt=""/> 
           </div>
           
           <div class="col-5 pl-5">
-  <div class="row">
+  <div class="row pt-3">
     <div class="col-12 d-flex align-items-center pl-0">
-      <img src="/assets/home/new_logo.svg" alt="" class="logo-img">
+      <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img"/>
       <h3 class="mb-0">
         <span>{{ $t("general.cameroon_focus") }}</span>
         <span style="color: black;">Focused {{ $t('network.Marketplace') }}</span>
@@ -640,6 +643,7 @@
   import TelevisionShow from "../components/televisionShow";
   import Categories from "../components/categories";
   import FAQ from "../components/faq";
+  import VLazyImage from "v-lazy-image/v2";
   
   export default {
     components: {
@@ -647,9 +651,11 @@
       Resources,
       TelevisionShow,
       Categories,
+      Products,
       FAQ,
       SiteFooter,
-      LightBox,ProductDetails
+      LightBox,ProductDetails,
+      VLazyImage
     },
   
       mounted() {
@@ -660,6 +666,7 @@
   
     data() {
       return {
+        activeTab: 'cameroon',
         products: [],
         expanded: true,
         location: "",
@@ -945,6 +952,9 @@
   
     methods: {
   
+      setActiveTab(tab) {
+      this.activeTab = tab;
+    },
        gotoproduct(pro){
    
        
@@ -1360,9 +1370,12 @@
 
 /* //////////// */
 .grid {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; 
 }
 
 .grid-item {
@@ -1381,12 +1394,20 @@
 .image-container {
   position: relative;
   width: 100%;
-  padding: 1px 10px;
+  height: 200px !important;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  /* padding: 1px 10px; */
 }
 
 .product-image {
   height: 200px !important;
-  border-radius: 6px;
+  width: 100%;
+  /* height: 50% !important; */
+  object-fit: cover;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  /* border-radius: 6px; */
 }
 
 .stock-status {
@@ -1441,6 +1462,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /*  */
+  justify-content: space-between;
 }
 
 .price {

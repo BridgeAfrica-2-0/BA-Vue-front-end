@@ -3,15 +3,14 @@
     <div class="accordion" id="accordionExample">
       <div class="card" v-for="(item, index) in items" :key="index">
         <div class="card-header" :id="'heading' + index">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center" style="cursor: pointer" @click="toggleCollapse(index)"
+                :aria-expanded="expandedIndex === index"
+                :aria-controls="'collapse' + index">
             <h6>{{ item.title }}</h6>
             <h2 class="mb-0">
               <button
                 class="btn btn-block"
                 type="button"
-                @click="toggleCollapse(index)"
-                :aria-expanded="expandedIndex === index"
-                :aria-controls="'collapse' + index"
               >
                 <span v-if="expandedIndex !== index"><i class="fas fa-plus"></i></span>
                 <span v-else><i class="fas fa-times"></i></span>
@@ -44,28 +43,48 @@ export default {
       expandedIndex: 0,
       items: [
         {
-          title: "How can we help you?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
-        },
-        {
-          title: "How can I track my order?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
+          title: "How do I place an order?",
+          content: `To place an order, simply browse through our products, add the items you wish to purchase to your cart, and proceed to checkout. You will be able to create an account or checkout as a guest.`,
         },
         {
           title: "What payment methods do you accept?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
+          content: `We accept a variety of payment methods including, mobile money, credit cards, stripe`,
         },
         {
-          title: "Do you offer international shipping?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
+          title: "When will my order be shipped?",
+          content: `Orders are typically shipped within 1-2 business days. You will receive a shipping confirmation email with tracking information once your order has been shipped`,
         },
         {
-          title: "What is your return policy?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
+          title: "Is my order confirmed?",
+          content: `You will receive an email confirmation once your order has been processed.`,
         },
         {
-          title: "Are your products cruelty-free?",
-          content: `We are a technology firm, on a mission to digitalise businesses and consumers in Africa. Through our bridgeafrica.com platform, we help SMEs create websites, gain database visibility, sell online and network. We equally manage an online artisanal platform cameroongallery.com, which helps craft artists sell their goods globally. Through our consulting services, we provide expert support to public and private entities.`,
+          title: "How can I manage my shipping addresses?",
+          content: `You can manage your shipping addresses by logging in to your account and clicking on the "My Addresses" link.`,
+        },
+        {
+          title: "Is my personal information secure?",
+          content: `We take your privacy very seriously and use industry-standard security measures to protect your personal information.`,
+        },
+        {
+          title: "What happens if my order is damaged or incomplete?",
+          content: `Please contact our customer service team immediately if your order is damaged or incomplete. We will work with you to resolve the issue.`,
+        },
+        {
+          title: "Can I track my order?",
+          content: `Yes, you can track your order using the tracking information provided in your shipping confirmation email.`,
+        },
+        {
+          title: "Where can I find information about your company? ",
+          content: `You can find information about our company on our About Us page.`,
+        },
+        {
+          title: "What's selling locally?",
+          content: `Selling locally means offering your products for sale within Cameroon only. As a local seller on our platform, you can reach customers across the country, benefiting from our e-commerce tools and support while focusing on the domestic market.`,
+        },
+        {
+          title: "What's selling globally?",
+          content: `Selling globally allows you to offer your products to customers worldwide. As a global seller, you can expand your reach beyond Cameroon, tapping into international markets and connecting with buyers from different countries through our platform's global network and logistics support.`,
         }
       ],
     };

@@ -78,19 +78,19 @@
               <b-navbar-nav class="mr-auto">
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'Bridge-home' ? 'active' : ''">{{ $t("general.Home") }}</router-link>
+                    <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'updatedBridgeHome' ? 'active' : 'inactive'">{{ $t("general.Home") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link>
+                    <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'">{{ $t("general.About_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : ''">{{ $t("general.Contact_Us") }}</router-link>
+                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'">{{ $t("general.Contact_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
@@ -98,7 +98,7 @@
                 <div class="d-block d-lg-none">
                   <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
                     <span class="nav-span">
-                      <router-link :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
+                      <router-link class="inactive" :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
                     </span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
@@ -113,7 +113,7 @@
                   </b-nav-item>
                   <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
                     <span class="nav-span">
-                      <router-link :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
+                      <router-link class="inactive" :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
                     </span>
                     <hr class="mobile navstyle" />
                   </b-nav-item>
@@ -128,34 +128,34 @@
               <b-nav-item class="ml-md-1">
                 <b-input-group class="binput">
                   <b-input-group-prepend @click="Search">
-                    <div class="border" style="color:#495057 !important">
-                      <b-icon style="color:red" class="mt-2 ml-2" icon="search"></b-icon>
+                    <div class="border" style="color: white !important; background-color: #fff">
+                      <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input v-on:keyup.enter='Search' style="border-left:none" type="search" v-model="keyword" placeholder="Search"></b-form-input>
+                  <b-form-input v-on:keyup.enter='Search' class="search" style="border-left:none" type="search" v-model="keyword" placeholder="Search"></b-form-input>
                 </b-input-group>
               </b-nav-item>
-              <b-nav-item class="ml-md-1 m-auto">
+              <b-nav-item class="ml-md-3 m-auto">
                 <span class="nav-span" style="color:#455a64">
-                  <b-icon icon="person" font-scale="1.8"></b-icon>
+                  <img src="../../assets/user.svg" alt="User Icon" id="user-icon">
                 </span>
               </b-nav-item>
-              <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
+              <b-nav-item v-if="!islogin" class="m-auto">
                 <span class="nav-span">
-                  <router-link :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-              <div class="border-right m-auto" style="height: 20px;"></div>
+              <div class="m-auto py-1" style="height: 15px; border-right: 2px solid #282828"></div>
               <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
-                  <router-link :to="{ name: 'signup' }">{{ $t("general.Sign_Up") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'Login' }">{{ $t("general.Login") }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
               <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
-                  <router-link :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{ $t("general.dashboard") }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -245,6 +245,31 @@ export default {
 
 <style scoped>
 
+li .nav-link:hover {
+  background-color: none !important;
+}
+
+.form-control {
+  padding: 0 0 0 7px !important;
+}
+
+.form-control:focus {
+  border-color: #CCCCCC !important
+}
+
+.search::placeholder {
+  color: #DDDDDD;
+}
+
+.search:hover {
+  color: black !important;
+}
+
+#user-icon {
+  width: 20px !important;
+  height: 20px !important;
+}
+
 .contact-info .btn-light {
   background-color: #F2F2F2 !important;
   border-color: #F2F2F2 !important;
@@ -310,8 +335,7 @@ export default {
 .binput {
   background: #fafafa;
   border: 1px solid #e7e7e7;
-  box-shadow: 0px 10px 35px rgb(0 0 0 / 11%);
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 a {
@@ -348,7 +372,7 @@ a {
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
-  color: #282828;
+  color: #282828 !important;
 }
 
 .nav-item.active .nav-link span {
@@ -357,6 +381,10 @@ a {
 
 .nav-item:hover .nav-link span {
   color: #e75c18 !important;
+}
+
+.inactive {
+  color: #282828 !important;
 }
 
 .active {

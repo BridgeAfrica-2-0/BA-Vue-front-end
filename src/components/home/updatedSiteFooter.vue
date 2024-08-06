@@ -2,7 +2,7 @@
   <section class="footer">
    <div class="container">
     <div :class="['subscription-box', { 'footer-subscription': isSmallScreen }]">
-      <p style="color: black;" class="subs-p">
+      <p style="color: black" class="subs-p">
         <span style="color: #e75c18;">Subscribe to our newsletter</span>
         and be the first to know about new arrivals, exclusive offers, and handicraft.
       </p>
@@ -77,27 +77,27 @@
               <ul class="text-left white ">
                 <li>
                   <a href="https://twitter.com/bridgeafricacom" class="bridge-icon" target="_blank">
-                  <b-icon icon="twitter" ></b-icon>
+                  <b-icon icon="twitter" class="social-icon" ></b-icon>
+                  <span class="social-text">Twitter</span>
                 </a>
-                <span class="social-text">Twitter</span>
                 </li>
                 <li>
                   <a href="http://facebook.com/bridgeafricacom" class=" bridge-icon" target="_blank">
-                  <b-icon icon="facebook" ></b-icon>
+                  <b-icon icon="facebook"  class="social-icon"></b-icon>
+                  <span class="social-text">Facebook</span>                  
                 </a>
-                <span class="social-text">Facebook</span>
                 </li>
                 <li>
                   <a href="https://instagram.com/bridgeafricacom" class=" bridge-icon" target="_blank">
-                  <b-icon icon="instagram" ></b-icon>
+                  <b-icon icon="instagram" class="social-icon"></b-icon>
+                  <span class="social-text">Instagram</span>
                 </a>
-                <span class="social-text">Instagram</span>
                 </li>
                 <li>
                   <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" class=" bridge-icon" target="_blank">
-                  <b-icon icon="youtube" ></b-icon>
+                  <b-icon icon="youtube" class="social-icon"></b-icon>
+                  <span class="social-text">Youtube</span>
                 </a>
-                <span class="social-text">Youtube</span>
                 </li>
               </ul>
             </div>
@@ -217,10 +217,15 @@ export default {
 .footer-links h4{
   font-size: 18px !important;
 }
-.bridge-icon {
+.bridge-icon  {
   background-color: transparent !important;
   color:#FF9E19 !important;
 }
+
+.bridge-icon span {
+  color: #fff;
+}
+
 .social-text{
   margin-left: 15px;
 }
@@ -231,16 +236,21 @@ export default {
   font-size: 30px;
   font-weight: bold; 
   line-height: 1.5;
+  text-shadow: 0px 2px 0px #d8d8d8,
+             0px 3px 0px rgba(209, 207, 207, 0.15),
+             1px 4px 1px rgba(209, 207, 207, 0.15),
+             2px 5px 1px rgba(209, 207, 207, 0.15)
 }
 .hire-btn {
   margin-top: 2%;
-  width: 174px;
+  width: 160px;
   height: 46px;
   background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 }
 .arrow-icon-wrapper {
   background-color: white;

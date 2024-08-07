@@ -42,7 +42,7 @@
             </splide-slide>
             <splide-slide>
               <div class="crtv-bans">
-                <v-lazy-image src="assets/home/slide2.png" alt="Image 2" class="slide-img"/>
+                <v-lazy-image src="assets/home/slide_2.png" alt="Image 2" class="slide-img"/>
               </div>
             </splide-slide>
           </splide>
@@ -387,8 +387,8 @@
         </div>
       </section>
      
-  
-  <section style="background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%);"> 
+      <!-- background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%); -->
+  <section style="background-color: white;"> 
   
     <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">

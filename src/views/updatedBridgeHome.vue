@@ -42,7 +42,7 @@
             </splide-slide>
             <splide-slide>
               <div class="crtv-bans">
-                <v-lazy-image src="assets/home/slide2.png" alt="Image 2" class="slide-img"/>
+                <v-lazy-image src="assets/home/slide_2.png" alt="Image 2" class="slide-img"/>
               </div>
             </splide-slide>
           </splide>
@@ -387,8 +387,8 @@
         </div>
       </section>
      
-  
-  <section style="background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%);"> 
+      <!-- background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%); -->
+  <section style="background-color: white;"> 
   
     <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
@@ -430,7 +430,7 @@
          </div> </div>
   </section>
   <section class="bg-whitee network">
-        <div class="container row  "  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+        <div class="container row  mt-3"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="col-2 mt-5">
             <div class="card-container">
   <div class="card">
@@ -499,15 +499,15 @@
 
 
           </div>
-          <div class="col-5">
-            <v-lazy-image src="/assets/home/globe.png"  alt=""/> 
+          <div class="col-5 mt-5">
+            <v-lazy-image src="/assets/home/new_globe.png"  alt=""/> 
           </div>
           
-          <div class="col-5 pl-5">
-  <div class="row pt-3">
+          <div class="col-5 pl-5 mt-5">
+  <div class="row">
     <div class="col-12 d-flex align-items-center pl-0">
       <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img"/>
-      <h3 class="mb-0">
+      <h3 class="mb-0 market-heading">
         <span>{{ $t("general.cameroon_focus") }}</span>
         <span style="color: black;">Focused {{ $t('network.Marketplace') }}</span>
       </h3>
@@ -519,7 +519,7 @@
     </div>
   </div>
   
-  <div class="row mt-3">
+  <div class="row mt-4">
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>7500+</h3>
@@ -534,7 +534,7 @@
     </div>
   </div>
   
-  <div class="row mt-5 mb-5">
+  <div class="row mt-5">
     <div class="col-6 statistic-box">
       <span class="text-left">
         <h3>100+</h3>
@@ -1185,6 +1185,10 @@
   
   <style>
 
+.market-heading{
+  font-size: 30px !important;
+  line-height: 36px !important;
+}
 .create-your-shop {
   height: 30px !important; 
   width: 45px; 
@@ -1216,6 +1220,7 @@
   font-size: 25px !important;
   font-weight: normal !important;
   color: black !important;
+  line-height: 40px !important;
  }
 .logo-img {
   width: 60px !important;
@@ -1524,7 +1529,7 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .network {

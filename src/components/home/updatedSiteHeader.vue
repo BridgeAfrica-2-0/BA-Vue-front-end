@@ -211,7 +211,12 @@
                   <b-input-group-prepend @click="Search">
                     <div
                       class="border"
-                      style="color: white !important; background-color: #fff"
+                      style="
+                        color: white !important;
+                        background-color: #fff; 
+                        border-top-left-radius: 0.25rem !important;
+                        border-bottom-left-radius: 0.25rem !important;
+                      "
                     >
                       <b-icon
                         style="color: #DDDDDD"
@@ -356,12 +361,12 @@ li .nav-link:hover {
   background-color: none !important;
 }
 
-.form-control {
-  padding: 0 0 0 7px !important;
-}
-
 .form-control:focus {
-  border-color: #cccccc !important;
+  color: initial !important; 
+  background-color: #fff !important; 
+  border-color: #ced4da !important; 
+  outline: initial !important; 
+  box-shadow: none !important;
 }
 
 .search::placeholder {
@@ -398,7 +403,7 @@ li .nav-link:hover {
   border-bottom: 1px solid #dee2e6;
 }
 .contact-info span {
-  margin-right: 35px;
+  margin-right: 25px;
   display: inline-flex;
   align-items: center;
 }

@@ -108,7 +108,7 @@
 </section>
 
 
-<section style="background: #f8f8f8">
+<section style="background: #FFFFFF">
         <div class="container ba-business pt-5 pb-5">
           <div class="row">
             <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
@@ -165,7 +165,9 @@
                 width="100%"
               
                 style="object-fit:contain; border-radius: 10px;"
-                controls
+                autoplay
+                muted
+                loop
                 poster="assets/home/ba_business.png"
               >
                 <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
@@ -1291,7 +1293,7 @@
 /* ////////// */
 .product-section {
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #FFFFFF;
 }
 
 .container {

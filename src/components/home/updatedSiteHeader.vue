@@ -403,7 +403,7 @@ li .nav-link:hover {
   border-bottom: 1px solid #dee2e6;
 }
 .contact-info span {
-  margin-right: 35px;
+  margin-right: 25px;
   display: inline-flex;
   align-items: center;
 }

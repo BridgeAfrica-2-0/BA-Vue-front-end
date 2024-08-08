@@ -83,7 +83,11 @@
           <div class="image-container mb-2">
             <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
             <button class="favorite-button">
-              <i class="fas fa-heart"></i>
+              <!-- <i class="fas fa-heart"></i> -->
+              <div>
+              <b-icon variant="primary" icon="heart" class="mr-2" @click="like(product.id)"></b-icon
+              ><span>  {{ product.product_likes }}</span>
+            </div>
             </button>
           </div>
           <div class="content-container">
@@ -962,7 +966,13 @@
     },
   
     methods: {
-  
+      like(id){
+      console.log('likes---', id) 
+      this.$store.dispatch("productComments/productLikes",id)
+      .then(res =>{
+        this.getDetail(id);
+      })
+    },
       setActiveTab(tab) {
       this.activeTab = tab;
     },

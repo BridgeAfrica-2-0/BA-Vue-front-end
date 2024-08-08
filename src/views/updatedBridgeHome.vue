@@ -73,7 +73,12 @@
  <p>See All Cameroon</p>
 </router-link>
 </div>
-      <div class="grid">
+      <div v-if="loading" class="m-auto">
+          <div class="loader">
+            <i class="fas fa-spinner fa-spin"></i>
+          </div>
+      </div>
+      <div v-else class="grid">
         <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
           <div class="image-container mb-2">
             <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
@@ -670,6 +675,8 @@
       return {
         activeTab: 'cameroon',
         products: [],
+        infiniteId: +new Date(),
+        loading: true,
         expanded: true,
         location: "",
         word1: "",
@@ -903,13 +910,15 @@
     created() {
       window.addEventListener("load", this.onWindowLoad);
       this.getLocation();
-  
+      this.loading = true;
       axios.get('guest/home/products').then(({ data }) => {
              
             this.products=data.data;
+            this.loading = false;
           })
           .catch((err) => {
             console.log({ err: err });
+            this.loading = false;
           }); 
   
   
@@ -1184,6 +1193,15 @@
   </script>
   
   <style>
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px; 
+  border-left: 1.1em solid rgb(231, 91, 23) !important
+}
 
 .market-heading{
   font-size: 30px !important;

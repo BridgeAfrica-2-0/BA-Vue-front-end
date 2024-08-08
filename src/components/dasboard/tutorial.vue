@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-card class=" border shadow " style="height:500px">
+  <div class="overflow">
+    <b-card class=" border shadow overflow" style="height:500px">
       <h6 class="title"> 
         <fas-icon class="icons" :icon="['fas', 'video']" /> {{ $t('dashboard.Tutorial') }}
       </h6>
@@ -891,6 +891,9 @@ export default {
 
 <style scoped>
 
+.overflow{
+  overflow: scroll;
+}
 .text-capitalised{
   text-transform: uppercase
 }

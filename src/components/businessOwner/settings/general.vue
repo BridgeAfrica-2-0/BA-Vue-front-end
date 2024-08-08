@@ -238,7 +238,6 @@ export default {
 
 
     updateGeneralInfo: function(){
-      console.log(this.business_form)
      
       this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
       let formData = new FormData();

@@ -45,7 +45,7 @@
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
-              v-model="permission"
+              v-model="business_form.permissions"
               name="permissions"
               type="text"
               value-field="value"
@@ -238,7 +238,6 @@ export default {
 
 
     updateGeneralInfo: function(){
-
      
       this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
       let formData = new FormData();

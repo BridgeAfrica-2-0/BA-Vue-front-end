@@ -59,7 +59,7 @@
       <hr />
     </div>
 
-    <div class="b-bottom">
+    <div v-if="business_form.permissions == 'Allow editor to post'" class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"

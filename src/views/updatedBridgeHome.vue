@@ -1460,9 +1460,8 @@
   border: none;
   cursor: pointer;
   font-size: 20px;
-  color: red;
+  color: #F5F5F5; 
 }
-
 
 .content-container {
   padding: 0px 15px;

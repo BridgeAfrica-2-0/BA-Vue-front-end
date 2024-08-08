@@ -45,7 +45,7 @@
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
-              v-model="permission"
+              v-model="business_form.permissions"
               name="permissions"
               type="text"
               value-field="value"
@@ -59,7 +59,7 @@
       <hr />
     </div>
 
-    <div v-if="business_form.permissions == 'Allow editor to post'" class="b-bottom">
+    <div class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
@@ -238,7 +238,7 @@ export default {
 
 
     updateGeneralInfo: function(){
-
+      console.log(this.business_form)
      
       this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
       let formData = new FormData();

@@ -636,7 +636,7 @@ export default {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
-          location:  { code: 62, label: 'Yaoundé' },
+          location:  { code: '', label: 'Location' },
           location_placeholder:this.$t("home.Location")
         };
       },

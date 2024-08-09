@@ -1640,6 +1640,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
       this.$store
         .dispatch("auth/completeWelcome")
         .then(() => {
+          this.$store.state.profile.profileIntro.user.profile_complete = true;
           console.log("hey yeah");
         })
         .catch((err) => {

@@ -847,7 +847,7 @@
                         ></b-icon>
                       </template>
                       <b-dropdown-item
-                        @click="editBusiness(business.id)"
+                        @click="editBusiness(business.slug)"
                         v-b-modal.updateBusinessModal
                         variant=""
                         >{{ $t("profileowner.Edit") }}</b-dropdown-item

@@ -298,6 +298,7 @@ export default {
     },
 
     editPage() {
+      this.$router.push("profile_owner");
       this.$router.push("profile_owner#about");
     },
   },

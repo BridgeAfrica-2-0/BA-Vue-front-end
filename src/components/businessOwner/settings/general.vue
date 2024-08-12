@@ -45,7 +45,7 @@
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
-              v-model="permission"
+              v-model="business_form.permissions"
               name="permissions"
               type="text"
               value-field="value"

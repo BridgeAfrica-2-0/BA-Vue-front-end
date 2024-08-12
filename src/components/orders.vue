@@ -194,50 +194,51 @@
       </div>
     </div>  
     <div v-for="order in orders" :key="order.order_id">
-      <div class="row d-flex justify-content-between px-3">
-        <p class="order-text align-self-center pb-0 mb-0">
-          <span class="font-weight-bold">
-            {{ $t("myOrders.Order") }}
-          </span>
-          <span
-            class="text-success cursor"
-            @click="gotoOrderDetails(order.order_id)"
-            >#{{ order.order_id }}</span
-          >
-        </p>
-        <b-dropdown
-          variant="ligth"
-          id="dropdown-1"
-          text="Manage"
-          class="align-self-center"
-        >
-          <b-dropdown-item
-            @click="updateOrderStatus('complete', order.order_id)"
-            >Complete</b-dropdown-item
-          >
-          <b-dropdown-item @click="updateOrderStatus('archive', order.order_id)"
-            >Archive</b-dropdown-item
-          >
-          <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
-            >{{ $t("general.Delete") }}</b-dropdown-item
-          >
-        </b-dropdown>
-      </div>
-      <div class="row d-flex justify-content-between px-3 mb-3">
-        <span class="flou align-self-center">
-          {{ order.user_name }}
-          {{ moment(order.created_at).format("MM/DD/YYYY") }}
-          12H00
-        </span>
-        <div class="d-block d-lg-none align-self-center text-small">
-          <span
-            >Status: <span class="text-success">{{ order.status }}</span></span
-          >
+      <div class="row d-flex justify-content-between px-3 bg-light pt-2">
+          <p class="order-text align-self-center pb-0 mb-0">
+            <span class="font-weight-bold">
+              {{ $t("myOrders.Order") }}
+            </span>
+            <span
+              class="text-success cursor"
+              @click="gotoOrderDetails(order.order_id)"
+              >#{{ order.order_id }}</span
+            >
+          </p>
         </div>
-      </div>
-      <hr />
+        <div class="row d-flex justify-content-between align-items-center px-3 bg-light">
+          <div>
+            <span class="flou align-self-center">
+            {{ order.user_name }}
+            {{ moment(order.created_at).format("MM/DD/YYYY") }}
+            12H00
+            </span>
+            <div class="d-block d-lg-none align-self-center text-small">
+              <span
+                >Status: <span class="text-success">{{ order.status }}</span></span
+              >
+            </div>
+          </div>
+          <b-dropdown
+            variant="ligth"
+            id="dropdown-1"
+            text="Manage"
+            class="align-self-center p-0 mr-2"
+          >
+            <b-dropdown-item
+              @click="updateOrderStatus('complete', order.order_id)"
+              >Complete</b-dropdown-item
+            >
+            <b-dropdown-item @click="updateOrderStatus('archive', order.order_id)"
+              >Archive</b-dropdown-item
+            >
+            <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
+              >{{ $t("general.Delete") }}</b-dropdown-item
+            >
+          </b-dropdown>
+        </div>
       <div
-        class="row px-3 my-4 cursor"
+        class="row px-3 mb-4 pt-4 pb-2 cursor row-shadow"
         @click="gotoOrderDetails(order.order_id)"
       >
         <div class="col-lg-3 col-4">
@@ -750,6 +751,11 @@ export default {
   border-radius: 5px;
   width: 100%;
 }
+
+.row-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 @media only screen and (max-width: 768px) {
   .order-text {
     font-size: 12px;

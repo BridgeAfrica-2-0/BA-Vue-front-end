@@ -1,17 +1,19 @@
 .<template>
   <div id="app" class="" ref="formContainer">
-
-   
     <div id="flashmessage">
       <FlashMessage />
-        <vue-confirm-dialog></vue-confirm-dialog>
-    </div> 
+      <!-- <vue-confirm-dialog></vue-confirm-dialog> -->
+    </div>
 
-  <b-modal id="authModal" ref="authModal" @hidden="hideAuthModal" hide-footer  size="xl">
-     <login   @success="success" @hideAuthModal="hideAuthModal"  />
-  </b-modal>
-
-
+    <b-modal
+      id="authModal"
+      ref="authModal"
+      @hidden="hideAuthModal"
+      hide-footer
+      size="xl"
+    >
+      <login @success="success" @hideAuthModal="hideAuthModal" />
+    </b-modal>
 
     <transition
       name="fade"
@@ -22,48 +24,49 @@
     >
       <router-view />
     </transition>
-    <notifications group="app" position="bottom right" classes="my-custom-class"/>
+    <notifications
+      group="app"
+      position="bottom right"
+      classes="my-custom-class"
+    />
   </div>
 </template>
 <script>
 import { Redis } from "@/mixins";
 import login from "@/components/Login";
 
-import { mapGetters, mapActions,mapState } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
   mixins: [Redis],
-  components:{login},
+  components: { login },
   data() {
     return {
       prevHeight: 0,
-   
-      showblock:true,
-         showfadde:false,
-         showfaddeB:true,
+
+      showblock: true,
+      showfadde: false,
+      showfaddeB: true,
     };
   },
- 
 
   // computed: mapGetters({
   //   auth: "auth/profilConnected",
   //   authModal:"auth/authModal"
   // }),
 
- computed:{
+  computed: {
+    ...mapGetters({
+      auth: "auth/profilConnected",
+      // authModal:"auth/authModal"
+    }),
 
-  ...mapGetters({
-    auth: "auth/profilConnected",
-    // authModal:"auth/authModal"
-  }),
-
-  authModal(){
-    return this.$store.state.auth.authModal.visibility;
-  }
-
- },
+    authModal() {
+      return this.$store.state.auth.authModal.visibility;
+    },
+  },
   watch: {
-    "$store.state.auth.profilConnected": function (newProfile) {
+    "$store.state.auth.profilConnected": function(newProfile) {
       const uuid = "network" === newProfile.user_type ? newProfile.id : null;
 
       this.getNetworkAndBusiness(
@@ -71,15 +74,15 @@ export default {
       );
     },
 
-    "$i18n.locale": function(newLanguage){
-      localStorage.setItem('lang', newLanguage) 
+    "$i18n.locale": function(newLanguage) {
+      localStorage.setItem("lang", newLanguage);
     },
 
-    authModal(newvalue){
-    
-     newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
-   
-    }
+    authModal(newvalue) {
+      newvalue
+        ? this.$bvModal.show("authModal")
+        : this.$bvModal.hide("authModal");
+    },
 
     // "authModal": function(newvalue){
     //   newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
@@ -87,46 +90,37 @@ export default {
     // }
   },
 
-  
- created(){
-   
-  },
+  created() {},
 
   methods: {
+    onWindowLoad() {
+      this.showfadde = true;
+      setTimeout(() => {
+        this.loadfinish();
+      }, 2000);
+    },
 
-     onWindowLoad() {
-       this.showfadde=true;
-       setTimeout(() => {
-        this.loadfinish()
-        }, 2000);
-         },
+    hideAuthModal() {
+      this.$store.dispatch("auth/hideAuthModal");
+    },
 
-      hideAuthModal(){
-      
-        this.$store.dispatch("auth/hideAuthModal")
-      },
+    success() {
+      console.log("success");
+    },
 
-      success(){
-     console.log("success");
-      },
+    loadfinish() {
+      this.showblock = false;
 
-       loadfinish(){
-
-      
-         this.showblock=false;
-
-         this.showfadde=false;
-         this.showfaddeB=false;
-        
-
-      },
+      this.showfadde = false;
+      this.showfaddeB = false;
+    },
 
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
     }),
 
-    getNetworkAndBusiness: async function (uuid) {
+    getNetworkAndBusiness: async function(uuid) {
       let request = await this.$repository.share.getNetworkAndBusiness(uuid);
       if (request.success) {
         this.setBusiness(request.data.business);
@@ -153,72 +147,59 @@ export default {
 };
 </script>
 
-
 <style lang="less">
-
-.wrap-text{
-      overflow-wrap: anywhere;
+.wrap-text {
+  overflow-wrap: anywhere;
 }
-.wrapp-text{
-
+.wrapp-text {
   white-space: normal;
-  
-    width: 100%;
- 
-    word-wrap: break-word;
+
+  width: 100%;
+
+  word-wrap: break-word;
 }
 
+.sharebtn .dropdown-menu li,
+.dropdown-menu li a {
+  white-space: nowrap !important;
+  float: left;
 
-.sharebtn .dropdown-menu li, .dropdown-menu li a {
-    white-space: nowrap !important;
-    float: left;
-    
-    height: auto;
-    word-wrap: break-word;
+  height: auto;
+  word-wrap: break-word;
 }
 
-.searchpage .dropdown-menu li, .dropdown-menu li a {
-    white-space: normal;
-    float: left;
-    
-    height: auto;
-    word-wrap: break-word;
+.searchpage .dropdown-menu li,
+.dropdown-menu li a {
+  white-space: normal;
+  float: left;
+
+  height: auto;
+  word-wrap: break-word;
 }
 
 @media only screen and (min-width: 768px) {
-    .splide__arrow--next{
-
-width: 25px !important;
+  .splide__arrow--next {
+    width: 25px !important;
     height: 25px !important;
-}
+  }
 
- .splide__arrow--prev{
-
-width: 25px !important;
-    height: 25px !important
-
-}
-
+  .splide__arrow--prev {
+    width: 25px !important;
+    height: 25px !important;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-    .splide__arrow--next{
-
-width: 20px !important;
+  .splide__arrow--next {
+    width: 20px !important;
     height: 20px !important;
+  }
+
+  .splide__arrow--prev {
+    width: 20px !important;
+    height: 20px !important;
+  }
 }
-
- .splide__arrow--prev{
-
-width: 20px !important;
-    height: 20px !important
-
-}
-
-}
-
-
- 
 
 .fade-enter-active,
 .fade-leave-active {
@@ -228,7 +209,7 @@ width: 20px !important;
   overflow: hidden;
 }
 
-.fadde{
+.fadde {
   transition-duration: 3.3s;
   transition-property: height, opacity;
   transition-timing-function: ease;
@@ -253,10 +234,9 @@ width: 20px !important;
   font-family: poppins, Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #455a64 ;
-  margin-left: 5px;
+  color: #455a64;
+  // margin-left: 5px;
 }
-
 
 #flashmessage {
   position: absolute;
@@ -356,46 +336,44 @@ width: 20px !important;
   // }
 }
 
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-.sep{
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
+.no-js #loader {
+  display: none;
+}
+.js #loader {
+  display: block;
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+.sep {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
   background: #fff;
-	// background: url(https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif) center no-repeat #fff;
+  // background: url(https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif) center no-repeat #fff;
 }
 
-
-
 @media only screen and (max-width: 768px) {
-   
-
   .lalala .nav-pills .nav-link {
     border-radius: 0.25rem !important;
     font-size: 12px !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
-}
-
-
+  }
 
   .lal .nav-pills .nav-link {
     border-radius: 0.25rem !important;
     font-size: 12px !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
+  }
 }
-}
-
 </style>
 
 <style>
- 
- 
 .title-linkClass {
   color: #455a64;
 }
@@ -409,14 +387,10 @@ width: 20px !important;
   color: red !important;
 }
 
-
-
- .nav-tabs > li.active    {
-   background-color: #272727 !important;
-   color: red;
-  
+.nav-tabs > li.active {
+  background-color: #272727 !important;
+  color: red;
 }
-
 
 .nav-tabs .nav-link.active-tab-item {
   background-color: white !important;
@@ -434,24 +408,22 @@ width: 20px !important;
   padding-right: 5px;
 }
 
- .nav-tabs .nav-link.active-tab-item .spa-color{
-   color: #e75c18 !important;
- }
+.nav-tabs .nav-link.active-tab-item .spa-color {
+  color: #e75c18 !important;
+}
 
 .nav-tabs:hover {
   background-color: white !important;
 }
 
-.modal-header{
+.modal-header {
   border-bottom: none !important;
 }
 
 .modal-header .close {
-    padding: 0.7rem 1rem !important;
-    margin: -0.5rem -0.5rem -1rem auto !important;
-    border-radius: 50% !important;
-    box-shadow: 0 0 50px #ccc !important;
+  padding: 0.7rem 1rem !important;
+  margin: -0.5rem -0.5rem -1rem auto !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 50px #ccc !important;
 }
- 
 </style>
-

@@ -320,7 +320,7 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.pname.required">
-                    required
+                    {{ $t("auth.product_name_is_required") }}
                   </span>
                 </md-field>
 
@@ -358,14 +358,14 @@
                   />
 
                   <span class="md-error" v-if="!$v.form.name.required">
-                    {{ $t("auth.First_Name_is_required") }}
+                    {{ $t("auth.fullname_is_required") }}
                   </span>
                 </md-field>
 
                   </div>
 
                   <div class="col-md-6">
-                     <md-field class="">
+                     <md-field :class="getValidationClass('email')">
                   <label for="email" class="p-2">
                     {{ $t("general.Email") }}
                   </label>
@@ -376,6 +376,9 @@
                      class="ba-input "
                     v-model="form.email"
                   />
+                  <span class="md-error" v-if="!$v.form.email.required">
+                    {{ $t("auth.email_is_required") }}
+                  </span>
                 </md-field>
                   </div>
 
@@ -524,7 +527,7 @@
         <div class="row">
           <div class="col-md-6">
             <h3 class="white">
-              <span> {{ $t("general.checkout_our") }} Biz 
+              <span> {{ $t("general.checkout_our") }}  <br>
                  </span> {{ $t("general.show_on_crtv") }} </h3>
     
 
@@ -678,7 +681,11 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center"> <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button> </div>
+              <div class="text-center">
+                  <router-link to="/settings?tab=account"> 
+                      <b-button variant="primary" class="upgrade-btn" >  {{ $t("general.Upgrade") }}  </b-button>
+                  </router-link>  
+                </div>
             </div>
           </div>
         </div>
@@ -970,6 +977,9 @@ export default {
       },
 
       tel: {
+        required,
+      },
+      email: {
         required,
       },
     },

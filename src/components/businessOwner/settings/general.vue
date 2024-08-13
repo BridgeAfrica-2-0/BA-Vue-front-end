@@ -130,16 +130,16 @@
     </div>
 
     <b-container>
-      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(business[0])">{{ $t('businessowner.Delete_Business_Identity') }}</b-link>
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(current_business)">{{ $t('businessowner.Delete_Business_Identity') }}</b-link>
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
             !!! <code>{{ $t('businessowner.DELETE_BUSINESS') }}</code> !!! 
           </template>
           <div class="d-block text-center">
-            <h3>{{ $t('businessowner.Delete_Business') }}: {{clickedObject.business_id}}!</h3>
+            <h3>{{ $t('businessowner.Delete_Business') }}: {{clickedObject.name}}!</h3>
           </div>
-          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">{{ $t('businessowner.Delete_Business') }}</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">{{ $t('businessowner.Delete_Business') }}</b-button>
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">{{ $t('businessowner.Cancel') }}</b-button>
         </b-modal>
       </div>
@@ -153,6 +153,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "general",
   data(){
@@ -171,7 +172,8 @@ export default {
           { label: this.$t('businessowner.Allow_editor_to_post'), value: 'Allow editor to post'}
         ],
         permission: null,
-        business_form: null
+        business_form: null,
+        current_business: {}
       }
   },
   
@@ -194,6 +196,7 @@ export default {
   mounted() {
     this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.getBusiness();
+    this.businessInfo();
   },
 
   methods:{
@@ -234,8 +237,16 @@ export default {
       });
     },
 
-
-
+    async businessInfo() {
+       let url=`business/info/${this.$route.params.id}`;
+ 
+       await axios.get(url)
+       .then(({ data }) => {
+          this.current_business = data.data;
+          console.log("+++++++++++", this.current_business);
+        })
+   
+     },
 
     updateGeneralInfo: function(){
 
@@ -244,7 +255,7 @@ export default {
       let formData = new FormData();
       formData.append('visibility', this.business_form.visibility);
       formData.append('permissions', this.business_form.permissions);
-      formData.append('post_approval', this.business_form.post_approval);
+      formData.append('post_approval', this.business_form.post_approval ? this.business_form.post_approval : 0);
       formData.append('keywords_alert', String(this.business_form.keywords_alert));
       console.log(String(this.business_form.keywords_alert));
       formData.append('marketplace', this.business_form.marketplace);

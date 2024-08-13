@@ -690,7 +690,7 @@ export default {
   },
 
   created() {
-
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.searchParams.location = this.$route.query.location;
  
    let code=null;
@@ -1047,7 +1047,8 @@ export default {
 
      // this.$store.commit("setProducts", []);
       // this.products = []
-      await this.$store
+      if (this.islogin) {
+        await this.$store
         .dispatch("marketSearch/getProducts")
         .then((res) => {
           console.log("products list: ");
@@ -1061,6 +1062,23 @@ export default {
           console.error(err);
           this.showDismissibleAlert = false;
         });
+      }
+      else{
+        await this.$store
+        .dispatch("marketSearch/getGuestUserProducts")
+        .then((res) => {
+          console.log("products list: ");
+          console.log(this.products);
+          this.prodLoader = false;
+          this.showDismissibleAlert = true;
+        })
+        .catch((err) => {
+          this.prodLoader = false;
+          console.log("products error: ");
+          console.error(err);
+          this.showDismissibleAlert = false;
+        });
+      }
     },
 
     searchProducts(data) {
@@ -1070,7 +1088,8 @@ export default {
       this.activateMatching = { name: this.searchParams.keyword };
       this.activateSuggestion(this.searchParams.keyword);
 
-      this.$store
+      if (this.islogin) {
+          this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
@@ -1078,6 +1097,18 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+         }
+         else
+         {
+          console.log("non-login---------");
+          this.$store
+        .dispatch("marketSearch/searchGuestUserProducts", data)
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+         }
     },
 
     searchNetworks(data) {

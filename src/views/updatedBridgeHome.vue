@@ -82,9 +82,6 @@
         <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
           <div class="image-container mb-2">
             <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
-            <button class="favorite-button">
-              <i class="fas fa-heart"></i>
-            </button>
           </div>
           <div class="content-container">
             <div class="stock-status" :class="{'in-stock': product.in_stock, 'out-of-stock': !product.in_stock}">

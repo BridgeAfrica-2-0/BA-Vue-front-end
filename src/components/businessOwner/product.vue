@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-confirm-dialog />
       <div class="text-center" v-if="loader" >
 
         <b-spinner

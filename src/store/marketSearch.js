@@ -20,7 +20,9 @@ export default {
         getProducts(state) {
             return state.products;
         },
-
+        getGuestUserProducts(state) {
+            return state.products;
+        },
         getCategories(state) {
             return state.categories;
         },
@@ -150,7 +152,24 @@ export default {
                     console.error(err);
                 });
         },
+        getGuestUserProducts({ commit, state }){
+            commit("setLoader", true);
+
+            return axios.get("visitor/search/market")
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                   
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+
+                    console.error(err);
+                });
+        },
         nextPage({ commit, state }, payload) {
+            console.log("test--------------",payload);
             commit("setLoader", true);
             commit("setProducts", { data: [] });
 
@@ -207,6 +226,34 @@ export default {
             }
         },
 
+        async searchGuestUserProducts({ commit, state }, data) {
+            commit("setProducts", { data: [] });
+            commit("setLoader", true);
+
+            let keyword = state.keyword ? state.keyword : ''
+            let cat_id = data.cat_id ? data.cat_id : ''
+            let sub_cat = data.sub_cat ? data.sub_cat : ''
+            let filter_id = data.filter_id ? data.filter_id : ''
+            let page = data.page ? data.page : ''
+            let distance = data.distanceInKM ? data.distanceInKM : ''
+            let countryId = data.country_id ? "&countryId=" + data.country_id : "";
+            let regionId = data.region_id ? "&regionId=" + data.region_id : "";
+            let divisionId = data.division_id ? "&divisionId=" + data.division_id : "";
+            let councilId = data.council_id ? "&councilId=" + data.council_id : "";
+            let city = data.city ? "&city=" + data.city : "&city=" + state.location.code;
+            let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
+            
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "";
+            const limit = 10;
+          
+            try {
+                const res = await axios.get(`visitor/search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
+                commit("setLoader", false);
+                commit("setProducts", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+            }
+        },
 
     }
 };

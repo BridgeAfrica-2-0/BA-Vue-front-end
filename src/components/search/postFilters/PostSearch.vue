@@ -45,7 +45,7 @@
   </div>
 
    <div v-else> 
-    <login />
+     <!-- add guest user api data here -->
   </div>
 
 
@@ -59,14 +59,13 @@ import { loader, search, PostComponentMixin } from "@/mixins";
 import Postskeleton from "@/components/Postskeleton";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
-import login from "@/components/search/login";
 
 export default {
   mixins: [loader, search, PostComponentMixin],
   components: {
     Sponsor,
     Post,
-    login, Postskeleton,
+   Postskeleton,
         Loader,
   },
 

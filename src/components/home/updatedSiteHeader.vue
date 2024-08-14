@@ -56,12 +56,41 @@
             </a>
           </div>
 
-          <div class="d-flex w-100 p-0">
+          <div class="d-flex flex-column w-100 p-0">
+            <div class="w-100">
+              <b-input-group class="binput " style="z-index:1; width:100%;">
+                  <b-input-group-prepend @click="Search">
+                    <div
+                      class="border"
+                      style="
+                        color: white !important;
+                        background-color: #fff; 
+                        border-top-left-radius: 0.25rem !important;
+                        border-bottom-left-radius: 0.25rem !important;
+                      "
+                    >
+                      <b-icon
+                        style="color: #DDDDDD"
+                        class="mt-2 ml-2"
+                        icon="search"
+                      ></b-icon>
+                    </div>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    v-on:keyup.enter="Search"
+                    class="search"
+                    style="border-left:none"
+                    type="search"
+                    v-model="keyword"
+                    placeholder="Search"
+                  ></b-form-input>
+                </b-input-group>
+              </div>
             <b-navbar-toggle
-              target="nav-collapse"
-              class="b-none"
+                target="nav-collapse"
+                class="b-none"
             ></b-navbar-toggle>
-            <b-collapse id="nav-collapse" is-nav>
+            <b-collapse id="nav-collapse" is-nav class="w-100">
               <b-navbar-nav class="mr-auto">
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">

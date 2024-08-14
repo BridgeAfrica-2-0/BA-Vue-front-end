@@ -10,7 +10,7 @@
             name="username"
             id="username"
             :placeholder="$t('businessowner.Business_Name')"
-            v-model="business_about_input.name"
+            v-model="business_about.name"
             class="form-control"
             required
           />
@@ -277,7 +277,6 @@
                 class="mt-1"
                 type="text"
                 v-model="business_about_input.website"
-                required
               ></b-form-input>
             </b-form-group>
           </div>
@@ -295,7 +294,6 @@
                 v-model="business_about_input.email"
                 type="email"
                 :placeholder="$t('businessowner.Enter_your_email')"
-                required
               ></b-form-input>
             </b-form-group>
           </div>
@@ -313,7 +311,6 @@
             v-model="business_about_input.about_business"
             class="mb-3 form-control"
             placeholder="description"
-            required
           ></textarea>
         </div>
 
@@ -871,7 +868,7 @@ export default {
           this.business_about.business_open_hours.length >= 7
             ? "Always Open"
             : "Open for selected hours";
-        this.business_about.business_open_hours.map((dayOpen) => {
+        this.business_about?.business_open_hours?.map((dayOpen) => {
           if (day.day.toLowerCase() === dayOpen.day.toLowerCase()) {
             day.closing_time = dayOpen.closing_time;
             day.opening_time = dayOpen.opening_time;
@@ -952,22 +949,22 @@ export default {
 
           
        
-          console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
+          console.log('test-------',this.business_about.lat, '------:',this.business_about.lng);
 
 
           var dat = {
             business_id: this.biz_id,
             data: {
-              name: this.business_about_input.name,
-              about_business: this.business_about_input.about_business,
+              name: this.business_about.name,
+              about_business: this.business_about.about_business,
               categoryId: this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
               subCategoryId: this.stringArray(this.filterselectvalue), //this.business_about_input.subCatFilter[0].subcategoryId,
               filterId: this.ArrayString(this.select_filterss),
-              keywords: this.stringKeyword(this.business_about_input.keywords),
-              primary_phone: this.business_about_input.phone1,
-              secondary_phone: this.business_about_input.phone2,
-              website: this.business_about_input.website,
-              email: this.business_about_input.email,
+              keywords: this.stringKeyword(this.business_about.keywords),
+              primary_phone: this.business_about.phone1,
+              secondary_phone: this.business_about.phone2,
+              website: this.business_about.website,
+              email: this.business_about.email,
               country: this.ArrayString(this.selectedcountry), //this.business_about_input.country[0].country_id,
               region: this.ArrayString(this.selectedregion), //this.business_about_input.region[0].region_id,
               division: this.ArrayString(this.selecteddivision), //this.business_about_input.division[0].division_id,
@@ -977,9 +974,9 @@ export default {
               // city: this.business_about_input.city,
               city: this.city,
               ...this.tempo,
-              lat: this.business_about_input.lat,
-              lng: this.business_about_input.lng,
-              address: this.business_about_input.address,
+              lat: this.business_about.lat,
+              lng: this.business_about.lng,
+              address: this.business_about.address,
             },
           };
 
@@ -998,16 +995,15 @@ export default {
               );
               this.flashMessage.show({
                 status: "success",
-                blockClass: "custom-block-class",
-                message: this.$t("businessowner.Business_Profile_updated"),
-              });
+                message: this.$t('businessowner.Business_Profile_updated')
+              });  
               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
-             
+              this.$store.commit('setDashboardBusiness', dat.data);
             })
             .catch((error) => {
               console.log(error, "update user business about end++++");
@@ -1019,7 +1015,7 @@ export default {
                   this.$store.getters["businessOwner/getBusinessAbout"]
                 )
               );
-              console.log(this.business_about);
+              console.log("Adsfasdf",this.business_about);
               this.$refs["addressBusinessModal"].hide();
               this.$refs["biographyModal"].hide();
             });

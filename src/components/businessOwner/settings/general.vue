@@ -296,24 +296,23 @@ export default {
     },
 
     deleteBusiness: function(busiess_id){
-      console.log("busiess_id: "+busiess_id);
-      this.axios.delete(`business/general/delete/${busiess_id}`)
-      .then(() => {
-        console.log('ohh yeah');
-        console.log(`business/general/delete/${busiess_id}`);
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('businessowner.Business_Deleted')
+      let url = "business/delete/" + busiess_id;
+      this.$store
+        .dispatch("profile/deleteBusiness", url)
+        .then((data) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t('businessowner.Business_Deleted')
+          });
+          this.$router.push('/dashboard');
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t('businessowner.Unable_To_Delete_Business')
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('businessowner.Unable_To_Delete_Business')
-        });
-      });
 		},
 
     selectObject(object){

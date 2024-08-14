@@ -42,7 +42,7 @@
     />
   </div>
   
-  <login v-else />
+  <!-- add guest user api data here -->
 
 </template>
 
@@ -53,7 +53,6 @@ import { loader, search } from "@/mixins";
 import peopleSkeleton from "@/components/peopleSkeleton";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Person from "@/components/Person";
-import login from "@/components/search/login";
 // import Loader from "@/components/Loader";
 
 export default {
@@ -62,7 +61,6 @@ export default {
     Sponsor,
     Person,
    // Loader,
-    login,
     peopleSkeleton
   },
 

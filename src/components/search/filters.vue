@@ -971,6 +971,7 @@ export default {
   },
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     city(){
      return this.$store.getters["allSearch/getLocation"];
     },
@@ -1034,6 +1035,7 @@ export default {
   },
 
   created() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getCities();
@@ -1206,7 +1208,8 @@ export default {
     },
 
     searchProducts(data) {
-      this.$store
+      if (this.islogin) {
+        this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
@@ -1214,6 +1217,18 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+         }
+         else
+         {
+        this.$store
+        .dispatch("marketSearch/searchGuestUserProducts", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+         }
     },
 
     allSearch(data) {

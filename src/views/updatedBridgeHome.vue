@@ -30,7 +30,7 @@
 </section> -->
 
 <section class="p-0">
-  <div>
+  <div style="height: 200px;">
     <div class="row">
       <div class="col-md-12 p-0">
         <div class="position-relative">
@@ -110,14 +110,14 @@
 </section>
 
 
-<section style="background: #FFFFFF">
+<section style="background: #FFFFFF" class="ba-section">
         <div class="container ba-business pt-5 pb-5">
           <div class="row">
             <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
-              <h3>
+              <h3 class="ba-title">
                 <span class="m-header-color">Bridge Africa </span>  <br> <span style="color: black;">{{ $t("general.for_busineses") }} </span> 
               </h3>
-              <p style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
+              <p class="ba-description" style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
   
               <div class="border-left-biz">   
                 <div class="babiz-list d-flex">
@@ -181,30 +181,30 @@
       </section>
   
   
-      <section class="pt-1 pb-1 bg-gradient">
+      <section class="pt-1 pb-1 bg-gradient sales-channel-section">
         <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
           <div class="flex-container">
-          <h3>
-        <span class="line1">Sales channel</span><br>
-        <span class="line2">Sell to Every Buyer,</span><br>
-        <span class="line3">Everywhere</span>
-         </h3>
+            <h3>
+              <span class="line1">Sales channel</span><br>
+              <span class="line2">Sell to Every Buyer,</span><br>
+              <span class="line3">Everywhere</span>
+          </h3>
 
-         <p>{{ $t("general.help_small_and_medium_size") }} 
-        <br>
-        <router-link to="/search">
-          <b-button
-           type="submit"
-           variant="primary"
-           block
-           class="mb-3 mt-3 selling-btn"
-           >
-           Start Selling
-           <span class="arrow-icon-wrapper">
-               <i class="fas fa-arrow-right"></i>
-           </span>
-            </b-button>
-        </router-link>
+          <p>{{ $t("general.help_small_and_medium_size") }} 
+           <br>
+          <router-link to="/search">
+            <b-button
+            type="submit"
+            variant="primary"
+            block
+            class="mb-3 mt-3 selling-btn"
+            >
+            Start Selling
+            <span class="arrow-icon-wrapper">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+              </b-button>
+          </router-link>
           </p>
           </div>
 
@@ -251,7 +251,7 @@
               <h3>
                 <span> Our </span> <span style="color: black !important">{{ $t("general.categories") }}  </span>
               </h3>
-              <p class="pl-5 pr-5" style="color: black !important">
+              <p class="our-category-description" style="color: black !important">
                 {{ $t("general.categories_sub_title") }} 
               </p>
             </div>  
@@ -368,7 +368,7 @@
                     </span>
                   </md-field>
                     </div>
-                    <div class="col-md-12 col-lg-5 mt-3">
+                    <div class="col-md-12 col-lg-5 mt-3 quote-btn-div">
                       <b-button
                         type="submit"
                         variant="primary"
@@ -395,7 +395,7 @@
     <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
         
-        <div class="col-md-6 p-0">
+        <div class="col-md-6 p-0 tailor-content">
           <div class=""> 
           <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;"> 
             <h3> <span> {{ $t("general.Tailor") }} </span>    
@@ -404,7 +404,7 @@
      <p style="color: black;"> {{ $t("general.hire_a_professional_tailor") }} </p>
         </div>
           </div>
-         <div class=" p-2  text-left">  
+         <div class=" p-2 hire-btn-div">  
       <b-button  @click="scrollTo" variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }}
         <span class="arrow-icon-wrapper">
                 <i class="fas fa-arrow-right"></i>
@@ -1607,6 +1607,10 @@
   .flex-container h3 {
     font-size: 22px;
 }
+.our-category-description {
+        padding-left: 3rem;
+        padding-right: 3rem
+  }
 
 .flex-container .line1 {
     font-size: 22px;
@@ -1742,6 +1746,9 @@
   justify-content: center;
   font-weight: 600;
   padding-left: 20px;
+  }
+  .hire-btn-div {
+    text-align: left;
   }
   .hire-div{
     max-height: 400px;
@@ -2316,6 +2323,145 @@
       background-color: #2D2D2D;
       padding: 5px 0;
       color: white
+    }
+
+    @media screen and (max-width: 425px) {
+      .shop-now-btn {
+        font-size: 25px;
+        bottom: -15px;
+      }
+
+      .shop-span {
+        padding-bottom: 0;
+        border-bottom: 0
+      }
+
+      .shop-span::after {
+        content: '';
+        position: absolute;
+        bottom: 20%;
+        left: 30px;
+        right: 30px; 
+        height: 3px;
+        background-color: #fff; 
+      }
+
+      .crtv-bans {
+        height: 200px;
+      }
+
+      .crtv-bans img {
+        width: 100%;
+        height: auto;
+        object-fit: fill; 
+      }
+
+      .splide__arrow {
+        top: 50% !important;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px; 
+      }
+
+      .image-container {
+        height: 150px !important;
+      }
+
+      .product-image {
+        height: 150px !important;
+      }
+
+      .content-container {
+        padding: 0px 5px;
+      }
+
+      .content-container h3 {
+        font-size: 15px !important;
+        margin: 0;
+      }
+
+      .content-container p {
+        font-size: 14px !important;
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      .stock-status {
+        margin-bottom: 3px;
+      }
+
+      .bottom-info {
+        padding: 2px 5px 10px 5px;
+      }
+
+      .product-section {
+        padding-bottom: 0px !important;
+      }
+
+      .ba-section {
+        padding: 0 20px;
+      }
+
+      .ba-business {
+        padding-top: -20px !important;
+      }
+
+      .ba-business .ba-description {
+        text-align: center !important;
+      }
+
+      .ba-title {
+        text-align: center;
+      }
+
+      .sales-channel-section .flex-container {
+        display: unset !important;
+        text-align: center !important;
+      }
+
+      .our-category-description {
+        padding: 0 12px !important;
+      }
+
+      .quote-btn {
+        width: auto !important;
+        padding: 0 !important;
+        padding-right: 3px !important;
+      }
+
+      .quote-btn-div {
+        text-align: center;
+      }
+      .arrow-icon-wrapper {
+        width: 42px !important;
+        height: 42px !important;
+      }
+
+      .tailor-content {
+        text-align: center !important;
+      }
+
+      .hire-btn-div {
+        text-align: center !important;
+      }
+    
+      .hire-btn {
+        height: 42.12px !important;
+        padding: 0 !important;
+        padding: 5px 3px 5px 20px !important;
+      }
+
+      .hire-btn .arrow-icon-wrapper {
+        width: 40px !important;
+        height: 40px !important;
+      }
+
+      .accordion {
+        padding: 0 !important;
+      }
     }
   
   </style>

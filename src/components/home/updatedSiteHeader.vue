@@ -56,9 +56,10 @@
             </a>
           </div>
 
-          <div class="d-flex flex-column w-100 p-0">
-            <div class="w-100">
-              <b-input-group class="binput " style="z-index:1; width:100%;">
+          <div class="d-flex w-100 p-0 mobile-search">
+            <div class="w-90 mobile-search-input m-auto">
+              <div class="d-flex">
+                <b-input-group class="binput">
                   <b-input-group-prepend @click="Search">
                     <div
                       class="border"
@@ -71,7 +72,7 @@
                     >
                       <b-icon
                         style="color: #DDDDDD"
-                        class="mt-2 ml-2"
+                        class="ml-2"
                         icon="search"
                       ></b-icon>
                     </div>
@@ -85,12 +86,20 @@
                     placeholder="Search"
                   ></b-form-input>
                 </b-input-group>
+                <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;" @click="Search">
+                  <b-icon
+                        style="color: #fff"
+                        class="mt-2 ml-2 mx-3 search-icon"
+                        icon="search"
+                      ></b-icon>
+                </div>
+              </div>
               </div>
             <b-navbar-toggle
                 target="nav-collapse"
                 class="b-none"
             ></b-navbar-toggle>
-            <b-collapse id="nav-collapse" is-nav class="w-100">
+            <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav class="mr-auto">
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">
@@ -441,6 +450,10 @@ a {
   color: #455a64 !important;
 }
 
+.mobile-search-input {
+    display:  none; 
+  }
+
 @import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
@@ -584,4 +597,42 @@ a {
     margin-right: 10px;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .mobile-search-input {
+    display:  block; 
+    padding-bottom: 10px;
+    width: 90%;
+  }
+
+  .balogo {
+    margin-left: 20px !important;
+  }
+
+  .mobile-search-input .binput {
+    /* width: 90%;
+    margin: auto;; */
+  }
+  #nav-collapse {
+    width: 100%
+  }
+  .mobile-search {
+    flex-direction: column;
+  }
+
+  .search-icon {
+    font-size: 18px;
+    margin-top: 12px !important;
+  }
+
+  .search {
+    margin-left: 0 !important;
+  }
+
+  .border {
+    display: flex;
+    align-items: center;
+  }
+}
+
 </style>

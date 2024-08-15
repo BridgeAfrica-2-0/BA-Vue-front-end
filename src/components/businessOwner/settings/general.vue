@@ -295,8 +295,8 @@ export default {
       });
     },
 
-    deleteBusiness: function(busiess_id){
-      let url = "business/delete/" + busiess_id;
+    deleteBusiness: function(business_id){
+      let url = "business/delete/" + business_id;
       this.$store
         .dispatch("profile/deleteBusiness", url)
         .then((data) => {

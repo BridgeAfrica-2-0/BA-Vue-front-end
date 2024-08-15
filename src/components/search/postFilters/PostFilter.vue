@@ -35,6 +35,7 @@
     </b-form-checkbox>
 
     <div
+      v-if="islogin"
       class="ab"
       :class="[
         'cursor mt-3',
@@ -288,8 +289,11 @@ export default {
     ...mapGetters({
       keyword: "search/POST_KEYWORD",
     }),
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
   },
-
+  // created() {
+  //   this.islogin = this.$store.getters["auth/isLogged"];
+  // },
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",

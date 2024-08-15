@@ -291,9 +291,6 @@ export default {
     }),
     islogin(){  return this.$store.getters["auth/isLogged"]; },
   },
-  // created() {
-  //   this.islogin = this.$store.getters["auth/isLogged"];
-  // },
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",

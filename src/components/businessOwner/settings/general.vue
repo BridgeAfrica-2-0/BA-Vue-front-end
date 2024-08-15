@@ -130,16 +130,16 @@
     </div>
 
     <b-container>
-      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(business[0])">{{ $t('businessowner.Delete_Business_Identity') }}</b-link>
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(current_business)">{{ $t('businessowner.Delete_Business_Identity') }}</b-link>
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
             !!! <code>{{ $t('businessowner.DELETE_BUSINESS') }}</code> !!! 
           </template>
           <div class="d-block text-center">
-            <h3>{{ $t('businessowner.Delete_Business') }}: {{clickedObject.business_id}}!</h3>
+            <h3>{{ $t('businessowner.Delete_Business') }}: {{clickedObject.name}}!</h3>
           </div>
-          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">{{ $t('businessowner.Delete_Business') }}</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">{{ $t('businessowner.Delete_Business') }}</b-button>
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">{{ $t('businessowner.Cancel') }}</b-button>
         </b-modal>
       </div>
@@ -153,6 +153,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "general",
   data(){
@@ -171,7 +172,8 @@ export default {
           { label: this.$t('businessowner.Allow_editor_to_post'), value: 'Allow editor to post'}
         ],
         permission: null,
-        business_form: null
+        business_form: null,
+        current_business: {}
       }
   },
   
@@ -194,6 +196,7 @@ export default {
   mounted() {
     this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.getBusiness();
+    this.businessInfo();
   },
 
   methods:{
@@ -234,8 +237,15 @@ export default {
       });
     },
 
-
-
+    async businessInfo() {
+       let url=`business/info/${this.$route.params.id}`;
+ 
+       await axios.get(url)
+       .then(({ data }) => {
+          this.current_business = data.data;
+        })
+   
+     },
 
     updateGeneralInfo: function(){
 
@@ -244,7 +254,7 @@ export default {
       let formData = new FormData();
       formData.append('visibility', this.business_form.visibility);
       formData.append('permissions', this.business_form.permissions);
-      formData.append('post_approval', this.business_form.post_approval);
+      formData.append('post_approval', this.business_form.post_approval ? this.business_form.post_approval : 0);
       formData.append('keywords_alert', String(this.business_form.keywords_alert));
       console.log(String(this.business_form.keywords_alert));
       formData.append('marketplace', this.business_form.marketplace);
@@ -284,25 +294,24 @@ export default {
       });
     },
 
-    deleteBusiness: function(busiess_id){
-      console.log("busiess_id: "+busiess_id);
-      this.axios.delete(`business/general/delete/${busiess_id}`)
-      .then(() => {
-        console.log('ohh yeah');
-        console.log(`business/general/delete/${busiess_id}`);
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('businessowner.Business_Deleted')
+    deleteBusiness: function(business_id){
+      let url = "business/delete/" + business_id;
+      this.$store
+        .dispatch("profile/deleteBusiness", url)
+        .then((data) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t('businessowner.Business_Deleted')
+          });
+          this.$router.push('/dashboard');
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t('businessowner.Unable_To_Delete_Business')
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('businessowner.Unable_To_Delete_Business')
-        });
-      });
 		},
 
     selectObject(object){

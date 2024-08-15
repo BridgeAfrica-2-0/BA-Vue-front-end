@@ -243,7 +243,6 @@ export default {
        await axios.get(url)
        .then(({ data }) => {
           this.current_business = data.data;
-          console.log("+++++++++++", this.current_business);
         })
    
      },

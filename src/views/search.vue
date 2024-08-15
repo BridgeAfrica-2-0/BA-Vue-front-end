@@ -1235,15 +1235,33 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findUserByParam({
-          data: {
-            keyword: this.searchParams.keyword.trim(),
-          },
-          page: 1,
-        });
+        var request;
+        if(this.islogin)
+      {
+        request = await this.$repository.search.findUserByParam({
+         data: {
+           keyword: this.searchParams.keyword.trim(),
+         },
+         page: 1,
+       });
+      }
+      else{
+        request = await this.$repository.search.findGuestUserByParam({
+         data: {
+           keyword: this.searchParams.keyword.trim(),
+         },
+         page: 1,
+       });
+      }
 
         if (request.success) {
+          if(this.islogin)
+        {
           this.setCallback(this.$repository.search.findUserByParam);
+        }
+        else{
+          this.setCallback(this.$repository.search.findGuestUserByParam);
+        }
           this.page(2);
           this.userStore(request.data);
         }

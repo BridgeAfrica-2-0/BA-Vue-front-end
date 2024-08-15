@@ -140,14 +140,31 @@ export default {
       });
       
       this.setLoaderState(true);
-      this.setCallback(this.$repository.search.findUserByParam);
-
-      const request = await this.$repository.search.findUserByParam({
-        data: {
-          keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
-        },
-        page: 1,
-      });
+      if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findUserByParam);
+      }
+      else{
+        this.setCallback(this.$repository.search.findGuestUserByParam);
+      }
+      var request;
+      if(this.islogin)
+      {
+        request = await this.$repository.search.findUserByParam({
+         data: {
+           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+         },
+         page: 1,
+       });
+      }
+      else{
+        request = await this.$repository.search.findGuestUserByParam({
+         data: {
+           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+         },
+         page: 1,
+       }); 
+      }
 
       if (request.success) {
         if (request.data.length) {

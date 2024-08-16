@@ -42,7 +42,41 @@
     />
   </div>
   
-  <!-- add guest user api data here -->
+  <div v-else>
+    <h6>
+      {{ $t("search.Sponsored_Result") }}
+      <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+    </h6>
+
+    <div>
+      <Sponsor />
+    </div>
+    <br>
+    <h6>
+      <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+      {{ $t("search.People") }}
+    </h6>
+
+     <peopleSkeleton  :loading="!pageHasLoad" />
+
+    <peopleSkeleton  :loading="!pageHasLoad" />
+
+    <NotFound v-if="!peoples.length && !loaderState" :title="title" />
+
+    <div v-else>
+
+
+      
+          <Person v-for="item in peoples" :key="item.id" :person="item"  />
+       
+    </div>   
+
+    <ScrollLoader
+      :loading="loadingIsActive"
+      color="#ced4da"
+      v-if="this.getKeywork"
+    />
+  </div>
 
 </template>
 

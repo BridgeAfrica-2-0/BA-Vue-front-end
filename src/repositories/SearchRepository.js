@@ -27,9 +27,9 @@ class Repository {
   async findGuestUserByParam(credentials) {
     try {
 
-      const {  data } = credentials
+      const { page, data } = credentials
 
-      const response = (data.keyword) ? await axios.post(`visitor/search/user?keyword=${data.keyword}`, { ...data }) : await axios.post(`visitor/search/user`, { ...data })
+      const response = (data.keyword) ? await axios.get(`visitor/search/user?page=${page}&keyword=${data.keyword}&limit=10`, { ...data, page }) : await axios.get(`visitor/search/user?page=${page}&limit=10`, { ...data , page})
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []

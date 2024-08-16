@@ -416,4 +416,54 @@ export default {
     width: 150px;
   }
 }
+
+@media screen and (max-width: 425px) {
+
+  .footer {
+    padding: 0px;
+  }
+
+  .footer .container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+  }
+  .subscription-box {
+    border-radius: 0px;
+    margin-top: -70px;
+    width: 100%
+  }
+
+  .subscription-box.footer-subscription {
+    padding: 50px 10px !important;
+  }
+
+  .subscription-box p {
+    font-size: 21px !important;
+    padding: 0 40px;
+  }
+
+  .hire-btn {
+    height: unset !important;
+    font-size: 16px;
+  }
+
+  .subscription-box input {
+    padding : 19px !important;
+    max-width: 65% !important;
+  }
+
+  #footer .footer-top {
+    padding: 40px 20px 0px 20px !important;
+  }
+
+  .footer-contact img {
+    width: unset !important;
+  }
+
+  .logo-div {
+    padding-left: 12px !important;
+  }
+  
+}
 </style>

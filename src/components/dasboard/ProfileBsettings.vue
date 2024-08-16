@@ -947,11 +947,6 @@ export default {
           console.log(this.business_about_input);
           this.input1();
 
-          
-       
-          console.log('test-------',this.business_about.lat, '------:',this.business_about.lng);
-
-
           var dat = {
             business_id: this.biz_id,
             data: {
@@ -1003,7 +998,6 @@ export default {
               ];
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
-              this.$store.commit('setDashboardBusiness', dat.data);
             })
             .catch((error) => {
               console.log(error, "update user business about end++++");
@@ -1015,7 +1009,6 @@ export default {
                   this.$store.getters["businessOwner/getBusinessAbout"]
                 )
               );
-              console.log("Adsfasdf",this.business_about);
               this.$refs["addressBusinessModal"].hide();
               this.$refs["biographyModal"].hide();
             });

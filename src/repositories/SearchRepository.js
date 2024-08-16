@@ -108,6 +108,23 @@ class Repository {
     }
   }
 
+  async findPostByBusinessForGuestUser(credentials) {
+    try {
+      const { page, data } = credentials
+      const response = await axios.post(`visitor/search/business/post/${page}`, { ...data, page })
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
+
   async findPostByNetWork(credentials) {
     try {
       const { page, data, keyword } = credentials

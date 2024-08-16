@@ -32,7 +32,36 @@
     ></b-pagination>
   </div>  
   <div v-else>  
-  <!-- add guest user api data here -->
+    <Skeleton  :loading="prodLoader" />
+    <Skeleton  :loading="prodLoader" />
+     <NotFoundComponent
+      v-if="business.data.length < 1 && prodLoader == false"
+      :title="title"
+    /> 
+    <div class="text-center"> 
+    <b-spinner
+      v-if="prodLoader"
+      variant="primary"
+      :label="$t('search.Spinning')"
+    ></b-spinner>
+     </div>
+
+   <Business
+        v-for="item in business.data"
+        :key="item.id"
+        :business="item"  
+      />
+
+    <b-pagination
+      v-if="business.next || business.previous"
+      v-model="currentPage"
+      :total-rows="business.total"
+      pills
+      :per-page="business.per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
   </div>  
 </template>
 
@@ -79,9 +108,7 @@ export default {
     islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
   mounted() {
-    if(this.islogin){
-      this.getBusiness();  
-    }
+    this.getBusiness();  
   },
   created(){
     this.islogin = this.$store.getters["auth/isLogged"];
@@ -120,10 +147,17 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
-    ...mapActions({
-      findBusiness: "business/FIND_BUSINESS",
-      nextPage: "business/NEXT_PAGE",
-    }),
+
+    findBusiness(payload) {
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
+  nextPage(payload) {
+    return this.$store.dispatch("business/NEXT_PAGE", payload);
+  },
     getBusiness() {
       this.$store.commit("business/setLoading", true);
       this.findBusiness({main:true})

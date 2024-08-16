@@ -92,6 +92,7 @@ export default {
   },
   created() {
     this.mapbox = Mapbox;
+    this.islogin = this.$store.getters["auth/isLogged"];
   },
   computed: {
     ...mapGetters({
@@ -100,6 +101,7 @@ export default {
       sponsorbusiness: "business/getSponsorBusinesses",
       prodLoader: "business/getloadingState",
     }),
+    islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
 
   mounted() {
@@ -115,10 +117,16 @@ export default {
       } else return number;
     },
 
-    ...mapActions({
-      findBusiness: "business/FIND_BUSINESS",
-      nextPage: "business/NEXT_PAGE",
-    }),
+    findBusiness(payload) {
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
+  nextPage(payload) {
+    return this.$store.dispatch("business/NEXT_PAGE", payload);
+  },
 
     getBusiness() {
       console.log("business search mounted");

@@ -6,7 +6,7 @@
           <div class="d-flex justify-content-between align-items-center" style="cursor: pointer" @click="toggleCollapse(index)"
                 :aria-expanded="expandedIndex === index"
                 :aria-controls="'collapse' + index">
-            <h6>{{ item.title }}</h6>
+            <h6 class="faq-title">{{ item.title }}</h6>
             <h2 class="mb-0">
               <button
                 class="btn btn-block"
@@ -138,5 +138,16 @@ export default {
   padding-left: 5px;
   font-size: 14px !important;
   color: black !important;
+}
+
+@media screen and (max-width: 425px) { 
+  .faq-title {
+    text-align: left !important;
+    padding-right: 5px;
+  }
+
+  .accordion .card-header button .fas {
+    font-size: 24px !important;
+  }
 }
 </style>

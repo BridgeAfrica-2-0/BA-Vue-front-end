@@ -514,7 +514,7 @@ export default {
             message: this.$t("businessowner.Transaction_Completed"),
           });
          }
-
+         this.$store.dispatch("auth/profilePackage");
          if(this.PaymentForm.type=='basic'){
             this.getAccounts();
            

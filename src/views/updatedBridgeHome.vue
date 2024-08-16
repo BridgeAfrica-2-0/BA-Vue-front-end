@@ -30,7 +30,7 @@
 </section> -->
 
 <section class="p-0">
-  <div>
+  <div style="height: 200px;">
     <div class="row">
       <div class="col-md-12 p-0">
         <div class="position-relative">
@@ -57,7 +57,7 @@
 
 
 <section class="product-section">
-  <div class="container">
+  <div class="container p-0">
     <h3 class="sections-title"><span style="color: #E75B17;">Our</span> Quality Products</h3>
     <p class="section-description">With over 100 categories of products, easily shop from businesses in Cameroon anytime, anywhere.</p>
     <div class="button-group">
@@ -110,18 +110,18 @@
 </section>
 
 
-<section style="background: #FFFFFF">
+<section style="background: #FFFFFF" class="ba-section">
         <div class="container ba-business pt-5 pb-5">
           <div class="row">
             <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
-              <h3>
+              <h3 class="ba-title">
                 <span class="m-header-color">Bridge Africa </span>  <br> <span style="color: black;">{{ $t("general.for_busineses") }} </span> 
               </h3>
-              <p style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
+              <p class="ba-description" style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
   
               <div class="border-left-biz">   
                 <div class="babiz-list d-flex">
-                  <span class="p-1 d-inline create-your-shop">
+                  <span class="p-1 create-your-shop">
                     <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
@@ -134,7 +134,7 @@
                   </div>
                 </div>
                 <div class="babiz-list d-flex">
-                  <span class="p-1 d-inline ship-globally">
+                  <span class="p-1 ship-globally">
                     <v-lazy-image src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
@@ -147,7 +147,7 @@
                   </div>
                 </div>
                 <div class="babiz-list d-flex">
-                  <span class="p-1 d-inline get-paid">
+                  <span class="p-1 get-paid">
                     <v-lazy-image src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"/>
                   </span>
                   <div class="bottom-border">
@@ -181,30 +181,30 @@
       </section>
   
   
-      <section class="pt-1 pb-1 bg-gradient">
+      <section class="pt-1 pb-1 bg-gradient sales-channel-section">
         <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
           <div class="flex-container">
-          <h3>
-        <span class="line1">Sales channel</span><br>
-        <span class="line2">Sell to Every Buyer,</span><br>
-        <span class="line3">Everywhere</span>
-         </h3>
+            <h3>
+              <span class="line1">Sales channel</span><br>
+              <span class="line2">Sell to Every Buyer,</span><br>
+              <span class="line3">Everywhere</span>
+          </h3>
 
-         <p>{{ $t("general.help_small_and_medium_size") }} 
-        <br>
-        <router-link to="/search">
-          <b-button
-           type="submit"
-           variant="primary"
-           block
-           class="mb-3 mt-3 selling-btn"
-           >
-           Start Selling
-           <span class="arrow-icon-wrapper">
-               <i class="fas fa-arrow-right"></i>
-           </span>
-            </b-button>
-        </router-link>
+          <p>{{ $t("general.help_small_and_medium_size") }} 
+           <br>
+          <router-link to="/search">
+            <b-button
+            type="submit"
+            variant="primary"
+            block
+            class="mb-3 mt-3 selling-btn"
+            >
+            Start Selling
+            <span class="arrow-icon-wrapper">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+              </b-button>
+          </router-link>
           </p>
           </div>
 
@@ -251,7 +251,7 @@
               <h3>
                 <span> Our </span> <span style="color: black !important">{{ $t("general.categories") }}  </span>
               </h3>
-              <p class="pl-5 pr-5" style="color: black !important">
+              <p class="our-category-description" style="color: black !important">
                 {{ $t("general.categories_sub_title") }} 
               </p>
             </div>  
@@ -368,7 +368,7 @@
                     </span>
                   </md-field>
                     </div>
-                    <div class="col-md-12 col-lg-5 mt-3">
+                    <div class="col-md-12 col-lg-5 mt-3 quote-btn-div">
                       <b-button
                         type="submit"
                         variant="primary"
@@ -390,12 +390,12 @@
       </section>
      
       <!-- background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%); -->
-  <section style="background-color: white;"> 
+  <section style="background-color: white;" class="tailor-section"> 
   
     <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class"  data-aos="fade-left" data-aos-offset="70px" data-aos-duration="1500" > 
       <div class="row ">
         
-        <div class="col-md-6 p-0">
+        <div class="col-md-6 p-0 tailor-content">
           <div class=""> 
           <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;"> 
             <h3> <span> {{ $t("general.Tailor") }} </span>    
@@ -404,7 +404,7 @@
      <p style="color: black;"> {{ $t("general.hire_a_professional_tailor") }} </p>
         </div>
           </div>
-         <div class=" p-2  text-left">  
+         <div class=" p-2 hire-btn-div">  
       <b-button  @click="scrollTo" variant="primary" class="hire-btn"> {{ $t("general.hire_tailor") }}
         <span class="arrow-icon-wrapper">
                 <i class="fas fa-arrow-right"></i>
@@ -431,7 +431,7 @@
   
          </div> </div>
   </section>
-  <section class="bg-whitee network">
+  <section class="bg-whitee network camroon-focus-desktop">
         <div class="container row  mt-3"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
           <div class="col-2 mt-5">
             <div class="card-container">
@@ -554,6 +554,123 @@
 
         </div>
       </section>
+
+
+      <section class="bg-whitee network camroon-focus-mobile">
+        <div class="container text-center  mt-3"  data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+            <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img m-auto"/>
+            <h3 class="mb-0 market-heading text-center">
+              <span>{{ $t("general.cameroon_focus") }}</span>
+              <span style="color: black;">Focused {{ $t('network.Marketplace') }}</span>
+            </h3>
+            <h3 class="statistics text-center">
+                Some of our statistics on stage performances in Cameroon
+            </h3>
+         <div class="d-flex row">
+          <div class="col-4 mt-5">
+            <div class="card-container">
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                <div class="col-4 pr-0">
+                  <v-lazy-image src="assets/home/m_1.png" alt="Icon" class="icon"/>
+                </div>
+                <div class="col-8 card-padding">
+                  <div class="d-flex flex-column">
+                    <span class="percentage">4</span>
+                    <span class="text">Countries</span>
+                  </div>
+                </div>
+              </div>
+
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                <div class="col-3 pr-0">
+                  <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon"/>
+                </div>
+                <div class="col-9 card-padding">
+                  <div class="d-flex flex-column">
+                    <span class="percentage pl-1">500+</span>
+                    <span class="text">Deals Globally</span>
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                <div class="col-4 pr-0">
+                  <v-lazy-image src="assets/home/m_3.png" alt="Icon" class="icon"/>
+                </div>
+                <div class="col-8 card-padding">
+                  <div class="d-flex flex-column">
+                    <span class="percentage">70M+</span>
+                    <span class="text">Revenue</span>
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                <div class="col-4 pr-0">
+                  <v-lazy-image src="assets/home/m_4.png" alt="Icon" class="icon"/>
+                </div>
+                <div class="col-8 card-padding">
+                  <div class="d-flex flex-column">
+                    <span class="percentage">98%</span>
+                    <span class="text">Satisfaction</span>
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+          <div class="col-8 mt-5">
+            <v-lazy-image src="/assets/home/globe-mobile.png"  alt=""/> 
+          </div>
+         </div>
+          
+          <div class="col-12">
+              <div class="row mt-4">
+                <div class="col-3 statistic-box">
+                  <span class="text-left">
+                    <h3>7500+</h3>
+                    <span style="color: black;">{{ $t("general.7k_business") }}</span>
+                  </span>
+                </div>
+                <div class="col-3 statistic-box">
+                  <span class="text-left">
+                    <h3>13000+</h3>
+                    <span style="color: black;">{{ $t("general.13k_customers") }}</span>
+                  </span>
+                </div>
+                <div class="col-3 statistic-box">
+                  <span class="text-left">
+                    <h3>100+</h3>
+                    <span style="color: black;">{{ $t("general.100_industries") }}</span>
+                  </span>
+                </div>
+                <div class="col-3 statistic-box">
+                  <span class="text-left">
+                    <h3>72H</h3>
+                    <span style="color: black;">{{ $t("general.48h_respond_time") }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </section>
      
   
       <section style="background: #F3F3F3">
@@ -563,7 +680,7 @@
               <h3>
                 <span> {{ $t("general.digital_education") }}   </span> <span style="color: black !important">{{ $t("general.to_help_you_make_more_money") }}  </span>
               </h3>
-              <p class="pl-5 pr-5" style="color: black !important">
+              <p style="color: black !important">
                 {{ $t("general.use_our_special_design_training") }} 
               </p>
             </div>  
@@ -575,7 +692,7 @@
       <section class="bg-whitee">
         
         <div class="container pt-5 pb-5"  >
-          <div class="text-left">
+          <div class="television-show-title">
               <h3>
                 <span> {{ $t("general.television_show") }}   </span> <br> <span style="color: black !important">{{ $t("general.from_our_television_show") }}  </span>
               </h3>
@@ -1191,6 +1308,15 @@
   
   <style>
 
+.television-show-title {
+  text-align: left;
+}
+
+.camroon-focus-mobile .col-12 {
+  padding-left: 3rem;
+  padding-top: 3rem;
+}
+
 .loader {
   display: flex;
   justify-content: center;
@@ -1585,6 +1711,10 @@
   margin-top: 5px; 
 }
 
+.camroon-focus-mobile {
+  display: none;
+}
+
 
   @media only screen and (min-width: 960px) {
     .custom-container {
@@ -1607,6 +1737,10 @@
   .flex-container h3 {
     font-size: 22px;
 }
+.our-category-description {
+        padding-left: 3rem;
+        padding-right: 3rem
+  }
 
 .flex-container .line1 {
     font-size: 22px;
@@ -1742,6 +1876,9 @@
   justify-content: center;
   font-weight: 600;
   padding-left: 20px;
+  }
+  .hire-btn-div {
+    text-align: left;
   }
   .hire-div{
     max-height: 400px;
@@ -2221,6 +2358,10 @@
     color: #e75b17;
     border-color: #ffffff;
   }
+
+  .resources p{
+        padding: 0 3rem;
+      }
   </style>
   
   <style>
@@ -2316,6 +2457,263 @@
       background-color: #2D2D2D;
       padding: 5px 0;
       color: white
+    }
+
+    @media screen and (max-width: 425px) {
+
+      .row {
+        margin: 0 !important;
+      }
+
+      .button-group {
+        display: none !important;
+      }
+
+      .see-all-p {
+        display: none !important;
+      }
+
+      .shop-now-btn {
+        font-size: 25px;
+        bottom: -15px;
+      }
+
+      .shop-span {
+        padding-bottom: 0;
+        border-bottom: 0
+      }
+
+      .shop-span::after {
+        content: '';
+        position: absolute;
+        bottom: 20%;
+        left: 30px;
+        right: 30px; 
+        height: 3px;
+        background-color: #fff; 
+      }
+
+      .crtv-bans {
+        height: 200px;
+      }
+
+      .crtv-bans img {
+        width: 100%;
+        height: auto;
+        object-fit: fill; 
+      }
+
+      .splide__arrow {
+        top: 50% !important;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px; 
+      }
+
+      .image-container {
+        height: 150px !important;
+      }
+
+      .product-image {
+        height: 150px !important;
+      }
+
+      .content-container {
+        padding: 0px 5px;
+      }
+
+      .content-container h3 {
+        font-size: 15px !important;
+        margin: 0;
+      }
+
+      .content-container p {
+        font-size: 14px !important;
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      .stock-status {
+        margin-bottom: 3px;
+      }
+
+      .bottom-info {
+        padding: 2px 5px 10px 5px;
+      }
+
+      .product-section {
+        padding-bottom: 0px !important;
+      }
+
+      .ba-section {
+        padding: 0 20px;
+      }
+
+      .ba-business {
+        padding-top: -20px !important;
+      }
+
+      .ba-business .ba-description {
+        text-align: center !important;
+      }
+
+      .ba-title {
+        text-align: center;
+      }
+
+      .sales-channel-section .flex-container {
+        display: unset !important;
+        text-align: center !important;
+      }
+
+      .selling-btn {
+        width: auto !important;
+      }
+
+      .our-category-description {
+        padding: 0 12px !important;
+      }
+
+      .quote-btn {
+        width: auto !important;
+        padding: 0 !important;
+        padding-right: 3px !important;
+      }
+
+      .quote-btn-div {
+        text-align: center;
+      }
+      .arrow-icon-wrapper {
+        width: 42px !important;
+        height: 42px !important;
+      }
+
+      .tailor-content {
+        text-align: center !important;
+      }
+
+      .hire-btn-div {
+        text-align: center !important;
+      }
+    
+      .hire-btn {
+        height: 42.12px !important;
+        padding: 0 !important;
+        padding: 5px 3px 5px 20px !important;
+      }
+
+      .hire-btn .arrow-icon-wrapper {
+        width: 40px !important;
+        height: 40px !important;
+      }
+
+      .accordion {
+        padding: 0 !important;
+      }
+
+      .resources p {
+        padding: 0 30px;
+      }
+
+      .television-show-title {
+        text-align: center;
+      }
+
+      .tailor-section {
+        display: none;
+      }
+
+      .camroon-focus-desktop {
+        display: none;
+      }
+
+      .camroon-focus-mobile {
+        display: block;
+        padding-bottom: 40px;
+      }
+
+      .market-heading {
+        font-size: 26px !important
+      }
+
+      .statistics {
+        font-size: 18px !important;
+        line-height: 30px !important;
+        margin-top: 20px;
+        padding: 0 28px;
+      }
+
+      .camroon-focus-mobile .col-4,
+      .camroon-focus-mobile .col-8,
+      .camroon-focus-mobile .col-12,
+      .camroon-focus-mobile .col-3,
+      .camroon-focus-mobile .row{
+        padding: 0;
+      }
+
+      .camroon-focus-mobile img{
+        width: 100%;
+        margin-left: 10px;
+      }
+
+      .camroon-focus-mobile .card {
+        padding: 5px;
+      }
+
+      .camroon-focus-mobile .card-content img{
+        width: 20px;
+        height: 20px;
+        margin-left: 0;
+      }
+
+       .camroon-focus-mobile .card-content .percentage{
+        font-size: 16px;
+        padding-left: 0 !important;
+      }
+
+      .camroon-focus-mobile .card-content .text{
+        font-size: 9px;
+        margin-top: 0;
+      }
+
+      .statistic-box {
+        padding-left: 8px !important;
+      }
+
+      .statistic-box h3 {
+        font-size: 16px !important;
+        margin: 0;
+        padding: 0;
+      }
+
+      .statistic-box span {
+        font-size: 10px !important;
+      }
+
+      .create-your-shop,
+      .ship-globally,
+      .get-paid {
+        width: 75px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ship-globally {
+        width: 42px;
+      }
+
+      .get-paid {
+        width: 37px;
+      }
+
+      .section-description {
+        padding: 0 30px !important;
+      }
+
     }
   
   </style>

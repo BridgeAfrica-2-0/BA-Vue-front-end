@@ -89,7 +89,7 @@
           ><br />
           <b-form-tags
             input-id="tags-separators"
-            v-model="business_about_input.keywords"
+            v-model="business_about.keywords"
             tag-variant="primary"
             separator=" ,;"
             :limit="limit"
@@ -218,14 +218,14 @@
                         type="text"
                         name="alias"
                         id="Neighbor"
-                        v-model="business_about_input.address"
+                        v-model="business_about.address"
                         placeholder="Neighborhood"
                         class="form-control text"
                       />
 
               <div class="" style="height: 250px; overflow:hidden">
                 <AutocompleteLocation
-                  :infos="business_about_input"
+                  :infos="business_about"
                   :region="region"
                   @get-address-details="getGeoCoderResult"
                 />
@@ -246,7 +246,7 @@
             >
               <VuePhoneNumberInput
                  default-country-code="CM"
-                v-model="business_about_input.phone1"
+                v-model="business_about.phone1"
               />
             </b-form-group>
           </div>
@@ -259,7 +259,7 @@
             >
               <VuePhoneNumberInput
                  default-country-code="CM"
-                v-model="business_about_input.phone2"
+                v-model="business_about.phone2"
               />
             </b-form-group>
           </div>
@@ -276,7 +276,7 @@
                 id="input-1"
                 class="mt-1"
                 type="text"
-                v-model="business_about_input.website"
+                v-model="business_about.website"
               ></b-form-input>
             </b-form-group>
           </div>
@@ -291,7 +291,7 @@
               <b-form-input
                 id="input-1"
                 class="mt-1"
-                v-model="business_about_input.email"
+                v-model="business_about.email"
                 type="email"
                 :placeholder="$t('businessowner.Enter_your_email')"
               ></b-form-input>
@@ -308,7 +308,7 @@
             type="text"
             id="description"
             name="description"
-            v-model="business_about_input.about_business"
+            v-model="business_about.about_business"
             class="mb-3 form-control"
             placeholder="description"
           ></textarea>

@@ -4,8 +4,8 @@
       <FlashMessage />
       <!-- <vue-confirm-dialog></vue-confirm-dialog> -->
     </div>
-
-    <b-modal
+    <!-- will be using this modal for some conditional components -->
+    <!-- <b-modal
       id="authModal"
       ref="authModal"
       @hidden="hideAuthModal"
@@ -13,7 +13,7 @@
       size="xl"
     >
       <login @success="success" @hideAuthModal="hideAuthModal" />
-    </b-modal>
+    </b-modal> -->
 
     <transition
       name="fade"
@@ -33,13 +33,13 @@
 </template>
 <script>
 import { Redis } from "@/mixins";
-import login from "@/components/Login";
+// import login from "@/components/Login";
 
 import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
   mixins: [Redis],
-  components: { login },
+  // components: { login },
   data() {
     return {
       prevHeight: 0,

@@ -817,6 +817,18 @@ export default {
 .f-12 {
   font-size: 12px;
 }
+
+
+@media screen and (max-width: 425px) {
+
+  .nav.nav-tabs {
+    overflow-x: auto;
+  }
+
+  .splide__slide {
+    width: 445px !important;
+  }
+}
 </style>
 
 <style >

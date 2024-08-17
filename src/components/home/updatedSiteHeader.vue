@@ -1,77 +1,24 @@
 <template>
   <div>
-    <!-- Top Bar with Contact Information and Language Selection -->
-    <!-- <div class="top-bar d-flex justify-content-between align-items-center">
-  <div class="container p-0 m-0">
-  <div class="contact-info">
-    <span> <img src="../../../public//assets//home/phone.png" class="size2" alt=""> +123 456 7890</span>
-    <span><img src="../../../public//assets//home/email.png" class="size2" alt=""> infobridgeafrica.com@gmail.com</span>
-    <span class="media-icons">
-      <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i class="fab fa-youtube"></i></a>
-    </span>
-  </div>
-  <div class="language-selection">
-    <b-dropdown variant="ligth">
-      <template #button-content>
-        <span class="poslang">{{ lang }}</span> <img :src="img" class="size poslang" alt=""> 
-      </template>
-      <b-dropdown-item @click="change('en')">
-        <img src="../../assets/img/about/en.png" class="size" alt=""> EN
-      </b-dropdown-item>
-      <b-dropdown-item @click="change('fr')">
-        <img src="../../assets/img/la-france.png" class="size" alt=""> FR
-      </b-dropdown-item>
-    </b-dropdown>
-  </div>
-</div>
-</div> -->
-    <div
-      class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto"
-    >
-      <div
-        class="container p-0 m-auto d-flex justify-content-between align-items-center"
-      >
+    <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
+      <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
         <div class="contact-info d-flex align-items-center">
           <div class="d-flex">
-            <span class="d-flex justify-content-center align-items-center"
-              ><img
-                src="../../../public/assets/home/phone.png"
-                class="size2 mr-2"
-                alt=""
-              /><span style="color: #8C8C8C !important">
-                +237697157690</span
-              ></span
-            >
-            <span class="d-flex justify-content-center align-items-center"
-              ><img
-                src="../../../public/assets/home/email.png"
-                id="mail-icon"
-                class="mr-2"
-                alt=""
-              /><span style="color: #8C8C8C !important"
-                >info@bridgeafrica.com</span
-              ></span
-            >
+            <span class="d-flex justify-content-center align-items-center">
+              <img src="../../../public/assets/home/phone.png" class="size2 mr-2" alt="" />
+              <span style="color: #8C8C8C !important">+237697157690</span>
+            </span>
+            <span class="d-flex justify-content-center align-items-center">
+              <img src="../../../public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+              <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
+            </span>
           </div>
           <div>
             <span class="media-icons">
-              <a href="https://twitter.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="http://facebook.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="https://instagram.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a
-                href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
-                target="_blank"
-                ><i class="fab fa-youtube"></i
-              ></a>
+              <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i class="fab fa-youtube"></i></a>
             </span>
           </div>
         </div>
@@ -82,19 +29,11 @@
               <img :src="img" class="size poslang" alt="" />
             </template>
             <b-dropdown-item @click="change('en')">
-              <img
-                src="../../assets/img/about/en.png"
-                class="size mr-1"
-                alt=""
-              />
+              <img src="../../assets/img/about/en.png" class="size mr-1" alt="" />
               English
             </b-dropdown-item>
             <b-dropdown-item @click="change('fr')">
-              <img
-                src="../../assets/img/la-france.png"
-                class="size mr-1"
-                alt=""
-              />
+              <img src="../../assets/img/la-france.png" class="size mr-1" alt="" />
               French
             </b-dropdown-item>
           </b-dropdown>
@@ -103,8 +42,8 @@
     </div>
 
     <!-- Header Bar -->
-    <div class="container-flex home-nav">
-      <b-navbar toggleable="lg" class="p-0 ">
+    <div ref="homeNav" class="container-flex home-nav">
+      <b-navbar toggleable="lg" class="p-0">
         <div class="container p-0 m-0">
           <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
             <a class="d-inline-block align-top mt-1 float-left" href="#">
@@ -117,10 +56,48 @@
             </a>
           </div>
 
-          <div class="d-flex w-100 p-0">
+          <div class="d-flex w-100 p-0 mobile-search">
+            <div class="w-90 mobile-search-input m-auto">
+              <div class="d-flex">
+                <b-input-group class="binput">
+                  <b-input-group-prepend @click="Search">
+                    <div
+                      class="border"
+                      style="
+                        color: white !important;
+                        background-color: #fff; 
+                        border-top-left-radius: 0.25rem !important;
+                        border-bottom-left-radius: 0.25rem !important;
+                      "
+                    >
+                      <b-icon
+                        style="color: #DDDDDD"
+                        class="ml-2"
+                        icon="search"
+                      ></b-icon>
+                    </div>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    v-on:keyup.enter="Search"
+                    class="search"
+                    style="border-left:none"
+                    type="search"
+                    v-model="keyword"
+                    placeholder="Search"
+                  ></b-form-input>
+                </b-input-group>
+                <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;" @click="Search">
+                  <b-icon
+                        style="color: #fff"
+                        class="mt-2 ml-2 mx-3 search-icon"
+                        icon="search"
+                      ></b-icon>
+                </div>
+              </div>
+              </div>
             <b-navbar-toggle
-              target="nav-collapse"
-              class="b-none"
+                target="nav-collapse"
+                class="b-none"
             ></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav class="mr-auto">
@@ -293,6 +270,7 @@ export default {
       img: require("../../assets/img/about/en.png"),
       lang: "English",
       keyword: "",
+      scrollPosition: 0,
     };
   },
   computed: {
@@ -303,7 +281,24 @@ export default {
       return this.$store.getters["auth/isLogged"];
     },
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      this.scrollPosition = window.scrollY;
+
+      const targetElement = this.$refs.homeNav;
+
+      if (this.scrollPosition > 50) { 
+        targetElement.classList.add('fixed-top');
+      } else {
+        targetElement.classList.remove('fixed-top');
+      }
+    },
     ...mapActions({
       Logout: "auth/logout",
     }),
@@ -357,6 +352,7 @@ export default {
 </script>
 
 <style scoped>
+
 li .nav-link:hover {
   background-color: none !important;
 }
@@ -453,6 +449,10 @@ li .nav-link:hover {
 a {
   color: #455a64 !important;
 }
+
+.mobile-search-input {
+    display:  none; 
+  }
 
 @import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
@@ -597,4 +597,42 @@ a {
     margin-right: 10px;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .mobile-search-input {
+    display:  block; 
+    padding-bottom: 10px;
+    width: 90%;
+  }
+
+  .balogo {
+    margin-left: 20px !important;
+  }
+
+  .mobile-search-input .binput {
+    /* width: 90%;
+    margin: auto;; */
+  }
+  #nav-collapse {
+    width: 100%
+  }
+  .mobile-search {
+    flex-direction: column;
+  }
+
+  .search-icon {
+    font-size: 18px;
+    margin-top: 12px !important;
+  }
+
+  .search {
+    margin-left: 0 !important;
+  }
+
+  .border {
+    display: flex;
+    align-items: center;
+  }
+}
+
 </style>

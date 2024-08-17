@@ -129,7 +129,7 @@
 
           <div style="float: right" ref="isnaav">
             <b-collapse id="nav-collapse" is-nav>
-              <div class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
@@ -138,7 +138,7 @@
                 </router-link>
               </div>
 
-              <div class="nav-item">
+              <div  v-if="islogin" class="nav-item">
                 <router-link
                    :to="{ name: 'GlobalSearch',query: { tab: 0 } }"
                   class="nav-link text-dark hov"
@@ -156,7 +156,7 @@
                 </router-link>
               </div>
 
-              <div v-if="!islogin" class="nav-item">
+              <div v-if="!islogin" class="nav-item mr-5">
                 <router-link
                   :to="{ name: 'Login' }"
                   class="nav-link text-dark hov"

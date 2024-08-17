@@ -1,5 +1,6 @@
 <template>
   <div class="p-0 m-0">
+    <vue-confirm-dialog />
     <div class="col-md-12 p-0">
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
@@ -847,7 +848,7 @@
                         ></b-icon>
                       </template>
                       <b-dropdown-item
-                        @click="editBusiness(business.id)"
+                        @click="editBusiness(business.slug)"
                         v-b-modal.updateBusinessModal
                         variant=""
                         >{{ $t("profileowner.Edit") }}</b-dropdown-item

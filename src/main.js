@@ -36,10 +36,10 @@ Vue.use(ShareNetwork);
 import plugin from './http';
 Vue.use(plugin);
 //vue confirm dialog  
-// import VueConfirmDialog from 'vue-confirm-dialog'
+import VueConfirmDialog from 'vue-confirm-dialog'
 
-// Vue.use(VueConfirmDialog)
-// Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+Vue.use(VueConfirmDialog)
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
 
 
 /* import VueMeta from 'vue-meta'

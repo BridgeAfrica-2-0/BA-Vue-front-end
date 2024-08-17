@@ -32,15 +32,13 @@
     ></b-pagination>
   </div>  
   <div v-else>  
-  
-       <login />
+  <!-- add guest user api data here -->
   </div>  
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
-import login from "@/components/search/login";
 import NotFoundComponent from "@/components/NotFoundComponent";
 import Skeleton from "@/components/skeleton";
 import Business from "@/components/Business";
@@ -48,7 +46,6 @@ export default {
   props: ["image"],
   components: {
     NotFoundComponent,
-    login,
     Skeleton,
     Business
   },

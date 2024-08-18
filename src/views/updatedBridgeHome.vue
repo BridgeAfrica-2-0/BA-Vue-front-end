@@ -30,7 +30,7 @@
 </section> -->
 
 <section class="p-0">
-  <div style="height: 200px;">
+  <div class="top-slider">
     <div class="row">
       <div class="col-md-12 p-0">
         <div class="position-relative">
@@ -179,6 +179,75 @@
           </div>
         </div>
       </section>
+
+      <section style="background: #FFFFFF" class="ba-section-mobile">
+        <div class="container ba-business pt-5 pb-5">
+          <h3 class="ba-title">
+                <span class="m-header-color">Bridge Africa </span>  <br> <span style="color: black;">{{ $t("general.for_busineses") }} </span> 
+              </h3>
+              <p class="ba-description" style="color: black;"> {{ $t("general.sell_online_in_person") }}  </p>
+          <div class="row">
+            <div class="col-lg-6 ba-video" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">  
+              <div>
+             <video
+                width="100%"
+              
+                style="object-fit:contain; border-radius: 10px;"
+                autoplay
+                muted
+                loop
+                poster="assets/home/ba_business.png"
+              >
+                <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
+              </video>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">  
+              <div class="border-left-biz">   
+                <div class="babiz-list d-flex">
+                  <span class="p-1 create-your-shop">
+                    <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing"/>
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.business_identity_and_oline") }} 
+                    </h5>
+                    <p>
+                      {{ $t("general.create_your_business_page") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="babiz-list d-flex">
+                  <span class="p-1 ship-globally">
+                    <v-lazy-image src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing"/>
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.online_business_database") }}  
+                    </h5>
+                    <p>
+                      {{ $t("general.make_your_business_visible") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="babiz-list d-flex">
+                  <span class="p-1 get-paid">
+                    <v-lazy-image src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing"/>
+                  </span>
+                  <div class="bottom-border">
+                    <h5> 
+                      {{ $t("general.unified_back_office") }}  
+                    </h5>
+                    <p>
+                      {{ $t("general.easily_manage_your_business") }}
+                    </p>
+                  </div>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
   
   
       <section class="pt-1 pb-1 bg-gradient sales-channel-section">
@@ -209,7 +278,7 @@
           </div>
 
   
-          <div class="row h-100">
+          <div class="row h-100 start-selling-desktop">
             <div class="col-md-4 pt-2">
               <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500" >
                 <div class="mb-3"> <v-lazy-image src="assets/home/new_about_5.png" alt=""/> </div>
@@ -238,6 +307,60 @@
                 <h6 class="bold"> {{ $t("general.logistics_support") }} </h6>
                 <p>{{ $t("general.we_support_businese_throughout") }}
                 </p>
+              </div>
+            </div>
+          </div>
+          <div class="row start-selling-mobile">
+            <div class="col-md-12 p-0">
+              <div class="position-relative">
+                <splide :options="options" class="r-image">
+                  <splide-slide>
+                    <div class="col-md-4 pt-2">
+                      <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500" >
+                        <div class="mb-3"> <v-lazy-image src="assets/home/new_about_5.png" alt=""/> </div>
+                        <h6 class="bold">   {{ $t("general.sell_world_wide") }}  </h6>
+                        <p>
+                          {{ $t("general.all_in_one") }}
+                        </p>
+                      </div>
+                    </div>
+                  </splide-slide>
+                  <splide-slide>
+                    <div class="col-md-4 pt-2">
+                      <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+                        <div class="mb-3"> 
+                          <v-lazy-image src="assets/home/new_about_1.png" alt=""/>
+                        </div>
+                        <h6 class="bold"> {{ $t("general.buy_world_wide") }} </h6>
+                        <p>
+                        {{ $t("general.buy_world_wide_customers") }} 
+                        </p>
+                      </div>
+                    </div>
+                  </splide-slide>
+                  <splide-slide>
+                    <div class="col-md-4 pt-2">
+                      <div class="p-3 about-p"  data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+                        <div class="mb-3"> <v-lazy-image src="assets/home/new_about_3.png" alt=""/></div>
+                        <h6 class="bold"> {{ $t("general.logistics_support") }} </h6>
+                        <p>{{ $t("general.we_support_businese_throughout") }}
+                        </p>
+                      </div>
+                    </div>
+                  </splide-slide>
+                </splide>
+                <router-link to="/search" class="mobile-start-selling-btn">
+                  <b-button
+                  type="submit"
+                  variant="primary"
+                  class="mb-3 mt-3 selling-btn-mobile"
+                  >
+                  Start Selling
+                  <span class="arrow-icon-wrapper">
+                      <i class="fas fa-arrow-right"></i>
+                  </span>
+                    </b-button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -274,7 +397,7 @@
                 </h3>
                 <form novalidate @submit.prevent="validateUser">
                   <div class="form pt-1 row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 p-0">
   
                       <label for="name" class="pb-0 label-color">
                         {{ $t("general.looking_for_something") }}
@@ -298,7 +421,7 @@
   
                     </div>
   
-                    <div class="col-md-6">
+                    <div class="col-md-6 p-0">
                       <label for="qunatity" class="pb-0 label-color">
                         {{ $t("general.Quantity") }}
                       </label>
@@ -314,7 +437,7 @@
                   </md-field>
                     </div>
   
-                    <div class="col-md-6">
+                    <div class="col-md-6 p-0">
                       <label for="uname" class="pb-0 label-color">
                         {{ $t("general.full_name") }}
                       </label>
@@ -335,7 +458,7 @@
   
                     </div>
   
-                    <div class="col-md-6">
+                    <div class="col-md-6 p-0">
                       <label for="email" class="pb-0 label-color">
                         {{ $t("general.Email") }}
                       </label>
@@ -351,7 +474,7 @@
                   </md-field>
                     </div>
   
-                    <div class="col-md-6">
+                    <div class="col-md-6 p-0">
                       <label for="name" class="pb-0 label-color"> {{ $t("general.Tel") }} </label>
                     <md-field :class="getValidationClass('tel')">
                     <md-input
@@ -368,7 +491,7 @@
                     </span>
                   </md-field>
                     </div>
-                    <div class="col-md-12 col-lg-5 mt-3 quote-btn-div">
+                    <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
                       <b-button
                         type="submit"
                         variant="primary"
@@ -1307,6 +1430,18 @@
   </script>
   
   <style>
+
+  .start-selling-mobile {
+    display: none !important;
+  }
+
+  .ba-section-mobile {
+    display: none;
+  }
+
+  .ba-video {
+    padding-left: 3rem;
+  }
 
 .television-show-title {
   text-align: left;
@@ -2461,6 +2596,10 @@
 
     @media screen and (max-width: 425px) {
 
+
+      .top-slider {
+        height: 200px;
+      }
       .row {
         margin: 0 !important;
       }
@@ -2548,7 +2687,16 @@
         padding-bottom: 0px !important;
       }
 
+      .ba-section-mobile {
+        display: block;
+      }
+
+      .ba-video {
+        padding: 0px !important;
+      }
+
       .ba-section {
+        display: none;
         padding: 0 20px;
       }
 
@@ -2571,6 +2719,42 @@
 
       .selling-btn {
         width: auto !important;
+      }
+
+      .selling-btn-mobile {
+        width: 174px;
+        background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+        border: none;
+        border-radius: 30px !important;
+        color: white;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        padding: 2px 2px 2px 20px !important;
+      }
+
+      .selling-btn-mobile .arrow-icon-wrapper {
+        margin-left: auto;
+      }
+
+      .start-selling-desktop {
+        display: none !important;
+      }
+
+      .start-selling-mobile {
+        display: block !important;
+      }
+
+      .selling-btn {
+        display: none !important
+      }
+
+      .mobile-start-selling-btn {
+        display: flex !important;
+        justify-content: center;
+        text-align: center;
       }
 
       .our-category-description {
@@ -2712,6 +2896,10 @@
 
       .section-description {
         padding: 0 30px !important;
+      }
+
+      .quote-form {
+        padding: 0 !important;
       }
 
     }

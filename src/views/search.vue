@@ -649,6 +649,7 @@ export default {
   mixins: [loader],
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
@@ -656,7 +657,6 @@ export default {
       user: "auth/user",
     }),
 
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
 
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
@@ -880,10 +880,17 @@ export default {
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       reset: "search/RESET_RESULT",
-      findBusiness: "business/FIND_BUSINESS",
+      // findBusiness: "business/FIND_BUSINESS",
       getGeo: "business/getGeo",
     }),
-
+    findBusiness(payload) {
+      console.log("==========================",this.isLogin)
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
     async checkIfItNetwork() {
       if ("network" == this.profileConnected.user_type) {
         const request = await this.$repository.share.switch(null, "reset");

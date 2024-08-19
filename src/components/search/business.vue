@@ -98,6 +98,7 @@ export default {
     };
   },
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       searchstate: "business/getSearchState",
       business: "business/getBusiness",
@@ -105,9 +106,9 @@ export default {
       prodLoader: "business/getloadingState",
     }),
     
-    islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
   mounted() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.getBusiness();  
   },
   created(){
@@ -149,6 +150,7 @@ export default {
     },
 
     findBusiness(payload) {
+      console.log("==========================",this.isLogin)
     if (this.isLogin) {
       return this.$store.dispatch("business/FIND_BUSINESS", payload);
     } else {
@@ -174,6 +176,7 @@ export default {
       this.$parent.changeBusinessPage(value);
       this.currentPage = value;
       const endpoint = this.business.next != "" ? this.business.next : this.business.previous;
+      console.log("==end point===========================", endpoint);
       this.nextPage({url: endpoint, page:value})
         .then((res) => {
         }).catch((err) => {

@@ -91,20 +91,21 @@ export default {
     };
   },
   created() {
-    this.mapbox = Mapbox;
     this.islogin = this.$store.getters["auth/isLogged"];
+    this.mapbox = Mapbox;
   },
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       searchstate: "business/getSearchState",
-      // businessess: "business/getBusiness",
+      businessess: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
       prodLoader: "business/getloadingState",
     }),
-    islogin(){  return this.$store.getters["auth/isLogged"]; }
   },
 
   mounted() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.getBusiness();
   },
   methods: {

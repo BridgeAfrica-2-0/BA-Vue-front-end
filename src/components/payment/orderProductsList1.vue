@@ -146,7 +146,7 @@
       console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
-     let url="ckeckout-cart&page="+value;       
+     let url="cart?page="+value;       
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {

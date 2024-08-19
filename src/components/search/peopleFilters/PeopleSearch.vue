@@ -42,7 +42,41 @@
     />
   </div>
   
-  <!-- add guest user api data here -->
+  <div v-else>
+    <h6>
+      {{ $t("search.Sponsored_Result") }}
+      <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+    </h6>
+
+    <div>
+      <Sponsor />
+    </div>
+    <br>
+    <h6>
+      <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+      {{ $t("search.People") }}
+    </h6>
+
+     <peopleSkeleton  :loading="!pageHasLoad" />
+
+    <peopleSkeleton  :loading="!pageHasLoad" />
+
+    <NotFound v-if="!peoples.length && !loaderState" :title="title" />
+
+    <div v-else>
+
+
+      
+          <Person v-for="item in peoples" :key="item.id" :person="item"  />
+       
+    </div>   
+
+    <ScrollLoader
+      :loading="loadingIsActive"
+      color="#ced4da"
+      v-if="this.getKeywork"
+    />
+  </div>
 
 </template>
 
@@ -140,14 +174,31 @@ export default {
       });
       
       this.setLoaderState(true);
-      this.setCallback(this.$repository.search.findUserByParam);
-
-      const request = await this.$repository.search.findUserByParam({
-        data: {
-          keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
-        },
-        page: 1,
-      });
+      if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findUserByParam);
+      }
+      else{
+        this.setCallback(this.$repository.search.findGuestUserByParam);
+      }
+      var request;
+      if(this.islogin)
+      {
+        request = await this.$repository.search.findUserByParam({
+         data: {
+           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+         },
+         page: 1,
+       });
+      }
+      else{
+        request = await this.$repository.search.findGuestUserByParam({
+         data: {
+           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+         },
+         page: 1,
+       }); 
+      }
 
       if (request.success) {
         if (request.data.length) {

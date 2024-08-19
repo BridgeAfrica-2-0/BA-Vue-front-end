@@ -826,7 +826,7 @@ export default {
   }
 
   .splide__slide {
-    width: 445px !important;
+    width: unset !important;
   }
 }
 </style>

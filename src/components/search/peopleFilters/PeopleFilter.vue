@@ -9,7 +9,7 @@
       ></b-form-input>
     </b-form>
 
-    <a
+    <a v-if="islogin"
       :class="['cursor', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
@@ -161,7 +161,10 @@ const options = [
 ];
 //import Button from "@/components/Button";
 export default {
-  
+  created()
+  {
+    this.islogin = this.$store.getters["auth/isLogged"];
+  },
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,
@@ -221,7 +224,13 @@ export default {
       }, {});
 
       this.stack({ data: { ...data, keyword: this.postKeyword }, page: 1 });
-      this.setCallback(this.$repository.search.findUserByParam);
+      if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findUserByParam);
+      }
+      else{
+        this.setCallback(this.$repository.search.findGuestUserByParam);
+      }
 
       this._onFindUser({...data,keyword: this.postKeyword});
       this.hide()
@@ -231,10 +240,19 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findUserByParam({
-          data:payload,
-          page: 1,
-        });
+        var request;
+        if(this.islogin){
+           request = await this.$repository.search.findUserByParam({
+            data:payload,
+            page: 1,
+          });
+        }
+        else{
+           request = await this.$repository.search.findGuestUserByParam({
+            data: payload,
+            page: 1,
+          });
+        }
         if (request.success) {
           this.userStore(request.data);
           this.page(2);
@@ -249,7 +267,13 @@ export default {
       if (e) {
         this.page(1);
         this.stack({data:{ profession: e, keyword: this.postKeyword ? this.postKeyword: "" },page: 1});
+        if(this.islogin)
+      {
         this.setCallback(this.$repository.search.findUserByParam);
+      }
+      else{
+        this.setCallback(this.$repository.search.findGuestUserByParam);
+      }
         
         this._onFindUser({
           profession: e,
@@ -277,6 +301,7 @@ export default {
     ...mapGetters({
       postKeyword: "search/POST_KEYWORD",
     }),
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
   },
 };
 </script>

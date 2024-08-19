@@ -24,6 +24,25 @@ class Repository {
       }
     }
   }
+  async findGuestUserByParam(credentials) {
+    try {
+
+      const { page, data } = credentials
+
+      const response = (data.keyword) ? await axios.get(`visitor/search/user?page=${page}&keyword=${data.keyword}&limit=10`, { ...data, page }) : await axios.get(`visitor/search/user?page=${page}&limit=10`, { ...data , page})
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      console.log(error)
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
 
   async findPostByKeyword(credentials) {
     try {

@@ -1224,7 +1224,6 @@ export default {
   },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getCities();

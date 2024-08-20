@@ -790,7 +790,7 @@ export default {
   },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
+    
     this.searchParams.location = this.$route.query.location;
  
    let code=null;

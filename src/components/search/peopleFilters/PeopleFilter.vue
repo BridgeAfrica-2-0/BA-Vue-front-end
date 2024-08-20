@@ -161,10 +161,6 @@ const options = [
 ];
 //import Button from "@/components/Button";
 export default {
-  created()
-  {
-    this.islogin = this.$store.getters["auth/isLogged"];
-  },
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,

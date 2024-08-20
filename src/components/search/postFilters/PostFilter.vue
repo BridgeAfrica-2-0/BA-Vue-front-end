@@ -210,9 +210,18 @@ export default {
       
       if (newValue) {
         this.page(1);
+        if(this.islogin)
+      {
         this.newCallbackForPagination(
           this.$repository.search.findPostByKeyword
         );
+      }
+      else
+      {
+        this.newCallbackForPagination(
+          this.$repository.search.findPostForGuestUser
+        );
+      }
         this.stack({
           data: {
             recent_post: "",
@@ -234,9 +243,18 @@ export default {
      
       if (newValue) {
         this.page(1);
+        if(this.islogin)
+      {
         this.newCallbackForPagination(
           this.$repository.search.findPostByKeyword
         );
+      }
+      else
+      {
+        this.newCallbackForPagination(
+          this.$repository.search.findPostForGuestUser
+        );
+      }
         this.stack({
           data: { not_seen: "" },
           keyword: this.keyword,
@@ -255,9 +273,17 @@ export default {
      
       if (newValue) {
         this.page(1);
+        if(this.islogin)
+      {
         this.newCallbackForPagination(
           this.$repository.search.findPostByKeyword
         );
+      }
+      else{
+        this.newCallbackForPagination(
+          this.$repository.search.findPostForGuestUser
+        );
+      }
         this.stack({
           data: {
             created_at: this.created_at,
@@ -316,10 +342,21 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findPostByKeyword({
+        let request;
+        if(this.islogin)
+      {
+         request = await this.$repository.search.findPostByKeyword({
           ...e,
           page: 1,
         });
+      }
+      else
+      {
+         request = await this.$repository.search.findPostForGuestUser({
+          ...e,
+          page: 1,
+        }); 
+      }
 
         if (request.success) {
           this.page(2);
@@ -365,7 +402,8 @@ export default {
       this.reset();
       const credentials = Object.keys(data);
       let render = [];
-
+      if(this.islogin)
+    {
       if (credentials.includes("users")) {
         let response = await this.$repository.search.findPostByKeyword({
           page: 1,
@@ -374,23 +412,21 @@ export default {
             keyword: this.keyword,
           },
         });
-
+  
         if (response.success) render = [...render, ...response.data];
       }
-
       if (credentials.includes("buisness")) {
-        let response = await this.$repository.search.findPostByBuisness({
-          page: 1,
-          data: {
-            ...data["buisness"],
-            keyword: this.keyword,
-          },
-        });
-
-        if (response.success) render = [...render, ...response.data];
-      }
-
-      if (credentials.includes("network")) {
+          let response = await this.$repository.search.findPostByBuisness({
+            page: 1,
+            data: {
+              ...data["buisness"],
+              keyword: this.keyword,
+            },
+          });
+  
+          if (response.success) render = [...render, ...response.data];
+        }
+        if (credentials.includes("network")) {
         let response = await this.$repository.search.findPostByNetWork({
           page: 1,
           data: {
@@ -401,6 +437,22 @@ export default {
 
         if (response.success) render = [...render, ...response.data];
       }
+    }
+      else
+      {
+        if (credentials.includes("buisness")) {
+          let response = await this.$repository.search.findPostForGuestUser({
+            page: 1,
+            data: {
+              keyword: this.keyword,
+            },
+          });
+  
+          if (response.success) render = [...render, ...response.data];
+        }
+      }
+
+      
 
       this.findPeoplePost(render);
       this.lauchLoader(false);

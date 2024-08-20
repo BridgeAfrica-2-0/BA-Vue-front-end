@@ -45,7 +45,45 @@
   </div>
 
    <div v-else> 
-     <!-- add guest user api data here -->
+    <h6>
+      {{ $t("search.Sponsored_Result") }}
+      <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+    </h6>
+  
+    <div>
+      <Sponsor />
+    </div>
+
+    <br>
+    <h6>
+      <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
+      {{ $t("search.Posting") }}
+    </h6>
+  
+    <Postskeleton :loading="loaderState" />
+     <Postskeleton :loading="loaderState" />
+     <div class="text-center">  
+    <Loader v-if="!pageHasLoad || loaderState" />
+     </div>
+    <NotFound v-if="!posts.length && !loaderState" :title="title" />
+    <div v-else>
+      <Post
+        v-for="(item, index) in posts"
+        :key="index"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="item.logo_path"
+        :editPost="(f) => f"
+        :deletePost="(f) => f"
+        :isDisplayInSearch="true"
+      />
+    </div>
+    <ScrollLoader
+      :loading="loadingIsActive"
+      color="#ced4da"
+      v-if="this.getKeywork"
+    />
   </div>
 
 
@@ -173,14 +211,32 @@ export default {
       });
       this.setLoaderState(true);
 
-      this.setCallback(this.$repository.search.findPostByKeyword);
+      if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findPostByKeyword);
+      }
+      else{
+        this.setCallback(this.$repository.search.findPostForGuestUser);
+      }
 
-      const request = await this.$repository.search.findPostByKeyword({
-        data: {
-          keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
-        },
-        page: 1,
-      });
+      let request;
+       if(this.islogin)
+       {
+         request = await this.$repository.search.findPostByKeyword({
+          data: {
+            keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+          },
+          page: 1,
+        });
+       }
+       else{
+        request = await this.$repository.search.findPostForGuestUser({
+          data: {
+            keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
+          },
+          page: 1,
+        });
+       }
 
       if (request.success) {
         if (request.data.length) {

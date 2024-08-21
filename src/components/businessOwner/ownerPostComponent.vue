@@ -174,7 +174,7 @@
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="profile || !isMemberNetworkFollower || canBeDelete"
+            v-if="!islogin || profile || !isMemberNetworkFollower || canBeDelete"
           />
         </b-col>
       </b-row>
@@ -462,6 +462,10 @@ export default {
     },
 
     onUpdate: async function({ uuid, text }) {
+      if(!this.islogin)
+    {
+      return;
+    }
       let data = { comment: text };
 
       if (
@@ -496,6 +500,12 @@ export default {
     },
     showLoginModal(id) {
     this.showModal = true;
+  },
+  success() {
+    this.showModal = false; 
+  },
+  hideAuthModal() {
+    this.showModal = false; 
   },
     onLike: async function() {
 

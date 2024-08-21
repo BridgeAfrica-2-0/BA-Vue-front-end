@@ -32,7 +32,12 @@
         <Button
           media="desktop"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="desktop"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
 
@@ -64,7 +69,12 @@
         <Button
           media="mobile"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="mobile"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
     </Nav>
@@ -790,7 +800,7 @@ export default {
   },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
+    
     this.searchParams.location = this.$route.query.location;
  
    let code=null;
@@ -1446,19 +1456,37 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findPostByKeyword({
+        let request;
+        if(this.islogin)
+      {
+        request = await this.$repository.search.findPostByKeyword({
           data: {
             keyword: this.searchParams.keyword.trim(),
           },
           page: 1,
         });
-
-        if (request.success) {
-          this.page(2);
-          this.setCallback(this.$repository.search.findPostByKeyword);
-          this.postStore(request.data);
-        }
-        this.lauchLoader(false);
+      }
+      else
+      {
+        request = await this.$repository.search.findPostForGuestUser({
+          data: {
+            keyword: this.searchParams.keyword.trim(),
+          },
+          page: 1,
+        });
+      }
+      if (request.success) {
+        this.page(2);
+        if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findPostByKeyword);
+      }
+      else{
+        this.setCallback(this.$repository.search.findPostForGuestUser);
+      }
+        this.postStore(request.data);
+      }
+      this.lauchLoader(false);
       } catch (error) {
         console.log(error);
         this.lauchLoader(false);

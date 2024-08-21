@@ -80,14 +80,14 @@
       </div>
       <div v-else class="grid">
         <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-          <div class="image-container mb-2">
+          <div class="image-container mb-2" @click="gotoproduct(product)">
             <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
           </div>
           <div class="content-container">
             <div class="stock-status" :class="{'in-stock': product.in_stock, 'out-of-stock': !product.in_stock}">
               {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
             </div>
-            <h3>{{ product.name }}</h3>
+            <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
             <p>{{ product.description.length > 50 ? product.description.slice(0, 50) + '...' : product.description }}</p>
           </div>
           <div class="bottom-info">
@@ -1690,6 +1690,7 @@
   object-fit: cover;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  cursor: pointer;
   /* border-radius: 6px; */
 }
 
@@ -1730,6 +1731,7 @@
   line-height: 20px !important;
   color: #000000;
   text-align: left !important;
+  cursor: pointer;
 }
 
 .content-container p {

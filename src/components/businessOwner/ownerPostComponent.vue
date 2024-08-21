@@ -306,7 +306,8 @@ export default {
     this.posterID = this.post.poster_id
       ? this.post.poster_id
       : this.post.user_id;
-
+    if(this.islogin)
+  {
     this.strategy = {
       user: () => {
         return "user" == (this.profile && this.profile.user_type) &&
@@ -331,6 +332,25 @@ export default {
           : { name: "networks", params: { id: this.posterID } };
       },
     };
+  }
+  else
+  {
+    this.strategy = {
+      user: () => {
+        return "user" == { name: "profile_owner" }
+      },
+
+      business: () => {
+        return "business" ==  { name: "BusinessOwner", params: { id: this.posterID } }
+      },
+ 
+      network: () => {
+        return "network" == { name: "networks", params: { id: this.posterID } };
+      },
+    };
+  }
+ 
+
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
@@ -340,6 +360,7 @@ export default {
   },
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     onRedirect() {
       return this.strategy[this.post.poster_type]();
     },

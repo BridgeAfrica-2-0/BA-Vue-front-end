@@ -68,14 +68,22 @@
             </b-button>
           </div>
 
-          <div class="mt-1">
+          <div class="mt-1" @click="handleMessage(person)">
             <BtnCtaMessage :element="person" type="people" />
           </div>
 
         
         </div>
       </b-popover>
-
+    <b-modal
+     
+      v-model="showModal" 
+      @hidden="hideAuthModal"
+      hide-footer
+      size="xl"
+    >
+      <login @success="success" @hideAuthModal="hideAuthModal" />
+    </b-modal>
 
       
   </div>
@@ -83,7 +91,7 @@
 
 <script>
 import axios from "axios";
-
+import login from "@/components/Login";
 export default {
 
   props: {
@@ -107,10 +115,11 @@ export default {
     }
    
   },
-
+ components: { login },
   data() {
     return {
       page: 1,
+      showModal: false,
       users: [],
       options: {
         rewind: true,
@@ -125,6 +134,7 @@ export default {
   },
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     old_users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
@@ -152,8 +162,32 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
-
+    hideAuthModal() {
+    this.showModal = false; 
+  },
+  success() {
+    this.showModal = false; 
+  },
+  async handleMessage(user) {
+      if(!this.islogin)
+      { 
+      this.$root.$emit('bv::hide::popover', 'person' + user.id);
+      console.log("hi guest user");
+      this.showModal = true;
+      return ;
+    }
+    else {
+      return;
+    }
+  },
     async handleFollow(user) {
+      if(!this.islogin)
+      { 
+      this.$root.$emit('bv::hide::popover', 'person' + user.id);
+      console.log("hi guest user");
+      this.showModal = true;
+      return ;
+    }
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;

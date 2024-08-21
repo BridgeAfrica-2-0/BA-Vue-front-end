@@ -273,7 +273,7 @@ export default {
       console.log("next page loading ");
       
       this.currentPage = value;
-     let url="cart&page="+value;    
+     let url="cart?page="+value;    
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {

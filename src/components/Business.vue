@@ -74,22 +74,35 @@
             <b-button
               block
               size="sm"
-              :class="business.is_follow !== 0 && 'u-btn'"
+              :class="islogin && business.is_follow !== 0 ? 'u-btn' : ''"
               :id="'followbtn' + business.id"
               variant="primary"
               @click="handleFollow(business)"
             >
+             
               <i
                 class="fas fa-lg btn-icon"
-                :class="business.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                :class="islogin 
+                ? (business.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus')
+                : 'fa-user-plus'"
               ></i>
+
               <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
             </b-button>
           </div>
 
+
           <div class="mt-1">
-            <BtnCtaMessage :element="business" type="business" />
+          <template v-if="islogin">
+          <BtnCtaMessage :element="business" type="business" />
+          </template>
+          <template v-else>
+          <div @click="showLoginModal(business.id)">
+          <BtnCtaMessage :element="business" type="business" />
           </div>
+          </template> 
+          </div>
+
 
           <div class="mt-1">
             <b-button
@@ -178,9 +191,18 @@ export default {
 
 
     gotoBusiness(id) {
-      this.$router.push(`/business/${id}?tabId=1`);
+      if (this.islogin) {
+        this.$router.push(`/business/${id}?tabId=1`);
+      } else {
+        this.$root.$emit('bv::hide::popover', 'business' + id);
+        this.showModal = true;
+        return;
+      }
     },
-
+    showLoginModal(id) {
+    this.$root.$emit('bv::hide::popover', 'business' + id);
+    this.showModal = true;
+  },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -191,6 +213,14 @@ export default {
     },
 
     async handleFollow(user) {
+      if(!this.islogin)
+    {
+      this.$root.$emit('bv::hide::popover', 'business' + user.id);
+      this.showModal = true;
+      return;
+    }
+    else {
+
       document.getElementById("followbtn" + user.id).disabled = true;
 
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -218,6 +248,7 @@ export default {
         .catch((err) => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
+    }
     },
     handleBusinessClick() {
       if (this.islogin) {

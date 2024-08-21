@@ -135,7 +135,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
-        v-if="isYourOwnPost"
+        v-if="islogin && isYourOwnPost"
       >
         <span class="text-ored">
           <b-avatar
@@ -154,7 +154,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-10-${uuid}`)"
-        v-if="isYourOwnPost"
+        v-if="islogin && isYourOwnPost"
       >
         <span class="text-ored">
           <b-avatar
@@ -173,7 +173,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-2-${uuid}`)"
-        v-if="isNetwork"
+        v-if="islogin && isNetwork"
       >
         <span class="text-ored">
           <b-avatar
@@ -192,7 +192,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="isBusiness"
+        v-if="islogin && isBusiness"
       >
         <span class="text-ored">
           <b-avatar
@@ -214,7 +214,7 @@
         data-toggle="popover"
         role="button"
         data-original-title=""
-     
+        v-if="islogin"
          @click.capture.native.stop.prevent="showc = !showc"
       >
         <span class="text-ored">
@@ -517,8 +517,11 @@ export default {
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
+    if(this.islogin)
+  {
     this.type = this.profile.user_type;
-    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
+  }
+  this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
   mounted() {
     // this.getUsers("");
@@ -527,6 +530,7 @@ export default {
   },
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       profile: "auth/profilConnected",
     }),

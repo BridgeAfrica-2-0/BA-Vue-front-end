@@ -1368,8 +1368,14 @@ export default {
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
             // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
-
+            if(this.islogin)
+          {
             this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
 
             if (res.data.data.length === 0) {
               let subName = "";
@@ -1532,6 +1538,16 @@ export default {
           console.log("Error erro!");
         });
     },
+    searchBusinessForGuestUser(data) {
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
     searchByFilter(filter) {
       // this.searchProducts({
@@ -1551,8 +1567,14 @@ export default {
         //   sub_cat: filter.sub_cat_id,
         //   filter_id: filter.id,
         // });
-
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
 
         this.$bvModal.hide("myModalllo");
       } else if (this.filterType ==0) {
@@ -1601,7 +1623,14 @@ export default {
       this.searchParams.neighbourhood = keyword;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1618,7 +1647,14 @@ export default {
       this.searchParams.city = keyword.code;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && !this.islogin) {
@@ -1638,7 +1674,14 @@ export default {
       if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       }
     },
     searchByDistance(value) {
@@ -1653,7 +1696,14 @@ export default {
         this.searchProducts(this.searchParams);
       }
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       }
     },
     searchByPrice(value) {
@@ -1721,7 +1771,14 @@ export default {
         });
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1743,7 +1800,14 @@ export default {
       this.searchParams.region_id = this.networkSelect.region;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1784,7 +1848,14 @@ export default {
       this.searchParams.neighborhood_id = null;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1823,7 +1894,14 @@ export default {
       }
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1838,7 +1916,14 @@ export default {
       this.searchParams.neighborhood_id = data.neighborhood_id;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1852,7 +1937,14 @@ export default {
       this.searchParams.council_id = this.networkSelect.council;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {
@@ -1878,7 +1970,14 @@ export default {
           console.log("Error erro!");
         });
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 5 && this.islogin) {

@@ -92,12 +92,29 @@
           </div>
           <div class="bottom-info">
             <span class="price">{{ product.price }} FCFA </span>
-            <button class="add-to-cart" @click="gotoproduct(product)">
-              <span style="font-size: 12px; font-weight: bold;">Add to Cart</span>
-              <span class="arrow-icon">
-                <i class="fas fa-arrow-right"></i>
-              </span>
-            </button>
+            <div class="desktop-buttons w-100">
+              <div class="d-flex justify-content-between w-100 mt-1">
+                <button class="buy-now-btn" @click="gotoproduct(product)">
+                  <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                  <span class="arrow-icon">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                </button>
+                <button class="add-to-cart" @click="handleAddToCard(product)">
+                  <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+                </button>
+              </div>
+            </div>
+            <div class="mobile-buttons w-100">
+              <div class="d-flex justify-content-between w-100 mt-1">
+              <button class="buy-now-btn" @click="gotoproduct(product)">
+                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+              </button>
+              <button class="add-to-cart" @click="handleAddToCard(product)">
+                <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">Cart</span>
+              </button>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1187,7 +1204,13 @@
          } else{
            return this.crtv_showf; 
          }
-      }
+      },
+      islogin() {
+        return this.$store.getters["auth/isLogged"];
+      },
+      getStatus() {
+        return this.$store.state.cart.status;
+      },
     },
   
     watch: {
@@ -1211,6 +1234,23 @@
   
   
    },
+   handleAddToCard(product) {
+      this.$store
+        .dispatch("cart/addToCart", product, this.islogin)
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
   
    closeDetailsProduct() {
         this.viewProduct = false;
@@ -1430,6 +1470,10 @@
   </script>
   
   <style>
+
+  .mobile-buttons {
+    display: none !important;
+  }
 
   .start-selling-mobile {
     display: none !important;
@@ -1773,6 +1817,29 @@
 .add-to-cart:hover {
   background-color: #e68a00;
 }
+
+.buy-now-btn {
+  padding: 5px 5px;
+  cursor: pointer;
+  height:auto;
+  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px !important;
+}
+
+.buy-now-btn:hover {
+  background-color: #e68a00;
+}
+
+.buy-now-btn .arrow-icon {
+  margin-left: 3px !important;
+}
+
 .arrow-icon {
   background-color: white;
   border-radius: 50%;
@@ -2902,6 +2969,14 @@
 
       .quote-form {
         padding: 0 !important;
+      }
+
+      .desktop-buttons {
+        display: none !important;
+      }
+
+      .mobile-buttons {
+        display: block !important;
       }
 
     }

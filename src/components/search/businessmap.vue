@@ -91,18 +91,21 @@ export default {
     };
   },
   created() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.mapbox = Mapbox;
   },
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       searchstate: "business/getSearchState",
-      // businessess: "business/getBusiness",
+      businessess: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
       prodLoader: "business/getloadingState",
     }),
   },
 
   mounted() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.getBusiness();
   },
   methods: {
@@ -115,10 +118,16 @@ export default {
       } else return number;
     },
 
-    ...mapActions({
-      findBusiness: "business/FIND_BUSINESS",
-      nextPage: "business/NEXT_PAGE",
-    }),
+    findBusiness(payload) {
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
+  nextPage(payload) {
+    return this.$store.dispatch("business/NEXT_PAGE", payload);
+  },
 
     getBusiness() {
       console.log("business search mounted");

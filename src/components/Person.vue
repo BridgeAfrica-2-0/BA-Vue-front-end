@@ -11,9 +11,12 @@
 
           <div class=" mt-3 ml-3 w-100">
             <div >
-              <router-link :to="'/profile/' + person.slug ">
-               <span class="username">   {{ person.name }} </span>
-              </router-link>
+              <span
+            class="username"
+           @click="handlePersonClick"
+              >
+               {{ person.name }}
+            </span>
             </div>
 
             <h6 class="follower m-15">
@@ -162,6 +165,13 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
+    handlePersonClick() {
+  if (this.islogin) {
+    this.$router.push({ path: `/profile/${this.person.slug}` });
+  } else {
+    this.showModal = true;
+  }
+},
     hideAuthModal() {
     this.showModal = false; 
   },

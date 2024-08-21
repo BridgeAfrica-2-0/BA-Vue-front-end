@@ -92,16 +92,28 @@
           </div>
           <div class="bottom-info">
             <span class="price">{{ product.price }} FCFA </span>
-            <div class="d-flex justify-content-between w-100 mt-1">
+            <div class="desktop-buttons w-100">
+              <div class="d-flex justify-content-between w-100 mt-1">
+                <button class="buy-now-btn" @click="gotoproduct(product)">
+                  <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                  <span class="arrow-icon">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                </button>
+                <button class="add-to-cart" @click="handleAddToCard(product)">
+                  <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+                </button>
+              </div>
+            </div>
+            <div class="mobile-buttons w-100">
+              <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="gotoproduct(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
-                <span class="arrow-icon">
-                  <i class="fas fa-arrow-right"></i>
-                </span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
-                <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+                <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">Cart</span>
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -1458,6 +1470,10 @@
   </script>
   
   <style>
+
+  .mobile-buttons {
+    display: none !important;
+  }
 
   .start-selling-mobile {
     display: none !important;
@@ -2953,6 +2969,14 @@
 
       .quote-form {
         padding: 0 !important;
+      }
+
+      .desktop-buttons {
+        display: none !important;
+      }
+
+      .mobile-buttons {
+        display: block !important;
       }
 
     }

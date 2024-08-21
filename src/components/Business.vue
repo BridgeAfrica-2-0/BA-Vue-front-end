@@ -16,11 +16,12 @@
         <div class="pl-3 flx100 mr-1">
           <p class="textt">
             <span class="">
-              <router-link
-                :to="{ name: 'BusinessFollower', params: { id: business.slug } }" 
+            <span
+            class="biz-name"
+           @click="handleBusinessClick"
               >
-                <span class="biz-name"> {{ business.name }} </span>
-              </router-link>
+               {{ business.name }}
+            </span>
             </span>
             <br />
 
@@ -105,12 +106,20 @@
         </div>
       </b-popover>
     </div>
+    <b-modal
+    v-model="showModal"
+    @hidden="hideAuthModal"
+    hide-footer
+    size="xl"
+  >
+    <login @success="success" @hideAuthModal="hideAuthModal" />
+  </b-modal>
   </div>
 </template>
 
 <script>
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-
+import login from "@/components/Login";
 import axios from "axios";
 export default {
   props: {
@@ -136,10 +145,12 @@ export default {
   },
   components: {
     BtnCtaMessage,
+    login,
   },
   data() {
     return {
       page: 1,
+      showModal: false,
       isloading: false,
        options: {
         rewind: true,
@@ -152,7 +163,9 @@ export default {
       },
     };
   },
-
+  computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
+  },
   methods: {
     getTotalCommunity() {
       
@@ -206,7 +219,19 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
-
+    handleBusinessClick() {
+      if (this.islogin) {
+        this.$router.push({ name: 'BusinessFollower', params: { id: this.business.slug } });
+      } else {
+        this.showModal = true;
+      }
+    },
+    hideAuthModal() {
+      this.showModal = false;
+    },
+    success() {
+      this.showModal = false;
+    }
    
   },
 };

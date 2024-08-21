@@ -88,6 +88,38 @@ export default {
                 throw error;
             });
         },
+        async FIND_BUSINESS_FOR_GUEST_USER({ commit, state }, payload) {
+            commit("setLoading", true);
+            return await axios.get(`visitor/search/business`, {
+                params: {
+                    keyword: state.keyword,
+                    main: "vrai",
+                    catId: payload.cat_id,
+                    subCatId: payload.sub_cat,
+                    filterId: payload.filter_id,
+                    distance: payload.distance,
+                    countryId:payload.country_id,
+                    regionId:payload.region_id,
+                    divisionId:payload.division_id,
+                    councilId:payload.council_id,
+                    city:payload.city ? payload.city.code:state.location.code,
+                    neighbourhoodId: payload.neighbourhood,
+                    limit: 10
+                }
+            }).then(({ data }) => {
+                commit("setLoading", false);
+
+                console.log("set businesses: ", data);
+                commit("setBusinesses", data);
+                commit("setSponsoredBusinesses", data.data.sponsord);
+                commit("setSearchState", payload);
+            }).catch(error => {
+                commit("setLoading", false);
+
+                console.log({ erroe: error });
+                throw error;
+            });
+        },
 
         NEXT_PAGE({ commit, state }, payload) {
             return axios.get(payload.url+'&page='+payload.page).then(({ data }) => {

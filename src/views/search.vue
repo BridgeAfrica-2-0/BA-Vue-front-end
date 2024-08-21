@@ -759,6 +759,7 @@ export default {
   mixins: [loader],
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
@@ -766,7 +767,6 @@ export default {
       user: "auth/user",
     }),
 
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
 
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
@@ -1009,10 +1009,17 @@ export default {
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       reset: "search/RESET_RESULT",
-      findBusiness: "business/FIND_BUSINESS",
+      // findBusiness: "business/FIND_BUSINESS",
       getGeo: "business/getGeo",
     }),
-
+    findBusiness(payload) {
+      console.log("==========================",this.isLogin)
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
     async checkIfItNetwork() {
       if ("network" == this.profileConnected.user_type) {
         const request = await this.$repository.share.switch(null, "reset");
@@ -1643,7 +1650,13 @@ export default {
       if (this.selectedId == 0) {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 1) {
+        if(this.islogin)
+      {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+      }
+      else{
+        this.searchBusinessForGuestUser({ cat_id: value.cat_id, sub_cat: value.id });
+      }
       } else if (this.selectedId == 5) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 3) {
@@ -1689,6 +1702,19 @@ export default {
       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+          this.$store.commit("business/setLoading", false);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+          this.$store.commit("business/setLoading", false);
+        });
+    },
+    searchBusinessForGuestUser(data) {
+      this.$store.commit("business/setLoading", true);
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
         .then((res) => {
           // console.log("categories loaded!");
           this.$store.commit("business/setLoading", false);

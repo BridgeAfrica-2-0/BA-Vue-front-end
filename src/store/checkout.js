@@ -161,8 +161,9 @@ const actions = {
 
   } ,
 
-  async getCart({ commit }) {
-    await axios.get('cart').then((response) => {
+  async getCart({ commit }, isLogin = false) {
+    const url = isLogin ? "cart" : "guest/cart";
+    await axios.get(url).then((response) => {
       console.log(response)
       commit('setCart', response.data)
     }).catch((error) => {

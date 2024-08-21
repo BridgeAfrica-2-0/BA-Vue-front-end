@@ -118,10 +118,7 @@ const routes = [
   {
     path: "/cart",
     name: "cart",
-    component: cart,
-    meta: {
-      auth: true,
-    },
+    component: cart
   },
   {
     path: "/about",

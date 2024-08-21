@@ -127,7 +127,7 @@
 		async created() {
 			this.loading = true;
 			await this.$store
-				.dispatch("checkout/getCart")
+				.dispatch("checkout/getCart", this.islogin)
 				.then(() => {
 					this.loading = false;
 					this.error = false;  
@@ -146,7 +146,7 @@
       console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
-     let url="cart?page="+value;       
+     let url= this.islogin ? "cart?page="+value : "guest/cart?page="+value;       
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {
@@ -251,6 +251,9 @@
 			cart() {
 				return this.$store.state.checkout.cart;
 				
+			},
+			islogin() {
+				return this.$store.getters["auth/isLogged"];
 			},
 		},
 		watch: {

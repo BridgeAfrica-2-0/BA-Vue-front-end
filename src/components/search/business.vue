@@ -150,8 +150,7 @@ export default {
     },
 
     findBusiness(payload) {
-      console.log("==========================",this.isLogin)
-    if (this.isLogin) {
+    if (this.islogin) {
       return this.$store.dispatch("business/FIND_BUSINESS", payload);
     } else {
       return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);

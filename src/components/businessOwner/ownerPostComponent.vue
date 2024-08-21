@@ -146,18 +146,28 @@
           <!--  :src="$store.getters.getProfilePicture"  -->
         </b-col>
         <b-col class="mt-1">
-          <span
-            class="mr-3 cursor"
-            @click="onLike"
-            v-if="!isMemberNetworkFollower"
-            ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
-            {{ item.likes_count | nFormatter }}
+          <span v-if="islogin && !isMemberNetworkFollower" class="mr-3 cursor" @click="onLike">
+          <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+           {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor"
+         <span v-else class="mr-3 cursor" @click="showLoginModal()">
+         <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+         {{ item.likes_count | nFormatter }}
+         </span>
+          <span class="cursor" v-if="islogin"
             ><b-icon
               icon="chat-fill"
               variant="primary"
               aria-hidden="true"
+            ></b-icon>
+            {{ item.comment_count | nFormatter }}
+          </span>
+          <span class="cursor" v-else
+            ><b-icon
+              icon="chat-fill"
+              variant="primary"
+              aria-hidden="true"
+              @click="showLoginModal()"
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
@@ -225,6 +235,14 @@
       :noDataTitle="''"
       @click.native="onShowComment"
     />
+    <b-modal
+    v-model="showModal"
+    @hidden="hideAuthModal"
+    hide-footer
+    size="xl"
+  >
+    <login @success="success" @hideAuthModal="hideAuthModal" />
+  </b-modal>
   </div>
 </template>
   
@@ -237,7 +255,7 @@ import Loader from "@/components/Loader";
 import { ShareButton } from "@/components/shareButton";
 
 import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
-
+import login from "@/components/Login";
 import Comment from "./comment";
 import light from "../lightbox";
 
@@ -250,6 +268,7 @@ export default {
     light,
     Loader,
     ShareButton,
+    login,
   },
 
   props: {
@@ -289,6 +308,7 @@ export default {
 
   data: () => ({
     item: null,
+    showModal: false,
     comments: [],
     comment: "",
     showComment: false,
@@ -474,7 +494,9 @@ export default {
         });
       }
     },
-
+    showLoginModal(id) {
+    this.showModal = true;
+  },
     onLike: async function() {
 
       if (!this.profile) {

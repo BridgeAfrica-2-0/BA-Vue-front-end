@@ -2021,14 +2021,20 @@ export default {
     },
 
     getCities(){
-      const cities =  this.$store.getters["auth/cities"];
-        for (let index in cities) {
-        this.citiesValues.push({
-          label: cities[index].name,
-          code: cities[index].id
-        });
-      }
-    },
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities = this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
+  },
 
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);

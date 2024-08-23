@@ -1237,7 +1237,7 @@
    },
    handleAddToCard(product) {
       this.$store
-        .dispatch("cart/addToCart", product, this.islogin)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",
@@ -2673,7 +2673,7 @@
       color: white
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 430px) {
 
 
       .top-slider {

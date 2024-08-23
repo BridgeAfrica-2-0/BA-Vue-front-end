@@ -140,7 +140,7 @@ export default {
   color: black !important;
 }
 
-@media screen and (max-width: 425px) { 
+@media screen and (max-width: 430px) { 
   .faq-title {
     text-align: left !important;
     padding-right: 5px;

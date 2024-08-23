@@ -44,14 +44,9 @@
               class="img-fluid banner"
               alt="Kitten"
             />
-
-            <b-button
-              @click="$emit('pageChange')"
-              variant="primary"
-              class="text-center mt-3"
-            >
-              {{ $t("businessowner.Upgrade_Now") }}
-            </b-button>
+            <div class="text-center">
+             <router-link to="/settings?tab=account">  <b-button variant="primary" class="text-center mt-3"> {{ $t("businessowner.Upgrade_Now") }} </b-button> </router-link>  
+            </div>
           </div>
         </b-card>
       </b-col>

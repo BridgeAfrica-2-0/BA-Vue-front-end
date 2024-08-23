@@ -146,14 +146,15 @@
           <!--  :src="$store.getters.getProfilePicture"  -->
         </b-col>
         <b-col class="mt-1">
-          <span
-            class="mr-3 cursor"
-            @click="onLike"
-            v-if="!isMemberNetworkFollower"
-            ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
-            {{ item.likes_count | nFormatter }}
+          <span v-if="islogin && !isMemberNetworkFollower" class="mr-3 cursor" @click="onLike">
+          <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+           {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor"
+         <span v-else class="mr-3 cursor" @click="showLoginModal()">
+         <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+         {{ item.likes_count | nFormatter }}
+         </span>
+          <span class="cursor" v-if="islogin"
             ><b-icon
               icon="chat-fill"
               variant="primary"
@@ -161,10 +162,19 @@
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
+          <span class="cursor" v-else
+            ><b-icon
+              icon="chat-fill"
+              variant="primary"
+              aria-hidden="true"
+              @click="showLoginModal()"
+            ></b-icon>
+            {{ item.comment_count | nFormatter }}
+          </span>
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="profile || !isMemberNetworkFollower || canBeDelete"
+            v-if="!islogin || profile || !isMemberNetworkFollower || canBeDelete"
           />
         </b-col>
       </b-row>
@@ -225,6 +235,14 @@
       :noDataTitle="''"
       @click.native="onShowComment"
     />
+    <b-modal
+    v-model="showModal"
+    @hidden="hideAuthModal"
+    hide-footer
+    size="xl"
+  >
+    <login @success="success" @hideAuthModal="hideAuthModal" />
+  </b-modal>
   </div>
 </template>
   
@@ -237,7 +255,7 @@ import Loader from "@/components/Loader";
 import { ShareButton } from "@/components/shareButton";
 
 import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
-
+import login from "@/components/Login";
 import Comment from "./comment";
 import light from "../lightbox";
 
@@ -250,6 +268,7 @@ export default {
     light,
     Loader,
     ShareButton,
+    login,
   },
 
   props: {
@@ -289,6 +308,7 @@ export default {
 
   data: () => ({
     item: null,
+    showModal: false,
     comments: [],
     comment: "",
     showComment: false,
@@ -306,7 +326,8 @@ export default {
     this.posterID = this.post.poster_id
       ? this.post.poster_id
       : this.post.user_id;
-
+    if(this.islogin)
+  {
     this.strategy = {
       user: () => {
         return "user" == (this.profile && this.profile.user_type) &&
@@ -331,6 +352,25 @@ export default {
           : { name: "networks", params: { id: this.posterID } };
       },
     };
+  }
+  else
+  {
+    this.strategy = {
+      user: () => {
+        return "user" == { name: "profile_owner" }
+      },
+
+      business: () => {
+        return "business" ==  { name: "BusinessOwner", params: { id: this.posterID } }
+      },
+ 
+      network: () => {
+        return "network" == { name: "networks", params: { id: this.posterID } };
+      },
+    };
+  }
+ 
+
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
@@ -340,6 +380,7 @@ export default {
   },
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     onRedirect() {
       return this.strategy[this.post.poster_type]();
     },
@@ -421,6 +462,10 @@ export default {
     },
 
     onUpdate: async function({ uuid, text }) {
+      if(!this.islogin)
+    {
+      return;
+    }
       let data = { comment: text };
 
       if (
@@ -453,7 +498,15 @@ export default {
         });
       }
     },
-
+    showLoginModal(id) {
+    this.showModal = true;
+  },
+  success() {
+    this.showModal = false; 
+  },
+  hideAuthModal() {
+    this.showModal = false; 
+  },
     onLike: async function() {
 
       if (!this.profile) {

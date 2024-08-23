@@ -21,7 +21,7 @@
         <Button
           media="desktop"
           @click.native="strategY['network']"
-          v-if="selectedId == 3"
+          v-if="selectedId == 3 && islogin"
         />
         <Button
           media="desktop"
@@ -32,7 +32,12 @@
         <Button
           media="desktop"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="desktop"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
 
@@ -52,7 +57,7 @@
         <Button
           media="mobile"
           @click.native="strategY['network']"
-          v-if="selectedId == 3"
+          v-if="selectedId == 3 && islogin"
         />
 
         <Button
@@ -64,7 +69,12 @@
         <Button
           media="mobile"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="mobile"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
     </Nav>
@@ -83,7 +93,7 @@
 
     <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
 
-    <div class="container searchly moveup">
+    <div  v-if="islogin" class="container searchly moveup">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -92,6 +102,16 @@
         @change="handleChange"
       >
       </ly-tab>
+    </div>
+    <div  v-else class="container searchly moveup">
+      <ly-tab
+      v-model="selectedId"
+      :items="guestItems"
+      :options="optionsnav"
+      activeColor="#e75c18"
+      @change="handleChange"
+    >
+    </ly-tab>
     </div>
 
     <hr style="margin-top: -0px" />
@@ -334,7 +354,7 @@
           <div class="container-flex a-flex">
             <!--filter for all takes just two fields at a time  -->
 
-            <div id="all" v-if="selectedId == '5'">
+            <div id="all" v-if="selectedId == '5' && islogin">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -432,6 +452,87 @@
 
               <hr />
             </div>
+            <div v-else-if="selectedId == '4' && !islogin">
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+
+              <br>
+
+              <h6>
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'hands-helping']"
+                  size="lg"
+                />
+
+                {{ $t("search.Businesses") }}
+              </h6>
+
+              <MiniBusiness :businesses="businesses" />
+
+              <span class="float-right mb-3" @click="selectedId = 1">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <div class="d-flex">
+                <fas-icon
+                  class="icons mr-1"
+                  :icon="['fas', 'users']"
+                  size="lg"
+                />
+
+                <h6>{{ $t("search.People") }}</h6>
+              </div>
+
+              <MiniPeople />
+              <span class="float-right mb-3" @click="selectedId = 2">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <h6>
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                {{ $t("search.Market") }}
+              </h6>
+
+              <MiniMarket :products="miniproducts" />
+
+              <span class="float-right mb-3" @click="selectedId = 0">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <h6>
+                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
+                {{ $t("search.Post") }}
+              </h6>
+
+              <MiniPost />
+
+              <span class="float-right mb-3" @click="selectedId = 3">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+            </div>
 
             <!--  select just businesses      -->
 
@@ -472,7 +573,7 @@
 
             <!-- filter out just the network  -->
 
-            <div v-if="selectedId == '3'">
+            <div v-if="selectedId == '3' && islogin">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -561,7 +662,16 @@
             <div v-if="selectedId == '0'">
               <mapbox :products="allproducts.data" />
             </div>
-            <div v-if="selectedId == '5'">
+            <div v-if="selectedId == '5' && islogin">
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+                :networks="mininetworks.data"
+                :defaultLocation="searchParams.location.label"
+                :isSearched="isSearched"
+              />
+            </div>
+            <div v-if="selectedId == '4' && !islogin">
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
@@ -649,6 +759,7 @@ export default {
   mixins: [loader],
 
   computed: {
+    islogin(){  return this.$store.getters["auth/isLogged"]; },
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
@@ -656,7 +767,6 @@ export default {
       user: "auth/user",
     }),
 
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
 
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
@@ -690,7 +800,7 @@ export default {
   },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
+    
     this.searchParams.location = this.$route.query.location;
  
    let code=null;
@@ -742,14 +852,24 @@ export default {
     this.getLocation();
     this.getKeyword();
 
-    this.strategY = {
+
+    if(this.islogin){
+        this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
       market: () => this.searchProducts({}),
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
-    };     
-
+        };
+      }
+      else{
+        this.strategY = {
+      users: () => this.onFindUser(),
+      all: () => this.getKeyword(),
+      market: () => this.searchProducts({}),
+      business: () => this.onFindBusiness(),
+      };
+      }
     // if (!this.$route.query.uuid)
      
 
@@ -805,6 +925,15 @@ export default {
         { label: this.$t("search.Business") },
         { label: this.$t("search.People") },
         { label: this.$t("search.Network") },
+         { label: this.$t("search.Post") },
+        { label: this.$t("search.All") },
+
+        
+      ],
+      guestItems: [
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
          { label: this.$t("search.Post") },
         { label: this.$t("search.All") },
 
@@ -880,10 +1009,17 @@ export default {
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       reset: "search/RESET_RESULT",
-      findBusiness: "business/FIND_BUSINESS",
+      // findBusiness: "business/FIND_BUSINESS",
       getGeo: "business/getGeo",
     }),
-
+    findBusiness(payload) {
+      console.log("==========================",this.isLogin)
+    if (this.isLogin) {
+      return this.$store.dispatch("business/FIND_BUSINESS", payload);
+    } else {
+      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
+    }
+  },
     async checkIfItNetwork() {
       if ("network" == this.profileConnected.user_type) {
         const request = await this.$repository.share.switch(null, "reset");
@@ -1145,20 +1281,20 @@ export default {
     },
 
     initialize() {
-      this.strategy = {
-        2: () => this.onFindUser(),
-        4: () => this.onFindPost(),
-        1: () => this.onFindBusiness(),
-        3: () => this.searchNetworks(),
-        0: () => this.searchProducts({}),
-      };
-
-      this.strategyForPlaceHolder = {
-        2: () => this.$t("general.Find_User"),
-        4: () => this.$t("general.Find_Post"),
-        5: () => this.$t("general.All"),
-        1: () => this.$t("general.Find_Businesses"),
-      };
+      if(this.islogin){
+        this.strategy = {
+          2: () => this.onFindUser(),
+          4: () => this.onFindPost(),
+          1: () => this.onFindBusiness(),
+          3: () => this.searchNetworks(),
+          0: () => this.searchProducts({}),
+        };
+        this.strategyForPlaceHolder = {
+          2: () => this.$t("general.Find_User"),
+          4: () => this.$t("general.Find_Post"),
+          5: () => this.$t("general.All"),
+          1: () => this.$t("general.Find_Businesses"),
+        };
 
       this.strategyForComponent = {
         2: () => ({
@@ -1174,12 +1310,48 @@ export default {
           filter: null,
         }),
       };
-
       this.strategyForNotFoundComponentTitle = {
         2: () => this.$t("general.Not_Find_users"),
         4: () => this.$t("general.Not_Find_posts"),
         1: () => this.$t("general.Not_Find_Business"),
       };
+      }
+      else{
+        this.strategy = {
+        2: () => this.onFindUser(),
+        // 4: () => this.onFindPost(),
+        1: () => this.onFindBusiness(),
+        3: () => this.onFindPost(),
+        0: () => this.searchProducts({}),
+      };
+      this.strategyForPlaceHolder = {
+          2: () => this.$t("general.Find_User"),
+          3: () => this.$t("general.Find_Post"),
+          4: () => this.$t("general.All"),
+          1: () => this.$t("general.Find_Businesses"),
+        };
+
+      this.strategyForComponent = {
+        2: () => ({
+          component: PeopleComponent,
+          filter: PeopleFilter,
+        }),
+        3: () => ({
+          component: PostComponent,
+          filter: PostFilter,
+        }),
+        1: () => ({
+          component: BusinessComponent,
+          filter: null,
+        }),
+      };
+      this.strategyForNotFoundComponentTitle = {
+        2: () => this.$t("general.Not_Find_users"),
+        3: () => this.$t("general.Not_Find_posts"),
+        1: () => this.$t("general.Not_Find_Business"),
+      };
+      }
+
 
       this.changePlaceHolder();
        this.strategyForComponent[this.selectedId]();
@@ -1235,15 +1407,33 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findUserByParam({
-          data: {
-            keyword: this.searchParams.keyword.trim(),
-          },
-          page: 1,
-        });
+        var request;
+        if(this.islogin)
+      {
+        request = await this.$repository.search.findUserByParam({
+         data: {
+           keyword: this.searchParams.keyword.trim(),
+         },
+         page: 1,
+       });
+      }
+      else{
+        request = await this.$repository.search.findGuestUserByParam({
+         data: {
+           keyword: this.searchParams.keyword.trim(),
+         },
+         page: 1,
+       });
+      }
 
         if (request.success) {
+          if(this.islogin)
+        {
           this.setCallback(this.$repository.search.findUserByParam);
+        }
+        else{
+          this.setCallback(this.$repository.search.findGuestUserByParam);
+        }
           this.page(2);
           this.userStore(request.data);
         }
@@ -1273,19 +1463,37 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findPostByKeyword({
+        let request;
+        if(this.islogin)
+      {
+        request = await this.$repository.search.findPostByKeyword({
           data: {
             keyword: this.searchParams.keyword.trim(),
           },
           page: 1,
         });
-
-        if (request.success) {
-          this.page(2);
-          this.setCallback(this.$repository.search.findPostByKeyword);
-          this.postStore(request.data);
-        }
-        this.lauchLoader(false);
+      }
+      else
+      {
+        request = await this.$repository.search.findPostForGuestUser({
+          data: {
+            keyword: this.searchParams.keyword.trim(),
+          },
+          page: 1,
+        });
+      }
+      if (request.success) {
+        this.page(2);
+        if(this.islogin)
+      {
+        this.setCallback(this.$repository.search.findPostByKeyword);
+      }
+      else{
+        this.setCallback(this.$repository.search.findPostForGuestUser);
+      }
+        this.postStore(request.data);
+      }
+      this.lauchLoader(false);
       } catch (error) {
         console.log(error);
         this.lauchLoader(false);
@@ -1437,10 +1645,18 @@ export default {
     getCategory(value) {
       this.Selectedcategory = value;
 
+      if(this.islogin)
+    {
       if (this.selectedId == 0) {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 1) {
+        if(this.islogin)
+      {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+      }
+      else{
+        this.searchBusinessForGuestUser({ cat_id: value.cat_id, sub_cat: value.id });
+      }
       } else if (this.selectedId == 5) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 3) {
@@ -1454,6 +1670,20 @@ export default {
       } else if (this.selectedId == 2) {
         this._onFindUser();
       }
+    }
+    else{
+      if (this.selectedId == 0) {
+        this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 1) {
+        this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 4) {
+        this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 3) {
+        this._onFindPost();
+      }else if (this.selectedId == 2) {
+        this._onFindUser();
+      }
+    }
     },
 
     allSearchByCat(data) {
@@ -1472,6 +1702,19 @@ export default {
       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+          this.$store.commit("business/setLoading", false);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+          this.$store.commit("business/setLoading", false);
+        });
+    },
+    searchBusinessForGuestUser(data) {
+      this.$store.commit("business/setLoading", true);
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
         .then((res) => {
           // console.log("categories loaded!");
           this.$store.commit("business/setLoading", false);

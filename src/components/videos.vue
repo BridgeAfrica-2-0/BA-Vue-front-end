@@ -63,6 +63,10 @@ export default {
         perMove: 1,
 
         breakpoints: {
+          425: {
+            perPage: 1,
+            gap: "0rem",
+          },
           760: {
             perPage: 2,
             gap: "0rem",
@@ -163,6 +167,23 @@ export default {
   }
 
  
+}
+
+@media screen and (max-width: 430px) {
+
+.bridge-resources .splide__slide {
+  width: unset !important;
+  height: 250px !important;
+}
+
+.bridge-resources .splide__slide img {
+  height: 250px !important;
+}
+
+.bridge-resources .splide__slide .hotbizz {
+  height: 250px !important;
+}
+
 }
 
 

@@ -21,7 +21,7 @@ export default {
     passwordToken: null, 
     registerData: null,
     neigbourhoods: [],
-    cities:[{name:"bbl", id:1}],
+    cities:[],
     businessAround: [],
     peopleAround: [],
     categories: [],

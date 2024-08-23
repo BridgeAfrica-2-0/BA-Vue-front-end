@@ -1,7 +1,19 @@
 <template>
   <div> 
     <div
-      v-if="filterType == '0' || filterType == '1' || filterType == '5'"
+      v-if="filterType == '0' || filterType == '1' || filterType == '5' && islogin"
+      class="mt-2 mb-2"
+    >
+      <b-button
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="resetFilters"
+        >{{ $t("search.Reset") }}</b-button
+      >
+    </div>
+    <div
+      v-else-if="filterType == '0' || filterType == '1' || filterType == '4' && !islogin"
       class="mt-2 mb-2"
     >
       <b-button
@@ -143,7 +155,7 @@
 
       <!--  blec implementation for neigbourhood stuff -->
 
-      <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
+      <div v-if="filterType == '0' || filterType == '1' || filterType == '5' && islogin">
         <div>
           <div>
             <b-form-group
@@ -321,7 +333,184 @@
           </div>
         </div>
       </div>
+      <div v-else-if="filterType == '0' || filterType == '1' || filterType == '4' && !islogin">
+        <div>
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Country')"
+              label-size="md"
+              label-class=" pt-0"
+              class="mb-0 pt-2 text-left"
+            >
+            </b-form-group>
+            <b-form-select
+              v-model="networkSelect.country"
+              :options="countries"
+              value-field="id"
+              text-field="name"
+              @change="getBRegions()"
+            >
+            </b-form-select>
+          </div>
 
+          <!-- city -->
+          <div v-if="!showMore">
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.City')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              > 
+              </b-form-group>
+                  <multiselect 
+                  :value="city" 
+                  :options="citiesValues" 
+                  placeholder="Select City" 
+                  class="search-hh w-100 city-search"
+                  style="border-left: none"
+                  label="label" 
+                  track-by="code"
+                  @input="setSelectedLocation"
+                ></multiselect>
+          </div>
+
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 mt-3 text-left"
+              >
+              </b-form-group>
+
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="lneighbourhoods"
+                :minMatchingChars="0"
+                @hit="searchThisNeibourhood(query)"
+                :maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class=""
+              />
+
+              <b-link
+                v-if="networkFilter.region"
+                class="float-right mt-2 mb-2"
+                @click="showMoreFilters"
+              >
+                More
+              </b-link>
+              <br />
+            </div>
+          </div>
+
+          <div class="more" v-if="showMore">
+            <hr />
+
+            <!-- Region -->
+            <div class="mt-1" v-if="networkFilter.region">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Region')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+
+              <b-form-select
+                v-model="networkSelect.region"
+                :options="regions"
+                value-field="id"
+                text-field="name"
+                @change="getBDivisions()"
+              >
+              </b-form-select>
+            </div>
+
+            <hr />
+
+            <!-- Division -->
+            <div v-if="networkFilter.division">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Division')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.division"
+                :options="divisions"
+                value-field="id"
+                text-field="name"
+                @change="getBCouncils()"
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Council -->
+            <div v-if="networkFilter.council">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Council')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.council"
+                :options="councils"
+                value-field="id"
+                text-field="name"
+                @change="
+                  getBNeighbourhoods({ council_id: networkSelect.council })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Neighbourhood -->
+            <div v-if="networkFilter.neighbourhood">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class="pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.neighbourhood"
+                :options="neighbourhoods"
+                value-field="id"
+                text-field="name"
+                @change="
+                  searchNeigbourhoods({
+                    neighborhood_id: networkSelect.neighbourhood,
+                  })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <b-link
+              v-if="networkFilter.region"
+              class="float-right mt-2 mb-2"
+              @click="hideMoreFilters"
+            >
+              Hide More
+            </b-link>
+          </div>
+        </div>
+      </div>
       <span v-if="showform == true">
         <b-form-group
           label-cols-lg="3"
@@ -398,7 +587,7 @@
     </div>
 
     <!-- Network -->
-    <div v-if="filterType == '3'">
+    <div v-if="filterType == '3' && islogin">
       <b-button
         v-if="networkFilter.region || networkFilter.category"
         class="float-right"
@@ -1033,20 +1222,52 @@ export default {
       return this.$store.getters["marketSearch/getLoader"];
     },
   },
+  mounted() {
+    console.log("Filter Type on page refresh:", this.filterType);
+    this.computedFilter();
+  },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
+    this.setupStrategies();
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getCities();
     this.getUserNeibourhoods();
+  },
+
+  methods: {
+    computedFilter() {
+      if (this.filterType !== null && this.strategies[this.filterType]) {
+        try {
+          this.currentFilter = this.strategies[this.filterType]();
+          console.log("========current filter=============", this.currentFilter);
+          return this.currentFilter;
+        } catch (error) {
+          this.nameOfCategory = null;
+          this.currentFilter = this.filterType;
+          console.error('Error applying filter:', error);
+          return null;
+        }
+      } else {
+        return null;
+      }
+    },
+    setupStrategies() {
+   if(this.islogin)
+  {
     this.strategies = {
       2: () => PeopleFilter,
       4: () => PostFilter,
     };
-  },
-
-  methods: {
+  }
+  else
+  {
+    this.strategies = {
+      2: () => PeopleFilter,
+      3: () => PostFilter,
+    };
+  }
+    },
     matching(cat) {
       this.$emit("onFinByCategory", { cat_id: cat.id });
 
@@ -1129,6 +1350,8 @@ export default {
 
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
+      if(this.islogin)
+    {
       if (this.filterType == 0) {
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -1168,8 +1391,14 @@ export default {
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
             // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
-
+            if(this.islogin)
+          {
             this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
 
             if (res.data.data.length === 0) {
               let subName = "";
@@ -1205,6 +1434,86 @@ export default {
           });
         }
       }
+    }
+    else
+    {
+      if (this.filterType == 0) {
+        this.$store
+          .dispatch("marketSearch/getFilter", subCat.id)
+          .then((res) => {
+            // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+            this.searchProducts(this.searchParams);
+            console.log("Filters: ");
+            console.log(res.data.data);
+            if (res.data.data.length === 0) {
+              let subName = "";
+              this.subCategories.map((sub) => {
+                if (sub.id) {
+                  subName = sub.name;
+                }
+              });
+              this.noFilter = `No filter available for ${subName}!`;
+            }
+            // this.filterLoader = false;
+            let filter = [];
+            res.data.data.map((filt) => {
+              filter.push({
+                cat_id: subCat.cat_id,
+                sub_cat_id: subCat.id,
+                ...filt,
+              });
+            });
+            this.$store.commit("marketSearch/setSubFilters", filter);
+            //console.log("[DeBUG] FILTER: ", this.subFilter);
+          })
+          .catch((err) => {
+            console.error(err);
+            // this.filterLoader = false;
+          });
+      } else if (this.filterType == 1 || this.filterType == 4) {
+        // method to search for a business lol
+        this.$store
+          .dispatch("marketSearch/getFilter", subCat.id)
+          .then((res) => {
+            // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+
+            this.searchBusiness(this.searchParams);
+
+            if (res.data.data.length === 0) {
+              let subName = "";
+              this.subCategories.map((sub) => {
+                if (sub.id) {
+                  subName = sub.name;
+                }
+              });
+              this.noFilter = `No filter available for ${subName}!`;
+            }
+            // this.filterLoader = false;
+            let filter = [];
+            res.data.data.map((filt) => {
+              filter.push({
+                cat_id: subCat.cat_id,
+                sub_cat_id: subCat.id,
+                ...filt,
+              });
+            });
+            this.$store.commit("marketSearch/setSubFilters", filter);
+            //console.log("[DeBUG] FILTER: ", this.subFilter);
+          })
+          .catch((err) => {
+            console.error(err);
+            // this.filterLoader = false;
+          });
+
+        if (this.filterType == 4) {
+          this.allSearch({
+            cat_id: subCat.cat_id,
+            sub_cat: subCat.id,
+            filter_id: subCat.id,
+          });
+        }
+      }
+    }
     },
 
     searchProducts(data) {
@@ -1252,6 +1561,16 @@ export default {
           console.log("Error erro!");
         });
     },
+    searchBusinessForGuestUser(data) {
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
     searchByFilter(filter) {
       // this.searchProducts({
@@ -1271,8 +1590,14 @@ export default {
         //   sub_cat: filter.sub_cat_id,
         //   filter_id: filter.id,
         // });
-
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
 
         this.$bvModal.hide("myModalllo");
       } else if (this.filterType ==0) {
@@ -1286,7 +1611,7 @@ export default {
         this.searchProducts(this.searchParams);
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
         console.log("[DEBUG] Filter: ", filter);
         // this.allSearch({
         //   cat_id: filter.cat_id,
@@ -1296,6 +1621,11 @@ export default {
 
         this.allSearch(this.searchParams);
 
+        this.$bvModal.hide("myModalllo");
+      } else if(this.filterType == 4 && !this.islogin)
+      {
+        console.log("[DEBUG] Filter: ", filter);
+        this.allSearch(this.searchParams);
         this.$bvModal.hide("myModalllo");
       }
     },
@@ -1316,10 +1646,19 @@ export default {
       this.searchParams.neighbourhood = keyword;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if(this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1331,10 +1670,19 @@ export default {
       this.searchParams.city = keyword.code;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && !this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1349,7 +1697,14 @@ export default {
       if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       }
     },
     searchByDistance(value) {
@@ -1364,7 +1719,14 @@ export default {
         this.searchProducts(this.searchParams);
       }
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       }
     },
     searchByPrice(value) {
@@ -1432,10 +1794,20 @@ export default {
         });
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin)
+      {
         this.allSearch(this.searchParams);
       }
     },
@@ -1451,11 +1823,21 @@ export default {
       this.searchParams.region_id = this.networkSelect.region;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
         this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin)
+      {
+        this.allSearch(this.searchParams); 
       }
 
       this.$store
@@ -1489,10 +1871,19 @@ export default {
       this.searchParams.neighborhood_id = null;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if(this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
 
@@ -1526,10 +1917,20 @@ export default {
       }
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin)
+      {
         this.allSearch(this.searchParams);
       }
     },
@@ -1538,10 +1939,19 @@ export default {
       this.searchParams.neighborhood_id = data.neighborhood_id;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1550,10 +1960,20 @@ export default {
       this.searchParams.council_id = this.networkSelect.council;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin)
+      {
         this.allSearch(this.searchParams);
       }
 
@@ -1573,10 +1993,19 @@ export default {
           console.log("Error erro!");
         });
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if(this.islogin)
+          {
+            this.searchBusiness(this.searchParams);
+          }
+          else
+          {
+            this.searchBusinessForGuestUser(this.searchParams);
+          }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1615,14 +2044,20 @@ export default {
     },
 
     getCities(){
-      const cities =  this.$store.getters["auth/cities"];
-        for (let index in cities) {
-        this.citiesValues.push({
-          label: cities[index].name,
-          code: cities[index].id
-        });
-      }
-    },
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities = this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
+  },
 
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);

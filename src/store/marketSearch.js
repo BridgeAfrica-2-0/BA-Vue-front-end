@@ -169,11 +169,9 @@ export default {
                 });
         },
         nextPage({ commit, state }, payload) {
-            console.log("test--------------",payload);
             commit("setLoader", true);
-            commit("setProducts", { data: [] });
 
-            return axios.get(payload.url+"&page"+payload.page+"&limit=10")
+            return axios.get(payload.url+'&page='+payload.page)
                 .then((res) => {
                     commit("setLoader", false);
 

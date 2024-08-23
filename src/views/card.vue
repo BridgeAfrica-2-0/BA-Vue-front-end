@@ -264,6 +264,10 @@ export default {
       let totalItems = this.cart.total;
       return 0;
     },
+
+    islogin() {
+				return this.$store.getters["auth/isLogged"];
+			},
   },
   methods: {
 
@@ -273,7 +277,7 @@ export default {
       console.log("next page loading ");
       
       this.currentPage = value;
-     let url="cart&page="+value;    
+      let url= this.islogin ? "cart?page="+value : "guest/cart?page="+value;    
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {
@@ -305,7 +309,7 @@ export default {
     async getCartItems() {
       this.loading = true;
       await this.$store
-        .dispatch("checkout/getCart") 
+        .dispatch("checkout/getCart", this.islogin) 
         .then(() => {
           this.loading = false;
           this.error = false;

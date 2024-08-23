@@ -15,10 +15,10 @@ export default {
     },
     actions: {
 
-        async addToCart({ commit }, payload) {
-            console.log("add to cart:", payload);
+        async addToCart({ commit }, {product, islogin}) {
+        const url = islogin ? `market/product/${product.id}/cart/add?business_id=${product.business_id}` : `guest/cart/product/${product.id}/cart/add?business_id=${product.business_id}`;
           return  await axios
-                .post(`market/product/${payload.id}/cart/add?business_id=${payload.business_id}`)
+                .post(url)
                 .then(( data ) => {
                  console.log(data);
                     commit('setStatus', data.data.message);

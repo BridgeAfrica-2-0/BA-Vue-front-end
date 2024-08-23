@@ -308,55 +308,41 @@ export default {
       this.product = product;
       this.viewProduct = true;
     },
-    
+    nextPage(payload) {
+    return this.$store.dispatch("marketSearch/nextPage", payload);
+  },
 
     /**
      * This will be ignored on rendering
      * @private
      */
     changePage(value) {
-      /**
-       * Fired when the button is clicked.
-       */
 
       this.currentPage = value;
-
-      this.$store
-        .dispatch("marketSearch/nextPage", {
-          url: this.products.next,
-          page: this.currentPage,
-        })
+      const endpoint = this.products.next != "" ? this.products.next : this.products.previous;
+      this.nextPage({url: endpoint, page:value})
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
-          // this.prodLoader = false;
         })
         .catch((err) => {
-          // this.prodLoader = false;
+          this.total = this.products.total;
           console.log("products error: ");
           console.error(err);
         });
     },
 
     changePageForGuest(value) {
-      /**
-       * Fired when the button is clicked.
-       */
 
       this.currentPage = value;
-
-      this.$store
-        .dispatch("marketSearch/nextPage", {
-          url: this.guestUserProducts.next,
-          page: this.currentPage,
-        })
+      const endpoint = this.guestUserProducts.next != "" ? this.guestUserProducts.next : this.guestUserProducts.previous;
+      this.nextPage({url: endpoint, page:value})
         .then((res) => {
           console.log("products list: ");
           console.log(this.guestUserProducts);
-          // this.prodLoader = false;
         })
         .catch((err) => {
-          // this.prodLoader = false;
+          this.total = this.guestUserProducts.total;
           console.log("products error: ");
           console.error(err);
         });
@@ -412,7 +398,7 @@ export default {
       this.product = product;
   
       this.$store
-        .dispatch("cart/addToCart", product)
+       .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
         
           this.flashMessage.show({

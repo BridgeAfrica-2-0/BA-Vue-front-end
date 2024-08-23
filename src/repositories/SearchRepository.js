@@ -24,6 +24,25 @@ class Repository {
       }
     }
   }
+  async findGuestUserByParam(credentials) {
+    try {
+
+      const { page, data } = credentials
+
+      const response = (data.keyword) ? await axios.get(`visitor/search/user?page=${page}&keyword=${data.keyword}&limit=10`, { ...data, page }) : await axios.get(`visitor/search/user?page=${page}&limit=10`, { ...data , page})
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      console.log(error)
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
 
   async findPostByKeyword(credentials) {
     try {
@@ -42,7 +61,23 @@ class Repository {
       }
     }
   }
+  async findPostForGuestUser(credentials) {
+    try {
+      const { page, data } = credentials
 
+      const response = await axios.get(`visitor/search/post?page=${page}&keyword=${data.keyword}`)
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
 
   async matching(keyword) {
     try {
@@ -95,6 +130,23 @@ class Repository {
     try {
       const { page, data } = credentials
       const response = await axios.post(`search/business/post/${page}`, { ...data, page })
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
+
+  async findPostByBusinessForGuestUser(credentials) {
+    try {
+      const { page, data } = credentials
+      const response = await axios.post(`visitor/search/business/post/${page}`, { ...data, page })
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []

@@ -113,6 +113,9 @@ export default {
        getStatus() {
       return this.$store.state.cart.status;
     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
 
   },
 
@@ -132,7 +135,7 @@ export default {
 
       let product=this.element;
       this.$store
-        .dispatch("cart/addToCart", product)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",

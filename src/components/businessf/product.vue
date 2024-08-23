@@ -378,6 +378,9 @@ export default {
       console.log(this.$store.state.checkout.allShipping);
       return this.$store.state.checkout.allShipping;
     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
   },
 
   beforeMount() {
@@ -446,7 +449,7 @@ export default {
       this.product = product;
   
       this.$store
-        .dispatch("cart/addToCart", product)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
         
           this.flashMessage.show({

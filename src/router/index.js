@@ -118,10 +118,7 @@ const routes = [
   {
     path: "/cart",
     name: "cart",
-    component: cart,
-    meta: {
-      auth: true,
-    },
+    component: cart
   },
   {
     path: "/about",
@@ -165,10 +162,7 @@ const routes = [
   {
     path: "/checkout",
     name: "payment",
-    component: payment,
-    meta: {
-      auth: true,
-    },
+    component: payment
   },
 
   {

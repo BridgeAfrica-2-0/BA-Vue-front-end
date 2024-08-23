@@ -598,7 +598,7 @@ a {
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 430px) {
   .mobile-search-input {
     display:  block; 
     padding-bottom: 10px;

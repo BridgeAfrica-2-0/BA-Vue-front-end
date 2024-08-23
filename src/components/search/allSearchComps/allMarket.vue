@@ -117,6 +117,9 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
   },
 
   methods: {
@@ -136,9 +139,9 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-      console.log("add to card ", this.product.id);
+      console.log("add to card ", this.product.id, this.isLogin);
       this.$store
-        .dispatch("cart/addToCart", this.product)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",

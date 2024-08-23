@@ -412,7 +412,7 @@ export default {
       this.product = product;
   
       this.$store
-        .dispatch("cart/addToCart", product)
+        .dispatch("cart/addToCart", product, this.islogin)
         .then((response) => {
         
           this.flashMessage.show({

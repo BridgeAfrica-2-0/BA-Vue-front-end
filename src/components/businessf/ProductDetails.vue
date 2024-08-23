@@ -130,11 +130,14 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
   },
   methods: {
     async handleAddToCard() {
       await this.$store
-        .dispatch("cart/addToCart", this.product)
+        .dispatch("cart/addToCart", this.product, this.islogin)
         .then((response) => {
           this.flashMessage.show({
             status: "success",

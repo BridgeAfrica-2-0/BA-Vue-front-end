@@ -1162,6 +1162,7 @@
     },
   
     created() {
+      localStorage.setItem('searchTab', 0);
       window.addEventListener("load", this.onWindowLoad);
       this.getLocation();
       this.loading = true;

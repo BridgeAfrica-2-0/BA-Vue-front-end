@@ -1222,13 +1222,38 @@ export default {
       return this.$store.getters["marketSearch/getLoader"];
     },
   },
+  mounted() {
+    console.log("Filter Type on page refresh:", this.filterType);
+    this.computedFilter();
+  },
 
   created() {
+    this.setupStrategies();
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getCities();
     this.getUserNeibourhoods();
-    if(this.islogin)
+  },
+
+  methods: {
+    computedFilter() {
+      if (this.filterType !== null && this.strategies[this.filterType]) {
+        try {
+          this.currentFilter = this.strategies[this.filterType]();
+          console.log("========current filter=============", this.currentFilter);
+          return this.currentFilter;
+        } catch (error) {
+          this.nameOfCategory = null;
+          this.currentFilter = this.filterType;
+          console.error('Error applying filter:', error);
+          return null;
+        }
+      } else {
+        return null;
+      }
+    },
+    setupStrategies() {
+   if(this.islogin)
   {
     this.strategies = {
       2: () => PeopleFilter,
@@ -1242,9 +1267,7 @@ export default {
       3: () => PostFilter,
     };
   }
-  },
-
-  methods: {
+    },
     matching(cat) {
       this.$emit("onFinByCategory", { cat_id: cat.id });
 
@@ -2021,14 +2044,20 @@ export default {
     },
 
     getCities(){
-      const cities =  this.$store.getters["auth/cities"];
-        for (let index in cities) {
-        this.citiesValues.push({
-          label: cities[index].name,
-          code: cities[index].id
-        });
-      }
-    },
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities = this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
+  },
 
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);

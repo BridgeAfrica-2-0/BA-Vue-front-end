@@ -819,7 +819,7 @@ export default {
 }
 
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 430px) {
 
   .nav.nav-tabs {
     overflow-x: auto;

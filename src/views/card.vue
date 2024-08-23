@@ -309,7 +309,7 @@ export default {
     async getCartItems() {
       this.loading = true;
       await this.$store
-        .dispatch("checkout/getCart") 
+        .dispatch("checkout/getCart", this.islogin) 
         .then(() => {
           this.loading = false;
           this.error = false;

@@ -831,7 +831,7 @@
       
       <section class="bg-whitee">
         
-        <div class="container pt-5 pb-5"  >
+        <div class="container television-section"  >
           <div class="television-show-title">
               <h3>
                 <span> {{ $t("general.television_show") }}   </span> <br> <span style="color: black !important">{{ $t("general.from_our_television_show") }}  </span>
@@ -1237,7 +1237,7 @@
    },
    handleAddToCard(product) {
       this.$store
-        .dispatch("cart/addToCart", product, this.islogin)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",
@@ -2583,6 +2583,15 @@
     transform: translateX(20px);
     opacity: 0;
   }
+
+  .television-section {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
+
+.splide__pagination {
+  display: none !important;
+}
   
   @media only screen and (max-width: 768px) {
     .selling-btn {
@@ -2664,7 +2673,7 @@
       color: white
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 430px) {
 
 
       .top-slider {
@@ -2978,6 +2987,23 @@
 
       .mobile-buttons {
         display: block !important;
+      }
+
+      .television-section {
+        padding-bottom: 1rem !important;
+        padding-top: 2rem !important;
+      }
+
+      .television-section .splide__arrow--prev {
+        margin-left: 5px !important;
+      }
+
+      .television-section .splide__arrow--next {
+        margin-right: 5px !important;
+      }
+
+      .television-section .splide__arrow {
+        top: 28% !important;
       }
 
     }

@@ -137,7 +137,7 @@ export default {
   methods: {
     async handleAddToCard() {
       await this.$store
-        .dispatch("cart/addToCart", this.product, this.islogin)
+      .dispatch("cart/addToCart",  {product: this.product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",

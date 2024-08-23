@@ -2664,7 +2664,7 @@
       color: white
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 430px) {
 
 
       .top-slider {

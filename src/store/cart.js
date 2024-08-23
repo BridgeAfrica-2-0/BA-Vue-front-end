@@ -15,10 +15,8 @@ export default {
     },
     actions: {
 
-        async addToCart({ commit }, payload, isLogin = false) {
-            console.log("add to cart:", payload);
-            console.log("Guest User:", isLogin);
-            const url = isLogin ? `market/product/${payload.id}/cart/add?business_id=${payload.business_id}` : `guest/cart/product/${payload.id}/cart/add?business_id=${payload.business_id}`;
+        async addToCart({ commit }, {product, islogin}) {
+        const url = islogin ? `market/product/${product.id}/cart/add?business_id=${product.business_id}` : `guest/cart/product/${product.id}/cart/add?business_id=${product.business_id}`;
           return  await axios
                 .post(url)
                 .then(( data ) => {

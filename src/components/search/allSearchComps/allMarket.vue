@@ -141,7 +141,7 @@ export default {
       this.product = product;
       console.log("add to card ", this.product.id, this.isLogin);
       this.$store
-        .dispatch("cart/addToCart", this.product, this.isLogin)
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
         .then((response) => {
           this.flashMessage.show({
             status: "success",

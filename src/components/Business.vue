@@ -200,9 +200,12 @@ export default {
       }
     },
     showLoginModal(id) {
-    this.$root.$emit('bv::hide::popover', 'business' + id);
-    this.showModal = true;
-  },
+      const path = this.$router.currentRoute.fullPath;
+      localStorage.setItem('previousRoute', this.$router.currentRoute.fullPath);
+      
+      this.$root.$emit('bv::hide::popover', 'business' + id);
+      this.showModal = true;
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -258,6 +261,7 @@ export default {
       }
     },
     hideAuthModal() {
+      localStorage.removeItem('previousRoute');      
       this.showModal = false;
     },
     success() {

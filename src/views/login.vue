@@ -255,9 +255,13 @@ export default {
             message: this.$t('auth.Successfully_Register')
           });
 
-          
+          const previousRoute = localStorage.getItem('previousRoute');
+          if (previousRoute) {
+            localStorage.removeItem('previousRoute');
+            this.$router.push({ path : previousRoute}); 
+          } else {
             this.$router.push({ name: "dashboard" });
-          
+          }          
         })
         .catch(err => {
           console.log({ err: err });   

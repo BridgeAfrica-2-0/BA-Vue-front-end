@@ -955,7 +955,7 @@ export default {
 
         if (response.success) {
           loader.hide();
-        
+          localStorage.removeItem('previousRoute');
           this.Logout();
         }
         return false;

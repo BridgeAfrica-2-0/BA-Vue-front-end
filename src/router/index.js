@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import VueRouter   from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
 import LoginValidation from "../views/LoginValidation.vue";
@@ -84,6 +84,8 @@ const contact = () => import("@/views/contact");
 import cart from "@/views/card";
 
 Vue.use(VueRouter);
+
+const previousRoute = { value: null };
 
 const routes = [
   {
@@ -487,6 +489,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
 
+    // Store the previous route if it's not the login or verification route
+    if (from.name !== 'Login' && from.name !== 'verifyAccount') {
+      previousRoute.value = from; 
+    }
+
   if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
     if (to.name == "BusinessFollower") {
       next("/business/" + to.params.id + "/guest");
@@ -530,3 +537,4 @@ router.afterEach((to, from) => {
 });
 
 export default router;
+export { previousRoute };

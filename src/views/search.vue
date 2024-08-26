@@ -1172,7 +1172,11 @@ export default {
           keyword: this.searchParams.keyword,
           location: this.searchParams.location,
         });
-
+      else 
+      await this.findBusiness({
+          keyword: "",
+          location: this.searchParams.location,
+        });
       this.$store.commit("business/setLoading", false);
     },
 
@@ -1456,7 +1460,16 @@ export default {
         });
         this.activateSuggestion(this.searchParams.keyword);
         this._onFindUser();
-      } else this.onNotified("the word must have at least 3 letters");
+      } else 
+      {
+        this.page(1);
+        this.stack({
+          data: {
+            keyword: "",
+          },
+        });
+        this._onFindUser();
+      }
     },
 
     async _onFindPost() {

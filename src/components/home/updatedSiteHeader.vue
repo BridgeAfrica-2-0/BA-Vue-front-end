@@ -212,6 +212,14 @@
                   ></b-form-input>
                 </b-input-group>
               </b-nav-item>
+              <b-nav-item class="ml-md-3 m-auto" @click="navigateToCart">
+              <span class="cart-icon position-relative" style="color:#455a64">
+              <b-icon icon="cart4" class="icon-size"></b-icon>
+              <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute" style="top: 0; right: 0;">
+                {{ cartCount }}
+              </span>
+              </span>
+              </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto">
                 <span class="nav-span" style="color:#455a64">
                   <img
@@ -263,7 +271,7 @@
 
 <script>
 import { mapActions } from "vuex";
-
+import axios from "axios";
 export default {
   data() {
     return {
@@ -271,6 +279,7 @@ export default {
       lang: "English",
       keyword: "",
       scrollPosition: 0,
+      cartCount: 0, 
     };
   },
   computed: {
@@ -282,6 +291,7 @@ export default {
     },
   },
   mounted() {
+    this.fetchCartCount();
     window.addEventListener('scroll', this.handleScroll);
   },
   beforeDestroy() {
@@ -345,6 +355,18 @@ export default {
       } else {
         this.img = require("../../assets/img/la-france.png");
         this.lang = "French";
+      }
+    },
+    navigateToCart() {
+    this.$router.push('/cart');
+  },
+  async fetchCartCount() {
+      try {
+        const url = this.islogin ? 'cart/total' : 'guest/cart/total';
+        const response = await axios.get(url);
+        this.cartCount = response.data.data.totalItems; 
+      } catch (error) {
+        console.error('Error fetching cart count:', error);
       }
     },
   },
@@ -485,6 +507,20 @@ a {
   font-weight: 500;
   line-height: 21px;
   color: #282828 !important;
+}
+.cart-icon {
+  color:#e75c18 !important;
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -10px !important;
+  right: -10px !important;
+  font-size: 10px; 
+  padding: 0.25em 0.5em;
+}
+.icon-size {
+  font-size: 1.7rem !important; 
 }
 
 .nav-item.active .nav-link span {

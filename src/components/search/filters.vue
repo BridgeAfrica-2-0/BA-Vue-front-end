@@ -27,7 +27,7 @@
 
     <br />
 
-    <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
+    <div v-if="filterType == '0' || filterType == '1' || (islogin && filterType == '5') ||  (!islogin && filterType == '4')">
 
         <span v-if="suggestedKeyword.length">
         <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
@@ -1680,7 +1680,7 @@ export default {
           }
       } else if (this.filterType ==0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5 && !this.islogin) {
+      } else if (this.filterType == 5 && this.islogin) {
         this.allSearch(this.searchParams);
       } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);

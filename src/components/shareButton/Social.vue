@@ -2,7 +2,7 @@
   <ShareNetwork
     :network="network"
     :url="link"
-    :title="`${auth.name} share post`"
+   :title="shareTitle"
     :description="post.content"
   >
     {{ title }}
@@ -19,10 +19,14 @@ export default {
     link: null,
   }),
 
-  computed: mapGetters({
+  computed: {
+  ... mapGetters({
     auth: "auth/profilConnected",
   }),
-
+  shareTitle() {
+    return this.auth ? `${this.auth.name} share post` : 'Share post';
+  }
+  },
   created() {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },

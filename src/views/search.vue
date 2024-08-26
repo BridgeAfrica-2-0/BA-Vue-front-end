@@ -619,13 +619,20 @@
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
                 <b-button
-                  to="/cart"
-                  size="sm"
-                  variant="primary"
-                  class="float-right"
-                >
-                  <b-icon icon="cart4"></b-icon> Cart
-                </b-button>
+              to="/cart"
+              size="sm"
+              variant="primary"
+              class="float-right position-relative"
+              >
+              <b-icon icon="cart4"></b-icon> Cart
+              <span
+               v-if="cartCount > 0"
+               class="badge badge-pill badge-danger position-absolute"
+               style="top: 0; right: 0; transform: translate(50%, -50%);"
+               >
+               {{ cartCount }}
+               </span>
+              </b-button>
                 <div class="float-right">
                   <b-button
                     size="sm"
@@ -713,7 +720,7 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from "@/components/ButtonNavBarFind";
-
+import axios from "axios";
 import {
   PostComponent,
   PeopleComponent,
@@ -875,10 +882,13 @@ export default {
 
     this.initialize();
   },
-
+  mounted() {
+    this.fetchCartCount();
+  },
   data() {
     return {
       activateMatching: null,
+      cartCount: 0, 
       catChose: "",
       subCatChose: "",
       filterChose: "",
@@ -1071,7 +1081,15 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
-
+    async fetchCartCount() {
+      try {
+        const url = this.islogin ? 'cart/total' : 'guest/cart/total';
+        const response = await axios.get(url);
+        this.cartCount = response.data.data.totalItems; 
+      } catch (error) {
+        console.error('Error fetching cart count:', error);
+      }
+    },
     onProcessQuery() {
       let tab=  localStorage.getItem("searchTab");
 
@@ -2040,7 +2058,11 @@ export default {
   color: #455a64 !important;
   overflow-x: hidden;
 }
-
+.badge {
+  position: absolute;
+  font-size: 10px; 
+  padding: 0.25em 0.5em;
+}
 .icon-color {
   color: #e75c18;
 }

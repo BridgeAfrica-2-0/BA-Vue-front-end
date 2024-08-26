@@ -65,7 +65,7 @@ class Repository {
     try {
       const { page, data } = credentials
 
-      const response = await axios.get(`visitor/search/post?page=${page}&keyword=${data.keyword}`)
+      const response = await axios.get(`visitor/search/post?limit=10&page=${page}&keyword=${data.keyword}`)
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []

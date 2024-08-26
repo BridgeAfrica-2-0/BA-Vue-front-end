@@ -161,6 +161,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
+import { previousRoute } from '@/router';
 import "vue-material/dist/vue-material.min.css";
 
 import "@/assets/default.css";
@@ -291,10 +292,15 @@ export default {
           //   this.$router.push({ name: "dashboard" });
           // }
 
-
            this.$store.dispatch("auth/profilePackage")
 
-           this.$router.push(this.$route.query.redirect || '/dashboard')
+            if (previousRoute.value) {
+              // Redirect to the previous route if it exists
+              this.$router.push(previousRoute.value.fullPath);
+            } else {
+              // Redirect to a default path if no previous route is stored
+              this.$router.push(this.$route.query.redirect || '/dashboard');
+            }
 
         })
         .catch(err => {

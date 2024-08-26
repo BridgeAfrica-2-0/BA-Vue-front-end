@@ -364,8 +364,9 @@ export default {
     },
     async removeIconFromCart(id) {
       this.loading = true;
+      const url = this.islogin ? `cart/item/${id}/delete` : `guest/cart/item/${id}/delete`;
       await axios
-        .delete(`cart/item/${id}/delete`)
+        .delete(url)
         .then((result) => {
 
           this.getCartSummary();

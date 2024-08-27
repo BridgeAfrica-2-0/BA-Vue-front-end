@@ -809,7 +809,7 @@ export default {
   font-size: 12px;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
   .nav.nav-tabs {
     overflow-x: auto;
   }

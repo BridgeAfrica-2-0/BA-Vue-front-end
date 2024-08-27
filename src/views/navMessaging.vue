@@ -2788,7 +2788,7 @@ li {
   }
   .chats {
     /* border: 2px solid green; */
-    /* min-height: 430px; */
+    /* min-height: 431px; */
   }
 
   .m-10 {

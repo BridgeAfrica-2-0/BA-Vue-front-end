@@ -130,7 +130,7 @@ export default {
         if (this.isProduct) {
           
 
-      if(this.isPremium =='premium'){
+      if(this.isPremium =='premium' && this.islogin){
         
 
       let product=this.element;
@@ -155,10 +155,32 @@ export default {
 
 
 
-      }else{
+      } else if(!this.islogin)
+      {
+        let product=this.element;
+      this.$store
+      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+
+
+           this.$router.push({ name: "payment" });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+      }
+      else{
   
 
-  this.cta();
+    this.cta();
       }
         
       }

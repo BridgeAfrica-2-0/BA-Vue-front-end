@@ -116,7 +116,7 @@ export default {
   display: none;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
   .desktop-image {
     display: none;
   }

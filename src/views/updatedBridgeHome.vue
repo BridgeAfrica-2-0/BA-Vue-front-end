@@ -2831,7 +2831,7 @@ export default {
   color: white;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
   .top-slider {
     height: 200px;
   }

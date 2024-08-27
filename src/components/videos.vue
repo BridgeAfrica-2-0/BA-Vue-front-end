@@ -154,7 +154,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
   .bridge-resources .splide__slide {
     width: unset !important;
     height: 250px !important;

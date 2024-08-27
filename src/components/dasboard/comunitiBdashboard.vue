@@ -264,7 +264,7 @@ export default {
 .s-comcard {
   overflow: auto;
   overflow-x: hidden;
-  height: 431px !important;
+  height: 430px !important;
 }
 </style>
 

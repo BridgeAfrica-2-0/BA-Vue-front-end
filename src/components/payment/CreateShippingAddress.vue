@@ -49,12 +49,12 @@ export default {
   name: "CreateShippingAddress",
   components: {
     FormCreateShippingAddress,
-    OrderProductsList
+    OrderProductsList,
   },
   props: {
     currentStep: {
-      require: true
-    }
+      require: true,
+    },
   },
   methods: {
     handleSwitchStep() {
@@ -65,7 +65,7 @@ export default {
     },
     gotoMarket() {
       this.$router.push("/search");
-    }
+    },
   },
   data() {
     return {
@@ -77,11 +77,11 @@ export default {
         division_id: "",
         council_id: "",
         city: "",
-        neighbourhood_id: ""
+        neighbourhood_id: "",
       },
-      order_items: []
+      order_items: [],
     };
-  }
+  },
 };
 </script>
 

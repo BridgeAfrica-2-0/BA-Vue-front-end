@@ -15,7 +15,7 @@
 					v-model="username"
 					type="text"
 					required
-					readonly
+					:readonly="!!username"
 				></b-form-input>
 			</b-form-group>
 
@@ -220,7 +220,7 @@
 		},
 		computed: {
 			username() {
-				return this.$store.state.auth.user.user.name;
+				return this.$store.state.auth.user?.user?.name || '';
 			},
 
 			 shippingsTab() {

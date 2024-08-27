@@ -971,9 +971,12 @@ export default {
       this.changePlaceHolder();
       this.changeNotFoundTitle();
 
-       if (this.selectedId == 5) {
+       if (this.selectedId == 5 && this.islogin) {
            this.getKeyword();
         }
+      else if(this.selectedId == 4 && !this.islogin) {
+        this.getKeyword();
+      }
         
         localStorage.setItem("searchTab", this.selectedId);
       
@@ -986,7 +989,7 @@ export default {
       handler(newValue, oldValue) {
         // this.activateSuggestion(newValue.keyword);
    
-        if (this.selectedId == 5) {
+        if (this.selectedId == 5 && this.islogin) {
           this.$store.commit("allSearch/setKeyword", newValue.keyword);
           this.$store.commit("allSearch/setLocation", newValue.location);
         } else if (this.selectedId == 1) {
@@ -1000,6 +1003,9 @@ export default {
           this.$store.commit("networkSearch/setKeyword", newValue.keyword);
 
           this.$store.commit("networkSearch/setLocation", newValue.location);
+        } else if (this.selectedId == 4 && !this.islogin) {
+          this.$store.commit("allSearch/setKeyword", newValue.keyword);
+          this.$store.commit("allSearch/setLocation", newValue.location);
         }
       },
     },
@@ -1057,6 +1063,8 @@ export default {
         this.searchNetworks();
       } else if (this.selectedId == 0) {
         this.searchProducts({});
+      } else if (this.selectedId == 4 && !this.islogin){
+        this.getKeyword();
       }
     },
 
@@ -1165,6 +1173,17 @@ export default {
      if(this.selectedId==5){  
       this.$store
         .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
+        .then((res) => {
+          // console.log("categories loaded!");
+          this.isSearched = !this.isSearched;
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+       }
+         else if(this.selectedId==4 && !this.islogin){
+          this.$store
+          .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
         .then((res) => {
           // console.log("categories loaded!");
           this.isSearched = !this.isSearched;

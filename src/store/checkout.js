@@ -102,8 +102,9 @@ const actions = {
 
 
 
-  async getAllShippingAdd({ commit }, prefix = '') {
-    await axios.get(prefix+'shipping/checkout/shippingAddresses')
+  async getAllShippingAdd({ commit }, { islogin, prefix = '' }) {
+    const url = islogin ? `${prefix}shipping/checkout/shippingAddresses` : `${prefix}guest/shipping-address`;
+    await axios.get(url)  
       .then((response) => {
         console.log(response.data)
         commit('setAllShipping', response.data.data)

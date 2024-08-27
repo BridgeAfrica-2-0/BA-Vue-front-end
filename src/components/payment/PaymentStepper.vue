@@ -154,13 +154,16 @@ export default {
 				return this.$store.state.checkout.order.data;
 				
 			},
+    islogin() {
+			return this.$store.getters["auth/isLogged"];
+		},
 
   },
 
   mounted() {
 			this.loading = true;
 			this.$store
-				.dispatch("checkout/getAllShippingAdd")
+				.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin})
 				.then(() => {
 					this.loading = false;
 				})

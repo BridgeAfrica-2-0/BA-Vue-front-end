@@ -1,21 +1,22 @@
 <template>
   <div>
-    
     <fas-icon
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
-    {{ $t("profilefollower.Businesses") }} 
-  
+    {{ $t("profilefollower.Businesses") }}
+
     <hr />
-    
-     <div class="business" v-if="noBusiness == false">
+
+    <div class="business" v-if="noBusiness == false">
       <b-row>
         <b-col lg="6" class="p-1 mb-2" v-for="item in busineses" :key="item.id">
-
-       <Business  class="h-100" :key="item.id" :business="item"   @getTotalCommunity='getTotalCommunity'/>
-         
-         
+          <Business
+            class="h-100"
+            :key="item.id"
+            :business="item"
+            @getTotalCommunity="getTotalCommunity"
+          />
         </b-col>
       </b-row>
 
@@ -32,13 +33,11 @@
       </p>
     </div>
 
-    
-     <div class="mx-auto text-center my-5"  v-if="!busineses.length"  >
-        <p class="my-2" >
-          No Business found
-        </p>
-      </div>  
-
+    <div class="mx-auto text-center my-5" v-if="!busineses.length">
+      <p class="my-2">
+        No Business found
+      </p>
+    </div>
   </div>
 </template>
 
@@ -49,17 +48,16 @@ export default {
   data() {
     return {
       noBusiness: false,
-      islogin:'',
+      islogin: "",
       foll_id: "",
       page: 1,
-      busineses: [],
+      busineses: []
     };
   },
- components: {
+  components: {
     Business
   },
   methods: {
-
     // bizzFollower(id){
     //   console.log(id);
     //   this.$router.push({name:'BusinessFollower', params:{id: id}})
@@ -80,29 +78,28 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-     
       let url = "business/user?page=" + this.page + "&slug=" + this.foll_id;
 
-      if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       this.$store
         .dispatch("follower/loadMoreUserBusiness", url)
@@ -118,21 +115,18 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
   computed: {
-
-    
     old_busineses() {
       return this.$store.state.follower.profileBusiness;
-    },
+    }
   },
   mounted() {
-
-     this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id;
     // this.$store
     // 	.dispatch("follower/profileBusiness", this.foll_id)
@@ -140,18 +134,17 @@ export default {
     // 	.catch((error) => {
     // 		console.log({ error: error });
     // 	});
-  },
+  }
 };
 </script>
 
 <style scoped>
-
-  .over{
-    cursor: pointer;
-      }
-      .over:hover{
-     color: #e75c18;
-      }
+.over {
+  cursor: pointer;
+}
+.over:hover {
+  color: #e75c18;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;

@@ -4,21 +4,26 @@
       <span>
         <h6 class="title m-2">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-      {{ $t("general.Hot_Businesses") }} 
+          {{ $t("general.Hot_Businesses") }}
         </h6>
       </span>
 
       <div class="ovver">
+        <VuePerfectScrollbar
+          class="scroll-area s-card"
+          settings="{maxScrollbarLength: 60px}"
+        >
+          <Business
+            v-for="item in business"
+            :key="item.id"
+            :canBlock="canBlock"
+            :index="index"
+            :business="item"
+            @getTotalCommunity="getTotalCommunity"
+          />
 
-    <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-
-         <Business  v-for="item in business" :key="item.id" :canBlock="canBlock" :index="index"  :business="item"  @getTotalCommunity='getTotalCommunity'  />
-        
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
-    </VuePerfectScrollbar>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>
@@ -26,9 +31,9 @@
 
 <script>
 import axios from "axios";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import Business from "@/components/Business";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["title", "image"],
 
@@ -43,14 +48,15 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
+        perMove: 1
       },
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
 
   components: {
-    Business,VuePerfectScrollbar
+    Business,
+    VuePerfectScrollbar
   },
 
   methods: {
@@ -63,21 +69,16 @@ export default {
       } else return number;
     },
 
-
-     gotoBusiness(id) {
-
-       if(this.$route.name == 'BusinessFollower'){
-          // this.$emit('gotoabout')
-          this.$router.push(`/business/${id}#about`);
-          console.log("direction --")
-      }else {
-
+    gotoBusiness(id) {
+      if (this.$route.name == "BusinessFollower") {
+        // this.$emit('gotoabout')
+        this.$router.push(`/business/${id}#about`);
+        console.log("direction --");
+      } else {
         this.$router.push(`/business/${id}?tabId=1`);
       }
       // this.$router.push(`/business/${id}?tabId=1`);
     },
-
-
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -86,24 +87,26 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-      let url = this.isGuestUser ? "guest/profile/hot/business/": "profile/hot/business/";
+      let url = this.isGuestUser
+        ? "guest/profile/hot/business/"
+        : "profile/hot/business/";
 
       axios
         .get(url + this.page)
@@ -117,16 +120,16 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.scroll-area{
+.scroll-area {
   height: inherit;
 }
 .ovver {
@@ -249,7 +252,7 @@ export default {
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
-     line-height: 35px;
+    line-height: 35px;
   }
 
   .textt {

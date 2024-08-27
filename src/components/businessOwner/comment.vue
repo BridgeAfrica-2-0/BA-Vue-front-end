@@ -9,17 +9,42 @@
       ></b-avatar>
 
       <div class="msg text" v-if="!proccesEdit">
-        <span class="float-right post-options" style="margin-right: -10px" v-if="'dashboard' !== $route.name ? isEditMode :false">
-          <b-dropdown size="sm" variant="outline primary " no-caret class="primary">
-            <template class="more" #button-content> <div class="post-options-btn rounded-circle">  <b-icon icon="three-dots-vertical" class="m-auto"> </b-icon>  </div></template>
-            <b-dropdown-item @click.prevent="() => {reply = false; toggle()}"> {{ $t("businessowner.Edit") }} </b-dropdown-item>
-            <b-dropdown-item @click.prevent="onDelete">{{ $t("businessowner.Delete") }}</b-dropdown-item>
+        <span
+          class="float-right post-options"
+          style="margin-right: -10px"
+          v-if="'dashboard' !== $route.name ? isEditMode : false"
+        >
+          <b-dropdown
+            size="sm"
+            variant="outline primary "
+            no-caret
+            class="primary"
+          >
+            <template class="more" #button-content>
+              <div class="post-options-btn rounded-circle">
+                <b-icon icon="three-dots-vertical" class="m-auto">
+                </b-icon></div
+            ></template>
+            <b-dropdown-item
+              @click.prevent="
+                () => {
+                  reply = false;
+                  toggle();
+                }
+              "
+            >
+              {{ $t("businessowner.Edit") }}
+            </b-dropdown-item>
+            <b-dropdown-item @click.prevent="onDelete">{{
+              $t("businessowner.Delete")
+            }}</b-dropdown-item>
           </b-dropdown>
         </span>
 
         <p class=" mb-0" v-if="!proccesEdit">
           <router-link
-            :to="{ name: 'Follower', params: { id: comment.user_id } }" class="card-title"
+            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+            class="card-title"
           >
             {{ comment.name }}
           </router-link>
@@ -56,7 +81,7 @@
           @keypress.enter="onProcess"
           :max-height="47"
         />
-        
+
         <b-spinner
           style="color: rgb(231, 92, 24);"
           class="send-cmt"
@@ -71,7 +96,7 @@
       </div>
 
       <p class="fs-12" v-if="proccesEdit">
-        <a href="#" @click.prevent="toggle">{{ $t('network.Cancel') }}</a>
+        <a href="#" @click.prevent="toggle">{{ $t("network.Cancel") }}</a>
       </p>
 
       <!-- End Edit message -->
@@ -137,7 +162,7 @@
               :item="obj"
               :uuid="uuid"
               :onDelete="() => onDeleteReply(obj.id)"
-              @update-reply-comment="(text) => onUpdate({ uuid: obj.id, text })"
+              @update-reply-comment="text => onUpdate({ uuid: obj.id, text })"
               type="reply"
             />
 
@@ -169,7 +194,7 @@ export default {
 
   components: {
     Reply,
-    Loader,
+    Loader
   },
 
   props: ["item", "uuid", "profileID", "onDelete"],
@@ -187,7 +212,7 @@ export default {
 
   filters: {
     date,
-    nFormatter: formatNumber,
+    nFormatter: formatNumber
   },
 
   computed: {
@@ -200,32 +225,32 @@ export default {
 
     isEditMode() {
       return this.isYourComment ? true : false;
-    },
+    }
   },
 
   methods: {
-    onDeleteReply: async function (uuid) {
+    onDeleteReply: async function(uuid) {
       const request = await this.$repository.post.delete(uuid);
 
       if (request.success) {
-        this.comments = this.comments.filter((e) => e.id != uuid);
+        this.comments = this.comments.filter(e => e.id != uuid);
         this.item.comment_count -= 1;
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t('general.Comment_Deleted'),
+          message: this.$t("general.Comment_Deleted")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: this.$t('general.Something_wrong_happen_Try_again'),
+          message: this.$t("general.Something_wrong_happen_Try_again")
         });
       }
     },
 
-    onUpdateReply: async function ({ uuid, text }) {
+    onUpdateReply: async function({ uuid, text }) {
       let data = { comment: text };
 
       if (
@@ -233,7 +258,7 @@ export default {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.profile.id });
@@ -241,20 +266,20 @@ export default {
       const request = await this.$repository.post.update({ uuid, data });
 
       if (request.success) {
-        this.comments = this.comments.map((e) =>
+        this.comments = this.comments.map(e =>
           e.id == uuid ? { ...request.data } : { ...e }
         );
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t('general.Comment_Updated'),
+          message: this.$t("general.Comment_Updated")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: request.data,
+          message: request.data
         });
       }
     },
@@ -264,7 +289,7 @@ export default {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: this.$t('general.Try_to_write_something'),
+          message: this.$t("general.Try_to_write_something")
         });
         return false;
       }
@@ -296,7 +321,7 @@ export default {
       if (this.reply) this.onShowReply();
     },
 
-    onUpdate: async function ({ uuid, text }) {
+    onUpdate: async function({ uuid, text }) {
       let data = { comment: text };
 
       if (
@@ -304,7 +329,7 @@ export default {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.profile.id });
@@ -312,45 +337,43 @@ export default {
       const request = await this.$repository.post.update({ uuid, data });
       console.log(request);
       if (request.success) {
-        this.comments = this.comments.map((e) =>
+        this.comments = this.comments.map(e =>
           e.id == uuid ? { ...request.data } : { ...e }
         );
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t('general.Comment_Updated'),
+          message: this.$t("general.Comment_Updated")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: request.data,
+          message: request.data
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.post-options-btn{
+.post-options-btn {
   height: 30px;
   width: 30px;
   display: flex;
   background: white;
-
 }
 .cursor {
   cursor: pointer;
 }
 
-.post-options{
-  
-   opacity: 0;
+.post-options {
+  opacity: 0;
 }
 
-.msg:hover .post-options{
+.msg:hover .post-options {
   opacity: 1;
 }
 
@@ -397,11 +420,10 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-  
   .avat-comment {
     width: 40px;
     height: 40px;
-     margin-right: 2px !important;
+    margin-right: 2px !important;
   }
 }
 
@@ -409,11 +431,9 @@ export default {
   .avat-comment {
     width: 36px;
     height: 36px;
-   
   }
 }
 </style>
-
 
 <style>
 #readmore {
@@ -427,7 +447,7 @@ export default {
   font-size: 12px;
 }
 
-.blaa .b-avatar-img{
+.blaa .b-avatar-img {
   margin-right: 2px !important;
 }
 </style>

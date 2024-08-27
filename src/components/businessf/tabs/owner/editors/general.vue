@@ -5,7 +5,7 @@
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
-      <MemberShip />  
+      <MemberShip />
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '4'">
@@ -16,27 +16,30 @@
       <KeywordAlert />
     </div>
 
-     <div class="mt-3 d-block d-md-none" v-if="seetings_id == '7'">
-        <Settings />
-      </div>
+    <div class="mt-3 d-block d-md-none" v-if="seetings_id == '7'">
+      <Settings />
+    </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
       <!-- <div class="d-block d-md-none" style="margin-top: 30px">
         <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
       </div> -->
 
-<Blocking />
-
-      
+      <Blocking />
     </div>
-
-   
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
-          <div  v-if="window.width >= 768">
-            <b-tabs  lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+          <div v-if="window.width >= 768">
+            <b-tabs
+              lazy
+              pills
+              v-model="tabIndex"
+              vertical
+              class="itzlala"
+              nav-wrapper-class="w-15"
+            >
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
@@ -57,10 +60,9 @@
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
 
-               <b-tab :title="$t('network.Network_Info')">
+              <b-tab :title="$t('network.Network_Info')">
                 <b-card-text> <Settings /> </b-card-text
               ></b-tab>
-
             </b-tabs>
           </div>
         </div>
@@ -75,21 +77,20 @@
 </template>
 
 <script>
+import MemberShip from "@/components/businessf/tabs/owner/networks/memberShip";
+import KeywordAlert from "@/components/businessf/tabs/owner/networks/keywordAlert";
 
-import MemberShip from '@/components/businessf/tabs/owner/networks/memberShip';
-import KeywordAlert from '@/components/businessf/tabs/owner/networks/keywordAlert';
+import PendingPost from "@/components/businessf/tabs/owner/networks/pendingPost";
+import Settings from "@/components/businessf/tabs/owner/networks/settings";
+import Notification from "@/components/businessf/tabs/owner/networks/notification";
 
-import PendingPost from '@/components/businessf/tabs/owner/networks/pendingPost';
-import Settings from '@/components/businessf/tabs/owner/networks/settings';
-import Notification from '@/components/businessf/tabs/owner/networks/notification';
-
-import Blocking from '@/components/businessf/tabs/owner/networks/settings/blocking';
+import Blocking from "@/components/businessf/tabs/owner/networks/settings/blocking";
 //import LyTab from '@/tab/src/index.vue';
 
 export default {
-  name: 'settings',
+  name: "settings",
 
-  props: ['currenttab'],
+  props: ["currenttab"],
 
   watch: {
     currenttab: {
@@ -98,56 +99,54 @@ export default {
         console.log(newVal);
 
         if (newVal == 3) {
-          this.selectedIdd = '3';
+          this.selectedIdd = "3";
 
-          this.tabIndex = '1';
+          this.tabIndex = "1";
         }
 
         if (newVal == 2) {
-          this.selectedIdd = '2';
-          this.tabIndex = '0';
+          this.selectedIdd = "2";
+          this.tabIndex = "0";
         }
 
         if (newVal == 4) {
-          this.selectedIdd = '4';
-          this.tabIndex = '2';
+          this.selectedIdd = "4";
+          this.tabIndex = "2";
         }
 
         if (newVal == 5) {
-          this.selectedIdd = '5';
-          this.tabIndex = '3';
+          this.selectedIdd = "5";
+          this.tabIndex = "3";
         }
 
         if (newVal == 6) {
-          this.selectedIdd = '6';
-          this.tabIndex = '1';
+          this.selectedIdd = "6";
+          this.tabIndex = "1";
         }
 
         if (newVal == 7) {
-          this.selectedIdd = '7';
-          this.tabIndex = '5';
+          this.selectedIdd = "7";
+          this.tabIndex = "5";
         }
-      },
-    },
+      }
+    }
   },
 
-
-   mounted() {
+  mounted() {
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;
     };
   },
 
- created(){
-   window.addEventListener("resize", this.handleResize);
+  created() {
+    window.addEventListener("resize", this.handleResize);
     this.handleResize();
- }, 
-
-   destroyed() {
-    window.removeEventListener("resize", this.handleResize);
   },
 
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
 
   components: {
     // Roles,
@@ -157,35 +156,40 @@ export default {
     MemberShip,
     KeywordAlert,
     PendingPost,
-    Settings,
-   // LyTab,
+    Settings
+    // LyTab,
   },
 
   data() {
     return {
       size: 0,
-     
+
       window: {
         width: 0,
-        height: 0,
+        height: 0
       },
       tabIndex: 1,
       selectedIdd: 0,
       seetings_id: 0,
       bottomSelectedId: 0,
-      items: [{ label: 'General' }, { label: 'Network Info' }, { label: 'Network Roles ' }, { label: 'Blocking' }],
+      items: [
+        { label: "General" },
+        { label: "Network Info" },
+        { label: "Network Roles " },
+        { label: "Blocking" }
+      ],
       options: {
-        activeColor: '#1d98bd',
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
 
   methods: {
-      handleResize() {
+    handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
-    },
-  },
+    }
+  }
 };
 </script>
 

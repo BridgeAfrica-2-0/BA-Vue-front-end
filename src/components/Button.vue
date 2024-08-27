@@ -19,9 +19,9 @@ export default {
     },
     fas: {
       default: () => "",
-      type: String,
-    },
-  },
+      type: String
+    }
+  }
 };
 </script>
 

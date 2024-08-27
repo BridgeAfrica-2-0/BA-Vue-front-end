@@ -1,31 +1,44 @@
 <template>
-  <div>   today  {{today}}
-    <b>{{ $t('profileowner.WorkPlace') }}</b>  
+  <div>
+    today {{ today }}
+    <b>{{ $t("profileowner.WorkPlace") }}</b>
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
-      {{ $t('profileowner.Add_Workplace') }} 
+      {{ $t("profileowner.Add_Workplace") }}
     </b-link>
 
     <b-list-group-item
       class="d-flex align-items-center mb-4"
       style="border: none"
-    >   
+    >
       <div class="datails t-left">
         <div class="row">
-          <div 
+          <div
             class="media border-botmediatom mt-3 mb-4"
             v-for="workPlace in work"
             :key="workPlace.id"
-          > 
-
-
+          >
             <div class="media-body">
               <h6 class="mb-0">
-                <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
+                <b>{{ workPlace.company_name }} ({{ workPlace.position }})</b>
               </h6>
-              <b v-if="workPlace.end_year || workPlace.end_month || workPlace.end_day">{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}</b>
-              <b v-else>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }}</b>
+              <b
+                v-if="
+                  workPlace.end_year || workPlace.end_month || workPlace.end_day
+                "
+                >{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{
+                  workPlace.start_day
+                }}
+                - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{
+                  workPlace.end_day
+                }}</b
+              >
+              <b v-else
+                >{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{
+                  workPlace.start_day
+                }}</b
+              >
               <p class="mb-1">
                 {{ workPlace.job_responsibilities }}
               </p>
@@ -37,14 +50,12 @@
                   dropdown
                   variant="primary-outline"
                 >
-                  <b-dropdown-item
-                    @click="editt(workPlace)"
-                    >{{ $t('profileowner.Edit') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item
-                    @click="deleteWorkPlace(workPlace.id)"
-                  >{{ $t('profileowner.Delete') }}</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="editt(workPlace)">{{
+                    $t("profileowner.Edit")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item @click="deleteWorkPlace(workPlace.id)">{{
+                    $t("profileowner.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -56,7 +67,7 @@
     <b-modal
       ref="edit-contact"
       id="edit"
-      :title="$t('profileowner.edit_Workplace') "
+      :title="$t('profileowner.edit_Workplace')"
       @close="cancel"
       @ok="updatesave"
     >
@@ -95,7 +106,7 @@
         checked="1"
         unchecked="0"
       >
-        {{ $t('profileowner.Currently_Working') }}
+        {{ $t("profileowner.Currently_Working") }}
       </b-form-checkbox>
       <!-- <label>{{ $t('profileowner.Start_Date') }}</label>
       <b-form-datepicker
@@ -113,35 +124,40 @@
         :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker> -->
 
-
-
       <div class="form-group">
-      <label  for="startDate">{{ $t('profileowner.Start_Date') }}</label>
-    
- 
-      
- <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+        <label for="startDate">{{ $t("profileowner.Start_Date") }}</label>
+
+        <DropdownDatepicker
+          v-model="editData.startDate"
+          :defaultDate="editData.startDate"
+          :maxDate="today"
+          style="width:100%"
+          dropdownClass="form-control mr-1 w-100"
+          class="d-inline-flex"
+        />
       </div>
 
       <div class="form-group">
+        <label v-if="!editData.currently_working" for="endDate">{{
+          $t("profileowner.End_Date")
+        }}</label>
 
-
-      <label v-if="!editData.currently_working" for="endDate">{{ $t('profileowner.End_Date') }}</label>
-
-          
- <DropdownDatepicker  v-if="!editData.currently_working"  v-model="editData.endDate" :defaultDate="editData.endDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
-
+        <DropdownDatepicker
+          v-if="!editData.currently_working"
+          v-model="editData.endDate"
+          :defaultDate="editData.endDate"
+          :maxDate="today"
+          style="width:100%"
+          dropdownClass="form-control mr-1 w-100"
+          class="d-inline-flex"
+        />
       </div>
-
-
-
-
     </b-modal>
 
     <b-modal
       ref="add-contact"
       id="modal-9"
-      :title="$t('profileowner.Add_Workplace') "
+      :title="$t('profileowner.Add_Workplace')"
       @close="cancel"
       @ok="save"
     >
@@ -154,73 +170,81 @@
         ></b-form-select>
       </div> -->
       <div class="form-group">
-      <b-form-input
-        class="mt-2"
-        v-model="workPlaceInput.companyName"
-        :placeholder="$t('profileowner.Company')"
-      ></b-form-input>
-
+        <b-form-input
+          class="mt-2"
+          v-model="workPlaceInput.companyName"
+          :placeholder="$t('profileowner.Company')"
+        ></b-form-input>
       </div>
 
       <div class="form-group">
-      <b-form-input
-        class="mt-2"
-        v-model="workPlaceInput.position"
-        :placeholder="$t('profileowner.Position')"
-      ></b-form-input>
-
+        <b-form-input
+          class="mt-2"
+          v-model="workPlaceInput.position"
+          :placeholder="$t('profileowner.Position')"
+        ></b-form-input>
       </div>
 
       <div class="form-group">
-      <b-form-input
-        class="mt-2"
-        v-model="workPlaceInput.cityTown"
-        :placeholder="$t('profileowner.City')"
-      ></b-form-input>
+        <b-form-input
+          class="mt-2"
+          v-model="workPlaceInput.cityTown"
+          :placeholder="$t('profileowner.City')"
+        ></b-form-input>
       </div>
 
       <div class="form-group">
-      <b-form-input
-        class="mt-2"
-        v-model="workPlaceInput.jobResponsibilities"
-        :placeholder="$t('profileowner.Responsibilities')"
-      ></b-form-input>
-
+        <b-form-input
+          class="mt-2"
+          v-model="workPlaceInput.jobResponsibilities"
+          :placeholder="$t('profileowner.Responsibilities')"
+        ></b-form-input>
       </div>
 
       <div class="form-group">
-      <b-form-checkbox
-        id="checkbox-1"
-        v-model="workPlaceInput.currentlyWorking"
-        name="checkbox-1"
-        :checked="workPlaceInput.currentlyWorking === 1 ? true : false"
-      >
-        {{ $t('profileowner.Currently_Working') }}
-      </b-form-checkbox>
-
+        <b-form-checkbox
+          id="checkbox-1"
+          v-model="workPlaceInput.currentlyWorking"
+          name="checkbox-1"
+          :checked="workPlaceInput.currentlyWorking === 1 ? true : false"
+        >
+          {{ $t("profileowner.Currently_Working") }}
+        </b-form-checkbox>
       </div>
 
       <div class="form-group">
-      <label for="startDate">{{ $t('profileowner.Start_Date') }}</label>
-      <!-- <b-form-datepicker
+        <label for="startDate">{{ $t("profileowner.Start_Date") }}</label>
+        <!-- <b-form-datepicker
         id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
         :placeholder="$t('profileowner.Start_Date')"
       ></b-form-datepicker> -->
- 
-      
- <DropdownDatepicker  v-model="workPlaceInput.startDate" :defaultDate="workPlaceInput.startDate"  :maxDate="today" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+        <DropdownDatepicker
+          v-model="workPlaceInput.startDate"
+          :defaultDate="workPlaceInput.startDate"
+          :maxDate="today"
+          style="width:100%"
+          dropdownClass="form-control mr-1 w-100"
+          class="d-inline-flex"
+        />
       </div>
 
       <div class="form-group">
+        <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{
+          $t("profileowner.End_Date")
+        }}</label>
 
-
-      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{ $t('profileowner.End_Date') }}</label>
-
-          
- <DropdownDatepicker v-if="!workPlaceInput.currentlyWorking" v-model="workPlaceInput.endDate" :defaultDate="workPlaceInput.endDate"   :maxDate="today"  style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
-
+        <DropdownDatepicker
+          v-if="!workPlaceInput.currentlyWorking"
+          v-model="workPlaceInput.endDate"
+          :defaultDate="workPlaceInput.endDate"
+          :maxDate="today"
+          style="width:100%"
+          dropdownClass="form-control mr-1 w-100"
+          class="d-inline-flex"
+        />
       </div>
       <!-- <b-form-datepicker
         v-if="!workPlaceInput.currentlyWorking"
@@ -230,30 +254,26 @@
         :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker> -->
     </b-modal>
-
-    
-
   </div>
 </template>
 
 <script>
-import { diffBetweenTwoDate } from '@/helpers'
-import DropdownDatepicker from 'vue-dropdown-datepicker'; 
+import { diffBetweenTwoDate } from "@/helpers";
+import DropdownDatepicker from "vue-dropdown-datepicker";
 export default {
-
   data() {
     return {
-      editData:[],
-       today :new Date().toISOString().slice(0, 10),
+      editData: [],
+      today: new Date().toISOString().slice(0, 10),
       options: [
-        { value: null, text: this.$t('profileowner.Select') },
-        { value: "private", text: this.$t('profileowner.Private') },
-        { value: "public", text: this.$t('profileowner.Public') },
+        { value: null, text: this.$t("profileowner.Select") },
+        { value: "private", text: this.$t("profileowner.Private") },
+        { value: "public", text: this.$t("profileowner.Public") }
       ],
       educationAndWorks: {
         workPlaces: this.work,
         professions: [],
-        educations: [],
+        educations: []
       },
       workPlaceInput: {
         companyName: null,
@@ -263,68 +283,69 @@ export default {
         currentlyWorking: false,
         startDate: null,
         endDate: null,
-        access: "public",
+        access: "public"
       },
       educationInput: null,
       professionInput: null,
-      index: null,
-    }
+      index: null
+    };
   },
 
-  components:{DropdownDatepicker},
+  components: { DropdownDatepicker },
 
   created() {
-    this.educationAndWorks.workPlaces = this.work
+    this.educationAndWorks.workPlaces = this.work;
   },
 
-  computed:{
-    work(){
+  computed: {
+    work() {
       return this.$store.state.profile.profile_about.user_experience;
     },
 
-     workk(){
+    workk() {
       return this.$store.state.profile.profile_about;
     }
   },
 
-  watch:{
-    "workPlaceInput.endDate": function(value){
+  watch: {
+    "workPlaceInput.endDate": function(value) {
+      if (this.workPlaceInput.endDate && this.workPlaceInput.startDate) {
+        const diff = diffBetweenTwoDate(
+          this.workPlaceInput.endDate,
+          this.workPlaceInput.startDate
+        );
 
-      if (this.workPlaceInput.endDate && 
-          this.workPlaceInput.startDate) {
-        const diff = diffBetweenTwoDate(this.workPlaceInput.endDate, this.workPlaceInput.startDate)
-      
-        if (diff <= 0){
+        if (diff <= 0) {
           this.flashMessage.show({
             status: "error",
             message: "the end date must not be greater than the start date",
-            blockClass: "custom-block-class",
-          })
+            blockClass: "custom-block-class"
+          });
         }
       }
     }
   },
 
   methods: {
-
-    editt(value){
-
-      console.log("this.editData Before Assign", value)
-       this.editData = value;
-       this.editData['startDate'] = value.start_day+'-'+value.start_month+'-'+value.start_year;
-       if(value.currently_working){
-         this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
-       } else{
-         console.log('falseeeeeeee')
-         this.editData['endDate'] = null;
-       }
-       console.log("this.editData Before Update", this.editData)
-       this.$refs["edit-contact"].show(); 
+    editt(value) {
+      console.log("this.editData Before Assign", value);
+      this.editData = value;
+      this.editData["startDate"] =
+        value.start_day + "-" + value.start_month + "-" + value.start_year;
+      if (value.currently_working) {
+        this.editData["endDate"] =
+          value.end_day + "-" + value.end_month + "-" + value.end_year;
+      } else {
+        console.log("falseeeeeeee");
+        this.editData["endDate"] = null;
+      }
+      console.log("this.editData Before Update", this.editData);
+      this.$refs["edit-contact"].show();
     },
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
       this.educationAndWorks.workPlaces = this.workPlaces;
-      
+
       console.log(this.educationAndWorks);
       this.workPlaceInput = {
         companyName: null,
@@ -334,23 +355,28 @@ export default {
         currentlyWorking: false,
         startDate: null,
         endDate: null,
-        access: "private",
+        access: "private"
       };
     },
 
-
-     updatesave: function(){
+    updatesave: function() {
       console.log(this.editData);
-       this.$store
+      this.$store
         .dispatch("profile/updateUserWorkPlaces", {
           workPlace: this.editData,
-          method: 'PUT',
+          method: "PUT"
         })
-        .then((response) => {
-          console.log( response, "lewsi save/update/delete new workPlace user end +++++" );
+        .then(response => {
+          console.log(
+            response,
+            "lewsi save/update/delete new workPlace user end +++++"
+          );
         })
-        .catch((error) => {
-          console.log( error, "lewis not save/update/delete new workPlace user end error (2) +++++");
+        .catch(error => {
+          console.log(
+            error,
+            "lewis not save/update/delete new workPlace user end error (2) +++++"
+          );
         })
         .finally(() => {
           this.$store.dispatch("profile/loadUserProfileAbout", null);
@@ -359,9 +385,13 @@ export default {
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log("Lewis Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
+          console.log(
+            "Lewis Finally save/update/delete new workplace user +++++",
+            this.educationAndWorks,
+            "+++++++++++"
+          );
         });
-		},
+    },
 
     save() {
       console.log("Save/edit/delete WorkPlace User Profile About");
@@ -378,13 +408,19 @@ export default {
       this.$store
         .dispatch("profile/updateUserWorkPlaces", {
           workPlace: this.workPlaceInput,
-          method: method,
+          method: method
         })
-        .then((response) => {
-          console.log( response, "save/update/delete new workPlace user end +++++" );
+        .then(response => {
+          console.log(
+            response,
+            "save/update/delete new workPlace user end +++++"
+          );
         })
-        .catch((error) => {
-          console.log( error, "not save/update/delete new workPlace user end error (2) +++++");
+        .catch(error => {
+          console.log(
+            error,
+            "not save/update/delete new workPlace user end error (2) +++++"
+          );
           this.$store.dispatch("profile/loadUserProfileAbout", null);
           // this.educationAndWorks.workPlaces = this.work;
           // this.work = this.$store.state.profile.profile_about.user_experience;
@@ -395,25 +431,31 @@ export default {
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log("Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
+          console.log(
+            "Finally save/update/delete new workplace user +++++",
+            this.educationAndWorks,
+            "+++++++++++"
+          );
           this.$refs["add-contact"].hide();
         });
     },
-    
-    deleteWorkPlace(workPlace_id) {
 
-       console.log("Lewis delete WorkPlace User Profile About", workPlace_id);
+    deleteWorkPlace(workPlace_id) {
+      console.log("Lewis delete WorkPlace User Profile About", workPlace_id);
 
       this.$store
         .dispatch("profile/updateUserWorkPlaces", {
           workPlace: workPlace_id,
-          method: 'DELETE',
+          method: "DELETE"
         })
-        .then((response) => {
-          console.log( response, "Lewis delete new workPlace user end +++++" );
+        .then(response => {
+          console.log(response, "Lewis delete new workPlace user end +++++");
         })
-        .catch((error) => {
-          console.log( error, "not Lewis delete new workPlace user end error (2) +++++");
+        .catch(error => {
+          console.log(
+            error,
+            "not Lewis delete new workPlace user end error (2) +++++"
+          );
           // this.educationAndWorks.workPlaces = this.work;
           // this.work = this.$store.state.profile.profile_about.user_experience;
         })
@@ -424,23 +466,26 @@ export default {
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log("Finally Lewis delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
+          console.log(
+            "Finally Lewis delete new workplace user +++++",
+            this.educationAndWorks,
+            "+++++++++++"
+          );
         });
-
     },
 
     edit(type, value) {
       switch (type) {
         case "workPlaces":
           console.log("edit workPlace +++++++");
-         
+
           this.workPlaceInput = this.work[value];
-          this.$refs["add-contact"].show();      
+          this.$refs["add-contact"].show();
           break;
         case "educations":
           console.log("edit education");
           this.index = this.educationAndWorks.educations.findIndex(
-            (education) => {
+            education => {
               return education.id === value;
             }
           );
@@ -450,7 +495,7 @@ export default {
         case "professions":
           console.log("edit professions");
           this.index = this.educationAndWorks.professions.findIndex(
-            (profession) => {
+            profession => {
               return profession.id === value;
             }
           );
@@ -461,8 +506,8 @@ export default {
           console.log("No Correspondance");
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

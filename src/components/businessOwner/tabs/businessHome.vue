@@ -4,20 +4,18 @@
       <b-col md="12" lg="6" xl="4">
         <Intro />
 
-        <comunitiDashboard/>
+        <comunitiDashboard />
 
         <br />
-
       </b-col>
 
       <b-col md="12" lg="6" xl="8" class="postpadding  mt-2  mt-xl-0 ">
-        <Post v-if="isPremium"/>
-
+        <Post v-if="isPremium" />
 
         <b-card v-if="!isPremium">
           <div class="text-center">
             <span class="username text-center mb-3">
-              <b> {{ $t('general.PREMIUM_ACCOUNT_FEATURE') }} </b>
+              <b> {{ $t("general.PREMIUM_ACCOUNT_FEATURE") }} </b>
             </span>
           </div>
 
@@ -45,7 +43,11 @@
               alt="Kitten"
             />
             <div class="text-center">
-             <router-link to="/settings?tab=account">  <b-button variant="primary" class="text-center mt-3"> {{ $t("businessowner.Upgrade_Now") }} </b-button> </router-link>  
+              <router-link to="/settings?tab=account">
+                <b-button variant="primary" class="text-center mt-3">
+                  {{ $t("businessowner.Upgrade_Now") }}
+                </b-button>
+              </router-link>
             </div>
           </div>
         </b-card>
@@ -67,14 +69,14 @@ export default {
 
     comunitiDashboard,
     // Personalise,
-    Post,
+    Post
   },
 
   data() {
     return {
-      isPremium: isPremium(),
+      isPremium: isPremium()
     };
-  },
+  }
 };
 </script>
 

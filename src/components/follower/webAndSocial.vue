@@ -1,32 +1,23 @@
 <template>
   <div>
-    <b class="social">{{ $t('profilefollower.Web_Soial_Links') }}</b>
+    <b class="social">{{ $t("profilefollower.Web_Soial_Links") }}</b>
     <hr />
-    
-
 
     <!-- {{info}}  -->
 
-
-
-     <div v-for="website in info.user_websites" :key="website.id">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'globe']"
-              />
-              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
-                website.website_url
-              }}</a>
-             
-            </div>
-
-
-
-
+    <div v-for="website in info.user_websites" :key="website.id">
+      <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'globe']" />
+      <a
+        :href="website"
+        @click="redirect(website.website_url)"
+        target="_blank"
+        >{{ website.website_url }}</a
+      >
+    </div>
   </div>
 </template>
 
-<script>  
+<script>
 export default {
   data() {
     return {
@@ -47,17 +38,11 @@ export default {
     };
   },
 
-   computed: {
-  
-
-      info(){
-   return this.$store.state.follower.profileIntro;
-    },
-   
-
-  },
-
-  
+  computed: {
+    info() {
+      return this.$store.state.follower.profileIntro;
+    }
+  }
 };
 </script>
 

@@ -33,7 +33,9 @@
                     icon="trash-fill"
                     aria-hidden="true"
                   ></b-icon>
-                  <span class="text-purple">{{ $t('businessowner.Delete') }}</span>
+                  <span class="text-purple">{{
+                    $t("businessowner.Delete")
+                  }}</span>
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -52,7 +54,7 @@
             <b-icon variant="primary" icon="heart" class="mr-2"></b-icon
             ><span>{{ comment.likes }}</span>
           </div>
-          <b-button variant="link">{{ $t('businessowner.Reply') }}</b-button>
+          <b-button variant="link">{{ $t("businessowner.Reply") }}</b-button>
         </div>
       </div>
     </div>
@@ -68,25 +70,25 @@ export default {
     current_user() {
       return {
         name: this.$store.state.auth.user.user.name,
-        avatar: this.$store.state.auth.user.user.profile_picture,
+        avatar: this.$store.state.auth.user.user.profile_picture
       };
     },
     datePublish() {
       return moment(this.comment.created_at).fromNow();
-    },
+    }
   },
   methods: {
     deleteComment() {
       this.$store
         .dispatch("productComments/deleteComment", {
           idproduct: this.idproduct,
-          idcomment: this.comment.comment_id,
+          idcomment: this.comment.comment_id
         })
         .then(() => {
           this.$emit("deletecomment", this.comment.comment_id);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

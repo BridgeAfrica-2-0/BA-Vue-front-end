@@ -13,10 +13,10 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ $t('dashboard.Heavy_Gym')}}
+                {{ $t("dashboard.Heavy_Gym") }}
                 <span class="float-right"> </span>
               </h5>
-              <p class="duration">{{ $t('dashboard.1h_Ago')}}</p>
+              <p class="duration">{{ $t("dashboard.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -73,7 +73,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('dashboard.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('dashboard.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -101,8 +105,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{ $t('dashboard.Heavy_Gym')}}</h5>
-              <p class="duration">{{ $t('dashboard.1h_Ago')}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("dashboard.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("dashboard.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -153,7 +159,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('dashboard.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('dashboard.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -181,8 +191,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{ $t('dashboard.Post_with_3_pics') }}</h5>
-              <p class="duration">{{ $t('dashboard.1h_Ago')}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("dashboard.Post_with_3_pics") }}
+              </h5>
+              <p class="duration">{{ $t("dashboard.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -233,7 +245,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('dashboard.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('dashboard.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -260,8 +276,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{ $t('dashboard.Heavy_Gym')}}</h5>
-              <p class="duration">{{ $t('dashboard.1h_Ago')}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("dashboard.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("dashboard.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -343,8 +361,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{ $t('dashboard.Heavy_Gym')}}</h5>
-              <p class="duration">{{ $t('dashboard.1h_Ago')}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("dashboard.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("dashboard.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -454,8 +474,8 @@ export default {
       imagees3: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-      ],
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
+      ]
     };
   },
 

@@ -119,8 +119,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -135,7 +135,7 @@ export default {
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -145,7 +145,7 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -156,7 +156,7 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -205,11 +205,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

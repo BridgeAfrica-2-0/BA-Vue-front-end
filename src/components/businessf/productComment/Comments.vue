@@ -8,7 +8,6 @@
           v-model.trim="reply"
           class="reply--text"
           placeholder="Post a comment"
-         
           maxlength="250"
           required
           @keyup.enter="submitComment"
@@ -23,10 +22,12 @@
         v-for="comment in Comments"
         :comment="comment"
         :key="comment.id"
-				:idproduct="idproduct"
-				@deletecomment="deleteComment"
+        :idproduct="idproduct"
+        @deletecomment="deleteComment"
       ></single-comment>
-      <b-button v-if="showSee" variant="link" @click="seeMore">see more</b-button>
+      <b-button v-if="showSee" variant="link" @click="seeMore"
+        >see more</b-button
+      >
     </div>
   </div>
 </template>
@@ -36,7 +37,7 @@ import singleComment from "./SingleComment";
 export default {
   name: "comments",
   components: {
-    singleComment,
+    singleComment
   },
   data() {
     return {
@@ -47,79 +48,68 @@ export default {
   },
 
   computed: {
-
-    Comments(){
-      return  this.$store.state.productComments.comments;
+    Comments() {
+      return this.$store.state.productComments.comments;
     }
   },
 
   methods: {
+    seeMore() {
+      this.current_comment_page++;
 
-    seeMore(){
-        this.current_comment_page++;
-        
-         this.$store
-          .dispatch("productComments/getComments", {
-            id: this.idproduct,
-            page: this.current_comment_page,
-          })
-          .then(res => {
-            if(res.length == 0){
-              this.showSee = false
-            }
-            console.log('reponse du see more', res)
-          })
-
-    },
-
-    getComment(){
       this.$store
-          .dispatch("productComments/getComments", {
-            id: this.idproduct,
-            page: this.current_comment_page,
-          })
-          .then(res => {
-            
-          })
+        .dispatch("productComments/getComments", {
+          id: this.idproduct,
+          page: this.current_comment_page
+        })
+        .then(res => {
+          if (res.length == 0) {
+            this.showSee = false;
+          }
+          console.log("reponse du see more", res);
+        });
     },
 
-    getDetail (id) {
-       this.$store
-      .dispatch("productDetails/getProductDetails", id)
-      .then((product) => {
-        
-        this.$emit("getNewDetail", product)
-       console.log("new product detail ", product)
-      });
-         
-        
-        
-      },
+    getComment() {
+      this.$store
+        .dispatch("productComments/getComments", {
+          id: this.idproduct,
+          page: this.current_comment_page
+        })
+        .then(res => {});
+    },
+
+    getDetail(id) {
+      this.$store
+        .dispatch("productDetails/getProductDetails", id)
+        .then(product => {
+          this.$emit("getNewDetail", product);
+          console.log("new product detail ", product);
+        });
+    },
 
     submitComment() {
-      console.log("------", this.reply)
+      console.log("------", this.reply);
       const comment = {
         idproduct: this.idproduct,
-        text: this.reply,
+        text: this.reply
       };
 
       this.$store.dispatch("productComments/postComment", comment).then(() => {
         this.getComment();
         this.getDetail(this.idproduct);
-        console.log('èèè', this.Comments)
-      })
+        console.log("èèè", this.Comments);
+      });
       // if (this.reply !== "") {
       //   this.$emit("submit-comment", this.reply);
       //   this.reply = "";
       // }
     },
-		deleteComment(idcomment){
-			this.$emit("deletecomment", idcomment)
-		},
-
-    
+    deleteComment(idcomment) {
+      this.$emit("deletecomment", idcomment);
+    }
   },
-  props: ["comments", "comments_wrapper_classes","idproduct"],
+  props: ["comments", "comments_wrapper_classes", "idproduct"]
 };
 </script>
 

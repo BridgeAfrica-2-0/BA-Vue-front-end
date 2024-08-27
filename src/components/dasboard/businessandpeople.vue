@@ -6,9 +6,11 @@
           <div style="p-div">
             <span>
               <h4>
-                {{ $t('dashboard.BUSINESS') }}
+                {{ $t("dashboard.BUSINESS") }}
                 <h6 style="float:right">
-                  <b-link> <u> {{ $t('dashboard.see_all') }} </u> </b-link>
+                  <b-link>
+                    <u> {{ $t("dashboard.see_all") }} </u>
+                  </b-link>
                 </h6>
               </h4>
             </span>
@@ -19,9 +21,11 @@
           <div class="p-div">
             <span>
               <h4>
-                {{ $t('dashboard.People') }}
+                {{ $t("dashboard.People") }}
                 <h6 style="float:right">
-                  <b-link> <u> {{ $t('dashboard.see_all') }} </u> </b-link>
+                  <b-link>
+                    <u> {{ $t("dashboard.see_all") }} </u>
+                  </b-link>
                 </h6>
               </h4>
             </span>

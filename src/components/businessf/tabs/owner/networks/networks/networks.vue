@@ -1,27 +1,27 @@
 <template>
   <div class="lalala">
-    <b-tabs content-class="mt-3" lazy fill active-nav-item-class="active-tab-item">
-
-      
-      <b-tab >
-
-         <template slot="title">
-                  {{ $t("network.Followers")
-                  }}<span class="spa-color">
-                    {{ nFormatter(networkdetails.total_followers) }}
-                  </span>
-                </template>
+    <b-tabs
+      content-class="mt-3"
+      lazy
+      fill
+      active-nav-item-class="active-tab-item"
+    >
+      <b-tab>
+        <template slot="title">
+          {{ $t("network.Followers")
+          }}<span class="spa-color">
+            {{ nFormatter(networkdetails.total_followers) }}
+          </span>
+        </template>
         <Followers />
       </b-tab>
-      <b-tab >
-
-
-         <template slot="title">
-                  {{ $t("network.Following")
-                  }}<span class="spa-color">
-                    {{ nFormatter(networkdetails.totat_following) }}
-                  </span>
-                </template>
+      <b-tab>
+        <template slot="title">
+          {{ $t("network.Following")
+          }}<span class="spa-color">
+            {{ nFormatter(networkdetails.totat_following) }}
+          </span>
+        </template>
 
         <Following />
       </b-tab>
@@ -37,7 +37,7 @@ export default {
     Followers,
     Following
   },
-   methods: {
+  methods: {
     nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -50,9 +50,9 @@ export default {
       }
       return num;
     }
-   },
+  },
 
-    computed: {
+  computed: {
     userdetails() {
       return this.$store.state.networkProfileCommunitySidebar.userdetails;
     },
@@ -61,10 +61,8 @@ export default {
     },
     networkdetails() {
       return this.$store.state.networkProfileCommunitySidebar.networkdetails;
-    },
-  },
-
-
+    }
+  }
 };
 </script>
 

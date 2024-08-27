@@ -2,7 +2,10 @@
   <div>
     <b-card header-bg-variant="primary" header-tag="header" footer-tag="footer">
       <template #header>
-        <h6 class="mb-0"><b-icon icon="people-fill"></b-icon> {{ $t('profileowner.Following') }}</h6>
+        <h6 class="mb-0">
+          <b-icon icon="people-fill"></b-icon>
+          {{ $t("profileowner.Following") }}
+        </h6>
       </template>
       <b-tabs content-class="mt-3">
         <b-tab :title="$t('profileowner.People_Who_Follow_Me')" active>
@@ -17,7 +20,7 @@
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">{{ $t('profileowner.Message') }}</span>
+                  <span class="show">{{ $t("profileowner.Message") }}</span>
                 </b-button>
               </b-list-group-item>
 
@@ -30,7 +33,7 @@
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
-                  <span class="show">{{ $t('profileowner.Add') }}</span>
+                  <span class="show">{{ $t("profileowner.Add") }}</span>
                 </b-button>
               </b-list-group-item>
             </b-col>
@@ -48,7 +51,7 @@
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">{{ $t('profileowner.Message') }}</span>
+                  <span class="show">{{ $t("profileowner.Message") }}</span>
                 </b-button>
               </b-list-group-item>
 
@@ -61,7 +64,7 @@
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
-                  <span class="show">{{ $t('profileowner.Add') }}</span>
+                  <span class="show">{{ $t("profileowner.Add") }}</span>
                 </b-button>
               </b-list-group-item>
             </b-col>
@@ -74,7 +77,7 @@
 
 <script>
 export default {
-  name: "following",
+  name: "following"
 };
 </script>
 

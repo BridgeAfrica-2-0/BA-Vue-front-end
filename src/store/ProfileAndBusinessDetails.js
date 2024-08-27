@@ -6,21 +6,20 @@ export default {
     details: [],
     profile: [],
 
-    business: [],
+    business: []
   },
 
   actions: {
     async getdetails({ commit }) {
-      return await axios.get("profile/user/info", {}).then(function({ data }) {
-        commit("setdetails", data.data);
-        commit("setBusiness", data.data.business);
-        commit("setProfile", data.data.owner[0]);
-
-     
-      }).catch(err => {
-     
-      });
-    },
+      return await axios
+        .get("profile/user/info", {})
+        .then(function({ data }) {
+          commit("setdetails", data.data);
+          commit("setBusiness", data.data.business);
+          commit("setProfile", data.data.owner[0]);
+        })
+        .catch(err => {});
+    }
   },
 
   mutations: {
@@ -34,12 +33,12 @@ export default {
 
     setBusiness(state, details) {
       state.business = details;
-    },
+    }
   },
 
   getters: {
     getdetails(state) {
       return state.details;
-    },
-  },
+    }
+  }
 };

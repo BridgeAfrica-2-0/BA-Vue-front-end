@@ -1,29 +1,16 @@
 <template>
   <div>
-    
-   
-
     <!-- User Posts Listing Section-->
     <b-card class="px-md-3">
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div v-for="item in owner_post" :key="item.post_id">
         <div class="mt-2">
           <div class="d-inline-flex">
             <span md="1" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="item.profile_picture"></b-avatar>
+              <b-avatar
+                class="d-inline-block avat"
+                variant="primary"
+                :src="item.profile_picture"
+              ></b-avatar>
             </span>
             <div class="pl-2 pl-md-3 pt-md-2">
               <h5 class="m-0 usernamee">
@@ -35,17 +22,27 @@
             <div class="toright pt-2">
               <b-dropdown variant="link" size="sm" dropleft no-caret>
                 <template #button-content>
-                  <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
+                  <b-icon
+                    icon="three-dots"
+                    variant="primary"
+                    aria-hidden="true"
+                  ></b-icon>
                 </template>
 
-                <b-dropdown-item-button variant="info" @click="approvedPost(item)">
+                <b-dropdown-item-button
+                  variant="info"
+                  @click="approvedPost(item)"
+                >
                   <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                  {{ $t('businessowner.Approved') }}
+                  {{ $t("businessowner.Approved") }}
                 </b-dropdown-item-button>
 
-                <b-dropdown-item-button variant="danger" @click="deletePost(item)">
+                <b-dropdown-item-button
+                  variant="danger"
+                  @click="deletePost(item)"
+                >
                   <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                  {{ $t('businessowner.Delete') }}
+                  {{ $t("businessowner.Delete") }}
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -74,16 +71,22 @@
               ></youtube>
             </span>
 
-            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
+            <light
+              css=" "
+              :cells="item.media.length"
+              :items="mapmediae(item.media)"
+            ></light>
           </div>
-          
-
         </div>
 
         <hr />
       </div>
 
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler">
+      <infinite-loading
+        :identifier="infiniteId"
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      >
         <div class="text-red" slot="no-more">No Pending Posts To Show</div>
         <div class="text-red" slot="no-results">No Pending Posts To Show</div>
       </infinite-loading>
@@ -92,22 +95,20 @@
 </template>
 
 <script>
+import light from "@/components/lightbox";
 
-import light from '@/components/lightbox';
-
-import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 
 export default {
-  name: 'postNetwork',
+  name: "postNetwork",
   components: {
- 
-    light,
+    light
   },
   data() {
     return {
       playerVars: {
-        autoplay: 0,
+        autoplay: 0
       },
       moment: moment,
       page: 1,
@@ -120,22 +121,25 @@ export default {
       edit_id: null,
       uploadPercentage: 0,
       fullPage: false,
-      images: ['https://i.wifegeek.com/200426/f9459c52.jpg'],
-      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
+      images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
+      imagees: [
+        "https://i.wifegeek.com/200426/f9459c52.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+      ],
       ima: [
-        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
-        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       animate: true,
       isUploading: false,
       createPost: {
-        postBusinessUpdate: '',
+        postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
@@ -145,7 +149,7 @@ export default {
 
       media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -158,7 +162,7 @@ export default {
 
       media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -167,7 +171,7 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
 
     getId(video_url) {
@@ -176,33 +180,28 @@ export default {
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
     reloads() {
-      console.log('reoading');
-      this.$store.commit('profile/ownerPost', []);
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
     },
 
-
-
-
-   
-
     infiniteHandler($state) {
-      let url="business/show/unapprove-post/" + this.url + "/" + this.page;
-       if (this.page == 1) {
+      let url = "business/show/unapprove-post/" + this.url + "/" + this.page;
+      if (this.page == 1) {
         this.owner_post.splice(0);
       }
-       this.$store
+      this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
           console.log(data);
@@ -215,36 +214,30 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
-
-    approvedPost(post){
-      
+    approvedPost(post) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18"
       });
 
       axios
-        .post('business/post-approve/' + post.post_id, {
-          name: this.name,
+        .post("business/post-approve/" + post.post_id, {
+          name: this.name
         })
         .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: 'success',
-            blockClass: 'custom-block-class',
-            message: this.$t('businessowner.Post_Approved'),
+            status: "success",
+            blockClass: "custom-block-class",
+            message: this.$t("businessowner.Post_Approved")
           });
           this.reloads();
           this.page = 1;
@@ -258,51 +251,44 @@ export default {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: err.response.data.message,
+              status: "error",
+              blockClass: "custom-block-class",
+              message: err.response.data.message
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: this.$t('businessowner.Unable_to_Approved_Post'),
+              status: "error",
+              blockClass: "custom-block-class",
+              message: this.$t("businessowner.Unable_to_Approved_Post")
             });
             console.log({ err: err });
 
             loader.hide();
           }
         });
-
     },
-   
-
-
-
 
     deletePost(post) {
-     
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18"
       });
 
       axios
         .delete("business/delete/post/" + post.post_id, {
-          name: this.name,
+          name: this.name
         })
         .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: 'success',
-            blockClass: 'custom-block-class',
-            message: this.$t('businessowner.Post_Deleted'),
+            status: "success",
+            blockClass: "custom-block-class",
+            message: this.$t("businessowner.Post_Deleted")
           });
           this.reloads();
           this.page = 1;
@@ -316,17 +302,17 @@ export default {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: err.response.data.message,
+              status: "error",
+              blockClass: "custom-block-class",
+              message: err.response.data.message
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: this.$t('businessowner.Unable_to_Delete_your_Post'),
+              status: "error",
+              blockClass: "custom-block-class",
+              message: this.$t("businessowner.Unable_to_Delete_your_Post")
             });
             console.log({ err: err });
 
@@ -335,48 +321,40 @@ export default {
         });
     },
 
- 
-   
-
-
     ownerPost() {
       this.$store
-        .dispatch('profile/ownerPost')
+        .dispatch("profile/ownerPost")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
     showModal() {
-      this.$refs['modal-3'].show();
+      this.$refs["modal-3"].show();
     },
     hideModal() {
-      this.$refs['modal-3'].hide();
+      this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log('Resetting the post data');
+      console.log("Resetting the post data");
 
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = '';
+        this.createPost.postBusinessUpdate = "";
       }
-    },
+    }
   },
   computed: {
     imageProfile() {
-      return 'yoo';
+      return "yoo";
     },
 
     info: function() {
-      return this.$store.getters['profile/getUserPostIntro'];
+      return this.$store.getters["profile/getUserPostIntro"];
     },
 
     owner_post() {
@@ -384,12 +362,12 @@ export default {
     },
 
     profileNamePost() {
-      return 'yoo';
-    },
+      return "yoo";
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
 

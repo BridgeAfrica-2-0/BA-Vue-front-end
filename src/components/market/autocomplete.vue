@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN
     };
   },
   methods: {
@@ -25,15 +25,15 @@ export default {
 
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        types: "country,region,place,postcode,locality,neighborhood",
+        types: "country,region,place,postcode,locality,neighborhood"
       });
 
       geocoder.addTo("#geocoder");
-      geocoder.on("result", (e) => {
+      geocoder.on("result", e => {
         this.$emit("get-location-details", e.result);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

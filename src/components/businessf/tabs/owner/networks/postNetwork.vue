@@ -1,7 +1,7 @@
 <template>
-  <div class="p-post">   
+  <div class="p-post">
     <!-- DOM to Create Post By A UserOwner-->
-    <b-card  v-if="canPost" class="px-md-3 mb-3 mt-2">
+    <b-card v-if="canPost" class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
@@ -92,10 +92,16 @@
         </b-col>
       </b-row>
 
-      <div v-if="postStatus != 'member' && pendingPost.data>0 " class="pending-post-view pt-2 mt-3">
+      <div
+        v-if="postStatus != 'member' && pendingPost.data > 0"
+        class="pending-post-view pt-2 mt-3"
+      >
         <p class="text-center">
-<!-- {{pendingPost.data}} -->
-          {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+          <!-- {{pendingPost.data}} -->
+          {{ $t("network.Your") }}
+          {{
+            $t("network.Posts_are_pending_for_approval")
+          }}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
             @click="editPage"
             style="color: #e75c18; text-decoration: underline; cursor: pointer"
@@ -103,8 +109,6 @@
           >
         </p>
       </div>
-
-
     </b-card>
 
     <!-- User Posts Listing Section-->
@@ -335,7 +339,7 @@
                       :title="$t('network.Add_Hyperlink')"
                       size="sm"
                       variant="outline-primary"
-                      @click="$refs.document.click()"  
+                      @click="$refs.document.click()"
                     >
                       <fas-icon
                         class="icons"
@@ -366,7 +370,7 @@
                 <div
                   v-for="movie in createPost.movies"
                   :key="movie.fileName"
-                  class="h300px"    
+                  class="h300px"
                 >
                   <div id="preview">
                     <span
@@ -429,11 +433,9 @@
       :businessLogo="item.profile_picture"
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
-   
     />
 
     <infinite-loading
-     
       ref="PinfiniteLoading"
       @infinite="infiniteHandler"
     ></infinite-loading>
@@ -447,14 +449,12 @@ import { mapGetters, mapMutations } from "vuex";
 
 import Post from "@/components/businessOwner/ownerPostComponent";
 
-
-
 export default {
   name: "postNetwork",
   mixins: [AllPostFeatureMixin],
-  props: ['postStatus'],
+  props: ["postStatus"],
   components: {
-    Post,
+    Post
   },
 
   data() {
@@ -464,7 +464,7 @@ export default {
       infiniteId: +new Date(),
       uploadPercentage: 0,
       isUploading: false,
-      owner_post:[],
+      owner_post: [],
       // post:this.$store.state.networkProfile.ownerPost,
       url: null,
       delete: [],
@@ -473,59 +473,57 @@ export default {
       edit_id: null,
       comments: [],
       fullPage: false,
-      pendingPost:[],
+      pendingPost: [],
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
         postNetworkUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
-     // owner_post: "networkProfile/getOwnerPost",
-      pending_post:"networkSetting/allPendingPost"
+      // owner_post: "networkProfile/getOwnerPost",
+      pending_post: "networkSetting/allPendingPost"
     }),
-    
-    Role(){
-     return this.$store.state.networkProfile.NetworkRole;  
+
+    Role() {
+      return this.$store.state.networkProfile.NetworkRole;
     },
 
-    networkInfo(){
-     return this.$store.state.networkProfile.networkInfo;  
+    networkInfo() {
+      return this.$store.state.networkProfile.networkInfo;
     },
 
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.image;
     },
 
-    canPost(){
-      let canPost=false;
+    canPost() {
+      let canPost = false;
 
-       if(this.Role=='network_editor' ){
-      if(this.networkInfo.postPermission=='Allow editor to post' || this.networkInfo.postPermission=='Allow member to post'){
-        
-            canPost=true;
-         }
+      if (this.Role == "network_editor") {
+        if (
+          this.networkInfo.postPermission == "Allow editor to post" ||
+          this.networkInfo.postPermission == "Allow member to post"
+        ) {
+          canPost = true;
+        }
       }
 
-      if(this.Role == 'network_member'){
-          
-           if(this.networkInfo.postPermission=='Allow member to post'){
-        
-            canPost=true;
-         }
-
+      if (this.Role == "network_member") {
+        if (this.networkInfo.postPermission == "Allow member to post") {
+          canPost = true;
+        }
       }
 
-
-      if(this.Role=='network_admin'){
-         canPost=true;
+      if (this.Role == "network_admin") {
+        canPost = true;
       }
 
       return canPost;
@@ -533,7 +531,7 @@ export default {
 
     profileNamePost() {
       return "yoo";
-    },
+    }
   },
 
   created() {
@@ -547,13 +545,12 @@ export default {
       auth: "auth/profilConnected",
       postRemove: "networkProfile/removePost",
       postUpdate: "networkProfile/UpdatePost",
-      postCreate: "networkProfile/createPost",
+      postCreate: "networkProfile/createPost"
     }),
 
-    
- flashErrors(errors) {
+    flashErrors(errors) {
       let err = "";
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -562,11 +559,10 @@ export default {
 
     editPage() {
       console.log("editPage");
-      this.$emit('changeSelected');
+      this.$emit("changeSelected");
     },
 
     AllPendingPost() {
-     
       this.axios
         .get("network/" + this.url + "/post/count-pending-posts")
         .then(({ data }) => {
@@ -574,7 +570,7 @@ export default {
           console.log(data);
           this.pendingPost = data;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -582,7 +578,7 @@ export default {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -595,7 +591,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -613,44 +609,40 @@ export default {
       return this.$youtube.getIdFromUrl(video_url);
     },
 
-
     async getAuth() {
-
       const type = [
         "NetworkEditors",
         "networks",
         "Membar Network Follower",
-        "memberNetwork",
+        "memberNetwork"
       ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
-       
+
       const response = await this.$repository.share.WhoIsConnect({
         networkId: type,
-        type,
+        type
       });
-  
-      if (response.success){  
-    this.auth(response.data);
 
-      } 
+      if (response.success) {
+        this.auth(response.data);
+      }
     },
 
     infiniteHandler($state) {
-      
       this.axios
         .get("network/show/post/" + this.url + "/" + this.page)
         .then(({ data }) => {
           if (data.data.length) {
-              this.owner_post.push(...data.data);
-               this.page += 1;
-           
+            this.owner_post.push(...data.data);
+            this.page += 1;
+
             $state.loaded();
           } else {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -662,35 +654,33 @@ export default {
         .then(() => {
           this.postRemove(uuid);
           this.page = 1;
-          
-          this.owner_post=[];  
-           this.$nextTick(() => {
-        this.$refs.PinfiniteLoading.attemptLoad();
-      });
+
+          this.owner_post = [];
+          this.$nextTick(() => {
+            this.$refs.PinfiniteLoading.attemptLoad();
+          });
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message: "Post Deleted"
           });
           return true;
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
-            
-
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: this.flashErrors(err.response.data.errors),
+              message: this.flashErrors(err.response.data.errors)
             });
             // loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: this.$t("network.Unable_to_Delete_your_Post"),
+              message: this.$t("network.Unable_to_Delete_your_Post")
             });
             console.log({ err: err });
 
@@ -715,45 +705,45 @@ export default {
       this.delete.forEach((value, index) => {
         formData2.append("deleteImg[" + index + "]", value.id);
       });
-      
+
       this.fileImageArr.forEach((value, index) => {
-          formData2.append("media[" + index + "]", value.thisfile);
-        });
-        
+        formData2.append("media[" + index + "]", value.thisfile);
+      });
+
       formData2.append("type", "image");
       formData2.append("content", this.edit_description);
       formData2.append("networkId", this.$route.params.id);
       this.axios
         .post("network/edit/post/" + this.edit_id, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           this.postUpdate(response.data.data);
         })
         .then(() => {
           this.page = 1;
-         this.owner_post=[];  
+          this.owner_post = [];
           this.$nextTick(() => {
-        this.$refs.PinfiniteLoading.attemptLoad();
-      });
+            this.$refs.PinfiniteLoading.attemptLoad();
+          });
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: "Content successfuly uploaded"
           });
           this.loading = false;
           // loader.hide();
           this.$refs["modal-edit"].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.loading = true;
           this.flashMessage.show({
             status: "error",
             message: "Unable to Update your post",
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
 
           // loader.hide()
@@ -761,8 +751,8 @@ export default {
         });
     },
 
-    chooseImage: function () {},
-    chooseVideo: function () {
+    chooseImage: function() {},
+    chooseVideo: function() {
       document.getElementById("chosefile").click();
     },
     chooseDocument() {
@@ -775,14 +765,14 @@ export default {
       if (file.files) {
         console.log("logging start");
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
-             thisfile: event.target.files[0],
+            thisfile: event.target.files[0]
           });
           console.log();
         };
@@ -793,7 +783,7 @@ export default {
       let result = null;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           result = e.target.result;
 
           return result;
@@ -807,14 +797,14 @@ export default {
 
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
-             thisfile: event.target.files[0],
+            thisfile: event.target.files[0]
           });
         };
         reader.readAsDataURL(file.files[0]);
@@ -828,8 +818,8 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-         thisfile: event.target.files[0],
-        fileName: event.target.files[0].name,
+        thisfile: event.target.files[0],
+        fileName: event.target.files[0].name
       });
     },
     selectDocumentOutsidePost(event) {
@@ -837,8 +827,8 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-         thisfile: event.target.files[0],
-        fileName: event.target.files[0].name,
+        thisfile: event.target.files[0],
+        fileName: event.target.files[0].name
       });
       this.$refs["modal-xl"].show();
     },
@@ -848,10 +838,10 @@ export default {
 
     deleteItem(name) {
       const newHyperlinks = this.createPost.hyperlinks.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       const movies = this.createPost.movies.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
@@ -860,7 +850,7 @@ export default {
     deleteImage(id, eve) {
       this.edit_image.splice(id, 1);
       this.delete.push({
-        id: eve.id,
+        id: eve.id
       });
     },
 
@@ -874,26 +864,21 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     async submitPost() {
+      let url = "network/post/create/" + this.url;
 
-      let url = "network/post/create/" + this.url ; 
+      if (this.postStatus == "member") {
+        url = "network/member-post/create/" + this.url;
+      }
 
-      if(this.postStatus== "member"){    
-           
-           url = "network/member-post/create/" + this.url ;
-      }   
-
-
-  if(this.postStatus== "editors"){    
-           
-           url = "network/editor-post/create/" + this.url ;
-      }   
-
+      if (this.postStatus == "editors") {
+        url = "network/editor-post/create/" + this.url;
+      }
 
       this.loading = true;
       this.isUploading = true;
@@ -902,66 +887,60 @@ export default {
       let formData2 = new FormData();
       //console.log(this.fileImageArr)
 
-
-
       this.fileImageArr.forEach((value, index) => {
-          formData2.append("media[" + index + "]", value.thisfile);
-        });
-
+        formData2.append("media[" + index + "]", value.thisfile);
+      });
 
       formData2.append("type", "image");
-  
+
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
-        .post( url, formData2, {
+        .post(url, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data"
           },
 
-          onUploadProgress: function (progressEvent) {
+          onUploadProgress: function(progressEvent) {
             this.uploadPercentage = parseInt(
               Math.round((progressEvent.loaded / progressEvent.total) * 100)
             );
-          }.bind(this),
+          }.bind(this)
         })
         // .then(() => this.ownerPost())
-        .then((res) => {
+        .then(res => {
           this.postCreate(res.data.data);
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: "Content successfuly uploaded"
           });
           // loader.hide()
           this.$refs["modal-xl"].hide();
           this.isUploading = false;
           this.loading = false;
           this.page = 1;
-          this.owner_post=[];  
+          this.owner_post = [];
 
-       this.$nextTick(() => {
-        this.$refs.PinfiniteLoading.attemptLoad();
-      });
-
-         
+          this.$nextTick(() => {
+            this.$refs.PinfiniteLoading.attemptLoad();
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           this.loading = false;
           this.isUploading = false;
           this.loading = false;
           if (err.response.status == 422) {
-
             this.flashMessage.show({
               status: "error",
-               message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              message: this.flashErrors(err.response.data.errors),
+              blockClass: "custom-block-class"
             });
             // loader.hide()
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('general.Unable_to_Create_Your_Post'),
-              blockClass: "custom-block-class",
+              message: this.$t("general.Unable_to_Create_Your_Post"),
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
           }
@@ -981,8 +960,8 @@ export default {
         this.createPost.movies = [];
         this.createPost.postNetworkUpdate = "";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1038,32 +1017,21 @@ export default {
   color: #e75c18;
 }
 
-  @media (min-width: 1200px ) {  
-      
-       .p-post{
-
-    padding-right:40px;
-    padding-left:40px;
+@media (min-width: 1200px) {
+  .p-post {
+    padding-right: 40px;
+    padding-left: 40px;
   }
+}
 
+@media (min-width: 1300px) {
+  .p-post {
+    padding-right: 50px;
+    padding-left: 50px;
   }
-
-
-    @media (min-width: 1300px ) {  
-      
-       .p-post{
-
-    padding-right:50px;
-    padding-left:50px;
-  }
-
-  }
-
+}
 
 @media (min-width: 762px) {
-
- 
-
   .avat {
     width: 64px;
     height: 64px;
@@ -1213,8 +1181,7 @@ export default {
 }
 </style>
 
-
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }

@@ -15,15 +15,19 @@
         <b-col cols="12" sm="12" md="8">
           <div>
             <h4 class="font-weight-bold">{{ product.name }}</h4>
-            <span class="text-success" v-if="product.in_stock">{{ $t('businessowner.In_Stock') }}</span>
-            <span class="text-danger" v-else>{{ $t('businessowner.Out_of_stock') }}</span>
+            <span class="text-success" v-if="product.in_stock">{{
+              $t("businessowner.In_Stock")
+            }}</span>
+            <span class="text-danger" v-else>{{
+              $t("businessowner.Out_of_stock")
+            }}</span>
             <h4 class="font-weight-bold">
               {{ formatMoney(Number(product.price)) }}
             </h4>
           </div>
           <hr class="h-divider" />
           <div>
-            <h4>{{ $t('businessowner.Product_Desciption') }}</h4>
+            <h4>{{ $t("businessowner.Product_Desciption") }}</h4>
             <p class="text-justify">
               {{ product.description }}
             </p>
@@ -34,14 +38,18 @@
             class="buttons my-3 d-flex justify-content-between align-items-center"
           >
             <b-button variant="primary" class="font-weight-light shadow-sm">
-              <span v-if="packageProduct === 'basic'"> {{ $t('businessowner.Messages') }} </span>
-              <span v-else-if="packageProduct === 'premium'">{{ $t('businessowner.Buy_Now') }}</span>
+              <span v-if="packageProduct === 'basic'">
+                {{ $t("businessowner.Messages") }}
+              </span>
+              <span v-else-if="packageProduct === 'premium'">{{
+                $t("businessowner.Buy_Now")
+              }}</span>
             </b-button>
             <b-button
               variant="success"
               class="font-weight-light shadow-sm"
               @click="closeModal"
-              >{{ $t('businessowner.Check_On_Website') }}</b-button
+              >{{ $t("businessowner.Check_On_Website") }}</b-button
             >
           </div>
           <hr class="h-divider" />
@@ -62,26 +70,26 @@ export default {
   props: {
     showModal: {
       type: Boolean,
-      default: false,
+      default: false
     },
     product: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
     ProductCaroussel,
-    ProductComments,
+    ProductComments
   },
   data() {
     return {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       canShowModal: false,
-      packageProduct: "basic",
+      packageProduct: "basic"
     };
   },
   computed: {},
@@ -92,22 +100,22 @@ export default {
     closeModal() {
       console.log("close modal");
       this.$emit("closemodal");
-    },
+    }
   },
   watch: {
     showModal(newValue) {
       this.canShowModal = newValue;
-    },
+    }
   },
   mounted() {
     //get prooduct package type
     this.$store
       .dispatch("productDetails/getProductDetails", this.product.id)
-      .then((product) => {
+      .then(product => {
         this.packageProduct = product.package[0] || this.packageProduct;
         console.log("Package for product : ", this.packageProduct);
       });
-  },
+  }
 };
 </script>
 

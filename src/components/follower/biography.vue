@@ -1,19 +1,22 @@
 <template>
   <div>
     <b-list-group-item class="d-flex align-items-center mb-4 style-group">
-      <b-avatar :src=" bio.user.profile_picture" class="mr-3 avatar-style"></b-avatar>
-      <div>  
+      <b-avatar
+        :src="bio.user.profile_picture"
+        class="mr-3 avatar-style"
+      ></b-avatar>
+      <div>
         <div class="row">
           <div class="col">
             <p>
-              {{ bio.user.biography  }}
+              {{ bio.user.biography }}
             </p>
           </div>
         </div>
       </div>
     </b-list-group-item>
   </div>
-</template>     
+</template>
 
 <script>
 export default {
@@ -24,13 +27,11 @@ export default {
   },
   methods: {},
 
-  computed:{
-
-    bio(){
+  computed: {
+    bio() {
       return this.$store.state.follower.profileIntro;
     }
-
-  },
+  }
 };
 </script>
 

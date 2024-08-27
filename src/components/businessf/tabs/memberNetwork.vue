@@ -6,12 +6,12 @@
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
       >
-        <b-tabs lazy  pills content-class="mt-3 f-left">
+        <b-tabs lazy pills content-class="mt-3 f-left">
           <b-tab :title="$t('general.People')" active> <People /> </b-tab>
-  
-          <b-tab title="Businesses" > <Businesses /> </b-tab>
 
-           <!-- <b-tab title="Network" > <Network /> </b-tab> -->
+          <b-tab title="Businesses"> <Businesses /> </b-tab>
+
+          <!-- <b-tab title="Network" > <Network /> </b-tab> -->
         </b-tabs>
       </b-card>
     </div>
@@ -27,7 +27,7 @@ export default {
   name: "memberNetwork",
   components: {
     People,
-    Businesses,
+    Businesses
     // Network,
   },
   data() {
@@ -48,10 +48,8 @@ export default {
     };
   },
 
-   methods:{
-       
-       community() {
-         
+  methods: {
+    community() {
       this.$store
         .dispatch("profile/profilecommunity", null)
         .then(() => {
@@ -60,17 +58,14 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
-    },
-
+    }
   },
   mounted() {
-      this.isLoading = true;
+    this.isLoading = true;
 
-     
     console.log("Load User Profile Community start+++++++");
     this.community();
-    
-    },
+  },
 
   computed: {
     rows() {
@@ -108,7 +103,7 @@ hr {
   }
 }
 
-.card-body{
+.card-body {
   padding: 2px;
 }
 </style>

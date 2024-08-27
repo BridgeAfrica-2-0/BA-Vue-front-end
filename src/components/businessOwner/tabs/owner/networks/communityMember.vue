@@ -1,227 +1,147 @@
 <template>
-  
+  <b-container>
+    <div>
+      <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col cols="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+            ></b-avatar>
+          </b-col>
 
-<b-container> 
-  
-  
-   <div>
-            
-
-
-
-
-
-            <div class="people-style border shadow">
-              <b-row class="mb-1">
-                <b-col cols="3" class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col cols="4">
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
-                  </div>
-                </b-col>
-
-                <b-col cols="5">
-                  <div class="p-buttons">
-                    <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> {{ $t('businessowner.Message') }}
-                    </b-button>
-
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> {{ $t('businessowner.Community') }}
-                    </b-button>
-                  </div>
-                </b-col>
-              </b-row>
+          <b-col cols="4">
+            <div class="e-name">
+              <h6>
+                <br />
+                howty Circlehead
+              </h6>
             </div>
+          </b-col>
 
+          <b-col cols="5">
+            <div class="p-buttons">
+              <b-button block variant="primary" size="sm" class="b-background">
+                <b-icon icon="chat"> </b-icon> {{ $t("businessowner.Message") }}
+              </b-button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="people-style border shadow">
-              <b-row class="mb-1">
-                <b-col cols="3" class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col cols="4">
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
-                  </div>
-                </b-col>
-
-                <b-col cols="5">
-                  <div class="p-buttons">
-                    <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
-                    </b-button>
-
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
-                    </b-button>
-                  </div>
-                </b-col>
-              </b-row>
+              <b-button block size="sm" class="b-background" variant="primary">
+                <b-icon icon="plus-circle"> </b-icon>
+                {{ $t("businessowner.Community") }}
+              </b-button>
             </div>
+          </b-col>
+        </b-row>
+      </div>
 
+      <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col cols="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+            ></b-avatar>
+          </b-col>
 
-
-
-
-
-
-        <div class="people-style border shadow">
-              <b-row class="mb-1">
-                <b-col cols="3" class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col cols="4">
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
-                  </div>
-                </b-col>
-
-                <b-col cols="5">
-                  <div class="p-buttons">
-                    <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
-                    </b-button>
-
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
-                    </b-button>
-                  </div>
-                </b-col>
-              </b-row>
+          <b-col cols="4">
+            <div class="e-name">
+              <h6>
+                <br />
+                howty Circlehead
+              </h6>
             </div>
+          </b-col>
 
+          <b-col cols="5">
+            <div class="p-buttons">
+              <b-button block variant="primary" size="sm" class="b-background">
+                <b-icon icon="chat"> </b-icon> {{ $t("businessowner.Message") }}
+              </b-button>
 
-
-
-
-
-
-        <div class="people-style border shadow">
-              <b-row class="mb-1">
-                <b-col cols="3" class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col cols="4">
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
-                  </div>
-                </b-col>
-
-                <b-col cols="5">
-                  <div class="p-buttons">
-                    <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
-                    </b-button>
-
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
-                    </b-button>
-                  </div>
-                </b-col>
-              </b-row>
+              <b-button block size="sm" class="b-background" variant="primary">
+                <b-icon icon="plus-circle"> </b-icon>
+                {{ $t("businessowner.Community") }}
+              </b-button>
             </div>
+          </b-col>
+        </b-row>
+      </div>
 
+      <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col cols="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+            ></b-avatar>
+          </b-col>
 
+          <b-col cols="4">
+            <div class="e-name">
+              <h6>
+                <br />
+                howty Circlehead
+              </h6>
+            </div>
+          </b-col>
 
+          <b-col cols="5">
+            <div class="p-buttons">
+              <b-button block variant="primary" size="sm" class="b-background">
+                <b-icon icon="chat"> </b-icon> {{ $t("businessowner.Message") }}
+              </b-button>
 
+              <b-button block size="sm" class="b-background" variant="primary">
+                <b-icon icon="plus-circle"> </b-icon>
+                {{ $t("businessowner.Community") }}
+              </b-button>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
 
+      <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col cols="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+            ></b-avatar>
+          </b-col>
 
+          <b-col cols="4">
+            <div class="e-name">
+              <h6>
+                <br />
+                howty Circlehead
+              </h6>
+            </div>
+          </b-col>
 
+          <b-col cols="5">
+            <div class="p-buttons">
+              <b-button block variant="primary" size="sm" class="b-background">
+                <b-icon icon="chat"> </b-icon> {{ $t("businessowner.Message") }}
+              </b-button>
 
-
-
-
-
-
-
-           
-          </div>
-
-          
-            </b-container>
-
-
-      
-
-
-
-      
-
-
-  
+              <b-button block size="sm" class="b-background" variant="primary">
+                <b-icon icon="plus-circle"> </b-icon>
+                {{ $t("businessowner.Community") }}
+              </b-button>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
+    </div>
+  </b-container>
 </template>
 
 <script>
@@ -240,15 +160,10 @@ export default {};
   left: 10px;
 }
 
-.a-left{
+.a-left {
   text-align: left;
   align-content: left;
 }
-
-
-
-
-
 
 hr {
   border: solid 1px dimgray;
@@ -294,9 +209,8 @@ f-right {
 }
 
 .b-background {
-  background-color:#e75c18;
+  background-color: #e75c18;
   color: white;
-
 
   border-top-left-radius: 4px;
 
@@ -331,10 +245,10 @@ f-right {
 
 .p-buttons {
   margin-right: 50px;
-margin-left: 50px;
-margin-bottom: 5px;
-margin-top: 7px;
-padding-right: 5px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  padding-right: 5px;
 }
 
 .e-name {
@@ -347,8 +261,4 @@ padding-right: 5px;
 .a-text {
   margin-top: 2px;
 }
-
-
-
-
 </style>

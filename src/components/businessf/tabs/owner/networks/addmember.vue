@@ -74,19 +74,19 @@ import Multiselect from "vue-multiselect";
 export default {
   name: "addmember",
   components: {
-    Multiselect,
+    Multiselect
   },
 
   data() {
     return {
       net_id: this.$route.params.id,
       selectedpeople: null,
-      selectedbusiness: null,
+      selectedbusiness: null
     };
   },
 
   methods: {
-    nFormatter: function (num) {
+    nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -104,7 +104,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let formData2 = new FormData();
@@ -121,17 +121,17 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: "Business added",
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           loader.hide();
 
           this.flashMessage.show({
             status: "error",
             message: err.response.data.message,
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
         });
     },
@@ -141,7 +141,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let formData2 = new FormData();
@@ -158,10 +158,10 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: "members added",
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           loader.hide();
@@ -169,7 +169,7 @@ export default {
           this.flashMessage.show({
             status: "error",
             message: err.response.data.message,
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
         });
     },
@@ -186,7 +186,7 @@ export default {
       this.$store
         .dispatch("networkProfile/users", url)
         .then(() => {})
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -196,26 +196,26 @@ export default {
       this.$store
         .dispatch("networkProfile/busineses", url)
         .then(() => {})
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
 
   computed: {
-    selectedpeopleArr: function () {
+    selectedpeopleArr: function() {
       let selectedUsers = [];
 
-      this.selectedpeople.forEach((item) => {
+      this.selectedpeople.forEach(item => {
         selectedUsers.push(item.user_id);
       });
       return selectedUsers;
     },
 
-    selectedbusinessArr: function () {
+    selectedbusinessArr: function() {
       let selectedUsers = [];
 
-      this.selectedbusiness.forEach((item) => {
+      this.selectedbusiness.forEach(item => {
         selectedUsers.push(item.business_id);
       });
       return selectedUsers;
@@ -227,8 +227,8 @@ export default {
 
     busineses() {
       return this.$store.state.networkProfile.businesses;
-    },
-  },
+    }
+  }
 };
 </script>
 

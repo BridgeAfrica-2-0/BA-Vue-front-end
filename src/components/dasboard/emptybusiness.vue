@@ -1,35 +1,28 @@
 <template>
   <div>
-
-
-
     <b-card class="border shadow " style="height:300px; ">
       <span class="">
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> {{ $t('dashboard.My_Businesses') }} </b>  
+          <b> {{ $t("dashboard.My_Businesses") }} </b>
         </h6>
-
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
+        <div v-if="business.length">
+          <Business :business="business" />
+        </div>
 
-         <div v-if="business.length"> 
-        
-        <Business  :business="business"   />
-         </div>
-
-
-        <div  v-else >
+        <div v-else>
           <b-row>
             <b-col>
               <div class="p-top">
                 <br />
-                <h6>{{ $t('dashboard.No_Business') }}</h6>
-   <router-link to="profile_owner#business">
-                <b-button variant="primary" class="busi-btn">  
-                  {{ $t('dashboard.Add_Business') }}
-                </b-button>
-   </router-link>
+                <h6>{{ $t("dashboard.No_Business") }}</h6>
+                <router-link to="profile_owner#business">
+                  <b-button variant="primary" class="busi-btn">
+                    {{ $t("dashboard.Add_Business") }}
+                  </b-button>
+                </router-link>
               </div>
             </b-col>
           </b-row>
@@ -43,16 +36,14 @@
 import Business from "@/components/dasboard/businesses";
 export default {
   name: "emptybusiness",
-  
-  components: {
-    Business,
-    },
-  
-  computed: {
-   
 
-    business(){
-    return this.$store.state.ProfileAndBusinessDetails.business;
+  components: {
+    Business
+  },
+
+  computed: {
+    business() {
+      return this.$store.state.ProfileAndBusinessDetails.business;
     }
   }
 };
@@ -74,14 +65,14 @@ export default {
 
   .mybusi {
     font-size: 20px;
-    margin-left:20px
+    margin-left: 20px;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .busi-btn {
     width: 115px;
-    
+
     font-family: Helvetica Neue;
 
     font-size: 12px;
@@ -116,11 +107,10 @@ export default {
   overflow: auto;
   overflow-x: hidden;
   padding: 15px;
-
 }
 
-.card-body{
+.card-body {
   padding-left: 1px !important;
-    padding-right: 1px !important;
+  padding-right: 1px !important;
 }
 </style>

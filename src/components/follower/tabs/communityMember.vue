@@ -126,12 +126,12 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
-  
- mounted() {
+
+  mounted() {
     this.foll_id = this.$route.params.id;
   },
 
@@ -144,18 +144,17 @@ export default {
         return this.$store.state.profile.UcommunityFollowing.user_following;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       }
-    },
+    }
   },
 
   methods: {
     async handleFollow(user) {
-     
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -166,7 +165,7 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -178,12 +177,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("profile/setUcommunityFollower", {
           user_followers: [],
-          total_user_follower: 0,
+          total_user_follower: 0
         });
       } else {
         this.$store.commit("profile/setUcommunityFollowing", {
           user_following: [],
-          total_user_following: 0,
+          total_user_following: 0
         });
       }
 
@@ -212,7 +211,9 @@ export default {
       }
 
       axios
-        .get(url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id)
+        .get(
+          url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id
+        )
         .then(({ data }) => {
           console.log(data);
           if (this.type == "Follower") {
@@ -238,11 +239,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

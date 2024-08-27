@@ -135,7 +135,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{$t("general.Community")}}</span>
+                  <span class="btn-com">{{ $t("general.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -190,8 +190,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -204,7 +204,7 @@ export default {
         return this.$store.state.businessOwner.BcommunityFollowing
           .business_following;
       }
-    },
+    }
   },
 
   mounted() {
@@ -227,12 +227,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("businessOwner/setBcommunityFollower", {
           business_followers: [],
-          total_business_follower: 0,
+          total_business_follower: 0
         });
       } else {
         this.$store.commit("businessOwner/setBcommunityFollowing", {
           business_following: [],
-          total_business_following: 0,
+          total_business_following: 0
         });
       }
 
@@ -277,11 +277,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,13 +1,12 @@
 <template>
   <div>
-    <b class="work">{{ $t('profilefollower.WorkPlace') }}</b>
+    <b class="work">{{ $t("profilefollower.WorkPlace") }}</b>
     <hr />
 
     <div class="row" v-for="workPlace in work" :key="workPlace.id">
       <b-list-group-item
         class="d-flex align-items-center mb-4 item border-none"
       >
-
         <div class="media-body">
           <h6 class="mb-0">
             <b>{{ workPlace.company_name }} ({{ workPlace.position }})</b>
@@ -52,8 +51,8 @@ export default {
 
     workk() {
       return this.$store.state.follower.profile_about;
-    },
-  },
+    }
+  }
 };
 </script>
 

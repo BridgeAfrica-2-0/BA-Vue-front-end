@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export default {
   namespaced: true,
   state: {
@@ -14,113 +13,90 @@ export default {
 
   getters: {
     getPeopleFollowers(state) {
-        return state.peoplefollowers;
+      return state.peoplefollowers;
     },
     getPeopleFollowings(state) {
-        return state.peoplefollowings;
+      return state.peoplefollowings;
     },
     getBusinessFollowers(state) {
-        return state.businessfollowers;
+      return state.businessfollowers;
     },
     getBusinessFollowings(state) {
-        return state.businessfollowings;
+      return state.businessfollowings;
     },
     getNetworkFollowers(state) {
-        return state.networkfollowers;
+      return state.networkfollowers;
     },
     getNetworkFollowings(state) {
-        return state.networkfollowings;
-    },
+      return state.networkfollowings;
+    }
   },
 
   mutations: {
     setPeopleFollowers(state, peoplefollowers) {
-        state.peoplefollowers = peoplefollowers;
+      state.peoplefollowers = peoplefollowers;
     },
     setPeopleFollowings(state, peoplefollowings) {
-        state.peoplefollowings = peoplefollowings;
+      state.peoplefollowings = peoplefollowings;
     },
     setBusinessFollowers(state, businessfollowers) {
-        state.businessfollowers = businessfollowers;
+      state.businessfollowers = businessfollowers;
     },
     setBusinessFollowings(state, businessfollowings) {
-        state.businessfollowings = businessfollowings;
+      state.businessfollowings = businessfollowings;
     },
     setNetworkFollowers(state, networkfollowers) {
-        state.networkfollowers = networkfollowers;
+      state.networkfollowers = networkfollowers;
     },
     setNetworkFollowings(state, networkfollowings) {
-        state.networkfollowings = networkfollowings;
-    },
+      state.networkfollowings = networkfollowings;
+    }
   },
 
   actions: {
-
-    getPeopleFollowers( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
+    getPeopleFollowers({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
         commit("setPeopleFollowers", data.data);
         console.log(data);
         console.log(path);
-
-      })
+      });
     },
-    getPeopleFollowings( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
+    getPeopleFollowings({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
         commit("setPeopleFollowings", data.data);
         console.log(path);
         console.log(data);
-
-      })
+      });
     },
 
-    getBusinessFollowers( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
-          commit("setBusinessFollowers", data.data);
-          console.log(path);
+    getBusinessFollowers({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
+        commit("setBusinessFollowers", data.data);
+        console.log(path);
         console.log(data);
-
-      })
+      });
     },
-    getBusinessFollowings( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
-          commit("setBusinessFollowings", data.data);
-          console.log(path);
+    getBusinessFollowings({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
+        commit("setBusinessFollowings", data.data);
+        console.log(path);
         console.log(data);
-
-      })
+      });
     },
 
-    getNetworkFollowers( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
-          commit("setNetworkFollowers", data.data);
-          console.log(path);
+    getNetworkFollowers({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
+        commit("setNetworkFollowers", data.data);
+        console.log(path);
         console.log(data);
-
-      })
+      });
     },
-    getNetworkFollowings( {commit}, path ){
-      return axios
-      .get(`network/${path}`)
-      .then(({ data }) => {
-          commit("setNetworkFollowings", data.data);
-          console.log(path);
+    getNetworkFollowings({ commit }, path) {
+      return axios.get(`network/${path}`).then(({ data }) => {
+        commit("setNetworkFollowings", data.data);
+        console.log(path);
         console.log(data);
-
-      })
-    },
-
-
-
-
-  },
+      });
+    }
+  }
 };

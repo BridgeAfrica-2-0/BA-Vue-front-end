@@ -4,13 +4,23 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{$t("general.COMMUNITY")}} </b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
+          <b> {{ $t("general.COMMUNITY") }} </b>
+          <span class="h4-color">
+            {{
+              nFormatter(
+                userdetails.total_people + businessdetails.total_Business
+              )
+            }}</span
+          >
         </h6>
       </span>
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            {{$t("general.People")}} <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
+            {{ $t("general.People") }}
+            <span class="spa-color">
+              {{ nFormatter(userdetails.total_people) }}
+            </span>
           </template>
           <div>
             <b-row>
@@ -18,15 +28,31 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      {{$t("general.Followers")}} <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
+                      {{ $t("general.Followers") }}
+                      <span class="spa-color">
+                        {{ nFormatter(userdetails.total_followers) }}
+                      </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers" @handleFollow="handleFollow" /></div>
+                    <div class="s-comcard">
+                      <People
+                        :peoples="userdetails.user_followers"
+                        @handleFollow="handleFollow"
+                      />
+                    </div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
-                      {{$t("general.Following")}} <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
+                      {{ $t("general.Following") }}
+                      <span class="spa-color">
+                        {{ nFormatter(userdetails.totat_following) }}
+                      </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following" @handleFollow="handleFollow" /></div>
+                    <div class="s-comcard">
+                      <People
+                        :peoples="userdetails.user_following"
+                        @handleFollow="handleFollow"
+                      />
+                    </div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -35,21 +61,40 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            {{$t("general.Businesses")}} <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
+            {{ $t("general.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(businessdetails.total_Business) }}
+            </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  {{$t("general.Followers")}} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  {{ $t("general.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(businessdetails.total_followers) }}
+                  </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @handleFollow="handleFollow" /></div>
+                <div class="s-comcard">
+                  <Business
+                    :businesses="businessdetails.Business_followers"
+                    @handleFollow="handleFollow"
+                  />
+                </div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  {{$t("general.Following")}} <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                  {{ $t("general.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(businessdetails.totat_following) }}
+                  </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @handleFollow="handleFollow" /></div>
+                <div class="s-comcard">
+                  <Business
+                    :businesses="businessdetails.Business_following"
+                    @handleFollow="handleFollow"
+                  />
+                </div>
               </b-tab>
             </b-tabs>
           </div>
@@ -65,11 +110,11 @@ export default {
   name: "sidebarcommunity",
   components: {
     People,
-    Business,
+    Business
   },
   data() {
     return {
-      url: null,
+      url: null
     };
   },
   computed: {
@@ -80,12 +125,12 @@ export default {
       return this.$store.state.networkProfileCommunitySidebar.businessdetails;
     }
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
     this.UserDetails();
     this.businessDetails();
   },
-  methods:{    
+  methods: {
     nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -100,33 +145,33 @@ export default {
     },
 
     UserDetails() {
-    this.$store
-      .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
     businessDetails() {
-    this.$store
-      .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
     async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata)
+      console.log("handleFollow", Comdata);
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      console.log("uri", url)
+      console.log("uri", url);
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
         id: Comdata.id,
-        type: Comdata.type,
+        type: Comdata.type
       };
 
       await this.axios
@@ -136,12 +181,12 @@ export default {
           Comdata.is_follow = nextFollowState;
         })
         .catch(err => console.log(err));
-    },
+    }
   }
 };
 </script>
 
-<style >
+<style>
 .lala .nav-fill {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);

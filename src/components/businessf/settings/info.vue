@@ -4,9 +4,9 @@
       <b-container class="bv-example-row">
         <b-form>
           <div class="b-bottomm">
-            <b-button variant="primary" class="a-button-l"
-              >{{$t("businessf.Save_Changes")}}</b-button
-            >
+            <b-button variant="primary" class="a-button-l">{{
+              $t("businessf.Save_Changes")
+            }}</b-button>
             <br />
             <br />
           </div>
@@ -36,8 +36,7 @@
               >
                 <b-form-select v-model="selected">
                   <b-form-select-option value="a">
-                    
-{{$t("businessf.select_option")}}</b-form-select-option
+                    {{ $t("businessf.select_option") }}</b-form-select-option
                   >
                 </b-form-select>
               </b-form-group>
@@ -75,7 +74,7 @@
               >
                 <b-form-select v-model="selected">
                   <b-form-select-option value="a">
-                    {{$t("businessf.select_option")}}</b-form-select-option
+                    {{ $t("businessf.select_option") }}</b-form-select-option
                   >
                 </b-form-select>
               </b-form-group>
@@ -93,7 +92,7 @@
               >
                 <b-form-select v-model="selected">
                   <b-form-select-option value="a">
-                     {{$t("businessf.select_option")}}</b-form-select-option
+                    {{ $t("businessf.select_option") }}</b-form-select-option
                   >
                 </b-form-select>
               </b-form-group>
@@ -133,7 +132,9 @@
                   <b-col>
                     <b-form-select v-model="selected">
                       <b-form-select-option value="a">
-                        --{{$t("businessf.select_option")}}</b-form-select-option
+                        --{{
+                          $t("businessf.select_option")
+                        }}</b-form-select-option
                       >
                     </b-form-select>
                   </b-col>
@@ -157,7 +158,7 @@
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
                 <b-form-checkbox class="a-text" id="" name="" value="">
-                  {{$t("businessf.This_Business_does_not_have_a_Website")}}
+                  {{ $t("businessf.This_Business_does_not_have_a_Website") }}
                 </b-form-checkbox>
               </b-form-group>
             </b-container>
@@ -174,7 +175,7 @@
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
                 <b-form-checkbox class="a-text" id="" name="" value="">
-                  {{$t("businessf.This_Business_does_not_have_a_Email")}}
+                  {{ $t("businessf.This_Business_does_not_have_a_Email") }}
                 </b-form-checkbox>
               </b-form-group>
             </b-container>
@@ -232,21 +233,23 @@
                 class="mb-0"
               >
                 <b-form-checkbox id="" class="a-text" name="" value="">
-                  {{$t("businessf.This_Business_has_an_address")}}</b-form-checkbox
+                  {{
+                    $t("businessf.This_Business_has_an_address")
+                  }}</b-form-checkbox
                 >
 
                 <b-container>
                   <b-row>
                     <b-col>
-                      <p>{{$t("businessf.Street_Address")}}</p>
+                      <p>{{ $t("businessf.Street_Address") }}</p>
                       <b-form-input name=""></b-form-input>
                     </b-col>
                     <b-col>
-                      <p>{{$t("businessf.City")}}</p>
+                      <p>{{ $t("businessf.City") }}</p>
                       <b-form-input name=""></b-form-input
                     ></b-col>
                     <b-col>
-                      <p>{{$t("businessf.Postal_Code")}}</p>
+                      <p>{{ $t("businessf.Postal_Code") }}</p>
                       <b-form-input name=""></b-form-input
                     ></b-col>
                   </b-row>
@@ -286,7 +289,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Monday")}}</b-form-checkbox
+                          {{ $t("businessf.Monday") }}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>-
@@ -297,7 +300,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Tuesday")}}</b-form-checkbox
+                          {{ $t("businessf.Tuesday") }}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -308,7 +311,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Wednesday")}}</b-form-checkbox
+                          {{ $t("businessf.Wednesday") }}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -319,7 +322,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Thursday")}}</b-form-checkbox
+                          {{ $t("businessf.Thursday") }}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -330,7 +333,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Friday")}}
+                          {{ $t("businessf.Friday") }}
                         </b-form-checkbox></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -341,7 +344,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" class="a-text" name="" value="">
-                          {{$t("businessf.Saturday")}}
+                          {{ $t("businessf.Saturday") }}
                         </b-form-checkbox></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -352,7 +355,7 @@
                     <b-row>
                       <b-col
                         ><b-form-checkbox id="" name="" class="a-text" value="">
-                          {{$t("businessf.Sunday")}}</b-form-checkbox
+                          {{ $t("businessf.Sunday") }}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -381,7 +384,11 @@
                   value="accepted"
                   unchecked-value="not_accepted"
                 >
-                  {{$t("businessf.All_business_posts_must_be_approved_by_an_admin")}}
+                  {{
+                    $t(
+                      "businessf.All_business_posts_must_be_approved_by_an_admin"
+                    )
+                  }}
                 </b-form-checkbox>
               </b-form-group>
             </b-container>
@@ -423,7 +430,9 @@
           </div>
 
           <b-container>
-            <b-link href="#foo" class="f-left">{{$t("businessf.Delete_Business_Identity")}}</b-link>
+            <b-link href="#foo" class="f-left">{{
+              $t("businessf.Delete_Business_Identity")
+            }}</b-link>
           </b-container>
         </b-form>
       </b-container>

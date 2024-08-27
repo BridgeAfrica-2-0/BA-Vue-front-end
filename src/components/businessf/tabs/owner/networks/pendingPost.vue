@@ -1,10 +1,12 @@
 <template>
   <div class="container">
-    <b-row class="padding-post"> 
+    <b-row class="padding-post">
       <b-col cols="12" class="f-left">
-    
-        <div v-for="(post, index) in owner_post" :key="index" class="mb-4 border p-3 rounded">
-
+        <div
+          v-for="(post, index) in owner_post"
+          :key="index"
+          class="mb-4 border p-3 rounded"
+        >
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -12,7 +14,7 @@
                   <b-avatar
                     class="d-inline-block mt-1"
                     variant="primary"
-                    :square="post.poster_type!=user"
+                    :square="post.poster_type != user"
                     :src="post.user_picture"
                     size="3.5rem"
                   ></b-avatar>
@@ -21,24 +23,31 @@
                   <h6 class="m-0 font-weight-bolder">
                     {{ post.user_name }}
                     <span class="float-right">
-                      <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+                      <b-dropdown
+                        size="lg"
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">{{ $t('network.Settings') }} </span>
+                          ><span class="sr-only"
+                            >{{ $t("network.Settings") }}
+                          </span>
                         </template>
-                        <b-dropdown-item @click="approved(post.id, index)"  >
-                          {{ $t('network.Approved') }}
+                        <b-dropdown-item @click="approved(post.id, index)">
+                          {{ $t("network.Approved") }}
                         </b-dropdown-item>
-                        <b-dropdown-item @click="unapproved(post.id, index)" >
-                          {{ $t('network.Unapproved') }}
+                        <b-dropdown-item @click="unapproved(post.id, index)">
+                          {{ $t("network.Unapproved") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h6>
                   <p>
-                    {{ moment(post.created_at).fromNow() }} - 
+                    {{ moment(post.created_at).fromNow() }} -
                     <span class="text-primary">{{ post.comment }}</span>
-                  </p>    
+                  </p>
                 </b-col>
               </b-row>
               <!-- <b-row>
@@ -61,74 +70,66 @@
                 :less-str="$t('search.read_less')"
                 :max-chars="200"
               ></read-more>
-              
             </p>
           </div>
 
-               <div v-if="post.media"> 
+          <div v-if="post.media">
+            <div v-if="post.media.length > 0" class="">
+              <span v-for="video in mapvideo(post.media)" :key="video">
+                <youtube
+                  class="w-100 videoh"
+                  :video-id="getId(video)"
+                  :player-vars="playerVars"
+                  @playing="playing"
+                ></youtube>
+              </span>
 
-          <div v-if="post.media.length > 0" class="">
-            <span v-for="video in mapvideo(post.media)" :key="video">
-              <youtube
-                class="w-100 videoh"
-                :video-id="getId(video)"
-                :player-vars="playerVars"
-                @playing="playing"
-              ></youtube>
-            </span>
-
-            <light css=" " :cells="post.media.length" :items="mapmediae(post.media)"></light>
+              <light
+                css=" "
+                :cells="post.media.length"
+                :items="mapmediae(post.media)"
+              ></light>
+            </div>
           </div>
-
-      </div>
         </div>
       </b-col>
     </b-row>
 
-
-
-     <infinite-loading
-          @infinite="infiniteHandler"
-          ref="AinfiniteLoading"
-         
-        >
-          <div class="text-red" slot="no-more">
-            {{ $t("network.No_More_Request") }}
-          </div>
-          <div class="text-red" slot="no-results">
-            {{ $t("network.No_More_Request") }}
-          </div>
-        </infinite-loading>
-
+    <infinite-loading @infinite="infiniteHandler" ref="AinfiniteLoading">
+      <div class="text-red" slot="no-more">
+        {{ $t("network.No_More_Request") }}
+      </div>
+      <div class="text-red" slot="no-results">
+        {{ $t("network.No_More_Request") }}
+      </div>
+    </infinite-loading>
 
     <b-row>
-      <b-col>
-      
-      </b-col>
+      <b-col> </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import light from '@/components/lightbox';
+import light from "@/components/lightbox";
 
-import moment from 'moment';
-import axios from 'axios';
-import { mapActions, mapGetters } from 'vuex';
+import moment from "moment";
+import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: 'postNetwork',
+  name: "postNetwork",
   components: {
-    light,
+    light
   },
   data() {
     return {
       playerVars: {
-        autoplay: 0,
+        autoplay: 0
       },
       moment: moment,
       page: 1,
-      owner_post:[],
+      owner_post: [],
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
@@ -138,37 +139,40 @@ export default {
       edit_id: null,
       uploadPercentage: 0,
       fullPage: false,
-      images: ['https://i.wifegeek.com/200426/f9459c52.jpg'],
-      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
+      images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
+      imagees: [
+        "https://i.wifegeek.com/200426/f9459c52.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+      ],
       ima: [
-        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
-        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       animate: true,
       isUploading: false,
       createPost: {
-        postBusinessUpdate: '',
+        postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
   methods: {
     ...mapActions({
-      approvedPost: 'networkSetting/approvedPost',
-      unapprovedPost: 'networkSetting/unapprovedPost',
+      approvedPost: "networkSetting/approvedPost",
+      unapprovedPost: "networkSetting/unapprovedPost"
     }),
 
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -179,9 +183,9 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -190,7 +194,7 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
 
     getId(video_url) {
@@ -199,28 +203,28 @@ export default {
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
     reloads() {
-      console.log('reoading');
+      console.log("reoading");
     },
 
     infiniteHandler($state) {
-      let url = 'show/posts/pending/' + this.url + '?page=' + this.page;
+      let url = "show/posts/pending/" + this.url + "?page=" + this.page;
 
-     
       this.$store
-        .dispatch('networkSetting/loadMore', url)
-        .then(({ data }) => { console.log("------",data)
+        .dispatch("networkSetting/loadMore", url)
+        .then(({ data }) => {
+          console.log("------", data);
           if (data.data.length) {
             this.page += 1;
 
@@ -230,7 +234,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -240,38 +244,35 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18"
       });
 
-      
       let payload = {
-        network_id:  this.url,
-        post_id: id,
+        network_id: this.url,
+        post_id: id
       };
 
-     
       this.approvedPost(payload)
         .then(() => {
-     
           this.$delete(this.owner_post, index);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: err.response.data.message,
+              status: "error",
+              blockClass: "custom-block-class",
+              message: err.response.data.message
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: 'Unable to Approved  Post',
+              status: "error",
+              blockClass: "custom-block-class",
+              message: "Unable to Approved  Post"
             });
             console.log({ err: err });
 
@@ -285,36 +286,34 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18"
       });
 
-      
       let payload = {
-        network_id:this.url,
-        post_id: id,
+        network_id: this.url,
+        post_id: id
       };
       this.unapprovedPost(payload)
         .then(() => {
-          
-            this.$delete(this.owner_post, index);
+          this.$delete(this.owner_post, index);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: err.response.data.message,
+              status: "error",
+              blockClass: "custom-block-class",
+              message: err.response.data.message
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: 'Unable to Approved  Post',
+              status: "error",
+              blockClass: "custom-block-class",
+              message: "Unable to Approved  Post"
             });
             console.log({ err: err });
 
@@ -325,54 +324,49 @@ export default {
 
     ownerPost() {
       this.$store
-        .dispatch('profile/ownerPost')
+        .dispatch("profile/ownerPost")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     showModal() {
-      this.$refs['modal-3'].show();
+      this.$refs["modal-3"].show();
     },
     hideModal() {
-      this.$refs['modal-3'].hide();
+      this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log('Resetting the post data');
+      console.log("Resetting the post data");
 
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = '';  
+        this.createPost.postBusinessUpdate = "";
       }
-    },
+    }
   },
   computed: {
     ...mapGetters({
-      info: 'networkSetting/getNetwork',
-    //  owner_post: 'networkSetting/allPendingPost',
-    }),
+      info: "networkSetting/getNetwork"
+      //  owner_post: 'networkSetting/allPendingPost',
+    })
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
 
 <style>
-
-
 @media (min-width: 762px) {
-
-.padding-post{
-
-  padding-Left:40px;
-   padding-right:40px
-}
-
+  .padding-post {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 .h-lg-250 {

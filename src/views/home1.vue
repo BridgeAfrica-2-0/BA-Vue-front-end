@@ -2,27 +2,24 @@
   <div>
     <!-- ======= Header ======= -->
 
-
-
-      <div ref="loaderr"  v-if="showfaddeB" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
-  :animation-duration="2000"
-  :size="65"
-  :color="'#ff1d5e'"
-/>     </div>
-
+    <div
+      ref="loaderr"
+      v-if="showfaddeB"
+      :class="{ fadde: showfadde, sep: showblock }"
+    >
+      <semipolar-spinner
+        :animation-duration="2000"
+        :size="65"
+        :color="'#ff1d5e'"
+      />
+    </div>
 
     <site-header class="topbar" />
 
     <!-- End Header -->
 
-
-
-
-
-
-
     <div class="container p-0">
-      <form class="d-block d-lg-none"  @submit.prevent="getKeyword">
+      <form class="d-block d-lg-none" @submit.prevent="getKeyword">
         <div class="mt-3 mr-5 input-group b-shadow">
           <div class="input-group-append color-mobile" style="border: none">
             <span
@@ -51,22 +48,25 @@
             data-original-title=""
             title=""
             v-model="credentials.keyword"
-              v-on:click="toggleinput()"
+            v-on:click="toggleinput()"
           />
         </div>
 
-        <div class="mt-1 mb-2 input-group b-shadow"  style="display: none; "   ref="mobileinput" >
+        <div
+          class="mt-1 mb-2 input-group b-shadow"
+          style="display: none; "
+          ref="mobileinput"
+        >
           <div class="input-group-append color-mobile" style="border: none">
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white;   border:none"
             >
-              
-
-              <b-icon style="color: #e75c18" font-scale="1.5" icon="geo-alt">  </b-icon>
+              <b-icon style="color: #e75c18" font-scale="1.5" icon="geo-alt">
+              </b-icon>
             </span>
           </div>
-<!-- 
+          <!-- 
           <input
             id="search-ba"
             type="search"
@@ -81,25 +81,17 @@
             v-model="word2"
           /> -->
 
+          <vue-bootstrap-typeahead
+            v-model="word2"
+            :data="neigbourhoods"
+            :minMatchingChars="0"
+            :maxMatches="10"
+            :serializer="item => item.name"
+            :placeholder="placeholder"
+            class="search-hh m-wheree"
+          />
 
-           
-
-
-               <vue-bootstrap-typeahead
-                v-model="word2"
-                :data="neigbourhoods"
-                :minMatchingChars="0"
-                :maxMatches="10"
-              
-                :serializer="(item) => item.name"
-                :placeholder="placeholder"
-                class="search-hh m-wheree"
-              />
-
-
-
-
-          <button class="button" @click="getKeyword" >GO</button>  
+          <button class="button" @click="getKeyword">GO</button>
         </div>
       </form>
     </div>
@@ -132,19 +124,15 @@
               v-model="credentials.keyword"
             />
 
-             
-             
-
-             <vue-bootstrap-typeahead
-                v-model="word2"
-                :data="neigbourhoods"
-                :minMatchingChars="0"
-                :maxMatches="10"
-              
-                :serializer="(item) => item.name"
-                :placeholder="placeholder"
-                class="search-hh w-44"
-              />
+            <vue-bootstrap-typeahead
+              v-model="word2"
+              :data="neigbourhoods"
+              :minMatchingChars="0"
+              :maxMatches="10"
+              :serializer="item => item.name"
+              :placeholder="placeholder"
+              class="search-hh w-44"
+            />
 
             <slot name="button">
               <Button @click.native="getKeyword" media="desktop" />
@@ -450,7 +438,12 @@
                   poster="assets/img/Home scroll copy.png"
                   id="Test_Video"
                 >
-                  <source muted preload="metadata" src="../assets/video/identity.mp4" type="video/mp4" />
+                  <source
+                    muted
+                    preload="metadata"
+                    src="../assets/video/identity.mp4"
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="scroll-caption hidde " id="hidde">
@@ -533,7 +526,12 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video2"
             >
-              <source muted preload="metadata" src="../assets/video/search.mp4" type="video/mp4" />
+              <source
+                muted
+                preload="metadata"
+                src="../assets/video/search.mp4"
+                type="video/mp4"
+              />
             </video>
           </div>
         </div>
@@ -601,7 +599,12 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video3"
             >
-              <source muted preload="metadata" src="../assets/video/messaging.mp4" type="video/mp4" />
+              <source
+                muted
+                preload="metadata"
+                src="../assets/video/messaging.mp4"
+                type="video/mp4"
+              />
             </video>
           </div>
         </div>
@@ -665,7 +668,12 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video3"
             >
-              <source muted preload="metadata" src="../assets/video/offline.mp4" type="video/mp4" />
+              <source
+                muted
+                preload="metadata"
+                src="../assets/video/offline.mp4"
+                type="video/mp4"
+              />
             </video>
           </div>
         </div>
@@ -806,8 +814,6 @@
  * this page is the home page of the system
  */
 
-
- 
 import SiteFooter from "../components/site/siteFooter";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 //import "../assets/js/main.js";
@@ -816,23 +822,29 @@ import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
 import VLazyImage from "v-lazy-image/v2";
 import { mapGetters, mapActions, mapMutations } from "vuex";
- import { SemipolarSpinner} from 'epic-spinners';
+import { SemipolarSpinner } from "epic-spinners";
 import axios from "axios";
 export default {
-  components: { Button, SiteHeader, SiteFooter,VueBootstrapTypeahead,SemipolarSpinner },
+  components: {
+    Button,
+    SiteHeader,
+    SiteFooter,
+    VueBootstrapTypeahead,
+    SemipolarSpinner
+  },
   data() {
     return {
       expanded: true,
       location: "",
       word1: "",
       word2: "",
-      
-      showblock:true,
-         showfadde:false,
-         showfaddeB:true,
 
-      placeholder:this.$t('home.Location'),
-      img1: require("../assets/img/coach.png"),
+      showblock: true,
+      showfadde: false,
+      showfaddeB: true,
+
+      placeholder: this.$t("home.Location"),
+      img1: require("../assets/img/coach.png")
     };
   },
 
@@ -842,130 +854,88 @@ export default {
       default: function() {
         return {
           keyword: "",
-          placeholder: this.$t("home.All"),
+          placeholder: this.$t("home.All")
         };
-      },
-    },
+      }
+    }
   },
 
-
-  created(){
-   
-
-   window.addEventListener("load", this.onWindowLoad);
+  created() {
+    window.addEventListener("load", this.onWindowLoad);
     this.getLocation();
-
   },
 
-
-
-   computed: {
+  computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      neigbourhoods: "auth/cities",
+      neigbourhoods: "auth/cities"
     }),
 
-    query(){
-
+    query() {
       return this.credentials.location;
-    },
+    }
 
+    //     neigbourhoods(){
 
+    //     let nei=  this.$store.getters["auth/cities"];
+    // const arrayFailed = Object.entries(nei).map((arr) => ({
+    //   id: arr[0],
+    //   name: arr[1],
+    // }));
 
-//     neigbourhoods(){
+    // return arrayFailed;
 
-//     let nei=  this.$store.getters["auth/cities"];
-// const arrayFailed = Object.entries(nei).map((arr) => ({
-//   id: arr[0],
-//   name: arr[1],
-// }));
-
-// return arrayFailed;
-
-
-//   },
-
-
+    //   },
   },
 
-
-  watch:{
-
-     word2(newQuery) {
-      axios
-           .get(`visitor/search/city?city=${newQuery}`)
-        .then(({ data }) => {
-          this.$store.commit("auth/setCities", data.data);
-        });
-    },
-
-
-    
-
+  watch: {
+    word2(newQuery) {
+      axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setCities", data.data);
+      });
+    }
   },
 
   methods: {
+    onWindowLoad() {
+      console.log("window load event");
 
-     onWindowLoad() {
-            console.log("window load event");
+      this.showfadde = true;
 
-          
-            this.showfadde=true;
-
-         
-
-         
-
-       setTimeout(() => {
-        this.loadfinish()
-        }, 2000);
-
-
-        },
-
-
-       loadfinish(){
-
-      
-        //  this.showblock=false;
-
-        //  this.showfadde=false;
-        //  this.showfaddeB=false;
-        
-
-      },
-
-
-    
-     ...mapActions({
-     
-      getGeo: "business/getGeo",
-      getNeigbourhoods: "auth/neigbourhoods",
-     
-    }),
-
-
-   toggleinput() {
-      this.$refs.mobileinput.style.display = "inline-flex";
-  
-       
-      
+      setTimeout(() => {
+        this.loadfinish();
+      }, 2000);
     },
 
-     getLocation() {
-      const success = (position) => {
+    loadfinish() {
+      //  this.showblock=false;
+      //  this.showfadde=false;
+      //  this.showfaddeB=false;
+    },
+
+    ...mapActions({
+      getGeo: "business/getGeo",
+      getNeigbourhoods: "auth/neigbourhoods"
+    }),
+
+    toggleinput() {
+      this.$refs.mobileinput.style.display = "inline-flex";
+    },
+
+    getLocation() {
+      const success = position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
         this.getGeo({ lat: latitude, lng: longitude });
 
         //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
-        this.getNeigbourhoods({ lat: latitude, lng: longitude });    
+        this.getNeigbourhoods({ lat: latitude, lng: longitude });
       };
 
-      const error = (err) => {
+      const error = err => {
         console.log(error);
       };
 
@@ -973,18 +943,17 @@ export default {
       navigator.geolocation.getCurrentPosition(success, error);
     },
 
-
     businessOwner() {
       this.$store
         .dispatch("homeRedirection/businessInfos")
-        .then((res) => {
+        .then(res => {
           this.$router.push({
             name: "BusinessOwner",
-            params: { id: this.$store.state.homeRedirection.idbissf },
+            params: { id: this.$store.state.homeRedirection.idbissf }
           });
           console.log(this.$store.state.homeRedirection.idbissf);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -1004,12 +973,10 @@ export default {
       }
     },
 
-   
-
-  /**
-   * this fuction id for make a search 
-   * @private
-   */
+    /**
+     * this fuction id for make a search
+     * @private
+     */
     getKeyword() {
       console.log(this.credentials.keyword, "---mm");
       if (!this.credentials.keyword) return false;
@@ -1026,7 +993,7 @@ export default {
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword, location:this.word2 },
+          query: { keyword: this.credentials.keyword, location: this.word2 }
         });
       }
     },
@@ -1053,7 +1020,7 @@ export default {
           }
         }
       }
-    },
+    }
   },
   mounted() {
     //     document.getElementById("animation").addEventListener("scroll", () => {
@@ -1089,7 +1056,7 @@ export default {
       );
     };
 
-    const elementOutofView = (el) => {
+    const elementOutofView = el => {
       const elementTop = el.getBoundingClientRect().top;
 
       return (
@@ -1098,24 +1065,24 @@ export default {
       );
     };
 
-    const displayScrollElement = (element) => {
+    const displayScrollElement = element => {
       element.classList.add("scrolled");
     };
 
-    const displayScrollElement2 = (element) => {
+    const displayScrollElement2 = element => {
       element.classList.add("js-scrolll");
     };
 
-    const hideScrollElement2 = (element) => {
+    const hideScrollElement2 = element => {
       element.classList.remove("js-scrolll");
     };
 
-    const hideScrollElement = (element) => {
+    const hideScrollElement = element => {
       element.classList.remove("scrolled");
     };
 
     const handleScrollAnimation = () => {
-      scrollElements.forEach((el) => {
+      scrollElements.forEach(el => {
         if (elementInView(el, 1.25)) {
           displayScrollElement(el);
         } else if (elementOutofView(el)) {
@@ -1123,7 +1090,7 @@ export default {
         }
       });
 
-      scrollElements2.forEach((el) => {
+      scrollElements2.forEach(el => {
         if (elementInView(el, 1.25)) {
           displayScrollElement2(el);
         } else if (elementOutofView(el)) {
@@ -1135,7 +1102,7 @@ export default {
     window.addEventListener("scroll", () => {
       handleScrollAnimation();
     });
-  },
+  }
 };
 </script>
 
@@ -1163,11 +1130,9 @@ export default {
 
 .button {
   background-color: #ffffff;
-  border-color: #cc4d0d ;
-  border: solid 2px ;
+  border-color: #cc4d0d;
+  border: solid 2px;
   color: #cc4d0d;
-
-  
 }
 .bold {
   font-weight: bold;
@@ -1668,7 +1633,6 @@ footer a {
   width: 44%;
 }
 
-
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
@@ -1678,54 +1642,37 @@ footer a {
   }
 }
 
-
-.m-wheree{
-   width: 77.8%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0px;
-    border: none;
-}
-
-.m-wheree input{
+.m-wheree {
+  width: 77.8%;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 0px;
   border: none;
 }
 
-
-
+.m-wheree input {
+  border: none;
+}
 </style>
 
 <style scoped>
-
-
-
 @media only screen and (max-width: 768px) {
-  
-    .semipolar-spinner{   
-  height: 65px;
-  width: 65px;
-  position: absolute;
-  margin-top: 50%;
-  margin-left: 42%;
+  .semipolar-spinner {
+    height: 65px;
+    width: 65px;
+    position: absolute;
+    margin-top: 50%;
+    margin-left: 42%;
+  }
 }
-
-}
-
 
 @media only screen and (min-width: 768px) {
-
-
-.semipolar-spinner{   
-  height: 65px;
-  width: 65px;
-  position: absolute;
-  margin-top: 22%;
-  margin-left: 47%;
+  .semipolar-spinner {
+    height: 65px;
+    width: 65px;
+    position: absolute;
+    margin-top: 22%;
+    margin-left: 47%;
+  }
 }
-
-}
-
-
-
-
 </style>

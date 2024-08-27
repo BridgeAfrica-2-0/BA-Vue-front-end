@@ -12,19 +12,28 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('network.Search') }}</span>
+              <b-icon-filter></b-icon-filter
+              ><span class="sr-only">{{ $t("network.Search") }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">{{ $t('network.Feedbacks_Type') }}</p>
-            <b-dropdown-item @click="applyFilter('0')">{{ $t('network.Any') }}</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Improvement')">{{ $t('network.Suggestion_For_Improvement') }}</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Complain')">{{ $t('network.Complain') }}</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">
+              {{ $t("network.Feedbacks_Type") }}
+            </p>
+            <b-dropdown-item @click="applyFilter('0')">{{
+              $t("network.Any")
+            }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Improvement')">{{
+              $t("network.Suggestion_For_Improvement")
+            }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Complain')">{{
+              $t("network.Complain")
+            }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="12">
-        <div 
+        <div
           :class="{ active: index == currentIndex }"
           v-for="(feedback, index) in feedbacks"
           :key="index"
@@ -53,20 +62,26 @@
                   </b-col>
                   <b-col cols="8" md="10" class="pt-2">
                     <h5 class="m-0 font-weight-bolder feedback-name">
-                      <b-link>  {{feedback.user_name}} </b-link>
+                      <b-link> {{ feedback.user_name }} </b-link>
                     </h5>
-                    <p>{{  moment(feedback.created_at).fromNow() }} - <span class="primary">{{feedback.title}}</span></p>
+                    <p>
+                      {{ moment(feedback.created_at).fromNow() }} -
+                      <span class="primary">{{ feedback.title }}</span>
+                    </p>
                   </b-col>
                   <b-col cols="2" md="1" class="float-right">
-                    <span 
-                      @click="deleteFeedback(feedback.id)"
-                    > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                    <span @click="deleteFeedback(feedback.id)">
+                      <b-link
+                        ><b-icon icon="trash-fill" aria-hidden="true"></b-icon
+                      ></b-link>
                     </span>
                   </b-col>
                 </b-row>
                 <b-row>
                   <b-col cols="12" class="mt-2">
-                    <p class="text-justify feedback-sent"> {{feedback.description}} </p>
+                    <p class="text-justify feedback-sent">
+                      {{ feedback.description }}
+                    </p>
                   </b-col>
                 </b-row>
               </b-card-text>
@@ -76,20 +91,20 @@
       </b-col>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-          <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
+          <div class="text-red" slot="no-more">
+            {{ $t("general.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("general.No_More_Request") }}
+          </div>
         </infinite-loading>
       </b-col>
     </b-row>
-
-    
-    
   </div>
 </template>
 
 <script>
-
-import moment from 'moment';
+import moment from "moment";
 export default {
   name: "feedbackNetwork",
   data() {
@@ -103,21 +118,27 @@ export default {
       currentIndex: -1,
       feedbacks: [],
       options: [
-        { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complaints", text: this.$t('general.Complaints')}
+        {
+          value: "Improvement",
+          text: this.$t("general.Suggestion_for_Improvement")
+        },
+        { value: "Complaints", text: this.$t("general.Complaints") }
       ],
       filters: [
         { value: "0", text: "Any" },
-         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complaints", text: this.$t('general.Complaints')}
+        {
+          value: "Improvement",
+          text: this.$t("general.Suggestion_for_Improvement")
+        },
+        { value: "Complaints", text: this.$t("general.Complaints") }
       ],
       feedbackForm: {
         title: "Improvement",
-        description: "",
-      },
+        description: ""
+      }
     };
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
@@ -128,104 +149,106 @@ export default {
       let data = "";
       if (filterData) {
         console.log("Status true");
-        if (filterData == 0) 
-          data = "";
-        else
-          data = filterData;
+        if (filterData == 0) data = "";
+        else data = filterData;
       }
       console.log(data);
       return data;
     },
-    applyFilter(data){
+    applyFilter(data) {
       this.loading = true;
       this.feedbacks = [];
-      this.filterData = data
+      this.filterData = data;
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
         this.currentPage = 1;
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        this.$refs.infiniteLoading.$emit("$InfiniteLoading:reset");
       });
     },
 
     infiniteHandler($state) {
       console.log("loop");
       const data = this.getRequestDatas(this.filterData);
-      console.log('keyword: '+data);
+      console.log("keyword: " + data);
       let formData = new FormData();
-      formData.append('keyword', data);
+      formData.append("keyword", data);
       // this.$store
       //   .dispatch("networkProfileMembers/getMembers", {
       //     path: this.url+"/members/list/"+this.page,
       //     formData: formData
       //   })
-      console.log("network/"+this.url+"/feedbacks/"+this.currentPage)
+      console.log("network/" + this.url + "/feedbacks/" + this.currentPage);
       this.axios
-        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .post(
+          "network/" + this.url + "/feedbacks/" + this.currentPage,
+          formData
+        )
         .then(({ data }) => {
-        console.log(data.data);
-        console.log(this.currentPage);
-        console.log(Object.values(data.data));
-        let object = Object.values(data.data);
-        if (object.length) {
-          console.log("Pushing data");
-          object.map((item) => {
-            this.feedbacks.push(item);
-            console.log(item);
-          })
-          console.log(...data.data);
-          // this.feedbacks.push(...data.data);
-          this.currentPage += 1;
+          console.log(data.data);
           console.log(this.currentPage);
+          console.log(Object.values(data.data));
+          let object = Object.values(data.data);
+          if (object.length) {
+            console.log("Pushing data");
+            object.map(item => {
+              this.feedbacks.push(item);
+              console.log(item);
+            });
+            console.log(...data.data);
+            // this.feedbacks.push(...data.data);
+            this.currentPage += 1;
+            console.log(this.currentPage);
+            this.loading = false;
+            $state.loaded();
+          } else {
+            this.loading = false;
+            $state.complete();
+          }
+        })
+        .catch(err => {
           this.loading = false;
-          $state.loaded();
-        } else {
-          this.loading = false;
-          $state.complete();
-        }
-      }) .catch((err) => {
-        this.loading = false;
-        console.log({ err: err });
-      })
+          console.log({ err: err });
+        });
     },
 
-    deleteFeedback: function(user_id){
+    deleteFeedback: function(user_id) {
       this.loading = true;
       let info = {
         user_id: user_id,
-        url: this.url,
+        url: this.url
       };
       this.$store
-      .dispatch("networkProfileFeedback/feedbackRequests", {
-        method:'DELETE',
-        data: info
-      })
-      .then(response => {
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        .dispatch("networkProfileFeedback/feedbackRequests", {
+          method: "DELETE",
+          data: info
+        })
+        .then(response => {
+          this.$nextTick(() => {
+            this.page = 0;
+            this.$refs.infiniteLoading.$emit("$InfiniteLoading:reset");
+          });
+          this.loading = false;
+          console.log(response);
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "Feedback Deleted"
+          });
+        })
+        .catch(err => {
+          this.$nextTick(() => {
+            this.page = 0;
+            this.$refs.infiniteLoading.$emit("$InfiniteLoading:reset");
+          });
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Deleted Feedback"
+          });
         });
-        this.loading = false;
-        console.log(response);
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "Feedback Deleted"
-        });
-      })
-      .catch( err => {
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Deleted Feedback"
-        });
-      });
-		},
+    }
   }
 };
 </script>

@@ -1,14 +1,21 @@
 <template>
-  <b-button variant="primary" class="btn-sm p-2" v-if="isBuyNow" @click="handleAddToCard" style="width:100%;">
-    Buy now 
+  <b-button
+    variant="primary"
+    class="btn-sm p-2"
+    v-if="isBuyNow"
+    @click="handleAddToCard"
+    style="width:100%;"
+  >
+    Buy now
   </b-button>
 
- <b-button variant="primary" v-else-if="buyNow"  @click="cta()">
-  <i v-if="buyNow" class="fas fa-envelope btn-icon "></i>
-     {{ $t("businessf.Message") }}
- </b-button>
+  <b-button variant="primary" v-else-if="buyNow" @click="cta()">
+    <i v-if="buyNow" class="fas fa-envelope btn-icon "></i>
+    {{ $t("businessf.Message") }}
+  </b-button>
 
-  <b-button v-else
+  <b-button
+    v-else
     :block="header"
     variant="primary"
     size="sm"
@@ -25,15 +32,20 @@
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
     <!-- <span v-else-if="isBuyNow" >Buy Now</span> -->
-    <span v-else style="display: inline-flex" :class="{'p-1':buyNow}">
-      <i v-if="buyNow" class="fas fa-envelope fa-lg btn-icon   mt-1 mr-1 mt-sm-1"></i>
-      <i v-else class="fas fa-envelope fa-lg btn-icon pb-2 mt-1 mr-1 mt-sm-1"></i>
-      <span class="btn-text blecmsg mt-md-0" >
+    <span v-else style="display: inline-flex" :class="{ 'p-1': buyNow }">
+      <i
+        v-if="buyNow"
+        class="fas fa-envelope fa-lg btn-icon   mt-1 mr-1 mt-sm-1"
+      ></i>
+      <i
+        v-else
+        class="fas fa-envelope fa-lg btn-icon pb-2 mt-1 mr-1 mt-sm-1"
+      ></i>
+      <span class="btn-text blecmsg mt-md-0">
         {{ $t("businessf.Message") }}</span
       >
     </span>
   </b-button>
-
 </template>
 
 <script>
@@ -52,43 +64,43 @@ export default {
      */
     element: {
       type: Object,
-      required: true,
+      required: true
     },
     /**
      * Take the Type of inbox (business,profile or network)
      */
     type: {
-      type: String,
+      type: String
     },
     /**
      * To differentiate the styling of the btn
      */
     header: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
 
-    buyNow:{
-      type:Boolean,
-      default:false
+    buyNow: {
+      type: Boolean,
+      default: false
     },
     /**
      * Boolean that will later be used in the inbox to extrat the business ID of the product
      */
     isProduct: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     /**
      * To difrentiat the text on the button
      */
     isBuyNow: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
 
-    isPremium:{
-         default: '',
+    isPremium: {
+      default: ""
     }
   },
   data() {
@@ -100,8 +112,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   computed: {
@@ -109,14 +121,12 @@ export default {
       return this.$store.getters["auth/profilConnected"];
     },
 
-
-       getStatus() {
+    getStatus() {
       return this.$store.state.cart.status;
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    },
-
+    }
   },
 
   methods: {
@@ -125,49 +135,32 @@ export default {
      * @private
      */
 
-      handleAddToCard() {
+    handleAddToCard() {
+      if (this.isProduct) {
+        if (this.isPremium == "premium") {
+          let product = this.element;
+          this.$store
+            .dispatch("cart/addToCart", { product, islogin: this.islogin })
+            .then(response => {
+              this.flashMessage.show({
+                status: "success",
+                message: this.getStatus
+              });
 
-        if (this.isProduct) {
-          
-
-      if(this.isPremium =='premium'){
-        
-
-      let product=this.element;
-      this.$store
-      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
-        .then((response) => {
-          this.flashMessage.show({
-            status: "success",
-            message: this.getStatus,
-          });
-
-
-           this.$router.push({ name: "payment" });
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "error occur",
-          });
-        });
-
-
-
-      }else{
-  
-
-  this.cta();
+              this.$router.push({ name: "payment" });
+            })
+            .catch(err => {
+              console.log({ err: err });
+              this.flashMessage.show({
+                status: "error",
+                message: "error occur"
+              });
+            });
+        } else {
+          this.cta();
+        }
       }
-        
-      }
- 
-     
-
-        
-    },    
-
+    },
 
     cta() {
       /**
@@ -175,16 +168,13 @@ export default {
        *
        */
 
-      
-      
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,
-        ...this.element,
+        ...this.element
       });
       let path = "";
 
       if (this.isProduct) {
- 
         path = "/messaging";
       } else {
         if (this.activeAccount.user_type == "business") {
@@ -205,11 +195,11 @@ export default {
       console.log("path:", path);
       this.$router.push({
         path: `${path}`,
-        query: { tabId: 1, msgTabId: msgTabId },
+        query: { tabId: 1, msgTabId: msgTabId }
       });
       // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -258,11 +248,8 @@ export default {
     margin-top: 1px !important;
   }
 
-
-  .blecmsg{
-   margin-top: -1px;
+  .blecmsg {
+    margin-top: -1px;
+  }
 }
-}
-
-
 </style>

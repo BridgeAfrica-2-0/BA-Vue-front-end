@@ -1,364 +1,315 @@
 <template>
   <b-container>
     <div class="s-card">
+      <b-button variant="primary" class="float-right" v-b-modal.modal-addm>
+        {{ $t("network.add_members") }}
+      </b-button>
 
-     <b-button variant="primary" class="float-right" v-b-modal.modal-addm> {{$t('network.add_members')}}  </b-button> 
-
-     <br>
-
-
-    
-
-
-
+      <br />
 
       <h6 class="font-weight-bolder">
-          {{ $t("network.all_users") }} 
-        </h6>
-        <hr width="100%" />
+        {{ $t("network.all_users") }}
+      </h6>
+      <hr width="100%" />
 
-   
-
-           <div  v-for="(editor, index)  in requests" :key="index">
-
-              <p class="">
-                <span class="d-inline-flex">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="primary"
-                    :src="editor.profile_picture"
-                    :text="editor.fullname.charAt(0)"
-                    size="3.5rem"
-                  ></b-avatar>
-                  <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
-                   
-
-                    <router-link :to="'/profile/'+editor.slug" >
-                          {{ editor.fullname }}
-                      </router-link>      
-
-                  </h5>
-                </span>
-                <span class="float-right mt-1">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
-                    </template>
-                    <b-dropdown-item
-                      href="#"
-                    @click="ApproveRequest(editor.user_slug, index)"
-                    >
-                     {{ $t('network.Approve') }}
-                    </b-dropdown-item>
-                    <b-dropdown-item
-                      href="#"
-                      @click="DeclineRequest(editor.user_slug, index )"
-                    >
-                      
-                      {{ $t('network.Decline') }}
-                    </b-dropdown-item>
-                  </b-dropdown>
-                </span>
-              </p>
-            </div>
-
-
+      <div v-for="(editor, index) in requests" :key="index">
+        <p class="">
+          <span class="d-inline-flex">
+            <b-avatar
+              class="d-inline-block"
+              variant="primary"
+              :src="editor.profile_picture"
+              :text="editor.fullname.charAt(0)"
+              size="3.5rem"
+            ></b-avatar>
+            <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
+              <router-link :to="'/profile/' + editor.slug">
+                {{ editor.fullname }}
+              </router-link>
+            </h5>
+          </span>
+          <span class="float-right mt-1">
+            <b-dropdown
+              size="lg"
+              variant="link"
+              toggle-class="text-decoration-none"
+              no-caret
+            >
+              <template #button-content>
+                <b-icon-three-dots-vertical
+                  variant="primary"
+                ></b-icon-three-dots-vertical
+                ><span class="sr-only">{{ $t("network.Settings") }}</span>
+              </template>
+              <b-dropdown-item
+                href="#"
+                @click="ApproveRequest(editor.user_slug, index)"
+              >
+                {{ $t("network.Approve") }}
+              </b-dropdown-item>
+              <b-dropdown-item
+                href="#"
+                @click="DeclineRequest(editor.user_slug, index)"
+              >
+                {{ $t("network.Decline") }}
+              </b-dropdown-item>
+            </b-dropdown>
+          </span>
+        </p>
+      </div>
 
       <b-row>
         <b-col cols="12">
-        <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
-            <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
-        </infinite-loading>
+          <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
+            <div class="text-red" slot="no-more">
+              {{ $t("network.No_More_Request") }}
+            </div>
+            <div class="text-red" slot="no-results">
+              {{ $t("network.No_More_Request") }}
+            </div>
+          </infinite-loading>
         </b-col>
       </b-row>
-   
-     <h6 class="font-weight-bolder">
-          {{ $t("network.Bussiness") }}
-        </h6>
-        <hr width="100%" />
 
-         <b-row class="mt-4">
-      <b-col cols="12">
+      <h6 class="font-weight-bolder">
+        {{ $t("network.Bussiness") }}
+      </h6>
+      <hr width="100%" />
 
-           <div  v-for="(editor, index)  in business" :key="index">
-
-              <p class="">
-                <span class=" d-inline-flex ">
-                  <b-avatar
-                    class="d-inline-block"
-                    square
-                    variant="primary"
-                    :src="editor.profile_picture"
-                    :text="editor.fullname.charAt(0)"
-                    size="3.5rem"
-                  ></b-avatar>
-                  <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
-                   
-
-                    <router-link
-                        :to="'/business/'+editor.slug"
-                      >
-                          {{ editor.fullname }}
-                      </router-link>
-
-                  </h5>
-                </span>
-                <span class="float-right mt-1">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
+      <b-row class="mt-4">
+        <b-col cols="12">
+          <div v-for="(editor, index) in business" :key="index">
+            <p class="">
+              <span class=" d-inline-flex ">
+                <b-avatar
+                  class="d-inline-block"
+                  square
+                  variant="primary"
+                  :src="editor.profile_picture"
+                  :text="editor.fullname.charAt(0)"
+                  size="3.5rem"
+                ></b-avatar>
+                <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
+                  <router-link :to="'/business/' + editor.slug">
+                    {{ editor.fullname }}
+                  </router-link>
+                </h5>
+              </span>
+              <span class="float-right mt-1">
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon-three-dots-vertical
+                      variant="primary"
+                    ></b-icon-three-dots-vertical
+                    ><span class="sr-only">{{ $t("network.Settings") }}</span>
+                  </template>
+                  <b-dropdown-item
+                    href="#"
+                    @click="BApproveRequest(editor.business_slug, index)"
                   >
-                    <template #button-content>
-                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
-                    </template>
-                    <b-dropdown-item
-                      href="#"
-                      @click="BApproveRequest(editor.business_slug, index)"
-                    >
-                     
-
-                     {{ $t('network.Approve') }}
-
-                    </b-dropdown-item>
-                    <b-dropdown-item
-                      href="#"
-                       @click="BDeclineRequest(editor.business_slug, index )"
-                    >
-                      
-                    {{ $t('network.Decline') }}
-
-                    </b-dropdown-item>
-                  </b-dropdown>
-                </span>
-              </p>
-            </div>
-
-      </b-col>   
-
-         </b-row>
-
-
+                    {{ $t("network.Approve") }}
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    href="#"
+                    @click="BDeclineRequest(editor.business_slug, index)"
+                  >
+                    {{ $t("network.Decline") }}
+                  </b-dropdown-item>
+                </b-dropdown>
+              </span>
+            </p>
+          </div>
+        </b-col>
+      </b-row>
 
       <b-row>
         <b-col cols="12">
-        <infinite-loading ref="BInfiniteLoading" @infinite="BinfiniteHandler">
-            <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
-        </infinite-loading>
+          <infinite-loading ref="BInfiniteLoading" @infinite="BinfiniteHandler">
+            <div class="text-red" slot="no-more">
+              {{ $t("network.No_More_Request") }}
+            </div>
+            <div class="text-red" slot="no-results">
+              {{ $t("network.No_More_Request") }}
+            </div>
+          </infinite-loading>
         </b-col>
       </b-row>
-    
     </div>
-
-
-
-
-
-
   </b-container>
-</template> 
+</template>
 
 <script>
-
-
 export default {
   data() {
     return {
-      url:null,
-      page:1,
+      url: null,
+      page: 1,
 
-      businesspage:1,
+      businesspage: 1,
 
       loading: false,
       requests: [],
 
-      business:[],
-    }
+      business: []
+    };
   },
 
-  components: {
-    
-    
-  },
-
+  components: {},
 
   mounted() {
-    this.url =  this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
+    this.url =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.$router.push("notFound");
   },
   methods: {
-
-
     infiniteHandler($state) {
-       console.log("loop");
-       console.log("network/"+this.url+"/members/users/request/"+this.page);
+      console.log("loop");
+      console.log(
+        "network/" + this.url + "/members/users/request/" + this.page
+      );
       this.axios
-      .get("network/"+this.url+"/members/users/request/"+this.page)
-      .then(({ data }) => {
-       console.log(data);
-       console.log(this.page);
-        if (data.data.length) {
-        this.page += 1;
-        console.log(this.page);
-        console.log(...data.data);
-        this.requests.push(...data.data);
-          $state.loaded();
+        .get("network/" + this.url + "/members/users/request/" + this.page)
+        .then(({ data }) => {
+          console.log(data);
+          console.log(this.page);
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.requests.push(...data.data);
+            $state.loaded();
           } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
+            $state.complete();
+          }
+        })
+        .catch(err => {
           console.log({ err: err });
-      })
-    },    
+        });
+    },
 
-
-
-
-      BinfiniteHandler($state) {
-
-
+    BinfiniteHandler($state) {
       this.axios
-      .get("network/"+this.url+"/members/business/request/"+this.businesspage)
-      .then(({ data }) => {
-      
-        if (data.data.length) {
-        this.businesspage += 1;
-       
-        this.business.push(...data.data);
-          $state.loaded();
-          } else {   
-          $state.complete();
-        }
-      }) .catch((err) => {
+        .get(
+          "network/" +
+            this.url +
+            "/members/business/request/" +
+            this.businesspage
+        )
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.businesspage += 1;
+
+            this.business.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch(err => {
           console.log({ err: err });
-      })
+        });
     },
 
+    ApproveRequest: function(user_id, index) {
+      console.log("user_id: ", user_id);
+      this.axios
+        .get("network/" + this.url + "/members/request/approve/" + user_id)
+        .then(() => {
+          this.$delete(this.requests, index);
 
-
-
-    ApproveRequest: function(user_id, index){
-    
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
-      .then(() => {
-      
-
-       this.$delete(this.requests,index);
-
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Request_Approved')
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Request_Approved")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Approve_Request")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Approve_Request')
-        });
-      });
     },
 
+    BApproveRequest: function(user_id, index) {
+      console.log("user_id: ", user_id);
+      this.axios
+        .get(
+          "network/" + this.url + "/members/business/request/approve/" + user_id
+        )
+        .then(() => {
+          this.$delete(this.business, index);
 
-
-
-
-    
-    BApproveRequest: function(user_id, index){
-    
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/business/request/approve/"+user_id)  
-      .then(() => {
-      
-
-       this.$delete(this.business,index);
-
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Request_Approved')
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Request_Approved")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Approve_Request")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Approve_Request')
-        });
-      });
     },
 
-
-
-
-
-
-    
-    BDeclineRequest: function(user_id, index ){
+    BDeclineRequest: function(user_id, index) {
       this.loading = true;
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/business/request/decline/"+user_id)
-      .then(() => {
-        
+      console.log("user_id: ", user_id);
+      this.axios
+        .get("network/" + this.url + "/business/request/decline/" + user_id)
+        .then(() => {
+          this.$delete(this.business, index);
 
-        this.$delete(this.business,index);   
-
-       
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Request_Deleted')
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Request_Deleted")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Deleted_Request")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Deleted_Request')
-        });
-      });
     },
 
-
-    
-    DeclineRequest: function(user_id, index ){
+    DeclineRequest: function(user_id, index) {
       this.loading = true;
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
-      .then(() => {
-          
+      console.log("user_id: ", user_id);
+      this.axios
+        .get("network/" + this.url + "/members/request/decline/" + user_id)
+        .then(() => {
+          this.$delete(this.requests, index);
 
-        this.$delete(this.requests,index);   
-
-       
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Request_Deleted')
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Request_Deleted")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Deleted_Request")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Deleted_Request')
-        });
-      });
-    },
+    }
   }
 };
 </script>
@@ -486,7 +437,6 @@ f-right {
   margin-bottom: 10px;
 }
 @media only screen and (min-width: 1200px) {
-
   .center {
     text-align: right;
   }
@@ -498,11 +448,9 @@ f-right {
   }
   .btn-2 {
     margin-left: 0px;
-  
   }
   .btn-1 {
     margin-left: 0px;
- 
   }
   .people-style {
     border-top-left-radius: 40px;
@@ -531,7 +479,7 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
-  
+
   .btn-2 {
     margin-left: -15px;
     width: 90px;
@@ -577,7 +525,6 @@ f-right {
     margin-left: -5px;
   }
   .btn {
-  
     height: 38px;
     font-size: 14px;
   }

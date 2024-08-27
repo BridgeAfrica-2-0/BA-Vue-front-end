@@ -1,17 +1,16 @@
-import axios from 'axios';
-import store from '@/store'
+import axios from "axios";
+import store from "@/store";
 
 class Repository {
-
   async changeLanguage(lg) {
     try {
       const response = await axios.get(`/profile/language?language=${lg}`);
       return {
-        success: true,
+        success: true
       };
     } catch (error) {
       return {
-        success: false,
+        success: false
       };
     }
   }
@@ -20,35 +19,37 @@ class Repository {
       const response = await axios.get(`/notification/business/${uuid}`);
       return {
         success: true,
-        data: response.data.data,
+        data: response.data.data
       };
     } catch (error) {
       return {
-        success: false,
+        success: false
       };
     }
   }
 
   async logOut() {
     try {
-      const response = await axios.post("/logout")
+      const response = await axios.post("/logout");
       return {
-        success: true,
-      }
+        success: true
+      };
     } catch (error) {
       return {
-        success: false,
-      }
+        success: false
+      };
     }
   }
 
   async profile() {
     await axios
-      .get('user/notifications', {
-      })
+      .get("user/notifications", {})
       .then(({ data }) => {
-        console.log('Nav bar notifs', data);
-        store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: data.data });
+        console.log("Nav bar notifs", data);
+        store.commit("notification/NEW_PROFILE_NOTIFICATION", {
+          init: true,
+          data: data.data
+        });
       })
       .catch(error => {
         console.log(error);

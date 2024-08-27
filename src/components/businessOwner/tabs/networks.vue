@@ -124,7 +124,7 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: 0,
+        allow_business: 0
       },
       chosenNetwork: {
         name: "",
@@ -133,8 +133,8 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: 0,
-      },
+        allow_business: 0
+      }
     };
   },
   beforeMount() {
@@ -159,19 +159,19 @@ export default {
     },
     success() {
       return this.getSuccess();
-    },
+    }
   },
   methods: {
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
-      editNetwork: "businessOwner/editNetwork",
+      editNetwork: "businessOwner/editNetwork"
     }),
     async getNetworksBusinessMembers() {
       let sucData = [];
       await axios
         .get(`business/${this.biz_id}/member/networks`)
-        .then((res) => {
+        .then(res => {
           this.$store.commit("setLoader", false);
           this.$store.commit("setSuccess", sucData);
           this.$store.commit("setNetworks", res.data.data);
@@ -181,12 +181,12 @@ export default {
             this.$store.commit("setSuccess", sucData);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Unauthorized request !!");
           let sucData = {
             state: true,
             succes: "danger",
-            msg: "Unauthorized request !!",
+            msg: "Unauthorized request !!"
           };
           this.$store.commit("setLoader", false);
           this.$store.commit("setSuccess", sucData);
@@ -217,7 +217,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -270,17 +270,16 @@ export default {
       fd.append("allow_busines", this.createdNetwork.allow_busines);
       let data = {
         id: this.createdNetwork.id,
-        data: fd,
+        data: fd
       };
       this.editNetwork(data);
     },
     selectImage(e) {
       this.createdNetwork.business_image = e.target.files[0];
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

@@ -12,14 +12,14 @@
                 value="accepted"
                 unchecked-value="not_accepted"
               >
-                {{ $t('businessowner.Select_All') }}
+                {{ $t("businessowner.Select_All") }}
               </b-form-checkbox>
             </div>
           </b-col>
           <b-col>
             <div class="b-bottomn f-right">
               <b-button variant="primary" class="a-button-l">
-                {{ $t('businessowner.Mark_as_Read') }}</b-button
+                {{ $t("businessowner.Mark_as_Read") }}</b-button
               >
             </div>
           </b-col>
@@ -46,7 +46,7 @@
             ></b-avatar>
             <span class="mr-auto"
               >J. Circlehead
-              <p>{{ $t('businessowner.1hr_ago') }}</p>
+              <p>{{ $t("businessowner.1hr_ago") }}</p>
             </span>
             <span class=" ">
               <div>
@@ -64,8 +64,12 @@
                     ></b-icon>
                   </template>
 
-                  <b-dropdown-item href="#"> {{ $t('businessowner.Delete') }} </b-dropdown-item>
-                  <b-dropdown-item href="#"> {{ $t('businessowner.Read') }} </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    {{ $t("businessowner.Delete") }}
+                  </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    {{ $t("businessowner.Read") }}
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -98,7 +102,7 @@
             ></b-avatar>
             <span class="mr-auto"
               >J. itz blezour blecc
-              <p>{{ $t('businessowner.2_weeks_ago') }}</p>
+              <p>{{ $t("businessowner.2_weeks_ago") }}</p>
             </span>
             <span class=" ">
               <div>
@@ -116,8 +120,12 @@
                     ></b-icon>
                   </template>
 
-                  <b-dropdown-item href="#"> {{ $t('businessowner.Delete') }} </b-dropdown-item>
-                  <b-dropdown-item href="#"> {{ $t('businessowner.Read') }} </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    {{ $t("businessowner.Delete") }}
+                  </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    {{ $t("businessowner.Read") }}
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>

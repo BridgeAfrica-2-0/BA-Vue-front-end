@@ -15,25 +15,17 @@
           :img-src="require('@/assets/img/dash1.png')"
         ></b-carousel-slide>
 
-       <b-carousel-slide
+        <b-carousel-slide
           :img-src="require('@/assets/img/dash2.png')"
         ></b-carousel-slide>
 
-          <b-carousel-slide
+        <b-carousel-slide
           :img-src="require('@/assets/img/dash3.png')"
         ></b-carousel-slide>
-
-
       </b-carousel>
     </div>
   </div>
 </template>
-
-
-
-
-
-
 
 <script>
 export default {

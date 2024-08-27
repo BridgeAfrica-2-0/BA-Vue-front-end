@@ -215,7 +215,7 @@
         role="button"
         data-original-title=""
         v-if="islogin"
-         @click.capture.native.stop.prevent="showc = !showc"
+        @click.capture.native.stop.prevent="showc = !showc"
       >
         <span class="text-ored">
           <b-avatar
@@ -231,8 +231,12 @@
         </div>
       </b-dropdown-item>
 
-
-      <b-popover :show.sync="showc"  :target="`sharing-community-${uuid}`"  triggers="hover focus click" style=" z-index: 99999">
+      <b-popover
+        :show.sync="showc"
+        :target="`sharing-community-${uuid}`"
+        triggers="hover focus click"
+        style=" z-index: 99999"
+      >
         <div class="popover-body" style=" z-index: 99999">
           <div
             @mousedown="open(`modal-1-${uuid}`, 'people')"
@@ -331,8 +335,6 @@
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
         @click.capture.native.stop.prevent="show = !show"
-      
-       
       >
         <span class="text-ored">
           <b-avatar
@@ -353,9 +355,9 @@
         triggers="hover focus click"
         :show.sync="show"
         placement="left"
-         style=" z-index: 99999"
+        style=" z-index: 99999"
       >
-        <div class="popover-body"  style=" z-index: 99999">
+        <div class="popover-body" style=" z-index: 99999">
           <div
             @mousedown="onShareVia('email')"
             class="
@@ -492,14 +494,14 @@ export default {
   name: "ShareButton",
   props: {
     post: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   components: {
     Box,
     Post,
-    Social,
+    Social
   },
 
   data: () => ({
@@ -511,17 +513,16 @@ export default {
     link: null,
     isCommunity: false,
     community: null,
-    show:false,
-    showc:false
+    show: false,
+    showc: false
   }),
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
-    if(this.islogin)
-  {
-    this.type = this.profile.user_type;
-  }
-  this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
+    if (this.islogin) {
+      this.type = this.profile.user_type;
+    }
+    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
   mounted() {
     // this.getUsers("");
@@ -530,9 +531,11 @@ export default {
   },
 
   computed: {
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     ...mapGetters({
-      profile: "auth/profilConnected",
+      profile: "auth/profilConnected"
     }),
 
     users() {
@@ -562,37 +565,31 @@ export default {
       const authUserIsNetwork = this.profile.user_type == "network";
 
       return authUserIsNetwork ? false : true;
-    },
+    }
   },
 
   watch: {
-    "$store.state.userChat.users": function (e) {
+    "$store.state.userChat.users": function(e) {
       this.community = e;
       console.log("DATA CHANGED!!!", this.community);
     },
-    modal: function (value) {
+    modal: function(value) {
       this.strategy = [
         "modal-1",
         "modal-2",
         "modal-3",
         "modal-4",
-        "modal-5",
+        "modal-5"
       ].includes(this.modal)
         ? true
         : false;
-    },
+    }
   },
 
   methods: {
-    showw(){
-      
-          
-
+    showw() {
       return false;
     },
-
-
-
 
     getUsers(keyword) {
       this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
@@ -604,19 +601,19 @@ export default {
       this.$store.dispatch("networkChat/GET_BIZS", keyword);
     },
 
-    onCopy: function (e) {
+    onCopy: function(e) {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: "You just copied the link to the clipboard" ,
+        message: "You just copied the link to the clipboard"
       });
     },
 
-    onError: function (e) {
+    onError: function(e) {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: this.$t("search.Failed_to_copy_the_text_to_the_clipboard"),
+        message: this.$t("search.Failed_to_copy_the_text_to_the_clipboard")
       });
     },
 
@@ -632,7 +629,7 @@ export default {
         [
           `modal-3-${this.uuid}`,
           `modal-2-${this.uuid}`,
-          `modal-1-${this.uuid}`,
+          `modal-1-${this.uuid}`
         ].includes(id)
       ) {
         this.update = id;
@@ -642,21 +639,21 @@ export default {
       this.$bvModal.show(id);
     },
 
-    shareToYourProfile: async function () {
+    shareToYourProfile: async function() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       let data = {
         [`${this.post.poster_type}_profile`]: "",
         post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
-        source_id: parseInt(this.post.user_id),
+        source_id: parseInt(this.post.user_id)
       };
 
       const request = await this.$repository.share.userPost(data, [
-        `${this.post.poster_type}`,
+        `${this.post.poster_type}`
       ]);
 
       loader.hide();
@@ -664,10 +661,10 @@ export default {
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: this.$t("search.Operation_success"),
+          message: this.$t("search.Operation_success")
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -719,15 +716,14 @@ a[class="dropdown-item"]:active {
 </style>
 
 <style scoped>
-.popover-body{
+.popover-body {
   z-index: 99999 !important;
 }
 
 .popover.b-popover {
-    display: block;
-    opacity: 1;
-    outline: 0;
-    z-index: 99999;
+  display: block;
+  opacity: 1;
+  outline: 0;
+  z-index: 99999;
 }
-
 </style>

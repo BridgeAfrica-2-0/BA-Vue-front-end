@@ -33,7 +33,7 @@
                     icon="trash-fill"
                     aria-hidden="true"
                   ></b-icon>
-                  <span class="text-purple">{{$t('general.Delete')}}</span>
+                  <span class="text-purple">{{ $t("general.Delete") }}</span>
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -56,7 +56,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -69,25 +68,25 @@ export default {
     current_user() {
       return {
         name: this.$store.state.auth.user.user.name,
-        avatar: this.$store.state.auth.user.user.profile_picture,
+        avatar: this.$store.state.auth.user.user.profile_picture
       };
     },
     datePublish() {
       return moment(this.comment.created_at).fromNow();
-    },
+    }
   },
   methods: {
     deleteComment() {
       this.$store
         .dispatch("productComments/deleteComment", {
           idproduct: this.idproduct,
-          idcomment: this.comment.comment_id,
+          idcomment: this.comment.comment_id
         })
         .then(() => {
           this.$emit("deletecomment", this.comment.comment_id);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

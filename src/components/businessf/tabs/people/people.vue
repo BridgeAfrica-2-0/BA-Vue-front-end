@@ -1,6 +1,6 @@
 <template>
   <div class="lallaa">
-    <b-tabs content-class="mt-3" fill pills >
+    <b-tabs content-class="mt-3" fill pills>
       <b-tab :title="$t('general.Followers')"><Followers /></b-tab>
       <b-tab :title="$t('general.Following')"><Following /></b-tab>
     </b-tabs>
@@ -13,8 +13,8 @@ import Following from "./tabs/following";
 export default {
   components: {
     Followers,
-    Following,
-  },
+    Following
+  }
 };
 </script>
 

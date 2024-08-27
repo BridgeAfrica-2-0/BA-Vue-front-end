@@ -1,14 +1,17 @@
 <template>
-  <splide :options="options" v-if="items.length" class="spnsor"  style="max-height:220px">
-    <splide-slide style="margin-right:-12px; margin-left:-12px " v-for="(item, index) in items" :key="index">
-
-      <Business
-        class=" m-1 sponsor-bix"
-        :key="item.id"
-        :business="item"
-      />
-      
-    </splide-slide>  
+  <splide
+    :options="options"
+    v-if="items.length"
+    class="spnsor"
+    style="max-height:220px"
+  >
+    <splide-slide
+      style="margin-right:-12px; margin-left:-12px "
+      v-for="(item, index) in items"
+      :key="index"
+    >
+      <Business class=" m-1 sponsor-bix" :key="item.id" :business="item" />
+    </splide-slide>
   </splide>
   <div v-else></div>
 </template>
@@ -16,28 +19,24 @@
 <script>
 import { formatNumber } from "@/helpers";
 import Business from "@/components/Business";
-import axios from "axios"
+import axios from "axios";
 export default {
   props: ["title", "image"],
 
   filters: {
     formatNumber,
-    format: (value) =>
-      value
-        ? value.length > 25
-          ? `${value.substring(0, 25)} ...`
-          : value
-        : "",
+    format: value =>
+      value ? (value.length > 25 ? `${value.substring(0, 25)} ...` : value) : ""
   },
-   components: {
+  components: {
     Business
   },
 
   data() {
     return {
       items: [],
-      
-      disable:false,
+
+      disable: false,
       options: {
         rewind: true,
         autoplay: true,
@@ -51,40 +50,43 @@ export default {
 
         margin: {
           right: "5rem",
-          left: "5rem",
+          left: "5rem"
         },
 
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "1rem",
+            gap: "1rem"
           },
           1500: {
             perPage: 1,
-            gap: "1rem",
-          },
-        },
-      },
+            gap: "1rem"
+          }
+        }
+      }
     };
   },
 
   created() {
-     
     this.init();
   },
 
-computed:{
-   islogin(){  return this.$store.getters["auth/isLogged"]; },
-},
+  computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
+  },
   methods: {
-    init: async function () {
-    if(this.islogin) { const request = await this.$repository.search.sponsors();
+    init: async function() {
+      if (this.islogin) {
+        const request = await this.$repository.search.sponsors();
 
-      if (request.success) this.items = request.data;}   
+        if (request.success) this.items = request.data;
+      }
     },
 
-    gotoBusiness(id){
-      this.$router.push(`/business/${id}#about`)
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
     },
 
     async handleFollow(user) {
@@ -94,22 +96,22 @@ computed:{
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           this.disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -210,7 +212,7 @@ computed:{
   .location {
     margin-bottom: 30px;
   }
- 
+
   .btn {
     padding-top: 6px;
     font-size: 10px;
@@ -366,31 +368,24 @@ computed:{
 }
 </style>
 
-<style >
-
-.spnsor .splide__arrow--next{
-
-width: 35px !important;
-    height: 35px !important;
+<style>
+.spnsor .splide__arrow--next {
+  width: 35px !important;
+  height: 35px !important;
 }
 
- .spnsor .splide__arrow--prev{
-
-width: 35px !important;
-    height: 35px !important
-
+.spnsor .splide__arrow--prev {
+  width: 35px !important;
+  height: 35px !important;
 }
 
-.sponsor-bix .splide__arrow--next{
-width: 25px !important;
-    height: 25px !important;
+.sponsor-bix .splide__arrow--next {
+  width: 25px !important;
+  height: 25px !important;
 }
 
- .sponsor-bix .splide__arrow--prev{
-
-   width: 25px !important;
-    height: 25px !important
-
+.sponsor-bix .splide__arrow--prev {
+  width: 25px !important;
+  height: 25px !important;
 }
- 
 </style>

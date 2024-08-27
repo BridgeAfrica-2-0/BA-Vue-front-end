@@ -1,10 +1,19 @@
 <template>
   <div>
-    <b-card v-if="networkInfo != 0" title="" class="" style="position: relative">
+    <b-card
+      v-if="networkInfo != 0"
+      title=""
+      class=""
+      style="position: relative"
+    >
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="networkInfo.image ? networkInfo.image : require('@/assets/default_network.png')"
+          :src="
+            networkInfo.image
+              ? networkInfo.image
+              : require('@/assets/default_network.png')
+          "
           variant="primary"
           square
           rounded
@@ -76,7 +85,6 @@
             :less-str="$t('search.read_less')"
             :max-chars="100"
           ></read-more>
-            
         </p>
       </b-card-text>
     </b-card>
@@ -303,7 +311,7 @@
                   accept="image/*"
                 />
                 <b-button
-                  :title="$t('general.Add_Profile_Image') "
+                  :title="$t('general.Add_Profile_Image')"
                   size="sm"
                   variant="outline-primary"
                   @click="$refs.file.click()"
@@ -361,11 +369,11 @@ export default {
       fileToUpload: "",
       selectedImagePrv: "",
       updateNetwork_form: null,
-      overlay: false,
+      overlay: false
     };
   },
   components: {
-    SidebarCommunity,
+    SidebarCommunity
   },
 
   created() {
@@ -376,11 +384,11 @@ export default {
   computed: {
     networkInfo() {
       return this.$store.state.networkProfile.networkInfo;
-    },
+    }
   },
 
   methods: {
-    init: async function () {
+    init: async function() {
       this.url = this.$route.params.id;
       await this.getNetworkInfo();
     },
@@ -396,7 +404,7 @@ export default {
         primary_phone: this.networkInfo.primary_phone,
         secondary_phone: this.networkInfo.secondary_phone,
         address: this.networkInfo.address,
-        allow_business: this.networkInfo.allow_business,
+        allow_business: this.networkInfo.allow_business
       };
       console.log(this.networkInfo[0]);
       console.log("hello");
@@ -423,18 +431,18 @@ export default {
         .then(() => {
           console.log("ohh yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-    updateNetwork: function () {
+    updateNetwork: function() {
       this.SPupdateN = true;
       console.log("this.updateNetwork_form", this.updateNetwork_form);
       this.$store
         .dispatch("networkProfile/updateNetwork", {
           path: "network/" + this.url + "/about/update",
-          formData: this.updateNetwork_form,
+          formData: this.updateNetwork_form
         })
         .then(({ data }) => {
           console.log(data);
@@ -443,15 +451,15 @@ export default {
           this.getNetworkInfo();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("network.Changes_Made_Successfuly"),
+            message: this.$t("network.Changes_Made_Successfuly")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.SPupdateN = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("network.Unable_To_Make_Changes"),
+            message: this.$t("network.Unable_To_Make_Changes")
           });
         });
     },
@@ -465,24 +473,24 @@ export default {
       this.$store
         .dispatch("networkProfile/submitFile", {
           path: "network/" + this.url + "/about/update/logo",
-          formData: formData,
+          formData: formData
         })
         .then(({ data }) => {
           console.log(data);
-          this.$refs['modal-4'].hide();
+          this.$refs["modal-4"].hide();
           this.getNetworkInfo();
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
             status: "success",
-            message: this.$t("network.Image_Uploaded_Successfuly"),
+            message: this.$t("network.Image_Uploaded_Successfuly")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("network.Unable_To_Uploaded_Image"),
+            message: this.$t("network.Unable_To_Uploaded_Image")
           });
         });
     },
@@ -492,8 +500,8 @@ export default {
       let file = e.target.files[0] || e.dataTransfer.files;
       this.selectedImagePrv = URL.createObjectURL(file);
       console.log(this.selectedImagePrv);
-    },
-  },
+    }
+  }
 };
 </script>
 

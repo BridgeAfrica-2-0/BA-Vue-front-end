@@ -23,7 +23,9 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> {{ $t('profilefollower.Heavy_Gym') }} </b></h6>
+            <h6 class="  m-0 p-0 a-center network-name ">
+              <b> {{ $t("profilefollower.Heavy_Gym") }} </b>
+            </h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -33,7 +35,7 @@
               style="width: 120px;"
               class="a-center"
             >
-              <b-icon icon="pencil"></b-icon> {{ $t('profilefollower.Edit') }}
+              <b-icon icon="pencil"></b-icon> {{ $t("profilefollower.Edit") }}
             </b-button>
           </b-col>
         </b-row>
@@ -47,26 +49,32 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> {{ $t('profilefollower.Private') }} </span>
+                <span class="pivate text">
+                  {{ $t("profilefollower.Private") }}
+                </span>
               </p>
             </b-col>
             <b-col>
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
-                <span class="pivate text"> 3.5K {{ $t('profilefollower.Community') }} </span>
+                <span class="pivate text">
+                  3.5K {{ $t("profilefollower.Community") }}
+                </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
 
-        <h6 class="mt-2 font-weight-bolder title ">{{ $t('profilefollower.About') }}</h6>
+        <h6 class="mt-2 font-weight-bolder title ">
+          {{ $t("profilefollower.About") }}
+        </h6>
         <p class="text-justify text">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
           <span class="d-inline-block float-right">
-            <a href="#">{{ $t('profilefollower.Read_more') }}</a>
+            <a href="#">{{ $t("profilefollower.Read_more") }}</a>
           </span>
         </p>
       </b-card-text>
@@ -90,7 +98,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            :label="$t('profilefollower.Brief_Description') "
+            :label="$t('profilefollower.Brief_Description')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -158,7 +166,7 @@
           </b-form-group>
 
           <b-button class="mt-2 " style="float:right" variant="primary">
-            {{ $t('profilefollower.Update_Network') }}</b-button
+            {{ $t("profilefollower.Update_Network") }}</b-button
           >
         </b-form>
       </b-container>
@@ -177,14 +185,14 @@
             <div>
               <input type="file" id="img" name="img" accept="image/*" />
             </div>
-            <h4>{{ $t('profilefollower.Upload_a_New_picture') }}</h4>
+            <h4>{{ $t("profilefollower.Upload_a_New_picture") }}</h4>
           </div>
 
           <div class="col-sm-6 text-center">
             <h1>
               <fas-icon class="primary" :icon="['fas', 'edit']" />
             </h1>
-            <h4>{{ $t('profilefollower.Edit_Your_New_picture') }}</h4>
+            <h4>{{ $t("profilefollower.Edit_Your_New_picture") }}</h4>
           </div>
         </div>
       </div>
@@ -202,12 +210,12 @@ export default {
     return {
       networkShow: true,
       showModal: false,
-      text: "",
+      text: ""
     };
   },
 
   components: {
-    SidebarCommunity,
+    SidebarCommunity
   },
 
   methods: {
@@ -218,8 +226,8 @@ export default {
     addNetwork() {
       console.log("hello");
       this.showModal = !this.showModal;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -109,8 +109,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -121,7 +121,7 @@ export default {
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -168,11 +168,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

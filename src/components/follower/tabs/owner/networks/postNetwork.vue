@@ -39,7 +39,9 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> {{ $t('profilefollower.Photo_Video') }} </span>
+                <span class="username">
+                  {{ $t("profilefollower.Photo_Video") }}
+                </span>
               </b-button>
             </b-col>
             <b-col cols="4" class="text-right m-0 p-0">
@@ -51,7 +53,9 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> {{ $t('profilefollower.Attach_File') }} </span>
+                <span class="username">
+                  {{ $t("profilefollower.Attach_File") }}
+                </span>
               </b-button>
             </b-col>
 
@@ -69,7 +73,7 @@
                   size="lg"
                 />
 
-                <span class="username"> {{ $t('profilefollower.Post') }} </span>
+                <span class="username"> {{ $t("profilefollower.Post") }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -78,10 +82,12 @@
 
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{ $t('profilefollower.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{
+            $t("profilefollower.Your_3_Post_s_are_pending_for_approval")
+          }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             href="#"
             style="color: #e75c18; text-decoration:underline;"
-            >{{ $t('profilefollower.View_All') }}</a
+            >{{ $t("profilefollower.View_All") }}</a
           >
         </p>
       </div>
@@ -126,7 +132,9 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> {{ $t('profilefollower.Add_to_Your_Post') }} </span>
+                  <span class="float-left">
+                    {{ $t("profilefollower.Add_to_Your_Post") }}
+                  </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -165,7 +173,7 @@
                 <span>
                   <b-button variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    {{ $t('profilefollower.Publish') }}</b-button
+                    {{ $t("profilefollower.Publish") }}</b-button
                   >
                 </span>
               </b-col>
@@ -192,7 +200,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{$t('profilefollower.Heavy_Gym')}}
+                {{ $t("profilefollower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -210,17 +218,17 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Edit')}}
+                      {{ $t("profilefollower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Delete')}}
+                      {{ $t("profilefollower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">{{$t('profilefollower.1h_Ago')}}</p>
+              <p class="duration">{{ $t("profilefollower.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -275,7 +283,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('profilefollower.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('profilefollower.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -304,7 +316,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{$t('profilefollower.Heavy_Gym')}}
+                {{ $t("profilefollower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -322,12 +334,12 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Edit')}}
+                      {{ $t("profilefollower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Delete')}}
+                      {{ $t("profilefollower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
@@ -381,7 +393,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('profilefollower.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('profilefollower.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -410,7 +426,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{$t('profilefollower.Heavy_Gym')}}
+                {{ $t("profilefollower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -428,12 +444,12 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Edit')}}
+                      {{ $t("profilefollower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Delete')}}
+                      {{ $t("profilefollower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
@@ -518,7 +534,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{$t('profilefollower.Heavy_Gym')}}
+                {{ $t("profilefollower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -536,12 +552,12 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Edit')}}
+                      {{ $t("profilefollower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('profilefollower.Delete')}}
+                      {{ $t("profilefollower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>

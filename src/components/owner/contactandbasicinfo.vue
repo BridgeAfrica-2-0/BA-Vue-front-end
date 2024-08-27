@@ -103,20 +103,17 @@
               v-model="info.user.city"
             ></b-form-input> -->
 
-  
-             <multiselect
-                        v-model="info.user.council"
-                      
-                        :multiple="false"
-                        :placeholder="$t('welcome.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="cities"
-                      ></multiselect>
+            <multiselect
+              v-model="info.user.council"
+              :multiple="false"
+              :placeholder="$t('welcome.Search')"
+              label="name"
+              track-by="id"
+              :options="cities"
+            ></multiselect>
 
-
-
-  <br>  <br>
+            <br />
+            <br />
 
             <div class="fosrm-group text-right w-100">
               <button type="submit" class="btn btn-primary orange">
@@ -252,7 +249,6 @@
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              
               <div class="col-md-12 pr-0 pl-0">
                 <div class="form-group">
                   <!-- <b-form-datepicker
@@ -265,11 +261,14 @@
                     :placeholder="$t('welcome.DOB')"
                   ></b-form-datepicker> -->
 
-
-                  
-                      <DropdownDatepicker v-model="birthDate.date"  :defaultDate="birthDate.date"  minAge="18"  style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
-
-
+                  <DropdownDatepicker
+                    v-model="birthDate.date"
+                    :defaultDate="birthDate.date"
+                    minAge="18"
+                    style="width:100%"
+                    dropdownClass="form-control mr-1 w-100"
+                    class="d-inline-flex"
+                  />
                 </div>
               </div>
             </div>
@@ -381,7 +380,7 @@
           {{ $t("profileowner.Add_Contacts") }} </a
         ><br />
 
-        <div v-for="con in info.user_contact" :key="con.id"> 
+        <div v-for="con in info.user_contact" :key="con.id">
           <span> {{ con.phone_number }} </span>
           <ul class="website navbar-nav pull-right">
             <li class="nav-item dropdown">
@@ -531,21 +530,23 @@
 
 <script>
 /**
- * this component is for display contact and basic information of the user 
+ * this component is for display contact and basic information of the user
  * @author Marcellin-dev
  */
 import moment from "moment";
 
 import Multiselect from "vue-multiselect";
-import axios from 'axios';
-import DropdownDatepicker from 'vue-dropdown-datepicker'; 
+import axios from "axios";
+import DropdownDatepicker from "vue-dropdown-datepicker";
 export default {
   data() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const maxDate = new Date(today);
     return {
-      min: moment().subtract(18, "years").format("YYYY-MM-DD"),
+      min: moment()
+        .subtract(18, "years")
+        .format("YYYY-MM-DD"),
       moment: moment,
       max: maxDate,
       websiteId: null,
@@ -557,7 +558,7 @@ export default {
         currentCity: null,
         homeTown: null,
         websites: [],
-        socialLinks: [],
+        socialLinks: []
       },
       phoneInput: null,
       websiteInput: null,
@@ -566,7 +567,7 @@ export default {
       newphone: null
     };
   },
-  components:{DropdownDatepicker,Multiselect},
+  components: { DropdownDatepicker, Multiselect },
   created() {
     this.basicInfo = JSON.parse(
       JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
@@ -574,11 +575,11 @@ export default {
     console.log("Load User birth Date start ++++++", this.basicInfo);
     this.$store
       .dispatch("profile/loadUserBasicInfosBirthDate", null)
-      .then((response) => {
+      .then(response => {
         console.log("load user birth date response (3) ++++", response);
         console.log("Load User BirthDate end+++++++");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("Error from server or from browser error (2) ++++", error);
       })
       .finally(() => {
@@ -590,17 +591,12 @@ export default {
         console.log("Load User birth Date end ++++++", this.basicInfo);
       });
 
-
-       this.getcities();
+    this.getcities();
   },
   computed: {
-
-     cities(){
-
-       return this.$store.state.auth.cities;
-     },
-
-
+    cities() {
+      return this.$store.state.auth.cities;
+    },
 
     birthDate() {
       let dob = this.info.user.dob;
@@ -613,39 +609,29 @@ export default {
     },
     info() {
       return this.$store.state.profile.profileIntro;
-    },
+    }
   },
   methods: {
+    /**
+     * this method is for delete contact of the user
+     * @private
+     */
 
-/**
- * this method is for delete contact of the user 
- * @private
- */
-
-
-getcities(){    
-   
-
-   this.$store
+    getcities() {
+      this.$store
         .dispatch("auth/cities")
-        .then(() => {
-        
-        })
-        .catch((err) => {
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
+    },
 
-},
-  
+    deleteContact(id) {
+      console.log("---", id);
 
-deleteContact(id){
-      console.log("---",id)
-      
-      this.$store.dispatch("profile/deleteContact", id)
-      .then(res => {
+      this.$store.dispatch("profile/deleteContact", id).then(res => {
         this.$store.dispatch("profile/loadUserPostIntro", null);
       });
-    
     },
     /**
      * this method is for get the gender and display well
@@ -680,25 +666,25 @@ deleteContact(id){
       console.log(this.birthDate);
       this.$store
         .dispatch("profile/updateUserBasicInfosBirthDate", {
-          dateOfBirth: this.birthDate,
+          dateOfBirth: this.birthDate
         })
-        .then((response) => {
+        .then(response => {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
+            .then(response => {
               console.log(response);
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
         })
-        .catch((error) => {})
+        .catch(error => {})
         .finally(() => {
           this.$refs["dobbb"].hide();
         });
     },
 
-     /**
+    /**
      * this method is for update gender
      * @private
      */
@@ -707,20 +693,20 @@ deleteContact(id){
       console.log(this.basicInfo.gender);
       this.$store
         .dispatch("profile/updateUserBasicInfosGender", {
-          gender: this.usergen,
+          gender: this.usergen
         })
-        .then((response) => {
+        .then(response => {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
+            .then(response => {
               console.log(response);
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
           console.log("save new gender user response (3)", response);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(
             error,
             "not save new birth date user end error( 2 ) +++++"
@@ -736,18 +722,19 @@ deleteContact(id){
      * this method is for update principal phone number
      * @private
      */
-    savePhone(){
-      console.log('--',this.info.user.phone);
-      let data = { phone: this.info.user.phone}
-      axios.post('profile/update-phone', data)
-      .then(res => {
-        console.log(res)
-        this.$store.dispatch("profile/loadUserPostIntro", null);
-         this.$refs["phonemodal1"].hide()
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    savePhone() {
+      console.log("--", this.info.user.phone);
+      let data = { phone: this.info.user.phone };
+      axios
+        .post("profile/update-phone", data)
+        .then(res => {
+          console.log(res);
+          this.$store.dispatch("profile/loadUserPostIntro", null);
+          this.$refs["phonemodal1"].hide();
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
 
     /**
@@ -757,14 +744,14 @@ deleteContact(id){
     savePhoneNumber() {
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
-          mobilePhones: this.newphone,
+          mobilePhones: this.newphone
         })
-        .then((response) => {
+        .then(response => {
           this.$store.dispatch("profile/loadUserPostIntro", null);
           console.log("update phone user response (3) ++++", response);
-           this.$store.dispatch("profile/loadUserPostIntro", null);
+          this.$store.dispatch("profile/loadUserPostIntro", null);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(
             error,
             "not save new mobilePhones user end error(2) +++++"
@@ -783,18 +770,18 @@ deleteContact(id){
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
-      let data = {city: this.info.user.council.name}  
+      let data = { city: this.info.user.council.name };
       this.$store
         .dispatch("profile/updateUserBasicInfosCurrentCity", data)
-        .then((response) => {
-            console.log("----------teststst")
-           this.$store.dispatch("profile/loadUserPostIntro", null);
+        .then(response => {
+          console.log("----------teststst");
+          this.$store.dispatch("profile/loadUserPostIntro", null);
           console.log(
             "save new current city user response (3) ++++++",
             response
           );
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(
             "not save new mobilePhones user end error (2) +++++++",
             error
@@ -819,19 +806,19 @@ deleteContact(id){
     saveHomeTown() {
       this.$store
         .dispatch("profile/updateUserBasicInfosHomeTown", {
-          homeTown: this.info.user.home_town,
+          homeTown: this.info.user.home_town
         })
-        .then((response) => {})
-        .catch((error) => {
+        .then(response => {})
+        .catch(error => {
           console.log(error, "not save new homeTown user end error (2)+++++");
         })
         .finally(() => {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
+            .then(response => {
               console.log(response);
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
           this.$refs["hometownModal"].hide();
@@ -845,34 +832,33 @@ deleteContact(id){
     saveWebsite() {
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
-          websites: this.websiteInput,
+          websites: this.websiteInput
         })
-        .then((response) => {
+        .then(response => {
           console.log("save new websites user response (3) ++++++", response);
           console.log("save new websites user end +++++");
           this.flashMessage.show({
             status: "success",
             message: response.data.message
-          })
-           this.$refs["websiteModal"].hide();
+          });
+          this.$refs["websiteModal"].hide();
         })
-        .catch((error) => {
-          console.log(error, "not save new websites user end error (2) +++++" );
+        .catch(error => {
+          console.log(error, "not save new websites user end error (2) +++++");
           this.flashMessage.show({
             status: "error",
             message: error.response.data.errors.webUrl[0]
-          })
+          });
         })
         .finally(() => {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
+            .then(response => {
               console.log(response);
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
-         
         });
     },
 
@@ -885,12 +871,12 @@ deleteContact(id){
       console.log(website);
       this.$store
         .dispatch("profile/deleteUserBasicInfosWebsites", {
-          id: website.id,
+          id: website.id
         })
-        .then((response) => {
+        .then(response => {
           console.log("save new websites user response (3) ++++++", response);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
@@ -909,13 +895,13 @@ deleteContact(id){
       this.$store
         .dispatch("profile/updateUserBasicInfosEWebsites", {
           websites: this.websiteInput,
-          id: this.websiteId,
+          id: this.websiteId
         })
-        .then((response) => {
+        .then(response => {
           console.log("save new websites user response (3) ++++++", response);
           console.log("save new websites user end +++++");
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
@@ -943,9 +929,9 @@ deleteContact(id){
       console.log(this.basicInfo.socialLinks);
       this.$store
         .dispatch("profile/updateUserBasicInfosSocialLinks", {
-          socialLinks: this.basicInfo.socialLinks,
+          socialLinks: this.basicInfo.socialLinks
         })
-        .then((response) => {
+        .then(response => {
           console.log();
           console.log(
             "save new socialLinks user response (3) ++++++",
@@ -953,7 +939,7 @@ deleteContact(id){
           );
           console.log("save new socialLinks user end +++++");
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(
             error,
             "not save new socialLinks user end error(2) +++++"
@@ -972,21 +958,19 @@ deleteContact(id){
     },
 
     /**
-     * this method is for delete website, social link 
+     * this method is for delete website, social link
      * @private
      */
     deleteElement(type, value) {
       switch (type) {
         case "website":
-          this.basicInfo.websites = this.basicInfo.websites.filter(
-            (website) => {
-              return website !== value;
-            }
-          );
+          this.basicInfo.websites = this.basicInfo.websites.filter(website => {
+            return website !== value;
+          });
           break;
         case "socialLink":
           this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
-            (socialLink) => {
+            socialLink => {
               return socialLink !== value;
             }
           );
@@ -998,14 +982,14 @@ deleteContact(id){
     },
 
     /**
-     * this method is for edit website, social link, 
+     * this method is for edit website, social link,
      * @private
      */
     edit(type, value) {
       switch (type) {
         case "website":
           console.log("edit website");
-          this.index = this.info.user_websites.findIndex((website) => {
+          this.index = this.info.user_websites.findIndex(website => {
             return website === value;
           });
           console.log(this.index);
@@ -1015,7 +999,7 @@ deleteContact(id){
           break;
         case "socialLink":
           console.log("edit socialLink");
-          this.index = this.basicInfo.socialLinks.findIndex((socialLink) => {
+          this.index = this.basicInfo.socialLinks.findIndex(socialLink => {
             return socialLink === value;
           });
           console.log(this.index);
@@ -1023,12 +1007,12 @@ deleteContact(id){
           this.$refs["sociallinkModal"].show();
       }
     },
-    
+
     redirect(website) {
       console.log(website);
       window.location.replace(website);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1040,12 +1024,8 @@ ul.website {
   display: inline;
 }
 @media only screen and (max-width: 768px) {
-
-  .btn-edit{
+  .btn-edit {
     font-size: 12px;
   }
 }
-
-
-
 </style>

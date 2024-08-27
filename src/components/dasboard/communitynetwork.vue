@@ -4,34 +4,38 @@
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
-   
-  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-    
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-  </VuePerfectScrollbar>
-      
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Network
+        v-for="item in network"
+        :network="item"
+        :key="item.id"
+        @getTotalCommunity="getTotalCommunity"
+      />
 
-   
-
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Network from "@/components/Network";
 import axios from "axios";
 export default {
   props: ["type"],
   components: {
-    Network,VuePerfectScrollbar
+    Network,
+    VuePerfectScrollbar
   },
 
   data() {
     return {
       page: 1,
-      network:[],
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -39,8 +43,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -51,22 +55,15 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
   methods: {
-
-
-    getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity")
-      .then((response) => {})
-      .catch((error) => {
-       
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity")
+        .then(response => {})
+        .catch(error => {});
     },
-
-
-
 
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
@@ -74,26 +71,22 @@ export default {
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-         
+        .then(response => {
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
-           this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-
-
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
-       
+        .catch(err => {
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
@@ -104,25 +97,22 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-      
-
       let url = null;
 
       if (this.type == "Follower") {
@@ -133,8 +123,6 @@ export default {
       axios
         .get(url + this.page)
         .then(({ data }) => {
-         
-       
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
@@ -156,11 +144,9 @@ export default {
             }
           }
         })
-        .catch((err) => {
-          
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
 
@@ -279,11 +265,10 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-
- .btn{
-    font-size:12px !important;
+  .btn {
+    font-size: 12px !important;
   }
-  
+
   .net-title {
     font-size: 20px;
     color: black;

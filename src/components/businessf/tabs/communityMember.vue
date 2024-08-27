@@ -30,7 +30,9 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
-                        <h6 class="follower m-15">5K {{$t("general.Community")}}</h6>
+                        <h6 class="follower m-15">
+                          5K {{ $t("general.Community") }}
+                        </h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -63,7 +65,9 @@
                           variant="primary"
                         >
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">{{$t("general.Community")}}</span>
+                          <span class="btn-com">{{
+                            $t("general.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -94,8 +98,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -108,7 +112,7 @@ export default {
         return this.$store.state.businessOwner.UcommunityFollowing
           .user_following;
       }
-    },
+    }
   },
   mounted() {
     this.biz_id = this.$route.params.id;
@@ -121,12 +125,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("businessOwner/setUcommunityFollower", {
           user_followers: [],
-          total_user_follower: 0,
+          total_user_follower: 0
         });
       } else {
         this.$store.commit("businessOwner/setUcommunityFollowing", {
           user_following: [],
-          total_user_following: 0,
+          total_user_following: 0
         });
       }
 
@@ -182,11 +186,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

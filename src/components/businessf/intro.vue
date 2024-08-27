@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div>
     <b-card title="" header-tag="header" footer-tag="footer">
       <h6 class="mb-2">
         <b>{{ $t("businessf.Intro") }}</b>
@@ -71,7 +71,7 @@
           :coordinates="[business_intro.lng, business_intro.lat]"
           color="red"
         >
-          <MglPopup  :showed="true" :closeButton="false">
+          <MglPopup :showed="true" :closeButton="false">
             <div class="row">
               <div class="px-4 py-2 dialog-div">
                 <p class="mb-0 dialog-text">{{ business_intro.name }}</p>
@@ -89,7 +89,7 @@
 
 <script>
 import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 export default {
   data() {
     return {
@@ -97,20 +97,22 @@ export default {
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 11,
-      isGuestUser: isGuestUser(),
+      isGuestUser: isGuestUser()
     };
   },
 
   components: {
     MglMap,
     MglMarker,
-    MglPopup,
+    MglPopup
   },
   computed: {
     business_intro() {
-      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
-    },
-  },
+      return this.isGuestUser
+        ? this.$store.state.businessGuest.businessInfo
+        : this.$store.state.businessOwner.businessInfo;
+    }
+  }
 };
 </script>
 

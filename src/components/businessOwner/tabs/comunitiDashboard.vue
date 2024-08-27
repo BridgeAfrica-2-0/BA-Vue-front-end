@@ -1,29 +1,38 @@
 <template>
   <div class="lalala">
-    <div class=" border mt-2 "> 
+    <div class=" border mt-2 ">
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('businessowner.COMMUNITY') }}</b> 
-          <span class="h4-color"> 
-            {{ nFormatter(total.total) }}   
+          <b> {{ $t("businessowner.COMMUNITY") }}</b>
+          <span class="h4-color">
+            {{ nFormatter(total.total) }}
           </span>
         </h6>
       </span>
 
-      <b-tabs active-nav-item-class="active-tab-item"  lazy content-class="mt-3  f-left ">
+      <b-tabs
+        active-nav-item-class="active-tab-item"
+        lazy
+        content-class="mt-3  f-left "
+      >
         <b-tab active>
           <template slot="title">
             {{ $t("businessowner.People") }}
             <span class="spa-color">
-              {{ nFormatter( total.total_people) }}
+              {{ nFormatter(total.total_people) }}
             </span>
           </template>
 
           <div>
             <b-row>
               <b-col>
-                <b-tabs lazy fill active-nav-item-class="active-tab-item"  content-class="mt-3  f-left m-up">
+                <b-tabs
+                  lazy
+                  fill
+                  active-nav-item-class="active-tab-item"
+                  content-class="mt-3  f-left m-up"
+                >
                   <b-tab active>
                     <template slot="title">
                       {{ $t("businessowner.Followers") }}
@@ -55,7 +64,7 @@
           <template slot="title">
             {{ $t("businessowner.Businesses") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_business ) }}
+              {{ nFormatter(total.total_business) }}
             </span>
           </template>
 
@@ -63,7 +72,7 @@
             <b-tabs
               lazy
               fill
-              active-nav-item-class="active-tab-item" 
+              active-nav-item-class="active-tab-item"
               content-class="mt-3  f-left m-up checkcheck"
             >
               <b-tab active>
@@ -85,7 +94,7 @@
                   >
                 </template>
 
-                <div class="s-comcard"><Business  type="following"  /></div>
+                <div class="s-comcard"><Business type="following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -95,7 +104,7 @@
           <template slot="title">
             {{ $t("businessowner.Network") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_network ) }}</span
+              {{ nFormatter(total.total_network) }}</span
             >
           </template>
 
@@ -103,7 +112,7 @@
             <b-tabs
               lazy
               fill
-              active-nav-item-class="active-tab-item" 
+              active-nav-item-class="active-tab-item"
               content-class="mt-3  f-left m-up checkcheck"
             >
               <b-tab active>
@@ -139,7 +148,7 @@
 import Business from "@/components/businessOwner/tabs/business";
 import People from "@/components/businessOwner/tabs/people";
 import Network from "@/components/businessOwner/tabs/network";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 
 export default {
   name: "comunitiDashboard",
@@ -147,11 +156,11 @@ export default {
   components: {
     People,
     Business,
-    Network,
+    Network
   },
   data() {
     return {
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
   methods: {
@@ -166,14 +175,16 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    }, 
+    }
   },
 
   computed: {
     total() {
-      return this.isGuestUser() ? this.$store.state.businessGuest.Tcommunity : this.$store.state.businessOwner.Tcommunity;
-    },
-  },
+      return this.isGuestUser()
+        ? this.$store.state.businessGuest.Tcommunity
+        : this.$store.state.businessOwner.Tcommunity;
+    }
+  }
 };
 </script>
 

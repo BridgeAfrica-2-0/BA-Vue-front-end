@@ -18,7 +18,7 @@
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l duration">
-              {{$t("general.Mark_as_Read")}}</b-button
+              {{ $t("general.Mark_as_Read") }}</b-button
             >
           </div>
         </b-col>
@@ -60,7 +60,6 @@
           Selected: <strong>{{ selected }}</strong
           ><br />
           All Selected: <strong>{{ allSelected }}</strong>
-
         </div>
       </b-row>
     </div>

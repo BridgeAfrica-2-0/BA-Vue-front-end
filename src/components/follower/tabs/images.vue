@@ -30,9 +30,9 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >{{ $t('profilefollower.Download') }}</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="downloadPic(pictures.id)">{{
+                    $t("profilefollower.Download")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -60,7 +60,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -82,21 +82,21 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
   },
 
   computed: {
     picturess() {
       return this.$store.state.UserProfileOwner.albumImages;
-    },
+    }
   },
 
   methods: {
     ...mapActions({
-      downloadPic: "UserProfileOwner/downloadPic",
+      downloadPic: "UserProfileOwner/downloadPic"
     }),
 
     showPic(url) {
@@ -112,10 +112,10 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.downloadPic(image_id)
-        .then((response) => {
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
 
@@ -126,29 +126,29 @@ export default {
           fileLink.click();
           this.flashMessage.show({
             status: "success",
-            message: "Image Downloaded",
+            message: "Image Downloaded"
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to download ",
+              message: "Unable to download "
             });
             console.log({ err: err });
             loader.hide();
           }
         });
-    },
+    }
   },
 
   mounted() {
@@ -158,8 +158,8 @@ export default {
   watch: {
     album: function(newVal) {
       this.album_id = newVal;
-    },
-  },
+    }
+  }
 };
 </script>
 

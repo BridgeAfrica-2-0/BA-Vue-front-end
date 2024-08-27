@@ -19,18 +19,15 @@
             <br />
             {{ item.followers }} {{ $t("profilefollower.Community") }}<br />
 
-           
-            
-
-             <read-more
-                      :more-str="$t('search.read_more')"
-                      class="readmore"
-                      :text="item.about_network"
-                      link="#"
-                      :less-str="$t('search.read_less')"
-                      :max-chars="100"
-                    >
-                    </read-more>
+            <read-more
+              :more-str="$t('search.read_more')"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              :less-str="$t('search.read_less')"
+              :max-chars="100"
+            >
+            </read-more>
           </p>
         </b-col>
 
@@ -121,8 +118,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -136,7 +133,7 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -146,16 +143,16 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -197,14 +194,13 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

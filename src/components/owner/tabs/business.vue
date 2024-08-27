@@ -1,31 +1,36 @@
 <template>
-  <div class="community-box"> 
-     <VuePerfectScrollbar
+  <div class="community-box">
+    <VuePerfectScrollbar
       class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Business
+        v-for="item in businesses"
+        :key="item.id"
+        :business="item"
+        @getTotalCommunity="getTotalCommunity"
+      />
 
-        <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity'  />
-          
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-     </VuePerfectScrollbar>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
-
 import axios from "axios";
 import Business from "@/components/Business";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["type", "from"],
   components: {
-    Business,VuePerfectScrollbar
+    Business,
+    VuePerfectScrollbar
   },
 
   data() {
     return {
       page: 1,
-    
+
       foll_id: null,
       biz_id: null,
       businesses: [],
@@ -35,14 +40,16 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
-    show(){
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    show() {
       return this.$route.name;
     },
     old_businesses() {
@@ -53,11 +60,11 @@ export default {
         return this.$store.state.businessOwner.BcommunityFollowing
           .business_following;
       }
-    },
+    }
   },
 
   mounted() {
-     this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
@@ -72,8 +79,6 @@ export default {
     },
     gotobusiness(id) {
       this.$router.push(`/business/${id}?tabId=1`);
-
-      
     },
 
     infiniteHandler($state) {
@@ -82,9 +87,9 @@ export default {
           ? `profile/business/follower/`
           : `profile/business/following/`;
 
-           if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       console.log(this.foll_id);
 
@@ -112,22 +117,19 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-  getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
-
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -136,24 +138,24 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
-             this.getTotalCommunity();
+          this.getTotalCommunity();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

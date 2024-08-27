@@ -3,7 +3,6 @@ import moment from "moment";
 export default {
   namespaced: true,
   state: {
-
     communityPeople: [],
     CommunityBusiness: [],
     ownerPost: [],
@@ -21,18 +20,31 @@ export default {
     imagess: [],
     networks: [],
 
-    profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
-    profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
-    NcommunityFollower: { "network_followers": [], "total_network_follower": 0 },
-    NcommunityFollowing: { "network_following": [], "total_network_following": 0 },
-    BcommunityFollower: { "business_followers": [], "total_business_follower": 0 },
-    BcommunityFollowing: { "business_following": [], "total_business_following": 0 },
+    profile_about: {
+      user: {},
+      user_address: [],
+      user_education: [],
+      user_experience: [],
+      user_websites: []
+    },
+    profileIntro: {
+      user: {},
+      user_address: [],
+      user_education: [],
+      user_experience: [],
+      user_websites: []
+    },
+    NcommunityFollower: { network_followers: [], total_network_follower: 0 },
+    NcommunityFollowing: { network_following: [], total_network_following: 0 },
+    BcommunityFollower: { business_followers: [], total_business_follower: 0 },
+    BcommunityFollowing: {
+      business_following: [],
+      total_business_following: 0
+    },
 
-    UcommunityFollower: { "user_followers": [], "total_user_follower": 0 },
-    UcommunityFollowing: { "user_following": [], "total_user_following": 0 },
-    Tcommunity: [],
-
-
+    UcommunityFollower: { user_followers: [], total_user_follower: 0 },
+    UcommunityFollowing: { user_following: [], total_user_following: 0 },
+    Tcommunity: []
   },
   getters: {
     getAlbums(state) {
@@ -65,7 +77,6 @@ export default {
       return state.success;
     },
 
-
     getProfileAboutBiography(state) {
       return state.profile_about.user.biography;
     },
@@ -86,53 +97,33 @@ export default {
     }
   },
   mutations: {
-
     setTcommunity(state, data) {
-
       state.Tcommunity = data;
-
     },
 
     setNcommunityFollower(state, data) {
-
       state.NcommunityFollower = data;
-
     },
 
     setUcommunityFollowing(state, data) {
-
-
       state.UcommunityFollowing = data;
-
     },
 
-
     setUcommunityFollower(state, data) {
-
       state.UcommunityFollower = data;
-
     },
 
     setBcommunityFollowing(state, data) {
       state.BcommunityFollowing = data;
-
     },
 
-
     setBcommunityFollower(state, data) {
-
       state.BcommunityFollower = data;
     },
 
-
     setNcommunityFollowing(state, data) {
-
       state.NcommunityFollowing = data;
     },
-
-
-
-
 
     //set media data
 
@@ -141,31 +132,20 @@ export default {
     },
 
     setprofileNetwork(state, data) {
-
       state.profileNetwork = data;
-
     },
 
     setProfileBusiness(state, data) {
       state.profileBusiness = data;
     },
 
-
     setImages(state, data) {
-
       state.ownerPostImages = data;
-
     },
-
-
 
     setImagess(state, data) {
-
       state.imagess = data;
-
     },
-
-
 
     setAlbumImages(state, data) {
       state.albumImages = data;
@@ -215,11 +195,11 @@ export default {
     },
     updateUserBiography(state, payload) {
       state.biography = payload.user.biography;
-
     },
 
     updateUserBirthDate(state, payload) {
-      state.userData[0].profile_about.basicInfo.dateOfBirth = payload.dateOfBirth;
+      state.userData[0].profile_about.basicInfo.dateOfBirth =
+        payload.dateOfBirth;
     },
     updateUserGender(state, payload) {
       state.userData[0].profile_about.basicInfo.gender = payload.gender;
@@ -230,13 +210,16 @@ export default {
       ];
     },
     storeCurrentCity(state, payload) {
-      state.userData[0].profile_about.basicInfo.currentCity = payload.currentCity;
+      state.userData[0].profile_about.basicInfo.currentCity =
+        payload.currentCity;
     },
     storeHomeTown(state, payload) {
       state.userData[0].profile_about.basicInfo.homeTown = payload.homeTown;
     },
     storeWebsites(state, payload) {
-      state.userData[0].profile_about.basicInfo.websites = [...payload.websites];
+      state.userData[0].profile_about.basicInfo.websites = [
+        ...payload.websites
+      ];
     },
     storeSocialLinks(state, payload) {
       state.userData[0].profile_about.basicInfo.socialLinks = [
@@ -277,157 +260,121 @@ export default {
   },
 
   actions: {
-
-
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
-    getImages({ commit}, id) {
-      return axios.get("guest/profile/user/media?slug="+id).then(({ data }) => {
-        commit("setImagess", data.data);
-      
-      });
+    getImages({ commit }, id) {
+      return axios
+        .get("guest/profile/user/media?slug=" + id)
+        .then(({ data }) => {
+          commit("setImagess", data.data);
+        });
     },
 
     loadMoreUserBusiness({ commit }, url) {
-
-   
-      return axios.get(url)
-        .then(({ data }) => {
-
-          return data;
-        });
-
+      return axios.get(url).then(({ data }) => {
+        return data;
+      });
     },
 
     loadMore({ commit }, url) {
-    
-      return axios.get(url)
-        .then((data) => {
+      return axios
+        .get(url)
+        .then(data => {
           return data;
-        }).catch((err) => {
-      
-        });
-
+        })
+        .catch(err => {});
     },
 
     Tcommunity({ commit }, id) {
-     
       return axios
-        .get('guest/profile/total/community?slug=' + id)
+        .get("guest/profile/total/community?slug=" + id)
         .then(({ data }) => {
-          commit('setTcommunity', data.data);
-         
+          commit("setTcommunity", data.data);
         });
-
     },
 
     NcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/network/follower?slug=' + id)
+        .get("guest/profile/network/follower?slug=" + id)
         .then(({ data }) => {
-          commit('setNcommunityFollower', data.data);
-        
+          commit("setNcommunityFollower", data.data);
         });
     },
     NcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/network/following?slug=' + id)
+        .get("guest/profile/network/following?slug=" + id)
         .then(({ data }) => {
-          commit('setNcommunityFollowing', data.data);
-      
+          commit("setNcommunityFollowing", data.data);
         });
     },
     BcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/business/follower?slug=' + id)
+        .get("guest/profile/business/follower?slug=" + id)
         .then(({ data }) => {
-          commit('setBcommunityFollower', data.data);
-       
+          commit("setBcommunityFollower", data.data);
         });
     },
     BcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/business/following?slug=' + id)
+        .get("guest/profile/business/following?slug=" + id)
         .then(({ data }) => {
-          commit('setBcommunityFollowing', data.data);
-      
+          commit("setBcommunityFollowing", data.data);
         });
     },
 
     UcommunityFollower({ commit }, id) {
       return axios
-        .get('guest/profile/user/follower?slug=' + id)
+        .get("guest/profile/user/follower?slug=" + id)
         .then(({ data }) => {
-          commit('setUcommunityFollower', data.data);
-         
+          commit("setUcommunityFollower", data.data);
         });
     },
     UcommunityFollowing({ commit }, id) {
       return axios
-        .get('guest/profile/user/following?slug=' + id)
+        .get("guest/profile/user/following?slug=" + id)
         .then(({ data }) => {
-          commit('setUcommunityFollowing', data.data);
-         
+          commit("setUcommunityFollowing", data.data);
         });
     },
-
-
 
     profileBusiness({ commit }, id) {
-
       return axios
-        .get('guest/profile/business/userBusiness?slug=' + id)
+        .get("guest/profile/business/userBusiness?slug=" + id)
         .then(({ data }) => {
-          commit('setProfileBusiness', data.data);
-        
+          commit("setProfileBusiness", data.data);
         });
-
     },
 
-
     profileNetwork({ commit }, id) {
-
-      return axios
-        .get('guest/profile/network?slug=' + id)
-        .then(({ data }) => {
-          commit('setprofileNetwork', data.data);
-        
-        });
-
+      return axios.get("guest/profile/network?slug=" + id).then(({ data }) => {
+        commit("setprofileNetwork", data.data);
+      });
     },
 
     getAlbumImages({ commit }, busineeId) {
-
-
       return axios
-        .get('guest/profile/business/album/show/' + busineeId)
+        .get("guest/profile/business/album/show/" + busineeId)
         .then(({ data }) => {
-          commit('setAlbumImages', data.data.media);
-        
+          commit("setAlbumImages", data.data.media);
         });
     },
-
 
     ownerPost({ commit }, id) {
       return axios.get("guest/profile/post?slug=" + id).then(({ data }) => {
         commit("ownerPost", data.data);
-      
       });
     },
-
-
-
 
     profilecommunity({ commit }, id) {
       return axios
@@ -435,22 +382,20 @@ export default {
         .then(({ data }) => {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
-         
         });
     },
 
     async loadUserPostIntro({ commit, rootGetters }, id) {
+      let auth = rootGetters["auth/isLogged"];
+      let url = "userIntro?slug=" + id;
 
-    
-      let auth=rootGetters['auth/isLogged'];
-      let url='userIntro?slug='+id;
-
-      if(!auth){    
-        url = 'guest/profile/userIntro?slug='+id;  
+      if (!auth) {
+        url = "guest/profile/userIntro?slug=" + id;
       }
-    
+
       let response_ = null;
-      await axios.get(url)
+      await axios
+        .get(url)
 
         .then(response => {
           if (!response) {
@@ -458,10 +403,9 @@ export default {
           }
 
           response_ = response.data[0];
-         commit("editPostUserIntro", response.data.data);
+          commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
-
           if (error instanceof TypeError) {
             console.log(error.message);
           } else {
@@ -472,133 +416,92 @@ export default {
     },
 
     async loadUserBiography({ commit, rootGetters }, id) {
-     let auth=rootGetters['auth/logout'];
-   
+      let auth = rootGetters["auth/logout"];
 
       let response_ = null;
-      await axios.get('guest/profile/userIntro/biography?slug=' + id)
+      await axios
+        .get("guest/profile/userIntro/biography?slug=" + id)
         .then(({ data }) => {
           return data;
         })
         .then(({ data }) => {
-         
-         
           commit("updateUserBiography", {
-            info_access: data.data !== null
-              ? data.data.biography[0].biography
-              : "private",
+            info_access:
+              data.data !== null ? data.data.biography[0].biography : "private",
             description:
               data.data !== null
                 ? data.data.biography[0].biography
                 : "No Description"
           });
           response_ = data;
-
         })
 
         .catch(error => {
-         
           throw error;
         });
       return response_;
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     async loadUserProfileAbout({ commit }, id) {
-
       let response_ = null;
-      await axios.get('guest/profile/userIntro?slug=' + id, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-
-        }
-      })
+      await axios
+        .get("guest/profile/userIntro?slug=" + id, {
+          method: "GET",
+          headers: {
+            Accept: "application/json"
+          }
+        })
         .then(response => {
-         
-
           return response;
         })
         .then(response => {
-
-         
           commit("updateUserProfileAbout", response.data.data);
           response_ = response;
         })
         .catch(error => {
-        
           throw error;
         });
       return response_;
     },
 
-
-
-
     async loadUserBasicInfosBirthDate(context, id) {
-      
       let response_ = null;
-      await axios.get('guest/profile/userIntro/dob?slug=' + id, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-
-        }
-      })
+      await axios
+        .get("guest/profile/userIntro/dob?slug=" + id, {
+          method: "GET",
+          headers: {
+            Accept: "application/json"
+          }
+        })
         .then(response => {
-         
           if (response.status !== 200 && response.status !== 201) {
-          
             throw "Error from the Server";
           }
           return response;
         })
         .then(response => {
-        
-         
           context.commit("updateUserBirthDate", {
             dateOfBirth:
               response.data === null
                 ? {
-                  date_1: {
-                    day: "12",
-                    month: "January",
-                    access: "private"
-                  },
-                  date_2: {
-                    year: "2000",
-                    access: "private"
+                    date_1: {
+                      day: "12",
+                      month: "January",
+                      access: "private"
+                    },
+                    date_2: {
+                      year: "2000",
+                      access: "private"
+                    }
                   }
-                }
                 : response.data
           });
           response_ = response;
         })
         .catch(error => {
-         
           throw error;
         });
       return response_;
-    },
-
-
-
-
-
-
+    }
   }
 };

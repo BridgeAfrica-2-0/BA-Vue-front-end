@@ -32,7 +32,7 @@
 <script>
 import("vue-it-bigger/dist/vue-it-bigger.min.css");
 export default {
-  name: "Categories",
+  name: "Categories"
 };
 </script>
 
@@ -102,7 +102,7 @@ export default {
   font-weight: 800;
 }
 
-.home-decor i{
+.home-decor i {
   bottom: 70px;
   font-weight: 400 !important;
 }
@@ -113,8 +113,8 @@ export default {
 }
 
 .mobile-image {
-    display: none;
-  }
+  display: none;
+}
 
 @media screen and (max-width: 430px) {
   .desktop-image {

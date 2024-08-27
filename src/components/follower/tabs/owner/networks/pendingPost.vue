@@ -29,7 +29,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    {{ $t('profilefollower.Mapoure_Agrobusiness') }}
+                    {{ $t("profilefollower.Mapoure_Agrobusiness") }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -39,26 +39,30 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">{{ $t('profilefollower.Settings') }}</span>
+                          ><span class="sr-only">{{
+                            $t("profilefollower.Settings")
+                          }}</span>
                         </template>
                         <b-dropdown-item href="#">
-                          {{ $t('profilefollower.Ignore') }}
+                          {{ $t("profilefollower.Ignore") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          {{ $t('profilefollower.Delete_a_Comment') }}
+                          {{ $t("profilefollower.Delete_a_Comment") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          {{ $t('profilefollower.Send_Message_To_User') }}
+                          {{ $t("profilefollower.Send_Message_To_User") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          {{ $t('profilefollower.Remove_User') }}
+                          {{ $t("profilefollower.Remove_User") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h6>
                   <p>
-                    {{ $t('profilefollower.1h_Ago')}} -
-                    <span class="text-primary">{{ $t('profilefollower.Commented_on_a_Post') }}</span>
+                    {{ $t("profilefollower.1h_Ago") }} -
+                    <span class="text-primary">{{
+                      $t("profilefollower.Commented_on_a_Post")
+                    }}</span>
                   </p>
                 </b-col>
               </b-row>

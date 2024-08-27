@@ -5,17 +5,19 @@
         <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
-            <b-alert show v-if="!match" variant="danger"
-              >{{ $t('passrecover.Passwords_do_not_match') }}</b-alert
-            >
+            <b-alert show v-if="!match" variant="danger">{{
+              $t("passrecover.Passwords_do_not_match")
+            }}</b-alert>
             <div class="row">
-              <div class="col text-left">{{ $t('passrecover.Create_New_Password') }}</div>
+              <div class="col text-left">
+                {{ $t("passrecover.Create_New_Password") }}
+              </div>
             </div>
           </b-card-text>
           <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
               <md-field>
-                <label for="password1"> {{ $t('passrecover.Password') }}</label>
+                <label for="password1"> {{ $t("passrecover.Password") }}</label>
                 <md-input
                   type="password"
                   name="password1"
@@ -26,7 +28,9 @@
               </md-field>
 
               <md-field>
-                <label for="password2"> {{ $t('passrecover.Confirm_Password') }}</label>
+                <label for="password2">
+                  {{ $t("passrecover.Confirm_Password") }}</label
+                >
                 <md-input
                   type="password"
                   name="password2"
@@ -41,7 +45,7 @@
               @click.prevent="next"
               variant="outline-primary"
             >
-              {{ $t('passrecover.Finish') }}
+              {{ $t("passrecover.Finish") }}
             </b-button>
           </b-form>
         </div>
@@ -97,9 +101,10 @@ export default {
 
               this.flashMessage.show({
                 status: "success",
-                title: this.$t('passrecover.Password_Reset_Success'),
-                message:
-                  this.$t('passrecover.You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second')
+                title: this.$t("passrecover.Password_Reset_Success"),
+                message: this.$t(
+                  "passrecover.You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second"
+                )
               });
 
               this.$router.push({ name: "Login" });

@@ -2,14 +2,14 @@
   <div class="mt-3">
     <div>
       <b-tabs pills content-class="mt-3 f-left">
-        <b-tab :title="$t('general.People')" active> 
-          <People /> 
+        <b-tab :title="$t('general.People')" active>
+          <People />
         </b-tab>
-        <b-tab title="$t('general.Businesses')"> 
-          <Businesses /> 
+        <b-tab title="$t('general.Businesses')">
+          <Businesses />
         </b-tab>
-        <b-tab :title="$t('general.Network')"> 
-          <Networks /> 
+        <b-tab :title="$t('general.Network')">
+          <Networks />
         </b-tab>
       </b-tabs>
     </div>
@@ -27,7 +27,7 @@ export default {
     People,
     Businesses,
     Networks
-  },
+  }
 };
 </script>
 

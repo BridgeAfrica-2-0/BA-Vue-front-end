@@ -2,240 +2,176 @@
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <p class="t-center">
-        <b>{{ $t('businessowner.Invite_your_followers_to_follow_this_business') }}</b>
+        <b>{{
+          $t("businessowner.Invite_your_followers_to_follow_this_business")
+        }}</b>
       </p>
-      <input class="form-control mb-2" :placeholder="$t('businessowner.Search')" type="text" />
-      
+      <input
+        class="form-control mb-2"
+        :placeholder="$t('businessowner.Search')"
+        type="text"
+      />
+
       <b-card-text>
-
-
-
-
-
-
-
-    
-         
-    <div class="people-style border shadow">
-      <b-row class="">
-        <b-col cols="4" class="my-auto">
-          <b-avatar
-            variant="primary"
-            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            size="5em"
-          ></b-avatar>
-        </b-col>
-
-        <b-col cols="">
-          <div>
-           
-            <div class="e-name" >
-               <b-row>   <b-col>    
-              <h6 >
-               
-              <strong>  howty Circlehead  </strong> 
-              </h6>
-
-              </b-col>
-             
-
-              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community') }}  </h7> </span>  </b-col>  </b-row>
-            </div>
-
-            <div class="p-buttons">
-              <b-row>
-
-                <b-col cols="2">
-                 
-                </b-col>
-
-                <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background f-15"
-                    style="font-size:15px"
-                  >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite') }}
-                  </b-button>
-                </b-col>
-                <b-col cols="3">
-                 
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-         
-    <div class="people-style border shadow">
-      <b-row class="">
-        <b-col cols="4" class="my-auto">
-          <b-avatar
-            variant="primary"
-            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            size="5em"
-          ></b-avatar>
-        </b-col>
-
-        <b-col cols="">
-          <div>
-           
-            <div class="e-name" >
-               <b-row>   <b-col>    
-              <h6 >
-               
-              <strong>  howty Circlehead  </strong> 
-              </h6>
-
-              </b-col>
-             
-
-              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community')}}  </h7> </span>  </b-col>  </b-row>
-            </div>
-
-            <div class="p-buttons">
-              <b-row>
-
-                <b-col cols="2">
-                 
-                </b-col>
-
-                <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background f-15"
-                    style="font-size:15px"
-                  >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite')}}
-                  </b-button>
-                </b-col>
-                <b-col cols="3">
-                 
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-         
-    <div class="people-style border shadow">
-      <b-row class="">
-        <b-col cols="4" class="my-auto">
-          <b-avatar
-            variant="primary"
-            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            size="5em"
-          ></b-avatar>
-        </b-col>
-
-        <b-col cols="">
-          <div>
-           
-            <div class="e-name" >
-               <b-row>   <b-col>    
-              <h6 >
-               
-              <strong>  howty Circlehead  </strong> 
-              </h6>
-
-              </b-col>
-             
-
-              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community')}}  </h7> </span>  </b-col>  </b-row>
-            </div>
-
-            <div class="p-buttons">
-              <b-row>
-
-                <b-col cols="2">
-                 
-                </b-col>
-
-                <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background f-15"
-                    style="font-size:15px"
-                  >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite')}}
-                  </b-button>
-                </b-col>
-                <b-col cols="3">
-                 
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
+        <div class="people-style border shadow">
+          <b-row class="">
+            <b-col cols="4" class="my-auto">
+              <b-avatar
+                variant="primary"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                size="5em"
+              ></b-avatar>
+            </b-col>
+
+            <b-col cols="">
+              <div>
+                <div class="e-name">
+                  <b-row>
+                    <b-col>
+                      <h6>
+                        <strong> howty Circlehead </strong>
+                      </h6>
+                    </b-col>
+
+                    <b-col>
+                      <span class="follow">
+                        <h7> 7k {{ $t("businessowner.Community") }} </h7>
+                      </span>
+                    </b-col>
+                  </b-row>
+                </div>
+
+                <div class="p-buttons">
+                  <b-row>
+                    <b-col cols="2"> </b-col>
+
+                    <b-col cols="5">
+                      <b-button
+                        block
+                        variant="primary"
+                        size="sm"
+                        class="b-background f-15"
+                        style="font-size:15px"
+                      >
+                        <b-icon icon="plus" class="ico   f-15 "> </b-icon>
+                        {{ $t("businessowner.Invite") }}
+                      </b-button>
+                    </b-col>
+                    <b-col cols="3"> </b-col>
+                  </b-row>
+                </div>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+
+        <div class="people-style border shadow">
+          <b-row class="">
+            <b-col cols="4" class="my-auto">
+              <b-avatar
+                variant="primary"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                size="5em"
+              ></b-avatar>
+            </b-col>
+
+            <b-col cols="">
+              <div>
+                <div class="e-name">
+                  <b-row>
+                    <b-col>
+                      <h6>
+                        <strong> howty Circlehead </strong>
+                      </h6>
+                    </b-col>
+
+                    <b-col>
+                      <span class="follow">
+                        <h7> 7k {{ $t("businessowner.Community") }} </h7>
+                      </span>
+                    </b-col>
+                  </b-row>
+                </div>
+
+                <div class="p-buttons">
+                  <b-row>
+                    <b-col cols="2"> </b-col>
+
+                    <b-col cols="5">
+                      <b-button
+                        block
+                        variant="primary"
+                        size="sm"
+                        class="b-background f-15"
+                        style="font-size:15px"
+                      >
+                        <b-icon icon="plus" class="ico   f-15 "> </b-icon>
+                        {{ $t("businessowner.Invite") }}
+                      </b-button>
+                    </b-col>
+                    <b-col cols="3"> </b-col>
+                  </b-row>
+                </div>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+
+        <div class="people-style border shadow">
+          <b-row class="">
+            <b-col cols="4" class="my-auto">
+              <b-avatar
+                variant="primary"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                size="5em"
+              ></b-avatar>
+            </b-col>
+
+            <b-col cols="">
+              <div>
+                <div class="e-name">
+                  <b-row>
+                    <b-col>
+                      <h6>
+                        <strong> howty Circlehead </strong>
+                      </h6>
+                    </b-col>
+
+                    <b-col>
+                      <span class="follow">
+                        <h7> 7k {{ $t("businessowner.Community") }} </h7>
+                      </span>
+                    </b-col>
+                  </b-row>
+                </div>
+
+                <div class="p-buttons">
+                  <b-row>
+                    <b-col cols="2"> </b-col>
+
+                    <b-col cols="5">
+                      <b-button
+                        block
+                        variant="primary"
+                        size="sm"
+                        class="b-background f-15"
+                        style="font-size:15px"
+                      >
+                        <b-icon icon="plus" class="ico   f-15 "> </b-icon>
+                        {{ $t("businessowner.Invite") }}
+                      </b-button>
+                    </b-col>
+                    <b-col cols="3"> </b-col>
+                  </b-row>
+                </div>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
       </b-card-text>
 
       <span class="float-right">
-        <a class="primary" href="#">{{ $t('businessowner.See_More') }}</a>
+        <a class="primary" href="#">{{ $t("businessowner.See_More") }}</a>
       </span>
     </b-card>
   </div>
@@ -266,31 +202,28 @@ p {
   color: #fff;
   border: none;
 }
-.f-15{
+.f-15 {
   font-size: 15px;
 }
-
 
 .t-center {
   text-align: center;
 }
 
-h6{
+h6 {
   font-size: 14px;
 }
 
-strong{
-
+strong {
   display: inline-flex;
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-top: 5px;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: 5px;
 }
 
-.follow{
+.follow {
   font-size: 10px;
   margin-left: -20px;
-
 }
 
 .btn {
@@ -342,8 +275,4 @@ strong{
   margin-right: -10px;
   margin-left: -10px;
 }
-
-
-
-
 </style>

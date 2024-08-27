@@ -12,10 +12,16 @@
         v-for="(item, index) in network"
         :key="index"
       >
-       <Network  :network="item" :key="item.id"  :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity'  @BlockUser="BlockUser" />
-
-        </b-col>
-    </b-row> 
+        <Network
+          :network="item"
+          :key="item.id"
+          :canBlock="canBlock"
+          :index="index"
+          @getTotalCommunity="getTotalCommunity"
+          @BlockUser="BlockUser"
+        />
+      </b-col>
+    </b-row>
 
     <infinite-loading
       :identifier="infiniteId"
@@ -31,8 +37,8 @@ import { isGuestUser } from "@/helpers";
 import Network from "@/components/Network";
 export default {
   props: ["type", "searchh"],
-   components: {
-    Network,
+  components: {
+    Network
   },
   data() {
     return {
@@ -47,21 +53,20 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
+        perMove: 1
       },
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
   computed: {
     from() {
       return this.$route.name;
     },
- 
-    canBlock(){
-     
-      if(this.from=='BusinessOwner'){
+
+    canBlock() {
+      if (this.from == "BusinessOwner") {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -73,7 +78,7 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   mounted() {
@@ -87,7 +92,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -96,50 +101,45 @@ export default {
       let dataInfo = {
         id: id,
         refernce: "network",
-        type: this.type,
+        type: this.type
       };
 
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
 
-       this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-        
-          callback: confirm => {
-            if (confirm) {
-      
+        callback: confirm => {
+          if (confirm) {
+            let fd = new FormData();
+            fd.append("banned_id", dataInfo.id);
+            fd.append("banned_type", dataInfo.refernce);
 
+            axios
+              .post("business/community-banned/" + this.biz_id, fd)
+              .then(response => {
+                this.businessCommunityTotal();
+                this.$delete(this.network, index);
+                console.log("user deleted");
 
-
-      let fd = new FormData();
-      fd.append("banned_id", dataInfo.id);
-      fd.append("banned_type", dataInfo.refernce);
-
-      axios
-        .post("business/community-banned/" + this.biz_id, fd)
-        .then((response) => {
-          this.businessCommunityTotal();
-          this.$delete(this.network, index);
-          console.log("user deleted");
-
-          console.log(response);
-          this.flashMessage.show({
-            status: "success",
-            message: dataInfo.refernce + " blocked",
-          });
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to blocked " + dataInfo.refernce,
-          });
-        });  
-
-            }}})
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
+          }
+        }
+      });
     },
 
     count(number) {
@@ -157,18 +157,18 @@ export default {
       const request = !status
         ? await this.$repository.share.jointNetwork({
             id: item.id,
-            type: "network",
+            type: "network"
           })
         : await this.$repository.share.removeNetwork({
             id: item.id,
-            type: "network",
+            type: "network"
           });
 
       if (request.success) {
         item = Object.assign(item, { is_follow: status ? 0 : 1 });
         this.flashMessage.show({
           status: "success",
-          title: request.data,
+          title: request.data
         });
       }
     },
@@ -186,7 +186,7 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
         path: `/business_owner/${this.activeAccount.slug}`,
-        query: { tabId: 1, msgTabId: 0 },
+        query: { tabId: 1, msgTabId: 0 }
       });
     },
     search() {
@@ -204,17 +204,17 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -222,11 +222,19 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-      const basePrefix = this.isGuestUser() ? 'guest/' : '';
+      const basePrefix = this.isGuestUser() ? "guest/" : "";
       if (this.type == "Follower") {
-        url = basePrefix+"business/community/network-follower/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/network-follower/" +
+          this.biz_id +
+          "/";
       } else {
-        url = basePrefix+"business/community/network-following/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/network-following/" +
+          this.biz_id +
+          "/";
       }
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
@@ -254,11 +262,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

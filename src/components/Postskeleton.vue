@@ -1,13 +1,15 @@
 <template>
   <div>
-   
-    <b-skeleton-wrapper :loading="loading" >
-      
+    <b-skeleton-wrapper :loading="loading">
       <template #loading>
         <div class="border people-style border h-100 p-2">
           <div class="row">
             <b-col md="3" cols="4" sm="3" class="my-auto">
-              <b-skeleton animation="fade" type="avatar" class="p-avater ml-2"></b-skeleton>
+              <b-skeleton
+                animation="fade"
+                type="avatar"
+                class="p-avater ml-2"
+              ></b-skeleton>
             </b-col>
             <b-col
               md="8"
@@ -16,48 +18,42 @@
               class="mt-2"
               style="margin-left: -15px"
             >
-              <b-skeleton  animation="fade" class="" width="85%"></b-skeleton>
+              <b-skeleton animation="fade" class="" width="85%"></b-skeleton>
               <b-skeleton animation="fade" width="55%"></b-skeleton>
 
               <b-skeleton animation="fade" width="90%"></b-skeleton>
             </b-col>
-
-          
           </div>
 
-            <div class="mt-2 p-3">
-                
-                 <b-skeleton class="" width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
+          <div class="mt-2 p-3">
+            <b-skeleton class="" width="85%"></b-skeleton>
+            <b-skeleton width="55%"></b-skeleton>
 
-              <b-skeleton width="90%"></b-skeleton>
-            </div>
+            <b-skeleton width="90%"></b-skeleton>
+          </div>
         </div>
       </template>
     </b-skeleton-wrapper>
   </div>
 </template>
 
-
-      
 <script>
 import axios from "axios";
 
 export default {
   name: "PostSkeletonComponent",
   props: {
-       loading: {
+    loading: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 };
 </script>
 
 <style scoped>
 .people-style {
- 
- border-radius: 10px;
+  border-radius: 10px;
   background: white;
 
   background-color: #fff;
@@ -68,13 +64,11 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .p-avater {
-    
     margin-top: 3px;
   }
 
   .people-style {
-  
-     border-radius: 10px;
+    border-radius: 10px;
     background: white;
 
     background-color: #fff;
@@ -89,13 +83,11 @@ export default {
 
 @media only screen and (max-width: 520px) {
   .p-avater {
- 
     margin-top: 3px;
   }
 
   .people-style {
-
-     border-radius: 10px;
+    border-radius: 10px;
     background: white;
 
     background-color: #fff;

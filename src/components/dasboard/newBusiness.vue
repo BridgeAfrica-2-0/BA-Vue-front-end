@@ -25,71 +25,74 @@
           size="6em"
         ></b-avatar>
 
-        <div class="text-lost mt-2">  
+        <div class="text-lost mt-2">
           <h6 class="">
-            <router-link :to="{ name: 'BusinessOwner', params:{id:business.slug} }" class="card-title">
-              {{ business.name }} 
+            <router-link
+              :to="{ name: 'BusinessOwner', params: { id: business.slug } }"
+              class="card-title"
+            >
+              {{ business.name }}
             </router-link>
           </h6>
-            <span class="text" v-for="cat in business.category" :key="cat.name">
-              {{ cat.name }}
-            </span> <br>
+          <span class="text" v-for="cat in business.category" :key="cat.name">
+            {{ cat.name }}
+          </span>
+          <br />
 
-           <span class="mr-3"> <b-icon icon="people"></b-icon> {{ business.followers }} </span>
-         
+          <span class="mr-3">
+            <b-icon icon="people"></b-icon> {{ business.followers }}
+          </span>
 
           <hr />
 
           <div class="card-body text-left">
-
-             <!-- <span class="mb-1">
+            <!-- <span class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             <router-link to="profile_owner">
              <span class="text"> {{ $t("dashboard.Visit_Profile") }}   </span>   </router-link>
              </span> -->
 
-          <p class="mb-1">
-            <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-           <router-link :to="'/business_owner/'+ business.slug+'?tabId=1'">
-           <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link>
-            <span class="badge  float-right mt-1">
-               {{ business.message }}
-            </span>
-          </p>
+            <p class="mb-1">
+              <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
+              <router-link
+                :to="'/business_owner/' + business.slug + '?tabId=1'"
+              >
+                <span class="text"> {{ $t("dashboard.Messages") }} </span>
+              </router-link>
+              <span class="badge  float-right mt-1">
+                {{ business.message }}
+              </span>
+            </p>
 
+            <p class="mb-1">
+              <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
 
-          <p class="mb-1">
-            <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-         
-             <router-link :to="'/business_owner/'+ business.slug+'?tabId=2'">
-          <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
-             </router-link>   
+              <router-link
+                :to="'/business_owner/' + business.slug + '?tabId=2'"
+              >
+                <span class="text"> {{ $t("dashboard.Notifications") }} </span>
+              </router-link>
 
-            <span class="badge    float-right mt-1">
-             {{ business.notification }}
-            </span>
-          </p>
+              <span class="badge    float-right mt-1">
+                {{ business.notification }}
+              </span>
+            </p>
 
-      <p class="mb-1">
-            <b-icon-globe class="text-primary"></b-icon-globe>
-       
-             <router-link :to="'/business_owner/'+ business.slug">
-          <span class="text">  {{ $t("dashboard.Visit_Website") }}  </span>      
-       </router-link> 
+            <p class="mb-1">
+              <b-icon-globe class="text-primary"></b-icon-globe>
 
-      </p>
+              <router-link :to="'/business_owner/' + business.slug">
+                <span class="text"> {{ $t("dashboard.Visit_Website") }} </span>
+              </router-link>
+            </p>
 
-      
- 
-          <!-- <p class="mb-1">
+            <!-- <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             <router-link :to="'business_owner/' + business.id">
               {{ $t("dashboard.Visit_Profile") }}
             </router-link>
           </p> -->
-          
-           </div>
-
+          </div>
         </div>
       </div>
     </b-card>
@@ -102,27 +105,25 @@ export default {
   props: {
     boptions: {
       type: Array,
-      required: true,
+      required: true
     },
 
-
-    selectedb:{
-        type:String,
-        required:true
+    selectedb: {
+      type: String,
+      required: true
     }
-
   },
 
   data() {
     return {
-      selected: "owner",
+      selected: "owner"
     };
   },
   computed: {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
-     business() {
+    business() {
       return this.$store.state.dashboard.dashboard_business;
     },
     community() {
@@ -141,7 +142,7 @@ export default {
     },
     profile() {
       return this.$store.state.ProfileAndBusinessDetails.profile;
-    },
+    }
   },
   mounted() {
     this.$store
@@ -149,36 +150,30 @@ export default {
       .then(() => {
         console.log("the response");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log({ err: err });
       });
   },
 
   methods: {
     async switchBusiness(value) {
-
       this.$emit("switchBusiness", value);
-    },
+    }
   },
 
   created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
-        
-      })
-      .catch((err) => {
-    
-      });
-  },
-
+      .then(() => {})
+      .catch(err => {});
+  }
 };
 </script>
 
 <style scoped>
-.text{
-   color: #455a64;
-   font-family: poppins;
+.text {
+  color: #455a64;
+  font-family: poppins;
 }
 .card-title {
   font-size: 18px;

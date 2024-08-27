@@ -5,21 +5,27 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              {{ $t('network.Create_personalised_website_for_your_business') }}
+              {{ $t("network.Create_personalised_website_for_your_business") }}
             </h2>
             <p class="my-2">
-              {{ $t('network.Start_with_a_template_and_make_it_your_own') }},
-              {{ $t('network.with_easy_drag_and_drop_and_1000s_of_design_features') }} 
+              {{ $t("network.Start_with_a_template_and_make_it_your_own") }},
+              {{
+                $t(
+                  "network.with_easy_drag_and_drop_and_1000s_of_design_features"
+                )
+              }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block mt-1">{{ $t('network.Select_a_template') }}</span>
+                <span class="d-block mt-1">{{
+                  $t("network.Select_a_template")
+                }}</span>
               </p>
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block mt-1">{{ $t('network.Launch') }}</span>
+                <span class="d-block mt-1">{{ $t("network.Launch") }}</span>
               </p>
             </b-col>
           </div>
@@ -29,7 +35,7 @@
     <b-row class="my-2">
       <b-col md="10" offset-md="1">
         <p class="float-right">
-          <span>{{ $t('general.Show') }}: &nbsp;</span>
+          <span>{{ $t("general.Show") }}: &nbsp;</span>
           <span class="d-inline-block">
             <b-form-select
               class="d-inline-block"
@@ -44,19 +50,33 @@
     <b-row>
       <b-col cols="12">
         <b-nav pills fill>
-          <b-nav-item v-on:click="filter('all')">{{ $t('network.All') }}</b-nav-item>
-          <b-nav-item v-on:click="shuffle">{{ $t('network.Shuffle') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('agriculture')"
-            >{{ $t('network.Agriculture') }}</b-nav-item
-          >
-          <b-nav-item v-on:click="filter('business')">{{ $t('network.Business') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('event')">{{ $t('network.Event') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('all')">{{
+            $t("network.All")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="shuffle">{{
+            $t("network.Shuffle")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('agriculture')">{{
+            $t("network.Agriculture")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('business')">{{
+            $t("network.Business")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('event')">{{
+            $t("network.Event")
+          }}</b-nav-item>
           <b-nav-item v-on:click="filter('personalcare')"
             >Personal Care</b-nav-item
           >
-          <b-nav-item v-on:click="filter('pharmacy')">{{ $t('network.Pharmacy') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('food')">{{ $t('network.Food') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('other')">{{ $t('network.Others') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('pharmacy')">{{
+            $t("network.Pharmacy")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('food')">{{
+            $t("network.Food")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('other')">{{
+            $t("network.Others")
+          }}</b-nav-item>
         </b-nav>
       </b-col>
     </b-row>
@@ -78,7 +98,7 @@
                 <template #header>
                   <p>
                     <span class="float-left">
-                      {{ $t('network.Template_Name') }}
+                      {{ $t("network.Template_Name") }}
                     </span>
                     <span class="float-right">
                       <b-icon-eye-fill class="mr-3"></b-icon-eye-fill>
@@ -230,8 +250,8 @@ export default {
   height: 100%;
   width: 100%;
 }
-.list-complete-enter, .list-complete-leave-to
- {
+.list-complete-enter,
+.list-complete-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }

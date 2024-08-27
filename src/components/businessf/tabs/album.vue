@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
@@ -23,7 +22,7 @@
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  {{$t("general.Create")}}</b-button
+                  {{ $t("general.Create") }}</b-button
                 >
               </b-form>
             </div>
@@ -72,7 +71,7 @@
                 variant="primary"
                 @click="updateAlbum(edit_id)"
               >
-                {{$t("general.Update")}}</b-button
+                {{ $t("general.Update") }}</b-button
               >
             </b-form>
           </div>
@@ -105,9 +104,11 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >{{$t("general.Edit_Name")}}</a
+                            >{{ $t("general.Edit_Name") }}</a
                           >
-                          <a class="dropdown-item">{{$t("general.Delete_Album")}}</a>
+                          <a class="dropdown-item">{{
+                            $t("general.Delete_Album")
+                          }}</a>
                         </div>
                       </li>
                     </ul>
@@ -116,12 +117,12 @@
                     <label
                       class="col-md-4 control-label pr-0 text-design"
                       for="name"
-                      >14 {{$t("general.Items")}} -
+                      >14 {{ $t("general.Items") }} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>{{$t("general.Public")}}</option>
-                        <option>{{$t("general.Private")}}</option>
+                        <option>{{ $t("general.Public") }}</option>
+                        <option>{{ $t("general.Private") }}</option>
                       </select>
                     </div>
                   </div>
@@ -162,14 +163,14 @@ export default {
       this.album_name = album_name;
       this.album_id = abum_id;
       console.log(abum_id);
-      
+
       console.log(this.url);
 
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const albumUrl = this.url + "/" + abum_id;
@@ -182,7 +183,7 @@ export default {
           this.showalbum = true;
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           loader.hide();
@@ -205,25 +206,25 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
         .post("business/album/edit/" + this.url + "/" + album_id, {
-          name: this.name,
+          name: this.name
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('general.Album_Deleted'),
+            message: this.$t("general.Album_Deleted")
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -232,7 +233,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: err.response.data.message
             });
 
             loader.hide();
@@ -240,7 +241,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Delete your abum",
+              message: "Unable to Delete your abum"
             });
             console.log({ err: err });
 
@@ -254,25 +255,25 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
         .post("business/album/update/" + this.url + "/" + album_id, {
-          name: this.edit_name,
+          name: this.edit_name
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Updated",
+            message: "Album Updated"
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -281,7 +282,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: err.response.data.message
             });
 
             loader.hide();
@@ -289,7 +290,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('general.Unable_to_create_your_Album'),
+              message: this.$t("general.Unable_to_create_your_Album")
             });
             console.log({ err: err });
 
@@ -303,25 +304,25 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
         .post("business/album/create/9", {
-          name: this.name,
+          name: this.name
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('general.Album_Created'),
+            message: this.$t("general.Album_Created")
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -330,7 +331,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: err.response.data.message
             });
 
             loader.hide();
@@ -338,14 +339,14 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('general.Unable_to_create_your_Album'),
+              message: this.$t("general.Unable_to_create_your_Album")
             });
             console.log({ err: err });
 
             loader.hide();
           }
         });
-    },
+    }
   },
 
   mounted() {
@@ -355,7 +356,7 @@ export default {
   computed: {
     albums() {
       return this.$store.state.businessOwner.albums;
-    },
+    }
   },
 
   data: function() {
@@ -379,7 +380,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -401,11 +402,11 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
-  },
+  }
 };
 </script>
 

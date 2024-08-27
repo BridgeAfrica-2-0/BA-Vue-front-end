@@ -9,18 +9,28 @@
             <b-tab :title="$t('profilefollower.Posts')" href="#post">
               <Post />
             </b-tab>
-            <b-tab :title="$t('profilefollower.About')" href="#about"><About /></b-tab>
-            <b-tab :title="$t('profilefollower.Business')" href="#business" class="m-0 p-0">
+            <b-tab :title="$t('profilefollower.About')" href="#about"
+              ><About
+            /></b-tab>
+            <b-tab
+              :title="$t('profilefollower.Business')"
+              href="#business"
+              class="m-0 p-0"
+            >
               <bussiness />
             </b-tab>
             <b-tab :title="$t('profilefollower.Media')" href="#media">
-              <Media type="profile" :isEditor="false"/>
+              <Media type="profile" :isEditor="false" />
             </b-tab>
             <b-tab :title="$t('profilefollower.Networks')">
               <Networks />
             </b-tab>
 
-            <b-tab :title="$t('profilefollower.Community')" href="#community" class="m-0 p-0">
+            <b-tab
+              :title="$t('profilefollower.Community')"
+              href="#community"
+              class="m-0 p-0"
+            >
               <following />
             </b-tab>
           </b-tabs>
@@ -30,20 +40,20 @@
   </div>
 </template>
 <script>
-import navbar from '@/components/navbar';
-import headPage from '@/components/ownerHeadpage';
-import Post from '@/components/businessfollower/tabs/posts';
-import About from '@/components/businessfollower/tabs/about';
-import Media from '@/components/owner/tabs/media';
-import Networks from '@/components/businessfollower/tabs/networks';
-import Following from '@/components/owner/tabs/memberNetwork';
-import Bussiness from '@/components/owner/tabs/bussiness';
+import navbar from "@/components/navbar";
+import headPage from "@/components/ownerHeadpage";
+import Post from "@/components/businessfollower/tabs/posts";
+import About from "@/components/businessfollower/tabs/about";
+import Media from "@/components/owner/tabs/media";
+import Networks from "@/components/businessfollower/tabs/networks";
+import Following from "@/components/owner/tabs/memberNetwork";
+import Bussiness from "@/components/owner/tabs/bussiness";
 
-import {knowWhoIsConnected} from "@/mixins"
+import { knowWhoIsConnected } from "@/mixins";
 
 export default {
   name: "ProfileFollower",
-  mixins:[knowWhoIsConnected],
+  mixins: [knowWhoIsConnected],
   components: {
     Bussiness,
     Following,
@@ -52,98 +62,98 @@ export default {
     Post,
     About,
     Media,
-    Networks,
+    Networks
   },
   data() {
     return {
       tabIndex: null,
-      tabs: ['#post', '#about', '#business', '#media', '#community'],
+      tabs: ["#post", "#about", "#business", "#media", "#community"]
     };
   },
 
   watch: {
     $route(to, from) {
       console.log(to.hash);
-      this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
+      this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
 
       console.log(from);
-    },
+    }
   },
   methods: {
     ownerPost() {
       this.$store
-        .dispatch('UserProfileOwner/ownerPost', this.url_data)
+        .dispatch("UserProfileOwner/ownerPost", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
   computed: {},
   created() {
-    this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
+    this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
 
     this.$store
-      .dispatch('profile/loadUserPostIntro', null)
-      .then((response) => {
+      .dispatch("profile/loadUserPostIntro", null)
+      .then(response => {
         console.log(response);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   },
   mounted() {
     this.$store
-      .dispatch('profile/Tcommunity', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/Tcommunity", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('follower/UcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("follower/UcommunityFollower", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('profile/UcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/UcommunityFollowing", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('profile/BcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/BcommunityFollower", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('profile/BcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/BcommunityFollowing", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('profile/NcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/NcommunityFollower", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch('profile/NcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch("profile/NcommunityFollowing", null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
-  },
+  }
 };
 </script>
 

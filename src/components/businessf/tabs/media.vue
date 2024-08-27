@@ -3,7 +3,6 @@
     <fas-icon
       class="violet mr-2 pt-1 icon-size primary"
       :icon="['fas', 'file-image']"
-    
     />Media
 
     <hr />
@@ -22,7 +21,7 @@ import axios from "axios";
 export default {
   components: {
     Album,
-    Images,
+    Images
   },
   methods: {
     onClick(i) {
@@ -31,44 +30,37 @@ export default {
 
     //function to get albums
 
-    getAlbums(){
+    getAlbums() {
       this.$store
         .dispatch("businessOwner/getAlbums", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-   
     },
 
-
-
-    getImages(){
-        
-        this.$store
+    getImages() {
+      this.$store
         .dispatch("businessOwner/getImages", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-   
-
     }
   },
 
-  mounted(){
-     
-       this.url_data=this.$route.params.id;
-       this.getAlbums();
-       this.getImages();
+  mounted() {
+    this.url_data = this.$route.params.id;
+    this.getAlbums();
+    this.getImages();
   },
   data: function() {
     return {
-      url_data:null,
+      url_data: null,
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -78,7 +70,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -100,11 +92,11 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
-  },
+  }
 };
 </script>
 

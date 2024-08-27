@@ -1,9 +1,7 @@
 <template>
   <b-container>
-    
-    <h5 class="a-text">{{ $t('network.Assign_Role') }}</h5>
- 
-     
+    <h5 class="a-text">{{ $t("network.Assign_Role") }}</h5>
+
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="7">
@@ -29,12 +27,12 @@
         <b-col cols="5" md="3">
           <b-form-group
             label-cols-lg="3"
-            :label=" $t('network.Role')"
+            :label="$t('network.Role')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-           <b-form-select
+            <b-form-select
               id="roles"
               v-model="form.role"
               :options="roles"
@@ -48,43 +46,49 @@
 
         <b-col cols="12" md="2">
           <b-button variant="primary" class="" @click="assignRole()">
-            <b-spinner v-if="SPassign" small type="grow"></b-spinner> {{ $t('network.Assign') }}
+            <b-spinner v-if="SPassign" small type="grow"></b-spinner>
+            {{ $t("network.Assign") }}
           </b-button>
         </b-col>
       </b-row>
 
       <p class="text">
-       {{ $t('network.Admin_can_manage_all_aspects_of_the_Business_Identity') }}.   
-       {{ $t('network.They_can_create_posts_and_send_messages_through_inbox') }}.
-        {{ $t('network.They_can_respond_to_the_delete_comments') }}, 
-        {{ $t('network.Approve_posts') }}, 
-        {{ $t('network.view_insights') }},
-         {{ $t('network.manage_the_business_settings') }},
-        {{ $t('network.update_Business_profile') }},
-         {{ $t('network.assign_roles_and_payments') }}.
+        {{
+          $t("network.Admin_can_manage_all_aspects_of_the_Business_Identity")
+        }}.
+        {{
+          $t("network.They_can_create_posts_and_send_messages_through_inbox")
+        }}. {{ $t("network.They_can_respond_to_the_delete_comments") }},
+        {{ $t("network.Approve_posts") }}, {{ $t("network.view_insights") }},
+        {{ $t("network.manage_the_business_settings") }},
+        {{ $t("network.update_Business_profile") }},
+        {{ $t("network.assign_roles_and_payments") }}.
       </p>
       <br />
       <p class="text">
-        {{ $t('network.Editor_can_create_posts_and_send_messages_through_inbox') }}, 
-        {{ $t('network.They_can_respond_to_and_delete_comments') }}, 
-        {{ $t('network.Approve_posts') }}, 
-        {{ $t('network.view_insights') }}.
+        {{
+          $t("network.Editor_can_create_posts_and_send_messages_through_inbox")
+        }}, {{ $t("network.They_can_respond_to_and_delete_comments") }},
+        {{ $t("network.Approve_posts") }}, {{ $t("network.view_insights") }}.
       </p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">{{ $t('network.Existing_Editors') }}</h5>
-        <div > 
-          <b-list-group v-for=" ( editor , index) in editors" :key="editor.user_id">
+        <h5 class="a-text">{{ $t("network.Existing_Editors") }}</h5>
+        <div>
+          <b-list-group
+            v-for="(editor, index) in editors"
+            :key="editor.user_id"
+          >
             <span class="d-flex align-items-center m-list">
-              <b-avatar 
-                class="mr-3" 
+              <b-avatar
+                class="mr-3"
                 :text="editor.fullname.charAt(0)"
                 :src="editor.profile_picture"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{editor.fullname}}</span>
+              <span class="mr-auto">{{ editor.fullname }}</span>
               <span>
                 <div>
                   <b-dropdown
@@ -96,75 +100,101 @@
                     <template #button-content>
                       <b-icon
                         icon="three-dots-vertical"
-                       variant="primary"
+                        variant="primary"
                         font-scale="1"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('network.Edit') }}</b-dropdown-item>
-                     <b-dropdown-item href="#" @click="deleteEditorr(editor,index)"> {{ $t('network.delete') }} </b-dropdown-item> 
+                    <b-dropdown-item
+                      href="#"
+                      @click="
+                        $bvModal.show('edit-editor');
+                        selectObject(editor);
+                      "
+                      >{{ $t("network.Edit") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      href="#"
+                      @click="deleteEditorr(editor, index)"
+                    >
+                      {{ $t("network.delete") }}
+                    </b-dropdown-item>
                   </b-dropdown>
                 </div>
               </span>
             </span>
           </b-list-group>
 
-        <infinite-loading
-          @infinite="EinfiniteHandler"
-          ref="ErinfiniteLoading">
-        
-         <div class="text-red" slot="no-more">
-            {{ $t("network.No_More_Request") }}
-          </div>
-          <div class="text-red" slot="no-results">
-            {{ $t("network.No_More_Request") }}
-          </div>
-        </infinite-loading> 
-
-
+          <infinite-loading
+            @infinite="EinfiniteHandler"
+            ref="ErinfiniteLoading"
+          >
+            <div class="text-red" slot="no-more">
+              {{ $t("network.No_More_Request") }}
+            </div>
+            <div class="text-red" slot="no-results">
+              {{ $t("network.No_More_Request") }}
+            </div>
+          </infinite-loading>
         </div>
-      
 
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
-              EDIT EDITOR: {{clickedObject.fullname}}
+              EDIT EDITOR: {{ clickedObject.fullname }}
             </template>
             <div class="d-block text-center">
-               <b-form-group
-                  label-cols-lg="3"
-                  :label=" $t('network.Role')"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0"
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('network.Role')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-select
+                  id="role"
+                  v-model="form.role"
+                  :options="roles"
+                  name="role"
+                  value-field="id"
+                  text-field="name"
+                  class="mb-3"
                 >
-                  <b-form-select
-                    id="role"
-                    v-model="form.role"
-                    :options="roles"
-                    name="role"
-                    value-field="id"
-                    text-field="name"
-                    class="mb-3"
-                  >
-                  </b-form-select>
-                </b-form-group>
+                </b-form-select>
+              </b-form-group>
             </div>
-            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">{{ $t('network.EDIT') }}</b-button>
+            <b-button
+              class="mt-3"
+              block
+              variant="primary"
+              @click="
+                $bvModal.hide('edit-editor');
+                editEditor(clickedObject);
+              "
+              >{{ $t("network.EDIT") }}</b-button
+            >
           </b-modal>
 
           <b-modal id="delete-editor" hide-footer>
-            <template #modal-title>
-              !!! <code>WARRING</code> !!!
-            </template>
+            <template #modal-title> !!! <code>WARRING</code> !!! </template>
             <div class="d-block text-center">
-              <h3>{{ $t('network.You_Are_About_To_Delete') }}: {{clickedObject.fullname}}!</h3>
+              <h3>
+                {{ $t("network.You_Are_About_To_Delete") }}:
+                {{ clickedObject.fullname }}!
+              </h3>
             </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">{{ $t('network.Delete') }}</b-button>
+            <b-button
+              class="mt-3"
+              block
+              @click="
+                $bvModal.hide('delete-editor');
+                deleteEditor(clickedObject);
+              "
+              >{{ $t("network.Delete") }}</b-button
+            >
           </b-modal>
         </div>
       </b-container>
     </div>
-   
   </b-container>
 </template>
 
@@ -172,261 +202,229 @@
 export default {
   name: "roles",
   data() {
-			return {
-        url: null,
-        SPassign: false,
-         editors:[],
-         editorspage: 1,
-         einfiniteId:1,
-        clickedObject: {},
-        form: {
-          name: "",
-          role: "",
-        },
-        
-			}
-	},
+    return {
+      url: null,
+      SPassign: false,
+      editors: [],
+      editorspage: 1,
+      einfiniteId: 1,
+      clickedObject: {},
+      form: {
+        name: "",
+        role: ""
+      }
+    };
+  },
 
   computed: {
     followers() {
       return this.$store.state.NetworkSettings.followers;
     },
     roles() {
-       return this.$store.state.NetworkSettings.roles;
+      return this.$store.state.NetworkSettings.roles;
     },
     old_editors() {
       return this.$store.state.NetworkSettings.editors;
-    },
-  },
- 
-  mounted(){
-    this.url = this.$route.params.id
-    this.getFollowers() 
-    this.getRoles() 
-   // this.displayEditor() 
+    }
   },
 
-  methods:{
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getFollowers();
+    this.getRoles();
+    // this.displayEditor()
+  },
 
-    
-    deleteEditorr(editor, index){
-        this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-          /**
-          * Callback Function
-          * @param {Boolean} confirm
-          */
-          callback: confirm => {
-            if (confirm) {
-                   
-                
+  methods: {
+    deleteEditorr(editor, index) {
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: confirm => {
+          if (confirm) {
+            this.$store
+              .dispatch("NetworkSettings/deleteEditor", {
+                path: "network/" + this.url + "/remove/editor/" + editor.user_id
+              })
+              .then(({ data }) => {
+                console.log(data);
 
+                this.$delete(this.editors, index);
 
-      this.$store
-        .dispatch("NetworkSettings/deleteEditor", {
-          path: "network/"+this.url+"/remove/editor/"+editor.user_id,
-        })
-        .then(({ data }) => {
-        console.log(data);
-     
-         this.$delete(this.editors, index);
-
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Editor_Deleted')
-        });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_Delete_Editor')
-        });
-      });
-            }
+                this.flashMessage.show({
+                  status: "success",
+                  message: this.$t("network.Editor_Deleted")
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: this.$t("network.Unable_To_Delete_Editor")
+                });
+              });
           }
         }
-      )
-
+      });
     },
 
-
-     EinfiniteHandler($state) {
-    
-     console.log('reloading page');
+    EinfiniteHandler($state) {
+      console.log("reloading page");
       let lien = "";
-     
-        lien = "network/" + this.$route.params.id + "/members/editor/" + this.editorspage;
-        this.axios
+
+      lien =
+        "network/" +
+        this.$route.params.id +
+        "/members/editor/" +
+        this.editorspage;
+      this.axios
         .post(lien)
         .then(({ data }) => {
           if (data.data.editor.length) {
             this.editors.push(...data.data.editor);
             this.editorspage += 1;
             $state.loaded();
-          } else {  
+          } else {
             $state.complete();
-          }  
+          }
         })
-        .catch((err) => {
-        
-        });
+        .catch(err => {});
     },
 
-
-
-
-     
     getFollowers() {
       console.log("getFollowers");
       this.$store
-      .dispatch("NetworkSettings/getfollowers", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .dispatch("NetworkSettings/getfollowers", this.url)
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
     getRoles() {
-    this.$store
-      .dispatch("NetworkSettings/getroles")
-      .then(() => {
-      
-      })
-      .catch( err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("NetworkSettings/getroles")
+        .then(() => {})
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
     displayEditor() {
-    this.$store
-      .dispatch("NetworkSettings/geteditors", this.url)
-      .then(() => {
-        
-      })
-      .catch( err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("NetworkSettings/geteditors", this.url)
+        .then(() => {})
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
 
-    async editEditor(clickedObject){
-       let formData = new FormData();
-      formData.append('user_id', clickedObject.user_id);
-      formData.append('role', this.form.role);
-    await   this.$store
+    async editEditor(clickedObject) {
+      let formData = new FormData();
+      formData.append("user_id", clickedObject.user_id);
+      formData.append("role", this.form.role);
+      await this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "roles/"+this.url+"/assign",
-          formData: formData,
+          path: "roles/" + this.url + "/assign",
+          formData: formData
         })
         .then(({ data }) => {
-       
-        
-        console.log(data);
-        console.log('lalal gjth');
-        console.log(this.$refs.ErinfiniteLoading);
-        this.editorspage = 1;
-        this.editors=[];
+          console.log(data);
+          console.log("lalal gjth");
+          console.log(this.$refs.ErinfiniteLoading);
+          this.editorspage = 1;
+          this.editors = [];
 
-        this.$nextTick(() => {
-        this.$refs.ErinfiniteLoading.attemptLoad(); 
-      });
-      
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.New_Role_Updated')
+          this.$nextTick(() => {
+            this.$refs.ErinfiniteLoading.attemptLoad();
+          });
+
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.New_Role_Updated")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Update_New_Role")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Update_New_Role')
-        });
-      });
-		},
+    },
 
-
-     assignRole: async function(){
+    assignRole: async function() {
       this.SPassign = true;
       let formData = new FormData();
-      formData.append('user_id', this.form.name);
-      formData.append('role', this.form.role);
+      formData.append("user_id", this.form.name);
+      formData.append("role", this.form.role);
 
-     await this.$store
+      await this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "roles/"+this.url+"/assign",
-          formData: formData,
+          path: "roles/" + this.url + "/assign",
+          formData: formData
         })
         .then(({ data }) => {
           this.editorspage = 1;
-          this.editors=[];
-        this.$nextTick(() => {
-        this.$refs.ErinfiniteLoading.attemptLoad(); 
-      });
-        this.getFollowers();
-        this.displayEditor();
-        this.SPassign = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.New_Role_Assigned')
+          this.editors = [];
+          this.$nextTick(() => {
+            this.$refs.ErinfiniteLoading.attemptLoad();
+          });
+          this.getFollowers();
+          this.displayEditor();
+          this.SPassign = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.New_Role_Assigned")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.SPassign = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Assigned_New_Role")
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.SPassign = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Assigned_New_Role')
-        });
-      });
-		},
+    },
 
-    deleteEditor: function(clickedObject){
+    deleteEditor: function(clickedObject) {
       console.log("deleteEditor");
       this.$store
         .dispatch("NetworkSettings/deleteEditor", {
-          path: "network/role/delete/"+clickedObject.user_id,
+          path: "network/role/delete/" + clickedObject.user_id
         })
         .then(({ data }) => {
-            
-            this.editorspage = 1;
-            this.editors=[];
-        this.$nextTick(() => {
-        this.$refs.ErinfiniteLoading.attemptLoad(); 
-      });
+          this.editorspage = 1;
+          this.editors = [];
+          this.$nextTick(() => {
+            this.$refs.ErinfiniteLoading.attemptLoad();
+          });
           this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Editor_Deleted')
+            status: "success",
+            message: this.$t("network.Editor_Deleted")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_To_Delete_Editor")
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_Delete_Editor')
-        });
-      });
-		},
+    },
 
-    
-
-    selectObject(object){
-
-			this.clickedObject = object
-
-      
-		},
-
-  },
-
+    selectObject(object) {
+      this.clickedObject = object;
+    }
+  }
 };
 </script>
 
@@ -474,9 +472,8 @@ export default {
     left: -20px;
   }
 
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

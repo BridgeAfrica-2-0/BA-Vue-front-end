@@ -5,7 +5,9 @@
         <div class="one2">
           <b-modal hide-footer title="Create album" id="createalbumModal">
             <b-form>
-              <b-form-input :placeholder="$t('general.Album_name')"></b-form-input>
+              <b-form-input
+                :placeholder="$t('general.Album_name')"
+              ></b-form-input>
               <b-button class="mt-2" variant="primary"> Create</b-button>
             </b-form>
           </b-modal>
@@ -19,8 +21,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>{{ $t('profilefollower.Profile_Picture') }}</h6>
-                  <p>36 {{ $t('profilefollower.Items')}}</p>
+                  <h6>{{ $t("profilefollower.Profile_Picture") }}</h6>
+                  <p>36 {{ $t("profilefollower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -41,8 +43,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>{{ $t('profilefollower.Cover_Photos') }}</h6>
-                  <p>36 {{ $t('profilefollower.Items')}}</p>
+                  <h6>{{ $t("profilefollower.Cover_Photos") }}</h6>
+                  <p>36 {{ $t("profilefollower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -63,8 +65,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>{{ $t('profilefollower.Custom_Album')}} 1</h6>
-                  <p>13 {{ $t('profilefollower.Items')}}</p>
+                  <h6>{{ $t("profilefollower.Custom_Album") }} 1</h6>
+                  <p>13 {{ $t("profilefollower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -85,8 +87,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>{{ $t('profilefollower.Custom_Album')}} 2</h6>
-                  <p>23 {{ $t('profilefollower.Items')}}</p>
+                  <h6>{{ $t("profilefollower.Custom_Album") }} 2</h6>
+                  <p>23 {{ $t("profilefollower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -107,8 +109,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>{{ $t('profilefollower.Custom_Album')}} 3</h6>
-                  <p>33 {{ $t('profilefollower.Items')}}</p>
+                  <h6>{{ $t("profilefollower.Custom_Album") }} 3</h6>
+                  <p>33 {{ $t("profilefollower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -137,7 +139,7 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >{{ $t('profilefollower.Custom_Album')}} 1
+                          >{{ $t("profilefollower.Custom_Album") }} 1
                           <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
                         <div
@@ -148,9 +150,11 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >{{ $t('profilefollower.Edit_Name') }}</a
+                            >{{ $t("profilefollower.Edit_Name") }}</a
                           >
-                          <a class="dropdown-item">{{ $t('profilefollower.Delete_Album') }}</a>
+                          <a class="dropdown-item">{{
+                            $t("profilefollower.Delete_Album")
+                          }}</a>
                         </div>
                       </li>
                     </ul>
@@ -159,12 +163,12 @@
                     <label
                       class="col-md-4 control-label pr-0 text-design"
                       for="name"
-                      >14 {{ $t('profilefollower.Items')}} -
+                      >14 {{ $t("profilefollower.Items") }} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>{{ $t('profilefollower.Public') }}</option>
-                        <option>{{ $t('profilefollower.Private') }}</option>
+                        <option>{{ $t("profilefollower.Public") }}</option>
+                        <option>{{ $t("profilefollower.Private") }}</option>
                       </select>
                     </div>
                   </div>
@@ -180,9 +184,11 @@
 
     <div class="container-flex" v-if="showalbum == true">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        {{ $t('profilefollower.Back') }}
+        {{ $t("profilefollower.Back") }}
       </b-button>
-      <span class="text-center ml-2"> {{ $t('profilefollower.Album_Name') }} </span>
+      <span class="text-center ml-2">
+        {{ $t("profilefollower.Album_Name") }}
+      </span>
 
       <Images />
     </div>
@@ -205,7 +211,7 @@ export default {
 
     onClick(i) {
       this.index = i;
-    },
+    }
   },
   data: function() {
     return {
@@ -220,7 +226,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -242,17 +248,15 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 .text-design {
   align-items: first baseline;
 }

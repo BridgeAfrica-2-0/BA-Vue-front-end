@@ -43,17 +43,33 @@
           </b-col>
           <b-col cols="12" md="6">
             <div class="image-upload-wrap" @click="findImage">
-                  <img :src="url" alt="" id="image" style="width: 100%; height: 100%; z-index: 1" :class="!hide ? 'hide1' : '' ">
-              
-                <a href="#" data-toggle="modal" data-target="#createalbumModal" :class="hide ? 'hide1' : '' " >
-                  <div class="drag-text ">
-                    <i class="fa fa-plus"></i>
-                    <h6>Product Image</h6>
-                  </div>
-                </a>
-             
+              <img
+                :src="url"
+                alt=""
+                id="image"
+                style="width: 100%; height: 100%; z-index: 1"
+                :class="!hide ? 'hide1' : ''"
+              />
+
+              <a
+                href="#"
+                data-toggle="modal"
+                data-target="#createalbumModal"
+                :class="hide ? 'hide1' : ''"
+              >
+                <div class="drag-text ">
+                  <i class="fa fa-plus"></i>
+                  <h6>Product Image</h6>
+                </div>
+              </a>
+
               <div>
-                <input id="img" type="file" v-show="false" @change="pickImage">
+                <input
+                  id="img"
+                  type="file"
+                  v-show="false"
+                  @change="pickImage"
+                />
               </div>
             </div>
           </b-col>
@@ -65,7 +81,11 @@
           label-for="input-1"
           label-size="sm"
         >
-          <b-form-input class="mt-1" id="price" v-model="product.price"></b-form-input>
+          <b-form-input
+            class="mt-1"
+            id="price"
+            v-model="product.price"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox
@@ -84,7 +104,11 @@
           label-for="input-1"
           label-size="sm"
         >
-          <b-form-input class="mt-1" id="conditions" v-model="product.condition"></b-form-input>
+          <b-form-input
+            class="mt-1"
+            id="conditions"
+            v-model="product.condition"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox
@@ -134,12 +158,12 @@ export default {
   props: {
     showModal: {
       type: Boolean,
-      default: false,
+      default: false
     },
     product: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   // watch: {
   //   showModal(newValue) {
@@ -148,9 +172,9 @@ export default {
   // }
 
   methods: {
-    findImage(){
+    findImage() {
       document.getElementById("img").click();
-    },
-  },
+    }
+  }
 };
 </script>

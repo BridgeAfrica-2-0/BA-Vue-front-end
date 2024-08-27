@@ -1,19 +1,17 @@
 <template>
   <div>
     <div class="">
-     
-
-         <peopleSkeleton  :loading="loader" />
-           <peopleSkeleton  :loading="loader" />
+      <peopleSkeleton :loading="loader" />
+      <peopleSkeleton :loading="loader" />
 
       <b-alert v-if="users.total == 0" show variant="warning"
         ><a href="#" class="alert-link">
           {{ $t("search.No_data_available_for_that_search") }}!
-        </a></b-alert>
+        </a></b-alert
+      >
 
- <Person v-for="item in users.data" :key="item.id" :person="item"  />
-       
- </div>
+      <Person v-for="item in users.data" :key="item.id" :person="item" />
+    </div>
   </div>
 </template>
 
@@ -28,13 +26,12 @@ export default {
     },
     loader() {
       return this.$store.getters["allSearch/getLoader"];
-    },
+    }
   },
 
-  
-   components: {
-    peopleSkeleton,Person
-    
+  components: {
+    peopleSkeleton,
+    Person
   },
 
   methods: {
@@ -63,7 +60,7 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -74,12 +71,12 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

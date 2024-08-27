@@ -11,7 +11,7 @@ export default {
     Networks: [],
 
     notifications: [],
-    loader: false,
+    loader: false
   },
   getters: {
     //getting followers from store
@@ -44,7 +44,7 @@ export default {
       if (state.notifications.length > 0) {
         return state.notifications;
       }
-    },
+    }
   },
   mutations: {
     //setting followers
@@ -78,7 +78,7 @@ export default {
     // Setting the notifications in the state
     setNotifications(state, payload) {
       state.notifications = payload;
-    },
+    }
   },
   actions: {
     //getting business followers
@@ -117,12 +117,12 @@ export default {
 
       await axios
         .get("/notification")
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setNotifications", res.data.data);
           setTimeout(() => {}, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
@@ -131,12 +131,12 @@ export default {
     // Sending a read request
     async readNotifiactions({ dispatch, commit }, payload) {
       let items = {
-        ids: [],
+        ids: []
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
-          id: null,
+          id: null
         };
         objId.id = element.id;
         items.ids.push(objId);
@@ -146,7 +146,7 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // delete a single notification
@@ -159,12 +159,12 @@ export default {
     // Delete All Notifications
     async deleteNotifications({ dispatch, commit }, payload) {
       let items = {
-        ids: [],
+        ids: []
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
-          id: null,
+          id: null
         };
         objId.id = element;
         items.ids.push(objId);
@@ -172,6 +172,6 @@ export default {
       await axios.post("/notification/deleteAll", items).then(() => {
         dispatch("getNotifications");
       });
-    },
-  },
+    }
+  }
 };

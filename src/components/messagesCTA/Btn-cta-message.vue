@@ -64,44 +64,44 @@ export default {
      */
     element: {
       type: Object,
-      required: true
+      required: true,
     },
     /**
      * Take the Type of inbox (business,profile or network)
      */
     type: {
-      type: String
+      type: String,
     },
     /**
      * To differentiate the styling of the btn
      */
     header: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
 
     buyNow: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      * Boolean that will later be used in the inbox to extrat the business ID of the product
      */
     isProduct: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     /**
      * To difrentiat the text on the button
      */
     isBuyNow: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
 
     isPremium: {
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
@@ -112,8 +112,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
   computed: {
@@ -126,7 +126,7 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
 
   methods: {
@@ -137,23 +137,42 @@ export default {
 
     handleAddToCard() {
       if (this.isProduct) {
-        if (this.isPremium == "premium") {
+        if (this.isPremium == "premium" && this.islogin) {
           let product = this.element;
           this.$store
             .dispatch("cart/addToCart", { product, islogin: this.islogin })
-            .then(response => {
+            .then((response) => {
               this.flashMessage.show({
                 status: "success",
-                message: this.getStatus
+                message: this.getStatus,
               });
 
               this.$router.push({ name: "payment" });
             })
-            .catch(err => {
+            .catch((err) => {
               console.log({ err: err });
               this.flashMessage.show({
                 status: "error",
-                message: "error occur"
+                message: "error occur",
+              });
+            });
+        } else if (!this.islogin) {
+          let product = this.element;
+          this.$store
+            .dispatch("cart/addToCart", { product, islogin: this.islogin })
+            .then((response) => {
+              this.flashMessage.show({
+                status: "success",
+                message: this.getStatus,
+              });
+
+              this.$router.push({ name: "payment" });
+            })
+            .catch((err) => {
+              console.log({ err: err });
+              this.flashMessage.show({
+                status: "error",
+                message: "error occur",
               });
             });
         } else {
@@ -170,7 +189,7 @@ export default {
 
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,
-        ...this.element
+        ...this.element,
       });
       let path = "";
 
@@ -195,11 +214,11 @@ export default {
       console.log("path:", path);
       this.$router.push({
         path: `${path}`,
-        query: { tabId: 1, msgTabId: msgTabId }
+        query: { tabId: 1, msgTabId: msgTabId },
       });
       // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-    }
-  }
+    },
+  },
 };
 </script>
 

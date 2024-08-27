@@ -2,7 +2,9 @@
   <div class="settings-notifications">
     <!-- HEARDER -->
 
-    <div class="d-flex flex-mobile-column justify-content-between align-items-md-end mb-4">
+    <div
+      class="d-flex flex-mobile-column justify-content-between align-items-md-end mb-4"
+    >
       <b-form-checkbox
         v-model="selectAll"
         class="cursor-pointer"
@@ -13,22 +15,34 @@
         {{ $t("general.Select_All") }}
       </b-form-checkbox>
       <div>
-        <b-button class="btn-mark-as cursor-pointer mr-2" @click="handleMarkAsRead" variant="primary">
+        <b-button
+          class="btn-mark-as cursor-pointer mr-2"
+          @click="handleMarkAsRead"
+          variant="primary"
+        >
           <b-spinner v-if="isMarkAsRead" small></b-spinner>
           {{ $t("general.Mark_as_Read") }}</b-button
         >
-        <b-button class="btn-mark-as cursor-pointer" @click="handleDelete" variant="outline-primary">
+        <b-button
+          class="btn-mark-as cursor-pointer"
+          @click="handleDelete"
+          variant="outline-primary"
+        >
           <b-spinner v-if="isDelete" small></b-spinner>
           {{ $t("general.Delete") }}</b-button
         >
       </div>
     </div>
-    
+
     <!-- NOTIFICATIONS CONTENT -->
 
     <div id="notifs">
       <!-- NOTIFICATIONS ITEMS -->
-      <div class="notif-item my-2" v-for="(notif, $index) in allNotifs" :key="$index">
+      <div
+        class="notif-item my-2"
+        v-for="(notif, $index) in allNotifs"
+        :key="$index"
+      >
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <div class="d-flex justify-content-start align-items-center">
@@ -41,11 +55,13 @@
               >
               </b-form-checkbox>
               <!-- AVATAR NOTIF -->
-              
-              <b-avatar  :src="notif.profile_picture"></b-avatar>
+
+              <b-avatar :src="notif.profile_picture"></b-avatar>
               <div class="ml-2">
                 <p class="mb-0 font-weight-bold">{{ notif.name }}</p>
-                <p class="mb-0 text-secondary">{{ formatDate(notif.created_at) }}</p>
+                <p class="mb-0 text-secondary">
+                  {{ formatDate(notif.created_at) }}
+                </p>
               </div>
             </div>
 
@@ -55,12 +71,12 @@
                   ? `${notif.notification_text.slice(0, 226)}...`
                   : notif.notification_text
               }} -->
-              {{
-                notif.notification_text
-              }}
+              {{ notif.notification_text }}
             </p>
           </div>
-          <b-badge v-if="!notif.mark_as_read" pill variant="primary"><span class="text-primary">.</span></b-badge>
+          <b-badge v-if="!notif.mark_as_read" pill variant="primary"
+            ><span class="text-primary">.</span></b-badge
+          >
         </div>
 
         <hr />
@@ -69,18 +85,20 @@
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more">{{ $t("general.No_More_Notifications") }}</div>
       <div slot="no-results">
-        <b-alert show variant="secondary">{{ $t("general.No_Notifications") }}</b-alert>
+        <b-alert show variant="secondary">{{
+          $t("general.No_Notifications")
+        }}</b-alert>
       </div>
     </infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { mapGetters } from 'vuex';
-import moment from 'moment';
+import axios from "axios";
+import { mapGetters } from "vuex";
+import moment from "moment";
 export default {
-  name: 'SettingsNotifications',
+  name: "SettingsNotifications",
   data() {
     return {
       selectAll: false,
@@ -91,7 +109,7 @@ export default {
       page: 1,
       // allNotifs: [],
       isMarkAsRead: false,
-      isDelete: false,
+      isDelete: false
     };
   },
   computed: {
@@ -106,16 +124,16 @@ export default {
       return this.notifs.map(notif => {
         return {
           id: notif.id,
-          status: this.selectedNotif.includes(notif.id) ? 'check' : 'uncheck',
+          status: this.selectedNotif.includes(notif.id) ? "check" : "uncheck"
         };
       });
     },
     allCheckBox() {
-      return document.querySelectorAll('.notif-item-checkbox input');
+      return document.querySelectorAll(".notif-item-checkbox input");
     },
     ...mapGetters({
-      allNotifs: 'notification/NEW_PROFILE_NOTIFICATION',
-    }),
+      allNotifs: "notification/NEW_PROFILE_NOTIFICATION"
+    })
   },
   methods: {
     toggleAll(checked) {
@@ -141,7 +159,7 @@ export default {
       }
     },
     selectNotif(value) {
-      if (value.status === 'check') {
+      if (value.status === "check") {
         this.selectedNotif.push(value.id);
       } else {
         const index = this.selectedNotif.indexOf(value.id);
@@ -150,19 +168,22 @@ export default {
           console.log(`Delete Notif ${index}`, this.selectedNotif);
         }
       }
-      console.log('Selected Notifs', this.selectedNotif);
+      console.log("Selected Notifs", this.selectedNotif);
     },
     handleMarkAsRead() {
       if (this.selectedNotif.length > 0) {
         this.isMarkAsRead = true;
-        console.log('Can delete this notif', this.selectedNotif.toString());
+        console.log("Can delete this notif", this.selectedNotif.toString());
         axios
-          .post('user/notifications/mark-read', {
-            notificationId: this.selectedNotif.toString(),
+          .post("user/notifications/mark-read", {
+            notificationId: this.selectedNotif.toString()
           })
           .then(response => {
             console.log(response.data);
-            this.$store.commit('notification/MARK_PROFILE_NOTIFICATION', response.data.data);
+            this.$store.commit(
+              "notification/MARK_PROFILE_NOTIFICATION",
+              response.data.data
+            );
             // this.markNotifAsRead(response.data.data);
             this.selectedNotif = [];
             this.setCheckMode(false);
@@ -172,19 +193,22 @@ export default {
           });
         return;
       }
-      console.log('No things to Mark as Read');
+      console.log("No things to Mark as Read");
     },
     handleDelete() {
       if (this.selectedNotif.length > 0) {
         this.isDelete = true;
-        console.log('Can delete this notif', this.selectedNotif.toString());
+        console.log("Can delete this notif", this.selectedNotif.toString());
         axios
-          .post('user/notifications/delete', {
-            notificationId: this.selectedNotif.toString(),
+          .post("user/notifications/delete", {
+            notificationId: this.selectedNotif.toString()
           })
           .then(response => {
             console.log(response.data);
-            this.$store.commit('notification/DELETE_PROFILE_NOTIFICATION', response.data.data);
+            this.$store.commit(
+              "notification/DELETE_PROFILE_NOTIFICATION",
+              response.data.data
+            );
             this.selectedNotif = [];
           })
           .finally(() => {
@@ -192,7 +216,7 @@ export default {
           });
         return;
       }
-      console.log('No things to Delete');
+      console.log("No things to Delete");
     },
     markNotifAsRead(payload) {
       //state.profile = state.profile.filter(notif => !payload.includes(notif.id));
@@ -205,22 +229,27 @@ export default {
     },
     infiniteHandler($state) {
       axios
-        .get('user/notification', {
+        .get("user/notification", {
           params: {
-            page: this.page,
-          },
+            page: this.page
+          }
         })
         .then(({ data }) => {
-          
-          const render = data.data
-          console.log(render)
+          const render = data.data;
+          console.log(render);
 
           if (render.length) {
             if (this.page === 1) {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: render});
+              this.$store.commit("notification/NEW_PROFILE_NOTIFICATION", {
+                init: true,
+                data: render
+              });
             } else {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: render });
-            }           
+              this.$store.commit("notification/NEW_PROFILE_NOTIFICATION", {
+                init: false,
+                data: render
+              });
+            }
             this.page += 1;
             $state.loaded();
           } else {
@@ -235,11 +264,11 @@ export default {
     formatDate(date) {
       if (date)
         return moment(date)
-          .startOf('hour')
+          .startOf("hour")
           .fromNow();
       return;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -250,8 +279,8 @@ export default {
 .btn-mark-as {
   outline: none !important;
 }
-@media only screen and (max-width: 600px){
-  .flex-mobile-column{
+@media only screen and (max-width: 600px) {
+  .flex-mobile-column {
     flex-direction: column;
   }
 }

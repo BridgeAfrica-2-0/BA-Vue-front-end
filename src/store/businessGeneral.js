@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 export default {
@@ -20,17 +19,11 @@ export default {
   },
 
   actions: {
-
     getbusiness({ commit }, path) {
-      return axios
-        .get(`business/${path}`)
-        .then(({ data }) => {
-          commit("setbusiness", data.data);
-          console.log(data);
-
-        })
+      return axios.get(`business/${path}`).then(({ data }) => {
+        commit("setbusiness", data.data);
+        console.log(data);
+      });
     }
-
-
-  },
+  }
 };

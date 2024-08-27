@@ -53,12 +53,17 @@
 
           <br />
 
-          <div class="d-flex"> 
+          <div class="d-flex">
+            <b-badge
+              v-if="!product.in_stock"
+              class="text-center m-auto"
+              show
+              variant="info"
+              >Out of Stock</b-badge
+            >
+          </div>
 
-        <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
-         </div> 
-
-          <div  v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
             <div v-if="product.in_stock" class="">
               <!-- <b-button variant="primary" @click="buyNow(product)"
                 ><span>{{ $t("general.Buy_Now") }}</span>
@@ -73,8 +78,14 @@
             </div>
 
             <div class="ml-2">
-              <b-button   :disabled="!product.in_stock" size="sm" v-if="business_info.user_package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
-                >
+              <b-button
+                :disabled="!product.in_stock"
+                size="sm"
+                v-if="business_info.user_package_name == 'premium'"
+                variant="primary"
+                style="width:100%"
+                @click="handleAddToCard(product)"
+              >
                 <b-icon icon="cart-plus"></b-icon>
                 {{ $t("general.cart") }}
               </b-button>
@@ -350,24 +361,23 @@ export default {
 
       currentPage: 1,
       nextLoad: false,
-      isGuestUser: isGuestUser(),
+      isGuestUser: isGuestUser()
     };
   },
   components: {
     ProductDetails,
-    VLazyImage,
+    VLazyImage
   },
-
-  
 
   computed: {
     products() {
       return this.$store.state.market.products;
     },
 
-
- business_info() {
-      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
+    business_info() {
+      return this.isGuestUser
+        ? this.$store.state.businessGuest.businessInfo
+        : this.$store.state.businessOwner.businessInfo;
     },
 
     getStatus() {
@@ -380,7 +390,7 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    },
+    }
   },
 
   beforeMount() {
@@ -405,12 +415,12 @@ export default {
 
       this.$store
         .dispatch("market/bPnextPage", url)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           this.loader = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     },
@@ -421,10 +431,10 @@ export default {
       let url = basePrefix + "/market?slug=" + this.businessSlug;
       await this.$store
         .dispatch("market/getBproducts", url)
-        .then((res) => {
+        .then(res => {
           console.log(res);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         })
         .finally(() => {
@@ -447,24 +457,23 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-  
+
       this.$store
-      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
-        .then((response) => {
-        
+        .dispatch("cart/addToCart", { product, islogin: this.islogin })
+        .then(response => {
           this.flashMessage.show({
             status: "success",
-            message: this.getStatus,
+            message: this.getStatus
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "error occur",
+            message: "error occur"
           });
         });
-    },
+    }
   },
 
   mounted() {
@@ -475,7 +484,7 @@ export default {
         console.log(this.shippingAddress);
       })
       .catch(() => {});
-  },
+  }
 };
 </script>
 

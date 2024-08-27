@@ -1,6 +1,6 @@
 <template>
-  <div>  
-    <div class="">  
+  <div>
+    <div class="">
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
@@ -12,7 +12,8 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button v-if="business_info.user_package_name=='premium'"
+        <b-button
+          v-if="business_info.user_package_name == 'premium'"
           variant="outline-primary"
           @click="() => $router.push({ name: 'cart' })"
         >
@@ -25,9 +26,7 @@
 
       <!-- MARKET PRODUCT LIST -->
 
-       <Product  />
-
-     
+      <Product />
     </div>
     <!-- ADDPRODUCT FORM -->
   </div>
@@ -35,19 +34,19 @@
 
 <script>
 import Product from "../product";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import axios from "axios";
 export default {
   name: "MarketPlace",
   components: {
-    Product,
+    Product
   },
   data() {
     return {
       showModal: false,
       load: false,
       loader: false,
-      businessId:null,
+      businessId: null,
       products: [],
       val: "",
       msg: "",
@@ -59,47 +58,41 @@ export default {
       multiselec: [
         { name: "Vue.js", code: "vu" },
         { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
-      ],
+        { name: "Open Source", code: "os" }
+      ]
     };
   },
 
-  computed:{
- 
-     business_info() {
-      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
-    },
+  computed: {
+    business_info() {
+      return this.isGuestUser
+        ? this.$store.state.businessGuest.businessInfo
+        : this.$store.state.businessOwner.businessInfo;
+    }
   },
 
   methods: {
-   
-
-   
-     getProducts: async function () {
-        let url="/market?slug="+this.businessId;
-       await this.$store
-        .dispatch("market/getBproducts", url).then((res) => {
+    getProducts: async function() {
+      let url = "/market?slug=" + this.businessId;
+      await this.$store
+        .dispatch("market/getBproducts", url)
+        .then(res => {
           console.log(res);
-             
-             
-          
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         })
         .finally(() => {
           this.loader = false;
         });
-    },
-
-
+    }
   },
   beforeMount() {
     this.businessId = this.$route.params.id;
     this.loader = true;
     //get market place products
-   // this.getProducts();
-  },
+    // this.getProducts();
+  }
 };
 </script>
 

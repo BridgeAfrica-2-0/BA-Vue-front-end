@@ -12,67 +12,101 @@
             </a>
           </div>
         </div>
-        <b-modal hide-footer title="Add Album Image" id="addAlbumImageModal" @keyup.enter="addAlbumImage(album.album_id)">
+        <b-modal
+          hide-footer
+          title="Add Album Image"
+          id="addAlbumImageModal"
+          @keyup.enter="addAlbumImage(album.album_id)"
+        >
           <b-form>
             <div class="row pb-3">
-              <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;">
+              <div
+                class="col-sm-6 text-center"
+                style="border-right:1px solid #dee2e6;"
+              >
                 <h1>
                   <fas-icon class="primary" :icon="['fas', 'upload']" />
                 </h1>
                 <div>
-                  <input type="file" id="file" ref="file" @change="onFileChange" name="img" accept="image/*" />
+                  <input
+                    type="file"
+                    id="file"
+                    ref="file"
+                    @change="onFileChange"
+                    name="img"
+                    accept="image/*"
+                  />
                 </div>
                 <h4>Upload Album New picture</h4>
               </div>
               <div v-if="selectedImagePrv" class="col-sm-6 text-center">
-                <b-img v-bind="imageProps" thumbnail fluid rounded :src="selectedImagePrv" alt="Rounded image"></b-img>
+                <b-img
+                  v-bind="imageProps"
+                  thumbnail
+                  fluid
+                  rounded
+                  :src="selectedImagePrv"
+                  alt="Rounded image"
+                ></b-img>
               </div>
             </div>
-            <b-button class="mt-2" modal-cancel variant="primary" @click="addAlbumImage(album.album_id)"> Upload</b-button>
+            <b-button
+              class="mt-2"
+              modal-cancel
+              variant="primary"
+              @click="addAlbumImage(album.album_id)"
+            >
+              Upload</b-button
+            >
           </b-form>
         </b-modal>
 
-          <div class="img-gall" v-for="image in album.media" :key="image.id">
-            <a href="#!"
-              ><b-img
-                class="card-img btn p-0"
-                thumbnail
-                fluid 
-                rounded
-                :src="image.media_url"
-                alt="image-img"
-                v-b-modal="'modal-'+image.id"
-                v-bind="imageProps"
-              ></b-img>
-            </a>
-            <b-modal hide-footer :id="'modal-'+image.id" title="Details">
-              <img class="card-img" :src="image.media_url" alt="media_img" />
-            </b-modal>
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown m-0 p-0">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-                    <b-dropdown-item href="#" @click="downloadPic(image.id)">{{ $t("general.Download") }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="setProfilePic(image.id)">{{ $t("general.Make_Profile_Picture") }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="deleteImage(image.id)">{{ $t("general.Delete") }}</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
+        <div class="img-gall" v-for="image in album.media" :key="image.id">
+          <a href="#!"
+            ><b-img
+              class="card-img btn p-0"
+              thumbnail
+              fluid
+              rounded
+              :src="image.media_url"
+              alt="image-img"
+              v-b-modal="'modal-' + image.id"
+              v-bind="imageProps"
+            ></b-img>
+          </a>
+          <b-modal hide-footer :id="'modal-' + image.id" title="Details">
+            <img class="card-img" :src="image.media_url" alt="media_img" />
+          </b-modal>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown m-0 p-0">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#" @click="downloadPic(image.id)">{{
+                    $t("general.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="setProfilePic(image.id)">{{
+                    $t("general.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="deleteImage(image.id)">{{
+                    $t("general.Delete")
+                  }}</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
           </div>
-         
+        </div>
       </div>
     </div>
   </div>
@@ -83,17 +117,17 @@ export default {
   props: ["album"],
   data: function() {
     return {
-      show_url:null,
-      url:null,
+      show_url: null,
+      url: null,
       img_url: null,
-      image_details:null,
-      selectedImagePrv: '',
-      fileToUpload: '',
+      image_details: null,
+      selectedImagePrv: "",
+      fileToUpload: "",
       index: 0,
-      imageProps: {  width: 205, height: 205}
+      imageProps: { width: 205, height: 205 }
     };
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
@@ -105,9 +139,7 @@ export default {
       this.index = i;
     },
 
-
-
-    showPic(image) {    
+    showPic(image) {
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
@@ -169,7 +201,7 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          this.$emit('ownerPostImages');
+          this.$emit("ownerPostImages");
           this.flashMessage.show({
             status: "success",
             message: "Image Deleted"
@@ -235,32 +267,32 @@ export default {
         });
     },
 
-    addAlbumImage(album_id){
-      console.log('media[0] '+this.fileToUpload);
-      console.log('album_id '+album_id);
+    addAlbumImage(album_id) {
+      console.log("media[0] " + this.fileToUpload);
+      console.log("album_id " + album_id);
       let formData = new FormData();
-      formData.append('media[0]', this.fileToUpload);
-      this.axios.post( 'network/store/media/'+this.url+'/'+album_id, formData,
-        {
+      formData.append("media[0]", this.fileToUpload);
+      this.axios
+        .post("network/store/media/" + this.url + "/" + album_id, formData, {
           headers: {
-              'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data"
           }
-        }
-      ).then(function(){
-        console.log('SUCCESS!!');
-        this.$emit('albumImages');
-        this.flashMessage.show({
-          status: "success",
-          message: "Picture Added"
+        })
+        .then(function() {
+          console.log("SUCCESS!!");
+          this.$emit("albumImages");
+          this.flashMessage.show({
+            status: "success",
+            message: "Picture Added"
+          });
+        })
+        .catch(function() {
+          console.log("FAILURE!!");
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Added Picture"
+          });
         });
-      })
-      .catch(function(){
-        console.log('FAILURE!!');
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Added Picture"
-        });
-      });
     },
 
     onFileChange(e) {
@@ -277,9 +309,8 @@ export default {
         vm.selectedImagePrv = e.target.result;
       };
       reader.readAsDataURL(file);
-    },
-
-  },
+    }
+  }
 };
 </script>
 

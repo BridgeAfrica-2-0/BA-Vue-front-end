@@ -7,16 +7,19 @@
           <div class="datails">
             <div class="row">
               <div class="col">
-                <span class="mr-auto"> <b>{{ $t('profilefollower.Username') }}</b> </span>
+                <span class="mr-auto">
+                  <b>{{ $t("profilefollower.Username") }}</b>
+                </span>
               </div>
             </div>
           </div>
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button class="btn" variant="outline-primary">
-               <b-icon icon="plus" class="mr-1"></b-icon>
-               {{ $t('profilefollower.Follow') }}</b-button>
+        <b-button class="btn" variant="outline-primary">
+          <b-icon icon="plus" class="mr-1"></b-icon>
+          {{ $t("profilefollower.Follow") }}</b-button
+        >
       </div>
     </div>
   </div>

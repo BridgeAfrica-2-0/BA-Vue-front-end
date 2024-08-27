@@ -111,8 +111,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -125,7 +125,7 @@ export default {
         return this.$store.state.profile.UcommunityFollowing.user_following;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       }
-    },
+    }
   },
 
   methods: {
@@ -135,12 +135,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("profile/setUcommunityFollower", {
           user_followers: [],
-          total_user_follower: 0,
+          total_user_follower: 0
         });
       } else {
         this.$store.commit("profile/setUcommunityFollowing", {
           user_following: [],
-          total_user_following: 0,
+          total_user_following: 0
         });
       }
 
@@ -195,11 +195,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

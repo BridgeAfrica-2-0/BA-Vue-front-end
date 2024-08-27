@@ -1,17 +1,22 @@
 <template>
   <div>
     <div class="s-ccard">
-    
+      <VuePerfectScrollbar
+        class="scroll-area s-card"
+        settings="{maxScrollbarLength: 60px}"
+      >
+        <Person
+          v-for="item in users"
+          :key="item.id"
+          :person="item"
+          @getTotalCommunity="getTotalCommunity"
+        />
 
-         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-    
-          <Person v-for="item in users" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
-       
-     <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
-  </VuePerfectScrollbar>
-     
+        <infinite-loading
+          @infinite="infiniteHandler"
+          ref="infiniteLoading"
+        ></infinite-loading>
+      </VuePerfectScrollbar>
     </div>
   </div>
 </template>
@@ -24,13 +29,14 @@ export default {
   props: ["type"],
 
   components: {
-    Person, VuePerfectScrollbar
+    Person,
+    VuePerfectScrollbar
   },
 
   data() {
     return {
       page: 1,
-      users:[],
+      users: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -38,8 +44,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -50,21 +56,16 @@ export default {
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
       }
-    },
+    }
   },
 
   methods: {
-
-  getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity")
-      .then((response) => {})
-      .catch((error) => {
-       
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity")
+        .then(response => {})
+        .catch(error => {});
     },
-
-
 
     count(number) {
       if (number >= 1000000) {
@@ -76,33 +77,28 @@ export default {
     },
 
     async handleFollow(user) {
-      
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
         .post(uri, data)
         .then(({ data }) => {
-         
           this.getTotalCommunity();
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
-         
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
-     
-
       let url = null;
 
       if (this.type == "Follower") {
@@ -132,17 +128,12 @@ export default {
               $state.complete();
             }
           }
-
-        
         })
-        .catch((err) => {
-         
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
-
 
 <style>
 .follower {

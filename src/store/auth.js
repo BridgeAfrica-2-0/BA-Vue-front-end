@@ -1,27 +1,27 @@
-import axios from 'axios';
-import router from '../router';
-import { state } from './search/state';
+import axios from "axios";
+import router from "../router";
+import { state } from "./search/state";
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
   namespaced: true,
 
   state: {
-    appLanguage: 'fr',
+    appLanguage: "fr",
     user: [],
-    authModal:{
-      visibility:false,
-      callbackAction:{
-        name:null,
-        payload:null
+    authModal: {
+      visibility: false,
+      callbackAction: {
+        name: null,
+        payload: null
       }
     },
-    quote:{},
+    quote: {},
     isVerified: null,
-    passwordToken: null, 
+    passwordToken: null,
     registerData: null,
     neigbourhoods: [],
-    cities:[],
+    cities: [],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -35,96 +35,84 @@ export default {
     division: [],
     profilConnected: null,
     password_reset: [],
-    last_path:null,
-    profile_package:''
+    last_path: null,
+    profile_package: ""
   },
 
   mutations: {
-
     updateProfilePicture(state, picture) {
       if (picture !== state.profilConnected.profile_picture)
-        state.profilConnected = { ...state.profilConnected, profile_picture: picture }
+        state.profilConnected = {
+          ...state.profilConnected,
+          profile_picture: picture
+        };
     },
 
-     updateAuthVisibility(state, payload){
-    
-       state.authModal.visibility=payload.visibility;
-     },
+    updateAuthVisibility(state, payload) {
+      state.authModal.visibility = payload.visibility;
+    },
 
     setprofilePackage(state, data) {
-     
-      localStorage.removeItem('profile_package');
-      state.profile_package=data
-      localStorage.setItem('profile_package', JSON.stringify(data));
-
+      localStorage.removeItem("profile_package");
+      state.profile_package = data;
+      localStorage.setItem("profile_package", JSON.stringify(data));
     },
-
 
     setquote(state, data) {
-     
-        state.quote=data
+      state.quote = data;
     },
 
-
-
     addCoverPicture(state, picture) {
+      state.profilConnected = {
+        ...state.profilConnected,
+        cover_picture: picture
+      };
+      let newUser = JSON.parse(localStorage.getItem("user"));
 
-      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
-      let newUser = JSON.parse(localStorage.getItem('user'));
+      newUser.user.cover_picture = picture;
 
-      newUser.user.cover_picture = picture
-
-      localStorage.setItem('user', JSON.stringify(newUser));
-
+      localStorage.setItem("user", JSON.stringify(newUser));
     },
 
     setUserData(state, userData) {
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
       state.user = userData;
-   
 
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
-      const userInfo = localStorage.getItem('user');
-      state.profilConnected = { ...userData.user, user_type: 'user'};
+      const userInfo = localStorage.getItem("user");
+      state.profilConnected = { ...userData.user, user_type: "user" };
     },
 
-
-    setAppLanguage(state, language) { 
+    setAppLanguage(state, language) {
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
 
     upUserData(state, userData) {
-            
-      console.log('setting user data');
+      console.log("setting user data");
       console.log(userData);
       state.user.user = userData.user;
-      localStorage.setItem("user.user", JSON.stringify(userData.user)) ;
+      localStorage.setItem("user.user", JSON.stringify(userData.user));
       console.log(state.user);
     },
 
-       
     setUserDataa(state, userData) {
-       
-      console.log('setting user data');
+      console.log("setting user data");
       console.log(userData);
       state.user.user = userData.user;
       console.log(state.user);
-      localStorage.setItem("user.user", JSON.stringify(userData.user))  
+      localStorage.setItem("user.user", JSON.stringify(userData.user));
     },
 
     setSignupData(state, userData) {
       state.user = userData;
-      localStorage.setItem("signup", JSON.stringify(userData.user))
+      localStorage.setItem("signup", JSON.stringify(userData.user));
     },
-
 
     setPasswordReset(state, userData) {
       state.password_reset = userData;
-     
     },
-
 
     setneigbourhoods(state, data) {
       state.neigbourhoods = data;
@@ -133,7 +121,6 @@ export default {
     setCities(state, data) {
       state.cities = data;
     },
-
 
     setCountry(state, data) {
       state.country = data;
@@ -192,39 +179,30 @@ export default {
     },
 
     clearUserData(state) {
-      localStorage.removeItem('user');
-      state.user=[];
-  
+      localStorage.removeItem("user");
+      state.user = [];
 
       var currentUrl = window.location.pathname;
-     // router.push({ name: 'Login', query: { redirect: currentUrl } });     
+      // router.push({ name: 'Login', query: { redirect: currentUrl } });
 
-      window.location.href = "/login?redirect="+currentUrl;     
-  
+      window.location.href = "/login?redirect=" + currentUrl;
     },
 
-
-    profilConnected(state, payload=null) {
-      state.profilConnected = (payload) ?  payload : { ...state.user.user, user_type: 'user'};
-    },
+    profilConnected(state, payload = null) {
+      state.profilConnected = payload
+        ? payload
+        : { ...state.user.user, user_type: "user" };
+    }
   },
 
-
   actions: {
-
     showAuthModal({ commit }) {
-     
-       commit("updateAuthVisibility", {visibility:true});
-     
+      commit("updateAuthVisibility", { visibility: true });
     },
 
     hideAuthModal({ commit }) {
-      
-      commit("updateAuthVisibility", {visibility:false});
-    
-   },
-
-
+      commit("updateAuthVisibility", { visibility: false });
+    },
 
     sendOtp({ commit }, payload) {
       return axios.post(payload.url, payload).then(({ data }) => {
@@ -245,183 +223,162 @@ export default {
       });
     },
 
-
-
     neigbourhoods({ commit }, payload) {
-
       console.log(payload);
 
-      return axios.get("user/neighborhood?lat=" + payload.lat + "&lng=" + payload.lng).then(({ data }) => {
-
-        console.log("logging data for neigbourhood");
-        console.log(data);
-        commit("setneigbourhoods", data.data);
-
-      });
-
+      return axios
+        .get("user/neighborhood?lat=" + payload.lat + "&lng=" + payload.lng)
+        .then(({ data }) => {
+          console.log("logging data for neigbourhood");
+          console.log(data);
+          commit("setneigbourhoods", data.data);
+        });
     },
 
     cities({ commit }, payload) {
-
-
       return axios.get("guest/city").then(({ data }) => {
-
         console.log("logging data for neigbourhood");
         console.log(data);
         commit("setCities", data.data);
-
       });
-
     },
 
-
     country({ commit }) {
-
       return axios.get("countries").then(({ data }) => {
         console.log(data.data);
         commit("setCountry", data.data);
-
       });
     },
 
     region({ commit }, data) {
-      return axios.post('regions', data).then(({ data }) => {
+      return axios.post("regions", data).then(({ data }) => {
         console.log(data);
-        commit('setRegion', data.data);
+        commit("setRegion", data.data);
       });
     },
 
     municipality({ commit }, data) {
       return axios.post("councils", data).then(({ data }) => {
         console.log(data);
-        commit('setMunicipality', data.data);
+        commit("setMunicipality", data.data);
       });
     },
 
     locality({ commit }, data) {
-      return axios.post('neighborhoods', data).then(({ data }) => {
+      return axios.post("neighborhoods", data).then(({ data }) => {
         console.log(data);
-        commit('setLocality', data.data);
-        return true
+        commit("setLocality", data.data);
+        return true;
       });
     },
 
     division({ commit }, data) {
       return axios.post("divisions", data).then(({ data }) => {
         console.log(data);
-        commit('setDivision', data.data);
+        commit("setDivision", data.data);
       });
     },
 
     categories({ commit }) {
-      return axios.get('category').then(({ data }) => {
+      return axios.get("category").then(({ data }) => {
         console.log(data);
-        commit('setCategories', data.data);
+        commit("setCategories", data.data);
       });
     },
 
     subcategories({ commit }, data) {
-      return axios.post('catergory/subcategory', data).then(({ data }) => {
+      return axios.post("catergory/subcategory", data).then(({ data }) => {
         console.log(data);
-        commit('setSubcategories', data.data);
+        commit("setSubcategories", data.data);
       });
     },
 
     completeWelcome({ commit }) {
       // localStorage.removeItem('user');
-      return axios.get('user/completewelcome').then(({ data }) => {
+      return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data.data);
-       // commit('setUserDataa', data.data);
-        commit('upUserData', data.data);
+        // commit('setUserDataa', data.data);
+        commit("upUserData", data.data);
       });
     },
 
     businessAround({ commit }) {
-      return axios.get('business/around').then(({ data }) => {
-        commit('setBusinessAround', data.data);
+      return axios.get("business/around").then(({ data }) => {
+        commit("setBusinessAround", data.data);
         console.log(data);
       });
     },
 
     peopleAround({ commit }) {
-      return axios.get('people/around').then(({ data }) => {
-        commit('setPeopleAround', data.data);
+      return axios.get("people/around").then(({ data }) => {
+        commit("setPeopleAround", data.data);
         console.log(data);
       });
     },
 
     storeRegisterData({ commit }, userdata) {
-      commit('setUserData', userdata);
+      commit("setUserData", userdata);
     },
 
     logout({ commit }) {
-
-   
-     commit('clearUserData');
-  
+      commit("clearUserData");
     },
 
     recoverPassword2({ commit }, data) {
-      return axios.post('user/reset', data).then(({ data }) => {
+      return axios.post("user/reset", data).then(({ data }) => {
         console.log(data);
 
-        commit('setPasswordToken', data.data);
+        commit("setPasswordToken", data.data);
       });
     },
 
     verify({ commit }, mydata) {
-      const url = 'user/verifyOtp/' + mydata.id;
+      const url = "user/verifyOtp/" + mydata.id;
 
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);
 
-        commit('setUserData', data.data);
+        commit("setUserData", data.data);
       });
     },
 
     verifyuser({ commit }, payload) {
-
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
 
         //commit('setUserData', data.data);
-        commit('setPasswordReset', data.data);
+        commit("setPasswordReset", data.data);
       });
     },
 
-
-
     VerifyOtp({ commit }, payload) {
-
       return axios.post(payload.url, payload).then(({ data }) => {
-       // console.log(data.data);
+        // console.log(data.data);
 
-      //  commit('setPasswordReset', data.data);
-      return data;
+        //  commit('setPasswordReset', data.data);
+        return data;
       });
     },
 
     ResetPassword({ commit }, payload) {
-
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
 
         //commit('setUserData', data.data);
       });
-    },
-
+    }
   },
 
   getters: {
     isLogged: state => !!state.user.accessToken,
     isVerified: state => !!state.user,
     user: state => state.user,
-    profile_package: state=> state.profile_package,
+    profile_package: state => state.profile_package,
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`;
     },
 
-    authModal:(state) => state.authModal,
+    authModal: state => state.authModal,
 
     profilConnected: state => state.profilConnected,
 
@@ -429,7 +386,6 @@ export default {
 
     cities: state => state.cities,
 
-    getAppLanguage: (state) => state.appLanguage
-
-  },
+    getAppLanguage: state => state.appLanguage
+  }
 };

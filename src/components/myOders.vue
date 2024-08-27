@@ -1,8 +1,8 @@
 <template>
-  <div >
+  <div>
     <navbar />
     <hr />
-    
+
     <div id="hidemobile">
       <div
         class="justify-content-between d-flex row cd B"
@@ -14,7 +14,7 @@
           @click="changeElementType(1)"
         >
           <div class="cercle1">1</div>
-          <h2 class="h2 text-position">{{$t("myOrders.All")}}</h2>
+          <h2 class="h2 text-position">{{ $t("myOrders.All") }}</h2>
         </div>
 
         <div
@@ -24,7 +24,9 @@
         >
           <div class="cercle2">2</div>
 
-          <h2 class="h2 text-position text-center">{{$t("myOrders.In_progress")}}</h2>
+          <h2 class="h2 text-position text-center">
+            {{ $t("myOrders.In_progress") }}
+          </h2>
         </div>
 
         <div
@@ -34,7 +36,9 @@
         >
           <div class="cercle2">3</div>
 
-          <h2 class="h2 text-position text-center">{{$t("myOrders.Complete")}}</h2>
+          <h2 class="h2 text-position text-center">
+            {{ $t("myOrders.Complete") }}
+          </h2>
         </div>
         <div
           id="m4"
@@ -42,7 +46,9 @@
           @click="changeElementType(4)"
         >
           <div class="cercle2 align-self-center">4</div>
-          <h2 class="h2 align-self-center ml-1 mb-0">{{ $t("myOrders.Cancel") }}</h2>
+          <h2 class="h2 align-self-center ml-1 mb-0">
+            {{ $t("myOrders.Cancel") }}
+          </h2>
         </div>
       </div>
 
@@ -51,9 +57,13 @@
             <h3 class="text-danger text-center margclear bg-warning">clear history</h3>
             </div> -->
       <div class="justify-content-between row my-4">
-        <div class="col order"><h3 class="margclear1 bold1">{{$t("myOrders.My_orders")}}</h3></div>
+        <div class="col order">
+          <h3 class="margclear1 bold1">{{ $t("myOrders.My_orders") }}</h3>
+        </div>
         <div class="col">
-          <h3 class="text-danger text-center margclear">{{$t("myOrders.clear_history")}}</h3>
+          <h3 class="text-danger text-center margclear">
+            {{ $t("myOrders.clear_history") }}
+          </h3>
         </div>
         <!-- <div class="status" v-if="titre">
           <h5 class="text-danger">clear history</h5>
@@ -64,7 +74,7 @@
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -79,7 +89,8 @@
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >{{$t("myOrders.Order")}} <span class="text-success order">#12324253</span>
+                  >{{ $t("myOrders.Order") }}
+                  <span class="text-success order">#12324253</span>
                   <br />
                   <span class="flou row" style="margin-left: 1px"
                     >yaoundé 12/12/2021 12H00</span
@@ -95,19 +106,22 @@
                     text="Manage"
                     class="m-md-2 noborder"
                   >
-                    <b-dropdown-item>{{$t("myOrders.archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
                 <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">{{$t("myOrders.status")}}:</p>
+                  <p class="h3">{{ $t("myOrders.status") }}:</p>
                   <h3 class="text-success h3">{{ i }}</h3>
                 </div>
               </div>
             </div>
 
-            
             <hr />
 
             <div class="justify-content-center row">
@@ -120,11 +134,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">{{$t("myOrders.Product Qty")}} :</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Price")}}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Product Qty") }} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Price") }}:</h3>
 
-                <h3 class="h3 margm2">{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Total")}} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-4">
@@ -142,8 +156,11 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                <button
+                  class="buttonm btn shadow text-center"
+                  @click="handleReOrder(9)"
+                >
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
             </div>
@@ -157,7 +174,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -169,7 +186,8 @@
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >{{$t("myOrders.Order")}} <span class="text-success order">#12324253</span>
+                  >{{ $t("myOrders.Order") }}
+                  <span class="text-success order">#12324253</span>
                   <br />
                   <span class="flou row" style="margin-left: 1px"
                     >yaoundé 12/12/2021 12H00</span
@@ -198,7 +216,7 @@
                 </div>
 
                 <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">{{$t("myOrders.status")}}:</p>
+                  <p class="h3">{{ $t("myOrders.status") }}:</p>
                   <h3 class="text-success h3">{{ etat }}</h3>
                 </div>
               </div>
@@ -216,11 +234,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Price")}}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Price") }}:</h3>
 
-                <h3 class="h3 margm2">{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Total")}} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-4">
@@ -238,8 +256,11 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                <button
+                  class="buttonm btn shadow text-center"
+                  @click="handleReOrder(9)"
+                >
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
             </div>
@@ -253,7 +274,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -265,7 +286,8 @@
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >{{$t("myOrders.Order")}} <span class="text-success order">#12324253</span>
+                  >{{ $t("myOrders.Order") }}
+                  <span class="text-success order">#12324253</span>
                   <br />
                   <span class="flou row" style="margin-left: 1px"
                     >yaoundé 12/12/2021 12H00</span
@@ -281,13 +303,17 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
                 <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">{{$t("myOrders.status")}}:</p>
+                  <p class="h3">{{ $t("myOrders.status") }}:</p>
                   <h3 class="text-success h3">{{ etat }}</h3>
                 </div>
               </div>
@@ -305,11 +331,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">{{$t("myOrders.Product Qty")}} :</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Price")}}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Product Qty") }} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Price") }}:</h3>
 
-                <h3 class="h3 margm2">{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Total")}} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-4">
@@ -327,8 +353,11 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                <button
+                  class="buttonm btn shadow text-center"
+                  @click="handleReOrder(9)"
+                >
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
             </div>
@@ -342,7 +371,7 @@
 
         <div v-if="status == 4" class="cancel">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -354,7 +383,8 @@
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >{{$t("myOrders.Order")}} <span class="text-success order">#12324253</span>
+                  >{{ $t("myOrders.Order") }}
+                  <span class="text-success order">#12324253</span>
                   <br />
                   <span class="flou row" style="margin-left: 1px"
                     >yaoundé 12/12/2021 12H00</span
@@ -370,13 +400,17 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
                 <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">{{$t("myOrders.status")}}:</p>
+                  <p class="h3">{{ $t("myOrders.status") }}:</p>
                   <h3 class="text-success h3">{{ etat }}</h3>
                 </div>
               </div>
@@ -394,11 +428,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Price")}}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Price") }}:</h3>
 
-                <h3 class="h3 margm2">{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3 class="h3 margm2">{{$t("myOrders.Total")}} :</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-4">
@@ -416,8 +450,11 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                <button
+                  class="buttonm btn shadow text-center"
+                  @click="handleReOrder(9)"
+                >
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
             </div>
@@ -440,7 +477,9 @@
       <!-- navigation--------------- -->
       <div class="row parent">
         <b-avatar id="a1" class="avatar bg-success" text="1"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(1)">{{$t("myOrders.All")}}</h2>
+        <h2 class="text cursor" @click="changeElementType(1)">
+          {{ $t("myOrders.All") }}
+        </h2>
         <div
           id="p1"
           class="progress prog cursor gris bg-success"
@@ -456,7 +495,9 @@
         </div>
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(2)">{{$t("myOrders.In_Progress")}}</h2>
+        <h2 class="text cursor" @click="changeElementType(2)">
+          {{ $t("myOrders.In_Progress") }}
+        </h2>
         <div
           id="p2"
           class="progress prog cursor gris"
@@ -472,7 +513,9 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">{{$t("myOrders.Complete")}}</h2>
+        <h2 class="text cursor" @click="changeElementType(3)">
+          {{ $t("myOrders.Complete") }}
+        </h2>
         <div
           id="p3"
           class="progress prog cursor gris"
@@ -488,7 +531,9 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">{{$t("myOrders.Cancel")}}</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">
+          {{ $t("myOrders.Cancel") }}
+        </h2>
         <div
           id="p4"
           class="progress prog cursor gris"
@@ -505,14 +550,18 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1">{{$t("myOrders.My_orders")}}</h3></div>
-        <div class="status"><h3 class="text-danger">{{$t("myOrders.clear_history")}}</h3></div>
+        <div class="col order">
+          <h3 class="bold1">{{ $t("myOrders.My_orders") }}</h3>
+        </div>
+        <div class="status">
+          <h3 class="text-danger">{{ $t("myOrders.clear_history") }}</h3>
+        </div>
       </div>
 
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -543,7 +592,7 @@
                 </div>
               </div>
               <router-link to="detail">
-                <span class="gras">{{$t("myOrders.Order")}}</span>
+                <span class="gras">{{ $t("myOrders.Order") }}</span>
                 <span class="text-success">#12324253</span> <br />
               </router-link>
               <span class="flou">yaoundé 12/12/2021 12H00</span>
@@ -560,11 +609,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3>{{$t("myOrders.Price")}} :</h3>
+                <h3>{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3>{{ $t("myOrders.Price") }} :</h3>
 
-                <h3>{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3>{{$t("myOrders.Total")}} :</h3>
+                <h3>{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3>{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -575,7 +624,7 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{$t("myOrders.status")}}</h3>
+                <h3 class="bold1">{{ $t("myOrders.status") }}</h3>
                 <h3 class="text-success">{{ i }}</h3>
               </div>
 
@@ -598,7 +647,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -617,12 +666,16 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.Archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.Delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">{{$t("myOrders.Order")}}</span>
+              <span class="gras">{{ $t("myOrders.Order") }}</span>
               <span class="text-success">#12324253</span> <br />
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
@@ -638,11 +691,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3>{{$t("myOrders.Price")}} :</h3>
+                <h3>{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3>{{ $t("myOrders.Price") }} :</h3>
 
-                <h3>{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3>{{$t("myOrders.Total")}} :</h3>
+                <h3>{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3>{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -653,13 +706,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{$t("myOrders.status")}}</h3>
+                <h3 class="bold1">{{ $t("myOrders.status") }}</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-<button class="button btn shadow" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                <button class="button btn shadow" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
 
@@ -676,7 +729,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -695,12 +748,16 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.Archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.Delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">{{$t("myOrders.Order")}}</span>
+              <span class="gras">{{ $t("myOrders.Order") }}</span>
               <span class="text-success">#12324253</span> <br />
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
@@ -716,11 +773,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3>{{$t("myOrders.Price")}} :</h3>
+                <h3>{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3>{{ $t("myOrders.Price") }} :</h3>
 
-                <h3>{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3>{{$t("myOrders.Total")}} :</h3>
+                <h3>{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3>{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -731,13 +788,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{$t("myOrders.status")}}</h3>
+                <h3 class="bold1">{{ $t("myOrders.status") }}</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
 
@@ -754,7 +811,7 @@
 
         <div v-if="status == 4" class="canel">
           <div class="show row">
-            <div class="col-3">{{$t("myOrders.Show")}}:</div>
+            <div class="col-3">{{ $t("myOrders.Show") }}:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -773,12 +830,16 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.Archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.Delete")}}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">{{$t("myOrders.Order")}}</span>
+              <span class="gras">{{ $t("myOrders.Order") }}</span>
               <span class="text-success">#12324253</span> <br />
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
@@ -794,11 +855,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>{{$t("myOrders.Product_Qty")}} :</h3>
-                <h3>{{$t("myOrders.Price")}} :</h3>
+                <h3>{{ $t("myOrders.Product_Qty") }} :</h3>
+                <h3>{{ $t("myOrders.Price") }} :</h3>
 
-                <h3>{{$t("myOrders.shipping_cost")}}:</h3>
-                <h3>{{$t("myOrders.Total")}} :</h3>
+                <h3>{{ $t("myOrders.shipping_cost") }}:</h3>
+                <h3>{{ $t("myOrders.Total") }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -809,13 +870,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{$t("myOrders.status")}}</h3>
+                <h3 class="bold1">{{ $t("myOrders.status") }}</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
                 </button>
               </div>
 
@@ -848,11 +909,11 @@ export default {
       etat: "All",
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: [
-        { value: null, text: this.$t('general.Please_select_an_option')},
+        { value: null, text: this.$t("general.Please_select_an_option") },
         { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: "b", text: "last 10 days" }
       ],
-      etat1: ["pending", "complete", "cancel"],
+      etat1: ["pending", "complete", "cancel"]
     };
   },
 
@@ -875,13 +936,13 @@ export default {
       const pr = document.getElementById("p" + p);
 
       const as = document.querySelectorAll(".avatar");
-      as.forEach((dat) => {
+      as.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       a.classList.add("bg-success");
 
       const ps = document.querySelectorAll(".progress");
-      ps.forEach((dat) => {
+      ps.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       pr.classList.add("bg-success");
@@ -890,21 +951,22 @@ export default {
 
       const el = document.getElementById("m" + p);
       const els = document.querySelectorAll(".t");
-      els.forEach((dat) => {
+      els.forEach(dat => {
         dat.classList.remove("green");
       });
       el.classList.add("green");
     },
-    handleReOrder(id){
-      axios.get(`/order/action/${id}/reorder`)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => console.log(error));
-    },
+    handleReOrder(id) {
+      axios
+        .get(`/order/action/${id}/reorder`)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => console.log(error));
+    }
   },
 
-  mounted() {},
+  mounted() {}
 };
 </script>
 
@@ -988,7 +1050,7 @@ h3 {
 
 /*  start style mobile------------------------- */
 
-.noborder{
+.noborder {
   border: none !important;
 }
 .drop {

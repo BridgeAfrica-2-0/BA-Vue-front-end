@@ -17,7 +17,7 @@
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
-            
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -30,7 +30,10 @@
                   <b>{{ info.user.name }}</b>
                 </div>
 
-                <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
+                <span class="duration float-left">
+                  {{ nFormatter(total.total_community) }}
+                  {{ $t("profileowner.Community") }}
+                </span>
               </h6>
             </span>
 
@@ -71,8 +74,12 @@
                       class="d-none d-md-inline edit-btn"
                       v-b-modal.modal-upp
                     >
-                      <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
-                      {{ $t('profileowner.Edit') }}
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'pencil-alt']"
+                        size="lg"
+                      />
+                      {{ $t("profileowner.Edit") }}
                     </b-button>
 
                     <b-dropdown
@@ -86,37 +93,44 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
-                      <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
-                      <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
+                      <b-dropdown-item @click="selectCover">
+                        {{ $t("profileowner.Change_Cover") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item @click="RemoveCover">
+                        {{ $t("profileowner.Remove_Cover") }}
+                      </b-dropdown-item>
+                      <b-dropdown-item @click="RemoveProfile">
+                        {{ $t("profileowner.Remove_Profile") }}
+                      </b-dropdown-item>
                       <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
-                      <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs">{{
+                        $t("profileowner.View_As")
+                      }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
+            <b-modal
+              id="logomodal"
+              ref="logomodal"
+              @ok="submitLogo"
+              :title="$t('profileowner.Upload_Your_Logo')"
+            >
               <div class="w3-container">
                 <div id="preview">
-
-                 <vue-cropper
+                  <vue-cropper
                     :src="logoselectedFile"
                     ref="logocropper"
                     :aspect-ratio="6.5 / 3"
                     drag-mode="move"
                     :view-mode="1"
-
-                     original:true
+                    original:true
                     info:false
                     canScale:true
                     maxImgSize:1000
-                    
                     :size="1"
-                   
                   />
-
-
                 </div>
               </div>
             </b-modal>
@@ -127,7 +141,7 @@
               ref="coverphotoCrop"
               ok-title="Crop and Save"
               @ok="submitCroppedCover"
-              :title="$t('profileowner.Crop_Cover_Photo')" 
+              :title="$t('profileowner.Crop_Cover_Photo')"
             >
               <div class="w3-container">
                 <div id="preview">
@@ -141,14 +155,17 @@
                     info:false
                     canScale:true
                     maxImgSize:1000
-                    
                     :size="1"
                   />
                 </div>
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modalxl" :title="$t('profileowner.Upload_Cover_Picture')">
+            <b-modal
+              id="modal-upp"
+              ref="modalxl"
+              :title="$t('profileowner.Upload_Cover_Picture')"
+            >
               <div class="w3-container">
                 <div class="row pb3">
                   <div
@@ -172,7 +189,7 @@
                           class=""
                         ></path>
                       </svg>
-                      <h4>{{ $t('profileowner.Upload_a_New_picture') }} </h4>
+                      <h4>{{ $t("profileowner.Upload_a_New_picture") }}</h4>
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
@@ -194,14 +211,19 @@
                         ></path>
                       </svg>
                     </h1>
-                    <h4>{{ $t('profileowner.Edit_Your_New_Picture') }} </h4>
+                    <h4>{{ $t("profileowner.Edit_Your_New_Picture") }}</h4>
                   </div>
                 </div>
               </div>
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal id="coverphoto" ref="coverphotoCropping" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
+            <b-modal
+              id="coverphoto"
+              ref="coverphotoCropping"
+              @ok="submitCover"
+              :title="$t('profileowner.Upload_Cover_Photo')"
+            >
               <div class="w3-container">
                 <div id="preview">
                   <vue-cropper
@@ -211,7 +233,6 @@
                     info:false
                     canScale:true
                     maxImgSize:1000
-                    
                     :size="1"
                     drag-mode="move"
                     :view-mode="1"
@@ -227,23 +248,21 @@
 </template>
 
 <script>
-
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
-
-import {defaultCoverImage} from '@/mixins';
-import { mapMutations, mapGetters } from 'vuex'
+import { defaultCoverImage } from "@/mixins";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "headPageOwner",
   mixins: [defaultCoverImage],
   components: {
-    VueCropper,
+    VueCropper
   },
 
-  created(){
-    this.currentAuthType = 'profile'
+  created() {
+    this.currentAuthType = "profile";
   },
 
   data() {
@@ -255,7 +274,7 @@ export default {
       profile_photo: null,
       cropedImage: null,
       selectedFile: null,
-      logoselectedFile:null,
+      logoselectedFile: null,
       options: {
         rewind: true,
         autoplay: true,
@@ -268,21 +287,21 @@ export default {
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
             perPage: 2,
-            gap: "1rem",
-          },
-        },
-      },
+            gap: "1rem"
+          }
+        }
+      }
     };
   },
 
   methods: {
     ...mapMutations({
-      addCoverPicture: 'auth/addCoverPicture',
-      addProfile: 'auth/updateProfilePicture'
+      addCoverPicture: "auth/addCoverPicture",
+      addProfile: "auth/updateProfilePicture"
     }),
 
     nFormatter(num) {
@@ -304,13 +323,10 @@ export default {
       this.img_url = URL.createObjectURL(file);
       this.$refs["logomodal"].show();
 
-
-
-     
       this.mime_type = file.type;
       if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.logoselectedFile = event.target.result;
           this.$refs.logocropper.replace(this.logoselectedFile);
         };
@@ -318,8 +334,6 @@ export default {
       } else {
         alert("Sorry, FileReader API not supported");
       }
- 
-
     },
 
     selectlogo() {
@@ -357,7 +371,7 @@ export default {
       this.mime_type = file.type;
       if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.selectedFile = event.target.result;
           this.$refs.cropper.replace(this.selectedFile);
         };
@@ -373,7 +387,7 @@ export default {
       this.mime_type = file.type;
       if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.selectedFile = event.target.result;
           this.$refs.cropperphotoCropping.replace(this.selectedFile);
         };
@@ -383,83 +397,74 @@ export default {
       }
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("cover-imag").click();
     },
 
-    chooseProfile1: function () {
+    chooseProfile1: function() {
       document.getElementById("profile-imag").click();
     },
 
-
-
-    
-
-  submitLogo() {
+    submitLogo() {
       this.cropedImage = this.$refs.logocropper.getCroppedCanvas().toDataURL();
-      this.$refs.logocropper.getCroppedCanvas().toBlob((blob) => {
-      
-
+      this.$refs.logocropper.getCroppedCanvas().toBlob(blob => {
         let loader = this.$loading.show({
-            container: this.fullPage ? null : this.$refs.preview,
-            canCancel: true,
-            onCancel: this.onCancel,
-            color: '#e75c18',
-          });
+          container: this.fullPage ? null : this.$refs.preview,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18"
+        });
 
-          let formData = new FormData();
-          formData.append("image", blob);
+        let formData = new FormData();
+        formData.append("image", blob);
         this.axios
           .post("user/upload/profile-picture", formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           })
-          .then((response) => {
-
-            
+          .then(response => {
             this.flashMessage.show({
-                status: "success",
-                message: this.$t("profileowner.Logo_Updated"),
-                blockClass: "custom-block-class",
-              });
-              
-              loader.hide();
-              
+              status: "success",
+              message: this.$t("profileowner.Logo_Updated"),
+              blockClass: "custom-block-class"
+            });
+
+            loader.hide();
 
             this.$store
               .dispatch("profile/loadUserPostIntro", null)
-              .then((response) => {
+              .then(response => {
                 console.log(response);
                 this.flashMessage.show({
                   status: "success",
                   message: this.$t("profileowner.Cover_Updated"),
-                  blockClass: "custom-block-class",
+                  blockClass: "custom-block-class"
                 });
                 loader.hide();
                 this.$refs["modalxl"].hide();
               })
-              .catch((error) => {
+              .catch(error => {
                 console.log(error);
               });
 
             this.editCoverNull();
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
             if (err.response.status == 422) {
               console.log({ err: err });
               this.flashMessage.show({
                 status: "error",
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               loader.hide();
             } else {
               this.flashMessage.show({
                 status: "error",
                 message: this.$t("profileowner.Unable_to_upload_your_image"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
               loader.hide();
@@ -468,13 +473,12 @@ export default {
       }, this.mime_type);
     },
 
-
     submitLogob() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18"
       });
 
       let formData = new FormData();
@@ -482,44 +486,43 @@ export default {
       this.axios
         .post("user/upload/profile-picture", formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
-             
+            .then(response => {
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Logo_Updated"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
-               loader.hide();
+              loader.hide();
               this.$refs["modalxl"].hide();
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
-             loader.hide();
+            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: this.$t("profileowner.Unable_to_set_your_Logo"),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
-             loader.hide();
+            loader.hide();
           }
         });
     },
@@ -535,35 +538,34 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       this.axios
         .delete("user/profile-picture")
-        .then((response) => {
+        .then(response => {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
-             
+            .then(response => {
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.profile_removed_successfully"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               loader.hide();
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
             message: this.$t("profileowner.Unable_to_remove_your_cover"),
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
           console.log({ err: err });
           loader.hide();
@@ -575,35 +577,35 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       this.axios
         .delete("user/cover")
-        .then((response) => {
+        .then(response => {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then(() => {
-              this.addCoverPicture(null)
+              this.addCoverPicture(null);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               loader.hide();
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error);
             });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
             message: this.$t("profileowner.Unable_to_remove_your_cover"),
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
           console.log({ err: err });
           loader.hide();
@@ -612,14 +614,14 @@ export default {
 
     submitCroppedCover() {
       this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
-      this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+      this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
         console.log("blob", blob);
 
         let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.preview,
           canCancel: true,
           onCancel: this.onCancel,
-          color: "#e75c18",
+          color: "#e75c18"
         });
 
         let formData = new FormData();
@@ -627,43 +629,43 @@ export default {
         this.axios
           .post("user/upload-cover", formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           })
-          .then((response) => {
+          .then(response => {
             this.$store
               .dispatch("profile/loadUserPostIntro", null)
-              .then((response) => {
+              .then(response => {
                 console.log(response);
                 this.flashMessage.show({
                   status: "success",
                   message: this.$t("profileowner.Cover_Updated"),
-                  blockClass: "custom-block-class",
+                  blockClass: "custom-block-class"
                 });
                 loader.hide();
                 this.$refs["modalxl"].hide();
               })
-              .catch((error) => {
+              .catch(error => {
                 console.log(error);
               });
 
             this.editCoverNull();
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
             if (err.response.status == 422) {
               console.log({ err: err });
               this.flashMessage.show({
                 status: "error",
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               loader.hide();
             } else {
               this.flashMessage.show({
                 status: "error",
                 message: this.$t("profileowner.Unable_to_upload_your_image"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
               loader.hide();
@@ -673,81 +675,73 @@ export default {
     },
 
     submitCover() {
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
-      if(this.selectedFile)  {            
-        this.cropedImage = this.$refs.cropperphotoCropping.getCroppedCanvas().toDataURL();
+      if (this.selectedFile) {
+        this.cropedImage = this.$refs.cropperphotoCropping
+          .getCroppedCanvas()
+          .toDataURL();
 
-        this.$refs.cropperphotoCropping.getCroppedCanvas().toBlob((blob) => {
+        this.$refs.cropperphotoCropping.getCroppedCanvas().toBlob(blob => {
+          this.cover_photo = blob;
 
-             this.cover_photo=blob;
-          
-             let formData = new FormData();
+          let formData = new FormData();
 
-      formData.append("image", this.cover_photo);
-      
-      this.axios.post("user/upload-cover", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-      })
-      .then((response) => {
-          console.log(response);
-        this.$store
-            .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
-             
+          formData.append("image", this.cover_photo);
 
-              this.flashMessage.success({
-                message: this.$t("profileowner.Operation_successful"),
-                blockClass: "custom-block-class",
-              });
-              loader.hide();
-              this.$refs["modalxl"].hide();
-        })
-        .catch((error) => {
-          console.log(error);
-          this.flashMessage.show({
-            status: "error",
-            message: error.response.data.message,
-            blockClass: "custom-block-class",
-        });
-      });
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-              blockClass: "custom-block-class",
+          this.axios
+            .post("user/upload-cover", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data"
+              }
+            })
+            .then(response => {
+              console.log(response);
+              this.$store
+                .dispatch("profile/loadUserPostIntro", null)
+                .then(response => {
+                  this.flashMessage.success({
+                    message: this.$t("profileowner.Operation_successful"),
+                    blockClass: "custom-block-class"
+                  });
+                  loader.hide();
+                  this.$refs["modalxl"].hide();
+                })
+                .catch(error => {
+                  console.log(error);
+                  this.flashMessage.show({
+                    status: "error",
+                    message: error.response.data.message,
+                    blockClass: "custom-block-class"
+                  });
+                });
+            })
+            .catch(err => {
+              console.log({ err: err });
+              if (err.response.status == 422) {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: err.response.data.message,
+                  blockClass: "custom-block-class"
+                });
+                loader.hide();
+              } else {
+                this.flashMessage.show({
+                  status: "error",
+                  message: this.$t("profileowner.Can_not_delete_your_cover"),
+                  blockClass: "custom-block-class"
+                });
+              }
             });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: this.$t("profileowner.Can_not_delete_your_cover"),
-              blockClass: "custom-block-class",
-            });
-          }
-        });
-           
-           
-
         }, this.mime_type);
-
-     }
-
-    
-      
-    },
+      }
+    }
   },
 
   mounted() {
@@ -755,26 +749,29 @@ export default {
   },
 
   computed: {
-
     ...mapGetters({
-      auth: 'auth/profilConnected'
+      auth: "auth/profilConnected"
     }),
 
     total() {
       return this.$store.state.profile.Tcommunity;
     },
 
-    info: function () {
+    info: function() {
       return this.$store.getters["profile/getUserPostIntro"];
-    },
+    }
   },
 
   watch: {
-    "$store.state.profile.profileIntro": { 
-      deep:true,
-      handler(){
-        this.addCoverPicture(this.$store.state.profile.profileIntro.user.cover_picture)
-        this.addProfile(this.$store.state.profile.profileIntro.user.profile_picture)
+    "$store.state.profile.profileIntro": {
+      deep: true,
+      handler() {
+        this.addCoverPicture(
+          this.$store.state.profile.profileIntro.user.cover_picture
+        );
+        this.addProfile(
+          this.$store.state.profile.profileIntro.user.profile_picture
+        );
       }
     }
   }

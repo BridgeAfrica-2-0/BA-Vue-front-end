@@ -35,7 +35,6 @@
         </div>
       </b-card>
     </div>
-
   </b-container>
 </template>
 
@@ -45,7 +44,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      code: "",
+      code: ""
     };
   },
   computed: mapGetters(["recoverPassData"]),
@@ -60,9 +59,9 @@ export default {
       axios
         .post(otpVerifcationUrl, {
           OTP: this.code,
-          phone: this.$store.state.auth.passwordToken.user.phone,
+          phone: this.$store.state.auth.passwordToken.user.phone
         })
-        .then((response) => {
+        .then(response => {
           if (response.status === 200) {
             console.log(response);
             this.$router.push({ name: "RecoverPass3" });
@@ -70,7 +69,7 @@ export default {
             console.log(response.data);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -78,12 +77,12 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: err.response.data.message
             });
           }
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

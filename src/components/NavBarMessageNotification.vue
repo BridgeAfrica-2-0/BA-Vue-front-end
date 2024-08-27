@@ -11,7 +11,13 @@
       >
         <div class="d-inline-flex flex-row align-items-center">
           <div>
-            <img :src="msg.user_picture" class="rounded-circle" alt="" width="30" height="30" />
+            <img
+              :src="msg.user_picture"
+              class="rounded-circle"
+              alt=""
+              width="30"
+              height="30"
+            />
           </div>
           <div class="d-flex flex-column ml-1 line-size">
             <div class="font-weight-bold">{{ msg.user_name }}</div>
@@ -22,32 +28,34 @@
       </div>
       <hr class="h-divider" />
 
-      <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>{{$t('general.See_Inbox')}}</u></a>
+      <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"
+        ><u>{{ $t("general.See_Inbox") }}</u></a
+      >
     </div>
   </b-popover>
 </template>
 
 <script>
-import { fromNow } from '@/helpers';
+import { fromNow } from "@/helpers";
 
 export default {
   data: () => ({
-    messages: [],
+    messages: []
   }),
 
   filters: {
     fromNow,
-    parseContent: function (value) {
+    parseContent: function(value) {
       return value.length < 10 ? value : `${value.substring(0, 10)} ...`;
-    },
+    }
   },
   methods: {
-    showMessages: async function () {
+    showMessages: async function() {
       const response = await this.$repository.post.showInboxMessage();
 
       if (response.success) this.messages = response.data;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -192,7 +200,7 @@ export default {
 }
 
 .text-dark {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;

@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ["title", "image"]
 };
 </script>
 

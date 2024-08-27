@@ -34,7 +34,6 @@
               :less-str="$t('search.read_less')"
               :max-chars="25"
             >
-              
             </read-more>
           </p>
         </b-col>
@@ -112,8 +111,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -130,7 +129,7 @@ export default {
         return this.$store.state.businessOwner.BcommunityFollowing
           .business_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -176,11 +175,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -144,17 +144,17 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       number: "",
       PaymentForm: {
         subscribe: "type",
         phone: "",
         operator: "",
-        country: "",
+        country: ""
       },
 
-      show: false,
+      show: false
     };
   },
 
@@ -164,7 +164,7 @@ export default {
     },
     countries() {
       return this.$store.state.auth.country;
-    },
+    }
   },
 
   mounted() {
@@ -185,7 +185,7 @@ export default {
           console.log(this.countries);
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -201,7 +201,7 @@ export default {
       console.log("defaultPayment");
       this.$store
         .dispatch("profileSettingsEdit/getDefaultPayment", {
-          path: `payment-method`,
+          path: `payment-method`
         })
         .then(() => {
           console.log(this.defaultPayment);
@@ -209,7 +209,7 @@ export default {
           this.PaymentForm.phone = this.defaultPayment.phone;
           console.log("ohh yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -223,7 +223,7 @@ export default {
       this.$store
         .dispatch("profileSettingsEdit/confirmPayment", {
           path: `update-payement-method`,
-          formData: formData,
+          formData: formData
         })
         .then(({ data }) => {
           console.log(data);
@@ -233,24 +233,24 @@ export default {
           this.DefaultPayment();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.Payment_Complete"),
+            message: this.$t("businessowner.Payment_Complete")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.AcRequestPayment = false;
           this.show = false;
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.Unable_Complete_Payment"),
+            message: this.$t("businessowner.Unable_Complete_Payment")
           });
         });
     },
 
     formatMoney(money) {
       return this.formatObject.format(money);
-    },
-  },
+    }
+  }
 };
 </script>
 

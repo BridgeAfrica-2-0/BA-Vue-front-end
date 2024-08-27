@@ -1,13 +1,18 @@
 <template>
   <div>
-     <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
+    <Business
+      v-for="item in businesses"
+      :key="item.id"
+      :business="item"
+      @getTotalCommunity="getTotalCommunity"
+    />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import moment from "moment";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import axios from "axios";
 import Business from "@/components/Business";
 export default {
@@ -24,16 +29,13 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-   
-  
-        
+        perMove: 1
       },
 
-       isGuestUser: isGuestUser
+      isGuestUser: isGuestUser
     };
   },
-   components: {
+  components: {
     Business
   },
   mounted() {
@@ -53,30 +55,27 @@ export default {
         return this.$store.state.businessOwner.BcommunityFollowing
           .business_following;
       }
-    },
+    }
   },
 
   methods: {
-
-      businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-    gotoBusiness(id) { 
-      
-      if(this.$route.name == 'BusinessFollower'){
-          // this.$emit('gotoabout')
-          this.$router.push(`/business/${id}#about`);
-          console.log("direction --")
-      }else {
-
+    gotoBusiness(id) {
+      if (this.$route.name == "BusinessFollower") {
+        // this.$emit('gotoabout')
+        this.$router.push(`/business/${id}#about`);
+        console.log("direction --");
+      } else {
         this.$router.push(`/business/${id}?tabId=1`);
       }
     },
@@ -90,22 +89,19 @@ export default {
     },
 
     infiniteHandler($state) {
-     
-
-           let url ="";
-       
+      let url = "";
 
       if (this.isGuestUser()) {
-        url = this.type === 'Follower'
-          ? `guest/business/community/business-follower/${this.biz_id}/`
-          : `guest/business/community/business-following/${this.biz_id}/`;
+        url =
+          this.type === "Follower"
+            ? `guest/business/community/business-follower/${this.biz_id}/`
+            : `guest/business/community/business-following/${this.biz_id}/`;
       } else {
-        url = this.type === 'Follower'
-          ? `business/community/business-follower/${this.biz_id}/`
-          : `business/community/business-following/${this.biz_id}/`;
+        url =
+          this.type === "Follower"
+            ? `business/community/business-follower/${this.biz_id}/`
+            : `business/community/business-following/${this.biz_id}/`;
       }
-
-
 
       axios
         .get(url + this.page)
@@ -130,19 +126,18 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     async handleFollow(user) {
-     
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
@@ -155,12 +150,12 @@ export default {
           this.businessCommunityTotal();
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

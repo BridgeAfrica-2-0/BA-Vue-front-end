@@ -16,7 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="">{{ $t('businessowner.Messages')}}</h3>
+                  <h3 class="">{{ $t("businessowner.Messages") }}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -102,10 +102,10 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item @click="newMessage(true)">
-                      {{ $t('businessowner.New_Chat') }}</b-dropdown-item
+                      {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="newMessage(true)">
-                      {{ $t('businessowner.New_Group_Chat') }}
+                      {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </b-col>
@@ -118,18 +118,21 @@
                     content-class="mt-12 ma-4 pt-6"
                     fill
                   >
-                    <b-tab :title="$t('businessowner.Users')" @click="getChatList({ type: 'user' })">
+                    <b-tab
+                      :title="$t('businessowner.Users')"
+                      @click="getChatList({ type: 'user' })"
+                    >
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('general.Search_chat_list')" 
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -157,14 +160,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.receiver_id,
+                                id: chat.receiver_id
                               })
                             "
                           >
@@ -195,7 +198,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -214,7 +217,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -242,14 +245,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.receiver_business_id
                               })
                             "
                           >
@@ -280,7 +283,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat')}}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -295,11 +298,11 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('general.Search_chat_list')" 
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -327,14 +330,14 @@
                                   ? chatSelected.clickedId
                                   : false)
                                   ? chatSelected.active
-                                  : false,
-                            },
+                                  : false
+                            }
                           ]"
                           @click="
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_network_id,
+                              id: chat.receiver_network_id
                             })
                           "
                         >
@@ -382,7 +385,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -410,14 +413,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.receiver_business_id
                               })
                             "
                           >
@@ -448,7 +451,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat')}}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -526,7 +529,7 @@
                         histBizToBiz({
                           type: type,
                           receiverID: chatId,
-                          keyword: chatSearchKeyword,
+                          keyword: chatSearchKeyword
                         })
                       "
                       type="text"
@@ -542,7 +545,7 @@
                             histBizToBiz({
                               type: type,
                               receiverID: chatId,
-                              keyword: chatSearchKeyword,
+                              keyword: chatSearchKeyword
                             })
                           "
                           class="msg-icon primary icon-size"
@@ -566,19 +569,19 @@
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            {{ $t('businessowner.View_Profile')}}
+                            {{ $t("businessowner.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Disable_Notification') }}
+                            {{ $t("businessowner.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Delete_Contact') }}
+                            {{ $t("businessowner.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Delete_Chat') }}
+                            {{ $t("businessowner.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -706,7 +709,9 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">{{ $t('businessowner.Select_a_chat') }}</h1>
+                  <h1 class="text-center">
+                    {{ $t("businessowner.Select_a_chat") }}
+                  </h1>
                 </div>
               </section>
 
@@ -799,7 +804,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px',
+                              left: display.x + 'px'
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -851,7 +856,9 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> {{ $t('businessowner.Contact_Info') }}</span>
+              <span class="cnt-info">
+                {{ $t("businessowner.Contact_Info") }}</span
+              >
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -862,16 +869,18 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{ $t('businessowner.View_Profile')}}</b-link>
+                <b-link class="primary">{{
+                  $t("businessowner.View_Profile")
+                }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>{{ $t('businessowner.Options') }}</li>
+                <li>{{ $t("businessowner.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      {{ $t('businessowner.Block_Messages') }}
+                      {{ $t("businessowner.Block_Messages") }}
                     </b-col>
                     <b-col>
                       <b-form-checkbox
@@ -884,7 +893,7 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>{{ $t('businessowner.Report_User') }}</li>
+                <li>{{ $t("businessowner.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
@@ -897,14 +906,18 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> {{ $t('businessowner.To') }} </b-col>
+                  <b-col class="col-1 mt-3">
+                    {{ $t("businessowner.To") }}
+                  </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
+                      :placeholder="
+                        $t('general.Type_the_name_of_person_or_Business')
+                      "
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -930,7 +943,7 @@
                               value="accepted"
                               @change="selectedAllMulty"
                             >
-                              {{ $t('businessowner.All') }}
+                              {{ $t("businessowner.All") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -940,7 +953,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              {{ $t('businessowner.People') }}
+                              {{ $t("businessowner.People") }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -951,7 +964,7 @@
                               name="business"
                               @change="businessAllMulty"
                             >
-                              {{ $t('businessowner.Business') }}
+                              {{ $t("businessowner.Business") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -961,7 +974,7 @@
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
-                              {{ $t('businessowner.Network') }}
+                              {{ $t("businessowner.Network") }}
                             </b-form-checkbox>
                           </b-col>
                           <!--
@@ -1000,7 +1013,7 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2>{{ $t('businessowner.All') }}</h2>
+                          <h2>{{ $t("businessowner.All") }}</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
@@ -1067,7 +1080,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >{{ $t('businessowner.Next') }}</b-button
+                      >{{ $t("businessowner.Next") }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"
@@ -1092,7 +1105,7 @@
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
         <div class="d-block text-center">
-          <h3>{{ $t('businessowner.The_Group_Name') }}:</h3>
+          <h3>{{ $t("businessowner.The_Group_Name") }}:</h3>
           <b-form-input
             v-model="groupName"
             @keypress.enter="selectedMultyChat()"
@@ -1103,14 +1116,14 @@
           ></b-form-input>
         </div>
 
-        <b-button class="mt-3" block @click="selectedMultyChat()"
-          >{{ $t('businessowner.Create') }}</b-button
-        >
+        <b-button class="mt-3" block @click="selectedMultyChat()">{{
+          $t("businessowner.Create")
+        }}</b-button>
       </b-modal>
       <!-- preview -->
       <b-modal id="preview-file" hide-footer>
         <div class="d-block text-center">
-          <h3>{{ $t('businessowner.Preview_file') }}:</h3>
+          <h3>{{ $t("businessowner.Preview_file") }}:</h3>
           <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
         </div>
       </b-modal>
@@ -1125,7 +1138,7 @@ import moment from "moment";
 
 export default {
   components: {
-    EmojiPicker,
+    EmojiPicker
   },
   data() {
     return {
@@ -1156,7 +1169,7 @@ export default {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       socket: io("localhost:7000", {
-        transports: ["websocket", "polling", "flashsocket"],
+        transports: ["websocket", "polling", "flashsocket"]
       }),
       chatSelected: [],
       showsearch: true,
@@ -1168,29 +1181,29 @@ export default {
           title: "Accounting Services",
           uri: "aaaa.com",
           category: "a",
-          icon: null,
+          icon: null
         },
         { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
         {
           title: "Advanced Student Lookup",
           uri: "bbbb.com",
           category: "b",
-          icon: null,
+          icon: null
         },
         { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
         {
           title: "Auxiliares Services",
           uri: "bbbb.com",
           category: "b",
-          icon: null,
+          icon: null
         },
         { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
         {
           title: "Board of Trustees",
           uri: "dddd.com",
           category: "d",
-          icon: null,
-        },
+          icon: null
+        }
       ],
       resources: [
         {
@@ -1198,14 +1211,14 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "1",
+          id: "1"
         },
         {
           name: "itz blec blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "2",
+          id: "2"
         },
 
         {
@@ -1213,7 +1226,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "3",
+          id: "3"
         },
 
         {
@@ -1221,7 +1234,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "4",
+          id: "4"
         },
 
         {
@@ -1229,15 +1242,15 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "5",
+          id: "5"
         },
         {
           name: "blezour blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "6",
-        },
+          id: "6"
+        }
       ],
       message: {},
       newMsg: false,
@@ -1246,7 +1259,7 @@ export default {
       checked: false,
       text: "",
       selected: [],
-      messages: null,
+      messages: null
     };
   },
   computed: {
@@ -1302,16 +1315,16 @@ export default {
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.users.filter((user) => {
+        return this.users.filter(user => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => user.name.toLowerCase().includes(v));
+            .every(v => user.name.toLowerCase().includes(v));
         });
       } else {
         return this.users.data;
       }
-    },
+    }
   },
   mounted() {
     if (this.chatList.length < 0) {
@@ -1352,8 +1365,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   methods: {
     convert(bytes) {
@@ -1366,7 +1379,7 @@ export default {
       this.allSelection = true;
       this.selectedMulty = [];
       if (this.allSelectedMulty) {
-        this.all.map((biz) => {
+        this.all.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1380,7 +1393,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.peopleMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1395,7 +1408,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.businessMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1410,7 +1423,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.networkMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1429,7 +1442,7 @@ export default {
       //   console.log(data);
       //   this.messages.push(data);
       // });
-      this.socket.on("groupMessage", (data) => {
+      this.socket.on("groupMessage", data => {
         console.log("group message Received");
         console.log(data);
         this.chats.push(data);
@@ -1439,12 +1452,12 @@ export default {
           sender_business_id: this.currentBiz.id,
           receiver_business_id: this.chatSelected.id,
           receiver_network_id: this.chatSelected.id,
-          receiver_id: this.chatId,
+          receiver_id: this.chatId
         };
 
         // this.saveMessage(elmts);
       });
-      this.socket.on("privateMessage", (data) => {
+      this.socket.on("privateMessage", data => {
         console.log("Received");
         console.log(data);
         this.chats.push(data);
@@ -1537,7 +1550,7 @@ export default {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
         data: data,
-        type: this.type,
+        type: this.type
       });
     },
     selectedMultyChat() {
@@ -1556,7 +1569,7 @@ export default {
       this.chatSelected = {
         active: true,
         clickedId: dumId,
-        name: this.groupName,
+        name: this.groupName
       };
 
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -1583,7 +1596,7 @@ export default {
         id: data.id,
         active: true,
         clickedId: data.id,
-        name: data.chat.name,
+        name: data.chat.name
       };
 
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -1616,7 +1629,7 @@ export default {
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
-        attachment: this.file,
+        attachment: this.file
       });
       console.log("SENT...", {
         type: this.type,
@@ -1624,7 +1637,7 @@ export default {
         sender_business_id: this.currentBiz.id,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
+        receiver_id: this.chatId
         // attachment: this.file,
       });
       this.input = "";
@@ -1638,7 +1651,7 @@ export default {
         sender_business_id: this.currentBiz.id,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
+        receiver_id: this.chatId
       });
 
       console.log("SENT...");
@@ -1693,12 +1706,12 @@ export default {
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
-        behavior: "smooth",
+        behavior: "smooth"
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       console.log(this.$refs.feed.scrollTop);
-    },
-  },
+    }
+  }
 };
 </script>
 

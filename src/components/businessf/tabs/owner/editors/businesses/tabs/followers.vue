@@ -51,8 +51,12 @@
     <b-row>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
+          <div class="text-red" slot="no-more">
+            {{ $t("general.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("general.No_More_Request") }}
+          </div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -63,7 +67,7 @@
 import CommunityBusiness from "../../communitybusiness";
 export default {
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
   data() {
     return {
@@ -72,14 +76,14 @@ export default {
       page: 0,
       loading: false,
       businessfollowers: [],
-      displayfollowers: [],
+      displayfollowers: []
     };
   },
   mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
-    nFormatter: function (num) {
+    nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -141,7 +145,7 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
       this.loading = false;
@@ -152,21 +156,21 @@ export default {
       console.log("network/" + this.url + "/lock/business/" + user_id);
       this.axios
         .delete("network/" + this.url + "/lock/business/" + user_id)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           this.blockUsers();
           this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: this.$t("settings.User_blocked"),
+            message: this.$t("settings.User_blocked")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("settings.Unable_to_blocked_User"),
+            message: this.$t("settings.Unable_to_blocked_User")
           });
         });
     },
@@ -177,20 +181,19 @@ export default {
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
         id: Comdata.id,
-        type: Comdata.type,
+        type: Comdata.type
       };
 
       await this.axios
         .post(url, data)
-        .then((response) => {
+        .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
         })
-        .catch((err) => console.log(err));
-    },
-  },
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,7 +1,9 @@
 <template>
   <b-container>
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l">{{$t("businessf.Save_Changes")}}</b-button>
+      <b-button variant="primary" class="a-button-l">{{
+        $t("businessf.Save_Changes")
+      }}</b-button>
       <br />
     </div>
 
@@ -61,7 +63,9 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            {{$t("businessf.All_business_posts_must_be_approved_by_an_admin")}}
+            {{
+              $t("businessf.All_business_posts_must_be_approved_by_an_admin")
+            }}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -103,7 +107,9 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left">{{$t("businessf.Delete_Business_Identity")}}</b-link>
+      <b-link href="#foo" class="f-left">{{
+        $t("businessf.Delete_Business_Identity")
+      }}</b-link>
     </b-container>
   </b-container>
 </template>
@@ -125,7 +131,6 @@ export default {
 }
 
 .b-bottomn {
- 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }

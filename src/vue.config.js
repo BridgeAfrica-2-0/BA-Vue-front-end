@@ -1,8 +1,8 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
-  mode: 'production',
+  mode: "production",
   optimization: {
-    nodeEnv: 'production',
+    nodeEnv: "production",
     minimize: true
   },
   module: {
@@ -28,15 +28,15 @@ module.exports = {
   },
   transpileDependencies: [
     // can be string or regex
-    'vue-moment',
-    'vue-mapbox',
-    'vue-animate-onscroll',
-    'vue-agile',
-    'mapbox-gl'
+    "vue-moment",
+    "vue-mapbox",
+    "vue-animate-onscroll",
+    "vue-agile",
+    "mapbox-gl"
   ],
   plugins: [
-    require('cssnano')({
-      preset: 'default'
+    require("cssnano")({
+      preset: "default"
     }),
     new MiniCssExtractPlugin({ filename: "[name].[hash].css" })
   ]

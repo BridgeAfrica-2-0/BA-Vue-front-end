@@ -1,5 +1,5 @@
 <template>
-  <div class="lalala">  
+  <div class="lalala">
     <div class="border mt-2">
       <span>
         <h6 class="title m-3">
@@ -16,7 +16,11 @@
           >
         </h6>
       </span>
-      <b-tabs lazy active-nav-item-class="active-tab-item" content-class="mt-3  f-left ">
+      <b-tabs
+        lazy
+        active-nav-item-class="active-tab-item"
+        content-class="mt-3  f-left "
+      >
         <b-tab active>
           <template slot="title">
             {{ $t("network.People") }}
@@ -27,7 +31,12 @@
           <div>
             <b-row>
               <b-col>
-                <b-tabs fill lazy active-nav-item-class="active-tab-item" content-class="mt-3  f-left m-up">
+                <b-tabs
+                  fill
+                  lazy
+                  active-nav-item-class="active-tab-item"
+                  content-class="mt-3  f-left m-up"
+                >
                   <b-tab active>
                     <template slot="title">
                       {{ $t("network.Followers") }}
@@ -47,8 +56,7 @@
                       </span>
                     </template>
                     <div class="s-comcard">
-                      <People type="Following"
-                      />
+                      <People type="Following" />
                     </div>
                   </b-tab>
                 </b-tabs>
@@ -78,7 +86,7 @@
                   </span>
                 </template>
                 <div class="s-comcard">
-                  <Business type="Follower"  />
+                  <Business type="Follower" />
                 </div>
               </b-tab>
               <b-tab>
@@ -89,7 +97,7 @@
                   </span>
                 </template>
                 <div class="s-comcard">
-                  <Business type="Following"/>
+                  <Business type="Following" />
                 </div>
               </b-tab>
             </b-tabs>
@@ -118,8 +126,7 @@
                 </template>
                 <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
                 <div class="s-comcard">
-                  <Network type="Follower"
-                  />
+                  <Network type="Follower" />
                 </div>
               </b-tab>
               <b-tab>
@@ -146,15 +153,15 @@ import People from "./people";
 import Business from "./business";
 import Network from "./network";
 export default {
-  name: "sidebarcommunity",       
+  name: "sidebarcommunity",
   components: {
     People,
     Business,
-    Network,
+    Network
   },
   data() {
     return {
-      url: null,
+      url: null
     };
   },
   computed: {
@@ -166,7 +173,7 @@ export default {
     },
     networkdetails() {
       return this.$store.state.networkProfileCommunitySidebar.networkdetails;
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
@@ -188,46 +195,35 @@ export default {
       return num;
     },
 
-    UserDetails() {   
-
-     
-
+    UserDetails() {
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
         .then(() => {
-        
-           console.log("loading user community");
+          console.log("loading user community");
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },  
-
-
-    businessDetails() {
-
-   
-      this.$store
-        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
-        .then(() => {
-             console.log("loading bix community");
-        })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
+    businessDetails() {
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
+        .then(() => {
+          console.log("loading bix community");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
 
     networkDetails() {
-     
-      
-
       this.$store
         .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
         .then(() => {
-         console.log("loading network community");
+          console.log("loading network community");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -239,19 +235,19 @@ export default {
       const data = {
         networkId: this.url,
         id: Comdata.id,
-        type: Comdata.type,
+        type: Comdata.type
       };
-      console.log("data", data)
+      console.log("data", data);
 
       await this.axios
         .post(url, data)
-        .then((response) => {
+        .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
         })
-        .catch((err) => console.log(err));
-    },
-  },
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 

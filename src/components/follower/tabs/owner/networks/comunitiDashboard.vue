@@ -9,14 +9,14 @@
               src="@/assets/icons/people.png"
               style="width: 60px;"
             />
-            {{$t("general.COMMUNITY")}} <span class="h4-color"> 7K </span>
+            {{ $t("general.COMMUNITY") }} <span class="h4-color"> 7K </span>
           </h4>
         </span>
 
         <b-tabs pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
-              {{$t("general.People")}} <span class="spa-color"> 7K </span>
+              {{ $t("general.People") }} <span class="spa-color"> 7K </span>
             </template>
 
             <div>
@@ -25,7 +25,8 @@
                   <b-tabs fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
                       <template slot="title">
-                        {{$t("general.Followers")}} <span class="spa-color"> 7K </span>
+                        {{ $t("general.Followers") }}
+                        <span class="spa-color"> 7K </span>
                       </template>
 
                       <div class="s-comcard">
@@ -42,7 +43,8 @@
 
                     <b-tab>
                       <template slot="title">
-                        {{$t("general.Following")}} <span class="spa-color"> 7K </span>
+                        {{ $t("general.Following") }}
+                        <span class="spa-color"> 7K </span>
                       </template>
 
                       <div class="s-comcard">
@@ -64,14 +66,15 @@
 
           <b-tab>
             <template slot="title">
-              {{$t("general.Businesses")}} <span class="spa-color"> 7K </span>
+              {{ $t("general.Businesses") }} <span class="spa-color"> 7K </span>
             </template>
 
             <div>
               <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                    {{$t("general.Followers")}} <span class="spa-color"> 7K </span>
+                    {{ $t("general.Followers") }}
+                    <span class="spa-color"> 7K </span>
                   </template>
 
                   <div class="s-comcard">
@@ -88,7 +91,8 @@
 
                 <b-tab>
                   <template slot="title">
-                    {{$t("general.Following")}} <span class="spa-color"> 7K </span>
+                    {{ $t("general.Following") }}
+                    <span class="spa-color"> 7K </span>
                   </template>
 
                   <div class="s-comcard">

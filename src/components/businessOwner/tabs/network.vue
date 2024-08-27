@@ -3,25 +3,30 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
     </b-modal>
- 
-  <Network v-for="item in network"  :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+
+    <Network
+      v-for="item in network"
+      :network="item"
+      :key="item.id"
+      @getTotalCommunity="getTotalCommunity"
+    />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import Network from "@/components/Network";
 export default {
   props: ["type"],
-   components: {
-    Network,
+  components: {
+    Network
   },
   data() {
     return {
       page: 1,
-       isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser,
       biz_id: null,
       network: [],
       options: {
@@ -31,8 +36,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -44,7 +49,7 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   mounted() {
@@ -52,19 +57,25 @@ export default {
   },
 
   methods: {
+    networkJoin: async function(item) {
+      const status = item.is_follow;
 
-    networkJoin: async function(item){
-      const status = item.is_follow
+      const request = !status
+        ? await this.$repository.share.jointNetwork({
+            id: item.id,
+            type: "network"
+          })
+        : await this.$repository.share.removeNetwork({
+            id: item.id,
+            type: "network"
+          });
 
-      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
-        
-
-      if (request.success){
-        item = Object.assign(item, {is_follow: status ? 0 : 1})
+      if (request.success) {
+        item = Object.assign(item, { is_follow: status ? 0 : 1 });
 
         this.flashMessage.show({
           status: "success",
-          title: request.data,
+          title: request.data
         });
       }
     },
@@ -72,21 +83,19 @@ export default {
     infiniteHandler($state) {
       console.log("loading network 1 1");
 
-      let url ="";
-       
+      let url = "";
 
-           if (this.isGuestUser()) {
-        url = this.type === 'Follower'
-          ? `guest/business/community/network-follower/${this.biz_id}/`
-          : `guest/business/community/network-following/${this.biz_id}/`;
+      if (this.isGuestUser()) {
+        url =
+          this.type === "Follower"
+            ? `guest/business/community/network-follower/${this.biz_id}/`
+            : `guest/business/community/network-following/${this.biz_id}/`;
       } else {
-        url = this.type === 'Follower'
-          ? `business/community/network-follower/${this.biz_id}/`
-          : `business/community/network-following/${this.biz_id}/`;
+        url =
+          this.type === "Follower"
+            ? `business/community/network-follower/${this.biz_id}/`
+            : `business/community/network-following/${this.biz_id}/`;
       }
-
-
-
 
       axios
         .get(url + this.page)
@@ -114,19 +123,18 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-     businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -137,23 +145,23 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
           this.businessCommunityTotal();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

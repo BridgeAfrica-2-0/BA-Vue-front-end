@@ -1,8 +1,5 @@
 <template>
   <div>
-    
-  
-
     <Post
       v-for="(item, index) in owner_post"
       usertype="user"
@@ -11,9 +8,8 @@
       :mapvideo="() => mapvideo(item.media)"
       :mapmediae="() => mapmediae(item.media)"
       :businessLogo="item.profile_picture"
-       :editPost="() => editPost(item)"
+      :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
-    
     />
 
     <infinite-loading
@@ -21,8 +17,9 @@
       ref="infiniteLoading"
       @infinite="infiniteHandler"
     >
-  <div slot="no-more">No more message</div>
-  <div slot="no-results" class="card">No more Post </div>     </infinite-loading>
+      <div slot="no-more">No more message</div>
+      <div slot="no-results" class="card">No more Post</div>
+    </infinite-loading>
   </div>
 </template>
 
@@ -34,14 +31,14 @@ import axios from "axios";
 export default {
   name: "postNetwork",
   components: {
-    Post,
+    Post
   },
   data() {
     return {
       playerVars: {
-        autoplay: 0,
+        autoplay: 0
       },
-      owner_post:[],
+      owner_post: [],
       page: 1,
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
@@ -55,22 +52,22 @@ export default {
       images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       ima: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       animate: true,
       isUploading: false,
       createPost: {
         postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
@@ -78,7 +75,7 @@ export default {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -91,7 +88,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -127,19 +124,15 @@ export default {
       this.$store.commit("profile/ownerPost", []);
     },
 
-    
-
-
-    
     infiniteHandler($state) {
-     
-      let url= "user/post/" + this.page+"?id="+this.url;
-      
-       this.$store.dispatch("follower/loadMore",url)
-     
+      let url = "user/post/" + this.page + "?id=" + this.url;
+
+      this.$store
+        .dispatch("follower/loadMore", url)
+
         .then(({ data }) => {
           console.log(data);
-          if (data.data.length) { 
+          if (data.data.length) {
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -148,38 +141,34 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
-
-
-
 
     deletePost(post) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const path = `user/post/delete/${post.post_id ? post.post_id : post.id}`;
       axios
         .delete(path)
-        .then((response) => {
+        .then(response => {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("profileowner.Post_Deleted"),
+            message: this.$t("profileowner.Post_Deleted")
           });
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -188,7 +177,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
 
             loader.hide();
@@ -196,7 +185,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: this.$t("profileowner.Unable_to_Delete_your_Post"),
+              message: this.$t("profileowner.Unable_to_Delete_your_Post")
             });
             console.log({ err: err });
 
@@ -220,7 +209,7 @@ export default {
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       this.fileImageArr = this.createPost.movies;
@@ -246,16 +235,16 @@ export default {
       this.axios
         .post("user/post/update/" + this.edit_id, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("profileowner.Content_successfuly_uploaded"),
+            message: this.$t("profileowner.Content_successfuly_uploaded")
           });
 
           this.reloads();
@@ -266,7 +255,7 @@ export default {
 
           this.$refs["modal-edit"].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -275,7 +264,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             loader.hide();
@@ -285,7 +274,7 @@ export default {
               status: "error",
 
               message: this.$t("profileowner.Unable_to_Update_your_post"),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
             loader.hide();
@@ -294,8 +283,8 @@ export default {
         });
     },
 
-    chooseImage: function () {},
-    chooseVideo: function () {
+    chooseImage: function() {},
+    chooseVideo: function() {
       document.getElementById("chosefile").click();
     },
     chooseDocument() {
@@ -308,13 +297,13 @@ export default {
       if (file.files) {
         console.log("logging start");
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || []
           });
           console.log();
         };
@@ -325,7 +314,7 @@ export default {
       let result = null;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           result = e.target.result;
 
           return result;
@@ -339,13 +328,13 @@ export default {
 
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || []
           });
         };
         reader.readAsDataURL(file.files[0]);
@@ -358,7 +347,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name,
+        fileName: event.target.files[0].name
       });
     },
     selectDocumentOutsidePost(event) {
@@ -366,7 +355,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name,
+        fileName: event.target.files[0].name
       });
       this.$refs["modal-xl"].show();
     },
@@ -376,10 +365,10 @@ export default {
 
     deleteItem(name) {
       const newHyperlinks = this.createPost.hyperlinks.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       const movies = this.createPost.movies.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
@@ -389,7 +378,7 @@ export default {
       this.edit_image.splice(id, 1);
 
       this.delete.push({
-        id: eve.id,
+        id: eve.id
       });
 
       console.log(this.delete);
@@ -405,7 +394,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -416,7 +405,7 @@ export default {
         container: this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let fileImage = null;
@@ -443,22 +432,22 @@ export default {
       this.axios
         .post("user/post", formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data"
           },
 
-          onUploadProgress: function (progressEvent) {
+          onUploadProgress: function(progressEvent) {
             this.uploadPercentage = parseInt(
               Math.round((progressEvent.loaded / progressEvent.total) * 100)
             );
-          }.bind(this),
+          }.bind(this)
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("profileowner.Content_successfuly_uploaded"),
+            message: this.$t("profileowner.Content_successfuly_uploaded")
           });
           this.isUploading = false;
           loader.hide();
@@ -470,7 +459,7 @@ export default {
           this.infiniteId += 1;
           console.log("post create complete");
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -479,7 +468,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             loader.hide();
@@ -489,7 +478,7 @@ export default {
               status: "error",
 
               message: this.$t("profileowner.Unable_to_Create_Your_Post"),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
             loader.hide();
@@ -512,14 +501,14 @@ export default {
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
       }
-    },
+    }
   },
   computed: {
     imageProfile() {
       return "yoo";
     },
 
-    info: function () {
+    info: function() {
       return this.$store.getters["profile/getUserPostIntro"];
     },
 
@@ -529,15 +518,15 @@ export default {
 
     profileNamePost() {
       return "yoo";
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
 
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }

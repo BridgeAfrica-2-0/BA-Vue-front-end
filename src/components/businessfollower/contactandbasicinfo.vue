@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>{{ $t("general.Basic_Information") }}</b></h6>
+      <h6 class="col-md-12">
+        <b>{{ $t("general.Basic_Information") }}</b>
+      </h6>
 
       <hr />
     </div>
@@ -20,9 +22,20 @@
         </button>
       </div>
 
-      <b-modal id="phonemodal" :title="$t('general.Add_Phone_Number')" hide-footer ref="phonemodal" @close="cancel">
+      <b-modal
+        id="phonemodal"
+        :title="$t('general.Add_Phone_Number')"
+        hide-footer
+        ref="phonemodal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="savePhoneNumber">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="savePhoneNumber"
+          >
             <b-form-input
               class="mt-2 mb-2"
               v-model="info.user.phone"
@@ -32,15 +45,28 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="currentcityModal" title="Add current city" hide-footer ref="currentcityModal" @close="cancel">
+      <b-modal
+        id="currentcityModal"
+        title="Add current city"
+        hide-footer
+        ref="currentcityModal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="saveCurrentCity">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveCurrentCity"
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="current city"
@@ -49,68 +75,150 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="hometownModal" ref="hometownModal" :title="$t('general.Add_home_town')" hide-footer @close="cancel">
+      <b-modal
+        id="hometownModal"
+        ref="hometownModal"
+        :title="$t('general.Add_home_town')"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="saveHomeTown">
-            <b-form-input class="mt-2 mb-2" v-model="info.user.home_town" placeholder="home town"></b-form-input>
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveHomeTown"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              v-model="info.user.home_town"
+              placeholder="home town"
+            ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="websiteModal" ref="websiteModal" title="Add a website" hide-footer @close="cancel">
+      <b-modal
+        id="websiteModal"
+        ref="websiteModal"
+        title="Add a website"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="saveWebsite">
-            <b-form-input class="mt-2 mb-2" placeholder="Website" v-model="websiteInput"></b-form-input>
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveWebsite"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              placeholder="Website"
+              v-model="websiteInput"
+            ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="websiteEModal" ref="websiteEModal" :title=" $t('general.Edit_website')" hide-footer @close="cancel">
+      <b-modal
+        id="websiteEModal"
+        ref="websiteEModal"
+        :title="$t('general.Edit_website')"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="saveEWebsite">
-            <b-form-input class="mt-2 mb-2" placeholder="Website" v-model="websiteInput"></b-form-input>
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveEWebsite"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              placeholder="Website"
+              v-model="websiteInput"
+            ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="sociallinkModal" title="Add A social link" hide-footer ref="sociallinkModal" @close="cancel">
+      <b-modal
+        id="sociallinkModal"
+        title="Add A social link"
+        hide-footer
+        ref="sociallinkModal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="saveSocialLink">
-            <b-form-input class="mt-2 mb-2" placeholder="soclial link" v-model="sociallinkInput"></b-form-input>
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveSocialLink"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              placeholder="soclial link"
+              v-model="sociallinkInput"
+            ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("general.Save") }}
+              </button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="modal-6" ref="model-6" :title=" $t('general.Edit_Date_of_Birth')" hide-footer @close="cancel">
+      <b-modal
+        id="modal-6"
+        ref="model-6"
+        :title="$t('general.Edit_Date_of_Birth')"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t("general.Birth_Year") }}</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{
+                $t("general.Birth_Year")
+              }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" class="mb-2"></b-form-datepicker>
+                  <b-form-datepicker
+                    id="example-datepicker"
+                    v-model="birthDate.date"
+                    class="mb-2"
+                  ></b-form-datepicker>
                 </div>
               </div>
             </div>
@@ -118,7 +226,11 @@
               <button type="button" class="btn btn-dark pr-1" @click="cancel">
                 cancel
               </button>
-              <button type="button" class="btn btn-primary orange" @click="saveBirthDate">
+              <button
+                type="button"
+                class="btn btn-primary orange"
+                @click="saveBirthDate"
+              >
                 {{ $t("general.Save") }}
               </button>
             </div>
@@ -139,13 +251,28 @@
         >
           {{ $t("general.Edit") }}
         </button>
-        <b-modal id="modal-7" title="Add/Edit Gender" hide-footer ref="modal-7" @close="cancel">
+        <b-modal
+          id="modal-7"
+          title="Add/Edit Gender"
+          hide-footer
+          ref="modal-7"
+          @close="cancel"
+        >
           <div class="modal-body">
             <form class="form-inline" action="" method="post">
               <div class="input-group col-md-12 mb-4 selec">
-                <label class="col-md-4 control-label" style="align-items: first baseline" for="gender">{{ $t("general.Gender") }} </label>
+                <label
+                  class="col-md-4 control-label"
+                  style="align-items: first baseline"
+                  for="gender"
+                  >{{ $t("general.Gender") }}
+                </label>
                 <div class="col-md-8 pl-0 pr-0">
-                  <select id="gender" class="form-control w-100" v-model="basicInfo.gender">
+                  <select
+                    id="gender"
+                    class="form-control w-100"
+                    v-model="basicInfo.gender"
+                  >
                     <option value="M">{{ $t("general.Male") }}</option>
                     <option value="F">{{ $t("general.Female") }}</option>
                   </select>
@@ -153,7 +280,11 @@
               </div>
               <!-- End number In input-->
               <div class="fosrm-group text-right w-100">
-                <button type="button" class="btn btn-primary orange" @click="saveGender">
+                <button
+                  type="button"
+                  class="btn btn-primary orange"
+                  @click="saveGender"
+                >
                   {{ $t("general.Save") }}
                 </button>
               </div>
@@ -164,7 +295,9 @@
     </div>
 
     <div class="row">
-      <h6 class="col-md-12"><b>{{ $t("general.Contact_Information") }}</b></h6>
+      <h6 class="col-md-12">
+        <b>{{ $t("general.Contact_Information") }}</b>
+      </h6>
     </div>
     <hr />
     <div class="row mb-1 mt-3">
@@ -184,7 +317,9 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12"><b>{{ $t("general.Places_you_lived") }}</b></div>
+      <div class="col-md-12">
+        <b>{{ $t("general.Places_you_lived") }}</b>
+      </div>
     </div>
     <hr />
     <div class="row mb-4">
@@ -213,29 +348,50 @@
           data-target="#hometownModal"
           v-b-modal.hometownModal
         >
-         {{ $t("general.Edit") }} 
+          {{ $t("general.Edit") }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Web &amp; {{ $t("general.Social_Links") }}</b></h6>
+        <h6 class="mb-0">
+          <b>Web &amp; {{ $t("general.Social_Links") }}</b>
+        </h6>
         <hr />
         <div class="media">
           <div class="media-body">
             <a v-b-modal.websiteModal data-target="#websiteModal">
-              <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'plus-circle']" />
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'plus-circle']"
+              />
               {{ $t("general.Add_a_Website") }}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
-              <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'globe']" />
-              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{ website.website_url }}</a>
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'globe']"
+              />
+              <a
+                :href="website"
+                @click="redirect(website.website_url)"
+                target="_blank"
+                >{{ website.website_url }}</a
+              >
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-                    <b-dropdown-item @click="edit('website', website)">{{ $t("general.Edit") }}</b-dropdown-item>
-                    <b-dropdown-item @click="deleteWebsite(website)">{{ $t("general.Delete") }}</b-dropdown-item>
+                  <b-dropdown
+                    id="dropdown-dropup"
+                    dropdown
+                    variant="primary-outline"
+                  >
+                    <b-dropdown-item @click="edit('website', website)">{{
+                      $t("general.Edit")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item @click="deleteWebsite(website)">{{
+                      $t("general.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>
@@ -287,75 +443,83 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 export default {
   data() {
     return {
       websiteId: null,
       basicInfo: {
-        dateOfBirth: { day: '12', month: '1', year: '2000' },
-        gender: 'M',
+        dateOfBirth: { day: "12", month: "1", year: "2000" },
+        gender: "M",
         mobilePhones: [],
         currentCity: null,
         homeTown: null,
         websites: [],
-        socialLinks: [],
+        socialLinks: []
       },
       phoneInput: null,
       websiteInput: null,
       sociallinkInput: null,
-      index: null,
+      index: null
     };
   },
   created() {
-    this.basicInfo = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAboutBasicInfos']));
-    console.log('Load User birth Date start ++++++', this.basicInfo);
+    this.basicInfo = JSON.parse(
+      JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
+    );
+    console.log("Load User birth Date start ++++++", this.basicInfo);
     this.$store
-      .dispatch('profile/loadUserBasicInfosBirthDate', null)
+      .dispatch("profile/loadUserBasicInfosBirthDate", null)
       .then(response => {
-        console.log('load user birth date response (3) ++++', response);
-        console.log('Load User BirthDate end+++++++');
+        console.log("load user birth date response (3) ++++", response);
+        console.log("Load User BirthDate end+++++++");
       })
       .catch(error => {
-        console.log('Error from server or from browser error (2) ++++', error);
+        console.log("Error from server or from browser error (2) ++++", error);
       })
       .finally(() => {
-        this.basicInfo = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAboutBasicInfos']));
-        console.log('Load User birth Date end ++++++', this.basicInfo);
+        this.basicInfo = JSON.parse(
+          JSON.stringify(
+            this.$store.getters["profile/getProfileAboutBasicInfos"]
+          )
+        );
+        console.log("Load User birth Date end ++++++", this.basicInfo);
       });
   },
   computed: {
     birthDate() {
       let dob = this.info.user.dob;
-      let check = moment(dob, 'YYYY/MM/DD');
-      var month = check.format('M');
-      var day = check.format('D');
-      var year = check.format('YYYY');
-      var date = year + '-' + month + '-' + day;
+      let check = moment(dob, "YYYY/MM/DD");
+      var month = check.format("M");
+      var day = check.format("D");
+      var year = check.format("YYYY");
+      var date = year + "-" + month + "-" + day;
       return { date: date };
     },
     info() {
       return this.$store.state.profile.profileIntro;
-    },
+    }
   },
   methods: {
     cancel() {
-      console.log('Cancel edit birth date user  ++++++');
-      this.basicInfo = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAboutBasicInfos']));
+      console.log("Cancel edit birth date user  ++++++");
+      this.basicInfo = JSON.parse(
+        JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
+      );
       this.phoneInput = null;
     },
     saveBirthDate() {
-      console.log('this.birthDate STARTTTTT');
+      console.log("this.birthDate STARTTTTT");
       console.log(this.birthDate);
       this.$store
-        .dispatch('profile/updateUserBasicInfosBirthDate', {
-          dateOfBirth: this.birthDate,
+        .dispatch("profile/updateUserBasicInfosBirthDate", {
+          dateOfBirth: this.birthDate
         })
         .then(response => {
-          console.log('save new birth date user response (3) +++++', response);
-          console.log('save new birth date user end +++++');
+          console.log("save new birth date user response (3) +++++", response);
+          console.log("save new birth date user end +++++");
           this.$store
-            .dispatch('profile/loadUserPostIntro', null)
+            .dispatch("profile/loadUserPostIntro", null)
             .then(response => {
               console.log(response);
             })
@@ -364,233 +528,264 @@ export default {
             });
         })
         .catch(error => {
-          console.log('not save new birth date user end error (2) +++++', error);
+          console.log(
+            "not save new birth date user end error (2) +++++",
+            error
+          );
         })
         .finally(() => {
-          this.$refs['model-6'].hide();
+          this.$refs["model-6"].hide();
         });
     },
     saveGender() {
-      console.log('save new gender user start +++++');
+      console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
       this.$store
-        .dispatch('profile/updateUserBasicInfosGender', {
-          gender: this.basicInfo.gender,
+        .dispatch("profile/updateUserBasicInfosGender", {
+          gender: this.basicInfo.gender
         })
         .then(response => {
           this.$store
-            .dispatch('profile/loadUserPostIntro', null)
+            .dispatch("profile/loadUserPostIntro", null)
             .then(response => {
               console.log(response);
             })
             .catch(error => {
               console.log(error);
             });
-          console.log('save new gender user response (3)', response);
+          console.log("save new gender user response (3)", response);
         })
         .catch(error => {
-          console.log(error, 'not save new birth date user end error( 2 ) +++++');
+          console.log(
+            error,
+            "not save new birth date user end error( 2 ) +++++"
+          );
         })
         .finally(() => {
-          console.log('finally save new gender user ');
-          this.$refs['modal-7'].hide();
+          console.log("finally save new gender user ");
+          this.$refs["modal-7"].hide();
         });
     },
     savePhoneNumber() {
       this.$store
-        .dispatch('profile/updateUserBasicInfosMobilePhones', {
-          mobilePhones: this.info.user.phone,
+        .dispatch("profile/updateUserBasicInfosMobilePhones", {
+          mobilePhones: this.info.user.phone
         })
         .then(response => {
-          console.log('update phone user response (3) ++++', response);
+          console.log("update phone user response (3) ++++", response);
         })
         .catch(error => {
-          console.log(error, 'not save new mobilePhones user end error(2) +++++');
+          console.log(
+            error,
+            "not save new mobilePhones user end error(2) +++++"
+          );
         })
         .finally(() => {
-          console.log('finally save new mobilePhones user ++++++ ');
-          this.$refs['phonemodal'].hide();
+          console.log("finally save new mobilePhones user ++++++ ");
+          this.$refs["phonemodal"].hide();
         });
     },
     saveCurrentCity() {
-      console.log('save new current City user start +++++');
+      console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
       this.$store
-        .dispatch('profile/updateUserBasicInfosCurrentCity', {
-          currentCity: this.info.user.city,
+        .dispatch("profile/updateUserBasicInfosCurrentCity", {
+          currentCity: this.info.user.city
         })
         .then(response => {
-          console.log('save new current city user response (3) ++++++', response);
+          console.log(
+            "save new current city user response (3) ++++++",
+            response
+          );
         })
         .catch(error => {
-          console.log('not save new mobilePhones user end error (2) +++++++', error);
+          console.log(
+            "not save new mobilePhones user end error (2) +++++++",
+            error
+          );
         })
         .finally(() => {
-          console.log('finally save new current city user ');
-          this.basicInfo = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAboutBasicInfos']));
+          console.log("finally save new current city user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
           console.log(this.basicInfo);
-          this.$refs['currentcityModal'].hide();
+          this.$refs["currentcityModal"].hide();
         });
     },
     saveHomeTown() {
       this.$store
-        .dispatch('profile/updateUserBasicInfosHomeTown', {
-          homeTown: this.info.user.home_town,
+        .dispatch("profile/updateUserBasicInfosHomeTown", {
+          homeTown: this.info.user.home_town
         })
         .then(response => {})
         .catch(error => {
-          console.log(error, 'not save new homeTown user end error (2)+++++');
+          console.log(error, "not save new homeTown user end error (2)+++++");
         })
         .finally(() => {
           this.$store
-            .dispatch('profile/loadUserPostIntro', null)
+            .dispatch("profile/loadUserPostIntro", null)
             .then(response => {
               console.log(response);
             })
             .catch(error => {
               console.log(error);
             });
-          this.$refs['hometownModal'].hide();
+          this.$refs["hometownModal"].hide();
         });
     },
     saveWebsite() {
       this.$store
-        .dispatch('profile/updateUserBasicInfosWebsites', {
-          websites: this.websiteInput,
+        .dispatch("profile/updateUserBasicInfosWebsites", {
+          websites: this.websiteInput
         })
         .then(response => {
-          console.log('save new websites user response (3) ++++++', response);
-          console.log('save new websites user end +++++');
+          console.log("save new websites user response (3) ++++++", response);
+          console.log("save new websites user end +++++");
         })
         .catch(error => {
-          console.log(error, 'not save new websites user end error (2) +++++');
+          console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
           this.$store
-            .dispatch('profile/loadUserPostIntro', null)
+            .dispatch("profile/loadUserPostIntro", null)
             .then(response => {
               console.log(response);
             })
             .catch(error => {
               console.log(error);
             });
-          this.$refs['websiteModal'].hide();
+          this.$refs["websiteModal"].hide();
         });
     },
     deleteWebsite(website) {
-      console.log('save new websites user start +++++');
+      console.log("save new websites user start +++++");
       console.log(website);
       this.$store
-        .dispatch('profile/deleteUserBasicInfosWebsites', {
-          id: website.id,
+        .dispatch("profile/deleteUserBasicInfosWebsites", {
+          id: website.id
         })
         .then(response => {
-          console.log('save new websites user response (3) ++++++', response);
+          console.log("save new websites user response (3) ++++++", response);
         })
         .catch(error => {
-          console.log(error, 'not save new websites user end error (2) +++++');
+          console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
-          console.log('finally save new website user ');
-          this.$store.dispatch('profile/loadUserPostIntro', null);
-          this.$refs['websiteEModal'].hide();
+          console.log("finally save new website user ");
+          this.$store.dispatch("profile/loadUserPostIntro", null);
+          this.$refs["websiteEModal"].hide();
         });
     },
     saveEWebsite() {
-      console.log('save new websites user start +++++');
+      console.log("save new websites user start +++++");
       this.$store
-        .dispatch('profile/updateUserBasicInfosEWebsites', {
+        .dispatch("profile/updateUserBasicInfosEWebsites", {
           websites: this.websiteInput,
-          id: this.websiteId,
+          id: this.websiteId
         })
         .then(response => {
-          console.log('save new websites user response (3) ++++++', response);
-          console.log('save new websites user end +++++');
+          console.log("save new websites user response (3) ++++++", response);
+          console.log("save new websites user end +++++");
         })
         .catch(error => {
-          console.log(error, 'not save new websites user end error (2) +++++');
+          console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
-          console.log('finally save new website user ');
-          this.$store.dispatch('profile/loadUserPostIntro', null);
-          this.$refs['websiteEModal'].hide();
+          console.log("finally save new website user ");
+          this.$store.dispatch("profile/loadUserPostIntro", null);
+          this.$refs["websiteEModal"].hide();
         });
     },
     saveSocialLink() {
-      console.log('save new sociallinks  user start +++++');
+      console.log("save new sociallinks  user start +++++");
       if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
-        console.log('Duplication of sociallink  +++++++');
+        console.log("Duplication of sociallink  +++++++");
       } else if (this.index !== null) {
         this.basicInfo.socialLinks[this.index] = this.sociallinkInput;
       } else {
-        console.log('No Duplication of sociallink +++++++');
+        console.log("No Duplication of sociallink +++++++");
         this.basicInfo.socialLinks.push(this.sociallinkInput);
       }
       this.sociallinkInput = null;
       console.log(this.basicInfo.socialLinks);
       this.$store
-        .dispatch('profile/updateUserBasicInfosSocialLinks', {
-          socialLinks: this.basicInfo.socialLinks,
+        .dispatch("profile/updateUserBasicInfosSocialLinks", {
+          socialLinks: this.basicInfo.socialLinks
         })
         .then(response => {
           console.log();
-          console.log('save new socialLinks user response (3) ++++++', response);
-          console.log('save new socialLinks user end +++++');
+          console.log(
+            "save new socialLinks user response (3) ++++++",
+            response
+          );
+          console.log("save new socialLinks user end +++++");
         })
         .catch(error => {
-          console.log(error, 'not save new socialLinks user end error(2) +++++');
+          console.log(
+            error,
+            "not save new socialLinks user end error(2) +++++"
+          );
         })
         .finally(() => {
-          console.log('finally save new socialLink user ');
-          this.basicInfo = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAboutBasicInfos']));
+          console.log("finally save new socialLink user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
           console.log(this.basicInfo);
-          this.$refs['sociallinkModal'].hide();
+          this.$refs["sociallinkModal"].hide();
         });
     },
     deleteElement(type, value) {
       switch (type) {
-        case 'website':
+        case "website":
           this.basicInfo.websites = this.basicInfo.websites.filter(website => {
             return website !== value;
           });
           break;
-        case 'socialLink':
-          this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(socialLink => {
-            return socialLink !== value;
-          });
+        case "socialLink":
+          this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
+            socialLink => {
+              return socialLink !== value;
+            }
+          );
           break;
         default:
-          console.log('No Correspondance');
+          console.log("No Correspondance");
           break;
       }
     },
     edit(type, value) {
       switch (type) {
-        case 'website':
-          console.log('edit website');
+        case "website":
+          console.log("edit website");
           this.index = this.info.user_websites.findIndex(website => {
             return website === value;
           });
           console.log(this.index);
           this.websiteInput = value.website_url;
           this.websiteId = value.id;
-          this.$refs['websiteEModal'].show();
+          this.$refs["websiteEModal"].show();
           break;
-        case 'socialLink':
-          console.log('edit socialLink');
+        case "socialLink":
+          console.log("edit socialLink");
           this.index = this.basicInfo.socialLinks.findIndex(socialLink => {
             return socialLink === value;
           });
           console.log(this.index);
           this.sociallinkInput = value;
-          this.$refs['sociallinkModal'].show();
+          this.$refs["sociallinkModal"].show();
       }
     },
     redirect(website) {
       console.log(website);
       window.location.replace(website);
-    },
-  },
+    }
+  }
 };
 </script>
 

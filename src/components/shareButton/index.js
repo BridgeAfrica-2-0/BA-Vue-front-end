@@ -1,3 +1,3 @@
-import Button from "./Button"
+import Button from "./Button";
 
-export const ShareButton = Button
+export const ShareButton = Button;

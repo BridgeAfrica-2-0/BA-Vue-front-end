@@ -19,7 +19,11 @@
                     <b-row>
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
                         <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <b> <router-link :to="'/profile/'+member.slug" > {{ member.name }}   </router-link>  </b>
+                          <b>
+                            <router-link :to="'/profile/' + member.slug">
+                              {{ member.name }}
+                            </router-link>
+                          </b>
                         </div>
                       </b-col>
 
@@ -31,17 +35,23 @@
                         class="mt-2 mt-lg-1 mt-xl-2"
                       >
                         <h6 class="follower">
-                              {{ count(member.followers) }}
-                              {{ $t("businessowner.Community") }}    <span  class="ml-2"  @click="$emit('BlockUser', member.id,index)" style="cursor: pointer">   <b-icon
+                          {{ count(member.followers) }}
+                          {{ $t("businessowner.Community") }}
+                          <span
+                            class="ml-2"
+                            @click="$emit('BlockUser', member.id, index)"
+                            style="cursor: pointer"
+                          >
+                            <b-icon
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover
                               title="Block This User"
                               variant="danger"
-                            ></b-icon>  </span>
-                            </h6>
+                            ></b-icon>
+                          </span>
+                        </h6>
                       </b-col>
-                     
                     </b-row>
                   </div>
                 </b-col>
@@ -72,9 +82,21 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                           @click="$emit('handleFollow', member)"
-                          :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
-                        ><i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                          <span class="btn-com">{{ $t('network.Community') }}</span>
+                          :style="
+                            member.is_follow !== 0
+                              ? 'background-color: rgb(162,107,80);'
+                              : ''
+                          "
+                          ><i
+                            :class="
+                              member.is_follow
+                                ? 'fas fa-user-minus fa-lg btn-icon'
+                                : 'fas fa-user-plus fa-lg btn-icon'
+                            "
+                          ></i>
+                          <span class="btn-com">{{
+                            $t("network.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -92,31 +114,24 @@
 <script>
 export default {
   props: ["member", "index"],
-  methods:{
-
-      count(number) {
+  methods: {
+    count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
-    },
-
-
-
+    }
   }
 };
 </script>
 
 <style scoped>
-
-
 @media only screen and (min-width: 768px) {
   .s-cardd {
     padding-left: 20px;
     padding-right: 20px;
-    
   }
   .btn-text {
     margin-left: 8px;
@@ -129,15 +144,12 @@ export default {
   }
 }
 
-
-@media only screen and (max-width: 768px) { 
-
+@media only screen and (max-width: 768px) {
   .s-cardd {
-     height: 400px;
-   overflow: auto;
-   overflow-x: hidden;
+    height: 400px;
+    overflow: auto;
+    overflow-x: hidden;
   }
-
 
   .btn-icon {
     margin-top: 3px;
@@ -159,8 +171,6 @@ export default {
     padding-right: 1px;
     height: 400px;
   }
-
-  
 }
 @media only screen and (min-width: 768px) {
   .btnpngs {
@@ -433,5 +443,3 @@ export default {
   font-size: 12px !important;
 }
 </style>
-
-

@@ -1,37 +1,49 @@
 <template>
   <div class="lalala">
-    <div class=" border mt-2 "> 
+    <div class=" border mt-2 ">
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b>  {{$t("general.COMMUNITY")}} </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
+          <b> {{ $t("general.COMMUNITY") }} </b>
+          <span class="h4-color">
+            {{ nFormatter(total.total_community) }}
+          </span>
         </h6>
       </span>
 
       <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            {{$t("general.People")}} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
+            {{ $t("general.People") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_people) }}
+            </span>
           </template>
 
-          <div>  
+          <div>
             <b-row>
               <b-col>
-                <b-tabs  lazy fill pills content-class="mt-3  f-left m-up">
+                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      {{$t("general.Followers")}} <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
+                      {{ $t("general.Followers") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_follower) }}
+                      </span>
                     </template>
 
-                    <div class="s-comcard"><People   type="Follower" /></div>
+                    <div class="s-comcard"><People type="Follower" /></div>
                   </b-tab>
 
                   <b-tab>
                     <template slot="title">
-                       {{$t("general.Following")}} <span class="spa-color">  {{ nFormatter(total.total_user_following)}}  </span>
+                      {{ $t("general.Following") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_following) }}
+                      </span>
                     </template>
 
-                    <div class="s-comcard"><People  type="Following" /></div>
+                    <div class="s-comcard"><People type="Following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -41,14 +53,25 @@
 
         <b-tab>
           <template slot="title">
-             {{$t("general.Businesses")}} <span class="spa-color">  {{ nFormatter(total.total_business)}} </span>
+            {{ $t("general.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_business) }}
+            </span>
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              lazy
+              fill
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                   {{$t("general.Followers")}} <span class="spa-color">  {{ nFormatter(total.total_business_follower)}} </span>
+                  {{ $t("general.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Business type="Follower" /></div>
@@ -56,7 +79,10 @@
 
               <b-tab>
                 <template slot="title">
-                   {{$t("general.Following")}} <span class="spa-color"> {{ nFormatter(total.total_business_following)}}</span>
+                  {{ $t("general.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_following) }}</span
+                  >
                 </template>
 
                 <div class="s-comcard"><Business type="following" /></div>
@@ -64,16 +90,27 @@
             </b-tabs>
           </div>
         </b-tab>
-          <b-tab>
+        <b-tab>
           <template slot="title">
-             {{$t("general.Network")}} <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>
+            {{ $t("general.Network") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_network) }}</span
+            >
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              lazy
+              fill
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                   {{$t("general.Followers")}} <span class="spa-color">  {{ nFormatter(total.total_network_follower)}} </span>
+                  {{ $t("general.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Follower" /></div>
@@ -81,7 +118,10 @@
 
               <b-tab>
                 <template slot="title">
-                   {{$t("general.Following")}} <span class="spa-color">  {{ nFormatter(total.total_network_following)}} </span>
+                  {{ $t("general.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_following) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Following" /></div>
@@ -89,13 +129,9 @@
             </b-tabs>
           </div>
         </b-tab>
-
-
-
-
       </b-tabs>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -103,38 +139,32 @@ import Business from "@/components/businessf/tabs/business";
 import People from "@/components/businessf/tabs/people";
 import Network from "@/components/businessf/tabs/networks";
 export default {
-  name: "comunitiDashboard",  
+  name: "comunitiDashboard",
   components: {
     People,
     Business,
-    Network,
+    Network
   },
-  
-  methods:{
-      nFormatter(num) {
+
+  methods: {
+    nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
+    }
   },
 
-  computed:{
-   
-   
-
-     total(){
-    return  this.$store.state.businessOwner.Tcommunity;
-   },
-
-   
-
+  computed: {
+    total() {
+      return this.$store.state.businessOwner.Tcommunity;
+    }
   }
 };
 </script>

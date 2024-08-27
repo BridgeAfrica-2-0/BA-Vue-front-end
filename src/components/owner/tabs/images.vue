@@ -10,7 +10,6 @@
       {{ $t("profileowner.No_items_found") }}
     </p>
     <div>
-      
       <b-modal
         id="modalxl"
         ref="modalxl"
@@ -38,60 +37,59 @@
         >
       </b-modal>
       <div class="row">
-      <div
-        
-        class="createp img-gall dasher d-flex"
-        v-if="isEditor ? (!canUpload ? true : false) : false"
-        @click="$refs.movie.click()"
-      >
-        <div class="m-auto">
-          <input
-            type="file"
-            id="chosefile"
-            @change="selectMoviesOutsidePost"
-            accept="video/mpeg, video/mp4, image/*"
-            hidden
-            ref="movie"
-          />
-          <a>
-            <div class="drag-textt">
-              <fas-icon :icon="['fas', 'plus']" />
-              <h3>{{ $t("profileowner.Add_Item") }}   </h3>
-            </div>
-          </a>
+        <div
+          class="createp img-gall dasher d-flex"
+          v-if="isEditor ? (!canUpload ? true : false) : false"
+          @click="$refs.movie.click()"
+        >
+          <div class="m-auto">
+            <input
+              type="file"
+              id="chosefile"
+              @change="selectMoviesOutsidePost"
+              accept="video/mpeg, video/mp4, image/*"
+              hidden
+              ref="movie"
+            />
+            <a>
+              <div class="drag-textt">
+                <fas-icon :icon="['fas', 'plus']" />
+                <h3>{{ $t("profileowner.Add_Item") }}</h3>
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
-   
-          <Picture
-             v-for="(im, index) in allImages" :key="index"
-            :im="im"
-            :typeOfMedia="() => typeOfMedia(im.media.path)"
-            :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
-            :getFullOriginalMediaLink="() => getFullMediaLink(im.media.path)"
-            :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
-            :showImg="() => showImg(getFullMediaLink(im.media.path))"
-            :downloadPic="() => downloadPic(im)"
-            :setProfilePic="() => setProfilePic(im.media.id)"
-            :setCoverPic="() => setCoverPic(im.media.id)"
-            :deleteImage="() => deleteImage(im.media.id, index)"
-            :content="im.content"
-            :imageProps="imageProps"
-            :isEditor="isEditor"
-            :type="type"
-            :getStyle="getStyle"
-          />
-        
-      <vue-easy-lightbox
-        :visible="visible"
-        :imgs="Slideimges"
-        :index="currentPicture"
-        @hide="handleHide"
-      >
-      </vue-easy-lightbox>
+
+        <Picture
+          v-for="(im, index) in allImages"
+          :key="index"
+          :im="im"
+          :typeOfMedia="() => typeOfMedia(im.media.path)"
+          :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
+          :getFullOriginalMediaLink="() => getFullMediaLink(im.media.path)"
+          :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
+          :showImg="() => showImg(getFullMediaLink(im.media.path))"
+          :downloadPic="() => downloadPic(im)"
+          :setProfilePic="() => setProfilePic(im.media.id)"
+          :setCoverPic="() => setCoverPic(im.media.id)"
+          :deleteImage="() => deleteImage(im.media.id, index)"
+          :content="im.content"
+          :imageProps="imageProps"
+          :isEditor="isEditor"
+          :type="type"
+          :getStyle="getStyle"
+        />
+
+        <vue-easy-lightbox
+          :visible="visible"
+          :imgs="Slideimges"
+          :index="currentPicture"
+          @hide="handleHide"
+        >
+        </vue-easy-lightbox>
       </div>
     </div>
   </div>
- 
 </template>
 
 <script>
@@ -100,12 +98,12 @@ import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
-import { ResizeMediaImage } from '@/mixins'
+import { ResizeMediaImage } from "@/mixins";
 
 export default {
   mixins: [ResizeMediaImage],
   components: {
-    Picture,
+    Picture
   },
   props: {
     album: {},
@@ -115,45 +113,45 @@ export default {
       type: Boolean,
       default: function() {
         return false;
-      },
+      }
     },
     albumName: {
       type: String,
-      required: true,
+      required: true
     },
 
     type: {
       type: String,
-      required: true,
+      required: true
     },
     isAlbum: {
       type: Boolean,
       default: function() {
         return false;
-      },
+      }
     },
 
     hasLoadPicture: {
       type: Boolean,
       default: function() {
         return false;
-      },
+      }
     },
     showCreateForm: {
       type: Boolean,
-      required: true,
+      required: true
     },
     images: {
       type: Array,
-      required: true,
+      required: true
     },
 
     showAlbum: {
       type: Boolean,
       default: function() {
         return false;
-      },
-    },
+      }
+    }
   },
 
   data() {
@@ -169,24 +167,20 @@ export default {
       visible: false,
       currentPicture: 0,
       playerVars: {
-        autoplay: 1,
+        autoplay: 1
       },
       text: "",
-      pattern: null,
+      pattern: null
     };
   },
 
   filters: {
-    path: fullMediaLink,
+    path: fullMediaLink
   },
 
   created() {
-    
+    this.allImages = this.images;
 
-    this.allImages = this.images
-
-
-   
     this.url = this.$route.params.id;
 
     this.pattern = {
@@ -197,7 +191,7 @@ export default {
         deleteImagePicture: this.deleteImagePicture,
         onDownloadPic: this.onDownloadPic,
         getAlbumImages: this.getAlbumImages,
-        updateItem: this.updateItem,
+        updateItem: this.updateItem
       }),
       business: () => ({
         submitPost: this.submitPostBusiness,
@@ -206,7 +200,7 @@ export default {
         deleteImagePicture: this.deleteImagePictureBusiness,
         onDownloadPic: this.onDownloadPicBusiness,
         getAlbumImages: this.getAlbumImagesBusiness,
-        updateItem: this.updateItemBusiness,
+        updateItem: this.updateItemBusiness
       }),
       network: () => ({
         submitPost: this.submitPostNetwork,
@@ -215,8 +209,8 @@ export default {
         deleteImagePicture: this.deleteImagePictureNetwork,
         onDownloadPic: this.onDownloadPicNetwork,
         getAlbumImages: this.getAlbumImagesNetwork,
-        updateItem: this.updateItemNetwork,
-      }),
+        updateItem: this.updateItemNetwork
+      })
     };
 
     this.strategy = {
@@ -230,7 +224,7 @@ export default {
       "image/jpg": () => "image",
       "image/png": () => "image",
       "video/mpeg": () => "video",
-      "video/mp4": () => "video",
+      "video/mp4": () => "video"
     };
     this.loadImages();
   },
@@ -238,7 +232,6 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-  
 
   methods: {
     ...mapActions({
@@ -261,7 +254,7 @@ export default {
       setCoverPictureNetwork: "networkProfileMedia/setCoverPic",
       deleteImagePictureNetwork: "networkProfileMedia/deleteImage",
       onDownloadPicNetwork: "networkProfileMedia/downloadPic",
-      getAlbumImagesNetwork: "networkProfileMedia/getAlbumImages",
+      getAlbumImagesNetwork: "networkProfileMedia/getAlbumImages"
     }),
 
     ...mapMutations({
@@ -269,9 +262,8 @@ export default {
       updateItemBusiness: "businessOwner/updateAlbumItem",
       updateItemNetwork: "networkProfileMedia/updateAlbumItem",
 
-      updateAllAlbums: "notification/UPDATE_ALBUM",
-      
-    }), 
+      updateAllAlbums: "notification/UPDATE_ALBUM"
+    }),
 
     getFullMediaLink: fullMediaLink,
 
@@ -286,7 +278,6 @@ export default {
     },
 
     showImg(index) {
-      
       this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },
@@ -301,9 +292,9 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.images.map((e) => {
-          return this.getFullMediaLink(e.media.path);
-        });
+      const pictures = this.images.map(e => {
+        return this.getFullMediaLink(e.media.path);
+      });
       this.Slideimges = pictures;
     },
 
@@ -327,7 +318,9 @@ export default {
     },
 
     removePicture(imageID, key) {
-      const newImages = this.allImages.filter( image => image.media.id != imageID );
+      const newImages = this.allImages.filter(
+        image => image.media.id != imageID
+      );
 
       this.allImages = newImages;
     },
@@ -336,7 +329,7 @@ export default {
       this.loading = true;
       this.pattern[this.type]()
         .onDownloadPic(media.id)
-        .then((response) => {
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
           fileLink.href = fileURL;
@@ -348,17 +341,17 @@ export default {
           fileLink.click();
           this.flashMessage.show({
             status: "success",
-            message: "Image Downloaded",
+            message: "Image Downloaded"
           });
           this.loading = false;
           return false;
         })
-        .catch((error) => {
+        .catch(error => {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: error.response.data.message
           });
           return false;
         });
@@ -373,25 +366,23 @@ export default {
 
           this.pattern[this.type]().updateItem({
             id: this.album,
-            action: "remove",
+            action: "remove"
           });
           this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: "Media Deleted",
+            message: "Media Deleted"
           });
 
-          this.updateAllAlbums()
+          this.updateAllAlbums();
           return false;
-        })
-        
+        });
     },
     //set an image as a cover photo
 
     setCoverPic(id) {
-
       this.loading = true;
-      
+
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, id: id }
@@ -403,16 +394,16 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: "Cover Picture succesfully set",
+            message: "Cover Picture succesfully set"
           });
           return true;
         })
-        .catch((error) => {
+        .catch(error => {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: error.response.data.message
           });
           return false;
         });
@@ -432,16 +423,16 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: "Profile Picture set",
+            message: "Profile Picture set"
           });
           return false;
         })
-        .catch((error) => {
+        .catch(error => {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: error.response.data.message
           });
           return false;
         });
@@ -452,7 +443,7 @@ export default {
       let albumId = this.album;
 
       let formData = new FormData();
-      
+
       formData.append("media", this.profile_pic);
       formData.append("dob", this.text);
 
@@ -462,7 +453,7 @@ export default {
           "business" == this.type || "network" == this.type
             ? this.$route.params.id
             : null,
-        data: formData,
+        data: formData
       };
 
       const data =
@@ -472,9 +463,9 @@ export default {
 
       this.pattern[this.type]()
         .submitPost(payload)
-        .then((picture) => {
-          this.updateAllAlbums()
-          return true
+        .then(picture => {
+          this.updateAllAlbums();
+          return true;
         })
         .then(() => {
           this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
@@ -484,7 +475,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: "Media Updated",
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
           this.$refs["modalxl"].hide();
           this.$emit("new-item");
@@ -492,11 +483,11 @@ export default {
         .then(() => {
           this.$emit("reste");
         })
-        .catch((error) => {
+        .catch(error => {
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: error.response.data.message
           });
         });
     },
@@ -512,8 +503,8 @@ export default {
       } catch (error) {
         this.media = null;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -538,10 +529,9 @@ export default {
   margin: auto;
   display: block !important;
 }
-.dasher{
+.dasher {
   border: 4px dashed #e75c18;
 }
-
 </style>
 
 <style>
@@ -589,7 +579,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    
+
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -634,7 +624,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-  
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -643,11 +632,10 @@ export default {
   }
 
   .img-gall {
-  
     position: relative;
     margin: 5px;
     float: left;
-    
+
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

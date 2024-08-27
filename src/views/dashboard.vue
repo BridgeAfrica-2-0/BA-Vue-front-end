@@ -2,14 +2,14 @@
   <div style="overflow-x: hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify p-card pr-1"> 
-       <CompleteProfile class="mb-2"  v-if="!Profile_complete" />
+    <div class="text-justify p-card pr-1">
+      <CompleteProfile class="mb-2" v-if="!Profile_complete" />
       <CarousselDashboard class="mm-top" /> <br />
 
-      <div v-if="selectedb == 'owner'"> 
+      <div v-if="selectedb == 'owner'">
         <b-card class="border shadow hselect">
           <b-row>
-            <b-col md="6" sm="12" class="">     
+            <b-col md="6" sm="12" class="">
               <h6 class="font-weight-bolder text-design text-center t-center">
                 {{
                   $t(
@@ -60,20 +60,23 @@
                 ></b-form-select>
               </b-card>
             </div>
-          </b-col> 
-          <b-col md="6" sm="12" class="mt-2" > 
-             <b-card class=" border shadow pr-3" style="height:350px">
+          </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <b-card class=" border shadow pr-3" style="height:350px">
               <h6 class="title">
-                <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
-                <b>  {{$t('dashboard.get_direction').toUpperCase()}} </b>
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'map-marker-alt']"
+                  size="lg"
+                />
+                <b> {{ $t("dashboard.get_direction").toUpperCase() }} </b>
               </h6>
-            <!-- <Map />  --> 
-            <div v-if="selectedBusiness"> 
-            <mapbox :business="selectedBusiness" />
-
-            </div>
+              <!-- <Map />  -->
+              <div v-if="selectedBusiness">
+                <mapbox :business="selectedBusiness" />
+              </div>
             </b-card>
-            </b-col>
+          </b-col>
         </b-row>
 
         <br />
@@ -173,18 +176,18 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
-import { isPremium } from '@/helpers';
-import { mapGetters, mapActions, mapMutations} from 'vuex'
+import { isPremium } from "@/helpers";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "dashboard",
-  
+
   mixins: [WhoIsIt],
 
   data() {
     return {
       slide: 0,
-       isPremium: isPremium(),
+      isPremium: isPremium(),
       sliding: null,
       url_data: null,
       selectedb: "owner",
@@ -193,7 +196,7 @@ export default {
       boptions: [],
       detail: null,
       data1: null,
-      showcompleteprofile:true,
+      showcompleteprofile: true
     };
   },
 
@@ -218,44 +221,37 @@ export default {
 
   methods: {
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected"
     }),
 
-    async checkIfItNetwork(){
-      if ("network" == this.profile.user_type){
-        const request = await this.$repository.share.switch(null,"reset");
+    async checkIfItNetwork() {
+      if ("network" == this.profile.user_type) {
+        const request = await this.$repository.share.switch(null, "reset");
 
-        if (request.status)
-          this.auth()
+        if (request.status) this.auth();
       }
-      
     },
     async switchBusiness(value) {
       this.data1 = false;
-     
 
       if (value != "Owner") {
         let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
           onCancel: this.onCancel,
-          color: "#e75c18",
+          color: "#e75c18"
         });
 
-      
         this.url_data = value;
 
         this.$store.commit("dashboard/setdBusinessId", value);
 
         await this.$store
           .dispatch("dashboard/dashboardBusiness", value)
-          .then((res) => {
-            
-             this.data1 = true;
+          .then(res => {
+            this.data1 = true;
           })
-          .catch((err) => {
-         
-          });
+          .catch(err => {});
 
         this.businessCommunityTotal();
 
@@ -268,71 +264,50 @@ export default {
     dashboardPpost() {
       this.$store
         .dispatch("dashboard/dashboardPpost")
-        .then(() => {
-         
-        })
-        .catch((err) => {
-         
-        });
+        .then(() => {})
+        .catch(err => {});
     },
 
     dashboardBpost() {
       this.$store
         .dispatch("dashboard/dashboardBpost", this.url_data)
-        .then(() => {
-         
-        })
-        .catch((err) => {
-        
-        });
+        .then(() => {})
+        .catch(err => {});
     },
 
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-        
-        })
-        .catch((err) => {
-       
-        });
+        .then(() => {})
+        .catch(err => {});
     },
 
     CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-         
-        })
-        .catch((err) => {
-         
-        });
+        .then(() => {})
+        .catch(err => {});
     },
 
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)
-        .then(() => {
-        
-        })
-        .catch((err) => {
-        
-        });
+        .then(() => {})
+        .catch(err => {});
     },
     getbusiness() {
-      
-
       let owner = JSON.parse(
         JSON.stringify(
           this.$store.getters["ProfileAndBusinessDetails/getdetails"]
         )
       ).owner;
 
-      const ownerData = owner.map((value) => ({ text: value.name, value: "owner" }));
+      const ownerData = owner.map(value => ({
+        text: value.name,
+        value: "owner"
+      }));
 
-      let data = ownerData
-
-     
+      let data = ownerData;
 
       let businesses = JSON.parse(
         JSON.stringify(
@@ -340,66 +315,48 @@ export default {
         )
       ).business;
 
-      const businessesData = businesses.map((value) => ({ text: value.name, value: value.slug }) );
+      const businessesData = businesses.map(value => ({
+        text: value.name,
+        value: value.slug
+      }));
 
-      data = [ ...businessesData, ...ownerData]
+      data = [...businessesData, ...ownerData];
 
-    
-      
-      this.boptions = data
+      this.boptions = data;
 
       return this.boptions;
-    },
+    }
   },
 
   created() {
-
-       
     this.$store
-      .dispatch('profile/loadUserPostIntro', null)
-      .then((response) => {
-   
-       if(this.$store.state.profile.profileIntro.user.profile_complete) { 
-           
-           this.showcompleteprofile =true;
-      }else{
-
-       this.showcompleteprofile =false;
-      }
-
-        
-        
-       
+      .dispatch("profile/loadUserPostIntro", null)
+      .then(response => {
+        if (this.$store.state.profile.profileIntro.user.profile_complete) {
+          this.showcompleteprofile = true;
+        } else {
+          this.showcompleteprofile = false;
+        }
       })
-      .catch((error) => {
-      
-      });
+      .catch(error => {});
 
-    
     this.checkIfItNetwork();
 
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then((response) => {
+      .then(response => {
         this.getbusiness();
-
       });
 
     this.dashboardPpost();
-
   },
 
-  mounted(){
-
-   
-
-
+  mounted() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then((response) => {
+      .then(response => {
         this.getbusiness();
-       this.data1 = true;
-      
+        this.data1 = true;
       });
 
     this.dashboardPpost();
@@ -407,31 +364,26 @@ export default {
 
   computed: {
     ...mapGetters({
-      profile: 'auth/profilConnected'
+      profile: "auth/profilConnected"
     }),
-    selectedBusiness: function(){
+    selectedBusiness: function() {
       let data = this.$store.state.dashboard.dashboard_business;
-      data.lat= data.latitute;
+      data.lat = data.latitute;
       data.lng = data.longitute;
-     
-      return data
+
+      return data;
     },
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
-    Profile_complete(){
-
-   
-     return this.showcompleteprofile;
-
-      
-   
+    Profile_complete() {
+      return this.showcompleteprofile;
     }
   },
 
   watch: {
-    selectedb(newvalue) {},
-  },
+    selectedb(newvalue) {}
+  }
 };
 </script>
 

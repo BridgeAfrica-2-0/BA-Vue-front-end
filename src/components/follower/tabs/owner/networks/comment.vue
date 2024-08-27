@@ -22,7 +22,6 @@
             :less-str="$t('search.read_less')"
             :max-chars="15000"
           >
-            
           </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>

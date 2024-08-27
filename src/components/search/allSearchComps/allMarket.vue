@@ -1,9 +1,7 @@
 <template>
   <div>
-  
-
-     <Skeleton  :loading="prodLoader" />
-      <Skeleton  :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
 
     <b-alert v-if="products.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -28,10 +26,7 @@
 
         <div class="flx50">
           <p class="text">
-            <span
-              class="title cursor-pointer"
-              @click="productDetails(product)"
-            >
+            <span class="title cursor-pointer" @click="productDetails(product)">
               {{ product.name }}
             </span>
             <br />
@@ -50,12 +45,17 @@
         </div>
       </div>
       <br />
-      
-      <div class="d-flex"> 
 
-        <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
-         </div> 
-         
+      <div class="d-flex">
+        <b-badge
+          v-if="!product.in_stock"
+          class="text-center m-auto"
+          show
+          variant="info"
+          >Out of Stock</b-badge
+        >
+      </div>
+
       <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
         <div class="" v-if="product.in_stock">
           <!-- <b-button variant="primary" @click="buyNow(product)"
@@ -66,13 +66,20 @@
             :isProduct="true"
             :isBuyNow="true"
             type="business"
-            :isPremium="product.user_package_name "  
+            :isPremium="product.user_package_name"
           />
         </div>
 
         <div class="ml-2">
-          <b-button   :disabled="!product.in_stock" size="sm"  v-if="product.user_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
-            ><span> <b-icon icon="cart-plus"></b-icon> {{ $t("general.cart") }}</span>
+          <b-button
+            :disabled="!product.in_stock"
+            size="sm"
+            v-if="product.user_package_name == 'premium'"
+            variant="primary"
+            @click="handleAddToCard(product)"
+            ><span>
+              <b-icon icon="cart-plus"></b-icon> {{ $t("general.cart") }}</span
+            >
           </b-button>
         </div>
       </div>
@@ -97,11 +104,11 @@ export default {
     return {
       viewProduct: false,
       total: 0,
-      product:{},
+      product: {},
       per_page: 10,
       list: [],
       currentPage: 1,
-      nextLoad: false,
+      nextLoad: false
     };
   },
 
@@ -119,12 +126,11 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    },
+    }
   },
 
   methods: {
     productDetails(product) {
-   
       this.product = product;
       this.viewProduct = true;
     },
@@ -141,18 +147,18 @@ export default {
       this.product = product;
       console.log("add to card ", this.product.id, this.isLogin);
       this.$store
-      .dispatch("cart/addToCart",  {product, islogin: this.islogin})
-        .then((response) => {
+        .dispatch("cart/addToCart", { product, islogin: this.islogin })
+        .then(response => {
           this.flashMessage.show({
             status: "success",
-            message: this.getStatus,
+            message: this.getStatus
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "error occur",
+            message: "error occur"
           });
         });
     },
@@ -166,22 +172,20 @@ export default {
 
       this.$store
         .dispatch("marketSearch/nextPage", this.currentPage)
-        .then((res) => {
+        .then(res => {
           console.log("products list: ");
           console.log(this.products);
           // this.prodLoader = false;
         })
-        .catch((err) => {
+        .catch(err => {
           // this.prodLoader = false;
           console.log("products error: ");
           console.error(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
-
-
 
 <style scoped>
 .flx50 {
@@ -232,7 +236,6 @@ input:focus {
 }
 h6 {
   text-align: center;
-
 }
 .short {
   text-align: center;
@@ -305,7 +308,7 @@ h6 {
     padding: 4px;
   }
   .title {
-   font-size: 1.2625rem;
+    font-size: 1.2625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
@@ -322,7 +325,7 @@ h6 {
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-  
+
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -348,7 +351,7 @@ h6 {
     /* min-width: 123px; */
   }
   .title {
-   font-size: 1.0625rem;
+    font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
@@ -405,7 +408,6 @@ input:focus {
 }
 h6 {
   text-align: center;
-
 }
 .short {
   text-align: center;
@@ -426,7 +428,7 @@ h6 {
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-   
+
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -449,10 +451,10 @@ h6 {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 80px; 
+    width: 80px;
   }
   .title {
-   font-size: 1.0625rem;
+    font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;

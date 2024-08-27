@@ -4,7 +4,7 @@ export default {
   namespaced: true,
 
   state: {
-    ndetails: []   
+    ndetails: []
   },
 
   actions: {
@@ -14,12 +14,11 @@ export default {
       });
     },
 
-    roleCheck({ commit },id){
-      return axios.get("network/"+id+"/determine-role")
-        .then((data) => {
-          return data;
-        });
-    },
+    roleCheck({ commit }, id) {
+      return axios.get("network/" + id + "/determine-role").then(data => {
+        return data;
+      });
+    }
   },
 
   mutations: {

@@ -2,7 +2,6 @@
   <div>
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
-        
         <div class="one2">
           <div class="createp img-gall image-wrapp">
             <div class=" ">
@@ -15,37 +14,50 @@
             </div>
           </div>
 
-          <b-modal hide-footer title="Create album" id="addAlbumModal" @keyup.enter="createAlbum()">
+          <b-modal
+            hide-footer
+            title="Create album"
+            id="addAlbumModal"
+            @keyup.enter="createAlbum()"
+          >
             <b-form>
-              <b-form-input 
+              <b-form-input
                 id="name"
                 :placeholder="$t('general.Album_name')"
                 v-model="form.name"
                 name="name"
               ></b-form-input>
-              <b-button class="mt-2" modal-cancel variant="primary" @click="createAlbum()"> Create</b-button>
+              <b-button
+                class="mt-2"
+                modal-cancel
+                variant="primary"
+                @click="createAlbum()"
+              >
+                Create</b-button
+              >
             </b-form>
-            
           </b-modal>
 
           <div v-for="album in albums" :key="album.id">
             <div class="createp img-gall predit2">
               <a href="#!" @click="showlbum(album.album_id, album.album_name)">
-                <b-img v-if="album.album_cover.length != 0"
+                <b-img
+                  v-if="album.album_cover.length != 0"
                   class="card-img"
                   :src="album.album_cover[0]"
                   alt="album-img"
                 ></b-img>
-                <b-img v-else
+                <b-img
+                  v-else
                   class="card-img"
-                  v-bind="albumProps" 
-                  rounded 
+                  v-bind="albumProps"
+                  rounded
                   alt="album_img"
                 ></b-img>
                 <div class="createdesc botmedia">
                   <div class="botmediades">
-                    <h6>{{album.album_name}}</h6>
-                    <p>{{album.almbum_item_number}} Item(s)</p>
+                    <h6>{{ album.album_name }}</h6>
+                    <p>{{ album.almbum_item_number }} Item(s)</p>
                   </div>
                 </div>
               </a>
@@ -66,9 +78,18 @@
                         />
                       </template>
 
-                      <b-dropdown-item href="#" v-b-modal.editAlbumModal @click="getAlbumId(album.album_id)">Edit</b-dropdown-item>
+                      <b-dropdown-item
+                        href="#"
+                        v-b-modal.editAlbumModal
+                        @click="getAlbumId(album.album_id)"
+                        >Edit</b-dropdown-item
+                      >
 
-                      <b-dropdown-item href="#" @click="deleteAlbum(album.album_id)">Delete</b-dropdown-item>
+                      <b-dropdown-item
+                        href="#"
+                        @click="deleteAlbum(album.album_id)"
+                        >Delete</b-dropdown-item
+                      >
                     </b-dropdown>
                   </li>
                 </ul>
@@ -78,18 +99,22 @@
 
           <b-modal hide-footer title="Create album" id="editAlbumModal">
             <b-form>
-              <b-form-input 
+              <b-form-input
                 id="name"
                 :placeholder="$t('general.Album_name')"
                 v-model="form.name"
                 name="name"
               ></b-form-input>
-              <b-button class="mt-2" modal-cancel variant="primary" @click="updateAlbum()"> Update</b-button>
+              <b-button
+                class="mt-2"
+                modal-cancel
+                variant="primary"
+                @click="updateAlbum()"
+              >
+                Update</b-button
+              >
             </b-form>
-            
           </b-modal>
-
-          
         </div>
 
         <div class="two2 d-none">
@@ -134,8 +159,8 @@
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>{{ $t('network.Public') }}</option>
-                        <option>{{ $t('network.Private') }}</option>
+                        <option>{{ $t("network.Public") }}</option>
+                        <option>{{ $t("network.Private") }}</option>
                       </select>
                     </div>
                   </div>
@@ -152,7 +177,7 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
-      <span class="text-center ml-2"> {{this.albumName}} </span>
+      <span class="text-center ml-2"> {{ this.albumName }} </span>
 
       <Album :album="albumimages" @albumImages="albumImages" />
     </div>
@@ -164,7 +189,7 @@ import Album from "./album";
 
 export default {
   components: { Album },
-  props:["albums"],
+  props: ["albums"],
   data: function() {
     return {
       url: null,
@@ -176,15 +201,21 @@ export default {
       form: {
         name: ""
       },
-      albumProps: { blank: true, blankColor: '#777', width: 150, height: 165, class: 'm1' }
+      albumProps: {
+        blank: true,
+        blankColor: "#777",
+        width: 150,
+        height: 165,
+        class: "m1"
+      }
     };
   },
   computed: {
     albumimages() {
       return this.$store.state.networkProfileMedia.albumimages;
-    },
+    }
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
@@ -196,32 +227,39 @@ export default {
       this.albumId = album_Id;
       this.albumName = album_name;
       this.showalbum = true;
-      console.log('album Id: '+this.albumId+' album name: '+this.albumName);
+      console.log(
+        "album Id: " + this.albumId + " album name: " + this.albumName
+      );
       this.albumImages();
     },
-    
+
     getAlbumId(album_Id) {
       this.albumId = album_Id;
-      console.log('album Id: '+this.albumId);
+      console.log("album Id: " + this.albumId);
     },
 
     onClick(i) {
       this.index = i;
     },
-    
+
     albumImages() {
-      console.log('Got album(network id:'+this.url+'album id:'+this.albumId+')');
-    this.$store
-      .dispatch("networkProfileMedia/getAlbumImages", this.url+"/"+this.albumId)
-      .then(() => {
-        console.log('Got album(network id)');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      console.log(
+        "Got album(network id:" + this.url + "album id:" + this.albumId + ")"
+      );
+      this.$store
+        .dispatch(
+          "networkProfileMedia/getAlbumImages",
+          this.url + "/" + this.albumId
+        )
+        .then(() => {
+          console.log("Got album(network id)");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
 
-    createAlbum: function(){
+    createAlbum: function() {
       // let loader = this.$loading.show({
       //   container: this.fullPage,
       //   canCancel: true,
@@ -229,47 +267,49 @@ export default {
       //   color: "#e75c18"
       // });
       let formData = new FormData();
-      formData.append('name', this.form.name);
-      this.axios.post("network/album/create/"+this.url, formData)
-      .then(() => {
-        console.log('ohh yeah');
-        this.$emit('ownerAlbums');
-        // loader.hide();
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.Album_Created'),
+      formData.append("name", this.form.name);
+      this.axios
+        .post("network/album/create/" + this.url, formData)
+        .then(() => {
+          console.log("ohh yeah");
+          this.$emit("ownerAlbums");
+          // loader.hide();
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("general.Album_Created")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          // loader.hide();
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("general.Unable_to_Create_Your_Album")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        // loader.hide();
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_to_Create_Your_Album')
-        });
-      });
-		},
+    },
 
-    updateAlbum: function(){
+    updateAlbum: function() {
       let formData = new FormData();
-      formData.append('name', this.form.name);
-      this.axios.post("network/album/update/"+this.url+"/"+this.albumId, formData)
-      .then(() => {
-        console.log('ohh yeah');
-        this.$emit('ownerAlbums');
-        this.flashMessage.show({
-          status: "success",
-          message: "Album Updated"
+      formData.append("name", this.form.name);
+      this.axios
+        .post("network/album/update/" + this.url + "/" + this.albumId, formData)
+        .then(() => {
+          console.log("ohh yeah");
+          this.$emit("ownerAlbums");
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Updated"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Update Album"
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Update Album"
-        });
-      });
-		},
+    },
 
     deleteAlbum(album_id) {
       console.log("deleting ----------");
@@ -283,7 +323,7 @@ export default {
         .delete("network/album/delete/" + this.url + "/" + album_id)
         .then(response => {
           console.log(response.data);
-          this.$emit('ownerAlbums');
+          this.$emit("ownerAlbums");
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted"
@@ -308,11 +348,8 @@ export default {
             // loader.hide();
           }
         });
-    },
-
-
-  },
-  
+    }
+  }
 };
 </script>
 

@@ -5,12 +5,17 @@
         <b-col cols="12 mb-3">
           <div class="d-flex justify-content-start align-items-center">
             <div>
-              <b-icon variant="primary" icon="heart" class="mr-2" @click="like(product.id)"></b-icon
-              ><span>  {{ product.product_likes }}</span>
+              <b-icon
+                variant="primary"
+                icon="heart"
+                class="mr-2"
+                @click="like(product.id)"
+              ></b-icon
+              ><span> {{ product.product_likes }}</span>
             </div>
             <div class="ml-3">
               <b-icon variant="primary" icon="chat-fill" class="mr-2"></b-icon
-              ><span> {{product.comments_count}}</span>
+              ><span> {{ product.comments_count }}</span>
             </div>
           </div>
         </b-col>
@@ -21,7 +26,7 @@
             <comments
               :comments_wrapper_classes="[
                 'custom-scrollbar',
-                'comments-wrapper',
+                'comments-wrapper'
               ]"
               :comments="comments"
               @submit-comment="submitComment"
@@ -42,60 +47,55 @@ import Comments from "./productComment/Comments.vue";
 export default {
   name: "ProductComments",
   components: {
-    Comments,
+    Comments
   },
   props: {
     idproduct: {
       type: Number,
-      required: true,
+      required: true
     },
-    product: {Object}
+    product: { Object }
   },
   data() {
     return {
       likes: 15,
       creator: {
         avatar: "http://via.placeholder.com/100x100/a74848",
-        user: "exampleCreator",
+        user: "exampleCreator"
       },
       current_comment_page: 1,
-      loadComments: [],
+      loadComments: []
     };
   },
   computed: {
     comments() {
       return this.loadComments;
-    },
+    }
   },
   methods: {
-    
-      getDetail (id) {
-       this.$store
-      .dispatch("productDetails/getProductDetails", id)
-      .then((product) => {
-        this.product = product;
-       console.log("new product detail ", product)
-      });
-         
-        
-        
-      },
+    getDetail(id) {
+      this.$store
+        .dispatch("productDetails/getProductDetails", id)
+        .then(product => {
+          this.product = product;
+          console.log("new product detail ", product);
+        });
+    },
 
-    like(id){
-      console.log('likes---', id) 
-      this.$store.dispatch("productComments/productLikes",id)
-      .then(res =>{
+    like(id) {
+      console.log("likes---", id);
+      this.$store.dispatch("productComments/productLikes", id).then(res => {
         this.getDetail(id);
-      })
+      });
     },
 
     handleDeleteComment(idcomment) {
       this.loadComments = this.loadComments.filter(
-        (el) => el.comment_id !== idcomment
+        el => el.comment_id !== idcomment
       );
     },
 
-    setNewDetail(product){
+    setNewDetail(product) {
       this.product = product;
     },
 
@@ -105,27 +105,25 @@ export default {
       //   user: this.current_user.user,
       //   avatar: this.current_user.avatar,
       //   text: reply,
-      // }); 
-      console.log('submit comment')
+      // });
+      console.log("submit comment");
       const comment = {
         idproduct: this.idproduct,
-        text: reply,
+        text: reply
       };
-       
+
       this.$store.dispatch("productComments/postComment", comment).then(() => {
-        
         this.$store
           .dispatch("productComments/getComments", {
             id: this.idproduct,
-            page: this.current_comment_page,
+            page: this.current_comment_page
           })
-          .then((data) => {
-            
+          .then(data => {
             this.loadComments = data;
             console.log(this.loadComments);
           });
       });
-    },
+    }
   },
   created() {
     this.$store.dispatch("productComments/getProductLikes", this.idproduct);
@@ -134,13 +132,13 @@ export default {
     this.$store
       .dispatch("productComments/getComments", {
         id: this.idproduct,
-        page: this.current_comment_page,
+        page: this.current_comment_page
       })
-      .then((data) => {
+      .then(data => {
         this.loadComments = data;
         console.log(this.loadComments);
       });
-  },
+  }
 };
 </script>
 

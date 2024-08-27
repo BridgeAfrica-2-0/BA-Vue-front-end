@@ -21,7 +21,7 @@
             <comments
               :comments_wrapper_classes="[
                 'custom-scrollbar',
-                'comments-wrapper',
+                'comments-wrapper'
               ]"
               :comments="comments"
               @submit-comment="submitComment"
@@ -41,34 +41,34 @@ import Comments from "./productComment/Comments.vue";
 export default {
   name: "ProductComments",
   components: {
-    Comments,
+    Comments
   },
   props: {
     idproduct: {
       type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       likes: 15,
       creator: {
         avatar: "http://via.placeholder.com/100x100/a74848",
-        user: "exampleCreator",
+        user: "exampleCreator"
       },
       current_comment_page: 1,
-      loadComments: [],
+      loadComments: []
     };
   },
   computed: {
     comments() {
       return this.loadComments;
-    },
+    }
   },
   methods: {
     handleDeleteComment(idcomment) {
       this.loadComments = this.loadComments.filter(
-        (el) => el.comment_id !== idcomment
+        el => el.comment_id !== idcomment
       );
     },
     submitComment: function(reply) {
@@ -80,21 +80,21 @@ export default {
       // });
       const comment = {
         idproduct: this.idproduct,
-        text: reply,
+        text: reply
       };
 
       this.$store.dispatch("productComments/postComment", comment).then(() => {
         this.$store
           .dispatch("productComments/getComments", {
             id: this.idproduct,
-            page: this.current_comment_page,
+            page: this.current_comment_page
           })
-          .then((data) => {
+          .then(data => {
             this.loadComments = data;
             console.log(this.loadComments);
           });
       });
-    },
+    }
   },
   created() {
     this.$store.dispatch("productComments/getProductLikes", this.idproduct);
@@ -103,13 +103,13 @@ export default {
     this.$store
       .dispatch("productComments/getComments", {
         id: this.idproduct,
-        page: this.current_comment_page,
+        page: this.current_comment_page
       })
-      .then((data) => {
+      .then(data => {
         this.loadComments = data;
         console.log(this.loadComments);
       });
-  },
+  }
 };
 </script>
 

@@ -10,8 +10,8 @@
         <span class="float-right post-options">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item>{{ $t('network.Edit') }}</b-dropdown-item>
-            <b-dropdown-item>{{ $t('network.Delete') }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Edit") }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
@@ -23,7 +23,6 @@
             :max-chars="15000"
           >
           </read-more>
-         
         </p>
         <b-icon
           :icon="icon"
@@ -40,7 +39,9 @@
           class="cursor"
         ></b-icon>
         {{ comment.reply_comment_count | nFormatter }}
-        <span @click="showReply" class="primary ml-2 reply"><b>{{ $t('network.Reply') }}</b></span>
+        <span @click="showReply" class="primary ml-2 reply"
+          ><b>{{ $t("network.Reply") }}</b></span
+        >
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1" class="p-0">
@@ -95,25 +96,25 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true,
+      required: true
     },
     uuid: {
-      required: true,
+      required: true
     },
     type: {
       type: String,
       required: true,
-      validator: function (value) {
+      validator: function(value) {
         if (["comment"].includes(value)) return true;
       },
-      default: function () {
+      default: function() {
         return "comment";
-      },
-    },
+      }
+    }
   },
   components: {
-    Comment,
-  },
+    Comment
+  }
 };
 </script>
 
@@ -170,7 +171,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

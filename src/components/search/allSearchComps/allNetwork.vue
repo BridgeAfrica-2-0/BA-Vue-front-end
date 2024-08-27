@@ -8,9 +8,8 @@
         >{{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
- 
-  <Network v-for="item in networks.data" :network="item" :key="item.id"  />
-   
+
+    <Network v-for="item in networks.data" :network="item" :key="item.id" />
 
     <b-modal v-model="show" id="modal-sm" size="sm" hide-header>
       <p class="text-center">Unable to join network!</p>
@@ -33,12 +32,13 @@ export default {
       per_page: 10,
       list: [],
       currentPage: 1,
-      nextLoad: false,
+      nextLoad: false
     };
   },
 
   components: {
-    Skeleton,Network
+    Skeleton,
+    Network
   },
 
   created() {
@@ -50,7 +50,7 @@ export default {
     },
     loader() {
       return this.$store.getters["allSearch/getLoader"];
-    },
+    }
   },
 
   methods: {
@@ -59,14 +59,14 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
         })
-        .catch((err) => {
+        .catch(err => {
           this.show = true;
           console.log(err);
         });
@@ -76,20 +76,20 @@ export default {
       const nextFollowState = user.is_member == 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_member = nextFollowState;
 
           this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.show = true;
           console.log(err);
         });
@@ -110,8 +110,8 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    },
-  },
+    }
+  }
 };
 </script>
 

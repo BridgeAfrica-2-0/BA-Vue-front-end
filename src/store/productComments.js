@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = {
-  comments: [],
+  comments: []
 };
 const getters = {};
 const actions = {
@@ -9,12 +9,12 @@ const actions = {
     return await new Promise((resolve, reject) => {
       axios
         .get(`market/product/detail/${details.id}/comments/${details.page}`)
-        .then((response) => {
-          commit('setComment', response.data.data);
+        .then(response => {
+          commit("setComment", response.data.data);
           console.log("Products comments", response.data);
           resolve(response.data.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     });
@@ -23,12 +23,12 @@ const actions = {
     return await new Promise((resolve, reject) => {
       axios
         .get(`/market/product/detail/${idproduct}/like`)
-        .then((response) => {
+        .then(response => {
           commit;
           console.log(response.data);
           resolve(response.data.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     });
@@ -38,12 +38,12 @@ const actions = {
     return await new Promise((resolve, reject) => {
       axios
         .get(`/market/product/detail/${idproduct}/like`)
-        .then((response) => {
+        .then(response => {
           commit;
           console.log(response.data);
           resolve(response.data.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     });
@@ -51,9 +51,9 @@ const actions = {
   async postComment({ commit }, newComment) {
     await axios
       .post(`/market/product/${newComment.idproduct}/comment/create`, {
-        comment: newComment.text,
+        comment: newComment.text
       })
-      .then((response) => {
+      .then(response => {
         commit;
         console.log(response.data);
       });
@@ -63,11 +63,11 @@ const actions = {
       .delete(
         `market/product/${details.idproduct}/comment/${details.idcomment}/delete `
       )
-      .then((response) => {
+      .then(response => {
         commit;
         console.log(response.data);
       });
-  },
+  }
 };
 const mutations = {
   // loadComments: (state, newComments) => {
@@ -77,11 +77,10 @@ const mutations = {
   //   }
   // },
 
-  setComment(state, data){
-    data.map(item =>{
-      state.comments.push(item)
-    })
-    
+  setComment(state, data) {
+    data.map(item => {
+      state.comments.push(item);
+    });
   }
 };
 
@@ -90,5 +89,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

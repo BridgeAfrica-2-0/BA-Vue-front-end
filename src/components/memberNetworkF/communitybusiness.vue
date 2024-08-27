@@ -17,14 +17,20 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            {{ $t('memnetwork.Community') }} <br />
+            {{ $t("memnetwork.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ member.location_description }}
             </span>
             <br />
-            <span v-if="member.about_business.length<65">{{ member.description}}</span>
-            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>{{ $t('memnetwork.Read_More') }}</b-link></span>
+            <span v-if="member.about_business.length < 65">{{
+              member.description
+            }}</span>
+            <span v-else
+              >{{ member.about_business.substring(0, 65) + "..." }}
+              <b-link>{{ $t("memnetwork.Read_More") }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -46,7 +52,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{ $t('memnetwork.Community') }}</span>
+                  <span class="btn-com">{{ $t("memnetwork.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -76,7 +82,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('memnetwork.Direction') }}</span>
+                  <span class="btn-text">{{ $t("memnetwork.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -98,8 +104,8 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   method: {
@@ -115,7 +121,7 @@ export default {
     //   }
     //   return num;
     // },
-  },
+  }
 };
 </script>
 

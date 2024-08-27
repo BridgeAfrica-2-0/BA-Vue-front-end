@@ -3,7 +3,6 @@
     <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-         
           <b-avatar
             class="p-avater"
             :square="'user' == item.poster_type ? false : true"
@@ -20,8 +19,6 @@
           </router-link>
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
-
-       
       </div>
 
       <div class="mt-2 ml-3 p-0">
@@ -137,8 +134,6 @@
       </b-row>
     </div>
 
-    
-
     <!-- <Comment
       v-for="comment in comments"
       :key="comment.updated_at"
@@ -171,25 +166,24 @@ import { formatNumber, fromNow } from "@/helpers";
 //import Comment from "./comment";
 import light from "../lightbox";
 
-
 export default {
   name: "ownerPostComponent",
- // mixins: [NoMoreDataForComment, isYourOwnPostMixins],
+  // mixins: [NoMoreDataForComment, isYourOwnPostMixins],
   components: {
-  //  Comment,
-    light,
-  //  Loader,
-  //  ShareButton,
+    //  Comment,
+    light
+    //  Loader,
+    //  ShareButton,
   },
 
   props: {
     post: {},
     usertype: {
-      default: () => null,
+      default: () => null
     },
     isDisplayInSearch: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
     mapvideo: {},
     mapmediae: {},
@@ -198,8 +192,8 @@ export default {
     deletePost: {},
     canBeDelete: {
       type: Boolean,
-      default: () => true,
-    },
+      default: () => true
+    }
   },
 
   watch: {
@@ -208,7 +202,7 @@ export default {
         this.onShowComment();
         this.loadComment = true;
       }
-    },
+    }
   },
 
   data: () => ({
@@ -221,32 +215,32 @@ export default {
     loadComment: false,
     commentHasLoad: false,
 
-    strategy: null,
+    strategy: null
   }),
 
   created() {
     this.item = this.post;
-    this.posterID = this.post.poster_id
-    
+    this.posterID = this.post.poster_id;
+
     this.strategy = {
       user: () => {
-        return  { name: "Follower", params: { id: this.posterID } }
+        return { name: "Follower", params: { id: this.posterID } };
       },
 
       business: () => {
-        return  { name: "BusinessFollower", params: { id: this.posterID } };
+        return { name: "BusinessFollower", params: { id: this.posterID } };
       },
 
       network: () => {
-        return { name: "networks", params: { id: this.posterID } }
-      },
+        return { name: "networks", params: { id: this.posterID } };
+      }
     };
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
   filters: {
     nFormatter: formatNumber,
-    now: fromNow,
+    now: fromNow
   },
 
   computed: {
@@ -262,14 +256,14 @@ export default {
     },
     isMemberNetworkFollower() {
       return "memberNetworkFollower" == this.$route.name ? true : false;
-    },
+    }
   },
 
   methods: {
     mapMedia(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -282,7 +276,7 @@ export default {
     mapVideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -297,7 +291,7 @@ export default {
     },
 
     ...mapMutations({
-      addNewComment: "networkProfile/updatePost",
+      addNewComment: "networkProfile/updatePost"
     }),
 
     getId(video_url) {
@@ -313,19 +307,19 @@ export default {
       const request = await this.$repository.post.delete(uuid);
 
       if (request.success) {
-        this.comments = this.comments.filter((e) => e.id != uuid);
+        this.comments = this.comments.filter(e => e.id != uuid);
         this.item.comment_count -= 1;
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t("general.Comment_Deleted"),
+          message: this.$t("general.Comment_Deleted")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: this.$t("general.Something_wrong_happen_Try_again"),
+          message: this.$t("general.Something_wrong_happen_Try_again")
         });
       }
     },
@@ -338,7 +332,7 @@ export default {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.profile.id });
@@ -346,20 +340,20 @@ export default {
       const request = await this.$repository.post.update({ uuid, data });
 
       if (request.success) {
-        this.comments = this.comments.map((e) =>
+        this.comments = this.comments.map(e =>
           e.id == uuid ? { ...request.data } : { ...e }
         );
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t("general.Comment_Updated"),
+          message: this.$t("general.Comment_Updated")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: request.data,
+          message: request.data
         });
       }
     },
@@ -376,7 +370,7 @@ export default {
           post: this.post.post_id ? this.post.post_id : this.post.id,
           network: this.$route.params.id
             ? this.$route.params.id
-            : this.profile.id,
+            : this.profile.id
         });
 
         if (request.success)
@@ -386,7 +380,7 @@ export default {
               ? this.post.likes_count + 1
               : this.post.likes_count
               ? this.post.likes_count - 1
-              : 0,
+              : 0
           });
         this.processLike = false;
       }
@@ -407,7 +401,7 @@ export default {
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
-        data,
+        data
       });
 
       if (request.success) {
@@ -415,7 +409,7 @@ export default {
         this.comment = "";
         this.item.comment_count += 1;
         this.flashMessage.success({
-          message: this.$t("businessowner.Post_created"),
+          message: this.$t("businessowner.Post_created")
         });
       }
 
@@ -429,7 +423,7 @@ export default {
 
       const request = await this.$repository.post.fetch({
         uuid: this.post.post_id ? this.post.post_id : this.post.id,
-        page: this.page,
+        page: this.page
       });
 
       if (request.success) {
@@ -444,8 +438,8 @@ export default {
       }
 
       this.loadComment = false;
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
@@ -621,7 +615,7 @@ export default {
     padding-left: 10 px;
     margin-left: 2%;
   }
- 
+
   .post-btn {
     border: none !important;
     margin-right: 0px;

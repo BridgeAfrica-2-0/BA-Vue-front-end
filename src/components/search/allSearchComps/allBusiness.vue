@@ -9,15 +9,7 @@
     >
     <div></div>
 
-    
-   
-     <Business
-        v-for="item in businesses.data"
-        :key="item.id"
-        :business="item"
-      
-      />
-
+    <Business v-for="item in businesses.data" :key="item.id" :business="item" />
   </div>
 </template>
 
@@ -36,18 +28,19 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   props: ["businesses"],
   components: {
-    Skeleton,Business
+    Skeleton,
+    Business
   },
   computed: {
     loader() {
       return this.$store.getters["allSearch/getLoader"];
-    },
+    }
   },
   mounted() {
     console.warn(this.businesses);
@@ -74,22 +67,22 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

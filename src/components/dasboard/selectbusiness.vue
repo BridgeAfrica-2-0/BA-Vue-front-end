@@ -2,7 +2,11 @@
   <div>
     <b-card class=" border shadow" style="height:350px">
       <h4 class="font-weight-bolder text-design">
-        {{ $t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses') }}
+        {{
+          $t(
+            "dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses"
+          )
+        }}
       </h4>
       <b-form-select v-model="selected" :options="options"></b-form-select>
     </b-card>

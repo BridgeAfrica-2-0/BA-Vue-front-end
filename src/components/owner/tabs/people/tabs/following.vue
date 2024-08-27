@@ -6,10 +6,10 @@
           <b-form-input
             aria-label="Text input with checkbox"
             :placeholder="$t('profileowner.Search_Something')"
-              v-model="keywords"
+            v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend  @click="$refs.search.search()" is-text>
+          <b-input-group-prepend @click="$refs.search.search()" is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
@@ -17,8 +17,12 @@
     </b-row>
     <br />
 
-        <CommunityMembers  @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
-     
+    <CommunityMembers
+      @BlockUser="BlockUser"
+      :searchh="keywords"
+      ref="search"
+      type="Following"
+    />
   </div>
 </template>
 
@@ -27,28 +31,25 @@ import CommunityMembers from "../../communityMember";
 export default {
   data() {
     return {
-        keywords:"",
-    }
-    },
+      keywords: ""
+    };
+  },
   components: {
     CommunityMembers
   },
 
-  computed: {
-   
-  },
+  computed: {},
   methods: {
     BlockUser(id) {
       console.log(id);
       let dataInfo = {
         id: id,
         refernce: "user",
-        type: "following",
+        type: "following"
       };
-      this.$emit('BlockUser', dataInfo);
-    },
+      this.$emit("BlockUser", dataInfo);
+    }
   }
-
 };
 </script>
 

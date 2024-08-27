@@ -1,40 +1,43 @@
 <template>
   <div>
-   
+    <div
+      v-for="business in business"
+      :key="business.id"
+      class="people-style shadow h-100 "
+    >
+      <div class="d-inline-flex">
+        <div>
+          <div class="center-img">
+            <splide :options="options" class="r-image">
+              <splide-slide cl>
+                <img :src="business.picture" class="r-image" />
+              </splide-slide>
+            </splide>
+          </div>
+        </div>
 
-            
-              <div    v-for="business in business" :key="business.id" class="people-style shadow h-100 ">
-               
-                <div class="d-inline-flex">
-                  <div >
-                    <div class="center-img">
-                      <splide :options="options" class="r-image">
-                        <splide-slide cl>
-                          <img :src="business.picture" class="r-image" />
-                        </splide-slide>
-                      </splide>
-                    </div>
-                  </div>
+        <div class="flex80">
+          <p class="textt text">
+            <strong class="title"
+              ><router-link :to="'business_owner/' + business.slug">
+                {{ business.name }}
+              </router-link>
+            </strong>
+            <br />
+            <span v-if="Array.isArray(business.category)">
+              <span
+                class="mr-1"
+                v-for="cat in business.category"
+                :key="cat.name"
+              >
+                {{ cat.name }},
+              </span>
+            </span>
+            <br />
+            {{ count(business.followers) }} {{ $t("profileowner.Community") }}
+            <br />
 
-                  <div class="flex80">
-                    <p class="textt text">
-                     <strong class="title"><router-link :to="'business_owner/'+business.slug"> 
-                        {{ business.name }} </router-link>
-                      </strong> 
-                      <br />
-                      <span v-if="Array.isArray(business.category)">
-                        <span
-                          class="mr-1"
-                          v-for="cat in business.category"
-                          :key="cat.name"
-                        >
-                          {{ cat.name }},
-                        </span>
-                      </span>
-                      <br />
-                      {{  count(business.followers) }} {{ $t('profileowner.Community') }} <br />
-
-                      <!-- <span class="location">
+            <!-- <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
                         {{ business.city }}
                         <span v-for="nei in business.neigborhood" :key="nei.id">
@@ -43,22 +46,19 @@
                       </span> 
                       <br />  -->
 
-                      <read-more
-                        :more-str="$t('search.read_more')"
-                        class="readmore"
-                        :text="business.about_business"
-                        link="#"
-                        :less-str="$t('search.read_less')"
-                        :max-chars="100"
-                      >
-                      
-                      </read-more>
-                    </p>
-                  </div>
-                </div>
-              </div>
-      
-   
+            <read-more
+              :more-str="$t('search.read_more')"
+              class="readmore"
+              :text="business.about_business"
+              link="#"
+              :less-str="$t('search.read_less')"
+              :max-chars="100"
+            >
+            </read-more>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -92,9 +92,7 @@ export default {
 </script>
 
 <style scoped>
-
-.flex80{
-
+.flex80 {
   flex-basis: 80% !important;
 }
 @media only screen and (min-width: 768px) {
@@ -108,8 +106,6 @@ export default {
   .btn-icon {
     margin-top: 3px;
   }
-
-  
 }
 
 @media only screen and (max-width: 768px) {
@@ -173,15 +169,13 @@ export default {
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-     margin-left: 3px;
+    margin-left: 3px;
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
 
     padding: 1px;
     text-align: left;
-
-   
 
     margin-right: -5px;
 

@@ -2,7 +2,7 @@
   <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
-          <!-- :src="require('@/assets/img/mayor.jpg')" -->
+        <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
           :src="networkInfo.image"
           variant="primary"
@@ -11,7 +11,6 @@
           class="network-logo"
         >
         </b-avatar>
-
       </b-container>
 
       <br />
@@ -19,7 +18,9 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
+            <h6 class="  m-0 p-0 a-center network-name ">
+              <b> {{ networkInfo.name }}</b>
+            </h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -27,20 +28,26 @@
               size="sm"
               @click="addFollower"
               :disabled="buttonStatus"
-              :style="networkInfo.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+              :style="
+                networkInfo.is_follow !== 0
+                  ? 'background-color: rgb(162,107,80);'
+                  : ''
+              "
               class="a-center"
-            ><b-spinner v-if="SPcommunity" small></b-spinner>
+              ><b-spinner v-if="SPcommunity" small></b-spinner>
               <i
                 class="fas fa-lg btn-icon"
-                :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                :class="
+                  networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                "
               ></i>
-              <span class="ml-1"> {{ $t('general.Community') }} </span>
+              <span class="ml-1"> {{ $t("general.Community") }} </span>
             </b-button>
           </b-col>
         </b-row>
       </b-container>
 
-      <br /> 
+      <br />
 
       <b-card-text class="text-left">
         <b-container>
@@ -48,7 +55,7 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> {{ $t('general.Private') }} </span>
+                <span class="pivate text"> {{ $t("general.Private") }} </span>
               </p>
             </b-col>
             <b-col>
@@ -56,36 +63,34 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                 {{ $t('general.community') }} 
+                  {{ $t("general.community") }}
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }} </h6>
+        <h6 class="mt-2 font-weight-bolder title ">
+          {{ $t("general.About") }}
+        </h6>
         <p class="text-justify text">
-           <read-more
-              :more-str="$t('search.read_more')"
-              class="readmore"
-              :text="networkInfo.description"
-              link="#"
-              :less-str="$t('search.read_less')"
-              :max-chars="100"
-            ></read-more>
-            
+          <read-more
+            :more-str="$t('search.read_more')"
+            class="readmore"
+            :text="networkInfo.description"
+            link="#"
+            :less-str="$t('search.read_less')"
+            :max-chars="100"
+          ></read-more>
         </p>
       </b-card-text>
     </b-card>
-    
-    
 
     <SidebarCommunity />
-
   </div>
 </template>
 
 <script>
-import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
+import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
 export default {
   name: "parent",
   components: {
@@ -99,18 +104,17 @@ export default {
       Pcommunity: false,
       buttonStatus: false,
       text: "",
-      file: '',
-
+      file: ""
     };
   },
   computed: {
     networkInfo() {
       return this.$store.state.networkProfile.networkInfo;
-    },
+    }
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
-    this.getNetworkInfo() 
+    this.getNetworkInfo();
   },
   methods: {
     nFormatter: function(num) {
@@ -131,44 +135,44 @@ export default {
     addFollower: function() {
       this.buttonStatus = true;
       this.SPcommunity = !this.SPcommunity;
-      this.axios.post("network/"+this.url+"/about/follow")
-      .then(() => {
-        this.getNetworkInfo();
-        this.SPcommunity = !this.SPcommunity;
-        if (this.networkInfo.is_follow) {
+      this.axios
+        .post("network/" + this.url + "/about/follow")
+        .then(() => {
+          this.getNetworkInfo();
+          this.SPcommunity = !this.SPcommunity;
+          if (this.networkInfo.is_follow) {
+            this.buttonStatus = false;
+            this.flashMessage.show({
+              status: "success",
+              message: "You Are Not more Following"
+            });
+          } else {
+            this.buttonStatus = false;
+            this.flashMessage.show({
+              status: "success",
+              message: this.$t("general.You_Are_Now_Following")
+            });
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
           this.buttonStatus = false;
           this.flashMessage.show({
-            status: "success",
-            message: "You Are Not more Following"
+            status: "error",
+            message: this.$t("general.Unable_To_follow")
           });
-        } else {
-          this.buttonStatus = false;
-          this.flashMessage.show({
-            status: "success",
-            message: this.$t('general.You_Are_Now_Following')
-          });
-        }
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.buttonStatus = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_To_follow')
         });
-      });
     },
     getNetworkInfo() {
       this.$store
-      .dispatch("networkProfile/getnetworkInfo", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .dispatch("networkProfile/getnetworkInfo", this.url)
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     }
-
   }
 };
 </script>

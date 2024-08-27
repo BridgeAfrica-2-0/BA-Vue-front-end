@@ -49,40 +49,40 @@ import { fromNow } from "@/helpers";
 export default {
   props: ["modal", "auth", "post", "hidden"],
   components: {
-    Button,
+    Button
   },
 
   data: () => ({
     content: null,
-    loading: false,
+    loading: false
   }),
 
   methods: {
-    sharing: async function () {
+    sharing: async function() {
       this.loading = true;
       let data = {
         [`${this.post.poster_type}_profile`]: "",
         post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
         source_id: parseInt(this.post.user_id),
-        content: this.content,
+        content: this.content
       };
 
       const request = await this.$repository.share.userPost(data, [
-        `${this.post.poster_type}`,
+        `${this.post.poster_type}`
       ]);
       this.loading = false;
       this.hidden();
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: "Operation success",
+          message: "Operation success"
         });
-    },
+    }
   },
 
   filters: {
-    fromNow,
-  },
+    fromNow
+  }
 };
 </script>
 

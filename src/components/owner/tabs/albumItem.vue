@@ -1,37 +1,37 @@
 <template>
-  <div class ="createp img-gall predit2 "
+  <div
+    class="createp img-gall predit2 "
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-  > 
-    
-      <img :src="cover(album.cover)"  alt="" class="card-img h-100">
-      
-      <div class="createdesc botmedia">
-        <div class="botmediadess-position" v-if="loading">
-          <b-spinner
-            style="width: 3rem; height: 3rem; color: #e75c18"
-            :label="$t('profileowner.Large_Spinner')"
-          ></b-spinner>
-        </div>
-        <div class="botmediadess-position" v-else>
-          <h6 style="font-size: 1rem; font-weight: bold">
-            {{ album.name }}
-          </h6>
-          <p style="font-size: 1rem; font-weight: bold">
-            {{ plural }}
-          </p>
-          
-          <b-button
-            v-if="upHere"
-            variant="outline-primary"
-            size="sm"
-            @click="show"
-          >
-            {{ $t("profileowner.Show") }}
-          </b-button>
-        </div>
+  >
+    <img :src="cover(album.cover)" alt="" class="card-img h-100" />
+
+    <div class="createdesc botmedia">
+      <div class="botmediadess-position" v-if="loading">
+        <b-spinner
+          style="width: 3rem; height: 3rem; color: #e75c18"
+          :label="$t('profileowner.Large_Spinner')"
+        ></b-spinner>
       </div>
-      <div class="mediadesc" v-if="canBeUpdate && isEditor">
+      <div class="botmediadess-position" v-else>
+        <h6 style="font-size: 1rem; font-weight: bold">
+          {{ album.name }}
+        </h6>
+        <p style="font-size: 1rem; font-weight: bold">
+          {{ plural }}
+        </p>
+
+        <b-button
+          v-if="upHere"
+          variant="outline-primary"
+          size="sm"
+          @click="show"
+        >
+          {{ $t("profileowner.Show") }}
+        </b-button>
+      </div>
+    </div>
+    <div class="mediadesc" v-if="canBeUpdate && isEditor">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
           <b-dropdown
@@ -58,14 +58,12 @@
       </ul>
     </div>
   </div>
-  
 </template>
 
 <script>
-
 import defaultImage from "@/assets/img/nothing.jpg";
 import { fullMediaLink } from "@/helpers";
-import { ResizeMediaImage } from '@/mixins'
+import { ResizeMediaImage } from "@/mixins";
 
 export default {
   mixins: [ResizeMediaImage],
@@ -83,22 +81,23 @@ export default {
   data: () => ({
     upHere: false,
     loading: false,
-    noItem: null,
+    noItem: null
   }),
 
   filters: {
-    path: fullMediaLink,
+    path: fullMediaLink
   },
 
-  computed:{
-    plural(){
-      return this.album.items ? `${this.album.items} items` : this.$t('general.No_item');
-    },
+  computed: {
+    plural() {
+      return this.album.items
+        ? `${this.album.items} items`
+        : this.$t("general.No_item");
+    }
   },
 
-  created(){
-    if (this.showCoverAlbum)
-      this.show()
+  created() {
+    if (this.showCoverAlbum) this.show();
   },
 
   methods: {
@@ -108,11 +107,11 @@ export default {
       return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
     },
 
-    show: async function () {
+    show: async function() {
       this.loading = true;
       this.loading = await this.showAlbumPictures();
-    },
-  },
+    }
+  }
 };
 </script>
 

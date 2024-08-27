@@ -35,8 +35,7 @@
             >
           </b-col>
           <b-col>
-                              <BtnCtaMessage :element="item" type="people" />
-
+            <BtnCtaMessage :element="item" type="people" />
           </b-col>
         </b-row>
       </b-col>

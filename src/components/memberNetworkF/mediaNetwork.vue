@@ -35,9 +35,9 @@ export default {
     },
     owneralbums() {
       return this.$store.state.networkProfileMedia.owneralbums;
-    },
+    }
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
     this.ownerPostImages();
     this.ownerAlbums();
@@ -47,26 +47,26 @@ export default {
       this.index = i;
     },
     ownerPostImages() {
-    this.$store
-      .dispatch("networkProfileMedia/getImages", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("networkProfileMedia/getImages", this.url)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
     ownerAlbums() {
-    this.$store
-      .dispatch("networkProfileMedia/getAlbums", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-    },
-  },
+      this.$store
+        .dispatch("networkProfileMedia/getAlbums", this.url)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
+  }
 };
 </script>
 

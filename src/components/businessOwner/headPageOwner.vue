@@ -1,8 +1,13 @@
 <template>
-  <div>   
-    <div class="container-fluid" style="padding: 0px"> 
+  <div>
+    <div class="container-fluid" style="padding: 0px">
       <div class="splide" v-if="business_info.cover.length">
-        <splide :options="options" :perPage="perPage" :key="business_info.cover.length" class="banner r-image">
+        <splide
+          :options="options"
+          :perPage="perPage"
+          :key="business_info.cover.length"
+          class="banner r-image"
+        >
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
             <img :src="cover.media_url" class="r-image" />
           </splide-slide>
@@ -163,11 +168,7 @@
                   class="edit-btn d-none d-md-inline"
                   @click="selectCover"
                 >
-                  <fas-icon
-                    class="mr-2"
-                    :icon="['fas', 'plus']"
-                    size="lg"
-                  />
+                  <fas-icon class="mr-2" :icon="['fas', 'plus']" size="lg" />
                   {{ $t("businessowner.Add_Cover") }}
                 </b-button>
 
@@ -185,9 +186,11 @@
                     {{ $t("businessowner.Add_Cover") }}</b-dropdown-item
                   >
 
-                  <b-dropdown-item >  <router-link :to="'/business/'+url " >   {{
-                    $t("businessowner.View_As")   
-                  }}      </router-link>  </b-dropdown-item>
+                  <b-dropdown-item>
+                    <router-link :to="'/business/' + url">
+                      {{ $t("businessowner.View_As") }}
+                    </router-link>
+                  </b-dropdown-item>
                 </b-dropdown>
               </span>
             </div>
@@ -217,30 +220,26 @@ export default {
       url: null,
       img_url: null,
       cover_photo: null,
-      profile_photo: null,
-
-    
+      profile_photo: null
     };
   },
 
   methods: {
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
-      addCoverPictureBusiness: "businessOwner/addCoverPicture",
+      addCoverPictureBusiness: "businessOwner/addCoverPicture"
     }),
 
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url)
-        .then(() => {
-          
-        })
-        .catch((err) => {
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
     },
     gotoCoverImages() {
-      this.$emit('goto-cover-images');
+      this.$emit("goto-cover-images");
     },
 
     viewAs() {
@@ -248,7 +247,6 @@ export default {
     },
 
     setlogo(e) {
-
       this.profile_photo = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
@@ -273,11 +271,11 @@ export default {
       this.$refs["coverphoto"].show();
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("cover-imag").click();
     },
 
-    chooseProfile1: function () {
+    chooseProfile1: function() {
       document.getElementById("profile-imag").click();
     },
 
@@ -286,7 +284,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let formData = new FormData();
@@ -295,10 +293,10 @@ export default {
       this.axios
         .post("business/upload/logo/" + this.url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.businessInfo();
@@ -306,19 +304,19 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: this.$t("businessowner.Logo_Updated"),
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
 
           loader.hide();
           this.$refs["logomodal"].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
             message: this.$t("businessowner.Unable_to_set_your_Logo"),
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
           console.log({ err: err });
           loader.hide();
@@ -330,7 +328,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let formData = new FormData();
@@ -339,41 +337,39 @@ export default {
       this.axios
         .post("business/upload/cover/" + this.url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           this.businessInfo();
           this.flashMessage.show({
             status: "success",
             message: this.$t("businessowner.Profile_Updated"),
-            blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
 
           loader.hide();
-         // this.$refs["coverphoto"].hide();  
+          // this.$refs["coverphoto"].hide();
         })
 
-        .catch((err) => {
-          
-          if (err.response && err.response.status == 422) {    
+        .catch(err => {
+          if (err.response && err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
-
           } else {
             this.flashMessage.show({
               status: "error",
               message: this.$t("businessowner.Unable_to_upload_your_image"),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           }
 
           loader.hide();
         });
-    },
+    }
   },
 
   mounted() {
@@ -385,42 +381,37 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-     perPage(){
-       if(this.business_info.cover){
+    perPage() {
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else if (this.business_info.cover.length == 2) {
+          return 2;
+        } else {
+          return 3;
+        }
+      } else {
+        return 3;
+      }
+    },
 
+    perPageM() {
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else {
+          return 2;
+        }
+      } else {
+        return 3;
+      }
+    },
 
-     
-       if (this.business_info.cover.length==1){
-         return 1;
-       }else if(this.business_info.cover.length==2){
-         return 2;
-       }else{
-       return 3;
-       }
-         }else{   return 3}
-      
-     },
-
-
-     perPageM(){
-
-       if(this.business_info.cover){
-       if (this.business_info.cover.length==1){
-         return 1;}
-       else{
-       return 2;
-       } }else{return 3}
-      
-     },
-
-
-
-options(){   
-
+    options() {
       return {
         rewind: true,
         autoplay: true,
-        perPage:this.perPage,
+        perPage: this.perPage,
         pagination: false,
 
         type: "loop",
@@ -429,28 +420,25 @@ options(){
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
-        
-             perPage:this.perPageM,
-            gap: "1rem",
-          },
-        },
+            perPage: this.perPageM,
+            gap: "1rem"
+          }
+        }
       };
-
-},
-
+    }
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function (data) {
-      console.log(data)
-   
+    "$store.state.businessOwner.businessInfo": function(data) {
+      console.log(data);
+
       this.updatePictureState(data.logo_path);
       this.addCoverPictureBusiness(data.cover);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -686,7 +674,6 @@ options(){
   }
 
   .see-all {
-    
     /* width: 91px; */
     position: relative;
     margin-top: -50px;

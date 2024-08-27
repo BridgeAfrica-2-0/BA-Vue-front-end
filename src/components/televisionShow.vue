@@ -3,7 +3,12 @@
     <div class="row television-show-desktop">
       <div class="col-md-6 col-lg-6">
         <div class="card left-card">
-          <video width="100%" controls height="500px" poster="assets/home/show-television/television-show-left.png">
+          <video
+            width="100%"
+            controls
+            height="500px"
+            poster="assets/home/show-television/television-show-left.png"
+          >
             <source src="assets/video/intro_video.mp4" type="video/mp4" />
           </video>
           <div class="card-body">
@@ -19,8 +24,13 @@
       <div class="col-md-6 col-lg-6">
         <div class="card right-card">
           <div class="d-flex p-2">
-            <video width="40%" style="object-fit:contain;" controls height="auto"
-              poster="assets/home/show-television/television-show-right-1.png">
+            <video
+              width="40%"
+              style="object-fit:contain;"
+              controls
+              height="auto"
+              poster="assets/home/show-television/television-show-right-1.png"
+            >
               <source src="assets/video/intro_video.mp4" type="video/mp4" />
             </video>
             <div class="card-body p-0 pl-3">
@@ -34,8 +44,13 @@
 
         <div class="card right-card">
           <div class="d-flex p-2">
-            <video width="40%" style="object-fit:contain;" controls height="auto"
-              poster="assets/home/show-television/television-show-right-2.png">
+            <video
+              width="40%"
+              style="object-fit:contain;"
+              controls
+              height="auto"
+              poster="assets/home/show-television/television-show-right-2.png"
+            >
               <source src="assets/video/intro_video.mp4" type="video/mp4" />
             </video>
             <div class="card-body p-0 pl-3">
@@ -49,8 +64,13 @@
 
         <div class="card right-card">
           <div class="d-flex p-2">
-            <video width="40%" style="object-fit:contain;" controls height="auto"
-              poster="assets/home/show-television/television-show-right-3.png">
+            <video
+              width="40%"
+              style="object-fit:contain;"
+              controls
+              height="auto"
+              poster="assets/home/show-television/television-show-right-3.png"
+            >
               <source src="assets/video/intro_video.mp4" type="video/mp4" />
             </video>
             <div class="card-body p-0 pl-3">
@@ -68,15 +88,20 @@
         <splide-slide>
           <div class="col-12">
             <div class="card left-card">
-              <video width="100%" controls height="500px" poster="assets/home/show-television/television-show-left.png">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-left.png"
+              >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
               <div class="card-body">
                 <h5 class="card-title">Checkout our Biz Show on CRTV</h5>
                 <p class="card-text">
                   Use our specially designed training curriculum to help enhance
-                  your entrepreneurial and digital skills, learn how to properly use
-                  your bridgeafrica.
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -85,15 +110,22 @@
         <splide-slide>
           <div class="col-12">
             <div class="card left-card">
-              <video width="100%" controls height="500px" poster="assets/home/show-television/television-show-right-1.png">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-1.png"
+              >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
               <div class="card-body">
-                <h5 class="card-title">Checkout our Biz Show on CRTV for latest new and update</h5>
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
                 <p class="card-text">
                   Use our specially designed training curriculum to help enhance
-                  your entrepreneurial and digital skills, learn how to properly use
-                  your bridgeafrica.
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -102,15 +134,22 @@
         <splide-slide>
           <div class="col-12">
             <div class="card left-card">
-              <video width="100%" controls height="500px" poster="assets/home/show-television/television-show-right-2.png">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-2.png"
+              >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
               <div class="card-body">
-                <h5 class="card-title">Checkout our Biz Show on CRTV for latest new and update</h5>
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
                 <p class="card-text">
                   Use our specially designed training curriculum to help enhance
-                  your entrepreneurial and digital skills, learn how to properly use
-                  your bridgeafrica.
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -119,15 +158,22 @@
         <splide-slide>
           <div class="col-12">
             <div class="card left-card">
-              <video width="100%" controls height="500px" poster="assets/home/show-television/television-show-right-3.png">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-3.png"
+              >
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
               <div class="card-body">
-                <h5 class="card-title">Checkout our Biz Show on CRTV for latest new and update</h5>
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
                 <p class="card-text">
                   Use our specially designed training curriculum to help enhance
-                  your entrepreneurial and digital skills, learn how to properly use
-                  your bridgeafrica.
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -141,7 +187,7 @@
 <script>
 import("vue-it-bigger/dist/vue-it-bigger.min.css");
 export default {
-  name: "TelevisionShow",
+  name: "TelevisionShow"
 };
 </script>
 

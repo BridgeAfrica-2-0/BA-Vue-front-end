@@ -21,7 +21,7 @@
               ></b-icon>
             </span>
           </span>
-          <!-- User Post Intro-->  
+          <!-- User Post Intro-->
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon
@@ -75,7 +75,7 @@
                 variant="primary"
               ></b-icon>
               {{ $t("profileowner.Current_City") }} :
-              <span class="text"> 
+              <span class="text">
                 {{ info.user.city }}
               </span>
             </p>
@@ -179,12 +179,11 @@
 
         <Community />
 
-        <Media @on:media="(value) => redirectToMedia(value)" />
+        <Media @on:media="value => redirectToMedia(value)" />
       </b-col>
 
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding ">
-
-        <owner-post  />
+        <owner-post />
       </b-col>
     </b-row>
   </div>
@@ -205,17 +204,16 @@ export default {
     //Followers,
     Media,
     OwnerPost,
-    Community,
+    Community
   },
- 
-  created() {
 
+  created() {
     this.workedAt = this.$t("profileowner.Current_or_Last_Organization");
     this.studiedAt = this.$t("profileowner.Last_Education");
 
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
+      .then(response => {
         this.userProfileOwner = this.$store.getters["profile/getUserPostIntro"];
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
@@ -224,14 +222,14 @@ export default {
         this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
         return response;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
 
     this.$store
       .dispatch("profile/getImages")
-      .then((response) => {})
-      .catch((error) => {
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
   },
@@ -243,7 +241,7 @@ export default {
 
     total() {
       return this.$store.state.profile.Tcommunity;
-    },
+    }
   },
 
   data() {
@@ -253,28 +251,26 @@ export default {
         studiedAt: null,
         homeTown: "Dummy",
         currentCity: "Dummy",
-        numbersOfFollowers: 256,
+        numbersOfFollowers: 256
       },
       userProfileOwnerInput: {
         workedAt: "",
         studiedAt: "",
         homeTown: "",
         currentCity: "",
-        numbersOfFollowers: 0,
+        numbersOfFollowers: 0
       },
       workedAtState: null,
       studiedAtState: null,
       homeTownState: null,
-      currentCityState: null,
+      currentCityState: null
     };
   },
 
   methods: {
-    
-    redirectToMedia: function(value){
-      console.log('redirectToMedia in posts')
-      if (value)
-        this.$emit('on:media', true)
+    redirectToMedia: function(value) {
+      console.log("redirectToMedia in posts");
+      if (value) this.$emit("on:media", true);
     },
 
     nFormatter(num) {
@@ -300,8 +296,8 @@ export default {
     editPage() {
       this.$router.push("profile_owner");
       this.$router.push("profile_owner#about");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -362,10 +358,7 @@ export default {
     width: 40px;
     height: 40px;
   }
-
-  
 }
-
 
 @media (min-width: 1200px) {
   .profile-pic {
@@ -377,13 +370,11 @@ export default {
     height: 40px;
   }
 
-  .post-padding{ 
-        padding-left: 60px !important;
+  .post-padding {
+    padding-left: 60px !important;
     padding-right: 70px !important;
   }
 }
-
-
 
 @media (max-width: 768px) {
   .profile-pic {

@@ -10,46 +10,48 @@
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search class="text-primary border-none"  @click="$refs.search.search()"></b-icon-search>
+            <b-icon-search
+              class="text-primary border-none"
+              @click="$refs.search.search()"
+            ></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
     <br />
 
-        <CommunityBusiness @BlockUser="BlockUser" :searchh="search" ref="search" type="Follower" />
-        
-     
+    <CommunityBusiness
+      @BlockUser="BlockUser"
+      :searchh="search"
+      ref="search"
+      type="Follower"
+    />
   </div>
 </template>
 
 <script>
 import CommunityBusiness from "../../communitybusiness";
 export default {
-
-   data() {
+  data() {
     return {
-        search:"",
-    }
-    },
+      search: ""
+    };
+  },
   components: {
     CommunityBusiness
   },
-  
+
   methods: {
     BlockUser(id) {
       console.log(id);
       let dataInfo = {
         id: id,
         refernce: "business",
-        type: "follower",
+        type: "follower"
       };
-      this.$emit('BlockUser', dataInfo);
-    },
+      this.$emit("BlockUser", dataInfo);
+    }
   }
-
-  
-
 };
 </script>
 

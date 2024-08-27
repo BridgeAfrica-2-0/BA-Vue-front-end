@@ -2,19 +2,26 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        {{ $t('network.Blocked_users_can_no_longer_see_things_you_post_on_your_business') }}, 
-        {{ $t('network.invite_your_business_to_networks') }}, {{ $t('network.strat_a_conversation') }}, 
-        {{ $t('network.or_follow_your_business') }}.
+        {{
+          $t(
+            "network.Blocked_users_can_no_longer_see_things_you_post_on_your_business"
+          )
+        }}, {{ $t("network.invite_your_business_to_networks") }},
+        {{ $t("network.strat_a_conversation") }},
+        {{ $t("network.or_follow_your_business") }}.
       </p>
     </b-container>
 
-    <b-container v-if="blockusers != 0 || blocknetworks != 0 || blockbusiness != 0" class="bv-example-row">
+    <b-container
+      v-if="blockusers != 0 || blocknetworks != 0 || blockbusiness != 0"
+      class="bv-example-row"
+    >
       <div v-if="blockusers != 0">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Blocked_Users') }} ({{blockusers.length}})
+          {{ $t("network.Blocked_Users") }} ({{ blockusers.length }})
         </h6>
         <hr width="100%" />
-        <b-list-group v-for="(blockuser,index) in blockusers" :key="index">
+        <b-list-group v-for="(blockuser, index) in blockusers" :key="index">
           <b-skeleton-wrapper :loading="loading">
             <template #loading>
               <b-card>
@@ -31,18 +38,28 @@
                 class="mr-3"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{blockuser.name}}</span>
-              <span class=" float-right text-center mt-1" > <b-button variant="primary"   @click="UnblockUser(blockuser, index)"> {{ $t('network.Unblock') }}  </b-button>   </span>
+              <span class="mr-auto">{{ blockuser.name }}</span>
+              <span class=" float-right text-center mt-1">
+                <b-button
+                  variant="primary"
+                  @click="UnblockUser(blockuser, index)"
+                >
+                  {{ $t("network.Unblock") }}
+                </b-button>
+              </span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
       </div>
       <div v-if="blocknetworks != 0">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Blocked_Users') }} ({{blocknetworks.length}})
+          {{ $t("network.Blocked_Users") }} ({{ blocknetworks.length }})
         </h6>
         <hr width="100%" />
-        <b-list-group v-for="(blocknetwork, index) in blocknetworks" :key="blocknetwork.id">
+        <b-list-group
+          v-for="(blocknetwork, index) in blocknetworks"
+          :key="blocknetwork.id"
+        >
           <b-skeleton-wrapper :loading="loading">
             <template #loading>
               <b-card>
@@ -59,18 +76,28 @@
                 class="mr-3"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{blocknetwork.name}}</span>
-              <span class=" float-right mt-1" >    <b-button variant="primary"   @click="UnblockNetwork(blocknetwork, index)" > {{ $t('network.Unblock') }}  </b-button> </span>
+              <span class="mr-auto">{{ blocknetwork.name }}</span>
+              <span class=" float-right mt-1">
+                <b-button
+                  variant="primary"
+                  @click="UnblockNetwork(blocknetwork, index)"
+                >
+                  {{ $t("network.Unblock") }}
+                </b-button>
+              </span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
       </div>
       <div v-if="blockbusiness != 0">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Blocked_Users') }} ({{blockbusiness.length}})
+          {{ $t("network.Blocked_Users") }} ({{ blockbusiness.length }})
         </h6>
         <hr width="100%" />
-        <b-list-group v-for="(blockbusines, index) in blockbusiness" :key="index">
+        <b-list-group
+          v-for="(blockbusines, index) in blockbusiness"
+          :key="index"
+        >
           <b-skeleton-wrapper :loading="loading">
             <template #loading>
               <b-card>
@@ -87,8 +114,15 @@
                 class="mr-3"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{blockbusines.name}}</span>
-              <span class="float-right mt-1">     <b-button variant="primary"  @click="UnblockBusines(blockbusines,index)"  > {{ $t('network.Unblock') }}  </b-button>     </span>
+              <span class="mr-auto">{{ blockbusines.name }}</span>
+              <span class="float-right mt-1">
+                <b-button
+                  variant="primary"
+                  @click="UnblockBusines(blockbusines, index)"
+                >
+                  {{ $t("network.Unblock") }}
+                </b-button>
+              </span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
@@ -96,12 +130,11 @@
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text>{{ $t('network.No_Blocked_User_Available') }}.</b-card-text>
+        <b-card-text
+          >{{ $t("network.No_Blocked_User_Available") }}.</b-card-text
+        >
       </b-card>
     </b-container>
-
-    
-
   </b-container>
 </template>
 
@@ -112,8 +145,8 @@ export default {
     return {
       url: null,
       loading: false
-    }
-	},
+    };
+  },
 
   computed: {
     blockusers() {
@@ -124,143 +157,130 @@ export default {
     },
     blockbusiness() {
       return this.$store.state.NetworkSettings.blockbusiness;
-    },
+    }
   },
 
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
     this.blockUsers();
     this.blockNetworks();
     this.blockBusiness();
   },
-  
-  methods:{
-     
+
+  methods: {
     blockUsers() {
       this.loading = true;
       console.log("blockUsers");
-    this.$store
-      .dispatch("NetworkSettings/getblockusers", this.url)
-      .then(() => {
-        this.loading = false;
-       
-      })
-      .catch(err => {
-        this.loading = false;
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("NetworkSettings/getblockusers", this.url)
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(err => {
+          this.loading = false;
+          console.log({ err: err });
+        });
     },
     blockNetworks() {
       this.loading = true;
       console.log("blockNetworks");
-    this.$store
-      .dispatch("NetworkSettings/getblocknetworks", this.url)
-      .then(() => {
-        this.loading = false;
-        console.log('ohh year');
-      })
-      .catch(err => {
-        this.loading = false;
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("NetworkSettings/getblocknetworks", this.url)
+        .then(() => {
+          this.loading = false;
+          console.log("ohh year");
+        })
+        .catch(err => {
+          this.loading = false;
+          console.log({ err: err });
+        });
     },
     blockBusiness() {
       this.loading = true;
       console.log("blockBusiness");
-    this.$store
-      .dispatch("NetworkSettings/getblockbusinesses", this.url)
-      .then(() => {
-        this.loading = false;
-        console.log('ohh year');
-      })
-      .catch(err => {
-        this.loading = false;
-        console.log({ err: err });
-      });
-    },
-     
-    UnblockUser(blockuser, index) {
-
-      console.log("unblocked-user/"+this.url+"/"+blockuser.id);
       this.$store
-      .dispatch("NetworkSettings/UnBlock", 
-      {
-        path: "unblocked-user/"+this.url+"/"+blockuser.id,
-      })
-			.then(response => {
-			  console.log(response);
-
-
-        
-       
-       this.$delete(this.blockusers,index);
-
-        
-        this.flashMessage.show({
-          status: "success",
-          message: "User Unblocked"
+        .dispatch("NetworkSettings/getblockbusinesses", this.url)
+        .then(() => {
+          this.loading = false;
+          console.log("ohh year");
+        })
+        .catch(err => {
+          this.loading = false;
+          console.log({ err: err });
         });
-			})
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Unblocked User"
+    },
+
+    UnblockUser(blockuser, index) {
+      console.log("unblocked-user/" + this.url + "/" + blockuser.id);
+      this.$store
+        .dispatch("NetworkSettings/UnBlock", {
+          path: "unblocked-user/" + this.url + "/" + blockuser.id
+        })
+        .then(response => {
+          console.log(response);
+
+          this.$delete(this.blockusers, index);
+
+          this.flashMessage.show({
+            status: "success",
+            message: "User Unblocked"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Unblocked User"
+          });
         });
-      });
     },
     UnblockNetwork(blocknetwork, index) {
       this.loading = true;
-      console.log("unblocked-network/"+this.url+"/"+blocknetwork.id);
+      console.log("unblocked-network/" + this.url + "/" + blocknetwork.id);
       this.$store
-      .dispatch("NetworkSettings/UnBlock", 
-      {
-        path: "unblocked-network/"+this.url+"/"+blocknetwork.id,
-      })
-			.then(response => {         
-			 
-       this.$delete(this.blocknetworks,index);
-        this.flashMessage.show({
-          status: "success",
-          message: "User Unblocked"
+        .dispatch("NetworkSettings/UnBlock", {
+          path: "unblocked-network/" + this.url + "/" + blocknetwork.id
+        })
+        .then(response => {
+          this.$delete(this.blocknetworks, index);
+          this.flashMessage.show({
+            status: "success",
+            message: "User Unblocked"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Unblocked User"
+          });
         });
-			})
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Unblocked User"
-        });
-      });
     },
     UnblockBusines(blockbusines, index) {
-     
-      console.log("unblocked-business/"+this.url+"/"+blockbusines.id);
+      console.log("unblocked-business/" + this.url + "/" + blockbusines.id);
       this.$store
-      .dispatch("NetworkSettings/UnBlock", 
-      {
-        path: "unblocked-business/"+this.url+"/"+blockbusines.id,
-      })
-			.then(response => {
-			  
-        this.$delete(this.blockbusiness,index);
-        this.flashMessage.show({
-          status: "success",
-          message: "User Unblocked"
+        .dispatch("NetworkSettings/UnBlock", {
+          path: "unblocked-business/" + this.url + "/" + blockbusines.id
+        })
+        .then(response => {
+          this.$delete(this.blockbusiness, index);
+          this.flashMessage.show({
+            status: "success",
+            message: "User Unblocked"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Unblocked User"
+          });
         });
-			})
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Unblocked User"
-        });
-      });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
+    <fas-icon
+      class="violet mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'file-image']"
+    />Media
 
     <hr />
 
@@ -24,28 +27,33 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" :type="type" v-else :OwnerRoute="OwnerRoute" />
+        <Album
+          :canUpload="!canUpload"
+          :type="type"
+          v-else
+          :OwnerRoute="OwnerRoute"
+        />
       </b-tab>
     </b-tabs>
   </div>
 </template>
 
 <script>
-import Album from './album';
-import Images from './images';
+import Album from "./album";
+import Images from "./images";
 
-import _ from 'lodash';
+import _ from "lodash";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   props: {
     type: {
       type: String,
       validator: function(value) {
-        return ['profile', 'network', 'business'].indexOf(value) !== -1;
-      },
-    },
+        return ["profile", "network", "business"].indexOf(value) !== -1;
+      }
+    }
   },
   data: function() {
     return {
@@ -55,20 +63,20 @@ export default {
       hasLoadPicture: false,
       showAlbum: false,
       strategy: null,
-      OwnerRoute: true,
+      OwnerRoute: true
     };
   },
 
   components: {
     Album,
-    Images,
+    Images
   },
 
   computed: {
     ...mapGetters({
-      getProfilePictures: 'UserProfileOwner/getImages',
-      getBusinessPictures: 'businessOwner/getAllImages',
-    }),
+      getProfilePictures: "UserProfileOwner/getImages",
+      getBusinessPictures: "businessOwner/getAllImages"
+    })
   },
 
   methods: {
@@ -81,7 +89,9 @@ export default {
               return {
                 id: img.id,
                 content: img.content,
-                media: [{ path: picture.path, type: picture.type, id: picture.id }],
+                media: [
+                  { path: picture.path, type: picture.type, id: picture.id }
+                ]
               };
             });
 
@@ -110,7 +120,7 @@ export default {
         //}
       } catch (error) {
         console.log(error);
-        throw new Error('Invalid type', this.type);
+        throw new Error("Invalid type", this.type);
       }
     },
 
@@ -131,29 +141,29 @@ export default {
         //}
       } catch (error) {
         console.log(error);
-        throw new Error('Invalid type', this.type);
+        throw new Error("Invalid type", this.type);
       }
-    },
+    }
   },
 
   created() {
     this.urlData = this.$route.params.id;
- 
+
     this.strategy = {
       business: () => ({
-        album: 'businessOwner/getAlbums',
-        image: 'businessOwner/getImages',
-        pictures: this.getBusinessPictures,
+        album: "businessOwner/getAlbums",
+        image: "businessOwner/getImages",
+        pictures: this.getBusinessPictures
       }),
       profile: () => ({
-        album: 'UserProfileOwner/getAlbums',
-        image: 'UserProfileOwner/getImages',
-        pictures: this.getProfilePictures,
-      }),
+        album: "UserProfileOwner/getAlbums",
+        image: "UserProfileOwner/getImages",
+        pictures: this.getProfilePictures
+      })
     };
 
     this.getImages();
-  },
+  }
 };
 </script>
 

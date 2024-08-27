@@ -5,13 +5,17 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="(item,index) in businesses"
+        v-for="(item, index) in businesses"
         :key="index"
       >
-
-        <Business  :key="item.id" :business="item" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
-         
-
+        <Business
+          :key="item.id"
+          :business="item"
+          :canBlock="canBlock"
+          :index="index"
+          @getTotalCommunity="getTotalCommunity"
+          @BlockUser="BlockUser"
+        />
       </b-col>
     </b-row>
 
@@ -34,7 +38,7 @@ export default {
   data() {
     return {
       page: 1,
-      
+
       businesses: [],
 
       infiniteId: +new Date(),
@@ -45,105 +49,90 @@ export default {
         pagination: false,
         foll_id: null,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   mounted() {
-
-     this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
-      canBlock(){
-     
-      if(!this.foll_id){
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    canBlock() {
+      if (!this.foll_id) {
         return true;
-      }else{
+      } else {
         return false;
       }
-    },
+    }
   },
 
   methods: {
-
-    
-     getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
 
+    BlockUser(id, index) {
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: confirm => {
+          if (confirm) {
+            // ... do something
 
+            let dataInfo = {
+              id: id,
+              refernce: "business",
+              type: this.type
+            };
 
-  BlockUser(id, index) {
+            let fd = new FormData();
+            fd.append("id", dataInfo.id);
+            fd.append("type", dataInfo.refernce);
+            this.$store
+              .dispatch("profile/Block", {
+                path: "block/entity",
+                formData: fd
+              })
+              .then(response => {
+                this.getTotalCommunity();
+                this.$delete(this.businesses, index);
+                console.log("user deleted");
 
-
-
-      this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-          /**
-          * Callback Function
-          * @param {Boolean} confirm
-          */
-          callback: confirm => {
-            if (confirm) {
-              // ... do something
-              
-     let dataInfo = {
-        id: id,
-        refernce: "business",
-        type: this.type,
-      };
-
-        
-      let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
-      .then(response => {
-        
-         this.getTotalCommunity();
-        this.$delete(this.businesses,index);
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-            }     
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
           }
         }
-      )
-
-
-
-
+      });
     },
-
 
     count(number) {
       if (number >= 1000000) {
@@ -156,7 +145,6 @@ export default {
 
     gotobusiness(id) {
       this.$router.push(`/business/${id}?tabId=1`);
-      
     },
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -165,18 +153,18 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-           this.getTotalCommunity();
+        .then(response => {
+          this.getTotalCommunity();
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -196,11 +184,12 @@ export default {
           ? `profile/business/follower/`
           : `profile/business/following/`;
 
-          if(!this.islogin){
-            url='guest/'+url;
-          } 
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
-      axios.get(
+      axios
+        .get(
           url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id
         )
         .then(({ data }) => {
@@ -226,11 +215,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -387,7 +376,7 @@ export default {
 
   .btn {
     padding-top: 6px;
-    
+
     font-size: 13px;
     height: 38px;
     width: 123px;

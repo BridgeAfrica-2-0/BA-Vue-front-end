@@ -18,26 +18,31 @@
 
     <br />
 
-    <CommunityBusiness @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following" />
+    <CommunityBusiness
+      @BlockUser="BlockUser"
+      :searchh="keywords"
+      ref="search"
+      type="Following"
+    />
   </div>
 </template>
 
 <script>
-import CommunityBusiness from '../../communitynetwork';
+import CommunityBusiness from "../../communitynetwork";
 export default {
   data() {
     return {
-      keywords: '',
+      keywords: ""
     };
   },
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
 
   computed: {
     folowing() {
       return this.$store.state.profile.CommunityBusiness.business_following;
-    },
+    }
   },
   methods: {
     BlockUser(id) {
@@ -45,10 +50,10 @@ export default {
       let dataInfo = {
         id: id,
         refernce: "network",
-        type: "following",
+        type: "following"
       };
-      this.$emit('BlockUser', dataInfo);
-    },
+      this.$emit("BlockUser", dataInfo);
+    }
   }
 };
 </script>

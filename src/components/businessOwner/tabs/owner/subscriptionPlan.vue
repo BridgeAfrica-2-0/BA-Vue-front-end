@@ -5,10 +5,12 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h3 class="my-3 font-weight-bolder">
-              {{ $t('businessowner.Subscription_Plan') }}
+              {{ $t("businessowner.Subscription_Plan") }}
             </h3>
             <p class="my-2">
-              {{ $t('businessowner.Upgrade_your_plans_to_get_exciting_features') }} 
+              {{
+                $t("businessowner.Upgrade_your_plans_to_get_exciting_features")
+              }}
             </p>
           </div>
         </div>
@@ -26,34 +28,42 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-5">
-                <p class="title-plan">{{ $t('businessowner.Basic') }}</p>
-                <h1 class="subtitle-plan">{{ $t('businessowner.Free') }}</h1>
+                <p class="title-plan">{{ $t("businessowner.Basic") }}</p>
+                <h1 class="subtitle-plan">{{ $t("businessowner.Free") }}</h1>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Subdomain_URL') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Subdomain_URL") }}
+            </h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Ticket_Support') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Ticket_Support") }}
+            </h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">
-              {{ $t('businessowner.Brige_Africa_Content') }} <br />{{ $t('businessowner.Intergration') }}
+              {{ $t("businessowner.Brige_Africa_Content") }} <br />{{
+                $t("businessowner.Intergration")
+              }}
             </h5>
           </div>
           <div class="btn-wrap free text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold">{{ $t('businessowner.Current_Plan') }}</b-button>
+            <b-button class="btn-block font-weight-bold">{{
+              $t("businessowner.Current_Plan")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>
       <b-col md="4" class="plan-2">
-        <b-button class="btn-block font-weight-bold" variant="primary"
-          >{{ $t('businessowner.Most_Popular') }}</b-button
-        >
+        <b-button class="btn-block font-weight-bold" variant="primary">{{
+          $t("businessowner.Most_Popular")
+        }}</b-button>
         <b-card header-tag="header" footer-tag="footer">
           <template #header>
             <b-row>
@@ -65,35 +75,47 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-2">
-                <p class="title-plan">{{ $t('businessowner.Advanced') }}</p>
-                <h3 class="subtitle-plan">$00/{{ $t('businessowner.month') }}</h3>
+                <p class="title-plan">{{ $t("businessowner.Advanced") }}</p>
+                <h3 class="subtitle-plan">
+                  $00/{{ $t("businessowner.month") }}
+                </h3>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Subdomain_URL') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Subdomain_URL") }}
+            </h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Ticket_Support') }}</h5>
-          </div>
-          <div class="text1">
             <h5 class="font-weight-bold">
-              {{ $t('businessowner.Brige_Africa_Content') }} <br />{{ $t('businessowner.Intergration') }}
+              {{ $t("businessowner.Ticket_Support") }}
             </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Premium_Template') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Brige_Africa_Content") }} <br />{{
+                $t("businessowner.Intergration")
+              }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Remove_Ads') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Premium_Template") }}
+            </h5>
+          </div>
+          <div class="text1">
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Remove_Ads") }}
+            </h5>
           </div>
           <div class="btn-wrap free2 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >{{ $t('businessowner.Subscribe_Now') }}</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">{{
+              $t("businessowner.Subscribe_Now")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>
@@ -109,50 +131,72 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-1">
-                <p class="title-plan">{{ $t('businessowner.Advanced') }}</p>
-                <h3 class="subtitle-plan">$12/{{ $t('businessowner.month') }}</h3>
+                <p class="title-plan">{{ $t("businessowner.Advanced") }}</p>
+                <h3 class="subtitle-plan">
+                  $12/{{ $t("businessowner.month") }}
+                </h3>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Subdomain_URL') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Subdomain_URL") }}
+            </h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Ticket_Support') }}</h5>
-          </div>
-          <div class="text1">
             <h5 class="font-weight-bold">
-              {{ $t('businessowner.Brige_Africa_Content') }} <br />{{ $t('businessowner.Intergration') }}
+              {{ $t("businessowner.Ticket_Support") }}
             </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Premium_Template') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Brige_Africa_Content") }} <br />{{
+                $t("businessowner.Intergration")
+              }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Remove_Ads') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Premium_Template") }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Free_Domain_for_1_year') }}</h5>
-            <p>S0 {{ $t('businessowner.Value') }}</p>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Remove_Ads") }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Connect_Your_domain') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Free_Domain_for_1_year") }}
+            </h5>
+            <p>S0 {{ $t("businessowner.Value") }}</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.SSL_Certificate') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Connect_Your_domain") }}
+            </h5>
+          </div>
+          <div class="text1">
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.SSL_Certificate") }}
+            </h5>
           </div>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('businessowner.Premium_Support') }}</h5>
-            <p>{{ $t('businessowner.email') }}, {{ $t('businessowner.phone') }}</p>
+            <h5 class="font-weight-bold">
+              {{ $t("businessowner.Premium_Support") }}
+            </h5>
+            <p>
+              {{ $t("businessowner.email") }}, {{ $t("businessowner.phone") }}
+            </p>
           </div>
           <div class="btn-wrap free3 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >{{ $t('businessowner.Subscribe_Now') }}</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">{{
+              $t("businessowner.Subscribe_Now")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>

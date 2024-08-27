@@ -7,22 +7,27 @@
           <div class="h-100 w-100">
             <div class="mx-auto text-center my-5">
               <h2 class="my-3 font-weight-bolder">
-                {{ $t('dashboard.Start_following') }}
+                {{ $t("dashboard.Start_following") }}
                 <span class="float-right">
                   <b-button variant="outline-primary" class="mt-2">
-                    {{ $t('dashboard.Next') }} <b-icon-chevron-right></b-icon-chevron-right>
+                    {{ $t("dashboard.Next") }}
+                    <b-icon-chevron-right></b-icon-chevron-right>
                   </b-button>
                 </span>
               </h2>
-              <p class="my-2 ">{{ $t('dashboard.Follow_people_or_business_from_the_list_below')}} </p>
+              <p class="my-2 ">
+                {{
+                  $t("dashboard.Follow_people_or_business_from_the_list_below")
+                }}
+              </p>
             </div>
           </div>
         </b-col>
       </b-row>
-      <b-row class="mt-3"> 
+      <b-row class="mt-3">
         <b-col cols="12">
           <b-tabs content-class="mt-3">
-            <b-tab :title="$t('dashboard.Bussiness_Around_You') " active>
+            <b-tab :title="$t('dashboard.Bussiness_Around_You')" active>
               <div v-for="i in 3" :key="i">
                 <p class="">
                   <span class="">
@@ -32,13 +37,13 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Bridge Africa</span> 
-                      {{ $t('dashboard.you_are_following') }}
+                      <span class="text-primary">Bridge Africa</span>
+                      {{ $t("dashboard.you_are_following") }}
                     </h5>
                   </span>
                   <span class="float-right mt-1">
                     <b-button variant="primary" class="mt-2"
-                      >{{ $t('dashboard.Following')}}
+                      >{{ $t("dashboard.Following") }}
                     </b-button>
                   </span>
                 </p>
@@ -54,13 +59,13 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Bridge Africa</span> 
-                      {{ $t('dashboard.is_a_business_nearby') }}
+                      <span class="text-primary">Bridge Africa</span>
+                      {{ $t("dashboard.is_a_business_nearby") }}
                     </h5>
                   </span>
                   <span class="float-right mt-1">
                     <b-button variant="outline-primary" class="mt-2"
-                      >{{ $t('dashboard.Follow')}}
+                      >{{ $t("dashboard.Follow") }}
                     </b-button>
                   </span>
                 </p>
@@ -77,12 +82,13 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Boris Ebwanga</span> {{ $t('dashboard.is_someone_you_may_know') }}
+                      <span class="text-primary">Boris Ebwanga</span>
+                      {{ $t("dashboard.is_someone_you_may_know") }}
                     </h5>
                   </span>
                   <span class="float-right mt-1">
                     <b-button variant="outline-primary" class="mt-2"
-                      >{{ $t('dashboard.Follow') }}
+                      >{{ $t("dashboard.Follow") }}
                     </b-button>
                   </span>
                 </p>

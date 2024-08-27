@@ -1,11 +1,10 @@
-
 import axios from "axios";
 
 export default {
   namespaced: true,
   state: {
     businessInfo: [],
-    subcategories: [],
+    subcategories: []
   },
 
   getters: {
@@ -20,34 +19,29 @@ export default {
     },
     setSubcategories(state, data) {
       state.subcategories = data;
-    },
+    }
   },
 
   actions: {
-
     getBusinessInfo({ commit }, businessId) {
-      return axios
-        .get(`business/info/${businessId}`)
-        .then(({ data }) => {
-          commit("setBusinessInfo", data.data);
-        })
+      return axios.get(`business/info/${businessId}`).then(({ data }) => {
+        commit("setBusinessInfo", data.data);
+      });
     },
 
     UpdateInfomation({ commit }, businessData) {
-
-     // let data={ ...}
+      // let data={ ...}
       return axios
-        .post(businessData.path,   businessData.data)
+        .post(businessData.path, businessData.data)
         .then(({ data }) => {
           return data;
-        })
+        });
     },
 
     subcategories({ commit }, data) {
       return axios.post("catergory/subcategory", data).then(({ data }) => {
         commit("setSubcategories", data.data);
       });
-    },
-
-  },
+    }
+  }
 };

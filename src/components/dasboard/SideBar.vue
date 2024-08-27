@@ -5,15 +5,13 @@
     margin-top: -85px; -->
 
     <div
-      class="text-left border-bottom  sidebarcover" 
+      class="text-left border-bottom  sidebarcover"
       style="
         
         background: url('assets/images/tissu-choisit.jpg');
         background-size: cover !important;
       "
     >
-      
-
       <div class="user-profile">
         <!-- <b-avatar
           class="p-avater bg-white"
@@ -25,8 +23,11 @@
 
       <div class="text-lost text-center">
         <h6 class="white">
-          <router-link :to="{ name: 'profile_owner' }" class="card-title p-3 white">
-            {{ profile.name }} 
+          <router-link
+            :to="{ name: 'profile_owner' }"
+            class="card-title p-3 white"
+          >
+            {{ profile.name }}
           </router-link>
         </h6>
       </div>
@@ -45,14 +46,15 @@
               <ul>
                 <li>
                   <router-link :to="userOwnPage">
-                     <span class="icon-location-arrow mr-3">
+                    <span class="icon-location-arrow mr-3">
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'user']"
                         size="lg"
                       />
-                    </span>  Profile </router-link
-                  >
+                    </span>
+                    Profile
+                  </router-link>
                 </li>
 
                 <li class="accordion">
@@ -70,7 +72,7 @@
                         size="lg"
                       />
                     </span>
-                    Your Businesses 
+                    Your Businesses
                   </a>
 
                   <b-collapse id="my-collapse">
@@ -105,7 +107,7 @@
                         size="lg"
                       />
                     </span>
-                    Your Networks 
+                    Your Networks
                   </a>
 
                   <b-collapse id="my-collapsenetwork">
@@ -123,7 +125,7 @@
                   </b-collapse>
                 </li>
                 <li>
-                  <router-link  :to="{ name: 'settings' }"  class="" >
+                  <router-link :to="{ name: 'settings' }" class="">
                     <span class="icon-location-arrow mr-3">
                       <fas-icon
                         class="icons"
@@ -132,22 +134,24 @@
                       />
                     </span>
 
-                    Account Settings  </router-link>
+                    Account Settings
+                  </router-link>
                 </li>
                 <li>
-                  <router-link  :to="{ name: 'orders' }"  class="" >
+                  <router-link :to="{ name: 'orders' }" class="">
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
-                        :icon="['fas', 'cart-arrow-down']" 
-                         size="lg"
+                        :icon="['fas', 'cart-arrow-down']"
+                        size="lg"
                       />
                     </span>
 
-                    Order  </router-link>
+                    Order
+                  </router-link>
                 </li>
                 <li>
-                  <router-link  v-if="islogin" :to="newRedirection('message')">
+                  <router-link v-if="islogin" :to="newRedirection('message')">
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
@@ -158,41 +162,37 @@
 
                     Inbox
                   </router-link>
-                  
                 </li>
                 <li>
-                  <router-link  v-if="islogin" :to="newRedirection('notification')">
+                  <router-link
+                    v-if="islogin"
+                    :to="newRedirection('notification')"
+                  >
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'bell']"
-                         size="lg"
+                        size="lg"
                       />
                     </span>
 
-                    Notifications   
+                    Notifications
                   </router-link>
-                  
                 </li>
 
                 <li>
-                  <router-link
-                  :to="{ name: 'GlobalSearch' }"
-                  
-                >
+                  <router-link :to="{ name: 'GlobalSearch' }">
                     <span class="icon-search2 mr-3">
                       <fas-icon
                         class="icons"
                         :icon="['fas', 'store']"
-                         size="lg"
+                        size="lg"
                       />
                     </span>
 
-                    Market  </router-link>
-                
+                    Market
+                  </router-link>
                 </li>
-               
-               
               </ul>
             </div>
           </VuePerfectScrollbar>
@@ -213,7 +213,7 @@ export default {
   data() {
     return {
       settings: {
-        maxScrollbarLength: 60,
+        maxScrollbarLength: 60
       },
 
       isActive: false,
@@ -226,16 +226,18 @@ export default {
       users: [],
 
       pending: false,
-      strategy: null,
+      strategy: null
     };
   },
 
   components: {
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
@@ -251,99 +253,99 @@ export default {
       networks: "social/FIND_USER_NETWORK",
       business: "social/FIND_USER_BUSNESS",
 
-      profile: "auth/profilConnected",
-    }),
+      profile: "auth/profilConnected"
+    })
   },
 
   created() {
     this.strategy = {
       business: {
-        newType: (item) => ({
+        newType: item => ({
           name: item.name,
           profile_picture: item.logo_path,
           id: item.id,
-          user_type: "business",
+          user_type: "business"
         }),
-        redirect: (obj) => this.redirection(obj),
+        redirect: obj => this.redirection(obj)
       },
 
       network: {
-        newType: (item) => ({
+        newType: item => ({
           name: item.name,
           profile_picture: item.image,
           id: item.id,
-          user_type: "network",
+          user_type: "network"
         }),
-        redirect: (obj) => this.redirection(obj),
-      },
+        redirect: obj => this.redirection(obj)
+      }
     };
 
-     this.islogin = this.$store.getters["auth/profilConnected"];
-      if (this.islogin) {
-        this.init();
-        this.userOwnPage = this.onRedirect();
+    this.islogin = this.$store.getters["auth/profilConnected"];
+    if (this.islogin) {
+      this.init();
+      this.userOwnPage = this.onRedirect();
 
-        this.notificationPatterns = {
-          user: () => "user/notification",
-          business: () => `/notification/business/${this.user.slug}`,
-          network: () => `/notification/network/${this.user.slug}`,
-        };
+      this.notificationPatterns = {
+        user: () => "user/notification",
+        business: () => `/notification/business/${this.user.slug}`,
+        network: () => `/notification/network/${this.user.slug}`
+      };
 
-        this.messagePatterns = {
-          user: () => "/messages/latest/user",
-          business: () => `/messages/latest/${this.user.slug}/business`,
-          network: () => `/messages/latest/${this.user.slug}/network`,
-        };
+      this.messagePatterns = {
+        user: () => "/messages/latest/user",
+        business: () => `/messages/latest/${this.user.slug}/business`,
+        network: () => `/messages/latest/${this.user.slug}/network`
+      };
 
-        this.redirectionPatterns = {
-          message: {
-            user: () => ({
-              name: "Nav Meassage",
-            }),
-            business: () => ({
-              name: "BusinessOwner",
-              params: { id: this.user.id },
-              query: { tabId: 1 },
-            }),
-            network: () => null,
-          },
-          notification: {
-            business: () => ({
-              name: "BusinessOwner",
-              params: { id: this.user.id },
-              query: { tabId: 2 },
-            }),
+      this.redirectionPatterns = {
+        message: {
+          user: () => ({
+            name: "Nav Meassage"
+          }),
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 1 }
+          }),
+          network: () => null
+        },
+        notification: {
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 2 }
+          }),
 
-            user: () => ({
-              name: "settings",
-            }),
-            network: () => ({
-              name: "networks",
-              params: { id: this.user.id },
-              query: { tabId: 2 },
-            }),
-          },
-        };
+          user: () => ({
+            name: "settings"
+          }),
+          network: () => ({
+            name: "networks",
+            params: { id: this.user.id },
+            query: { tabId: 2 }
+          })
+        }
+      };
 
-        this.updateNotificationEvent();
-      }
+      this.updateNotificationEvent();
+    }
   },
 
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
-    },
+    }
   },
 
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
-      lauchNetworkRequest: "social/INIT",
+      lauchNetworkRequest: "social/INIT"
     }),
 
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
 
     gotoProfile() {
@@ -355,9 +357,9 @@ export default {
         network: () => ({ name: "networks", params: { id: this.user.id } }),
         business: () => ({
           name: "BusinessOwner",
-          params: { id: this.user.id },
+          params: { id: this.user.id }
         }),
-        user: () => ({ name: "profile_owner" }),
+        user: () => ({ name: "profile_owner" })
       };
       return link[this.user.user_type]();
     },
@@ -368,22 +370,22 @@ export default {
       if (obj.routeName !== this.$router.name)
         this.$router.push({
           name: obj.routeName,
-          params: { id: obj.routeId },
+          params: { id: obj.routeId }
         });
     },
 
-    process: async function (item, type) {
+    process: async function(item, type) {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: item.slug,
+          routeId: item.slug
         };
 
         const request =
@@ -401,7 +403,7 @@ export default {
                   : `You are now redirect to ${item.name}`
                 : item.is_owner || item.is_editor
                 ? `You are now connected as ${item.name}`
-                : `You are now redirect to ${item.name}`,
+                : `You are now redirect to ${item.name}`
           });
 
           this.auth(this.strategy[type].newType(item));
@@ -424,15 +426,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -467,7 +467,7 @@ export default {
       const link = {
         home: () => {
           return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
-        },
+        }
       };
       try {
         return link[type]();
@@ -485,12 +485,12 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    switchToProfile: async function () {
+    switchToProfile: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const response = await this.$repository.share.switch(null, "reset");
@@ -498,19 +498,19 @@ export default {
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
         this.$router.push({
-          name: "profile_owner",
+          name: "profile_owner"
         });
       }
 
       loader.hide();
     },
 
-    getNetworks: async function () {
+    getNetworks: async function() {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function () {
+    getBusiness: async function() {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -530,31 +530,30 @@ export default {
     async newNotification(url) {
       await axios
         .get(url)
-        .then((response) => {
+        .then(response => {
           this.notifications = response.data.data.slice(0, 5);
         })
-        .catch((error) => console.log("Error In newNotification  => " + error));
+        .catch(error => console.log("Error In newNotification  => " + error));
     },
 
     async newMessage(url) {
       await axios
         .get(url)
-        .then((response) => {
+        .then(response => {
           this.messages = response.data.data;
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     checkIfExists(object, key) {
       return _.has(object, key);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style  scoped>
-
-.sidebarcover{
+<style scoped>
+.sidebarcover {
   background-size: cover !important ;
 }
 
@@ -969,6 +968,3 @@ main .post-content .post-meta {
   outline: none;
 }
 </style>
-
-
-

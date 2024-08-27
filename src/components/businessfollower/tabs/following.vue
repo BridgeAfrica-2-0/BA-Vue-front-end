@@ -2,7 +2,9 @@
   <div>
     <b-card header-bg-variant="primary" header-tag="header" footer-tag="footer">
       <template #header>
-        <h6 class="mb-0"><b-icon icon="people-fill"></b-icon>{{$t('general.Following')}}</h6>
+        <h6 class="mb-0">
+          <b-icon icon="people-fill"></b-icon>{{ $t("general.Following") }}
+        </h6>
       </template>
       <b-tabs content-class="mt-3">
         <b-tab title="People Who Follow Me" active>
@@ -68,7 +70,7 @@
 
 <script>
 export default {
-  name: "following",
+  name: "following"
 };
 </script>
 

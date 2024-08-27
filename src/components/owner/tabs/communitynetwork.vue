@@ -1,36 +1,50 @@
 <template>
   <div class="p-2">
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t('profileowner.Do_you_want_to_join_this_network') }}
+      {{ $t("profileowner.Do_you_want_to_join_this_network") }}
     </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="(item,index) in network" :key="index">
-
-
-        <Network  :network="item" :key="item.id" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
- 
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="(item, index) in network"
+        :key="index"
+      >
+        <Network
+          :network="item"
+          :key="item.id"
+          :canBlock="canBlock"
+          :index="index"
+          @getTotalCommunity="getTotalCommunity"
+          @BlockUser="BlockUser"
+        />
       </b-col>
     </b-row>
 
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
 import Network from "@/components/Network";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
   components: {
-    Network,
+    Network
   },
   data() {
     return {
       page: 1,
-      
-      network:[],
+
+      network: [],
       foll_id: null,
       infiniteId: +new Date(),
       options: {
@@ -39,111 +53,90 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
-        perMove: 1,
-      },
+        type: "loop",
+        perMove: 1
+      }
     };
   },
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
-     canBlock(){
-     
-      if(!this.foll_id){
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    canBlock() {
+      if (!this.foll_id) {
         return true;
-      }else{
+      } else {
         return false;
       }
-    },
+    }
   },
 
   mounted() {
-     this.islogin=this.$store.getters["auth/isLogged"];
-    this.foll_id = this.$route.params.id ? this.$route.params.id : '';
+    this.islogin = this.$store.getters["auth/isLogged"];
+    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
   methods: {
-
-
-
- getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
 
+    BlockUser(id, index) {
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: confirm => {
+          if (confirm) {
+            let dataInfo = {
+              id: id,
+              refernce: "network",
+              type: this.type
+            };
 
-    
-  BlockUser(id, index) {
+            let fd = new FormData();
+            fd.append("id", dataInfo.id);
+            fd.append("type", dataInfo.refernce);
+            this.$store
+              .dispatch("profile/Block", {
+                path: "block/entity",
+                formData: fd
+              })
+              .then(response => {
+                this.getTotalCommunity();
+                this.$delete(this.network, index);
+                console.log("user deleted");
 
-
-      this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-          /**
-          * Callback Function
-          * @param {Boolean} confirm
-          */
-          callback: confirm => {
-            if (confirm) {
-              
-
-              
-
-     let dataInfo = {
-        id: id,
-        refernce: "network",
-        type: this.type,
-      };
-
-    
-      let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
-      .then(response => {
-        
-       this.getTotalCommunity();
-        this.$delete(this.network,index);
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-
-
-            }
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
           }
         }
-      )
-
-
-
-
+      });
     },
 
-
-
-      count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -153,53 +146,52 @@ export default {
     },
 
     async handleJoin(user) {
-      document.getElementById('joinbtn' + user.id).disabled = true;
+      document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_member = nextFollowState;
-          document.getElementById('joinbtn' + user.id).disabled = false;
+          document.getElementById("joinbtn" + user.id).disabled = false;
 
           this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-          
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
-          document.getElementById('joinbtn' + user.id).disabled = false;
+          document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
     async handleFollow(user) {
-      document.getElementById('followbtn' + user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-           this.getTotalCommunity();
+        .then(response => {
+          this.getTotalCommunity();
           user.is_follow = nextFollowState;
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
@@ -214,22 +206,24 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/network/follower/';
+      if (this.type == "Follower") {
+        url = "profile/network/follower/";
       } else {
-        url = 'profile/network/following/';
+        url = "profile/network/following/";
       }
 
-       if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
-        .get(url + this.page + '?keyword=' + this.searchh + '&slug=' + this.foll_id)
+        .get(
+          url + this.page + "?keyword=" + this.searchh + "&slug=" + this.foll_id
+        )
         .then(({ data }) => {
-          console.log('lading network after response');
+          console.log("lading network after response");
           console.log(data);
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
               this.network.push(...data.data.network_followers);
@@ -250,11 +244,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -325,13 +319,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -378,13 +372,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -411,7 +405,7 @@ export default {
 
   .btn {
     padding-top: 6px;
-   font-size: 13px;
+    font-size: 13px;
     height: 38px;
     width: 125px;
   }

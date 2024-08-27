@@ -5,7 +5,11 @@
         <div class="border people-style shadow h-100">
           <div class="row">
             <b-col md="3" cols="4" sm="3" class="my-auto">
-              <b-skeleton animation="fade" type="avatar" class="p-avater ml-2"></b-skeleton>
+              <b-skeleton
+                animation="fade"
+                type="avatar"
+                class="p-avater ml-2"
+              ></b-skeleton>
             </b-col>
             <b-col
               md="8"
@@ -26,8 +30,6 @@
   </div>
 </template>
 
-
-      
 <script>
 import axios from "axios";
 
@@ -36,16 +38,14 @@ export default {
   props: {
     loading: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 };
 </script>
 
 <style scoped>
 .people-style {
- 
-
   background: white;
 
   background-color: #fff;
@@ -56,13 +56,10 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .p-avater {
-    
     margin-top: 3px;
   }
 
   .people-style {
-  
-
     background: white;
 
     background-color: #fff;
@@ -77,13 +74,10 @@ export default {
 
 @media only screen and (max-width: 520px) {
   .p-avater {
- 
     margin-top: 3px;
   }
 
   .people-style {
-
-
     background: white;
 
     background-color: #fff;

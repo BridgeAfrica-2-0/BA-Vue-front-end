@@ -1,9 +1,9 @@
 <template>
-  <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper"> 
+  <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper">
     <navbar />
-     <Skeleton  :loading="!isloaded" />
+    <Skeleton :loading="!isloaded" />
     <div v-if="isloaded">
-      <div class="container-fluid">  
+      <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
           :items="items"
@@ -55,7 +55,7 @@ import LyTab from "@/tab/src/index.vue";
 // import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 import axios from "axios";
-import { isPremium } from '@/helpers';
+import { isPremium } from "@/helpers";
 import Skeleton from "@/components/businessPageSkeleton";
 export default {
   name: "Home",
@@ -66,7 +66,7 @@ export default {
     Business,
     LyTab,
     Settings,
-    Inbox,
+    Inbox
     // Footer,
   },
   data() {
@@ -77,34 +77,34 @@ export default {
       isloaded: false,
       url_data: null,
       items: [
-        { label: this.$t('search.Home'), icon: "" },
-        { label: this.$t('search.Inbox'), icon: "" },
-        { label: this.$t('search.Notification'), icon: "" },
-        { label: this.$t('search.Settings'), icon: "" },
+        { label: this.$t("search.Home"), icon: "" },
+        { label: this.$t("search.Inbox"), icon: "" },
+        { label: this.$t("search.Notification"), icon: "" },
+        { label: this.$t("search.Settings"), icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd",
+        activeColor: "#1d98bd"
       },
       isPremium: isPremium()
     };
   },
   methods: {
-    pageChange(){
-      console.log("pageChange")
-      this.selectedId = 6
+    pageChange() {
+      console.log("pageChange");
+      this.selectedId = 6;
     },
 
-   
-    async  businessInfo() {
-       
-      let url=`business/info/${this.$route.params.id}`;
+    async businessInfo() {
+      let url = `business/info/${this.$route.params.id}`;
 
-      await axios.get(url)
-      .then(({ data }) => {
-         this.$store.commit("businessOwner/setBusinessInfo", data.data);
-         this.auth({ ...data.data,profile_picture: data.data.logo_path, user_type: 'business' });
-          })
-  
+      await axios.get(url).then(({ data }) => {
+        this.$store.commit("businessOwner/setBusinessInfo", data.data);
+        this.auth({
+          ...data.data,
+          profile_picture: data.data.logo_path,
+          user_type: "business"
+        });
+      });
     },
 
     CommunityBusiness() {
@@ -113,7 +113,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -123,7 +123,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -133,7 +133,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -143,89 +143,80 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
   watch: {
-    "$route.query.tabId": function () {
+    "$route.query.tabId": function() {
       this.selectedId = this.$route.query.tabId;
-    },
-
-   
+    }
   },
 
-  beforeCreate: async function () {
+  beforeCreate: async function() {
     await this.$repository.share.switch(this.$route.params.id, "business");
   },
 
   created() {
-
     //Insight is only for premium account
     if (this.isPremium) {
-      this.items.push({ label: this.$t('search.Insight'), icon: "" });
-      this.items.push({ label: this.$t('search.Pending_Post'), icon: "" });
+      this.items.push({ label: this.$t("search.Insight"), icon: "" });
+      this.items.push({ label: this.$t("search.Pending_Post"), icon: "" });
     }
 
     let loader = this.$loading.show({
       container: this.$refs.wrapper,
       canCancel: true,
       onCancel: this.onCancel,
-      color: "#e75c18",
+      color: "#e75c18"
     });
 
-  
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
-    
-   
 
     this.foll_id = this.$route.params.id;
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
-      .then((data) => {
+      .then(data => {
         let role = data.data.data.role;
         switch (role) {
           case "editor":
             this.$router.push({
               name: "BusinessEditor",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
           case "visitor":
             this.$router.push({
               name: "BusinessFollower",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
         }
-         this.businessInfo();
+        this.businessInfo();
         this.isloaded = true;
-        loader.hide()
+        loader.hide();
       })
-      .catch((error) => {
+      .catch(error => {
         console.log({ error: error });
         console.log(error.response.status);
-        loader.hide()
+        loader.hide();
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
       });
-
-
-   
   },
   mounted() {
     if (this.$store.state.profileSettingsEdit.etat == 1) {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-   
+
     this.CommunityBusiness();
     this.CommunityPeople();
     this.businessCommunityTotal();
     this.ownerPost();
-  },
+  }
 };
 </script>
 

@@ -1,7 +1,5 @@
 <template>
-  <div v-if="islogin" >
-
-    
+  <div v-if="islogin">
     <h6>
       {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
@@ -10,16 +8,16 @@
     <div>
       <Sponsor />
     </div>
-    <br>
+    <br />
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       {{ $t("search.People") }}
     </h6>
 
     <!-- <Loader v-if="!pageHasLoad || loaderState" /> -->
-     <peopleSkeleton  :loading="!pageHasLoad" />
+    <peopleSkeleton :loading="!pageHasLoad" />
 
-    <peopleSkeleton  :loading="!pageHasLoad" />
+    <peopleSkeleton :loading="!pageHasLoad" />
 
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
 
@@ -30,10 +28,8 @@
         :key="index"
       /> -->
 
-      
-          <Person v-for="item in peoples" :key="item.id" :person="item"  />
-       
-    </div>   
+      <Person v-for="item in peoples" :key="item.id" :person="item" />
+    </div>
 
     <ScrollLoader
       :loading="loadingIsActive"
@@ -41,7 +37,7 @@
       v-if="this.getKeywork"
     />
   </div>
-  
+
   <div v-else>
     <h6>
       {{ $t("search.Sponsored_Result") }}
@@ -51,25 +47,21 @@
     <div>
       <Sponsor />
     </div>
-    <br>
+    <br />
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       {{ $t("search.People") }}
     </h6>
 
-     <peopleSkeleton  :loading="!pageHasLoad" />
+    <peopleSkeleton :loading="!pageHasLoad" />
 
-    <peopleSkeleton  :loading="!pageHasLoad" />
+    <peopleSkeleton :loading="!pageHasLoad" />
 
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
 
     <div v-else>
-
-
-      
-          <Person v-for="item in peoples" :key="item.id" :person="item"  />
-       
-    </div>   
+      <Person v-for="item in peoples" :key="item.id" :person="item" />
+    </div>
 
     <ScrollLoader
       :loading="loadingIsActive"
@@ -77,11 +69,9 @@
       v-if="this.getKeywork"
     />
   </div>
-
 </template>
 
 <script>
-
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { loader, search } from "@/mixins";
 import peopleSkeleton from "@/components/peopleSkeleton";
@@ -94,17 +84,15 @@ export default {
   components: {
     Sponsor,
     Person,
-   // Loader,
+    // Loader,
     peopleSkeleton
   },
 
   data: () => ({
-    pageHasLoad: false,
-   
+    pageHasLoad: false
   }),
 
   computed: {
-
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
       canScrool: "search/END_INITIAL_REQUEST",
@@ -112,11 +100,12 @@ export default {
       getKeywork: "search/POST_KEYWORD",
       getStack: "search/STACK_VALUE"
     }),
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
-    loadingIsActive: function () {
-      return this.loaderState && this.peoples.length ? true : false;
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
     },
-    
+    loadingIsActive: function() {
+      return this.loaderState && this.peoples.length ? true : false;
+    }
   },
 
   mounted() {
@@ -125,14 +114,13 @@ export default {
 
   created() {
     //this.getAuth();
-   
+
     this.init();
   },
 
-  watch:{
-    "$store.state.search.page":function(newVal){
-      if ( 1 == newVal)
-        this.haveNotData = false
+  watch: {
+    "$store.state.search.page": function(newVal) {
+      if (1 == newVal) this.haveNotData = false;
     }
   },
 
@@ -141,11 +129,11 @@ export default {
       userStore: "search/FIND_USER",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      stack: "search/STACK_VALUE",
+      stack: "search/STACK_VALUE"
     }),
 
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
 
     async getAuth() {
@@ -153,51 +141,47 @@ export default {
         "NetworkEditors",
         "networks",
         "Membar Network Follower",
-        "memberNetwork",
+        "memberNetwork"
       ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
 
       const response = await this.$repository.share.WhoIsConnect({
         networkId: type,
-        type,
+        type
       });
       if (response.success) this.auth(response.data);
     },
 
-    init: async function () {
+    init: async function() {
       this.stack({
         data: {
-          keyword: "",
+          keyword: ""
         },
-        page: 1,
+        page: 1
       });
-      
+
       this.setLoaderState(true);
-      if(this.islogin)
-      {
+      if (this.islogin) {
         this.setCallback(this.$repository.search.findUserByParam);
-      }
-      else{
+      } else {
         this.setCallback(this.$repository.search.findGuestUserByParam);
       }
       var request;
-      if(this.islogin)
-      {
+      if (this.islogin) {
         request = await this.$repository.search.findUserByParam({
-         data: {
-           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
-         },
-         page: 1,
-       });
-      }
-      else{
+          data: {
+            keyword: this.$route.query.keyword ? this.$route.query.keyword : ""
+          },
+          page: 1
+        });
+      } else {
         request = await this.$repository.search.findGuestUserByParam({
-         data: {
-           keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
-         },
-         page: 1,
-       }); 
+          data: {
+            keyword: this.$route.query.keyword ? this.$route.query.keyword : ""
+          },
+          page: 1
+        });
       }
 
       if (request.success) {
@@ -211,8 +195,8 @@ export default {
       this.setLoaderState(false);
     },
 
-    onscroll: async function () {
-      console.log(this.getStack,this.getPage)
+    onscroll: async function() {
+      console.log(this.getStack, this.getPage);
       if (!this.getKeywork) return false;
 
       const scrollY = window.scrollY;
@@ -229,8 +213,8 @@ export default {
         this.setLoaderState(true);
 
         const request = await this.callback({
-          ...this.getStack ,
-          page: this.getPage,
+          ...this.getStack,
+          page: this.getPage
         });
 
         if (request.success) {
@@ -242,7 +226,7 @@ export default {
 
         this.setLoaderState(false);
       }
-    },
-  },
+    }
+  }
 };
 </script>

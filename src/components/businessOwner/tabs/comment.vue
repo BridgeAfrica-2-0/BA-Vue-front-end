@@ -22,7 +22,6 @@
             :less-str="$t('search.read_less')"
             :max-chars="15000"
           >
-                  
           </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
@@ -59,14 +58,14 @@ export default {
   data() {
     return {
       reply: false,
-      msg: "this sis sit tit typesetting",
+      msg: "this sis sit tit typesetting"
     };
   },
   methods: {
     showReply() {
       this.reply = !this.reply;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -120,7 +119,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

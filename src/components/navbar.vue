@@ -122,6 +122,18 @@
           >
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
+          <div style="float: left" class="mt-2">
+            <span class="cart-icon position-relative" style="color:#455a64">
+                  <b-icon icon="cart4" class="icon-size"></b-icon>
+                  <span
+                    v-if="cartCount > 0"
+                    class="badge badge-pill badge-danger position-absolute"
+                    style="top: 0; right: 0;"
+                  >
+                    {{ cartCount }}
+                  </span>
+                </span>
+          </div>
 
           <div style="float: right" ref="isnaav">
             <b-collapse id="nav-collapse" is-nav>
@@ -638,7 +650,7 @@ export default {
   data() {
     return {
       isActive: false,
-
+      cartCount: 0,
       shownav: false,
       notifications: [],
       messages: [],
@@ -669,6 +681,9 @@ export default {
   },
   beforeMount() {
     // this.getLocation();
+  },
+  mounted() {
+    this.fetchCartCount();
   },
   created() {
     //check for authentication
@@ -856,7 +871,15 @@ export default {
       // This will open permission popup
       navigator.geolocation.getCurrentPosition(success, error);
     },
-
+    async fetchCartCount() {
+      try {
+        const url = this.islogin ? "cart/total" : "guest/cart/total";
+        const response = await axios.get(url);
+        this.cartCount = response.data.data.totalItems;
+      } catch (error) {
+        console.error("Error fetching cart count:", error);
+      }
+    },
     updateNotificationEvent() {
       try {
         const newRouteNotificationApi = this.notificationPatterns[
@@ -1061,6 +1084,20 @@ export default {
 };
 </script>
 <style>
+.cart-icon {
+  color: #e75c18 !important;
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -10px !important;
+  right: -10px !important;
+  font-size: 10px;
+  padding: 0.25em 0.5em;
+}
+.icon-size {
+  font-size: 1.7rem !important;
+}
 .m-where {
   width: 87.8%;
   padding: 0px;

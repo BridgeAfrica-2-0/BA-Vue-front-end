@@ -1,32 +1,37 @@
 <template>
   <div>
-    <b class="education">{{ $t('profilefollower.Education') }}</b>   
+    <b class="education">{{ $t("profilefollower.Education") }}</b>
     <hr />
-<div
-          class="row"
-          v-for="education in this.$store.getters['follower/getProfileAboutEducationAndWorks'] " 
-          :key="education.school_name"
-        >
-  
-    <b-list-group-item class="d-flex align-items-center mb-4 border-0 education">
-  <!--    <b-avatar class="mr-3 avatar"></b-avatar> -->
-      <div class="datails">
-        <div class="row">
-          <div class="col">
-            <span class="mr-auto"> <b> {{ education.school_name }}</b> </span>
-            <p>
-             {{ $t('profilefollower.Duration_From') }} {{ education.start_year }} To
-              {{ education.end_year }}  </p>
+    <div
+      class="row"
+      v-for="education in this.$store.getters[
+        'follower/getProfileAboutEducationAndWorks'
+      ]"
+      :key="education.school_name"
+    >
+      <b-list-group-item
+        class="d-flex align-items-center mb-4 border-0 education"
+      >
+        <!--    <b-avatar class="mr-3 avatar"></b-avatar> -->
+        <div class="datails">
+          <div class="row">
+            <div class="col">
+              <span class="mr-auto">
+                <b> {{ education.school_name }}</b>
+              </span>
+              <p>
+                {{ $t("profilefollower.Duration_From") }}
+                {{ education.start_year }} To {{ education.end_year }}
+              </p>
 
-            <p> 
-               {{ education.description }}
-            </p>
+              <p>
+                {{ education.description }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </b-list-group-item>
-
-</div>
+      </b-list-group-item>
+    </div>
   </div>
 </template>
 

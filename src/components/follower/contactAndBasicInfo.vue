@@ -2,7 +2,7 @@
   <div>
     <BasicInfo />
     <ContactInfo class="mt-3" />
-  <!--  <BusinessVisited class="mt-3" /> -->
+    <!--  <BusinessVisited class="mt-3" /> -->
     <PlacesLived class="mt-3" />
     <WebAndSocials class="mt-3" />
   </div>
@@ -18,7 +18,7 @@ export default {
   components: {
     BasicInfo,
     ContactInfo,
-  //  BusinessVisited,
+    //  BusinessVisited,
     PlacesLived,
     WebAndSocials
   }

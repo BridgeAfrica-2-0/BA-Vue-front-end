@@ -17,15 +17,15 @@ export default {
   props: ["center"],
   components: {
     MglMap,
-    MglMarker,
+    MglMarker
   },
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
-      zoom: 12,
+      zoom: 12
     };
-  },
+  }
 };
 </script>
 <style scoped>

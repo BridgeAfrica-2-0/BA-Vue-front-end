@@ -1,46 +1,47 @@
 <template>
   <div>
     <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
-     
       <div class="ss-card">
-
-    <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-      
-         <Post
-          v-for="(item, index) in owner_post"
-          :key="index"
-          :post="item"
-          :mapvideo="() => mapvideo(item.media)"
-          :mapmediae="() => mapmediae(item.media)"
-          :businessLogo="item.logo_path"
-          :editPost="(f) => f"
-          :deletePost="(f) => f"
-        />
-        <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-     
-      </VuePerfectScrollbar>
-
+        <VuePerfectScrollbar
+          class="scroll-area s-card"
+          settings="{maxScrollbarLength: 60px}"
+        >
+          <Post
+            v-for="(item, index) in owner_post"
+            :key="index"
+            :post="item"
+            :mapvideo="() => mapvideo(item.media)"
+            :mapmediae="() => mapmediae(item.media)"
+            :businessLogo="item.logo_path"
+            :editPost="f => f"
+            :deletePost="f => f"
+          />
+          <infinite-loading
+            :identifier="infiniteId"
+            ref="infiniteLoading"
+            @infinite="infiniteHandler"
+          ></infinite-loading>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { isYourOwnPostMixins } from '@/mixins';
-import Post from '@/components/businessOwner/ownerPostComponent';
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { isYourOwnPostMixins } from "@/mixins";
+import Post from "@/components/businessOwner/ownerPostComponent";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
-  name: 'postNetwork',
+  name: "postNetwork",
   mixins: [isYourOwnPostMixins],
   components: {
-    Post, VuePerfectScrollbar
+    Post,
+    VuePerfectScrollbar
   },
   data() {
     return {
       playerVars: {
-        autoplay: 0,
+        autoplay: 0
       },
       page: 1,
       infiniteId: +new Date(),
@@ -54,12 +55,12 @@ export default {
       fullPage: false,
 
       createPost: {
-        postBusinessUpdate: '',
+        postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
@@ -67,9 +68,9 @@ export default {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -84,9 +85,9 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -95,30 +96,29 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
- 
+
     infiniteHandler($state) {
-      let url = 'profile/dashboard/post/user/' + this.page;
+      let url = "profile/dashboard/post/user/" + this.page;
 
       this.$store
-        .dispatch('follower/loadMore', url)
+        .dispatch("follower/loadMore", url)
 
         .then(({ data }) => {
-       
           if (data.data.length) {
             this.page += 1;
 
@@ -128,31 +128,29 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
-         
-        });
-    },
+        .catch(err => {});
+    }
   },
   computed: {
     imageProfile() {
-      return 'yoo';
+      return "yoo";
     },
 
-    info: function () {
-      return this.$store.getters['follower/getUserPostIntro'];
+    info: function() {
+      return this.$store.getters["follower/getUserPostIntro"];
     },
 
     owner_post() {
       return this.$store.state.follower.ownerPost;
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
 
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }
@@ -404,36 +402,27 @@ export default {
   right: 1%;
 }
 
-
-.ss-card{
+.ss-card {
   height: 100%;
- 
-    /* overflow: auto; */
-    overflow: hidden;
-    overflow-x: hidden;
-    padding: 15px;
-    
-}
 
+  /* overflow: auto; */
+  overflow: hidden;
+  overflow-x: hidden;
+  padding: 15px;
+}
 
 @media only screen and (max-width: 768px) {
-.blecrr .card-body{
-  padding-left: 4px !important;
+  .blecrr .card-body {
+    padding-left: 4px !important;
 
-   padding-right: 2px !important;
-}
+    padding-right: 2px !important;
+  }
 
-.ss-card{
-
-  height: 540px;
+  .ss-card {
+    height: 540px;
     overflow: hidden !important;
     overflow-x: hidden;
     padding: 2px;
-    
+  }
 }
-
-}
-
-
-
 </style>

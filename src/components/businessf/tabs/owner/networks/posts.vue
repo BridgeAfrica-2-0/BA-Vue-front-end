@@ -30,14 +30,14 @@
           </template>
           <b-dropdown-item-button v-on:click="deletePost(post.id)">
             <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-            {{ $t('network.Delete') }} 
+            {{ $t("network.Delete") }}
           </b-dropdown-item-button>
         </b-dropdown>
       </b-col>
     </b-row>
     <b-modal hide-footer ref="modal-1">
       <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
-      <h3>{{ $t('network.Post_Title') }} </h3>
+      <h3>{{ $t("network.Post_Title") }}</h3>
       <p class="text">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
         quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id
@@ -49,23 +49,20 @@
 
 <script>
 export default {
-  name: 'networkPosts',
+  name: "networkPosts",
   data() {
     return {
-      posts: [
-        
-      ]
+      posts: []
     };
   },
   methods: {
-  
     showModal() {
       this.$refs["modal-1"].show();
     },
 
-    postDescription(id){
-        var post=this.posts(id);
-        return post.text;
+    postDescription(id) {
+      var post = this.posts(id);
+      return post.text;
     },
     deletePost(id) {
       const index = id - 1;

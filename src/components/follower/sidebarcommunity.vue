@@ -4,14 +4,20 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('profilefollower.COMMUNITY') }} </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
+          <b> {{ $t("profilefollower.COMMUNITY") }} </b>
+          <span class="h4-color">
+            {{ nFormatter(total.total_community) }}
+          </span>
         </h6>
       </span>
 
       <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            {{ $t('profilefollower.People') }} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
+            {{ $t("profilefollower.People") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_people) }}
+            </span>
           </template>
 
           <div>
@@ -20,18 +26,28 @@
                 <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
+                      {{ $t("profilefollower.Followers") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_follower) }}
+                      </span>
                     </template>
 
-                    <div class="s-comcard"><People from="Follower"  type="Follower" /></div>
+                    <div class="s-comcard">
+                      <People from="Follower" type="Follower" />
+                    </div>
                   </b-tab>
 
                   <b-tab>
                     <template slot="title">
-                      {{ $t('profilefollower.Following') }} <span class="spa-color">  {{ nFormatter(total.total_user_following)}}  </span>
+                      {{ $t("profilefollower.Following") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_following) }}
+                      </span>
                     </template>
 
-                    <div class="s-comcard"><People  from="Follower"  type="Following" /></div>
+                    <div class="s-comcard">
+                      <People from="Follower" type="Following" />
+                    </div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -41,62 +57,91 @@
 
         <b-tab>
           <template slot="title">
-            {{ $t('profilefollower.Businesses') }} <span class="spa-color">  {{ nFormatter(total.total_business)}} </span>
+            {{ $t("profilefollower.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_business) }}
+            </span>
           </template>
 
           <div>
-            <b-tabs fill lazy pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              fill
+              lazy
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_business_follower)}} </span>
+                  {{ $t("profilefollower.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_follower) }}
+                  </span>
                 </template>
 
-                <div class="s-comcard"><Business  from="Follower"  type="Follower" /></div>
+                <div class="s-comcard">
+                  <Business from="Follower" type="Follower" />
+                </div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('profilefollower.Following') }} <span class="spa-color"> {{ nFormatter(total.total_business_following)}}</span>
+                  {{ $t("profilefollower.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_following) }}</span
+                  >
                 </template>
 
-                <div class="s-comcard"><Business from="Follower"  type="following" /></div>
+                <div class="s-comcard">
+                  <Business from="Follower" type="following" />
+                </div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
 
-
-
-
-          <b-tab>
+        <b-tab>
           <template slot="title">
-            {{ $t('profilefollower.Network') }} <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>
+            {{ $t("profilefollower.Network") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_network) }}</span
+            >
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              lazy
+              fill
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_network_follower)}} </span>
+                  {{ $t("profilefollower.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_follower) }}
+                  </span>
                 </template>
 
-                <div class="s-comcard"><Network from="Follower"  type="Follower" /></div>
+                <div class="s-comcard">
+                  <Network from="Follower" type="Follower" />
+                </div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('profilefollower.Following') }} <span class="spa-color">  {{ nFormatter(total.total_network_following)}} </span>
+                  {{ $t("profilefollower.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_following) }}
+                  </span>
                 </template>
 
-                <div class="s-comcard"><Network  from="Follower"  type="Following" /></div>
+                <div class="s-comcard">
+                  <Network from="Follower" type="Following" />
+                </div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
-
-
-
-
       </b-tabs>
     </div>
   </div>
@@ -112,48 +157,39 @@ export default {
   components: {
     People,
     Business,
-    Network,
+    Network
   },
-  
-  methods:{
-      nFormatter(num) {
+
+  methods: {
+    nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
+    }
   },
 
-
-  computed:{
-   total(){
-    return  this.$store.state.follower.Tcommunity;
-   },
- 
-
+  computed: {
+    total() {
+      return this.$store.state.follower.Tcommunity;
+    }
   }
 };
 </script>
 
 <style>
-
-
-
-    @media only screen and (max-width: 768px) {
-
-      .nav-pills .nav-link {
-         
-         padding-left: 12px !important;
+@media only screen and (max-width: 768px) {
+  .nav-pills .nav-link {
+    padding-left: 12px !important;
     padding-right: 12px !important;
-      }
-    }
-
+  }
+}
 
 .lala .nav-fill {
   margin-top: -19px;

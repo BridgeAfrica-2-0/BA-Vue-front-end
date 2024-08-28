@@ -1,21 +1,21 @@
 <template>
-  <div> 
+  <div>
     <fas-icon
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
     {{ $t("profilefollower.Network") }}
- 
+
     <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("profilefollower.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-    <div class="mx-auto text-center my-5"  v-if="!network.length & !loading"  >
-        <p class="my-2" >
-          No Network found
-        </p>
-    </div>  
+    <div class="mx-auto text-center my-5" v-if="!network.length & !loading">
+      <p class="my-2">
+        No Network found
+      </p>
+    </div>
 
     <b-row>
       <b-col
@@ -25,8 +25,14 @@
         v-for="item in network"
         :key="item.id"
       >
-     <Network  class="h-100" :network="item" :key="item.id"  :index="index"  @getTotalCommunity='getTotalCommunity' />
-     </b-col>
+        <Network
+          class="h-100"
+          :network="item"
+          :key="item.id"
+          :index="index"
+          @getTotalCommunity="getTotalCommunity"
+        />
+      </b-col>
     </b-row>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -41,8 +47,8 @@ export default {
   data() {
     return {
       page: 1,
-    
-      loading:false,
+
+      loading: false,
       network: [],
       foll_id: "",
       options: {
@@ -52,56 +58,52 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
- components: {
-    Network,
+  components: {
+    Network
   },
-  computed:{
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
+  computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
- 
+
   mounted() {
-     this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id;
   },
 
-
-
   methods: {
-
-      async handleJoin(user) {
-      document.getElementById('joinbtn' + user.id).disabled = true;
+    async handleJoin(user) {
+      document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_member = nextFollowState;
-          document.getElementById('joinbtn' + user.id).disabled = false;
+          document.getElementById("joinbtn" + user.id).disabled = false;
 
           this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-          
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
-          document.getElementById('joinbtn' + user.id).disabled = false;
+          document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
-
-
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -109,16 +111,16 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -127,13 +129,12 @@ export default {
     infiniteHandler($state) {
       let url = "network?slug=" + this.foll_id + "&page=" + this.page;
 
-      if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
-
-      this.loading=true;
-      if (this.page == 1) {  
+      this.loading = true;
+      if (this.page == 1) {
         this.network.splice(0);
       }
 
@@ -144,7 +145,7 @@ export default {
           if (data.data.length) {
             if (this.page == 1) {
               this.network.push(...data.data);
-              this.loading=false;
+              this.loading = false;
             }
             this.page += 1;
 
@@ -153,21 +154,21 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.over{
-    cursor: pointer;
-      }
-      .over:hover{
-     color: #e75c18;
-      }
+.over {
+  cursor: pointer;
+}
+.over:hover {
+  color: #e75c18;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -377,7 +378,7 @@ export default {
 
     padding: 7px;
   }
-  .btn{
+  .btn {
     font-size: 13px;
   }
 }

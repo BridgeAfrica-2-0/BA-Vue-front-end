@@ -1,19 +1,15 @@
 <template>
   <div>
-    <b class="basic">{{ $t('profilefollower.Basic_Infomation') }}</b>
+    <b class="basic">{{ $t("profilefollower.Basic_Infomation") }}</b>
     <hr />
     <div class="basic row">
-      <div class="col">
-        {{ $t('profilefollower.Date_Of_Birth') }}:
-      </div>
+      <div class="col">{{ $t("profilefollower.Date_Of_Birth") }}:</div>
       <div class="col">
         {{ info.user.dob }}
       </div>
     </div>
     <div class=" basic row">
-      <div class="col">
-        {{ $t('profilefollower.Gender') }}:
-      </div>
+      <div class="col">{{ $t("profilefollower.Gender") }}:</div>
       <div class="col">
         {{ info.user.gender }}
       </div>
@@ -25,19 +21,17 @@
 export default {
   data() {
     return {
-      dateOfBirth: "20/20/2020",  
+      dateOfBirth: "20/20/2020",
       gender: "Male"
     };
   },
   methods: {},
 
-   computed:{
-
-    info(){
+  computed: {
+    info() {
       return this.$store.state.follower.profileIntro;
     }
-
-  },
+  }
 };
 </script>
 

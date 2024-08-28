@@ -55,7 +55,6 @@
                       :less-str="$t('search.read_less')"
                       :max-chars="100"
                     >
-                  
                     </read-more>
                   </p>
                 </div>
@@ -162,8 +161,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -177,7 +176,7 @@ export default {
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -197,17 +196,17 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -219,12 +218,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("profile/setBcommunityFollower", {
           business_followers: [],
-          total_business_follower: 0,
+          total_business_follower: 0
         });
       } else {
         this.$store.commit("profile/setBcommunityFollowing", {
           business_following: [],
-          total_business_following: 0,
+          total_business_following: 0
         });
       }
 
@@ -269,11 +268,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

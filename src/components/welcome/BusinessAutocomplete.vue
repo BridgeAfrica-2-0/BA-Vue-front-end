@@ -21,7 +21,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 5,
+      zoom: 5
     };
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
         container: "map",
         style: this.mapStyle,
         zoom: this.zoom,
-        center: this.center,
+        center: this.center
       });
 
       var regon = this.region ? this.region[0].name.toLowerCase() : "centre";
@@ -45,17 +45,17 @@ export default {
         countries: "cm",
         placeholder: "Address",
         filter: function(item) {
-          return item.context.some((i) => {
+          return item.context.some(i => {
             return i.text === regon;
           });
-        },
+        }
       });
       geocoder.addTo("#geolocation");
-      geocoder.on("result", (e) => {
+      geocoder.on("result", e => {
         this.$emit("business-instance-location", e.result);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

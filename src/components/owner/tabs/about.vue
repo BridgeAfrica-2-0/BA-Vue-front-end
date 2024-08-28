@@ -43,7 +43,7 @@ export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation,
+    WorkAndEducation
   },
   data() {
     return {
@@ -53,8 +53,8 @@ export default {
 
       window: {
         width: 0,
-        height: 0,
-      },
+        height: 0
+      }
     };
   },
   created() {
@@ -67,8 +67,8 @@ export default {
     console.log("Load User Profile About start ++++++", this.profile_about);
     this.$store
       .dispatch("profile/loadUserProfileAbout", null)
-      .then((response) => {})
-      .catch((error) => {
+      .then(response => {})
+      .catch(error => {
         console.log("Error from server or from browser error (2) ++++", error);
       })
       .finally(() => {
@@ -86,7 +86,7 @@ export default {
     card() {
       if (this.size > 992) return true;
       return false;
-    },
+    }
   },
   mounted() {
     var that = this;
@@ -103,8 +103,8 @@ export default {
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
-    },
-  },
+    }
+  }
 };
 </script>
 

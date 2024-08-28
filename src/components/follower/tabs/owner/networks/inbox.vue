@@ -131,7 +131,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -159,14 +159,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.receiver_id,
+                                id: chat.receiver_id
                               })
                             "
                           >
@@ -216,7 +216,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -244,14 +244,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.receiver_business_id
                               })
                             "
                           >
@@ -301,7 +301,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -329,14 +329,14 @@
                                   ? chatSelected.clickedId
                                   : false)
                                   ? chatSelected.active
-                                  : false,
-                            },
+                                  : false
+                            }
                           ]"
                           @click="
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_network_id,
+                              id: chat.receiver_network_id
                             })
                           "
                         >
@@ -384,7 +384,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQuery
                               })
                             "
                           />
@@ -412,14 +412,14 @@
                                     ? chatSelected.clickedId
                                     : false)
                                     ? chatSelected.active
-                                    : false,
-                              },
+                                    : false
+                              }
                             ]"
                             @click="
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.receiver_business_id
                               })
                             "
                           >
@@ -528,7 +528,7 @@
                         histBizToBiz({
                           type: type,
                           receiverID: chatId,
-                          keyword: chatSearchKeyword,
+                          keyword: chatSearchKeyword
                         })
                       "
                       type="text"
@@ -544,7 +544,7 @@
                             histBizToBiz({
                               type: type,
                               receiverID: chatId,
-                              keyword: chatSearchKeyword,
+                              keyword: chatSearchKeyword
                             })
                           "
                           class="msg-icon primary icon-size"
@@ -801,7 +801,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px',
+                              left: display.x + 'px'
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -1099,13 +1099,13 @@
             id="input-large"
             size="lg"
             autofocus
-            :placeholder="$t('general.Enter_your_name') "
+            :placeholder="$t('general.Enter_your_name')"
           ></b-form-input>
         </div>
 
-        <b-button class="mt-3" block @click="selectedMultyChat()"
-          >{{ $t("general.Create") }}</b-button
-        >
+        <b-button class="mt-3" block @click="selectedMultyChat()">{{
+          $t("general.Create")
+        }}</b-button>
       </b-modal>
       <!-- preview -->
       <b-modal id="preview-file" hide-footer>
@@ -1125,7 +1125,7 @@ import moment from "moment";
 
 export default {
   components: {
-    EmojiPicker,
+    EmojiPicker
   },
   data() {
     return {
@@ -1156,7 +1156,7 @@ export default {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       socket: io("localhost:7000", {
-        transports: ["websocket", "polling", "flashsocket"],
+        transports: ["websocket", "polling", "flashsocket"]
       }),
       chatSelected: [],
       showsearch: true,
@@ -1168,29 +1168,29 @@ export default {
           title: "Accounting Services",
           uri: "aaaa.com",
           category: "a",
-          icon: null,
+          icon: null
         },
         { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
         {
           title: "Advanced Student Lookup",
           uri: "bbbb.com",
           category: "b",
-          icon: null,
+          icon: null
         },
         { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
         {
           title: "Auxiliares Services",
           uri: "bbbb.com",
           category: "b",
-          icon: null,
+          icon: null
         },
         { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
         {
           title: "Board of Trustees",
           uri: "dddd.com",
           category: "d",
-          icon: null,
-        },
+          icon: null
+        }
       ],
       resources: [
         {
@@ -1198,14 +1198,14 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "1",
+          id: "1"
         },
         {
           name: "itz blec blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "2",
+          id: "2"
         },
 
         {
@@ -1213,7 +1213,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "3",
+          id: "3"
         },
 
         {
@@ -1221,7 +1221,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "4",
+          id: "4"
         },
 
         {
@@ -1229,15 +1229,15 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "5",
+          id: "5"
         },
         {
           name: "blezour blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "6",
-        },
+          id: "6"
+        }
       ],
       message: {},
       newMsg: false,
@@ -1246,7 +1246,7 @@ export default {
       checked: false,
       text: "",
       selected: [],
-      messages: null,
+      messages: null
     };
   },
   computed: {
@@ -1302,16 +1302,16 @@ export default {
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.users.filter((user) => {
+        return this.users.filter(user => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => user.name.toLowerCase().includes(v));
+            .every(v => user.name.toLowerCase().includes(v));
         });
       } else {
         return this.users.data;
       }
-    },
+    }
   },
   mounted() {
     if (this.chatList.length < 0) {
@@ -1352,8 +1352,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   methods: {
     convert(bytes) {
@@ -1366,7 +1366,7 @@ export default {
       this.allSelection = true;
       this.selectedMulty = [];
       if (this.allSelectedMulty) {
-        this.all.map((biz) => {
+        this.all.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1380,7 +1380,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.peopleMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1395,7 +1395,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.businessMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1410,7 +1410,7 @@ export default {
 
       this.selectedMulty = [];
       if (this.networkMulty) {
-        this.bizs.map((biz) => {
+        this.bizs.map(biz => {
           this.selectedMulty.push(biz.id);
         });
       } else {
@@ -1429,7 +1429,7 @@ export default {
       //   console.log(data);
       //   this.messages.push(data);
       // });
-      this.socket.on("groupMessage", (data) => {
+      this.socket.on("groupMessage", data => {
         console.log("group message Received");
         console.log(data);
         this.chats.push(data);
@@ -1439,12 +1439,12 @@ export default {
           sender_business_id: this.currentBiz.id,
           receiver_business_id: this.chatSelected.id,
           receiver_network_id: this.chatSelected.id,
-          receiver_id: this.chatId,
+          receiver_id: this.chatId
         };
 
         // this.saveMessage(elmts);
       });
-      this.socket.on("privateMessage", (data) => {
+      this.socket.on("privateMessage", data => {
         console.log("Received");
         console.log(data);
         this.chats.push(data);
@@ -1537,7 +1537,7 @@ export default {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
         data: data,
-        type: this.type,
+        type: this.type
       });
     },
     selectedMultyChat() {
@@ -1556,7 +1556,7 @@ export default {
       this.chatSelected = {
         active: true,
         clickedId: dumId,
-        name: this.groupName,
+        name: this.groupName
       };
 
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -1583,7 +1583,7 @@ export default {
         id: data.id,
         active: true,
         clickedId: data.id,
-        name: data.chat.name,
+        name: data.chat.name
       };
 
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -1616,7 +1616,7 @@ export default {
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
-        attachment: this.file,
+        attachment: this.file
       });
       console.log("SENT...", {
         type: this.type,
@@ -1624,7 +1624,7 @@ export default {
         sender_business_id: this.currentBiz.id,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
+        receiver_id: this.chatId
         // attachment: this.file,
       });
       this.input = "";
@@ -1638,7 +1638,7 @@ export default {
         sender_business_id: this.currentBiz.id,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
+        receiver_id: this.chatId
       });
 
       console.log("SENT...");
@@ -1693,12 +1693,12 @@ export default {
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
-        behavior: "smooth",
+        behavior: "smooth"
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       console.log(this.$refs.feed.scrollTop);
-    },
-  },
+    }
+  }
 };
 </script>
 

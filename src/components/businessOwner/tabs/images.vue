@@ -1,17 +1,14 @@
 <template>
   <div>
-    
-
-    {{picturess}}
+    {{ picturess }}
     <div class="row">
       <div class="container-fluid">
-
         <b-modal
           id="modalxl"
           ref="modalxl"
           centered
           hide-footer
-          :title=" $t('businessowner.Upoad_Image') "
+          :title="$t('businessowner.Upoad_Image')"
         >
           <br />
 
@@ -24,7 +21,7 @@
             id="textarea-small"
             class="mb-2 border-none"
             v-model="text"
-            :placeholder=" $t('businessowner.Enter_a_description') "
+            :placeholder="$t('businessowner.Enter_a_description')"
           >
           </b-form-textarea>
 
@@ -32,7 +29,7 @@
 
           <b-button @click="submitPost" variant="primary" block
             ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-             {{ $t('businessowner.Publish') }}</b-button
+            {{ $t("businessowner.Publish") }}</b-button
           >
         </b-modal>
 
@@ -50,7 +47,7 @@
             <a @click="$refs.movie.click()">
               <div class="drag-textt">
                 <fas-icon :icon="['fas', 'plus']" />
-                <h3> {{ $t('businessowner.Add_Item') }}</h3>
+                <h3>{{ $t("businessowner.Add_Item") }}</h3>
               </div>
             </a>
           </div>
@@ -88,22 +85,23 @@
                     </b-icon>
                   </template>
 
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    > {{ $t('businessowner.Download') }}</b-dropdown-item
+                  <b-dropdown-item @click="downloadPic(pictures.id)">
+                    {{ $t("businessowner.Download") }}</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setProfilePic(pictures.id)"
-                    > {{ $t('businessowner.Make_Profile_Picture') }}</b-dropdown-item
+                  <b-dropdown-item @click="setProfilePic(pictures.id)">
+                    {{
+                      $t("businessowner.Make_Profile_Picture")
+                    }}</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    > {{ $t('businessowner.Make_Cover_Photo') }}</b-dropdown-item
+                  <b-dropdown-item @click="setCoverPic(pictures.id)">
+                    {{ $t("businessowner.Make_Cover_Photo") }}</b-dropdown-item
                   >
-                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    > {{ $t('businessowner.Delete') }}</b-dropdown-item
+                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#">
+                    {{ $t("businessowner.Delete") }}</b-dropdown-item
                   >
                 </b-dropdown>
               </li>
             </ul>
-
           </div>
         </div>
       </div>
@@ -136,7 +134,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -158,9 +156,9 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
   },
   components: {},
@@ -168,7 +166,7 @@ export default {
   computed: {
     picturess() {
       return this.$store.state.businessOwner.albumImages;
-    },
+    }
   },
   methods: {
     ...mapActions({
@@ -176,7 +174,7 @@ export default {
       setProfilePic: "businessOwner/setProfilePic",
       setCoverPic: "businessOwner/setCoverPic",
       deleteImage: "businessOwner/deleteImage",
-      downloadPic: "businessOwner/downloadPic",
+      downloadPic: "businessOwner/downloadPic"
     }),
 
     showPic(url) {
@@ -190,10 +188,10 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.downloadPic(image_id)
-        .then((response) => {
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
           fileLink.href = fileURL;
@@ -202,23 +200,23 @@ export default {
           fileLink.click();
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.Image_Downloaded'),
+            message: this.$t("businessowner.Image_Downloaded")
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('businessowner.Unable_to_download'),
+              message: this.$t("businessowner.Unable_to_download")
             });
             console.log({ err: err });
             loader.hide();
@@ -231,30 +229,30 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.deleteImage(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.Album_Deleted'),
+            message: this.$t("businessowner.Album_Deleted")
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('businessowner.Unable_to_Delete_your_Image'),
+              message: this.$t("businessowner.Unable_to_Delete_your_Image")
             });
             console.log({ err: err });
             loader.hide();
@@ -267,30 +265,30 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.setCoverPic(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.cover_Picture_succesfully_set'),
+            message: this.$t("businessowner.cover_Picture_succesfully_set")
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('businessowner.Unable_to_set_your_cover_picture'),
+              message: this.$t("businessowner.Unable_to_set_your_cover_picture")
             });
             console.log({ err: err });
             loader.hide();
@@ -304,41 +302,36 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.setProfilePic(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.Profile_Picture_set'),
+            message: this.$t("businessowner.Profile_Picture_set")
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('businessowner.Unable_to_set_your_profile_pic'),
+              message: this.$t("businessowner.Unable_to_set_your_profile_pic")
             });
             console.log({ err: err });
             loader.hide();
           }
         });
     },
-
-
-
-
-
 
     submitPost() {
       let loader = this.$loading.show({
@@ -365,7 +358,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('businessowner.Profile_Updated'),
+            message: this.$t("businessowner.Profile_Updated"),
 
             blockClass: "custom-block-class"
           });
@@ -392,7 +385,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('businessowner.Unable_to_upload_your_image'),
+              message: this.$t("businessowner.Unable_to_upload_your_image"),
               blockClass: "custom-block-class"
             });
             console.log({ err: err });
@@ -401,9 +394,6 @@ export default {
           }
         });
     },
-
-
-
 
     selectMoviesOutsidePost(e) {
       this.profile_pic = e.target.files[0];
@@ -415,7 +405,7 @@ export default {
     },
     onClick(i) {
       this.index = i;
-    },
+    }
   },
 
   mounted() {
@@ -424,8 +414,8 @@ export default {
   watch: {
     album: function(newVal) {
       this.album_id = newVal;
-    },
-  },
+    }
+  }
 };
 </script>
 

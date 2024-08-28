@@ -2,7 +2,6 @@
   <div>
     <WorkPlace />
     <Education />
-    
   </div>
 </template>
 
@@ -13,7 +12,7 @@ import Education from "./education";
 export default {
   components: {
     WorkPlace,
-    Education,
+    Education
   }
 };
 </script>

@@ -1,92 +1,96 @@
 <template>
   <div>
-    <div class="s-cardd"> 
-      <Person  v-for="item in users"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
- </div>
+    <div class="s-cardd">
+      <Person
+        v-for="item in users"
+        :key="item.id"
+        :person="item"
+        @getTotalCommunity="getTotalCommunity"
+      />
+    </div>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
-
 <script>
-import axios from 'axios';
+import axios from "axios";
 import Person from "@/components/Person";
 export default {
-  props: ['type'],
+  props: ["type"],
   data() {
     return {
-    
       page: 1,
       net_id: null,
       users: [],
-      options: {  
+      options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
-        perMove: 1,
-      },
+        type: "loop",
+        perMove: 1
+      }
     };
   },
-  
+
   components: {
-  Person
+    Person
   },
 
   mounted() {
-    this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.net_id = this.$route.params.id;
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
     },
+    activeAccount() {
+      return this.$store.getters["auth/profilConnected"];
+    }
   },
 
   methods: {
-
-
-       cta(data) {
+    cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+      this.$store.commit("businessChat/setSelectedChat", data);
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 0 }
+      });
     },
-
 
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     infiniteHandler($state) {
-    
-     let url = `network/community/people/${this.net_id}/`;
+      let url = `network/community/people/${this.net_id}/`;
 
-      if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.user_followers.length) {
               this.page += 1;
 
@@ -111,28 +115,24 @@ export default {
         });
     },
 
-   
-   UserDetails() {   
+    UserDetails() {
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)   
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)
         .then(() => {
           console.log("ohh year");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },  
-
+    },
 
     async handleFollow(user) {
-      
-      
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user"
       };
 
       await axios
@@ -140,20 +140,17 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
 
-           this.UserDetails();
+          this.UserDetails();
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
-        });
-    },
 
-  },
+        .catch(err => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
+    }
+  }
 };
 </script>
 

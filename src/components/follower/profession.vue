@@ -1,12 +1,10 @@
 <template>
   <div v-if="profession">
-    <b class="profession">{{ $t('profilefollower.Profession') }}</b> 
+    <b class="profession">{{ $t("profilefollower.Profession") }}</b>
     <hr />
-      <div class="datails">
-       
-            <span class="mr-auto"> {{profession}} </span>
-         
-      </div> 
+    <div class="datails">
+      <span class="mr-auto"> {{ profession }} </span>
+    </div>
   </div>
 </template>
 
@@ -23,13 +21,11 @@ export default {
     };
   },
 
-  computed:{
-
-    profession(){
+  computed: {
+    profession() {
       return this.$store.state.follower.profileIntro.user.profession;
     }
   }
-
 };
 </script>
 <style scoped>

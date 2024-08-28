@@ -18,20 +18,16 @@
   </div>  -->
 
   <div>
-    <b class="basic">{{ $t('profilefollower.Places_you_lived') }}</b>
+    <b class="basic">{{ $t("profilefollower.Places_you_lived") }}</b>
     <hr />
     <div class="basic row">
+      <div class="col">{{ $t("profilefollower.Current_City") }}:</div>
       <div class="col">
-        {{ $t('profilefollower.Current_City') }}:
-      </div>
-      <div class="col">
-        {{info.user.city}}
+        {{ info.user.city }}
       </div>
     </div>
     <div class=" basic row">
-      <div class="col">
-         {{ $t('profilefollower.Home_City') }}:
-      </div>
+      <div class="col">{{ $t("profilefollower.Home_City") }}:</div>
       <div class="col">
         {{ info.user.home_town }}
       </div>
@@ -44,13 +40,11 @@ export default {
   data() {
     return {};
   },
-   computed:{
-
-    info(){
+  computed: {
+    info() {
       return this.$store.state.follower.profileIntro;
     }
-
-  },
+  }
 };
 </script>
 

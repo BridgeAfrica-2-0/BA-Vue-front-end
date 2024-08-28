@@ -6,7 +6,7 @@
           <div class="create" @click="createAlbum">
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>{{ $t('network.Create_Album') }}</p>
+              <p>{{ $t("network.Create_Album") }}</p>
             </div>
           </div>
         </b-col>
@@ -32,11 +32,11 @@
             </template>
             <b-dropdown-item-button @click="openAlbum">
               <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-              {{ $t('network.Edit') }}
+              {{ $t("network.Edit") }}
             </b-dropdown-item-button>
             <b-dropdown-item-button>
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              {{ $t('network.Delete') }}
+              {{ $t("network.Delete") }}
             </b-dropdown-item-button>
           </b-dropdown>
         </b-col>
@@ -44,9 +44,11 @@
     </b-row>
 
     <div v-if="pictureShow">
-      <b-button @click="back" variant="primary">{{ $t('network.Back') }}</b-button>
+      <b-button @click="back" variant="primary">{{
+        $t("network.Back")
+      }}</b-button>
 
-      <div class="album-name">{{ $t('network.Album_Name') }}</div>
+      <div class="album-name">{{ $t("network.Album_Name") }}</div>
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
@@ -54,7 +56,7 @@
               fluid-grow
               src="https://picsum.photos/300/150/?image=41"
             ></b-img>
-            <h3>{{ $t('network.Picture_Title') }}</h3>
+            <h3>{{ $t("network.Picture_Title") }}</h3>
           </b-modal>
         </div>
         <b-col md="6" class="mt-2">
@@ -62,7 +64,7 @@
             <input id="default-btn" type="file" @change="onFileChange" />
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>{{ $t('network.Add_Photo') }}</p>
+              <p>{{ $t("network.Add_Photo") }}</p>
             </div>
           </div>
         </b-col>
@@ -80,10 +82,19 @@
       </b-row>
     </div>
 
-    <b-modal hide-footer :title="$t('network.Create_Album')" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="$t('network.Create_Album')"
+      v-model="showModal"
+    >
       <b-form>
-        <b-form-input v-model="text" :placeholder="$t('network.Album_Name')"></b-form-input>
-        <b-button class="mt-2" variant="primary"> {{ $t('network.Create') }}</b-button>
+        <b-form-input
+          v-model="text"
+          :placeholder="$t('network.Album_Name')"
+        ></b-form-input>
+        <b-button class="mt-2" variant="primary">
+          {{ $t("network.Create") }}</b-button
+        >
       </b-form>
     </b-modal>
   </div>

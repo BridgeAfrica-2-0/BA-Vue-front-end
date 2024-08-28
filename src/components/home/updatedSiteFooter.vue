@@ -1,145 +1,161 @@
 <template>
   <section class="footer">
-   <div class="container">
-    <div :class="['subscription-box', { 'footer-subscription': isSmallScreen }]">
-      <p style="color: black" class="subs-p">
-        <span style="color: #e75c18;">Subscribe to our newsletter</span>
-        and be the first to know about new arrivals, exclusive offers, and handicraft.
-      </p>
-      <form @submit.prevent="subscribe">
-        <input type="email" v-model="email" placeholder="Enter your email">
-        <b-button type="submit" variant="primary" class="hire-btn"> Subscribe
-          <span class="arrow-icon-wrapper">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-        </b-button>
-      </form>
+    <div class="container">
+      <div
+        :class="['subscription-box', { 'footer-subscription': isSmallScreen }]"
+      >
+        <p style="color: black" class="subs-p">
+          <span style="color: #e75c18;">Subscribe to our newsletter</span>
+          and be the first to know about new arrivals, exclusive offers, and
+          handicraft.
+        </p>
+        <form @submit.prevent="subscribe">
+          <input type="email" v-model="email" placeholder="Enter your email" />
+          <b-button type="submit" variant="primary" class="hire-btn">
+            Subscribe
+            <span class="arrow-icon-wrapper">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+          </b-button>
+        </form>
+      </div>
 
-    </div>
+      <footer id="footer">
+        <div class="footer-top black-back">
+          <div class="container footer-box">
+            <div class="row p-0">
+              <div class="col-lg-3 col-md-6 p-0 footer-contact">
+                <div class="row">
+                  <div class="col-8 footer-img-col">
+                    <img
+                      src="../../assets/img/bavlogo.png"
+                      width="250px"
+                      class="size px-n1 px-md-0"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9 logo-div">
+                    <p class="white">
+                      International Handicraft Center, Rond-point Intendance,
+                      Yaounde Cameroon
+                    </p>
+                    <p style="color: #FF9E19;">
+                      bridgeafricaventures.com
+                    </p>
+                  </div>
+                </div>
 
-    <footer id="footer">
-      <div class="footer-top black-back">
-        <div class="container footer-box">
-          <div class="row p-0">
-            <div class="col-lg-3 col-md-6 p-0 footer-contact">
-              <div class="row">
-                <div class="col-8 footer-img-col">
-                  <img
-                    src="../../assets/img/bavlogo.png"
-                    width="250px"
-                    class="size px-n1 px-md-0"
-                    alt=""
-                  />
-                </div>
-                <div class="col-9 logo-div">
-                  <p class="white">
-                  International Handicraft Center,
-                  Rond-point Intendance, Yaounde 
-                  Cameroon
-                  </p>
-                  <p style="color: #FF9E19;">
-                    bridgeafricaventures.com
-                  </p>
-                </div>
+                <br />
               </div>
 
+              <div class="col-lg-3 col-md-6 footer-links white">
+                <h4 class="bridge-header text-left white pt-2">
+                  {{ $t("home.USEFUL_LINKS") }}
+                </h4>
+                <ul class="white">
+                  <li class="white">
+                    <router-link class="over" :to="{ name: 'Bridge-home' }">{{
+                      $t("home.Home")
+                    }}</router-link>
+                  </li>
+                  <li class="white ">
+                    <router-link class="over" :to="{ name: 'about' }">{{
+                      $t("home.About_Us")
+                    }}</router-link>
+                  </li>
+                  <li class="white ">
+                    <router-link class="over" :to="{ name: 'contact' }">{{
+                      $t("home.Contact_Us")
+                    }}</router-link>
+                  </li>
+                </ul>
+              </div>
 
-              <br />
-            </div>
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4 class="bridge-header text-left white pt-2">
+                  {{ $t("home.FOLLOW_US") }}
+                </h4>
+                <ul class="text-left white ">
+                  <li>
+                    <a
+                      href="https://twitter.com/bridgeafricacom"
+                      class="bridge-icon"
+                      target="_blank"
+                    >
+                      <b-icon icon="twitter" class="social-icon"></b-icon>
+                      <span class="social-text">Twitter</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="http://facebook.com/bridgeafricacom"
+                      class=" bridge-icon"
+                      target="_blank"
+                    >
+                      <b-icon icon="facebook" class="social-icon"></b-icon>
+                      <span class="social-text">Facebook</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://instagram.com/bridgeafricacom"
+                      class=" bridge-icon"
+                      target="_blank"
+                    >
+                      <b-icon icon="instagram" class="social-icon"></b-icon>
+                      <span class="social-text">Instagram</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
+                      class=" bridge-icon"
+                      target="_blank"
+                    >
+                      <b-icon icon="youtube" class="social-icon"></b-icon>
+                      <span class="social-text">Youtube</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white pt-2">
-                {{ $t("home.USEFUL_LINKS") }}
-              </h4>
-              <ul class="white">
-                <li class="white">
-                  <router-link class="over" :to="{ name: 'Bridge-home' }">{{
-                    $t("home.Home")
-                  }}</router-link>
-                </li>
-                <li class="white ">
-                  <router-link class="over" :to="{ name: 'about' }">{{
-                    $t("home.About_Us")
-                  }}</router-link>
-                </li>
-                <li class="white ">
-                  <router-link class="over" :to="{ name: 'contact' }">{{
-                    $t("home.Contact_Us")
-                  }}</router-link>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white pt-2">
-                {{ $t("home.FOLLOW_US") }}
-              </h4>
-              <ul class="text-left white ">
-                <li>
-                  <a href="https://twitter.com/bridgeafricacom" class="bridge-icon" target="_blank">
-                  <b-icon icon="twitter" class="social-icon" ></b-icon>
-                  <span class="social-text">Twitter</span>
-                </a>
-                </li>
-                <li>
-                  <a href="http://facebook.com/bridgeafricacom" class=" bridge-icon" target="_blank">
-                  <b-icon icon="facebook"  class="social-icon"></b-icon>
-                  <span class="social-text">Facebook</span>                  
-                </a>
-                </li>
-                <li>
-                  <a href="https://instagram.com/bridgeafricacom" class=" bridge-icon" target="_blank">
-                  <b-icon icon="instagram" class="social-icon"></b-icon>
-                  <span class="social-text">Instagram</span>
-                </a>
-                </li>
-                <li>
-                  <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" class=" bridge-icon" target="_blank">
-                  <b-icon icon="youtube" class="social-icon"></b-icon>
-                  <span class="social-text">Youtube</span>
-                </a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white pt-2">
-                {{ $t("home.WORKING_HOURS") }}
-              </h4>
-              <ul class="white">
-                <li>
-                  {{ $t("home.Monday") }}-{{ $t("home.Friday") }}:
-                  {{ $t("home.09AM_05PM") }}
-                </li>
-                <li>{{ $t("home.Saturday") }}: {{ $t("home.09AM_01PM") }}</li>
-                <li>Sunday: Off</li>
-              </ul>
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4 class="bridge-header text-left white pt-2">
+                  {{ $t("home.WORKING_HOURS") }}
+                </h4>
+                <ul class="white">
+                  <li>
+                    {{ $t("home.Monday") }}-{{ $t("home.Friday") }}:
+                    {{ $t("home.09AM_05PM") }}
+                  </li>
+                  <li>{{ $t("home.Saturday") }}: {{ $t("home.09AM_01PM") }}</li>
+                  <li>Sunday: Off</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
-   </div>
-  
+      </footer>
+    </div>
   </section>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
-      email: '',
-      isSmallScreen: false,
+      email: "",
+      isSmallScreen: false
     };
   },
   methods: {
     async subscribe() {
-      if (this.email.trim() === '') {
-        alert('Email cannot be empty');
+      if (this.email.trim() === "") {
+        alert("Email cannot be empty");
         return;
       }
-     
+
       const newSubscription = {
         email: this.email
       };
@@ -151,9 +167,9 @@ export default {
           message: "Subscription successful."
         });
         // Clear the email input after a successful subscription
-        this.email = '';
+        this.email = "";
       } catch (error) {
-        console.error('Error subscribing:', error);
+        console.error("Error subscribing:", error);
         this.flashMessage.show({
           status: "error",
           message: "Subscription failed. Please try again."
@@ -169,11 +185,11 @@ export default {
   },
   mounted() {
     this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+    window.removeEventListener("resize", this.handleResize);
+  }
 };
 </script>
 
@@ -185,11 +201,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .footer h4 {
-		margin-right: auto;
-		margin-left: auto;
-	}
-.logo-div
-{
+  margin-right: auto;
+  margin-left: auto;
+}
+.logo-div {
   text-align: left;
   margin-top: 10px;
   padding-left: 20px;
@@ -214,38 +229,36 @@ export default {
   display: inline-block;
   line-height: 0;
 }
-.footer-links h4{
+.footer-links h4 {
   font-size: 18px !important;
 }
-.bridge-icon  {
+.bridge-icon {
   background-color: transparent !important;
-  color:#FF9E19 !important;
+  color: #ff9e19 !important;
 }
 
 .bridge-icon span {
   color: #fff;
 }
 
-.social-text{
+.social-text {
   margin-left: 15px;
 }
 .subs-btn {
   border-radius: 30px;
 }
-.subs-p{
+.subs-p {
   font-size: 30px;
-  font-weight: bold; 
+  font-weight: bold;
   line-height: 1.5;
-  text-shadow: 0px 2px 0px #d8d8d8,
-             0px 3px 0px rgba(209, 207, 207, 0.15),
-             1px 4px 1px rgba(209, 207, 207, 0.15),
-             2px 5px 1px rgba(209, 207, 207, 0.15)
+  text-shadow: 0px 2px 0px #d8d8d8, 0px 3px 0px rgba(209, 207, 207, 0.15),
+    1px 4px 1px rgba(209, 207, 207, 0.15), 2px 5px 1px rgba(209, 207, 207, 0.15);
 }
 .hire-btn {
   margin-top: 2%;
   width: 160px;
   height: 46px;
-  background: linear-gradient(323.09deg, #E07715 6.03%, #FF9E19 85.15%);
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -264,7 +277,7 @@ export default {
   margin-left: auto;
 }
 .arrow-icon-wrapper i {
-  color: #FF6200;
+  color: #ff6200;
 }
 
 .footer {
@@ -285,7 +298,7 @@ export default {
   z-index: 10;
   max-width: 100%;
   border-radius: 5px;
-  border: 1px solid #C1C2CE;
+  border: 1px solid #c1c2ce;
   margin-top: -220px;
 }
 .subscription-box.footer-subscription {
@@ -314,15 +327,15 @@ export default {
   width: 100%;
   max-width: 75%;
   margin-bottom: 10px;
-  border: 1px solid #E7E7E7;
+  border: 1px solid #e7e7e7;
   border-radius: 3px;
 }
 .subscription-box input[type="email"]::placeholder {
-  color: #C7C7C7;
+  color: #c7c7c7;
 }
 .subscription-box button {
   padding: 10px 20px;
-  background-color: #FF9E19;
+  background-color: #ff9e19;
   border: none;
   color: #fff;
   border-radius: 3px;
@@ -349,11 +362,11 @@ export default {
 .over:hover {
   color: #e75c18 !important;
 }
-.white{
+.white {
   font-size: 15px;
 }
 
-.over{
+.over {
   font-weight: 400 !important;
 }
 
@@ -366,7 +379,7 @@ export default {
   .footer-box {
     margin: 10% 5%;
   }
-  .subscription-box{
+  .subscription-box {
     width: 100%;
   }
 }
@@ -375,29 +388,29 @@ export default {
   .footer-icons-div {
     width: 100%;
   }
-  .subs-p{
-  font-size: 20px;
-  font-weight: bold; 
-  line-height: 1.5;
-   }
+  .subs-p {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+  }
   .footer-img-col {
     padding-left: 10px;
   }
   .subscription-box p {
     font-size: 1.2em;
   }
-  .subscription-box{
+  .subscription-box {
     width: 100%;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .subs-p{
-  font-size: 20px;
-  font-weight: bold; 
-  line-height: 1.5;
-   }
-  .subscription-box{
+  .subs-p {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  .subscription-box {
     width: 100%;
   }
   .subscription-box p {
@@ -417,8 +430,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 430px) {
-
+@media screen and (max-width: 431px) {
   .footer {
     padding: 0px;
   }
@@ -431,7 +443,7 @@ export default {
   .subscription-box {
     border-radius: 0px;
     margin-top: -70px;
-    width: 100%
+    width: 100%;
   }
 
   .subscription-box.footer-subscription {
@@ -449,7 +461,7 @@ export default {
   }
 
   .subscription-box input {
-    padding : 19px !important;
+    padding: 19px !important;
     max-width: 65% !important;
   }
 
@@ -464,6 +476,5 @@ export default {
   .logo-div {
     padding-left: 12px !important;
   }
-  
 }
 </style>

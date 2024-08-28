@@ -110,8 +110,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -131,7 +131,7 @@ export default {
         return this.$store.state.businessOwner.UcommunityFollowing
           .user_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -148,7 +148,7 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
         path: `/business_owner/${this.activeAccount.id}`,
-        query: { tabId: 1, msgTabId: 0 },
+        query: { tabId: 1, msgTabId: 0 }
       });
     },
 
@@ -195,11 +195,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -236,8 +236,6 @@ export default {
     width: 16px;
     margin-right: 5px;
   }
-
- 
 }
 
 @media only screen and (min-width: 768px) {

@@ -15,10 +15,19 @@
         <div class="row">
           <div class="col">
             <b-form-input v-model="city" placeholder="City"></b-form-input>
-            <b-form-input class="mt-2" v-model="hometown" placeholder="Hometown"></b-form-input>
+            <b-form-input
+              class="mt-2"
+              v-model="hometown"
+              placeholder="Hometown"
+            ></b-form-input>
           </div>
           <div class="col-4">
-            <b-form-select class="mb-2" size="sm" v-model="selected" :options="options"></b-form-select>
+            <b-form-select
+              class="mb-2"
+              size="sm"
+              v-model="selected"
+              :options="options"
+            ></b-form-select>
           </div>
         </div>
       </div>
@@ -31,15 +40,15 @@ export default {
   data() {
     return {
       selected: null,
-      city: '',
-      hometown: '',
+      city: "",
+      hometown: "",
       options: [
-        { value: null, text: 'Select' },
-        { value: 'private', text: 'Private' },
-        { value: 'public', text: 'Public' },
-      ],
+        { value: null, text: "Select" },
+        { value: "private", text: "Private" },
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 

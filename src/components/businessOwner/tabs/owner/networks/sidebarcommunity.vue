@@ -1,60 +1,27 @@
 <template>
   <div class="mt-3 lala">
     <b-container>
-
-
-      <b-tabs  pills content-class="mt-3  f-left">
+      <b-tabs pills content-class="mt-3  f-left">
         <b-tab :title="$t('businessowner.People')" active>
-           
+          <b-tabs fill pills content-class="mt-3  f-left">
+            <b-tab :title="$t('businessowner.Followers')" active>
+              <People />
+            </b-tab>
 
-
-
-
-            <b-tabs fill pills content-class="mt-3  f-left">
-        <b-tab :title="$t('businessowner.Followers')" active>
-        
-
-        <People />
-
-         
-        </b-tab>
-
-        <b-tab :title="$t('businessowner.Following')">  <People /> </b-tab>
-      </b-tabs>
-
-
-
-
-
-       
-
-         
+            <b-tab :title="$t('businessowner.Following')"> <People /> </b-tab>
+          </b-tabs>
         </b-tab>
 
         <b-tab :title="$t('businessowner.Businesses')">
-          
-          
-      <b-tabs fill pills content-class="mt-3  f-left">
-       
-           
+          <b-tabs fill pills content-class="mt-3  f-left">
+            <b-tab :title="$t('businessowner.Followers')" active>
+              <Business />
+            </b-tab>
 
-        <b-tab :title="$t('businessowner.Followers')" active>
-        
-
-         <Business /> 
-
-         
+            <b-tab :title="$t('businessowner.Following')"> <Business /> </b-tab>
+          </b-tabs>
         </b-tab>
-
-        <b-tab :title="$t('businessowner.Following')">   <Business />  </b-tab>
       </b-tabs>
-            
-          
-          
-          </b-tab>
-      </b-tabs>
-
-      
     </b-container>
   </div>
 </template>

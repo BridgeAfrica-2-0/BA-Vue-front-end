@@ -2,18 +2,23 @@
   <div class="container-fluid">
     <navbar />
     <div class="row">
-       <div class="col-12 col-md-12 col-lg-9 ">
+      <div class="col-12 col-md-12 col-lg-9 ">
         <hr />
         <div class="row">
-          <div class="col d-none d-md-block"><h3 class="mx-5">{{$t("general.PRODUCT_DETAILS")}}</h3></div>
+          <div class="col d-none d-md-block">
+            <h3 class="mx-5">{{ $t("general.PRODUCT_DETAILS") }}</h3>
+          </div>
           <div class="col">
             <div class="row desktop">
-              <div class="col-2"> <h3 class="text-center">{{$t("general.Quantity")}}</h3> </div>
-              <div class="col-4"> <h3 class="text-center">{{$t("general.price")}}</h3> </div>
-              <div class="col-5">   <h3 class="text-center">{{$t("general.Total")}}</h3> </div>
-              
-              
-            
+              <div class="col-2">
+                <h3 class="text-center">{{ $t("general.Quantity") }}</h3>
+              </div>
+              <div class="col-4">
+                <h3 class="text-center">{{ $t("general.price") }}</h3>
+              </div>
+              <div class="col-5">
+                <h3 class="text-center">{{ $t("general.Total") }}</h3>
+              </div>
             </div>
           </div>
         </div>
@@ -21,180 +26,164 @@
         <div class="row my-4" v-if="loading">
           <div class="col-12 d-flex justify-content-center align-items-center">
             <b-spinner
-            variant="primary"
+              variant="primary"
               style="width: 3rem; height: 3rem;"
               label="Loading"
             ></b-spinner>
           </div>
-        </div>  
+        </div>
         <div v-if="!loading">
-          <div v-for="(cart_item, i) in cart.data" :key="i"> 
-           
+          <div v-for="(cart_item, i) in cart.data" :key="i">
             <div class="row ">
               <div class="">
                 <splide :options="{ rewind: true }" class="r-image">
                   <splide-slide>
-                    <img
-                      :src="cart_item.product_picture"
-                      class="r-image"
-                    />
+                    <img :src="cart_item.product_picture" class="r-image" />
                   </splide-slide>
                 </splide>
               </div>
 
               <div class="col-8 col-md-4 text-end text-start bold m-auto ">
-                <div >
-                  
-
-                  <h3 class="username">   {{ cart_item.product_name}}  </h3>
+                <div>
+                  <h3 class="username">{{ cart_item.product_name }}</h3>
                 </div>
 
                 <div class="text">
-  <p> 
-                  <read-more
-                        more-str="read more"
-                        class="readmore"
-                        :text="cart_item.product_description"
-                        link="#"
-                        less-str="read less"
-                        :max-chars="50"
-                      >
-                      </read-more>
-
-                       </p>
-                 
+                  <p>
+                    <read-more
+                      more-str="read more"
+                      class="readmore"
+                      :text="cart_item.product_description"
+                      link="#"
+                      less-str="read less"
+                      :max-chars="50"
+                    >
+                    </read-more>
+                  </p>
                 </div>
               </div>
-          
+
               <div class="col mt-2 d-none d-md-block m-auto">
                 <div class="row ">
                   <div class="col-2  bg-y ">
                     <input
                       type="number"
-                    
-                      @change="changeQuantity($event,cart_item.item_id)"
+                      @change="changeQuantity($event, cart_item.item_id)"
                       v-model="cart_item.quantity"
                       class="numbersize  form-control m-auto"
                     />
-
-
-             
-
-
                   </div>
                   <div class="col-4 text-center  p-0 ">
-                    <h3 class="marg2">{{ formatMoney(cart_item.product_price) }} </h3>
+                    <h3 class="marg2">
+                      {{ formatMoney(cart_item.product_price) }}
+                    </h3>
                   </div>
                   <div class="col-5 p-0   text-center">
                     <h3 class="marg3">
-                      {{formatMoney(cart_item.product_price * cart_item.quantity) }}
-                      
+                      {{
+                        formatMoney(
+                          cart_item.product_price * cart_item.quantity
+                        )
+                      }}
                     </h3>
                   </div>
                   <div class="col-1 p-0  ">
-
-                    <span style="margin-left:-2rem"> 
-                    <fas-icon
-                      @click="removeIconFromCart(cart_item.product_id)"
-                      class="couleur search   cursor "
-                      :icon="['fas', 'trash-alt']"
-                      
-                    />
-
-                      </span>
+                    <span style="margin-left:-2rem">
+                      <fas-icon
+                        @click="removeIconFromCart(cart_item.product_id)"
+                        class="couleur search   cursor "
+                        :icon="['fas', 'trash-alt']"
+                      />
+                    </span>
                   </div>
                 </div>
               </div>
 
               <br />
-          <div class="row"> </div>
+              <div class="row"></div>
 
-        
-              
-                  <div class="col-3 d-block d-md-none mt-2 ">
-                    <input
-                      type="number"
-                    
-                      @change="changeQuantity($event,cart_item.item_id)"
-                      v-model="cart_item.quantity"
-                      class="numbersize  form-control"
-                    />
+              <div class="col-3 d-block d-md-none mt-2 ">
+                <input
+                  type="number"
+                  @change="changeQuantity($event, cart_item.item_id)"
+                  v-model="cart_item.quantity"
+                  class="numbersize  form-control"
+                />
+              </div>
 
-                  </div>
+              <div class="col-3  p-0  mt-2 d-block d-md-none">
+                <h3 class="">{{ formatMoney(cart_item.product_price) }}</h3>
+              </div>
+              <div class="col-3 p-0  text-center d-block d-md-none  mt-2">
+                <h3 class="">
+                  {{
+                    formatMoney(cart_item.product_price * cart_item.quantity)
+                  }}
+                </h3>
+              </div>
+              <div class=" d-block d-md-none col-3   text-center  mt-2 ">
+                <fas-icon
+                  @click="removeIconFromCart(cart_item.product_id)"
+                  class="couleur search   cursor"
+                  style="margin-top:-10px"
+                  :icon="['fas', 'trash-alt']"
+                />
+              </div>
+            </div>
 
-                  
-                  <div class="col-3  p-0  mt-2 d-block d-md-none">
-                    <h3 class="">{{ formatMoney(cart_item.product_price) }} </h3>
-                  </div>
-                  <div class="col-3 p-0  text-center d-block d-md-none  mt-2">
-                    <h3 class="">
-                      {{ formatMoney(cart_item.product_price * cart_item.quantity) }}
-                      
-                    </h3>
-                  </div>
-                  <div class=" d-block d-md-none col-3   text-center  mt-2 ">
-                    <fas-icon
-                      @click="removeIconFromCart(cart_item.product_id)"
-                      class="couleur search   cursor"
-                      style="margin-top:-10px"
-                      :icon="['fas', 'trash-alt']"
-                    />
-                  </div>
-                </div>
-           
             <hr />
           </div>
 
           <div class="d-flex justify-content-center">
-      
-
-
-           
-              <b-pagination
-      v-if="cart.next || cart.previous"
-      v-model="currentPage"
-      pills
-      :total-rows="cart.total"
-      :per-page="cart.per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-    ></b-pagination>
-
-
+            <b-pagination
+              v-if="cart.next || cart.previous"
+              v-model="currentPage"
+              pills
+              :total-rows="cart.total"
+              :per-page="cart.per_page"
+              aria-controls="my-table"
+              @change="changePage"
+              align="center"
+            ></b-pagination>
           </div>
         </div>
       </div>
-      
+
       <div class="col-12 col-md-12 col-lg-3  color">
-        <h3 class="my-2">{{$t("general.cart_totals")}}</h3>
+        <h3 class="my-2">{{ $t("general.cart_totals") }}</h3>
         <hr />
         <div class="row">
           <div class="col">
-            <h3>{{$t("general.ITEMS")}} {{ cart_total.total_items }}</h3>
+            <h3>{{ $t("general.ITEMS") }} {{ cart_total.total_items }}</h3>
           </div>
           <div class="col">
-            <h3> {{$t("general.sub_totals")}}   {{ cart_total.sub_total }} </h3>
+            <h3>{{ $t("general.sub_totals") }} {{ cart_total.sub_total }}</h3>
           </div>
         </div>
         <br />
         <form action="">
           <!-- {{$t("general.SHIPPING")}}
           <input type="text" class="form-control" /> -->
-          {{$t("general.PROMO_CODE")}}
+          {{ $t("general.PROMO_CODE") }}
           <input type="text" class="form-control" />
-          <button class="btn btncolor shadow"><h3>{{$t("general.Apply")}}</h3></button>
+          <button class="btn btncolor shadow">
+            <h3>{{ $t("general.Apply") }}</h3>
+          </button>
         </form>
         <br />
         <hr />
         <br />
 
         <div class="row">
-          <div class="col"><h3>{{$t("general.TOTAL_COST")}}</h3></div>
-          <div class="col"><h3>  {{formatMoney(cart_total.total_cost)}} </h3></div>
+          <div class="col">
+            <h3>{{ $t("general.TOTAL_COST") }}</h3>
+          </div>
+          <div class="col">
+            <h3>{{ formatMoney(cart_total.total_cost) }}</h3>
+          </div>
         </div>
         <button class="btn btn1 form-control shadow" @click="gotoCheckout">
-          <h3>{{$t("general.CHECKOUT")}}</h3>
+          <h3>{{ $t("general.CHECKOUT") }}</h3>
         </button>
         <br />
         <br />
@@ -216,10 +205,10 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       orderForCurrentPage: [],
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"]
     };
   },
   created() {
@@ -228,19 +217,13 @@ export default {
     console.log("loading cart items");
   },
   watch: {
-
-
     currentPage: function(val) {
       this.orderForCurrentPage = this.cart["data"].slice(
         (val - 1) * this.per_page,
         val * this.per_page
       );
-    },
-
-
-
+    }
   },
-
 
   computed: {
     rowsOrder() {
@@ -266,50 +249,43 @@ export default {
     },
 
     islogin() {
-				return this.$store.getters["auth/isLogged"];
-			},
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   methods: {
-
-    
-    
-        changePage(value) {
+    changePage(value) {
       console.log("next page loading ");
-      
+
       this.currentPage = value;
-      let url= this.islogin ? "cart?page="+value : "guest/cart?page="+value;    
+      let url = this.islogin
+        ? "cart?page=" + value
+        : "guest/cart?page=" + value;
 
       this.$store
-        .dispatch("checkout/next", url).then((res) => {
+        .dispatch("checkout/next", url)
+        .then(res => {
           console.log(res);
-          this.loader=false;
-          
+          this.loader = false;
         })
-       
-        .catch((err) => {
-        
+
+        .catch(err => {
           console.error(err);
         });
     },
 
-    async getCartSummary(){
-
+    async getCartSummary() {
       await this.$store
-        .dispatch("checkout/getCartSummary") 
-        .then(() => {
-         
-        })
-        .catch((err) => {
-          console.log({err:err});
-          
+        .dispatch("checkout/getCartSummary")
+        .then(() => {})
+        .catch(err => {
+          console.log({ err: err });
         });
-
     },
 
     async getCartItems() {
       this.loading = true;
       await this.$store
-        .dispatch("checkout/getCart", this.islogin) 
+        .dispatch("checkout/getCart", this.islogin)
         .then(() => {
           this.loading = false;
           this.error = false;
@@ -318,78 +294,75 @@ export default {
             this.currentPage
           );
         })
-        .catch((err) => {
-          console.log({err:err});
+        .catch(err => {
+          console.log({ err: err });
           this.loading = false;
           this.error = true;
         });
     },
 
     async changeQuantity(event, index) {
-    
-    
       let quantity = event.target.value;
-      if(quantity > 1 ){  
-     
-     await this.$store.dispatch("checkout/updateCart", {quantity:quantity, index:index }) 
-        .then((response) => {
-           this.getCartSummary(); 
-        })
-        .catch((err) => {
-        
-         if(err){
-            this.getCartSummary(); 
-           this.flashMessage.show({
-            status: "error",
-          
-            message: "Quantity unavailable"
-          });  
-         }
-          
-        }); }
-    
+      if (quantity > 1) {
+        await this.$store
+          .dispatch("checkout/updateCart", { quantity: quantity, index: index })
+          .then(response => {
+            this.getCartSummary();
+          })
+          .catch(err => {
+            if (err) {
+              this.getCartSummary();
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Quantity unavailable"
+              });
+            }
+          });
+      }
     },
 
     formatMoney(money) {
       return this.formatObject.format(money);
     },
     makeOrderforCurrentPage(cart, currentPage) {
-       return cart["data"].slice(
+      return cart["data"].slice(
         (currentPage - 1) * this.per_page,
-         currentPage * this.per_page
-       );
+        currentPage * this.per_page
+      );
     },
     gotoCheckout() {
       this.$router.push("/checkout");
     },
     async removeIconFromCart(id) {
       this.loading = true;
-      const url = this.islogin ? `cart/item/${id}/delete` : `guest/cart/item/${id}/delete`;
+      const url = this.islogin
+        ? `cart/item/${id}/delete`
+        : `guest/cart/item/${id}/delete`;
       await axios
         .delete(url)
-        .then((result) => {
-
+        .then(result => {
           this.getCartSummary();
           console.log(result);
           this.getCartItems();
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Item Removed Successfully",
+            message: "Item Removed Successfully"
           });
           this.loading = false;
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
           this.flashMessage.show({
             status: "error",
             blockClass: "custom-block-class",
-            message: "Unable to remove item at this moment",
+            message: "Unable to remove item at this moment"
           });
           this.loading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -427,7 +400,7 @@ export default {
   .numbersize {
     width: 40px;
     padding: 0px;
-        padding-left: 8px !important;
+    padding-left: 8px !important;
     height: 20px;
   }
   .line {
@@ -442,8 +415,6 @@ export default {
     color: white;
     line-height: 10px;
   }
-
-
 
   .btn1 {
     background-color: #e75c18;
@@ -502,19 +473,16 @@ export default {
     width: 190px;
   }
   .numbersize {
-   width: 40px;
+    width: 40px;
     padding: 0px;
-        padding-left: 8px !important;
+    padding-left: 8px !important;
     height: 20px;
   }
 }
 
-.text{
+.text {
   font-weight: 400;
 }
-
-
-
 
 @media only screen and (min-width: 768px) {
   .title {
@@ -553,7 +521,6 @@ export default {
     margin-bottom: 30px;
   }
 
-
   .r-image {
     border-radius: 8px;
 
@@ -561,19 +528,6 @@ export default {
     width: 160px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media only screen and (max-width: 768px) {
   .a-flex {
@@ -635,19 +589,13 @@ export default {
   }
 }
 
+.btn1:hover {
+  color: white !important;
+  background-color: #e75c;
+}
 
-
-
-  .btn1:hover{
-    color:white !important;
-    background-color: #e75c;
-  
-  }
-
-  .btncolor:hover{
-    color:white !important;
-    background-color: #e75c;
-
-  }
-
+.btncolor:hover {
+  color: white !important;
+  background-color: #e75c;
+}
 </style>

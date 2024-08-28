@@ -4,7 +4,6 @@
       class="border shadow card pr-3"
       style="height: 500px; padding-bottom: 50px"
     >
-     
       <h6>Market Activites</h6>
       <div class="product-activi mt-2">
         <VuePerfectScrollbar
@@ -35,17 +34,14 @@
               </div>
             </template>
 
-             <template #cell(price)="data">
-               <span class="mt-1  d-flex">
-                  {{ data.item.price }} Fcfa
-                 
-                </span>
-              
+            <template #cell(price)="data">
+              <span class="mt-1  d-flex"> {{ data.item.price }} Fcfa </span>
             </template>
-
           </b-table>
 
-          <div v-if="items.length == 0" class="text-center mt-5"> No  Activity </div>
+          <div v-if="items.length == 0" class="text-center mt-5">
+            No Activity
+          </div>
 
           <infinite-loading
             @infinite="infiniteHandler"
@@ -58,8 +54,7 @@
 </template>
 
 <script>
-import moment from 'moment';
-
+import moment from "moment";
 
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import axios from "axios";
@@ -75,60 +70,57 @@ export default {
         {
           key: "product",
           label: "Product",
-          formatter: "Product",
+          formatter: "Product"
         },
-       
 
         {
           key: "price",
-          label: "Price",
+          label: "Price"
         },
 
         {
-         
           key: "qty",
-          label: "qty",
+          label: "qty"
         },
 
         {
-         
           key: "date",
-          label: "Date",
+          label: "Date"
         },
 
         {
-         
           key: "status",
-          label: "status",
-        },
-      ],
+          label: "status"
+        }
+      ]
     };
   },
 
- computed: {
+  computed: {
     items() {
       let items = [];
 
-      this.products.forEach(function (item) {
+      this.products.forEach(function(item) {
         let topush = {
           product: { image: item.product_picture, name: item.product_name },
           qty: item.quantity,
-          date: moment(item.created_at).format('MM/DD/YYYY'),
+          date: moment(item.created_at).format("MM/DD/YYYY"),
           price: item.price,
-          status: item.status,
+          status: item.status
         };
         items.push(topush);
       });
 
       return items;
-    },
+    }
   },
 
   methods: {
     infiniteHandler($state) {
       let url = `user-order/items/${this.page}`;
 
-       axios.get(url)
+      axios
+        .get(url)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
@@ -140,12 +132,11 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {});
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 .product-activi {
@@ -155,15 +146,14 @@ export default {
 }
 </style>
 
-<style >
+<style>
 td {
   border-top: 1.5px solid #e8eef3 !important ;
-   color: #455a64;
+  color: #455a64;
 }
 
 th {
   color: #455a64;
   font-weight: 500;
-
 }
 </style>

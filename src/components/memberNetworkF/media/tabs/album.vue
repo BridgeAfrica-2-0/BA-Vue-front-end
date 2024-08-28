@@ -11,16 +11,18 @@
           ></b-img>
           <span class="album-text">
             <div>{{ post.name }}</div>
-            <span> {{ post.items.length }} {{ $t('memnetwork.item_s') }}</span>
+            <span> {{ post.items.length }} {{ $t("memnetwork.item_s") }}</span>
           </span>
         </b-col>
       </div>
     </b-row>
 
     <div v-if="pictureShow">
-      <b-button @click="back" variant="primary">{{ $t('memnetwork.Back') }}</b-button>
+      <b-button @click="back" variant="primary">{{
+        $t("memnetwork.Back")
+      }}</b-button>
 
-      <div class="album-name">{{ $t('memnetwork.Album_Name') }}</div>
+      <div class="album-name">{{ $t("memnetwork.Album_Name") }}</div>
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
@@ -28,7 +30,7 @@
               fluid-grow
               src="https://picsum.photos/300/150/?image=41"
             ></b-img>
-            <h3>{{ $t('memnetwork.Picture_Title') }}</h3>
+            <h3>{{ $t("memnetwork.Picture_Title") }}</h3>
           </b-modal>
         </div>
         <b-col md="4" class="mt-2">
@@ -36,7 +38,7 @@
             <input id="default-btn" type="file" @change="onFileChange" />
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>{{ $t('memnetwork.Add_Photo') }}</p>
+              <p>{{ $t("memnetwork.Add_Photo") }}</p>
             </div>
           </div>
         </b-col>
@@ -54,10 +56,19 @@
       </b-row>
     </div>
 
-    <b-modal hide-footer :title="$t('memnetwork.Create_Album')" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="$t('memnetwork.Create_Album')"
+      v-model="showModal"
+    >
       <b-form>
-        <b-form-input v-model="text" :placeholder="$t('memnetwork.Album_Name')"></b-form-input>
-        <b-button class="mt-2" variant="primary">{{ $t('memnetwork.Create') }}</b-button>
+        <b-form-input
+          v-model="text"
+          :placeholder="$t('memnetwork.Album_Name')"
+        ></b-form-input>
+        <b-button class="mt-2" variant="primary">{{
+          $t("memnetwork.Create")
+        }}</b-button>
       </b-form>
     </b-modal>
   </div>

@@ -20,9 +20,9 @@
     <br />
     <br />
     <br />
-  
-  <p class="text">  {{ bio.user.biography  }} </p>
-   
+
+    <p class="text">{{ bio.user.biography }}</p>
+
     <div v-if="editing">
       <b-form @submit.prevent="save">
         <b-form-select
@@ -69,27 +69,26 @@ export default {
       options: [
         { value: null, text: this.$t("profileowner.Select") },
         { value: "private", text: this.$t("profileowner.Private") },
-        { value: "public", text: this.$t("profileowner.Public") },
+        { value: "public", text: this.$t("profileowner.Public") }
       ],
       biography: {
         info_access: null,
-        description: null,
-      },
+        description: null
+      }
     };
   },
-  computed:{
-
-    bio(){
+  computed: {
+    bio() {
       return this.$store.state.profile.profile_about;
-    },
+    }
   },
   created() {
     this.$store
       .dispatch("profile/loadUserBiography", null)
-      .then((response) => {
+      .then(response => {
         console.log(response, "Load User Biography response (3) +++++++");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error, "Error from server or from browser error(2)++++");
         throw error;
       })
@@ -103,10 +102,10 @@ export default {
       });
   },
 
-/**
- * this method is for launch the date in the form for edit 
- * @private
- */
+  /**
+   * this method is for launch the date in the form for edit
+   * @private
+   */
   methods: {
     edit(value) {
       if (value === 0) {
@@ -128,7 +127,7 @@ export default {
     },
 
     /**
-     * this method is for save the information after edit 
+     * this method is for save the information after edit
      * @private
      */
     save() {
@@ -143,18 +142,18 @@ export default {
       this.$store
         .dispatch("profile/updateUserBiography", {
           info_access: this.info_access,
-          description: this.bio.user.biography,
+          description: this.bio.user.biography
         })
-        .then((response) => {
+        .then(response => {
           console.log(
             response,
             ...[
               "edit user biography after response (3) +++++",
-              "edit user biography endddd ++++",
+              "edit user biography endddd ++++"
             ]
           );
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(
             error,
             "erreur lie au navigateur ou au serveur error(2) +++++++"
@@ -165,8 +164,8 @@ export default {
             )
           );
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

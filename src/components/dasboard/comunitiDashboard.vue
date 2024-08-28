@@ -1,28 +1,47 @@
 <template>
-    <div class="lalala"  >
-    <b-card class=" border  blecrr shadow border ">  
+  <div class="lalala">
+    <b-card class=" border  blecrr shadow border ">
       <span>
         <h6 class=" m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <span class="ml-2">{{ $t('dashboard.COMMUNITY') }}  </span> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
+          <span class="ml-2">{{ $t("dashboard.COMMUNITY") }} </span>
+          <span class="h4-color">
+            {{ nFormatter(total.total_community) }}
+          </span>
         </h6>
       </span>
 
-      <b-tabs class="pr-lg-2 pl-lg-2"  lazy content-class="mt-3 p-lg-1 f-left " active-nav-item-class="active-tab-item">
-       
+      <b-tabs
+        class="pr-lg-2 pl-lg-2"
+        lazy
+        content-class="mt-3 p-lg-1 f-left "
+        active-nav-item-class="active-tab-item"
+      >
         <b-tab active>
           <template slot="title">
-            {{ $t('dashboard.People') }} <span class="spa-color"> {{ nFormatter(total.total_people) }} </span>
+            {{ $t("dashboard.People") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_people) }}
+            </span>
           </template>
 
           <div>
             <b-row>
               <b-col>
-      
-                <b-tabs lazy fill justified class="pr-2 pl-2" content-class="mt-3  f-left m-up"  active-nav-item-class="active-tab-item" >
+                <b-tabs
+                  lazy
+                  fill
+                  justified
+                  class="pr-2 pl-2"
+                  content-class="mt-3  f-left m-up"
+                  active-nav-item-class="active-tab-item"
+                >
                   <b-tab active>
                     <template slot="title">
-                      {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_user_follower) }} </span>
+                      {{ $t("dashboard.Followers") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_follower) }}
+                      </span>
                     </template>
 
                     <div class="s-comcard"><People type="Follower" /></div>
@@ -30,7 +49,10 @@
 
                   <b-tab>
                     <template slot="title">
-                      {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_user_following) }} </span>
+                      {{ $t("dashboard.Following") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_following) }}
+                      </span>
                     </template>
 
                     <div class="s-comcard"><People type="Following" /></div>
@@ -43,14 +65,27 @@
 
         <b-tab>
           <template slot="title">
-            {{ $t('dashboard.Businesses') }} <span class="spa-color"> {{ nFormatter(total.total_business) }} </span>
+            {{ $t("dashboard.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_business) }}
+            </span>
           </template>
 
-          <div>             
-            <b-tabs lazy fill   justified class="pr-2 pl-2" content-class="mt-3  f-left m-up checkcheck" active-nav-item-class="active-tab-item">
+          <div>
+            <b-tabs
+              lazy
+              fill
+              justified
+              class="pr-2 pl-2"
+              content-class="mt-3  f-left m-up checkcheck"
+              active-nav-item-class="active-tab-item"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_business_follower) }} </span>
+                  {{ $t("dashboard.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Business type="Follower" /></div>
@@ -58,7 +93,10 @@
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_business_following) }}</span>
+                  {{ $t("dashboard.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_following) }}</span
+                  >
                 </template>
 
                 <div class="s-comcard"><Business type="following" /></div>
@@ -69,14 +107,27 @@
 
         <b-tab>
           <template slot="title">
-            {{ $t('dashboard.Network') }} <span class="spa-color"> {{ nFormatter(total.total_network) }}</span>
+            {{ $t("dashboard.Network") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_network) }}</span
+            >
           </template>
 
-          <div>   
-            <b-tabs class="pr-2 pl-2" lazy fill justified content-class="mt-3  f-left m-up checkcheck" active-nav-item-class="active-tab-item">
+          <div>
+            <b-tabs
+              class="pr-2 pl-2"
+              lazy
+              fill
+              justified
+              content-class="mt-3  f-left m-up checkcheck"
+              active-nav-item-class="active-tab-item"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_network_follower) }} </span>
+                  {{ $t("dashboard.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Follower" /></div>
@@ -84,7 +135,10 @@
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_network_following) }} </span>
+                  {{ $t("dashboard.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_following) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Following" /></div>
@@ -108,94 +162,47 @@ export default {
   components: {
     People,
     Business,
-    Network,
+    Network
   },
 
-  mounted(){
-    
-      this.$store
-      .dispatch("profile/Tcommunity", '') 
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-       
-      });
+  mounted() {
+    this.$store
+      .dispatch("profile/Tcommunity", "")
+      .then(response => {})
+      .catch(error => {});
 
-
-
-
-      
-
- 
-      this.$store
+    this.$store
       .dispatch("profile/UcommunityFollower", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-      
-      });
+      .then(response => {})
+      .catch(error => {});
 
-
-
-      
-      this.$store
+    this.$store
       .dispatch("profile/UcommunityFollowing", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-      
-      });
+      .then(response => {})
+      .catch(error => {});
 
-     
-   
-      this.$store
+    this.$store
       .dispatch("profile/BcommunityFollower", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-       
-      });
+      .then(response => {})
+      .catch(error => {});
 
-     
-      this.$store
+    this.$store
       .dispatch("profile/BcommunityFollowing", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-      
-      });
+      .then(response => {})
+      .catch(error => {});
 
-
-
-      
-      this.$store
+    this.$store
       .dispatch("profile/NcommunityFollower", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-       
-      });
+      .then(response => {})
+      .catch(error => {});
 
-      
-      this.$store
+    this.$store
       .dispatch("profile/NcommunityFollowing", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-      
-      });
-
+      .then(response => {})
+      .catch(error => {});
   },
   computed: {
-
-        total() {
+    total() {
       return this.$store.state.profile.Tcommunity;
     },
 
@@ -210,33 +217,23 @@ export default {
     this.$store
       .dispatch("dashboardcommunity/getdetails")
 
-      .then(() => {
-       
-      })
-      .catch(err => {
-        
-      });
+      .then(() => {})
+      .catch(err => {});
 
     // this.$store
     //   .dispatch("dashboardcommunity/gettotalcommunity")
 
     //   .then(() => {
-    //    
+    //
     //   })
     //   .catch(err => {
     //
     //   });
 
-
-      this.$store
-      .dispatch('profile/Tcommunity', null)
-      .then((response) => {})
-      .catch((error) => {
-       
-      });
-
-
-
+    this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then(response => {})
+      .catch(error => {});
   },
   methods: {
     count(number) {
@@ -248,42 +245,38 @@ export default {
       } else return number;
     },
 
-
-       nFormatter(num) {
+    nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
-
+    }
   }
 };
 </script>
 
 <style scoped>
-
- .blecrr .card-body{
+.blecrr .card-body {
   padding-left: 4px !important;
 
-   padding-right: 2px !important;
+  padding-right: 2px !important;
 }
-
 </style>
 
-<style> 
+<style>
 .lala .nav-fill {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .s-comcard {
- height: 415px !important;
+  height: 415px !important;
   overflow: hidden !important;
   overflow-x: hidden;
 }

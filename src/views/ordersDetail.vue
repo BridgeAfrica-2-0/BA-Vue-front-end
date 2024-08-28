@@ -1,4 +1,4 @@
-<template >
+<template>
   <div>
     <navbar />
     <div class="content body">
@@ -11,10 +11,14 @@
               <span class="bold m"><h3>Order</h3></span>
               <span class="text-success order m"><h3>#12324253</h3></span>
             </span>
-            <span class="flou marge1"><h3 class="marge1">yaoundé, 12/12/2021,12:00</h3></span>
+            <span class="flou marge1"
+              ><h3 class="marge1">yaoundé, 12/12/2021,12:00</h3></span
+            >
           </div>
           <div class="col p-0">
-            <span class="bold"> <h3 class="margtotal">Total : 199500 Fcfa</h3> </span>
+            <span class="bold">
+              <h3 class="margtotal">Total : 199500 Fcfa</h3>
+            </span>
           </div>
         </div>
       </div>
@@ -23,28 +27,47 @@
         <div class="card-body row">
           <div class="col">
             <span class="mr-2 row"
-              ><fas-icon class="couleur search card" :icon="['fas', 'cart-arrow-down']" /> Card</span
+              ><fas-icon
+                class="couleur search card"
+                :icon="['fas', 'cart-arrow-down']"
+              />
+              Card</span
             >
             <span class="row">
               <span class="col"> <h3>sold by: marcellin , danaz</h3></span>
 
               <div>
-
-                
-                <button v-b-modal="'my-modal'" variant="ligth" class="border mx-4 button">
+                <button
+                  v-b-modal="'my-modal'"
+                  variant="ligth"
+                  class="border mx-4 button"
+                >
                   <span class="mr-3 row"
-                    ><fas-icon class="couleur1 search margbtn" :icon="['fas', 'envelope']" />
+                    ><fas-icon
+                      class="couleur1 search margbtn"
+                      :icon="['fas', 'envelope']"
+                    />
                     <h3 class="couleur1 ecart">chat now</h3>
                   </span>
                 </button>
                 <b-modal id="my-modal">
                   <div class="container">
-                    <span class="mr-3 row" @click="cta({ id: 2, name: 'Marcellin Handel' })"
-                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
+                    <span
+                      class="mr-3 row"
+                      @click="cta({ id: 2, name: 'Marcellin Handel' })"
+                      ><fas-icon
+                        class="couleur search"
+                        :icon="['fas', 'envelope']"
+                      />
                       <h3>chat with Marcellin</h3>
                     </span>
-                    <span class="mr-3 row" @click="cta({ id: 2, name: 'Bethoven hamza' })"
-                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
+                    <span
+                      class="mr-3 row"
+                      @click="cta({ id: 2, name: 'Bethoven hamza' })"
+                      ><fas-icon
+                        class="couleur search"
+                        :icon="['fas', 'envelope']"
+                      />
                       <h3>chat with danaz</h3>
                     </span>
                   </div>
@@ -59,16 +82,41 @@
         <div class="card-body">
           <div class="row container rowmobile">
             <b-avatar id="a1" class="avatar" text=" "></b-avatar>
-            <b-progress id="p1" :value="value" :max="max" variant="success" class="mb-3 size"> </b-progress>
+            <b-progress
+              id="p1"
+              :value="value"
+              :max="max"
+              variant="success"
+              class="mb-3 size"
+            >
+            </b-progress>
 
             <b-avatar id="a2" class="avatar" text=" "></b-avatar>
-            <b-progress id="p2" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
+            <b-progress
+              id="p2"
+              :value="value"
+              :max="max"
+              variant="success"
+              class="mb-3 size"
+            ></b-progress>
 
             <b-avatar id="a3" class="avatar" text=" "></b-avatar>
-            <b-progress id="p3" :value="value" :max="max" variant="success " class="mb-3 size"></b-progress>
+            <b-progress
+              id="p3"
+              :value="value"
+              :max="max"
+              variant="success "
+              class="mb-3 size"
+            ></b-progress>
 
             <b-avatar id="a4" class="avatar" text=" "></b-avatar>
-            <b-progress id="p4" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
+            <b-progress
+              id="p4"
+              :value="value"
+              :max="max"
+              variant="success"
+              class="mb-3 size"
+            ></b-progress>
           </div>
           <div class="row sizestate">
             <div class="col-3"><h3>payment made</h3></div>
@@ -150,7 +198,8 @@
                   <span class="col">15000 Fcfa</span></span
                 >
                 <span class="row">
-                  <span class="col"><h3>total shipping fee :</h3></span><span class="col"> 1600 Fcfa</span></span
+                  <span class="col"><h3>total shipping fee :</h3></span
+                  ><span class="col"> 1600 Fcfa</span></span
                 >
               </div>
               <div class="row"><hr class="hr" /></div>
@@ -172,58 +221,61 @@
 </template>
 
 <script>
-import navbar from '@/components/navbar.vue';
+import navbar from "@/components/navbar.vue";
 export default {
   components: { navbar },
   data() {
     return {
       value: 0,
       max: 50,
-      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
-      status: 2,
+      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      status: 2
     };
   },
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    },
+      return this.$store.getters["auth/profilConnected"];
+    }
   },
 
   mounted() {
-    const progress = document.querySelectorAll('.size');
+    const progress = document.querySelectorAll(".size");
     for (let i = 1; i <= progress.length; i++) {
-      let a = document.getElementById('a' + i);
-      let p = document.getElementById('p' + i);
+      let a = document.getElementById("a" + i);
+      let p = document.getElementById("p" + i);
       if (i <= this.status) {
-        p.classList.add('bg-success');
-        a.classList.add('bg-success');
+        p.classList.add("bg-success");
+        a.classList.add("bg-success");
       } else {
-        p.classList.add('bg-secondary');
-        a.classList.add('bg-secondary');
+        p.classList.add("bg-secondary");
+        a.classList.add("bg-secondary");
       }
     }
   },
   methods: {
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
+      this.$store.commit("businessChat/setSelectedChat", data);
+      let path = "";
       let msgTab = null;
-      if (this.activeAccount.user_type == 'business') {
+      if (this.activeAccount.user_type == "business") {
         msgTab = 1;
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
         msgTab = 2;
-        path = '/network/' + this.activeAccount.id;
+        path = "/network/" + this.activeAccount.id;
       } else {
         msgTab = 0;
-        path = '/messaging';
+        path = "/messaging";
       }
 
-      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTab } });
+      this.$router.push({
+        path: `${path}`,
+        query: { tabId: 1, msgTabId: msgTab }
+      });
       //   this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-    },
-  },
+    }
+  }
 };
 </script>
 

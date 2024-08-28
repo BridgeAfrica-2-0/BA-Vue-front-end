@@ -5,10 +5,10 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h3 class="my-3 font-weight-bolder">
-              {{ $t('network.Subscription_Plan') }}
+              {{ $t("network.Subscription_Plan") }}
             </h3>
             <p class="my-2">
-              {{ $t('network.Upgrade_your_plans_to_get_exciting_features') }}
+              {{ $t("network.Upgrade_your_plans_to_get_exciting_features") }}
             </p>
           </div>
         </div>
@@ -26,34 +26,38 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-5">
-                <p class="title-plan">{{ $t('network.Basic') }}</p>
-                <h1 class="subtitle-plan">{{ $t('network.Free') }}</h1>
+                <p class="title-plan">{{ $t("network.Basic") }}</p>
+                <h1 class="subtitle-plan">{{ $t("network.Free") }}</h1>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Subdomain') }} URL</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Subdomain") }} URL</h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Ticket_Support') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Ticket_Support") }}</h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">
-              {{ $t('network.Brige_Africa_Content') }} <br />{{ $t('network.Intergration') }}
+              {{ $t("network.Brige_Africa_Content") }} <br />{{
+                $t("network.Intergration")
+              }}
             </h5>
           </div>
           <div class="btn-wrap free text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold">{{ $t('network.Current_Plan') }}</b-button>
+            <b-button class="btn-block font-weight-bold">{{
+              $t("network.Current_Plan")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>
       <b-col md="4" class="plan-2">
-        <b-button class="btn-block font-weight-bold" variant="primary"
-          >{{ $t('network.Most_Popular') }}</b-button
-        >
+        <b-button class="btn-block font-weight-bold" variant="primary">{{
+          $t("network.Most_Popular")
+        }}</b-button>
         <b-card header-tag="header" footer-tag="footer">
           <template #header>
             <b-row>
@@ -65,35 +69,38 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-2">
-                <p class="title-plan">{{ $t('network.Advanced') }}</p>
-                <h3 class="subtitle-plan">$00/{{ $t('network.month') }}</h3>
+                <p class="title-plan">{{ $t("network.Advanced") }}</p>
+                <h3 class="subtitle-plan">$00/{{ $t("network.month") }}</h3>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Subdomain') }}URL</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Subdomain") }}URL</h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Ticket_Support') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Ticket_Support") }}</h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">
-              {{ $t('network.Brige_Africa_Content') }} <br /> {{ $t('network.Intergration') }}
+              {{ $t("network.Brige_Africa_Content") }} <br />
+              {{ $t("network.Intergration") }}
             </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Premium_Template') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("network.Premium_Template") }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Remove_Ads') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Remove_Ads") }}</h5>
           </div>
           <div class="btn-wrap free2 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >{{ $t('network.Subscribe_Now') }}</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">{{
+              $t("network.Subscribe_Now")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>
@@ -109,50 +116,60 @@
                 ></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-1">
-                <p class="title-plan">{{ $t('network.Advanced') }}</p>
-                <h3 class="subtitle-plan">$12/{{ $t('network.month') }}</h3>
+                <p class="title-plan">{{ $t("network.Advanced") }}</p>
+                <h3 class="subtitle-plan">$12/{{ $t("network.month") }}</h3>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Subdomain_URL') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Subdomain_URL") }}</h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Ticket_Support') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Ticket_Support") }}</h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">
-              Brige Africa Content <br />{{ $t('network.Intergration') }}
+              Brige Africa Content <br />{{ $t("network.Intergration") }}
             </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Premium_Template') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("network.Premium_Template") }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Remove_Ads') }}</h5>
+            <h5 class="font-weight-bold">{{ $t("network.Remove_Ads") }}</h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Free_Domain_for_year') }}</h5>
-            <p>{{ $t('network.S0_Value') }}</p>
+            <h5 class="font-weight-bold">
+              {{ $t("network.Free_Domain_for_year") }}
+            </h5>
+            <p>{{ $t("network.S0_Value") }}</p>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Connect_Your_domain') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("network.Connect_Your_domain") }}
+            </h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.SSL_Certificate') }}</h5>
+            <h5 class="font-weight-bold">
+              {{ $t("network.SSL_Certificate") }}
+            </h5>
           </div>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Premium_Support') }}</h5>
-            <p>{{ $t('network.email_phone') }}</p>
+            <h5 class="font-weight-bold">
+              {{ $t("network.Premium_Support") }}
+            </h5>
+            <p>{{ $t("network.email_phone") }}</p>
           </div>
           <div class="btn-wrap free3 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >{{ $t('network.Subscribe_Now') }}</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">{{
+              $t("network.Subscribe_Now")
+            }}</b-button>
           </div>
         </b-card>
       </b-col>

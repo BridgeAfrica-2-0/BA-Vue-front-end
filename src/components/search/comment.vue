@@ -2,25 +2,28 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-          <b-avatar
+        <b-avatar
           variant="info"
           :src="comment.comment_user_profile_picture"
-          
           class="avat-comment"
         ></b-avatar>
         <span class="float-right">
-          <b-dropdown size="sm" variant="outline "  class="primary">
-            <template class="more" #button-content>
-             
-            </template>
-            <b-dropdown-item> {{$t("search.Edit")}} </b-dropdown-item>
-            <b-dropdown-item>{{$t("search.Delete")}}</b-dropdown-item>
+          <b-dropdown size="sm" variant="outline " class="primary">
+            <template class="more" #button-content> </template>
+            <b-dropdown-item> {{ $t("search.Edit") }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t("search.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
-            <read-more :more-str="$t('search.read_more')" :text="comment.text" link="#" :less-str="$t('search.read_less')" :max-chars="15000" > </read-more>
+          <read-more
+            :more-str="$t('search.read_more')"
+            :text="comment.text"
+            link="#"
+            :less-str="$t('search.read_less')"
+            :max-chars="15000"
+          >
+          </read-more>
         </p>
-   
       </b-col>
     </b-row>
   </div>
@@ -28,12 +31,12 @@
 
 <script>
 export default {
-  props:['comment'],
+  props: ["comment"]
 };
 </script>
 
 <style scoped>
-.msg{
+.msg {
   background-color: #ddd;
   padding: 20px;
   border-radius: 25px;
@@ -69,35 +72,22 @@ export default {
     margin-left: 88%;
   }
 
-
-  .avat-comment{
-   width: 40px;
-      height: 40px;  
+  .avat-comment {
+    width: 40px;
+    height: 40px;
+  }
 }
-
-
-}
-
-
 
 @media only screen and (min-width: 768px) {
-  
-
-
-  .avat-comment{
-     width: 36px;
-      height: 36px;    
+  .avat-comment {
+    width: 36px;
+    height: 36px;
+  }
 }
-
-
-}
-
-
 </style>
 
-
-<style>   #readmore{
+<style>
+#readmore {
   color: #e75c18;
-
 }
-     </style>
+</style>

@@ -79,21 +79,21 @@ export default {
   components: {
     General,
     LyTab,
-    Default, 
+    Default,
     Inbox,
     navbar,
-   // Footer,
-    Parent,
+    // Footer,
+    Parent
   },
   watch: {
-    "$route.query.selectedId": function () {
+    "$route.query.selectedId": function() {
       this.selectedId =
         this.$route.params.selectedId != 0 ? this.$route.params.selectedId : 0;
     },
 
-    "$route.query.tabId": function () {
+    "$route.query.tabId": function() {
       this.selectedId = this.$route.query.tabId;
-    },
+    }
   },
 
   data() {
@@ -110,12 +110,12 @@ export default {
         { label: this.$t("network.Member_Request"), icon: "" },
         { label: this.$t("network.Pending_Post"), icon: "" },
         { label: this.$t("network.Keyword_Alert"), icon: "" },
-        { label: this.$t("network.Settings"), icon: "" },
+        { label: this.$t("network.Settings"), icon: "" }
       ],
 
       options: {
-        activeColor: "#32a400",
-      },
+        activeColor: "#32a400"
+      }
     };
   },
 
@@ -124,7 +124,7 @@ export default {
       container: this.$refs.wrapper,
       canCancel: true,
       onCancel: this.onCancel,
-      color: "#e75c18",
+      color: "#e75c18"
     });
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
@@ -132,27 +132,27 @@ export default {
 
     this.$store
       .dispatch("networkDetails/roleCheck", this.foll_id)
-      .then((data) => {
+      .then(data => {
         let role = data.data.data;
-       this.$store.commit("networkProfile/setNetworkRole", role);
+        this.$store.commit("networkProfile/setNetworkRole", role);
         switch (role) {
           case "follower":
             this.$router.push({
               name: "Membar Network Follower",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
           case "network_editor":
             this.$router.push({
               name: "NetworkEditors",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
 
           case "network_member":
             this.$router.push({
               name: "memberNetwork",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
         }
@@ -160,7 +160,7 @@ export default {
         this.isloaded = true;
         loader.hide();
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response.data.message);
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
@@ -175,7 +175,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
 
     changer() {
@@ -191,13 +191,13 @@ export default {
         this.auth({
           ...data.data,
           profile_picture: data.data.image,
-          user_type: "network",
+          user_type: "network"
         });
       });
     },
 
-    handleChange(item, index) {},
-  },
+    handleChange(item, index) {}
+  }
 };
 </script>
 

@@ -4,7 +4,9 @@
     <hr />
     <div id="hidemobile">
       <div class="justify-content-between row my-4">
-        <div class="col order"><h3 class="margclear1 bold1">Archived Orders</h3></div>
+        <div class="col order">
+          <h3 class="margclear1 bold1">Archived Orders</h3>
+        </div>
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
@@ -15,7 +17,10 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select v-model="selected" :options="options"></b-form-select>
+              <b-form-select
+                v-model="selected"
+                :options="options"
+              ></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -27,13 +32,20 @@
                 <span class="gras"
                   >Order <span class="text-success order">#12324253</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
                 </span>
               </div>
 
               <div class="col">
                 <div class="row drop">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2 noborder"
+                  >
                     <b-dropdown-item>Unarchived</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
@@ -107,7 +119,12 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
                     <b-dropdown-item>Unarchived</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -181,31 +198,31 @@
 </template>
 
 <script>
-import navbar from '../components/navbar.vue';
+import navbar from "../components/navbar.vue";
 export default {
   components: { navbar },
   data() {
     return {
-      selected: '',
-      rimg: '',
+      selected: "",
+      rimg: "",
       status: 1,
-      etat: 'All',
+      etat: "All",
       currentPage: 1,
       perPage: 3,
-      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
+      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: [
-        { value: null, text: this.$t('general.Please_select_an_option')},
-        { value: 'a', text: 'last 5 days' },
-        { value: 'b', text: 'last 10 days' },
+        { value: null, text: this.$t("general.Please_select_an_option") },
+        { value: "a", text: "last 5 days" },
+        { value: "b", text: "last 10 days" }
       ],
-      etat1: ['archived', 'archived', 'archived'],
+      etat1: ["archived", "archived", "archived"]
     };
   },
   computed: {
     rows() {
       return this.perPage;
-    },
-  },
+    }
+  }
 };
 </script>
 

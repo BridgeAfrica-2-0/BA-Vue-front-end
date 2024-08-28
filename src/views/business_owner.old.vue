@@ -140,7 +140,6 @@ export default {
   border: 1px solid gray;
 }
 
-
 .center-ly {
   margin-top: -25px;
 }

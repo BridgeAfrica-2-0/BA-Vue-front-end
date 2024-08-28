@@ -14,18 +14,26 @@
             id="textarea-small"
             size="sm"
             class="mb-2"
-            :placeholder="$t('businessowner.Whats_On_Your_Mind') "
+            :placeholder="$t('businessowner.Whats_On_Your_Mind')"
           ></b-form-textarea>
           <span class="float-left">
             <b-button-group size="sm" class="">
-              <b-button :title="$t('businessowner.Add_Image')" size="sm" variant="outline-primary">
+              <b-button
+                :title="$t('businessowner.Add_Image')"
+                size="sm"
+                variant="outline-primary"
+              >
                 <b-icon icon="card-image" aria-hidden="true"></b-icon>
               </b-button>
-              <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary">
+              <b-button
+                :title="$t('businessowner.Add_Movie')"
+                size="sm"
+                variant="outline-primary"
+              >
                 <b-icon icon="camera-video-fill" aria-hidden="true"></b-icon>
               </b-button>
               <b-button
-                :title=" $t('businessowner.Add_Hyperlink')"
+                :title="$t('businessowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
               >
@@ -36,7 +44,7 @@
           <span class="float-right">
             <b-button variant="outline-primary" size="sm"
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              {{ $t('businessowner.Post') }}</b-button
+              {{ $t("businessowner.Post") }}</b-button
             >
           </span>
         </b-col>
@@ -60,11 +68,11 @@
           </a>
           <div class="post-pending pt-2">
             <p>
-              {{ $t('businessowner.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
-                href="#"
-                class="text-design"
-                >{{ $t('businessowner.View_All') }}</a
-              >
+              {{
+                $t("businessowner.Your_3_Post_s_are_pending_for_approval")
+              }}.&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="text-design">{{
+                $t("businessowner.View_All")
+              }}</a>
             </p>
           </div>
         </div>
@@ -83,46 +91,63 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ $t('businessowner.Mapoure_Agrobusiness')}}
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.More')}}
+                      {{ $t("businessowner.More") }}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
+                      {{ $t("businessowner.Locked") }}
+                      <span class="sr-only"
+                        >({{ $t("businessowner.Click_to_unlock") }})</span
+                      >
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
+                    <b-dropdown-group
+                      :header="$t('businessowner.Choose_options')"
+                      class="small"
+                    >
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{ $t('businessowner.Option') }} A <span class="sr-only">( {{ $t('businessowner.Not_selected')  }})</span>
+                        {{ $t("businessowner.Option") }} A
+                        <span class="sr-only"
+                          >( {{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
+                        {{ $t("businessowner.Option") }} B
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} C
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_action")
+                    }}</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_other_action")
+                    }}</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('businessowner.Delete')}}
+                      {{ $t("businessowner.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>{{$t('businessowner.1h_Ago')}}</p>
+              <p>{{ $t("businessowner.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -202,46 +227,63 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ $t('businessowner.Mapoure_Agrobusiness')}}
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.More')}}
+                      {{ $t("businessowner.More") }}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
+                      {{ $t("businessowner.Locked") }}
+                      <span class="sr-only"
+                        >({{ $t("businessowner.Click_to_unlock") }})</span
+                      >
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
+                    <b-dropdown-group
+                      :header="$t('businessowner.Choose_options')"
+                      class="small"
+                    >
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} A
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
+                        {{ $t("businessowner.Option") }} B
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} C
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_action")
+                    }}</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_other_action")
+                    }}</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('businessowner.Delete')}}
+                      {{ $t("businessowner.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>{{$t('businessowner.1h_Ago')}}</p>
+              <p>{{ $t("businessowner.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -317,46 +359,63 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ $t('businessowner.Mapoure_Agrobusiness')}}
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.More')}}
+                      {{ $t("businessowner.More") }}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
+                      {{ $t("businessowner.Locked") }}
+                      <span class="sr-only"
+                        >({{ $t("businessowner.Click_to_unlock") }})</span
+                      >
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
+                    <b-dropdown-group
+                      :header="$t('businessowner.Choose_options')"
+                      class="small"
+                    >
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} A
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
+                        {{ $t("businessowner.Option") }} B
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} C
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_action")
+                    }}</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_other_action")
+                    }}</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('businessowner.Delete')}}
+                      {{ $t("businessowner.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>{{$t('businessowner.1h_Ago')}}</p>
+              <p>{{ $t("businessowner.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -434,46 +493,63 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ $t('businessowner.Mapoure_Agrobusiness')}}
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.More')}}
+                      {{ $t("businessowner.More") }}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
+                      {{ $t("businessowner.Locked") }}
+                      <span class="sr-only"
+                        >({{ $t("businessowner.Click_to_unlock") }})</span
+                      >
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
+                    <b-dropdown-group
+                      :header="$t('businessowner.Choose_options')"
+                      class="small"
+                    >
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} A
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
+                        {{ $t("businessowner.Option") }} B
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Selected") }})</span
+                        >
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t("businessowner.Option") }} C
+                        <span class="sr-only"
+                          >({{ $t("businessowner.Not_selected") }})</span
+                        >
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_action")
+                    }}</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{
+                      $t("businessowner.Some_other_action")
+                    }}</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      {{$t('businessowner.Delete')}}
+                      {{ $t("businessowner.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>{{$t('businessowner.1h_Ago')}}</p>
+              <p>{{ $t("businessowner.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>

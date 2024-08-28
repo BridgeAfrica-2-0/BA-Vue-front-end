@@ -95,7 +95,7 @@ export default {
     Footer,
     Market,
     caroussel,
-    AutoComplete,
+    AutoComplete
   },
   data() {
     return {
@@ -105,15 +105,15 @@ export default {
         { text: "Handicfraft", value: "Handicfraft" },
         { text: "Electronics", value: "Electronics" },
         { text: "Restaurant", value: "Restaurant" },
-        { text: "clothing", value: "clothing" },
-      ],
+        { text: "clothing", value: "clothing" }
+      ]
     };
   },
   methods: {
     getLocationDetails(response) {
       console.log(response);
-    },
-  },
+    }
+  }
 };
 </script>
 

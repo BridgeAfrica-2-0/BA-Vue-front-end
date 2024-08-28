@@ -8,17 +8,17 @@ export default {
   props: {
     hasData: {
       type: Boolean,
-      required: true,
+      required: true
     },
     moreDataTitle: {
       type: String,
-      required: true,
+      required: true
     },
     noDataTitle: {
       type: String,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
 

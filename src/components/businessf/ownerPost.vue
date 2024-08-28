@@ -1,7 +1,5 @@
 <template>
   <div>
-    
-
     <Post
       v-for="(item, index) in owner_post"
       :key="index"
@@ -13,27 +11,22 @@
       :deletePost="() => deletePost(item)"
     />
     <infinite-loading @infinite="infiniteHandler">
-
-        <div slot="no-more" class="mt-5"> {{ $t('general.no_more_most') }} </div>
-        <div slot="no-results" class="mt-5">   {{ $t('general.no_post') }} </div> 
-
-       
-
-
+      <div slot="no-more" class="mt-5">{{ $t("general.no_more_most") }}</div>
+      <div slot="no-results" class="mt-5">{{ $t("general.no_post") }}</div>
     </infinite-loading>
   </div>
 </template>
 
 <script>
 import Post from "@/components/businessOwner/ownerPostComponent";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 
 import { WhoIsIt, PostComponentMixin } from "@/mixins";
 export default {
   name: "postNetwork",
   mixins: [WhoIsIt, PostComponentMixin],
   components: {
-    Post,
+    Post
   },
   data() {
     return {
@@ -56,11 +49,11 @@ export default {
         // profile_picture: this.$store.getters.getProfilePicture,
         postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
       fileImageArr: [],
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
 
@@ -68,7 +61,7 @@ export default {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -81,7 +74,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -113,8 +106,8 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = '';
-      if (isGuestUser){
+      let url = "";
+      if (isGuestUser) {
         url = "guest/business/show/post/" + this.url + "/" + this.page;
       } else {
         url = "business/show/post/" + this.url + "/" + this.page;
@@ -134,7 +127,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -158,7 +151,7 @@ export default {
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
       }
-    },
+    }
   },
   computed: {
     business_intro() {
@@ -180,14 +173,14 @@ export default {
 
     profileNamePost() {
       return "yoo";
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }

@@ -1,15 +1,13 @@
 <template>
-  
   <div class="img-gall">
-      <b-img
-        v-if="typeOfMedia() == 'image' && !loading"
-        class="card-img btn p-0 album-img "
-        
-        :src="getFullMediaLink()"
-        alt="media_img"
-        v-b-modal="`modal-${im.id}`"
-        v-bind="imageProps"
-      ></b-img>
+    <b-img
+      v-if="typeOfMedia() == 'image' && !loading"
+      class="card-img btn p-0 album-img "
+      :src="getFullMediaLink()"
+      alt="media_img"
+      v-b-modal="`modal-${im.id}`"
+      v-bind="imageProps"
+    ></b-img>
 
     <video
       controls
@@ -24,7 +22,7 @@
       :video-id="getYoutubeKey()"
       :player-vars="playerVars"
     ></youtube>
-      
+
     <div class="botmediadess-position" v-if="loading">
       <b-spinner
         style="width: 3rem; height: 3rem; color: #e75c18"
@@ -84,13 +82,11 @@
       />
       <p class="my-4">{{ content }}</p>
     </b-modal>
-    
   </div>
 </template>
 
 <script>
-
-import { mapMutations,mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   props: [
@@ -114,27 +110,26 @@ export default {
   ],
 
   created() {
-    
     this.uuid = this.isAlbum
       ? `modal-album-${this.im.id}`
       : `modal-picture-${this.im.id}`;
 
-    console.log(this.uuid, this.im.id)
+    console.log(this.uuid, this.im.id);
 
     this.strategy = {
       BusinessOwner: {
         picture: ({ media_url }) => this.updatePictureState(media_url),
-        cover: (data) => this.addCoverPictureBusiness(data),
+        cover: data => this.addCoverPictureBusiness(data)
       },
 
       profile_owner: {
         picture: ({ media_url }) => this.updatePictureState(media_url),
-        cover: ({ media_url }) => this.addCoverPictureProfile(media_url),
-      },
+        cover: ({ media_url }) => this.addCoverPictureProfile(media_url)
+      }
     };
   },
 
-  computed:{
+  computed: {
     ...mapGetters({
       auth: "auth/profilConnected"
     })
@@ -144,63 +139,56 @@ export default {
     return {
       loading: false,
       uuid: null,
-      strategy: null,
+      strategy: null
     };
   },
 
   methods: {
-
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
       addCoverPictureBusiness: "businessOwner/addCoverPicture",
-      addCoverPictureProfile: "auth/addCoverPicture",
-      
-      
+      addCoverPictureProfile: "auth/addCoverPicture"
     }),
 
     async onDownloadPic() {
-      
-      const imageSrc = this.getFullOriginalMediaLink()
-      
-      const image = await fetch(imageSrc)
-      const imageBlog = await image.blob()
-      const imageURL = URL.createObjectURL(imageBlog)
-      const splitName = imageSrc.split('/')
-      
-      const link = document.createElement('a')
-      link.href = imageURL
-      link.download = splitName[splitName.length-1]
+      const imageSrc = this.getFullOriginalMediaLink();
 
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    
+      const image = await fetch(imageSrc);
+      const imageBlog = await image.blob();
+      const imageURL = URL.createObjectURL(imageBlog);
+      const splitName = imageSrc.split("/");
+
+      const link = document.createElement("a");
+      link.href = imageURL;
+      link.download = splitName[splitName.length - 1];
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     },
 
     async onDeleteImage() {
-      
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
-
       this.deleteImage()
-      .then(() => {
-        this.loading = false;
-      })
-      .catch((error) => {
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(error => {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: "something wrong happen",
+            message: "something wrong happen"
           });
           return false;
         })
-      .finally(() => loader.hide())
+        .finally(() => loader.hide());
     },
     //set an image as a cover photo
 
@@ -209,7 +197,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       this.setCoverPic()
@@ -218,12 +206,12 @@ export default {
             this.strategy[this.$route.name].cover({
               media_url: this.getFullMediaLink(),
               id: this.im.id,
-              media_type: "image/png",
+              media_type: "image/png"
             });
           } catch (error) {
             console.error(error);
           }
-          loader.hide()
+          loader.hide();
         })
         .catch(() => loader.hide());
     },
@@ -234,7 +222,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.setProfilePic()
         .then(() => {
@@ -242,23 +230,22 @@ export default {
             this.strategy[this.$route.name].picture({
               media_url: this.getFullMediaLink(),
               id: this.im.id,
-              media_type: "image/png",
+              media_type: "image/png"
             });
           } catch (error) {
             console.error(error);
           }
         })
         .catch(() => loader.hide());
-    },
-
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 .img-size {
   width: 100% !important;
-  height: 100% ;
+  height: 100%;
 }
 .botmediadess-position {
   text-align: center;
@@ -381,7 +368,7 @@ export default {
   .img-gall {
     position: relative;
     margin: 5px;
-    float: left;                                                                                                                      
+    float: left;
     width: auto;
     transition-duration: 0.4s;
     border-radius: 5px;

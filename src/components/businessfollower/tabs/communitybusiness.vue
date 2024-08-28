@@ -40,7 +40,6 @@
                   :less-str="$t('search.read_less')"
                   :max-chars="15"
                 >
-                  
                 </read-more>
               </p>
             </b-col>
@@ -130,8 +129,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -142,7 +141,7 @@ export default {
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -161,12 +160,12 @@ export default {
       if (this.type == "Follower") {
         this.$store.commit("profile/setBcommunityFollower", {
           business_followers: [],
-          total_business_follower: 0,
+          total_business_follower: 0
         });
       } else {
         this.$store.commit("profile/setBcommunityFollowing", {
           business_following: [],
-          total_business_following: 0,
+          total_business_following: 0
         });
       }
 
@@ -209,11 +208,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

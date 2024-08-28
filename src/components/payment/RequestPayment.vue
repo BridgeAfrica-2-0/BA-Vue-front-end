@@ -75,16 +75,19 @@
       </div>
 
       <div v-else>
+        <h2 class="text-center">Transaction failed!</h2>
 
-         <h2 class="text-center"> Transaction failed!</h2>
+        <p class="mt-5 text-center">
+          Oops! Your transaction failed. Please try again.
+        </p>
+        <p class="mt-3 text-center">Your transaction may fail because</p>
+        <p class="text-center">
+          - Your Mobile Money balance is lower than <b> {{ price }} frs. </b>
+        </p>
+        <p class="text-center">- Your payment request has timed out.</p>
+        <p class="text-center">- The payment was cancelled.</p>
 
-        <p class="mt-5 text-center"> Oops! Your transaction failed. Please try again. </p>
-        <p class="mt-3 text-center">   Your transaction may fail because </p>
-       <p class="text-center">  - Your Mobile Money balance is lower than <b> {{price}} frs. </b> </p>
-       <p class="text-center"> - Your payment request has timed out.</p> 
-       <p class="text-center">  - The payment was cancelled.</p>
-        
-       <p class="text-center">   Contact us if you have any trouble.</p>
+        <p class="text-center">Contact us if you have any trouble.</p>
       </div>
     </b-modal>
   </b-card>
@@ -96,26 +99,26 @@ export default {
 
   props: {
     operator: {
-      type: String,
+      type: String
     },
     amount: {
-      type: String,
+      type: String
     },
 
     loading: {
       type: Boolean,
-      default: false,
+      default: false
     },
 
     price: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
   computed: {
     order() {
       return this.$store.state.checkout.order.data;
-    },
+    }
   },
   data() {
     return {
@@ -124,9 +127,9 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
-      number: "",
+      number: ""
     };
   },
   methods: {
@@ -140,14 +143,13 @@ export default {
       this.$emit("confirmpayment", {
         number: this.number,
         amount: this.price,
-        operator: this.operator,
+        operator: this.operator
       });
 
       this.loading = false;
     },
 
     paymenterror(error) {
-     
       this.error_msg = error;
     },
 
@@ -156,8 +158,8 @@ export default {
     },
     changepayment() {
       this.$emit("changepayment");
-    },
-  },
+    }
+  }
 };
 </script>
 

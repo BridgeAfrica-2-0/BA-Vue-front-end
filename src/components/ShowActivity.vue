@@ -8,11 +8,11 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
-          {{$t("general.Business")}}
+          {{ $t("general.Business") }}
         </p>
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
-        <b-card-body> 
+        <b-card-body>
           <div
             v-for="(item, index) in business"
             :key="index"
@@ -45,11 +45,14 @@
       </b-collapse>
     </b-card>
 
-    <b-card class="mb-1" v-if="'network' != profile.user_type && networks.length">
+    <b-card
+      class="mb-1"
+      v-if="'network' != profile.user_type && networks.length"
+    >
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
-          {{$t("general.Network")}}
+          {{ $t("general.Network") }}
         </p>
       </b-card-header>
       <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
@@ -96,8 +99,8 @@ export default {
       networks: "social/FIND_USER_NETWORK",
       business: "social/FIND_USER_BUSNESS",
       hasLauchNetworkRequest: "social/INIT",
-      profile: "auth/profilConnected",
-    }),
+      profile: "auth/profilConnected"
+    })
   },
 
   mounted() {
@@ -134,26 +137,26 @@ export default {
   created() {
     this.strategy = {
       business: {
-        newType: (item) => ({
+        newType: item => ({
           name: item.name,
           profile_picture: item.logo_path,
           id: item.id,
-          slug:item.slug,
-          user_type: "business",
+          slug: item.slug,
+          user_type: "business"
         }),
-        redirect: (obj) => this.redirection(obj),
+        redirect: obj => this.redirection(obj)
       },
 
       network: {
-        newType: (item) => ({
+        newType: item => ({
           name: item.name,
           profile_picture: item.image,
           id: item.id,
-           slug:item.slug,
-          user_type: "network",
+          slug: item.slug,
+          user_type: "network"
         }),
-        redirect: (obj) => this.redirection(obj),
-      },
+        redirect: obj => this.redirection(obj)
+      }
     };
   },
 
@@ -162,57 +165,52 @@ export default {
     openBusiness: false,
     show: false,
     openNetwork: false,
-    strategy: null,
+    strategy: null
   }),
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
 
     redirection(obj) {
       if (obj.routeName !== this.$router.name)
         this.$router.push({
           name: obj.routeName,
-          params: { id: obj.routeId },
+          params: { id: obj.routeId }
         });
     },
 
-    process: async function (item, type) {
+    process: async function(item, type) {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: item.slug,
+          routeId: item.slug
         };
-
 
         const request =
           "network" == type
-            ? await this.$repository.share.switch(
-                item.slug,
-                "network"
-              )
-            : await this.$repository.share.switch(
-                item.slug,
-                "business"
-              );
+            ? await this.$repository.share.switch(item.slug, "network")
+            : await this.$repository.share.switch(item.slug, "business");
 
         if (request.success) {
           this.flashMessage.success({
             time: 5000,
             message:
               "business" == type
-
-                ? item.is_owner ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`
-                : ( item.is_owner  || item.is_editor ) ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`,
-
+                ? item.is_owner
+                  ? `You are now connected as ${item.name}`
+                  : `You are now redirect to ${item.name}`
+                : item.is_owner || item.is_editor
+                ? `You are now connected as ${item.name}`
+                : `You are now redirect to ${item.name}`
           });
 
           this.auth(this.strategy[type].newType(item));
@@ -231,8 +229,8 @@ export default {
 
     activedNetwork(item) {
       if (!this.pending) this.process(item, "network");
-    },
-  },
+    }
+  }
 };
 </script>
 

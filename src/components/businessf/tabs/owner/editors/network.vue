@@ -59,7 +59,11 @@
                   class="b-background shadow"
                   variant="primary"
                   @click="$emit('handleFollow', network)"
-                  :style="network.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+                  :style="
+                    network.is_follow !== 0
+                      ? 'background-color: rgb(162,107,80);'
+                      : ''
+                  "
                 >
                   <i
                     :class="
@@ -122,10 +126,10 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
-  },
+  }
 };
 </script>
 

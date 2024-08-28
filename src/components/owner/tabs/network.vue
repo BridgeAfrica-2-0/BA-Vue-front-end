@@ -1,29 +1,34 @@
 <template>
   <div class="community-box">
-     <VuePerfectScrollbar
+    <VuePerfectScrollbar
       class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-    
-   <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
-     </VuePerfectScrollbar>
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Network
+        v-for="item in network"
+        :network="item"
+        :key="item.id"
+        @getTotalCommunity="getTotalCommunity"
+      />
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Network from "@/components/Network";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["type"],
   components: {
-    Network,VuePerfectScrollbar
+    Network,
+    VuePerfectScrollbar
   },
   data() {
     return {
       page: 1,
-  
+
       foll_id: null,
       network: [],
       options: {
@@ -33,21 +38,22 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     show() {
       return this.$route.name;
-    },
+    }
   },
 
   mounted() {
-
-     this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
@@ -58,17 +64,17 @@ export default {
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
@@ -82,14 +88,13 @@ export default {
           ? `profile/network/follower/`
           : `profile/network/following/`;
 
-           if(!this.islogin){
-            url='guest/'+url;
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
         .get(url + this.page + "?slug=" + this.foll_id)
         .then(({ data }) => {
-        
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
@@ -111,22 +116,19 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-    
-  getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
-
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -134,23 +136,23 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
-             this.getTotalCommunity();
+          this.getTotalCommunity();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

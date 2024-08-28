@@ -1,7 +1,6 @@
 <template>
-  <div class="map-container"> 
+  <div class="map-container">
     <MglMap
-    
       :accessToken="accessToken"
       :zoom="zoom"
       :center="center"
@@ -11,14 +10,14 @@
       <MglMarker
         v-for="(business, key) in businessesItems.data"
         :key="business.id"
-        :coordinates="[business.lng , business.lat]"
+        :coordinates="[business.lng, business.lat]"
       >
         <div class="marker" slot="marker">
           <div>B{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[business.lng, business.lat]" >
+        <MglPopup :coordinates="[business.lng, business.lat]">
           <div class="py-4 navig">
-            <div 
+            <div
               class="d-flex justify-content-center flex-column pointer"
               @click="gotoBusiness(business.id)"
             >
@@ -49,9 +48,6 @@
                 :max-chars="100"
               >
               </read-more>
-              
-
-              
             </div>
           </div>
         </MglPopup>
@@ -64,9 +60,16 @@
         <div class="marker" slot="marker">
           <div>M{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[product.business_lng, product.business_lat]" @open="filtre(product.business_id)">
+        <MglPopup
+          :coordinates="[product.business_lng, product.business_lat]"
+          @open="filtre(product.business_id)"
+        >
           <div class="py-4 navig">
-            <div class="d-flex justify-content-center flex-column pointer " v-for="item in FilterProduct" :key="item.id">
+            <div
+              class="d-flex justify-content-center flex-column pointer "
+              v-for="item in FilterProduct"
+              :key="item.id"
+            >
               <img :src="product.picture" alt="..." class="img-map" />
               <h6 class="text-center my-3">
                 {{ item.name }}
@@ -75,7 +78,7 @@
               <read-more
                 :more-str="$t('search.read_more')"
                 class="readmore"
-                :text="item.description "
+                :text="item.description"
                 link="#"
                 :less-str="$t('search.read_less')"
                 :max-chars="50"
@@ -102,9 +105,15 @@ export default {
   components: {
     MglMap,
     MglMarker,
-    MglPopup,
+    MglPopup
   },
-  props: ["businesses", "products", "networks", "defaultLocation", "isSearched"],
+  props: [
+    "businesses",
+    "products",
+    "networks",
+    "defaultLocation",
+    "isSearched"
+  ],
   data() {
     return {
       filterProduct: null,
@@ -119,16 +128,15 @@ export default {
     isSearched: {
       immediate: true,
       handler(newValue, oldValue) {
-          this.updateMapPosition({location: this.defaultLocation});
+        this.updateMapPosition({ location: this.defaultLocation });
       }
     }
   },
   methods: {
-    filtre(id){
-
-     this.filterProduct= this.products.filter(elem =>{
-        return elem.business_id == id
-      })
+    filtre(id) {
+      this.filterProduct = this.products.filter(elem => {
+        return elem.business_id == id;
+      });
     },
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);
@@ -140,50 +148,51 @@ export default {
       });
     },
 
-    filtrer(data, key){
-      let result = [
-      ...new Map(
-        data.map(x => [key(x), x])
-      ).values()
-    ]
-    return result;
+    filtrer(data, key) {
+      let result = [...new Map(data.map(x => [key(x), x])).values()];
+      return result;
     },
-    updateMapPosition({location}) {
+    updateMapPosition({ location }) {
       const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${process.env.VUE_APP_MAPBOX_TOKEN}`;
-      axios.get(endpoint).then((res) => {
-         if (typeof res.data.features[0]['center'] !== 'undefined') {
-          this.center = res.data.features[0]['center'];
-         }
-      }).catch((err) => {
-        console.log({ err: err });
-      });
-     
+      axios
+        .get(endpoint)
+        .then(res => {
+          if (typeof res.data.features[0]["center"] !== "undefined") {
+            this.center = res.data.features[0]["center"];
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     }
   },
-  computed : {
+  computed: {
     ...mapGetters({
-      businessesItems: "business/getBusiness",
+      businessesItems: "business/getBusiness"
     }),
     businessesItems() {
-      
       return this.$store.getters["allSearch/getBusinesses"];
     },
-    FilterProduct(){
+    FilterProduct() {
       return this.filterProduct;
     },
-    productBlock(){
-      return this.filtrer(this.products, it => it.business_id)
+    productBlock() {
+      return this.filtrer(this.products, it => it.business_id);
     }
   },
-  mounted(){
-    let products = [{nom:"lele", id:1},{nom:"lele1", id:1}, {nom:"lele", id:2}];
+  mounted() {
+    let products = [
+      { nom: "lele", id: 1 },
+      { nom: "lele1", id: 1 },
+      { nom: "lele", id: 2 }
+    ];
     let unique = [];
     const subject = [...new Set(products)];
-    let rand = Math.floor(Math.random() * 10000) /100000000 ; 
-  },
+    let rand = Math.floor(Math.random() * 10000) / 100000000;
+  }
 };
 </script>
-<style scoped> 
+<style scoped>
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .map-container {
   width: 100%;
@@ -194,15 +203,14 @@ export default {
   height: 100px;
   object-fit: cover;
 }
-.mapboxgl-popup-content { 
+.mapboxgl-popup-content {
   /* border-radius: 200px !important;
   max-height: 100px !important;
   */
 }
-.navig{
-  max-height: 200px ;
-  overflow-y: auto ;
-
+.navig {
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .marker {

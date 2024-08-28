@@ -1,10 +1,9 @@
 <template>
   <b-container class="container-fluid">
     <b-container class="text">
-      <b-container class="bv-example-row">  {{Packages}}
+      <b-container class="bv-example-row">
+        {{ Packages }}
         <b-row>
-        
-        
           <b-col cols="12" md="12">
             <div>
               <b-table-simple hover caption-top responsive>
@@ -20,7 +19,7 @@
                   </b-tr>
                 </b-thead>
 
-                <b-tbody v-for="Package in Packages.packages" :key="Package.id"> 
+                <b-tbody v-for="Package in Packages.packages" :key="Package.id">
                   <b-tr
                     @click="ToggleModal(Package.name, Package.id)"
                     :variant="
@@ -34,7 +33,11 @@
                       {{ Package.name }}
                     </b-td>
                     <b-td class="a-text">
-                      <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Upgrade"}}</b-link>
+                      <b-link>{{
+                        Package.id === Packages.user_actived_plan[0].package_id
+                          ? "Current"
+                          : "Upgrade"
+                      }}</b-link>
                       <span class="text-success">
                         {{
                           Package.id ===
@@ -216,7 +219,9 @@
                   - 36000XAF</b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices }}XAF/{{ $t("businessowner.Month") }}
+                  >{{ Packages.premium_package_prices }}XAF/{{
+                    $t("businessowner.Month")
+                  }}
                   <b-button
                     v-b-modal.PackageSelection
                     @click="PaymentForm.subscribe = 'one year'"
@@ -309,7 +314,12 @@
             <b-overlay :show="show" rounded="sm">
               <div class="row">
                 <div class="col-10 col-sm-9 col-md-8">
-                  <VuePhoneNumberInput default-country-code="CM" v-model="PaymentForm.phone" placeholder="237 6XX XXX XXX" required/>
+                  <VuePhoneNumberInput
+                    default-country-code="CM"
+                    v-model="PaymentForm.phone"
+                    placeholder="237 6XX XXX XXX"
+                    required
+                  />
                 </div>
                 <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
                   <b-button
@@ -398,14 +408,21 @@ export default {
   name: "website",
   props: ["profileId"],
   components: {
-    VuePhoneNumberInput,
+    VuePhoneNumberInput
   },
   data() {
     return {
       url: null,
       moment: moment,
-      default_package:{package_id: 1, name: "basic", status: 0, start_at: null, expired_at: null, laravel_through_key: 29},
-        
+      default_package: {
+        package_id: 1,
+        name: "basic",
+        status: 0,
+        start_at: null,
+        expired_at: null,
+        laravel_through_key: 29
+      },
+
       modalShowBasics: false,
       modalShowPremium: false,
       bntStatus: false,
@@ -416,24 +433,24 @@ export default {
         phone: "",
         operator: "",
         package_id: "",
-        type: "",
+        type: ""
       },
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
 
       dataPackages: {
         packages: [
           {
             id: 1,
-            name: "basic",
+            name: "basic"
           },
           {
             id: 2,
-            name: "premium",
-          },
+            name: "premium"
+          }
         ],
         premium_package_prices: [1000, 12000],
         user_actived_plan: [
@@ -443,40 +460,27 @@ export default {
             status: 1,
             start_at: "2021-10-18 13:00:33",
             expired_at: "2021-11-18 13:00:33",
-            laravel_through_key: 1,
-          },
-        ],
-      },
+            laravel_through_key: 1
+          }
+        ]
+      }
     };
   },
 
-  watch:{
-
-     Packages: {
-      
-
-
-       handler(newValue, oldValue) { 
-
-          if(!newValue.user_actived_plan.length){
-
-      this.Packages.user_actived_plan.push(this.default_package);
-       
-      }
-
-           
+  watch: {
+    Packages: {
+      handler(newValue, oldValue) {
+        if (!newValue.user_actived_plan.length) {
+          this.Packages.user_actived_plan.push(this.default_package);
         }
-
-     }
-
+      }
+    }
   },
 
   computed: {
     Packages() {
-
-      return this.$store.state.profileAccountType.accounts ;
-    },
-    
+      return this.$store.state.profileAccountType.accounts;
+    }
   },
 
   mounted() {
@@ -501,17 +505,15 @@ export default {
       }
     },
 
-
-
     getAccounts() {
       this.$store
         .dispatch("profileAccountType/getaccounts", {
-          path: `profile/settings/packages`,
+          path: `profile/settings/packages`
         })
         .then(() => {
           console.log("ohh yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -530,7 +532,7 @@ export default {
       this.$store
         .dispatch("profileAccountType/confirmPayment", {
           path: `settings/packages/${this.url}`,
-          formData: formData,
+          formData: formData
         })
         .then(({ data }) => {
           console.log(data);
@@ -540,16 +542,16 @@ export default {
           this.getAccounts();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.Transaction_Completed"),
+            message: this.$t("businessowner.Transaction_Completed")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.$refs["AcRequestPayment"].hide();
           this.show = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.Unable_Complete_Payment"),
+            message: this.$t("businessowner.Unable_Complete_Payment")
           });
         });
     },
@@ -598,18 +600,18 @@ export default {
       let data = {
         startDate: startDate,
         endMonth: endMonth,
-        endYear: endYear,
+        endYear: endYear
       };
       return data;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 .descrip {
   font-size: 14px;
-      font-family: poppins !important;
+  font-family: poppins !important;
 }
 .btn-custom {
   height: 38px;

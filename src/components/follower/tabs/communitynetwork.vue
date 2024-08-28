@@ -97,8 +97,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   mounted() {
@@ -111,7 +111,7 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -123,12 +123,12 @@ export default {
         console.log("follower");
         this.$store.commit("profile/setNcommunityFollower", {
           network_followers: [],
-          total_network_follower: 0,
+          total_network_follower: 0
         });
       } else {
         this.$store.commit("profile/setNcommunityFollowing", {
           network_following: [],
-          total_network_following: 0,
+          total_network_following: 0
         });
       }
 
@@ -144,16 +144,16 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -197,11 +197,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -95,7 +95,7 @@
 </template>
 <script>
 /**
- * this component is for contact us view 
+ * this component is for contact us view
  */
 import Contact from "../components/site/contact";
 import SiteFooter from "../components/site/siteFooter";
@@ -117,8 +117,8 @@ export default {
     SiteHeader,
     MglMap,
     MglMarker,
-    MglPopup,
-  },
+    MglPopup
+  }
 };
 </script>
 <style scoped>

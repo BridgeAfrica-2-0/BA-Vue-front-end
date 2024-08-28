@@ -13,7 +13,7 @@ export default {
     pendingPosts: [],
     keywordAlerts: [],
     notifications: [],
-    general: [],
+    general: []
   },
   getters: {
     //getting blocked users from store
@@ -57,7 +57,7 @@ export default {
     //all notifications
     allNotifications(state) {
       return state.notifications;
-    },
+    }
   },
   mutations: {
     // setting general section
@@ -147,7 +147,7 @@ export default {
     //set notifications
     setNotifications(state, payload) {
       state.notifications = payload;
-    },
+    }
   },
   actions: {
     async getNetworks({ commit }, networkId) {
@@ -239,48 +239,53 @@ export default {
 
     //approve member request
     async approveUser({ commit }, payload) {
-      const res = await axios.patch(`network/${payload.networkId}/members/${payload.id}/approve`, payload);
+      const res = await axios.patch(
+        `network/${payload.networkId}/members/${payload.id}/approve`,
+        payload
+      );
 
       commit("setApprove", res.data);
     },
 
     //decline member request
     async declineUser({ commit }, payload) {
-      const res = await axios.post(`network/${payload.networkId}/members/${payload.id}/unapprove`, payload);
+      const res = await axios.post(
+        `network/${payload.networkId}/members/${payload.id}/unapprove`,
+        payload
+      );
 
       commit("setDecline", res.data);
     },
 
-    //getting pending post, 
+    //getting pending post,
     async getPendingPost({ commit }, networkId) {
       const res = await axios.get(`show/posts/pending/${networkId}`);
 
       commit("setPendingPost", res.data);
     },
 
-
-
-
-
     //load more pending post
 
-     loadMore({ commit }, url) {
-    return   axios.get(`network/${url}`);
-
-        
+    loadMore({ commit }, url) {
+      return axios.get(`network/${url}`);
     },
 
     //approve pending post
     async approvedPost({ commit }, payload) {
-      const res = await axios.get(`network/posts/approve/${payload.network_id}/${payload.post_id}`, payload);
+      const res = await axios.get(
+        `network/posts/approve/${payload.network_id}/${payload.post_id}`,
+        payload
+      );
 
-      commit("setApprovedPost", res.data);   
+      commit("setApprovedPost", res.data);
     },
 
     //decline pending post
     async unapprovedPost({ commit }, payload) {
-       
-      const res = await axios.get(`network/posts/decline/${payload.network_id}/${payload.post_id}`, payload);
+      const res = await axios.get(
+        `network/posts/decline/${payload.network_id}/${payload.post_id}`,
+        payload
+      );
 
       commit("setDeclinedPost", res.data);
     },
@@ -311,6 +316,6 @@ export default {
       const res = await axios.get("notification");
 
       commit("setNotification", res.data);
-    },
-  },
+    }
+  }
 };

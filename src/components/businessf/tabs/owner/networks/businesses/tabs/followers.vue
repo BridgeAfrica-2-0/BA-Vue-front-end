@@ -4,7 +4,7 @@
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend
-            @click="search" 
+            @click="search"
             is-text
             style="cursor:pointer;"
           >
@@ -40,9 +40,16 @@
             {{ (item["communityNum"] = nFormatter(item.followers)) }}
           </div>
           <div style="display:none;">{{ (item["type"] = "business") }}</div>
-                  
-    <Business  :canBlock="canBlock"  callerType='network'  :key="item.id"  :index="index" :business="item" @getTotalCommunity='businessDetails'  @BlockUser="BlockUser"  />
-   
+
+          <Business
+            :canBlock="canBlock"
+            callerType="network"
+            :key="item.id"
+            :index="index"
+            :business="item"
+            @getTotalCommunity="businessDetails"
+            @BlockUser="BlockUser"
+          />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -67,7 +74,7 @@
 import Business from "@/components/Business";
 export default {
   components: {
-    Business,
+    Business
   },
   data() {
     return {
@@ -76,21 +83,22 @@ export default {
       page: 1,
       loading: false,
       businessfollowers: [],
-      displayfollowers: [],
+      displayfollowers: []
     };
   },
 
-   computed:{
-    canBlock(){
-     
-     if(this.$route.name=='networks'|| this.$route.name=='NetworkEditors' ){
+  computed: {
+    canBlock() {
+      if (
+        this.$route.name == "networks" ||
+        this.$route.name == "NetworkEditors"
+      ) {
         return true;
-      }else{
+      } else {
         return false;
       }
-    },
+    }
   },
-
 
   mounted() {
     this.url = this.$route.params.id;
@@ -125,14 +133,14 @@ export default {
         console.log(this.searchTitle);
         this.$nextTick(() => {
           this.page = 1;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          this.$refs.infiniteLoading.$emit("$InfiniteLoading:reset");
         });
       } else {
         console.log("Empty search title: " + this.searchTitle);
         this.businessfollowers = [];
         this.$nextTick(() => {
           this.page = 1;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          this.$refs.infiniteLoading.$emit("$InfiniteLoading:reset");
         });
       }
     },
@@ -152,7 +160,10 @@ export default {
       // }
 
       this.axios
-        .post("network/"+this.url +"/business/follower/"+this.page, formData)
+        .post(
+          "network/" + this.url + "/business/follower/" + this.page,
+          formData
+        )
         .then(({ data }) => {
           console.log(data);
           console.log(this.page);
@@ -174,55 +185,47 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
       this.loading = false;
     },
 
     BlockUser(user_id, index) {
-     
       console.log("network/" + this.url + "/lock/business/" + user_id);
       this.axios
         .post("network/" + this.url + "/lock/business/" + user_id)
-        .then((response) => {
+        .then(response => {
           console.log(response);
-          
+
           this.loading = false;
 
           this.businessDetails();
-         this.$delete(this.displayfollowers,index);
-
+          this.$delete(this.displayfollowers, index);
 
           this.flashMessage.show({
             status: "success",
-            message: "Business blocked",
+            message: "Business blocked"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: err.response.data.message,
+            message: err.response.data.message
           });
         });
     },
 
-
-
-   businessDetails() {
+    businessDetails() {
       this.$store
         .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
-        .then(() => {
-        
-        })
-        .catch((err) => {
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
-
 
     async handleFollow(Comdata) {
       document.getElementById("followbtn" + Comdata.id).disabled = true;
@@ -237,15 +240,15 @@ export default {
 
       await this.axios
         .post(url, data)
-        .then((response) => {
+        .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
-           document.getElementById("followbtn" + Comdata.id).disabled = true;
+          document.getElementById("followbtn" + Comdata.id).disabled = true;
           this.businessDetails();
         })
-        .catch((err) => console.log(err));
-    },
-  },
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 

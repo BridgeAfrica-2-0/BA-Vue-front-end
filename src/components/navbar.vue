@@ -1,5 +1,5 @@
 <template>
-  <header class=""> 
+  <header class="">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -46,7 +46,7 @@
                 data-original-title=""
                 title=""
                 v-on:click="toggleinput()"
-                 v-on:keyup.enter="getKeyword"
+                v-on:keyup.enter="getKeyword"
               />
             </b-input-group>
 
@@ -56,20 +56,17 @@
                   class="input-group-append color-mobile"
                   style="border: none"
                 >
-                  <multiselect 
-                   :value="city" 
-                    :options="citiesValues" 
-                    placeholder="Select City" 
+                  <multiselect
+                    :value="city"
+                    :options="citiesValues"
+                    placeholder="Select City"
                     class="search-hh w-100"
                     style="border-left: none"
-                    label="label" 
+                    label="label"
                     track-by="code"
                     @input="setSelectedLocation"
-              ></multiselect>
-    
+                  ></multiselect>
                 </div>
-
-
               </b-input-group>
             </span>
           </form>
@@ -87,19 +84,18 @@
                 data-original-title=""
                 title=""
                 v-on:keyup.enter="getKeyword"
-              />              
+              />
 
-              <multiselect 
-             :value="city" 
-              :options="citiesValues" 
-              placeholder="Select City" 
-              class="search-hh w-44 city-search"
-              style="border-left: none"
-               label="label" 
-               track-by="code"
-               @input="setSelectedLocation"
+              <multiselect
+                :value="city"
+                :options="citiesValues"
+                placeholder="Select City"
+                class="search-hh w-44 city-search"
+                style="border-left: none"
+                label="label"
+                track-by="code"
+                @input="setSelectedLocation"
               ></multiselect>
-
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
@@ -109,7 +105,7 @@
           <div id="search-popover" class="d-none"></div>
         </div>
 
-        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer" >
+        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <button
@@ -126,6 +122,18 @@
           >
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
+          <div style="float: left" class="mt-2">
+            <span class="cart-icon position-relative" style="color:#455a64">
+                  <b-icon icon="cart4" class="icon-size"></b-icon>
+                  <span
+                    v-if="cartCount > 0"
+                    class="badge badge-pill badge-danger position-absolute"
+                    style="top: 0; right: 0;"
+                  >
+                    {{ cartCount }}
+                  </span>
+                </span>
+          </div>
 
           <div style="float: right" ref="isnaav">
             <b-collapse id="nav-collapse" is-nav>
@@ -138,9 +146,9 @@
                 </router-link>
               </div>
 
-              <div  v-if="islogin" class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <router-link
-                   :to="{ name: 'GlobalSearch',query: { tab: 0 } }"
+                  :to="{ name: 'GlobalSearch', query: { tab: 0 } }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}
@@ -183,51 +191,58 @@
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
                     <div v-if="messages.length">
-                    <div v-for="message in messages" :key="message.id">
-                      <hr class="h-divider" />
-                      <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
-                      >
-                        <div class="d-inline-flex flex-row align-items-center">
-                          <div>
-                            <img
-                              :src="
-                                profileSenderImange(
-                                  message.sender
-                                    ? message.sender
+                      <div v-for="message in messages" :key="message.id">
+                        <hr class="h-divider" />
+                        <div
+                          class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        >
+                          <div
+                            class="d-inline-flex flex-row align-items-center"
+                          >
+                            <div>
+                              <img
+                                :src="
+                                  profileSenderImange(
+                                    message.sender
+                                      ? message.sender
+                                      : message.sender_network
+                                      ? message.sender_network
+                                      : message.sender_business
+                                  )
+                                "
+                                class="rounded"
+                                alt=""
+                                width="40"
+                                height="65"
+                              />
+                            </div>
+                            <div class="d-flex flex-column ml-1 line-size">
+                              <div class="font-weight-bold">
+                                {{
+                                  message.sender_business
+                                    ? message.sender_business.name
                                     : message.sender_network
-                                    ? message.sender_network
-                                    : message.sender_business
-                                )
-                              "
-                              class="rounded"
-                              alt=""
-                              width="40"
-                              height="65"
-                            />
-                          </div>
-                          <div class="d-flex flex-column ml-1 line-size">
-                            <div class="font-weight-bold">
-                              {{
-                                message.sender_business
-                                  ? message.sender_business.name
-                                  : message.sender_network
-                                  ? message.sender_network.name
-                                  : message.sender
-                                  ? message.sender.name
-                                  : ""
-                              }}
-                            </div>
-                            <div class="small text-muted">
-                              {{ checkIfExists(message, 'message') && message.message != null ? message.message.substring(0, 20) : '' }}
+                                    ? message.sender_network.name
+                                    : message.sender
+                                    ? message.sender.name
+                                    : ""
+                                }}
+                              </div>
+                              <div class="small text-muted">
+                                {{
+                                  checkIfExists(message, "message") &&
+                                  message.message != null
+                                    ? message.message.substring(0, 20)
+                                    : ""
+                                }}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="small text-muted">
-                          {{ message.created_at | moment("from", "now") }}
+                          <div class="small text-muted">
+                            {{ message.created_at | moment("from", "now") }}
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </div>
                     <hr class="h-divider" />
                     <router-link :to="newRedirection('message')" v-if="islogin">
@@ -260,36 +275,41 @@
                     >
                       <hr class="h-divider" />
 
-                      <router-link  v-if="islogin" :to="newRedirection('notification')">
-                      <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      <router-link
+                        v-if="islogin"
+                        :to="newRedirection('notification')"
                       >
-                        <div>
-
-                          <b-avatar
-                            :src="notification.profile_picture"
-                            size="2rem"
-                          >
-                          </b-avatar>
-                          
-                        </div>
-                        <div class="d-flex flex-column ml-3">
-                          <div class="wrap-text">{{ notification.notification_text }}</div>
-                          <div class="small text-muted">
-                            <span class="text-capitalize">
-                              {{
-                                notification.created_at | moment("from", "now")
-                              }}
-                            </span>
+                        <div
+                          class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        >
+                          <div>
+                            <b-avatar
+                              :src="notification.profile_picture"
+                              size="2rem"
+                            >
+                            </b-avatar>
+                          </div>
+                          <div class="d-flex flex-column ml-3">
+                            <div class="wrap-text">
+                              {{ notification.notification_text }}
+                            </div>
+                            <div class="small text-muted">
+                              <span class="text-capitalize">
+                                {{
+                                  notification.created_at
+                                    | moment("from", "now")
+                                }}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-
                       </router-link>
                     </div>
                     <hr class="h-divider" />
 
-                    <router-link  v-if="islogin" :to="newRedirection('notification')"
+                    <router-link
+                      v-if="islogin"
+                      :to="newRedirection('notification')"
                       ><u>{{
                         $t("general.See_all_Notifications")
                       }}</u></router-link
@@ -337,7 +357,6 @@
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-
                     <a
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
@@ -345,22 +364,18 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'user']"
+                        ><fas-icon class="violet search" :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
                     <hr class="h-divider" />
-                    
+
                     <div
                       style="width: 100%"
                       class="d-inline-flex flex-row align-items-center mb-1"
                     >
                       <Activity class="w-full" />
                     </div>
-
-                    
 
                     <router-link
                       :to="{ name: 'orders' }"
@@ -379,16 +394,13 @@
                       :to="{ name: 'settings' }"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
-                      <span 
-                        class="mr-2 w-full"
-                        style="display: inline-block;"
+                      <span class="mr-2 w-full" style="display: inline-block;"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cogs']"
-                      />
+                        />
                         {{ $t("general.Account_Settings") }}
                       </span>
-                      
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -483,7 +495,7 @@
 
             <div class="other-menu suggest-item cursor-pointer">
               <router-link
-                :to="{ name: 'GlobalSearch',query: { tab: 0 } }"
+                :to="{ name: 'GlobalSearch', query: { tab: 0 } }"
                 class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
               >
                 <span class="mr-3"
@@ -496,35 +508,31 @@
             </div>
             <hr class="h-divider" />
 
-             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+            <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
               <router-link
                 :to="newRedirection('message')"
                 class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
               >
                 <span class="mr-3"
-                  ><fas-icon
-                    class="violet search"
-                    :icon="['fas', 'comment']"
+                  ><fas-icon class="violet search" :icon="['fas', 'comment']"
                 /></span>
                 Messages
               </router-link>
             </div>
-            <hr class="h-divider" v-if="islogin"/>
+            <hr class="h-divider" v-if="islogin" />
 
-             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+            <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
               <router-link
                 :to="newRedirection('notification')"
                 class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
               >
                 <span class="mr-3"
-                  ><fas-icon
-                    class="violet search"
-                    :icon="['fas', 'bell']"
+                  ><fas-icon class="violet search" :icon="['fas', 'bell']"
                 /></span>
                 {{ $t("general.Notifications") }}
               </router-link>
             </div>
-            <hr class="h-divider" v-if="islogin"/>
+            <hr class="h-divider" v-if="islogin" />
 
             <div
               v-if="'user' != user.user_type"
@@ -598,9 +606,7 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-3"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'sign-out-alt']"
+                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -608,7 +614,6 @@
         </b-modal>
       </div>
     </nav>
-
 
     <div></div>
   </header>
@@ -626,26 +631,26 @@ export default {
   name: "navbar",
   components: {
     Button,
-    Activity,
+    Activity
     // NavBarNotifications
   },
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
-          location:  { code: '', label: 'Location' },
-          location_placeholder:this.$t("home.Location")
+          location: { code: "", label: "Location" },
+          location_placeholder: this.$t("home.Location")
         };
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       isActive: false,
-      
+      cartCount: 0,
       shownav: false,
       notifications: [],
       messages: [],
@@ -654,7 +659,7 @@ export default {
       redirectionPatterns: null,
       selectedUser: null,
       users: [],
-      citiesValues: [],
+      citiesValues: []
     };
   },
 
@@ -663,82 +668,104 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-     // neigbourhoods: "auth/neigbourhoods",
-      cities: "auth/cities",
+      // neigbourhoods: "auth/neigbourhoods",
+      cities: "auth/cities"
     }),
-    city(){
+    city() {
       return this.credentials.location;
     },
 
-    islogin(){  return this.$store.getters["auth/isLogged"]; }
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   beforeMount() {
     // this.getLocation();
   },
+  mounted() {
+    this.fetchCartCount();
+  },
   created() {
     //check for authentication
     this.getCities();
-   
+
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
 
       this.notificationPatterns = {
         user: () => "user/notification",
-        business: () => `/notification/business/${this.user.slug?this.user.slug:this.user.user_slug}`,
-        network: () => `/notification/network/${this.user.slug?this.user.slug:this.user.user_slug}`,
+        business: () =>
+          `/notification/business/${
+            this.user.slug ? this.user.slug : this.user.user_slug
+          }`,
+        network: () =>
+          `/notification/network/${
+            this.user.slug ? this.user.slug : this.user.user_slug
+          }`
       };
 
       this.messagePatterns = {
         user: () => "/messages/latest/user",
-        business: () => `/messages/latest/${this.user.slug?this.user.slug:this.user.user_slug}/business`,
-        network: () => `/messages/latest/${this.user.slug?this.user.slug:this.user.user_slug}/network`,
+        business: () =>
+          `/messages/latest/${
+            this.user.slug ? this.user.slug : this.user.user_slug
+          }/business`,
+        network: () =>
+          `/messages/latest/${
+            this.user.slug ? this.user.slug : this.user.user_slug
+          }/network`
       };
 
       this.redirectionPatterns = {
         message: {
           user: () => ({
-            name: "Nav Meassage",
+            name: "Nav Meassage"
           }),
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.slug?this.user.slug:this.user.user_slug },
-            query: { tabId: 1 },
+            params: {
+              id: this.user.slug ? this.user.slug : this.user.user_slug
+            },
+            query: { tabId: 1 }
           }),
-          network: () => null,
+          network: () => null
         },
         notification: {
           business: () => ({
             name: "BusinessOwner",
-            params: { id: this.user.slug?this.user.slug:this.user.user_slug },
-            query: { tabId: 2 },
+            params: {
+              id: this.user.slug ? this.user.slug : this.user.user_slug
+            },
+            query: { tabId: 2 }
           }),
 
           user: () => ({
-            name: "settings",
+            name: "settings"
           }),
           network: () => ({
             name: "networks",
-            params: { id: this.user.slug?this.user.slug:this.user.user_slug  },
-            query: { tabId: 2 },
-          }),
-        },
+            params: {
+              id: this.user.slug ? this.user.slug : this.user.user_slug
+            },
+            query: { tabId: 2 }
+          })
+        }
       };
 
       this.updateNotificationEvent();
     }
-    
-    console.log('updated city: ', this.credentials.location);
+
+    console.log("updated city: ", this.credentials.location);
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function () {
-      
+    "$store.state.auth.profilConnected": function() {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function () {
+    "$i18n.locale": async function() {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale
       );
@@ -748,18 +775,16 @@ export default {
     },
 
     query(newQuery) {
-      axios
-        .get(`visitor/search/city?city=${newQuery}`)
-        .then(({ data }) => {
-          this.$store.commit("auth/setCities", data.data);
-        });
-    },
+      axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setCities", data.data);
+      });
+    }
   },
-  
+
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
-    },
+    }
   },
 
   methods: {
@@ -769,28 +794,28 @@ export default {
       lauchNetworkRequest: "social/INIT",
       getGeo: "business/getGeo",
       getNeigbourhoods: "auth/neigbourhoods",
-      Logout: "auth/logout",
+      Logout: "auth/logout"
     }),
-    setSelectedLocation(value)
-    {
+    setSelectedLocation(value) {
       this.city = value;
-      this.credentials.location = {code: value.code, label: value.label };
+      this.credentials.location = { code: value.code, label: value.label };
     },
     profileSenderImange(image) {
-      if (!image)
-        return null;
+      if (!image) return null;
 
       const picture = image.profile_picture
-          ? image.profile_picture
-          : image.logo_path
-            ? image.logo_path
-            : image.image ? image.image : null ;
+        ? image.profile_picture
+        : image.logo_path
+        ? image.logo_path
+        : image.image
+        ? image.image
+        : null;
 
       return picture;
     },
 
     ...mapMutations({
-      profile: "auth/profilConnected",
+      profile: "auth/profilConnected"
     }),
 
     gotoProfile() {
@@ -799,51 +824,62 @@ export default {
 
     onRedirect() {
       const link = {
-        network: () => ({ name: "networks", params: { id: this.user.slug?this.user.slug:this.user.user_slug } }),
+        network: () => ({
+          name: "networks",
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug }
+        }),
         business: () => ({
           name: "BusinessOwner",
-          params: { id: this.user.slug?this.user.slug:this.user.user_slug },
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug }
         }),
-        user: () => ({ name: "profile_owner" }),
+        user: () => ({ name: "profile_owner" })
       };
       return link[this.user.user_type]();
     },
 
-
-  getCities(){
-      this.$store.dispatch("auth/cities", {})
-         .then(() => {
-            const cities = this.$store.getters["auth/cities"];
-            for (let index in cities) {
-                this.citiesValues.push({
-                  label: cities[index].name,
-                  code: cities[index].id
-                });
-            }
-          })
-          .catch((err) => {
-            console.log({err:err});
-          });
-  },
-  getLocation() {
-      const success = (position) => {
+    getCities() {
+      this.$store
+        .dispatch("auth/cities", {})
+        .then(() => {
+          const cities = this.$store.getters["auth/cities"];
+          for (let index in cities) {
+            this.citiesValues.push({
+              label: cities[index].name,
+              code: cities[index].id
+            });
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    getLocation() {
+      const success = position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
         this.getGeo({ lat: latitude, lng: longitude });
 
         //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
-        this.getNeigbourhoods({ lat: latitude, lng: longitude });    
+        this.getNeigbourhoods({ lat: latitude, lng: longitude });
       };
 
-      const error = (err) => {
+      const error = err => {
         console.log(error);
       };
 
       // This will open permission popup
       navigator.geolocation.getCurrentPosition(success, error);
     },
-
+    async fetchCartCount() {
+      try {
+        const url = this.islogin ? "cart/total" : "guest/cart/total";
+        const response = await axios.get(url);
+        this.cartCount = response.data.data.totalItems;
+      } catch (error) {
+        console.error("Error fetching cart count:", error);
+      }
+    },
     updateNotificationEvent() {
       try {
         const newRouteNotificationApi = this.notificationPatterns[
@@ -863,7 +899,6 @@ export default {
 
     newRedirection(type) {
       try {
-        
         const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
         if (newPath) {
@@ -872,41 +907,40 @@ export default {
           if (newPath.params)
             path = Object.assign(path, { params: newPath.params });
 
-          if (newPath.query) path = Object.assign(path, { query: newPath.query });
+          if (newPath.query)
+            path = Object.assign(path, { query: newPath.query });
 
           return path;
         }
 
         return { name: this.$route.name };
-      
-      }catch(err){
-        console.log(err)
+      } catch (err) {
+        console.log(err);
       }
-      
     },
 
     getKeyword() {
-
       if (!this.credentials.keyword) return false;
-     
-      if (this.$route.name != "search") { 
-        this.$emit('updateSearchKeyword', this.credentials.keyword)
-      }
-     
+
       if (this.$route.name != "search") {
-        
+        this.$emit("updateSearchKeyword", this.credentials.keyword);
+      }
+
+      if (this.$route.name != "search") {
         this.$store
           .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
+            keyword: this.credentials.keyword
           })
-          .catch((err) => {
+          .catch(err => {
             console.log("Error erro!");
           });
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword,  location: this.credentials.location, },
-          
+          query: {
+            keyword: this.credentials.keyword,
+            location: this.credentials.location
+          }
         });
       }
     },
@@ -914,7 +948,7 @@ export default {
       const link = {
         home: () => {
           return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
-        },
+        }
       };
       try {
         return link[type]();
@@ -937,12 +971,12 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function () {
+    logout: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const requestForReset = await this.$repository.share.switch(
@@ -955,7 +989,7 @@ export default {
 
         if (response.success) {
           loader.hide();
-        
+
           this.Logout();
         }
         return false;
@@ -963,12 +997,12 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function () {
+    switchToProfile: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const response = await this.$repository.share.switch(null, "reset");
@@ -976,7 +1010,7 @@ export default {
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
         this.$router.push({
-          name: "profile_owner",
+          name: "profile_owner"
         });
       }
 
@@ -985,23 +1019,21 @@ export default {
 
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
-  
-         this.$refs.toglercontainer.style.marginTop = "25px";
-       this.$refs.toglercontainer.style.position = "absolute";
 
-       this.$refs.toglercontainer.style.right = "1%";
+      this.$refs.toglercontainer.style.marginTop = "25px";
+      this.$refs.toglercontainer.style.position = "absolute";
 
-       this.$refs.isnaav.style.display = "none";
-       
-      
+      this.$refs.toglercontainer.style.right = "1%";
+
+      this.$refs.isnaav.style.display = "none";
     },
 
-    getNetworks: async function () {
+    getNetworks: async function() {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function () {
+    getBusiness: async function() {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -1031,38 +1063,50 @@ export default {
     async newNotification(url) {
       await axios
         .get(url)
-        .then((response) => {
+        .then(response => {
           this.notifications = response.data.data.slice(0, 5);
         })
-        .catch((error) => console.log("Error In newNotification  => " + error));
+        .catch(error => console.log("Error In newNotification  => " + error));
     },
 
     async newMessage(url) {
       await axios
         .get(url)
-        .then((response) => {
+        .then(response => {
           this.messages = response.data.data;
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     checkIfExists(object, key) {
       return _.has(object, key);
     }
-  },
+  }
 };
-
 </script>
 <style>
-
-.m-where{
+.cart-icon {
+  color: #e75c18 !important;
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -10px !important;
+  right: -10px !important;
+  font-size: 10px;
+  padding: 0.25em 0.5em;
+}
+.icon-size {
+  font-size: 1.7rem !important;
+}
+.m-where {
   width: 87.8%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0px;
-    border: none;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 0px;
+  border: none;
 }
 
-.m-where input{
+.m-where input {
   border: none;
 }
 .vbst-item:hover {
@@ -1290,20 +1334,21 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-.m-where{
-  width: 85.8%;
+  .m-where {
+    width: 85.8%;
     padding: 0px;
     margin: 0px;
     border-radius: 0px;
     border: none;
+  }
+
+  .balala .form-control {
+    border: 0px;
+  }
 }
 
-.balala .form-control{
-  border: 0px;
-}
-}
-
-.city-search .multiselect__tags,.city-search .multiselect__select{
+.city-search .multiselect__tags,
+.city-search .multiselect__select {
   height: 100% !important;
 }
 </style>

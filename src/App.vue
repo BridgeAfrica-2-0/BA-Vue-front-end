@@ -46,7 +46,7 @@ export default {
 
       showblock: true,
       showfadde: false,
-      showfaddeB: true,
+      showfaddeB: true
     };
   },
 
@@ -57,13 +57,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
       // authModal:"auth/authModal"
     }),
 
     authModal() {
       return this.$store.state.auth.authModal.visibility;
-    },
+    }
   },
   watch: {
     "$store.state.auth.profilConnected": function(newProfile) {
@@ -82,7 +82,7 @@ export default {
       newvalue
         ? this.$bvModal.show("authModal")
         : this.$bvModal.hide("authModal");
-    },
+    }
 
     // "authModal": function(newvalue){
     //   newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
@@ -117,7 +117,7 @@ export default {
 
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
-      setBusiness: "social/FIND_USER_BUSNESS",
+      setBusiness: "social/FIND_USER_BUSNESS"
     }),
 
     getNetworkAndBusiness: async function(uuid) {
@@ -142,8 +142,8 @@ export default {
     },
     afterEnter(element) {
       element.style.height = "auto";
-    },
-  },
+    }
+  }
 };
 </script>
 

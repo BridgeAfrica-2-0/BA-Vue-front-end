@@ -109,7 +109,7 @@
                               variant="primary"
                             >
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                              {{ $t('general.Community') }}
+                              {{ $t("general.Community") }}
                             </b-button>
                           </b-col>
                         </b-row>
@@ -280,15 +280,15 @@ export default {
         { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
         { id: 7, first_name: "The Great", last_name: "Gazzoo" },
         { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
-      ],
+        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
+      ]
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    },
-  },
+    }
+  }
 };
 </script>
 

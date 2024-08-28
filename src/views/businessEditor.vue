@@ -1,4 +1,4 @@
- <template>
+<template>
   <div class="wahala" style="overflow-x: clip;  padding: 0px">
     <span v-if="isloaded">
       <navbar />
@@ -61,7 +61,7 @@ export default {
     LyTab,
     Settings,
 
-    Inbox,
+    Inbox
 
     // Footer,
   },
@@ -78,11 +78,11 @@ export default {
         { label: "Inbox", icon: "" },
         { label: "Notification", icon: "" },
 
-        { label: "Settings", icon: "" },
+        { label: "Settings", icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd",
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
 
@@ -91,7 +91,7 @@ export default {
 
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
-      .then((data) => {
+      .then(data => {
         console.log(data);
 
         let role = data.data.data.role;
@@ -99,14 +99,14 @@ export default {
           case "visitor":
             this.$router.push({
               name: "BusinessFollower",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
         }
 
         this.isloaded = true;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log({ error: error });
 
         console.log(error.response.status);
@@ -118,19 +118,18 @@ export default {
   },
 
   methods: {
-   
-    async  businessInfo() {
-       
-      let url=`business/info/${this.$route.params.id}`;
+    async businessInfo() {
+      let url = `business/info/${this.$route.params.id}`;
 
-      await axios.get(url)
-      .then(({ data }) => {
-         this.$store.commit("businessOwner/setBusinessInfo", data.data);
-         this.auth({ ...data.data,profile_picture: data.data.logo_path, user_type: 'business' });
-          })
-  
+      await axios.get(url).then(({ data }) => {
+        this.$store.commit("businessOwner/setBusinessInfo", data.data);
+        this.auth({
+          ...data.data,
+          profile_picture: data.data.logo_path,
+          user_type: "business"
+        });
+      });
     },
-
 
     CommunityBusiness() {
       this.$store
@@ -138,7 +137,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -149,7 +148,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -160,7 +159,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -171,10 +170,10 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
   computed: {},
 
@@ -191,7 +190,7 @@ export default {
 
     this.businessCommunityTotal();
     this.ownerPost();
-  },
+  }
 };
 </script>
 

@@ -1,22 +1,34 @@
 <template>
   <div>
-   
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> {{ $t('general.About') }}
- 
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon>
+    {{ $t("general.About") }}
+
     <hr />
 
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
-        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active><Biography /></b-tab>  
-        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
-        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
+        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active
+          ><Biography
+        /></b-tab>
+        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"
+          ><ContactandInfo />
+        </b-tab>
+        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"
+          ><WorkAndEducation
+        /></b-tab>
       </b-tabs>
     </b-card>
     <b-card no-body class="mobile p-2">
       <b-tabs pills card justified>
-        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active><Biography /></b-tab>
-        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"><ContactAndInfo /> </b-tab>
-        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"><WorkAndEducation /></b-tab>
+        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active
+          ><Biography
+        /></b-tab>
+        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"
+          ><ContactAndInfo />
+        </b-tab>
+        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"
+          ><WorkAndEducation
+        /></b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -30,42 +42,39 @@ export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation,
+    WorkAndEducation
   },
 
   data() {
     return {
       size: 0,
-      profile_about: null,
+      profile_about: null
     };
   },
 
-  methods:{
-    
-
-
+  methods: {
     created() {
-    this.profile_about = JSON.parse(
-            JSON.stringify(this.$store.getters['profile/getProfileAbout'])
-    );
-    console.log("Load User Profile About start ++++++", this.profile_about);
-    this.$store
-            .dispatch("profile/loadUserProfileAbout", null)
-            .then(response => {
-              
-            })
-            .catch(error => {
-              console.log("Error from server or from browser error (2) ++++", error);
-            })
-            .finally(() => {
-              this.profile_about = JSON.parse(
-                      JSON.stringify(this.$store.getters['profile/getProfileAbout_'])
-              );
-              console.log("Load User Profile About end ++++++", this.profile_about);
-            });
-  },
-
-  },
+      this.profile_about = JSON.parse(
+        JSON.stringify(this.$store.getters["profile/getProfileAbout"])
+      );
+      console.log("Load User Profile About start ++++++", this.profile_about);
+      this.$store
+        .dispatch("profile/loadUserProfileAbout", null)
+        .then(response => {})
+        .catch(error => {
+          console.log(
+            "Error from server or from browser error (2) ++++",
+            error
+          );
+        })
+        .finally(() => {
+          this.profile_about = JSON.parse(
+            JSON.stringify(this.$store.getters["profile/getProfileAbout_"])
+          );
+          console.log("Load User Profile About end ++++++", this.profile_about);
+        });
+    }
+  }
 };
 </script>
 

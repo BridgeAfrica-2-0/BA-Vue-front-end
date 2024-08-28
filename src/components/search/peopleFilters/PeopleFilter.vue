@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form class="mb-4">
-      <label for="feedback-user">{{$t("general.Profession")}}</label>
+      <label for="feedback-user">{{ $t("general.Profession") }}</label>
       <b-form-input
         @input="debounceInput"
         id="feedback-user"
@@ -9,14 +9,15 @@
       ></b-form-input>
     </b-form>
 
-    <a v-if="islogin"
+    <a
+      v-if="islogin"
       :class="['cursor', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
       @click.prevent="toogleRootSection"
     >
       <b-row class="fl px-3">
-        <span>{{$t("general.People_from")}}</span>
+        <span>{{ $t("general.People_from") }}</span>
         <b-icon
           :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
         ></b-icon>
@@ -29,14 +30,14 @@
         <a
           :class="[
             'cursor',
-            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100',
+            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100'
           ]"
           :aria-expanded="peopleSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-1"
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("general.People")}} </span>
+            <span>{{ $t("general.People") }} </span>
             <b-icon
               :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -67,14 +68,14 @@
         <a
           :class="[
             'cursor',
-            buisnessSectionIsVisible ? 'w-100' : 'collapsed w-100',
+            buisnessSectionIsVisible ? 'w-100' : 'collapsed w-100'
           ]"
           :aria-expanded="buisnessSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-2"
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("general.Buisness")}} </span>
+            <span>{{ $t("general.Buisness") }} </span>
             <b-icon
               :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -95,7 +96,6 @@
                 name="bui-2a"
                 stacked
               >
-
               </b-form-radio-group>
             </b-form-group>
           </b-card>
@@ -106,14 +106,14 @@
         <a
           :class="[
             'cursor',
-            networkSectionIsVisible ? 'w-100' : 'collapsed w-100',
+            networkSectionIsVisible ? 'w-100' : 'collapsed w-100'
           ]"
           :aria-expanded="networkSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-4"
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("general.Network")}} </span>
+            <span>{{ $t("general.Network") }} </span>
             <b-icon
               :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -145,7 +145,6 @@
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon "
         /> -->
-        
       </b-card>
     </b-collapse>
   </div>
@@ -172,19 +171,19 @@ export default {
     selectedNetwork: null,
     optionsPeople: options,
     optionsBuisness: options,
-    optionsNetwork: [...options, { text: "Member", value: "Member" }],
+    optionsNetwork: [...options, { text: "Member", value: "Member" }]
   }),
 
   watch: {
-    selectedPeople: function () {
-      this.onProcess('people');
+    selectedPeople: function() {
+      this.onProcess("people");
     },
-    selectedBuisness: function () {
-      this.onProcess('business');
+    selectedBuisness: function() {
+      this.onProcess("business");
     },
-    selectedNetwork: function () {
-      this.onProcess('network');
-    },
+    selectedNetwork: function() {
+      this.onProcess("network");
+    }
   },
 
   methods: {
@@ -194,25 +193,25 @@ export default {
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       stack: "search/STACK_VALUE",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
-      reset: "search/RESET_RESULT",
+      reset: "search/RESET_RESULT"
     }),
 
-    hide(){
-      this.$bvModal.hide('myModall')
+    hide() {
+      this.$bvModal.hide("myModall");
     },
 
     map(e, type) {
       return e ? [`${type}_${e.toLowerCase()}`] : [];
     },
 
-    onProcess: _.debounce(function (e) {
+    onProcess: _.debounce(function(e) {
       this.page(1);
 
-      
-      const user = (e == 'people') ? this.map(this.selectedPeople, `user`): [];
-      const buisness = (e == 'business') ? this.map(this.selectedBuisness, `buisness`): [];
-      const network = (e == 'network') ? this.map(this.selectedNetwork, `network`) : [];
-
+      const user = e == "people" ? this.map(this.selectedPeople, `user`) : [];
+      const buisness =
+        e == "business" ? this.map(this.selectedBuisness, `buisness`) : [];
+      const network =
+        e == "network" ? this.map(this.selectedNetwork, `network`) : [];
 
       const data = [...user, ...buisness, ...network].reduce((hash, value) => {
         hash[value] = "";
@@ -220,16 +219,14 @@ export default {
       }, {});
 
       this.stack({ data: { ...data, keyword: this.postKeyword }, page: 1 });
-      if(this.islogin)
-      {
+      if (this.islogin) {
         this.setCallback(this.$repository.search.findUserByParam);
-      }
-      else{
+      } else {
         this.setCallback(this.$repository.search.findGuestUserByParam);
       }
 
-      this._onFindUser({...data,keyword: this.postKeyword});
-      this.hide()
+      this._onFindUser({ ...data, keyword: this.postKeyword });
+      this.hide();
     }, 2000),
 
     async _onFindUser(payload) {
@@ -237,16 +234,15 @@ export default {
         this.lauchLoader(true);
         this.reset();
         var request;
-        if(this.islogin){
-           request = await this.$repository.search.findUserByParam({
-            data:payload,
-            page: 1,
-          });
-        }
-        else{
-           request = await this.$repository.search.findGuestUserByParam({
+        if (this.islogin) {
+          request = await this.$repository.search.findUserByParam({
             data: payload,
-            page: 1,
+            page: 1
+          });
+        } else {
+          request = await this.$repository.search.findGuestUserByParam({
+            data: payload,
+            page: 1
           });
         }
         if (request.success) {
@@ -259,25 +255,29 @@ export default {
       this.lauchLoader(false);
     },
 
-    debounceInput: _.debounce(function (e) {
+    debounceInput: _.debounce(function(e) {
       if (e) {
         this.page(1);
-        this.stack({data:{ profession: e, keyword: this.postKeyword ? this.postKeyword: "" },page: 1});
-        if(this.islogin)
-      {
-        this.setCallback(this.$repository.search.findUserByParam);
-      }
-      else{
-        this.setCallback(this.$repository.search.findGuestUserByParam);
-      }
-        
+        this.stack({
+          data: {
+            profession: e,
+            keyword: this.postKeyword ? this.postKeyword : ""
+          },
+          page: 1
+        });
+        if (this.islogin) {
+          this.setCallback(this.$repository.search.findUserByParam);
+        } else {
+          this.setCallback(this.$repository.search.findGuestUserByParam);
+        }
+
         this._onFindUser({
           profession: e,
           keyword: this.postKeyword,
-          page: 1,
+          page: 1
         });
 
-        this.hide()
+        this.hide();
       }
     }, 1000),
 
@@ -290,15 +290,17 @@ export default {
       this.peopleSectionIsVisible = false;
       this.buisnessSectionIsVisible = false;
       this.networkSectionIsVisible = false;
-    },
+    }
   },
 
   computed: {
     ...mapGetters({
-      postKeyword: "search/POST_KEYWORD",
+      postKeyword: "search/POST_KEYWORD"
     }),
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
-  },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
+  }
 };
 </script>
 

@@ -124,7 +124,7 @@ export default {
     return {
       url: null,
       moment: moment,
-     
+
       filter: "0",
       filterData: false,
       spinner: false,
@@ -136,26 +136,28 @@ export default {
       options: [
         {
           value: "Improvement",
-          text: this.$t("general.Suggestion_for_Improvement"),
+          text: this.$t("general.Suggestion_for_Improvement")
         },
-        { value: "Complain", text: this.$t("general.Complaints") },
+        { value: "Complain", text: this.$t("general.Complaints") }
       ],
       filters: [
         { value: "0", text: "Any" },
         {
           value: "Improvement",
-          text: this.$t("general.Suggestion_for_Improvement"),
+          text: this.$t("general.Suggestion_for_Improvement")
         },
-        { value: "Complain", text: this.$t("general.Complaints") },
+        { value: "Complain", text: this.$t("general.Complaints") }
       ],
       feedbackForm: {
         title: "Improvement",
-        description: "",
-      },
+        description: ""
+      }
     };
   },
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   mounted() {
     this.islogin = this.$store.getters["auth/isLogged"];
@@ -199,16 +201,13 @@ export default {
       this.axios
         .post(url, formData)
         .then(({ data }) => {
-         
           let object = Object.values(data.data);
           if (object.length) {
-          
-            object.map((item) => {
+            object.map(item => {
               this.feedbacks.push(item);
-            
             });
             this.currentPage += 1;
-            
+
             // this.feedbacks.push(...data.data);
             this.loading = false;
             $state.loaded();
@@ -218,26 +217,26 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           this.loading = false;
           console.log({ err: err });
         });
     },
 
-    createFeedback: function () {
+    createFeedback: function() {
       this.spinner = true;
       let formData = new FormData();
       formData.append("title", this.feedbackForm.title);
       formData.append("description", this.feedbackForm.description);
-    
+
       this.axios
         .post("network/" + this.url + "/feedback/create", formData)
         .then(() => {
-          this.feedbackForm = {title:'Improvement',description: "" };
+          this.feedbackForm = { title: "Improvement", description: "" };
 
           this.currentPage = 1;
-        
-          this.feedbacks=[];
+
+          this.feedbacks = [];
           this.$nextTick(() => {
             this.$refs.infiniteLoading.attemptLoad();
           });
@@ -245,15 +244,15 @@ export default {
           this.spinner = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Just Created A New Feedback",
+            message: "You Just Created A New Feedback"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.spinner = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("general.Unable_to_Create_Your_Feedback"),
+            message: this.$t("general.Unable_to_Create_Your_Feedback")
           });
         });
     },
@@ -261,8 +260,8 @@ export default {
       this.currentPage = value;
       console.log(this.currentPage);
       this.getMembers();
-    },
-  },
+    }
+  }
 };
 </script>
 

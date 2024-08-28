@@ -10,7 +10,12 @@
               <h1>{{ post.title }}</h1>
               <b-row>
                 <b-col>
-                  <p><small>{{ $t("general.Public") }} - 397  {{ $t("general.Members") }}</small></p>
+                  <p>
+                    <small
+                      >{{ $t("general.Public") }} - 397
+                      {{ $t("general.Members") }}</small
+                    >
+                  </p>
                 </b-col>
                 <b-col class="col-1">
                   <b-button
@@ -19,18 +24,16 @@
                     size="sm"
                     variant="primary"
                     ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'check']"
-                      />{{ $t("general.Joined") }}</small
+                      <fas-icon class="mr-2" :icon="['fas', 'check']" />{{
+                        $t("general.Joined")
+                      }}</small
                     ></b-button
                   >
                   <b-button v-if="!post.state" size="sm" variant="success"
                     ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'plus']"
-                      />{{ $t("general.Join") }}</small
+                      <fas-icon class="mr-2" :icon="['fas', 'plus']" />{{
+                        $t("general.Join")
+                      }}</small
                     ></b-button
                   >
                 </b-col>
@@ -43,17 +46,29 @@
     <div class="no-network" v-if="networkShow">
       <div class="white-box">
         <h2>{{ $t("general.Builds_networks_around_your_Business") }}</h2>
-        <p>{{ $t("general.Create_network_to_stay_in_touch_with_just_the_people") }}</p>
-        <p>{{ $t("general.you_want_Engage") }}, {{ $t("general.share") }},{{ $t("general.Make_Plans_and_much_more") }} </p>
-        <b-button class="btn-add" variant="primary">{{ $t("general.Add_Network") }}</b-button>
+        <p>
+          {{
+            $t("general.Create_network_to_stay_in_touch_with_just_the_people")
+          }}
+        </p>
+        <p>
+          {{ $t("general.you_want_Engage") }}, {{ $t("general.share") }},{{
+            $t("general.Make_Plans_and_much_more")
+          }}
+        </p>
+        <b-button class="btn-add" variant="primary">{{
+          $t("general.Add_Network")
+        }}</b-button>
       </div>
     </div>
 
-    <b-modal hide-footer :title=" $t('general.Add_network')" v-model="showModal">
+    <b-modal hide-footer :title="$t('general.Add_network')" v-model="showModal">
       <b-form>
         <b-form-input v-model="text" placeholder="network name"></b-form-input>
         <b-form-file class="mt-1" id="file-small" size="sm"></b-form-file>
-        <b-button class="mt-2 " variant="primary"> {{ $t("general.Add") }}</b-button>
+        <b-button class="mt-2 " variant="primary">
+          {{ $t("general.Add") }}</b-button
+        >
       </b-form>
     </b-modal>
   </div>
@@ -72,7 +87,14 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
@@ -80,6 +102,14 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+          state: "1"
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
@@ -87,24 +117,9 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
-        },
-      ],
+          state: "1"
+        }
+      ]
     };
   },
   methods: {
@@ -114,8 +129,8 @@ export default {
 
     addNetwork() {
       this.showModal = !this.showModal;
-    },
-  },
+    }
+  }
 };
 </script>
 

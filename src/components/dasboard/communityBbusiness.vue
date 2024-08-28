@@ -1,21 +1,28 @@
-
 <template>
   <div class="h-100">
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Business
+        v-for="item in businesses"
+        :key="item.id"
+        :business="item"
+        @getTotalCommunity="getTotalCommunity"
+      />
 
-      <VuePerfectScrollbar   class="scroll-area s-card"  settings="{maxScrollbarLength: 60px}"  >
-  
-       <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
-         
-       <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
-       </VuePerfectScrollbar>
-
+      <infinite-loading
+        @infinite="infiniteHandler"
+        ref="infiniteLoading"
+      ></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Business from "@/components/Business";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["type"],
   data() {
@@ -30,38 +37,31 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
     biz_id() {
       return this.$store.state.dashboard.dBusinessId;
-    },
+    }
   },
 
- components: {
-     Business,
-     VuePerfectScrollbar
+  components: {
+    Business,
+    VuePerfectScrollbar
   },
-  
+
   methods: {
-
-    
-     businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-        
-        })
-        .catch((err) => {
-        
-        });
+        .then(() => {})
+        .catch(err => {});
     },
 
-
-gotoBusiness(id) {
+    gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },
     async handleFollow(user) {
@@ -71,19 +71,17 @@ gotoBusiness(id) {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-         
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -126,15 +124,11 @@ gotoBusiness(id) {
             }
           }
         })
-        .catch((err) => {
-        
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
-
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

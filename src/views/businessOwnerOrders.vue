@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <hr />  
+    <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
     ----------------------DEBUT -----------------------------------------------------
-    -->  
-   
+    -->
+
     <div id="hidemobile">
       <div
         class="justify-content-between d-flex row cd B"
@@ -17,7 +17,7 @@
           @click="changeElementType(1)"
         >
           <div class="cercle1">1</div>
-          <h2 class="h2 text-position">{{ $t("businessowner.All") }}</h2>  
+          <h2 class="h2 text-position">{{ $t("businessowner.All") }}</h2>
         </div>
 
         <div
@@ -85,26 +85,32 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item @click="updateStatus(item.oderId, 'archive')">{{
-                        $t("businessowner.Archive")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(item.oderId, 'cancel')">{{
-                        $t("businessowner.Delete")
-                      }}</b-dropdown-item>
+                      <b-dropdown-item
+                        @click="updateStatus(item.oderId, 'archive')"
+                        >{{ $t("businessowner.Archive") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item
+                        @click="updateStatus(item.oderId, 'cancel')"
+                        >{{ $t("businessowner.Delete") }}</b-dropdown-item
+                      >
 
-                      <b-dropdown-item @click="updateStatus(item.oderId, 'shipped')" >{{ 
-                        $t("businessowner.shipped")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(item.oderId, 're-shedule')">{{
-                        $t("businessowner.Reshedule")
-                      }}</b-dropdown-item>
+                      <b-dropdown-item
+                        @click="updateStatus(item.oderId, 'shipped')"
+                        >{{ $t("businessowner.shipped") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item
+                        @click="updateStatus(item.oderId, 're-shedule')"
+                        >{{ $t("businessowner.Reshedule") }}</b-dropdown-item
+                      >
                     </b-dropdown>
                   </div>
                 </div>
-                <div role="button" @click="getBusinessOrderDetails(item.oderId)"> 
-
-                <span class="gras">{{ $t("businessowner.Order") }}</span>
-                <span class="text-success order">#{{ item.oderId }}</span>
+                <div
+                  role="button"
+                  @click="getBusinessOrderDetails(item.oderId)"
+                >
+                  <span class="gras">{{ $t("businessowner.Order") }}</span>
+                  <span class="text-success order">#{{ item.oderId }}</span>
                 </div>
                 <br />
                 <span class="flou">
@@ -113,7 +119,7 @@
               </div>
 
               <span class="row posstatus">
-                <p class="h3 statusp">{{ $t("businessowner.Status") }}:</p> 
+                <p class="h3 statusp">{{ $t("businessowner.Status") }}:</p>
                 <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
               </span>
             </div>
@@ -138,14 +144,12 @@
                 </h3>
                 <h3 class="h3 margm2">{{ $t("businessowner.Price") }}:</h3>
 
-                <h3 class="h3 margm2">
-                  {{$t("myOrders.shipping_cost")}}:
-                </h3>
+                <h3 class="h3 margm2">{{ $t("myOrders.shipping_cost") }}:</h3>
                 <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
               </div>
 
               <div class="col-4 m-auto">
-                <h3 class="h3">{{ item.totalProduct }}</h3> 
+                <h3 class="h3">{{ item.totalProduct }}</h3>
 
                 <h3 class="h3">{{ item.Totalprice }} XAF</h3>
                 <h3 class="h3">{{ item.shippingCost }} XAF</h3>
@@ -158,15 +162,15 @@
             </div>
 
             <div class="justify-content-center container row">
-              <div class=""> 
-               <button
+              <div class="">
+                <button
                   @click="updateStatus(9, 'shipped')"
                   class="buttonm btn shadow text-center"
                 >
                   <h3 class="h3 button-text">
                     {{ $t("businessowner.shipped") }}
                   </h3>
-                </button> 
+                </button>
               </div>
             </div>
             <div class="justify-content-center container row">
@@ -176,11 +180,9 @@
             <!-- <hr /> -->
           </div>
           <div class="overflow-auto">
-          
-            
-          <div class="text-center d-flex">    
-         <b-pagination
-                v-if="next || prev "
+            <div class="text-center d-flex">
+              <b-pagination
+                v-if="next || prev"
                 v-model="currentPage"
                 pills
                 class="m-auto"
@@ -188,21 +190,9 @@
                 :total-rows="totalItems"
                 @change="handlePage"
               ></b-pagination>
-            </div> 
-        
+            </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
       </div>
     </div>
     <div class="justify-content-between row"></div>
@@ -210,7 +200,7 @@
 
     <!-- <div class="container d-flex justify-content-end">clear history</div> -->
     <!--  partie desktop---------------------------------------------------------------------------------------- -->
- 
+
     <div class="hidedesktop" id="hidedesktop">
       <!-- navigation--------------- -->
       <div class="row parent">
@@ -297,7 +287,7 @@
       </div>
 
       <div>
-        <div  class="inprogress">
+        <div class="inprogress">
           <div class="show row">
             <div class="col-3">{{ $t("businessowner.Show") }}:</div>
             <div class="col">
@@ -318,24 +308,30 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(item.oderId, 'archive')">{{
-                      $t("businessowner.Archive")
-                    }}</b-dropdown-item>   
-                    <b-dropdown-item @click="updateStatus(item.oderId, 'cancel')">{{
-                      $t("businessowner.Delete")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item  @click="updateStatus(item.oderId, 'shipped')">{{
-                      $t("businessowner.shipped")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(item.oderId, 're-shedule')">{{
-                      $t("businessowner.Reshedule")
-                    }}</b-dropdown-item>
+                    <b-dropdown-item
+                      @click="updateStatus(item.oderId, 'archive')"
+                      >{{ $t("businessowner.Archive") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      @click="updateStatus(item.oderId, 'cancel')"
+                      >{{ $t("businessowner.Delete") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      @click="updateStatus(item.oderId, 'shipped')"
+                      >{{ $t("businessowner.shipped") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      @click="updateStatus(item.oderId, 're-shedule')"
+                      >{{ $t("businessowner.Reshedule") }}</b-dropdown-item
+                    >
                   </b-dropdown>
                 </div>
               </div>
-             <div role="button" @click="getBusinessOrderDetails(item.oderId)"> 
-              <span class="gras">{{ $t("businessowner.Order") }}</span>
-              <span class="text-success">#{{ item.oderId }}</span> </div> <br />
+              <div role="button" @click="getBusinessOrderDetails(item.oderId)">
+                <span class="gras">{{ $t("businessowner.Order") }}</span>
+                <span class="text-success">#{{ item.oderId }}</span>
+              </div>
+              <br />
 
               <span class="flou">{{
                 moment(item.dateCreated).format("DD/MM/YYYY HH:mm")
@@ -361,7 +357,7 @@
                 <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
                 <h3>{{ $t("businessowner.Price") }} :</h3>
 
-                <h3>{{$t("myOrders.shipping_cost")}}:</h3>   
+                <h3>{{ $t("myOrders.shipping_cost") }}:</h3>
                 <h3>{{ $t("businessowner.Total") }} :</h3>
               </div>
 
@@ -378,14 +374,14 @@
               </div>
 
               <div class="col-2 m-auto justify-content-end btn-marg">
-                 <button
+                <button
                   @click="updateStatus(9, 'shipped')"
                   class="button btn shadow"
                 >
                   <h3 class="h3 button-text">
                     {{ $t("businessowner.Shipped") }}
                   </h3>
-                </button> 
+                </button>
               </div>
 
               <div class="justify-content-center container row">
@@ -399,12 +395,10 @@
           </div>
 
           <div class="overflow-auto">
-          
-              
-            <div class="text-center d-flex">  
+            <div class="text-center d-flex">
               <b-pagination
-              class="m-auto"
-                v-if="next || prev "
+                class="m-auto"
+                v-if="next || prev"
                 v-model="currentPage"
                 pills
                 :per-page="perPage"
@@ -412,119 +406,118 @@
                 @change="handlePage"
               ></b-pagination>
             </div>
-           
           </div>
-        </div> </div>
+        </div>
+      </div>
     </div>
-   
 
-  <b-modal hide-footer id="bizproductdetails"  size="xl"   ref="bizproductdetails" title="Order Details">
-   <div> 
-
- <businessordersdetail  ref="businessproductdetails"  orderdetails="orderDetails" :loading="isloading" />
-     </div>
-  </b-modal>
-
+    <b-modal
+      hide-footer
+      id="bizproductdetails"
+      size="xl"
+      ref="bizproductdetails"
+      title="Order Details"
+    >
+      <div>
+        <businessordersdetail
+          ref="businessproductdetails"
+          orderdetails="orderDetails"
+          :loading="isloading"
+        />
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import moment from "moment";
-import businessordersdetail from '@/views/businessordersdetail'
+import businessordersdetail from "@/views/businessordersdetail";
 import Orders from "@/views/businessOwnerOrders";
 import axios from "axios";
 export default {
   data() {
     return {
-      orderdetails:{},
-      isloading:false,
+      orderdetails: {},
+      isloading: false,
       moment: moment,
       rows: 0,
       currentPage: 0,
       perPage: 10,
-      orders:[],
-      row:'',
-      prev:'',
-      totalItems:0,
+      orders: [],
+      row: "",
+      prev: "",
+      totalItems: 0,
       selected: null,
       rimg: "",
       url: null,
-      status:'',
+      status: "",
       etat: "All",
 
       options: [
-        { value: null, text: this.$t('general.Please_select_an_option') },
+        { value: null, text: this.$t("general.Please_select_an_option") },
         { value: "5", text: "last 5 days" },
-        { value: "10", text: "last 10 days" },
+        { value: "10", text: "last 10 days" }
       ],
-      etat1: ["in process", "complete", "cancel"],
+      etat1: ["in process", "complete", "cancel"]
     };
   },
 
-  components:{
+  components: {
     businessordersdetail
   },
 
-  mounted() { 
-    console.log('mounted business orders compoments');
+  mounted() {
+    console.log("mounted business orders compoments");
     this.url = this.$route.params.id;
-   
-    this.getOrder('');
+
+    this.getOrder("");
   },
 
   methods: {
+    //order details functionalities
 
-     //order details functionalities
-
-      getBusinessOrderDetails(orderId) {
-  
+    getBusinessOrderDetails(orderId) {
       console.log(orderId);
-     this.$bvModal.show("bizproductdetails")
-     this.isloading = true;
+      this.$bvModal.show("bizproductdetails");
+      this.isloading = true;
       let data = {
         orderId: orderId,
-        businessSlug:this.url,
+        businessSlug: this.url
       };
-      this.$store 
+      this.$store
         .dispatch("businessOrderDetails/getOrderDetails", data)
-        .then((response) => {
-          
-        
-         this.isloading=false;
-        
+        .then(response => {
+          this.isloading = false;
+
           //this.status = this.getStatus;
           this.$refs.businessproductdetails.transition();
         });
     },
 
-
-   
-
-
     changeElementType(p) {
       console.log("------------------" + p);
       this.status = p;
-      this.currentPage=1;
+      this.currentPage = 1;
       if (p == 1) {
         this.etat = "All";
-        
-        this.getOrder('');
+
+        this.getOrder("");
 
         this.currentPage = 1;
       } else if (p == 2) {
         this.etat = "In process";
-        this.getOrder('pending');
-       
+        this.getOrder("pending");
+
         this.currentPage = 1;
       } else if (p == 3) {
-        this.getOrder('Re-shedule');
+        this.getOrder("Re-shedule");
         this.etat = "Re-shedule";
-      
+
         this.currentPage = 1;
       } else if (p == 4) {
-        this.getOrder('Shipped');
+        this.getOrder("Shipped");
         this.etat = "Shipped";
-       
+
         this.currentPage = 1;
       }
       //transition partie desktop
@@ -532,13 +525,13 @@ export default {
       const pr = document.getElementById("p" + p);
 
       const as = document.querySelectorAll(".avatar");
-      as.forEach((dat) => {
+      as.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       a.classList.add("bg-success");
 
       const ps = document.querySelectorAll(".progress");
-      ps.forEach((dat) => {
+      ps.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       pr.classList.add("bg-success");
@@ -547,7 +540,7 @@ export default {
 
       const el = document.getElementById("m" + p);
       const els = document.querySelectorAll(".t");
-      els.forEach((dat) => {
+      els.forEach(dat => {
         dat.classList.remove("green");
       });
       el.classList.add("green");
@@ -557,65 +550,62 @@ export default {
       let start = this.getCurrentpage * this.perPage;
       console.log(this.getCurrentpage);
     },
-    
-  handlePage(value) {
+
+    handlePage(value) {
       this.currentPage = value;
       this.getOrder(this.status);
     },
 
-   async getOrder(status) {
-
-     
-      this.status=status;
+    async getOrder(status) {
+      this.status = status;
       let biz_id = this.$route.params.id;
 
       await axios
-        .post(`order/Business/list?slug=${biz_id}&status=${status}&period=${this.selected}&page=${this.currentPage}`)
-        .then((res) => {
+        .post(
+          `order/Business/list?slug=${biz_id}&status=${status}&period=${this.selected}&page=${this.currentPage}`
+        )
+        .then(res => {
           console.log("hey yeah orders");
-          console.log(res); 
-          
+          console.log(res);
+
           this.totalItems = res.data.total;
           this.perPage = res.data.per_page;
-          this.orders=res.data;
+          this.orders = res.data;
           this.next = res.data.next;
           this.prev = res.data.previous;
-
-
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     updateStatus(order_id, status) {
-        console.log(order_id+status);
+      console.log(order_id + status);
       let formData = new FormData();
       formData.append("OrderId", order_id);
       formData.append("slug", this.url);
       formData.append("status", status);
       this.$store
         .dispatch("orderBusiness/updateOrderStatus", {
-          path: "order/updateOrderBusiness", 
-          formData: formData,
+          path: "order/updateOrderBusiness",
+          formData: formData
         })
         .then(({ data }) => {
-        
-        this.getOrder(this.status);
+          this.getOrder(this.status);
 
           this.flashMessage.show({
             status: "success",
-            message: "Status Changed To " + status,
+            message: "Status Changed To " + status
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable to Change Status",
+            message: "Unable to Change Status"
           });
         });
-    },
+    }
   },
 
   computed: {
@@ -623,21 +613,16 @@ export default {
       return this.currentPage;
     },
 
- orderDetails() {
+    orderDetails() {
       return this.$store.getters["businessOrderDetails/getOrderDetails"];
-    },
+    }
 
     // orders() {
-      
+
     //   return this.$store.state.orderBusiness.orders;
-       
+
     // },
-
-
-    
-    
-
-  },
+  }
 };
 </script>
 
@@ -727,11 +712,11 @@ h3 {
   max-height: 200px;
 }
 
-.r-img{
-    border-radius: 5px;
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
+.r-img {
+  border-radius: 5px;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 }
 
 .margm {

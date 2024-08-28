@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  props: ["member"],
+  props: ["member"]
 };
 </script>
 
@@ -399,5 +399,3 @@ export default {
   font-size: 12px !important;
 }
 </style>
-
-

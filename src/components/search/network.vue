@@ -6,22 +6,23 @@
       :label="$t('search.Spinning')"
     ></b-spinner> -->
 
+    <Skeleton :loading="loader" />
+    <Skeleton :loading="loader" />
 
-    <Skeleton  :loading="loader" />
-      <Skeleton  :loading="loader" />
-
-
-    <b-alert v-if="networks.data.length == 0 && !loader " show variant="warning"
+    <b-alert v-if="networks.data.length == 0 && !loader" show variant="warning"
       ><a href="#" class="alert-link">
         {{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
-    
 
-      
-  <Network v-for="item in networks.data" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
+    <Network
+      v-for="item in networks.data"
+      :network="item"
+      :key="item.id"
+      @getTotalCommunity="getTotalCommunity"
+    />
 
- <!-- pagination -->
+    <!-- pagination -->
 
     <b-pagination
       v-if="networks.next || networks.previous"
@@ -62,7 +63,7 @@ export default {
       list: [],
       islogin: true,
       currentPage: 1,
-      nextLoad: false,
+      nextLoad: false
     };
   },
 
@@ -78,7 +79,7 @@ export default {
     },
     loader() {
       return this.$store.getters["networkSearch/getLoader"];
-    },
+    }
   },
   created() {
     // this.networkSearch()
@@ -94,8 +95,7 @@ export default {
   },
 
   methods: {
-
-      count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -103,20 +103,20 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
-    
+
     async handleFollow(user) {
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
 
     async handleJoin(user) {
@@ -124,19 +124,19 @@ export default {
       const nextFollowState = user.is_member == 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_member = nextFollowState;
           this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
     changePage(value) {
       this.$store.commit("networkSearch/setNetworks", { data: [] });
@@ -150,19 +150,19 @@ export default {
       this.$store
         .dispatch("networkSearch/SEARCH", {
           country_id: 1,
-          page: this.currentPage,
+          page: this.currentPage
         })
-        .then((res) => {
+        .then(res => {
           this.total = this.networks.total;
         })
-        .catch((err) => {
+        .catch(err => {
           // this.prodLoader = false;
           console.log("loader: ", this.prodLoader);
           console.log("products error: ");
           console.error(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

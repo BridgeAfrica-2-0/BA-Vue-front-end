@@ -22,8 +22,8 @@
         v-for="comment in comments"
         :comment="comment"
         :key="comment.id"
-				:idproduct="idproduct"
-				@deletecomment="deleteComment"
+        :idproduct="idproduct"
+        @deletecomment="deleteComment"
       ></single-comment>
     </div>
   </div>
@@ -34,11 +34,11 @@ import singleComment from "./SingleComment";
 export default {
   name: "comments",
   components: {
-    singleComment,
+    singleComment
   },
   data() {
     return {
-      reply: "",
+      reply: ""
     };
   },
   methods: {
@@ -48,11 +48,11 @@ export default {
         this.reply = "";
       }
     },
-		deleteComment(idcomment){
-			this.$emit("deletecomment", idcomment)
-		}
+    deleteComment(idcomment) {
+      this.$emit("deletecomment", idcomment);
+    }
   },
-  props: ["comments", "comments_wrapper_classes","idproduct"],
+  props: ["comments", "comments_wrapper_classes", "idproduct"]
 };
 </script>
 

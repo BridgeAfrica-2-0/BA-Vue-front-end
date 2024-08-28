@@ -1,37 +1,44 @@
 <template>
   <div>
-     <span v-if="isloaded">
-    <Navbar />
+    <span v-if="isloaded">
+      <Navbar />
 
-    <b-container fluid class="content wahala">
-      <b-row>
-        <b-col lg="5" xl="4" class=" ">  
-          <Parent /> 
-        </b-col>
+      <b-container fluid class="content wahala">
+        <b-row>
+          <b-col lg="5" xl="4" class=" ">
+            <Parent />
+          </b-col>
 
-        <b-col class="col mt-sm-3">
-          <b-tabs content-class="mt-3" lazy fill pills>
-            <b-tab :title="$t('memnetwork.Posts')"><Posts :postStatus="'member'" /></b-tab>
-            <b-tab :title="$t('memnetwork.Media')"><Media :type="'network'" :isEditor="false" /></b-tab>
-            <b-tab :title="$t('memnetwork.Members')"><Members from="member" /></b-tab>
-            <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
-          </b-tabs>
-        </b-col>
-      </b-row>
-    </b-container><p class="text-center">
-      <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-      Bridge Africa © 2021
-    </p>
-    <Footer />
-
-     </span>
-
+          <b-col class="col mt-sm-3">
+            <b-tabs content-class="mt-3" lazy fill pills>
+              <b-tab :title="$t('memnetwork.Posts')"
+                ><Posts :postStatus="'member'"
+              /></b-tab>
+              <b-tab :title="$t('memnetwork.Media')"
+                ><Media :type="'network'" :isEditor="false"
+              /></b-tab>
+              <b-tab :title="$t('memnetwork.Members')"
+                ><Members from="member"
+              /></b-tab>
+              <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
+            </b-tabs>
+          </b-col>
+        </b-row>
+      </b-container>
+      <p class="text-center">
+        <span class="display-inline">
+          <b-link @click="$i18n.locale = 'en'">
+            {{ $t("auth.english") }}</b-link
+          >
+          <span class="vl"></span>
+          <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+            {{ $t("auth.french") }}
+          </b-link>
+        </span>
+        Bridge Africa © 2021
+      </p>
+      <Footer />
+    </span>
   </div>
 </template>
 
@@ -43,13 +50,12 @@ import Parent from "../components/memberNetworkF/parent";
 import Media from "@/components/owner/tabs/media";
 //import Members from "../components/memberNetworkF/members";
 
-import Members from '@/components/businessf/tabs/owner/networks/member';
+import Members from "@/components/businessf/tabs/owner/networks/member";
 import Feedback from "../components/memberNetworkF/feedback";
 
 import { WhoIsIt } from "@/mixins";
 export default {
-
-  mixins:[WhoIsIt],
+  mixins: [WhoIsIt],
   components: {
     Navbar,
     Footer,
@@ -57,57 +63,47 @@ export default {
     Media,
     Members,
     Parent,
-    Feedback,
+    Feedback
   },
 
-data() {
+  data() {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
-      foll_id:null,
-      isloaded:false,
+      foll_id: null,
+      isloaded: false
+    };
+  },
 
-    }},
-  
-
-created(){
-
-   this.foll_id = this.$route.params.id;
+  created() {
+    this.foll_id = this.$route.params.id;
 
     this.$store
       .dispatch("networkDetails/roleCheck", this.foll_id)
-      .then((data) => {
-      
+      .then(data => {
         let role = data.data.data;
         this.$store.commit("networkProfile/setNetworkRole", role);
         switch (role) {
           case "follower":
             this.$router.push({
               name: "Membar Network Follower",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
-
-         
-            
         }
 
         this.isloaded = true;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log({ error: error });
 
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-        //  this.$router.push({ name: "notFound" });
+          //  this.$router.push({ name: "notFound" });
         }
       });
-
-
-
-},
-
+  }
 };
 </script>
 

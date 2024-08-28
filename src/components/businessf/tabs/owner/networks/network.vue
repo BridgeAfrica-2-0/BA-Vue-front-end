@@ -3,9 +3,14 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
     </b-modal>
- 
-   <Network v-for="item in network"  :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-   
+
+    <Network
+      v-for="item in network"
+      :network="item"
+      :key="item.id"
+      @getTotalCommunity="getTotalCommunity"
+    />
+
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -18,7 +23,7 @@ export default {
   data() {
     return {
       page: 1,
-   
+
       net_id: null,
       network: [],
       options: {
@@ -28,16 +33,17 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
- components: {
-    Network,
+  components: {
+    Network
   },
   computed: {
-    
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     old_network() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.NcommunityFollower
@@ -45,40 +51,43 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   mounted() {
-    this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.net_id = this.$route.params.id;
   },
 
   methods: {
+    networkJoin: async function(item) {
+      const status = item.is_follow;
 
-    networkJoin: async function(item){
-      const status = item.is_follow
+      const request = !status
+        ? await this.$repository.share.jointNetwork({
+            id: item.id,
+            type: "network"
+          })
+        : await this.$repository.share.removeNetwork({
+            id: item.id,
+            type: "network"
+          });
 
-      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
-        
-
-      if (request.success){
-        item = Object.assign(item, {is_follow: status ? 0 : 1})
+      if (request.success) {
+        item = Object.assign(item, { is_follow: status ? 0 : 1 });
 
         this.flashMessage.show({
           status: "success",
-          title: request.data,
+          title: request.data
         });
       }
-    }, 
+    },
 
     infiniteHandler($state) {
-     
-
-      let url = `network/community/networks/${this.net_id}/`
-        if(!this.islogin){
-            url='guest/'+url;
-          }
-
+      let url = `network/community/networks/${this.net_id}/`;
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
         .get(url + this.page)
@@ -106,26 +115,25 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
- 
-
-   networkDetails() {
+    networkDetails() {
       console.log("networkDetails");
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.net_id)
+        .dispatch(
+          "networkProfileCommunitySidebar/getNetworkDetails",
+          this.net_id
+        )
         .then(() => {
           console.log("ohh year");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
- 
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -133,32 +141,28 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
           this.networkDetails();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
-
-
-
 <style scoped>
-
-.flx100{
+.flx100 {
   flex-basis: 70%;
 }
 @media only screen and (min-width: 768px) {

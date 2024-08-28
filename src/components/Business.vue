@@ -5,7 +5,10 @@
         <div class="center-img">
           <splide :options="options" class="r-image">
             <splide-slide cl>
-              <img :src="business.picture?business.picture:business.logo_path" class="r-image" />
+              <img
+                :src="business.picture ? business.picture : business.logo_path"
+                class="r-image"
+              />
             </splide-slide>
 
             <splide-slide v-for="cover in business.covers" :key="cover" cl>
@@ -16,12 +19,9 @@
         <div class="pl-3 flx100 mr-1">
           <p class="textt">
             <span class="">
-            <span
-            class="biz-name"
-           @click="handleBusinessClick"
-              >
-               {{ business.name }}
-            </span>
+              <span class="biz-name" @click="handleBusinessClick">
+                {{ business.name }}
+              </span>
             </span>
             <br />
 
@@ -30,14 +30,22 @@
             </span>
             <br />
             {{ count(business.followers) }}
-            {{ $t("dashboard.Community") }}    <span v-if="canBlock" class="ml-2"  @click="BlockUser(business.id, index)" style="cursor: pointer">   <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Business"
-                              variant="danger"
-                            ></b-icon>  </span>
-                             <br />
+            {{ $t("dashboard.Community") }}
+            <span
+              v-if="canBlock"
+              class="ml-2"
+              @click="BlockUser(business.id, index)"
+              style="cursor: pointer"
+            >
+              <b-icon
+                font-scale="1"
+                icon="exclamation-octagon"
+                v-b-tooltip.hover
+                title="Block This Business"
+                variant="danger"
+              ></b-icon>
+            </span>
+            <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -61,14 +69,17 @@
         <b-button
           variant="light"
           class="rounded-circle hov-btn"
-          :id="'business'+business.id"
-         
+          :id="'business' + business.id"
         >
           <b-icon icon="three-dots"> </b-icon>
         </b-button>
       </div>
 
-      <b-popover :target="'business'+business.id" triggers="hover" placement="top">
+      <b-popover
+        :target="'business' + business.id"
+        triggers="hover"
+        placement="top"
+      >
         <div class="pt-3 pb-3">
           <div class="mt-1">
             <b-button
@@ -79,30 +90,31 @@
               variant="primary"
               @click="handleFollow(business)"
             >
-             
               <i
                 class="fas fa-lg btn-icon"
-                :class="islogin 
-                ? (business.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus')
-                : 'fa-user-plus'"
+                :class="
+                  islogin
+                    ? business.is_follow !== 0
+                      ? 'fa-user-minus'
+                      : 'fa-user-plus'
+                    : 'fa-user-plus'
+                "
               ></i>
 
               <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
             </b-button>
           </div>
 
-
           <div class="mt-1">
-          <template v-if="islogin">
-          <BtnCtaMessage :element="business" type="business" />
-          </template>
-          <template v-else>
-          <div @click="showLoginModal(business.id)">
-          <BtnCtaMessage :element="business" type="business" />
+            <template v-if="islogin">
+              <BtnCtaMessage :element="business" type="business" />
+            </template>
+            <template v-else>
+              <div @click="showLoginModal(business.id)">
+                <BtnCtaMessage :element="business" type="business" />
+              </div>
+            </template>
           </div>
-          </template> 
-          </div>
-
 
           <div class="mt-1">
             <b-button
@@ -119,14 +131,9 @@
         </div>
       </b-popover>
     </div>
-    <b-modal
-    v-model="showModal"
-    @hidden="hideAuthModal"
-    hide-footer
-    size="xl"
-  >
-    <login @success="success" @hideAuthModal="hideAuthModal" />
-  </b-modal>
+    <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl">
+      <login @success="success" @hideAuthModal="hideAuthModal" />
+    </b-modal>
   </div>
 </template>
 
@@ -138,71 +145,70 @@ export default {
   props: {
     business: {
       required: true,
-      type: Object,
+      type: Object
     },
 
-     index:{
-      type:Number,
-      default:0
+    index: {
+      type: Number,
+      default: 0
     },
 
-    canBlock:{
-      type:Boolean,
-      default:false
+    canBlock: {
+      type: Boolean,
+      default: false
     },
-     callerType:{
-      type:String,
-      default:''
+    callerType: {
+      type: String,
+      default: ""
     }
-   
   },
   components: {
     BtnCtaMessage,
-    login,
+    login
   },
   data() {
     return {
       page: 1,
       showModal: false,
       isloading: false,
-       options: {
+      options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
         disable: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   computed: {
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   methods: {
     getTotalCommunity() {
-      
-        this.$emit('getTotalCommunity');
+      this.$emit("getTotalCommunity");
     },
 
-     BlockUser(id, index){
-        this.$emit('BlockUser',id, index );
+    BlockUser(id, index) {
+      this.$emit("BlockUser", id, index);
     },
-
 
     gotoBusiness(id) {
       if (this.islogin) {
         this.$router.push(`/business/${id}?tabId=1`);
       } else {
-        this.$root.$emit('bv::hide::popover', 'business' + id);
+        this.$root.$emit("bv::hide::popover", "business" + id);
         this.showModal = true;
         return;
       }
     },
     showLoginModal(id) {
-    this.$root.$emit('bv::hide::popover', 'business' + id);
-    this.showModal = true;
-  },
+      this.$root.$emit("bv::hide::popover", "business" + id);
+      this.showModal = true;
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -213,46 +219,46 @@ export default {
     },
 
     async handleFollow(user) {
-      if(!this.islogin)
-    {
-      this.$root.$emit('bv::hide::popover', 'business' + user.id);
-      this.showModal = true;
-      return;
-    }
-    else {
+      if (!this.islogin) {
+        this.$root.$emit("bv::hide::popover", "business" + user.id);
+        this.showModal = true;
+        return;
+      } else {
+        document.getElementById("followbtn" + user.id).disabled = true;
 
-      document.getElementById("followbtn" + user.id).disabled = true;
-
-      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
-       let data = ''
-      if(this.callerType=='network'){
+        const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+        const nextFollowState = user.is_follow === 0 ? 1 : 0;
+        let data = "";
+        if (this.callerType == "network") {
           data = {
-        id: user.id,
-         type: "business",
-        network_id: this.$route.params.id
-      };
-      }else{ 
-       data = {
-        id: user.id,
-         type: "business",
-      };
-       }
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          user.is_follow = nextFollowState;
-          document.getElementById("followbtn" + user.id).disabled = false;
-          this.getTotalCommunity();
-        })
-        .catch((err) => {
-          document.getElementById("followbtn" + user.id).disabled = false;
-        });
-    }
+            id: user.id,
+            type: "business",
+            network_id: this.$route.params.id
+          };
+        } else {
+          data = {
+            id: user.id,
+            type: "business"
+          };
+        }
+        await axios
+          .post(uri, data)
+          .then(response => {
+            user.is_follow = nextFollowState;
+            document.getElementById("followbtn" + user.id).disabled = false;
+            this.getTotalCommunity();
+          })
+          .catch(err => {
+            document.getElementById("followbtn" + user.id).disabled = false;
+          });
+      }
     },
     handleBusinessClick() {
       if (this.islogin) {
-        this.$router.push({ name: 'BusinessFollower', params: { id: this.business.slug } });
+        this.$router.push({
+          name: "BusinessFollower",
+          params: { id: this.business.slug }
+        });
       } else {
         this.showModal = true;
       }
@@ -263,8 +269,7 @@ export default {
     success() {
       this.showModal = false;
     }
-   
-  },
+  }
 };
 </script>
 
@@ -274,13 +279,13 @@ export default {
   height: 40px !important;
   vertical-align: center;
   text-align: center;
-  align-items: center; 
+  align-items: center;
   align-self: center;
 }
 
 .biz-name {
   font-size: 1.0625rem;
-    font-weight: 500;
+  font-weight: 500;
   line-height: 1.2;
   font-family: poppins;
 
@@ -511,7 +516,6 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    
 
     padding: 7px;
   }

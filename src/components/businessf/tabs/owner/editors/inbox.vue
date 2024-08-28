@@ -9,7 +9,7 @@ import Inbox from "@/components/businessf/tabs/owner/networks/inbox.vue";
 
 export default {
   components: {
-    Inbox,
+    Inbox
   },
   data() {
     return {
@@ -28,7 +28,7 @@ export default {
         type: "",
         name: "Louis Litt",
         timeStamp: "",
-        message: "",
+        message: ""
       },
       newMsg: false,
       show: false,
@@ -44,7 +44,7 @@ export default {
           timeStamp: "3:00 PM",
 
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 1,
@@ -52,7 +52,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 2,
@@ -60,7 +60,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 3,
@@ -68,7 +68,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 4,
@@ -76,7 +76,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 5,
@@ -84,8 +84,8 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        }
       ],
       messages: [
         {
@@ -93,14 +93,14 @@ export default {
           name: "Blezour blec",
           startMessage: "Hello Blec lola blec ",
           timeStamp: "3:00pm",
-          messageCount: "10",
+          messageCount: "10"
         },
         {
           id: 1,
           name: "Blec blezour blec",
-        
+
           timeStamp: "7:00am",
-          messageCount: "60",
+          messageCount: "60"
         },
 
         {
@@ -108,51 +108,51 @@ export default {
           name: "baba blecc ",
           startMessage: "Lorem ipsum la lola blec vlr ",
           timeStamp: "9:00am",
-          messageCount: "60",
+          messageCount: "60"
         },
         {
           id: 4,
           name: "Louis Litt",
           startMessage: "Lorem  sit amet this is goo.",
           timeStamp: "6:00am",
-          messageCount: "6",
+          messageCount: "6"
         },
         {
           id: 5,
           name: "Louis Litt",
           startMessage: "Lorem this   sit amet.",
           timeStamp: "7:00am",
-          messageCount: "100",
+          messageCount: "100"
         },
         {
           id: 6,
           name: "Louis Litt",
           startMessage: "Lorem ithe amet.",
           timeStamp: "7:00am",
-          messageCount: "3",
+          messageCount: "3"
         },
         {
           id: 7,
           name: "Louis Litt",
           startMessage: "Lordol sit amet.",
           timeStamp: "7:00am",
-          messageCount: "10",
+          messageCount: "10"
         },
         {
           id: 8,
           name: "Louis Litt",
           startMessage: "Lorem vheck ",
           timeStamp: "7:00am",
-          messageCount: "40",
+          messageCount: "40"
         },
         {
           id: 9,
           name: "Louis Litt",
           startMessage: "Lorem papa .",
           timeStamp: "7:00am",
-          messageCount: "15",
-        },
-      ],
+          messageCount: "15"
+        }
+      ]
     };
   },
 
@@ -160,8 +160,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
 
   methods: {
@@ -217,22 +217,22 @@ export default {
       this.message.message = this.text;
       this.chats.push(this.message);
       this.text = "";
-    },
+    }
   },
 
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.resources.filter((item) => {
+        return this.resources.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
+            .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.resources;
       }
-    },
-  },
+    }
+  }
 };
 </script>

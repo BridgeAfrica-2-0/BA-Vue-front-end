@@ -5,22 +5,30 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              {{ $t('businessowner.Create_personalised_website_for_your_business') }}
+              {{
+                $t(
+                  "businessowner.Create_personalised_website_for_your_business"
+                )
+              }}
             </h2>
             <p class="my-2">
-              {{ $t('businessowner.Start_with_a_template_and_male_it_your_own') }}, 
-              {{ $t('businessowner.with_easy_drag_and_drop') }} & {{ $t('businessowner.1000s_of_design_features') }}
+              {{
+                $t("businessowner.Start_with_a_template_and_male_it_your_own")
+              }}, {{ $t("businessowner.with_easy_drag_and_drop") }} &
+              {{ $t("businessowner.1000s_of_design_features") }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block">{{ $t('businessowner.Select_a_template') }}</span>
+                <span class="d-block">{{
+                  $t("businessowner.Select_a_template")
+                }}</span>
               </p>
               <hr width="80%" class="row-step" />
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block">{{ $t('businessowner.Launch') }}</span>
+                <span class="d-block">{{ $t("businessowner.Launch") }}</span>
               </p>
             </b-col>
           </div>
@@ -35,16 +43,21 @@
               <template #header>
                 <p>
                   <span class="float-right">
-                    {{ $t('businessowner.Selected_Template') }}
+                    {{ $t("businessowner.Selected_Template") }}
                   </span>
                 </p>
               </template>
               <p class="mt-1 m-0 p-0">
                 <span class="float-left m-0 p-0">
-                  {{ $t('businessowner.Template_Name') }} <strong class="color-site">{{ $t('businessowner.Free') }}</strong>
+                  {{ $t("businessowner.Template_Name") }}
+                  <strong class="color-site">{{
+                    $t("businessowner.Free")
+                  }}</strong>
                 </span>
                 <span class="float-right p-0 m-0">
-                  <b-link href="#foo">{{ $t('businessowner.Choose_Another_Template') }}</b-link>
+                  <b-link href="#foo">{{
+                    $t("businessowner.Choose_Another_Template")
+                  }}</b-link>
                 </span>
               </p>
               <img
@@ -61,7 +74,9 @@
                   class="upload-pic-icon"
                   aria-hidden="true"
                 ></b-icon-image-fill>
-                <p class="upload-text">{{ $t('businessowner.Add_Company_logo') }}</p>
+                <p class="upload-text">
+                  {{ $t("businessowner.Add_Company_logo") }}
+                </p>
               </div>
               <div id="fileName"></div>
             </div>
@@ -102,19 +117,27 @@
                   </div>
                   <div class="d-inline-block">
                     <h5 class="font-weight-bolder text-left mt-2">
-                      {{ $t('businessowner.You_are_currently_subscribed_to_free_plan') }}
+                      {{
+                        $t(
+                          "businessowner.You_are_currently_subscribed_to_free_plan"
+                        )
+                      }}
                     </h5>
                     <p class="text-left text-design">
-                      {{ $t('businessowner.You_can_get_access_to_features_like_mapping_your_domain') }},
-                      {{ $t('businessowner.premium_template') }}, {{ $t('businessowner.premium_support_and_much_more') }}. 
-                      {{ $t('businessowner.Simply_upgrade_your_plan') }}.
+                      {{
+                        $t(
+                          "businessowner.You_can_get_access_to_features_like_mapping_your_domain"
+                        )
+                      }}, {{ $t("businessowner.premium_template") }},
+                      {{ $t("businessowner.premium_support_and_much_more") }}.
+                      {{ $t("businessowner.Simply_upgrade_your_plan") }}.
                     </p>
                   </div>
 
                   <p class="text-right">
-                    <b-link href="/business_owner/create_website_plan"
-                      >{{ $t('businessowner.Change_Plan') }}</b-link
-                    >
+                    <b-link href="/business_owner/create_website_plan">{{
+                      $t("businessowner.Change_Plan")
+                    }}</b-link>
                   </p>
                 </div>
               </b-col>
@@ -125,13 +148,19 @@
                   variant="outline-dark"
                   class="ml-3 float-left"
                   size="sm"
-                  >{{ $t('businessowner.Cancel') }}</b-button
+                  >{{ $t("businessowner.Cancel") }}</b-button
                 >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >{{ $t('businessowner.Save_Open_Editor') }}</b-button
+                <b-button
+                  variant="primary"
+                  class="ml-3 float-right"
+                  size="sm"
+                  >{{ $t("businessowner.Save_Open_Editor") }}</b-button
                 >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >{{ $t('businessowner.Save') }}</b-button
+                <b-button
+                  variant="primary"
+                  class="ml-3 float-right"
+                  size="sm"
+                  >{{ $t("businessowner.Save") }}</b-button
                 >
               </b-col>
             </b-row>

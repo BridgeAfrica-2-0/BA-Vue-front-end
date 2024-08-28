@@ -3,19 +3,21 @@
     <b-card class="card">
       <b-row>
         <b-col>
-          <h4>{{$t("search.Market")}}</h4>
+          <h4>{{ $t("search.Market") }}</h4>
         </b-col>
         <b-col class="col">
-          <b-link class="lnk">{{$t("search.See_All")}}</b-link>
+          <b-link class="lnk">{{ $t("search.See_All") }}</b-link>
         </b-col>
       </b-row>
       <div>
         <b-row>
           <b-col>
-            <h6><b>{{$t("search.Business_Name")}}</b></h6>
+            <h6>
+              <b>{{ $t("search.Business_Name") }}</b>
+            </h6>
           </b-col>
           <b-col class="col">
-            <b-link class="lnk">{{$t("search.Visit_Shop")}}</b-link>
+            <b-link class="lnk">{{ $t("search.Visit_Shop") }}</b-link>
           </b-col>
         </b-row>
         <div class="products">
@@ -49,16 +51,16 @@
 import Product from "@/components/search/slider";
 export default {
   components: {
-    Product,
+    Product
   },
   data() {
     return {
       products: [
         { title: "Product", cost: "1000", state: "In-stock" },
-        { title: "Product", cost: "1000", state: "In-stock" },
-      ],
+        { title: "Product", cost: "1000", state: "In-stock" }
+      ]
     };
-  },
+  }
 };
 </script>
 

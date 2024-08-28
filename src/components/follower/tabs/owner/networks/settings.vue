@@ -155,7 +155,7 @@
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l b-font">
-              {{ $t('profilefollower.Save_Changes') }}
+              {{ $t("profilefollower.Save_Changes") }}
             </b-button>
           </div>
         </b-col>

@@ -9,13 +9,20 @@
           <b-link class="link">Business Name</b-link>
         </h4>
         <p>
-          <a href="">{{ $t('profileowner.mywebsite_com') }}</a> <br />
-          <strong>{{ $t('profileowner.Category') }}:</strong> {{ $t('profileowner.Business_Category') }} <br />
-          <strong>{{ $t('profileowner.Community') }}:</strong> {{ $t('profileowner.11M_Community') }} <br />
-          <strong>{{ $t('profileowner.Location') }}:</strong> {{ $t('profileowner.Neighbourhood') }}, {{ $t('profileowner.City') }}, {{ $t('profileowner.Country') }} <br />
-          <strong>{{ $t('profileowner.Keyword') }}:</strong> {{ $t('profileowner.Keyword') }} 1 {{ $t('profileowner.Keyword') }} 2 {{ $t('profileowner.Keyword') }} 3 <br />
-          <strong>{{ $t('profileowner.About') }}:</strong> Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. <b-link>{{ $t('profileowner.Read_More') }}</b-link>
+          <a href="">{{ $t("profileowner.mywebsite_com") }}</a> <br />
+          <strong>{{ $t("profileowner.Category") }}:</strong>
+          {{ $t("profileowner.Business_Category") }} <br />
+          <strong>{{ $t("profileowner.Community") }}:</strong>
+          {{ $t("profileowner.11M_Community") }} <br />
+          <strong>{{ $t("profileowner.Location") }}:</strong>
+          {{ $t("profileowner.Neighbourhood") }}, {{ $t("profileowner.City") }},
+          {{ $t("profileowner.Country") }} <br />
+          <strong>{{ $t("profileowner.Keyword") }}:</strong>
+          {{ $t("profileowner.Keyword") }} 1 {{ $t("profileowner.Keyword") }} 2
+          {{ $t("profileowner.Keyword") }} 3 <br />
+          <strong>{{ $t("profileowner.About") }}:</strong> Lorem ipsum, dolor
+          sit amet consectetur adipisicing elit.
+          <b-link>{{ $t("profileowner.Read_More") }}</b-link>
         </p>
       </div>
       <div>
@@ -31,18 +38,19 @@
               >
                 <b-dropdown-item>
                   <b-icon icon="chat-fill" variant="primary"></b-icon>
-                  {{ $t('profileowner.Message') }}</b-dropdown-item
+                  {{ $t("profileowner.Message") }}</b-dropdown-item
                 >
 
                 <b-dropdown-item>
-                  <b-icon icon="geo-alt" variant="primary"></b-icon> {{ $t('profileowner.Get_Direction') }}</b-dropdown-item
+                  <b-icon icon="geo-alt" variant="primary"></b-icon>
+                  {{ $t("profileowner.Get_Direction") }}</b-dropdown-item
                 >
               </b-dropdown>
             </b-col>
             <b-col>
               <b-button class=" community  mt-2" size="sm">
                 <b-icon icon="plus"></b-icon>
-                {{ $t('profileowner.Community') }}</b-button
+                {{ $t("profileowner.Community") }}</b-button
               >
             </b-col>
           </b-row>

@@ -1,5 +1,5 @@
 <template>
-  <div>  
+  <div>
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <div class="d-block d-md-none" style="margin-top: 30px">
         <ly-tab
@@ -109,7 +109,7 @@ import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
 import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
-import { isPremium } from '@/helpers';
+import { isPremium } from "@/helpers";
 
 export default {
   name: "settings",
@@ -139,8 +139,8 @@ export default {
           this.selectedIdd = 6;
           this.tabIndex = 7;
         }
-      },
-    },
+      }
+    }
   },
 
   components: {
@@ -152,7 +152,7 @@ export default {
     Insight,
     Info,
     Payment,
-    Blocking,
+    Blocking
   },
 
   data() {
@@ -164,19 +164,19 @@ export default {
       bottomSelectedId: 0,
       window: {
         width: 0,
-        height: 0,
+        height: 0
       },
       items: [
         { label: "General" },
         { label: "Business Info" },
         { label: "Business Roles" },
         { label: "Payment" },
-        { label: "Blocking" },
+        { label: "Blocking" }
       ],
       options: {
-        activeColor: "#1d98bd",
+        activeColor: "#1d98bd"
       },
-      isPremium: isPremium(),
+      isPremium: isPremium()
     };
   },
 
@@ -200,13 +200,13 @@ export default {
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.border-none { 
+.border-none {
   border: none;
 }
 .card-header {

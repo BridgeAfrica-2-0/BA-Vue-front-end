@@ -5,7 +5,7 @@
       autocomplete="off"
       class="md-layout"
       @submit.prevent="validateUser"
-    > 
+    >
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
@@ -16,7 +16,7 @@
         <md-card-content>
           <div class="center"></div>
 
-          <br />   
+          <br />
 
           <div v-if="!verify_method">
             <b-row class="row border">
@@ -31,8 +31,8 @@
                   </span>
 
                   <span class="ml-3 md-title l-20">
-                    {{$t("verification.Via_Email_To")}} <br />
-                 {{auth.email}}
+                    {{ $t("verification.Via_Email_To") }} <br />
+                    {{ auth.email }}
                   </span>
                 </div>
               </b-col>
@@ -55,14 +55,14 @@
                 <div class="d-inline-flex mt-3 mb-3">
                   <span class="mr-4">
                     <b-icon
-                      icon="telephone"   
+                      icon="telephone"
                       variant="primary"
                       font-scale="3"
                     ></b-icon>
                   </span>
 
                   <span class="ml-3 md-title l-20">
-                    {{$t('verification.Via_SMS_To')}} <br />
+                    {{ $t("verification.Via_SMS_To") }} <br />
                     {{ auth.phone }}
                   </span>
                 </div>
@@ -166,47 +166,42 @@ export default {
   data: () => ({
     form: {
       password: null,
-      email: null,
+      email: null
     },
-     das:[],
+    das: [],
     langs: ["en", "fr"],
     token: "",
     verify_method: false,
     chosemethod: "",
     userSaved: false,
     sending: false,
-    lastUser: null,
+    lastUser: null
   }),
   validations: {
     form: {
       password: {
-        required,
+        required
       },
       email: {
         required,
-        email,
-      },
-    },
+        email
+      }
+    }
   },
 
-  created(){
- this.das = JSON.parse(localStorage.getItem('signup'));
+  created() {
+    this.das = JSON.parse(localStorage.getItem("signup"));
   },
 
-   computed: {
+  computed: {
     auth() {
+      let type = this.$store.state.auth.user.user
+        ? this.$store.state.auth.user.user
+        : this.das;
 
-   
-
-      let type = this.$store.state.auth.user.user? this.$store.state.auth.user.user: this.das ;
-      
-
-      return  type;
-    },
-
-
+      return type;
+    }
   },
-
 
   methods: {
     verifyMethod(metho) {
@@ -219,19 +214,18 @@ export default {
         url = "user/email/sendOtp";
       }
       this.sending = true;
-   
 
       this.$store
         .dispatch("auth/sendOtp", {
           url: url,
           email: this.auth.email,
-          phone: this.auth.phone,
+          phone: this.auth.phone
         })
-        .then((response) => {
+        .then(response => {
           this.sending = false;
           this.verify_method = true;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           this.sending = false;
@@ -251,16 +245,16 @@ export default {
 
       axios
         .post(url, {
-            email: this.auth.email,
-          phone: this.auth.phone,
+          email: this.auth.email,
+          phone: this.auth.phone
         })
-        .then((response) => {
+        .then(response => {
           if (response.status === 200) {
             console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
 
-              message: this.$t("verification.Successfully_Send"),
+              message: this.$t("verification.Successfully_Send")
             });
 
             this.sending = false;
@@ -268,7 +262,7 @@ export default {
             console.log(response.data);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -279,13 +273,13 @@ export default {
               status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("auth.resend_otp_failed"),
+              message: this.$t("auth.resend_otp_failed")
             });
             console.log({ err: err });
           }
@@ -296,34 +290,31 @@ export default {
 
     Verify() {
       this.sending = true;
-      let phone=null;
-      if(this.chosemethod == "tel"){
-
-        phone=this.auth.phone;
-      }else{
-
-        phone = this.auth.email; 
+      let phone = null;
+      if (this.chosemethod == "tel") {
+        phone = this.auth.phone;
+      } else {
+        phone = this.auth.email;
       }
-     
+
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
           id: this.auth.id,
-          phone: phone,
-         
+          phone: phone
         })
-        .then((response) => {
+        .then(response => {
           this.sending = false;
 
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t("verification.account_verification_success"),
+            message: this.$t("verification.account_verification_success")
           });
 
           this.$router.push({ name: "welcome" });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -334,13 +325,13 @@ export default {
               status: "error",
 
               message: this.$t("verification.Unable_to_verify_your_account"),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("auth.resend_otp_failed"),
+              message: this.$t("auth.resend_otp_failed")
             });
             console.log({ err: err });
           }
@@ -353,7 +344,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
@@ -367,7 +358,7 @@ export default {
     flashErrors(errors) {
       let err = "";
       if (errors) {
-        Object.values(errors).forEach((element) => {
+        Object.values(errors).forEach(element => {
           err = element[0];
         });
       }
@@ -385,8 +376,8 @@ export default {
       this.sending = true;
 
       this.login();
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <flashMessage />
-    <h5 class="a-text">{{$t('general.Assign_Role')}}</h5>
+    <h5 class="a-text">{{ $t("general.Assign_Role") }}</h5>
 
     <b-container class="b-bottom">
       <b-row>
@@ -48,28 +48,35 @@
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="assign-btn" @click="assignRole()"
-            >{{$t('general.Assign')}}</b-button
+          <b-button
+            variant="primary"
+            class="assign-btn"
+            @click="assignRole()"
+            >{{ $t("general.Assign") }}</b-button
           >
         </b-col>
       </b-row>
 
       <p class="text">
-        {{$t('general.Admin_can_manage_all_aspects_of_the_Business_Identity')}}.
-        {{$t('general.They_can_create_posts_and_send_messages_through_inbox')}} . 
-        {{$t('general.They_can_respond_to_the_delete_comments')}}, 
-        {{$t('general.Approve_posts')}},
-        {{$t('general.view_insights')}} , 
-        {{$t('general.manage_the_business_settings')}},
-        {{$t('general.update_Business_profile')}}, 
-        {{$t('general.assign_roles_and_payments')}}.
+        {{
+          $t("general.Admin_can_manage_all_aspects_of_the_Business_Identity")
+        }}.
+        {{
+          $t("general.They_can_create_posts_and_send_messages_through_inbox")
+        }}
+        . {{ $t("general.They_can_respond_to_the_delete_comments") }},
+        {{ $t("general.Approve_posts") }}, {{ $t("general.view_insights") }} ,
+        {{ $t("general.manage_the_business_settings") }},
+        {{ $t("general.update_Business_profile") }},
+        {{ $t("general.assign_roles_and_payments") }}.
       </p>
       <br />
       <p class="text">
-        {{$t('general.Editor_can_create_posts_and_send_messages_through_inbox')}}, 
-        {{$t('general.They_can_respond_to_and_delete_comments')}},
-        {{$t('general.Approve_posts')}} , 
-        {{$t('general.view_insights')}}
+        {{
+          $t("general.Editor_can_create_posts_and_send_messages_through_inbox")
+        }}, {{ $t("general.They_can_respond_to_and_delete_comments") }},
+        {{ $t("general.Approve_posts") }} ,
+        {{ $t("general.view_insights") }}
       </p>
     </b-container>
 
@@ -94,7 +101,7 @@
                   <b-dropdown-item
                     href="#"
                     @click="$bvModal.show('edit-editor'), selectObject(editor)"
-                    >{{$t('general.Edit')}}</b-dropdown-item
+                    >{{ $t("general.Edit") }}</b-dropdown-item
                   >
                   <b-dropdown-item
                     href="#"
@@ -102,7 +109,7 @@
                       $bvModal.show('delete-editor'), selectObject(editor)
                     "
                   >
-                    {{$t('general.Delete')}}
+                    {{ $t("general.Delete") }}
                   </b-dropdown-item>
                 </b-dropdown>
               </div>
@@ -115,7 +122,7 @@
     <div>
       <b-modal id="edit-editor" hide-footer>
         <template #modal-title>
-          {{$t('general.EDIT_EDITOR')}}: {{ clickedObject.name }}
+          {{ $t("general.EDIT_EDITOR") }}: {{ clickedObject.name }}
         </template>
         <div class="d-block text-center">
           <b-form-group
@@ -142,18 +149,21 @@
           block
           variant="primary"
           @click="editEditor(clickedObject)"
-          >{{$t('general.EDIT')}}</b-button
+          >{{ $t("general.EDIT") }}</b-button
         >
       </b-modal>
 
       <b-modal id="delete-editor" hide-footer>
         <template #modal-title> !!! <code>WARRING</code> !!! </template>
         <div class="d-block text-center">
-          <h3>{{$t('general.You_Are_About_To_Delete')}}: {{ clickedObject.name }}!</h3>
+          <h3>
+            {{ $t("general.You_Are_About_To_Delete") }}:
+            {{ clickedObject.name }}!
+          </h3>
         </div>
-        <b-button class="mt-3" block @click="deleteEditor(clickedObject)"
-          >{{$t('general.Delete')}}</b-button
-        >
+        <b-button class="mt-3" block @click="deleteEditor(clickedObject)">{{
+          $t("general.Delete")
+        }}</b-button>
       </b-modal>
     </div>
   </b-container>
@@ -233,14 +243,14 @@ export default {
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.New_Role_Assigned')
+            message: this.$t("general.New_Role_Assigned")
           });
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t('general.Unable_to_Assigned_New_Role')
+            message: this.$t("general.Unable_to_Assigned_New_Role")
           });
         });
     },
@@ -254,14 +264,14 @@ export default {
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.New_Role_Assigned')
+            message: this.$t("general.New_Role_Assigned")
           });
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t('general.Unable_to_Assigned_New_Role')
+            message: this.$t("general.Unable_to_Assigned_New_Role")
           });
         });
     },
@@ -275,14 +285,14 @@ export default {
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.Editor_Deleted')
+            message: this.$t("general.Editor_Deleted")
           });
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t('general.Unable_To_Delete_Editor')
+            message: this.$t("general.Unable_To_Delete_Editor")
           });
         });
     },

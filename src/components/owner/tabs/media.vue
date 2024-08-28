@@ -6,9 +6,16 @@
     />{{ $t("profileowner.Media") }}
 
     <hr />
-    <b-card-text v-if="!isPremium && type == 'business'"> {{$t('general.PREMIUM_ACCOUNT_FEATURE')}} </b-card-text>
+    <b-card-text v-if="!isPremium && type == 'business'">
+      {{ $t("general.PREMIUM_ACCOUNT_FEATURE") }}
+    </b-card-text>
 
-    <b-tabs content-class="mt-3" v-model="tabIndex" v-if="isPremium || type !== 'business'" pills>
+    <b-tabs
+      content-class="mt-3"
+      v-model="tabIndex"
+      v-if="isPremium || type !== 'business'"
+      pills
+    >
       <b-tab :title="$t('profileowner.Posts')" @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner
@@ -28,18 +35,19 @@
           :type="type"
           v-else
         />
-        
       </b-tab>
 
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
-          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
+          <b-spinner
+            class="load"
+            :label="$t('profileowner.Large_Spinner')"
+          ></b-spinner>
         </div>
         <Album
           :isEditor="isEditor"
           :type="type"
           :key="forReload"
-          
           :getAlbums="getAlbums"
           :getImages="getImages"
           :showCoverAlbum="showCoverAlbum"
@@ -53,8 +61,8 @@
 import Album from "./album";
 import Images from "./images";
 import { mapGetters, mapMutations } from "vuex";
-import { isGuestUser } from '@/helpers';
-import { isPremium } from '@/helpers';
+import { isGuestUser } from "@/helpers";
+import { isPremium } from "@/helpers";
 
 import _ from "lodash";
 
@@ -64,50 +72,47 @@ export default {
       type: String,
       validator: function(value) {
         return ["profile", "network", "business"].indexOf(value) !== -1;
-      },
+      }
     },
 
     showCoverAlbum: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
 
     isEditor: {
       type: Boolean,
-      default: () => true,
+      default: () => true
     },
 
     isablum: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
 
   watch: {
-      
-    "$store.state.notification.updateAlbum": function(canBeUpload){
-      
-      if (canBeUpload){
-        this.getAlbums()
-        this.forReload = this.forReload ++
+    "$store.state.notification.updateAlbum": function(canBeUpload) {
+      if (canBeUpload) {
+        this.getAlbums();
+        this.forReload = this.forReload++;
       }
     },
 
-    showCoverAlbum: function(newValue){
-      if (newValue){
-        this.tabIndex = 1
-      }else{
+    showCoverAlbum: function(newValue) {
+      if (newValue) {
+        this.tabIndex = 1;
+      } else {
         this.tabIndex = 0;
       }
     },
 
-    tabIndex: function(newValue){
-      if (newValue){
-        this.getAlbums()
-      }else{
-        this.getImages()
+    tabIndex: function(newValue) {
+      if (newValue) {
+        this.getAlbums();
+      } else {
+        this.getImages();
       }
     }
-
   },
 
   data: function() {
@@ -120,50 +125,50 @@ export default {
       tabIndex: 0,
       addItem: false,
       isGuestUser: isGuestUser(),
-      forReload:0,
+      forReload: 0,
       isPremium: isPremium()
     };
   },
 
   components: {
     Album,
-    Images,
+    Images
   },
-
 
   computed: {
     ...mapGetters({
       getProfilePictures: "UserProfileOwner/getImages",
       getNetworkPictures: "networkProfileMedia/getImages",
-      profile: "auth/profilConnected",
+      profile: "auth/profilConnected"
     }),
 
-    getBusinessPictures(){
-      return this.isGuestUser ? this.$store.getters["businessGuest/getAllImages"] : this.$store.getters["businessOwner/getAllImages"]
+    getBusinessPictures() {
+      return this.isGuestUser
+        ? this.$store.getters["businessGuest/getAllImages"]
+        : this.$store.getters["businessOwner/getAllImages"];
     }
-
   },
 
   methods: {
     ...mapMutations({
-      updateAllAlbums: "notification/UPDATE_ALBUM",
+      updateAllAlbums: "notification/UPDATE_ALBUM"
     }),
 
     all() {
-      const wrapper = (data) => {
+      const wrapper = data => {
         const newData = data
-          .filter((img) => img.media.length)
-          .map((img) => {
-            let render = img.media.map((picture) => {
+          .filter(img => img.media.length)
+          .map(img => {
+            let render = img.media.map(picture => {
               return {
                 id: img.id,
                 content: img.content,
-                media: { 
-                  path: picture.path, 
-                  type: picture.type, 
+                media: {
+                  path: picture.path,
+                  type: picture.type,
                   id: picture.id,
-                  preview_url: picture.preview_url 
-                },
+                  preview_url: picture.preview_url
+                }
               };
             });
             return render;
@@ -185,12 +190,12 @@ export default {
             this.hasLoadAlbum = true;
             this.addItem = true;
           })
-          .catch((err) => {
+          .catch(err => {
             this.hasLoadAlbum = true;
           })
           .finally(() => {
-            console.log("End load album")
-            this.updateAllAlbums(false)
+            console.log("End load album");
+            this.updateAllAlbums(false);
           });
         //}
       } catch (error) {
@@ -209,7 +214,7 @@ export default {
             this.hasLoadPicture = true;
             this.addItem = true;
           })
-          .catch((err) => {
+          .catch(err => {
             this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
           })
@@ -219,11 +224,10 @@ export default {
         console.log(error);
         throw new Error("Invalid type", this.type);
       }
-    },
+    }
   },
 
   created() {
-    
     this.urlData = this.$route.params.id
       ? this.$route.params.id
       : this.profile.slug;
@@ -231,35 +235,34 @@ export default {
     if (this.isablum) {
       this.tabIndex = 1;
     }
-    const dispatchMethod = this.isGuestUser ? 'businessGuest' : 'businessOwner';
+    const dispatchMethod = this.isGuestUser ? "businessGuest" : "businessOwner";
     if (this.showCoverAlbum) this.tabIndex = 1;
 
     this.strategy = {
       business: () => ({
-        album: dispatchMethod+"/getAlbums",
-        image: dispatchMethod+"/getImages",
-        pictures: this.getBusinessPictures,
+        album: dispatchMethod + "/getAlbums",
+        image: dispatchMethod + "/getImages",
+        pictures: this.getBusinessPictures
       }),
       profile: () => ({
         album: "UserProfileOwner/getAlbums",
         image: "UserProfileOwner/getImages",
-        pictures: this.getProfilePictures,
+        pictures: this.getProfilePictures
       }),
       network: () => ({
         album: "networkProfileMedia/getAlbums",
         image: "networkProfileMedia/getImages",
-        pictures: this.getNetworkPictures,
-      }),
+        pictures: this.getNetworkPictures
+      })
     };
 
-    if (this.showCoverAlbum){
+    if (this.showCoverAlbum) {
       this.tabIndex = 1;
-      this.getAlbums()
-    }else{
+      this.getAlbums();
+    } else {
       this.getImages();
     }
-
-  },
+  }
 };
 </script>
 

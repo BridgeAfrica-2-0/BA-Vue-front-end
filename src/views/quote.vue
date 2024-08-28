@@ -308,12 +308,15 @@
                       v-model="form.shipping"
                     />
 
-                        <span class="md-error" v-if="!$v.form.shipping.required">
-                          {{ $t("general.Payment_method_is_required") }}
-                        </span>
+                    <span class="md-error" v-if="!$v.form.shipping.required">
+                      {{ $t("general.Payment_method_is_required") }}
+                    </span>
                   </md-field>
 
-                  <div class="md-field md-theme-default md-select" :class="getValidationClass('country')">
+                  <div
+                    class="md-field md-theme-default md-select"
+                    :class="getValidationClass('country')"
+                  >
                     <country-select
                       v-model="form.country"
                       :country="form.country"
@@ -325,10 +328,14 @@
                     </span>
                   </div>
 
-                  <div class="md-field md-theme-default md-select" :class="getValidationClass('region')">
+                  <div
+                    class="md-field md-theme-default md-select"
+                    :class="getValidationClass('region')"
+                  >
                     <region-select
                       v-model="form.region"
-                      :country="form.country" :region="form.region"
+                      :country="form.country"
+                      :region="form.region"
                       class="md-input form-control"
                     />
                     <span class="md-error" v-if="!$v.form.region.required">
@@ -370,7 +377,9 @@
 
                 <b-card class="mt-3 p-1 text-center">
                   <b-button variant="primary" type="submit" class="mb-3" block>
-                    {{ $t("general.Submit_Form") }} <b-spinner v-if="sending" variant="light" small>  </b-spinner>
+                    {{ $t("general.Submit_Form") }}
+                    <b-spinner v-if="sending" variant="light" small>
+                    </b-spinner>
                   </b-button>
                 </b-card>
               </div>
@@ -412,56 +421,56 @@ export default {
       shipping: "",
       ltime: "",
 
-      attachement: null,
+      attachement: null
     },
 
     userSaved: false,
     sending: false,
-    lastUser: null,
+    lastUser: null
   }),
 
   validations: {
     form: {
       pname: {
-        required,
+        required
       },
 
       category: {
-        required,
+        required
       },
 
       budget: {
-        required,
+        required
       },
 
       pmethod: {
-        required,
+        required
       },
 
       quantity: {
-        required,
+        required
       },
 
       description: {
-        required,
+        required
       },
 
       shipping: {
-        required,
+        required
       },
 
       country: {
-        required,
+        required
       },
 
       region: {
-        required,
+        required
       },
 
       ltime: {
-        required,
-      },
-    },
+        required
+      }
+    }
   },
 
   computed: {
@@ -471,7 +480,7 @@ export default {
 
     postInfo() {
       return this.$store.state.auth.quote;
-    },
+    }
   },
 
   mounted() {
@@ -488,10 +497,8 @@ export default {
     categories() {
       this.$store
         .dispatch("auth/categories")
-        .then(() => {
-     
-        })
-        .catch((err) => {
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -502,7 +509,7 @@ export default {
 
     flashErrors(errors) {
       let err = "";
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -521,26 +528,26 @@ export default {
           quantity: this.form.quantity,
           max_budget: this.form.budget,
           payment_mode: this.form.pmethod,
-          payment_method:this.form.pmethod,
+          payment_method: this.form.pmethod,
           details: this.form.description,
           shipping_location: this.form.shipping,
 
           country: this.form.country,
           time_of_shipping: this.form.ltime,
           city: this.form.region,
-          attachment: this.form.attachement,
+          attachment: this.form.attachement
         })
         .then(({ data }) => {
           this.sending = false;
 
           this.flashMessage.show({
             status: "success",
-             message:"Successfully Send",
-            title: "success",
+            message: "Successfully Send",
+            title: "success"
           });
           this.$router.push("/search");
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -551,12 +558,12 @@ export default {
               status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "error sending form",
+              message: "error sending form"
             });
             console.log({ err: err });
           }
@@ -566,30 +573,27 @@ export default {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
-        
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
 
     validateUser() {
       this.$v.$touch();
-       
+
       if (!this.$v.$invalid) {
         this.saveForm();
-      }else{
+      } else {
         this.flashMessage.show({
-            status: "error",
-            title: "Fill In All Required Form",
-          });
+          status: "error",
+          title: "Fill In All Required Form"
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
-
-
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
@@ -1010,4 +1014,3 @@ export default {
   color: black !important;
 }
 </style>
-

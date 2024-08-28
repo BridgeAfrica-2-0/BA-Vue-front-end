@@ -1,4 +1,4 @@
-import * as TYPES from './types';
+import * as TYPES from "./types";
 
 export const mutations = {
   [TYPES.NEW_BUSINESS_NOTIFICATION](state, payload) {
@@ -30,8 +30,7 @@ export const mutations = {
   },
 
   [TYPES.UPDATE_ALBUM](state) {
-    console.log("what are she doing")
-    state.updateAlbum = !state.updateAlbum
-  },
-
+    console.log("what are she doing");
+    state.updateAlbum = !state.updateAlbum;
+  }
 };

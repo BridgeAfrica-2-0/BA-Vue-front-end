@@ -28,7 +28,9 @@
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
             <b-link>
-              <h5 class="font-weight-bolder name w-md-bizname">{{ business_info.name }}</h5>
+              <h5 class="font-weight-bolder name w-md-bizname">
+                {{ business_info.name }}
+              </h5>
             </b-link>
             <p>
               <br />
@@ -45,13 +47,16 @@
             id="followbtn"
             :class="hasBeFollow !== 0 && 'u-btn'"
             @click="handleFollow"
-          > <span class=" d-flex m-auto">   
-            <i
-              :class="`fas ${
-                hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
-              } fa-lg btn-icon`"
-            ></i>
-            <span class="f-14"> {{ $t("businessf.Community") }}</span>
+          >
+            <span class=" d-flex m-auto">
+              <i
+                :class="
+                  `fas ${
+                    hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
+                  } fa-lg btn-icon`
+                "
+              ></i>
+              <span class="f-14"> {{ $t("businessf.Community") }}</span>
             </span>
           </b-button>
 
@@ -97,7 +102,9 @@
               <img class="logo" :src="business_info.logo_path" />
             </div>
             <div class="d-inline-block mt-4 ml-4 float-left texts">
-              <h6 class="font-weight-bolder name w-biznam">{{ business_info.name }}</h6>
+              <h6 class="font-weight-bolder name w-biznam">
+                {{ business_info.name }}
+              </h6>
               <p class="details">
                 {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
@@ -109,7 +116,6 @@
             class="community size"
             variant="primary"
             id="followbtn"
-            
             :class="hasBeFollow !== 0 && 'u-btn'"
             @click="handleFollow"
           >
@@ -172,7 +178,6 @@
   </div>
 </template>
 
-
 <script>
 import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
@@ -180,7 +185,7 @@ import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "./tabs/networks";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 
 import { defaultCoverImage } from "@/mixins";
 
@@ -196,7 +201,7 @@ export default {
     Media,
     MarketPlace,
     Community,
-    Networks,
+    Networks
   },
 
   data() {
@@ -207,17 +212,19 @@ export default {
       url_data: null,
       currentTab: 0,
       tabIndex: null,
-      tabs: ["#post", "#about", "#media", "#market","#network", "#community"],
-      isGuestUser: isGuestUser(),
+      tabs: ["#post", "#about", "#media", "#market", "#network", "#community"],
+      isGuestUser: isGuestUser()
     };
   },
 
   computed: {
     business_info() {
-      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
+      return this.isGuestUser
+        ? this.$store.state.businessGuest.businessInfo
+        : this.$store.state.businessOwner.businessInfo;
     },
-     perPage() {
-      console.log(this.business_info.cover)
+    perPage() {
+      console.log(this.business_info.cover);
       if (this.business_info.cover) {
         if (this.business_info.cover.length == 1) {
           return 1;
@@ -256,27 +263,27 @@ export default {
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
             perPage: this.perPageM,
-            gap: "1rem",
-          },
-        },
+            gap: "1rem"
+          }
+        }
       };
-    },
-
+    }
   },
 
   created() {
-    this.currentTab = this.$route.query.tabId ? this.$route.query.tabId :this.tabs.findIndex((tab) => tab === this.$route.hash) ;
-     this.currentAuthType = "business";
+    this.currentTab = this.$route.query.tabId
+      ? this.$route.query.tabId
+      : this.tabs.findIndex(tab => tab === this.$route.hash);
+    this.currentAuthType = "business";
     this.url_data = this.$route.params.id;
-   
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function () {
+    "$store.state.businessOwner.businessInfo": function() {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
 
@@ -287,21 +294,14 @@ export default {
       }
     },
 
-    $route(to, from) { 
-      if ("#media" == to.hash)
-        this.showCoverAlbum = true;
+    $route(to, from) {
+      if ("#media" == to.hash) this.showCoverAlbum = true;
 
-      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+      this.currentTab = this.tabs.findIndex(tab => tab === to.hash);
 
-
-       if ("#about" == to.hash)
-      
-
-      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
-    },
-
-
-    
+      if ("#about" == to.hash)
+        this.currentTab = this.tabs.findIndex(tab => tab === to.hash);
+    }
   },
 
   mounted() {
@@ -319,18 +319,20 @@ export default {
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
-        id: this.business_info.id ? this.business_info.id : this.$route.params.id,
-        type: "business",
+        id: this.business_info.id
+          ? this.business_info.id
+          : this.$route.params.id,
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => { 
+        .then(response => {
           console.log(response);
           this.hasBeFollow = nextFollowState;
           // document.getElementById("followbtn").disabled = nextFollowState;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           // document.getElementById("followbtn").disabled = false;
         });
@@ -340,46 +342,47 @@ export default {
       this.currentTab = 1;
     },
 
-   
-
     businessCommunityTotal() {
-      const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
+      const dispatchMethod = this.isGuestUser
+        ? "businessGuest/businessCommunityTotal"
+        : "businessOwner/businessCommunityTotal";
       this.$store
         .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     ownerPost() {
-      const dispatchMethod = this.isGuestUser ? "businessGuest/ownerPost": "businessOwner/ownerPost";
+      const dispatchMethod = this.isGuestUser
+        ? "businessGuest/ownerPost"
+        : "businessOwner/ownerPost";
       this.$store
         .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-
-.f-14{
+.f-14 {
   font-size: 14px;
 }
 
-.w-md-bizname{
+.w-md-bizname {
   max-width: 300px;
 }
-.w-biznam{
-   max-width: 150px;
+.w-biznam {
+  max-width: 150px;
 }
 .place_holder {
   width: 50% !important;
@@ -439,14 +442,11 @@ img {
   display: flex;
 }
 
-
 span {
   font-size: 16px;
   margin-left: 4px;
- 
 }
 p {
-
   font-size: 14px;
 }
 .btns {
@@ -487,7 +487,6 @@ p {
   position: relative;
   top: 11px;
   font-size: 20px;
- 
 }
 
 .name-block {
@@ -592,10 +591,8 @@ p {
   .name {
     position: relative;
     font-size: 16px;
-   
   }
   p {
-  
     font-size: 12px;
   }
   .m-fol {

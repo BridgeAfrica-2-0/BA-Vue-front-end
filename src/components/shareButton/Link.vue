@@ -12,54 +12,54 @@
   </b-list-group-item>
 </template>
 
-
 <script>
-import Button from '@/components/Button';
+import Button from "@/components/Button";
 
 export default {
-  name: 'Link',
+  name: "Link",
 
   props: {
     contact: {
       type: Object,
-      required: true,
+      required: true
     },
     post: {
       type: Object,
-      required: true,
+      required: true
     },
     actionType: {
-      required: true,
-    },
+      required: true
+    }
   },
 
   components: {
-    Button,
+    Button
   },
 
   data: () => ({
-    loading: false,
+    loading: false
   }),
 
   methods: {
-    share: async function () {
-      
+    share: async function() {
       this.loading = true;
       let data = {
-        [`${this.post.poster_type}_${this.actionType}`]: '',
+        [`${this.post.poster_type}_${this.actionType}`]: "",
         post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
         source_id: parseInt(this.post.user_id),
-        target_id: this.contact.id,
+        target_id: this.contact.id
       };
-      const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);
+      const request = await this.$repository.share.userPost(data, [
+        `${this.post.poster_type}`
+      ]);
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: this.$t("search.Operation_success"),
+          message: this.$t("search.Operation_success")
         });
 
       this.loading = false;
-    },
-  },
+    }
+  }
 };
 </script>

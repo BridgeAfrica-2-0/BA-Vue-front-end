@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> {{ $t('general.About') }}
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon>
+    {{ $t("general.About") }}
 
     <hr />
 
@@ -22,33 +23,37 @@
 </template>
 
 <script>
-import Biography from '../biography';
-import ContactandInfo from '../contactandbasicinfo';
-import WorkAndEducation from '../workandeducation';
+import Biography from "../biography";
+import ContactandInfo from "../contactandbasicinfo";
+import WorkAndEducation from "../workandeducation";
 export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation,
+    WorkAndEducation
   },
   data() {
     return {
       size: 0,
-      profile_about: null,
+      profile_about: null
     };
   },
   created() {
-    this.profile_about = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAbout']));
-    console.log('Load User Profile About start ++++++', this.profile_about);
+    this.profile_about = JSON.parse(
+      JSON.stringify(this.$store.getters["profile/getProfileAbout"])
+    );
+    console.log("Load User Profile About start ++++++", this.profile_about);
     this.$store
-      .dispatch('profile/loadUserProfileAbout', null)
+      .dispatch("profile/loadUserProfileAbout", null)
       .then(response => {})
       .catch(error => {
-        console.log('Error from server or from browser error (2) ++++', error);
+        console.log("Error from server or from browser error (2) ++++", error);
       })
       .finally(() => {
-        this.profile_about = JSON.parse(JSON.stringify(this.$store.getters['profile/getProfileAbout_']));
-        console.log('Load User Profile About end ++++++', this.profile_about);
+        this.profile_about = JSON.parse(
+          JSON.stringify(this.$store.getters["profile/getProfileAbout_"])
+        );
+        console.log("Load User Profile About end ++++++", this.profile_about);
       });
   },
   computed: {
@@ -59,14 +64,14 @@ export default {
     card() {
       if (this.size > 992) return true;
       return false;
-    },
+    }
   },
   mounted() {
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;
     };
-  },
+  }
 };
 </script>
 

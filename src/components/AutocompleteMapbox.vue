@@ -15,7 +15,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 5,
+      zoom: 5
     };
   },
   created() {
@@ -29,7 +29,7 @@ export default {
       console.log(response.result);
       let details = {
         coordinates: response.result.center,
-        address: response.result.text,
+        address: response.result.text
       };
       this.$emit("get-address-details", details);
     },
@@ -40,7 +40,7 @@ export default {
         container: "map",
         style: this.mapStyle,
         zoom: this.zoom,
-        center: this.center,
+        center: this.center
       });
       console.log(this.region);
       var regon = this.region ? this.region.name.toLowerCase() : "centre";
@@ -52,24 +52,24 @@ export default {
         countries: "cm",
         placeholder: "Address",
         filter: function(item) {
-          return item.context.some((i) => {
+          return item.context.some(i => {
             return i.text === regon;
           });
-        },
+        }
       });
 
       document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
 
-      geocoder.on("result", (e) => {
+      geocoder.on("result", e => {
         let response = e.result;
         let details = {
           coordinates: response.center,
-          address: response.place_name,
+          address: response.place_name
         };
         this.$emit("get-address-details", details);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

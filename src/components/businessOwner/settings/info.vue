@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>  
+  <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
       <b-form>
         <div class="b-bottom">
@@ -363,7 +363,11 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              :label="$t('businessowner.Municipality')+'/'+ $t('businessowner.City')"  
+              :label="
+                $t('businessowner.Municipality') +
+                  '/' +
+                  $t('businessowner.City')
+              "
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -485,24 +489,6 @@
           </b-container>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="b-bottom">
           <b-container>
             <b-form-group
@@ -512,7 +498,7 @@
               label-class=" pt-0 "
               class="mb-0"
             >
-              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">       
+              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                 <b-form-radio-group
                   class="a-text text"
                   :options="['Always Open', 'Open for selected hours']"
@@ -521,13 +507,10 @@
                   v-model="open"
                   :disabled="false"
                 ></b-form-radio-group>
-                <br /> 
+                <br />
                 <b-container v-if="displayHour1">
                   <b-row v-for="(day, index) in dayOfWorks" :key="index">
-                    <b-col cols="6"
-                      >  
-                      
-                      
+                    <b-col cols="6">
                       <b-form-checkbox
                         id=""
                         class="a-text text"
@@ -537,7 +520,6 @@
                       >
                         {{ day.day }}</b-form-checkbox
                       >
-                    
 
                       <b-form-input
                         @change="input(index, day)"
@@ -545,15 +527,12 @@
                         type="time"
                         v-model="day.opening_time"
                         :required="day.check ? 'required' : null"
-                      ></b-form-input
-                    >   
-                    
-                   
-                     
-                     </b-col>
-                  
-                    <b-col cols="6"
-                      >  <br>  <b-form-input
+                      ></b-form-input>
+                    </b-col>
+
+                    <b-col cols="6">
+                      <br />
+                      <b-form-input
                         @change="input(index, day)"
                         class="mt-1"
                         name="end"
@@ -569,23 +548,6 @@
             </b-form-group>
           </b-container>
         </div>
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
 
         <div class="b-bottomm">
           <b-button
@@ -625,7 +587,7 @@ export default {
 
   components: {
     Multiselect,
-    VuePhoneNumberInput,
+    VuePhoneNumberInput
   },
 
   data() {
@@ -655,44 +617,42 @@ export default {
         { day: "thursday", opening_time: null, closing_time: null },
         { day: "friday", opening_time: null, closing_time: null },
         { day: "saturday", opening_time: null, closing_time: null },
-        { day: "sunday", opening_time: null, closing_time: null },
+        { day: "sunday", opening_time: null, closing_time: null }
       ],
       openDaysStatus: [],
 
-
-       dayOfWorks: [
+      dayOfWorks: [
         { day: "monday", mon_start: null, mon_end: null, check: false },
         {
           day: "tuesday",
           tues_start: null,
           tues_end: null,
-          check: false,
+          check: false
         },
         {
           day: "wednesday",
           wed_start: null,
           wed_end: null,
-          check: false,
+          check: false
         },
         {
           day: "thursday",
           thurs_start: null,
           thurs_end: null,
-          check: false,
+          check: false
         },
         { day: "friday", fri_start: null, fri_end: null, check: false },
         {
           day: "saturday",
           sat_start: null,
           sat_end: null,
-          check: false,
+          check: false
         },
-        { day: "sunday", sun_start: null, sun_end: null, check: false },
+        { day: "sunday", sun_start: null, sun_end: null, check: false }
       ],
 
+      openNow: null,
 
-       openNow: null,
-      
       open: "Open for selected hours",
       tempo: {},
 
@@ -715,7 +675,7 @@ export default {
         satudayStart: "",
         satudayEnd: "",
         sundayStart: "",
-        sundayEnd: "",
+        sundayEnd: ""
       },
       businessForm: {
         openHours: {
@@ -732,8 +692,8 @@ export default {
           satudayStart: "",
           satudayEnd: "",
           sundayStart: "",
-          sundayEnd: "",
-        },
+          sundayEnd: ""
+        }
       },
 
       timezones: [
@@ -767,20 +727,20 @@ export default {
         {
           label:
             "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London",
-          value: "0",
+          value: "0"
         },
         {
           label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
-          value: "1",
+          value: "1"
         },
         {
           label:
             "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
-          value: "1",
+          value: "1"
         },
         {
           label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
-          value: "1",
+          value: "1"
         },
         { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
         { label: "(GMT+01:00) West Central Africa", value: "1" },
@@ -791,7 +751,7 @@ export default {
         { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
         {
           label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
-          value: "2",
+          value: "2"
         },
         { label: "(GMT+02:00) Jerusalem", value: "2" },
         { label: "(GMT+02:00) Minsk", value: "2" },
@@ -810,7 +770,7 @@ export default {
         { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
         {
           label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
-          value: "5.5",
+          value: "5.5"
         },
         { label: "(GMT+05:45) Kathmandu", value: "5.75" },
         { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
@@ -820,54 +780,52 @@ export default {
         { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
         {
           label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
-          value: "8",
+          value: "8"
         },
         { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
         { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
         { label: "(GMT+08:00) Perth", value: "8" },
-        { label: "(GMT+08:00) Taipei", value: "8" },
+        { label: "(GMT+08:00) Taipei", value: "8" }
       ],
       options: [
         { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text: " Business ", value: "business" }
       ],
       OpenHours: [
         { name: "Always Open", value: "1" },
-        { name: "Open for selected hours", value: "0" },
+        { name: "Open for selected hours", value: "0" }
       ],
       multiselec: [
         { name: "Vue.js", code: "vu" },
         { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
-      ],
+        { name: "Open Source", code: "os" }
+      ]
     };
   },
 
-
-
-   watch: {
+  watch: {
     open(value) {
       console.log("change open value ", value);
-      if(value == "Always Open"){
-        this.displayHour1 = false
-      }else if(value == "Open for selected hours"){
-        this.displayHour1 = true
+      if (value == "Always Open") {
+        this.displayHour1 = false;
+      } else if (value == "Open for selected hours") {
+        this.displayHour1 = true;
       }
     },
     dayOfWorks: {
       handler(newValue, oldValue) {
         let num = 0;
-        newValue.map((day) => {
+        newValue.map(day => {
           if (day.check) {
             num = num + 1;
           }
         });
-       
+
         console.log(newValue);
         console.log(oldValue);
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
 
   computed: {
@@ -875,11 +833,10 @@ export default {
       return this.$store.state.businessSettingInfo.businessInfo;
     },
 
-    bizOpenHours(){
- 
-     return  this.businessInfo.business_open_hours.length !==0 ? this.businessInfo.business_open_hours : this.openHour;
-     
-
+    bizOpenHours() {
+      return this.businessInfo.business_open_hours.length !== 0
+        ? this.businessInfo.business_open_hours
+        : this.openHour;
     },
 
     scategories() {
@@ -906,19 +863,18 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         selectedUsers.push(item.category_id);
       });
       return selectedUsers;
     },
-   
 
-     selectedsubcategories: function() {
+    selectedsubcategories: function() {
       let sub_cat = [];
 
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         if (item.subcategory_id) {
           sub_cat.push(item.subcategory_id);
         } else {
@@ -928,10 +884,9 @@ export default {
       return sub_cat;
     },
 
-
-     selectedcountry: function() {
+    selectedcountry: function() {
       let sub_cat = [];
-      this.country.forEach((item) => {
+      this.country.forEach(item => {
         if (item.country_id) {
           sub_cat.push(item.country_id);
         } else {
@@ -941,9 +896,9 @@ export default {
       return sub_cat;
     },
 
-     selectedregion: function() {
+    selectedregion: function() {
       let sub_cat = [];
-      this.region.forEach((item) => {
+      this.region.forEach(item => {
         if (item.region_id) {
           sub_cat.push(item.region_id);
         } else {
@@ -953,11 +908,9 @@ export default {
       return sub_cat;
     },
 
-
-
     selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         if (item.division_id) {
           sub_cat.push(item.division_id);
         } else {
@@ -967,11 +920,9 @@ export default {
       return sub_cat;
     },
 
-
-
- selectedmunicipality: function() {
+    selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         if (item.council_id) {
           sub_cat.push(item.council_id);
         } else {
@@ -981,11 +932,9 @@ export default {
       return sub_cat;
     },
 
-
-
- city: function() {
+    city: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         if (item.council_id) {
           sub_cat.push(item.name);
         } else {
@@ -995,15 +944,11 @@ export default {
       return sub_cat.toString();
     },
 
-
-   
-
-    
     selectedlocality: function() {
       let sub_cat = [];
       console.log("loging localities");
       console.log(this.locality);
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         if (item.neighborhood_id) {
           sub_cat.push(item.neighborhood_id);
         } else {
@@ -1011,133 +956,100 @@ export default {
         }
       });
       return sub_cat;
-    },
-
+    }
   },
 
   mounted() {
-   
-    
     this.categories();
     this.Country();
     console.log("-----", this.businessInfo);
 
-  
-   //this.businessInfo()
-
-
-
-
-        
-
-
+    //this.businessInfo()
   },
 
+  created() {
+    this.url = this.$route.params.id;
 
-
-
-
-   created() {
-      this.url = this.$route.params.id;
-   
     this.getBusinessInfo();
     this.editBusiness();
-    const dispatchMethod = this.isGuestUser ? "businessGuest": "businessOwner";
+    const dispatchMethod = this.isGuestUser ? "businessGuest" : "businessOwner";
     this.$store
-      .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
-      
-        business_id: this.$route.params.id,
+      .dispatch(dispatchMethod + "/loadUserBusinessAbout", {
+        business_id: this.$route.params.id
       })
-      .then((response) => {
+      .then(response => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+          JSON.stringify(
+            this.$store.getters[dispatchMethod + "/getBusinessAbout"]
+          )
         );
-      
-      
-     if(this.businessInfo.business_open_hours.length >= 1){
 
-       console.log("biz hour initialised");
+        if (this.businessInfo.business_open_hours.length >= 1) {
+          console.log("biz hour initialised");
 
           this.dayOfWorks = this.businessInfo.business_open_hours;
-  
-          this.businessInfo.business_open_hours.forEach((element, index) => {
-  
-           if(element.opening_time && element.closing_time){
-              this.dayOfWorks[index].check = true;
-           }else { this.dayOfWorks[index].check = false; }
-        });
-        
-        }
 
+          this.businessInfo.business_open_hours.forEach((element, index) => {
+            if (element.opening_time && element.closing_time) {
+              this.dayOfWorks[index].check = true;
+            } else {
+              this.dayOfWorks[index].check = false;
+            }
+          });
+        }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("error from the server or browser error(2) ++++", error);
       })
       .finally(() => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+          JSON.stringify(
+            this.$store.getters[dispatchMethod + "/getBusinessAbout"]
+          )
         );
-      
-       
       });
   },
 
-
   methods: {
-
-
-
-    
-
-
-     input1(){
-         
-      this.dayOfWorks.map((item) =>{
-          if(item.day == "monday"){
-              this.dayOfWorks[0].mon_start =this.dayOfWorks[0].opening_time;
-              this.dayOfWorks[0].mon_end =this.dayOfWorks[0].closing_time;
-              this.dayOfWorks[0].monday =this.dayOfWorks[0].day;
-          }else  if(item.day == "tuesday"){
-              this.dayOfWorks[1].tues_start =this.dayOfWorks[1].opening_time;
-              this.dayOfWorks[1].tues_end =this.dayOfWorks[1].closing_time;
-              this.dayOfWorks[1].tuesday =this.dayOfWorks[1].day;
-          } else  if(item.day == "wednesday"){
-              this.dayOfWorks[2].wed_start =this.dayOfWorks[2].opening_time;
-              this.dayOfWorks[2].wed_end =this.dayOfWorks[2].closing_time;
-              this.dayOfWorks[2].wednesday =this.dayOfWorks[2].day;
-          } else  if(item.day == "thursday"){
-              this.dayOfWorks[3].thurs_start =this.dayOfWorks[3].opening_time;
-              this.dayOfWorks[3].thurs_end =this.dayOfWorks[3].closing_time;
-              this.dayOfWorks[3].thursday =this.dayOfWorks[3].day;
-          } else  if(item.day == "friday"){
-              this.dayOfWorks[4].fri_start =this.dayOfWorks[4].opening_time;
-              this.dayOfWorks[4].fri_end =this.dayOfWorks[4].closing_time;
-              this.dayOfWorks[4].friday =this.dayOfWorks[4].day;
-          } else  if(item.day == "saturday"){
-              this.dayOfWorks[5].sat_start =this.dayOfWorks[5].opening_time;
-              this.dayOfWorks[5].sat_end =this.dayOfWorks[5].closing_time;
-              this.dayOfWorks[5].saturday =this.dayOfWorks[5].day;
-          } else  if(item.day == "sunday"){
-              this.dayOfWorks[6].sun_start =this.dayOfWorks[6].opening_time;
-              this.dayOfWorks[6].sun_end =this.dayOfWorks[6].closing_time;
-              this.dayOfWorks[6].sunday =this.dayOfWorks[6].day;
-          }
-        })
-        
-       
-        this.dayOfWorks.map((item) =>{
-
-            Object.entries(item).forEach(
-            ([key, valeur]) => {
-              this.tempo[key] = valeur 
-            }
-          );
-
+    input1() {
+      this.dayOfWorks.map(item => {
+        if (item.day == "monday") {
+          this.dayOfWorks[0].mon_start = this.dayOfWorks[0].opening_time;
+          this.dayOfWorks[0].mon_end = this.dayOfWorks[0].closing_time;
+          this.dayOfWorks[0].monday = this.dayOfWorks[0].day;
+        } else if (item.day == "tuesday") {
+          this.dayOfWorks[1].tues_start = this.dayOfWorks[1].opening_time;
+          this.dayOfWorks[1].tues_end = this.dayOfWorks[1].closing_time;
+          this.dayOfWorks[1].tuesday = this.dayOfWorks[1].day;
+        } else if (item.day == "wednesday") {
+          this.dayOfWorks[2].wed_start = this.dayOfWorks[2].opening_time;
+          this.dayOfWorks[2].wed_end = this.dayOfWorks[2].closing_time;
+          this.dayOfWorks[2].wednesday = this.dayOfWorks[2].day;
+        } else if (item.day == "thursday") {
+          this.dayOfWorks[3].thurs_start = this.dayOfWorks[3].opening_time;
+          this.dayOfWorks[3].thurs_end = this.dayOfWorks[3].closing_time;
+          this.dayOfWorks[3].thursday = this.dayOfWorks[3].day;
+        } else if (item.day == "friday") {
+          this.dayOfWorks[4].fri_start = this.dayOfWorks[4].opening_time;
+          this.dayOfWorks[4].fri_end = this.dayOfWorks[4].closing_time;
+          this.dayOfWorks[4].friday = this.dayOfWorks[4].day;
+        } else if (item.day == "saturday") {
+          this.dayOfWorks[5].sat_start = this.dayOfWorks[5].opening_time;
+          this.dayOfWorks[5].sat_end = this.dayOfWorks[5].closing_time;
+          this.dayOfWorks[5].saturday = this.dayOfWorks[5].day;
+        } else if (item.day == "sunday") {
+          this.dayOfWorks[6].sun_start = this.dayOfWorks[6].opening_time;
+          this.dayOfWorks[6].sun_end = this.dayOfWorks[6].closing_time;
+          this.dayOfWorks[6].sunday = this.dayOfWorks[6].day;
+        }
       });
-     
+
+      this.dayOfWorks.map(item => {
+        Object.entries(item).forEach(([key, valeur]) => {
+          this.tempo[key] = valeur;
+        });
+      });
     },
-
-
 
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
@@ -1145,7 +1057,7 @@ export default {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
@@ -1153,7 +1065,7 @@ export default {
     addFilter(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
@@ -1165,7 +1077,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1178,7 +1090,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1188,7 +1100,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1198,7 +1110,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1208,7 +1120,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1221,7 +1133,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1234,7 +1146,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1247,7 +1159,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1261,14 +1173,12 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     setOpenHours(day, startTime, endDay) {
-   
-
       switch (day) {
         //  this.businessInfo.business_open_hours.forEach((item) => {
 
@@ -1363,13 +1273,12 @@ export default {
     },
 
     getBusinessInfo() {
-      
       this.$store
         .dispatch("businessSettingInfo/getBusinessInfo", this.url)
         .then(() => {
           console.log("business data available");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1377,12 +1286,12 @@ export default {
       console.log("editBusiness");
       this.axios
         .get("business/edit/" + this.url)
-        .then(({ data }) => {  
+        .then(({ data }) => {
           console.log("testing: ", data);
           this.editbiz = data.data;
           this.setEditData(data.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1399,7 +1308,7 @@ export default {
       this.municipality = business.council;
       this.locality = business.neigborhood;
 
-      select_filterss.map((item) => {
+      select_filterss.map(item => {
         this.select_filterss.push(item.filter_id);
       });
 
@@ -1410,83 +1319,71 @@ export default {
       this.Locality();
     },
 
-    updateInfo: function (businessInfo) {
+    updateInfo: function(businessInfo) {
+      this.input1();
 
-       this.input1();
-       
-     
       this.Lspinner = true;
       this.loading = true;
       console.log("updateInfo", businessInfo);
 
-     
-      var dat = { 
-        "name": this.businessInfo.name,
-                   "categoryId": this.selectedcategories.toString(),
-                   "subCategoryId": this.selectedsubcategories.toString(), 
+      var dat = {
+        name: this.businessInfo.name,
+        categoryId: this.selectedcategories.toString(),
+        subCategoryId: this.selectedsubcategories.toString(),
 
-                   "filterId": this.select_filterss.toString(),
-                   "country": this.selectedcountry.toString(),
-                   "region": this.selectedregion.toString(),
-                   "division": this.selecteddivision.toString(),
-                   "council": this.selectedmunicipality.toString(),
-                   "neigborhood":this.selectedlocality.toString(),
-                   "alway": !this.displayHour1 ? "vrai" : "faux",
-                   "keywords": String(businessInfo.keywords),
-                   "primary_phone": businessInfo.phone,
-                   "secondary_phone": businessInfo.secondary_phone,
-                   "timezone": businessInfo.timezone,
-                   "about_business": businessInfo.about_business,
-                   "website": businessInfo.website,
-                   "email": businessInfo.email,
-                    "location_description": businessInfo.location_description,
-                    "address": businessInfo.city,
-                    "Street": businessInfo.Street,
-                    "city": businessInfo.city,
-                    "PostalCode": businessInfo.PostalCode,
-                    "lat": businessInfo.lat,
-                    "lng": businessInfo.lng,
-                    ...this.tempo
-
-
-
-
-
-      }
-
-
-      
-
+        filterId: this.select_filterss.toString(),
+        country: this.selectedcountry.toString(),
+        region: this.selectedregion.toString(),
+        division: this.selecteddivision.toString(),
+        council: this.selectedmunicipality.toString(),
+        neigborhood: this.selectedlocality.toString(),
+        alway: !this.displayHour1 ? "vrai" : "faux",
+        keywords: String(businessInfo.keywords),
+        primary_phone: businessInfo.phone,
+        secondary_phone: businessInfo.secondary_phone,
+        timezone: businessInfo.timezone,
+        about_business: businessInfo.about_business,
+        website: businessInfo.website,
+        email: businessInfo.email,
+        location_description: businessInfo.location_description,
+        address: businessInfo.city,
+        Street: businessInfo.Street,
+        city: businessInfo.city,
+        PostalCode: businessInfo.PostalCode,
+        lat: businessInfo.lat,
+        lng: businessInfo.lng,
+        ...this.tempo
+      };
 
       this.$store
         .dispatch("businessSettingInfo/UpdateInfomation", {
           path: "business/update/" + this.url,
-         
-          data:dat
+
+          data: dat
         })
         .then(({ data }) => {
           console.log(data);
           this.getBusinessInfo();
-        
+
           this.Lspinner = false;
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.Changes_Made_Successfuly"),
+            message: this.$t("businessowner.Changes_Made_Successfuly")
           });
           this.loading = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.Lspinner = false;
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.Unable_To_Make_Changes"),
+            message: this.$t("businessowner.Unable_To_Make_Changes")
           });
           this.loading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

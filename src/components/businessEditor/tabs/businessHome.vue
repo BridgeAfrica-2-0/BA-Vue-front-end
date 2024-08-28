@@ -16,7 +16,7 @@
 
 <script>
 import Intro from "@/components/businessf/intro";
-import comunitiDashboard from "@/components/businessOwner/tabs/comunitiDashboard"; 
+import comunitiDashboard from "@/components/businessOwner/tabs/comunitiDashboard";
 
 import Post from "../ownerPost";
 export default {
@@ -26,8 +26,8 @@ export default {
 
     comunitiDashboard,
 
-    Post,
-  },
+    Post
+  }
 };
 </script>
 

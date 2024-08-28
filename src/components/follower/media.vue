@@ -7,11 +7,12 @@
           :icon="['fas', 'file-image']"
           size="lg"
         />
-        <b> {{ $t('profilefollower.Media') }} </b>
+        <b> {{ $t("profilefollower.Media") }} </b>
       </h6>
-       <span class="float-right">
+      <span class="float-right">
         <b-link
-          ><b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t('profilefollower.View_All') }}
+          ><b-icon icon="eye-fill" variant="primary"> </b-icon>
+          {{ $t("profilefollower.View_All") }}
         </b-link></span
       >
       <CoolLightBox :items="imgaray" :index="index" @close="index = null">
@@ -34,10 +35,10 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       foll_id: null,
-      index: null,
+      index: null
     };
   },
 
@@ -52,19 +53,19 @@ export default {
         arr.push(value.image_url);
       });
       return arr;
-    },
+    }
   },
 
   created() {
     this.foll_id = this.$route.params.id;
-    console.log(this.foll_id, "++++++++++++++++++++++++++++++++++++++++")
+    console.log(this.foll_id, "++++++++++++++++++++++++++++++++++++++++");
     this.$store
       .dispatch("follower/getImages", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
-  },
+  }
 };
 </script>
 

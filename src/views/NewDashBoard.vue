@@ -1,12 +1,12 @@
 <template>
-  <div style="overflow-x: hidden" class="dashboard" >
+  <div style="overflow-x: hidden" class="dashboard">
     <navbar></navbar>
 
     <div class="main row">
       <div class="sidebar d-none d-xl-block"><SideBar /></div>
 
       <div class="main-content row wi-100">
-        <div class=" col-lg-7"> 
+        <div class=" col-lg-7">
           <div class="text-justify p-card ">
             <CompleteProfile class="mb-2" v-if="!Profile_complete" />
           </div>
@@ -17,63 +17,88 @@
                 <b-avatar
                   :src="profille.user.profile_picture"
                   variant="primary"
-                   size="3em"
+                  size="3em"
                 ></b-avatar>
 
                 <span class="mt-2 ml-3">
                   Your current plan:
-                  <span class="sub-title"  v-if="profile_package.user_package">
-                     {{ profile_package.user_package.name }} Account
+                  <span class="sub-title" v-if="profile_package.user_package">
+                    {{ profile_package.user_package.name }} Account
                   </span>
 
-                  <span class="sub-title"  v-else >
-                     Basic Account
+                  <span class="sub-title" v-else>
+                    Basic Account
                   </span>
-
-
                 </span>
               </span>
               <div class="text-center">
-             <router-link to="/settings?tab=account">  <b-button variant="outline-primary"> Upgrade Account </b-button> </router-link>  
+                <router-link to="/settings?tab=account">
+                  <b-button variant="outline-primary">
+                    Upgrade Account
+                  </b-button>
+                </router-link>
               </div>
             </b-card>
           </div>
 
+          <div class="d-block d-lg-none">
+            <NewProfile
+              class="mt-1"
+              v-if="selectedb == 'owner'"
+              :boptions="boptions"
+              :selectedb="selectedb"
+              @switchBusiness="switchBusiness"
+            />
 
-          <div class="d-block d-lg-none">  
-          <NewProfile class="mt-1"  v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
-          
-           <new-business class="mt-1"  style="height: 400px" v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
-           </div>
+            <new-business
+              class="mt-1"
+              style="height: 400px"
+              v-if="selectedb != 'owner'"
+              :boptions="boptions"
+              :selectedb="selectedb"
+              @switchBusiness="switchBusiness"
+            />
+          </div>
 
- 
           <DashboardTab :usertype="selectedb" class="mt-2" />
-      
 
-          <ProductActivities  v-if="selectedb == 'owner'"  class="mt-2" />
-           <ProductBactivities  v-if="selectedb != 'owner'"  class="mt-2" />
+          <ProductActivities v-if="selectedb == 'owner'" class="mt-2" />
+          <ProductBactivities v-if="selectedb != 'owner'" class="mt-2" />
 
-          <Tutorial class="mt-2"  style="overflow:hidden"/>
+          <Tutorial class="mt-2" style="overflow:hidden" />
         </div>
 
         <div class=" col-lg-5 pl-0">
+          <div class="d-none d-lg-block">
+            <NewProfile
+              v-if="selectedb == 'owner'"
+              :boptions="boptions"
+              :selectedb="selectedb"
+              @switchBusiness="switchBusiness"
+            />
 
-          <div class="d-none d-lg-block">  
-          <NewProfile   v-if="selectedb == 'owner'"   :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' />
-          
-           <new-business  style="height: 380px"  v-if="selectedb != 'owner'"  :boptions='boptions'  :selectedb='selectedb' @switchBusiness='switchBusiness' /> 
-           </div>
+            <new-business
+              style="height: 380px"
+              v-if="selectedb != 'owner'"
+              :boptions="boptions"
+              :selectedb="selectedb"
+              @switchBusiness="switchBusiness"
+            />
+          </div>
           <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
 
-          
-          <comuniti-dashboard   v-if="selectedb == 'owner'"  class="mt-2"></comuniti-dashboard>
-  
-          <comuniti-Bdashboard  v-if="selectedb != 'owner'"  class="mt-2" ></comuniti-Bdashboard>
+          <comuniti-dashboard
+            v-if="selectedb == 'owner'"
+            class="mt-2"
+          ></comuniti-dashboard>
 
+          <comuniti-Bdashboard
+            v-if="selectedb != 'owner'"
+            class="mt-2"
+          ></comuniti-Bdashboard>
 
           <Business class="mt-2" />
           <Popularnetwork class="mt-2" />
-          
         </div>
       </div>
     </div>
@@ -118,7 +143,7 @@ export default {
 
   data() {
     return {
-      selectedb:"owner",
+      selectedb: "owner",
       slide: 0,
       //isPremium: isPremium(),
       sliding: null,
@@ -128,14 +153,13 @@ export default {
       boptions: [],
       detail: null,
       data1: null,
-      showcompleteprofile: true,
-    
+      showcompleteprofile: true
     };
   },
 
   components: {
     ComunitiDashboard,
-     ComunitiBdashboard,
+    ComunitiBdashboard,
     // BusinessDashboard,
     DashboardTab,
     ProductActivities,
@@ -154,14 +178,14 @@ export default {
     // EmptyBusiness,
     // Profile,
 
-    Navbar,
+    Navbar
     // mapbox
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
-    }), 
+      auth: "auth/profilConnected"
+    }),
 
     async checkIfItNetwork() {
       if ("network" == this.profile.user_type) {
@@ -171,48 +195,38 @@ export default {
       }
     },
 
-     async ProfileProcess() {
-      console.log('swtichin')
-      const response = await this.$repository.share.switch(null, 'reset');
+    async ProfileProcess() {
+      console.log("swtichin");
+      const response = await this.$repository.share.switch(null, "reset");
 
-      if (response.success) this.auth({ ...this.profille.user, user_type: 'user' });
+      if (response.success)
+        this.auth({ ...this.profille.user, user_type: "user" });
 
-     console.log(this.profille)
-
-  
-
+      console.log(this.profille);
     },
 
-
-     BusinessProcess: async function (id, type) {
-   
+    BusinessProcess: async function(id, type) {
       try {
-          const request = await this.$repository.share.switch( id,  type );
-      if (request.success) {
-
-
-  this.auth({
-    name: this.selectedBusiness.name,
-    profile_picture: this.selectedBusiness.picture,
-    id: this.selectedBusiness.id,
-    slug:this.selectedBusiness.slug,
-    user_type: "business",
-  });
-          
+        const request = await this.$repository.share.switch(id, type);
+        if (request.success) {
+          this.auth({
+            name: this.selectedBusiness.name,
+            profile_picture: this.selectedBusiness.picture,
+            id: this.selectedBusiness.id,
+            slug: this.selectedBusiness.slug,
+            user_type: "business"
+          });
         }
-
       } catch (error) {
         console.log(error);
       }
     },
 
-
     async switchBusiness(value) {
       this.data1 = false;
-     
-      this.selectedb=value;
-      if(value == "owner"){
-     
+
+      this.selectedb = value;
+      if (value == "owner") {
         this.ProfileProcess();
       }
 
@@ -221,7 +235,7 @@ export default {
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
           onCancel: this.onCancel,
-          color: "#e75c18",
+          color: "#e75c18"
         });
 
         this.url_data = value;
@@ -230,16 +244,15 @@ export default {
 
         await this.$store
           .dispatch("dashboard/dashboardBusiness", value)
-          .then((res) => {
+          .then(res => {
             this.data1 = true;
           })
-          .catch((err) => {});
+          .catch(err => {});
 
         this.businessCommunityTotal();
 
         this.dashboardBpost();
-         this.BusinessProcess(value, 'business');
-        
+        this.BusinessProcess(value, "business");
 
         loader.hide();
       }
@@ -249,35 +262,35 @@ export default {
       this.$store
         .dispatch("dashboard/dashboardPpost")
         .then(() => {})
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     dashboardBpost() {
       this.$store
         .dispatch("dashboard/dashboardBpost", this.url_data)
         .then(() => {})
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {})
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {})
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {})
-        .catch((err) => {});
+        .catch(err => {});
     },
     getbusiness() {
       let owner = JSON.parse(
@@ -286,9 +299,9 @@ export default {
         )
       ).owner;
 
-      const ownerData = owner.map((value) => ({
+      const ownerData = owner.map(value => ({
         text: value.name,
-        value: "owner",
+        value: "owner"
       }));
 
       let data = ownerData;
@@ -299,9 +312,9 @@ export default {
         )
       ).business;
 
-      const businessesData = businesses.map((value) => ({
+      const businessesData = businesses.map(value => ({
         text: value.name,
-        value: value.slug,
+        value: value.slug
       }));
 
       data = [...businessesData, ...ownerData];
@@ -309,26 +322,26 @@ export default {
       this.boptions = data;
 
       return this.boptions;
-    },
+    }
   },
 
   created() {
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
+      .then(response => {
         if (this.$store.state.profile.profileIntro.user.profile_complete) {
           this.showcompleteprofile = true;
         } else {
           this.showcompleteprofile = false;
         }
       })
-      .catch((error) => {});
+      .catch(error => {});
 
     this.checkIfItNetwork();
 
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then((response) => {
+      .then(response => {
         this.getbusiness();
       });
 
@@ -336,15 +349,14 @@ export default {
   },
 
   mounted() {
-
     let externalScript = document.createElement("script");
     externalScript.setAttribute("src", "/assets/js/dashboard.js");
     document.head.appendChild(externalScript);
 
-  this.ProfileProcess();
+    this.ProfileProcess();
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then((response) => {
+      .then(response => {
         this.getbusiness();
         this.data1 = true;
       });
@@ -352,11 +364,9 @@ export default {
     this.dashboardPpost();
   },
 
-   
-
   computed: {
     ...mapGetters({
-      profile: "auth/profilConnected",
+      profile: "auth/profilConnected"
     }),
     profille() {
       return this.$store.state.auth.user;
@@ -365,8 +375,8 @@ export default {
     profile_package() {
       return this.$store.state.auth.profile_package;
     },
-    
-    selectedBusiness: function () {
+
+    selectedBusiness: function() {
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat = data.latitute;
       data.lng = data.longitute;
@@ -378,14 +388,12 @@ export default {
     },
     Profile_complete() {
       return this.showcompleteprofile;
-    },
-  },
-
-  
+    }
+  }
 };
 </script>
 
-<style >
+<style>
 .title {
   font-size: 18px;
   line-height: 1.2;
@@ -411,14 +419,10 @@ export default {
   color: red !important;
 }
 
-
-
- .nav-tabs > li.active    {
-   background-color: #272727 !important;
-   color: red;
-  
+.nav-tabs > li.active {
+  background-color: #272727 !important;
+  color: red;
 }
-
 
 .nav-tabs .nav-link.active-tab-item {
   background-color: white !important;
@@ -436,9 +440,9 @@ export default {
   padding-right: 5px;
 }
 
- .nav-tabs .nav-link.active-tab-item .spa-color{
-   color: #e75c18 !important;
- }
+.nav-tabs .nav-link.active-tab-item .spa-color {
+  color: #e75c18 !important;
+}
 
 .nav-tabs:hover {
   background-color: white !important;
@@ -469,7 +473,6 @@ export default {
 
 .dashboard .card-body {
   padding-right: 0px !important;
- 
 }
 .dashboard .dashboard-tab .card-body {
   padding-left: 0px !important;
@@ -477,22 +480,14 @@ export default {
 </style>
 
 <style scoped>
-
 @media only screen and (min-width: 768px) {
-
- 
 }
 
 @media only screen and (max-width: 992px) {
-
-    .wi-100{
+  .wi-100 {
     width: 100%;
-
   }
-
 }
-
-
 
 .card-body {
   padding: 8px;

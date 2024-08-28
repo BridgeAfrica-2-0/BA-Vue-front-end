@@ -82,8 +82,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-    },
+    }
   },
 
   methods: {
@@ -105,12 +105,12 @@ export default {
         console.log("follower");
         this.$store.commit("profile/setNcommunityFollower", {
           network_followers: [],
-          total_network_follower: 0,
+          total_network_follower: 0
         });
       } else {
         this.$store.commit("profile/setNcommunityFollowing", {
           network_following: [],
-          total_network_following: 0,
+          total_network_following: 0
         });
       }
 
@@ -156,11 +156,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

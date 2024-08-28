@@ -11,19 +11,19 @@
         >
         </ly-tab>
       </div>
-    
-     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '1'">
+
+      <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '1'">
         <Info />
-      </div> 
+      </div>
 
       <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
         <Blocking />
       </div>
     </div>
 
-     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <Notification />
-    </div> 
+    </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
       <Insight />
@@ -55,7 +55,7 @@
 
               <b-tab title="Business Info">
                 <b-card-text> <Info /> </b-card-text
-              ></b-tab> 
+              ></b-tab>
 
               <!-- <b-tab title="Business Roles">
                 <b-card-text> <Roles /> </b-card-text
@@ -79,11 +79,7 @@
               <b-tab title="Blocking">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
-
-
-              
-
-            </b-tabs>  
+            </b-tabs>
           </div>
         </div>
 
@@ -122,7 +118,7 @@ export default {
     currenttab: {
       immediate: true,
       handler(newVal, oldVal) {
-         console.log(newVal);
+        console.log(newVal);
 
         if (newVal == 3) {
           this.selectedIdd = "1";
@@ -143,21 +139,21 @@ export default {
           this.selectedIdd = "0";
           this.tabIndex = "0";
         }
-      },
-    },
+      }
+    }
   },
 
   components: {
     // General,
     // Roles,
     Notification,
-   // Pending,
+    // Pending,
     LyTab,
     Insight,
     Info,
     // Website,
     // Payment,
-    Blocking,
+    Blocking
   },
 
   data() {
@@ -168,19 +164,18 @@ export default {
       seetings_id: 0,
       bottomSelectedId: 0,
       items: [
-       
         { label: "Notification" },
         { label: "Business Info" },
-        {label:"Insight"},
-        { label: "Blocking" },
+        { label: "Insight" },
+        { label: "Blocking" }
       ],
       options: {
-        activeColor: "#1d98bd",
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
 
-  methods: {},
+  methods: {}
 };
 </script>
 

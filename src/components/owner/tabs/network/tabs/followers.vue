@@ -17,20 +17,25 @@
     </b-row>
     <br />
 
-    <CommunityBusiness @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Follower" />
+    <CommunityBusiness
+      @BlockUser="BlockUser"
+      :searchh="keywords"
+      ref="search"
+      type="Follower"
+    />
   </div>
 </template>
 
 <script>
-import CommunityBusiness from '../../communitynetwork';
+import CommunityBusiness from "../../communitynetwork";
 export default {
   data() {
     return {
-      keywords: '',
+      keywords: ""
     };
   },
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
 
   computed: {},
@@ -40,10 +45,10 @@ export default {
       let dataInfo = {
         id: id,
         refernce: "network",
-        type: "follower",
+        type: "follower"
       };
-      this.$emit('BlockUser', dataInfo);
-    },
+      this.$emit("BlockUser", dataInfo);
+    }
   }
 };
 </script>

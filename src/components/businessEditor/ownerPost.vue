@@ -1,7 +1,5 @@
 <template>
   <div>
-    
-
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
@@ -71,7 +69,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username">{{ $t("general.Attach_File")}} </span>
+                <span class="username">{{ $t("general.Attach_File") }} </span>
               </b-button>
             </b-col>
             <!-- Post-->
@@ -88,7 +86,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> {{ $t("general.Post")}} </span>
+                <span class="username"> {{ $t("general.Post") }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -252,7 +250,7 @@
               <span>
                 <b-button @click="updatePost" variant="primary" block
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  {{ $t("general.Publish")}}</b-button
+                  {{ $t("general.Publish") }}</b-button
                 >
               </span>
             </b-col>
@@ -298,7 +296,9 @@
                 ></b-form-textarea>
               </div>
               <div class="bordder">
-                <span class="float-left"> {{$t("general.Add_to_Your_Post")}} </span>
+                <span class="float-left">
+                  {{ $t("general.Add_to_Your_Post") }}
+                </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />
@@ -359,8 +359,7 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                   
-                   {{$t("general.delete")}}  
+                    {{ $t("general.delete") }}
                   </span>
                 </div>
 
@@ -398,8 +397,8 @@
               <span>
                 <b-button @click="submitPost" variant="primary" block
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  {{$t("general.Publish")}} </b-button
-                >
+                  {{ $t("general.Publish") }}
+                </b-button>
               </span>
             </b-col>
             <b-col cols="1" md="1" class="m-0 p-0"></b-col>
@@ -434,7 +433,7 @@ import Post from "@/components/businessOwner/ownerPostComponent";
 export default {
   name: "postNetwork",
   components: {
-    Post,
+    Post
   },
   data() {
     return {
@@ -472,25 +471,25 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       ima: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ],
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
         postBusinessUpdate: "",
         movies: [],
-        hyperlinks: [],
+        hyperlinks: []
       },
       isSubmitted: false,
-      fileImageArr: [],
+      fileImageArr: []
     };
   },
 
@@ -498,7 +497,7 @@ export default {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -511,7 +510,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -559,7 +558,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -571,25 +570,25 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
         .post("business/delete/post/" + post.post_id, {
-          name: this.name,
+          name: this.name
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message:  this.$t('general.Post_Deleted'),
+            message: this.$t("general.Post_Deleted")
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -598,7 +597,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
 
             loader.hide();
@@ -606,7 +605,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: this.$t('general.Unable_to_Delete_your_Post'),
+              message: this.$t("general.Unable_to_Delete_your_Post")
             });
             console.log({ err: err });
 
@@ -630,7 +629,7 @@ export default {
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       //  const fileImage = this.createPost.movies[0].target.files[0];
@@ -660,22 +659,22 @@ export default {
       this.axios
         .post("business/update/post/" + this.edit_id, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t('general.Content_successfuly_uploaded'),
+            message: this.$t("general.Content_successfuly_uploaded")
           });
           loader.hide();
 
           this.$refs["modal-edit"].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -684,7 +683,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             loader.hide();
@@ -693,8 +692,8 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('general.Unable_to_Update_your_post'),
-              blockClass: "custom-block-class",
+              message: this.$t("general.Unable_to_Update_your_post"),
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
             loader.hide();
@@ -703,8 +702,8 @@ export default {
         });
     },
 
-    chooseImage: function () {},
-    chooseVideo: function () {
+    chooseImage: function() {},
+    chooseVideo: function() {
       document.getElementById("chosefile").click();
     },
     chooseDocument() {
@@ -716,13 +715,13 @@ export default {
       if (file.files) {
         let reader = new FileReader();
 
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || []
           });
           console.log();
         };
@@ -734,7 +733,7 @@ export default {
       let result = null;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           result = e.target.result;
 
           return result;
@@ -748,13 +747,13 @@ export default {
 
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || []
           });
         };
         reader.readAsDataURL(file.files[0]);
@@ -768,7 +767,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name,
+        fileName: event.target.files[0].name
       });
     },
     selectDocumentOutsidePost(event) {
@@ -776,7 +775,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name,
+        fileName: event.target.files[0].name
       });
       this.$refs["modal-xl"].show();
     },
@@ -786,10 +785,10 @@ export default {
 
     deleteItem(name) {
       const newHyperlinks = this.createPost.hyperlinks.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       const movies = this.createPost.movies.filter(
-        (item) => item.fileName.trim() !== name.trim()
+        item => item.fileName.trim() !== name.trim()
       );
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
@@ -799,7 +798,7 @@ export default {
       this.edit_image.splice(id, 1);
 
       this.delete.push({
-        id: eve.id,
+        id: eve.id
       });
 
       console.log(this.delete);
@@ -815,7 +814,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -826,7 +825,7 @@ export default {
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       let fileImage = null;
@@ -852,22 +851,22 @@ export default {
       this.axios
         .post("business/create/post/" + this.url, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data"
           },
 
-          onUploadProgress: function (progressEvent) {
+          onUploadProgress: function(progressEvent) {
             this.uploadPercentage = parseInt(
               Math.round((progressEvent.loaded / progressEvent.total) * 100)
             );
-          }.bind(this),
+          }.bind(this)
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t('general.Content_successfuly_uploaded'),
+            message: this.$t("general.Content_successfuly_uploaded")
           });
           this.isUploading = false;
           loader.hide();
@@ -877,7 +876,7 @@ export default {
           this.infiniteId += 1;
           console.log("post create complete");
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -886,7 +885,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             loader.hide();
@@ -894,8 +893,8 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('general.Unable_to_Create_Your_Business'),
-              blockClass: "custom-block-class",
+              message: this.$t("general.Unable_to_Create_Your_Business"),
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
             loader.hide();
@@ -922,7 +921,7 @@ export default {
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
       }
-    },
+    }
   },
   computed: {
     business_intro() {
@@ -944,14 +943,14 @@ export default {
 
     profileNamePost() {
       return "yoo";
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
-  },
+  }
 };
 </script>
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }

@@ -28,7 +28,10 @@
                     >
                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
                         <router-link
-                          :to="{ name: 'Follower', params: { id: people.slug } }"
+                          :to="{
+                            name: 'Follower',
+                            params: { id: people.slug }
+                          }"
                         >
                           <b>{{ people.name }}</b>
                         </router-link>
@@ -115,12 +118,12 @@ export default {
   name: "PeopleComponent",
   props: {
     people: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   components: {
-    peopleSkeleton,
+    peopleSkeleton
   },
 
   methods: {
@@ -130,7 +133,7 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -141,12 +144,12 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

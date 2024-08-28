@@ -1,15 +1,16 @@
 <template>
   <div>
-    <b>{{ $t('profileowner.Web_Soial_Links') }}</b>
+    <b>{{ $t("profileowner.Web_Soial_Links") }}</b>
     <hr />
     <div>
       <b-link class="text-decoration-none" v-b-modal.modal-7
         ><b-icon icon="globe" variant="primary"></b-icon>
-        {{ $t('profileowner.https_www_yourwebsite_com') }}</b-link
+        {{ $t("profileowner.https_www_yourwebsite_com") }}</b-link
       >
     </div>
     <b-link class="text-decoration-none" v-b-modal.modal-7
-      ><b-icon icon="plus" variant="primary"></b-icon> {{ $t('profileowner.Add_a_Website') }}</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon>
+      {{ $t("profileowner.Add_a_Website") }}</b-link
     >
     <b-modal id="modal-7" title="Add a Website">
       <div>
@@ -41,7 +42,8 @@
       >
     </div>
     <b-link class="text-decoration-none" v-b-modal.modal-8
-      ><b-icon icon="plus" variant="primary"></b-icon> {{ $t('profileowner.Add_a_Social_Link') }}</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon>
+      {{ $t("profileowner.Add_a_Social_Link") }}</b-link
     >
     <b-modal id="modal-8" title="Add other Link">
       <div>

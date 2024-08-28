@@ -1,7 +1,7 @@
 <template>
   <!-- Our Resources -->
   <section class="pl-3">
-     <LightBox
+    <LightBox
       ref="lightboxx"
       :media="renderResources"
       :show-caption="true"
@@ -16,43 +16,37 @@
             title="How to Use"
             title-link-class="title-linkClass"
             @click="changeResource('Creation')"
-          > 
-         
+          >
             <Videos :videos="renderResources" @openGallery="openGallery" />
-        
           </b-tab>
 
-           <b-tab
+          <b-tab
             title="Digital Education"
             title-link-class="title-linkClass"
             @click="changeResource('Digital')"
-          > 
-           <Videos :videos="renderResources" />
-             </b-tab>
-           <b-tab
+          >
+            <Videos :videos="renderResources" />
+          </b-tab>
+          <b-tab
             title="Cameroon Business"
             title-link-class="title-linkClass"
             @click="changeResource('Cameroon')"
-          > 
-      
+          >
             <Videos :videos="renderResources" />
-     
           </b-tab>
-            <b-tab
-            title='Fulfulde'
+          <b-tab
+            title="Fulfulde"
             title-link-class="title-linkClass"
-             @click="changeResource('fufulde')"
-          > 
-       
-            <Videos :videos="renderResources" /> </b-tab>
-             </b-tabs> </div>
+            @click="changeResource('fufulde')"
+          >
+            <Videos :videos="renderResources" />
+          </b-tab>
+        </b-tabs>
+      </div>
     </div>
-
   </section>
 </template>
 
-
-      
 <script>
 import LightBox from "vue-it-bigger";
 import("vue-it-bigger/dist/vue-it-bigger.min.css");
@@ -61,12 +55,13 @@ export default {
   name: "Resources",
 
   components: {
-    LightBox, Videos
+    LightBox,
+    Videos
   },
 
   data() {
     return {
-        options: {
+      options: {
         rewind: true,
         autoplay: true,
         perPage: 5,
@@ -77,13 +72,13 @@ export default {
         breakpoints: {
           760: {
             perPage: 2,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
             perPage: 2,
-            gap: "1rem",
-          },
-        },
+            gap: "1rem"
+          }
+        }
       },
 
       subEmail: "",
@@ -99,52 +94,49 @@ export default {
           title: "Using BRIDGEAFRICA.COM as a customer",
           tag: ["bridgeafrica", "Creation"],
           thumb: "assets/images/training/mod15/EN.jpg",
-          id: "xkJScXdGP4o",
+          id: "xkJScXdGP4o"
         },
         {
           type: "youtube",
           title: "How to create a website on BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "Creation"],
           thumb: "assets/images/training/mod13/EN.jpg",
-          id: "Qj99frCQW",
+          id: "Qj99frCQW"
         },
         {
           type: "youtube",
           title: "Selling on BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "Creation"],
           thumb: "assets/images/training/mod14/EN.jpg",
-          id: "BJ1fRB37XRg",
+          id: "BJ1fRB37XRg"
         },
         {
           type: "youtube",
-          title:
-            "Digital Marketing",
+          title: "Digital Marketing",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod8/EN.jpg",
-          id: "45JO17Wm4vs",
+          id: "45JO17Wm4vs"
         },
         {
           type: "youtube",
-          title:
-            "Understanding digital payment systems",
+          title: "Understanding digital payment systems",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod9/EN.jpg",
-          id: "A2ioGy5SJXA",
+          id: "A2ioGy5SJXA"
         },
         {
           type: "youtube",
-          title:
-            "Identifying and developing market links",
+          title: "Identifying and developing market links",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod10/EN.jpg",
-          id: "-SwMF8jqmAk",
+          id: "-SwMF8jqmAk"
         },
         {
           type: "youtube",
           title: "Making money online",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod7/EN.jpg",
-          id: "6DjMVUIM8YU",
+          id: "6DjMVUIM8YU"
         },
 
         {
@@ -152,70 +144,71 @@ export default {
           title: "DEVELOPING COMPETITIVE PRODUCTS",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod1/EN.jpg",
-          id: "X7ZK3elhVGI",
+          id: "X7ZK3elhVGI"
         },
         {
           type: "youtube",
           title: "DEFINING A BUSINESS PLAN",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod3/EN.jpg",
-          id: "xE_MDyTftuY",
+          id: "xE_MDyTftuY"
         },
         {
           type: "youtube",
           title: "PACKAGING",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod4/EN.jpg",
-          id: "8fOVIxnAK0A",
+          id: "8fOVIxnAK0A"
         },
         {
           type: "youtube",
           title: "BRANDING",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod5/EN.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
         {
           type: "youtube",
           title: "LOCAL AND INTERNATIONAL LOGISTICS",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod6/EN.jpg",
-          id: "_1DjN9eBjkY",
+          id: "_1DjN9eBjkY"
         },
         {
           type: "youtube",
           title: "MAKING MONEY ONLINE",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod7/EN.jpg",
-          id: "6DjMVUIM8YU",
+          id: "6DjMVUIM8YU"
         },
         {
           type: "youtube",
           title: "DIGITAL MARKETING",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod8/EN.jpg",
-          id: "45JO17Wm4vs",
+          id: "45JO17Wm4vs"
         },
         {
           type: "youtube",
           title: "UNDERSTANDING DIGITAL PAYMENT SYSTEMS:MOBILE MONEY SYSTEMS",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod9/EN.jpg",
-          id: "A2ioGy5SJXA",
+          id: "A2ioGy5SJXA"
         },
         {
           type: "youtube",
-          title: "IDENTIFYING AND DEVELOPING MARKET LINKS: BUILDING YOUR NETWORK",
+          title:
+            "IDENTIFYING AND DEVELOPING MARKET LINKS: BUILDING YOUR NETWORK",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod10/EN.jpg",
-          id: "-SwMF8jqmAk",
+          id: "-SwMF8jqmAk"
         },
         {
           type: "youtube",
           title: "SOCIAL MEDIA MANAGEMENT",
           tag: ["bridgeafrica", "Cameroon"],
           thumb: "assets/images/training/mod11/EN.jpg",
-          id: "2vM16dMvKuo",
+          id: "2vM16dMvKuo"
         },
 
         {
@@ -223,35 +216,35 @@ export default {
           title: "How To Register Your Business",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod2/FFU.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
         {
           type: "youtube",
           title: "Defining A Business Plan",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod3/FFU.jpg",
-          id: "96QS4J0b8F4",
+          id: "96QS4J0b8F4"
         },
         {
           title: "packaging",
           type: "youtube",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod4/FFU.jpg",
-          id: "BJtABiNS0LU",
+          id: "BJtABiNS0LU"
         },
         {
           type: "youtube",
           title: "Digital Marketing",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod8/FFU.jpg",
-          id: "oktDhhtOYuo",
+          id: "oktDhhtOYuo"
         },
         {
           type: "youtube",
           title: "UNDERSTANDING DIGITAL PAYMENT SYSTEMS MOBILE MONEY SYSTEMS",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod9/FFU.jpg",
-          id: "xAAaj2R1SYU",
+          id: "xAAaj2R1SYU"
         },
         {
           type: "youtube",
@@ -259,43 +252,43 @@ export default {
             "IDENTIFYING AND DEVELOPING MARKET LINKS: BUILDING YOUR NETWORK",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod10/FFU.jpg",
-          id: "oqkGYTzygQE",
+          id: "oqkGYTzygQE"
         },
         {
           type: "youtube",
           title: " SOCIAL MEDIA MANAGEMENT",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod11/FFU.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
         {
           type: "youtube",
           title: "KEEPING RECORDS TRACK YOUR BUSINESS’ PROGRESS",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod12/FFU.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
         {
           type: "youtube",
           title: " SELLING ON BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod14/FFU.jpg",
-          id: "EwQrPYxYuj8",
+          id: "EwQrPYxYuj8"
         },
         {
           type: "youtube",
           title: "USING BRIDGEAFRICA.COM AS A CUSTOMER",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod15/FFU.jpg",
-          id: "xkJScXdGP4o",
+          id: "xkJScXdGP4o"
         },
         {
           type: "youtube",
           title: " HOW TO CREATE A WEBSITE ON BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod13/FFU.jpg",
-          id: "Q86VsRmoU0Q",
-        },
+          id: "Q86VsRmoU0Q"
+        }
       ],
 
       fr_videos: [
@@ -304,7 +297,7 @@ export default {
           title: "développer des produits compétitifs",
           tag: ["bridgeafrica", "Plan"],
           thumb: "assets/images/training/mod1/FR.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -312,7 +305,7 @@ export default {
           title: "Comment enregistrer votre entreprise",
           tag: ["bridgeafrica", "creation"],
           thumb: "assets/images/training/mod2/FR.jpg",
-          id: "6njJyiMZA68",
+          id: "6njJyiMZA68"
         },
 
         {
@@ -320,7 +313,7 @@ export default {
           title: "Définir un plan d'entreprise",
           tag: ["bridgeafrica", "Plan"],
           thumb: "assets/images/training/mod3/FR.jpg",
-          id: "rwxWEiiKS0U",
+          id: "rwxWEiiKS0U"
         },
 
         {
@@ -328,7 +321,7 @@ export default {
           title: "Emballage",
           tag: ["bridgeafrica", "Plan"],
           thumb: "assets/images/training/mod4/FR.jpg",
-          id: "bhpQoA7rp30",
+          id: "bhpQoA7rp30"
         },
 
         {
@@ -336,7 +329,7 @@ export default {
           title: "Branding",
           tag: ["bridgeafrica", "Plan"],
           thumb: "assets/images/training/mod5/FR.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -344,7 +337,7 @@ export default {
           title: "Logistique locale et internationale",
           tag: ["bridgeafrica", "Plan"],
           thumb: "assets/images/training/mod6/FR.jpg",
-          id: "_1DjN9eBjkY",
+          id: "_1DjN9eBjkY"
         },
 
         {
@@ -352,7 +345,7 @@ export default {
           title: "Gagner de l'argent en ligne",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod7/FR.jpg",
-          id: "QQuWClPzcuo",
+          id: "QQuWClPzcuo"
         },
 
         {
@@ -360,7 +353,7 @@ export default {
           title: "Marketing numérique",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod8/FR.jpg",
-          id: "lZSeQnjzt8o",
+          id: "lZSeQnjzt8o"
         },
 
         {
@@ -368,7 +361,7 @@ export default {
           title: "comprendre le système de paiement numérique",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod9/FR.jpg",
-          id: "3Vl3bSU-wqQ",
+          id: "3Vl3bSU-wqQ"
         },
 
         {
@@ -377,7 +370,7 @@ export default {
             "IDENTIFIER ET DÉVELOPPER LES LIENS AVEC LE MARCHÉ  CONSTRUIRE VOTRE RÉSEAU",
           tag: ["bridgeafrica", "Digital"],
           thumb: "assets/images/training/mod10/FR.jpg",
-          id: "INywx9vMfp4",
+          id: "INywx9vMfp4"
         },
 
         {
@@ -385,7 +378,7 @@ export default {
           title: "GESTION DES RESEAUX SOCIAUX",
           tag: ["bridgeafrica", "creation"],
           thumb: "assets/images/training/mod11/FR.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -393,7 +386,7 @@ export default {
           title: "TENIR DES REGISTRES SUIVRE LES PROGRÈS DE VOTRE ENTREPRISE",
           tag: ["bridgeafrica", "creation"],
           thumb: "assets/images/training/mod12/FR.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -401,7 +394,7 @@ export default {
           title: "COMMENT CRÉER UN SITE WEB SUR BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "hba", "creation"],
           thumb: "assets/images/training/mod13/FR.jpg",
-          id: "0S8Kc7bgMY8",
+          id: "0S8Kc7bgMY8"
         },
 
         {
@@ -409,7 +402,7 @@ export default {
           title: "VENDRE SUR BRIDGEAFRICA",
           tag: ["bridgeafrica", "hba", "creation"],
           thumb: "assets/images/training/mod14/FR.jpg",
-          id: "0S8Kc7bgMY8",
+          id: "0S8Kc7bgMY8"
         },
 
         {
@@ -417,7 +410,7 @@ export default {
           title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
           tag: ["bridgeafrica", "hba", "creation"],
           thumb: "assets/images/training/mod15/FR.jpg",
-          id: "0S8Kc7bgMY8",
+          id: "0S8Kc7bgMY8"
         },
 
         {
@@ -425,7 +418,7 @@ export default {
           title: "développer des produits compétitifs",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod1/FFU.jpg",
-          id: "vbgShfVz9Iw",
+          id: "vbgShfVz9Iw"
         },
 
         {
@@ -433,7 +426,7 @@ export default {
           title: "Comment enregistrer votre entreprise",
           tag: ["bridgeafrica", "hba", "fufulde"],
           thumb: "assets/images/training/mod2/FFU.jpg",
-          id: "qlJIwRI1AEI",
+          id: "qlJIwRI1AEI"
         },
 
         {
@@ -441,7 +434,7 @@ export default {
           title: "Définir un plan d'entreprise",
           tag: ["bridgeafrica", "hba", "fufulde"],
           thumb: "assets/images/training/mod3/FFU.jpg",
-          id: "96QS4J0b8F4",
+          id: "96QS4J0b8F4"
         },
 
         {
@@ -449,7 +442,7 @@ export default {
           type: "youtube",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod4/FFU.jpg",
-          id: "BJtABiNS0LU",
+          id: "BJtABiNS0LU"
         },
 
         {
@@ -457,7 +450,7 @@ export default {
           type: "youtube",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod5/FFU.jpg",
-          id: "qoigtzeTCu8",
+          id: "qoigtzeTCu8"
         },
 
         {
@@ -465,7 +458,7 @@ export default {
           title: "Logistique locale et internationale",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod6/FFU.jpg",
-          id: "xpPsvHCj1Ss",
+          id: "xpPsvHCj1Ss"
         },
 
         {
@@ -473,7 +466,7 @@ export default {
           title: "Gagner de l'argent en ligne",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod7/FFU.jpg",
-          id: "ptsna6yIsZM",
+          id: "ptsna6yIsZM"
         },
 
         {
@@ -481,7 +474,7 @@ export default {
           title: "Marketing numérique",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod8/FFU.jpg",
-          id: "oktDhhtOYuo",
+          id: "oktDhhtOYuo"
         },
 
         {
@@ -489,7 +482,7 @@ export default {
           title: "comprendre le système de paiement numérique",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod9/FFU.jpg",
-          id: "xAAaj2R1SYU",
+          id: "xAAaj2R1SYU"
         },
 
         {
@@ -498,7 +491,7 @@ export default {
             "IDENTIFIER ET DÉVELOPPER LES LIENS AVEC LE MARCHÉ : CONSTRUIRE VOTRE RÉSEAU",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod10/FFU.jpg",
-          id: "oqkGYTzygQE",
+          id: "oqkGYTzygQE"
         },
 
         {
@@ -506,7 +499,7 @@ export default {
           title: "GESTION DES RESEAUX SOCIAUX",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod11/FFU.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -514,7 +507,7 @@ export default {
           title: "TENIR DES REGISTRES SUIVRE LES PROGRÈS DE VOTRE ENTREPRISE",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod12/FFU.jpg",
-          id: "ePeiO76aVAc",
+          id: "ePeiO76aVAc"
         },
 
         {
@@ -522,7 +515,7 @@ export default {
           title: "COMMENT CRÉER UN SITE WEB SUR BRIDGEAFRICA.COM",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod13/FFU.jpg",
-          id: "0S8Kc7bgMY8",
+          id: "0S8Kc7bgMY8"
         },
 
         {
@@ -530,7 +523,7 @@ export default {
           title: "VENDRE SUR BRIDGEAFRICA",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod14/FFU.jpg",
-          id: "0S8Kc7bgMY8",
+          id: "0S8Kc7bgMY8"
         },
 
         {
@@ -538,9 +531,9 @@ export default {
           title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
           tag: ["bridgeafrica", "fufulde"],
           thumb: "assets/images/training/mod15/FFU.jpg",
-          id: "0S8Kc7bgMY8",
-        },
-      ],
+          id: "0S8Kc7bgMY8"
+        }
+      ]
     };
   },
 
@@ -549,7 +542,7 @@ export default {
       if (this.selectedResource == "use") {
         return this.resources;
       }
-      return this.resources.filter((res) => {
+      return this.resources.filter(res => {
         if (res.tag.includes(this.selectedResource)) {
           return res;
         }
@@ -562,7 +555,7 @@ export default {
       } else {
         return this.fr_videos;
       }
-    },
+    }
   },
 
   mounted() {
@@ -584,7 +577,6 @@ export default {
     },
 
     openGallery(index) {
-     
       this.$refs.lightboxx.showImage(index);
     },
 
@@ -638,13 +630,12 @@ export default {
       }
 
       this.page = this.page + 1;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-
 /* .title-linkClass{
  padding-left: 20px !important;
 } */
@@ -818,9 +809,7 @@ export default {
   font-size: 12px;
 }
 
-
-@media screen and (max-width: 430px) {
-
+@media screen and (max-width: 431px) {
   .nav.nav-tabs {
     overflow-x: auto;
   }
@@ -831,7 +820,7 @@ export default {
 }
 </style>
 
-<style >
+<style>
 .vib-container:hover .vib-hidden {
   opacity: 1 !important;
 }

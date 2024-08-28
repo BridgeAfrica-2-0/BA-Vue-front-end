@@ -21,18 +21,18 @@
 </template>
 
 <script>
-import CommunityMembers from '../../communityMember';
+import CommunityMembers from "../../communityMember";
 export default {
   data() {
     return {
-      keywords: '',
+      keywords: ""
     };
   },
   components: {
-    CommunityMembers,
+    CommunityMembers
   },
 
-  computed: {},
+  computed: {}
 };
 </script>
 

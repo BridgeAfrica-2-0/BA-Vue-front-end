@@ -6,32 +6,40 @@
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
       >
-        <b-tabs  lazy content-class="mt-3 f-left" active-nav-item-class="active-tab-item">
-          <b-tab  active>
-
-               <template slot="title">
-           {{ $t('profileowner.People')}} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
-          </template>
-
+        <b-tabs
+          lazy
+          content-class="mt-3 f-left"
+          active-nav-item-class="active-tab-item"
+        >
+          <b-tab active>
+            <template slot="title">
+              {{ $t("profileowner.People") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_people) }}
+              </span>
+            </template>
 
             <People @BlockUser="BlockUser" />
           </b-tab>
 
           <b-tab>
-
-              <template slot="title">
-           {{ $t('profileowner.Businesses')}} <span class="spa-color"> {{ nFormatter(total.total_business)}}  </span>
-          </template>
-
+            <template slot="title">
+              {{ $t("profileowner.Businesses") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_business) }}
+              </span>
+            </template>
 
             <Businesses @BlockUser="BlockUser" />
           </b-tab>
 
-          <b-tab >
-
-              <template slot="title">
-           {{ $t('profileowner.Network')}} <span class="spa-color"> {{ nFormatter(total.total_network)}}  </span>
-          </template>
+          <b-tab>
+            <template slot="title">
+              {{ $t("profileowner.Network") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_network) }}
+              </span>
+            </template>
 
             <Network @BlockUser="BlockUser" />
           </b-tab>
@@ -51,21 +59,21 @@ export default {
   components: {
     People,
     Businesses,
-    Network,
+    Network
   },
-	computed: {
-			total() {
-				return this.$store.state.profile.Tcommunity;
-			},
-      rows() {
-        return this.items.length;
-      }
-	},
+  computed: {
+    total() {
+      return this.$store.state.profile.Tcommunity;
+    },
+    rows() {
+      return this.items.length;
+    }
+  },
   data() {
     return {
       perPage: 3,
       currentPage: 1,
-       foll_id: null,
+      foll_id: null,
       items: [
         { id: 1, first_name: "Fred", last_name: "Flintstone" },
         { id: 2, first_name: "Wilma", last_name: "Flintstone" },
@@ -81,31 +89,27 @@ export default {
   },
 
   methods: {
-
-      getTotalCommunity(){
-
-        
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
 
-
-    	nFormatter(num) {
-				if (num >= 1000000000) {
-					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-				}
-				if (num >= 1000000) {
-					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-				}
-				if (num >= 1000) {
-					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-				}
-				return num;
-			},
+    nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+      }
+      return num;
+    },
 
     community() {
       this.$store
@@ -122,39 +126,38 @@ export default {
       let fd = new FormData();
       fd.append("id", dataInfo.id);
       fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
+      this.$store
+        .dispatch("profile/Block", {
+          path: "block/entity",
+          formData: fd
         })
-      .then(response => {
-        this.community();
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
+        .then(response => {
+          this.community();
+          console.log(response);
+          this.flashMessage.show({
+            status: "success",
+            message: dataInfo.refernce + " blocked"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to blocked " + dataInfo.refernce
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-    },
-
+    }
   },
   mounted() {
-      this.isLoading = true;
+    this.isLoading = true;
 
-        this.foll_id = this.$route.params.id ? this.$route.params.id : '';
-  
+    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
+
     this.getTotalCommunity();
-     
+
     console.log("Load User Profile Community start+++++++");
     this.community();
-    
-    },
+  }
 };
 </script>
 
@@ -186,7 +189,7 @@ hr {
   }
 }
 
-.card-body{
+.card-body {
   padding: 2px;
 }
 </style>

@@ -7,19 +7,19 @@
           <span
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
-           >
-          
-            <b-nav-item-dropdown
-              :id="'dropdown-' + index"
-            >
+          >
+            <b-nav-item-dropdown :id="'dropdown-' + index">
               <template slot="button-content">
-                <span @click="() => {
-                  showSubCat(category.category, category.sub_cat)
-                  bcategory({ cat_id: category.category.id })
-                  $emit('activate:matching:category', null)
-                  $emit('activateSuggestion',category.category.name)
-                  
-                }">
+                <span
+                  @click="
+                    () => {
+                      showSubCat(category.category, category.sub_cat);
+                      bcategory({ cat_id: category.category.id });
+                      $emit('activate:matching:category', null);
+                      $emit('activateSuggestion', category.category.name);
+                    }
+                  "
+                >
                   {{ category.category.name }}
                 </span>
               </template>
@@ -32,31 +32,29 @@
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
-                    @click="() => {
-                      $store.commit('marketSearch/setSubCat', [])
-                      $emit('update:keyword', {
-                        keyword: subCat.name,
-                        cat_id: subCat.cat_id
-                      });
-                      $emit('activate:matching:category', {name:subCat.name})
-                       $emit('activateSuggestion',subCat.name)
-                      bcategory({ cat_id: subCat.cat_id, id: subCat.id })
-                      
-                      
-                    }"
+                    @click="
+                      () => {
+                        $store.commit('marketSearch/setSubCat', []);
+                        $emit('update:keyword', {
+                          keyword: subCat.name,
+                          cat_id: subCat.cat_id
+                        });
+                        $emit('activate:matching:category', {
+                          name: subCat.name
+                        });
+                        $emit('activateSuggestion', subCat.name);
+                        bcategory({ cat_id: subCat.cat_id, id: subCat.id });
+                      }
+                    "
                     href="#"
                     class="ml-2"
                   >
-                   
-                      <img
-                        class="img-fluid picture logo-img"
-                        :src="subCat.cat_image"
-                      />
-                      {{ subCat.name }}
-                 
+                    <img
+                      class="img-fluid picture logo-img"
+                      :src="subCat.cat_image"
+                    />
+                    {{ subCat.name }}
                   </b-dropdown-item>
-
-             
                 </div>
               </div>
             </b-nav-item-dropdown>
@@ -86,17 +84,17 @@
                   <b-dropdown-item
                     class="ml-1"
                     @click="
-                    () => {
-                      $emit('onChangeCategoryName', category.category.name);
-                      bcategory({ cat_id: category.category.id })
-                      $emit('activate:matching:category', null)
-                      $emit('activateSuggestion',  category.category.name)  
-                       $emit('update:keyword', {
-                           keyword: category.category.name,
-                           cat_id: category.category.id
-                          })
-                      
-                    }"
+                      () => {
+                        $emit('onChangeCategoryName', category.category.name);
+                        bcategory({ cat_id: category.category.id });
+                        $emit('activate:matching:category', null);
+                        $emit('activateSuggestion', category.category.name);
+                        $emit('update:keyword', {
+                          keyword: category.category.name,
+                          cat_id: category.category.id
+                        });
+                      }
+                    "
                   >
                     {{ category.category.name }}
                   </b-dropdown-item>
@@ -116,8 +114,7 @@
 export default {
   name: "subnav",
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     categories() {
@@ -125,7 +122,7 @@ export default {
     },
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
-    },
+    }
   },
 
   created() {
@@ -133,29 +130,23 @@ export default {
   },
 
   methods: {
-    
     bcategory(category, value = null) {
-
       this.$emit("category", category);
 
-    
-      if (value){
-
+      if (value) {
         this.$emit("onChangeCategoryName", value.name);
-        this.$emit('update:keyword', {
+        this.$emit("update:keyword", {
           keyword: value.name,
           cat_id: value.id
-        })
+        });
       }
-        
     },
 
     getCategories() {
       this.$store
         .dispatch("marketSearch/getCategories")
-        .then((res) => {
-        })
-        .catch((err) => {
+        .then(res => {})
+        .catch(err => {
           console.log("Error erro!");
         });
     },
@@ -175,26 +166,21 @@ export default {
       this.searchProduct(data);
     },
     allSearch(data) {
-    
       this.$store
         .dispatch("allSearch/SEARCH", data)
-        .then((res) => {
+        .then(res => {
           // console.log("categories loaded!");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Error erro!");
         });
     },
 
-
-    showSubCat(category, subCat, show=true) {
-
-      
+    showSubCat(category, subCat, show = true) {
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$refs[category.id][0].visible = true;
 
-      if (show)
-        this.$emit("parentcategory", category.id);
+      if (show) this.$emit("parentcategory", category.id);
 
       this.$emit("onChangeCategoryName", category.name);
       // this.subCategories.push(subCat);
@@ -202,19 +188,16 @@ export default {
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
-     console.log(category);
-      this.$emit('update:keyword', {
+      console.log(category);
+      this.$emit("update:keyword", {
         keyword: category.name,
         cat_id: category.id
-      })
-
+      });
     },
 
     hideSubCat(catId) {
-
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
-
     },
 
     onOverMore() {
@@ -223,8 +206,8 @@ export default {
     },
     onLeaveMore() {
       this.$refs.More.visible = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -249,11 +232,8 @@ export default {
 }
 </style>
 
-
-<style >
-
-
- /* .dropdown .show{
+<style>
+/* .dropdown .show{
   color:#e75c18 !important;
 }
 
@@ -276,5 +256,4 @@ color:#e75c18 !important;
 .b-nav-dropdown :hover{
   color: #e75c18 !important;
 } */
-
 </style>

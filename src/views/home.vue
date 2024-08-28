@@ -10,9 +10,13 @@
               <Post />
             </b-tab>
             <b-tab :title="$t('home.About')"><About /></b-tab>
-            <b-tab :title="$t('home.Business')"><p>I'm the second tab</p></b-tab>
+            <b-tab :title="$t('home.Business')"
+              ><p>I'm the second tab</p></b-tab
+            >
             <b-tab :title="$t('home.Media')"><Media /></b-tab>
-            <b-tab :title="$t('home.Following')"><p>I'm the second tab</p></b-tab>
+            <b-tab :title="$t('home.Following')"
+              ><p>I'm the second tab</p></b-tab
+            >
           </b-tabs>
         </b-col>
       </b-row>

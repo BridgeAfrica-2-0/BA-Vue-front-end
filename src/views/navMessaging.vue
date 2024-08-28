@@ -17,7 +17,7 @@
                     :src="
                       getImage({
                         type: 'user',
-                        image: currentUser.user.profile_picture,
+                        image: currentUser.user.profile_picture
                       })
                     "
                   ></b-avatar>
@@ -61,15 +61,14 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQueryUser,
+                                keyword: searchQueryUser
                               })
                             "
                           />
                         </b-col>
                       </b-row>
 
-                      <div class="messages"> 
-                    
+                      <div class="messages">
                         <!-- <div v-if="loader" class="text-center mt-6 ">
                           <b-spinner
                             variant="light"
@@ -91,8 +90,8 @@
                                   ? chatSelected.clickedId
                                   : false)
                                   ? chatSelected.active
-                                  : false,
-                            },
+                                  : false
+                            }
                           ]"
                           @click="
                             selectedChat({
@@ -101,7 +100,7 @@
                               id:
                                 chat.sender_id == currentUser.user.id
                                   ? chat.receiver_id
-                                  : chat.sender_id,
+                                  : chat.sender_id
                             })
                           "
                         >
@@ -140,7 +139,7 @@
                                       id:
                                         chat.sender_id == currentUser.user.id
                                           ? chat.receiver_id
-                                          : chat.sender_id,
+                                          : chat.sender_id
                                     })
                                   "
                                 >
@@ -181,7 +180,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQueryBusiness,
+                                keyword: searchQueryBusiness
                               })
                             "
                           />
@@ -189,7 +188,6 @@
                       </b-row>
 
                       <div class="messages">
-                     
                         <!-- <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="light"
@@ -211,8 +209,8 @@
                                   ? chatSelected.clickedId
                                   : false)
                                   ? chatSelected.active
-                                  : false,
-                            },
+                                  : false
+                            }
                           ]"
                           @click="
                             selectedChat({
@@ -220,7 +218,7 @@
                               chat: chat,
                               id: chat.receiver_business_id
                                 ? chat.receiver_business_id
-                                : chat.sender_business_id,
+                                : chat.sender_business_id
                             })
                           "
                         >
@@ -259,7 +257,7 @@
                                       chat: chat,
                                       id: chat.receiver_business_id
                                         ? chat.receiver_business_id
-                                        : chat.sender_business_id,
+                                        : chat.sender_business_id
                                     })
                                   "
                                 >
@@ -299,7 +297,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQueryNetwork,
+                                keyword: searchQueryNetwork
                               })
                             "
                           />
@@ -307,7 +305,6 @@
                       </b-row>
 
                       <div class="messages">
-                     
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="light"
@@ -330,8 +327,8 @@
                                   ? chatSelected.clickedId
                                   : false)
                                   ? chatSelected.active
-                                  : false,
-                            },
+                                  : false
+                            }
                           ]"
                           @click="
                             selectedChat({
@@ -339,7 +336,7 @@
                               chat: chat,
                               id: chat.receiver_network_id
                                 ? chat.receiver_network_id
-                                : chat.sender_network_id,
+                                : chat.sender_network_id
                             })
                           "
                         >
@@ -378,7 +375,7 @@
                                       chat: chat,
                                       id: chat.receiver_network_id
                                         ? chat.receiver_network_id
-                                        : chat.sender_network_id,
+                                        : chat.sender_network_id
                                     })
                                   "
                                 >
@@ -413,7 +410,7 @@
             v-if="newMsg == false && info == false && rightSide == false"
             class="p-0 back-image"
           >
-            <div class="chat-nav shadow"  v-if="chatSelected.active">
+            <div class="chat-nav shadow" v-if="chatSelected.active">
               <b-row class="desk" v-if="chatSelected.active">
                 <b-col class="col-1 mt-3 ma-4">
                   <b-icon
@@ -453,7 +450,7 @@
                   @keypress.enter="
                     histUserToUser({
                       receiverID: chatId,
-                      keyword: chatSearchKeyword,
+                      keyword: chatSearchKeyword
                     })
                   "
                   type="text"
@@ -469,105 +466,109 @@
               style="margin-left: 1px"
               ref="feed"
             >
-      <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}"
-    >
-
-              <div v-if="loader" class="text-center mt-12 pt-12">
-                <b-spinner
-                  variant="light"
-                  label="Spinning"
-                  class="spinner centralizer"
-                ></b-spinner>
-              </div>
-              <div v-else v-for="chat in userToUser" :key="chat.id">
-                <div v-if="currentUser.user.id != chat.sender_id">
-                  <b-row class="p-1">
-                    <b-col>
-                      <p class="msg-text mt-0 text">
-                        <span class="text-center float-right mt-n0">
-                          <b-dropdown
-                            variant="link"
-                            size="lg"
-                            toggle-class="text-decoration-none p-0"
-                            no-caret
-                            right
-                          >
-                            <template slot="button-content">
-                              <b><i class="fas fa-ellipsis-v"></i></b>
-                            </template>
-                            <b-dropdown-item
-                              @click="deleteMessage(chat, userToUser, type)"
+              <VuePerfectScrollbar
+                class="scroll-area s-card"
+                settings="{maxScrollbarLength: 60px}"
+              >
+                <div v-if="loader" class="text-center mt-12 pt-12">
+                  <b-spinner
+                    variant="light"
+                    label="Spinning"
+                    class="spinner centralizer"
+                  ></b-spinner>
+                </div>
+                <div v-else v-for="chat in userToUser" :key="chat.id">
+                  <div v-if="currentUser.user.id != chat.sender_id">
+                    <b-row class="p-1">
+                      <b-col>
+                        <p class="msg-text mt-0 text">
+                          <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
                             >
-                              Delete
-                            </b-dropdown-item>
-                          </b-dropdown>
-                        </span>
-                        <span v-if="chat.attachment">
-                          <img :src="chat.attachment" />
-                          <!-- <br />
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item
+                                @click="deleteMessage(chat, userToUser, type)"
+                              >
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
-                          <br />
-                        </span>
-                        <span v-if="chat.post_details">
-                          <small class="text-dark font-italic text-right"
-                            ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                            post</small
-                          ><br />
-                          <span class="font-italic">{{
-                            chat.post_details.content
-                          }}</span>
-                          <hr />
-                        </span>
-                        {{ chat.message }}
-                        <small class="float-right mt-2 text-white pr-1 pt-1">
-                          {{ getCreatedAt(chat.created_at) }}
-                        </small>
-                      </p>
-                    </b-col>
-                  </b-row>
-                </div>
-                <div v-else>
-                  <b-row class="p-1">
-                    <b-col>
-                      <p id="sent" class="msg-text-sent text">
-                        <span v-if="chat.attachment">
-                          <!-- <img :src="chat.attachment" /> -->
-                          <!-- <br />
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(chat.created_at) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
+                  <div v-else>
+                    <b-row class="p-1">
+                      <b-col>
+                        <p id="sent" class="msg-text-sent text">
+                          <span v-if="chat.attachment">
+                            <!-- <img :src="chat.attachment" /> -->
+                            <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
-                          <br />
-                        </span>
-                        <span v-if="chat.post_details">
-                          <small class="text-dark font-italic text-right"
-                            ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                            post</small
-                          ><br />
-                          <span class="font-italic">{{
-                            chat.post_details.content
-                          }}</span>
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
 
-                          <hr />
-                        </span>
-                        {{ chat.message }}
-                        <small class="float-right mt-2 text-white pr-1 pt-1">
-                          {{ getCreatedAt(chat.created_at) }}
-                        </small>
-                      </p>
-                    </b-col>
-                  </b-row>
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(chat.created_at) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
                 </div>
-              </div>
-      </VuePerfectScrollbar>
+              </VuePerfectScrollbar>
             </section>
 
-            <section v-else class="" style="margin-left: 1px; height:80vh" ref="feed">
+            <section
+              v-else
+              class=""
+              style="margin-left: 1px; height:80vh"
+              ref="feed"
+            >
               <div class="mt-6 pt-12 d-flex h-100">
                 <h3 class="text-center m-auto">Select a chat</h3>
               </div>
             </section>
 
-            <div   v-if="chatSelected.active" class="bottom mt-3">
+            <div v-if="chatSelected.active" class="bottom mt-3">
               <b-row class="text-center">
                 <b-alert
                   :show="this.filePreview"
@@ -651,7 +652,7 @@
                           class="emoji-picker"
                           :style="{
                             top: display.y + 'px',
-                            left: display.x + 'px',
+                            left: display.x + 'px'
                           }"
                         >
                           <div class="emoji-picker__search">
@@ -811,7 +812,7 @@
                           selectedChat({
                             type: 'user',
                             chat: user,
-                            id: user.id,
+                            id: user.id
                           })
                         "
                       >
@@ -823,7 +824,7 @@
                             :src="
                               getImage({
                                 type: 'user',
-                                image: user.profile_picture,
+                                image: user.profile_picture
                               })
                             "
                           ></b-avatar>
@@ -840,7 +841,7 @@
                           selectedChat({
                             type: 'business',
                             chat: biz,
-                            id: biz.id,
+                            id: biz.id
                           })
                         "
                       >
@@ -852,7 +853,7 @@
                             :src="
                               getImage({
                                 type: 'business',
-                                image: biz.logo_path,
+                                image: biz.logo_path
                               })
                             "
                           ></b-avatar>
@@ -869,7 +870,7 @@
                           selectedChat({
                             type: 'network',
                             chat: network,
-                            id: network.id,
+                            id: network.id
                           })
                         "
                       >
@@ -881,7 +882,7 @@
                             :src="
                               getImage({
                                 type: 'network',
-                                image: network.image,
+                                image: network.image
                               })
                             "
                           ></b-avatar>
@@ -909,7 +910,7 @@
                     :src="
                       getImage({
                         type: 'user',
-                        image: currentUser.user.profile_picture,
+                        image: currentUser.user.profile_picture
                       })
                     "
                   ></b-avatar>
@@ -952,7 +953,7 @@
                             @keypress="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQueryUser,
+                                keyword: searchQueryUser
                               })
                             "
                           />
@@ -960,105 +961,103 @@
                       </b-row>
 
                       <div class="messages contacts-height">
-                         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}"
-    >
-                     
-                      <div v-if="chatList.length > 0">
-                        <b-row
-                          v-for="(chat, index) in chatList"
-                          :key="index"
-                          :class="[
-                            'p-2 message ',
-                            {
-                              messageSelected:
-                                (chat.sender_id == currentUser.user.id
-                                  ? chat.receiver_id
-                                  : chat.sender_id) ==
-                                (chatSelected.clickedId != null
-                                  ? chatSelected.clickedId
-                                  : false)
-                                  ? chatSelected.active
-                                  : false,
-                            },
-                          ]"
-                          @click="
-                            selectedChat({
-                              type: 'user',
-                              chat: chat,
-                              id:
-                                chat.sender_id == currentUser.user.id
-                                  ? chat.receiver_id
-                                  : chat.sender_id,
-                            })
-                          "
+                        <VuePerfectScrollbar
+                          class="scroll-area s-card"
+                          settings="{maxScrollbarLength: 60px}"
                         >
-                          <b-col class="col-9">
-                            <span style="display: inline-flex">
-                              <b-avatar
-                                class="d-inline-block profile-pic"
-                                variant="light"
-                                :src="chatListImage(chat)"
-                              ></b-avatar>
+                          <div v-if="chatList.length > 0">
+                            <b-row
+                              v-for="(chat, index) in chatList"
+                              :key="index"
+                              :class="[
+                                'p-2 message ',
+                                {
+                                  messageSelected:
+                                    (chat.sender_id == currentUser.user.id
+                                      ? chat.receiver_id
+                                      : chat.sender_id) ==
+                                    (chatSelected.clickedId != null
+                                      ? chatSelected.clickedId
+                                      : false)
+                                      ? chatSelected.active
+                                      : false
+                                }
+                              ]"
+                              @click="
+                                selectedChat({
+                                  type: 'user',
+                                  chat: chat,
+                                  id:
+                                    chat.sender_id == currentUser.user.id
+                                      ? chat.receiver_id
+                                      : chat.sender_id
+                                })
+                              "
+                            >
+                              <b-col class="col-9">
+                                <span style="display: inline-flex">
+                                  <b-avatar
+                                    class="d-inline-block profile-pic"
+                                    variant="light"
+                                    :src="chatListImage(chat)"
+                                  ></b-avatar>
 
-                              <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ formatName(chat) }}</b>
-                                <p class="duration">{{ chat.message }}</p>
-                              </h6>
-                            </span>
-                          </b-col>
+                                  <h6 class="mt-2 d-inline-block ml-2">
+                                    <b class="bold"> {{ formatName(chat) }}</b>
+                                    <p class="duration">{{ chat.message }}</p>
+                                  </h6>
+                                </span>
+                              </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <span class="text-center float-right mt-n0">
-                              <b-dropdown
-                                variant="link"
-                                size="lg"
-                                toggle-class="text-decoration-none p-0"
-                                no-caret
-                                right
-                              >
-                                <template slot="button-content">
-                                  <b><i class="fas fa-ellipsis-v"></i></b>
-                                </template>
-                                <b-dropdown-item
-                                  @click="
-                                    deleteChat(chat, chatList, {
-                                      type: 'user',
-                                      chat: chat,
-                                      id:
-                                        chat.sender_id == currentUser.user.id
-                                          ? chat.receiver_id
-                                          : chat.sender_id,
-                                    })
-                                  "
-                                >
-                                  Delete
-                                </b-dropdown-item>
-                              </b-dropdown>
-                            </span>
+                              <b-col class="col-3 text-center">
+                                <span class="text-center float-right mt-n0">
+                                  <b-dropdown
+                                    variant="link"
+                                    size="lg"
+                                    toggle-class="text-decoration-none p-0"
+                                    no-caret
+                                    right
+                                  >
+                                    <template slot="button-content">
+                                      <b><i class="fas fa-ellipsis-v"></i></b>
+                                    </template>
+                                    <b-dropdown-item
+                                      @click="
+                                        deleteChat(chat, chatList, {
+                                          type: 'user',
+                                          chat: chat,
+                                          id:
+                                            chat.sender_id ==
+                                            currentUser.user.id
+                                              ? chat.receiver_id
+                                              : chat.sender_id
+                                        })
+                                      "
+                                    >
+                                      Delete
+                                    </b-dropdown-item>
+                                  </b-dropdown>
+                                </span>
 
-                            <small class="text-center">
-                              {{ getCreatedAt(chat.created_at) }}
-                            </small>
-                            <small class="text-center">
-                              <b-badge
-                                variant="light"
-                                v-if="chat.message_count"
-                                class="count"
-                                >{{ chat.message_count }}</b-badge
-                              >
-                            </small>
-                          </b-col>
-                        </b-row>
-                        </div>
+                                <small class="text-center">
+                                  {{ getCreatedAt(chat.created_at) }}
+                                </small>
+                                <small class="text-center">
+                                  <b-badge
+                                    variant="light"
+                                    v-if="chat.message_count"
+                                    class="count"
+                                    >{{ chat.message_count }}</b-badge
+                                  >
+                                </small>
+                              </b-col>
+                            </b-row>
+                          </div>
 
                           <!--if no chats found-->
-                        <div v-else class="text-center">No chats found!</div>
-                        <!--if no chats found-->
-
-                         </VuePerfectScrollbar>
-                      
+                          <div v-else class="text-center">No chats found!</div>
+                          <!--if no chats found-->
+                        </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1078,103 +1077,102 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQueryBusiness,
+                                keyword: searchQueryBusiness
                               })
                             "
                           />
                         </b-col>
                       </b-row>
-      <div class="messages contacts-height">
-                         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}"
-    >
-                  
-                        <b-row
-                          v-for="(chat, index) in chatList"
-                          :key="index"
-                          :class="[
-                            'p-2 message ',
-                            {
-                              messageSelected:
-                                (chat.receiver_business_id
-                                  ? chat.receiver_business_id
-                                  : chat.sender_business_id) ==
-                                (chatSelected.clickedId != null
-                                  ? chatSelected.clickedId
-                                  : false)
-                                  ? chatSelected.active
-                                  : false,
-                            },
-                          ]"
-                          @click="
-                            selectedChat({
-                              type: 'business',
-                              chat: chat,
-                              id: chat.receiver_business_id
-                                ? chat.receiver_business_id
-                                : chat.sender_business_id,
-                            })
-                          "
+                      <div class="messages contacts-height">
+                        <VuePerfectScrollbar
+                          class="scroll-area s-card"
+                          settings="{maxScrollbarLength: 60px}"
                         >
-                          <b-col class="col-9">
-                            <span style="display: inline-flex">
-                              <b-avatar
-                                class="d-inline-block profile-pic"
-                                variant="light"
-                                :src="chatListImage(chat)"
-                                square
-                              ></b-avatar>
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  (chat.receiver_business_id
+                                    ? chat.receiver_business_id
+                                    : chat.sender_business_id) ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false
+                              }
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'business',
+                                chat: chat,
+                                id: chat.receiver_business_id
+                                  ? chat.receiver_business_id
+                                  : chat.sender_business_id
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="light"
+                                  :src="chatListImage(chat)"
+                                  square
+                                ></b-avatar>
 
-                              <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ formatName(chat) }}</b>
-                                <p class="duration">{{ chat.message }}</p>
-                              </h6>
-                            </span>
-                          </b-col>
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ formatName(chat) }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <span class="text-center float-right mt-n0">
-                              <b-dropdown
-                                variant="link"
-                                size="lg"
-                                toggle-class="text-decoration-none p-0"
-                                no-caret
-                                right
-                              >
-                                <template slot="button-content">
-                                  <b><i class="fas fa-ellipsis-v"></i></b>
-                                </template>
-                                <b-dropdown-item
-                                  @click="
-                                    deleteChat(chat, chatList, {
-                                      type: 'business',
-                                      chat: chat,
-                                      id: chat.receiver_business_id
-                                        ? chat.receiver_business_id
-                                        : chat.sender_business_id,
-                                    })
-                                  "
+                            <b-col class="col-3 text-center">
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
                                 >
-                                  Delete
-                                </b-dropdown-item>
-                              </b-dropdown>
-                            </span>
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item
+                                    @click="
+                                      deleteChat(chat, chatList, {
+                                        type: 'business',
+                                        chat: chat,
+                                        id: chat.receiver_business_id
+                                          ? chat.receiver_business_id
+                                          : chat.sender_business_id
+                                      })
+                                    "
+                                  >
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
 
-                            <small class="text-center">
-                              {{ getCreatedAt(chat.created_at) }}
-                            </small>
-                            <small class="text-center">
-                              <b-badge
-                                variant="light"
-                                v-if="chat.message_count"
-                                class="count"
-                                >{{ chat.message_count }}</b-badge
-                              >
-                            </small>
-                          </b-col>
-                        </b-row>
-                         </VuePerfectScrollbar>
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <small class="text-center">
+                                <b-badge
+                                  variant="light"
+                                  v-if="chat.message_count"
+                                  class="count"
+                                  >{{ chat.message_count }}</b-badge
+                                >
+                              </small>
+                            </b-col>
+                          </b-row>
+                        </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1194,7 +1192,7 @@
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQueryNetwork,
+                                keyword: searchQueryNetwork
                               })
                             "
                           />
@@ -1202,96 +1200,95 @@
                       </b-row>
 
                       <div class="messages contacts-height">
-                         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}"
-    >
-                        <b-row
-                          v-for="(chat, index) in chatList"
-                          :key="index"
-                          :class="[
-                            'p-2 message ',
-                            {
-                              messageSelected:
-                                (chat.receiver_network_id
-                                  ? chat.receiver_network_id
-                                  : chat.sender_network_id) ==
-                                (chatSelected.clickedId != null
-                                  ? chatSelected.clickedId
-                                  : false)
-                                  ? chatSelected.active
-                                  : false,
-                            },
-                          ]"
-                          @click="
-                            selectedChat({
-                              type: 'network',
-                              chat: chat,
-                              id: chat.receiver_network_id
-                                ? chat.receiver_network_id
-                                : chat.sender_network_id,
-                            })
-                          "
+                        <VuePerfectScrollbar
+                          class="scroll-area s-card"
+                          settings="{maxScrollbarLength: 60px}"
                         >
-                          <b-col class="col-9">
-                            <span style="display: inline-flex">
-                              <b-avatar
-                                class="d-inline-block profile-pic"
-                                variant="light"
-                                :src="chatListImage(chat)"
-                                square
-                              ></b-avatar>
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  (chat.receiver_network_id
+                                    ? chat.receiver_network_id
+                                    : chat.sender_network_id) ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false
+                              }
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'network',
+                                chat: chat,
+                                id: chat.receiver_network_id
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="light"
+                                  :src="chatListImage(chat)"
+                                  square
+                                ></b-avatar>
 
-                              <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ formatName(chat) }}</b>
-                                <p class="duration">{{ chat.message }}</p>
-                              </h6>
-                            </span>
-                          </b-col>
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ formatName(chat) }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
 
-                          <b-col class="col-3 text-center">
-
-                             <span class="text-center float-right mt-n0">
-                              <b-dropdown
-                                variant="link"
-                                size="lg"
-                                toggle-class="text-decoration-none p-0"
-                                no-caret
-                                right
-                              >
-                                <template slot="button-content">
-                                  <b><i class="fas fa-ellipsis-v"></i></b>
-                                </template>
-                                <b-dropdown-item
-                                  @click="
-                                    deleteChat(chat, chatList, {
-                                      type: 'network',
-                                      chat: chat,
-                                      id: chat.receiver_network_id
-                                        ? chat.receiver_network_id
-                                        : chat.sender_network_id,
-                                    })
-                                  "
+                            <b-col class="col-3 text-center">
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
                                 >
-                                  Delete
-                                </b-dropdown-item>
-                              </b-dropdown>
-                            </span>
-                            
-                            <small class="text-center">
-                              {{ getCreatedAt(chat.created_at) }}
-                            </small>
-                            <small class="text-center">
-                              <b-badge
-                                variant="light"
-                                v-if="chat.message_count"
-                                class="count"
-                                >{{ chat.message_count }}</b-badge
-                              >
-                            </small>
-                          </b-col>
-                        </b-row>
-                         </VuePerfectScrollbar>
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item
+                                    @click="
+                                      deleteChat(chat, chatList, {
+                                        type: 'network',
+                                        chat: chat,
+                                        id: chat.receiver_network_id
+                                          ? chat.receiver_network_id
+                                          : chat.sender_network_id
+                                      })
+                                    "
+                                  >
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <small class="text-center">
+                                <b-badge
+                                  variant="light"
+                                  v-if="chat.message_count"
+                                  class="count"
+                                  >{{ chat.message_count }}</b-badge
+                                >
+                              </small>
+                            </b-col>
+                          </b-row>
+                        </VuePerfectScrollbar>
                       </div>
 
                       <!-- End Chats -->
@@ -1302,7 +1299,7 @@
             </div>
           </b-col>
           <b-col v-if="newMsg == false && info == false" class="p-0 back-image">
-            <div class="chat-nav shadow"  v-if="chatSelected.active">
+            <div class="chat-nav shadow" v-if="chatSelected.active">
               <b-row class="desk" v-if="chatSelected.active">
                 <b-col class="col-3 m-auto" @click="info = true">
                   <b-avatar
@@ -1332,13 +1329,12 @@
                       />
                     </b-col> -->
                 <b-col class="col-2 text-center m-auto">
-                  <span  style="cursor: pointer">  
-                  <b-icon
-                    v-b-toggle.collapse-1
-                    class="msg-icon primary icon-size text-center"
-                    icon="search"
-                   
-                  ></b-icon>
+                  <span style="cursor: pointer">
+                    <b-icon
+                      v-b-toggle.collapse-1
+                      class="msg-icon primary icon-size text-center"
+                      icon="search"
+                    ></b-icon>
                   </span>
                 </b-col>
               </b-row>
@@ -1350,7 +1346,7 @@
                   @keypress.enter="
                     histUserToUser({
                       receiverID: chatId,
-                      keyword: chatSearchKeyword,
+                      keyword: chatSearchKeyword
                     })
                   "
                   type="text"
@@ -1366,252 +1362,255 @@
               style="margin-left: 1px"
               ref="feed"
             >
-            
-                         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}"
-    >
-
-              <div v-if="loader" class="text-center mt-12 pt-12">
-                <b-spinner
-                  variant="primary"
-                  label="Spinning"
-                  class="spinner centralizer"
-                ></b-spinner>
-              </div>
-              <div v-else v-for="chat in userToUser" :key="chat.id">
-                <div v-if="currentUser.user.id != chat.sender_id">
-                  <b-row class="p-2">
-                    <b-col>
-                      <p class="msg-text mt-0 text">
-                        <span v-if="chat.attachment">
-                          <img :src="chat.attachment" />
-                          <!-- <br />
-                            <b>{{ chat.attachment }}</b> -->
-                          <br />
-                        </span>
-                        <span v-if="chat.post_details">
-                          <small class="text-dark font-italic text-right"
-                            ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                            post</small
-                          ><br />
-                          <img
-                            v-if="sharedImg(chat)"
-                            :src="sharedImg(chat)"
-                            class="sharedImg"
-                          />
-                          <br />
-                          <span class="font-italic">{{
-                            chat.post_details.content
-                          }}</span>
-                          <hr />
-                        </span>
-                        {{ chat.message }}
-                        <small class="float-right mt-2 text-white pr-1 pt-1">
-                          {{ getCreatedAt(chat.created_at) }}
-                        </small>
-                      </p>
-                    </b-col>
-                  </b-row>
+              <VuePerfectScrollbar
+                class="scroll-area s-card"
+                settings="{maxScrollbarLength: 60px}"
+              >
+                <div v-if="loader" class="text-center mt-12 pt-12">
+                  <b-spinner
+                    variant="primary"
+                    label="Spinning"
+                    class="spinner centralizer"
+                  ></b-spinner>
                 </div>
-                <div v-else>
-                  <b-row class="p-2">
-                    <b-col>
-                      <p id="sent" class="msg-text-sent text">
-                        <span class="text-center float-right mt-n0">
-                          <b-dropdown
-                            variant="link"
-                            size="lg"
-                            toggle-class="text-decoration-none p-0"
-                            no-caret
-                            right
-                          >
-                            <template slot="button-content">
-                              <b><i class="fas fa-ellipsis-v"></i></b>
-                            </template>
-                            <b-dropdown-item
-                              @click="deleteMessage(chat, userToUser, type)"
+                <div v-else v-for="chat in userToUser" :key="chat.id">
+                  <div v-if="currentUser.user.id != chat.sender_id">
+                    <b-row class="p-2">
+                      <b-col>
+                        <p class="msg-text mt-0 text">
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <img
+                              v-if="sharedImg(chat)"
+                              :src="sharedImg(chat)"
+                              class="sharedImg"
+                            />
+                            <br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(chat.created_at) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
+                  <div v-else>
+                    <b-row class="p-2">
+                      <b-col>
+                        <p id="sent" class="msg-text-sent text">
+                          <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
                             >
-                              Delete
-                            </b-dropdown-item>
-                          </b-dropdown>
-                        </span>
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item
+                                @click="deleteMessage(chat, userToUser, type)"
+                              >
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
 
-                        <span v-if="chat.attachment">
-                          <img :src="chat.attachment" />
-                          <!-- <br />
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
-                          <br />
-                        </span>
-                        <span v-if="chat.post_details">
-                          <small class="text-dark font-italic text-right"
-                            ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                            post</small
-                          ><br />
-                          <img
-                            v-if="sharedImg(chat)"
-                            :src="sharedImg(chat)"
-                            class="sharedImg"
-                          />
-                          <br />
-                          <span class="font-italic">{{
-                            chat.post_details.content
-                          }}</span>
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <img
+                              v-if="sharedImg(chat)"
+                              :src="sharedImg(chat)"
+                              class="sharedImg"
+                            />
+                            <br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
 
-                          <hr />
-                        </span>
-                        {{ chat.message }}
-                        <small class="float-right mt-2 text-white pr-1 pt-1">
-                          {{ getCreatedAt(chat.created_at) }}
-                        </small>
-                      </p>
-                    </b-col>
-                  </b-row>
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(chat.created_at) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
                 </div>
-              </div>
-                         </VuePerfectScrollbar>
+              </VuePerfectScrollbar>
             </section>
 
-            <section v-else class="" style="margin-left: 1px; height:80vh" ref="feed">
+            <section
+              v-else
+              class=""
+              style="margin-left: 1px; height:80vh"
+              ref="feed"
+            >
               <div class="mt-12 pt-12 d-flex h-100">
                 <h3 class="text-center m-auto">Select a chat</h3>
               </div>
             </section>
 
-            <div  v-if="chatSelected.active" class="bottom mt-3">
-              <div style="width: 60%;">  
-              <b-row class="text-center">
-                <b-alert
-                  :show="this.filePreview"
-                  class="mt-4"
-                  variant="warning"
-                  dismissible
-                  @dismissed="dismissed"
-                >
-                  <span
-                    style="cursor: pointer !important"
-                    href=""
-                    @click="$bvModal.show('preview-file')"
+            <div v-if="chatSelected.active" class="bottom mt-3">
+              <div style="width: 60%;">
+                <b-row class="text-center">
+                  <b-alert
+                    :show="this.filePreview"
+                    class="mt-4"
+                    variant="warning"
+                    dismissible
+                    @dismissed="dismissed"
                   >
-                    {{ this.file.name
-                    }}<b class="pl-2 text-bold">{{
-                      convert(this.file.size)
-                    }}</b>
-                  </span>
-                </b-alert>
-              </b-row>
-              <b-row v-if="!checked">
-                <b-col cols="2" class="p-0">
-                  <label for="file">
-                    <b-icon
-                      for="file"
-                      class="
+                    <span
+                      style="cursor: pointer !important"
+                      href=""
+                      @click="$bvModal.show('preview-file')"
+                    >
+                      {{ this.file.name
+                      }}<b class="pl-2 text-bold">{{
+                        convert(this.file.size)
+                      }}</b>
+                    </span>
+                  </b-alert>
+                </b-row>
+                <b-row v-if="!checked">
+                  <b-col cols="2" class="p-0">
+                    <label for="file">
+                      <b-icon
+                        for="file"
+                        class="
                         msg-icon
                         primary
                         icon-size icon-top
                         float-right
                         text-right
                       "
-                      icon="paperclip"
-                    >
-                    </b-icon>
-                    <i class="ion-images"></i>
-                    <input
-                      style="display: none"
-                      type="file"
-                      id="file"
-                      accept="image/*"
-                      ref="file"
-                      @change="handleFileUpload()"
-                    />
-                  </label>
-
-                  <!-- <button v-on:click="submitFile()">Submit</button> -->
-                </b-col>
-                <b-col cols="8" class="p-0">
-                  <small v-if="nameSpace.status" class="pr-8 text-danger">
-                    {{ nameSpace.text }}
-                  </small>
-                  <b-form-input
-                    id="textarea"
-                    v-model="input"
-                    @keypress.enter="send"
-                    class="input-background"
-                    placeholder="Enter a message..."
-                  ></b-form-input>
-
-                  <div class="wrapper">
-                    <emoji-picker @emoji="append" :search="search">
-                      <div
-                        class="emoji-invoker"
-                        slot="emoji-invoker"
-                        slot-scope="{ events: { click: clickEvent } }"
-                        @click.stop="clickEvent"
+                        icon="paperclip"
                       >
-                        <svg
-                          height="24"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          class="svgg"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0h24v24H0z" fill="none" />
-                          <path
-                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
-                          />
-                        </svg>
-                      </div>
-                      <div
-                        slot="emoji-picker"
-                        slot-scope="{ emojis, insert, display }"
-                      >
+                      </b-icon>
+                      <i class="ion-images"></i>
+                      <input
+                        style="display: none"
+                        type="file"
+                        id="file"
+                        accept="image/*"
+                        ref="file"
+                        @change="handleFileUpload()"
+                      />
+                    </label>
+
+                    <!-- <button v-on:click="submitFile()">Submit</button> -->
+                  </b-col>
+                  <b-col cols="8" class="p-0">
+                    <small v-if="nameSpace.status" class="pr-8 text-danger">
+                      {{ nameSpace.text }}
+                    </small>
+                    <b-form-input
+                      id="textarea"
+                      v-model="input"
+                      @keypress.enter="send"
+                      class="input-background"
+                      placeholder="Enter a message..."
+                    ></b-form-input>
+
+                    <div class="wrapper">
+                      <emoji-picker @emoji="append" :search="search">
                         <div
-                          class="emoji-picker"
-                          :style="{
-                            top: display.y + 'px',
-                            left: display.x + 'px',
-                          }"
+                          class="emoji-invoker"
+                          slot="emoji-invoker"
+                          slot-scope="{ events: { click: clickEvent } }"
+                          @click.stop="clickEvent"
                         >
-                          <div class="emoji-picker__search">
-                            <input type="text" v-model="search" v-focus />
-                          </div>
-                          <div>
-                            <div
-                              v-for="(emojiGroup, category) in emojis"
-                              :key="category"
-                            >
-                              <h5>{{ category }}</h5>
-                              <div class="emojis">
-                                <span
-                                  v-for="(emoji, emojiName) in emojiGroup"
-                                  :key="emojiName"
-                                  @click="insert(emoji)"
-                                  :title="emojiName"
-                                  >{{ emoji }}</span
-                                >
+                          <svg
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            class="svgg"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+                            />
+                          </svg>
+                        </div>
+                        <div
+                          slot="emoji-picker"
+                          slot-scope="{ emojis, insert, display }"
+                        >
+                          <div
+                            class="emoji-picker"
+                            :style="{
+                              top: display.y + 'px',
+                              left: display.x + 'px'
+                            }"
+                          >
+                            <div class="emoji-picker__search">
+                              <input type="text" v-model="search" v-focus />
+                            </div>
+                            <div>
+                              <div
+                                v-for="(emojiGroup, category) in emojis"
+                                :key="category"
+                              >
+                                <h5>{{ category }}</h5>
+                                <div class="emojis">
+                                  <span
+                                    v-for="(emoji, emojiName) in emojiGroup"
+                                    :key="emojiName"
+                                    @click="insert(emoji)"
+                                    :title="emojiName"
+                                    >{{ emoji }}</span
+                                  >
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </emoji-picker>
-                  </div>
-                </b-col>
+                      </emoji-picker>
+                    </div>
+                  </b-col>
 
-                <b-col cols="2" class="p-0 pl-2">
-                  <b-icon
-                    @click="send"
-                    class="msg-icon primary icon-size icon-top"
-                    icon="cursor-fill"
-                  ></b-icon>
-                </b-col>
-              </b-row>
+                  <b-col cols="2" class="p-0 pl-2">
+                    <b-icon
+                      @click="send"
+                      class="msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
+                  </b-col>
+                </b-row>
 
-              <!-- <p v-if="checked" class="ml-5">
+                <!-- <p v-if="checked" class="ml-5">
                   You have blocked messages and calls from this user.
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
                 </p> -->
-                 </div>
+              </div>
             </div>
           </b-col>
 
@@ -1718,7 +1717,7 @@
                           selectedChat({
                             type: 'user',
                             chat: user,
-                            id: user.id,
+                            id: user.id
                           })
                         "
                       >
@@ -1730,7 +1729,7 @@
                             :src="
                               getImage({
                                 type: 'user',
-                                image: user.profile_picture,
+                                image: user.profile_picture
                               })
                             "
                           ></b-avatar>
@@ -1747,7 +1746,7 @@
                           selectedChat({
                             type: 'business',
                             chat: biz,
-                            id: biz.id,
+                            id: biz.id
                           })
                         "
                       >
@@ -1759,7 +1758,7 @@
                             :src="
                               getImage({
                                 type: 'business',
-                                image: biz.logo_path,
+                                image: biz.logo_path
                               })
                             "
                           ></b-avatar>
@@ -1776,7 +1775,7 @@
                           selectedChat({
                             type: 'network',
                             chat: network,
-                            id: network.id,
+                            id: network.id
                           })
                         "
                       >
@@ -1788,7 +1787,7 @@
                             :src="
                               getImage({
                                 type: 'network',
-                                image: network.image,
+                                image: network.image
                               })
                             "
                           ></b-avatar>
@@ -1827,7 +1826,8 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   components: {
     Navbar,
-    EmojiPicker, VuePerfectScrollbar
+    EmojiPicker,
+    VuePerfectScrollbar
   },
   data() {
     return {
@@ -1853,14 +1853,14 @@ export default {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-        transports: ["websocket", "polling", "flashsocket"],
+        transports: ["websocket", "polling", "flashsocket"]
       }),
       // socket: io("localhost:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       nameSpace: {
         status: false,
-        text: "",
+        text: ""
       },
       chatSelected: [],
       showsearch: true,
@@ -1876,7 +1876,7 @@ export default {
       checked: false,
       text: "",
       selected: [],
-      chats: [],
+      chats: []
     };
   },
 
@@ -1884,15 +1884,15 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   watch: {
     screenWidth(newWidth, oldWidth) {
       this.screenX = newWidth;
       // this.rightSide = this.screenX > 930;
       this.mobile = this.screenX < 930;
-    },
+    }
   },
 
   computed: {
@@ -1931,16 +1931,16 @@ export default {
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.users.filter((user) => {
+        return this.users.filter(user => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => user.name.toLowerCase().includes(v));
+            .every(v => user.name.toLowerCase().includes(v));
         });
       } else {
         return this.users.data;
       }
-    },
+    }
   },
 
   mounted() {
@@ -2000,7 +2000,7 @@ export default {
             ? this.ctaSelected.business_id
               ? this.ctaSelected.business_id
               : this.ctaSelected.id
-            : this.ctaSelected.id,
+            : this.ctaSelected.id
       });
     } else {
       this.tabIndex = 0;
@@ -2009,7 +2009,7 @@ export default {
     }
   },
   methods: {
-    onPressSearchNewChat: _.debounce(function (e) {
+    onPressSearchNewChat: _.debounce(function(e) {
       console.log("press...");
       this.getList(e);
     }, 1000),
@@ -2065,11 +2065,11 @@ export default {
       let name = "";
 
       if (this.type == "user") {
-        console.log('user chat name', value);
+        console.log("user chat name", value);
         if (value.sender?.id == this.currentUser.user.id) {
-          name = value.receiver ? value.receiver.name : 'Unknown User';
+          name = value.receiver ? value.receiver.name : "Unknown User";
         } else {
-          name = value.sender ? value.sender.name : 'Unknown User';
+          name = value.sender ? value.sender.name : "Unknown User";
         }
       } else if (this.type == "business") {
         name = value.receiver_business
@@ -2205,11 +2205,11 @@ export default {
     },
     socketListenners() {
       console.log("Listen type of chat:", this.type);
-      this.socket.on("create-chatList", (data) => {
+      this.socket.on("create-chatList", data => {
         this.getChatList({ type: this.getChatList({ type: data.type }) });
       });
 
-      this.socket.on("privateMessage", (data) => {
+      this.socket.on("privateMessage", data => {
         console.log("Received");
         console.log(data);
         this.userToUser.push(data);
@@ -2240,7 +2240,7 @@ export default {
         if (this.currentUser.user.id == data.sender_id) {
           this.saveMessage(this.formData, data.type);
           this.$store.dispatch("userChat/GET_USERS_CHAT_LIST_Dos", {
-            type: this.type,
+            type: this.type
           });
         } else {
           console.log("Here here 1");
@@ -2260,7 +2260,7 @@ export default {
     },
     getCreatedAt(data) {
       const date = moment().diff(moment(data), "days");
-    
+
       if (date >= 1) {
         return moment(data).format("L");
       } else {
@@ -2269,7 +2269,6 @@ export default {
       }
     },
     getList(keyword) {
-     
       if (this.type == "user") {
         this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {
@@ -2303,7 +2302,7 @@ export default {
           console.log("->[User selected]<-");
           this.socket.emit("addUser", {
             socketID: this.socket.id,
-            ...this.receiver,
+            ...this.receiver
           });
         })
         .catch(() => console.log("error"));
@@ -2315,7 +2314,7 @@ export default {
           console.log("->[User selected]<-");
           this.socket.emit("addUser", {
             socketID: this.socket.id,
-            ...this.receiver,
+            ...this.receiver
           });
         })
         .catch(() => console.log("error"));
@@ -2327,7 +2326,7 @@ export default {
           console.log("->[User selected]<-");
           this.socket.emit("addUser", {
             socketID: this.socket.id,
-            ...this.receiver,
+            ...this.receiver
           });
         })
         .catch(() => console.log("error"));
@@ -2339,7 +2338,7 @@ export default {
           console.log("->[User selected]<-");
           this.socket.emit("addUser", {
             socketID: this.socket.id,
-            ...this.receiver,
+            ...this.receiver
           });
         })
         .catch(() => console.log("error"));
@@ -2374,7 +2373,7 @@ export default {
       this.chatSelected = {
         active: true,
         clickedId: data.id,
-        ...data.chat,
+        ...data.chat
       };
       (this.chatSelected.name = data.chat.isProduct
         ? data.chat.business_name
@@ -2459,7 +2458,7 @@ export default {
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
-        behavior: "smooth",
+        behavior: "smooth"
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       // console.log(this.$refs.feed.scrollTop);
@@ -2495,7 +2494,7 @@ export default {
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
-        group_id: this.chatId,
+        group_id: this.chatId
       });
     },
     async sendPrivate() {
@@ -2508,7 +2507,7 @@ export default {
         receiver_network_id: this.chatSelected.clickedId,
         receiver_id: this.chatSelected.clickedId,
         attachment: this.file,
-        type: this.type,
+        type: this.type
       });
       console.log("SENT...");
       this.input = "";
@@ -2516,7 +2515,7 @@ export default {
       this.scrollToBottom();
     },
     async deleteMessage(data, chatListData, type) {
-      let dataChat = chatListData.filter((b) => {
+      let dataChat = chatListData.filter(b => {
         return b.id !== data.id;
       });
 
@@ -2555,7 +2554,7 @@ export default {
     async deleteChat(data, chatList, type) {
       console.log(type, "User profile chat lisr");
 
-      let dataChat = chatList.filter((b) => {
+      let dataChat = chatList.filter(b => {
         return b.id !== data.id;
       });
 
@@ -2563,17 +2562,17 @@ export default {
 
       console.log("asdasd asd ", mainData);
 
-      this.$store.dispatch("userChat/DELETE_USER_CHAT", mainData)
-    },
-  },
+      this.$store.dispatch("userChat/DELETE_USER_CHAT", mainData);
+    }
+  }
 };
 </script>
 
 <style scoped>
-.contacts-height{
+.contacts-height {
   height: calc(100vh - 190px);
 }
-.scroll-area{
+.scroll-area {
   height: inherit;
 }
 .count {
@@ -2640,14 +2639,13 @@ export default {
 }
 .chats {
   /* border: 2px solid green; */
-  
+
   height: calc(100vh - 160px);
   overflow-y: hidden;
   overflow-x: hidden;
-  background-image: url("/assets/images/messaging.png"); 
-   background-repeat: no-repeat;
+  background-image: url("/assets/images/messaging.png");
+  background-repeat: no-repeat;
   background-size: cover;
-  
 }
 
 .back-image {
@@ -2669,7 +2667,6 @@ h1 {
 .messages {
   overflow-y: auto;
   overflow-x: hidden;
-
 }
 .txt {
   font-size: 13px;
@@ -2729,8 +2726,8 @@ h1 {
   border-bottom-right-radius: 15px;
   background-color: white;
   position: fixed;
-    width: 100%;
-    bottom: 0;
+  width: 100%;
+  bottom: 0;
 }
 .detail {
   margin-left: -40px;
@@ -2791,7 +2788,7 @@ li {
   }
   .chats {
     /* border: 2px solid green; */
-    /* min-height: 430px; */
+    /* min-height: 431px; */
   }
 
   .m-10 {

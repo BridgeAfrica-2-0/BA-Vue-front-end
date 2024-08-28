@@ -1,6 +1,5 @@
 <template>
   <div class="p-3">
-    
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
@@ -9,7 +8,7 @@
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>{{ $t('businessowner.Create_Album') }}</h3>
+                  <h3>{{ $t("businessowner.Create_Album") }}</h3>
                 </div>
               </a>
             </div>
@@ -23,7 +22,7 @@
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  {{ $t('businessowner.Create') }}</b-button
+                  {{ $t("businessowner.Create") }}</b-button
                 >
               </b-form>
             </div>
@@ -35,14 +34,14 @@
             :key="albums.id"
           >
             <a>
-            <span @click="showlbum(albums.id, albums.album_name)">
+              <span @click="showlbum(albums.id, albums.album_name)">
                 <img class="card-img album-img" :src="albums.media[0]" alt="" />
-              </span>  
+              </span>
 
               <div class="botmediadess">
                 <p>
                   {{ albums.album_name }} <br />
-                  {{ albums.item_number }} {{ $t('businessowner.Items') }}
+                  {{ albums.item_number }} {{ $t("businessowner.Items") }}
                 </p>
               </div>
             </a>
@@ -68,12 +67,12 @@
 
                     <b-dropdown-item
                       @click="editAlbum(albums.id, albums.album_name)"
-                      >{{ $t('businessowner.Edit') }}</b-dropdown-item
+                      >{{ $t("businessowner.Edit") }}</b-dropdown-item
                     >
 
-                    <b-dropdown-item @click="deleteAlbum(albums.id)"
-                      >{{ $t('businessowner.Delete') }}</b-dropdown-item
-                    >
+                    <b-dropdown-item @click="deleteAlbum(albums.id)">{{
+                      $t("businessowner.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>
@@ -98,7 +97,7 @@
                 variant="primary"
                 @click="updateAlbum(edit_id)"
               >
-                {{ $t('businessowner.Update') }}</b-button
+                {{ $t("businessowner.Update") }}</b-button
               >
             </b-form>
           </div>
@@ -120,7 +119,7 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >{{ $t('businessowner.Custom_Album') }} 1
+                          >{{ $t("businessowner.Custom_Album") }} 1
                           <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
                         <div
@@ -131,21 +130,23 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >{{ $t('businessowner.Edit_Name') }}</a
+                            >{{ $t("businessowner.Edit_Name") }}</a
                           >
-                          <a class="dropdown-item">{{ $t('businessowner.Delete_Album') }}</a>
+                          <a class="dropdown-item">{{
+                            $t("businessowner.Delete_Album")
+                          }}</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
                     <label class="col-md-4 control-label pr-0 text-design"
-                      >14 {{ $t('businessowner.Items') }} -
+                      >14 {{ $t("businessowner.Items") }} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>{{ $t('businessowner.Public') }}</option>
-                        <option>{{ $t('businessowner.Private') }}</option>
+                        <option>{{ $t("businessowner.Public") }}</option>
+                        <option>{{ $t("businessowner.Private") }}</option>
                       </select>
                     </div>
                   </div>
@@ -161,11 +162,11 @@
 
     <div class="container-flex" v-if="showalbum == true">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        {{ $t('businessowner.Back') }}
+        {{ $t("businessowner.Back") }}
       </b-button>
       <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 
-      <Images :album="album_id"  />
+      <Images :album="album_id" />
     </div>
   </div>
 </template>
@@ -186,8 +187,8 @@ export default {
       edit_id: null,
       edit_name: null,
       images: [],
-      imagees: [ ],
-      index: 0,
+      imagees: [],
+      index: 0
     };
   },
   methods: {
@@ -197,12 +198,12 @@ export default {
     showlbum(abum_id, album_name) {
       this.album_name = album_name;
       this.album_id = abum_id;
-      
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       const albumUrl = this.url + "/" + abum_id;
       this.$store
@@ -212,7 +213,7 @@ export default {
           this.showalbum = true;
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           loader.hide();
         });
@@ -227,10 +228,10 @@ export default {
     },
 
     ...mapActions({
-    createAlbumm: "businessOwner/createAlbum",       
+      createAlbumm: "businessOwner/createAlbum",
       updateAlbumm: "businessOwner/updateAlbum",
       deleteAlbumm: "businessOwner/deleteAlbum",
-      getAlbums: "businessOwner/getAlbums",
+      getAlbums: "businessOwner/getAlbums"
     }),
 
     createAlbum() {
@@ -238,30 +239,30 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
-      this.createAlbumm({name:this.name, id:this.url })
-        .then((response) => {
+      this.createAlbumm({ name: this.name, id: this.url })
+        .then(response => {
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.Album_Created'),
+            message: this.$t("general.Album_Created")
           });
           this.getAlbums(this.url);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('general.Unable_to_create_your_Album'),
+              message: this.$t("general.Unable_to_create_your_Album")
             });
             console.log({ err: err });
             loader.hide();
@@ -269,36 +270,36 @@ export default {
         });
     },
 
-    updateAlbum(album ) {
+    updateAlbum(album) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
-      this.updateAlbumm({name:this.edit_name,url:this.url, id:album})
+      this.updateAlbumm({ name: this.edit_name, url: this.url, id: album })
         .then(() => {
           this.flashMessage.show({
             status: "success",
-            message: "Album Updated",
+            message: "Album Updated"
           });
           this.getAlbums(this.url);
           loader.hide();
-            this.$refs["editalbum"].hide(); 
+          this.$refs["editalbum"].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('general.Unable_to_create_your_Album'),
+              message: this.$t("general.Unable_to_create_your_Album")
             });
             console.log({ err: err });
             loader.hide();
@@ -307,43 +308,42 @@ export default {
     },
 
     deleteAlbum(album) {
-     
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
-      this.deleteAlbumm( { url:this.url, id:album})
+      this.deleteAlbumm({ url: this.url, id: album })
         .then(() => {
           this.flashMessage.show({
             status: "success",
-            message: "Album Deleted",
+            message: "Album Deleted"
           });
           this.getAlbums(this.url);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: err.response.data.message
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to Delete your abum",
+              message: "Unable to Delete your abum"
             });
             console.log({ err: err });
             loader.hide();
           }
         });
-    },
+    }
   },
-  
+
   beforeMount() {
     this.url = this.$route.params.id;
     this.getAlbums(this.url);
@@ -351,11 +351,10 @@ export default {
   computed: {
     albums() {
       return this.$store.state.businessOwner.albums;
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style>
 .call-action {

@@ -1,31 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
 const state = {
-  myOrders: [],
+  myOrders: []
 };
 const getters = {
   getAllOrders: state => {
     return state.myOrders;
   },
   getPendingOrders: state => {
-    return state.myOrders.filter(order => order.status === 'pending') || [];
+    return state.myOrders.filter(order => order.status === "pending") || [];
   },
   getCompleteOrders: state => {
-    return state.myOrders.filter(order => order.status === 'complete') || [];
+    return state.myOrders.filter(order => order.status === "complete") || [];
   },
   getCancelOrders: state => {
-    return state.myOrders.filter(order => order.status === 'cancel') || [];
-  },
+    return state.myOrders.filter(order => order.status === "cancel") || [];
+  }
 };
 const actions = {
   async getMyOrders({ commit }) {
-    commit('removeOrder');
+    commit("removeOrder");
     let page = 1;
     let dataLength = 0;
     do {
       await axios
         .get(`order/getOrderUser/${page}`)
         .then(response => {
-          commit('addPageOrder', response.data.data);
+          commit("addPageOrder", response.data.data);
           dataLength = response.data.data.length;
           console.log(response.data);
         })
@@ -34,8 +34,8 @@ const actions = {
         });
       page++;
     } while (dataLength > 0);
-    console.log('listing order user finish');
-  },
+    console.log("listing order user finish");
+  }
 };
 const mutations = {
   addPageOrder: (state, newpage) => {
@@ -43,7 +43,7 @@ const mutations = {
   },
   removeOrder: state => {
     state.myOrders = [];
-  },
+  }
 };
 
 export default {
@@ -51,5 +51,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

@@ -5,23 +5,21 @@ export default {
 
   state: {
     profile_community: [],
-    community: [],
+    community: []
   },
 
   actions: {
     getdetails({ commit }) {
       return axios.get("/profile/community", {}).then(function({ data }) {
         commit("setdetails", data.data);
-        
       });
     },
 
     gettotalcommunity({ commit }) {
       return axios.get("/profile/total/community", {}).then(function({ data }) {
         commit("setcom", data.data);
-        
       });
-    },
+    }
   },
 
   mutations: {
@@ -30,7 +28,7 @@ export default {
     },
     setcom(state, details) {
       state.community = details;
-    },
+    }
   },
 
   getters: {
@@ -39,6 +37,6 @@ export default {
     },
     getcom(state) {
       return state.community;
-    },
-  },
+    }
+  }
 };

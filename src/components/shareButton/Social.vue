@@ -2,7 +2,7 @@
   <ShareNetwork
     :network="network"
     :url="link"
-    :title="`${auth.name} share post`"
+    :title="shareTitle"
     :description="post.content"
   >
     {{ title }}
@@ -16,16 +16,20 @@ export default {
   props: ["post", "network", "title"],
 
   data: () => ({
-    link: null,
+    link: null
   }),
 
-  computed: mapGetters({
-    auth: "auth/profilConnected",
-  }),
-
+  computed: {
+    ...mapGetters({
+      auth: "auth/profilConnected"
+    }),
+    shareTitle() {
+      return this.auth ? `${this.auth.name} share post` : "Share post";
+    }
+  },
   created() {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
-  },
+  }
 
   /* metaInfo() {
     return {

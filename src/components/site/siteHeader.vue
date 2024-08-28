@@ -231,7 +231,7 @@ export default {
     return {
       img: require("../../assets/img/about/en.png"),
       lang: "EN",
-      keyword: "",
+      keyword: ""
     };
   },
   created() {
@@ -244,12 +244,12 @@ export default {
 
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    },
+    }
   },
 
   methods: {
     ...mapActions({
-      Logout: "auth/logout",
+      Logout: "auth/logout"
     }),
 
     /**
@@ -262,7 +262,7 @@ export default {
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const requestForReset = await this.$repository.share.switch(
@@ -289,7 +289,7 @@ export default {
       if (this.$route.name != "Search") {
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.keyword },
+          query: { keyword: this.keyword }
         });
       }
     },
@@ -304,8 +304,8 @@ export default {
         this.img = require("../../assets/img/la-france.png");
         this.lang = "FR";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -7,7 +7,7 @@
             {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
           </div>
         </md-card-header>
-      
+
         <md-card-content>
           <div class="center">
             <b-row>
@@ -73,7 +73,9 @@
           </div>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("auth.email") }} {{ $t("auth.or") }}  {{ $t("auth.Tel") }}  </label>
+            <label for="email">
+              {{ $t("auth.email") }} {{ $t("auth.or") }} {{ $t("auth.Tel") }}
+            </label>
             <md-input
               type="text"
               name="email"
@@ -112,16 +114,17 @@
               {{ $t("auth.password_is_required") }}
             </span>
 
-            <span class="md-error" v-if="!$v.form.password.minLength" >
+            <span class="md-error" v-if="!$v.form.password.minLength">
               {{ $t("auth.password_is_required") }}
-              {{ $t("auth.Password_must_have_at_least") }} {{ $v.form.password.$params.minLength.min }} letters.
+              {{ $t("auth.Password_must_have_at_least") }}
+              {{ $v.form.password.$params.minLength.min }} letters.
             </span>
-
-            
           </md-field>
 
           <md-field :class="getValidationClass('confirmPassword')">
-            <label for="confirmPassword"> {{ $t("auth.confirm_password") }} </label>
+            <label for="confirmPassword">
+              {{ $t("auth.confirm_password") }}
+            </label>
             <md-input
               type="password"
               name="confirmPassword"
@@ -129,15 +132,17 @@
               v-model="form.confirmPassword"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              >   {{ $t("auth.password_is_required") }}
+            <span class="md-error" v-if="!$v.form.confirmPassword.required">
+              {{ $t("auth.password_is_required") }}
             </span>
 
-             <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
-              > {{ $t("auth.Password_is_required") }} 
-               {{ $t("auth.Passwords_must_be_identical") }} .
+            <span
+              class="md-error"
+              v-if="!$v.form.confirmPassword.sameAsPassword"
+            >
+              {{ $t("auth.Password_is_required") }}
+              {{ $t("auth.Passwords_must_be_identical") }} .
             </span>
-
           </md-field>
         </md-card-content>
 
@@ -169,7 +174,9 @@
           <br />
           <br />
 
-          <label> {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }} </label>
+          <label>
+            {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
+          </label>
           <br />
 
           <label>
@@ -182,22 +189,21 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("auth.the_user") }} {{ lastUser }} {{ $t("auth.was_saved_with_success") }}
+        {{ $t("auth.the_user") }} {{ lastUser }}
+        {{ $t("auth.was_saved_with_success") }}
       </md-snackbar>
     </form>
 
     <hr class="localfoter" />
 
     <p class="text-center">
-     
       <span class="display-inline">
-        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span> 
-        <b-link class="ml-2"  @click="setLang('fr')">
+        <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="setLang('fr')">
           {{ $t("auth.french") }}
         </b-link>
       </span>
-
 
       Bridge Africa © 2021
     </p>
@@ -208,7 +214,7 @@
 import { validationMixin } from "vuelidate";
 import axios from "axios";
 
-import { required,sameAs, email, minLength } from "vuelidate/lib/validators";
+import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "FormValidation",
@@ -223,72 +229,68 @@ export default {
       email: null,
       password: null,
 
-      confirmPassword: null,
+      confirmPassword: null
     },
     userSaved: false,
     sending: false,
-    lastUser: null,
+    lastUser: null
   }),
 
   validations: {
     form: {
       firstName: {
-        required,
+        required
       },
 
       lastName: {
-        required,
+        required
       },
 
       password: {
         required,
-         minLength: minLength(8),
+        minLength: minLength(8)
       },
 
       confirmPassword: {
         required,
-         minLength: minLength(8),
-         sameAsPassword: sameAs('password')
+        minLength: minLength(8),
+        sameAsPassword: sameAs("password")
       },
-
 
       email: {
-        required,
-     
-      },
-    },
+        required
+      }
+    }
   },
 
-  created(){
-   if(this.$store.getters["auth/isLogged"]){
-       this.$router.push({ name: "dashboard" });
-   }
+  created() {
+    if (this.$store.getters["auth/isLogged"]) {
+      this.$router.push({ name: "dashboard" });
+    }
   },
   methods: {
     authProvider(provider) {
       let self = this;
       this.$auth
         .authenticate(provider)
-        .then((response) => {
+        .then(response => {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-    setLang(data){
-        
-         console.log(data);
-          this.$i18n.locale = data;
-         this.$store.commit("auth/setAppLanguage", data);
+    setLang(data) {
+      console.log(data);
+      this.$i18n.locale = data;
+      this.$store.commit("auth/setAppLanguage", data);
     },
 
-
-     flashErrors(errors) {
+    flashErrors(errors) {
       let err = "";
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -306,13 +308,13 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('auth.Successfully_Register'),
+            message: this.$t("auth.Successfully_Register")
           });
 
           this.$router.push({ name: "welcome" });
           return response.data.token;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -321,7 +323,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
@@ -344,7 +346,7 @@ export default {
           email: this.form.email,
           password: this.form.password,
           phone: this.form.tel,
-          password_confirmation: this.form.password,
+          password_confirmation: this.form.password
         })
         .then(({ data }) => {
           console.log(data.data);
@@ -352,13 +354,12 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-            title: this.$t('auth.Successfully_Register'),
-        
+            title: this.$t("auth.Successfully_Register")
           });
 
           this.$router.push({ name: "verifyAccount" });
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -369,13 +370,13 @@ export default {
               status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-               blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
-              title: this.$t('auth.Registration_Failed'),
-              message: this.$t('auth.Unable_to_store_this_data'),
+              title: this.$t("auth.Registration_Failed"),
+              message: this.$t("auth.Unable_to_store_this_data")
             });
             console.log({ err: err });
           }
@@ -386,8 +387,8 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

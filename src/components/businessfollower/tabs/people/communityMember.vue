@@ -30,7 +30,9 @@
       <b-col cols="3">
         <b-row>
           <b-col>
-            <b-button variant="primary" size="sm" class=""> +Community</b-button>
+            <b-button variant="primary" size="sm" class="">
+              +Community</b-button
+            >
           </b-col>
           <b-col>
             <b-button variant="outline-primary" size="sm">

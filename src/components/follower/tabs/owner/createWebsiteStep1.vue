@@ -5,21 +5,33 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              {{ $t('profilefollower.Create_personalised_website_for_your_business') }}
+              {{
+                $t(
+                  "profilefollower.Create_personalised_website_for_your_business"
+                )
+              }}
             </h2>
             <p class="my-2">
-              {{ $t('profilefollower.Start_with_a_template_and_male_it_your_own') }}, {{ $t('profilefollower.with_easy_drag_and_drop') }}
-              {{ $t('profilefollower.1000s_of_design_features') }}
+              {{
+                $t(
+                  "profilefollower.Start_with_a_template_and_male_it_your_own"
+                )
+              }}, {{ $t("profilefollower.with_easy_drag_and_drop") }}
+              {{ $t("profilefollower.1000s_of_design_features") }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block mt-1">{{ $t('profilefollower.Select_a_template') }}</span>
+                <span class="d-block mt-1">{{
+                  $t("profilefollower.Select_a_template")
+                }}</span>
               </p>
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block mt-1">{{ $t('profilefollower.Launch') }}</span>
+                <span class="d-block mt-1">{{
+                  $t("profilefollower.Launch")
+                }}</span>
               </p>
             </b-col>
           </div>
@@ -29,7 +41,7 @@
     <b-row class="my-2">
       <b-col md="10" offset-md="1">
         <p class="float-right">
-          <span>{{ $t('profilefollower.Show') }}: &nbsp;</span>
+          <span>{{ $t("profilefollower.Show") }}: &nbsp;</span>
           <span class="d-inline-block">
             <b-form-select
               class="d-inline-block"
@@ -44,19 +56,33 @@
     <b-row>
       <b-col cols="12">
         <b-nav pills fill>
-          <b-nav-item v-on:click="filter('all')">{{ $t('profilefollower.All') }}</b-nav-item>
-          <b-nav-item v-on:click="shuffle">{{ $t('profilefollower.Shuffle') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('agriculture')"
-            >{{ $t('profilefollower.Agriculture') }}</b-nav-item
-          >
-          <b-nav-item v-on:click="filter('business')">{{ $t('profilefollower.Business') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('event')">{{ $t('profilefollower.Event') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('personalcare')"
-            >{{ $t('profilefollower.Personal_Care') }}</b-nav-item
-          >
-          <b-nav-item v-on:click="filter('pharmacy')">{{ $t('profilefollower.Pharmacy') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('food')">{{ $t('profilefollower.Food') }}</b-nav-item>
-          <b-nav-item v-on:click="filter('other')">{{ $t('profilefollower.Others') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('all')">{{
+            $t("profilefollower.All")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="shuffle">{{
+            $t("profilefollower.Shuffle")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('agriculture')">{{
+            $t("profilefollower.Agriculture")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('business')">{{
+            $t("profilefollower.Business")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('event')">{{
+            $t("profilefollower.Event")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('personalcare')">{{
+            $t("profilefollower.Personal_Care")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('pharmacy')">{{
+            $t("profilefollower.Pharmacy")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('food')">{{
+            $t("profilefollower.Food")
+          }}</b-nav-item>
+          <b-nav-item v-on:click="filter('other')">{{
+            $t("profilefollower.Others")
+          }}</b-nav-item>
         </b-nav>
       </b-col>
     </b-row>
@@ -78,7 +104,7 @@
                 <template #header>
                   <p>
                     <span class="float-left">
-                      {{ $t('profilefollower.Template_Name') }}
+                      {{ $t("profilefollower.Template_Name") }}
                     </span>
                     <span class="float-right">
                       <b-icon-eye-fill class="mr-3"></b-icon-eye-fill>

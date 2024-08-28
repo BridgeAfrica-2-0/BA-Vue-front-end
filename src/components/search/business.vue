@@ -1,24 +1,20 @@
-<template> 
-  <div v-if="islogin">  
-    <Skeleton  :loading="prodLoader" />
-    <Skeleton  :loading="prodLoader" />
-     <NotFoundComponent
+<template>
+  <div v-if="islogin">
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
-    /> 
-    <div class="text-center"> 
-    <b-spinner
-      v-if="prodLoader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner>
-     </div>
+    />
+    <div class="text-center">
+      <b-spinner
+        v-if="prodLoader"
+        variant="primary"
+        :label="$t('search.Spinning')"
+      ></b-spinner>
+    </div>
 
-   <Business
-        v-for="item in business.data"
-        :key="item.id"
-        :business="item"  
-      />
+    <Business v-for="item in business.data" :key="item.id" :business="item" />
 
     <b-pagination
       v-if="business.next || business.previous"
@@ -30,27 +26,23 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-  </div>  
-  <div v-else>  
-    <Skeleton  :loading="prodLoader" />
-    <Skeleton  :loading="prodLoader" />
-     <NotFoundComponent
+  </div>
+  <div v-else>
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
-    /> 
-    <div class="text-center"> 
-    <b-spinner
-      v-if="prodLoader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner>
-     </div>
+    />
+    <div class="text-center">
+      <b-spinner
+        v-if="prodLoader"
+        variant="primary"
+        :label="$t('search.Spinning')"
+      ></b-spinner>
+    </div>
 
-   <Business
-        v-for="item in business.data"
-        :key="item.id"
-        :business="item"  
-      />
+    <Business v-for="item in business.data" :key="item.id" :business="item" />
 
     <b-pagination
       v-if="business.next || business.previous"
@@ -62,7 +54,7 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -81,7 +73,7 @@ export default {
   data() {
     return {
       total: 0,
-     
+
       per_page: 10,
       list: [],
       currentPage: 1,
@@ -93,25 +85,26 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   computed: {
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     ...mapGetters({
       searchstate: "business/getSearchState",
       business: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
-      prodLoader: "business/getloadingState",
-    }),
-    
+      prodLoader: "business/getloadingState"
+    })
   },
   mounted() {
     this.islogin = this.$store.getters["auth/isLogged"];
-    this.getBusiness();  
+    this.getBusiness();
   },
-  created(){
+  created() {
     this.islogin = this.$store.getters["auth/isLogged"];
   },
   methods: {
@@ -133,40 +126,43 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     findBusiness(payload) {
-    if (this.islogin) {
-      return this.$store.dispatch("business/FIND_BUSINESS", payload);
-    } else {
-      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
-    }
-  },
-  nextPage(payload) {
-    return this.$store.dispatch("business/NEXT_PAGE", payload);
-  },
+      if (this.islogin) {
+        return this.$store.dispatch("business/FIND_BUSINESS", payload);
+      } else {
+        return this.$store.dispatch(
+          "business/FIND_BUSINESS_FOR_GUEST_USER",
+          payload
+        );
+      }
+    },
+    nextPage(payload) {
+      return this.$store.dispatch("business/NEXT_PAGE", payload);
+    },
     getBusiness() {
       this.$store.commit("business/setLoading", true);
-      this.findBusiness({main:true})
-        .then((res) => {
+      this.findBusiness({ main: true })
+        .then(res => {
           this.$store.commit("business/setLoading", false);
           this.total = this.business.total;
         })
-        .catch((err) => {
+        .catch(err => {
           this.$store.commit("business/setLoading", false);
           console.error(err);
         });
@@ -174,16 +170,17 @@ export default {
     changePage(value) {
       this.$parent.changeBusinessPage(value);
       this.currentPage = value;
-      const endpoint = this.business.next != "" ? this.business.next : this.business.previous;
+      const endpoint =
+        this.business.next != "" ? this.business.next : this.business.previous;
       console.log("==end point===========================", endpoint);
-      this.nextPage({url: endpoint, page:value})
-        .then((res) => {
-        }).catch((err) => {
+      this.nextPage({ url: endpoint, page: value })
+        .then(res => {})
+        .catch(err => {
           this.total = this.business.total;
           console.error(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

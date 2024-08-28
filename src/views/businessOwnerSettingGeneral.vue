@@ -19,7 +19,9 @@
 
     <b-container class="">
       <b-container class="">
-        <h5 class="a-text"><b-icon-gear></b-icon-gear> {{$t('general.Business_Settings')}}</h5>
+        <h5 class="a-text">
+          <b-icon-gear></b-icon-gear> {{ $t("general.Business_Settings") }}
+        </h5>
       </b-container>
 
       <b-container class="bv-example-row">

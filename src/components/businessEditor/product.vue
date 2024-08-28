@@ -13,9 +13,11 @@
         <b-col cols="7" sm="8" md="7">
           <p class="text">
             <strong class="title"> {{ product.name }} </strong> <br />
-            <strong> {{$t("general.Description")}} </strong> <br />
+            <strong> {{ $t("general.Description") }} </strong> <br />
             {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30">{{$t("general.see_more")}} </b-link>
+            <b-link v-if="product.description.length >= 30"
+              >{{ $t("general.see_more") }}
+            </b-link>
             <br />
 
             <span class="price">
@@ -68,7 +70,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>{{$t("general.Product_Image")}}</h6>
+                  <h6>{{ $t("general.Product_Image") }}</h6>
                 </div>
               </a>
               <div></div>
@@ -91,7 +93,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("general.This_Product_Is_On_Discount")}}
+          {{ $t("general.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
         <b-form-group
@@ -127,10 +129,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("general.Published")}}
+          {{ $t("general.Published") }}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary">{{$t("general.Add")}} </b-button>
+        <b-button class="mt-2 btn-block" variant="primary"
+          >{{ $t("general.Add") }}
+        </b-button>
       </b-form>
     </b-modal>
 
@@ -159,13 +163,13 @@
               <BtnCtaMessage :element="item" type="business" />
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >{{$t("general.Checkout_on_website")}}</b-button
-              >
+              <b-button variant="outline-dark" class="float-right">{{
+                $t("general.Checkout_on_website")
+              }}</b-button>
             </b-col>
           </b-row>
           <hr />
-          <h5>{{$t("general.Product_Detail")}}</h5>
+          <h5>{{ $t("general.Product_Detail") }}</h5>
           <p>
             {{ product.description }}
           </p>
@@ -253,7 +257,8 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
+                      23 &nbsp; &nbsp; &nbsp;
+                      <a href="#">{{ $t("general.Reply") }}</a>
                     </div>
                   </div>
                   <ul class="comments-list">
@@ -316,13 +321,12 @@
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-
                           <i
                             class="fa heart  fa-heart-o"
                             aria-hidden="true"
                           ></i>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
-
+                          23 &nbsp; &nbsp; &nbsp;
+                          <a href="#">{{ $t("general.Reply") }}</a>
                         </div>
                       </div>
                     </li>
@@ -381,7 +385,8 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
+                      23 &nbsp; &nbsp; &nbsp;
+                      <a href="#">{{ $t("general.Reply") }}</a>
                     </div>
                   </div>
                 </li>
@@ -399,7 +404,7 @@ export default {
   props: ["product"],
   data() {
     return {
-      viewProduct: false,
+      viewProduct: false
     };
   },
   components: {},
@@ -411,8 +416,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    },
-  },
+    }
+  }
 };
 </script>
 

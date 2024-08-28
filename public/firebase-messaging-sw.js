@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/5.5.0/firebase-messaging.js');
+importScripts("https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/5.5.0/firebase-messaging.js");
 
 try {
   firebase.initializeApp({
@@ -11,18 +11,15 @@ try {
     appId: "1:518469069539:web:25d044a5d9f18825a3f3d6"
   });
 
-  const messaging = firebase.messaging()
+  const messaging = firebase.messaging();
 
-  messaging.setBackgroundMessageHandler((payload) => {
-    const title = payload.data.username
+  messaging.setBackgroundMessageHandler(payload => {
+    const title = payload.data.username;
     const options = {
       body: payload.data.body,
-      icon:'public/logo.png'
-    }
+      icon: "public/logo.png"
+    };
 
-    return this.registration.showNotification(title, options)
+    return this.registration.showNotification(title, options);
   });
-
-} catch (error) {
- 
-}
+} catch (error) {}

@@ -8,8 +8,7 @@
             variant="primary"
             class="icon-size"
           ></b-icon> -->
-          </b
-        > 
+        </b>
       </h6>
 
       <b-card-text>
@@ -19,25 +18,25 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Work at: 
-              <span
-                class="text"
-                v-for="exp in info.user_experience.slice(0, 1)"
-                :key="exp.id"
-              >
-                {{ exp.company_name }}
-              </span>
+          Work at:
+          <span
+            class="text"
+            v-for="exp in info.user_experience.slice(0, 1)"
+            :key="exp.id"
+          >
+            {{ exp.company_name }}
+          </span>
         </p>
         <p>
           <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
-          Studied at:      <span
-                v-for="edu in info.user_education.slice(0, 1)"
-                :key="edu.id"
-                class="text"
-              >
-            
-                {{ edu.school_name }}</span
-              >
+          Studied at:
+          <span
+            v-for="edu in info.user_education.slice(0, 1)"
+            :key="edu.id"
+            class="text"
+          >
+            {{ edu.school_name }}</span
+          >
         </p>
         <p>
           <b-icon
@@ -61,7 +60,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-         Community:  {{ info.user.community }}
+          Community: {{ info.user.community }}
         </p>
       </b-card-text>
     </b-card>
@@ -70,11 +69,10 @@
 
 <script>
 export default {
-  computed:{
-     info :function(){
-       
-         return this.$store.getters['follower/getUserPostIntro'];
-      }
+  computed: {
+    info: function() {
+      return this.$store.getters["follower/getUserPostIntro"];
+    }
   }
 };
 </script>

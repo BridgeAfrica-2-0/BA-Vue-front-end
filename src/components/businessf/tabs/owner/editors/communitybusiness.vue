@@ -123,15 +123,15 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   methods: {
     gotoBusinessAbout(id) {
       this.$router.push(`/business/${id}#about`);
-    },
-  },
+    }
+  }
 };
 </script>
 

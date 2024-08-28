@@ -1,6 +1,11 @@
 <template>
   <div class="modal-auth">
-    <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
+    <form
+      novalidate
+      autocomplete="off"
+      class="md-layout"
+      @submit.prevent="validateUser"
+    >
       <div class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
@@ -9,7 +14,6 @@
         </md-card-header>
 
         <md-card-content>
-        
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -40,7 +44,9 @@
           <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("auth.email") }} / {{ $t("auth.Tel") }} </label>
+            <label for="email">
+              {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
+            </label>
             <md-input
               type="text"
               name="email"
@@ -62,7 +68,7 @@
             <md-input
               type="password"
               name="password"
-               autocomplete="off"
+              autocomplete="off"
               id="password"
               v-model="form.password"
               :disabled="sending"
@@ -102,15 +108,17 @@
               </md-button>
             </b-col>
             <b-col cols="6">
-             
-                <md-button @click="toSignup" class="md-raised f-right"
-                  >{{ $t("auth.signup") }}
-                </md-button>
-             
+              <md-button @click="toSignup" class="md-raised f-right"
+                >{{ $t("auth.signup") }}
+              </md-button>
             </b-col>
           </b-row>
 
-          <router-link @click="toForgetPassword" to="password" class="nav-link text">
+          <router-link
+            @click="toForgetPassword"
+            to="password"
+            class="nav-link text"
+          >
             {{ $t("auth.forget_password") }}
           </router-link>
         </div>
@@ -124,7 +132,7 @@
           <label class="f-12">
             {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
           </label>
-          <br /> 
+          <br />
 
           <label class="f-12">
             <b-link href="#"> {{ $t("auth.terms_and_conditions") }} </b-link> &
@@ -136,11 +144,10 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("auth.the_user") }} {{ lastUser }} {{ $t("auth.was_saved_with_success") }} !
+        {{ $t("auth.the_user") }} {{ lastUser }}
+        {{ $t("auth.was_saved_with_success") }} !
       </md-snackbar>
     </form>
-
-   
   </div>
 </template>
 
@@ -173,17 +180,14 @@ export default {
       },
       email: {
         required
-        
       }
     }
   },
 
-   created(){
-   
-  },
+  created() {},
 
   methods: {
-    getValidationClass(fieldName) { 
+    getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
@@ -192,25 +196,22 @@ export default {
       }
     },
 
-   toSignup(){
-    this.closeModal();
-  this.$router.push({ name: "signup" });
-   },
+    toSignup() {
+      this.closeModal();
+      this.$router.push({ name: "signup" });
+    },
 
-   toForgetPassword(){
-    
-  this.closeModal();
-  this.$router.push({ name: "Password" });
-
-   },
+    toForgetPassword() {
+      this.closeModal();
+      this.$router.push({ name: "Password" });
+    },
 
     flashErrors(errors) {
       let err = "";
-      if(errors){   
-      Object.values(errors).forEach((element) => {
-        err = element[0];
-      });
-
+      if (errors) {
+        Object.values(errors).forEach(element => {
+          err = element[0];
+        });
       }
 
       return err;
@@ -224,16 +225,15 @@ export default {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch(err => {  
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-  closeModal(){
-   
-   this.$emit("hideAuthModal")
-  },
-  
+    closeModal() {
+      this.$emit("hideAuthModal");
+    },
+
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
@@ -241,18 +241,17 @@ export default {
           console.log(data);
 
           this.$store.commit("auth/setUserData", data.data);
-           this.$store.dispatch("auth/profilePackage")
+          this.$store.dispatch("auth/profilePackage");
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('auth.Successfully_Register')
+            message: this.$t("auth.Successfully_Register")
           });
-        
-         this.closeModal();
-          
+
+          this.closeModal();
         })
         .catch(err => {
-          console.log({ err: err });   
+          console.log({ err: err });
         });
     },
 
@@ -276,10 +275,9 @@ export default {
         })
         .then(() => {
           this.sending = false;
-           this.$store.dispatch("auth/profilePackage")
+          this.$store.dispatch("auth/profilePackage");
 
-           this.closeModal();
-
+          this.closeModal();
         })
         .catch(err => {
           console.log(err);
@@ -290,25 +288,26 @@ export default {
 
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
+              message:
+                err.response.data.message +
+                " " +
+                this.flashErrors(err.response.data.errors)
             });
           } else if (err.response.status == 403) {
-            
-            console.log(err.response.data); 
-           this.$store.commit("auth/setSignupData",err.response.data.data);
+            console.log(err.response.data);
+            this.$store.commit("auth/setSignupData", err.response.data.data);
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message, 
+              message: err.response.data.message
             });
-            
+
             this.closeModal();
             this.$router.push({ name: "verifyAccount" });
-          }
-           else {
+          } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t('auth.An_error_has_occured')
+              message: this.$t("auth.An_error_has_occured")
             });
           }
         });
@@ -325,14 +324,14 @@ export default {
 </script>
 
 <style>
- .modal-auth .modal-header{
+.modal-auth .modal-header {
   border: none !important;
-  padding: .4rem !important;
- }
+  padding: 0.4rem !important;
+}
 
- .modal-auth .modal-body{
+.modal-auth .modal-body {
   padding: 0px;
- }
+}
 </style>
 
 <style scoped>
@@ -373,7 +372,7 @@ export default {
   padding-bottom: 80px;
 }
 .b-div {
- background-image: url("/assets/home/login-ban.jpg");
+  background-image: url("/assets/home/login-ban.jpg");
   background-position: center;
   background-size: cover;
 }

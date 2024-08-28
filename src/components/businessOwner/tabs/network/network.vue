@@ -1,6 +1,11 @@
 <template>
   <div class="lalala">
-    <b-tabs content-class="mt-3" lazy fill active-nav-item-class="active-tab-item" >
+    <b-tabs
+      content-class="mt-3"
+      lazy
+      fill
+      active-nav-item-class="active-tab-item"
+    >
       <b-tab>
         <template slot="title">
           {{ $t("businessowner.Followers") }}
@@ -33,11 +38,11 @@ import { isGuestUser } from "@/helpers";
 export default {
   components: {
     Followers,
-    Following,
+    Following
   },
   data() {
     return {
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
   methods: {
@@ -52,13 +57,15 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
+    }
   },
   computed: {
     total() {
-      return this.isGuestUser() ? this.$store.state.businessGuest.Tcommunity: this.$store.state.businessOwner.Tcommunity;
-    },
-  },
+      return this.isGuestUser()
+        ? this.$store.state.businessGuest.Tcommunity
+        : this.$store.state.businessOwner.Tcommunity;
+    }
+  }
 };
 </script>
 

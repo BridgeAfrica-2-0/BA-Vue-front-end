@@ -1,12 +1,19 @@
 <template>
-  <div class="createp img-gall predit2" @mouseover="upHere = true" @mouseleave="upHere = false">
+  <div
+    class="createp img-gall predit2"
+    @mouseover="upHere = true"
+    @mouseleave="upHere = false"
+  >
     <a>
       <span>
         <img class="card-img album-img" :src="cover(album.cover)" alt="" />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
-          <b-spinner style="width: 3rem; height: 3rem; color: #e75c18" label="Large Spinner"></b-spinner>
+          <b-spinner
+            style="width: 3rem; height: 3rem; color: #e75c18"
+            label="Large Spinner"
+          ></b-spinner>
         </div>
         <div class="botmediadess-position" v-else>
           <h6 style="font-size: 26px; font-weight: bold">
@@ -16,8 +23,13 @@
             {{ album.items | plural }}
           </p>
 
-          <b-button v-if="upHere" variant="outline-primary" size="sm" @click="show">
-            {{ $t('general.Show') }}
+          <b-button
+            v-if="upHere"
+            variant="outline-primary"
+            size="sm"
+            @click="show"
+          >
+            {{ $t("general.Show") }}
           </b-button>
         </div>
       </div>
@@ -26,23 +38,30 @@
 </template>
 
 <script>
-import defaultImage from '@/assets/img/nothing.jpg';
+import defaultImage from "@/assets/img/nothing.jpg";
 
-import { fullMediaLink } from '@/helpers';
+import { fullMediaLink } from "@/helpers";
 
 export default {
-  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures'],
+  props: [
+    "album",
+    "type",
+    "deleteAlbums",
+    "editAlbum",
+    "canBeUpdate",
+    "showAlbumPictures"
+  ],
 
   data: () => ({
     upHere: false,
-    loading: false,
+    loading: false
   }),
 
   filters: {
     path: fullMediaLink,
     plural: function(val) {
-      return val ? `${val} items` : this.$t('general.No_item');
-    },
+      return val ? `${val} items` : this.$t("general.No_item");
+    }
   },
 
   methods: {
@@ -55,8 +74,8 @@ export default {
     show: async function() {
       this.loading = true;
       this.loading = await this.showAlbumPictures();
-    },
-  },
+    }
+  }
 };
 </script>
 

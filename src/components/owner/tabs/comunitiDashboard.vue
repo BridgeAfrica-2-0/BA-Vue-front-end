@@ -4,34 +4,41 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('profileowner.COMMUNITY') }} </b> <span class="h4-color">  </span>
+          <b> {{ $t("profileowner.COMMUNITY") }} </b>
+          <span class="h4-color"> </span>
         </h6>
       </span>
 
-      <b-tabs lazy  content-class="mt-3  f-left ">
+      <b-tabs lazy content-class="mt-3  f-left ">
         <b-tab active>
-          <template slot="title">     
-            {{ $t('profileowner.People') }} <span class="spa-color">  </span>
-          </template>  
+          <template slot="title">
+            {{ $t("profileowner.People") }} <span class="spa-color"> </span>
+          </template>
 
           <div>
             <b-row>
               <b-col>
-                <b-tabs lazy fill  content-class="mt-3  f-left m-up">
+                <b-tabs lazy fill content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      {{ $t('profileowner.Followers') }} <span class="spa-color">  </span>
+                      {{ $t("profileowner.Followers") }}
+                      <span class="spa-color"> </span>
                     </template>
 
-                    <div class="s-comcard"><People  :people="people.people_followers" /></div>
+                    <div class="s-comcard">
+                      <People :people="people.people_followers" />
+                    </div>
                   </b-tab>
 
                   <b-tab>
                     <template slot="title">
-                      {{ $t('profileowner.Following') }} <span class="spa-color">  </span>
+                      {{ $t("profileowner.Following") }}
+                      <span class="spa-color"> </span>
                     </template>
 
-                    <div class="s-comcard"><People  :people="people.people_following" /></div>
+                    <div class="s-comcard">
+                      <People :people="people.people_following" />
+                    </div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -39,63 +46,69 @@
           </div>
         </b-tab>
 
-        <b-tab >
+        <b-tab>
           <template slot="title">
-            {{ $t('profileowner.Businesses') }} <span class="spa-color">  </span>
+            {{ $t("profileowner.Businesses") }} <span class="spa-color"> </span>
           </template>
 
           <div>
-            <b-tabs lazy fill  content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs lazy fill content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  {{ $t('profileowner.Followers') }} <span class="spa-color">  </span>
+                  {{ $t("profileowner.Followers") }}
+                  <span class="spa-color"> </span>
                 </template>
 
-                <div class="s-comcard"><Business :business='business.business_followers' /></div>
+                <div class="s-comcard">
+                  <Business :business="business.business_followers" />
+                </div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('profileowner.Following') }} <span class="spa-color">  </span>
+                  {{ $t("profileowner.Following") }}
+                  <span class="spa-color"> </span>
                 </template>
 
-                <div class="s-comcard"><Business   :business='business.business_following' /></div>
+                <div class="s-comcard">
+                  <Business :business="business.business_following" />
+                </div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
 
-
-
-
-
-
-         <b-tab>
+        <b-tab>
           <template slot="title">
-            {{ $t('profileowner.Networks') }} <span class="spa-color">  </span>
+            {{ $t("profileowner.Networks") }} <span class="spa-color"> </span>
           </template>
 
           <div>
-            <b-tabs lazy fill  content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs lazy fill content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  {{ $t('profileowner.Followers') }} <span class="spa-color">  </span>
+                  {{ $t("profileowner.Followers") }}
+                  <span class="spa-color"> </span>
                 </template>
 
-                <div class="s-comcard"><Network :network='network.business_followers' /></div>
+                <div class="s-comcard">
+                  <Network :network="network.business_followers" />
+                </div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('profileowner.Following') }} <span class="spa-color">  </span>
+                  {{ $t("profileowner.Following") }}
+                  <span class="spa-color"> </span>
                 </template>
 
-                <div class="s-comcard"><Network   :network='network.business_following' /></div>
+                <div class="s-comcard">
+                  <Network :network="network.business_following" />
+                </div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
-
       </b-tabs>
     </div>
   </div>
@@ -115,10 +128,8 @@ export default {
     Network
   },
 
-  methods:{
-       
-       community() {
-         
+  methods: {
+    community() {
       this.$store
         .dispatch("profile/profilecommunity", null)
         .then(() => {
@@ -127,43 +138,32 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
-    },
-
+    }
   },
   mounted() {
-      this.isLoading = true;
+    this.isLoading = true;
 
-        
     console.log("Load User Profile Community start+++++++");
     this.community();
-    
-    },
+  },
 
   computed: {
     rows() {
       return this.items.length;
     },
 
-    business(){
-           
-           return this.$store.state.profile.CommunityBusiness
-
+    business() {
+      return this.$store.state.profile.CommunityBusiness;
     },
 
-
-     people() {
+    people() {
       return this.$store.state.profile.communityPeople;
     },
 
-     network(){
-           
-           return this.$store.state.profile.CommunityBusiness
-
-    },
-
-
+    network() {
+      return this.$store.state.profile.CommunityBusiness;
+    }
   }
-  
 };
 </script>
 

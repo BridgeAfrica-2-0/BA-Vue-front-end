@@ -9,7 +9,7 @@
             v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text  @click="$refs.search.search()">
+          <b-input-group-prepend is-text @click="$refs.search.search()">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
@@ -18,30 +18,27 @@
 
     <br />
 
-          <CommunityBusiness  :searchh="keywords" ref="search" type="Following" />
-     
+    <CommunityBusiness :searchh="keywords" ref="search" type="Following" />
   </div>
 </template>
 
 <script>
-
 import CommunityBusiness from "@/components/owner/tabs/communitynetwork";
 export default {
   data() {
     return {
-        keywords:"",
-    }
-    },
+      keywords: ""
+    };
+  },
   components: {
     CommunityBusiness
   },
 
-   computed: {
+  computed: {
     folowing() {
       return this.$store.state.profile.CommunityBusiness.business_following;
     }
-  },
-
+  }
 };
 </script>
 

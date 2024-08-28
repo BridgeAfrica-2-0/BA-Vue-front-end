@@ -34,30 +34,30 @@ export default {
         { label: "Pending Post" },
         { label: "Keyword Alert" },
         { label: "Roles" },
-        { label: "Settings" },
+        { label: "Settings" }
       ],
       options: {
-        activeColor: "#1d98bd",
+        activeColor: "#1d98bd"
       },
       bottomItems: [
         { text: "Home", icon: " ly-icon-home" },
         { text: "blec", icon: "ly-icon ly-icon-icon--" },
         { text: "becky", icon: "ly-icon ly-icon-sousuo" },
-        { text: "yoo", icon: "ly-icon ly-icon-wode" },
+        { text: "yoo", icon: "ly-icon ly-icon-wode" }
       ],
       bottomOptions: {
         activeColor: "#1d98bd",
         fixBottom: true,
-        labelKey: "text",
-      },
+        labelKey: "text"
+      }
     };
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    },
-  },
+    }
+  }
 };
 </script>
 

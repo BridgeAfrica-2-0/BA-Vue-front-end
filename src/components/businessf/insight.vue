@@ -6,8 +6,8 @@
           <b-row>
             <b-col cols="8">
               <h6 class="card-title mb-0">
-                {{$t("businessf.New_Notifications")}}
-                <p class="s-text">{{$t("businessf.From")}} (Jan 1 - Jan 8)</p>
+                {{ $t("businessf.New_Notifications") }}
+                <p class="s-text">{{ $t("businessf.From") }} (Jan 1 - Jan 8)</p>
               </h6>
             </b-col>
             <b-col>
@@ -26,7 +26,7 @@
             <b-col>
               <h3 class="mb-2 m-up">
                 3,897
-                <p class="s-text">{{$t("businessf.Total_Posts")}}: 79</p>
+                <p class="s-text">{{ $t("businessf.Total_Posts") }}: 79</p>
               </h3>
             </b-col>
             <b-col cols="8">
@@ -45,8 +45,8 @@
           <b-row>
             <b-col cols="8">
               <h6 class="card-title mb-0">
-                {{$t("businessf.New_Notifications")}}
-                <p class="s-text">{{$t("businessf.From")}} (Jan 1 - Jan 8)</p>
+                {{ $t("businessf.New_Notifications") }}
+                <p class="s-text">{{ $t("businessf.From") }} (Jan 1 - Jan 8)</p>
               </h6>
             </b-col>
             <b-col>
@@ -65,7 +65,7 @@
             <b-col>
               <h3 class="mb-2 m-up">
                 3,897
-                <p class="s-text">{{$t("businessf.Total_Posts")}}: 79</p>
+                <p class="s-text">{{ $t("businessf.Total_Posts") }}: 79</p>
               </h3>
             </b-col>
             <b-col cols="8">
@@ -84,8 +84,8 @@
           <b-row>
             <b-col cols="8">
               <h6 class="card-title mb-0">
-                {{$t("businessf.New_Notifications")}}
-                <p class="s-text">{{$t("businessf.From")}} (Jan 1 - Jan 8)</p>
+                {{ $t("businessf.New_Notifications") }}
+                <p class="s-text">{{ $t("businessf.From") }} (Jan 1 - Jan 8)</p>
               </h6>
             </b-col>
             <b-col>
@@ -104,7 +104,7 @@
             <b-col>
               <h3 class="mb-2 m-up">
                 3,897
-                <p class="s-text">{{$t("businessf.Total_Posts")}}: 79</p>
+                <p class="s-text">{{ $t("businessf.Total_Posts") }}: 79</p>
               </h3>
             </b-col>
             <b-col cols="8">

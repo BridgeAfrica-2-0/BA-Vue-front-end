@@ -2,27 +2,23 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-
-
-          <div class="img-gall" v-for="image in album.media" :key="image.id">
-            <a href="#!"
-              ><b-img
-                class="card-img btn p-0"
-                thumbnail
-                fluid 
-                rounded
-                :src="image.media_url"
-                alt="image-img"
-                v-b-modal="'modal-'+image.id"
-                v-bind="imageProps"
-              ></b-img>
-            </a>
-            <b-modal hide-footer :id="'modal-'+image.id" title="Details">
-              <img class="card-img" :src="image.media_url" alt="media_img" />
-            </b-modal>
-  
-          </div>
-         
+        <div class="img-gall" v-for="image in album.media" :key="image.id">
+          <a href="#!"
+            ><b-img
+              class="card-img btn p-0"
+              thumbnail
+              fluid
+              rounded
+              :src="image.media_url"
+              alt="image-img"
+              v-b-modal="'modal-' + image.id"
+              v-bind="imageProps"
+            ></b-img>
+          </a>
+          <b-modal hide-footer :id="'modal-' + image.id" title="Details">
+            <img class="card-img" :src="image.media_url" alt="media_img" />
+          </b-modal>
+        </div>
       </div>
     </div>
   </div>
@@ -33,13 +29,13 @@ export default {
   props: ["album"],
   data: function() {
     return {
-      show_url:null,
-      url:null,
+      show_url: null,
+      url: null,
       img_url: null,
-      image_details:null,
-    
+      image_details: null,
+
       index: 0,
-      imageProps: {  width: 205, height: 205}
+      imageProps: { width: 205, height: 205 }
     };
   },
   methods: {
@@ -51,15 +47,12 @@ export default {
       this.index = i;
     },
 
-
-
-    showPic(image) {    
+    showPic(image) {
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
-    },
-   
-  },
+    }
+  }
 };
 </script>
 

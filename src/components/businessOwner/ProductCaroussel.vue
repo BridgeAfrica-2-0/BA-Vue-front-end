@@ -33,12 +33,12 @@
 <script>
 export default {
   props: {
-    productImages: Array,
+    productImages: Array
   },
   data() {
     return {
       slide: 0,
-      sliding: null,
+      sliding: null
       // productImages: [
       // 	{
       // 		img: require("@/assets/img/payment/headset.jpg"),
@@ -61,14 +61,13 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-
-.sizee{
+.sizee {
   object-fit: cover;
 }
 

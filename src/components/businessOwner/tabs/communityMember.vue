@@ -1,12 +1,22 @@
 <template>
   <div class="p-2">
-    <div class="s-ccard">  
+    <div class="s-ccard">
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="item.id">
-
-           <Person :canBlock="canBlock" :index="index"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
-
-        
+        <b-col
+          lg="6"
+          sm="12"
+          class="p-2"
+          v-for="(item, index) in users"
+          :key="item.id"
+        >
+          <Person
+            :canBlock="canBlock"
+            :index="index"
+            :key="item.id"
+            :person="item"
+            @getTotalCommunity="getTotalCommunity"
+            @BlockUser="BlockUser"
+          />
         </b-col>
       </b-row>
       <infinite-loading
@@ -20,7 +30,7 @@
 
 <script>
 import axios from "axios";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import Person from "@/components/Person";
 export default {
   props: ["type", "searchh"],
@@ -37,33 +47,31 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
+        perMove: 1
       },
-      isGuestUser: isGuestUser 
+      isGuestUser: isGuestUser
     };
   },
 
   components: {
-  Person
+    Person
   },
-  
+
   computed: {
     activeAccount() {
       return this.$store.getters["auth/profilConnected"];
     },
 
-    from(){
-        return  this.$route.name;
+    from() {
+      return this.$route.name;
     },
-      canBlock(){
-     
-      if(this.from=='BusinessOwner'){
+    canBlock() {
+      if (this.from == "BusinessOwner") {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
-
 
     old_users() {
       if (this.type == "Follower") {
@@ -73,75 +81,68 @@ export default {
         return this.$store.state.businessOwner.UcommunityFollowing
           .user_following;
       }
-    },
+    }
   },
   mounted() {
     this.biz_id = this.$route.params.id;
   },
 
   methods: {
-
-     
-
-       businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-  BlockUser(id, index) {
-
-     let dataInfo = {
+    BlockUser(id, index) {
+      let dataInfo = {
         id: id,
         refernce: "user",
-        type: this.type,
+        type: this.type
       };
 
-     this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-        
-          callback: confirm => {
-            if (confirm) {
-      
-      let fd = new FormData();
-      fd.append("banned_id", dataInfo.id);
-      fd.append("banned_type", dataInfo.refernce);  
-      
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
 
-      axios.post("business/community-banned/"+this.biz_id , fd)
-      .then(response => {
-        
-      this.businessCommunityTotal();
-        this.$delete(this.users,index);
-        console.log("user deleted");
+        callback: confirm => {
+          if (confirm) {
+            let fd = new FormData();
+            fd.append("banned_id", dataInfo.id);
+            fd.append("banned_type", dataInfo.refernce);
 
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
+            axios
+              .post("business/community-banned/" + this.biz_id, fd)
+              .then(response => {
+                this.businessCommunityTotal();
+                this.$delete(this.users, index);
+                console.log("user deleted");
+
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
+          }
+        }
       });
-
-            }}})
-    },  
+    },
 
     cta(data) {
       console.log(data);
@@ -156,15 +157,14 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
         path: `/business_owner/${this.activeAccount.slug}`,
-        query: { tabId: 1, msgTabId: 0 },
+        query: { tabId: 1, msgTabId: 0 }
       });
     },
 
     search() {
       console.log("search started");
 
-      
-       this.users=[];
+      this.users = [];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -172,13 +172,12 @@ export default {
     },
 
     async handleFollow(user) {
-    
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -190,7 +189,7 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -207,12 +206,20 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-      const basePrefix = this.isGuestUser() ? 'guest/' : '';
+      const basePrefix = this.isGuestUser() ? "guest/" : "";
 
       if (this.type == "Follower") {
-        url = basePrefix+"business/community/people-follower/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/people-follower/" +
+          this.biz_id +
+          "/";
       } else {
-        url = basePrefix+"business/community/people-following/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/people-following/" +
+          this.biz_id +
+          "/";
       }
 
       console.log(url + this.page + "?keyword=" + this.searchh);
@@ -244,11 +251,11 @@ export default {
 
           console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

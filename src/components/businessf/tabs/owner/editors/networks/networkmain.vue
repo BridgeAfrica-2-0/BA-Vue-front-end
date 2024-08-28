@@ -6,16 +6,21 @@
       </div>
       <div class=" col details">
         <h4>
-          <b-link class="link">{{$t("general.Business_Name")}}</b-link>
+          <b-link class="link">{{ $t("general.Business_Name") }}</b-link>
         </h4>
         <p>
           <a href="">mywebsite.com</a> <br />
-          <strong>{{$t("general.Category")}}:</strong> {{$t("general.Business_Category")}} <br />
-          <strong>{{$t("general.Community")}}:</strong> 1.1M {{$t("general.Community")}} <br />
-          <strong>{{$t("general.Location")}}:</strong> {{$t("general.Neighbourhood")}}, {{$t("general.city")}} {{$t("general.country")}} <br />
+          <strong>{{ $t("general.Category") }}:</strong>
+          {{ $t("general.Business_Category") }} <br />
+          <strong>{{ $t("general.Community") }}:</strong> 1.1M
+          {{ $t("general.Community") }} <br />
+          <strong>{{ $t("general.Location") }}:</strong>
+          {{ $t("general.Neighbourhood") }}, {{ $t("general.city") }}
+          {{ $t("general.country") }} <br />
           <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>{{$t("general.About")}}:</strong> Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. <b-link>{{$t("general.Read_More")}}</b-link>
+          <strong>{{ $t("general.About") }}:</strong> Lorem ipsum, dolor sit
+          amet consectetur adipisicing elit.
+          <b-link>{{ $t("general.Read_More") }}</b-link>
         </p>
       </div>
       <div>

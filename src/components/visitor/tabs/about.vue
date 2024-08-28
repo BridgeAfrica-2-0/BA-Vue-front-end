@@ -3,7 +3,7 @@
     <b-alert show class="primary-bg">
       <b-icon class="purple" icon="person-fill"></b-icon>
       <b>
-        {{ $t('general.About') }}
+        {{ $t("general.About") }}
       </b></b-alert
     >
     <b-card no-body class="desktop">

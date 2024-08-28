@@ -101,7 +101,7 @@
 
 <script>
 export default {
-  props: ["peoples"],
+  props: ["peoples"]
 };
 </script>
 

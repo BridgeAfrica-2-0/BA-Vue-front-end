@@ -24,7 +24,9 @@
         <img class="img-fluid picture" :src="business.picture" />
         <div class="text-lost">
           <b>
-            <router-link  :to="{name:'BusinessOwner', params:{id:business.slug}}">
+            <router-link
+              :to="{ name: 'BusinessOwner', params: { id: business.slug } }"
+            >
               {{ business.name }}
             </router-link>
           </b>
@@ -85,18 +87,14 @@ export default {
   computed: {
     business() {
       return this.$store.state.dashboard.dashboard_business;
-    },
+    }
   },
   created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
-        
-      })
-      .catch((err) => {
-    
-      });
-  },
+      .then(() => {})
+      .catch(err => {});
+  }
 };
 </script>
 

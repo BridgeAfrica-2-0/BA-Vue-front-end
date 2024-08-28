@@ -3,9 +3,17 @@
     <p class="font-weight-bold">Notifications</p>
     <hr class="h-divider" />
     <div v-for="notif in allNotifs" :key="notif.id">
-      <div class="d-inline-flex suggest-item flex-row align-items-center cursor-pointer">
+      <div
+        class="d-inline-flex suggest-item flex-row align-items-center cursor-pointer"
+      >
         <div>
-          <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+          <img
+            src="@/assets/img/profile-pic.jpg"
+            class="rounded-circle"
+            alt=""
+            width="30"
+            height="30"
+          />
         </div>
         <div class="d-flex flex-column ml-3">
           <div>
@@ -22,29 +30,31 @@
       </div>
       <hr class="h-divider" />
     </div>
-    <a href="/settings" class="text-ored text-center"><u>See all Notifications</u></a>
+    <a href="/settings" class="text-ored text-center"
+      ><u>See all Notifications</u></a
+    >
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
+import axios from "axios";
+import moment from "moment";
 // import mapGetters from 'vuex';
 export default {
-  name: 'NavBarNotifications',
+  name: "NavBarNotifications",
   data() {
     return {};
   },
   methods: {
     handleLoadNotif() {
       axios
-        .get('user/notifications', {
+        .get("user/notifications", {
           params: {
-            page: 1,
-          },
+            page: 1
+          }
         })
         .then(({ data }) => {
-          console.log('Nav bar notifs', data);
+          console.log("Nav bar notifs", data);
           this.allNotifs.push(...data.data);
         })
         .catch(error => {
@@ -54,21 +64,23 @@ export default {
     formatDate(date) {
       if (date)
         return moment(date)
-          .startOf('hour')
+          .startOf("hour")
           .fromNow();
       return;
-    },
+    }
   },
   computed: {
     allNotifs() {
-      console.log(this.$store.getters['notification/NEW_PROFILE_NOTIFICATION']);
-      const notifs = this.$store.getters['notification/NEW_PROFILE_NOTIFICATION'].slice(0, 4);
+      console.log(this.$store.getters["notification/NEW_PROFILE_NOTIFICATION"]);
+      const notifs = this.$store.getters[
+        "notification/NEW_PROFILE_NOTIFICATION"
+      ].slice(0, 4);
       if (!notifs) {
         return [];
       }
       return notifs;
-    },
-  },
+    }
+  }
   // created() {
   //   console.log('nav bar notifications');
   //   this.handleLoadNotif();

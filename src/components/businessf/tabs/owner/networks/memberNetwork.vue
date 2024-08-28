@@ -1,41 +1,40 @@
 <template>
   <div class="mt-3">
     <div>
-      <b-tabs lazy active-nav-item-class="active-tab-item" content-class="mt-3 f-left">
-        <b-tab :title="$t('network.People')" active> 
-
-           <template slot="title">
+      <b-tabs
+        lazy
+        active-nav-item-class="active-tab-item"
+        content-class="mt-3 f-left"
+      >
+        <b-tab :title="$t('network.People')" active>
+          <template slot="title">
             {{ $t("network.People") }}
             <span class="spa-color">
               {{ nFormatter(userdetails.total_people) }}
             </span>
-          </template> <People /> 
+          </template>
+          <People />
         </b-tab>
 
-        
-        <b-tab > 
-
-           <template slot="title">
+        <b-tab>
+          <template slot="title">
             {{ $t("network.Businesses") }}
             <span class="spa-color">
-              {{ nFormatter(businessdetails.total_Business)  }}
+              {{ nFormatter(businessdetails.total_Business) }}
             </span>
           </template>
 
-
-          <Businesses /> 
+          <Businesses />
         </b-tab>
-        <b-tab > 
-
-           <template slot="title">
-            {{ $t('network.Network') }}
+        <b-tab>
+          <template slot="title">
+            {{ $t("network.Network") }}
             <span class="spa-color">
               {{ nFormatter(networkdetails.total_Network) }}
             </span>
           </template>
 
-
-          <Networks /> 
+          <Networks />
         </b-tab>
       </b-tabs>
     </div>
@@ -55,7 +54,7 @@ export default {
     Networks
   },
 
-   methods: {
+  methods: {
     nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -68,9 +67,9 @@ export default {
       }
       return num;
     }
-   },
+  },
 
-    computed: {
+  computed: {
     userdetails() {
       return this.$store.state.networkProfileCommunitySidebar.userdetails;
     },
@@ -79,10 +78,8 @@ export default {
     },
     networkdetails() {
       return this.$store.state.networkProfileCommunitySidebar.networkdetails;
-    },
-  },
-
-
+    }
+  }
 };
 </script>
 

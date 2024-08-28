@@ -22,7 +22,6 @@
             :less-str="$t('search.read_less')"
             :max-chars="15000"
           >
-          
           </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
@@ -58,14 +57,15 @@ export default {
     return {
       reply: false,
 
-      msg: " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+      msg:
+        " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting"
     };
   },
   methods: {
     showReply() {
       this.reply = !this.reply;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -119,7 +119,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

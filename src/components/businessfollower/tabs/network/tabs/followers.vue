@@ -22,18 +22,18 @@
 </template>
 
 <script>
-import CommunityBusiness from '../../communitynetwork';
+import CommunityBusiness from "../../communitynetwork";
 export default {
   data() {
     return {
-      keywords: '',
+      keywords: ""
     };
   },
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
 
-  computed: {},
+  computed: {}
 };
 </script>
 

@@ -1,17 +1,22 @@
 <template>
   <div class="img-gall-item">
-   <b-img v-if="typeOfMedia() == 'image' && !loading"
-        class="card-img btn p-0 album-img h-100"
-        thumbnail
-        fluid
-        rounded
-        :src="getFullMediaLink()"
-        alt="media_img"
-        v-b-modal="`modal-${im.id}`"
-        v-bind="imageProps"
-      ></b-img>
-  
-    <video controls v-else-if="typeOfMedia() == 'video' && !loading" class="card-img btn p-0 album-img">
+    <b-img
+      v-if="typeOfMedia() == 'image' && !loading"
+      class="card-img btn p-0 album-img h-100"
+      thumbnail
+      fluid
+      rounded
+      :src="getFullMediaLink()"
+      alt="media_img"
+      v-b-modal="`modal-${im.id}`"
+      v-bind="imageProps"
+    ></b-img>
+
+    <video
+      controls
+      v-else-if="typeOfMedia() == 'video' && !loading"
+      class="card-img btn p-0 album-img"
+    >
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
@@ -22,21 +27,38 @@
     ></youtube>
 
     <div class="botmediadess-position" v-if="loading">
-      <b-spinner style="width: 3rem; height: 3rem; color: #e75c18" label="Large Spinner"></b-spinner>
+      <b-spinner
+        style="width: 3rem; height: 3rem; color: #e75c18"
+        label="Large Spinner"
+      ></b-spinner>
     </div>
     <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
-      <img class="card-img" :src="getFullMediaLink()" @click="() => showImg()" alt="media_img" />
+      <img
+        class="card-img"
+        :src="getFullMediaLink()"
+        @click="() => showImg()"
+        alt="media_img"
+      />
       <p class="my-4">{{ content }}</p>
     </b-modal>
 
     <div class="mediadesc" v-if="!['youtube'].includes(typeOfMedia())">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown m-0 p-0">
-          <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
+          <b-dropdown
+            size="sm"
+            class="float-right"
+            variant="link"
+            toggle-class="text-decoration-none"
+            no-caret
+          >
             <template #button-content>
-              <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
+              <b-icon icon="three-dots-vertical" color="white" variant="light">
+              </b-icon>
             </template>
-            <b-dropdown-item @click="onDownloadPic()"> {{ $t('network.Download') }}</b-dropdown-item>
+            <b-dropdown-item @click="onDownloadPic()">
+              {{ $t("network.Download") }}</b-dropdown-item
+            >
           </b-dropdown>
         </li>
       </ul>
@@ -49,22 +71,22 @@
 <script>
 export default {
   props: [
-    'im',
-    'imageProps',
-    'content',
-    'typeOfMedia',
-    'getFullMediaLink',
-    'getYoutubeKey',
-    'showImg',
-    'downloadPic',
-    'setProfilePic',
-    'setCoverPic',
-    'deleteImage',
+    "im",
+    "imageProps",
+    "content",
+    "typeOfMedia",
+    "getFullMediaLink",
+    "getYoutubeKey",
+    "showImg",
+    "downloadPic",
+    "setProfilePic",
+    "setCoverPic",
+    "deleteImage"
   ],
 
   data() {
     return {
-      loading: false,
+      loading: false
     };
   },
 
@@ -90,13 +112,13 @@ export default {
     async onSetProfilePic() {
       this.loading = true;
       this.loading = await this.setProfilePic();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.card-img{
+.card-img {
   object-fit: cover;
 }
 .botmediadess-position {
@@ -292,20 +314,14 @@ export default {
 </style>
 
 <style>
- 
- .mediadesc{
+.mediadesc {
   opacity: 0;
- }
-  .img-gall-item:hover .mediadesc{
-   
-    opacity: 1;
- }
+}
+.img-gall-item:hover .mediadesc {
+  opacity: 1;
+}
 
-
- .img-gall:hover .mediadesc{
-   
-    opacity: 1;
- }
-
-
+.img-gall:hover .mediadesc {
+  opacity: 1;
+}
 </style>

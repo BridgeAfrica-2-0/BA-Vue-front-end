@@ -14,7 +14,7 @@
               <b-row>
                 <b-col cols="12">
                   <p class="detail">
-                    {{ $t('memnetwork.Cameroon') }},
+                    {{ $t("memnetwork.Cameroon") }},
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
                       <b-icon icon="globe" class="primary"></b-icon> 3,
@@ -31,13 +31,13 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +{{ $t('memnetwork.Community') }}</b-button
+              +{{ $t("memnetwork.Community") }}</b-button
             >
           </b-col>
           <b-col>
             <b-button variant="outline-primary" size="sm">
               <b-icon icon="chat-fill"></b-icon>
-              {{ $t('memnetwork.Message') }}</b-button
+              {{ $t("memnetwork.Message") }}</b-button
             >
           </b-col>
         </b-row>

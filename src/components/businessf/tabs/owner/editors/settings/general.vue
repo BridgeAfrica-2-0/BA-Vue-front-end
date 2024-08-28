@@ -63,7 +63,7 @@
             unchecked-value="not_accepted"
             v-model="form.post_approval"
           >
-        All posts must be approved by an admin
+            All posts must be approved by an admin
           </b-form-checkbox>
         </b-form-group>
       </b-container>

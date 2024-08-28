@@ -1,5 +1,5 @@
 <template>
-  <div class="map-container">  
+  <div class="map-container">
     <MglMap
       :accessToken="accessToken"
       :zoom="zoom"
@@ -64,7 +64,7 @@ export default {
   components: {
     MglMap,
     MglMarker,
-    MglPopup,
+    MglPopup
   },
   data() {
     return {
@@ -86,8 +86,8 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   created() {
@@ -95,13 +95,15 @@ export default {
     this.mapbox = Mapbox;
   },
   computed: {
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     ...mapGetters({
       searchstate: "business/getSearchState",
       businessess: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
-      prodLoader: "business/getloadingState",
-    }),
+      prodLoader: "business/getloadingState"
+    })
   },
 
   mounted() {
@@ -119,22 +121,25 @@ export default {
     },
 
     findBusiness(payload) {
-    if (this.isLogin) {
-      return this.$store.dispatch("business/FIND_BUSINESS", payload);
-    } else {
-      return this.$store.dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", payload);
-    }
-  },
-  nextPage(payload) {
-    return this.$store.dispatch("business/NEXT_PAGE", payload);
-  },
+      if (this.isLogin) {
+        return this.$store.dispatch("business/FIND_BUSINESS", payload);
+      } else {
+        return this.$store.dispatch(
+          "business/FIND_BUSINESS_FOR_GUEST_USER",
+          payload
+        );
+      }
+    },
+    nextPage(payload) {
+      return this.$store.dispatch("business/NEXT_PAGE", payload);
+    },
 
     getBusiness() {
       console.log("business search mounted");
       this.$store.commit("business/setLoading", true);
 
       this.findBusiness({})
-        .then((res) => {
+        .then(res => {
           console.log("business list: ");
           console.log(this.business);
           this.$store.commit("business/setLoading", false);
@@ -142,7 +147,7 @@ export default {
           this.total = this.business.total;
           this.changePage();
         })
-        .catch((err) => {
+        .catch(err => {
           this.$store.commit("business/setLoading", false);
 
           console.error(err);
@@ -156,18 +161,18 @@ export default {
       this.currentPage = this.businessPage;
 
       this.nextPage(this.currentPage)
-        .then((res) => {
+        .then(res => {
           console.log("business list: ");
           console.log(this.business);
           this.prodLoader = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.prodLoader = false;
           this.total = this.business.total;
           console.error(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

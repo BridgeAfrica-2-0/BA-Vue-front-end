@@ -12,7 +12,7 @@ export default {
     blockbusiness: [],
     networkinfo: [],
     editnetworkinfo: [],
-    general: [],
+    general: []
   },
 
   getters: {
@@ -41,13 +41,13 @@ export default {
       return state.editnetworkinfo;
     }
   },
-  
+
   mutations: {
     // setting general section
     generalSave(state, payload) {
       state.general = payload;
     },
-    
+
     set_details(state, details) {
       state.NetworkDetails = details;
     },
@@ -92,8 +92,7 @@ export default {
     },
 
     getroles({ commit }) {
-      return axios.get("/network/roles/show-roles")
-      .then(({ data }) => {
+      return axios.get("/network/roles/show-roles").then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
         console.log("roles data");
@@ -101,21 +100,25 @@ export default {
     },
 
     geteditors({ commit }, networkId) {
-      return axios.post(`/network/${networkId}/members/editor`).then(({ data }) => {
-        commit("seteditors", data.data);
-        console.log(data);
-      });
+      return axios
+        .post(`/network/${networkId}/members/editor`)
+        .then(({ data }) => {
+          commit("seteditors", data.data);
+          console.log(data);
+        });
     },
     updateEditor({ commit }, data) {
       console.log("updateEditor", data);
-      return axios.post(`/network/${data.path}`, data.formData).then(({ data }) => {
-        console.log(data);
-        return data;
-      });
+      return axios
+        .post(`/network/${data.path}`, data.formData)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        });
     },
 
     getblockusers({ commit }, networkId) {
-      console.log("getblockusers")
+      console.log("getblockusers");
       return axios
         .get(`/network/users/blocked/${networkId}`)
         .then(({ data }) => {
@@ -156,53 +159,48 @@ export default {
     },
 
     generalSave({ commit }, payload) {
-      console.log("payload", payload)
-      return axios.post(`/network/${payload.path}`, payload.formData)
-      .then(({ data }) => {
-        return data;
-      });
+      console.log("payload", payload);
+      return axios
+        .post(`/network/${payload.path}`, payload.formData)
+        .then(({ data }) => {
+          return data;
+        });
     },
 
     UnBlock({ commit }, payload) {
-      console.log("payload", payload)
-      return axios.delete(`/network/${payload.path}`)
-      .then(({ data }) => {
+      console.log("payload", payload);
+      return axios.delete(`/network/${payload.path}`).then(({ data }) => {
         return data;
       });
     },
 
     networkDelete({ commit }, payload) {
-      console.log("payload", payload)
-      return axios.delete(`/network/${payload.path}`)
-      .then(({ data }) => {
+      console.log("payload", payload);
+      return axios.delete(`/network/${payload.path}`).then(({ data }) => {
         return data;
       });
     },
 
     deleteEditor({ commit }, payload) {
-      
-      return axios.put(payload.path)   
-      .then(({ data }) => {
+      return axios.put(payload.path).then(({ data }) => {
         return data;
       });
     },
 
     updateNetworkInfo({ commit }, data) {
-      console.log("updateNetworkInfo", data)
-      return axios.post(`/network/${data.path}`, data.formData)
-      .then(({ data }) => {
-        return data;
-      });
+      console.log("updateNetworkInfo", data);
+      return axios
+        .post(`/network/${data.path}`, data.formData)
+        .then(({ data }) => {
+          return data;
+        });
     },
- 
+
     loadMore({ commit }, PenData) {
-      console.log("loadMore", PenData)
-      return axios.get(`/network/${PenData}`)
-      .then(({ data }) => {
+      console.log("loadMore", PenData);
+      return axios.get(`/network/${PenData}`).then(({ data }) => {
         return data;
       });
-    },
-
-  },
-
+    }
+  }
 };

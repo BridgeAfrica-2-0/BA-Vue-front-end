@@ -1,8 +1,6 @@
 <template>
-  <div class="p-2"> 
+  <div class="p-2">
     <b-row>
-
-     
       <b-col
         lg="6"
         sm="12"
@@ -10,9 +8,14 @@
         v-for="(item, index) in businesses"
         :key="index"
       >
-
-     <Business  :canBlock="canBlock" :index="index"  :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
-       
+        <Business
+          :canBlock="canBlock"
+          :index="index"
+          :key="item.id"
+          :business="item"
+          @getTotalCommunity="getTotalCommunity"
+          @BlockUser="BlockUser"
+        />
       </b-col>
     </b-row>
 
@@ -27,7 +30,7 @@
 <script>
 // import moment from 'moment';
 import axios from "axios";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 import Business from "@/components/Business";
 export default {
   props: ["type", "searchh"],
@@ -35,7 +38,7 @@ export default {
   data() {
     return {
       businesses: [],
-      disable:false,
+      disable: false,
       biz_id: null,
       page: 1,
       infiniteId: +new Date(),
@@ -46,26 +49,23 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
+        perMove: 1
       },
-      isGuestUser: isGuestUser 
+      isGuestUser: isGuestUser
     };
   },
   components: {
     Business
   },
   computed: {
-
-
-    from(){
-        return  this.$route.name;
+    from() {
+      return this.$route.name;
     },
 
-    canBlock(){
-     
-      if(this.from=='BusinessOwner'){
+    canBlock() {
+      if (this.from == "BusinessOwner") {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -82,7 +82,7 @@ export default {
 
     activeAccount() {
       return this.$store.getters["auth/profilConnected"];
-    },
+    }
   },
 
   mounted() {
@@ -90,84 +90,76 @@ export default {
   },
 
   methods: {
-      
-  businessCommunityTotal() {
-    const dispatchMethod = isGuestUser() ? "businessGuest/businessCommunityTotal" : "businessOwner/businessCommunityTotal";
-    this.$store
+    businessCommunityTotal() {
+      const dispatchMethod = isGuestUser()
+        ? "businessGuest/businessCommunityTotal"
+        : "businessOwner/businessCommunityTotal";
+      this.$store
         .dispatch(dispatchMethod, this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-  },
+    },
 
-  BlockUser(id, index) {
-
-     let dataInfo = {
+    BlockUser(id, index) {
+      let dataInfo = {
         id: id,
         refernce: "business",
-        type: this.type,
+        type: this.type
       };
 
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
 
- this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-        
-          callback: confirm => {
-            if (confirm) {
-      
+        callback: confirm => {
+          if (confirm) {
+            // this.$store.dispatch("profile/Block", {
+            //   path: "block/entity",
+            //   formData: fd
+            //   })
 
-      
-      // this.$store.dispatch("profile/Block", {
-      //   path: "block/entity",
-      //   formData: fd
-      //   })
+            let fd = new FormData();
+            fd.append("banned_id", dataInfo.id);
+            fd.append("banned_type", dataInfo.refernce);
 
-    
-      let fd = new FormData();
-      fd.append("banned_id", dataInfo.id);
-      fd.append("banned_type", dataInfo.refernce);  
-      
+            axios
+              .post("business/community-banned/" + this.biz_id, fd)
+              .then(response => {
+                this.businessCommunityTotal();
+                this.$delete(this.businesses, index);
+                console.log("user deleted");
 
-      axios.post("business/community-banned/"+this.biz_id , fd)
-      .then(response => {
-        
-      this.businessCommunityTotal();
-        this.$delete(this.businesses,index);
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
+          }
+        }
       });
-
-            }}})
     },
 
     gotoBusiness(id) {
-
-       if(this.$route.name == 'BusinessFollower'){
-          // this.$emit('gotoabout')
-          this.$router.push(`/business/${id}#about`);
-          console.log("direction --")
-      }else {
-
+      if (this.$route.name == "BusinessFollower") {
+        // this.$emit('gotoabout')
+        this.$router.push(`/business/${id}#about`);
+        console.log("direction --");
+      } else {
         this.$router.push(`/business/${id}?tabId=1`);
       }
       // this.$router.push(`/business/${id}?tabId=1`);
@@ -185,7 +177,7 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
         path: `/business_owner/${this.activeAccount.slug}`,
-        query: { tabId: 1, msgTabId: 1 },
+        query: { tabId: 1, msgTabId: 1 }
       });
     },
     count(number) {
@@ -198,13 +190,12 @@ export default {
     },
 
     async handleFollow(user) {
-     
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -216,7 +207,7 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -225,7 +216,7 @@ export default {
     search() {
       console.log("search started");
 
-     this.businesses=[];
+      this.businesses = [];
 
       this.page = 1;
       this.infiniteId += 1;
@@ -235,13 +226,21 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-      const basePrefix = this.isGuestUser() ? 'guest/' : '';  
+      const basePrefix = this.isGuestUser() ? "guest/" : "";
       if (this.type == "Follower") {
-        url = basePrefix+"business/community/business-follower/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/business-follower/" +
+          this.biz_id +
+          "/";
       } else {
-        url = basePrefix+"business/community/business-following/" + this.biz_id + "/";
+        url =
+          basePrefix +
+          "business/community/business-following/" +
+          this.biz_id +
+          "/";
       }
-      console.log('url', url);
+      console.log("url", url);
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
@@ -267,11 +266,11 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

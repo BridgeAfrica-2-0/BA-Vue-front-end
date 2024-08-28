@@ -133,7 +133,13 @@
       <b-overlay :show="show" rounded="sm">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-8">
-            <VuePhoneNumberInput id="number" default-country-code="CM" v-model="PaymentForm.phone" placeholder="237 6XX XXX XXX" required/>
+            <VuePhoneNumberInput
+              id="number"
+              default-country-code="CM"
+              v-model="PaymentForm.phone"
+              placeholder="237 6XX XXX XXX"
+              required
+            />
           </div>
           <div
             class="col-12 col-sm-12 col-md-4 px-0 btn-custom-box mt-2 mt-md-0"
@@ -158,7 +164,7 @@ export default {
   name: "payment",
   props: ["profileId"],
   components: {
-    VuePhoneNumberInput,
+    VuePhoneNumberInput
   },
   data() {
     return {
@@ -168,7 +174,7 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       number: "",
       PaymentForm: {
@@ -178,7 +184,7 @@ export default {
         country: ""
       },
 
-      show: false,
+      show: false
     };
   },
 
@@ -188,7 +194,7 @@ export default {
     },
     countries() {
       return this.$store.state.auth.country;
-    },
+    }
   },
   mounted() {
     console.log("profileId", this.profileId);
@@ -219,22 +225,22 @@ export default {
           console.log(this.countries);
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-    
+
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
         .dispatch("profileAccountType/getDefaultPayment", {
-          path: `get-payement-method/${this.url}`,
+          path: `get-payement-method/${this.url}`
         })
         .then(() => {
           this.PaymentForm.operator = this.defaultPayment.payement_method;
           console.log("ohh yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -248,7 +254,7 @@ export default {
       this.$store
         .dispatch("profileAccountType/confirmPayment", {
           path: `business/update-payement-method/${this.url}`,
-          formData: formData,
+          formData: formData
         })
         .then(({ data }) => {
           console.log(data);
@@ -258,24 +264,24 @@ export default {
           this.DefaultPayment();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.Payment_number_Complete"),
+            message: this.$t("businessowner.Payment_number_Complete")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           this.AcRequestPayment = false;
           this.show = false;
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.un_able_to_save_payment_number"),
+            message: this.$t("businessowner.un_able_to_save_payment_number")
           });
         });
     },
 
     formatMoney(money) {
       return this.formatObject.format(money);
-    },
-  },
+    }
+  }
 };
 </script>
 

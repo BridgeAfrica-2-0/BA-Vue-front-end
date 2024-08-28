@@ -1,79 +1,101 @@
 <template>
-  <div>  
-
+  <div>
     <div class="people-style border h-100">
-        <div class="d-inline-flex w-100">
-            <div class="center-img">
-              
-           <img :src="network.picture?network.picture:network.image" class="r-image" />
-              
-            </div>
-            <div class="pl-3 flx100 mr-1">
-              <p class="textt">
-                <span>
-                   <router-link :to="{name: 'networks', params: {id: network.slug}}">
-              <span class="net-name ">{{ network.name }}</span>
-            </router-link><br />
-                </span>
-                
-                {{ count(network.followers ?network.followers:network.community ) }}
-                {{ $t("dashboard.Community") }}   <span v-if="canBlock" class="ml-2"  @click="BlockUser(person.id, index)" style="cursor: pointer">   <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Network"
-                              variant="danger"
-                            ></b-icon>  </span> <br />
-
-                <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.location_description?network.location_description:network.address }}
+      <div class="d-inline-flex w-100">
+        <div class="center-img">
+          <img
+            :src="network.picture ? network.picture : network.image"
+            class="r-image"
+          />
+        </div>
+        <div class="pl-3 flx100 mr-1">
+          <p class="textt">
+            <span>
+              <router-link
+                :to="{ name: 'networks', params: { id: network.slug } }"
+              >
+                <span class="net-name ">{{ network.name }}</span> </router-link
+              ><br />
             </span>
 
-                <br />
-                 <read-more
+            {{
+              count(network.followers ? network.followers : network.community)
+            }}
+            {{ $t("dashboard.Community") }}
+            <span
+              v-if="canBlock"
+              class="ml-2"
+              @click="BlockUser(person.id, index)"
+              style="cursor: pointer"
+            >
+              <b-icon
+                font-scale="1"
+                icon="exclamation-octagon"
+                v-b-tooltip.hover
+                title="Block This Network"
+                variant="danger"
+              ></b-icon>
+            </span>
+            <br />
+
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{
+                network.location_description
+                  ? network.location_description
+                  : network.address
+              }}
+            </span>
+
+            <br />
+            <read-more
               :more-str="$t('dashboard.read_more')"
               class="readmore"
-              :text="network.about_network ? network.about_network:network.description"
+              :text="
+                network.about_network
+                  ? network.about_network
+                  : network.description
+              "
               link="#"
               :less-str="$t('dashboard.read_less')"
               :max-chars="50"
             >
             </read-more>
-              </p>
-            </div>
+          </p>
+        </div>
 
-
-
-             <b-button
+        <b-button
           variant="light"
           class="rounded-circle hov-btn"
-          :id="'network'+network.id"
+          :id="'network' + network.id"
         >
           <b-icon icon="three-dots"> </b-icon>
-        </b-button>  </div>
-     
-     
+        </b-button>
+      </div>
 
-           <b-popover :target="'network'+network.id" triggers="hover" placement="top">
+      <b-popover
+        :target="'network' + network.id"
+        triggers="hover"
+        placement="top"
+      >
         <div class="pt-3 pb-3">
           <div class="mt-1">
-             <b-button
-                  block
-                  size="sm"
-                  :id="'followbtn' + network.id"
-                  :class="network.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="handleFollow(network)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{ $t("dashboard.Community") }}</span>
-                </b-button>
+            <b-button
+              block
+              size="sm"
+              :id="'followbtn' + network.id"
+              :class="network.is_follow !== 0 && 'u-btn'"
+              variant="primary"
+              @click="handleFollow(network)"
+            >
+              <i
+                class="fas fa-lg btn-icon"
+                :class="
+                  network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                "
+              ></i>
+              <span class="btn-com">{{ $t("dashboard.Community") }}</span>
+            </b-button>
           </div>
 
           <div class="mt-1">
@@ -81,119 +103,101 @@
           </div>
 
           <div class="mt-1">
-            
-             <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :class="network.is_member !== 0 && 'u-btn'"
-                  variant="primary"
-                  :id="'joinbtn' + network.id"
-                  @click="handleJoin(network)"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{ $t("general.Join") }}</span>
-                </b-button>
-
+            <b-button
+              block
+              size="sm"
+              class="b-background shadow"
+              :class="network.is_member !== 0 && 'u-btn'"
+              variant="primary"
+              :id="'joinbtn' + network.id"
+              @click="handleJoin(network)"
+            >
+              <i
+                class="fas fa-lg btn-icon"
+                :class="
+                  network.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                "
+              ></i>
+              <span class="btn-com">{{ $t("general.Join") }}</span>
+            </b-button>
           </div>
         </div>
       </b-popover>
-
     </div>
-
-    </div>
-  
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-   props: {
+  props: {
     network: {
       required: true,
-      type: Object,
+      type: Object
     },
-     index:{
-      type:Number,
-      default:0
+    index: {
+      type: Number,
+      default: 0
     },
 
-    canBlock:{
-      type:Boolean,
-      default:false
+    canBlock: {
+      type: Boolean,
+      default: false
     },
-     callerType:{
-      type:String,
-      default:''
+    callerType: {
+      type: String,
+      default: ""
     }
-   
   },
 
   data() {
     return {
       page: 1,
-     
+
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
-  
   computed: {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];
     },
-    
-    islogin(){  return this.$store.getters["auth/isLogged"];; }
+
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   created() {
-     this.islogin = this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
 
-     if(this.islogin){ 
-    this.$store
-      .dispatch("networkDetails/getndetails")
-      .then(() => {
-    
-      })
-      .catch((err) => {
-      
-      });
-       }
+    if (this.islogin) {
+      this.$store
+        .dispatch("networkDetails/getndetails")
+        .then(() => {})
+        .catch(err => {});
+    }
   },
 
   methods: {
-
-
-
-
-getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity")
-      .then((response) => {})
-      .catch((error) => {
-       
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity")
+        .then(response => {})
+        .catch(error => {});
     },
 
-
-
-      BlockUser(id,index){
-        this.$emit('BlockUser',id, index );
+    BlockUser(id, index) {
+      this.$emit("BlockUser", id, index);
     },
 
-
-     count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -202,83 +206,69 @@ getTotalCommunity(){
       } else return number;
     },
 
-
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-        
+        .then(response => {
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
-          
-           this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-
-
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
-  
-
     async handleFollow(user) {
-
       document.getElementById("followbtn" + user.id).disabled = true;
-      
+
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      
-      let data = ''
-      if(this.callerType=='network'){
-          data = {
-        id: user.id,
-        type: "network",
-        network_id: this.$route.params.id
-      };
-      }else{ 
-       data = {
-        id: user.id,
-        type: "network",
-      };
-       }
+
+      let data = "";
+      if (this.callerType == "network") {
+        data = {
+          id: user.id,
+          type: "network",
+          network_id: this.$route.params.id
+        };
+      } else {
+        data = {
+          id: user.id,
+          type: "network"
+        };
+      }
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
-         
+
           this.getTotalCommunity();
         })
-        .catch((err) => {
-         
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
-
-
 <style scoped>
-
-
 .hov-btn {
   width: 40px !important;
   height: 40px !important;
@@ -291,7 +281,7 @@ getTotalCommunity(){
 
 .net-name {
   font-size: 1.0625rem;
-    font-weight: 500;
+  font-weight: 500;
   line-height: 1.2;
   font-family: poppins;
 
@@ -347,7 +337,6 @@ getTotalCommunity(){
 }
 
 .card {
- 
 }
 
 .s-button {
@@ -426,10 +415,10 @@ getTotalCommunity(){
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
- .btn{
-    font-size:11.5px !important;
+  .btn {
+    font-size: 11.5px !important;
   }
-  
+
   .textt {
     color: #000;
 
@@ -465,14 +454,12 @@ getTotalCommunity(){
     width: 110px;
   }
 
-   .r-image {
+  .r-image {
     border-radius: 8px;
 
     height: 100px;
     width: 100px;
   }
-
-  
 }
 
 .stock {
@@ -537,15 +524,12 @@ getTotalCommunity(){
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    
 
     padding: 7px;
   }
 
   .btn {
     display: flex;
-
-  
   }
 
   h4 {
@@ -565,7 +549,6 @@ getTotalCommunity(){
   overflow-x: hidden;
   padding-bottom: 25px;
 }
-
 </style>
 
 <style>

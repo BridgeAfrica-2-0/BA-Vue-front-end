@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="fl mb-3">
-      <label for="datepicker-dateformat1">{{$t("search.Posted_Date")}}</label>
+      <label for="datepicker-dateformat1">{{ $t("search.Posted_Date") }}</label>
       <b-form-datepicker
         v-model="created_at"
         id="datepicker-dateformat1"
@@ -9,7 +9,7 @@
           year: 'numeric',
           month: 'short',
           day: '2-digit',
-          weekday: 'short',
+          weekday: 'short'
         }"
         locale="en"
       ></b-form-datepicker>
@@ -22,7 +22,7 @@
       name="customSwitch1"
       switch
     >
-      {{$t("search.Recent_Post")}}
+      {{ $t("search.Recent_Post") }}
     </b-form-checkbox>
     <b-form-checkbox
       @click="showPostHaveNotSeen"
@@ -31,7 +31,7 @@
       name="customSwitch2"
       switch
     >
-      {{$t("search.Post_you_ve_not_seen")}}
+      {{ $t("search.Post_you_ve_not_seen") }}
     </b-form-checkbox>
 
     <div
@@ -39,14 +39,14 @@
       class="ab"
       :class="[
         'cursor mt-3',
-        rootSectionIsVisible ? 'w-100' : 'collapsed w-100',
+        rootSectionIsVisible ? 'w-100' : 'collapsed w-100'
       ]"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
       @click.prevent="toogleRootSection"
     >
       <b-icon :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
-      <span>{{$t("search.Post_from")}}</span>
+      <span>{{ $t("search.Post_from") }}</span>
     </div>
 
     <b-collapse id="collapse-4" v-model="rootSectionIsVisible">
@@ -56,7 +56,7 @@
           class="db"
           :class="[
             'cursor',
-            buisnessSectionIsVisible ? 'w-100  my-2' : 'collapsed w-100',
+            buisnessSectionIsVisible ? 'w-100  my-2' : 'collapsed w-100'
           ]"
           :aria-expanded="buisnessSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-2"
@@ -65,7 +65,7 @@
           <b-icon
             :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>{{$t("search.Buisness")}}</span>
+          <span>{{ $t("search.Buisness") }}</span>
         </div>
         <b-collapse
           id="collapse-2"
@@ -91,7 +91,7 @@
           class="db"
           :class="[
             'cursor',
-            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100',
+            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100'
           ]"
           :aria-expanded="peopleSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-1"
@@ -100,7 +100,7 @@
           <b-icon
             :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>{{$t("search.People")}}</span>
+          <span>{{ $t("search.People") }}</span>
         </div>
         <b-collapse
           id="collapse-1"
@@ -126,7 +126,7 @@
           class="db"
           :class="[
             'cursor',
-            networkSectionIsVisible ? 'w-100' : 'collapsed w-100',
+            networkSectionIsVisible ? 'w-100' : 'collapsed w-100'
           ]"
           :aria-expanded="networkSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-4"
@@ -135,7 +135,7 @@
           <b-icon
             :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>{{$t("search.Network")}}</span>
+          <span>{{ $t("search.Network") }}</span>
         </div>
         <b-collapse
           id="collapse-4"
@@ -166,27 +166,26 @@ import _ from "lodash";
 import { mapActions, mapGetters } from "vuex";
 
 const options = [
-    { text: "Follower", value: "Follower" },
-    { text: "Following", value: "Following" },
-    { text: "Community", value: "Community" }
+  { text: "Follower", value: "Follower" },
+  { text: "Following", value: "Following" },
+  { text: "Community", value: "Community" }
 ];
 
 export default {
-  
-  created(){
-     this.optionsBuisness = [
+  created() {
+    this.optionsBuisness = [
       ...options,
-      { text: this.$t('general.Editor'), value: "Editor" },
-      { text: this.$t('general.Owner'), value: "Owner" },
+      { text: this.$t("general.Editor"), value: "Editor" },
+      { text: this.$t("general.Owner"), value: "Owner" }
     ];
 
     this.optionsNetwork = [
-      { text: this.$t('general.Editor'), value: "Editor" },
-      { text: this.$t('general.Member'), value: "Member" },
-      { text: this.$t('general.Owner'), value: "Owner" },
+      { text: this.$t("general.Editor"), value: "Editor" },
+      { text: this.$t("general.Member"), value: "Member" },
+      { text: this.$t("general.Owner"), value: "Owner" }
     ];
   },
-  
+
   data: () => ({
     created_at: null,
     isRecentPost: false,
@@ -201,121 +200,111 @@ export default {
     optionsPeople: options,
     optionsBuisness: null,
     optionsNetwork: null,
-    strategies: null,
+    strategies: null
   }),
 
   watch: {
-
-    isRecentPost: function (newValue) {
-      
+    isRecentPost: function(newValue) {
       if (newValue) {
         this.page(1);
-        if(this.islogin)
-      {
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
-      }
-      else
-      {
-        this.newCallbackForPagination(
-          this.$repository.search.findPostForGuestUser
-        );
-      }
+        if (this.islogin) {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostByKeyword
+          );
+        } else {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostForGuestUser
+          );
+        }
         this.stack({
           data: {
             recent_post: "",
-            keyword: this.keyword,
-          },
+            keyword: this.keyword
+          }
         });
 
         this._onFindPost({
           data: {
             recent_post: "",
-            keyword: this.keyword,
-          },
+            keyword: this.keyword
+          }
         });
-        this.hide()
+        this.hide();
       }
     },
 
-    isPostHaveNotSeen: function (newValue) {
-     
+    isPostHaveNotSeen: function(newValue) {
       if (newValue) {
         this.page(1);
-        if(this.islogin)
-      {
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
-      }
-      else
-      {
-        this.newCallbackForPagination(
-          this.$repository.search.findPostForGuestUser
-        );
-      }
+        if (this.islogin) {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostByKeyword
+          );
+        } else {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostForGuestUser
+          );
+        }
         this.stack({
           data: { not_seen: "" },
-          keyword: this.keyword,
+          keyword: this.keyword
         });
         this._onFindPost({
           data: {
             not_seen: "",
-            keyword: this.keyword,
-          },
+            keyword: this.keyword
+          }
         });
-        this.hide()
+        this.hide();
       }
     },
 
-    created_at: function (newValue) {
-     
+    created_at: function(newValue) {
       if (newValue) {
         this.page(1);
-        if(this.islogin)
-      {
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
-      }
-      else{
-        this.newCallbackForPagination(
-          this.$repository.search.findPostForGuestUser
-        );
-      }
+        if (this.islogin) {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostByKeyword
+          );
+        } else {
+          this.newCallbackForPagination(
+            this.$repository.search.findPostForGuestUser
+          );
+        }
         this.stack({
           data: {
             created_at: this.created_at,
-            keyword: this.keyword,
-          },
+            keyword: this.keyword
+          }
         });
         this._onFindPost({
           data: {
             created_at: this.created_at,
-            keyword: this.keyword,
-          },
+            keyword: this.keyword
+          }
         });
-        this.hide()
+        this.hide();
       }
     },
 
-    selectedPeople: function () {
+    selectedPeople: function() {
       this.onProcess();
     },
-    selectedBuisness: function () {
+    selectedBuisness: function() {
       this.onProcess();
     },
-    selectedNetwork: function () {
+    selectedNetwork: function() {
       this.onProcess();
-    },
+    }
   },
 
   computed: {
     ...mapGetters({
-      keyword: "search/POST_KEYWORD",
+      keyword: "search/POST_KEYWORD"
     }),
-    islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   methods: {
     ...mapActions({
@@ -324,11 +313,11 @@ export default {
       lauchLoader: "search/LOADING",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       stack: "search/STACK_VALUE",
-      reset: "search/RESET_RESULT",
+      reset: "search/RESET_RESULT"
     }),
 
-    hide(){
-      this.$bvModal.hide('myModall')
+    hide() {
+      this.$bvModal.hide("myModall");
     },
 
     hasKeyWord() {
@@ -343,20 +332,17 @@ export default {
         this.lauchLoader(true);
         this.reset();
         let request;
-        if(this.islogin)
-      {
-         request = await this.$repository.search.findPostByKeyword({
-          ...e,
-          page: 1,
-        });
-      }
-      else
-      {
-         request = await this.$repository.search.findPostForGuestUser({
-          ...e,
-          page: 1,
-        }); 
-      }
+        if (this.islogin) {
+          request = await this.$repository.search.findPostByKeyword({
+            ...e,
+            page: 1
+          });
+        } else {
+          request = await this.$repository.search.findPostForGuestUser({
+            ...e,
+            page: 1
+          });
+        }
 
         if (request.success) {
           this.page(2);
@@ -371,7 +357,7 @@ export default {
 
     communityIsChecked(data) {
       const useSelectFollowerAndFollowing = data.filter(
-        (item) => "Follower" == item || "Following" == item
+        item => "Follower" == item || "Following" == item
       );
 
       if (
@@ -379,21 +365,21 @@ export default {
         data.indexOf("Community") != -1
       ) {
         const newData = data.filter(
-          (item) => "Follower" !== item || "Following" !== item
+          item => "Follower" !== item || "Following" !== item
         );
       }
     },
 
     onNotified(message) {
       this.flashMessage.error({
-        message,
+        message
       });
     },
 
     map(data, type) {
-      return data.map((e) => ({
+      return data.map(e => ({
         key: type,
-        value: `${type}_${e.toLowerCase()}`,
+        value: `${type}_${e.toLowerCase()}`
       }));
     },
 
@@ -402,63 +388,58 @@ export default {
       this.reset();
       const credentials = Object.keys(data);
       let render = [];
-      if(this.islogin)
-    {
-      if (credentials.includes("users")) {
-        let response = await this.$repository.search.findPostByKeyword({
-          page: 1,
-          data: {
-            ...data["users"],
-            keyword: this.keyword,
-          },
-        });
-  
-        if (response.success) render = [...render, ...response.data];
-      }
-      if (credentials.includes("buisness")) {
+      if (this.islogin) {
+        if (credentials.includes("users")) {
+          let response = await this.$repository.search.findPostByKeyword({
+            page: 1,
+            data: {
+              ...data["users"],
+              keyword: this.keyword
+            }
+          });
+
+          if (response.success) render = [...render, ...response.data];
+        }
+        if (credentials.includes("buisness")) {
           let response = await this.$repository.search.findPostByBuisness({
             page: 1,
             data: {
               ...data["buisness"],
-              keyword: this.keyword,
-            },
+              keyword: this.keyword
+            }
           });
-  
+
           if (response.success) render = [...render, ...response.data];
         }
         if (credentials.includes("network")) {
-        let response = await this.$repository.search.findPostByNetWork({
-          page: 1,
-          data: {
-            ...data["network"],
-            keyword: this.keyword,
-          },
-        });
+          let response = await this.$repository.search.findPostByNetWork({
+            page: 1,
+            data: {
+              ...data["network"],
+              keyword: this.keyword
+            }
+          });
 
-        if (response.success) render = [...render, ...response.data];
-      }
-    }
-      else
-      {
+          if (response.success) render = [...render, ...response.data];
+        }
+      } else {
         if (credentials.includes("buisness")) {
           let response = await this.$repository.search.findPostForGuestUser({
             page: 1,
             data: {
-              keyword: this.keyword,
-            },
+              keyword: this.keyword
+            }
           });
-  
+
           if (response.success) render = [...render, ...response.data];
         }
       }
-
-      
 
       this.findPeoplePost(render);
       this.lauchLoader(false);
     },
 
-    onProcess: _.debounce(function (e) {
+    onProcess: _.debounce(function(e) {
       this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
@@ -474,18 +455,18 @@ export default {
       this.stack(data);
       this.newCallbackForPagination(this._onFind);
       this._onFind(data);
-      this.hide()
+      this.hide();
     }, 2000),
 
     showRecentPost() {
-      console.log('test me')
+      console.log("test me");
       this.isRecentPost = !this.isRecentPost;
     },
-    
+
     showPostHaveNotSeen() {
       this.isPostHaveNotSeen = !this.isPostHaveNotSeen;
     },
-    
+
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
 
@@ -496,9 +477,8 @@ export default {
       this.peopleSectionIsVisible = false;
       this.buisnessSectionIsVisible = false;
       this.networkSectionIsVisible = false;
-    },
-
-  },
+    }
+  }
 };
 </script>
 

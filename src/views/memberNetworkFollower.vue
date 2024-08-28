@@ -6,20 +6,23 @@
       <b-row>
         <b-col lg="5" xl="4" class=" ">
           <Parent />
-        </b-col> 
+        </b-col>
 
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" lazy fill pills>
             <b-tab :title="$t('memnetwork.Posts')"><Posts /></b-tab>
-            <b-tab :title="$t('memnetwork.Media')"><Media :type="'network'" :isEditor="false"/></b-tab>
-            <b-tab :title="$t('memnetwork.Members')"><Members from="follower" /></b-tab>
+            <b-tab :title="$t('memnetwork.Media')"
+              ><Media :type="'network'" :isEditor="false"
+            /></b-tab>
+            <b-tab :title="$t('memnetwork.Members')"
+              ><Members from="follower"
+            /></b-tab>
             <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
     </b-container>
     <Footer />
-
   </div>
 </template>
 
@@ -29,13 +32,13 @@ import Footer from "../components/footer";
 import Posts from "../components/memberNetworkF/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
 import Media from "@/components/owner/tabs/media";
-//import Members from "../components/memberNetworkF/members"; 
-import Members from '@/components/businessf/tabs/owner/networks/member';
+//import Members from "../components/memberNetworkF/members";
+import Members from "@/components/businessf/tabs/owner/networks/member";
 import Feedback from "../components/memberNetworkF/feedback";
 
 import { WhoIsIt } from "@/mixins";
 export default {
-  mixins:[WhoIsIt],
+  mixins: [WhoIsIt],
   components: {
     Navbar,
     Footer,
@@ -43,8 +46,8 @@ export default {
     Media,
     Members,
     Parent,
-    Feedback,
-  },
+    Feedback
+  }
 };
 </script>
 

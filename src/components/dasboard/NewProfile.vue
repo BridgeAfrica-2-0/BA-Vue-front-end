@@ -31,40 +31,39 @@
             </router-link>
           </h6>
 
-           <span class="mr-3"> <b-icon icon="people"></b-icon> {{profile.follower}} </span>
-         
+          <span class="mr-3">
+            <b-icon icon="people"></b-icon> {{ profile.follower }}
+          </span>
 
           <hr />
 
           <div class=" text-left">
-
-             <!-- <span class="mb-1">
+            <!-- <span class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             <router-link to="profile_owner">
              <span class="text"> {{ $t("dashboard.Visit_Profile") }}   </span>   </router-link>
              </span> -->
 
-          <p class="mb-1">
-            <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            <router-link to="/messaging">
-           <span class="text"> {{ $t("dashboard.Messages") }}  </span>  </router-link
-            >
-            <span class="badge  bg-white  float-right mt-1">
-              {{ profile.message }}
-            </span>
-          </p>
-          <p class="mb-1">
-            <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-         
-             <router-link to="/notification">
-          <span class="text">  {{ $t("dashboard.Notifications") }} </span>      
-             </router-link>   
+            <p class="mb-1">
+              <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
+              <router-link to="/messaging">
+                <span class="text"> {{ $t("dashboard.Messages") }} </span>
+              </router-link>
+              <span class="badge  bg-white  float-right mt-1">
+                {{ profile.message }}
+              </span>
+            </p>
+            <p class="mb-1">
+              <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
 
-            <span class="badge  bg-white  float-right mt-1">
-            {{ profile.notification }}
-            </span>
-          </p>
+              <router-link to="/notification">
+                <span class="text"> {{ $t("dashboard.Notifications") }} </span>
+              </router-link>
 
+              <span class="badge  bg-white  float-right mt-1">
+                {{ profile.notification }}
+              </span>
+            </p>
 
             <!-- <small class="text-muted"> Email </small>
             <h6>{{ profile.email }} hannagover@gmail.com</h6>
@@ -88,13 +87,13 @@ export default {
   props: {
     boptions: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
 
   data() {
     return {
-      selectedb: "owner",
+      selectedb: "owner"
     };
   },
   computed: {
@@ -117,7 +116,7 @@ export default {
     },
     profile() {
       return this.$store.state.ProfileAndBusinessDetails.profile;
-    },
+    }
   },
   mounted() {
     this.$store
@@ -125,7 +124,7 @@ export default {
       .then(() => {
         console.log("the response");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log({ err: err });
       });
   },
@@ -133,15 +132,15 @@ export default {
   methods: {
     async switchBusiness(value) {
       this.$emit("switchBusiness", value);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.text{
-   color: #455a64;
-   font-family: poppins;
+.text {
+  color: #455a64;
+  font-family: poppins;
 }
 .card-title {
   font-size: 18px;
@@ -187,7 +186,6 @@ small {
     font-size: 14px;
 
     flex-basis: 90%;
-   
   }
 }
 
@@ -219,7 +217,6 @@ small {
     font-size: 12px;
 
     flex-basis: 100%;
-    
   }
 }
 

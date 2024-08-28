@@ -1,11 +1,13 @@
 <template>
   <div class="main">
     <div class="images imageslg">
-      <div>    
+      <div>
         <img
-         
-           :src="info.user.cover_picture ? info.user.cover_picture : getCustomCover[0]"
-      
+          :src="
+            info.user.cover_picture
+              ? info.user.cover_picture
+              : getCustomCover[0]
+          "
           class="banner"
         />
       </div>
@@ -13,7 +15,7 @@
         <b-col cols="6" class="avata">
           <div>
             <b-avatar
-              v-if="info.user.profile_picture != null"  
+              v-if="info.user.profile_picture != null"
               :src="info.user.profile_picture"
               class="float-left avatar"
               badge-variant="primary"
@@ -38,7 +40,6 @@
             </b-link>
             <br />
 
-
             <span class="k15 duration">
               {{ info.user.followers }} {{ $t("profilefollower.Community") }}
             </span>
@@ -46,31 +47,25 @@
         </b-col>
         <b-col cols="12">
           <div class="btns">
-            <b-button class="community size mr-2 ml-1"
-            
-            :class="info.user.is_follow !== 0 && 'u-btn'"
-                              :id="'followbtn' + info.user.id"
-                              
-                                @click="handleFollow(info.user)"  >
-             
-
-                <i
-                                class="fas fa-lg btn-icon  m-fa "
-                                :class="
-                                  info.user.is_follow !== 0
-                                    ? 'fa-user-minus'
-                                    : 'fa-user-plus'
-                                "
-                              ></i>
-
-
+            <b-button
+              class="community size mr-2 ml-1"
+              :class="info.user.is_follow !== 0 && 'u-btn'"
+              :id="'followbtn' + info.user.id"
+              @click="handleFollow(info.user)"
+            >
+              <i
+                class="fas fa-lg btn-icon  m-fa "
+                :class="
+                  info.user.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                "
+              ></i>
 
               <span class="txt-btn">{{
                 $t("profilefollower.Community")
               }}</span></b-button
             >
 
-            <BtnCtaMessage  :element="info.user" type="people" :header="true" />
+            <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
             <b-dropdown
               size="sm"
@@ -127,37 +122,23 @@
     <div class="m-btn mobile mb-2">
       <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
-      <b-button class="direction ml-1 size" size="sm"
-      
-       
-            :class="info.user.is_follow !== 0 && 'u-btn'"
-                              :id="'followbtn' + info.user.id"
-                              
-                                @click="handleFollow(info.user)" 
-                                
-                                >
-       
-
-         <i
-                                class="fas fa-lg btn-icon  m-fa "
-                                :class="
-                                  info.user.is_follow !== 0
-                                    ? 'fa-user-minus'
-                                    : 'fa-user-plus'
-                                "
-                              ></i>
-
+      <b-button
+        class="direction ml-1 size"
+        size="sm"
+        :class="info.user.is_follow !== 0 && 'u-btn'"
+        :id="'followbtn' + info.user.id"
+        @click="handleFollow(info.user)"
+      >
+        <i
+          class="fas fa-lg btn-icon  m-fa "
+          :class="info.user.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+        ></i>
 
         <span class="txt-btn">{{ $t("dashboard.Community") }} </span></b-button
       >
-
-
-
-        
-
     </div>
 
-    <div class="body container"> 
+    <div class="body container">
       <b-row>
         <b-col cols="12" class=" p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>
@@ -165,15 +146,15 @@
               <Post />
             </b-tab>
 
-            <b-tab :title="$t('profilefollower.About')"><About /></b-tab>   
-             <b-tab :title="$t('profilefollower.Media')"
+            <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"
               ><Media type="profile" :isEditor="false"
             /></b-tab>
             <b-tab :title="$t('profilefollower.Business')"
               ><Businesses
             /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-           
+
             <b-tab :title="$t('profilefollower.Community')"
               ><Community
             /></b-tab>
@@ -185,60 +166,58 @@
 </template>
 
 <script>
-//import Post from "@/components/follower/tabs/posts"; 
+//import Post from "@/components/follower/tabs/posts";
 import Post from "@/components/businessfollower/tabs/posts";
-import About from "@/components/follower/tabs/about";  
+import About from "@/components/follower/tabs/about";
 import Media from "@/components/businessfollower/tabs/media";
 //import Community from "@/components/follower/tabs/community";
-import Community from '@/components/owner/tabs/memberNetwork';
-//import Community from "@/components/owner/tabs/comunitiDashboard"; 
+import Community from "@/components/owner/tabs/memberNetwork";
+//import Community from "@/components/owner/tabs/comunitiDashboard";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 import axios from "axios";
 import { knowWhoIsConnected } from "@/mixins";
-import {defaultCoverImage} from '@/mixins';
+import { defaultCoverImage } from "@/mixins";
 
 export default {
-  mixins: [knowWhoIsConnected,defaultCoverImage],
+  mixins: [knowWhoIsConnected, defaultCoverImage],
   name: "Home",
   data() {
     return {
-      foll_id: "",
+      foll_id: ""
     };
   },
-  
+
   components: {
     Post,
     About,
     Media,
     Community,
     Businesses,
-    Network,
+    Network
   },
 
   created() {
+    this.currentAuthType = "profile";
 
-    this.currentAuthType = 'profile'   
+    this.foll_id = this.$route.params.id;
 
-     this.foll_id = this.$route.params.id;
- 
     // this.$store
     //   .dispatch("follower/loadUserPostIntro", this.foll_id)
     //   .then((response) => {})
-    //   .catch((error) => {   
-    //     console.log({ error: error });   
+    //   .catch((error) => {
+    //     console.log({ error: error });
     //   });
   },
 
-  methods:{
-       async handleFollow(user) {
-     
+  methods: {
+    async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
@@ -249,34 +228,29 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-
-
-
+    }
   },
 
   mounted() {
-   
     console.log("Info: ", this.info.user);
-    
+
     this.$store
       .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
-
   },
 
   computed: {
-    info: function () {
+    info: function() {
       return this.$store.getters["follower/getUserPostIntro"];
-    },
-  },
+    }
+  }
 };
 </script>
 

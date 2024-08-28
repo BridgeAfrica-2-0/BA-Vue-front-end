@@ -1,10 +1,13 @@
 <template>
   <div>
+    <Business
+      v-for="item in businesses"
+      :key="item.id"
+      :business="item"
+      @getTotalCommunity="getTotalCommunity"
+    />
 
-    <Business v-for="item in businesses" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
-   
-       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -13,21 +16,20 @@ import axios from "axios";
 import Business from "@/components/Business";
 export default {
   // props: ["businesses"],
-   props: ["type"],
+  props: ["type"],
 
   components: {
     Business
   },
 
-   computed:{
-    
-    islogin(){  return this.$store.getters["auth/isLogged"]; }
-   },
+  computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
+  },
 
   data() {
     return {
-
-    
       options: {
         rewind: true,
         autoplay: true,
@@ -35,24 +37,21 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      }, 
-      
-      networkId:null,
-       page: 1,
-        businesses: [],
+        perMove: 1
+      },
+
+      networkId: null,
+      page: 1,
+      businesses: []
     };
   },
 
-
-   mounted() {
-
-    this.islogin=this.$store.getters["auth/isLogged"];
+  mounted() {
+    this.islogin = this.$store.getters["auth/isLogged"];
     this.networkId = this.$route.params.id;
-   }, 
+  },
 
-  methods: {  
-
+  methods: {
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -66,18 +65,12 @@ export default {
       this.$router.push(`/business/${id}#about`);
     },
 
+    infiniteHandler($state) {
+      let url = `network/community/businesses/${this.networkId}/`;
 
-    
-
-
-      infiniteHandler($state) { 
-
-      let url = `network/community/businesses/${this.networkId}/`;    
-               
-        if(!this.islogin){
-            url='guest/'+url;
-          }
-
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
         .get(url + this.page)
@@ -102,38 +95,30 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-  
-
-   businessDetails() {
+    businessDetails() {
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.networkId)
-        .then(() => {
-        
-        })
-        .catch((err) => {
+        .dispatch(
+          "networkProfileCommunitySidebar/getBusinessDetails",
+          this.networkId
+        )
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
-
-     async handleFollow(user) {
-   
+    async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
@@ -146,18 +131,14 @@ export default {
           this.businessDetails();
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-
-
-
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {
@@ -265,8 +246,8 @@ export default {
     padding-top: 6px;
     font-size: 10px;
 
-    height: 28px;  
-     width: 97px;
+    height: 28px;
+    width: 97px;
   }
 
   .r-image {

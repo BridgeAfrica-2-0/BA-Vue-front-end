@@ -7,20 +7,15 @@ export default {
   props: ["chartData", "options"],
 
   watch: {
-
-    chartData:function(newVal) {
-
+    chartData: function(newVal) {
       this.update();
-
     }
-
   },
 
   methods: {
     update() {
       this.$data._chart.update();
       this.renderChart(this.chartData, this.options);
-
     }
   },
   mounted() {

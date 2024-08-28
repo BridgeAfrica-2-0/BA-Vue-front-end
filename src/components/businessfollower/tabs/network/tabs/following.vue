@@ -23,22 +23,22 @@
 </template>
 
 <script>
-import CommunityBusiness from '../../communitybusiness';
+import CommunityBusiness from "../../communitybusiness";
 export default {
   data() {
     return {
-      keywords: '',
+      keywords: ""
     };
   },
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
 
   computed: {
     folowing() {
       return this.$store.state.profile.CommunityBusiness.business_following;
-    },
-  },
+    }
+  }
 };
 </script>
 

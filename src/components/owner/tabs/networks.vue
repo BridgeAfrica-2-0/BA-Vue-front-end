@@ -23,14 +23,17 @@
           :key="index"
         >
           <div class="people-style shadow h-100">
-            <div class="float-right others" 
-            v-if="type == 'others' ? network.is_owner ? true:false : false">
+            <div
+              class="float-right others"
+              v-if="
+                type == 'others' ? (network.is_owner ? true : false) : false
+              "
+            >
               <b-dropdown
                 size="lg"
                 variant="link"
                 toggle-class="text-decoration-none"
                 no-caret
-              
               >
                 <template #button-content>
                   <b-icon
@@ -43,13 +46,14 @@
                   @click="showEditNetwork(network)"
                   v-b-modal.updateBusinessModal
                   variant=""
-                  >{{$t("profileowner.Edit")}}</b-dropdown-item
+                  >{{ $t("profileowner.Edit") }}</b-dropdown-item
                 >
                 <b-dropdown-item
-                 @click="selectNetwork(network)"
-                 v-b-modal.deleteBusinessModal
-                 no-stacking
-                >{{$t("profileowner.Delete")}}</b-dropdown-item>
+                  @click="selectNetwork(network)"
+                  v-b-modal.deleteBusinessModal
+                  no-stacking
+                  >{{ $t("profileowner.Delete") }}</b-dropdown-item
+                >
               </b-dropdown>
             </div>
 
@@ -59,34 +63,52 @@
                   <img :src="network.image" class="r-image" />
                 </div>
               </div>
- 
+
               <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
-                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.slug">
+                    <router-link
+                      v-if="type == 'business'"
+                      :to="'/network_member/' + network.slug"
+                    >
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->
-  
-                      <span v-if="type!='business'" >   <b-icon  v-if="network.is_approve" icon="check-circle-fill" variant="primary"> </b-icon>     </span>
-                       
+
+                      <span v-if="type != 'business'">
+                        <b-icon
+                          v-if="network.is_approve"
+                          icon="check-circle-fill"
+                          variant="primary"
+                        >
+                        </b-icon>
+                      </span>
                     </router-link>
 
-                     <router-link v-else :to="'/network/' + network.slug">
+                    <router-link v-else :to="'/network/' + network.slug">
                       {{ network.name }}
                       <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                        -->
-  
-                      <span v-if="type!='business'" >   <b-icon  v-if="network.is_approve" icon="check-circle-fill" variant="primary"> </b-icon>     </span>
-                       
+
+                      <span v-if="type != 'business'">
+                        <b-icon
+                          v-if="network.is_approve"
+                          icon="check-circle-fill"
+                          variant="primary"
+                        >
+                        </b-icon>
+                      </span>
                     </router-link>
-
-
                   </strong>
                   <br />
-                                     
-                      
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span>
+
+                  <span
+                    class="m-1"
+                    v-for="cat in network.assign_categories"
+                    :key="cat.id"
+                  >
+                    {{ cat.name }}
+                  </span>
                   <br />
 
                   {{ network.community }} Community <br />
@@ -146,18 +168,22 @@
       </div>
       <div class="mx-auto text-center my-5" v-else>
         <p class="my-2" v-if="!profileNetworks.length">
-          {{$t("profileowner.No_network_found")}}
+          {{ $t("profileowner.No_network_found") }}
         </p>
       </div>
     </div>
 
     <b-modal
       hide-footer
-      :title="editNet ? $t('profileowner.Edit_Network') : $t('profileowner.Add_Network')"
+      :title="
+        editNet
+          ? $t('profileowner.Edit_Network')
+          : $t('profileowner.Add_Network')
+      "
       size="lg"
       v-model="showModal"
       ref="netmodal"
-        @close="cancel"
+      @close="cancel"
     >
       <b-container>
         <b-form>
@@ -213,7 +239,7 @@
                 class="mb-0"
               >
                 <b-form-input
-                  v-model="createdNetwork.name" 
+                  v-model="createdNetwork.name"
                   id="network_name"
                   placeholder=""
                   required
@@ -237,7 +263,6 @@
                 ></multiselect>
               </div>
             </b-col>
-
 
             <b-col md="6">
               <div class="form-group mt-3">
@@ -308,8 +333,8 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="Neighbor" class="username">
-                  {{ $t("profileowner.Neighbor") }} :
-                </label ><br />
+                  {{ $t("profileowner.Neighbor") }} : </label
+                ><br />
                 <multiselect
                   v-model="locality"
                   :placeholder="$t('profileowner.Search')"
@@ -338,10 +363,7 @@
               </b-form-group>
             </b-col> -->
 
-
-
-
-             <b-col md="6">
+            <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('auth.email')"
@@ -358,8 +380,6 @@
                 </b-form-input>
               </b-form-group>
             </b-col>
-
-
 
             <b-col md="6">
               <b-form-group
@@ -443,10 +463,6 @@
               </b-form-group>
             </b-col>
 
-           
-
-
-           
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
@@ -455,32 +471,13 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-           
-
-
-                 <div class="" style="height: 200px; overflow:hidden">
+                <div class="" style="height: 200px; overflow:hidden">
                   <AutocompleteLocation
-                  
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
                 </div>
-
-
-               
-
               </b-form-group>
-       
-
-
-
-
-
-
- 
-
-
-
             </b-col>
             <b-col md="6">
               <b-form-group
@@ -501,22 +498,19 @@
 
                 <div id="preview">
                   <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
-       
 
-                  <vue-cropper  v-if="logoimg_url"
+                  <vue-cropper
+                    v-if="logoimg_url"
                     :src="selectedFile"
                     ref="cropperr"
                     original:true
                     info:false
                     canScale:true
                     maxImgSize:1000
-                    
                     :size="1"
                     drag-mode="move"
                     :view-mode="1"
                   />
-
-
                 </div>
                 <br />
                 <div class="text-center">
@@ -571,7 +565,11 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{editNet ? $t("profileowner.Edit_Network") : $t("profileowner.Add_Network")}}
+            {{
+              editNet
+                ? $t("profileowner.Edit_Network")
+                : $t("profileowner.Add_Network")
+            }}
           </b-button>
         </b-form>
       </b-container>
@@ -609,14 +607,41 @@
       </p>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal" title="Do you really want to delete network!!" centered hide-footer no-stacking>
+    <b-modal
+      id="deleteBusinessModal"
+      title="Do you really want to delete network!!"
+      centered
+      hide-footer
+      no-stacking
+    >
       <b-row>
-        <b-col><b-button class="mt-3" variant="success" block @click="$bvModal.hide('deleteBusinessModal')">Cancel</b-button></b-col>
-        <b-col><b-button class="mt-3" variant="primary" block v-b-modal.deleteBusinessModal2>Approve</b-button></b-col>
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="success"
+            block
+            @click="$bvModal.hide('deleteBusinessModal')"
+            >Cancel</b-button
+          ></b-col
+        >
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="primary"
+            block
+            v-b-modal.deleteBusinessModal2
+            >Approve</b-button
+          ></b-col
+        >
       </b-row>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal2" title="Any particular reason why you want to delete network?" centered hide-footer>
+    <b-modal
+      id="deleteBusinessModal2"
+      title="Any particular reason why you want to delete network?"
+      centered
+      hide-footer
+    >
       <b-form @submit.prevent="deleteNetwork(selectedNetwork)">
         <p>
           <b-form-textarea
@@ -631,7 +656,16 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
+          <b-col
+            ><b-button
+              class="mt-3"
+              variant="primary"
+              type="submit"
+              @click="$bvModal.hide('deleteBusinessModal2')"
+              block
+              >Delete</b-button
+            ></b-col
+          >
         </b-row>
       </b-form>
     </b-modal>
@@ -644,33 +678,32 @@ import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 
-import {wrapperErrors} from "@/helpers"
+import { wrapperErrors } from "@/helpers";
 
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
 export default {
-
-  props:{
+  props: {
     type: {
       type: String,
-      default: () => 'others'
+      default: () => "others"
     }
   },
 
   data() {
     return {
       page: 1,
-      
+
       multiselecvalue: [],
       infiniteId: 1,
-      logoimg_url: '',
+      logoimg_url: "",
       profileNetworks: [],
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
       editNet: false,
-      logo: '',
+      logo: "",
       country: [],
       region: [],
       division: [],
@@ -686,7 +719,7 @@ export default {
       success: {
         state: false,
         variant: "",
-        msg: "",
+        msg: ""
       },
       createdNetwork: {
         name: "",
@@ -703,7 +736,7 @@ export default {
         special_needs: "",
         address: "",
         image: "",
-        allow_business: 0,
+        allow_business: 0
       },
       chosenNetwork: {
         name: "",
@@ -720,8 +753,8 @@ export default {
         special_needs: "",
         address: "",
         image: "",
-        allow_business: 0,
-      },
+        allow_business: 0
+      }
     };
   },
 
@@ -738,7 +771,7 @@ export default {
   },
 
   computed: {
-    old_profileNetworks: function () {
+    old_profileNetworks: function() {
       return this.$store.state.profile.profilenetwork;
     },
 
@@ -746,10 +779,10 @@ export default {
       return this.$store.state.auth.categories;
     },
 
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
 
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         if (item.id) {
           selectedUsers.push(item.id);
         } else {
@@ -759,7 +792,7 @@ export default {
       return selectedUsers;
     },
 
-    pagee: function () {
+    pagee: function() {
       return this.page;
     },
 
@@ -783,81 +816,68 @@ export default {
       return this.$store.state.auth.locality;
     },
 
-    selectedcountry: function () {
+    selectedcountry: function() {
       return this.country.id;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       return this.region.id;
     },
 
-    selecteddivision: function () {
+    selecteddivision: function() {
       return this.division.id;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       return this.municipality.id;
     },
 
-    selectedcity: function () {
+    selectedcity: function() {
       return this.municipality.name;
     },
 
-
-
-
-    selectedlocality: function () {
+    selectedlocality: function() {
       return this.locality.id;
-    },
+    }
   },
 
   methods: {
-
-
-
-    cancel(){
-
-
-        this.logoimg_url= '';
-      this.selectedFile='';
-      this.createdNetwork.id = '';
-      this.createdNetwork.image = '';
-      this.createdNetwork.name = '';
-      this.createdNetwork.email = '';
-      this.createdNetwork.country_id ='';
-      this.createdNetwork.primary_phone ='';
-      this.createdNetwork.city = '';
-      this.createdNetwork.secondary_phone ='';
-      this.createdNetwork.network_category_id ='';
-      this.createdNetwork.business_id ='';
-      this.createdNetwork.address = '';
-      this.createdNetwork.neighbourhood = '';
-      this.createdNetwork.network_categories = ''
-      this.createdNetwork.purpose = '';
-      this.createdNetwork.special_needs = '';
-      this.createdNetwork.allow_business ='';
+    cancel() {
+      this.logoimg_url = "";
+      this.selectedFile = "";
+      this.createdNetwork.id = "";
+      this.createdNetwork.image = "";
+      this.createdNetwork.name = "";
+      this.createdNetwork.email = "";
+      this.createdNetwork.country_id = "";
+      this.createdNetwork.primary_phone = "";
+      this.createdNetwork.city = "";
+      this.createdNetwork.secondary_phone = "";
+      this.createdNetwork.network_category_id = "";
+      this.createdNetwork.business_id = "";
+      this.createdNetwork.address = "";
+      this.createdNetwork.neighbourhood = "";
+      this.createdNetwork.network_categories = "";
+      this.createdNetwork.purpose = "";
+      this.createdNetwork.special_needs = "";
+      this.createdNetwork.allow_business = "";
 
       this.country = [];
       this.region = [];
       this.division = [];
-      this.municipality =[];
+      this.municipality = [];
       this.localities = [];
-
-
-
-
     },
 
-    
-
-    getGeoCoderResult(response) {console.log(response);
+    getGeoCoderResult(response) {
+      console.log(response);
       this.coordinates = response.coordinates;
       this.createdNetwork.address = response.address;
-    
+
       console.log(response);
     },
 
     flashErrors(errors) {
       let err = "";
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -870,7 +890,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -878,7 +898,7 @@ export default {
     netCategory(category) {
       let cat = "";
 
-      category.forEach((item) => {
+      category.forEach(item => {
         cat = cat + item + ",";
       });
 
@@ -895,22 +915,21 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },     
+    },
 
     onLogoChangge(e) {
       this.logo = e.target.files[0];
       const logofile = e.target.files[0];
       this.logoimg_url = URL.createObjectURL(logofile);
 
-
       this.mime_type = logofile.type;
 
-        if (typeof FileReader === "function") {
+      if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.selectedFile = event.target.result;
           this.$refs.cropperr.replace(this.selectedFile);
         };
@@ -918,14 +937,7 @@ export default {
       } else {
         alert("Sorry, FileReader API not supported");
       }
-
-
     },
-
-
-   
-
-
 
     Region() {
       let formData2 = new FormData();
@@ -936,7 +948,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -950,7 +962,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -964,7 +976,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -978,7 +990,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -987,11 +999,11 @@ export default {
       this.loader = true;
       axios
         .get("profile/user/networks")
-        .then((res) => {
+        .then(res => {
           this.loader = false;
           this.networks = res.data.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.loader = false;
         });
     },
@@ -1009,10 +1021,11 @@ export default {
     // },
 
     infiniteHandler($state) {
+      let url =
+        this.type == "others"
+          ? "network?page=" + this.page
+          : `business/network/${this.$route.params.id}/${this.page}`;
 
-      let url = this.type == 'others' ? "network?page=" + this.page : 
-`business/network/${this.$route.params.id}/${this.page}`
-      
       if (this.page == 1) {
         this.profileNetworks.splice(0);
       }
@@ -1030,7 +1043,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -1038,14 +1051,14 @@ export default {
               status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
               message: err.response.statusText,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
           }
@@ -1054,12 +1067,11 @@ export default {
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
-      
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
@@ -1072,19 +1084,17 @@ export default {
           this.flashMessage.show({
             status: "success",
             message: "Network created",
-             blockClass: "custom-block-class",
+            blockClass: "custom-block-class"
           });
 
-          this.profileNetworks.push(data.data)
+          this.profileNetworks.push(data.data);
           this.$refs["netmodal"].hide();
 
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-
         })
-        .catch((err) => {
-          
+        .catch(err => {
           // if (err.response.data.errors){
           //   const errors = wrapperErrors(err.response.data.errors)
           //   errors.map(e => this.flashMessage.show({
@@ -1095,23 +1105,20 @@ export default {
           //   )
           // }
 
-           if (err.response.status == 422) {
+          if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
-              message: this.flashErrors(err.response.data.errors),
-              
+              message: this.flashErrors(err.response.data.errors)
             });
           }
 
-
-          
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
-          
+
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          
+
           loader.hide();
         });
     },
@@ -1122,15 +1129,15 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
-        .then((res) => {
+        .then(res => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
-          
+
           // this.profileNetworks = this.profileNetworks.map(net => {
           //   if (net.id == editedNetwork.id)
           //     return res.data.data
@@ -1139,13 +1146,13 @@ export default {
           // })
           //this.getNetworks();
 
-            this.profileNetworks=[];
-           this.infiniteId += 1;
+          this.profileNetworks = [];
+          this.infiniteId += 1;
           loader.hide();
-          this.showmodal(false, "edit")
-          console.log('update sucess')
+          this.showmodal(false, "edit");
+          console.log("update sucess");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
@@ -1153,19 +1160,18 @@ export default {
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
-              message: this.flashErrors(err.response.data.errors),
-             
+              message: this.flashErrors(err.response.data.errors)
             });
           } else {
             this.wrapperError(err.response.data.errors).map(er => {
               this.flashMessage.show({
                 status: "error",
                 message: er,
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
-            })
-              console.log({ err: err });
-            }
+            });
+            console.log({ err: err });
+          }
 
           loader.hide();
           setTimeout(() => {
@@ -1175,8 +1181,8 @@ export default {
         });
     },
 
-    wrapperError(error){
-      return Object.values(error).map(err => err[0])
+    wrapperError(error) {
+      return Object.values(error).map(err => err[0]);
     },
 
     // delete a network
@@ -1185,24 +1191,24 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       console.log(this.textReason);
       let fd = new FormData();
-      fd.append("reason", this.textReason)
+      fd.append("reason", this.textReason);
       axios
         .post(`network/${network.id}`, fd)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           this.getNetworks();
           loader.hide();
           this.flashMessage.show({
             status: "success",
             message: "Operation was successful !!"
-          });  
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           this.loader = false;
           loader.hide();
           this.flashMessage.show({
@@ -1230,7 +1236,7 @@ export default {
         "secondary_phone",
         this.createdNetwork.secondary_phone.split(" ").join("")
       );
-      fd.append("email",  this.createdNetwork.email);
+      fd.append("email", this.createdNetwork.email);
       fd.append("network_categories", this.selectedcategories);
 
       fd.append("description", this.createdNetwork.description);
@@ -1242,17 +1248,14 @@ export default {
       fd.append("council_id", this.selectedmunicipality);
       fd.append("neighborhood_id", this.selectedlocality);
 
-         
-   if(this.logo)  {            
-    this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+      if (this.logo) {
+        this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
 
-    this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
-      this.logo=blob;
-      // formData.append("profile_picture", this.profile_pic);
-   
-   }, this.mime_type);
-
-   }
+        this.$refs.cropperr.getCroppedCanvas().toBlob(blob => {
+          this.logo = blob;
+          // formData.append("profile_picture", this.profile_pic);
+        }, this.mime_type);
+      }
 
       fd.append("image", this.logo);
 
@@ -1261,7 +1264,7 @@ export default {
         fd.append("_method", "POST");
         let data = {
           data: fd,
-          id: this.createdNetwork.id,
+          id: this.createdNetwork.id
         };
         this.editNetwork(data);
       } else {
@@ -1304,11 +1307,11 @@ export default {
           this.municipality = data.data.council[0];
           this.locality = data.data.locality[0];
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-      this.logoimg_url= network.image;
-      this.selectedFile=network.image;
+      this.logoimg_url = network.image;
+      this.selectedFile = network.image;
       this.createdNetwork.id = network.id;
       this.createdNetwork.image = network.image;
       this.createdNetwork.name = network.name;
@@ -1347,8 +1350,8 @@ export default {
     selectNetwork(n) {
       this.selectedNetwork = n;
       console.log(this.selectedNetwork);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -1892,7 +1895,7 @@ p {
   color: #000;
 }
 
-.flx70{
-      flex-basis: 70%;
+.flx70 {
+  flex-basis: 70%;
 }
 </style>

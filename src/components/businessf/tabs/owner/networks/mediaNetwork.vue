@@ -18,14 +18,14 @@ import Images from "./images";
 export default {
   components: {
     Album,
-    Images,
+    Images
   },
   methods: {
     onClick(i) {
       this.index = i;
-    },
+    }
   },
-  data: function () {
+  data: function() {
     return {
       images: [
         "https://placekitten.com/801/800",
@@ -36,7 +36,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -58,11 +58,11 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
+      index: 0
     };
-  },
+  }
 };
 </script>
 
@@ -232,5 +232,3 @@ export default {
   color: #000;
 }
 </style>
-
-

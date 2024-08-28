@@ -85,7 +85,7 @@ export default {
     },
     profile() {
       return this.$store.state.ProfileAndBusinessDetails.profile;
-    },
+    }
   },
   mounted() {
     this.$store
@@ -93,12 +93,12 @@ export default {
       .then(() => {
         console.log("the response");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log({ err: err });
       });
   },
 
-  methods: {},
+  methods: {}
 };
 </script>
 

@@ -1,10 +1,11 @@
 <template>
   <b-container>
     <div class="s-card">
-
-
-
-      <div v-for="request in requests" :key="request.id" class="people-style border shadow">
+      <div
+        v-for="request in requests"
+        :key="request.id"
+        class="people-style border shadow"
+      >
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
             <b-card>
@@ -13,108 +14,110 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-            
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="request.profile_picture"
-            ></b-avatar>
-          </b-col>
 
-          <b-col md="8" cols="8" lg="8" sm="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{request.fullname}} </b>
-                        </div>
-                      </b-col>
+          <b-row class="mb-1">
+            <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
+              <b-avatar
+                class="p-avater"
+                variant="primary"
+                :src="request.profile_picture"
+              ></b-avatar>
+            </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          @click="ApproveRequest(request.slug)"
+            <b-col md="8" cols="8" lg="8" sm="8">
+              <div>
+                <b-row class="shift">
+                  <b-col md="12" lg="12" xl="6" sm="6">
+                    <div class="e-name">
+                      <b-row>
+                        <b-col
+                          md="6"
+                          lg="6"
+                          cols="6"
+                          sm="12"
+                          xl="12"
+                          class="mt-lg-2"
                         >
-                          <span class="btn-text text-center">Approve</span>
-                        </b-button>
-                      </b-col>
+                          <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                            <b> {{ request.fullname }} </b>
+                          </div>
+                        </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow text-center"
-                          variant="primary"
-                          @click="DeclineRequest(request.slug)"
+                        <b-col
+                          md="6"
+                          lg="6"
+                          cols="6"
+                          sm="12"
+                          xl="12"
+                          class="mt-3 mt-lg-2 mt-xl-0"
                         >
-                          <span class="btn-com text-center">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
+                          <h6 class="follower">5K Community</h6>
+                        </b-col>
+                      </b-row>
+                    </div>
+                  </b-col>
+
+                  <b-col lg="12" xl="6" cols="12" sm="6" md="12">
+                    <div>
+                      <b-row class="mt-lg-0">
+                        <b-col
+                          md="6"
+                          lg="6"
+                          cols="6"
+                          sm="12"
+                          xl="12"
+                          class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                        >
+                          <b-button
+                            block
+                            variant="primary"
+                            size="sm"
+                            class="b-background flexx pobtn shadow"
+                            @click="ApproveRequest(request.slug)"
+                          >
+                            <span class="btn-text text-center">Approve</span>
+                          </b-button>
+                        </b-col>
+
+                        <b-col
+                          md="6"
+                          lg="6"
+                          cols="6"
+                          sm="12"
+                          xl="12"
+                          class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                        >
+                          <b-button
+                            block
+                            size="sm"
+                            class="b-background flexx pobtn shadow text-center"
+                            variant="primary"
+                            @click="DeclineRequest(request.slug)"
+                          >
+                            <span class="btn-com text-center">Decline</span>
+                          </b-button>
+                        </b-col>
+                      </b-row>
+                    </div>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
         </b-skeleton-wrapper>
       </div>
       <b-row>
         <b-col cols="12">
           <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler">
-            <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
+            <div class="text-red" slot="no-more">
+              {{ $t("general.No_More_Request") }}
+            </div>
+            <div class="text-red" slot="no-results">
+              {{ $t("general.No_More_Request") }}
+            </div>
           </infinite-loading>
         </b-col>
       </b-row>
-
-      
     </div>
   </b-container>
 </template>
@@ -123,89 +126,92 @@
 export default {
   data() {
     return {
-      url:null,
-      page:0,
-      loading: false,
-    }
+      url: null,
+      page: 0,
+      loading: false
+    };
   },
   computed: {
     requests() {
       return this.$store.state.networkProfileMemberRequest.requests;
-    },
+    }
   },
   mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
     infiniteHandler($state) {
-       console.log("loop");
+      console.log("loop");
       this.axios
-      .get("network/"+this.url+"/members/users/request/"+this.page)
-      .then(({ data }) => {
-        console.log("// convert array to th object");
-        let obj = Object.assign({}, data);
-        console.log(obj);
-       console.log(data);
-       console.log(this.page);
-        if (data.data.length) {
-        this.page += 1;
-        console.log(this.page);
-        console.log(...data.data);
-        this.requests.push(...data.data);
-          $state.loaded();
+        .get("network/" + this.url + "/members/users/request/" + this.page)
+        .then(({ data }) => {
+          console.log("// convert array to th object");
+          let obj = Object.assign({}, data);
+          console.log(obj);
+          console.log(data);
+          console.log(this.page);
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.requests.push(...data.data);
+            $state.loaded();
           } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
+            $state.complete();
+          }
+        })
+        .catch(err => {
           console.log({ err: err });
-      })
+        });
     },
-    ApproveRequest: function(user_id){
+    ApproveRequest: function(user_id) {
       this.loading = true;
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
-      .then(() => {
-        this.infiniteHandler();
-        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        console.log('ohh yeah');
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Request Approved"
+      console.log("user_id: ", user_id);
+      this.axios
+        .get("network/" + this.url + "/members/request/approve/" + user_id)
+        .then(() => {
+          this.infiniteHandler();
+          // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          console.log("ohh yeah");
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: "Request Approved"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Approve Request"
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Approve Request"
-        });
-      });
     },
-    DeclineRequest: function(user_id){
+    DeclineRequest: function(user_id) {
       this.loading = true;
-      console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
-      .then(() => {
-        this.infiniteHandler();
-        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        console.log('ohh yeah');
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Request Deleted"
+      console.log("user_id: ", user_id);
+      this.axios
+        .get("network/" + this.url + "/members/request/decline/" + user_id)
+        .then(() => {
+          this.infiniteHandler();
+          // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          console.log("ohh yeah");
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: "Request Deleted"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Deleted Request"
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Deleted Request"
-        });
-      });
-    },
+    }
   }
 };
 </script>

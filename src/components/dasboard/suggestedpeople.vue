@@ -1,9 +1,6 @@
 <template>
   <div>
-
-     <Person v-for="item in people_around" :key="item.id" :person="item"  />
-
-  
+    <Person v-for="item in people_around" :key="item.id" :person="item" />
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -28,8 +25,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -39,11 +36,10 @@ export default {
     },
     activeAccount() {
       return this.$store.getters["auth/profilConnected"];
-    },
+    }
   },
   methods: {
     cta_business(data) {
-     
       this.$store.commit("businessChat/setSelectedChat", data);
 
       let path = "";
@@ -56,7 +52,7 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({
         path: `/business_owner/${this.activeAccount.id}`,
-        query: { tabId: 1, msgTabId: 0 },
+        query: { tabId: 1, msgTabId: 0 }
       });
     },
 
@@ -70,25 +66,22 @@ export default {
     },
 
     async handleFollow(user) {
-   
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
         .post(uri, data)
         .then(({ data }) => {
-        
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
-         
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -96,13 +89,9 @@ export default {
     async infiniteHandler($state) {
       let url = "people/around?page=" + this.page;
 
-    
-
       await axios
         .get(url)
         .then(({ data }) => {
-         
-
           if (data.data.length) {
             this.people_around.push(...data.data);
             this.page += 1;
@@ -112,11 +101,9 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
-         
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
 

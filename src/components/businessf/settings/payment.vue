@@ -2,8 +2,10 @@
   <b-container>
     <b-container>
       <p class="a-text">
-        {{$t("businessf.")}}
-{{$t("businessf.Select_a_payment_method_for_your_bridge_africa_account")}}
+        {{ $t("businessf.") }}
+        {{
+          $t("businessf.Select_a_payment_method_for_your_bridge_africa_account")
+        }}
       </p>
     </b-container>
 
@@ -25,7 +27,7 @@
           name="mobile-payment"
           value="mobile-money"
         >
-          {{$t("businessf.Mobile_Payment")}}
+          {{ $t("businessf.Mobile_Payment") }}
         </b-form-radio>
         <br />
         <b-form-radio
@@ -34,7 +36,7 @@
           id="Credit-card"
           name="credit-card"
           value="credit-card"
-          >{{$t("businessf.Credit_Debit_card")}}</b-form-radio
+          >{{ $t("businessf.Credit_Debit_card") }}</b-form-radio
         >
       </b-form-group>
 
@@ -48,21 +50,24 @@
 
       <b-container class="h-background">
         <div class="account-headnig">
-          <h3  class="heading-user h3-color">4755-xxxx-xxxx</h3>
+          <h3 class="heading-user h3-color">4755-xxxx-xxxx</h3>
           <p class="card-name">123456789</p>
         </div>
       </b-container>
 
       <div class=" mb-0">
-        <b-icon icon="plus" class='b-color' ></b-icon>  
-        <b-link href="#">{{$t("businessf.Add_new_Credit_Debit_card")}} </b-link>
+        <b-icon icon="plus" class="b-color"></b-icon>
+        <b-link href="#"
+          >{{ $t("businessf.Add_new_Credit_Debit_card") }}
+        </b-link>
       </div>
       <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> {{$t("businessf.Your_payment_information_is_secure")}}
-          , <b-link href="#">{{$t("businessf.Read_more")}}</b-link>
+          <b-icon icon="lock" class="b-color"></b-icon>
+          {{ $t("businessf.Your_payment_information_is_secure") }} ,
+          <b-link href="#">{{ $t("businessf.Read_more") }}</b-link>
         </p>
       </div>
     </b-container>
@@ -82,13 +87,11 @@ export default {
   text-align: left;
 }
 
-
-.h3-color{
+.h3-color {
   color: #000;
 }
 
-
-.b-color{
+.b-color {
   color: #7952b3;
 }
 .tabs {

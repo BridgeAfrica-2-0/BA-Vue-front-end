@@ -13,25 +13,32 @@
         </b-col>
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
-            <strong class="title">     <router-link :to="'/business/' + member.slug">
-                    {{ member.name }} 
-                  </router-link> </strong> <br />
+            <strong class="title">
+              <router-link :to="'/business/' + member.slug">
+                {{ member.name }}
+              </router-link>
+            </strong>
+            <br />
             <span v-if="member.category.length">
               {{ member.category[0].name }}</span
             >
             <br />
             {{ member.communityNum }}
-            {{ $t("network.Community") }}     <span    @click="$emit('BlockUser', member.id,index)"  class="ml-3"  style="cursor: pointer">  
-                      
-                      <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Business"
-                              variant="danger"
-                            ></b-icon>
-                            
-                              </span>   <br />
+            {{ $t("network.Community") }}
+            <span
+              @click="$emit('BlockUser', member.id, index)"
+              class="ml-3"
+              style="cursor: pointer"
+            >
+              <b-icon
+                font-scale="1"
+                icon="exclamation-octagon"
+                v-b-tooltip.hover
+                title="Block This Business"
+                variant="danger"
+              ></b-icon>
+            </span>
+            <br />
 
             <!-- <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
@@ -64,7 +71,11 @@
                   class="b-background shadow"
                   variant="primary"
                   @click="$emit('handleFollow', member)"
-                  :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+                  :style="
+                    member.is_follow !== 0
+                      ? 'background-color: rgb(162,107,80);'
+                      : ''
+                  "
                 >
                   <i
                     :class="
@@ -117,7 +128,7 @@
 
 <script>
 export default {
-  props: ["member","index"],
+  props: ["member", "index"],
   data() {
     return {
       options: {
@@ -126,20 +137,20 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
   method: {
-    goToBusinessAbout(id){ 
+    goToBusinessAbout(id) {
       // if(this.$route.name != 'BusinessFollower'){
-        this.$router.push(`/business/${id}?tabId=1`);
+      this.$router.push(`/business/${id}?tabId=1`);
       // }else {
-        console.log("------------------ttt")
-        // this.$router.push(`/business/${id}#about`);
+      console.log("------------------ttt");
+      // this.$router.push(`/business/${id}#about`);
       // }
     }
-  },
+  }
 };
 </script>
 

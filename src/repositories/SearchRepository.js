@@ -7,9 +7,9 @@ class Repository {
 
       const response = data.keyword
         ? await axios.post(`search/listUsers/${page}?keyword=${data.keyword}`, {
-            ...data,
-            page
-          })
+          ...data,
+          page
+        })
         : await axios.post(`search/listUsers/${page}`, { ...data, page });
       return {
         success: response.data.data ? true : false,
@@ -26,16 +26,30 @@ class Repository {
   async findGuestUserByParam(credentials) {
     try {
       const { page, data } = credentials;
+      let response;
 
-      const response = data.keyword
-        ? await axios.get(
-            `visitor/search/user?page=${page}&keyword=${data.keyword}&limit=10`,
-            { ...data, page }
-          )
-        : await axios.get(`visitor/search/user?page=${page}&limit=10`, {
-            ...data,
-            page
-          });
+      if (data.keyword && data.profession) {
+        response = await axios.get(
+          `visitor/search/user?page=${page}&keyword=${data.keyword}&profession=${data.profession}&limit=10`,
+          { ...data, page }
+        );
+      } else if (data.keyword) {
+        response = await axios.get(
+          `visitor/search/user?page=${page}&keyword=${data.keyword}&limit=10`,
+          { ...data, page }
+        );
+      } else if (data.profession) {
+        response = await axios.get(
+          `visitor/search/user?page=${page}&profession=${data.profession}&limit=10`,
+          { ...data, page }
+        );
+      } else {
+        response = await axios.get(`visitor/search/user?page=${page}&limit=10`, {
+          ...data,
+          page,
+        });
+      }
+
       return {
         success: response.data.data ? true : false,
         data: response.data.data ? response.data.data : []

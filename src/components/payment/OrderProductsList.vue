@@ -110,7 +110,10 @@ export default {
   async created() {
     this.loading = true;
     await this.$store
-      .dispatch("checkout/getshippingsummary")
+      .dispatch(
+        "checkout/getshippingsummary",
+        this.$store.getters["auth/isLogged"]
+      )
       .then(() => {
         this.loading = false;
         this.error = false;
@@ -129,15 +132,18 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = "cart/shippingSummary/";
+      let url = this.$store.getters["auth/isLogged"]
+        ? "cart/shippingSummary/"
+        : "guest/cart/shippingSummary/";
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          console.log(data);
-          if (data.data.length) {
+          console.log("checkout api data", data);
+          if (data.data.length > 0) {
             this.page += 1;
-            if (data.data[0].business_items.length) {
+            if (data.data) {
               this.cart.push(...data.data);
+              console.log("checkout cart data", this.cart);
             } else {
               $state.complete();
             }
@@ -147,7 +153,7 @@ export default {
             $state.complete();
           }
         })
-        .catch(err => {});
+        .catch((err) => {});
     },
 
     changePage(value) {
@@ -158,12 +164,12 @@ export default {
 
       this.$store
         .dispatch("checkout/next", url)
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.loading = false;
         })
 
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -174,7 +180,7 @@ export default {
         image = img1;
       } else {
         image.push({
-          img: img1
+          img: img1,
         });
       }
       return image;
@@ -187,7 +193,7 @@ export default {
         // console.log(key + " -- " + value);
         data = {
           adress: val,
-          price: item[val]
+          price: item[val],
         };
       }
 
@@ -210,7 +216,7 @@ export default {
         (currentPage - 1) * this.per_page,
         currentPage * this.per_page
       );
-    }
+    },
   },
   data() {
     return {
@@ -224,23 +230,23 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2
+        minimumFractionDigits: 2,
       }),
       orderForCurrentPage: [],
       productImages: [
         {
-          img: require("@/assets/img/payment/headset.jpg")
+          img: require("@/assets/img/payment/headset.jpg"),
         },
         {
-          img: require("@/assets/img/payment/headset1.jpg")
+          img: require("@/assets/img/payment/headset1.jpg"),
         },
         {
-          img: require("@/assets/img/payment/headset2.jpg")
+          img: require("@/assets/img/payment/headset2.jpg"),
         },
         {
-          img: require("@/assets/img/payment/headset3.jpg")
-        }
-      ]
+          img: require("@/assets/img/payment/headset3.jpg"),
+        },
+      ],
     };
   },
   computed: {
@@ -254,7 +260,7 @@ export default {
     },
     cartt() {
       return this.$store.state.checkout.shippingsummary;
-    }
+    },
   },
   watch: {
     currentPage: function(val) {
@@ -262,8 +268,8 @@ export default {
         (val - 1) * this.per_page,
         val * this.per_page
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

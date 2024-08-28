@@ -253,6 +253,7 @@ export default {
       this.getDestinations(this.form.region);
     }
     this.username = this.$store.state.auth.user?.user?.name || "";
+    this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
   },
   methods: {
     closesipping() {

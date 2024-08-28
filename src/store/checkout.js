@@ -48,11 +48,13 @@ const actions = {
       });
   },
 
-  async getshippingsummary({ commit }) {
+  async getshippingsummary({ commit }, isLogin) {
+    const url = isLogin
+      ? "cart/shippingSummary/1"
+      : "guest/cart/shippingSummary/1";
     await axios
-      .get("cart/shippingSummary/1")
+      .get(url)
       .then((response) => {
-        console.log(response);
         commit("setshippingsummary", response.data);
       })
       .catch((error) => {
@@ -74,8 +76,12 @@ const actions = {
   },
 
   async choseShipping({ commit }, payload) {
+    console.log("payload", payload);
+    let url = payload.isLogin
+      ? "update/shipping-address/status"
+      : "guest/shipping-address/update/status";
     await axios
-      .post("update/shipping-address/status?shipping_address_id=" + payload.id)
+      .post(`${url}?shipping_address_id=${payload.id}`)
       .then((response) => {
         console.log(response);
       })
@@ -160,9 +166,10 @@ const actions = {
       });
   },
 
-  async getCartt({ commit }) {
+  async getCartt({ commit } , isLogin = false) {
+    let url = isLogin ? "ckeckout-cart" : "guest/cart/checkout"
     await axios
-      .get("ckeckout-cart")
+      .get(url)
       .then((response) => {
         console.log(response);
         commit("setCart", response.data);

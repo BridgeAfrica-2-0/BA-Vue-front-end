@@ -122,7 +122,7 @@
           >
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
-          <div style="float: left" class="mt-2">
+          <div style="float: left; cursor: pointer;" class="mt-2" @click="navigateToCart">
             <span class="cart-icon position-relative" style="color:#455a64">
                   <b-icon icon="cart4" class="icon-size"></b-icon>
                   <span
@@ -821,7 +821,9 @@ export default {
     gotoProfile() {
       this.$router.push("profile_owner");
     },
-
+    navigateToCart() {
+      this.$router.push("/cart");
+    },
     onRedirect() {
       const link = {
         network: () => ({

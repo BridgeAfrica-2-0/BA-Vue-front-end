@@ -17,15 +17,18 @@ export default {
       const url = islogin
         ? `market/product/${product.id}/cart/add?business_id=${product.business_id}`
         : `guest/cart/product/${product.id}/cart/add?business_id=${product.business_id}`;
-      let options = islogin ? {} : { withCredentials: true };
+      // let options = islogin ? {} : { withCredentials: false };
       return await axios
-        .post(url, {}, options)
+        .post(url)
         .then((data) => {
           console.log(data);
-          const setCookieHeader = data.headers["set-cookie"]; // Correct header key for cookies
+          const setCookieHeader = data.data.data.guest_identifier; 
 
           // Log the cookie value if it exists
           if (setCookieHeader) {
+            document.cookie = `guest_identifier=${setCookieHeader}; path=/; samesite=None; secure`;
+
+  
             console.log("Cookie received:", setCookieHeader);
           } else {
             console.log("No Set-Cookie header received");

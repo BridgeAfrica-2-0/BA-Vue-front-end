@@ -14,10 +14,12 @@ const state = {
   total: null,
 
   buisinessOrdered: [],
+  shippingAddressChanged: false,
 };
 const getters = {
   getAllShipping: (state) => state.allShipping,
   getCartSummary: (state) => state.cart_summary,
+  shippingAddressChanges: (state) => state.shippingAddressChanged,
 };
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
@@ -59,8 +61,8 @@ const actions = {
       .then((response) => {
         commit("setshippingsummary", response.data);
       })
-      .catch((error) => {-                                                
-        console.log({ error: error });
+      .catch((error) => {
+        -console.log({ error: error });
       });
   },
 
@@ -131,7 +133,7 @@ const actions = {
   },
 
   createOrder({ commit }, { isLogin }) {
-    let url = isLogin ? "cart/create" : "guest/cart/create"
+    let url = isLogin ? "cart/create" : "guest/cart/create";
     return axios
       .post(url)
       .then((data) => {
@@ -161,7 +163,9 @@ const actions = {
 
   async getCart({ commit }, isLogin = false) {
     let guest_identifier = getGuestIdentifier();
-    const url = isLogin ? "cart" : "guest/cart?guest_identifier=" + guest_identifier;
+    const url = isLogin
+      ? "cart"
+      : "guest/cart?guest_identifier=" + guest_identifier;
     await axios
       .get(url)
       .then((response) => {
@@ -183,6 +187,7 @@ const actions = {
       .then((response) => {
         console.log(response);
         commit("setCart", response.data);
+        commit("shippingAddressChanged");
       })
       .catch((error) => {
         console.log({ error: error });
@@ -261,6 +266,8 @@ const mutations = {
 
     console.log("mutation update", shippingData);
   },
+  shippingAddressChanged: (state) =>
+    (state.shippingAddressChanged = !state.shippingAddressChanged),
 };
 export default {
   namespaced: true,

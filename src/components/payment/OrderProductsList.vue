@@ -103,6 +103,8 @@
 // import ProductCaroussel from "./ProductCaroussel.vue";
 import axios from "axios";
 import { getGuestIdentifier } from "../../helpers";
+import { mapGetters } from "vuex";
+
 export default {
   name: "OrderProductsList",
   components: {
@@ -132,8 +134,8 @@ export default {
       this.$refs.infiniteLoading.attemptLoad();
     },
 
-    infiniteHandler($state) {
-      if (!this.goNextPage) {
+    infiniteHandler($state = null) {
+      if (!this.goNextPage && $state) {
         $state.complete();
         return;
       }
@@ -154,10 +156,10 @@ export default {
             } else {
               $state.complete();
             }
-
-            $state.loaded();
+            if($state) $state.loaded();
+            
           } else {
-            $state.complete();
+            if($state) $state.complete();
           }
         })
         .catch((err) => {});
@@ -258,6 +260,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      shippingAddressChanges: "checkout/shippingAddressChanges",
+    }),
     rowsOrder() {
       let rows = 1;
       if (this.cart["data"]) {
@@ -277,6 +282,10 @@ export default {
         val * this.per_page
       );
     },
+    shippingAddressChanges: (val) => {
+      this.infiniteHandler(null)
+      console.log(val, "addres cahnged")
+    }
   },
 };
 </script>

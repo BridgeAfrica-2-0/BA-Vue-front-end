@@ -133,7 +133,7 @@ const actions = {
   },
 
   createOrder({ commit }, { isLogin }) {
-    let url = isLogin ? "cart/create" : "guest/cart/create";
+    let url = isLogin ? "cart/create" : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
       .post(url)
       .then((data) => {

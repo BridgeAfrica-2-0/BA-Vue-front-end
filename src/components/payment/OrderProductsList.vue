@@ -134,10 +134,11 @@ export default {
       this.$refs.infiniteLoading.attemptLoad();
     },
 
-    infiniteHandler($state = null) {
+    infiniteHandler($state) {
+
       if (!this.goNextPage && $state) {
         $state.complete();
-        return;
+        // return;
       }
       let url = this.$store.getters["auth/isLogged"]
         ? "cart/shippingSummary/" + this.page
@@ -152,6 +153,7 @@ export default {
             this.page += 1;
             if (data.data) {
               this.cart.push(...data.data);
+              this.notifyParent();
               console.log("checkout cart data", this.cart);
             } else {
               $state.complete();
@@ -226,6 +228,9 @@ export default {
         currentPage * this.per_page
       );
     },
+    notifyParent() {
+      this.$emit('customEvent', { data: this.cart });
+    }
   },
   data() {
     return {
@@ -283,8 +288,8 @@ export default {
       );
     },
     shippingAddressChanges: (val) => {
-      this.infiniteHandler(null)
       console.log(val, "addres cahnged")
+      // this.infiniteHandler()
     }
   },
 };

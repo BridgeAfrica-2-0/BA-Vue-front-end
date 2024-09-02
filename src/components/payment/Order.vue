@@ -7,12 +7,13 @@
     </div>
     <div class="order card-body">
       <div>
-        <OrderProductsList ref="checkoutorderr" />
+        <OrderProductsList ref="checkoutorderr" @customEvent="handleCustomEvent"/>
         <div class="row">
           <div class="col d-flex justify-content-end mt-4">
             <button
               @click="handleCreateOrder"
               class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
+              
             >
               <b-spinner v-if="loading" small variant="light"></b-spinner>
               {{ $t("Order.Order") }}
@@ -35,6 +36,7 @@ export default {
   data() {
     return {
       loading: false,
+      cart: []
     };
   },
   computed: {
@@ -43,15 +45,21 @@ export default {
     },
 
     order() {
-      return this.$store.state.checkout.order.data;
+      return this.$store.state.checkout.cart.data;
     },
 
-    cart() {
-      return this.$store.state.checkout.cart;
-    },
+    // cart() {
+    //   return this.$store.state.checkout.cart;
+    // },
     allShipping() {
       return this.$store.state.checkout.allShipping;
     },
+    isDestinationAvailable() {
+      return (
+        Array.isArray(this.cart.data) &&
+        this.cart.data.every((item) => item.isDestinationAvailable)
+      );
+    }
   },
   methods: {
     RefreshSipping() {
@@ -64,6 +72,11 @@ export default {
     },
     handleCreateOrder() {
       if (this.cartLenght) {
+        console.log("===========cart in order===========",this.cart.data)
+        if (!this.isDestinationAvailable) {
+        alert('One or more items in your cart cannot be shipped to the selected destination.');
+        return;
+      }
         this.loading = true;
         let order_data = {};
 
@@ -103,6 +116,11 @@ export default {
         });
       }
     },
+    handleCustomEvent(payload) {
+      console.log('Received =========================:', payload);
+      this.cart = payload;
+      // Do something with the data received from the child component
+    }
   },
   mounted() {},
 };

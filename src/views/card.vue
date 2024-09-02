@@ -194,6 +194,7 @@
 <script>
 import navbar from "@/components/navbar.vue";
 import axios from "axios";
+import { getGuestIdentifier } from "../helpers";
 export default {
   components: { navbar },
   data() {
@@ -338,7 +339,7 @@ export default {
       this.loading = true;
       const url = this.islogin
         ? `cart/item/${id}/delete`
-        : `guest/cart/item/${id}/delete`;
+        : `guest/cart/item/${id}/delete?guest_identifier=${getGuestIdentifier()}`;
       await axios
         .delete(url)
         .then(result => {

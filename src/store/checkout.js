@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getGuestIdentifier } from "../helpers";
 
 const state = {
   allShipping: [],
@@ -21,11 +22,12 @@ const getters = {
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
     console.log(newShippingAdd);
+    let guest_identifier = getGuestIdentifier();
     const url = newShippingAdd.islogin
       ? `shipping-address`
       : `guest/shipping-address`;
     await axios
-      .post(url, newShippingAdd)
+      .post(url, { ...newShippingAdd, guest_identifier })
       .then((response) => {
         console.log(response.data);
         commit;
@@ -51,13 +53,13 @@ const actions = {
   async getshippingsummary({ commit }, isLogin) {
     const url = isLogin
       ? "cart/shippingSummary/1"
-      : "guest/cart/shippingSummary/1";
+      : "guest/cart/shippingSummary/1?id=" + getGuestIdentifier();
     await axios
       .get(url)
       .then((response) => {
         commit("setshippingsummary", response.data);
       })
-      .catch((error) => {
+      .catch((error) => {-                                                
         console.log({ error: error });
       });
   },
@@ -81,7 +83,9 @@ const actions = {
       ? "update/shipping-address/status"
       : "guest/shipping-address/update/status";
     await axios
-      .post(`${url}?shipping_address_id=${payload.id}`)
+      .post(`${url}?shipping_address_id=${payload.id}`, {
+        guest_identifier: getGuestIdentifier(),
+      })
       .then((response) => {
         console.log(response);
       })
@@ -101,9 +105,10 @@ const actions = {
   },
 
   async getAllShippingAdd({ commit }, { islogin, prefix = "" }) {
+    let guest_identifier = getGuestIdentifier();
     const url = islogin
       ? `${prefix}shipping/checkout/shippingAddresses`
-      : `${prefix}guest/shipping-address`;
+      : `${prefix}guest/shipping-address?guest_identifier=${guest_identifier}`;
     await axios
       .get(url)
       .then((response) => {
@@ -125,9 +130,10 @@ const actions = {
       });
   },
 
-  createOrder({ commit }) {
+  createOrder({ commit }, { isLogin }) {
+    let url = isLogin ? "cart/create" : "guest/cart/create"
     return axios
-      .post("cart/create")
+      .post(url)
       .then((data) => {
         let orderId = data.data.data;
         console.log(data.data);
@@ -154,7 +160,8 @@ const actions = {
   },
 
   async getCart({ commit }, isLogin = false) {
-    const url = isLogin ? "cart" : "guest/cart";
+    let guest_identifier = getGuestIdentifier();
+    const url = isLogin ? "cart" : "guest/cart?guest_identifier=" + guest_identifier;
     await axios
       .get(url)
       .then((response) => {
@@ -166,8 +173,11 @@ const actions = {
       });
   },
 
-  async getCartt({ commit } , isLogin = false) {
-    let url = isLogin ? "ckeckout-cart" : "guest/cart/checkout"
+  async getCartt({ commit }, isLogin = false) {
+    let guest_identifier = getGuestIdentifier();
+    let url = isLogin
+      ? "ckeckout-cart"
+      : "guest/cart/checkout?guest_identifier=" + guest_identifier;
     await axios
       .get(url)
       .then((response) => {

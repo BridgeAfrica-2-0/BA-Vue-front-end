@@ -30,11 +30,11 @@ import OrderProductsList from "./OrderProductsList.vue";
 export default {
   name: "Order",
   components: {
-    OrderProductsList
+    OrderProductsList,
   },
   data() {
     return {
-      loading: false
+      loading: false,
     };
   },
   computed: {
@@ -51,7 +51,7 @@ export default {
     },
     allShipping() {
       return this.$store.state.checkout.allShipping;
-    }
+    },
   },
   methods: {
     RefreshSipping() {
@@ -72,7 +72,9 @@ export default {
         const productlength = this.cartLenght;
 
         this.$store
-          .dispatch("checkout/createOrder")
+          .dispatch("checkout/createOrder", {
+            isLogin: this.$store.getters["auth/isLogged"],
+          })
           .then(({ data }) => {
             console.log(data);
 
@@ -97,12 +99,12 @@ export default {
           status: "error",
 
           message: "no product in your shopping cart",
-          blockClass: "custom-block-class"
+          blockClass: "custom-block-class",
         });
       }
-    }
+    },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 

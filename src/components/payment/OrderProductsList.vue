@@ -102,6 +102,7 @@
 <script>
 // import ProductCaroussel from "./ProductCaroussel.vue";
 import axios from "axios";
+import { getGuestIdentifier } from "../../helpers";
 export default {
   name: "OrderProductsList",
   components: {
@@ -132,13 +133,19 @@ export default {
     },
 
     infiniteHandler($state) {
+      if (!this.goNextPage) {
+        $state.complete();
+        return;
+      }
       let url = this.$store.getters["auth/isLogged"]
-        ? "cart/shippingSummary/"
-        : "guest/cart/shippingSummary/";
+        ? "cart/shippingSummary/" + this.page
+        : `guest/cart/shippingSummary/${
+            this.page
+          }?guest_identifier=${getGuestIdentifier()}`;
       axios
-        .get(url + this.page)
+        .get(url)
         .then(({ data }) => {
-          console.log("checkout api data", data);
+          if (data.total <= data.data.length) this.goNextPage = false;
           if (data.data.length > 0) {
             this.page += 1;
             if (data.data) {
@@ -247,6 +254,7 @@ export default {
           img: require("@/assets/img/payment/headset3.jpg"),
         },
       ],
+      goNextPage: true,
     };
   },
   computed: {

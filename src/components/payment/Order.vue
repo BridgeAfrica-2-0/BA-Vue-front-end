@@ -7,13 +7,16 @@
     </div>
     <div class="order card-body">
       <div>
-        <OrderProductsList ref="checkoutorderr" @customEvent="handleCustomEvent"/>
+        <OrderProductsList
+          ref="checkoutorderr"
+          @customEvent="handleCustomEvent"
+        />
         <div class="row">
           <div class="col d-flex justify-content-end mt-4">
             <button
               @click="handleCreateOrder"
               class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
-              :disabled= !isDestinationAvailable
+              :disabled="isDestinationAvailable"
             >
               <b-spinner v-if="loading" small variant="light"></b-spinner>
               {{ $t("Order.Order") }}
@@ -31,11 +34,12 @@ import OrderProductsList from "./OrderProductsList.vue";
 export default {
   name: "Order",
   components: {
-    OrderProductsList,
+    OrderProductsList
   },
   data() {
     return {
       loading: false,
+      isDestinationAvailable: false,
       cart: []
     };
   },
@@ -53,12 +57,6 @@ export default {
     // },
     allShipping() {
       return this.$store.state.checkout.allShipping;
-    },
-    isDestinationAvailable() {
-      return (
-        Array.isArray(this.cart.data) &&
-        this.cart.data.every((item) => item.isDestinationAvailable)
-      );
     }
   },
   methods: {
@@ -72,11 +70,12 @@ export default {
     },
     handleCreateOrder() {
       if (this.cartLenght) {
-        console.log("===========cart in order===========",this.cart.data)
-        if (!this.isDestinationAvailable) {
-        alert('One or more items in your cart cannot be shipped to the selected destination.');
-        return;
-      }
+        if (this.isDestinationAvailable) {
+          alert(
+            "One or more items in your cart cannot be shipped to the selected destination."
+          );
+          return;
+        }
         this.loading = true;
         let order_data = {};
 
@@ -86,11 +85,9 @@ export default {
 
         this.$store
           .dispatch("checkout/createOrder", {
-            isLogin: this.$store.getters["auth/isLogged"],
+            isLogin: this.$store.getters["auth/isLogged"]
           })
           .then(({ data }) => {
-            console.log(data);
-
             this.$emit(
               "showoperator",
               data.data.total_orders_amount,
@@ -112,17 +109,20 @@ export default {
           status: "error",
 
           message: "no product in your shopping cart",
-          blockClass: "custom-block-class",
+          blockClass: "custom-block-class"
         });
       }
     },
     handleCustomEvent(payload) {
-      console.log('Received =========================:', payload);
       this.cart = payload;
-      // Do something with the data received from the child component
+      if (this.cart.data && this.cart.data.length > 0) {
+        this.isDestinationAvailable = this.cart.data.some(
+          obj => obj.isDestinationAvailable === false
+        );
+      }
     }
   },
-  mounted() {},
+  mounted() {}
 };
 </script>
 

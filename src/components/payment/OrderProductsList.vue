@@ -135,7 +135,6 @@ export default {
     },
 
     infiniteHandler($state) {
-
       if (!this.goNextPage && $state) {
         $state.complete();
         // return;
@@ -151,36 +150,37 @@ export default {
           if (data.total <= data.data.length) this.goNextPage = false;
           if (data.data.length > 0) {
             this.page += 1;
-            if (data.data) {
-              this.cart.push(...data.data);
-              this.notifyParent();
-              console.log("checkout cart data", this.cart);
+            if (data.data.length > 0) {
+              data.data.forEach(dat => {
+                if (dat.business_items.length > 0) {
+                  this.cart.push(dat);
+                  this.notifyParent();
+                }
+              });
             } else {
               $state.complete();
             }
-            if($state) $state.loaded();
-            
+            if ($state) $state.loaded();
           } else {
-            if($state) $state.complete();
+            if ($state) $state.complete();
           }
         })
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     changePage(value) {
-      console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
       let url = "ckeckout-cart&page=" + value;
 
       this.$store
         .dispatch("checkout/next", url)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           this.loading = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     },
@@ -191,7 +191,7 @@ export default {
         image = img1;
       } else {
         image.push({
-          img: img1,
+          img: img1
         });
       }
       return image;
@@ -204,7 +204,7 @@ export default {
         // console.log(key + " -- " + value);
         data = {
           adress: val,
-          price: item[val],
+          price: item[val]
         };
       }
 
@@ -229,7 +229,7 @@ export default {
       );
     },
     notifyParent() {
-      this.$emit('customEvent', { data: this.cart });
+      this.$emit("customEvent", { data: this.cart });
     }
   },
   data() {
@@ -244,29 +244,29 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       orderForCurrentPage: [],
       productImages: [
         {
-          img: require("@/assets/img/payment/headset.jpg"),
+          img: require("@/assets/img/payment/headset.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset1.jpg"),
+          img: require("@/assets/img/payment/headset1.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset2.jpg"),
+          img: require("@/assets/img/payment/headset2.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset3.jpg"),
-        },
+          img: require("@/assets/img/payment/headset3.jpg")
+        }
       ],
-      goNextPage: true,
+      goNextPage: true
     };
   },
   computed: {
     ...mapGetters({
-      shippingAddressChanges: "checkout/shippingAddressChanges",
+      shippingAddressChanges: "checkout/shippingAddressChanges"
     }),
     rowsOrder() {
       let rows = 1;
@@ -278,7 +278,7 @@ export default {
     },
     cartt() {
       return this.$store.state.checkout.shippingsummary;
-    },
+    }
   },
   watch: {
     currentPage: function(val) {
@@ -287,11 +287,11 @@ export default {
         val * this.per_page
       );
     },
-    shippingAddressChanges: (val) => {
-      console.log(val, "addres cahnged")
+    shippingAddressChanges: val => {
+      console.log(val, "addres cahnged");
       // this.infiniteHandler()
     }
-  },
+  }
 };
 </script>
 

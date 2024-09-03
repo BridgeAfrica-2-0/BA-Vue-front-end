@@ -13,7 +13,7 @@
             <button
               @click="handleCreateOrder"
               class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
-              
+              :disabled= !isDestinationAvailable
             >
               <b-spinner v-if="loading" small variant="light"></b-spinner>
               {{ $t("Order.Order") }}

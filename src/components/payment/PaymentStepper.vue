@@ -286,8 +286,20 @@ export default {
       let url = null;
       if (operator == "ORANGE") {
         this.loading = true;
+        const userJson = localStorage.getItem('user');
 
-        url = "orange/start-orange-money-transaction";
+      let userId = null;
+      const userObject = JSON.parse(userJson);
+      if(userObject)
+      {
+        try {
+        userId = userObject.user.id;
+        } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        }
+      }
+
+        url = this.islogin ?`orange/start-orange-money-transaction?userId=${userId}`: "orange/start-orange-money-transaction";
 
         axios
           .post(url, data)

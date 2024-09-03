@@ -306,9 +306,9 @@ export default {
           .then(response => {
             // this.showConfirmPayment = true;
             //  this.onClickNext();
-            console.log(response.data.data);
+            console.log("==========================",response.data);
 
-            window.location.href = response.data.data.payment_url;
+            // window.location.href = response.data.data.payment_url;
             this.loading = false;
             console.log("testing orange");
           })

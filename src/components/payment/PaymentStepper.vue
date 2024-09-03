@@ -306,9 +306,16 @@ export default {
           .then(response => {
             // this.showConfirmPayment = true;
             //  this.onClickNext();
-            console.log("==========================",response.data);
-
-            // window.location.href = response.data.data.payment_url;
+            if(response.data)
+          {
+            this.flashMessage.show({
+              status: "success",
+              message: "Operation Successful! "
+            });
+            setTimeout(() => {
+             this.$router.push({ path: '/' }); 
+              }, 3000); 
+          }
             this.loading = false;
             console.log("testing orange");
           })

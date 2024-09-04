@@ -295,7 +295,7 @@
           <span style="color: black;">{{ $t("general.for_busineses") }} </span>
         </h3>
         <p class="ba-description" style="color: black;">
-          {{ $t("general.sell_online_in_person") }}
+          {{ $t("general.sell_online_in_person-mobile") }}
         </p>
         <div class="row">
           <div
@@ -335,46 +335,12 @@
                     class="icon-spacing"
                   />
                 </span>
-                <div class="bottom-border">
+                <div class="ml-2">
                   <h5>
-                    {{ $t("general.business_identity_and_oline") }}
+                    {{ $t("general.business_identity_and_oline_mobile") }}
                   </h5>
                   <p>
                     {{ $t("general.create_your_business_page") }}
-                  </p>
-                </div>
-              </div>
-              <div class="babiz-list d-flex">
-                <span class="p-1 ship-globally">
-                  <v-lazy-image
-                    src="assets/home/ba_business_2.png"
-                    alt="Icon"
-                    class="icon-spacing"
-                  />
-                </span>
-                <div class="bottom-border">
-                  <h5>
-                    {{ $t("general.online_business_database") }}
-                  </h5>
-                  <p>
-                    {{ $t("general.make_your_business_visible") }}
-                  </p>
-                </div>
-              </div>
-              <div class="babiz-list d-flex">
-                <span class="p-1 get-paid">
-                  <v-lazy-image
-                    src="assets/home/ba_business_3.png"
-                    alt="Icon"
-                    class="icon-spacing"
-                  />
-                </span>
-                <div class="bottom-border">
-                  <h5>
-                    {{ $t("general.unified_back_office") }}
-                  </h5>
-                  <p>
-                    {{ $t("general.easily_manage_your_business") }}
                   </p>
                 </div>
               </div>
@@ -570,9 +536,9 @@
       </div>
     </section>
 
-    <section class="p-0 m-0 bg-color">
+    <section class="p-0 m-0 quotation-form-desktop">
       <div
-        class="container mt-0 p-0"
+        class="container mt-0 p-0 "
         data-aos="zoom-in-up"
         data-aos-offset="70px"
         data-aos-duration="1500"
@@ -593,6 +559,137 @@
                   $t("general.find_products_and_services")
                 }}</span>
               </h3>
+              <form novalidate @submit.prevent="validateUser">
+                <div class="form pt-1 row">
+                  <div class="col-md-12 p-0">
+                    <label for="name" class="pb-0 label-color">
+                      {{ $t("general.looking_for_something") }}
+                    </label>
+                    <md-field :class="getValidationClass('pname')">
+                      <md-input
+                        type="text"
+                        name="name"
+                        class="ba-input"
+                        id="name"
+                        placeholder="Input Product Keyword or Name"
+                        v-model="form.pname"
+                      />
+
+                      <span class="md-error" v-if="!$v.form.pname.required">
+                        required
+                      </span>
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="qunatity" class="pb-0 label-color">
+                      {{ $t("general.Quantity") }}
+                    </label>
+                    <md-field :class="getValidationClass('quantity')">
+                      <md-input
+                        class="ba-input "
+                        type="tel"
+                        name="qunatity"
+                        id="quantity"
+                        placeholder="Quantity"
+                        v-model="form.quantity"
+                      />
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="uname" class="pb-0 label-color">
+                      {{ $t("general.full_name") }}
+                    </label>
+                    <md-field :class="getValidationClass('name')">
+                      <md-input
+                        type="text"
+                        name="uname"
+                        id="uname"
+                        class="ba-input"
+                        placeholder="Full Name"
+                        v-model="form.name"
+                      />
+
+                      <span class="md-error" v-if="!$v.form.name.required">
+                        {{ $t("auth.First_Name_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="email" class="pb-0 label-color">
+                      {{ $t("general.Email") }}
+                    </label>
+                    <md-field class="">
+                      <md-input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        class="ba-input"
+                        v-model="form.email"
+                      />
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="name" class="pb-0 label-color">
+                      {{ $t("general.Tel") }}
+                    </label>
+                    <md-field :class="getValidationClass('tel')">
+                      <md-input
+                        type="tel"
+                        name="tel"
+                        id="tel"
+                        placeholder="Tel."
+                        class="ba-input "
+                        v-model="form.tel"
+                      />
+
+                      <span class="md-error" v-if="!$v.form.tel.required">
+                        {{ $t("auth.tel_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+                  <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
+                    <b-button type="submit" variant="primary" class="quote-btn">
+                      {{ $t("general.Request_For_Quotation") }}
+                      <span class="arrow-icon-wrapper">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
+                    </b-button>
+                  </div>
+                  <div></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section class="p-0 m-0 quotation-form-mobile">
+      <div
+        class="container mt-0"
+        data-aos="zoom-in-up"
+        data-aos-offset="70px"
+        data-aos-duration="1500"
+      >
+        <div class="row mt-0">
+          <div class="text-center">
+            <h3> Looking for something special?</h3>
+            <p style="color: black;" class="px-2"> Explore Cameroon's products and services. From custom tailoring to local crafts, we've got you covered.to Measure tailoring service that represents outstanding value for money</p>
+          </div>
+          <div class="col-lg-4 h-100 quote-img">
+            <v-lazy-image src="assets/home/quotation-img-mobile.png" alt="" />
+          </div>
+
+          <div
+            class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form"
+            id="quote"
+          >
+            <div class="m-left">
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
                   <div class="col-md-12 p-0">
@@ -1087,7 +1184,7 @@
     </section>
 
     <section class="bg-whitee faq">
-      <div class="container pb-5">
+      <div class="container pb-5 pl-4 pr-4">
         <div class="text-center">
           <h3 style="color: #e75b17">
             {{ $t("general.faq") }}
@@ -1684,6 +1781,9 @@ export default {
 </script>
 
 <style>
+.quotation-form-mobile {
+    display: none;
+  }
 .mobile-buttons {
   display: none !important;
 }
@@ -2832,6 +2932,28 @@ export default {
 }
 
 @media screen and (max-width: 431px) {
+  .quotation-form-desktop {
+    display: none;
+  }
+  .quotation-form-mobile {
+    display: block;
+    background-color: #fff;
+  }
+
+  .quotation-form-mobile h3 {
+    color: #E75B17;
+  }
+
+  .quotation-form-mobile .ba-input {
+    box-shadow: none !important;
+    border: 1px solid #E7E7E7 !important;
+    background-color: #FAFAFA !important;
+  }
+
+  .quotation-form-mobile .ba-input::placeholder {
+    color: #A5A5A5; 
+  }
+
   .top-slider {
     height: 200px;
   }
@@ -2982,6 +3104,10 @@ export default {
     display: block !important;
   }
 
+  .start-selling-mobile .splide__arrow {
+    top: 40% !important;
+  }
+
   .selling-btn {
     display: none !important;
   }
@@ -3115,7 +3241,7 @@ export default {
   .create-your-shop,
   .ship-globally,
   .get-paid {
-    width: 75px;
+    width: 68px;
     display: flex !important;
     align-items: center;
     justify-content: center;

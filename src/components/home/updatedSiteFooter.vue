@@ -39,7 +39,7 @@
                       International Handicraft Center, Rond-point Intendance,
                       Yaounde Cameroon
                     </p>
-                    <p style="color: #FF9E19;">
+                    <p class="mt-3" style="color: #FF9E19;">
                       bridgeafricaventures.com
                     </p>
                   </div>
@@ -475,6 +475,10 @@ export default {
 
   .logo-div {
     padding-left: 12px !important;
+  }
+
+  .social-text {
+    font-weight: 400 !important;
   }
 }
 </style>

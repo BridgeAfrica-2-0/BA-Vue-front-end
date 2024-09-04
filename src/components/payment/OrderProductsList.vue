@@ -102,6 +102,9 @@
 <script>
 // import ProductCaroussel from "./ProductCaroussel.vue";
 import axios from "axios";
+import { getGuestIdentifier } from "../../helpers";
+import { mapGetters } from "vuex";
+
 export default {
   name: "OrderProductsList",
   components: {
@@ -110,7 +113,10 @@ export default {
   async created() {
     this.loading = true;
     await this.$store
-      .dispatch("checkout/getshippingsummary")
+      .dispatch(
+        "checkout/getshippingsummary",
+        this.$store.getters["auth/isLogged"]
+      )
       .then(() => {
         this.loading = false;
         this.error = false;
@@ -129,29 +135,40 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = "cart/shippingSummary/";
+      if (!this.goNextPage && $state) {
+        $state.complete();
+        // return;
+      }
+      let url = this.$store.getters["auth/isLogged"]
+        ? "cart/shippingSummary/" + this.page
+        : `guest/cart/shippingSummary/${
+            this.page
+          }?guest_identifier=${getGuestIdentifier()}`;
       axios
-        .get(url + this.page)
+        .get(url)
         .then(({ data }) => {
-          console.log(data);
-          if (data.data.length) {
+          if (data.total <= data.data.length) this.goNextPage = false;
+          if (data.data.length > 0) {
             this.page += 1;
-            if (data.data[0].business_items.length) {
-              this.cart.push(...data.data);
+            if (data.data.length > 0) {
+              data.data.forEach(dat => {
+                if (dat.business_items.length > 0) {
+                  this.cart.push(dat);
+                  this.notifyParent();
+                }
+              });
             } else {
               $state.complete();
             }
-
-            $state.loaded();
+            if ($state) $state.loaded();
           } else {
-            $state.complete();
+            if ($state) $state.complete();
           }
         })
         .catch(err => {});
     },
 
     changePage(value) {
-      console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
       let url = "ckeckout-cart&page=" + value;
@@ -210,6 +227,9 @@ export default {
         (currentPage - 1) * this.per_page,
         currentPage * this.per_page
       );
+    },
+    notifyParent() {
+      this.$emit("customEvent", { data: this.cart });
     }
   },
   data() {
@@ -240,10 +260,14 @@ export default {
         {
           img: require("@/assets/img/payment/headset3.jpg")
         }
-      ]
+      ],
+      goNextPage: true
     };
   },
   computed: {
+    ...mapGetters({
+      shippingAddressChanges: "checkout/shippingAddressChanges"
+    }),
     rowsOrder() {
       let rows = 1;
       if (this.cart["data"]) {
@@ -262,6 +286,10 @@ export default {
         (val - 1) * this.per_page,
         val * this.per_page
       );
+    },
+    shippingAddressChanges: val => {
+      console.log(val, "addres cahnged");
+      // this.infiniteHandler()
     }
   }
 };

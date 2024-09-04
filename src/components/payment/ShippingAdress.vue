@@ -67,12 +67,13 @@ export default {
   name: "ShippingAddress",
   data() {
     return {
-      loading: false
+      loading: false,
+      selectedShipping: null,
     };
   },
   components: {
     CreateShippingModal,
-    ChangeShippingAddress
+    ChangeShippingAddress,
   },
 
   methods: {
@@ -81,17 +82,20 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
-
       this.$store
-        .dispatch("checkout/choseShipping", data)
+        .dispatch("checkout/choseShipping", {
+          id: data,
+          isLogin: this.$store.getters["auth/isLogged"],
+        })
         .then(() => {
+          
           this.$emit("RefreshSipping");
           loader.hide();
 
           this.$store
-            .dispatch("checkout/getCartt")
+            .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
             .then(() => {
               loader.hide();
             })
@@ -113,24 +117,26 @@ export default {
 
     loadActualComponent1() {
       this.$emit("loadActualComponent1");
-    }
+    },
   },
   computed: {
     shippingsTab() {
       console.log(this.$store.state.checkout.allShipping);
       return this.$store.state.checkout.allShipping;
     },
-    selectedShipping: {
+    selectedShippingId: {
       get() {
         // Find the active shipping item and return its ID
-        const activeShipping = this.shippingsTab.find(item => item.active == 1);
+        const activeShipping = this.shippingsTab.find(
+          (item) => item.active == 1
+        );
         return activeShipping ? activeShipping.id : null;
       },
       set(value) {
-        // Allow v-model to set the selectedShipping value
+        // Directly set the data property rather than the computed property
         this.selectedShipping = value;
-      }
-    }
+      },
+    },
   },
   mounted() {
     this.loading = true;
@@ -142,7 +148,11 @@ export default {
       .catch(() => {
         this.loading = false;
       });
-  }
+  },
+  created() {
+    // Initialize selectedShipping with the ID of the active shipping item if available
+    this.selectedShipping = this.selectedShippingId;
+  },
 };
 </script>
 

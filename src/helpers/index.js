@@ -4,10 +4,10 @@ import axios from "axios";
 export const getRootSchemeForRedis = () =>
   axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8);
 
-export const date = value =>
+export const date = (value) =>
   moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a");
 
-export const fullMediaLink = media => {
+export const fullMediaLink = (media) => {
   if (media) {
     const scheme = axios.defaults.baseURL.substring(
       0,
@@ -25,12 +25,12 @@ export const fullMediaLink = media => {
   return "";
 };
 
-export const fromNow = dateTime =>
+export const fromNow = (dateTime) =>
   moment(dateTime)
     .local("en" == localStorage.getItem("lang") ? "en" : "fr")
     .fromNow();
 
-export const formatNumber = num => {
+export const formatNumber = (num) => {
   if (num >= 1000000000) {
     return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
   }
@@ -52,7 +52,7 @@ export const diffBetweenTwoDate = (end, start) => {
   return endDate.diff(startDate);
 };
 
-export const notification = notification => {
+export const notification = (notification) => {
   const time = () => notification.created_at;
 
   return `
@@ -96,4 +96,25 @@ export const isPremium = () => {
   return check;
 };
 
-export const wrapperErrors = errors => Object.values(errors).map(err => err[0]);
+export const wrapperErrors = (errors) =>
+  Object.values(errors).map((err) => err[0]);
+
+export const generateGuestIdentifier = () => {
+  return (
+    "id-" +
+    Math.random()
+      .toString(36)
+      .slice(2, 11)
+  );
+};
+
+export const setGuestIdentifier = () => {
+  const existing = localStorage.getItem("guest_identifier");
+  if (existing) return;
+  const guestIdentifier = generateGuestIdentifier();
+  localStorage.setItem("guest_identifier", guestIdentifier);
+  return guestIdentifier;
+};
+export const getGuestIdentifier = () => {
+  return localStorage.getItem("guest_identifier") ?? null;
+};

@@ -76,8 +76,16 @@
         </b-form-select>
       </b-form-group>
 
-      <div v-if="activateMatching" class="pb-2">
-        <b-badge
+      <div v-if="activateMatching" class="pb-2 badges-wrapper">
+        <span
+          v-for="item in categoryRendering"
+          :key="item.id"
+          @click="matching(item)"
+          :class="[item.activated ? 'activated' : 'inactied']"
+        >
+          {{ item.category }}
+        </span>
+        <!-- <b-badge
           v-for="item in categoryRendering"
           :key="item.id"
           :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
@@ -85,7 +93,7 @@
           @click="matching(item)"
         >
           {{ item.category }}
-        </b-badge>
+        </b-badge> -->
 
         <span v-if="activateMatching && !loading && !categoryRendering.length"
           >Not data found</span
@@ -229,7 +237,7 @@
                 :minMatchingChars="0"
                 @hit="searchThisNeibourhood(query)"
                 :maxMatches="10"
-                :serializer="item => item.name"
+                :serializer="(item) => item.name"
                 placeholder="Where"
                 class=""
               />
@@ -330,7 +338,7 @@
                 text-field="name"
                 @change="
                   searchNeigbourhoods({
-                    neighborhood_id: networkSelect.neighbourhood
+                    neighborhood_id: networkSelect.neighbourhood,
                   })
                 "
               >
@@ -413,7 +421,7 @@
                 :minMatchingChars="0"
                 @hit="searchThisNeibourhood(query)"
                 :maxMatches="10"
-                :serializer="item => item.name"
+                :serializer="(item) => item.name"
                 placeholder="Where"
                 class=""
               />
@@ -514,7 +522,7 @@
                 text-field="name"
                 @change="
                   searchNeigbourhoods({
-                    neighborhood_id: networkSelect.neighbourhood
+                    neighborhood_id: networkSelect.neighbourhood,
                   })
                 "
               >
@@ -831,7 +839,7 @@ import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import axios from "axios";
 export default {
   components: {
-    VueBootstrapTypeahead
+    VueBootstrapTypeahead,
   },
 
   name: "filters",
@@ -841,7 +849,7 @@ export default {
     "activateMatching",
     "Selectedcategory",
     "Selectedparentcategory",
-    "categoryNameSelected"
+    "categoryNameSelected",
   ],
   watch: {
     query(newQuery) {
@@ -862,16 +870,16 @@ export default {
         const response = await this.$repository.search.matching(value.name);
 
         if (response.success) {
-          this.matchingCategory = response.data.map(item => {
-            const sub = item.sub_category.map(c => ({
+          this.matchingCategory = response.data.map((item) => {
+            const sub = item.sub_category.map((c) => ({
               ...c,
-              cat_id: item.id
+              cat_id: item.id,
             }));
 
             return {
               ...item,
-              actived: false,
-              sub_category: sub
+              activated: false,
+              sub_category: sub,
             };
           });
 
@@ -886,7 +894,7 @@ export default {
       if (!value.length) return false;
 
       const cat = this.$store.getters["marketSearch/getCategories"].find(
-        r => r.category.name === value
+        (r) => r.category.name === value
       );
 
       this.$emit("onFinByCategory", { cat_id: cat.category.id });
@@ -1087,7 +1095,7 @@ export default {
           this.selectcategories = this.Tailoring;
           break;
       }
-    }
+    },
   },
 
   data() {
@@ -1120,7 +1128,7 @@ export default {
         council_id: null,
         neighborhood_id: null,
         distanceInKM: null,
-        price_range: null
+        price_range: null,
       },
 
       networkFilter: {
@@ -1128,7 +1136,7 @@ export default {
         region: false,
         division: false,
         council: false,
-        neighbourhood: false
+        neighbourhood: false,
       },
 
       networkSelect: {
@@ -1137,7 +1145,7 @@ export default {
         region: null,
         division: null,
         council: null,
-        neighbourhood: null
+        neighbourhood: null,
       },
 
       strategies: null,
@@ -1165,7 +1173,7 @@ export default {
       map: false,
       citiesValues: [],
       categories_filters: [],
-      categories_sub_filters: []
+      categories_sub_filters: [],
     };
   },
 
@@ -1190,12 +1198,12 @@ export default {
 
     categoriesAll() {
       const category = this.$store.getters["marketSearch/getCategories"].map(
-        e => {
+        (e) => {
           return {
             id: e.category.id,
             value: e.category.name,
             text: e.category.name,
-            sub_cat: e.category.sub_cat
+            sub_cat: e.category.sub_cat,
           };
         }
       );
@@ -1232,7 +1240,7 @@ export default {
     },
     prodLoader() {
       return this.$store.getters["marketSearch/getLoader"];
-    }
+    },
   },
   mounted() {
     console.log("Filter Type on page refresh:", this.filterType);
@@ -1271,12 +1279,12 @@ export default {
       if (this.islogin) {
         this.strategies = {
           2: () => PeopleFilter,
-          4: () => PostFilter
+          4: () => PostFilter,
         };
       } else {
         this.strategies = {
           2: () => PeopleFilter,
-          3: () => PostFilter
+          3: () => PostFilter,
         };
       }
     },
@@ -1285,10 +1293,10 @@ export default {
 
       this.showSubCat(cat.sub_category);
 
-      this.matchingCategory = this.matchingCategory.map(item => {
+      this.matchingCategory = this.matchingCategory.map((item) => {
         return item.id === cat.id
-          ? { ...item, actived: true }
-          : { ...item, actived: false };
+          ? { ...item, activated: true }
+          : { ...item, activated: false };
       });
     },
 
@@ -1366,14 +1374,14 @@ export default {
         if (this.filterType == 0) {
           this.$store
             .dispatch("marketSearch/getFilter", subCat.id)
-            .then(res => {
+            .then((res) => {
               // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
               this.searchProducts(this.searchParams);
               console.log("Filters: ");
               console.log(res.data.data);
               if (res.data.data.length === 0) {
                 let subName = "";
-                this.subCategories.map(sub => {
+                this.subCategories.map((sub) => {
                   if (sub.id) {
                     subName = sub.name;
                   }
@@ -1382,17 +1390,17 @@ export default {
               }
               // this.filterLoader = false;
               let filter = [];
-              res.data.data.map(filt => {
+              res.data.data.map((filt) => {
                 filter.push({
                   cat_id: subCat.cat_id,
                   sub_cat_id: subCat.id,
-                  ...filt
+                  ...filt,
                 });
               });
               this.$store.commit("marketSearch/setSubFilters", filter);
               //console.log("[DeBUG] FILTER: ", this.subFilter);
             })
-            .catch(err => {
+            .catch((err) => {
               console.error(err);
               // this.filterLoader = false;
             });
@@ -1400,7 +1408,7 @@ export default {
           // method to search for a business lol
           this.$store
             .dispatch("marketSearch/getFilter", subCat.id)
-            .then(res => {
+            .then((res) => {
               // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
               if (this.islogin) {
                 this.searchBusiness(this.searchParams);
@@ -1410,7 +1418,7 @@ export default {
 
               if (res.data.data.length === 0) {
                 let subName = "";
-                this.subCategories.map(sub => {
+                this.subCategories.map((sub) => {
                   if (sub.id) {
                     subName = sub.name;
                   }
@@ -1419,17 +1427,17 @@ export default {
               }
               // this.filterLoader = false;
               let filter = [];
-              res.data.data.map(filt => {
+              res.data.data.map((filt) => {
                 filter.push({
                   cat_id: subCat.cat_id,
                   sub_cat_id: subCat.id,
-                  ...filt
+                  ...filt,
                 });
               });
               this.$store.commit("marketSearch/setSubFilters", filter);
               //console.log("[DeBUG] FILTER: ", this.subFilter);
             })
-            .catch(err => {
+            .catch((err) => {
               console.error(err);
               // this.filterLoader = false;
             });
@@ -1438,7 +1446,7 @@ export default {
             this.allSearch({
               cat_id: subCat.cat_id,
               sub_cat: subCat.id,
-              filter_id: subCat.id
+              filter_id: subCat.id,
             });
           }
         }
@@ -1446,14 +1454,14 @@ export default {
         if (this.filterType == 0) {
           this.$store
             .dispatch("marketSearch/getFilter", subCat.id)
-            .then(res => {
+            .then((res) => {
               // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
               this.searchProducts(this.searchParams);
               console.log("Filters: ");
               console.log(res.data.data);
               if (res.data.data.length === 0) {
                 let subName = "";
-                this.subCategories.map(sub => {
+                this.subCategories.map((sub) => {
                   if (sub.id) {
                     subName = sub.name;
                   }
@@ -1462,17 +1470,17 @@ export default {
               }
               // this.filterLoader = false;
               let filter = [];
-              res.data.data.map(filt => {
+              res.data.data.map((filt) => {
                 filter.push({
                   cat_id: subCat.cat_id,
                   sub_cat_id: subCat.id,
-                  ...filt
+                  ...filt,
                 });
               });
               this.$store.commit("marketSearch/setSubFilters", filter);
               //console.log("[DeBUG] FILTER: ", this.subFilter);
             })
-            .catch(err => {
+            .catch((err) => {
               console.error(err);
               // this.filterLoader = false;
             });
@@ -1480,14 +1488,14 @@ export default {
           // method to search for a business lol
           this.$store
             .dispatch("marketSearch/getFilter", subCat.id)
-            .then(res => {
+            .then((res) => {
               // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
 
               this.searchBusiness(this.searchParams);
 
               if (res.data.data.length === 0) {
                 let subName = "";
-                this.subCategories.map(sub => {
+                this.subCategories.map((sub) => {
                   if (sub.id) {
                     subName = sub.name;
                   }
@@ -1496,17 +1504,17 @@ export default {
               }
               // this.filterLoader = false;
               let filter = [];
-              res.data.data.map(filt => {
+              res.data.data.map((filt) => {
                 filter.push({
                   cat_id: subCat.cat_id,
                   sub_cat_id: subCat.id,
-                  ...filt
+                  ...filt,
                 });
               });
               this.$store.commit("marketSearch/setSubFilters", filter);
               //console.log("[DeBUG] FILTER: ", this.subFilter);
             })
-            .catch(err => {
+            .catch((err) => {
               console.error(err);
               // this.filterLoader = false;
             });
@@ -1515,7 +1523,7 @@ export default {
             this.allSearch({
               cat_id: subCat.cat_id,
               sub_cat: subCat.id,
-              filter_id: subCat.id
+              filter_id: subCat.id,
             });
           }
         }
@@ -1526,19 +1534,19 @@ export default {
       if (this.islogin) {
         this.$store
           .dispatch("marketSearch/searchProducts", data)
-          .then(res => {
+          .then((res) => {
             // console.log("categories loaded!");
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
       } else {
         this.$store
           .dispatch("marketSearch/searchGuestUserProducts", data)
-          .then(res => {
+          .then((res) => {
             // console.log("categories loaded!");
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
       }
@@ -1547,10 +1555,10 @@ export default {
     allSearch(data) {
       this.$store
         .dispatch("allSearch/SEARCH", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -1558,20 +1566,20 @@ export default {
     searchBusiness(data) {
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
     searchBusinessForGuestUser(data) {
       this.$store
         .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -1633,10 +1641,10 @@ export default {
       //console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
       this.$store
         .dispatch("marketSearch/getUserNeigbourhoods")
-        .then(res => {
+        .then((res) => {
           console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       //console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
@@ -1682,7 +1690,7 @@ export default {
 
     searchByNeigbourhood(nei) {
       let data = {
-        location: nei
+        location: nei,
       };
 
       this.searchParams.neighbourhood = nei;
@@ -1701,7 +1709,7 @@ export default {
       /* console.log("[DEBUG] PRICE: ", value);
       console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id); */
       let data = {
-        distanceInKM: this.distance
+        distanceInKM: this.distance,
       };
       this.searchParams.distanceInKM = this.distance;
 
@@ -1722,7 +1730,7 @@ export default {
       let catId = this.subCategories[0].cat_id;
       let data = {
         cat_id: catId,
-        price_range: `${[180, value]}`
+        price_range: `${[180, value]}`,
       };
 
       this.searchParams.price_range = `${[180, value]}`;
@@ -1734,12 +1742,12 @@ export default {
       //console.log("[debug] Networks: ", this.networkSelect);
       this.$store
         .dispatch("networkSearch/COUNTRIES")
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
           console.log("countries: ", this.countries);
           if (this.networkSelect.country) this.getRegions();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       //console.log("[debug]country: ", this.countries);
@@ -1759,7 +1767,7 @@ export default {
 
       this.$store
         .dispatch("networkSearch/REGIONS", data)
-        .then(res => {
+        .then((res) => {
           if (this.networkSelect.region) this.getBDivisions();
 
           this.networkFilter = {
@@ -1767,7 +1775,7 @@ export default {
             region: true,
             division: false,
             council: false,
-            neighbourhood: false
+            neighbourhood: false,
           };
 
           this.networkSelect.region = null;
@@ -1776,7 +1784,7 @@ export default {
           this.networkSelect.neighbourhood = null;
           console.log("regions: ", this.regions);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
 
@@ -1821,21 +1829,21 @@ export default {
 
       this.$store
         .dispatch("networkSearch/DIVISIONS", data)
-        .then(res => {
+        .then((res) => {
           if (this.networkSelect.division) this.getBCouncils();
           this.networkFilter = {
             category: false,
             region: true,
             division: true,
             council: false,
-            neighbourhood: false
+            neighbourhood: false,
           };
 
           this.networkSelect.division = null;
           this.networkSelect.council = null;
           this.networkSelect.neighbourhood = null;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -1865,7 +1873,7 @@ export default {
 
       await this.$store
         .dispatch("networkSearch/COUNCILS", data)
-        .then(res => {
+        .then((res) => {
           console.log("councils: ", this.councils);
 
           this.networkFilter = {
@@ -1873,12 +1881,12 @@ export default {
             region: true,
             division: true,
             council: true,
-            neighbourhood: false
+            neighbourhood: false,
           };
 
           this.networkSelect.neighbourhood = null;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       if (this.networkSelect.council) {
@@ -1944,17 +1952,17 @@ export default {
 
       await this.$store
         .dispatch("networkSearch/NEIGHBOURHOODS", data)
-        .then(res => {
+        .then((res) => {
           console.log("Neighbourhoods: ", this.neighbourhoods);
           this.networkFilter = {
             category: false,
             region: true,
             division: true,
             council: true,
-            neighbourhood: true
+            neighbourhood: true,
           };
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       if (this.filterType == 1) {
@@ -1980,14 +1988,14 @@ export default {
       this.searchNetworks(data);
       this.$store
         .dispatch("networkSearch/REGIONS", data)
-        .then(res => {
+        .then((res) => {
           if (this.networkSelect.region) this.getDivisions();
           this.networkFilter = {
             category: false,
             region: true,
             division: false,
             council: false,
-            neighbourhood: false
+            neighbourhood: false,
           };
           this.networkSelect.region = null;
           this.networkSelect.division = null;
@@ -1995,7 +2003,7 @@ export default {
           this.networkSelect.neighbourhood = null;
           //console.log("regions: ", this.regions);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       // this.networkSelect = {
@@ -2013,11 +2021,11 @@ export default {
           for (let index in cities) {
             this.citiesValues.push({
               label: cities[index].name,
-              code: cities[index].id
+              code: cities[index].id,
             });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -2030,7 +2038,7 @@ export default {
 
       this.$store
         .dispatch("networkSearch/DIVISIONS", data)
-        .then(res => {
+        .then((res) => {
           console.log("divisions: ", this.divisions);
           if (this.networkSelect.division) this.getCouncils();
           this.networkFilter = {
@@ -2038,7 +2046,7 @@ export default {
             region: true,
             division: true,
             council: false,
-            neighbourhood: false
+            neighbourhood: false,
           };
           // this.networkSelect.region = null;
 
@@ -2046,7 +2054,7 @@ export default {
           this.networkSelect.council = null;
           this.networkSelect.neighbourhood = null;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -2056,7 +2064,7 @@ export default {
       const data = { division_id: this.networkSelect.division };
       await this.$store
         .dispatch("networkSearch/COUNCILS", data)
-        .then(res => {
+        .then((res) => {
           console.log("councils: ", this.councils);
 
           this.networkFilter = {
@@ -2064,12 +2072,12 @@ export default {
             region: true,
             division: true,
             council: true,
-            neighbourhood: false
+            neighbourhood: false,
           };
 
           this.networkSelect.neighbourhood = null;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       if (this.networkSelect.council) {
@@ -2085,17 +2093,17 @@ export default {
       this.searchNetworks(data);
       await this.$store
         .dispatch("networkSearch/NEIGHBOURHOODS", data)
-        .then(res => {
+        .then((res) => {
           //console.log("Neighbourhoods: ", this.neighbourhoods);
           this.networkFilter = {
             category: false,
             region: true,
             division: true,
             council: true,
-            neighbourhood: true
+            neighbourhood: true,
           };
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
       this.searchNetworks(data);
@@ -2131,14 +2139,14 @@ export default {
         region: false,
         division: false,
         council: false,
-        neighbourhood: false
+        neighbourhood: false,
       };
       this.networkSelect = {
         country: [],
         region: [],
         division: [],
         council: [],
-        neighbourhood: []
+        neighbourhood: [],
       };
     },
 
@@ -2147,10 +2155,10 @@ export default {
 
       await this.$store
         .dispatch("networkSearch/SEARCH", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -2160,10 +2168,10 @@ export default {
     allSearchByCat(data) {
       this.$store
         .dispatch("allSearch/SEARCH", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -2428,15 +2436,19 @@ export default {
     setSelectedLocation(value) {
       this.$emit("updateSearchLocation", {
         code: value.code,
-        label: value.label
+        label: value.label,
       });
       this.searchThiscity(value);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.badges-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
 .inactied {
   cursor: pointer;
   font-size: 14px;
@@ -2444,6 +2456,9 @@ export default {
   font-weight: 400;
   border: 1px solid #455a64;
   background: transparent;
+  margin: 2px;
+  padding: 1px;
+  border-radius: 7px;
 }
 
 .actived {
@@ -2452,6 +2467,9 @@ export default {
   color: white;
   border: 1px solid #e75c18;
   background: #e75c18;
+  margin: 2px;
+  padding: 1px;
+  border-radius: 7px;
 }
 
 .br-3 {

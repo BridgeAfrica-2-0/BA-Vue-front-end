@@ -7,12 +7,16 @@
     </div>
     <div class="order card-body">
       <div>
-        <OrderProductsList ref="checkoutorderr" />
+        <OrderProductsList
+          ref="checkoutorderr"
+          @customEvent="handleCustomEvent"
+        />
         <div class="row">
           <div class="col d-flex justify-content-end mt-4">
             <button
               @click="handleCreateOrder"
               class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
+              :disabled="isDestinationAvailable"
             >
               <b-spinner v-if="loading" small variant="light"></b-spinner>
               {{ $t("Order.Order") }}
@@ -34,7 +38,9 @@ export default {
   },
   data() {
     return {
-      loading: false
+      loading: false,
+      isDestinationAvailable: false,
+      cart: []
     };
   },
   computed: {
@@ -43,12 +49,12 @@ export default {
     },
 
     order() {
-      return this.$store.state.checkout.order.data;
+      return this.$store.state.checkout.cart.data;
     },
 
-    cart() {
-      return this.$store.state.checkout.cart;
-    },
+    // cart() {
+    //   return this.$store.state.checkout.cart;
+    // },
     allShipping() {
       return this.$store.state.checkout.allShipping;
     }
@@ -64,6 +70,12 @@ export default {
     },
     handleCreateOrder() {
       if (this.cartLenght) {
+        if (this.isDestinationAvailable) {
+          alert(
+            "One or more items in your cart cannot be shipped to the selected destination."
+          );
+          return;
+        }
         this.loading = true;
         let order_data = {};
 
@@ -72,10 +84,10 @@ export default {
         const productlength = this.cartLenght;
 
         this.$store
-          .dispatch("checkout/createOrder")
+          .dispatch("checkout/createOrder", {
+            isLogin: this.$store.getters["auth/isLogged"]
+          })
           .then(({ data }) => {
-            console.log(data);
-
             this.$emit(
               "showoperator",
               data.data.total_orders_amount,
@@ -99,6 +111,14 @@ export default {
           message: "no product in your shopping cart",
           blockClass: "custom-block-class"
         });
+      }
+    },
+    handleCustomEvent(payload) {
+      this.cart = payload;
+      if (this.cart.data && this.cart.data.length > 0) {
+        this.isDestinationAvailable = this.cart.data.some(
+          obj => obj.isDestinationAvailable === false
+        );
       }
     }
   },

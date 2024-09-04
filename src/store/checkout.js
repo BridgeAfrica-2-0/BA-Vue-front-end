@@ -55,7 +55,7 @@ const actions = {
   async getshippingsummary({ commit }, isLogin) {
     const url = isLogin
       ? "cart/shippingSummary/1"
-      : "guest/cart/shippingSummary/1?id=" + getGuestIdentifier();
+      : "guest/cart/shippingSummary/1?guest_identifier=" + getGuestIdentifier();
     await axios
       .get(url)
       .then((response) => {

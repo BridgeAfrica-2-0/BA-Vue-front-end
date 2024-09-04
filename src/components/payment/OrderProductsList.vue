@@ -102,6 +102,9 @@
 <script>
 // import ProductCaroussel from "./ProductCaroussel.vue";
 import axios from "axios";
+import { getGuestIdentifier } from "../../helpers";
+import { mapGetters } from "vuex";
+
 export default {
   name: "OrderProductsList",
   components: {
@@ -132,44 +135,52 @@ export default {
     },
 
     infiniteHandler($state) {
+      if (!this.goNextPage && $state) {
+        $state.complete();
+        // return;
+      }
       let url = this.$store.getters["auth/isLogged"]
-        ? "cart/shippingSummary/"
-        : "guest/cart/shippingSummary/";
+        ? "cart/shippingSummary/" + this.page
+        : `guest/cart/shippingSummary/${
+            this.page
+          }?guest_identifier=${getGuestIdentifier()}`;
       axios
-        .get(url + this.page)
+        .get(url)
         .then(({ data }) => {
-          console.log("checkout api data", data);
+          if (data.total <= data.data.length) this.goNextPage = false;
           if (data.data.length > 0) {
             this.page += 1;
-            if (data.data) {
-              this.cart.push(...data.data);
-              console.log("checkout cart data", this.cart);
+            if (data.data.length > 0) {
+              data.data.forEach(dat => {
+                if (dat.business_items.length > 0) {
+                  this.cart.push(dat);
+                  this.notifyParent();
+                }
+              });
             } else {
               $state.complete();
             }
-
-            $state.loaded();
+            if ($state) $state.loaded();
           } else {
-            $state.complete();
+            if ($state) $state.complete();
           }
         })
-        .catch((err) => {});
+        .catch(err => {});
     },
 
     changePage(value) {
-      console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
       let url = "ckeckout-cart&page=" + value;
 
       this.$store
         .dispatch("checkout/next", url)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           this.loading = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     },
@@ -180,7 +191,7 @@ export default {
         image = img1;
       } else {
         image.push({
-          img: img1,
+          img: img1
         });
       }
       return image;
@@ -193,7 +204,7 @@ export default {
         // console.log(key + " -- " + value);
         data = {
           adress: val,
-          price: item[val],
+          price: item[val]
         };
       }
 
@@ -217,6 +228,9 @@ export default {
         currentPage * this.per_page
       );
     },
+    notifyParent() {
+      this.$emit("customEvent", { data: this.cart });
+    }
   },
   data() {
     return {
@@ -230,26 +244,30 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       orderForCurrentPage: [],
       productImages: [
         {
-          img: require("@/assets/img/payment/headset.jpg"),
+          img: require("@/assets/img/payment/headset.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset1.jpg"),
+          img: require("@/assets/img/payment/headset1.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset2.jpg"),
+          img: require("@/assets/img/payment/headset2.jpg")
         },
         {
-          img: require("@/assets/img/payment/headset3.jpg"),
-        },
+          img: require("@/assets/img/payment/headset3.jpg")
+        }
       ],
+      goNextPage: true
     };
   },
   computed: {
+    ...mapGetters({
+      shippingAddressChanges: "checkout/shippingAddressChanges"
+    }),
     rowsOrder() {
       let rows = 1;
       if (this.cart["data"]) {
@@ -260,7 +278,7 @@ export default {
     },
     cartt() {
       return this.$store.state.checkout.shippingsummary;
-    },
+    }
   },
   watch: {
     currentPage: function(val) {
@@ -269,7 +287,11 @@ export default {
         val * this.per_page
       );
     },
-  },
+    shippingAddressChanges: val => {
+      console.log(val, "addres cahnged");
+      // this.infiniteHandler()
+    }
+  }
 };
 </script>
 

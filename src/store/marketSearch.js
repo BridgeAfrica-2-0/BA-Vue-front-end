@@ -219,7 +219,7 @@ export default {
 
       try {
         const res = await axios.get(
-          `search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}` +
+          `search/market?keyword=${keyword}&catId=${cat_id}&sub_cat_id=${sub_cat}&filterId=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}` +
             countryId +
             regionId +
             divisionId +
@@ -265,7 +265,7 @@ export default {
 
       try {
         const res = await axios.get(
-          `visitor/search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}` +
+          `visitor/search/market?keyword=${keyword}&catId=${cat_id}&sub_cat_id=${sub_cat}&filterId=${filter_id}&distanceInKM=${distance}&page=${page}&limit=${limit}` +
             countryId +
             regionId +
             divisionId +

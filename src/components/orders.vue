@@ -346,6 +346,11 @@ import RequestPayment from "./payment/RequestPayment";
 import moment from "moment";
 export default {
   components: { navbar, PaymentOperator, RequestPayment },
+  computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+  },
   data() {
     return {
       isTabActive: 1,
@@ -444,7 +449,19 @@ export default {
       if (operator == "ORANGE") {
         this.loading = true;
 
-        url = "orange/start-orange-money-transaction";
+        const userJson = localStorage.getItem('user');
+
+       let userId = null;
+       const userObject = JSON.parse(userJson);
+       if(userObject)
+       {
+       try {
+       userId = userObject.user.id;
+      } catch (error) {
+      console.error('Error parsing user data from localStorage:', error);
+     }
+      }
+       url = this.islogin ?`orange/start-orange-money-transaction?userId=${userId}`: "orange/start-orange-money-transaction";
 
         axios
           .post(url, data)

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getGuestIdentifier, setGuestIdentifier } from "../helpers";
 export default {
   namespaced: true,
 
@@ -14,22 +15,28 @@ export default {
   },
   actions: {
     async addToCart({ commit }, { product, islogin }) {
+      let guest_identifier = getGuestIdentifier();
+      if (!islogin && !guest_identifier) {
+        guest_identifier = setGuestIdentifier();
+      }
       const url = islogin
         ? `market/product/${product.id}/cart/add?business_id=${product.business_id}`
         : `guest/cart/product/${product.id}/cart/add?business_id=${product.business_id}`;
-      let options = islogin ? {} : { withCredentials: true };
+      let body = islogin ? {} : { guest_identifier };
       return await axios
-        .post(url, {}, options)
+        .post(url, body)
         .then((data) => {
           console.log(data);
-          const setCookieHeader = data.headers["set-cookie"]; // Correct header key for cookies
+          const setCookieHeader = data.data.data.guest_identifier;
 
           // Log the cookie value if it exists
-          if (setCookieHeader) {
-            console.log("Cookie received:", setCookieHeader);
-          } else {
-            console.log("No Set-Cookie header received");
-          }
+          // if (setCookieHeader) {
+          //   document.cookie = `guest_identifier=${setCookieHeader}; path=/; samesite=None; secure`;
+
+          //   console.log("Cookie received:", setCookieHeader);
+          // } else {
+          //   console.log("No Set-Cookie header received");
+          // }
           commit("setStatus", data.data.message);
         })
         .catch((error) => {

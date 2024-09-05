@@ -198,16 +198,16 @@ export default {
   props: {
     form: {
       type: Object,
-      require: true
+      require: true,
     },
     current_step: {
-      require: true
+      require: true,
     },
     modal: Boolean,
     mode: {
       type: String,
-      default: "create"
-    }
+      default: "create",
+    },
   },
   data() {
     return {
@@ -215,7 +215,8 @@ export default {
       loading: false,
       countries: [],
       regions: [],
-      destinations: []
+      destinations: [],
+      username: "",
     };
   },
   created() {
@@ -223,14 +224,12 @@ export default {
     console.log(this.form.country);
   },
   computed: {
-    username() {
-      return this.$store.state.auth.user?.user?.name || "";
-    },
-
     shippingsTab() {
       return this.$store.state.checkout.allShipping;
-    }
-
+    },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     // countries() {
     // 	return this.$store.state.auth.country;
     // },
@@ -253,6 +252,8 @@ export default {
       this.getRegions(this.form.country);
       this.getDestinations(this.form.region);
     }
+    this.username = this.$store.state.auth.user?.user?.name || "";
+    this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
   },
   methods: {
     closesipping() {
@@ -265,6 +266,7 @@ export default {
       event.preventDefault();
       this.loading = true;
       this.form.name = this.username;
+      this.form.islogin = this.islogin;
       //if component is called in create mode
       if (this.mode === "create") {
         this.$store
@@ -297,8 +299,8 @@ export default {
             phone: this.form.phone,
             city: this.form.city,
             neighbourhood_id: 1,
-            email: this.form.email
-          }
+            email: this.form.email,
+          },
         };
 
         for (let key in shippingUp.data) {
@@ -319,6 +321,7 @@ export default {
           this.$emit("closecshippingm");
         }
       }
+      this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
     },
     onReset(event) {
       event.preventDefault();
@@ -340,42 +343,43 @@ export default {
       this.loading = true;
       await axios
         .get(`shipping-address/get-country`)
-        .then(res => {
+        .then((res) => {
           // this.countries = res.data.data
           let data = [];
           for (let i = 0; i < res.data.data.length; i++) {
             let country = {
               id: res.data.data[i].country,
-              name: res.data.data[i].country
+              name: res.data.data[i].country,
             };
             data.push(country);
           }
           this.countries = data;
           this.loading = false;
         })
-        .catch(err => console.dir(err));
+        .catch((err) => {
+          this.loading = false;
+        });
     },
     async getRegions(country) {
       this.loading = true;
-      console.log(country);
       let data = {
-        country: country
+        country: country,
       };
       await axios
         .post(`shipping-address/select-region`, data)
-        .then(res => {
+        .then((res) => {
           let data = [];
           for (let i = 0; i < res.data.data.length; i++) {
             let region = {
               id: res.data.data[i].regions,
-              name: res.data.data[i].regions
+              name: res.data.data[i].regions,
             };
             data.push(region);
           }
           this.loading = false;
           this.regions = data;
         })
-        .catch(err => console.dir(err));
+        .catch((err) => console.dir(err));
       // this.form.region_id = undefined;
       // this.form.division_id = undefined;
       // this.form.council_id = undefined;
@@ -384,27 +388,25 @@ export default {
     },
     async getDestinations(region) {
       this.loading = true;
-      console.log(region);
       let data = {
-        region: region
+        region: region,
       };
       await axios
         .post(`shipping-address/select-destination`, data)
-        .then(res => {
+        .then((res) => {
           let data = [];
           for (let i = 0; i < res.data.data.length; i++) {
             let region = {
               id: res.data.data[i].destinations,
-              name: res.data.data[i].destinations
+              name: res.data.data[i].destinations,
             };
             data.push(region);
           }
           this.destinations = data;
           this.loading = false;
-          console.log(res.data.data);
         })
-        .catch(err => console.dir(err));
-    }
+        .catch((err) => console.dir(err));
+    },
     // getDivisions(region_id) {
     // 	this.form.division_id = undefined;
     // 	this.form.council_id = undefined;
@@ -420,7 +422,7 @@ export default {
     // 	this.form.neighbourhood_id = undefined;
     // 	this.$store.dispatch("auth/locality", { councilId: council_id });
     // },
-  }
+  },
 };
 </script>
 <style scoped>

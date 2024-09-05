@@ -80,12 +80,14 @@
     </Nav>
 
     <SubNav
-      @onChangeCategoryName="val => (categoryName = val)"
+      @onChangeCategoryName="(val) => (categoryName = val)"
       @category="getCategory"
       @parentcategory="getparentCategory"
-      @update:keyword="val => (searchParams = Object.assign(searchParams, val))"
+      @update:keyword="
+        (val) => (searchParams = Object.assign(searchParams, val))
+      "
       @activateSuggestion="activateSuggestion"
-      @activate:matching:category="val => (activateMatching = val)"
+      @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
     />
 
@@ -130,7 +132,7 @@
                 getCategory({ cat_id: category.category.id });
                 searchParams = Object.assign(searchParams, {
                   keyword: category.category.name,
-                  cat_id: category.category.id
+                  cat_id: category.category.id,
                 });
               }
             "
@@ -723,7 +725,7 @@ import {
   PostComponent,
   PeopleComponent,
   PostFilter,
-  PeopleFilter
+  PeopleFilter,
 } from "@/components/search";
 
 import BusinessComponent from "@/components/search/business";
@@ -732,6 +734,7 @@ import BusinessComponent from "@/components/search/business";
 import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import { getGuestIdentifier } from '../helpers';
 
 export default {
   components: {
@@ -757,7 +760,7 @@ export default {
     MiniPost,
     MiniMarket,
     PostComponent,
-    PeopleComponent
+    PeopleComponent,
     // Footer,
   },
 
@@ -771,7 +774,7 @@ export default {
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
       profileConnected: "auth/profilConnected",
-      user: "auth/user"
+      user: "auth/user",
     }),
 
     businesses() {
@@ -802,7 +805,7 @@ export default {
 
     subFilters() {
       return this.$store.getters["marketSearch/getSubFilters"];
-    }
+    },
   },
 
   created() {
@@ -862,14 +865,14 @@ export default {
         all: () => this.getKeyword(),
         market: () => this.searchProducts({}),
         network: () => this.searchNetworks(),
-        business: () => this.onFindBusiness()
+        business: () => this.onFindBusiness(),
       };
     } else {
       this.strategY = {
         users: () => this.onFindUser(),
         all: () => this.getKeyword(),
         market: () => this.searchProducts({}),
-        business: () => this.onFindBusiness()
+        business: () => this.onFindBusiness(),
       };
     }
     // if (!this.$route.query.uuid)
@@ -892,7 +895,7 @@ export default {
         keyword: "",
         cat_id: "",
         location: "",
-        placeholder: "Find In All"
+        placeholder: "Find In All",
       },
       strategY: null,
 
@@ -930,21 +933,21 @@ export default {
         { label: this.$t("search.People") },
         { label: this.$t("search.Network") },
         { label: this.$t("search.Post") },
-        { label: this.$t("search.All") }
+        { label: this.$t("search.All") },
       ],
       guestItems: [
         { label: this.$t("search.Market") },
         { label: this.$t("search.Business") },
         { label: this.$t("search.People") },
         { label: this.$t("search.Post") },
-        { label: this.$t("search.All") }
+        { label: this.$t("search.All") },
       ],
 
       default_category: "",
 
       optionsnav: {
-        activeColor: "#top1d98bd"
-      }
+        activeColor: "#top1d98bd",
+      },
     };
   },
 
@@ -991,13 +994,13 @@ export default {
           this.$store.commit("allSearch/setKeyword", newValue.keyword);
           this.$store.commit("allSearch/setLocation", newValue.location);
         }
-      }
-    }
+      },
+    },
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected"
+      auth: "auth/profilConnected",
     }),
 
     ...mapActions({
@@ -1010,7 +1013,7 @@ export default {
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       reset: "search/RESET_RESULT",
       // findBusiness: "business/FIND_BUSINESS",
-      getGeo: "business/getGeo"
+      getGeo: "business/getGeo",
     }),
     findBusiness(payload) {
       console.log("==========================", this.isLogin);
@@ -1070,14 +1073,17 @@ export default {
     async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({
         networkId: null,
-        type: null
+        type: null,
       });
 
       if (response.success) this.auth(response.data);
     },
     async fetchCartCount() {
       try {
-        const url = this.islogin ? "cart/total" : "guest/cart/total";
+        let guest_identifier = getGuestIdentifier();
+        const url = this.islogin
+          ? "cart/total"
+          : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
         this.cartCount = response.data.data.totalItems;
       } catch (error) {
@@ -1154,26 +1160,26 @@ export default {
         this.$store
           .dispatch("allSearch/SEARCH", {
             keyword: keyword,
-            location: location
+            location: location,
           })
-          .then(res => {
+          .then((res) => {
             // console.log("categories loaded!");
             this.isSearched = !this.isSearched;
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
       } else if (this.selectedId == 4 && !this.islogin) {
         this.$store
           .dispatch("allSearch/SEARCH", {
             keyword: keyword,
-            location: location
+            location: location,
           })
-          .then(res => {
+          .then((res) => {
             // console.log("categories loaded!");
             this.isSearched = !this.isSearched;
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
       }
@@ -1192,12 +1198,12 @@ export default {
       if (this.searchParams.keyword.trim())
         await this.findBusiness({
           keyword: this.searchParams.keyword,
-          location: this.searchParams.location
+          location: this.searchParams.location,
         });
       else
         await this.findBusiness({
           keyword: "",
-          location: this.searchParams.location
+          location: this.searchParams.location,
         });
       this.$store.commit("business/setLoading", false);
     },
@@ -1212,13 +1218,13 @@ export default {
       if (this.islogin) {
         await this.$store
           .dispatch("marketSearch/getProducts")
-          .then(res => {
+          .then((res) => {
             console.log("products list: ");
             console.log(this.products);
             this.prodLoader = false;
             this.showDismissibleAlert = true;
           })
-          .catch(err => {
+          .catch((err) => {
             this.prodLoader = false;
             console.log("products error: ");
             console.error(err);
@@ -1227,13 +1233,13 @@ export default {
       } else {
         await this.$store
           .dispatch("marketSearch/getGuestUserProducts")
-          .then(res => {
+          .then((res) => {
             console.log("products list: ");
             console.log(this.products);
             this.prodLoader = false;
             this.showDismissibleAlert = true;
           })
-          .catch(err => {
+          .catch((err) => {
             this.prodLoader = false;
             console.log("products error: ");
             console.error(err);
@@ -1252,18 +1258,18 @@ export default {
       if (this.islogin) {
         this.$store
           .dispatch("marketSearch/searchProducts", data)
-          .then(res => {
+          .then((res) => {
             // console.log("categories loaded!");
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
       } else {
         console.log("non-login---------");
         this.$store
           .dispatch("marketSearch/searchGuestUserProducts", data)
-          .then(res => {})
-          .catch(err => {
+          .then((res) => {})
+          .catch((err) => {
             console.log("Error erro!");
           });
       }
@@ -1277,23 +1283,23 @@ export default {
 
       this.$store
         .dispatch("networkSearch/SEARCH", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
 
     getLocation() {
-      const success = position => {
+      const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
         this.getGeo({ lat: latitude, lng: longitude });
       };
 
-      const error = err => {
+      const error = (err) => {
         console.log(error);
       };
 
@@ -1308,33 +1314,33 @@ export default {
           4: () => this.onFindPost(),
           1: () => this.onFindBusiness(),
           3: () => this.searchNetworks(),
-          0: () => this.searchProducts({})
+          0: () => this.searchProducts({}),
         };
         this.strategyForPlaceHolder = {
           2: () => this.$t("general.Find_User"),
           4: () => this.$t("general.Find_Post"),
           5: () => this.$t("general.All"),
-          1: () => this.$t("general.Find_Businesses")
+          1: () => this.$t("general.Find_Businesses"),
         };
 
         this.strategyForComponent = {
           2: () => ({
             component: PeopleComponent,
-            filter: PeopleFilter
+            filter: PeopleFilter,
           }),
           4: () => ({
             component: PostComponent,
-            filter: PostFilter
+            filter: PostFilter,
           }),
           1: () => ({
             component: BusinessComponent,
-            filter: null
-          })
+            filter: null,
+          }),
         };
         this.strategyForNotFoundComponentTitle = {
           2: () => this.$t("general.Not_Find_users"),
           4: () => this.$t("general.Not_Find_posts"),
-          1: () => this.$t("general.Not_Find_Business")
+          1: () => this.$t("general.Not_Find_Business"),
         };
       } else {
         this.strategy = {
@@ -1342,33 +1348,33 @@ export default {
           // 4: () => this.onFindPost(),
           1: () => this.onFindBusiness(),
           3: () => this.onFindPost(),
-          0: () => this.searchProducts({})
+          0: () => this.searchProducts({}),
         };
         this.strategyForPlaceHolder = {
           2: () => this.$t("general.Find_User"),
           3: () => this.$t("general.Find_Post"),
           4: () => this.$t("general.All"),
-          1: () => this.$t("general.Find_Businesses")
+          1: () => this.$t("general.Find_Businesses"),
         };
 
         this.strategyForComponent = {
           2: () => ({
             component: PeopleComponent,
-            filter: PeopleFilter
+            filter: PeopleFilter,
           }),
           3: () => ({
             component: PostComponent,
-            filter: PostFilter
+            filter: PostFilter,
           }),
           1: () => ({
             component: BusinessComponent,
-            filter: null
-          })
+            filter: null,
+          }),
         };
         this.strategyForNotFoundComponentTitle = {
           2: () => this.$t("general.Not_Find_users"),
           3: () => this.$t("general.Not_Find_posts"),
-          1: () => this.$t("general.Not_Find_Business")
+          1: () => this.$t("general.Not_Find_Business"),
         };
       }
 
@@ -1405,11 +1411,11 @@ export default {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
         this.searchParams = Object.assign(this.searchParams, {
-          placeholder: newPlaceholder
+          placeholder: newPlaceholder,
         });
       } catch (error) {
         this.searchParams = Object.assign(this.searchParams, {
-          placeholder: ""
+          placeholder: "",
         });
       }
     },
@@ -1431,16 +1437,16 @@ export default {
         if (this.islogin) {
           request = await this.$repository.search.findUserByParam({
             data: {
-              keyword: this.searchParams.keyword.trim()
+              keyword: this.searchParams.keyword.trim(),
             },
-            page: 1
+            page: 1,
           });
         } else {
           request = await this.$repository.search.findGuestUserByParam({
             data: {
-              keyword: this.searchParams.keyword.trim()
+              keyword: this.searchParams.keyword.trim(),
             },
-            page: 1
+            page: 1,
           });
         }
 
@@ -1467,8 +1473,8 @@ export default {
         this.postKeyword(this.searchParams.keyword.trim());
         this.stack({
           data: {
-            keyword: this.searchParams.keyword.trim()
-          }
+            keyword: this.searchParams.keyword.trim(),
+          },
         });
         this.activateSuggestion(this.searchParams.keyword);
         this._onFindUser();
@@ -1476,8 +1482,8 @@ export default {
         this.page(1);
         this.stack({
           data: {
-            keyword: ""
-          }
+            keyword: "",
+          },
         });
         this._onFindUser();
       }
@@ -1491,16 +1497,16 @@ export default {
         if (this.islogin) {
           request = await this.$repository.search.findPostByKeyword({
             data: {
-              keyword: this.searchParams.keyword.trim()
+              keyword: this.searchParams.keyword.trim(),
             },
-            page: 1
+            page: 1,
           });
         } else {
           request = await this.$repository.search.findPostForGuestUser({
             data: {
-              keyword: this.searchParams.keyword.trim()
+              keyword: this.searchParams.keyword.trim(),
             },
-            page: 1
+            page: 1,
           });
         }
         if (request.success) {
@@ -1525,9 +1531,9 @@ export default {
         this.postKeyword(this.searchParams.keyword.trim());
         this.stack({
           data: {
-            keyword: this.searchParams.keyword.trim()
+            keyword: this.searchParams.keyword.trim(),
           },
-          page: 1
+          page: 1,
         });
 
         this._onFindPost();
@@ -1633,12 +1639,12 @@ export default {
       this.subFilters = [];
       this.$store
         .dispatch("marketSearch/getFilter", this.subCatChose.id)
-        .then(res => {
+        .then((res) => {
           this.$store.commit("marketSearch/setSubFilters", res.data.data);
           this.subFilters = res.data.data;
           console.log("filter:", res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -1672,7 +1678,7 @@ export default {
           } else {
             this.searchBusinessForGuestUser({
               cat_id: value.cat_id,
-              sub_cat: value.id
+              sub_cat: value.id,
             });
           }
         } else if (this.selectedId == 5) {
@@ -1681,7 +1687,7 @@ export default {
           this.searchNetworks({
             cat_id: value.cat_id,
             sub_cat: value.id,
-            keyword: this.searchParams.keyword
+            keyword: this.searchParams.keyword,
           });
         } else if (this.selectedId == 4) {
           this._onFindPost();
@@ -1707,10 +1713,10 @@ export default {
       console.log("the category is: ", data);
       this.$store
         .dispatch("allSearch/SEARCH", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
         });
     },
@@ -1719,11 +1725,11 @@ export default {
       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
           this.$store.commit("business/setLoading", false);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
           this.$store.commit("business/setLoading", false);
         });
@@ -1732,11 +1738,11 @@ export default {
       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
-        .then(res => {
+        .then((res) => {
           // console.log("categories loaded!");
           this.$store.commit("business/setLoading", false);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error erro!");
           this.$store.commit("business/setLoading", false);
         });
@@ -2046,8 +2052,8 @@ export default {
     togglelist() {
       this.$refs.mapblock.style.display = "none";
       this.$refs.middleblock.style.display = "block";
-    }
-  }
+    },
+  },
 };
 </script>
 

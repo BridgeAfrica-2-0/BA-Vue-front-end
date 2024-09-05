@@ -312,6 +312,7 @@
 <script>
 import { mapActions } from "vuex";
 import axios from "axios";
+import { getGuestIdentifier } from "../../helpers";
 export default {
   data() {
     return {
@@ -319,7 +320,7 @@ export default {
       lang: "English",
       keyword: "",
       scrollPosition: 0,
-      cartCount: 0
+      cartCount: 0,
     };
   },
   computed: {
@@ -328,7 +329,7 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
   mounted() {
     this.fetchCartCount();
@@ -350,14 +351,14 @@ export default {
       }
     },
     ...mapActions({
-      Logout: "auth/logout"
+      Logout: "auth/logout",
     }),
     logout: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       const requestForReset = await this.$repository.share.switch(
@@ -382,7 +383,7 @@ export default {
       if (this.$route.name != "Search") {
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.keyword }
+          query: { keyword: this.keyword },
         });
       }
     },
@@ -402,14 +403,17 @@ export default {
     },
     async fetchCartCount() {
       try {
-        const url = this.islogin ? "cart/total" : "guest/cart/total";
+        let guest_identifier = getGuestIdentifier();
+        const url = this.islogin
+          ? "cart/total"
+          : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
         this.cartCount = response.data.data.totalItems;
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

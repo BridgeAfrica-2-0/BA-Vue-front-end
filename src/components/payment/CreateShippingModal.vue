@@ -38,18 +38,18 @@ export default {
     id: String,
     title: {
       type: String,
-      default: "Add Shipping Address"
+      default: "Add Shipping Address",
     },
     mode: {
       type: String,
-      default: "create"
+      default: "create",
     },
     editForm: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   components: {
-    FormCreateShippingAddress
+    FormCreateShippingAddress,
   },
   data() {
     return {
@@ -61,15 +61,16 @@ export default {
         division_id: "",
         council_id: "",
         city: "",
-        neighbourhood_id: ""
-      }
+        neighbourhood_id: "",
+      },
     };
   },
   methods: {
     hideModal() {
       this.$refs["create-shipping-modal"].hide();
-    }
-  }
+    },
+  },
+ 
 };
 </script>
 

@@ -122,17 +122,21 @@
           >
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
-          <div style="float: left" class="mt-2">
+          <div
+            style="float: left; cursor: pointer;"
+            class="mt-2"
+            @click="navigateToCart"
+          >
             <span class="cart-icon position-relative" style="color:#455a64">
-                  <b-icon icon="cart4" class="icon-size"></b-icon>
-                  <span
-                    v-if="cartCount > 0"
-                    class="badge badge-pill badge-danger position-absolute"
-                    style="top: 0; right: 0;"
-                  >
-                    {{ cartCount }}
-                  </span>
-                </span>
+              <b-icon icon="cart4" class="icon-size"></b-icon>
+              <span
+                v-if="cartCount > 0"
+                class="badge badge-pill badge-danger position-absolute"
+                style="top: 0; right: 0;"
+              >
+                {{ cartCount }}
+              </span>
+            </span>
           </div>
 
           <div style="float: right" ref="isnaav">
@@ -626,12 +630,13 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
+import { getGuestIdentifier } from "../helpers";
 
 export default {
   name: "navbar",
   components: {
     Button,
-    Activity
+    Activity,
     // NavBarNotifications
   },
   props: {
@@ -642,10 +647,10 @@ export default {
           keyword: "",
           placeholder: this.$t("general.All"),
           location: { code: "", label: "Location" },
-          location_placeholder: this.$t("home.Location")
+          location_placeholder: this.$t("home.Location"),
         };
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -659,7 +664,7 @@ export default {
       redirectionPatterns: null,
       selectedUser: null,
       users: [],
-      citiesValues: []
+      citiesValues: [],
     };
   },
 
@@ -669,7 +674,7 @@ export default {
       user: "auth/profilConnected",
       auth: "auth/user",
       // neigbourhoods: "auth/neigbourhoods",
-      cities: "auth/cities"
+      cities: "auth/cities",
     }),
     city() {
       return this.credentials.location;
@@ -677,7 +682,7 @@ export default {
 
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
   beforeMount() {
     // this.getLocation();
@@ -702,7 +707,7 @@ export default {
         network: () =>
           `/notification/network/${
             this.user.slug ? this.user.slug : this.user.user_slug
-          }`
+          }`,
       };
 
       this.messagePatterns = {
@@ -714,43 +719,43 @@ export default {
         network: () =>
           `/messages/latest/${
             this.user.slug ? this.user.slug : this.user.user_slug
-          }/network`
+          }/network`,
       };
 
       this.redirectionPatterns = {
         message: {
           user: () => ({
-            name: "Nav Meassage"
+            name: "Nav Meassage",
           }),
           business: () => ({
             name: "BusinessOwner",
             params: {
-              id: this.user.slug ? this.user.slug : this.user.user_slug
+              id: this.user.slug ? this.user.slug : this.user.user_slug,
             },
-            query: { tabId: 1 }
+            query: { tabId: 1 },
           }),
-          network: () => null
+          network: () => null,
         },
         notification: {
           business: () => ({
             name: "BusinessOwner",
             params: {
-              id: this.user.slug ? this.user.slug : this.user.user_slug
+              id: this.user.slug ? this.user.slug : this.user.user_slug,
             },
-            query: { tabId: 2 }
+            query: { tabId: 2 },
           }),
 
           user: () => ({
-            name: "settings"
+            name: "settings",
           }),
           network: () => ({
             name: "networks",
             params: {
-              id: this.user.slug ? this.user.slug : this.user.user_slug
+              id: this.user.slug ? this.user.slug : this.user.user_slug,
             },
-            query: { tabId: 2 }
-          })
-        }
+            query: { tabId: 2 },
+          }),
+        },
       };
 
       this.updateNotificationEvent();
@@ -778,13 +783,13 @@ export default {
       axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
         this.$store.commit("auth/setCities", data.data);
       });
-    }
+    },
   },
 
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
-    }
+    },
   },
 
   methods: {
@@ -794,7 +799,7 @@ export default {
       lauchNetworkRequest: "social/INIT",
       getGeo: "business/getGeo",
       getNeigbourhoods: "auth/neigbourhoods",
-      Logout: "auth/logout"
+      Logout: "auth/logout",
     }),
     setSelectedLocation(value) {
       this.city = value;
@@ -815,24 +820,26 @@ export default {
     },
 
     ...mapMutations({
-      profile: "auth/profilConnected"
+      profile: "auth/profilConnected",
     }),
 
     gotoProfile() {
       this.$router.push("profile_owner");
     },
-
+    navigateToCart() {
+      this.$router.push("/cart");
+    },
     onRedirect() {
       const link = {
         network: () => ({
           name: "networks",
-          params: { id: this.user.slug ? this.user.slug : this.user.user_slug }
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug },
         }),
         business: () => ({
           name: "BusinessOwner",
-          params: { id: this.user.slug ? this.user.slug : this.user.user_slug }
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug },
         }),
-        user: () => ({ name: "profile_owner" })
+        user: () => ({ name: "profile_owner" }),
       };
       return link[this.user.user_type]();
     },
@@ -845,16 +852,16 @@ export default {
           for (let index in cities) {
             this.citiesValues.push({
               label: cities[index].name,
-              code: cities[index].id
+              code: cities[index].id,
             });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
     getLocation() {
-      const success = position => {
+      const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
@@ -864,7 +871,7 @@ export default {
         this.getNeigbourhoods({ lat: latitude, lng: longitude });
       };
 
-      const error = err => {
+      const error = (err) => {
         console.log(error);
       };
 
@@ -873,7 +880,11 @@ export default {
     },
     async fetchCartCount() {
       try {
-        const url = this.islogin ? "cart/total" : "guest/cart/total";
+        let guest_identifier = getGuestIdentifier();
+        const url = this.islogin
+          ? "cart/total"
+          : `guest/cart/total?guest_identifier=${guest_identifier}`;
+
         const response = await axios.get(url);
         this.cartCount = response.data.data.totalItems;
       } catch (error) {
@@ -929,9 +940,9 @@ export default {
       if (this.$route.name != "search") {
         this.$store
           .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword
+            keyword: this.credentials.keyword,
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("Error erro!");
           });
 
@@ -939,8 +950,8 @@ export default {
           name: "GlobalSearch",
           query: {
             keyword: this.credentials.keyword,
-            location: this.credentials.location
-          }
+            location: this.credentials.location,
+          },
         });
       }
     },
@@ -948,7 +959,7 @@ export default {
       const link = {
         home: () => {
           return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
-        }
+        },
       };
       try {
         return link[type]();
@@ -976,7 +987,7 @@ export default {
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       const requestForReset = await this.$repository.share.switch(
@@ -1002,7 +1013,7 @@ export default {
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       const response = await this.$repository.share.switch(null, "reset");
@@ -1010,7 +1021,7 @@ export default {
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
         this.$router.push({
-          name: "profile_owner"
+          name: "profile_owner",
         });
       }
 
@@ -1063,24 +1074,24 @@ export default {
     async newNotification(url) {
       await axios
         .get(url)
-        .then(response => {
+        .then((response) => {
           this.notifications = response.data.data.slice(0, 5);
         })
-        .catch(error => console.log("Error In newNotification  => " + error));
+        .catch((error) => console.log("Error In newNotification  => " + error));
     },
 
     async newMessage(url) {
       await axios
         .get(url)
-        .then(response => {
+        .then((response) => {
           this.messages = response.data.data;
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
     checkIfExists(object, key) {
       return _.has(object, key);
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

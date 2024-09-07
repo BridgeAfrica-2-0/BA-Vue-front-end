@@ -127,7 +127,7 @@
                     <button class="buy-now-btn" @click="gotoproduct(product)">
                       <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
                     </button>
-                    <button class="add-to-cart" @click="handleAddToCard(product)">
+                    <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
                       <b-icon icon="cart-plus"></b-icon><span class="px-1"
                         style="font-size: 12px; font-weight: bold;">Cart</span>
                     </button>
@@ -212,7 +212,7 @@
     </section>
 
     <section style="background: #FFFFFF" class="ba-section-mobile">
-      <div class="container ba-business pt-5 pb-5" style="padding: 0 25px !important">
+      <div class="container ba-business pt-5 mt-4 pb-5" style="padding: 0 25px !important">
         <h3 class="ba-title">
           <span class="m-header-color">Bridge Africa</span> <br />
           <span style="color: black;">{{ $t("general.for_busineses") }}</span>
@@ -1887,7 +1887,7 @@ export default {
 }
 
 .buy-now-btn {
-  padding: 5px 5px;
+  padding: 5px 8px;
   cursor: pointer;
   height: auto;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
@@ -1897,7 +1897,6 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding-left: 12px !important;
 }
 
 .buy-now-btn:hover {
@@ -2728,6 +2727,9 @@ export default {
 }
 
 @media screen and (max-width: 431px) {
+  .mobile-add-to-cart-btn {
+    display: none;
+  }
   .quotation-form-desktop {
     display: none;
   }

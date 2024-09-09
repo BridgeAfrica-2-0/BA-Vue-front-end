@@ -79,7 +79,7 @@
       <b-navbar toggleable="lg" class="p-0">
         <div class="container p-0 m-0">
           <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
-            <a class="d-inline-block align-top mt-1 float-left" href="#">
+            <a class="d-inline-block align-top mt-1 float-left mobile1_1" href="#">
               <img
                 src="@/assets/logo.png"
                 alt=""
@@ -87,6 +87,28 @@
                 loading="lazy"
               />
             </a>
+             <div class="auth-class d-md-none">
+                <span  v-if="!islogin"  class="nav-span mr-3">
+                  <router-link class="inactive" :to="{ name: 'signup' }">{{
+                    $t("general.Sign_Up")
+                  }}</router-link>
+                </span>
+                <router-link   v-if="!islogin"  class="inactive" :to="{ name: 'Login' }">
+                    <img
+                      src="../../assets/user.svg"
+                      alt="User Icon"
+                      id="user-icon"
+                    />
+                  </router-link>
+                <span  v-if="islogin" >
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                    $t("general.dashboard")
+                  }}</router-link>
+                </span>
+                <span v-if="islogin" @click="logout"  class="logout-span">{{ $t("general.Logout") }}</span>
+
+
+             </div>
           </div>
 
           <div class="d-flex w-100 p-0 mobile-search">
@@ -176,46 +198,6 @@
                   <hr class="mobile navstyle" />
                 </b-nav-item>
 
-                <div class="d-block d-lg-none">
-                  <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
-                    <span class="nav-span">
-                      <router-link class="inactive" :to="{ name: 'signup' }">{{
-                        $t("general.Sign_Up")
-                      }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                  <b-nav-item v-if="islogin" class="ml-md-1 text-center">
-                    <span class="nav-span">
-                      <router-link :to="{ name: 'dashboard' }">{{
-                        $t("general.dashboard")
-                      }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                  <b-nav-item class="ml-md-1">
-                    <div
-                      class="border-right"
-                      style="border-right:1px solid black"
-                    ></div>
-                  </b-nav-item>
-                  <b-nav-item v-if="!islogin" class="ml-md-1 text-center">
-                    <span class="nav-span">
-                      <router-link class="inactive" :to="{ name: 'Login' }">{{
-                        $t("general.Login")
-                      }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                  <b-nav-item
-                    v-if="islogin"
-                    @click="logout"
-                    class="ml-md-1 text-center"
-                  >
-                    <span class="nav-span">{{ $t("general.Logout") }}</span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                </div>
               </b-navbar-nav>
             </b-collapse>
             <b-navbar-nav class="mr-auto d-none d-lg-flex">
@@ -418,6 +400,17 @@ export default {
 </script>
 
 <style scoped>
+.logout-span{
+  margin-left: 10px;
+  color: black;
+  cursor: pointer;
+}
+.auth-class {
+  justify-content: end;
+  display: flex;
+  margin-right: 20px;
+  margin-top: 20px;
+}
 li .nav-link:hover {
   background-color: none !important;
 }
@@ -590,7 +583,9 @@ a {
   .mobile1 {
     width: 140px !important;
   }
-
+  .mobile1_1 {
+    margin-left: 50px !important;
+  }
   .balogo {
     width: 70px;
   }
@@ -607,6 +602,17 @@ a {
   }
 
   .navbar-toggler {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    /* position: absolute !important; */
+    top: 18px !important;
+    right: auto !important;
+  }
+  .mobile-nav {
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
@@ -678,6 +684,9 @@ a {
 }
 
 @media screen and (max-width: 431px) {
+  .mobile1_1 {
+    margin-left: 30px !important;
+  }
   .mobile-search-input {
     display: block;
     padding-bottom: 10px;

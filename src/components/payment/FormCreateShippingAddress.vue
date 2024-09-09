@@ -274,6 +274,7 @@ export default {
           .then(() => {
             this.loading = false;
             this.errorAppend = false;
+            this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
             if (this.modal) {
               this.$emit("closecshippingm");
             } else {
@@ -287,6 +288,7 @@ export default {
               this.$emit("closecshippingm");
             }
           });
+         
       } else {
         //if component is called in edit mode
         let formData = new FormData();
@@ -311,6 +313,7 @@ export default {
         this.$store
           .dispatch("checkout/updateShippingAddress", shippingUp)
           .then(() => {
+            this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
             this.loading = false;
           })
           .catch(() => {
@@ -320,6 +323,7 @@ export default {
         if (this.modal) {
           this.$emit("closecshippingm");
         }
+        
       }
       this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
     },

@@ -10,7 +10,7 @@ export default {
     images: [],
     albumImages: [],
     ownerPost: [],
-    ownerPostImages: [],
+    ownerPostImages: []
   },
 
   getters: {
@@ -33,16 +33,24 @@ export default {
     // sending success value
     getSuccess(state) {
       return state.success;
-    },
+    }
   },
 
   mutations: {
     //set media data
 
-
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id
+          ? Object.assign(album, {
+              items:
+                "remove" == payload.action
+                  ? parseInt(album.items) - 1
+                  : parseInt(album.items) + 1
+            })
+          : album
+      );
+      state.albums = newState;
     },
 
     setAlbums(state, data) {
@@ -99,14 +107,17 @@ export default {
     },
 
     updateAlbum(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id
+          ? Object.assign(album, { name: payload.name })
+          : album
+      );
+      state.albums = newState;
     },
 
     removeAlbum(state, uuid) {
-      state.albums = state.albums.filter(album => album.id != uuid)
-    },
-
+      state.albums = state.albums.filter(album => album.id != uuid);
+    }
   },
 
   actions: {
@@ -120,36 +131,26 @@ export default {
       commit("ownerPostImages", res.data);
     },
 
-    async getAlbumImages({commit, rootGetters}, id) {
+    async getAlbumImages({ commit, rootGetters }, id) {
+      let auth = rootGetters["auth/isLogged"];
+      let url = `profile/album/pictures/${id}`;
 
-      
-      let auth=rootGetters['auth/isLogged'];
-      let url=`profile/album/pictures/${id}`;
-
-      if(!auth){    
-        url =`guest/profile/album/pictures/${id}`; 
+      if (!auth) {
+        url = `guest/profile/album/pictures/${id}`;
       }
-
 
       const res = await axios.get(url);
       commit("setAlbumImages", res.data.data);
     },
 
     // for albums
-    async getAlbums({commit, rootGetters},  id) {
+    async getAlbums({ commit, rootGetters }, id) {
+      let auth = rootGetters["auth/isLogged"];
+      let url = "profile/album/show?slug=" + id;
 
-
-
-
-        let auth=rootGetters['auth/isLogged'];
-        let url="profile/album/show?slug="+id;
-  
-        if(!auth){    
-          url ="guest/profile/album/show?slug="+id ; 
-        }
-
-
-
+      if (!auth) {
+        url = "guest/profile/album/show?slug=" + id;
+      }
 
       const res = await axios.get(url);
       commit("setAlbums", res.data.data.album);
@@ -157,7 +158,6 @@ export default {
 
     async createAlbum({ commit }, albumInfo) {
       return axios.post("profile/album/create", albumInfo);
-
     },
 
     async updateAlbum({ commit }, user) {
@@ -169,19 +169,15 @@ export default {
     },
 
     // for images
-    async getImages({commit, rootGetters}, id) {
+    async getImages({ commit, rootGetters }, id) {
+      let auth = rootGetters["auth/isLogged"];
+      let url = "profile/post/media?slug=" + id;
 
-        let auth=rootGetters['auth/isLogged'];
-        let url="profile/post/media?slug="+id
-  
-        if(!auth){    
-          url ="guest/profile/post/media?slug="+id  
-        }
+      if (!auth) {
+        url = "guest/profile/post/media?slug=" + id;
+      }
 
-
-
-
-      const res = await axios.get(url);   
+      const res = await axios.get(url);
       commit("setImages", res.data.data);
     },
 
@@ -207,6 +203,6 @@ export default {
         method: "post",
         responseType: "blob"
       });
-    },
-  },
+    }
+  }
 };

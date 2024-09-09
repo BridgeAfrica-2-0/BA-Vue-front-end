@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper">
     <Navbar />
-    <div class="container wahala" >
+    <div class="container wahala">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div class="mbl-wrap">
@@ -24,9 +24,9 @@
                 </b-card-text>
               </b-tab>
 
-             <b-tab :title="$t('businessowner.Account_Type')">
+              <b-tab :title="$t('businessowner.Account_Type')">
                 <b-card-text> <Website /> </b-card-text
-              ></b-tab> 
+              ></b-tab>
 
               <b-tab :title="$t('settings.General')">
                 <b-card-text class="mt-3">
@@ -34,7 +34,7 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                           <b-tbody v-if="getUserInfos.id">
+                          <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text">
                                 {{ $t("settings.Name") }}
@@ -74,7 +74,7 @@
                               </b-td>
                             </b-tr>
 
-                            <br /> 
+                            <br />
 
                             <b-tr>
                               <b-td class="a-text text"
@@ -133,7 +133,11 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">
-                                  {{ getUserInfos && getUserInfos.country ? getUserInfos.country.name : null}}
+                                  {{
+                                    getUserInfos && getUserInfos.country
+                                      ? getUserInfos.country.name
+                                      : null
+                                  }}
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -145,7 +149,11 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">
-                                  {{getUserInfos.region ? getUserInfos.region.name : Null}}
+                                  {{
+                                    getUserInfos.region
+                                      ? getUserInfos.region.name
+                                      : Null
+                                  }}
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -159,7 +167,9 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.division ? getUserInfos.division.name : Null
+                                  getUserInfos.division
+                                    ? getUserInfos.division.name
+                                    : Null
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -173,7 +183,9 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.council ? getUserInfos.council.name : Null
+                                  getUserInfos.council
+                                    ? getUserInfos.council.name
+                                    : Null
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -200,7 +212,9 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.neigborhood ? getUserInfos.neigborhood.name : Null
+                                  getUserInfos.neigborhood
+                                    ? getUserInfos.neigborhood.name
+                                    : Null
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -216,7 +230,9 @@
                               <b-modal
                                 id="modal-10"
                                 ref="modal-10"
-                                :title="$t('settings.Edit_your_information_here')"
+                                :title="
+                                  $t('settings.Edit_your_information_here')
+                                "
                                 hide-footer
                               >
                                 <form>
@@ -251,7 +267,6 @@
                                       v-model="getUserInfos.phone"
                                       required
                                     />
-                                    
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label">{{
@@ -340,7 +355,7 @@
                             <br />
 
                             <br />
-                          </b-tbody> 
+                          </b-tbody>
                         </b-table-simple>
                       </div>
                     </b-col>
@@ -430,7 +445,7 @@
                           class=" btn btn-primary"
                           @click="changePassword"
                         >
-                          {{$t("settings.Change")}}
+                          {{ $t("settings.Change") }}
                         </button>
                       </b-form-group>
                     </b-container>
@@ -440,11 +455,9 @@
                 </b-card-text>
               </b-tab>
 
-              
               <b-tab :title="$t('settings.delete_account')">
-                <Delete  />
+                <Delete />
               </b-tab>
-
             </b-tabs>
           </div>
         </b-col>
@@ -452,20 +465,19 @@
       </b-row>
     </div>
 
-
     <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import SettingsNotifications from '@/components/SettingsNotifications.vue';
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import SettingsNotifications from "@/components/SettingsNotifications.vue";
 import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 import Delete from "@/components/owner/settings/delete";
 import Website from "@/components/owner/settings/website";
-import VuePassword from 'vue-password';
+import VuePassword from "vue-password";
 import VuePhoneNumberInput from "vue-phone-number-input";
 
 export default {
@@ -491,20 +503,20 @@ export default {
     },
     country() {
       let country = [];
-      this.$store.state.auth.country.map((dat) => {
+      this.$store.state.auth.country.map(dat => {
         country.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return country;
     },
     region() {
       let region = [];
-      this.$store.state.auth.region.map((dat) => {
+      this.$store.state.auth.region.map(dat => {
         region.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return region;
@@ -512,10 +524,10 @@ export default {
 
     division() {
       let division = [];
-      this.$store.state.auth.division.map((dat) => {
+      this.$store.state.auth.division.map(dat => {
         division.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return division;
@@ -523,10 +535,10 @@ export default {
 
     municipality() {
       let municipality = [];
-      this.$store.state.auth.municipality.map((dat) => {
+      this.$store.state.auth.municipality.map(dat => {
         municipality.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return municipality;
@@ -534,14 +546,14 @@ export default {
 
     neighbor() {
       let neighbor = [];
-      this.$store.state.auth.locality.map((dat) => {
+      this.$store.state.auth.locality.map(dat => {
         neighbor.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return neighbor;
-    },
+    }
 
     // locality(){
 
@@ -578,36 +590,36 @@ export default {
       message1: "",
       genderOptions: [
         { value: "male", text: "male" },
-        { value: "female", text: "female" },
+        { value: "female", text: "female" }
       ],
       psw1Strength: 0,
-      psw2Strength: 0,
+      psw2Strength: 0
     };
   },
 
   methods: {
-    update1Strength(newPass){
+    update1Strength(newPass) {
       this.psw1Strength = this.checkPassword(newPass);
     },
-    update2Strength(newPass1){
+    update2Strength(newPass1) {
       this.psw2Strength = this.checkPassword(newPass1);
     },
-    checkPassword(pass){
+    checkPassword(pass) {
       let crossMinNum = pass.length > 4 ? 1 : 0;
       let hasNum = /\d/.test(pass) ? 1 : 0;
       let hasLetters = /[a-zA-Z]/.test(pass) ? 1 : 0;
-      let hasSymbols = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(pass) ? 1 : 0;
+      let hasSymbols = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(pass)
+        ? 1
+        : 0;
       return crossMinNum + hasNum + hasLetters + hasSymbols;
     },
 
     userInfos() {
       this.$store
         .dispatch("profileSettingsEdit/userInfos")
-        .then((response) => {
-
-          
+        .then(response => {
           this.selected = this.$store.state.profileSettingsEdit.userInfos.payement_method;
-         
+
           // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
 
           //   }else { this.selectedGender = 1 }
@@ -615,7 +627,7 @@ export default {
           // this.selectedCounty = this.getUserInfos.country.id;
           // console.log("-----------------"+this.selectedCounty);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     },
@@ -637,17 +649,17 @@ export default {
 
       this.$store
         .dispatch("profileSettingsEdit/updateUserInfos", formData)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           console.log(this.getUserInfos);
           this.flashMessage.show({
             status: "success",
             message: response.data.message
-          });  
-          this.$refs['modal-10'].hide()
+          });
+          this.$refs["modal-10"].hide();
           this.userInfos();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -658,11 +670,11 @@ export default {
       formData1.append("payement_method", this.selected);
       this.$store
         .dispatch("profileSettingsEdit/changePayment", formData1)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           console.log(this.getUserInfos);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -673,21 +685,19 @@ export default {
         container: this.$refs.wrapper,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.$store
         .dispatch("auth/country")
-        .then((response) => {
+        .then(response => {
           console.log(this.country);
-          
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         })
         .finally(() => {
           loader.hide();
-         
         });
     },
 
@@ -698,48 +708,45 @@ export default {
       formData2.append("password", this.newPass);
       formData2.append("password_confirmation", this.newPass1);
 
-      if(this.newPass != this.newPass1){
+      if (this.newPass != this.newPass1) {
         this.flashMessage.show({
           status: "warning",
           message: "the password does not match"
-        }); 
-         this.loading=false;
-      }else{
-
-        
-        this.$store
-      .dispatch("profileSettingsEdit/changePassword",formData2)
-      .then(response =>{
-        console.log("------------------------");
-        console.log(response.data.message);
-        this.flashMessage.show({
-          status: "success",
-          message: response.data.message
-        }); 
-         this.loading=false;
-        
-      })
-      .catch((err) => {
-        this.flashMessage.show({
-          status: "error",
-          message: "An error occured"
-        }); 
-        console.log('--------- error: ');
-          console.error(err);
-           this.loading=false;
         });
-        }
+        this.loading = false;
+      } else {
+        this.$store
+          .dispatch("profileSettingsEdit/changePassword", formData2)
+          .then(response => {
+            console.log("------------------------");
+            console.log(response.data.message);
+            this.flashMessage.show({
+              status: "success",
+              message: response.data.message
+            });
+            this.loading = false;
+          })
+          .catch(err => {
+            this.flashMessage.show({
+              status: "error",
+              message: "An error occured"
+            });
+            console.log("--------- error: ");
+            console.error(err);
+            this.loading = false;
+          });
+      }
     },
 
     getRegion() {
-      console.log(this.country,'id country: ',this.selectedCounty)
+      console.log(this.country, "id country: ", this.selectedCounty);
       let data = { countryId: this.selectedCounty };
       this.$store
         .dispatch("auth/region", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -752,10 +759,10 @@ export default {
       let data = { regionId: this.selectedRegion };
       this.$store
         .dispatch("auth/division", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -767,10 +774,10 @@ export default {
       let data = { divisionId: this.selectedDivision };
       this.$store
         .dispatch("auth/municipality", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -780,23 +787,21 @@ export default {
       let data = { councilId: this.selectedMunicipality };
       this.$store
         .dispatch("auth/locality", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
     },
 
     redirection() {
-      this.$store
-        .dispatch("profileSettingsEdit/redirection")
-        .then((response) => {
-          // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
-          this.$router.push(`business_owner/${1}`);
-        });
-    },
+      this.$store.dispatch("profileSettingsEdit/redirection").then(response => {
+        // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
+        this.$router.push(`business_owner/${1}`);
+      });
+    }
     // getLocality(){
 
     //    this.$store
@@ -812,31 +817,37 @@ export default {
     // }
   },
 
-beforeMount(){
-  this.userInfos();
-  
-},
+  beforeMount() {
+    this.userInfos();
+  },
 
-watch: {
-  "$store.state.profileSettingsEdit.userInfos": function(){
-     this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
-     this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
+  watch: {
+    "$store.state.profileSettingsEdit.userInfos": function() {
+      this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+      this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
 
-     this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division ?this.$store.state.profileSettingsEdit.userInfos.division.id:'';
-    this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council?this.$store.state.profileSettingsEdit.userInfos.council.id:'';
-    this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood ? this.$store.state.profileSettingsEdit.userInfos.neigborhood.id:'';
+      this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos
+        .division
+        ? this.$store.state.profileSettingsEdit.userInfos.division.id
+        : "";
+      this.selectedMunicipality = this.$store.state.profileSettingsEdit
+        .userInfos.council
+        ? this.$store.state.profileSettingsEdit.userInfos.council.id
+        : "";
+      this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos
+        .neigborhood
+        ? this.$store.state.profileSettingsEdit.userInfos.neigborhood.id
+        : "";
 
-    this.getCountry();
-    this.getRegion();
-    this.getDivision();
-    this.getMunicipality();
-    this.getNeighbor();
-  }
-},
-
+      this.getCountry();
+      this.getRegion();
+      this.getDivision();
+      this.getMunicipality();
+      this.getNeighbor();
+    }
+  },
 
   mounted() {
-    
     // this.getLocality();
 
     var that = this;
@@ -847,16 +858,12 @@ watch: {
     if (that.size == "") {
       that.size = window.innerWidth;
     }
-
-    
   },
   created() {
     if ("account" === this.$route.query.tab) {
       this.activeTab = 1;
     }
   }
-
-  
 };
 </script>
 

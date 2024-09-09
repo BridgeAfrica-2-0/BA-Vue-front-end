@@ -29,7 +29,7 @@ export default {
   props: ["type"],
   components: {
     Business,
-    VuePerfectScrollbar,
+    VuePerfectScrollbar
   },
 
   data() {
@@ -44,8 +44,8 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
@@ -56,15 +56,15 @@ export default {
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
       }
-    },
+    }
   },
 
   methods: {
     getTotalCommunity() {
       this.$store
         .dispatch("profile/Tcommunity")
-        .then((response) => {})
-        .catch((error) => {});
+        .then(response => {})
+        .catch(error => {});
     },
 
     async handleFollow(user) {
@@ -74,17 +74,17 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
-        .catch((err) => {
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -132,14 +132,11 @@ export default {
             }
           }
         })
-        .catch((err) => {});
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
-
-
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

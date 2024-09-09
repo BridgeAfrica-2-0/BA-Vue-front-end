@@ -3,10 +3,12 @@
     <b-container>
       <b-row class="b-bottom">
         <b-col>
-          <h5>{{$t("businessf.Pending_Posts")}}</h5>
+          <h5>{{ $t("businessf.Pending_Posts") }}</h5>
         </b-col>
         <div class="f-right">
-          <b-col> <p>35 {{$t("businessf.Pending")}}</p> </b-col>
+          <b-col>
+            <p>35 {{ $t("businessf.Pending") }}</p>
+          </b-col>
         </div>
       </b-row>
 
@@ -34,11 +36,19 @@
                     font-scale="1"
                   ></b-icon>
                 </template>
-                <b-dropdown-item href="#">{{$t("businessf.Approve")}}</b-dropdown-item>
-                <b-dropdown-item href="#"> {{$t("businessf.Delete_Post")}} </b-dropdown-item>
+                <b-dropdown-item href="#">{{
+                  $t("businessf.Approve")
+                }}</b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Delete_Post") }}
+                </b-dropdown-item>
 
-                <b-dropdown-item href="#"> {{$t("businessf.Send_Message")}} </b-dropdown-item>
-                <b-dropdown-item href="#"> {{$t("businessf.Remove_User")}} </b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Send_Message") }}
+                </b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Remove_User") }}
+                </b-dropdown-item>
               </b-dropdown>
             </div>
           </span>
@@ -75,11 +85,19 @@
                     font-scale="1"
                   ></b-icon>
                 </template>
-                <b-dropdown-item href="#">{{$t("businessf.Approve")}}</b-dropdown-item>
-                <b-dropdown-item href="#"> {{$t("businessf.Delete_Post")}} </b-dropdown-item>
+                <b-dropdown-item href="#">{{
+                  $t("businessf.Approve")
+                }}</b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Delete_Post") }}
+                </b-dropdown-item>
 
-                <b-dropdown-item href="#"> {{$t("businessf.Send_Message")}} </b-dropdown-item>
-                <b-dropdown-item href="#"> {{$t("businessf.Remove_User")}} </b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Send_Message") }}
+                </b-dropdown-item>
+                <b-dropdown-item href="#">
+                  {{ $t("businessf.Remove_User") }}
+                </b-dropdown-item>
               </b-dropdown>
             </div>
           </span>

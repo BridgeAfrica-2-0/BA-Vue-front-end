@@ -83,7 +83,7 @@
 
           <!-- <div v-if="verify_method"> -->
           <div>
-            <md-field v-if="showOtp && !showConfirm ">
+            <md-field v-if="showOtp && !showConfirm">
               <label for="otp"> {{ $t("verification.otp") }}</label>
 
               <md-input
@@ -95,36 +95,26 @@
               />
             </md-field>
 
+            <p class="mt-5 mt-md-2" v-if="showOtp && !showConfirm">
+              {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
+              <b-link @click.prevent="resendOtp()">
+                {{ $t("verification.Resend_OTP") }}
+              </b-link>
+            </p>
 
+            <div class="center" v-if="showOtp && !showConfirm">
+              <b-button
+                class="buttonn mt-5"
+                @click.prevent="VerifyOtp"
+                :disabled="sending"
+                variant="primary"
+                type="submit"
+              >
+                {{ $t("verification.Verify") }}
+              </b-button>
+            </div>
 
-
-          <p class="mt-5 mt-md-2"   v-if="showOtp && !showConfirm "  >       
-            {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
-            <b-link @click.prevent="resendOtp()">   
-              {{ $t("verification.Resend_OTP") }}
-            </b-link>
-          </p>
-
-          
-
-         <div class="center"    v-if="showOtp && !showConfirm " >
-            <b-button
-              class="buttonn mt-5"
-              @click.prevent="VerifyOtp"
-              :disabled="sending"
-              variant="primary"
-              type="submit"
-            >
-              {{ $t("verification.Verify") }}
-            </b-button>
-          </div>
-
-    
-
-
-
-
-            <div v-if="showConfirm & !showOtp ">
+            <div v-if="showConfirm & !showOtp">
               <md-field>
                 <label for="password"> {{ $t("auth.password") }}</label>
 
@@ -151,90 +141,70 @@
                 />
               </md-field>
 
-
-
-
-
-
               <div class="center">
-            <b-button
-              class="buttonn mt-5"
-              @click.prevent="ResetPassword"
-              :disabled="sending"
-              variant="primary"
-              type="submit"
-            >
-              {{ $t("verification.Reset") }}
-            </b-button>
-          </div>
-
-          
-            </div> 
-
-            <div v-if="showChoseMethod" > 
-
-            <md-field v-if="chosemethod == 'tel'">
-              <label for="email"> {{ $t("auth.tel") }}</label>
-
-              <md-input
-                type="text"
-                name="tel"
-                id="tel"
-                v-model="form.phone"
-                required
-              />
-            </md-field>
-
-            <md-field v-if="chosemethod == 'email'">
-              <label for="otp"> {{ $t("auth.email") }}</label>
-
-              <md-input
-                type="email"
-                name="email"
-                id="email"
-                v-model="form.email"
-                required
-              />
-            </md-field>
-
-            <br />
-
-            <div class="md-layout md-gutter">
-              <br />
+                <b-button
+                  class="buttonn mt-5"
+                  @click.prevent="ResetPassword"
+                  :disabled="sending"
+                  variant="primary"
+                  type="submit"
+                >
+                  {{ $t("verification.Reset") }}
+                </b-button>
+              </div>
             </div>
 
+            <div v-if="showChoseMethod">
+              <md-field v-if="chosemethod == 'tel'">
+                <label for="email"> {{ $t("auth.tel") }}</label>
 
-            <div class="center">
-            <b-button
-              class="buttonn"
-              @click.prevent="Verify"
-              :disabled="sending"
-              variant="primary"
-              type="submit"
-            >
-              {{ $t("verification.Verify") }}
-            </b-button>
+                <md-input
+                  type="text"
+                  name="tel"
+                  id="tel"
+                  v-model="form.phone"
+                  required
+                />
+              </md-field>
+
+              <md-field v-if="chosemethod == 'email'">
+                <label for="otp"> {{ $t("auth.email") }}</label>
+
+                <md-input
+                  type="email"
+                  name="email"
+                  id="email"
+                  v-model="form.email"
+                  required
+                />
+              </md-field>
+
+              <br />
+
+              <div class="md-layout md-gutter">
+                <br />
+              </div>
+
+              <div class="center">
+                <b-button
+                  class="buttonn"
+                  @click.prevent="Verify"
+                  :disabled="sending"
+                  variant="primary"
+                  type="submit"
+                >
+                  {{ $t("verification.Verify") }}
+                </b-button>
+              </div>
+            </div>
           </div>
-
-
-
-          </div> 
-          
-            
-
-          
-           </div>
         </md-card-content>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <div v-if="chosemethod">
-         
-
           <br />
           <br />
-
-         
         </div>
 
         <div></div>
@@ -271,31 +241,31 @@ export default {
       password: null,
       email: null,
       tel: null,
-      confirm_password:null,
-      otp:null,
+      confirm_password: null,
+      otp: null
     },
     das: [],
     langs: ["en", "fr"],
     token: "",
-    showChoseMethod:false,
+    showChoseMethod: false,
     showOtp: false,
     showConfirm: false,
     verify_method: false,
     chosemethod: "",
     userSaved: false,
     sending: false,
-    lastUser: null,
+    lastUser: null
   }),
   validations: {
     form: {
       password: {
-        required,
+        required
       },
       email: {
         required,
-        email,
-      },
-    },
+        email
+      }
+    }
   },
 
   created() {
@@ -305,19 +275,14 @@ export default {
   computed: {
     auth() {
       return this.$store.state.auth.password_reset;
-       
-     
-    },
+    }
   },
 
   methods: {
-
-
-
     verifyMethod(metho) {
       console.log(metho);
       this.chosemethod = metho;
-      this.showChoseMethod=true;
+      this.showChoseMethod = true;
 
       let url = "";
       if (this.chosemethod == "tel") {
@@ -327,11 +292,9 @@ export default {
       }
     },
 
-
-
     resendOtp() {
       let url = "";
-     
+
       if (this.chosemethod == "email") {
         url = "user/resetemail";
       } else {
@@ -342,14 +305,15 @@ export default {
         .dispatch("auth/verifyuser", {
           url: url,
           email: this.form.email,
-          phone: this.form.phone,
-        }).then((response) => {
+          phone: this.form.phone
+        })
+        .then(response => {
           if (response.status === 200) {
             console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
 
-              message: this.$t("verification.Successfully_Send"),
+              message: this.$t("verification.Successfully_Send")
             });
 
             this.sending = false;
@@ -357,16 +321,13 @@ export default {
             console.log(response.data);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
-
-         
 
           this.sending = false;
         });
     },
 
-    
     VerifyOtp() {
       this.sending = true;
       let url = "user/verifyResetOtp";
@@ -375,39 +336,40 @@ export default {
         .dispatch("auth/VerifyOtp", {
           url: url,
           email: this.form.email,
-          OTP:this.form.otp,
+          OTP: this.form.otp,
           type: this.chosemethod,
-          phone: this.form.phone,
+          phone: this.form.phone
         })
-        .then((data) => {
-
+        .then(data => {
           this.sending = false;
-          this.showConfirm=true;
+          this.showConfirm = true;
           this.showOtp = false;
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t("verification.otp_verified"),
+            message: this.$t("verification.otp_verified")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
             console.log({ err: err });
-           
 
             this.flashMessage.show({
               status: "error",
 
-             message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              message:
+                err.response.data.message +
+                " " +
+                this.flashErrors(err.response.data.errors),
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("auth.resend_otp_failed"),
+              message: this.$t("auth.resend_otp_failed")
             });
             console.log({ err: err });
           }
@@ -416,36 +378,32 @@ export default {
         });
     },
 
-
-
- 
-    
     ResetPassword() {
       this.sending = true;
-      let url = "user/resetpassword/"+this.auth.user.id;
+      let url = "user/resetpassword/" + this.auth.user.id;
 
       this.$store
         .dispatch("auth/VerifyOtp", {
           url: url,
           email: this.form.email,
-          password:this.form.password,
-          password_confirmation :this.form.confirm_password,
+          password: this.form.password,
+          password_confirmation: this.form.confirm_password,
           type: this.chosemethod,
-          phone: this.form.phone,
+          phone: this.form.phone
         })
-        .then((response) => {
+        .then(response => {
           this.sending = false;
 
           this.showOtp = true;
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t("verification.password_reset_sucessful"),
+            message: this.$t("verification.password_reset_sucessful")
           });
 
-           this.$router.push({ name: "Login" });
+          this.$router.push({ name: "Login" });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -455,14 +413,17 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              message:
+                err.response.data.message +
+                " " +
+                this.flashErrors(err.response.data.errors),
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("auth.reset_password_failed"),
+              message: this.$t("auth.reset_password_failed")
             });
             console.log({ err: err });
           }
@@ -470,10 +431,6 @@ export default {
           this.sending = false;
         });
     },
-
-
-
-
 
     Verify() {
       this.sending = true;
@@ -489,19 +446,21 @@ export default {
         .dispatch("auth/verifyuser", {
           url: url,
           email: this.form.email,
-          phone: this.form.phone,
+          phone: this.form.phone
         })
-        .then((response) => {
+        .then(response => {
           this.sending = false;
-          this.showChoseMethod=false;
+          this.showChoseMethod = false;
           this.showOtp = true;
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t("verification.we_have_sent_an_otp_code_to_your_inbox"),
+            message: this.$t(
+              "verification.we_have_sent_an_otp_code_to_your_inbox"
+            )
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -511,14 +470,17 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
+              message:
+                err.response.data.message +
+                " " +
+                this.flashErrors(err.response.data.errors),
+              blockClass: "custom-block-class"
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("auth.resend_otp_failed"),
+              message: this.$t("auth.resend_otp_failed")
             });
             console.log({ err: err });
           }
@@ -531,7 +493,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
@@ -545,7 +507,7 @@ export default {
     flashErrors(errors) {
       let err = "";
       if (errors) {
-        Object.values(errors).forEach((element) => {
+        Object.values(errors).forEach(element => {
           err = element[0];
         });
       }
@@ -563,8 +525,8 @@ export default {
       this.sending = true;
 
       this.login();
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -2,25 +2,37 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-
         <div v-for="post in images" :key="post.id">
           <!-- {{post.id}} -->
-          <div class="img-gall" v-for="(image, index) in post.media" :key="index">
+          <div
+            class="img-gall"
+            v-for="(image, index) in post.media"
+            :key="index"
+          >
             <a href="#!"
               ><b-img
                 class="card-img btn p-0"
                 thumbnail
-                fluid 
+                fluid
                 rounded
                 :src="image.media_url"
                 alt="media_img"
-                v-b-modal="'modal-'+image.media_id"
+                v-b-modal="'modal-' + image.media_id"
                 v-bind="imageProps"
               ></b-img>
             </a>
-            <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
-              <img class="card-img" :src="image.media_url"  @click="() => showImg(index)" alt="media_img" />
-              <p class="my-4">{{image.post_content[0]}}</p>
+            <b-modal
+              hide-footer
+              :id="'modal-' + image.media_id"
+              title="Details"
+            >
+              <img
+                class="card-img"
+                :src="image.media_url"
+                @click="() => showImg(index)"
+                alt="media_img"
+              />
+              <p class="my-4">{{ image.post_content[0] }}</p>
             </b-modal>
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
@@ -38,9 +50,21 @@
                         :icon="['fas', 'ellipsis-v']"
                       />
                     </template>
-                    <b-dropdown-item href="#" @click="downloadPic(image.media_id)">{{ $t("general.Download") }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="setProfilePic(image.media_id)">{{ $t("general.Make_Profile_Picture") }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="deleteImage(image.media_id)">{{ $t("general.Delete") }}</b-dropdown-item>
+                    <b-dropdown-item
+                      href="#"
+                      @click="downloadPic(image.media_id)"
+                      >{{ $t("general.Download") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      href="#"
+                      @click="setProfilePic(image.media_id)"
+                      >{{ $t("general.Make_Profile_Picture") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      href="#"
+                      @click="deleteImage(image.media_id)"
+                      >{{ $t("general.Delete") }}</b-dropdown-item
+                    >
                   </b-dropdown>
                 </li>
               </ul>
@@ -54,7 +78,6 @@
           @hide="handleHide"
         ></vue-easy-lightbox>
 
-         
         <!-- {{images}} -->
         <!-- {{images[0].type}} -->
       </div>
@@ -67,19 +90,19 @@ export default {
   props: ["images"],
   data: function() {
     return {
-      show_url:null,
-      url:null,
+      show_url: null,
+      url: null,
       img_url: null,
-      image_details:null,
-      file: '',
-     
+      image_details: null,
+      file: "",
+
       visible: false,
       index: 0,
-      imageProps: {  width: 205, height: 205},
-      Slideimges: [],
+      imageProps: { width: 205, height: 205 },
+      Slideimges: []
     };
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
   },
   methods: {
@@ -92,19 +115,19 @@ export default {
     },
     showImg(index) {
       console.log(index);
-      this.index = index
-      this.visible = true
+      this.index = index;
+      this.visible = true;
     },
     handleHide() {
-      this.visible = false
+      this.visible = false;
     },
-    showPic(image) {    
+    showPic(image) {
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
     },
-    
-    loadImages: function(){
+
+    loadImages: function() {
       this.images.forEach(post => {
         post.media.forEach(media => {
           this.Slideimges.push(media.media_url);
@@ -167,7 +190,7 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          this.$emit('ownerPostImages');
+          this.$emit("ownerPostImages");
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted"
@@ -231,38 +254,36 @@ export default {
           }
         });
     },
-    addAlbumImage(){
+    addAlbumImage() {
       let formData = new FormData();
-      formData.append('file', this.file);
-      this.axios.post( 'network/addalbum/image',formData,
-        {
+      formData.append("file", this.file);
+      this.axios
+        .post("network/addalbum/image", formData, {
           headers: {
-              'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data"
           }
-        }
-      ).then(function(){
-        console.log('SUCCESS!!');
-        this.flashMessage.show({
-          status: "success",
-          message: "Picture Added"
+        })
+        .then(function() {
+          console.log("SUCCESS!!");
+          this.flashMessage.show({
+            status: "success",
+            message: "Picture Added"
+          });
+        })
+        .catch(function() {
+          console.log("FAILURE!!");
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Added Picture"
+          });
         });
-      })
-      .catch(function(){
-        console.log('FAILURE!!');
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Added Picture"
-        });
-      });
     },
-    handleFileUpload(){
+    handleFileUpload() {
       this.file = this.$refs.file.files[0];
     }
-  },
+  }
 };
 </script>
-
-
 
 <style>
 .text-design {

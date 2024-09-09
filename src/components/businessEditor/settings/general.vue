@@ -1,7 +1,5 @@
 <template>
   <b-container>
-    
-
     <div class="">
       <b-container>
         <b-form-group
@@ -61,7 +59,7 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            {{$t('network.All_business_posts_must_be_approved_by_an_admin')}}
+            {{ $t("network.All_business_posts_must_be_approved_by_an_admin") }}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -79,7 +77,6 @@
         >
           <b-form-textarea
             id="textarea"
-          
             :placeholder="$t('network.Enter_something')"
             rows="3"
             max-rows="6"
@@ -106,15 +103,17 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text">{{$t('network.Delete_Business_Identity')}}</b-link>
+      <b-link href="#foo" class="f-left text">{{
+        $t("network.Delete_Business_Identity")
+      }}</b-link>
     </b-container>
 
-
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text">{{$t('network.Save_Changes')}}</b-button>
+      <b-button variant="primary" class="a-button-l text">{{
+        $t("network.Save_Changes")
+      }}</b-button>
       <br />
     </div>
-    
   </b-container>
 </template>
 
@@ -135,7 +134,6 @@ export default {
 }
 
 .b-bottomn {
- 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }
@@ -169,7 +167,7 @@ export default {
     top: -5px;
     left: -20px;
   }
-  .btn{
+  .btn {
     font-size: 12px;
   }
 }

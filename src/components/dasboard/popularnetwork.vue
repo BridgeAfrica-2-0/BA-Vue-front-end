@@ -1,99 +1,87 @@
 <template>
-  <div>  
-
-  <b-card class=" border pt-0  blecrr shadow border "  style=" height: 500px; padding-bottom:50px">  
-   
-   <span>
+  <div>
+    <b-card
+      class=" border pt-0  blecrr shadow border "
+      style=" height: 500px; padding-bottom:50px"
+    >
+      <span>
         <h6 class=" m-3 ">
-     <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-          <span class="ml-2">  {{ $t("dashboard.POPULAR_NETWORKS")}}  </span> 
+          <fas-icon
+            class="icons"
+            :icon="['fas', 'project-diagram']"
+            size="lg"
+          />
+          <span class="ml-2"> {{ $t("dashboard.POPULAR_NETWORKS") }} </span>
         </h6>
       </span>
 
+      <div class="s-comcardd pt-0">
+        <VuePerfectScrollbar
+          class="scroll-area s-card p-1"
+          settings="{maxScrollbarLength: 60px}"
+        >
+          <Network
+            v-for="item in network"
+            :network="item"
+            :key="item.id"
+            @getTotalCommunity="getTotalCommunity"
+          />
 
-
- <div class="s-comcardd pt-0"  >
-
-  <VuePerfectScrollbar class="scroll-area s-card p-1" settings="{maxScrollbarLength: 60px}" >
-   
-  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-    
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-  </VuePerfectScrollbar>
-      
-
-    </div>
-      </b-card>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        </VuePerfectScrollbar>
+      </div>
+    </b-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Network from "@/components/Network";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["title", "image"],
- 
- components: {
-    
-    Network, VuePerfectScrollbar
+
+  components: {
+    Network,
+    VuePerfectScrollbar
   },
 
   data() {
     return {
       page: 1,
-      network:[],
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
-  
   computed: {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];
-    },
+    }
   },
   created() {
     this.$store
       .dispatch("networkDetails/getndetails")
-      .then(() => {
-    
-      })
-      .catch((err) => {
-      
-      });
+      .then(() => {})
+      .catch(err => {});
   },
 
   methods: {
-
-
-
-
-getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity")
-      .then((response) => {})
-      .catch((error) => {
-       
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity")
+        .then(response => {})
+        .catch(error => {});
     },
 
-
-
-    
-
-     count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -102,34 +90,28 @@ getTotalCommunity(){
       } else return number;
     },
 
-
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-        
+        .then(response => {
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
 
-          
-           this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-
-
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
@@ -140,63 +122,54 @@ getTotalCommunity(){
       axios
         .get(url + this.page)
         .then(({ data }) => {
-        
           if (data.data.length) {
-
             this.page += 1;
-            this.network = [...this.network, ...data.data ]
+            this.network = [...this.network, ...data.data];
             $state.loaded();
-             this.$nextTick(() => {
-          VuePerfectScrollbar.update(this.$refs.scrollWrapper);
-        });
-
+            this.$nextTick(() => {
+              VuePerfectScrollbar.update(this.$refs.scrollWrapper);
+            });
           } else {
             $state.complete();
           }
         })
-        .catch((err) => {
-         
-        });
+        .catch(err => {});
     },
 
     async handleFollow(user) {
-
       document.getElementById("followbtn" + user.id).disabled = true;
-      
+
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      
+
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
-         
+
           this.getTotalCommunity();
         })
-        .catch((err) => {
-         
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style >
-.scroll-area{
+<style>
+.scroll-area {
   height: inherit;
 }
 </style>
 
 <style scoped>
-
-
 .flx100 {
   flex-basis: 80% !important;
 }
@@ -241,7 +214,6 @@ getTotalCommunity(){
 }
 
 .card {
- 
 }
 
 .s-button {
@@ -320,10 +292,10 @@ getTotalCommunity(){
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
- .btn{
-    font-size:11.5px !important;
+  .btn {
+    font-size: 11.5px !important;
   }
-  
+
   .textt {
     color: #000;
 
@@ -458,7 +430,6 @@ getTotalCommunity(){
   overflow-x: hidden;
   padding-bottom: 25px;
 }
-
 </style>
 
 <style>

@@ -1,14 +1,61 @@
 <template>
   <div>
+    <div class="people-style border shadow">
+      <b-row>
+        <b-col cols="6">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col>
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong>
+            {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong>
+            {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong>
+            {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
+            <strong>{{ $t("businessowner.About") }}:</strong>
+            {{
+              $t("businessowner.super_best_car_seller_in_the_world")
+            }}
+            adipisicing elit.
+            <b-link>{{ $t("businessowner.Read_More") }}</b-link>
+          </p>
+        </b-col>
+      </b-row>
 
+      <b-row>
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="plus-circle"> </b-icon>
+            {{ $t("businessowner.Community") }}
+          </b-button>
+        </b-col>
 
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="chat"> </b-icon>
+            {{ $t("businessowner.Message") }}
+          </b-button>
+        </b-col>
 
-
-
-
-
-
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon icon="direction" class="ico"> </b-icon>
+            {{ $t("businessowner.Direction") }}
+          </b-button>
+        </b-col>
+      </b-row>
+    </div>
 
     <div class="people-style border shadow">
       <b-row>
@@ -25,13 +72,20 @@
         <b-col>
           <p class="text">
             <strong> Super Car ltd </strong> <br />
-            <strong> {{ $t('businessowner.Category') }} : </strong> {{ $t('businessowner.Car_marketing') }} <br />
-            <strong> {{ $t('businessowner.Community') }} : </strong> 20k <br />
-            <strong> {{ $t('businessowner.Location') }} :</strong> {{ $t('businessowner.Cameroon') }} <br />
-            <strong> {{ $t('businessowner.Keyword') }} :</strong> {{ $t('businessowner.car') }},{{ $t('businessowner.swag') }} <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong>
+            {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong>
+            {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong>
+            {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
-            <strong>{{ $t('businessowner.About') }}:</strong> {{ $t('businessowner.super_best_car_seller_in_the_world') }}
-            adipisicing elit. <b-link>{{ $t('businessowner.Read_More') }}</b-link>
+            <strong>{{ $t("businessowner.About") }}:</strong>
+            {{
+              $t("businessowner.super_best_car_seller_in_the_world")
+            }}
+            adipisicing elit.
+            <b-link>{{ $t("businessowner.Read_More") }}</b-link>
           </p>
         </b-col>
       </b-row>
@@ -39,32 +93,26 @@
       <b-row>
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
+            <b-icon class="ico" icon="plus-circle"> </b-icon>
+            {{ $t("businessowner.Community") }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
+            <b-icon class="ico" icon="chat"> </b-icon>
+            {{ $t("businessowner.Message") }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon icon="direction" class="ico"> </b-icon> {{ $t('businessowner.Direction')}}
+            <b-icon icon="direction" class="ico"> </b-icon>
+            {{ $t("businessowner.Direction") }}
           </b-button>
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
-
-
-
-
 
     <div class="people-style border shadow">
       <b-row>
@@ -81,13 +129,20 @@
         <b-col>
           <p class="text">
             <strong> Super Car ltd </strong> <br />
-            <strong> {{ $t('businessowner.Category') }} : </strong> {{ $t('businessowner.Car_marketing') }} <br />
-            <strong> {{ $t('businessowner.Community') }} : </strong> 20k <br />
-            <strong> {{ $t('businessowner.Location') }} :</strong> {{ $t('businessowner.Cameroon') }} <br />
-            <strong> {{ $t('businessowner.Keyword') }} :</strong> {{ $t('businessowner.car') }},{{ $t('businessowner.swag') }} <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong>
+            {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong>
+            {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong>
+            {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
-            <strong>{{ $t('businessowner.About') }}:</strong> {{ $t('businessowner.super_best_car_seller_in_the_world') }}
-            adipisicing elit. <b-link>{{ $t('businessowner.Read_More') }}</b-link>
+            <strong>{{ $t("businessowner.About") }}:</strong>
+            {{
+              $t("businessowner.super_best_car_seller_in_the_world")
+            }}
+            adipisicing elit.
+            <b-link>{{ $t("businessowner.Read_More") }}</b-link>
           </p>
         </b-col>
       </b-row>
@@ -95,83 +150,26 @@
       <b-row>
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
+            <b-icon class="ico" icon="plus-circle"> </b-icon>
+            {{ $t("businessowner.Community") }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
+            <b-icon class="ico" icon="chat"> </b-icon>
+            {{ $t("businessowner.Message") }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon icon="direction" class="ico"> </b-icon> {{ $t('businessowner.Direction')}}
+            <b-icon icon="direction" class="ico"> </b-icon>
+            {{ $t("businessowner.Direction") }}
           </b-button>
         </b-col>
       </b-row>
     </div>
-
-
-
-    <div class="people-style border shadow">
-      <b-row>
-        <b-col cols="6">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col>
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> {{ $t('businessowner.Category') }} : </strong> {{ $t('businessowner.Car_marketing') }} <br />
-            <strong> {{ $t('businessowner.Community') }} : </strong> 20k <br />
-            <strong> {{ $t('businessowner.Location') }} :</strong> {{ $t('businessowner.Cameroon') }} <br />
-            <strong> {{ $t('businessowner.Keyword') }} :</strong> {{ $t('businessowner.car') }},{{ $t('businessowner.swag') }} <br />
-
-            <strong>{{ $t('businessowner.About') }}:</strong> {{ $t('businessowner.super_best_car_seller_in_the_world') }}
-            adipisicing elit. <b-link>{{ $t('businessowner.Read_More') }}</b-link>
-          </p>
-        </b-col>
-      </b-row>
-
-      <b-row>
-        <b-col cols="4">
-          <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t('businessowner.Community')}}
-          </b-button>
-        </b-col>
-
-        <b-col cols="4">
-          <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> {{ $t('businessowner.Message')}}
-          </b-button>
-        </b-col>
-
-        <b-col cols="4">
-          <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon icon="direction" class="ico"> </b-icon> {{ $t('businessowner.Direction')}}
-          </b-button>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
   </div>
 </template>
 
@@ -230,8 +228,7 @@ export default {
 
   border-bottom-right-radius: 5px;
 }
-.r-image{
-
+.r-image {
   border-radius: 8px;
 }
 

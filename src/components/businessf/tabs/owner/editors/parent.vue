@@ -2,7 +2,7 @@
   <div class=" ">
     <b-card v-if="networkInfo" title="" class="">
       <b-container class="a-center">
-          <!-- :src="require('@/assets/img/mayor.jpg')" -->
+        <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
           :src="networkInfo.image"
           variant="primary"
@@ -16,7 +16,9 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
+            <h6 class="  m-0 p-0 a-center network-name ">
+              <b> {{ networkInfo.name }}</b>
+            </h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -24,11 +26,21 @@
               size="sm"
               @click="addFollower"
               :disabled="buttonStatus"
-               :style="networkInfo.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+              :style="
+                networkInfo.is_follow !== 0
+                  ? 'background-color: rgb(162,107,80);'
+                  : ''
+              "
               class="a-center"
             >
-              <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-              <span> {{ $t('general.Community') }}</span>
+              <i
+                :class="
+                  networkInfo.is_follow
+                    ? 'fas fa-user-minus fa-lg btn-icon'
+                    : 'fas fa-user-plus fa-lg btn-icon'
+                "
+              ></i>
+              <span> {{ $t("general.Community") }}</span>
             </b-button>
           </b-col>
         </b-row>
@@ -49,14 +61,16 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                 {{ nFormatter(networkInfo.community) }}
-                  {{ $t('general.community') }} 
+                  {{ nFormatter(networkInfo.community) }}
+                  {{ $t("general.community") }}
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}</h6>
+        <h6 class="mt-2 font-weight-bolder title ">
+          {{ $t("general.About") }}
+        </h6>
         <p class="text-justify text">
           <read-more
             :more-str="$t('search.read_more')"
@@ -66,14 +80,17 @@
             :less-str="$t('search.read_less')"
             :max-chars="100"
           ></read-more>
-         
         </p>
       </b-card-text>
     </b-card>
     <b-card v-else class="text-center">
-      <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem"></b-spinner>
+      <b-spinner
+        variant="primary"
+        label="Text Centered"
+        style="width: 3rem; height: 3rem"
+      ></b-spinner>
     </b-card>
-    
+
     <SidebarCommunity />
 
     <b-modal
@@ -215,7 +232,6 @@
         </b-form>
       </b-container>
     </b-modal>
-
   </div>
 </template>
 
@@ -227,7 +243,7 @@ import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebar
 export default {
   name: "parent",
   components: {
-    SidebarCommunity,
+    SidebarCommunity
     // ReadMore
   },
   data() {
@@ -239,22 +255,23 @@ export default {
       buttonStatus: false,
       updateNetwork_form: null,
       text: "",
-      file: '',
+      file: "",
       SPupdateN: false
-
     };
   },
   computed: {
     networkInfo() {
       return this.$store.state.networkProfile.networkInfo;
-    },
+    }
   },
-  mounted(){
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
-    this.getNetworkInfo() 
+  mounted() {
+    this.url =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.$router.push("notFound");
+    this.getNetworkInfo();
   },
   methods: {
-  
     addNetwork() {
       this.updateNetwork_form = {
         name: this.networkInfo.name,
@@ -263,20 +280,20 @@ export default {
         primary_phone: this.networkInfo.primary_phone,
         secondary_phone: this.networkInfo.secondary_phone,
         address: this.networkInfo.address,
-        allow_business: this.networkInfo.allow_business,
+        allow_business: this.networkInfo.allow_business
       };
       console.log(this.networkInfo[0]);
       console.log("hello");
       this.showModal = !this.showModal;
     },
 
-    updateNetwork: function () {
+    updateNetwork: function() {
       this.SPupdateN = true;
       console.log("this.updateNetwork_form", this.updateNetwork_form);
       this.$store
         .dispatch("networkProfile/updateNetwork", {
           path: "network/" + this.url + "/about/update",
-          formData: this.updateNetwork_form,
+          formData: this.updateNetwork_form
         })
         .then(({ data }) => {
           console.log(data);
@@ -284,20 +301,19 @@ export default {
           this.getNetworkInfo();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("network.Changes_Made_Successfuly"),
+            message: this.$t("network.Changes_Made_Successfuly")
           });
           this.showModal = !this.showModal;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.SPupdateN = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("network.Unable_To_Make_Changes"),
+            message: this.$t("network.Unable_To_Make_Changes")
           });
         });
     },
-
 
     nFormatter: function(num) {
       if (num >= 1000000000) {
@@ -317,44 +333,44 @@ export default {
     addFollower: function() {
       this.buttonStatus = true;
       this.SPcommunity = !this.SPcommunity;
-      this.axios.post("network/"+this.url+"/about/follow")
-      .then(() => {
-        this.getNetworkInfo();
-        this.SPcommunity = !this.SPcommunity;
-        if (this.networkInfo.is_follow) {
+      this.axios
+        .post("network/" + this.url + "/about/follow")
+        .then(() => {
+          this.getNetworkInfo();
+          this.SPcommunity = !this.SPcommunity;
+          if (this.networkInfo.is_follow) {
+            this.buttonStatus = false;
+            this.flashMessage.show({
+              status: "success",
+              message: this.$t("network.You_Are_Not_more_Following")
+            });
+          } else {
+            this.buttonStatus = false;
+            this.flashMessage.show({
+              status: "success",
+              message: this.$t("network.You_Are_Now_Following")
+            });
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
           this.buttonStatus = false;
           this.flashMessage.show({
-            status: "success",
-            message: this.$t('network.You_Are_Not_more_Following')
+            status: "error",
+            message: this.$t("network.Unable_To_follow")
           });
-        } else {
-          this.buttonStatus = false;
-          this.flashMessage.show({
-            status: "success",
-            message: this.$t('network.You_Are_Now_Following')
-          });
-        }
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.buttonStatus = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_follow'),
         });
-      });
     },
     getNetworkInfo() {
       this.$store
-      .dispatch("networkProfile/getnetworkInfo", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .dispatch("networkProfile/getnetworkInfo", this.url)
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     }
-
   }
 };
 </script>

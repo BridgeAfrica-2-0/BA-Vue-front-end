@@ -4,28 +4,22 @@
       Do you want to join this network?
     </b-modal>
 
-
-      
-
-          <div class="people-style shadow"  v-for="item in network" :key="item.id">
+    <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-         
-            <div class="center-img">
+          <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>   
-        
+          </div>
         </b-col>
 
-        
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-           {{ item.followers }} {{$t("general.Community")}}<br />
+            {{ item.followers }} {{ $t("general.Community") }}<br />
 
-           {{ item.about_network }} <b-link>{{$t("generalRead_More.")}</b-link>
+            {{ item.about_network }} <b-link>{{$t("generalRead_More.")}</b-link>
           </p>
         </b-col>
 
@@ -47,7 +41,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{$t("general.Community")}}</span>
+                  <span class="btn-com">{{ $t("general.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -94,21 +88,19 @@
       </b-row>
     </div>
 
-   
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-
 import axios from "axios";
- 
+
 export default {
   props: ["type"],
   data() {
     return {
       page: 1,
-       biz_id:null,
+      biz_id: null,
       options: {
         rewind: true,
         autoplay: true,
@@ -122,96 +114,66 @@ export default {
   },
 
   computed: {
-   
-        network(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
-   }
-   
+    network() {
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.NcommunityFollower
+          .network_followers;
+      } else {
+        return this.$store.state.profile.NcommunityFollowing.network_following;
+      }
+    }
   },
-  
 
-   mounted(){
+  mounted() {
     this.biz_id = this.$route.params.id;
- },
+  },
 
-
-
-
-   methods:{
-      
-     
-      infiniteHandler($state) {       
-
-        console.log("loading network 1 1")
+  methods: {
+    infiniteHandler($state) {
+      console.log("loading network 1 1");
 
       let url = null;
 
-    
-
-         if(this.type=="Follower"){  
-         
-           url = "business/community/visitor/network-follower/"+this.biz_id+"/";
-         }else{
-         
-           url = "business/community/visitor/network-following/"+this.biz_id+"/";
-         }
+      if (this.type == "Follower") {
+        url =
+          "business/community/visitor/network-follower/" + this.biz_id + "/";
+      } else {
+        url =
+          "business/community/visitor/network-following/" + this.biz_id + "/";
+      }
       axios
-        .get(url + this.page)   
+        .get(url + this.page)
         .then(({ data }) => {
-          console.log("lading network after response")
+          console.log("lading network after response");
           console.log(data);
-        if(this.type=="Follower"){
-         
+          if (this.type == "Follower") {
+            if (data.data.network_followers.length) {
+              this.page += 1;
+              this.network.push(...data.data.network_followers);
 
-          if (data.data.network_followers.length) {
-            this.page += 1;
-            this.network.push(...data.data.network_followers);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
+            }
           } else {
-            
+            if (data.data.network_following.length) {
+              this.page += 1;
 
+              this.network.push(...data.data.network_following);
 
-             if (data.data.network_following.length) {
-            this.page += 1;
-      
-            this.network.push(...data.data.network_following);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
-
+            }
           }
-        }) 
-        .catch((err) => {
+        })
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-
-  } ,
-
- 
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

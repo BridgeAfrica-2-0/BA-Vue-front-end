@@ -21,7 +21,7 @@
         <Button
           media="desktop"
           @click.native="strategY['network']"
-          v-if="selectedId == 3"
+          v-if="selectedId == 3 && islogin"
         />
         <Button
           media="desktop"
@@ -32,7 +32,12 @@
         <Button
           media="desktop"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="desktop"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
 
@@ -52,7 +57,7 @@
         <Button
           media="mobile"
           @click.native="strategY['network']"
-          v-if="selectedId == 3"
+          v-if="selectedId == 3 && islogin"
         />
 
         <Button
@@ -64,7 +69,12 @@
         <Button
           media="mobile"
           @click.native="strategies"
-          v-if="[2, 4].includes(selectedId)"
+          v-if="[2, 4].includes(selectedId) && islogin"
+        />
+        <Button
+          media="mobile"
+          @click.native="strategies"
+          v-if="[2, 3].includes(selectedId) && !islogin"
         />
       </template>
     </Nav>
@@ -83,10 +93,20 @@
 
     <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
 
-    <div class="container searchly moveup">
+    <div v-if="islogin" class="container searchly moveup">
       <ly-tab
         v-model="selectedId"
         :items="items"
+        :options="optionsnav"
+        activeColor="#e75c18"
+        @change="handleChange"
+      >
+      </ly-tab>
+    </div>
+    <div v-else class="container searchly moveup">
+      <ly-tab
+        v-model="selectedId"
+        :items="guestItems"
         :options="optionsnav"
         activeColor="#e75c18"
         @change="handleChange"
@@ -334,7 +354,7 @@
           <div class="container-flex a-flex">
             <!--filter for all takes just two fields at a time  -->
 
-            <div id="all" v-if="selectedId == '5'">
+            <div id="all" v-if="selectedId == '5' && islogin">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -348,7 +368,7 @@
                 <Sponsor />
               </div>
 
-              <br>
+              <br />
 
               <h6>
                 <fas-icon
@@ -432,6 +452,87 @@
 
               <hr />
             </div>
+            <div v-else-if="selectedId == '4' && !islogin">
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+
+              <br />
+
+              <h6>
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'hands-helping']"
+                  size="lg"
+                />
+
+                {{ $t("search.Businesses") }}
+              </h6>
+
+              <MiniBusiness :businesses="businesses" />
+
+              <span class="float-right mb-3" @click="selectedId = 1">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <div class="d-flex">
+                <fas-icon
+                  class="icons mr-1"
+                  :icon="['fas', 'users']"
+                  size="lg"
+                />
+
+                <h6>{{ $t("search.People") }}</h6>
+              </div>
+
+              <MiniPeople />
+              <span class="float-right mb-3" @click="selectedId = 2">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <h6>
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                {{ $t("search.Market") }}
+              </h6>
+
+              <MiniMarket :products="miniproducts" />
+
+              <span class="float-right mb-3" @click="selectedId = 0">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+
+              <h6>
+                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
+                {{ $t("search.Post") }}
+              </h6>
+
+              <MiniPost />
+
+              <span class="float-right mb-3" @click="selectedId = 3">
+                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
+              </span>
+              <br />
+
+              <hr />
+            </div>
 
             <!--  select just businesses      -->
 
@@ -449,7 +550,7 @@
                 <Sponsor />
               </div>
 
-              <br>
+              <br />
               <h6>
                 <fas-icon
                   class="icons"
@@ -472,7 +573,7 @@
 
             <!-- filter out just the network  -->
 
-            <div v-if="selectedId == '3'">
+            <div v-if="selectedId == '3' && islogin">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
                 <fas-icon
@@ -485,7 +586,7 @@
               <div>
                 <Sponsor />
               </div>
-              <br>
+              <br />
               <h6>
                 <fas-icon
                   class="icons"
@@ -513,7 +614,7 @@
               <div>
                 <Sponsor />
               </div>
-              <br>
+              <br />
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
@@ -521,9 +622,16 @@
                   to="/cart"
                   size="sm"
                   variant="primary"
-                  class="float-right"
+                  class="float-right position-relative"
                 >
                   <b-icon icon="cart4"></b-icon> Cart
+                  <span
+                    v-if="cartCount > 0"
+                    class="badge badge-pill badge-danger position-absolute"
+                    style="top: 0 !important; right: 0 !important; transform: translate(50%, -50%);"
+                  >
+                    {{ cartCount }}
+                  </span>
                 </b-button>
                 <div class="float-right">
                   <b-button
@@ -561,7 +669,16 @@
             <div v-if="selectedId == '0'">
               <mapbox :products="allproducts.data" />
             </div>
-            <div v-if="selectedId == '5'">
+            <div v-if="selectedId == '5' && islogin">
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+                :networks="mininetworks.data"
+                :defaultLocation="searchParams.location.label"
+                :isSearched="isSearched"
+              />
+            </div>
+            <div v-if="selectedId == '4' && !islogin">
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
@@ -603,7 +720,7 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from "@/components/ButtonNavBarFind";
-
+import axios from "axios";
 import {
   PostComponent,
   PeopleComponent,
@@ -617,6 +734,7 @@ import BusinessComponent from "@/components/search/business";
 import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import { getGuestIdentifier } from '../helpers';
 
 export default {
   components: {
@@ -649,14 +767,15 @@ export default {
   mixins: [loader],
 
   computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
       profileConnected: "auth/profilConnected",
       user: "auth/user",
     }),
-
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
 
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
@@ -690,80 +809,88 @@ export default {
   },
 
   created() {
-
     this.searchParams.location = this.$route.query.location;
- 
-   let code=null;
 
-   if(this.searchParams.location){
-    //try to get the location code
-    code=this.searchParams.location.code
-   
-    if(!code){ 
-    this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
-      }else{
-      localStorage.setItem("searchLocation", JSON.stringify(this.searchParams.location) );
+    let code = null;
 
+    if (this.searchParams.location) {
+      //try to get the location code
+      code = this.searchParams.location.code;
+
+      if (!code) {
+        this.searchParams.location = JSON.parse(
+          localStorage.getItem("searchLocation")
+        );
+      } else {
+        localStorage.setItem(
+          "searchLocation",
+          JSON.stringify(this.searchParams.location)
+        );
       }
+    } else {
+      this.searchParams.location = JSON.parse(
+        localStorage.getItem("searchLocation")
+      );
+    }
 
-   }else{
-     this.searchParams.location = JSON.parse(localStorage.getItem("searchLocation"));
-    } 
+    console.log(this.searchParams.location);
 
-   console.log(this.searchParams.location);
+    if (!this.searchParams.location) {
+      this.searchParams.location = { code: "", label: "Location" };
+    }
 
-   if(!this.searchParams.location){
-     this.searchParams.location = { code: '', label: 'Location' }; 
-   }
-
-   
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
 
-   
+    this.$store.commit("marketSearch/setKeyword", this.searchParams.keyword);
 
-           this.$store.commit("marketSearch/setKeyword",this.searchParams.keyword );
-        
-          this.$store.commit("marketSearch/setLocation", this.searchParams.location);
+    this.$store.commit("marketSearch/setLocation", this.searchParams.location);
 
-           this.$store.commit("networkSearch/setKeyword", this.searchParams.keyword);
+    this.$store.commit("networkSearch/setKeyword", this.searchParams.keyword);
 
-          this.$store.commit("networkSearch/setLocation", this.searchParams.location);
+    this.$store.commit("networkSearch/setLocation", this.searchParams.location);
 
-      this.searchParams.location_placeholder = this.searchParams.location
-        ? this.searchParams.location
-        : this.$t("home.Location");
-      
-   
-
+    this.searchParams.location_placeholder = this.searchParams.location
+      ? this.searchParams.location
+      : this.$t("home.Location");
 
     this.onProcessQuery();
     this.getLocation();
     this.getKeyword();
 
-    this.strategY = {
-      users: () => this.onFindUser(),
-      all: () => this.getKeyword(),
-      market: () => this.searchProducts({}),
-      network: () => this.searchNetworks(),
-      business: () => this.onFindBusiness(),
-    };     
-
+    if (this.islogin) {
+      this.strategY = {
+        users: () => this.onFindUser(),
+        all: () => this.getKeyword(),
+        market: () => this.searchProducts({}),
+        network: () => this.searchNetworks(),
+        business: () => this.onFindBusiness(),
+      };
+    } else {
+      this.strategY = {
+        users: () => this.onFindUser(),
+        all: () => this.getKeyword(),
+        market: () => this.searchProducts({}),
+        business: () => this.onFindBusiness(),
+      };
+    }
     // if (!this.$route.query.uuid)
-     
 
     this.initialize();
   },
-
+  mounted() {
+    this.fetchCartCount();
+  },
   data() {
     return {
       activateMatching: null,
+      cartCount: 0,
       catChose: "",
       subCatChose: "",
       filterChose: "",
       categoryName: "",
-    
+
       searchParams: {
         keyword: "",
         cat_id: "",
@@ -805,14 +932,16 @@ export default {
         { label: this.$t("search.Business") },
         { label: this.$t("search.People") },
         { label: this.$t("search.Network") },
-         { label: this.$t("search.Post") },
+        { label: this.$t("search.Post") },
         { label: this.$t("search.All") },
-
-        
       ],
-
-
-
+      guestItems: [
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
+        { label: this.$t("search.Post") },
+        { label: this.$t("search.All") },
+      ],
 
       default_category: "",
 
@@ -827,27 +956,27 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
+    selectedId: function() {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
 
-       if (this.selectedId == 5) {
-           this.getKeyword();
-        }
-        
-        localStorage.setItem("searchTab", this.selectedId);
-      
+      if (this.selectedId == 5 && this.islogin) {
+        this.getKeyword();
+      } else if (this.selectedId == 4 && !this.islogin) {
+        this.getKeyword();
+      }
+
+      localStorage.setItem("searchTab", this.selectedId);
     },
- 
 
     searchParams: {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
         // this.activateSuggestion(newValue.keyword);
-   
-        if (this.selectedId == 5) {
+
+        if (this.selectedId == 5 && this.islogin) {
           this.$store.commit("allSearch/setKeyword", newValue.keyword);
           this.$store.commit("allSearch/setLocation", newValue.location);
         } else if (this.selectedId == 1) {
@@ -855,12 +984,15 @@ export default {
           this.$store.commit("business/setKeyword", newValue.keyword);
         } else if (this.selectedId == 0) {
           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
-        
+
           this.$store.commit("marketSearch/setLocation", newValue.location);
         } else if (this.selectedId == 3) {
           this.$store.commit("networkSearch/setKeyword", newValue.keyword);
 
           this.$store.commit("networkSearch/setLocation", newValue.location);
+        } else if (this.selectedId == 4 && !this.islogin) {
+          this.$store.commit("allSearch/setKeyword", newValue.keyword);
+          this.$store.commit("allSearch/setLocation", newValue.location);
         }
       },
     },
@@ -880,10 +1012,20 @@ export default {
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       reset: "search/RESET_RESULT",
-      findBusiness: "business/FIND_BUSINESS",
+      // findBusiness: "business/FIND_BUSINESS",
       getGeo: "business/getGeo",
     }),
-
+    findBusiness(payload) {
+      console.log("==========================", this.isLogin);
+      if (this.isLogin) {
+        return this.$store.dispatch("business/FIND_BUSINESS", payload);
+      } else {
+        return this.$store.dispatch(
+          "business/FIND_BUSINESS_FOR_GUEST_USER",
+          payload
+        );
+      }
+    },
     async checkIfItNetwork() {
       if ("network" == this.profileConnected.user_type) {
         const request = await this.$repository.share.switch(null, "reset");
@@ -893,11 +1035,10 @@ export default {
     },
 
     updateSearchLocation(location) {
-     
       this.searchParams.location_placeholder = location;
       this.searchParams.location = location;
 
-       this.$store.commit("allSearch/setLocation", location);
+      this.$store.commit("allSearch/setLocation", location);
     },
 
     updateSearchKeyword(keyword) {
@@ -911,10 +1052,12 @@ export default {
         this.searchNetworks();
       } else if (this.selectedId == 0) {
         this.searchProducts({});
+      } else if (this.selectedId == 4 && !this.islogin) {
+        this.getKeyword();
       }
     },
 
-    activateSuggestion: async function (value) {
+    activateSuggestion: async function(value) {
       this.$store.commit("allSearch/setSuggestedKeyword", []);
       if (value) {
         const response = await this.$repository.search.sugesstion(value);
@@ -935,51 +1078,56 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
-
+    async fetchCartCount() {
+      try {
+        let guest_identifier = getGuestIdentifier();
+        const url = this.islogin
+          ? "cart/total"
+          : `guest/cart/total?guest_identifier=${guest_identifier}`;
+        const response = await axios.get(url);
+        this.cartCount = response.data.data.totalItems;
+      } catch (error) {
+        console.error("Error fetching cart count:", error);
+      }
+    },
     onProcessQuery() {
-      let tab=  localStorage.getItem("searchTab");
+      let tab = localStorage.getItem("searchTab");
 
-
-       if (this.$route.query.tab==0) {
+      if (this.$route.query.tab == 0) {
         this.selectedId = 0;
         return true;
-      }else{
-      
-      if (tab==0) {
-        this.selectedId = 0;
-        return true;
+      } else {
+        if (tab == 0) {
+          this.selectedId = 0;
+          return true;
+        }
+
+        if (tab == 1) {
+          this.selectedId = 1;
+          return true;
+        }
+
+        if (tab == 2) {
+          this.selectedId = 2;
+
+          return true;
+        }
+
+        if (tab == 3) {
+          this.selectedId = 3;
+          return true;
+        }
+
+        if (tab == 4) {
+          this.selectedId = 4;
+
+          return true;
+        }
       }
 
-       if (tab==1) {
-        this.selectedId = 1;
-        return true;
-      }
-
-       if (tab==2) {
-        this.selectedId = 2;
-       
-        return true;
-      }
-
-
-       if (tab==3) {
-        this.selectedId = 3;
-        return true;
-      }
-
-       if (tab==4) {
+      if (this.$route.query.uuid) {
         this.selectedId = 4;
-        
-        return true;
       }
-
-       }
-
-      if (this.$route.query.uuid) { 
-        this.selectedId = 4;
-       } 
-
-
     },
     // [ED]----------
 
@@ -995,30 +1143,46 @@ export default {
     getKeyword(data) {
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$store.commit("marketSearch/setSubCat", []);
-   
+
       var keyword = this.searchParams.keyword;
       var location = this.searchParams.location;
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
       this.$store.commit("allSearch/setKeyword", keyword);
-      this.$store.commit("allSearch/setLocation", location);     
+      this.$store.commit("allSearch/setLocation", location);
 
       if (this.searchParams.keyword)
         this.activateMatching = { name: this.searchParams.keyword };
       this.activateSuggestion(this.searchParams.keyword);
 
-     if(this.selectedId==5){  
-      this.$store
-        .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
-        .then((res) => {
-          // console.log("categories loaded!");
-          this.isSearched = !this.isSearched;
-        })
-        .catch((err) => {
-          console.log("Error erro!");
-        });
-         }
+      if (this.selectedId == 5) {
+        this.$store
+          .dispatch("allSearch/SEARCH", {
+            keyword: keyword,
+            location: location,
+          })
+          .then((res) => {
+            // console.log("categories loaded!");
+            this.isSearched = !this.isSearched;
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      } else if (this.selectedId == 4 && !this.islogin) {
+        this.$store
+          .dispatch("allSearch/SEARCH", {
+            keyword: keyword,
+            location: location,
+          })
+          .then((res) => {
+            // console.log("categories loaded!");
+            this.isSearched = !this.isSearched;
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      }
     },
 
     async onFindBusiness() {
@@ -1036,7 +1200,11 @@ export default {
           keyword: this.searchParams.keyword,
           location: this.searchParams.location,
         });
-
+      else
+        await this.findBusiness({
+          keyword: "",
+          location: this.searchParams.location,
+        });
       this.$store.commit("business/setLoading", false);
     },
 
@@ -1045,22 +1213,39 @@ export default {
       console.log("loader: ", this.prodLoader);
       this.showDismissibleAlert = false;
 
-     // this.$store.commit("setProducts", []);
+      // this.$store.commit("setProducts", []);
       // this.products = []
-      await this.$store
-        .dispatch("marketSearch/getProducts")
-        .then((res) => {
-          console.log("products list: ");
-          console.log(this.products);
-          this.prodLoader = false;
-          this.showDismissibleAlert = true;
-        })
-        .catch((err) => {
-          this.prodLoader = false;
-          console.log("products error: ");
-          console.error(err);
-          this.showDismissibleAlert = false;
-        });
+      if (this.islogin) {
+        await this.$store
+          .dispatch("marketSearch/getProducts")
+          .then((res) => {
+            console.log("products list: ");
+            console.log(this.products);
+            this.prodLoader = false;
+            this.showDismissibleAlert = true;
+          })
+          .catch((err) => {
+            this.prodLoader = false;
+            console.log("products error: ");
+            console.error(err);
+            this.showDismissibleAlert = false;
+          });
+      } else {
+        await this.$store
+          .dispatch("marketSearch/getGuestUserProducts")
+          .then((res) => {
+            console.log("products list: ");
+            console.log(this.products);
+            this.prodLoader = false;
+            this.showDismissibleAlert = true;
+          })
+          .catch((err) => {
+            this.prodLoader = false;
+            console.log("products error: ");
+            console.error(err);
+            this.showDismissibleAlert = false;
+          });
+      }
     },
 
     searchProducts(data) {
@@ -1070,22 +1255,31 @@ export default {
       this.activateMatching = { name: this.searchParams.keyword };
       this.activateSuggestion(this.searchParams.keyword);
 
-      this.$store
-        .dispatch("marketSearch/searchProducts", data)
-        .then((res) => {
-          // console.log("categories loaded!");
-        })
-        .catch((err) => {
-          console.log("Error erro!");
-        });
+      if (this.islogin) {
+        this.$store
+          .dispatch("marketSearch/searchProducts", data)
+          .then((res) => {
+            // console.log("categories loaded!");
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      } else {
+        console.log("non-login---------");
+        this.$store
+          .dispatch("marketSearch/searchGuestUserProducts", data)
+          .then((res) => {})
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      }
     },
 
     searchNetworks(data) {
-
-     
-      if (this.searchParams.keyword) {  
+      if (this.searchParams.keyword) {
         this.activateMatching = { name: this.searchParams.keyword };
-      this.activateSuggestion(this.searchParams.keyword);  }
+        this.activateSuggestion(this.searchParams.keyword);
+      }
 
       this.$store
         .dispatch("networkSearch/SEARCH", data)
@@ -1114,50 +1308,85 @@ export default {
     },
 
     initialize() {
-      this.strategy = {
-        2: () => this.onFindUser(),
-        4: () => this.onFindPost(),
-        1: () => this.onFindBusiness(),
-        3: () => this.searchNetworks(),
-        0: () => this.searchProducts({}),
-      };
+      if (this.islogin) {
+        this.strategy = {
+          2: () => this.onFindUser(),
+          4: () => this.onFindPost(),
+          1: () => this.onFindBusiness(),
+          3: () => this.searchNetworks(),
+          0: () => this.searchProducts({}),
+        };
+        this.strategyForPlaceHolder = {
+          2: () => this.$t("general.Find_User"),
+          4: () => this.$t("general.Find_Post"),
+          5: () => this.$t("general.All"),
+          1: () => this.$t("general.Find_Businesses"),
+        };
 
-      this.strategyForPlaceHolder = {
-        2: () => this.$t("general.Find_User"),
-        4: () => this.$t("general.Find_Post"),
-        5: () => this.$t("general.All"),
-        1: () => this.$t("general.Find_Businesses"),
-      };
+        this.strategyForComponent = {
+          2: () => ({
+            component: PeopleComponent,
+            filter: PeopleFilter,
+          }),
+          4: () => ({
+            component: PostComponent,
+            filter: PostFilter,
+          }),
+          1: () => ({
+            component: BusinessComponent,
+            filter: null,
+          }),
+        };
+        this.strategyForNotFoundComponentTitle = {
+          2: () => this.$t("general.Not_Find_users"),
+          4: () => this.$t("general.Not_Find_posts"),
+          1: () => this.$t("general.Not_Find_Business"),
+        };
+      } else {
+        this.strategy = {
+          2: () => this.onFindUser(),
+          // 4: () => this.onFindPost(),
+          1: () => this.onFindBusiness(),
+          3: () => this.onFindPost(),
+          0: () => this.searchProducts({}),
+        };
+        this.strategyForPlaceHolder = {
+          2: () => this.$t("general.Find_User"),
+          3: () => this.$t("general.Find_Post"),
+          4: () => this.$t("general.All"),
+          1: () => this.$t("general.Find_Businesses"),
+        };
 
-      this.strategyForComponent = {
-        2: () => ({
-          component: PeopleComponent,
-          filter: PeopleFilter,
-        }),
-        4: () => ({
-          component: PostComponent,
-          filter: PostFilter,
-        }),
-        1: () => ({
-          component: BusinessComponent,
-          filter: null,
-        }),
-      };
-
-      this.strategyForNotFoundComponentTitle = {
-        2: () => this.$t("general.Not_Find_users"),
-        4: () => this.$t("general.Not_Find_posts"),
-        1: () => this.$t("general.Not_Find_Business"),
-      };
+        this.strategyForComponent = {
+          2: () => ({
+            component: PeopleComponent,
+            filter: PeopleFilter,
+          }),
+          3: () => ({
+            component: PostComponent,
+            filter: PostFilter,
+          }),
+          1: () => ({
+            component: BusinessComponent,
+            filter: null,
+          }),
+        };
+        this.strategyForNotFoundComponentTitle = {
+          2: () => this.$t("general.Not_Find_users"),
+          3: () => this.$t("general.Not_Find_posts"),
+          1: () => this.$t("general.Not_Find_Business"),
+        };
+      }
 
       this.changePlaceHolder();
-       this.strategyForComponent[this.selectedId]();
+      this.strategyForComponent[this.selectedId]();
     },
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1204,15 +1433,29 @@ export default {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findUserByParam({
-          data: {
-            keyword: this.searchParams.keyword.trim(),
-          },
-          page: 1,
-        });
+        var request;
+        if (this.islogin) {
+          request = await this.$repository.search.findUserByParam({
+            data: {
+              keyword: this.searchParams.keyword.trim(),
+            },
+            page: 1,
+          });
+        } else {
+          request = await this.$repository.search.findGuestUserByParam({
+            data: {
+              keyword: this.searchParams.keyword.trim(),
+            },
+            page: 1,
+          });
+        }
 
         if (request.success) {
-          this.setCallback(this.$repository.search.findUserByParam);
+          if (this.islogin) {
+            this.setCallback(this.$repository.search.findUserByParam);
+          } else {
+            this.setCallback(this.$repository.search.findGuestUserByParam);
+          }
           this.page(2);
           this.userStore(request.data);
         }
@@ -1235,23 +1478,44 @@ export default {
         });
         this.activateSuggestion(this.searchParams.keyword);
         this._onFindUser();
-      } else this.onNotified("the word must have at least 3 letters");
+      } else {
+        this.page(1);
+        this.stack({
+          data: {
+            keyword: "",
+          },
+        });
+        this._onFindUser();
+      }
     },
 
     async _onFindPost() {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findPostByKeyword({
-          data: {
-            keyword: this.searchParams.keyword.trim(),
-          },
-          page: 1,
-        });
-
+        let request;
+        if (this.islogin) {
+          request = await this.$repository.search.findPostByKeyword({
+            data: {
+              keyword: this.searchParams.keyword.trim(),
+            },
+            page: 1,
+          });
+        } else {
+          request = await this.$repository.search.findPostForGuestUser({
+            data: {
+              keyword: this.searchParams.keyword.trim(),
+            },
+            page: 1,
+          });
+        }
         if (request.success) {
           this.page(2);
-          this.setCallback(this.$repository.search.findPostByKeyword);
+          if (this.islogin) {
+            this.setCallback(this.$repository.search.findPostByKeyword);
+          } else {
+            this.setCallback(this.$repository.search.findPostForGuestUser);
+          }
           this.postStore(request.data);
         }
         this.lauchLoader(false);
@@ -1303,8 +1567,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -1406,22 +1669,43 @@ export default {
     getCategory(value) {
       this.Selectedcategory = value;
 
-      if (this.selectedId == 0) {
-        this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 1) {
-        this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 5) {
-        this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 3) {
-        this.searchNetworks({
-          cat_id: value.cat_id,
-          sub_cat: value.id,
-          keyword: this.searchParams.keyword,
-        });
-      } else if (this.selectedId == 4) {
-        this._onFindPost();
-      } else if (this.selectedId == 2) {
-        this._onFindUser();
+      if (this.islogin) {
+        if (this.selectedId == 0) {
+          this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
+        } else if (this.selectedId == 1) {
+          if (this.islogin) {
+            this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+          } else {
+            this.searchBusinessForGuestUser({
+              cat_id: value.cat_id,
+              sub_cat: value.id,
+            });
+          }
+        } else if (this.selectedId == 5) {
+          this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+        } else if (this.selectedId == 3) {
+          this.searchNetworks({
+            cat_id: value.cat_id,
+            sub_cat: value.id,
+            keyword: this.searchParams.keyword,
+          });
+        } else if (this.selectedId == 4) {
+          this._onFindPost();
+        } else if (this.selectedId == 2) {
+          this._onFindUser();
+        }
+      } else {
+        if (this.selectedId == 0) {
+          this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
+        } else if (this.selectedId == 1) {
+          this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+        } else if (this.selectedId == 4) {
+          this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+        } else if (this.selectedId == 3) {
+          this._onFindPost();
+        } else if (this.selectedId == 2) {
+          this._onFindUser();
+        }
       }
     },
 
@@ -1441,6 +1725,19 @@ export default {
       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+          this.$store.commit("business/setLoading", false);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+          this.$store.commit("business/setLoading", false);
+        });
+    },
+    searchBusinessForGuestUser(data) {
+      this.$store.commit("business/setLoading", true);
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
         .then((res) => {
           // console.log("categories loaded!");
           this.$store.commit("business/setLoading", false);
@@ -1761,12 +2058,16 @@ export default {
 </script>
 
 <style scoped>
-.searchpage{
+.searchpage {
   font-family: poppins !important;
   color: #455a64 !important;
   overflow-x: hidden;
 }
-
+.badge {
+  position: absolute;
+  font-size: 10px;
+  padding: 0.25em 0.5em;
+}
 .icon-color {
   color: #e75c18;
 }

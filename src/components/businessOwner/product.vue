@@ -1,117 +1,119 @@
 <template>
   <div>
-      <div class="text-center" v-if="loader" >
-
-        <b-spinner
-           class="spin"
-          variant="primary">   </b-spinner> 
-      
-     </div> 
-      <b-row v-if="!loader">
-            <b-col md="12" lg="6" class=" mb-2" v-for="product in products.data" :key="product.id">
-
-    <div class="people-style  h-100 "> 
-
-       <b-link>
-                  <div class="float-right others">
-                    <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-                      <template #button-content>
-                        <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
-                      </template>
-                      <b-dropdown-item
-                     
-                     @click="callactions(product)" v-b-modal="`modal-${product.id}`">   {{ $t("profileowner.Edit") }}</b-dropdown-item
-                      >
-                      <b-dropdown-item @click="deleteProduct(product)"  v-b-modal="`modal-D${product.id}`">
-                        {{ $t("profileowner.Delete") }}</b-dropdown-item
-                      >
-                    </b-dropdown> 
-                  </div>
-                </b-link>
-
-
-     <div class="d-inline-flex">
-
-       <div >   
-          <div class="center-img">
-            <img
-              :src="product.picture"
-              class="r-image cursor-pointer"
-              @click="productDetails(product)"
-            />
-          </div>
-
-           </div>
-
-           <div class="flx50" > 
-        
-          <p class="text">
-            <span class="title cursor-pointer" @click="productDetails(product)">
-              {{ product.name }}
-            </span> <br>
-
-            <span> <b> Quantity:</b>  {{product.quantity}} </span> 
-
-
-
-            <br />
-
-             <read-more
-                        :more-str="$t('search.read_more')"
-                        class="readmore"
-                        :text="product.description"
-                        link="#"
-                        :less-str="$t('search.read_less')"
-                        :max-chars="100"
-                      >
-
-                      </read-more>
-
-
-           
-
-            <span class="price username mt-2">
-             {{ product.price }} FCFA
-            </span>
-        
-          </p>
-       
-        </div>  
-       
-          
-       </div>
-
+    <vue-confirm-dialog />
+    <div class="text-center" v-if="loader">
+      <b-spinner class="spin" variant="primary"> </b-spinner>
     </div>
+    <b-row v-if="!loader">
+      <b-col
+        md="12"
+        lg="6"
+        class=" mb-2"
+        v-for="product in products.data"
+        :key="product.id"
+      >
+        <div class="people-style  h-100 ">
+          <b-link>
+            <div class="float-right others">
+              <b-dropdown
+                size="lg"
+                variant="link"
+                toggle-class="text-decoration-none"
+                no-caret
+              >
+                <template #button-content>
+                  <b-icon
+                    icon="three-dots-vertical"
+                    variant="primary"
+                    class="icon-size"
+                  ></b-icon>
+                </template>
+                <b-dropdown-item
+                  @click="callactions(product)"
+                  v-b-modal="`modal-${product.id}`"
+                >
+                  {{ $t("profileowner.Edit") }}</b-dropdown-item
+                >
+                <b-dropdown-item
+                  @click="deleteProduct(product)"
+                  v-b-modal="`modal-D${product.id}`"
+                >
+                  {{ $t("profileowner.Delete") }}</b-dropdown-item
+                >
+              </b-dropdown>
+            </div>
+          </b-link>
 
-            </b-col>
+          <div class="d-inline-flex">
+            <div>
+              <div class="center-img">
+                <img
+                  :src="product.picture"
+                  class="r-image cursor-pointer"
+                  @click="productDetails(product)"
+                />
+              </div>
+            </div>
+
+            <div class="flx50">
+              <p class="text">
+                <span
+                  class="title cursor-pointer"
+                  @click="productDetails(product)"
+                >
+                  {{ product.name }}
+                </span>
+                <br />
+
+                <span> <b> Quantity:</b> {{ product.quantity }} </span>
+
+                <br />
+
+                <read-more
+                  :more-str="$t('search.read_more')"
+                  class="readmore"
+                  :text="product.description"
+                  link="#"
+                  :less-str="$t('search.read_less')"
+                  :max-chars="100"
+                >
+                </read-more>
+
+                <span class="price username mt-2">
+                  {{ product.price }} FCFA
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </b-col>
     </b-row>
 
-
-
- <span v-if="!loader"> 
-     <b-pagination
-      v-if="products.next || products.previous"
-      v-model="currentPage"
-      pills
-      :total-rows="products.total"
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-    ></b-pagination>
-
-  </span>
-
-
+    <span v-if="!loader">
+      <b-pagination
+        v-if="products.next || products.previous"
+        v-model="currentPage"
+        pills
+        :total-rows="products.total"
+        :per-page="per_page"
+        aria-controls="my-table"
+        @change="changePage"
+        align="center"
+      ></b-pagination>
+    </span>
 
     <!-- EDIT PRODUCT MODAL -->
     <!-- <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product">
       <EditProduct :showModal="Edit" :product="product" />
     </b-modal> -->
 
-
-    <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product" v-model="showModal"  size="lg" >
-
+    <b-modal
+      :id="`modal-${product.id}`"
+      hide-footer
+      title="Edit product"
+      v-model="showModal"
+      size="lg"
+    >
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -146,7 +148,11 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
+            <div
+              class="image-upload-wrap"
+              @click="picImage"
+              style="display: flex; justify-content: center; align-items: center; overflow: hidden"
+            >
               <input
                 type="file"
                 @change="getImagee"
@@ -157,11 +163,15 @@
               />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div v-if="selectedImagePrv">
-                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%">
+                  <img
+                    :src="selectedImagePrv"
+                    :srcset="selectedImagePrv"
+                    style="min-width: 100%; min-height: 100%"
+                  />
                 </div>
                 <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>{{ $t('businessowner.Product_Image') }}</h6>
+                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
                 </div>
               </a>
             </div>
@@ -189,7 +199,7 @@
           value="1"
           unchecked-value="0"
         >
-          {{ $t('businessowner.This_Product_Is_On_Discount') }}
+          {{ $t("businessowner.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
         <b-form-group
@@ -213,19 +223,19 @@
             v-model="product.is_service"
             unchecked-value="0"
           >
-            {{ $t('businessowner.This_Item_Is_A_Service') }} ?
+            {{ $t("businessowner.This_Item_Is_A_Service") }} ?
           </b-form-checkbox>
 
           <b-form-checkbox
             value="1"
             v-model="product.in_stock"
-             unchecked-value="0"
+            unchecked-value="0"
           >
-            {{ $t('businessowner.In_stock') }}
+            {{ $t("businessowner.In_stock") }}
           </b-form-checkbox>
 
           <b-form-checkbox value="1" unchecked-value="0">
-            {{ $t('businessowner.Published') }}
+            {{ $t("businessowner.Published") }}
           </b-form-checkbox>
         </div>
         <!-- TAX and KG -->
@@ -245,22 +255,19 @@
           ></b-form-input>
         </b-form-group>
 
-          <b-form-group
-            id="kg"
-            :label="$t('businessowner.quantity')"
-            label-for="quantity"
-            label-size="sm"
-          >
-           <b-form-input
-              v-model="product.quantity"
-              class="mt-1"
-              id="quantity"
-              type="number"
-              
-              
-            ></b-form-input>
-      </b-form-group>
-
+        <b-form-group
+          id="kg"
+          :label="$t('businessowner.quantity')"
+          label-for="quantity"
+          label-size="sm"
+        >
+          <b-form-input
+            v-model="product.quantity"
+            class="mt-1"
+            id="quantity"
+            type="number"
+          ></b-form-input>
+        </b-form-group>
 
         <b-form-group
           id="kg"
@@ -278,51 +285,52 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Category') }}  </label> 
+          <label class="typo__label">
+            {{ $t("businessowner.Category") }}
+          </label>
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
-           
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             label="name"
             track-by="id"
             :options="BuCategories"
-           
           ></multi-select>
-        </div>  
+        </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}  </label>    
+          <label class="typo__label">
+            {{ $t("businessowner.Sub_Category") }}
+          </label>
           <multi-select
             v-model="filterselectvalue"
-           
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             label="name"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
-         
-          ></multi-select> 
+          ></multi-select>
         </div>
-        <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
+        <label class="typo__label">{{ $t("businessowner.Filters") }} </label>
         <div>
-          <b-card no-body> 
-            <b-tabs pills card vertical>  
+          <b-card no-body>
+            <b-tabs pills card vertical>
               <b-tab
-                :title="filters.name"  
+                :title="filters.name"
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack"> 
+                  <b-form-group
+                    :label="$t('businessowner.Filters')"
+                    class="colorblack"
+                  >
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
                       v-model="select_filterss"
                       name="filters"
                     >
-
-                 
                       <b-form-checkbox
                         class="colorblack"
                         v-for="fil in filters.filters"
@@ -339,48 +347,53 @@
           </b-card>
         </div>
 
-
-        <b-button @click="editProduct(product)" class="mt-2 btn-block" variant="primary">
+        <b-button
+          @click="editProduct(product)"
+          class="mt-2 btn-block"
+          variant="primary"
+        >
           <b-spinner small v-if="sendingp" variant="white"></b-spinner>
-          {{ $t('update') }}
+          {{ $t("update") }}
         </b-button>
       </b-form>
     </b-modal>
 
-
-
-
-
-
-
-
-    
-
     <!-- modal delete -->
 
-
-
-
-      <b-modal :id="`modal-D${product.id}`" centered hide-footer  v-model="delModal" title="Edit product" size="lg">
-        <template #modal-title>
-          <span>WARNING!!!</span>
-        </template>
-        <div class="d-block text-center">
-          <h3>Sure To Delete: {{product.name}}!!</h3>
-        </div>
-        <b-row>
-          <b-col>
-            <b-button class="mt-3" block variant="primary" @click="deleteProduct(product)">Delete</b-button>
-          </b-col>
-        </b-row>
-        <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Delete</b-button> -->
-      </b-modal>
-
-
-   
+    <b-modal
+      :id="`modal-D${product.id}`"
+      centered
+      hide-footer
+      v-model="delModal"
+      title="Edit product"
+      size="lg"
+    >
+      <template #modal-title>
+        <span>WARNING!!!</span>
+      </template>
+      <div class="d-block text-center">
+        <h3>Sure To Delete: {{ product.name }}!!</h3>
+      </div>
+      <b-row>
+        <b-col>
+          <b-button
+            class="mt-3"
+            block
+            variant="primary"
+            @click="deleteProduct(product)"
+            >Delete</b-button
+          >
+        </b-col>
+      </b-row>
+      <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Delete</b-button> -->
+    </b-modal>
 
     <!-- PRODUCT DETAILS MODAL -->
-    <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product"/>
+    <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+    />
     <!-- <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" /> -->
   </div>
 </template>
@@ -395,41 +408,37 @@ export default {
   data() {
     return {
       viewProduct: false,
-      businessSlug:null,
-     // products:[],
-     sendingp:false,
-      product:[],
+      businessSlug: null,
+      // products:[],
+      sendingp: false,
+      product: [],
       load: false,
       loader: false,
-      pro_img:'',
+      pro_img: "",
       showModal: false,
       Edit: false,
       selectedProduct: "",
-       total: 0,
+      total: 0,
       per_page: 10,
-     delModal:false,
+      delModal: false,
       currentPage: 1,
       nextLoad: false,
-      selectedImagePrv:null, 
+      selectedImagePrv: null,
       multiselecvalue: [],
-      filterselectvalue:[],
-      select_filterss: [],
+      filterselectvalue: [],
+      select_filterss: []
     };
   },
-  
+
   components: {
     ProductDetails,
-   MultiSelect,
-   //  EditProduct
+    MultiSelect
+    //  EditProduct
   },
   computed: {
-
-    products(){
-      
-       return this.$store.state.market.products;
-
+    products() {
+      return this.$store.state.market.products;
     },
-
 
     BuCategories() {
       return this.$store.state.auth.categories;
@@ -438,29 +447,20 @@ export default {
     //  selectedImagePrv(){
     //    return  this.product.picture;
 
-    //  }, 
+    //  },
 
     scategories() {
       return this.$store.state.auth.subcategories;
     },
 
-   
-
-
-
-selectedcategories: function() {
-     
-   
-      return  this.multiselecvalue.id;
+    selectedcategories: function() {
+      return this.multiselecvalue.id;
     },
-
-
-
 
     selectedsubcategories: function() {
       let sub_cat = [];
 
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         if (item.subcategory_id) {
           sub_cat.push(item.subcategory_id);
         } else {
@@ -468,14 +468,7 @@ selectedcategories: function() {
         }
       });
       return sub_cat;
-    },
-
-
-   
-
-
-
-
+    }
 
     // selectedcategories: function () {
     //   let selectedCatUsers = [];
@@ -487,152 +480,111 @@ selectedcategories: function() {
     //   }
     //   return selectedCatUsers;
     // },
-
   },
-
 
   beforeMount() {
-
-     this.loader = true;
-     this.businessSlug = this.$route.params.id;
-      this.getProducts();
+    this.loader = true;
+    this.businessSlug = this.$route.params.id;
+    this.getProducts();
     this.categories();
-   
-
   },
   methods: {
+    callactions(product) {
+      console.log(product);
+      this.product = product;
+      this.selectedImagePrv = product.picture;
 
-     callactions(product){
+      this.multiselecvalue = product.categories[0];
 
-       console.log(product);
-  this.product=product;
-  this.selectedImagePrv= product.picture;
+      this.subcategories();
 
-  
- this.multiselecvalue = product.categories[0];
- 
+      console.log(this.filterselectvalue);
 
-   this.subcategories();
+      // this.filterselectvalue =product.subcategories;
 
-   
+      //this.filterselectvalue.filters=product.filters;
 
-   console.log(this.filterselectvalue);
+      this.select_filterss = this.editfilters(product.filters);
 
- 
+      //this.getfilters();
+    },
 
-  // this.filterselectvalue =product.subcategories;  
-
-   //this.filterselectvalue.filters=product.filters;  
-
-    this.select_filterss = this.editfilters(product.filters);
-
-   
-
-
-   //this.getfilters();
-
-     },
-
-
-      editfilters(filter) {
+    editfilters(filter) {
       let fil = [];
 
-      filter.forEach((item) => {
+      filter.forEach(item => {
         fil.push(item.id);
       });
 
       return fil;
     },
 
-
-    
-    getsubCat(){
-        let selectedUsers=[];
-         this.scategories.forEach((item) => {
-
-
-            this. product.subcategories.forEach((itemm) => {
-        if (item.subcategory_id == itemm.id) {
-          selectedUsers.push(item);
-        } 
-      });
-
-
+    getsubCat() {
+      let selectedUsers = [];
+      this.scategories.forEach(item => {
+        this.product.subcategories.forEach(itemm => {
+          if (item.subcategory_id == itemm.id) {
+            selectedUsers.push(item);
+          }
+        });
       });
 
       console.log(selectedUsers);
 
       return selectedUsers;
-
     },
 
-
-
-    getfilters(){
-        let selectedUsers=[];
-         this.scategories.forEach((item) => {
-
-
-            this. product.subcategories.forEach((itemm) => {
-        if (item.subcategory_id == itemm.id) {
-          selectedUsers.push(item);
-        } 
-      });
-
-
+    getfilters() {
+      let selectedUsers = [];
+      this.scategories.forEach(item => {
+        this.product.subcategories.forEach(itemm => {
+          if (item.subcategory_id == itemm.id) {
+            selectedUsers.push(item);
+          }
+        });
       });
 
       console.log(selectedUsers);
 
       return selectedUsers;
-
     },
 
-
-
-      flashErrors(errors) {
-      let err = '';
-      Object.values(errors).forEach((element) => {
+    flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
       return err;
     },
 
-
-        changePage(value) {
+    changePage(value) {
       console.log("next page loading ");
-      
-      this.loader=true;
+
+      this.loader = true;
       this.currentPage = value;
-     let url="/market?slug="+this.businessSlug+"&page="+value;    
+      let url = "/market?slug=" + this.businessSlug + "&page=" + value;
 
       this.$store
-        .dispatch("market/bPnextPage", url).then((res) => {
+        .dispatch("market/bPnextPage", url)
+        .then(res => {
           console.log(res);
-          this.loader=false;
-          
+          this.loader = false;
         })
-       
-        .catch((err) => {
+
+        .catch(err => {
           this.$store.commit("business/setLoading", true);
           this.total = this.business.total;
           console.error(err);
         });
     },
 
-
-
-      getProducts: async function () {
-        let url="/market?slug="+this.businessSlug;
-       await this.$store
-        .dispatch("market/getBproducts", url).then((res) => {
-        
-             
-             
-          
-        })
-        .catch((error) => {
+    getProducts: async function() {
+      let url = "/market?slug=" + this.businessSlug;
+      await this.$store
+        .dispatch("market/getBproducts", url)
+        .then(res => {})
+        .catch(error => {
           console.log(error);
         })
         .finally(() => {
@@ -640,10 +592,8 @@ selectedcategories: function() {
         });
     },
 
-
-
-    productDetails(product){
-      this.product=product;
+    productDetails(product) {
+      this.product = product;
       this.viewProduct = true;
     },
     showEdit() {
@@ -659,16 +609,15 @@ selectedcategories: function() {
       document.querySelector("#Mimage").click();
     },
     getImagee(e) {
-      
       this.product.picture = e.target.files[0];
-      this.pro_img=e.target.files[0];
+      this.pro_img = e.target.files[0];
       let fille = e.target.files[0];
       this.selectedImagePrv = URL.createObjectURL(fille);
-     // console.log("this.selectedImagePrv", this.selectedImagePrv);
+      // console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
-    
+
     editProduct(Product) {
-      this.sendingp=true;
+      this.sendingp = true;
       console.log("editProduct");
       console.log(Product);
       let formData = new FormData();
@@ -679,138 +628,117 @@ selectedcategories: function() {
       formData.append("condition", Product.condition);
       formData.append("is_service", Product.is_service);
       formData.append("in_stock", Product.in_stock);
-      formData.append("tax_amount", 0);  
-       formData.append("quantity", Product.quantity);  
+      formData.append("tax_amount", 0);
+      formData.append("quantity", Product.quantity);
       formData.append("kg", Product.kg);
-      formData.append("categoryId",  this.multiselecvalue.id);
-      formData.append("subCategoryId",this.filterselectvalue
-        .map((el) => el.subcategory_id)
-        .join());
+      formData.append("categoryId", this.multiselecvalue.id);
+      formData.append(
+        "subCategoryId",
+        this.filterselectvalue.map(el => el.subcategory_id).join()
+      );
 
-
-     
-      formData.append("filterId",  this.select_filterss.join());
+      formData.append("filterId", this.select_filterss.join());
       formData.append("picture", this.pro_img);
 
       console.log(this.pro_img);
 
-     
-     axios.post("market/"+Product.id, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        }).then(({ data }) => {
-          this.sendingp=false;
-          console.log(data);
-          this.flashMessage.show({
-            status: "success",
-            blockClass: 'custom-block-class',
-            message: "Changes Made Successfuly"
-          });  
-
-          this.showModal=false;
-
-            this.changePage(this.currentPage );
-        })
-        .catch((err) => {
-            console.log({ err: err });
-
-            this.sendingp = false;
-
-            if (err.response.status == 422) {
-              console.log({ err: err });
-
-              this.flashMessage.show({
-                status: 'error',
-
-                message: this.flashErrors(err.response.data.errors),
-                blockClass: 'custom-block-class',
-              });
-            } else {
-              this.flashMessage.show({
-                status: 'error',
-
-                message: 'Unable to Update Your Product',
-                blockClass: 'custom-block-class',
-              });
-              console.log({ err: err });
-            }
-            
-            
-          });
-    },  
-
-
-    deleteProduct(Product) {
-
-      this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-        
-          callback: confirm => {
-            if (confirm) { 
-
-            
-            this.$store
-        .dispatch("market/DeleteProduct", {
-          path: "market/"+Product.id,
+      axios
+        .post("market/" + Product.id, formData, {
+          headers: { "Content-Type": "multipart/form-data" }
         })
         .then(({ data }) => {
-
-          this.changePage(this.currentPage );
-           this.delModal=false;
-
+          this.sendingp = false;
           console.log(data);
           this.flashMessage.show({
             status: "success",
-            blockClass: 'custom-block-class',
-            message: this.$t('general.Product_Deleted_Successfuly'),
-          });  
+            blockClass: "custom-block-class",
+            message: "Changes Made Successfuly"
+          });
+
+          this.showModal = false;
+
+          this.changePage(this.currentPage);
         })
         .catch(err => {
           console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: this.$t('general.Unable_To_Delete_Product')
-          });
-        }); 
-            }
-       }})  
+
+          this.sendingp = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: this.flashErrors(err.response.data.errors),
+              blockClass: "custom-block-class"
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to Update Your Product",
+              blockClass: "custom-block-class"
+            });
+            console.log({ err: err });
+          }
+        });
     },
-    
-    categories(){
-        this.$store.dispatch("auth/categories");
+
+    deleteProduct(Product) {
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+
+        callback: confirm => {
+          if (confirm) {
+            this.$store
+              .dispatch("market/DeleteProduct", {
+                path: "market/" + Product.id
+              })
+              .then(({ data }) => {
+                this.changePage(this.currentPage);
+                this.delModal = false;
+
+                console.log(data);
+                this.flashMessage.show({
+                  status: "success",
+                  blockClass: "custom-block-class",
+                  message: this.$t("general.Product_Deleted_Successfuly")
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: this.$t("general.Unable_To_Delete_Product")
+                });
+              });
+          }
+        }
+      });
     },
 
-    
-   
+    categories() {
+      this.$store.dispatch("auth/categories");
+    },
 
-  async  subcategories() {
-    
-
+    async subcategories() {
       let formData2 = new FormData();
 
-     
-     
       formData2.append("categoryId", this.selectedcategories);
-     await this.$store.dispatch("auth/subcategories", formData2) .then(() => {
-         
-         this.filterselectvalue =this.getfilters(); 
-         
-        })
-     
-    
-      
-      
-
+      await this.$store.dispatch("auth/subcategories", formData2).then(() => {
+        this.filterselectvalue = this.getfilters();
+      });
     },
 
     addTag(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.product.categories.push(tag);
@@ -818,37 +746,34 @@ selectedcategories: function() {
     addFilter(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.product.subcategories.push(tag);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-
 .others {
   position: absolute;
   right: 0px;
 }
 
-.flx50{
+.flx50 {
   flex-basis: 70%;
 }
 
- .spin{
-          text-align: center;
-    margin-top: 10%;
-      margin-bottom: 10%;
-    width: 4rem;
-     height: 4rem;
-        }
+.spin {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 4rem;
+  height: 4rem;
+}
 
-
-.h-100{
-
+.h-100 {
   height: 100%;
 }
 
@@ -911,10 +836,10 @@ h6 {
   .center-img {
     margin-right: -40px;
   }
-  .marge{
-  margin-right: 0px;
-      padding-right: 8px
-}
+  .marge {
+    margin-right: 0px;
+    padding-right: 8px;
+  }
 }
 
 .buybtn {
@@ -944,17 +869,14 @@ h6 {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  
 
   padding: 3px;
- 
 }
 
 @media only screen and (max-width: 540px) {
-  .marge{
-      margin-left: -25px;
-      
-}
+  .marge {
+    margin-left: -25px;
+  }
   .text {
     color: #000;
 
@@ -994,7 +916,7 @@ h6 {
 
   .title {
     font-size: 16px;
-     font-weight: 600;
+    font-weight: 600;
 
     line-height: 35px;
   }
@@ -1022,7 +944,7 @@ h6 {
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-      margin-left: 50px;
+    margin-left: 50px;
     padding: 1px;
     text-align: left;
 
@@ -1052,10 +974,10 @@ h6 {
     height: 38px;
     min-width: 123px;
   }
- 
+
   .title {
     font-size: 20px;
-     font-weight: 600;
+    font-weight: 600;
 
     line-height: 35px;
   }
@@ -1142,7 +1064,7 @@ h6 {
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-      margin-left: 50px;
+    margin-left: 50px;
     font-weight: normal;
     line-height: 20px;
     font-style: normal;

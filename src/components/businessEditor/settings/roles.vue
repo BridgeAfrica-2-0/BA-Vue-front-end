@@ -57,7 +57,7 @@
         <h5 class="a-text">Existing Admins</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
@@ -68,14 +68,14 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
-                  <b-dropdown-item href="#">{{$t('general.Edit')}}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{$t('general.Delete')}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("general.Edit")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("general.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -86,7 +86,6 @@
               variant="primary"
               text="BV"
               class="mr-3 profile-pic"
-            
             ></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
@@ -98,11 +97,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -119,7 +114,7 @@
         <h5 class="a-text">Existing Editors</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
@@ -130,11 +125,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -148,7 +139,6 @@
               variant="primary"
               text="BV"
               class="mr-3 profile-pic"
-           
             ></b-avatar>
             <span class="mr-auto username">itz blec blec</span>
             <span>
@@ -160,11 +150,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -228,9 +214,8 @@ export default {
     left: -20px;
   }
 
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

@@ -106,7 +106,7 @@
                     <lightbox
                       :cells="post.media.length"
                       :items="
-                        post.media.map(function (url) {
+                        post.media.map(function(url) {
                           return url;
                         })
                       "
@@ -144,7 +144,7 @@ export default {
       moment: moment,
       value: [],
       limit: 8,
-      posts: [],
+      posts: []
     };
   },
 
@@ -161,8 +161,8 @@ export default {
       listTag = listTag.substring(1);
 
       let data = {
-        slug:  this.$route.params.id,
-        keywork: listTag,
+        slug: this.$route.params.id,
+        keywork: listTag
       };
       //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);
 
@@ -170,11 +170,11 @@ export default {
         .dispatch("keywordOperationOnNetwork/newKeyWord", data)
         .then(() => {
           this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.Changes_Made_Successfuly')
-        });
+            status: "success",
+            message: this.$t("general.Changes_Made_Successfuly")
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -182,7 +182,7 @@ export default {
     approvePost(idpost) {
       let data = {
         id: idpost,
-        dat: { network_id: 1 },
+        dat: { network_id: 1 }
       };
 
       this.$store
@@ -190,7 +190,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -198,7 +198,7 @@ export default {
     unApprovePost(idpost) {
       let data = {
         network_id: 1,
-        id: idpost,
+        id: idpost
       };
 
       this.$store
@@ -206,25 +206,28 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
   },
 
   mounted() {
     this.$store
-      .dispatch("keywordOperationOnNetwork/DbListKeyWord", this.$route.params.id)
+      .dispatch(
+        "keywordOperationOnNetwork/DbListKeyWord",
+        this.$route.params.id
+      )
       .then(() => {
         console.log("cool ");
 
         let data = null;
         data = this.$store.state.keywordOperationOnNetwork.dbListKeyWord;
-        data.map((dat) => {
+        data.map(dat => {
           this.value.push(dat);
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log({ err: err });
       });
 
@@ -235,22 +238,22 @@ export default {
 
         let data = null;
         data = this.$store.state.keywordOperationOnNetwork.listPost;
-        data.map((dat) => {
+        data.map(dat => {
           this.posts.push({
             network_name: dat.network_name,
             content: dat.content,
             logo_path: dat.logo_path,
             media: dat.media,
-            created_at: dat.created_at,
+            created_at: dat.created_at
           });
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log({ err: err });
       });
   },
 
-  computed: {},
+  computed: {}
 };
 </script>
 
@@ -259,7 +262,7 @@ export default {
   text-align: left;
 }
 
-.font-12{
+.font-12 {
   font-size: 14px;
 }
 </style>

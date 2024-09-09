@@ -4,7 +4,7 @@
       <b-tabs content-class="mt-3">
         <b-tab :title="$t('general.People')" active>
           <b-tabs content-class="mt-3" fill pills>
-            <b-tab :title="$t('general.Followers') (2)" active>
+            <b-tab :title="$t('general.Followers')(2)" active>
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
@@ -46,7 +46,8 @@
                     >
                   </b-dropdown>
                   <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> {{$t("general.Community")}}</b-button
+                    ><b-icon-plus></b-icon-plus>
+                    {{ $t("general.Community") }}</b-button
                   >
                 </span>
               </div>
@@ -91,12 +92,13 @@
                     >
                   </b-dropdown>
                   <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> {{$t("general.Community")}}</b-button
+                    ><b-icon-plus></b-icon-plus>
+                    {{ $t("general.Community") }}</b-button
                   >
                 </span>
               </div>
             </b-tab>
-            <b-tab :title="$t('general.Following') (1)">
+            <b-tab :title="$t('general.Following')(1)">
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
@@ -138,16 +140,17 @@
                     >
                   </b-dropdown>
                   <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> {{$t("general.Community")}}</b-button
+                    ><b-icon-plus></b-icon-plus>
+                    {{ $t("general.Community") }}</b-button
                   >
                 </span>
               </div>
             </b-tab>
           </b-tabs>
         </b-tab>
-        <b-tab :title="$t('general.Bussiness') ">
+        <b-tab :title="$t('general.Bussiness')">
           <b-tabs content-class="mt-3" fill pills>
-            <b-tab :title="$t('general.Followers') (2)" active>
+            <b-tab :title="$t('general.Followers')(2)" active>
               <div class="row border shadow pt-3 pb-3 pl-0 mb-4">
                 <div class="d-flex col-md-3">
                   <img class="img-fluid" src="@/assets/img/photo2.jpg" />
@@ -229,13 +232,14 @@
                       >
                     </b-dropdown>
                     <b-button variant="outline-primary" size="sm"
-                      ><b-icon-plus></b-icon-plus> {{$t("general.Community")}}</b-button
+                      ><b-icon-plus></b-icon-plus>
+                      {{ $t("general.Community") }}</b-button
                     >
                   </span>
                 </div>
               </div>
             </b-tab>
-            <b-tab :title="$t('general.Following') (1)">
+            <b-tab :title="$t('general.Following')(1)">
               <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
                 <div class="d-flex col-md-3">
                   <img class="img-fluid" src="@/assets/img/photo2.jpg" />
@@ -274,7 +278,8 @@
                       >
                     </b-dropdown>
                     <b-button variant="outline-primary" size="sm"
-                      ><b-icon-plus></b-icon-plus> {{$t("general.Community")}}</b-button
+                      ><b-icon-plus></b-icon-plus>
+                      {{ $t("general.Community") }}</b-button
                     >
                   </span>
                 </div>

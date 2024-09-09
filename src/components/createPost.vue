@@ -40,7 +40,7 @@
           <span class="float-right">
             <b-button variant="outline-primary" size="sm"
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              {{$t("search.Publish")}}</b-button
+              {{ $t("search.Publish") }}</b-button
             >
           </span>
         </b-col>

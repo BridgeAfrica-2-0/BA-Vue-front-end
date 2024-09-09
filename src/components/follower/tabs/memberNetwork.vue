@@ -6,32 +6,35 @@
         style="padding: 0px; margin-left: -12px; margin-right: -12px"
       >
         <b-tabs lazy pills content-class="mt-3 f-left">
-          <b-tab  active>
-
-               <template slot="title">
-           {{ $t('profileowner.People')}} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
-          </template>
-
+          <b-tab active>
+            <template slot="title">
+              {{ $t("profileowner.People") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_people) }}
+              </span>
+            </template>
 
             <People @BlockUser="BlockUser" />
           </b-tab>
 
           <b-tab>
-
-              <template slot="title">
-           {{ $t('profileowner.Businesses')}} <span class="spa-color"> {{ nFormatter(total.total_business)}}  </span>
-          </template>
-
+            <template slot="title">
+              {{ $t("profileowner.Businesses") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_business) }}
+              </span>
+            </template>
 
             <Businesses @BlockUser="BlockUser" />
           </b-tab>
 
-          <b-tab >
-
-              <template slot="title">
-           {{ $t('profileowner.Network')}} <span class="spa-color"> {{ nFormatter(total.total_network)}}  </span>
-          </template>
-
+          <b-tab>
+            <template slot="title">
+              {{ $t("profileowner.Network") }}
+              <span class="spa-color">
+                {{ nFormatter(total.total_network) }}
+              </span>
+            </template>
 
             <Network @BlockUser="BlockUser" />
           </b-tab>
@@ -51,48 +54,41 @@ export default {
   components: {
     People,
     Businesses,
-    Network,
+    Network
   },
 
-  
-		computed: {
-			total() {
-				return this.$store.state.follower.Tcommunity;
-			},
-		},
-
+  computed: {
+    total() {
+      return this.$store.state.follower.Tcommunity;
+    }
+  },
 
   data() {
     return {
       perPage: 3,
-      currentPage: 1,
+      currentPage: 1
     };
   },
 
   methods: {
-
-    	nFormatter(num) {
-				if (num >= 1000000000) {
-					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-				}
-				if (num >= 1000000) {
-					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-				}
-				if (num >= 1000) {
-					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-				}
-				return num;
-			},
-
-    
-
+    nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+      }
+      return num;
+    }
   },
   mounted() {
     this.isLoading = true;
 
     console.log("Load User Profile Community start+++++++");
-  
-  },
+  }
 };
 </script>
 

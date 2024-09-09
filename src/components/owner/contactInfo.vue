@@ -1,11 +1,9 @@
 <template>
   <div>
-    <b>{{ $t('profileowner.') }}{{ $t('profileowner.Contact_Infomation') }}</b>
+    <b>{{ $t("profileowner.") }}{{ $t("profileowner.Contact_Infomation") }}</b>
     <hr />
-    <div v-for="(contact, index) in contacts" class="row" :key="index"> 
-      <div class="col">
-        {{ $t('profileowner.Mobile_Phone') }}:
-      </div>
+    <div v-for="(contact, index) in contacts" class="row" :key="index">
+      <div class="col">{{ $t("profileowner.Mobile_Phone") }}:</div>
       <div class="col">
         <div class="row">
           <div class="col-4">
@@ -28,12 +26,13 @@
         class="edit-btn mb-2"
         variant="outline-primary"
         v-b-modal.modal-3
-        >{{ $t('profileowner.Edit') }}
+        >{{ $t("profileowner.Edit") }}
       </b-button>
     </div>
 
     <b-link class="text-decoration-none" v-b-modal.modal-4
-      ><b-icon icon="plus" variant="primary"></b-icon> {{ $t('profileowner.Add_Other_Phones') }}</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon>
+      {{ $t("profileowner.Add_Other_Phones") }}</b-link
     >
 
     <b-modal
@@ -61,8 +60,11 @@
             ></b-form-input>
           </div>
         </div>
-        <b-button class="ml-2 mt-2 position-but" type="submit" variant="primary"
-          >{{ $t('profileowner.Add') }}</b-button
+        <b-button
+          class="ml-2 mt-2 position-but"
+          type="submit"
+          variant="primary"
+          >{{ $t("profileowner.Add") }}</b-button
         >
       </b-form>
     </b-modal>

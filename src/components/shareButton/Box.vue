@@ -37,11 +37,10 @@
           :key="index"
         >
           <b-avatar class="mr-3" :src="getImage(elmt)"></b-avatar>
-          <span class="mr-auto" v-if="elmt"> 
-             {{elmt.name}}</span>
+          <span class="mr-auto" v-if="elmt"> {{ elmt.name }}</span>
 
           <b-button
-            v-if="sentList.some((n) => n === index)"
+            v-if="sentList.some(n => n === index)"
             variant="primary"
             disabled
           >
@@ -60,7 +59,7 @@
               sharePostByMsg({
                 index: index,
                 post_id: post.id,
-                receiver_id: elmt.id,
+                receiver_id: elmt.id
               })
             "
           >
@@ -102,7 +101,7 @@ export default {
 
   components: {
     Contact,
-    Loader,
+    Loader
   },
 
   data: () => ({
@@ -117,40 +116,40 @@ export default {
     contacts: [],
     actionType: null,
     hasbeLoad: false,
-    uuid: null,
+    uuid: null
   }),
 
   props: {
     id: {},
     listElmts: { type: Array },
     isCommunity: {
-      default: null,
+      default: null
     },
     modal: {
       type: String,
-      required: true,
+      required: true
     },
     post: {
       type: Object,
-      required: true,
+      required: true
     },
     title: {
       type: String,
-      required: true,
+      required: true
     },
     subtitle: {
       type: String,
-      required: true,
+      required: true
     },
     placeholder: {
       type: String,
-      required: true,
+      required: true
     },
     type: {
       type: String,
-      required: true,
+      required: true
     },
-    update: {},
+    update: {}
   },
 
   created() {
@@ -165,27 +164,27 @@ export default {
     },
     sentStatus() {
       return this.$store.getters["businessChat/getSuccess"];
-    },
+    }
   },
   watch: {
-    update: function (value) {
+    update: function(value) {
       if (
         [
           `modal-3-${this.uuid}`,
           `modal-2-${this.uuid}`,
-          `modal-1-${this.uuid}`,
+          `modal-1-${this.uuid}`
         ].includes(value) &&
         this.isCommunity
       )
         this.community();
       else this.getContacts();
-    },
+    }
   },
 
   methods: {
-    debounceInput: _.debounce(function (e) {
+    debounceInput: _.debounce(function(e) {
       if (e) {
-        const result = this.all.filter((contact) => {
+        const result = this.all.filter(contact => {
           return contact.name.toLowerCase().includes(e.toLowerCase());
         });
 
@@ -193,14 +192,14 @@ export default {
         else
           this.flashMessage.show({
             status: "error",
-            message: `No ${this.type} name contains ${e}`,
+            message: `No ${this.type} name contains ${e}`
           });
       } else {
         this.contacts = this.all;
       }
     }, 2000),
 
-    community: function () {
+    community: function() {
       console.log(this.isCommunity);
       this.search();
     },
@@ -242,7 +241,7 @@ export default {
         if (this.type == "people") {
           this.$store
             .dispatch("userChat/SHARE_POST_USER", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
                 message: `Post shared successfully!`
@@ -251,19 +250,19 @@ export default {
         } else if (this.type == "business") {
           this.$store
             .dispatch("userChat/SHARE_POST_BUSINESS", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else {
           this.$store
             .dispatch("userChat/SHARE_POST_NETWORK", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         }
@@ -271,28 +270,28 @@ export default {
         if (this.type == "people") {
           this.$store
             .dispatch("businessChat/SHARE_POST_USER", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else if (this.type == "business") {
           this.$store
             .dispatch("businessChat/SHARE_POST_BUSINESS", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else {
           this.$store
             .dispatch("businessChat/SHARE_POST_NETWORK", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         }
@@ -300,28 +299,28 @@ export default {
         if (this.type == "people") {
           this.$store
             .dispatch("networkChat/SHARE_POST_USER", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else if (this.type == "business") {
           this.$store
             .dispatch("networkChat/SHARE_POST_BUSINESS", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else {
           this.$store
             .dispatch("networkChat/SHARE_POST_NETWORK", payload)
-            .then((res) => {
+            .then(res => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         }
@@ -330,7 +329,7 @@ export default {
 
     search(keyword) {
       this.sentList = [];
-      
+
       console.log("Keywork:", keyword);
       console.log("type:", this.isCommunity);
       console.log("user type:", this.profilConnected.user_type);
@@ -349,17 +348,17 @@ export default {
           if (this.isCommunity == "people") {
             this.$store.dispatch("businessChat/GET_COMMUNITY_USERS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           } else if (this.isCommunity == "business") {
             this.$store.dispatch("businessChat/GET_COMMUNITY_BIZS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           } else {
             this.$store.dispatch("businessChat/GET_COMMUNITY_NETS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           }
           break;
@@ -368,17 +367,17 @@ export default {
           if (this.isCommunity == "people") {
             this.$store.dispatch("networkChat/GET_COMMUNITY_USERS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           } else if (this.isCommunity == "business") {
             this.$store.dispatch("networkChat/GET_COMMUNITY_BIZS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           } else {
             this.$store.dispatch("networkChat/GET_COMMUNITY_NETS", {
               id: this.profilConnected.id,
-              keyword: keyword,
+              keyword: keyword
             });
           }
           break;
@@ -394,7 +393,7 @@ export default {
           break;
       }
     },
-    getContacts: async function () {
+    getContacts: async function() {
       this.loading = true;
 
       const response = await this.$repository.share.showNetworkAndBussiness();
@@ -415,8 +414,8 @@ export default {
 
         this.all = this.contacts;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

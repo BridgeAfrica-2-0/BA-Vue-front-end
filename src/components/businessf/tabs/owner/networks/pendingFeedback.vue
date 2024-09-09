@@ -1,7 +1,8 @@
 <template>
   <div>
     <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-star-fill></b-icon-star-fill> {{ $t('network.No_Pending_Posts_To_Show') }} 
+      <b-icon-star-fill></b-icon-star-fill>
+      {{ $t("network.No_Pending_Posts_To_Show") }}
     </h5>
     <span class="float-right">35 Pending</span>
 
@@ -22,7 +23,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    {{ $t('network.Mapoure_Agrobusiness') }}
+                    {{ $t("network.Mapoure_Agrobusiness") }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -32,19 +33,24 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">{{ $t('network.Settings') }} </span>
+                          ><span class="sr-only"
+                            >{{ $t("network.Settings") }}
+                          </span>
                         </template>
                         <b-dropdown-item href="#">
-                          {{ $t('network.Approve') }} 
+                          {{ $t("network.Approve") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          {{ $t('network.Reject') }} 
+                          {{ $t("network.Reject") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                    1h Ago - <span class="text-primary">{{ $t('network.Feedback_Type') }}</span>
+                    1h Ago -
+                    <span class="text-primary">{{
+                      $t("network.Feedback_Type")
+                    }}</span>
                   </p>
                 </b-col>
               </b-row>

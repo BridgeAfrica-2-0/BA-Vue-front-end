@@ -2,15 +2,28 @@
   <div class="wahala">
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
-      <div  class="text-justify mt-2 container-fluid" >
-        <b-row class="center-content" >
+      <div class="text-justify mt-2 container-fluid">
+        <b-row class="center-content">
           <b-col cols="12">
-            <b-tabs lazy content-class="mt-3 mobile-tab"  v-model="currentTab"  fill pills >
+            <b-tabs
+              lazy
+              content-class="mt-3 mobile-tab"
+              v-model="currentTab"
+              fill
+              pills
+            >
               <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
-              <b-tab :title="$t('general.About')"><About /></b-tab> 
-              <b-tab :title="$t('general.Media')"><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
+              <b-tab :title="$t('general.About')"><About /></b-tab>
+              <b-tab :title="$t('general.Media')"
+                ><Media
+                  type="business"
+                  :showCoverAlbum="showCoverAlbum"
+                  :key="key"
+              /></b-tab>
               <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
-              <b-tab :title="$t('general.Networks')"><Networks type="business" /></b-tab> 
+              <b-tab :title="$t('general.Networks')"
+                ><Networks type="business"
+              /></b-tab>
               <b-tab :title="$t('general.Community')"><Followers /></b-tab>
             </b-tabs>
           </b-col>
@@ -21,7 +34,7 @@
 </template>
 
 <script>
-import HomePage from "@/components/businessOwner/tabs/businessHome";   
+import HomePage from "@/components/businessOwner/tabs/businessHome";
 import About from "@/components/businessOwner/tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "@/components/businessOwner/tabs/marketPlace";
@@ -39,63 +52,57 @@ export default {
     Media,
     MarketPlace,
     Followers,
-     Networks
+    Networks
   },
   data() {
     return {
       currentTab: 0,
-      key:0,
+      key: 0,
       tabIndex: 0,
-      showCoverAlbum:false,
-      tabs: ["#post", "#about", "#media", "#market", "#community"],
+      showCoverAlbum: false,
+      tabs: ["#post", "#about", "#media", "#market", "#community"]
     };
   },
- 
+
   methods: {
     gotoCoverImages() {
-      this.showCoverAlbum = true
+      this.showCoverAlbum = true;
       this.isCover = true;
-      this.key = this.key + 1
+      this.key = this.key + 1;
       this.currentTab = 2;
-    },
+    }
   },
 
   watch: {
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal){
-        this.showCoverAlbum = false
-        this.key = this.key - 1
+      if (2 != newVal) {
+        this.showCoverAlbum = false;
+        this.key = this.key - 1;
       }
     },
 
     $route(to, from) {
-        console.log(to.hash);
-        this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
-    },
-  },
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex(tab => tab === to.hash);
+    }
+  }
 };
 </script>
 
-
 <style>
-
 @media only screen and (max-width: 768px) {
-  .mobile-tab .nav-fill > .nav-link, .nav-fill .nav-item {
+  .mobile-tab .nav-fill > .nav-link,
+  .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
-  
   }
 }
-
 </style>
 
-
 <style scoped>
-
-alig{
-
-  padding-left:70px;
-   padding-right:70px
+alig {
+  padding-left: 70px;
+  padding-right: 70px;
 }
 .images {
   display: flex;
@@ -135,5 +142,4 @@ img {
     padding-left: 63px;
   }
 }
-
 </style>

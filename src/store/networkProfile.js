@@ -1,37 +1,33 @@
-  
 import axios from "axios";
 
 export default {
   namespaced: true,
   state: {
     networkInfo: [],
-    NetworkRole:'',
+    NetworkRole: "",
     networks: [],
     loader: false,
-    success: false, 
+    success: false,
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
     albums: [],
     images: [],
     albumImages: [],
-    businesses:[],
-    users:[],
+    businesses: [],
+    users: [],
     ownerPost: [],
     ownerPostImages: [],
-    selected:0
+    selected: 0
   },
 
-
-
   getters: {
-
     getAlbums(state) {
       return state.albums;
     },
 
     getOwnerPost(state) {
-      return state.ownerPost
+      return state.ownerPost;
     },
 
     getImages(state) {
@@ -57,22 +53,19 @@ export default {
     }
   },
   mutations: {
-
-    setUsers(state, data){
-     
-      state.users=data;
-
+    setUsers(state, data) {
+      state.users = data;
     },
 
-    setBusinesses(state, data){
-      state.businesses=data;
+    setBusinesses(state, data) {
+      state.businesses = data;
     },
-   
-    setNetworkRole(state, data){
-    state.NetworkRole=data;
+
+    setNetworkRole(state, data) {
+      state.NetworkRole = data;
     },
-    
-    setSelected(state, val){
+
+    setSelected(state, val) {
       state.selected = val;
     },
     setnetworkInfo(state, networkInfo) {
@@ -85,9 +78,7 @@ export default {
     },
 
     setImages(state, data) {
-
       state.ownerPostImages = data;
-
     },
 
     setAlbumImages(state, data) {
@@ -103,18 +94,19 @@ export default {
     },
 
     removePost(state, uuid) {
-      const newPosts = state.ownerPost.filter(post => post.id != uuid)
-      state.ownerPost = newPosts
+      const newPosts = state.ownerPost.filter(post => post.id != uuid);
+      state.ownerPost = newPosts;
     },
 
     UpdatePost(state, payload) {
-            
-      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
-      state.ownerPost = newPosts
+      const newPosts = state.ownerPost.map(post =>
+        post.id == payload.id ? payload : post
+      );
+      state.ownerPost = newPosts;
     },
 
     createPost(state, payload) {
-      state.ownerPost = [payload, ...state.ownerPost]
+      state.ownerPost = [payload, ...state.ownerPost];
     },
 
     setNetworkInfo(state, data) {
@@ -126,7 +118,7 @@ export default {
     },
 
     ownerPost(state, data) {
-      console.log(data)
+      console.log(data);
       state.ownerPost = data;
     },
 
@@ -136,15 +128,19 @@ export default {
 
     updatePost(state, payload) {
       const strategy = {
-        "add:comment:count": (uuid) => state.ownerPost.map(post => (post.id == uuid) ? { ...post, comment_count: post.comment_count + 1 } : post)
-      }
+        "add:comment:count": uuid =>
+          state.ownerPost.map(post =>
+            post.id == uuid
+              ? { ...post, comment_count: post.comment_count + 1 }
+              : post
+          )
+      };
 
       try {
-        state.ownerPost = strategy[payload.action](payload.uuid)
+        state.ownerPost = strategy[payload.action](payload.uuid);
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       }
-
     },
 
     setNetworks(state, payload) {
@@ -162,93 +158,79 @@ export default {
   },
 
   actions: {
-
-
     users({ commit }, url) {
       return axios.get(url).then(({ data }) => {
         console.log(data);
-        commit('setUsers', data.data.users);
+        commit("setUsers", data.data.users);
       });
     },
-
 
     busineses({ commit }, url) {
       return axios.get(url).then(({ data }) => {
         console.log(data);
-        commit('setBusinesses', data.data.businesses);
+        commit("setBusinesses", data.data.businesses);
       });
     },
 
-
-    Selected({commit}){
-        commit('setSelected', 4)
+    Selected({ commit }) {
+      commit("setSelected", 4);
     },
 
-    updateNetwork( {commit}, networkData ){
-      console.log("networkData.path",networkData.path);
-      console.log("networkData.formData",networkData.formData);
+    updateNetwork({ commit }, networkData) {
+      console.log("networkData.path", networkData.path);
+      console.log("networkData.formData", networkData.formData);
       return axios
-      .post(networkData.path, networkData.formData)
-      .then(({ data }) => {
-        console.log(data);
-        return data;
-      })
+        .post(networkData.path, networkData.formData)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        });
     },
 
-    submitFile( {commit}, networkData ){
-      console.log("networkData.path",networkData.path);
-      console.log("networkData.formData",networkData.formData);
-      return axios.post( networkData.path, networkData.formData,
-        {
+    submitFile({ commit }, networkData) {
+      console.log("networkData.path", networkData.path);
+      console.log("networkData.formData", networkData.formData);
+      return axios
+        .post(networkData.path, networkData.formData, {
           headers: {
-              'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data"
           }
-        }
-      )
-      .then(({ data }) => {
-        console.log(data);
-        return data;
-      })
+        })
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        });
     },
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
-    getnetworkInfo( {commit,rootGetters}, networkId ){  
-      
-      
-      let auth=rootGetters['auth/isLogged'];  
-      let url=`network/${networkId}/about/information`;
+    getnetworkInfo({ commit, rootGetters }, networkId) {
+      let auth = rootGetters["auth/isLogged"];
+      let url = `network/${networkId}/about/information`;
 
-      if(!auth){    
-        url = `guest/network/${networkId}/about/information`; 
+      if (!auth) {
+        url = `guest/network/${networkId}/about/information`;
       }
 
-
-      return axios
-      .get(url)
-      .then(({ data }) => {
-          commit("setNetworkInfo", data.data);
-      
-
-      })
+      return axios.get(url).then(({ data }) => {
+        commit("setNetworkInfo", data.data);
+      });
     },
-    
-    getAlbumImages( {commit}, networkId){
-      return axios
-      .get('network/album/show/'+networkId )
-      .then(({ data }) => {
-       commit('setAlbumImages', data.data.media);
+
+    getAlbumImages({ commit }, networkId) {
+      return axios.get("network/album/show/" + networkId).then(({ data }) => {
+        commit("setAlbumImages", data.data.media);
         console.log(data);
       });
     },
@@ -282,10 +264,12 @@ export default {
     },
 
     networkInfo({ commit }, networkId) {
-      return axios.get(`network/${networkId}/about/information`).then(({ data }) => {
-        commit("setNetworkInfo", data.data);
-        console.log(data);
-      });
+      return axios
+        .get(`network/${networkId}/about/information`)
+        .then(({ data }) => {
+          commit("setNetworkInfo", data.data);
+          console.log(data);
+        });
     },
 
     Communitynetwork({ commit }, networkId) {

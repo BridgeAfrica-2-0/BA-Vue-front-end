@@ -1,11 +1,10 @@
 <template>
   <div class="container">
-   
     <div id="hidemobile">
       <hr />
 
       <div>
-        <div >
+        <div>
           <div v-for="i in etat1" :key="i">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
@@ -17,21 +16,27 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive') }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete') }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule') }}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9, 'archive')">{{
+                        $t("businessowner.Archive")
+                      }}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
+                        $t("businessowner.Delete")
+                      }}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
+                        $t("businessowner.Reshedule")
+                      }}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">{{ $t('businessowner.Order') }}</span>
+                <span class="gras">{{ $t("businessowner.Order") }}</span>
                 <span class="text-success order">#12324253</span> <br />
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-             <span class="row posstatus">
-                <p class="h3 statusp">{{ $t('businessowner.status') }}:</p>
-              <h3 class="text-success h3 margstatus ">{{ i }}</h3>
-             </span>
+              <span class="row posstatus">
+                <p class="h3 statusp">{{ $t("businessowner.status") }}:</p>
+                <h3 class="text-success h3 margstatus ">{{ i }}</h3>
+              </span>
             </div>
             <hr />
 
@@ -45,11 +50,15 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte') }} :</h3>
-                <h3 class="h3 margm2">{{ $t('businessowner.Price') }}:</h3>
+                <h3 class="h3 margm2">
+                  {{ $t("businessowner.Product_Qte") }} :
+                </h3>
+                <h3 class="h3 margm2">{{ $t("businessowner.Price") }}:</h3>
 
-                <h3 class="h3 margm2">{{ $t('businessowner.shipping_cost') }}:</h3>
-                <h3 class="h3 margm2">{{ $t('businessowner.Total') }} :</h3>
+                <h3 class="h3 margm2">
+                  {{ $t("businessowner.shipping_cost") }}:
+                </h3>
+                <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
               </div>
 
               <div class="col-4">
@@ -67,8 +76,13 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button  @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">{{ $t('businessowner.shipped') }}</h3>
+                <button
+                  @click="updateStatus(9, 'shipped')"
+                  class="buttonm btn shadow text-center"
+                >
+                  <h3 class="h3 button-text">
+                    {{ $t("businessowner.shipped") }}
+                  </h3>
                 </button>
               </div>
             </div>
@@ -79,8 +93,6 @@
             <!-- <hr /> -->
           </div>
         </div>
-
-        
       </div>
     </div>
     <div class="justify-content-between row"></div>
@@ -93,12 +105,16 @@
       <!-- navigation--------------- -->
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1">{{ $t('businessowner.My_orders') }}</h3></div>
-        <div class="status"><h3 class="text-danger">{{ $t('businessowner.clear_history') }}</h3></div>
+        <div class="col order">
+          <h3 class="bold1">{{ $t("businessowner.My_orders") }}</h3>
+        </div>
+        <div class="status">
+          <h3 class="text-danger">{{ $t("businessowner.clear_history") }}</h3>
+        </div>
       </div>
 
       <div>
-        <div >
+        <div>
           <div v-for="i in etat1" :key="i">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
@@ -109,17 +125,25 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive') }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete') }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule') }}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9, 'archive')">{{
+                      $t("businessowner.Archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
+                      $t("businessowner.Delete")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
+                      $t("businessowner.Reshedule")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
               <router-link to="/business_owner/ordersdetail">
-              <span class="gras">{{ $t('businessowner.Order') }}</span>
-              <span class="text-success">#12324253</span> <br />
+                <span class="gras">{{ $t("businessowner.Order") }}</span>
+                <span class="text-success">#12324253</span> <br />
               </router-link>
-              <span class="flou">{{ $t('businessowner.Yaounde') }} 12/12/2021 12H00</span>
+              <span class="flou"
+                >{{ $t("businessowner.Yaounde") }} 12/12/2021 12H00</span
+              >
               <hr />
             </div>
 
@@ -133,11 +157,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>{{ $t('businessowner.Product_Qte') }} :</h3>
-                <h3>{{ $t('businessowner.Price') }} :</h3>
+                <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
+                <h3>{{ $t("businessowner.Price") }} :</h3>
 
-                <h3>{{ $t('businessowner.shipping_cost') }}:</h3>
-                <h3>{{ $t('businessowner.Total') }} :</h3>
+                <h3>{{ $t("businessowner.shipping_cost") }}:</h3>
+                <h3>{{ $t("businessowner.Total") }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -148,13 +172,18 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{ $t('businessowner.status') }}</h3>
+                <h3 class="bold1">{{ $t("businessowner.status") }}</h3>
                 <h3 class="text-success">{{ i }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
-                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped') }}</h3>
+                <button
+                  @click="updateStatus(9, 'shipped')"
+                  class="button btn shadow"
+                >
+                  <h3 class="h3 button-text">
+                    {{ $t("businessowner.Shipped") }}
+                  </h3>
                 </button>
               </div>
 
@@ -168,18 +197,13 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-
-
 export default {
- 
   data() {
     return {
       url: null,
@@ -189,16 +213,16 @@ export default {
       etat: "All",
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: [
-        { value: null, text: this.$t('businessowner.Please_select_an_option') },
-        { value: "a", text: this.$t('businessowner.last_5_days') },
-        { value: "b", text: this.$t('businessowner.last_10_days') },
+        { value: null, text: this.$t("businessowner.Please_select_an_option") },
+        { value: "a", text: this.$t("businessowner.last_5_days") },
+        { value: "b", text: this.$t("businessowner.last_10_days") }
       ],
-      etat1: ["in process", "complete", "cancel"],
+      etat1: ["in process", "complete", "cancel"]
     };
   },
 
   mounted() {
-   this.url = this.$route.params.id;
+    this.url = this.$route.params.id;
   },
 
   methods: {
@@ -220,13 +244,13 @@ export default {
       const pr = document.getElementById("p" + p);
 
       const as = document.querySelectorAll(".avatar");
-      as.forEach((dat) => {
+      as.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       a.classList.add("bg-success");
 
       const ps = document.querySelectorAll(".progress");
-      ps.forEach((dat) => {
+      ps.forEach(dat => {
         dat.classList.remove("bg-success");
       });
       pr.classList.add("bg-success");
@@ -235,46 +259,43 @@ export default {
 
       const el = document.getElementById("m" + p);
       const els = document.querySelectorAll(".t");
-      els.forEach((dat) => {
+      els.forEach(dat => {
         dat.classList.remove("green");
       });
       el.classList.add("green");
     },
 
     updateStatus(order_id, status) {
-      console.log("updateStatus")
-      console.log("order_id", order_id)
-      console.log("business_id", this.url)
-      console.log("status", status)
+      console.log("updateStatus");
+      console.log("order_id", order_id);
+      console.log("business_id", this.url);
+      console.log("status", status);
       let formData = new FormData();
-      formData.append("order_id", order_id)
-      formData.append("business_id", this.url)
-      formData.append("status", status)
+      formData.append("order_id", order_id);
+      formData.append("business_id", this.url);
+      formData.append("status", status);
       this.$store
-        .dispatch("orderBusiness/updateOrderStatus", 
-        {
+        .dispatch("orderBusiness/updateOrderStatus", {
           path: "order/updateOrder",
           formData: formData
         })
-        .then(({data}) => {
-          console.log('ohh year');
+        .then(({ data }) => {
+          console.log("ohh year");
           console.log(data);
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.Status_Changed_To')+status
+            message: this.$t("businessowner.Status_Changed_To") + status
           });
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t('businessowner.Unable_to_Change_Status')
+            message: this.$t("businessowner.Unable_to_Change_Status")
           });
         });
-    },
-  },
-
-
+    }
+  }
 };
 </script>
 
@@ -284,10 +305,9 @@ export default {
   color: #b6b2b2;
 }
 .show {
-    margin-left: 2px;
+  margin-left: 2px;
   margin-bottom: 70px;
-   width: 370px;
-
+  width: 370px;
 }
 .manage {
   margin-bottom: -60px;
@@ -401,7 +421,7 @@ h3 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
-.posstatus{
+.posstatus {
   margin-left: 195px;
   margin-top: -18px;
 }
@@ -609,14 +629,14 @@ h3 {
   }
   .cercle2 {
     margin-left: 50px !important;
-    width: 18px ;
+    width: 18px;
     height: 18px;
-     line-height: 20px;
+    line-height: 20px;
   }
-.cercle1{
-   width: 18px ;
+  .cercle1 {
+    width: 18px;
     height: 18px;
-}
+  }
 
   #hidedesktop {
     display: none;
@@ -633,8 +653,8 @@ h3 {
   }
   .cercle2 {
     margin-left: 3px !important;
-     width: 17px;
-       height: 17px;
+    width: 17px;
+    height: 17px;
   }
   .gras {
     font-size: 12px !important;
@@ -651,21 +671,21 @@ h3 {
   .marghr {
     margin-bottom: -20px;
   }
-  .manage{
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
 }
-  @media only screen and (max-width: 470px) {
-    .h2 {
-      font-size: 10px !important;
-      margin-left: 5px;
-    }
-    .cercle2 {
-      margin-left: -4px !important;
-    }
-  
-   .manage{
+@media only screen and (max-width: 470px) {
+  .h2 {
+    font-size: 10px !important;
+    margin-left: 5px;
+  }
+  .cercle2 {
+    margin-left: -4px !important;
+  }
+
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }

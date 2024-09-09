@@ -85,11 +85,13 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
+const previousRoute = { value: null };
+
 const routes = [
   {
     path: "/notFound",
     name: "notFoundd",
-    component: notFound,
+    component: notFound
   },
 
   {
@@ -97,8 +99,8 @@ const routes = [
     name: "pordersdetail",
     component: OrderDetails,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
@@ -106,39 +108,36 @@ const routes = [
     name: "OrderDetail",
     component: OrderDetails,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
     path: "oldhome",
     name: "home1",
-    component: home1,
+    component: home1
   },
   {
     path: "/cart",
     name: "cart",
-    component: cart,
-    meta: {
-      auth: true,
-    },
+    component: cart
   },
   {
     path: "/about",
     name: "about",
-    component: about,
+    component: about
   },
 
   {
     path: "/quote",
     name: "quote",
-    component: Quote,
+    component: Quote
   },
 
   {
     path: "/contact",
     name: "contact",
-    component: contact,
+    component: contact
     // meta: {
     //   auth: true,
     // },
@@ -147,28 +146,25 @@ const routes = [
   {
     path: "/market",
     name: "market",
-    component: market,
+    component: market
   },
 
   {
     path: "/success",
     name: "success",
-    component: success,
+    component: success
   },
 
   {
     path: "/failure",
     name: "failure",
-    component: failure,
+    component: failure
   },
 
   {
     path: "/checkout",
     name: "payment",
-    component: payment,
-    meta: {
-      auth: true,
-    },
+    component: payment
   },
 
   {
@@ -176,8 +172,8 @@ const routes = [
     name: "businessOwnerOrders",
     component: businessOwnerOrders,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
@@ -185,24 +181,24 @@ const routes = [
     name: "ordersdetail",
     component: businessordersdetail,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/myorders",
     name: "orders",
     component: orders,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/orders",
     name: "norders",
     component: orders,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/dashboard",
@@ -210,8 +206,8 @@ const routes = [
     component: newdashboard,
     //component: dashboard,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
@@ -219,8 +215,8 @@ const routes = [
     name: "newdashboard",
     component: newdashboard,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
@@ -228,14 +224,14 @@ const routes = [
     name: "welcome",
     component: welcome,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
     path: "/settings",
     name: "settings",
-    component: settings,
+    component: settings
   },
 
   {
@@ -244,28 +240,28 @@ const routes = [
     component: profile_owner,
     meta: {
       // auth: true,
-    },
+    }
   },
   {
     path: "/profilefollower/:id?",
     name: "ProfileFollower",
     component: profileFollower,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/template_viewer",
     name: "templateViewer",
-    component: templateView,
+    component: templateView
   },
   {
     path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
@@ -273,40 +269,40 @@ const routes = [
     name: "BusinessEditor",
     component: businessEditor,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
     path: "/business_owner_setting_general",
     name: "businessOwnerSettingGeneral",
-    component: businessOwnerSettingGeneral,
+    component: businessOwnerSettingGeneral
   },
 
   {
     path: "/business_owner/create_website_step_one",
     name: "createWebSite",
-    component: webSiteCreate,
+    component: webSiteCreate
   },
   {
     path: "/business_owner/create_website_step_two",
     name: "createWebSiteTwo",
-    component: webSiteCreateTwo,
+    component: webSiteCreateTwo
   },
   {
     path: "/business_owner/create_website_plan",
     name: "payPlan",
-    component: paidPlan,
+    component: paidPlan
   },
   {
     path: "/business_owner/create_website_confirm_payment",
     name: "confirmPayment",
-    component: confirmPayment,
+    component: confirmPayment
   },
   {
     path: "/network/:id?",
     name: "networks",
-    component: networks,
+    component: networks
   },
 
   {
@@ -314,16 +310,16 @@ const routes = [
     name: "NetworkEditors",
     component: networkEditors,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/network_member/:id?",
     name: "memberNetwork",
     component: memberNetwork,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
   {
     path: "/network_follower/:id?",
@@ -331,43 +327,43 @@ const routes = [
     component: memberNetworkFollower,
     meta: {
       // auth: true,
-    },
+    }
   },
 
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
 
   {
     path: "/auth/facebook/callback",
     name: "Loginfacebook",
-    component: Login,
+    component: Login
   },
 
   {
     path: "/auth/google/callback",
     name: "Logingoogle",
-    component: Login,
+    component: Login
   },
 
   {
     path: "/login/validation",
     name: "Loginvalidation",
-    component: LoginValidation,
+    component: LoginValidation
   },
 
   {
     path: "/signup",
     name: "signup",
-    component: signup,
+    component: signup
   },
 
   {
     path: "/password",
     name: "Password",
-    component: Password,
+    component: Password
   },
 
   {
@@ -376,18 +372,18 @@ const routes = [
     component: verifyAccount,
     meta: {
       //  auth: true,
-    },
+    }
   },
 
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
-    component: RecoverPass2,
+    component: RecoverPass2
   },
   {
     path: "/recoverPass3",
     name: "RecoverPass3",
-    component: RecoverPass3,
+    component: RecoverPass3
   },
 
   {
@@ -395,37 +391,37 @@ const routes = [
     name: "BusinessFollower",
     component: businessFollower,
     meta: {
-      auth: true,
-    },
+      auth: true
+    }
   },
 
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
-    component: businessVisitor,
+    component: businessVisitor
   },
 
   {
     path: "/profilevisitor",
     name: "visitor",
-    component: Visitor,
+    component: Visitor
   },
   {
     path: "/search",
     name: "GlobalSearch",
-    component: search,
+    component: search
   },
 
   {
     path: "/",
     name: "Bridge-home",
-    component: updatedBridgeHome,
+    component: updatedBridgeHome
   },
 
   {
     path: "/blecc",
     name: "Blecc",
-    component: BridgeHome,
+    component: BridgeHome
   },
 
   // {
@@ -437,7 +433,7 @@ const routes = [
   {
     path: "/services/:id",
     name: "Service",
-    component: service,
+    component: service
   },
 
   {
@@ -446,54 +442,59 @@ const routes = [
     component: Follower,
     meta: {
       //  auth: true,
-    },
+    }
   },
 
   {
     path: "/search/:id",
     name: "Search",
-    component: search,
+    component: search
   },
   {
     path: "/forgotpass",
     name: "ForgotPassword",
-    component: forgotPassword,
+    component: forgotPassword
   },
   {
     path: "/messaging",
     name: "Nav Meassage",
-    component: navMessage,
+    component: navMessage
   },
 
   {
     path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",
-    component: memberNetworkFollower,
+    component: memberNetworkFollower
   },
 
   {
     path: "*",
     name: "notFound",
-    component: notFound,
+    component: notFound
   },
   {
     path: "/business/:id/guest",
     name: "BusinessFollowerGuest",
     component: businessFollower,
-    props: { isGuestUser: true },
-  },
+    props: { isGuestUser: true }
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+  // Store the previous route if it's not the login or verification route
+  if (from.name !== "Login" && from.name !== "verifyAccount") {
+    previousRoute.value = from;
+  }
+
+  if (to.matched.some(record => record.meta.auth) && !loggedIn) {
     if (to.name == "BusinessFollower") {
       next("/business/" + to.params.id + "/guest");
       return;
@@ -503,7 +504,7 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  if (to.matched.some((record) => record.meta.auth)) {
+  if (to.matched.some(record => record.meta.auth)) {
     const dat = localStorage.getItem("user");
     const userdata = JSON.parse(dat);
 
@@ -536,3 +537,4 @@ router.afterEach((to, from) => {
 });
 
 export default router;
+export { previousRoute };

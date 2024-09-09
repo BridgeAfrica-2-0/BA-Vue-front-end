@@ -1,6 +1,6 @@
 <template>
   <div class="p-3 pt-0 card-border  mt-0 mb-1" style="position: relative">
-     <div class="mt-0">
+    <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <!-- <b-avatar
@@ -28,7 +28,14 @@
 
         <div
           class="toright"
-          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? (isYourOwnPost && canBeDelete)||this.$route.name=='networks': false: false"
+          v-if="
+            'dashboard' !== $route.name
+              ? !isDisplayInSearch
+                ? (isYourOwnPost && canBeDelete) ||
+                  this.$route.name == 'networks'
+                : false
+              : false
+          "
         >
           <b-dropdown
             variant="link"
@@ -147,13 +154,18 @@
         </b-col>
         <b-col class="mt-1">
           <span
+            v-if="islogin && !isMemberNetworkFollower"
             class="mr-3 cursor"
             @click="onLike"
-            v-if="!isMemberNetworkFollower"
-            ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+          >
+            <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor"
+          <span v-else class="mr-3 cursor" @click="showLoginModal()">
+            <b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+            {{ item.likes_count | nFormatter }}
+          </span>
+          <span class="cursor" v-if="islogin"
             ><b-icon
               icon="chat-fill"
               variant="primary"
@@ -161,10 +173,21 @@
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
+          <span class="cursor" v-else
+            ><b-icon
+              icon="chat-fill"
+              variant="primary"
+              aria-hidden="true"
+              @click="showLoginModal()"
+            ></b-icon>
+            {{ item.comment_count | nFormatter }}
+          </span>
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="profile || !isMemberNetworkFollower || canBeDelete"
+            v-if="
+              !islogin || profile || !isMemberNetworkFollower || canBeDelete
+            "
           />
         </b-col>
       </b-row>
@@ -173,8 +196,15 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        !isDisplayInSearch ? !isMemberNetworkFollower ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) && canBeDelete: false: false"
-    >   
+        !isDisplayInSearch
+          ? !isMemberNetworkFollower
+            ? ((profile && profile.id) == item.post_id
+                ? item.post_id
+                : item.id) && canBeDelete
+            : false
+          : false
+      "
+    >
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
@@ -185,7 +215,10 @@
         ></b-avatar>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative; overflow:hidden">
+      <div
+        class="p-0 m-0 pr-3 inline-comment"
+        style="position: relative; overflow:hidden"
+      >
         <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
@@ -207,16 +240,16 @@
         />
       </div>
     </div>
-  
-    <Comment 
+
+    <Comment
       v-for="comment in comments"
       :key="comment.updated_at"
       :item="comment"
       :uuid="post.post_id ? post.post_id : post.id"
       :onDelete="() => onDelete(comment.id)"
-      @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
+      @update-comment="text => onUpdate({ uuid: comment.id, text })"
     />
-    
+
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
@@ -225,11 +258,13 @@
       :noDataTitle="''"
       @click.native="onShowComment"
     />
+    <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl">
+      <login @success="success" @hideAuthModal="hideAuthModal" />
+    </b-modal>
   </div>
 </template>
-  
-<script>
 
+<script>
 import { mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
 
@@ -237,10 +272,9 @@ import Loader from "@/components/Loader";
 import { ShareButton } from "@/components/shareButton";
 
 import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
-
+import login from "@/components/Login";
 import Comment from "./comment";
 import light from "../lightbox";
-
 
 export default {
   name: "ownerPostComponent",
@@ -250,16 +284,17 @@ export default {
     light,
     Loader,
     ShareButton,
+    login
   },
 
   props: {
     post: {},
     usertype: {
-      default: () => null,
+      default: () => null
     },
     isDisplayInSearch: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
     mapvideo: {},
     mapmediae: {},
@@ -268,14 +303,12 @@ export default {
     deletePost: {},
     canBeDelete: {
       type: Boolean,
-      default: () => true,
+      default: () => true
     },
 
     from: {
-      
-      default: () => 'others',
-    },
-
+      default: () => "others"
+    }
   },
 
   watch: {
@@ -284,11 +317,12 @@ export default {
         this.onShowComment();
         this.loadComment = true;
       }
-    },
+    }
   },
 
   data: () => ({
     item: null,
+    showModal: false,
     comments: [],
     comment: "",
     showComment: false,
@@ -297,49 +331,73 @@ export default {
     loadComment: false,
     commentHasLoad: false,
 
-    strategy: null,
+    strategy: null
   }),
-
 
   created() {
     this.item = this.post;
     this.posterID = this.post.poster_id
       ? this.post.poster_id
       : this.post.user_id;
+    if (this.islogin) {
+      this.strategy = {
+        user: () => {
+          return "user" == (this.profile && this.profile.user_type) &&
+            "user" == this.post.poster_type &&
+            (this.profile && this.profile.id) == this.posterID
+            ? { name: "profile_owner" }
+            : { name: "Follower", params: { id: this.posterID } };
+        },
 
-    this.strategy = {
-      user: () => {
-        return "user" == (this.profile && this.profile.user_type) &&
-          "user" == this.post.poster_type && (this.profile && this.profile.id) == this.posterID
-          ? { name: "profile_owner" }
-          : { name: "Follower", params: { id: this.posterID } };
-      },
+        business: () => {
+          return "business" == (this.profile && this.profile.user_type) &&
+            "business" == this.post.poster_type &&
+            (this.profile && this.profile.id) == this.posterID
+            ? { name: "BusinessOwner", params: { id: this.posterID } }
+            : { name: "BusinessFollower", params: { id: this.posterID } };
+        },
 
-      business: () => {
-        return "business" == (this.profile && this.profile.user_type) &&
-          "business" == this.post.poster_type &&
-          (this.profile && this.profile.id) == this.posterID
-          ? { name: "BusinessOwner", params: { id: this.posterID } }
-          : { name: "BusinessFollower", params: { id: this.posterID } };
-      },
- 
-      network: () => {
-        return "network" == (this.profile && this.profile.user_type) &&
-          "business" == this.post.poster_type &&
-          (this.profile && this.profile.id) == this.posterID
-          ? { name: "networks", params: { id: this.posterID } }
-          : { name: "networks", params: { id: this.posterID } };
-      },
-    };
+        network: () => {
+          return "network" == (this.profile && this.profile.user_type) &&
+            "business" == this.post.poster_type &&
+            (this.profile && this.profile.id) == this.posterID
+            ? { name: "networks", params: { id: this.posterID } }
+            : { name: "networks", params: { id: this.posterID } };
+        }
+      };
+    } else {
+      this.strategy = {
+        user: () => {
+          return "user" == { name: "profile_owner" };
+        },
+
+        business: () => {
+          return (
+            "business" ==
+            { name: "BusinessOwner", params: { id: this.posterID } }
+          );
+        },
+
+        network: () => {
+          return (
+            "network" == { name: "networks", params: { id: this.posterID } }
+          );
+        }
+      };
+    }
+
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
   filters: {
     nFormatter: formatNumber,
-    now: fromNow,
+    now: fromNow
   },
 
   computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     onRedirect() {
       return this.strategy[this.post.poster_type]();
     },
@@ -352,14 +410,14 @@ export default {
     },
     isMemberNetworkFollower() {
       return "memberNetworkFollower" == this.$route.name ? true : false;
-    },
+    }
   },
 
   methods: {
     mapMedia(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -372,7 +430,7 @@ export default {
     mapVideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -387,7 +445,7 @@ export default {
     },
 
     ...mapMutations({
-      addNewComment: "networkProfile/updatePost",
+      addNewComment: "networkProfile/updatePost"
     }),
 
     getId(video_url) {
@@ -403,24 +461,27 @@ export default {
       const request = await this.$repository.post.delete(uuid);
 
       if (request.success) {
-        this.comments = this.comments.filter((e) => e.id != uuid);
+        this.comments = this.comments.filter(e => e.id != uuid);
         this.item.comment_count -= 1;
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t("general.Comment_Deleted"),
+          message: this.$t("general.Comment_Deleted")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: this.$t("general.Something_wrong_happen_Try_again"),
+          message: this.$t("general.Something_wrong_happen_Try_again")
         });
       }
     },
 
     onUpdate: async function({ uuid, text }) {
+      if (!this.islogin) {
+        return;
+      }
       let data = { comment: text };
 
       if (
@@ -428,7 +489,7 @@ export default {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.profile.id });
@@ -436,34 +497,41 @@ export default {
       const request = await this.$repository.post.update({ uuid, data });
 
       if (request.success) {
-        this.comments = this.comments.map((e) =>
+        this.comments = this.comments.map(e =>
           e.id == uuid ? { ...request.data } : { ...e }
         );
 
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t("general.Comment_Updated"),
+          message: this.$t("general.Comment_Updated")
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: request.data,
+          message: request.data
         });
       }
     },
-
+    showLoginModal(id) {
+      this.showModal = true;
+    },
+    success() {
+      this.showModal = false;
+    },
+    hideAuthModal() {
+      this.showModal = false;
+    },
     onLike: async function() {
-
       if (!this.profile) {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: "You must loggin to perform that action",
+          message: "You must loggin to perform that action"
         });
 
-        return false
+        return false;
       }
 
       if (this.isDisplayInSearch) return false;
@@ -477,7 +545,7 @@ export default {
           post: this.post.post_id ? this.post.post_id : this.post.id,
           network: this.$route.params.id
             ? this.$route.params.id
-            : this.profile.id,
+            : this.profile.id
         });
 
         if (request.success)
@@ -487,14 +555,13 @@ export default {
               ? this.post.likes_count + 1
               : this.post.likes_count
               ? this.post.likes_count - 1
-              : 0,
+              : 0
           });
         this.processLike = false;
       }
     },
 
     onCreateComment: async function() {
-      
       if (
         !(this.comment.trim().length >= 1 && !this.createCommentRequestIsActive)
       )
@@ -509,7 +576,7 @@ export default {
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
-        data,
+        data
       });
 
       if (request.success) {
@@ -517,7 +584,7 @@ export default {
         this.comment = "";
         this.item.comment_count += 1;
         this.flashMessage.success({
-          message: this.$t("businessowner.Post_created"),
+          message: this.$t("businessowner.Post_created")
         });
       }
 
@@ -531,7 +598,7 @@ export default {
 
       const request = await this.$repository.post.fetch({
         uuid: this.post.post_id ? this.post.post_id : this.post.id,
-        page: this.page,
+        page: this.page
       });
 
       if (request.success) {
@@ -546,18 +613,18 @@ export default {
       }
 
       this.loadComment = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
 .comment {
-   overflow: hidden !important;
-   font-size: 14px;
+  overflow: hidden !important;
+  font-size: 14px;
 }
 
-.card-title{
+.card-title {
   font-size: 18px;
   line-height: 1.2;
   font-family: poppins;
@@ -738,7 +805,7 @@ export default {
     padding-left: 10 px;
     margin-left: 2%;
   }
- 
+
   .post-btn {
     border: none !important;
     margin-right: 0px;
@@ -851,9 +918,9 @@ export default {
 
 .duration {
   font-weight: 500;
-      color: #67757c;
-  
-  font-size: .75rem!important;
+  color: #67757c;
+
+  font-size: 0.75rem !important;
 }
 
 .usernamee:hover {

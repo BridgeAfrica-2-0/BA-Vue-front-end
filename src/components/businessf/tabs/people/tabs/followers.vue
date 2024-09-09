@@ -53,28 +53,28 @@ import CommunityMembers from "../../communityMember";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    CommunityMembers,
+    CommunityMembers
   },
   data: () => ({
     loader: false,
     followers: [],
-    searchQuery: "",
+    searchQuery: ""
   }),
   computed: {
     theFollowers() {
       if (this.searchQuery) {
-        return this.followers.filter((item) => {
+        return this.followers.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
+            .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.getPeopleFollowers;
       }
     },
 
-    ...mapGetters(["getPeopleFollowers"]),
+    ...mapGetters(["getPeopleFollowers"])
   },
   beforeMount() {
     this.getPeopleFollowers();
@@ -83,8 +83,8 @@ export default {
     this.gettingPeopleFollowers();
   },
   methods: {
-    ...mapActions(["gettingPeopleFollowers"]),
-  },
+    ...mapActions(["gettingPeopleFollowers"])
+  }
 };
 </script>
 

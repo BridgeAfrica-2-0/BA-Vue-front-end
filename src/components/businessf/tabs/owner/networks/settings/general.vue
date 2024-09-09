@@ -115,45 +115,45 @@ export default {
       options: [
         {
           text: this.$t("network.Admin_Only"),
-          value: "Admin only",
+          value: "Admin only"
         },
         {
           text: this.$t("network.Editor"),
-          value: "Allow editor to post",
+          value: "Allow editor to post"
         },
         {
           text: this.$t("network.Member"),
-          value: "Allow member to post",
-        },
+          value: "Allow member to post"
+        }
       ],
       lists: [
         {
           text: this.$t("network.Approval_by_admin"),
           value: "Admin",
-          disabled: false,
+          disabled: false
         },
         {
           text: this.$t("network.Approval_by_editor_and_admin"),
           value: "Admin and editor",
-          disabled: false,
+          disabled: false
         },
 
-         {
+        {
           text: this.$t("network.auto_approval"),
           value: "Only",
-          disabled: false,
-        },
-      ],
+          disabled: false
+        }
+      ]
     };
   },
 
   computed: {
     ...mapGetters({
-      getNetwork: "networkSettings/getNetwork",
+      getNetwork: "networkSettings/getNetwork"
     }),
     networkinfo() {
       return this.$store.state.NetworkSettings.networkinfo;
-    },
+    }
   },
 
   mounted() {
@@ -164,7 +164,7 @@ export default {
   methods: {
     ...mapActions({
       generalSave: "networkSettings/generalSave",
-      networkDelete: "networkSettings/networkDelete",
+      networkDelete: "networkSettings/networkDelete"
     }),
 
     check() {
@@ -190,7 +190,7 @@ export default {
         .then(() => {
           console.log("getNetworkInfo");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -207,7 +207,7 @@ export default {
       this.$store
         .dispatch("NetworkSettings/generalSave", {
           path: "general-settings/" + this.url,
-          formData: formData,
+          formData: formData
         })
         .then(({ data }) => {
           console.log(data);
@@ -215,42 +215,42 @@ export default {
           this.load = false;
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.Changes_Made_Successfully'),
+            message: this.$t("general.Changes_Made_Successfully")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.load = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t('general.Unable_To_Make_Changes'),
+            message: this.$t("general.Unable_To_Make_Changes")
           });
         });
     },
 
-    deleteNetwork: function () {
+    deleteNetwork: function() {
       console.log("deleteNetwork: " + this.url);
       this.$store
         .dispatch("NetworkSettings/networkDelete", {
-          path: "settings/delete-network/" + this.url,
+          path: "settings/delete-network/" + this.url
         })
         .then(({ data }) => {
           console.log(data);
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
-            message: this.$t('general.Network_Deleted'),
+            message: this.$t("general.Network_Deleted")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t('general.Unable_To_Delete_Network'),
+            message: this.$t("general.Unable_To_Delete_Network")
           });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

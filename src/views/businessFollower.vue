@@ -1,22 +1,20 @@
 <template>
-  <div  style="overflow-x: clip;">
-        <navbar />
-          <Skeleton  :loading="isloading" />
+  <div style="overflow-x: clip;">
+    <navbar />
+    <Skeleton :loading="isloading" />
     <span v-if="!isloading">
-      
-       
-      <Business :key="foll_id"  class="wahala" />
+      <Business :key="foll_id" class="wahala" />
       <Footer />
     </span>
   </div>
-</template> 
+</template>
 
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessf/business";
 import Footer from "../components/footer";
 import Skeleton from "@/components/businessPageSkeleton";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 export default {
   name: "Home",
 
@@ -33,66 +31,59 @@ export default {
       foll_id: null,
       isloading: true,
       isGuestUser: isGuestUser(),
-      tabs: ["#post", "#about", "#business", "#media", "#community"],
+      tabs: ["#post", "#about", "#business", "#media", "#community"]
     };
   },
 
   beforeRouteUpdate(to, from, next) {
-
     this.foll_id = to.params.id;
     next();
   },
- 
- methods:{
-    
-     businessInfo() {
-      const dispatchMethod = this.isGuestUser ? "businessGuest/businessInfo": "businessOwner/businessInfo";
+
+  methods: {
+    businessInfo() {
+      const dispatchMethod = this.isGuestUser
+        ? "businessGuest/businessInfo"
+        : "businessOwner/businessInfo";
       this.$store
         .dispatch(dispatchMethod, this.foll_id)
         .then(() => {
           this.isloading = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
+    }
+  },
 
-
- },
-  
   created() {
-    
     this.foll_id = this.$route.params.id;
     this.isloading = true;
 
-    
     if (!this.isGuestUser) {
-    this.$store
-      .dispatch("businessOwner/roleCheck", this.foll_id)
-      .then((data) => {
-       
-      })
-      .catch((error) => {
-        if (error.response.status == 404) {
-          this.$router.push({ name: "notFound" });
-        }
-      });
+      this.$store
+        .dispatch("businessOwner/roleCheck", this.foll_id)
+        .then(data => {})
+        .catch(error => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "notFound" });
+          }
+        });
     }
 
-     this.businessInfo();
+    this.businessInfo();
 
     //add guest user flag
     if (this.isGuestUser) {
-      localStorage.setItem('isGuestUser', true);
+      localStorage.setItem("isGuestUser", true);
     }
   },
 
   watch: {
     $route(to, from) {
-      this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
-
-    },
-  },
+      this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
+    }
+  }
 };
 </script>
 

@@ -6,8 +6,7 @@
           $t(
             "settings.Blocked_users_can_no_longer_see_things_you_post_on_your_business"
           )
-        }}, 
-        {{ $t("settings.invite_your_business_to_networks") }},
+        }}, {{ $t("settings.invite_your_business_to_networks") }},
         {{ $t("settings.start_a_conversation") }},
         {{ $t("settings.or_follow_your_business") }}.
       </p>
@@ -23,8 +22,9 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <b-list class="d-flex justify-content-between align-items-center m-list">
-            
+          <b-list
+            class="d-flex justify-content-between align-items-center m-list"
+          >
             <span class="mr-auto">
               <b-avatar
                 variant="light"
@@ -33,9 +33,12 @@
                 class="mr-3"
                 size="4em"
               ></b-avatar>
-            {{ blockuser.name }}
+              {{ blockuser.name }}
             </span>
-            <span class="float-right" @click="UnblockBlockUser(blockuser, 'user')">
+            <span
+              class="float-right"
+              @click="UnblockBlockUser(blockuser, 'user')"
+            >
               <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
             </span>
           </b-list>
@@ -43,7 +46,7 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card  bg-variant="white" text-variant="black" class="text-center mb-1">
+      <b-card bg-variant="white" text-variant="black" class="text-center mb-1">
         <b-card-text
           >{{ $t("settings.No_Blocked_User_Available") }}.</b-card-text
         >
@@ -64,7 +67,6 @@
             </b-card>
           </template>
           <b-list class="d-flex align-items-center m-list">
-            
             <span class="mr-auto">
               <b-avatar
                 variant="primary"
@@ -78,7 +80,7 @@
             <span
               class="float-right"
               @click="UnblockBlockUser(blockbusines, 'business')"
-              >
+            >
               <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
             </span>
           </b-list>
@@ -87,7 +89,9 @@
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center mt-2">
-        <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Business_Available") }}.</b-card-text>
+        <b-card-text class="font-mobile-14"
+          >{{ $t("settings.No_Blocked_Business_Available") }}.</b-card-text
+        >
       </b-card>
     </b-container>
 
@@ -110,7 +114,9 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{ blocknet.name }}</span>
-            <span class="float-right" @click="UnblockBlockUser(blocknet, 'network')"
+            <span
+              class="float-right"
+              @click="UnblockBlockUser(blocknet, 'network')"
               ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
             >
           </b-list>
@@ -118,8 +124,10 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">  
-        <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Network_Available") }}.</b-card-text>
+      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">
+        <b-card-text class="font-mobile-14"
+          >{{ $t("settings.No_Blocked_Network_Available") }}.</b-card-text
+        >
       </b-card>
     </b-container>
   </b-container>
@@ -131,7 +139,7 @@ export default {
   data() {
     return {
       url: null,
-      loading: false,
+      loading: false
     };
   },
 
@@ -144,7 +152,7 @@ export default {
     },
     blocknetworks() {
       return this.$store.state.profile.blocknetwork;
-    },
+    }
   },
 
   mounted() {
@@ -162,7 +170,7 @@ export default {
           console.log("ohh year");
           this.loading = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
         });
@@ -176,7 +184,7 @@ export default {
           console.log("ohh year");
           this.loading = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
         });
@@ -190,7 +198,7 @@ export default {
           console.log("ohh year");
           this.loading = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
         });
@@ -205,7 +213,7 @@ export default {
       fd.append("type", type);
       this.axios
         .post("profile/unblock/entity", fd)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           this.blockUsers();
           this.blockBusiness();
@@ -213,19 +221,19 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.user_unblocked"),
+            message: this.$t("businessowner.user_unblocked")
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("settings.Unable_to_Unblock_User"),
+            message: this.$t("settings.Unable_to_Unblock_User")
           });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -253,7 +261,7 @@ export default {
     top: -5px;
     left: -20px;
   }
-  .font-mobile-14{
+  .font-mobile-14 {
     font-size: 14px;
   }
 }

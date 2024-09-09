@@ -9,8 +9,8 @@ export default {
   props: {
     title: {
       type: String,
-      default: () => "Not Found",
-    },
-  },
+      default: () => "Not Found"
+    }
+  }
 };
 </script>

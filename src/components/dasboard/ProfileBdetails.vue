@@ -1,155 +1,166 @@
 <template>
+  <div ref="wrapper">
+    <div class="container wahala">
+      <b-row v-if="loading">
+        <b-col cols="12" md="12" lg="12" xl="12">
+          <div class="mbl-wrap">
+            <b-card-text class="mt-3">
+              <b-row>
+                <b-col cols="12" md="12">
+                  <div>
+                    <b-table-simple hover small caption-top responsive>
+                      <b-tbody>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Category
+                          </b-td>
 
-     <div ref="wrapper">
-       <div class="container wahala" >
-            <b-row v-if="loading">
-                <b-col cols="12" md="12" lg="12" xl="12">
-                    <div class="mbl-wrap">
-                        <b-card-text class="mt-3">
-                            <b-row>
-                                <b-col cols="12" md="12">
-                                    <div>
-                                        <b-table-simple hover small caption-top responsive>
-                                            <b-tbody>
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Category
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            <span
+                              v-for="category in business_about.category"
+                              :key="category.id"
+                            >
+                              {{ category.name }}</span
+                            >
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        <span v-for="category in business_about.category" :key="category.id"> {{ category.name }}</span>
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Busniness Name
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Busniness Name
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            {{ business_about.name }}
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        {{ business_about.name }}
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Address
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Address
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            <span>
+                              {{ business_about.address }}
+                            </span>
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        <span>    
-                                                            {{ business_about.address }}
-                                                        </span>
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            City
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        City
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            <span>
+                              {{ business_about.city }}
+                            </span>
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        <span>
-                                                            {{ business_about.city }}
-                                                        </span>
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Neighbour
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Neighbour
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            <span v-if="business_about.neigborhood[0]">
+                              {{ business_about.neigborhood[0].name }}
+                            </span>
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        <span  v-if="business_about.neigborhood[0]">
-                                                            {{ business_about.neigborhood[0].name }}
-                                                        </span>
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Public URL
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Public URL
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            <span v-if="business_about.website">
+                              {{ business_about.website }}
+                            </span>
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        <span v-if="business_about.website">
-                                                            {{ business_about.website }}
-                                                        </span>
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            People
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        People
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            {{ business_about.community }}
+                            {{
+                              business_about.community > 1000 ? "K" : ""
+                            }}
+                            Community
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        {{ business_about.community }}
-                                                        {{ business_about.community > 1000 ? "K" : "" }} Community
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Phone Number
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Phone Number
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            {{ business_about.phone1 }}
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        {{ business_about.phone1 }}
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Email
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Email
-                                                    </b-td>
+                          <b-td class="a-text text td">
+                            {{ business_about.email }}
+                          </b-td>
+                        </b-tr>
+                        <br />
 
-                                                    <b-td class="a-text text td">
-                                                        {{ business_about.email }}
-                                                    </b-td>
-                                                </b-tr> <br/>
+                        <b-tr>
+                          <b-td class="a-text text">
+                            Opening Hours
+                          </b-td>
 
-                                                <b-tr>
-                                                    <b-td class="a-text text">
-                                                        Opening Hours
-                                                    </b-td>
-
-                                                    <b-td class="a-text text td">
-                                                        <b-link> Open now </b-link>
-                                                        <br />
-                                                        <b-dropdown size="sm" variant="transperent">
-                                                            <template #button-content>
-                                                            {{ hoursOpen }}
-                                                            </template>
-                                                            <b-dropdown-item
-                                                            v-for="day in business_about.business_open_hours"
-                                                            :key="day.day"
-                                                            @click="selectHour(day)"
-                                                            >
-                                                            {{ day.opening_time }}AM -
-                                                            {{ day.closing_time }}PM</b-dropdown-item
-                                                            >
-                                                        </b-dropdown>
-                                                    </b-td>
-                                                </b-tr>
-
-                                            </b-tbody> 
-                                        </b-table-simple>
-                                    </div>
-                                </b-col>
-                            </b-row>
-                        </b-card-text>
-                        
-                    </div>
+                          <b-td class="a-text text td">
+                            <b-link> Open now </b-link>
+                            <br />
+                            <b-dropdown size="sm" variant="transperent">
+                              <template #button-content>
+                                {{ hoursOpen }}
+                              </template>
+                              <b-dropdown-item
+                                v-for="day in business_about.business_open_hours"
+                                :key="day.day"
+                                @click="selectHour(day)"
+                              >
+                                {{ day.opening_time }}AM -
+                                {{ day.closing_time }}PM</b-dropdown-item
+                              >
+                            </b-dropdown>
+                          </b-td>
+                        </b-tr>
+                      </b-tbody>
+                    </b-table-simple>
+                  </div>
                 </b-col>
-            </b-row>
-        </div>
-
+              </b-row>
+            </b-card-text>
+          </div>
+        </b-col>
+      </b-row>
     </div>
-     
+  </div>
 </template>
-
 
 <script>
 /**
@@ -161,13 +172,10 @@ import VuePhoneNumberInput from "vue-phone-number-input";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 
 export default {
-  components: {
-   
-    
-  },
+  components: {},
   data() {
     return {
       loading: false,
@@ -192,28 +200,28 @@ export default {
           day: "tuesday",
           tues_start: null,
           tues_end: null,
-          check: false,
+          check: false
         },
         {
           day: "wednesday",
           wed_start: null,
           wed_end: null,
-          check: false,
+          check: false
         },
         {
           day: "thursday",
           thurs_start: null,
           thurs_end: null,
-          check: false,
+          check: false
         },
         { day: "friday", fri_start: null, fri_end: null, check: false },
         {
           day: "saturday",
           sat_start: null,
           sat_end: null,
-          check: false,
+          check: false
         },
-        { day: "sunday", sun_start: null, sun_end: null, check: false },
+        { day: "sunday", sun_start: null, sun_end: null, check: false }
       ],
 
       business_about: {},
@@ -229,66 +237,68 @@ export default {
   watch: {
     open(value) {
       console.log("change open value ", value);
-      if(value == "Always Open"){
-        this.displayHour1 = false
-      }else if(value == "Open for selected hours"){
-        this.displayHour1 = true
+      if (value == "Always Open") {
+        this.displayHour1 = false;
+      } else if (value == "Open for selected hours") {
+        this.displayHour1 = true;
       }
     },
     dayOfWorks: {
       handler(newValue, oldValue) {
         let num = 0;
-        newValue.map((day) => {
+        newValue.map(day => {
           if (day.check) {
             num = num + 1;
           }
         });
-       
+
         console.log(newValue);
         console.log(oldValue);
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   created() {
     let loader = this.$loading.show({
       container: this.$refs.about,
       canCancel: true,
       onCancel: this.onCancel,
-      color: "#e75c18",
+      color: "#e75c18"
     });
-    
-    const dispatchMethod = this.isGuestUser ? "businessGuest": "businessOwner";
+
+    const dispatchMethod = this.isGuestUser ? "businessGuest" : "businessOwner";
     this.$store
-      .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
+      .dispatch(dispatchMethod + "/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
-        business_id: this.biz_id,
+        business_id: this.biz_id
       })
-      .then((response) => {
+      .then(response => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+          JSON.stringify(
+            this.$store.getters[dispatchMethod + "/getBusinessAbout"]
+          )
         );
         // this.dayOfWorks = this.initialize(this.dayOfWorks);
-        if(this.business_about.business_open_hours.length >= 1){
-
+        if (this.business_about.business_open_hours.length >= 1) {
           this.dayOfWorks = this.business_about.business_open_hours;
-  
-          this.business_about.business_open_hours.forEach((element, index) => {
-  
-           if(element.opening_time && element.closing_time){
-              this.dayOfWorks[index].check = true;
-           }else { this.dayOfWorks[index].check = false; }
-        });
-        
-        }
 
+          this.business_about.business_open_hours.forEach((element, index) => {
+            if (element.opening_time && element.closing_time) {
+              this.dayOfWorks[index].check = true;
+            } else {
+              this.dayOfWorks[index].check = false;
+            }
+          });
+        }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("error from the server or browser error(2) ++++", error);
       })
       .finally(() => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+          JSON.stringify(
+            this.$store.getters[dispatchMethod + "/getBusinessAbout"]
+          )
         );
         console.log("-------", this.business_about);
         this.loading = true;
@@ -302,8 +312,7 @@ export default {
     this.editBusiness();
   },
   computed: {
-
-     biz_id() {
+    biz_id() {
       return this.$store.state.dashboard.dBusinessId;
     },
 
@@ -316,7 +325,7 @@ export default {
       if (
         this.$route.name == "BusinessFollower" ||
         this.$route.name == "BusinessEditor" ||
-         this.$route.name == "BusinessFollowerGuest"
+        this.$route.name == "BusinessFollowerGuest"
       ) {
         return false;
       } else {
@@ -361,7 +370,7 @@ export default {
     },
     selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         if (item.category_id) {
           selectedUsers.push(item.category_id);
         } else {
@@ -373,7 +382,7 @@ export default {
     selectedsubcategories: function() {
       let sub_cat = [];
       console.log("sous cat --- ", this.filterselectvalue);
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         if (item.subcategory_id) {
           sub_cat.push(item.subcategory_id);
         } else {
@@ -384,14 +393,14 @@ export default {
     },
     selectedcountry: function() {
       let sub_cat = [];
-      this.country.forEach((item) => {
+      this.country.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedregion: function() {
       let sub_cat = [];
-      this.region.forEach((item) => {
+      this.region.forEach(item => {
         if (item.region_id) {
           sub_cat.push(item.region_id);
         } else {
@@ -402,7 +411,7 @@ export default {
     },
     selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         if (item.division_id) {
           sub_cat.push(item.division_id);
         } else {
@@ -413,7 +422,7 @@ export default {
     },
     selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         if (item.council_id) {
           sub_cat.push(item.council_id);
         } else {
@@ -423,9 +432,9 @@ export default {
       return sub_cat;
     },
 
-      city: function() {
+    city: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         if (item.council_id) {
           sub_cat.push(item.name);
         } else {
@@ -435,11 +444,9 @@ export default {
       return sub_cat.toString();
     },
 
-
-
     selectedlocality: function() {
       let sub_cat = [];
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         if (item.neighborhood_id) {
           sub_cat.push(item.neighborhood_id);
         } else {
@@ -447,54 +454,48 @@ export default {
         }
       });
       return sub_cat;
-    },
+    }
   },
   methods: {
+    input1() {
+      this.dayOfWorks.map(item => {
+        if (item.day == "monday") {
+          this.dayOfWorks[0].mon_start = this.dayOfWorks[0].opening_time;
+          this.dayOfWorks[0].mon_end = this.dayOfWorks[0].closing_time;
+          this.dayOfWorks[0].monday = this.dayOfWorks[0].day;
+        } else if (item.day == "tuesday") {
+          this.dayOfWorks[1].tues_start = this.dayOfWorks[1].opening_time;
+          this.dayOfWorks[1].tues_end = this.dayOfWorks[1].closing_time;
+          this.dayOfWorks[1].tuesday = this.dayOfWorks[1].day;
+        } else if (item.day == "wednesday") {
+          this.dayOfWorks[2].wed_start = this.dayOfWorks[2].opening_time;
+          this.dayOfWorks[2].wed_end = this.dayOfWorks[2].closing_time;
+          this.dayOfWorks[2].wednesday = this.dayOfWorks[2].day;
+        } else if (item.day == "thursday") {
+          this.dayOfWorks[3].thurs_start = this.dayOfWorks[3].opening_time;
+          this.dayOfWorks[3].thurs_end = this.dayOfWorks[3].closing_time;
+          this.dayOfWorks[3].thursday = this.dayOfWorks[3].day;
+        } else if (item.day == "friday") {
+          this.dayOfWorks[4].fri_start = this.dayOfWorks[4].opening_time;
+          this.dayOfWorks[4].fri_end = this.dayOfWorks[4].closing_time;
+          this.dayOfWorks[4].friday = this.dayOfWorks[4].day;
+        } else if (item.day == "saturday") {
+          this.dayOfWorks[5].sat_start = this.dayOfWorks[5].opening_time;
+          this.dayOfWorks[5].sat_end = this.dayOfWorks[5].closing_time;
+          this.dayOfWorks[5].saturday = this.dayOfWorks[5].day;
+        } else if (item.day == "sunday") {
+          this.dayOfWorks[6].sun_start = this.dayOfWorks[6].opening_time;
+          this.dayOfWorks[6].sun_end = this.dayOfWorks[6].closing_time;
+          this.dayOfWorks[6].sunday = this.dayOfWorks[6].day;
+        }
+      });
+      console.log("---input: ", this.dayOfWorks);
+      console.log("---input: ", ...this.dayOfWorks);
 
-    input1(){
-         
-      this.dayOfWorks.map((item) =>{
-          if(item.day == "monday"){
-              this.dayOfWorks[0].mon_start =this.dayOfWorks[0].opening_time;
-              this.dayOfWorks[0].mon_end =this.dayOfWorks[0].closing_time;
-              this.dayOfWorks[0].monday =this.dayOfWorks[0].day;
-          }else  if(item.day == "tuesday"){
-              this.dayOfWorks[1].tues_start =this.dayOfWorks[1].opening_time;
-              this.dayOfWorks[1].tues_end =this.dayOfWorks[1].closing_time;
-              this.dayOfWorks[1].tuesday =this.dayOfWorks[1].day;
-          } else  if(item.day == "wednesday"){
-              this.dayOfWorks[2].wed_start =this.dayOfWorks[2].opening_time;
-              this.dayOfWorks[2].wed_end =this.dayOfWorks[2].closing_time;
-              this.dayOfWorks[2].wednesday =this.dayOfWorks[2].day;
-          } else  if(item.day == "thursday"){
-              this.dayOfWorks[3].thurs_start =this.dayOfWorks[3].opening_time;
-              this.dayOfWorks[3].thurs_end =this.dayOfWorks[3].closing_time;
-              this.dayOfWorks[3].thursday =this.dayOfWorks[3].day;
-          } else  if(item.day == "friday"){
-              this.dayOfWorks[4].fri_start =this.dayOfWorks[4].opening_time;
-              this.dayOfWorks[4].fri_end =this.dayOfWorks[4].closing_time;
-              this.dayOfWorks[4].friday =this.dayOfWorks[4].day;
-          } else  if(item.day == "saturday"){
-              this.dayOfWorks[5].sat_start =this.dayOfWorks[5].opening_time;
-              this.dayOfWorks[5].sat_end =this.dayOfWorks[5].closing_time;
-              this.dayOfWorks[5].saturday =this.dayOfWorks[5].day;
-          } else  if(item.day == "sunday"){
-              this.dayOfWorks[6].sun_start =this.dayOfWorks[6].opening_time;
-              this.dayOfWorks[6].sun_end =this.dayOfWorks[6].closing_time;
-              this.dayOfWorks[6].sunday =this.dayOfWorks[6].day;
-          }
-        })
-        console.log('---input: ',this.dayOfWorks);
-        console.log('---input: ',...this.dayOfWorks);
-       
-        this.dayOfWorks.map((item) =>{
-
-            Object.entries(item).forEach(
-            ([key, valeur]) => {
-              this.tempo[key] = valeur 
-            }
-          );
-
+      this.dayOfWorks.map(item => {
+        Object.entries(item).forEach(([key, valeur]) => {
+          this.tempo[key] = valeur;
+        });
       });
       console.log("good: ", this.tempo);
     },
@@ -508,13 +509,12 @@ export default {
      * @private
      */
 
-
-    getGeoCoderResult(response) {console.log('res map ---',response);
-     this.business_about_input.address = response.address;
-       this.business_about_input.lng = response.coordinates[0];
+    getGeoCoderResult(response) {
+      console.log("res map ---", response);
+      this.business_about_input.address = response.address;
+      this.business_about_input.lng = response.coordinates[0];
       this.business_about_input.lat = response.coordinates[1];
-},
-
+    },
 
     /**
      * this method is used to transform the elements of the array into a character string
@@ -523,7 +523,7 @@ export default {
      */
     stringArray1(words) {
       let keyword = "";
-      words.map((item) => {
+      words.map(item => {
         if (item.category_id) {
           keyword += item.category_id + ",";
         } else {
@@ -541,10 +541,10 @@ export default {
      */
     stringArray(words) {
       let keyword = "";
-      words.map((item) => {
+      words.map(item => {
         if (item.subcategory_id) {
           keyword += item.subcategory_id + ",";
-        } else if (item.subcategoryId){
+        } else if (item.subcategoryId) {
           keyword += item.subcategoryId + ",";
         } else {
           keyword += item.id + ",";
@@ -560,7 +560,7 @@ export default {
      */
     ArrayString(words) {
       let keyword = "";
-      words.map((item) => {
+      words.map(item => {
         keyword += item + ",";
       });
 
@@ -575,9 +575,9 @@ export default {
       this.$store
         .dispatch("businessOwner/loadUserBusinessAbout", {
           // business_abobusiness_id: this.business_about_input,
-          business_id: this.biz_id,
+          business_id: this.biz_id
         })
-        .then((res) => {
+        .then(res => {
           this.business_about = JSON.parse(
             JSON.stringify(
               this.$store.getters["businessOwner/getBusinessAbout"]
@@ -601,7 +601,7 @@ export default {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
@@ -615,7 +615,7 @@ export default {
       console.log("sous cat --- ", this.filterselectvalue);
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
@@ -628,12 +628,12 @@ export default {
      * @private
      */
     initialize(daysOfWorks) {
-      const zdaysOfWorks = daysOfWorks.map((day) => {
+      const zdaysOfWorks = daysOfWorks.map(day => {
         this.open =
           this.business_about.business_open_hours.length >= 7
             ? "Always Open"
             : "Open for selected hours";
-        this.business_about.business_open_hours.map((dayOpen) => {
+        this.business_about.business_open_hours.map(dayOpen => {
           if (day.day.toLowerCase() === dayOpen.day.toLowerCase()) {
             day.closing_time = dayOpen.closing_time;
             day.opening_time = dayOpen.opening_time;
@@ -669,12 +669,12 @@ export default {
             business_id: this.biz_id,
             data: {
               about_business: this.business_about_input.about_business,
-              name: this.business_about_input.name,
-            },
+              name: this.business_about_input.name
+            }
           };
           this.$store
             .dispatch("businessOwner/updateBusinessBiographie", data)
-            .then((response) => {
+            .then(response => {
               console.log(
                 "fetch finished on the database response (3) ",
                 response
@@ -682,7 +682,7 @@ export default {
               this.loadBusinessAbout();
               console.log("Modify Business Biography end++++");
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(
                 error,
                 "Modify Business Biography end error (2) ++++"
@@ -712,10 +712,12 @@ export default {
           console.log(this.business_about_input);
           this.input1();
 
-          
-       
-          console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
-
+          console.log(
+            "test-------",
+            this.business_about_input.lat,
+            "------:",
+            this.business_about_input.lng
+          );
 
           var dat = {
             business_id: this.biz_id,
@@ -741,19 +743,14 @@ export default {
               ...this.tempo,
               lat: this.business_about_input.lat,
               lng: this.business_about_input.lng,
-              address: this.business_about_input.address,
-            },
+              address: this.business_about_input.address
+            }
           };
 
-         
           console.log("test envoi: ", dat);
           this.$store
-            .dispatch(
-              "businessOwner/updateUserBusinessAbout",
-              dat
-              
-            )
-            .then((response) => {
+            .dispatch("businessOwner/updateUserBusinessAbout", dat)
+            .then(response => {
               console.log(
                 "update user business about response ++++++",
                 response
@@ -761,7 +758,7 @@ export default {
               this.flashMessage.show({
                 status: "success",
                 blockClass: "custom-block-class",
-                message: this.$t("businessowner.Business_Profile_updated"),
+                message: this.$t("businessowner.Business_Profile_updated")
               });
               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
@@ -769,9 +766,8 @@ export default {
               ];
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
-             
             })
-            .catch((error) => {
+            .catch(error => {
               console.log(error, "update user business about end++++");
             })
             .finally(() => {
@@ -796,17 +792,17 @@ export default {
      */
     stringKeyword(words) {
       let keyword = "";
-      words.map((item) => {
+      words.map(item => {
         keyword += item + ",";
       });
       return keyword.substring(0, keyword.length - 1);
     },
     test() {
-      let businessAddress = this.dayOfWorks.filter((day) => {
+      let businessAddress = this.dayOfWorks.filter(day => {
         return day.check === true;
       });
       if (businessAddress.length > 0) {
-        businessAddress = businessAddress.map((day) => {
+        businessAddress = businessAddress.map(day => {
           return [day.day, day.opening_time, day.closing_time];
         });
       } else {
@@ -836,7 +832,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -854,7 +850,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -869,7 +865,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -879,7 +875,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -894,7 +890,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -911,7 +907,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -929,7 +925,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -946,7 +942,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -964,7 +960,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -976,14 +972,16 @@ export default {
 
     editBusiness() {
       console.log("editBusiness");
-      const endpoint = this.isGuestUser ? "guest/business/edit/" : "business/edit/";
+      const endpoint = this.isGuestUser
+        ? "guest/business/edit/"
+        : "business/edit/";
       this.axios
         .get(endpoint + this.business_id)
         .then(({ data }) => {
           console.log("testing: ", data);
           this.setEditData(data.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -999,7 +997,7 @@ export default {
       this.filterselectvalue = business.subCatFilter;
 
       let Bcountry = business.country;
-      Bcountry.map((c) => {
+      Bcountry.map(c => {
         this.country.push({ id: c.country_id, name: c.name });
       });
       this.region = business.region;
@@ -1007,7 +1005,7 @@ export default {
       this.municipality = business.council;
       this.locality = business.neigborhood;
       let select_filterss = business.filter;
-      select_filterss.map((item) => {
+      select_filterss.map(item => {
         this.select_filterss.push(item.filter_id);
       });
       this.subcategories();
@@ -1015,16 +1013,16 @@ export default {
       this.Division();
       this.Municipality();
       this.Locality();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
 .mbl-wrap {
-   height: 100%;
-   overflow: hidden;
- }
+  height: 100%;
+  overflow: hidden;
+}
 
 @media only screen and (max-width: 768px) {
   .wahala .nav-pills .nav-link {
@@ -1038,12 +1036,11 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: row;
-     padding-top: 10px;
-        height: 70%;
-    
+    padding-top: 10px;
+    height: 70%;
+
     overflow: auto;
     overflow-x: hidden;
-
   }
   .nav.nav-pills {
     flex-wrap: nowrap;
@@ -1062,9 +1059,9 @@ export default {
 
 <style scoped>
 .td {
-    padding-left: 15%;
-    font-weight: 600;
-    display: block;
+  padding-left: 15%;
+  font-weight: 600;
+  display: block;
 }
 
 .buynow {

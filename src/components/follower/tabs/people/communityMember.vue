@@ -14,7 +14,7 @@
               <b-row>
                 <b-col cols="12">
                   <p class="detail">
-                    {{ $t('profilefollower.Cameroon') }},
+                    {{ $t("profilefollower.Cameroon") }},
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
                       <b-icon icon="globe" class="primary"></b-icon> 3,
@@ -31,13 +31,13 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +{{ $t('profilefollower.Community') }}</b-button
+              +{{ $t("profilefollower.Community") }}</b-button
             >
           </b-col>
           <b-col>
             <b-button variant="outline-primary" size="sm">
               <b-icon icon="chat-fill"></b-icon>
-              {{ $t('profilefollower.Message') }}</b-button
+              {{ $t("profilefollower.Message") }}</b-button
             >
           </b-col>
         </b-row>

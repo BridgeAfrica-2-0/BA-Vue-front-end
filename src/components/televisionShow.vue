@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="row">
+    <div class="row television-show-desktop">
       <div class="col-md-6 col-lg-6">
         <div class="card left-card">
           <video
@@ -83,17 +83,119 @@
         </div>
       </div>
     </div>
+    <div class="row television-show-mobile">
+      <splide :options="options" class="r-image">
+        <splide-slide>
+          <div class="col-12">
+            <div class="card left-card">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-left.png"
+              >
+                <source src="assets/video/intro_video.mp4" type="video/mp4" />
+              </video>
+              <div class="card-body">
+                <h5 class="card-title">Checkout our Biz Show on CRTV</h5>
+                <p class="card-text">
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </splide-slide>
+        <splide-slide>
+          <div class="col-12">
+            <div class="card left-card">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-1.png"
+              >
+                <source src="assets/video/intro_video.mp4" type="video/mp4" />
+              </video>
+              <div class="card-body">
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
+                <p class="card-text">
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </splide-slide>
+        <splide-slide>
+          <div class="col-12">
+            <div class="card left-card">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-2.png"
+              >
+                <source src="assets/video/intro_video.mp4" type="video/mp4" />
+              </video>
+              <div class="card-body">
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
+                <p class="card-text">
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </splide-slide>
+        <splide-slide>
+          <div class="col-12">
+            <div class="card left-card">
+              <video
+                width="100%"
+                controls
+                height="500px"
+                poster="assets/home/show-television/television-show-right-3.png"
+              >
+                <source src="assets/video/intro_video.mp4" type="video/mp4" />
+              </video>
+              <div class="card-body">
+                <h5 class="card-title">
+                  Checkout our Biz Show on CRTV for latest new and update
+                </h5>
+                <p class="card-text">
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </splide-slide>
+      </splide>
+    </div>
   </section>
 </template>
 
 <script>
 import("vue-it-bigger/dist/vue-it-bigger.min.css");
 export default {
-  name: "TelevisionShow",
+  name: "TelevisionShow"
 };
 </script>
 
 <style scoped>
+.television-show-mobile {
+  display: none !important;
+}
+
 .card {
   padding: 0 !important;
   text-align: left !important;
@@ -149,6 +251,16 @@ export default {
 
   .left-card {
     height: 480px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .television-show-desktop {
+    display: none !important;
+  }
+
+  .television-show-mobile {
+    display: block !important;
   }
 }
 </style>

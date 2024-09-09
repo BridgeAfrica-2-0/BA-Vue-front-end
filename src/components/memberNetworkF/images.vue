@@ -4,22 +4,35 @@
       <div class="container-fluid">
         <div v-for="post in images" :key="post.id">
           <!-- {{post.id}} -->
-          <div class="img-gall" v-for="(image, index) in post.media" :key="index">
+          <div
+            class="img-gall"
+            v-for="(image, index) in post.media"
+            :key="index"
+          >
             <a href="#!"
               ><b-img
                 class="card-img btn p-0"
                 thumbnail
-                fluid 
+                fluid
                 rounded
                 :src="image.media_url"
                 alt="media_img"
-                v-b-modal="'modal-'+image.media_id"
+                v-b-modal="'modal-' + image.media_id"
                 v-bind="imageProps"
               ></b-img>
             </a>
-            <b-modal hide-footer :id="'modal-'+image.media_id" :title="$t('memnetwork.Details')">
-              <img class="card-img" :src="image.media_url" @click="() => showImg(index)" alt="media_img" />
-              <p class="my-4">{{image.post_content[0]}}</p>
+            <b-modal
+              hide-footer
+              :id="'modal-' + image.media_id"
+              :title="$t('memnetwork.Details')"
+            >
+              <img
+                class="card-img"
+                :src="image.media_url"
+                @click="() => showImg(index)"
+                alt="media_img"
+              />
+              <p class="my-4">{{ image.post_content[0] }}</p>
             </b-modal>
           </div>
         </div>
@@ -29,7 +42,6 @@
           :index="index"
           @hide="handleHide"
         ></vue-easy-lightbox>
-         
       </div>
     </div>
   </div>
@@ -40,19 +52,19 @@ export default {
   props: ["images"],
   data: function() {
     return {
-      show_url:null,
-      url:null,
+      show_url: null,
+      url: null,
       img_url: null,
-      image_details:null,
-      file: '',
-    
+      image_details: null,
+      file: "",
+
       visible: false,
       index: 0,
-      imageProps: {  width: 205, height: 205},
-      Slideimges: [],
+      imageProps: { width: 205, height: 205 },
+      Slideimges: []
     };
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
     this.loadImages();
   },
@@ -64,23 +76,23 @@ export default {
     onClick(i) {
       this.index = i;
     },
-        
+
     showImg(index) {
       console.log(index);
-      this.index = index
-      this.visible = true
+      this.index = index;
+      this.visible = true;
     },
     handleHide() {
-      this.visible = false
+      this.visible = false;
     },
 
-    showPic(image) {    
+    showPic(image) {
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
     },
-    
-    loadImages: function(){
+
+    loadImages: function() {
       this.images.forEach(post => {
         post.media.forEach(media => {
           this.Slideimges.push(media.media_url);
@@ -89,8 +101,7 @@ export default {
       });
       // this.Slideimges = this.images;
     }
-
-  },
+  }
 };
 </script>
 

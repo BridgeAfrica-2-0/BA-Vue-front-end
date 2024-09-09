@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div>
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
       <div class="text-justify mt-2 container wahala">
@@ -19,7 +19,9 @@
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business" class="p-3"
               /></b-tab>
-              <b-tab :title="$t('businessowner.Market')"><MarketPlace  :isPremium="isPremium"/></b-tab>
+              <b-tab :title="$t('businessowner.Market')"
+                ><MarketPlace :isPremium="isPremium"
+              /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
                 <Networks type="business" />
               </b-tab>
@@ -42,7 +44,7 @@ import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
 import Networks from "@/components/owner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
-import { isPremium } from '@/helpers';
+import { isPremium } from "@/helpers";
 
 export default {
   name: "Home",
@@ -66,44 +68,42 @@ export default {
     };
   },
 
-  created(){
+  created() {
+    let tab = localStorage.getItem("businessTab");
 
-       let tab=  localStorage.getItem("businessTab");
-      
-      if (tab) {
-        this.currentTab=tab;
-      }
-
+    if (tab) {
+      this.currentTab = tab;
+    }
   },
 
   methods: {
     gotoCoverImages() {
       console.log("parent cover method");
       this.isCover = true;
-      this.key = this.key + 1
+      this.key = this.key + 1;
       this.currentTab = 2;
     },
     pageChange() {
       console.log("business pageChange");
       this.$emit("pageChange");
-    },
+    }
   },
-  
+
   watch: {
     currentTab: (newVal, oldVal) => {
       localStorage.setItem("ba-business-active-tab", newVal);
       localStorage.setItem("businessTab", newVal);
-      
-      if (2 != newVal){
-        this.showCoverAlbum = false
-        this.key = this.key - 1
+
+      if (2 != newVal) {
+        this.showCoverAlbum = false;
+        this.key = this.key - 1;
       }
     },
 
     $route(to, from) {
-      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
-    },
-  },
+      this.currentTab = this.tabs.findIndex(tab => tab === to.hash);
+    }
+  }
 };
 </script>
 
@@ -113,7 +113,6 @@ export default {
   .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
-   
   }
 }
 </style>

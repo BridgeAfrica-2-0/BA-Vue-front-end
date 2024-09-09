@@ -2,8 +2,21 @@
   <div class="p-2">
     <div class="s-ccard">
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="index">
-          <Person :key="item.id" :person="item" :canBlock="canBlock" :index="index"  @getTotalCommunity='getTotalCommunity' @BlockUser="BlockUser" />
+        <b-col
+          lg="6"
+          sm="12"
+          class="p-2"
+          v-for="(item, index) in users"
+          :key="index"
+        >
+          <Person
+            :key="item.id"
+            :person="item"
+            :canBlock="canBlock"
+            :index="index"
+            @getTotalCommunity="getTotalCommunity"
+            @BlockUser="BlockUser"
+          />
         </b-col>
       </b-row>
       <infinite-loading
@@ -13,7 +26,7 @@
       ></infinite-loading>
     </div>
   </div>
-</template>  
+</template>
 
 <script>
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
@@ -22,12 +35,12 @@ import axios from "axios";
 export default {
   props: ["type", "searchh"],
   components: {
-  Person
+    Person
   },
   data() {
     return {
       page: 1,
-      
+
       foll_id: null,
       users: [],
       infiniteId: +new Date(),
@@ -38,23 +51,24 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
-    this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
   },
 
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
-    canBlock(){
-     
-      if(!this.foll_id){
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    canBlock() {
+      if (!this.foll_id) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -66,103 +80,90 @@ export default {
         return this.$store.state.profile.UcommunityFollowing.user_following;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       }
-    },
+    }
   },
 
   methods: {
-
- getTotalCommunity(){
-         this.$store
-      .dispatch("profile/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+    getTotalCommunity() {
+      this.$store
+        .dispatch("profile/Tcommunity", this.foll_id)
+        .then(response => {})
+        .catch(error => {
+          console.log({ error: error });
+        });
     },
 
+    BlockUser(id, index) {
+      this.$confirm({
+        message: `Are you sure?`,
+        button: {
+          no: "No",
+          yes: "Yes"
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: confirm => {
+          if (confirm) {
+            let dataInfo = {
+              id: id,
+              refernce: "user",
+              type: this.type
+            };
 
+            let fd = new FormData();
+            fd.append("id", dataInfo.id);
+            fd.append("type", dataInfo.refernce);
+            this.$store
+              .dispatch("profile/Block", {
+                path: "block/entity",
+                formData: fd
+              })
+              .then(response => {
+                this.getTotalCommunity();
 
-  BlockUser(id, index) {
+                this.$delete(this.users, index);
 
-     this.$confirm(
-        {
-          message: `Are you sure?`,
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-          /**
-          * Callback Function
-          * @param {Boolean} confirm
-          */
-          callback: confirm => {
-            if (confirm) {
-                   
+                console.log("user deleted");
 
-     let dataInfo = {
-        id: id,
-        refernce: "user",
-        type: this.type,
-      };
-
-    
-      let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
-      .then(response => {
-         this.getTotalCommunity();
-      
-        this.$delete(this.users,index);
-
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-
-            }
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: dataInfo.refernce + " blocked"
+                });
+              })
+              .catch(err => {
+                console.log({ err: err });
+                this.flashMessage.show({
+                  status: "error",
+                  message: "Unable to blocked " + dataInfo.refernce
+                });
+              });
           }
         }
-      )
-
-
+      });
     },
 
-
     async handleFollow(user) {
-      
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
         .post(uri, data)
         .then(({ data }) => {
-           this.getTotalCommunity();
+          this.getTotalCommunity();
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
@@ -194,14 +195,13 @@ export default {
         url = "profile/user/following/";
       }
 
-       if(!this.islogin){
-            url='guest/'+url;
-            
-          }
+      if (!this.islogin) {
+        url = "guest/" + url;
+      }
 
       axios
         .get(
-          url + this.page +  "?slug=" + this.foll_id +"&keyword=" + this.searchh
+          url + this.page + "?slug=" + this.foll_id + "&keyword=" + this.searchh
         )
         .then(({ data }) => {
           console.log(data);
@@ -219,20 +219,20 @@ export default {
               this.page += 1;
 
               this.users.push(...data.data.user_following);
-             
+
               $state.loaded();
             } else {
               $state.complete();
             }
           }
 
-        //  console.log(data);
+          //  console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

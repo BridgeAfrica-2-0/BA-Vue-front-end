@@ -13,10 +13,10 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{$t("businessf.Heavy_Gym")}}
+                {{ $t("businessf.Heavy_Gym") }}
                 <span class="float-right"> </span>
               </h5>
-              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
+              <p class="duration">{{ $t("businessf.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -73,7 +73,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('businessf.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -101,8 +105,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
-              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("businessf.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("businessf.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -153,7 +159,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('businessf.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -181,8 +191,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Post_with_3_pics")}}</h5>
-              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("businessf.Post_with_3_pics") }}
+              </h5>
+              <p class="duration">{{ $t("businessf.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -233,7 +245,11 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('businessf.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
               <fas-icon
                 class="primary send-cmt"
@@ -260,8 +276,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
-              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("businessf.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("businessf.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -343,8 +361,10 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
-              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
+              <h5 class="m-0 font-weight-bolder">
+                {{ $t("businessf.Heavy_Gym") }}
+              </h5>
+              <p class="duration">{{ $t("businessf.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -421,7 +441,7 @@ import Comment from "./comment";
 export default {
   name: "postNetwork",
   components: {
-    Comment,
+    Comment
   },
   data() {
     return {
@@ -444,18 +464,18 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
       imagees: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
       ],
 
       imagees3: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-      ],
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
+      ]
     };
   },
 
@@ -477,8 +497,8 @@ export default {
     },
     hideModal() {
       this.$refs["modal-3"].hide();
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,14 +1,14 @@
 {
-    "Recover_Password": "Récupérez votre mot de passe",
-    "Enter_Your_Phone_Number": "Entrez votre numéro de téléphone",
-    "Phone": "Téléphone",
-    "Next": "Suivant",
-    "OTP": "OTP",
-    "Passwords_do_not_match": "Les mots de passe ne correspondent pas",
-    "Create_New_Password": "Créer un nouveau mot de passe",
-    "Password": "Mot de passe",
-    "Confirm_Password": "Confirmez le mot de passe",
-    "Finish": "Terminer",
-    "Password_Reset_Success": "Mot de passe réinitialisé avec succès",
-    "You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second": "Vous avez réussi à réinitialiser votre mot de passe. Vous serez redirigé dans une seconde"
+  "Recover_Password": "Récupérez votre mot de passe",
+  "Enter_Your_Phone_Number": "Entrez votre numéro de téléphone",
+  "Phone": "Téléphone",
+  "Next": "Suivant",
+  "OTP": "OTP",
+  "Passwords_do_not_match": "Les mots de passe ne correspondent pas",
+  "Create_New_Password": "Créer un nouveau mot de passe",
+  "Password": "Mot de passe",
+  "Confirm_Password": "Confirmez le mot de passe",
+  "Finish": "Terminer",
+  "Password_Reset_Success": "Mot de passe réinitialisé avec succès",
+  "You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second": "Vous avez réussi à réinitialiser votre mot de passe. Vous serez redirigé dans une seconde"
 }

@@ -1,147 +1,143 @@
 <template>
   <div ref="wrapper" class="main-sub-con">
+    <VuePerfectScrollbar class="scrool-area" :settings="settings">
+      <div class="container wahala">
+        <b-row>
+          <b-col cols="12" md="12" lg="12" xl="12">
+            <div class="mbl-wrap">
+              <b-card-text class="mt-3">
+                <b-row>
+                  <b-col cols="12" md="12">
+                    <div>
+                      <div v-if="getUserInfos.id">
+                        <form>
+                          <div class="mb-3">
+                            <label class="form-label">{{
+                              $t("settings.Name")
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="getUserInfos.name"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">{{
+                              $t("settings.Email")
+                            }}</label>
+                            <input
+                              type="email"
+                              class="form-control"
+                              v-model="getUserInfos.email"
+                            />
+                          </div>
 
-    <VuePerfectScrollbar class="scrool-area"  :settings="settings" >
+                          <div class="mb-3">
+                            <label class="form-label">{{
+                              $t("settings.Phone")
+                            }}</label>
 
-    <div class="container wahala">
-      <b-row>
-        <b-col cols="12" md="12" lg="12" xl="12">
-          <div class="mbl-wrap">
-            <b-card-text class="mt-3">
-              <b-row>
-                <b-col cols="12" md="12">
-                  <div>
-                    <div v-if="getUserInfos.id">
-                      <form>
-                        <div class="mb-3">
-                          <label class="form-label">{{
-                            $t("settings.Name")
-                          }}</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="getUserInfos.name"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">{{
-                            $t("settings.Email")
-                          }}</label>
-                          <input
-                            type="email"
-                            class="form-control"
-                            v-model="getUserInfos.email"
-                          />
-                        </div>
+                            <VuePhoneNumberInput
+                              default-country-code="CM"
+                              v-model="getUserInfos.phone"
+                              required
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">{{
+                              $t("settings.DOB")
+                            }}</label>
+                            <input
+                              type="date"
+                              class="form-control"
+                              v-model="getUserInfos.dob"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            {{ $t("settings.Gender") }}
 
-                        <div class="mb-3">
-                          <label class="form-label">{{
-                            $t("settings.Phone")
-                          }}</label>
+                            <b-form-select
+                              v-model="selectedGender"
+                              :options="genderOptions"
+                            ></b-form-select>
+                          </div>
+                          <div class="mb-3">
+                            {{ $t("settings.Country") }}
+                            <b-form-select
+                              v-model="selectedCounty"
+                              :options="country"
+                              @change="getRegion"
+                            ></b-form-select>
+                          </div>
+                          <div class="mb-3">
+                            {{ $t("settings.Region") }}
+                            <b-form-select
+                              v-model="selectedRegion"
+                              :options="region"
+                              @change="getDivision"
+                              required
+                            ></b-form-select>
+                          </div>
 
-                          <VuePhoneNumberInput
-                            default-country-code="CM"
-                            v-model="getUserInfos.phone"
-                            required
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">{{
-                            $t("settings.DOB")
-                          }}</label>
-                          <input
-                            type="date"
-                            class="form-control"
-                            v-model="getUserInfos.dob"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          {{ $t("settings.Gender") }}
+                          <div class="mb-3">
+                            {{ $t("settings.Division") }}
+                            <b-form-select
+                              v-model="selectedDivision"
+                              :options="division"
+                              @change="getMunicipality"
+                              required
+                            ></b-form-select>
+                          </div>
 
-                          <b-form-select
-                            v-model="selectedGender"
-                            :options="genderOptions"
-                          ></b-form-select>
-                        </div>
-                        <div class="mb-3">
-                          {{ $t("settings.Country") }}
-                          <b-form-select
-                            v-model="selectedCounty"
-                            :options="country"
-                            @change="getRegion"
-                          ></b-form-select>
-                        </div>
-                        <div class="mb-3">
-                          {{ $t("settings.Region") }}
-                          <b-form-select
-                            v-model="selectedRegion"
-                            :options="region"
-                            @change="getDivision"
-                            required
-                          ></b-form-select>
-                        </div>
+                          <div class="mb-3">
+                            {{ $t("settings.Municipality") }}
+                            <b-form-select
+                              v-model="selectedMunicipality"
+                              :options="municipality"
+                              @change="getNeighbor"
+                              required
+                            ></b-form-select>
+                          </div>
 
-                        <div class="mb-3">
-                          {{ $t("settings.Division") }}
-                          <b-form-select
-                            v-model="selectedDivision"
-                            :options="division"
-                            @change="getMunicipality"
-                            required
-                          ></b-form-select>
-                        </div>
+                          <div class="mb-3">
+                            {{ $t("settings.Neighbourhood") }}
+                            <b-form-select
+                              v-model="selectedNeighbor"
+                              :options="neighbor"
+                              required
+                            ></b-form-select>
+                          </div>
 
-                        <div class="mb-3">
-                          {{ $t("settings.Municipality") }}
-                          <b-form-select
-                            v-model="selectedMunicipality"
-                            :options="municipality"
-                            @change="getNeighbor"
-                            required
-                          ></b-form-select>
-                        </div>
-
-                        <div class="mb-3">
-                          {{ $t("settings.Neighbourhood") }}
-                          <b-form-select
-                            v-model="selectedNeighbor"
-                            :options="neighbor"
-                            required
-                          ></b-form-select>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">{{
-                            $t("settings.City")
-                          }}</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="getUserInfos.city"
-                          />
-                        </div>
-                        <button class="btn btn-primary" @click="update">
-                          {{ $t("settings.Save_Changes") }}
-                        </button>
-                      </form>
+                          <div class="mb-3">
+                            <label class="form-label">{{
+                              $t("settings.City")
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              v-model="getUserInfos.city"
+                            />
+                          </div>
+                          <button class="btn btn-primary" @click="update">
+                            {{ $t("settings.Save_Changes") }}
+                          </button>
+                        </form>
+                      </div>
                     </div>
-                  </div>
-                </b-col>
-              </b-row>
-            </b-card-text>
-          </div>
-        </b-col>
-        <b-col> </b-col>
-      </b-row>
-    </div>
-
+                  </b-col>
+                </b-row>
+              </b-card-text>
+            </div>
+          </b-col>
+          <b-col> </b-col>
+        </b-row>
+      </div>
     </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
-
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import VuePhoneNumberInput from "vue-phone-number-input";
 
 export default {
@@ -160,20 +156,20 @@ export default {
     },
     country() {
       let country = [];
-      this.$store.state.auth.country.map((dat) => {
+      this.$store.state.auth.country.map(dat => {
         country.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return country;
     },
     region() {
       let region = [];
-      this.$store.state.auth.region.map((dat) => {
+      this.$store.state.auth.region.map(dat => {
         region.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return region;
@@ -181,10 +177,10 @@ export default {
 
     division() {
       let division = [];
-      this.$store.state.auth.division.map((dat) => {
+      this.$store.state.auth.division.map(dat => {
         division.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return division;
@@ -192,10 +188,10 @@ export default {
 
     municipality() {
       let municipality = [];
-      this.$store.state.auth.municipality.map((dat) => {
+      this.$store.state.auth.municipality.map(dat => {
         municipality.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return municipality;
@@ -203,14 +199,14 @@ export default {
 
     neighbor() {
       let neighbor = [];
-      this.$store.state.auth.locality.map((dat) => {
+      this.$store.state.auth.locality.map(dat => {
         neighbor.push({
           value: dat.id,
-          text: dat.name,
+          text: dat.name
         });
       });
       return neighbor;
-    },
+    }
 
     // locality(){
 
@@ -250,10 +246,10 @@ export default {
       message1: "",
       genderOptions: [
         { value: "male", text: "male" },
-        { value: "female", text: "female" },
+        { value: "female", text: "female" }
       ],
       psw1Strength: 0,
-      psw2Strength: 0,
+      psw2Strength: 0
     };
   },
 
@@ -277,19 +273,17 @@ export default {
     userInfos() {
       this.$store
         .dispatch("profileSettingsEdit/userInfos")
-        .then((response) => {
-          this.selected =
-            this.$store.state.profileSettingsEdit.userInfos.payement_method;
+        .then(response => {
+          this.selected = this.$store.state.profileSettingsEdit.userInfos.payement_method;
 
           // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
 
           //   }else { this.selectedGender = 1 }
-          this.selectedGender =
-            this.$store.state.profileSettingsEdit.userInfos.gender;
+          this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
           // this.selectedCounty = this.getUserInfos.country.id;
           // console.log("-----------------"+this.selectedCounty);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     },
@@ -311,17 +305,17 @@ export default {
 
       this.$store
         .dispatch("profileSettingsEdit/updateUserInfos", formData)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           console.log(this.getUserInfos);
           this.flashMessage.show({
             status: "success",
-            message: response.data.message,
+            message: response.data.message
           });
           this.$refs["modal-10"].hide();
           this.userInfos();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -332,11 +326,11 @@ export default {
       formData1.append("payement_method", this.selected);
       this.$store
         .dispatch("profileSettingsEdit/changePayment", formData1)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           console.log(this.getUserInfos);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -347,14 +341,14 @@ export default {
         container: this.$refs.wrapper,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
       this.$store
         .dispatch("auth/country")
-        .then((response) => {
+        .then(response => {
           console.log(this.country);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         })
@@ -373,25 +367,25 @@ export default {
       if (this.newPass != this.newPass1) {
         this.flashMessage.show({
           status: "warning",
-          message: "the password does not match",
+          message: "the password does not match"
         });
         this.loading = false;
       } else {
         this.$store
           .dispatch("profileSettingsEdit/changePassword", formData2)
-          .then((response) => {
+          .then(response => {
             console.log("------------------------");
             console.log(response.data.message);
             this.flashMessage.show({
               status: "success",
-              message: response.data.message,
+              message: response.data.message
             });
             this.loading = false;
           })
-          .catch((err) => {
+          .catch(err => {
             this.flashMessage.show({
               status: "error",
-              message: "An error occured",
+              message: "An error occured"
             });
             console.log("--------- error: ");
             console.error(err);
@@ -405,10 +399,10 @@ export default {
       let data = { countryId: this.selectedCounty };
       this.$store
         .dispatch("auth/region", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -421,10 +415,10 @@ export default {
       let data = { regionId: this.selectedRegion };
       this.$store
         .dispatch("auth/division", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -436,10 +430,10 @@ export default {
       let data = { divisionId: this.selectedDivision };
       this.$store
         .dispatch("auth/municipality", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
@@ -449,23 +443,21 @@ export default {
       let data = { councilId: this.selectedMunicipality };
       this.$store
         .dispatch("auth/locality", data)
-        .then((response) => {
+        .then(response => {
           console.log("------------------------");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("--------- error: ");
           console.error(err);
         });
     },
 
     redirection() {
-      this.$store
-        .dispatch("profileSettingsEdit/redirection")
-        .then((response) => {
-          // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
-          this.$router.push(`business_owner/${1}`);
-        });
-    },
+      this.$store.dispatch("profileSettingsEdit/redirection").then(response => {
+        // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
+        this.$router.push(`business_owner/${1}`);
+      });
+    }
     // getLocality(){
 
     //    this.$store
@@ -486,11 +478,9 @@ export default {
   },
 
   watch: {
-    "$store.state.profileSettingsEdit.userInfos": function () {
-      this.selectedCounty =
-        this.$store.state.profileSettingsEdit.userInfos.country.id;
-      this.selectedRegion =
-        this.$store.state.profileSettingsEdit.userInfos.region.id;
+    "$store.state.profileSettingsEdit.userInfos": function() {
+      this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+      this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
 
       this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos
         .division
@@ -510,14 +500,14 @@ export default {
       this.getDivision();
       this.getMunicipality();
       this.getNeighbor();
-    },
+    }
   },
 
   mounted() {
     // this.getLocality();
 
     var that = this;
-    window.onresize = function () {
+    window.onresize = function() {
       that.size = window.innerWidth;
     };
 
@@ -529,14 +519,13 @@ export default {
     if ("account" === this.$route.query.tab) {
       this.activeTab = 2;
     }
-  },
+  }
 };
 </script>
 
 <style>
 .mbl-wrap {
   height: 100%;
- 
 }
 
 @media only screen and (max-width: 768px) {
@@ -594,14 +583,12 @@ export default {
   }
 }
 
-.main-sub-con{
-
+.main-sub-con {
   height: 800px;
-  
-  overflow: hidden;
 
+  overflow: hidden;
 }
-.scrool-area{
+.scrool-area {
   height: inherit;
 }
 </style>

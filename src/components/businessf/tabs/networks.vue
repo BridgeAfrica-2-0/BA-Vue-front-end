@@ -1,15 +1,17 @@
 <template>
-  <div class="t-color"> 
+  <div class="t-color">
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> {{$t("general.Network")}} </span>
+      <span class="t-color"> {{ $t("general.Network") }} </span>
 
-      <b-button 
-      v-if="display != 'BusinessFollower' && display != 'BusinessFollowerGuest' "
+      <b-button
+        v-if="
+          display != 'BusinessFollower' && display != 'BusinessFollowerGuest'
+        "
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >{{$t("general.Add_Network")}}</b-button
+        >{{ $t("general.Add_Network") }}</b-button
       >
       <hr />
       <b-row>
@@ -35,7 +37,7 @@
                     {{ cat }}
                   </span>
                   <br />
-                  {{ network.followers }} {{$t("general.Community")}} <br />
+                  {{ network.followers }} {{ $t("general.Community") }} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -45,13 +47,12 @@
 
                   <read-more
                     v-if="network.description"
-                     :more-str="$t('search.read_more')"
+                    :more-str="$t('search.read_more')"
                     :text="network.description"
                     link="#"
                     :less-str="$t('search.read_less')"
                     :max-chars="200"
                   ></read-more>
-                  
                 </p>
               </b-col>
 
@@ -66,9 +67,9 @@
                         variant="primary"
                       >
                         <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                        <span class="btn-com" v-b-modal.modal-sm
-                          >{{$t("general.Community")}}</span
-                        >
+                        <span class="btn-com" v-b-modal.modal-sm>{{
+                          $t("general.Community")
+                        }}</span>
                       </b-button>
                     </b-col>
 
@@ -93,7 +94,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { isGuestUser } from '@/helpers';
+import { isGuestUser } from "@/helpers";
 
 export default {
   data() {
@@ -114,7 +115,7 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: 0,
+        allow_business: 0
       },
       chosenNetwork: {
         name: "",
@@ -123,13 +124,13 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: 0,
+        allow_business: 0
       },
       isGuestUser: isGuestUser()
     };
   },
   beforeMount() {
-   // this.getNetworks();
+    // this.getNetworks();
   },
 
   mounted() {
@@ -137,11 +138,11 @@ export default {
   },
 
   computed: {
-    display(){
+    display() {
       return this.$route.name;
     },
     network() {
-     return this.$store.state.businessOwner.networks;
+      return this.$store.state.businessOwner.networks;
     },
 
     getNetworksFromStore() {
@@ -152,21 +153,22 @@ export default {
     },
     success() {
       return this.getSuccess();
-    },
+    }
   },
   methods: {
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
-      getNetworks: isGuestUser ? "businessGuest/getNetworks": "businessOwner/getNetworks",
-      editNetwork: "businessOwner/editNetwork",
+      getNetworks: isGuestUser
+        ? "businessGuest/getNetworks"
+        : "businessOwner/getNetworks",
+      editNetwork: "businessOwner/editNetwork"
     }),
 
     infiniteHandler($state) {
       let url = "business/network/" + this.biz_slug + "/" + this.page,
-      
-      dispatchMethod = "businessOwner/loadMore";
+        dispatchMethod = "businessOwner/loadMore";
 
-      if (this.isGuestUser ) {
+      if (this.isGuestUser) {
         url = "guest/business/network/" + this.biz_slug + "/" + this.page;
         dispatchMethod = "businessGuest/loadMore";
       }
@@ -187,7 +189,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -197,7 +199,7 @@ export default {
       this.chosenNetwork = network;
       this.viewnetwork = true;
     },
-    
+
     showmodal(state, arg) {
       this.showModal = state;
       if (arg == "edit") {
@@ -240,22 +242,21 @@ export default {
       fd.append("special_needs", this.createdNetwork.special_needs);
       fd.append("business_image", this.createdNetwork.business_image);
       fd.append("allow_busines", this.createdNetwork.allow_busines);
-      
+
       let data = {
         id: this.createdNetwork.id,
-        data: fd,
+        data: fd
       };
-      
+
       this.editNetwork(data);
     },
-    
+
     selectImage(e) {
       this.createdNetwork.business_image = e.target.files[0];
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {

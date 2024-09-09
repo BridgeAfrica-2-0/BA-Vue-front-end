@@ -1,93 +1,100 @@
 <template>
   <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
-     <Skeleton :loading="prodLoader" />
-    <b-alert v-if="products.data.length === 0 && !prodLoader" show variant="warning"
+    <Skeleton :loading="prodLoader" />
+    <b-alert
+      v-if="products.data.length === 0 && !prodLoader"
+      show
+      variant="warning"
       ><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
- 
- <div v-if="!prodLoader">  
-     <div
-      v-for="(product, index) in products.data"
-      :key="index"
-      class="people-style p-3 border h-100"
-    >  
-     <span v-if="product">  
-      <div class="d-inline-flex">
-        <div class="mr-2">
-          <div class="center-img">
-            <img
-              :src="product.picture"
-              class="r-image cursor-pointer"
-              @click="productDetails(product)"
-            />
+
+    <div v-if="!prodLoader">
+      <div
+        v-for="(product, index) in products.data"
+        :key="index"
+        class="people-style p-3 border h-100"
+      >
+        <span v-if="product">
+          <div class="d-inline-flex">
+            <div class="mr-2">
+              <div class="center-img">
+                <img
+                  :src="product.picture"
+                  class="r-image cursor-pointer"
+                  @click="productDetails(product)"
+                />
+              </div>
+            </div>
+
+            <div class="flx50">
+              <p class="text">
+                <span
+                  class="title cursor-pointer"
+                  @click="productDetails(product)"
+                >
+                  {{ product.name }}
+                </span>
+                <br />
+
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="product.description"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="100"
+                >
+                </read-more>
+                <span class="price  mt-2"> {{ product.price }} FCFA </span>
+              </p>
+            </div>
           </div>
-        </div>
+          <br />
 
-        <div class="flx50">
-          <p class="text">
-            <span
-              class="title cursor-pointer"
-              @click="productDetails(product)"
+          <div class="d-flex">
+            <b-badge
+              v-if="!product.in_stock"
+              class="text-center m-auto"
+              show
+              variant="info"
+              >Out of Stock</b-badge
             >
-              {{ product.name }}
-            </span>
-            <br />
+          </div>
 
-            <read-more
-              more-str="read more"
-              class="readmore"
-              :text="product.description"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-            <span class="price  mt-2"> {{ product.price }} FCFA </span>
-          </p>
-        </div>
-      </div>
-      <br />
-    
-    <div class="d-flex"> 
-
-        <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
-         </div> 
-         
           <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
-        <div v-if="product.in_stock" class=""> 
-          <BtnCtaMessage
-            :element="product"
-            :isProduct="true"
-            :isBuyNow="true"
-            type="business"  
-            :isPremium="product.user_package_name"
-          />
-        </div>
+            <div v-if="product.in_stock" class="">
+              <BtnCtaMessage
+                :element="product"
+                :isProduct="true"
+                :isBuyNow="true"
+                type="business"
+                :isPremium="product.user_package_name"
+              />
+            </div>
 
-        <div class="ml-2">
-          <b-button
-           :disabled="!product.in_stock"
-           size="sm"
-            v-if="product.user_package_name == 'premium'"
-            variant="primary"
-            @click="handleAddToCard(product)"
-            ><span>
-              <b-icon icon="cart-plus"></b-icon>
-              {{ $t("general.cart") }}</span
-            >
-          </b-button>
-        </div>
+            <div class="ml-2">
+              <b-button
+                :disabled="!product.in_stock"
+                size="sm"
+                v-if="product.user_package_name == 'premium'"
+                variant="primary"
+                @click="handleAddToCard(product)"
+                ><span>
+                  <b-icon icon="cart-plus"></b-icon>
+                  {{ $t("general.cart") }}</span
+                >
+              </b-button>
+            </div>
+          </div>
+
+          <br />
+          <br />
+        </span>
       </div>
-
-      <br />
-      <br />
-     </span>
-    </div> 
-    
-     </div>
+    </div>
     <!-- pagination -->
     <b-pagination
       v-if="products.next || products.previous"
@@ -102,17 +109,129 @@
     ></b-pagination>
     <!-- End pagination -->
 
-   
+    <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+    />
+  </div>
+
+  <div v-else>
+    <!-- <login /> -->
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <b-alert
+      v-if="guestUserProducts.data.length === 0 && !prodLoader"
+      show
+      variant="warning"
+      ><a href="#" class="alert-link">
+        {{ $t("search.No_product_available_for_that_search") }}!
+      </a></b-alert
+    >
+
+    <div v-if="!prodLoader">
+      <div
+        v-for="(product, index) in guestUserProducts.data"
+        :key="index"
+        class="people-style p-3 border h-100"
+      >
+        <span v-if="product">
+          <div class="d-inline-flex">
+            <div class="mr-2">
+              <div class="center-img">
+                <img
+                  :src="product.picture"
+                  class="r-image cursor-pointer"
+                  @click="productDetails(product)"
+                />
+              </div>
+            </div>
+
+            <div class="flx50">
+              <p class="text">
+                <span
+                  class="title cursor-pointer"
+                  @click="productDetails(product)"
+                >
+                  {{ product.name }}
+                </span>
+                <br />
+
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="product.description"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="100"
+                >
+                </read-more>
+                <span class="price  mt-2"> {{ product.price }} FCFA </span>
+              </p>
+            </div>
+          </div>
+          <br />
+
+          <div class="d-flex">
+            <b-badge
+              v-if="!product.in_stock"
+              class="text-center m-auto"
+              show
+              variant="info"
+              >Out of Stock</b-badge
+            >
+          </div>
+
+          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+            <div v-if="product.in_stock" class="">
+              <BtnCtaMessage
+                :element="product"
+                :isProduct="true"
+                :isBuyNow="true"
+                type="business"
+                :isPremium="product.user_package_name"
+              />
+            </div>
+
+            <div class="ml-2">
+              <b-button
+                :disabled="!product.in_stock"
+                size="sm"
+                v-if="product.user_package_name == 'premium'"
+                variant="primary"
+                @click="handleAddToCard(product)"
+                ><span>
+                  <b-icon icon="cart-plus"></b-icon>
+                  {{ $t("general.cart") }}</span
+                >
+              </b-button>
+            </div>
+          </div>
+
+          <br />
+          <br />
+        </span>
+      </div>
+    </div>
+    <!-- pagination -->
+    <b-pagination
+      v-if="guestUserProducts.next || guestUserProducts.previous"
+      v-model="currentPage"
+      :total-rows="total"
+      pills
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePageForGuest"
+      align="center"
+      :disabled="guestUserProducts.data.length > 0 ? false : true"
+    ></b-pagination>
+    <!-- End pagination -->
 
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
       :product="product"
     />
-
-  </div>
-  <div v-else>
-    <login />
   </div>
 </template>
 
@@ -124,7 +243,7 @@
  * Copyright (c) Bridge Africa. All rights reserved.
  */
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
-import login from "@/components/search/login";
+// import login from "@/components/search/login";
 import Skeleton from "@/components/skeleton";
 export default {
   data() {
@@ -133,16 +252,21 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
-      product:{},
-      
+      product: {},
+
       currentPage: 1,
-      nextLoad: false,
+      nextLoad: false
     };
   },
   computed: {
-     islogin(){  return this.$store.getters["auth/isLogged"]; },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     products() {
       return this.$store.getters["marketSearch/getProducts"];
+    },
+    guestUserProducts() {
+      return this.$store.getters["marketSearch/getGuestUserProducts"];
     },
     prodLoader() {
       return this.$store.getters["marketSearch/getLoader"];
@@ -150,13 +274,13 @@ export default {
 
     getStatus() {
       return this.$store.state.cart.status;
-    },
+    }
   },
 
   components: {
     ProductDetails,
-    login,
-    Skeleton,
+    // login,
+    Skeleton
   },
 
   created() {
@@ -164,6 +288,8 @@ export default {
 
     if (this.islogin) {
       this.getProducts();
+    } else {
+      this.getGuestUserProducts();
     }
   },
 
@@ -172,7 +298,7 @@ export default {
      * This will be ignored on rendering
      * @private
      */
-     closeDetailsProduct() {
+    closeDetailsProduct() {
       this.viewProduct = false;
     },
 
@@ -185,42 +311,51 @@ export default {
       this.viewProduct = true;
     },
 
-
-     productDetails(product) {
-    
+    productDetails(product) {
       this.product = product;
       this.viewProduct = true;
     },
-    
+    nextPage(payload) {
+      return this.$store.dispatch("marketSearch/nextPage", payload);
+    },
 
     /**
      * This will be ignored on rendering
      * @private
      */
     changePage(value) {
-      /**
-       * Fired when the button is clicked.
-       */
-
       this.currentPage = value;
-
-      this.$store
-        .dispatch("marketSearch/nextPage", {
-          url: this.products.next,
-          page: this.currentPage,
-        })
-        .then((res) => {
+      const endpoint =
+        this.products.next != "" ? this.products.next : this.products.previous;
+      this.nextPage({ url: endpoint, page: value })
+        .then(res => {
           console.log("products list: ");
           console.log(this.products);
-          // this.prodLoader = false;
         })
-        .catch((err) => {
-          // this.prodLoader = false;
+        .catch(err => {
+          this.total = this.products.total;
           console.log("products error: ");
           console.error(err);
         });
     },
 
+    changePageForGuest(value) {
+      this.currentPage = value;
+      const endpoint =
+        this.guestUserProducts.next != ""
+          ? this.guestUserProducts.next
+          : this.guestUserProducts.previous;
+      this.nextPage({ url: endpoint, page: value })
+        .then(res => {
+          console.log("products list: ");
+          console.log(this.guestUserProducts);
+        })
+        .catch(err => {
+          this.total = this.guestUserProducts.total;
+          console.log("products error: ");
+          console.error(err);
+        });
+    },
     /**
      * This will be ignored on rendering
      * @private
@@ -232,10 +367,22 @@ export default {
 
       await this.$store
         .dispatch("marketSearch/searchProducts", {})
-        .then((res) => {
+        .then(res => {
           this.total = this.products.total;
         })
-        .catch((err) => {});
+        .catch(err => {});
+    },
+    async getGuestUserProducts() {
+      /**
+       * Fired before the DOM is loaded.
+       */
+
+      await this.$store
+        .dispatch("marketSearch/searchGuestUserProducts", {})
+        .then(res => {
+          this.total = this.guestUserProducts.total;
+        })
+        .catch(err => {});
     },
 
     /**
@@ -255,29 +402,26 @@ export default {
      * @private
      */
 
-
-      handleAddToCard(product) {
+    handleAddToCard(product) {
       this.product = product;
-  
+
       this.$store
-        .dispatch("cart/addToCart", product)
-        .then((response) => {
-        
+        .dispatch("cart/addToCart", { product, islogin: this.islogin })
+        .then(response => {
           this.flashMessage.show({
             status: "success",
-            message: this.getStatus,
+            message: this.getStatus
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "error occur",
+            message: "error occur"
           });
         });
     },
 
-    
     AddToCard(id, val) {
       /**
        * Fired when the button is clicked.
@@ -285,22 +429,22 @@ export default {
       console.log("add to card ", id);
       this.$store
         .dispatch("cart/addToCart", id)
-        .then((response) => {
+        .then(response => {
           console.log("----", this.getStatus);
           this.flashMessage.show({
             status: "success",
-            message: this.getStatus,
+            message: this.getStatus
           });
           if (val) this.$router.push({ name: "payment" });
         })
-        .catch((error) => {
+        .catch(error => {
           this.flashMessage.show({
             status: "error",
-            message: "error occur",
+            message: "error occur"
           });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -410,12 +554,11 @@ h6 {
   background: white;
   background-color: #fff;
   background-clip: border-box;
- 
+
   margin-bottom: 10px;
 }
 @media only screen and (max-width: 540px) {
   .text {
-  
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -439,11 +582,10 @@ h6 {
     padding: 4px;
   }
   .title {
-     font-size: 1.0625rem;
+    font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
- 
   }
   .btn {
     padding-top: 6px;
@@ -454,12 +596,11 @@ h6 {
 }
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-  
+
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -485,7 +626,7 @@ h6 {
     /* min-width: 123px; */
   }
   .title {
-     font-size: 1.2625rem;
+    font-size: 1.2625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
@@ -560,11 +701,10 @@ h6 {
 }
 @media only screen and (min-width: 762px) {
   .text {
- 
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
- 
+
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -590,7 +730,7 @@ h6 {
     width: 80px;
   }
   .title {
-     font-size: 1.0625rem;
+    font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;

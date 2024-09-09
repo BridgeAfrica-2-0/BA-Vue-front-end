@@ -10,8 +10,8 @@
         <span class="float-right post-options">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item>{{ $t('network.Edit') }}</b-dropdown-item>
-            <b-dropdown-item>{{ $t('network.Delete') }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Edit") }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
@@ -23,7 +23,6 @@
             :max-chars="15000"
           >
           </read-more>
-          
         </p>
       </b-col>
     </b-row>
@@ -38,22 +37,22 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true,
+      required: true
     },
     uuid: {
-      required: true,
+      required: true
     },
     type: {
       type: String,
       required: true,
-      validator: function (value) {
+      validator: function(value) {
         if (["reply"].includes(value)) return true;
       },
-      default: function () {
+      default: function() {
         return "reply";
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 
@@ -110,7 +109,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

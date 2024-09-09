@@ -3,7 +3,11 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @onclick="search" is-text style="cursor:pointer;">
+          <b-input-group-prepend
+            @onclick="search"
+            is-text
+            style="cursor:pointer;"
+          >
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -12,7 +16,7 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search" 
+            @keyup="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -21,7 +25,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('general.Network_Admins') }} ({{nFormatter(admins.length)}})
+          {{ $t("general.Network_Admins") }} ({{ nFormatter(admins.length) }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -44,7 +48,7 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{admin.fullname}}
+                    {{ admin.fullname }}
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -56,28 +60,36 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t('general.Settings') }}</span>
+                      ><span class="sr-only">{{ $t("general.Settings") }}</span>
                     </template>
-                    <b-dropdown-item href="#" @click="removeAsAdmin(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill>{{ $t('general.Remove_as_Admin') }} 
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeAsAdmin(admin.user_id)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill
+                      >{{ $t("general.Remove_as_Admin") }}
                     </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('general.Remove_From_Networks') }}
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeFromNetworks(admin.user_id)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill>
+                      {{ $t("general.Remove_From_Networks") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>{{ $t('general.No_Result_On_Admins') }}</div>
+          <div v-else>{{ $t("general.No_Result_On_Admins") }}</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
     <b-row class="mt-4">
-      <b-col cols="12" >
+      <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('general.Bussiness') }} ({{nFormatter(business.length)}})
+          {{ $t("general.Bussiness") }} ({{ nFormatter(business.length) }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -101,7 +113,7 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0  username d-inline-block ml-2">
-                    {{busines.name}}
+                    {{ busines.name }}
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -115,23 +127,27 @@
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                       ><span class="sr-only">Settings</span>
                     </template>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(busines.business_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('general.Remove_From_Networks') }}
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeFromNetworks(busines.business_id)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill>
+                      {{ $t("general.Remove_From_Networks") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>{{ $t('general.No_Result_On_Networks') }}</div>
+          <div v-else>{{ $t("general.No_Result_On_Networks") }}</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" >
+    <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('general.All_Members') }} ({{nFormatter(members.length)}})
+          {{ $t("general.All_Members") }} ({{ nFormatter(members.length) }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -142,7 +158,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div v-for="member in members" :key="member.id" >
+          <div v-for="member in members" :key="member.id">
             <p class="">
               <span class="">
                 <b-avatar
@@ -153,7 +169,7 @@
                   size="3.5rem"
                 ></b-avatar>
                 <h5 class="m-0 username d-inline-block ml-2">
-                  {{member.fullname}}
+                  {{ member.fullname }}
                 </h5>
               </span>
               <span class="float-right mt-1">
@@ -168,10 +184,15 @@
                     ><span class="sr-only">Settings</span>
                   </template>
                   <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
-                    <b-icon-person-plus-fill></b-icon-person-plus-fill>{{ $t('general.Make_Admin') }} 
+                    <b-icon-person-plus-fill></b-icon-person-plus-fill
+                    >{{ $t("general.Make_Admin") }}
                   </b-dropdown-item>
-                  <b-dropdown-item href="#" @click="removeFromNetworks(member.user_id)">
-                    <b-icon-trash-fill></b-icon-trash-fill> {{ $t('general.Remove_From_Networks') }}
+                  <b-dropdown-item
+                    href="#"
+                    @click="removeFromNetworks(member.user_id)"
+                  >
+                    <b-icon-trash-fill></b-icon-trash-fill>
+                    {{ $t("general.Remove_From_Networks") }}
                   </b-dropdown-item>
                 </b-dropdown>
               </span>
@@ -180,15 +201,20 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
-          <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
+        <infinite-loading
+          @infinite="infiniteHandler"
+          ref="infiniteHandler"
+          :identifier="infiniteId"
+        >
+          <div class="text-red" slot="no-more">
+            {{ $t("general.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("general.No_More_Request") }}
+          </div>
         </infinite-loading>
       </b-col>
     </b-row>
-
-    
-
   </div>
 </template>
 
@@ -197,7 +223,7 @@ export default {
   name: "member",
   data() {
     return {
-      url:null,
+      url: null,
       perPage: null,
       page: 0,
       currentPage: null,
@@ -217,21 +243,21 @@ export default {
       return this.$store.state.networkProfileMembers.business;
     }
   },
-  mounted(){
-    this.url = this.$route.params.id
-    this.getAdmins()
-    this.getBusiness()
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getAdmins();
+    this.getBusiness();
   },
-  methods:{
+  methods: {
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
@@ -246,38 +272,39 @@ export default {
     infiniteHandler($state) {
       console.log("loop");
       const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      console.log("keyword: " + data);
       let formData = new FormData();
-      formData.append('keyword', data);
+      formData.append("keyword", data);
       this.axios
-      .post("network/"+this.url+"/members/list/"+this.page, formData)
-      .then(({ data }) => {
-       console.log(data);
-       console.log(this.page);
-        if (data.data.length) {
-        this.page += 1;
-        console.log(this.page);
-        console.log(...data.data);
-        this.members.push(...data.data);
-          $state.loaded();
+        .post("network/" + this.url + "/members/list/" + this.page, formData)
+        .then(({ data }) => {
+          console.log(data);
+          console.log(this.page);
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.members.push(...data.data);
+            $state.loaded();
           } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
+            $state.complete();
+          }
+        })
+        .catch(err => {
           console.log({ err: err });
-      })
+        });
     },
     getAdmins() {
       this.loading = true;
       const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/getadmins", {
-          'path':this.url+"/members/admin",
-          'keyword':data
-          })
+          path: this.url + "/members/admin",
+          keyword: data
+        })
         .then(() => {
-          console.log('Admins Available');
+          console.log("Admins Available");
           this.loading = false;
         })
         .catch(err => {
@@ -309,11 +336,11 @@ export default {
       const data = this.getRequestDatas(this.searchTitle);
       this.$store
         .dispatch("networkProfileMembers/getbusiness", {
-          'path':this.url+"/members/business",
-          'keyword':data
-          })
+          path: this.url + "/members/business",
+          keyword: data
+        })
         .then(() => {
-          console.log('Business Available');
+          console.log("Business Available");
           this.loading = false;
         })
         .catch(err => {
@@ -327,82 +354,87 @@ export default {
       this.page -= 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.$refs.infiniteLoading('$InfiniteLoading:reset');
+      this.$refs.infiniteLoading("$InfiniteLoading:reset");
       this.getAdmins();
       this.getBusiness();
     },
-    makeAdmin: function(user_id){
+    makeAdmin: function(user_id) {
       this.loading = true;
-      this.axios.put("network/"+this.url+"/make/admin/"+user_id)
-      .then(() => {
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.The_Member_Is_Now_Admin')
+      this.axios
+        .put("network/" + this.url + "/make/admin/" + user_id)
+        .then(() => {
+          console.log("ohh yeah");
+          this.searchTitle = "";
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("general.The_Member_Is_Now_Admin")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("general.Unable_To_Set_Member_As_Admin")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_To_Set_Member_As_Admin')
-        });
-      });
     },
-    removeAsAdmin: function(user_id){
+    removeAsAdmin: function(user_id) {
       this.loading = true;
-      this.axios.put("network/"+this.url+"/remove/admin/"+user_id)
-      .then(() => {
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.Member_Successfully_Removed_As_Admin')
+      this.axios
+        .put("network/" + this.url + "/remove/admin/" + user_id)
+        .then(() => {
+          console.log("ohh yeah");
+          this.searchTitle = "";
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("general.Member_Successfully_Removed_As_Admin")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("general.Unable_To_Removed_Member_As_Admin")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_To_Removed_Member_As_Admin')
-        });
-      });
-		},
-    removeFromNetworks: function(user_id){
+    },
+    removeFromNetworks: function(user_id) {
       this.loading = true;
-      this.axios.delete("network/"+this.url+"/member/remove/"+user_id)
-      .then(() => {
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.Member_Successfully_Removerd_From_Network')
+      this.axios
+        .delete("network/" + this.url + "/member/remove/" + user_id)
+        .then(() => {
+          console.log("ohh yeah");
+          this.searchTitle = "";
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t(
+              "general.Member_Successfully_Removerd_From_Network"
+            )
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("general.Unable_to_Removerd_Member_From_Network")
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_to_Removerd_Member_From_Network')
-        });
-      });
-		},
+    }
   }
 };
 </script>
@@ -411,7 +443,7 @@ export default {
 hr {
   border: solid 1px dimgray;
 }
-.scroll{
+.scroll {
   max-height: 200px;
   overflow-y: scroll;
   scrollbar-width: thin;

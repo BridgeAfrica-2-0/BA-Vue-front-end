@@ -1,9 +1,10 @@
 <template>
   <div>
     <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-star-fill></b-icon-star-fill> {{ $t('businessowner.Pending_Feedbacks') }}
+      <b-icon-star-fill></b-icon-star-fill>
+      {{ $t("businessowner.Pending_Feedbacks") }}
     </h5>
-    <span class="float-right">35 {{ $t('businessowner.Pending') }}</span>
+    <span class="float-right">35 {{ $t("businessowner.Pending") }}</span>
 
     <hr width="100%" />
     <b-row>
@@ -22,7 +23,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                {{ $t('businessowner.Mapoure_Agrobusiness') }}
+                    {{ $t("businessowner.Mapoure_Agrobusiness") }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -32,19 +33,24 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">{{ $t('businessowner.Settings') }}</span>
+                          ><span class="sr-only">{{
+                            $t("businessowner.Settings")
+                          }}</span>
                         </template>
                         <b-dropdown-item href="#">
-                          {{ $t('businessowner.Approve') }}
+                          {{ $t("businessowner.Approve") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          {{ $t('businessowner.Reject') }}
+                          {{ $t("businessowner.Reject") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                    {{ $t('businessowner.1h_Ago') }} - <span class="text-primary">{{ $t('businessowner.Feedback_Type') }}</span>
+                    {{ $t("businessowner.1h_Ago") }} -
+                    <span class="text-primary">{{
+                      $t("businessowner.Feedback_Type")
+                    }}</span>
                   </p>
                 </b-col>
               </b-row>

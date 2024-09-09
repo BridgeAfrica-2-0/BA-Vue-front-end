@@ -13,7 +13,7 @@
               unchecked-value="not_accepted"
               @click="selectall"
             >
-              {{$t("businessf.Select_All")}}
+              {{ $t("businessf.Select_All") }}
             </b-form-checkbox>
           </div>
         </b-col>
@@ -24,21 +24,20 @@
               class="a-button-l"
               @click="readNotifiactions(selected)"
             >
-              {{$t("businessf.Mark_as_Read")}}</b-button
+              {{ $t("businessf.Mark_as_Read") }}</b-button
             >
             <b-button
               @click="deleteAll(selected)"
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              {{$t("businessf.Delete")}}</b-button
+              {{ $t("businessf.Delete") }}</b-button
             >
           </div>
         </b-col>
       </b-row>
     </b-container>
-      <br />
-
+    <br />
 
     <div v-for="post in sendNotifications" :key="post.id">
       <b-container class="bb-bottom">
@@ -80,10 +79,10 @@
                 </template>
 
                 <b-dropdown-item href="#" @click="deleteOne(post.id)">
-                  {{$t("businessf.Delete")}}
+                  {{ $t("businessf.Delete") }}
                 </b-dropdown-item>
                 <b-dropdown-item href="#" @click="readNotifiactions(selected)">
-                  {{$t("businessf.Read")}}
+                  {{ $t("businessf.Read") }}
                 </b-dropdown-item>
               </b-dropdown>
             </div>
@@ -99,11 +98,10 @@
           ></b-spinner>
         </b-col>
         <b-col v-if="!sendNotifications && !loader" class="load">
-          <p>{{$t("businessf.No_notifications_to_show")}} !!</p>
+          <p>{{ $t("businessf.No_notifications_to_show") }} !!</p>
         </b-col>
       </b-container>
     </div>
-
   </div>
 </template>
 
@@ -121,8 +119,8 @@ export default {
   computed: {
     ...mapGetters({
       sendNotifications: "businessFollowers/sendNotifications",
-      getLoader: "businessFollowers/getLoader",
-    }),
+      getLoader: "businessFollowers/getLoader"
+    })
   },
   methods: {
     // getting actions from store
@@ -130,7 +128,7 @@ export default {
       getNotifications: "businessFollowers/getNotifications",
       readNotifiactions: "businessFollowers/readNotifiactions",
       deleteNotifications: "businessFollowers/deleteNotifications",
-      deleteOne: "businessFollowers/deleteOne",
+      deleteOne: "businessFollowers/deleteOne"
     }),
 
     select(notification, index) {
@@ -143,7 +141,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.sendNotifications.forEach((element) => {
+      this.sendNotifications.forEach(element => {
         this.selected.push(element);
       });
     },
@@ -151,12 +149,12 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach((element) => {
+      data.forEach(element => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -186,14 +184,10 @@ export default {
   margin-left: -20px;
 }
 
-
-
-
-.m-left-top{
+.m-left-top {
   margin-left: -15px;
 }
-.p-notifaction{
-
+.p-notifaction {
   padding: 30px;
 }
 </style>

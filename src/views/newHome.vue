@@ -988,7 +988,7 @@
 
       <div class="hotbiz">
         <splide :options="optionss" class="r-image">
-          <splide-slide v-for="(item,i) in fr_videos" :key="item.id">
+          <splide-slide v-for="(item, i) in fr_videos" :key="item.id">
             <div class="container">
               <div class="row">
                 <div class="col-md-4">
@@ -997,10 +997,7 @@
                     <br />
                     <br />
                     <span>
-                      <b-link
-                       
-                        @click="openGallery(i)"
-                      >
+                      <b-link @click="openGallery(i)">
                         {{ $t("general.play_video") }}
                       </b-link>
                       <br />
@@ -1019,7 +1016,6 @@
 
                     <div>
                       <b-icon
-                      
                         @click="openGallery(i)"
                         icon="play-circle"
                         scale="3"
@@ -1157,9 +1153,6 @@
       </div>
     </div>
 
-
-    
-
     <div class="container mt-5 pt-5">
       <div class="text-center mb-3">
         <h1 class="h1-text mb-5 pb-5">
@@ -1257,20 +1250,19 @@
     <Newsletter class="mt-100" />
     <SiteFooter />
 
-     <LightBox 
+    <LightBox
       ref="lightbox"
       :media="fr_videos"
       :show-caption="true"
       :show-light-box="false"
-      ></LightBox>
-
+    ></LightBox>
   </div>
-</template>  
+</template>
 
 <script>
 import axios from "axios";
-import LightBox from 'vue-it-bigger'
-import('vue-it-bigger/dist/vue-it-bigger.min.css')
+import LightBox from "vue-it-bigger";
+import("vue-it-bigger/dist/vue-it-bigger.min.css");
 import { validationMixin } from "vuelidate";
 import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 
@@ -1286,24 +1278,24 @@ export default {
     SiteFooter,
     Resources,
     LightBox,
-    SemipolarSpinner,
+    SemipolarSpinner
   },
 
   mixins: [validationMixin],
   validations: {
     form: {
       pname: {
-        required,
+        required
       },
 
       name: {
-        required,
+        required
       },
 
       tel: {
-        required,
-      },
-    },
+        required
+      }
+    }
   },
 
   data() {
@@ -1313,22 +1305,22 @@ export default {
           id: 1,
           name: "Natashia Bellenga Ebo",
           image: "assets/images/testi/buy1.jfif",
-          testimoney: this.$t("general.ever_since_i_started_using_ba"),
+          testimoney: this.$t("general.ever_since_i_started_using_ba")
         },
 
         {
           id: 4,
           image: "assets/images/testi/buy2.jfif",
           name: "Easter Yaya",
-          testimoney: this.$t("general.i_have_double_my_chiken_production"),
+          testimoney: this.$t("general.i_have_double_my_chiken_production")
         },
 
         {
           id: 3,
           name: "James Eba ego",
           image: "assets/images/testi/buy3.jfif",
-          testimoney: this.$t("general.i_will_always_recommend_ba"),
-        },
+          testimoney: this.$t("general.i_will_always_recommend_ba")
+        }
       ],
 
       ctestimonials: [
@@ -1336,14 +1328,14 @@ export default {
           id: 4,
           name: "Kaneka Taylor",
           image: "assets/images/testi/taylor.jpg",
-          testimoney: this.$t("general.as_a_busy_mother"),
+          testimoney: this.$t("general.as_a_busy_mother")
         },
 
         {
           id: 5,
           image: "assets/images/testi/f6b.jpg",
           name: " yvon Eboto",
-          testimoney: this.$t("general.i_am_a_restaurant_owner"),
+          testimoney: this.$t("general.i_am_a_restaurant_owner")
         },
 
         {
@@ -1351,8 +1343,8 @@ export default {
 
           name: "Sharon Vetti",
           image: "assets/images/testi/vetti.jpg",
-          testimoney: this.$t("general.with_ba_i_was_able_sew"),
-        },
+          testimoney: this.$t("general.with_ba_i_was_able_sew")
+        }
       ],
 
       text: `
@@ -1367,7 +1359,7 @@ export default {
         `,
       images: [
         "assets/images/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
-        "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
+        "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png"
       ],
       currentNumber: 0,
 
@@ -1376,7 +1368,7 @@ export default {
         tel: null,
         name: null,
         quantity: null,
-        email: null,
+        email: null
       },
 
       userSaved: false,
@@ -1389,14 +1381,14 @@ export default {
           picture: "assets/images/AFRICAN CULTURE.jpg",
           name: "African Tradition",
           description:
-            "Production de vêtements africains de toutes les régions du Cameroun, avec une spécialisation dans les vêtements des champs.",
+            "Production de vêtements africains de toutes les régions du Cameroun, avec une spécialisation dans les vêtements des champs."
         },
 
         {
           id: "3711",
           picture: "assets/images/bibi.jpg",
           name: "Vin Bibi",
-          description: "Production de vin blanc moueleux",
+          description: "Production de vin blanc moueleux"
         },
 
         {
@@ -1404,14 +1396,14 @@ export default {
           picture: "assets/images/silas.jpg",
           name: "Silas Construction",
           description:
-            "Silas Construction peut répondre à tous vos besoins en matière de construction. ",
+            "Silas Construction peut répondre à tous vos besoins en matière de construction. "
         },
 
         {
           id: "76",
           picture: "assets/images/emma.jpg",
           name: "Emma Fashion",
-          description: "Embroidery , hand-made",
+          description: "Embroidery , hand-made"
         },
 
         {
@@ -1419,7 +1411,7 @@ export default {
           picture: "assets/images/GERAR.jpg",
           name: "Gerar Fashion",
           description:
-            "Customisation des bijoux, sac et chaussures avec du tissu pagne et formation sur la customisation",
+            "Customisation des bijoux, sac et chaussures avec du tissu pagne et formation sur la customisation"
         },
 
         {
@@ -1427,7 +1419,7 @@ export default {
           picture: "assets/images/edo.jpg",
           name: "Saveurs du Lapin",
           description:
-            "Entreprise de production de viande de lapin et autres produits connexes.",
+            "Entreprise de production de viande de lapin et autres produits connexes."
         },
 
         {
@@ -1437,7 +1429,7 @@ export default {
           name: "Aissa Couture",
 
           description:
-            "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres.",
+            "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres."
         },
 
         {
@@ -1445,8 +1437,8 @@ export default {
           picture: "assets/images/okapi.jpg",
           name: "OKAPI",
           description:
-            "OKAPI est spécialisé dans la transformation de fruits exotiques en jus naturelles et dérivés. Elle innove dans la conception de nouvelles saveurs originales.",
-        },
+            "OKAPI est spécialisé dans la transformation de fruits exotiques en jus naturelles et dérivés. Elle innove dans la conception de nouvelles saveurs originales."
+        }
       ],
 
       hotbiz_eng: [
@@ -1455,28 +1447,28 @@ export default {
           picture: "assets/images/EN/AFRICAN CULTURE.jpg",
           name: "African Tradition",
           description:
-            "Production of african wear from all regions of Cameroon, with specialty in the grassfield attire",
+            "Production of african wear from all regions of Cameroon, with specialty in the grassfield attire"
         },
 
         {
           id: "3711",
           picture: "assets/images/EN/bibi.jpg",
           name: "Vin Bibi",
-          description: "Production of soft white wine",
+          description: "Production of soft white wine"
         },
 
         {
           id: "3712",
           picture: "assets/images/EN/silas.jpg",
           name: "Silas Construction",
-          description: "Manufacturing of industrial machines",
+          description: "Manufacturing of industrial machines"
         },
 
         {
           id: "76",
           picture: "assets/images/EN/emma.jpg",
           name: "Emma Fashion",
-          description: "Embroidery , hand-made",
+          description: "Embroidery , hand-made"
         },
 
         {
@@ -1484,7 +1476,7 @@ export default {
           picture: "assets/images/EN/GERAR.jpg",
           name: "Gerar Fashion",
           description:
-            "Customization of jewelry, bags and shoes with loincloth and training on customization",
+            "Customization of jewelry, bags and shoes with loincloth and training on customization"
         },
 
         {
@@ -1493,7 +1485,7 @@ export default {
           name: "Saveurs du Lapin",
 
           description:
-            "Company producing rabbit meat and other related products.",
+            "Company producing rabbit meat and other related products."
         },
 
         {
@@ -1502,7 +1494,7 @@ export default {
 
           name: "Aissa Couture",
           description:
-            "Specializing in woven fabric, shirts, pants, decoration, placemats and more",
+            "Specializing in woven fabric, shirts, pants, decoration, placemats and more"
         },
 
         {
@@ -1510,124 +1502,124 @@ export default {
           picture: "assets/images/EN/okapi.jpg",
           name: "OKAPI",
           description:
-            "OKAPI is specialized in the transformation of exotic fruits into natural juices and derivatives. It innovates in the conception of new original flavors.",
-        },
+            "OKAPI is specialized in the transformation of exotic fruits into natural juices and derivatives. It innovates in the conception of new original flavors."
+        }
       ],
 
       fr_videos: [
-        { 
-          id:"CrjFkoU5eqs",
+        {
+          id: "CrjFkoU5eqs",
           thumb: "assets/images/biz/FR/african culture fr.jpg",
           name: "African Culture",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7XZ4SAKiQMM",
+          id: "7XZ4SAKiQMM",
           thumb: "assets/images/biz/FR/bibi fr.jpg",
           name: "Vin Bibi",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"1eIXf4Nu-F0",
+          id: "1eIXf4Nu-F0",
           thumb: "assets/images/biz/FR/Gerar fr.jpg",
           name: "Gerar Fashion",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"vO53J95E2GA",
+          id: "vO53J95E2GA",
           thumb: "assets/images/biz/FR/EDO RAISSA 2.jpg",
           name: "Edo Raissa",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7XZ4SAKiQMM",
+          id: "7XZ4SAKiQMM",
           thumb: "assets/images/biz/FR/OKAPI 1.jpg",
           name: "Okapi",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"xyD30G01nOg",
+          id: "xyD30G01nOg",
           thumb: "assets/images/biz/FR/ETS Aissa 3.jpg",
           name: "ETS Aissa ",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"BqgkXMUm858",
+          id: "BqgkXMUm858",
           thumb: "assets/images/biz/FR/SILAS FR.jpg",
           name: "George Silas",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7aIMDB6_tWg",
+          id: "7aIMDB6_tWg",
           thumb: "assets/images/biz/FR/emma fr.jpg",
           name: "Emma Fashion",
-          type: 'youtube',
-        },
+          type: "youtube"
+        }
       ],
 
       en_videos: [
         {
-          id:"CrjFkoU5eqs",
+          id: "CrjFkoU5eqs",
           thumb: "assets/images/biz/EN/AFRICAN CULTURE.jpg",
           name: "African Culture",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7XZ4SAKiQMM",
+          id: "7XZ4SAKiQMM",
           thumb: "assets/images/biz/EN/Bibi.jpg",
           name: "Vin Bibi",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"1eIXf4Nu-F0",
+          id: "1eIXf4Nu-F0",
           thumb: "assets/images/biz/EN/Gerar Fashion.jpg",
           name: "Gerar Fashion",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"vO53J95E2GA",
+          id: "vO53J95E2GA",
           thumb: "assets/images/biz/EN/edo en.jpg",
           name: "Edo Raissa",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7XZ4SAKiQMM",
+          id: "7XZ4SAKiQMM",
           thumb: "assets/images/biz/EN/OKAPI EN.jpg",
           name: "Okapi",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"xyD30G01nOg",
+          id: "xyD30G01nOg",
           thumb: "assets/images/biz/EN/aissa.jpg",
           name: "ETS Aissa ",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"BqgkXMUm858",
+          id: "BqgkXMUm858",
           thumb: "assets/images/biz/EN/SILAS.jpg",
           name: "George Silas",
-          type: 'youtube',
+          type: "youtube"
         },
 
         {
-          id:"7aIMDB6_tWg",
+          id: "7aIMDB6_tWg",
           thumb: "assets/images/biz/EN/Emma Fashion.jpg",
           name: "Emma Fashion",
-          type: 'youtube',
-        },
+          type: "youtube"
+        }
       ],
       selected_video: "",
       show_loader: false,
@@ -1643,13 +1635,13 @@ export default {
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
             perPage: 1,
-            gap: "1rem",
-          },
-        },
+            gap: "1rem"
+          }
+        }
       },
 
       options: {
@@ -1663,13 +1655,13 @@ export default {
         breakpoints: {
           760: {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           992: {
             perPage: 2,
-            gap: "1rem",
-          },
-        },
+            gap: "1rem"
+          }
+        }
       },
 
       optionss: {
@@ -1678,12 +1670,12 @@ export default {
         perPage: 1,
         pagination: false,
         type: "loop",
-        perMove: 1,
+        perMove: 1
       },
       img: require("../assets/img/about/en.png"),
       lang: "EN",
       keyword: "",
-      timer: null,
+      timer: null
     };
   },
 
@@ -1704,19 +1696,17 @@ export default {
       } else {
         return this.hotbiz_fr;
       }
-    },
+    }
   },
 
   methods: {
-     openGallery(index) {
+    openGallery(index) {
       this.$refs.lightbox.showImage(index);
     },
-
 
     playAnimation() {
       this.$refs.number1.play();
     },
-    
 
     theFormat(number) {
       return number.toFixed(0);
@@ -1729,7 +1719,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
@@ -1742,8 +1732,8 @@ export default {
           email: this.form.email,
           tel: this.form.tel,
           pname: this.form.pname,
-          quantity: this.form.quantity,
-        },
+          quantity: this.form.quantity
+        }
       });
     },
 
@@ -1754,11 +1744,11 @@ export default {
       }
     },
 
-    startRotation: function () {
+    startRotation: function() {
       this.timer = setInterval(this.next, 10000);
     },
 
-    next: function () {
+    next: function() {
       if (this.currentNumber == 1) {
         this.currentNumber = 0;
       } else {
@@ -1774,7 +1764,7 @@ export default {
       el.style.transition = "opacity " + seconds + "s ease";
 
       el.style.opacity = 0;
-      setTimeout(function () {
+      setTimeout(function() {
         el.parentNode.removeChild(el);
       }, speed);
     },
@@ -1784,7 +1774,7 @@ export default {
       if (this.$route.name != "Search") {
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.keyword },
+          query: { keyword: this.keyword }
         });
       }
     },
@@ -1794,7 +1784,7 @@ export default {
 
       this.$router.push({
         name: "GlobalSearch",
-        query: { keyword: keyword },
+        query: { keyword: keyword }
       });
     },
 
@@ -1824,11 +1814,11 @@ export default {
       axios
         .get(url)
         .then(({ data }) => {})
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

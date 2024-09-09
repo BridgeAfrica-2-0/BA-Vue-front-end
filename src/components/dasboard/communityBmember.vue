@@ -1,16 +1,21 @@
 <template>
   <div class="h-100">
-    
     <VuePerfectScrollbar
       class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
-    
-          <Person v-for="item in users" :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
-       
-     <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" ></infinite-loading>
-   </VuePerfectScrollbar>
-   
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Person
+        v-for="item in users"
+        :key="item.id"
+        :person="item"
+        @getTotalCommunity="getTotalCommunity"
+      />
 
+      <infinite-loading
+        @infinite="infiniteHandler"
+        ref="infiniteLoading"
+      ></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
@@ -20,9 +25,10 @@ import Person from "@/components/Person";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   props: ["type"],
-  
-   components: {
-    Person, VuePerfectScrollbar
+
+  components: {
+    Person,
+    VuePerfectScrollbar
   },
 
   data() {
@@ -38,31 +44,24 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
     biz_id() {
       return this.$store.state.dashboard.dBusinessId;
-    },
+    }
   },
 
   methods: {
-
-    
-     businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-          
-        })
-        .catch((err) => {
-        
-        });
+        .then(() => {})
+        .catch(err => {});
     },
-
 
     count(number) {
       if (number >= 1000000) {
@@ -74,26 +73,24 @@ export default {
     },
 
     async handleFollow(user) {
-        document.getElementById("followbtn" + user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "user"
       };
 
       await axios
         .post(uri, data)
         .then(({ data }) => {
-         
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
 
           this.businessCommunityTotal();
         })
 
-        .catch((err) => {
-          
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
@@ -127,14 +124,12 @@ export default {
             }
           }
         })
-        .catch((err) => {
-         
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
-    
+
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -168,8 +163,6 @@ export default {
     width: 16px;
     margin-right: 5px;
   }
-
- 
 }
 
 @media only screen and (min-width: 768px) {
@@ -177,8 +170,6 @@ export default {
     width: 20px;
     margin-right: 5px;
   }
-
- 
 }
 
 .btn {

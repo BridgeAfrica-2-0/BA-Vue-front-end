@@ -4,7 +4,11 @@
       <b-row>
         <b-col>
           <h4 class="font-weight-bolder text-design">
-            {{ $t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses') }}
+            {{
+              $t(
+                "dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses"
+              )
+            }}
           </h4>
         </b-col>
         <b-col>

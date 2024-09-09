@@ -32,7 +32,7 @@
           </b-card-text>
 
           <b-button href="#" class="float-right" variant="primary">
-            {{ $t('businessowner.Post') }}
+            {{ $t("businessowner.Post") }}
           </b-button>
         </b-card>
       </b-col>
@@ -47,15 +47,24 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('businessowner.Search') }}</span>
+              <b-icon-filter></b-icon-filter
+              ><span class="sr-only">{{ $t("businessowner.Search") }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">{{ $t('businessowner.Feedbacks_Type') }}</p>
-            <b-dropdown-item href="#">{{ $t('businessowner.Any') }}</b-dropdown-item>
-            <b-dropdown-item href="#"
-              >{{ $t('businessowner.suggestion_for_improvement') }}</b-dropdown-item
-            >
-            <b-dropdown-item href="#">{{ $t('businessowner.Progress_to_your_program') }}</b-dropdown-item>
-            <b-dropdown-item href="#">{{ $t('businessowner.New_Idea_for_PEA_JEUNES') }}</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">
+              {{ $t("businessowner.Feedbacks_Type") }}
+            </p>
+            <b-dropdown-item href="#">{{
+              $t("businessowner.Any")
+            }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{
+              $t("businessowner.suggestion_for_improvement")
+            }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{
+              $t("businessowner.Progress_to_your_program")
+            }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{
+              $t("businessowner.New_Idea_for_PEA_JEUNES")
+            }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>
@@ -76,10 +85,13 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    {{ $t('businessowner.Mapoure_Agrobusiness') }}
+                    {{ $t("businessowner.Mapoure_Agrobusiness") }}
                   </h5>
                   <p>
-                    {{ $t('businessowner.1h_Ago') }} - <span class="text-primary">{{ $t('businessowner.Feedback_Type') }}</span>
+                    {{ $t("businessowner.1h_Ago") }} -
+                    <span class="text-primary">{{
+                      $t("businessowner.Feedback_Type")
+                    }}</span>
                   </p>
                 </b-col>
               </b-row>
@@ -116,9 +128,12 @@ export default {
       selected: 1,
       text: "",
       options: [
-        { value: "1", text: this.$t('businessowner.suggestion_for_improvement') },
-        { value: "2", text: this.$t('businessowner.Progress_to_your_program') },
-        { value: "3", text: this.$t('businessowner.New_Idea_for_PEA_JEUNES') }
+        {
+          value: "1",
+          text: this.$t("businessowner.suggestion_for_improvement")
+        },
+        { value: "2", text: this.$t("businessowner.Progress_to_your_program") },
+        { value: "3", text: this.$t("businessowner.New_Idea_for_PEA_JEUNES") }
       ]
     };
   }

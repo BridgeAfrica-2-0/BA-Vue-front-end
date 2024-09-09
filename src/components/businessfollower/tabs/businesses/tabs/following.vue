@@ -10,7 +10,10 @@
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search @click="$refs.search.search()" class="text-primary border-none"></b-icon-search>
+            <b-icon-search
+              @click="$refs.search.search()"
+              class="text-primary border-none"
+            ></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
@@ -23,19 +26,19 @@
 </template>
 
 <script>
-import CommunityBusiness from '../../communitybusiness';
+import CommunityBusiness from "../../communitybusiness";
 export default {
   data() {
     return {
-      search: '',
+      search: ""
     };
   },
 
   components: {
-    CommunityBusiness,
+    CommunityBusiness
   },
 
-  computed: {},
+  computed: {}
 };
 </script>
 

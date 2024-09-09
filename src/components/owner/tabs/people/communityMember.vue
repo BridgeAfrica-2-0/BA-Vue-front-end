@@ -31,13 +31,13 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +{{ $t('profileowner.Community') }}</b-button
+              +{{ $t("profileowner.Community") }}</b-button
             >
           </b-col>
           <b-col>
             <b-button variant="outline-primary" size="sm">
               <b-icon icon="chat-fill"></b-icon>
-              {{ $t('profileowner.Message') }}</b-button
+              {{ $t("profileowner.Message") }}</b-button
             >
           </b-col>
         </b-row>

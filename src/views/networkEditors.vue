@@ -89,7 +89,7 @@ export default {
     Inbox,
     navbar,
     // Footer,
-    Parent,
+    Parent
   },
 
   data() {
@@ -110,12 +110,12 @@ export default {
         { label: this.$t("network.Keyword_Alert"), icon: "" },
 
         { label: this.$t("network.Blocking"), icon: "" },
-         { label: this.$t("network.Settings"), icon: "" },
+        { label: this.$t("network.Settings"), icon: "" }
       ],
 
       options: {
-        activeColor: "#32a400",
-      },
+        activeColor: "#32a400"
+      }
     };
   },
 
@@ -124,28 +124,28 @@ export default {
 
     this.$store
       .dispatch("networkDetails/roleCheck", this.foll_id)
-      .then((data) => {
+      .then(data => {
         let role = data.data.data;
-       this.$store.commit("networkProfile/setNetworkRole", role);
+        this.$store.commit("networkProfile/setNetworkRole", role);
         switch (role) {
           case "follower":
             this.$router.push({
               name: "BuMembar Network FollowernessEditor",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
 
           case "network_member":
             this.$router.push({
               name: "memberNetwork",
-              params: { id: this.foll_id },
+              params: { id: this.foll_id }
             });
             break;
         }
-        this.getNetworkInfo()
+        this.getNetworkInfo();
         this.isloaded = true;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log({ error: error });
 
         console.log(error.response.status);
@@ -157,26 +157,27 @@ export default {
   },
 
   methods: {
-    changer(){
-      this.selectedId = 4
-      console.log("evenement arrive au parent network",  this.selectedId )
+    changer() {
+      this.selectedId = 4;
+      console.log("evenement arrive au parent network", this.selectedId);
     },
     handleChange(item, index) {
       console.log(item, index);
     },
 
+    async getNetworkInfo() {
+      let url = `network/${this.$route.params.id}/about/information`;
 
-    async  getNetworkInfo() {
-       
-      let url=`network/${this.$route.params.id}/about/information`;
-
-      await axios.get(url)
-      .then(({ data }) => {
-         this.$store.commit("networkProfile/setNetworkInfo", data.data);
-         this.auth({ ...data.data,profile_picture: data.data.image, user_type: 'network' });
-          })  
-    },
-  },
+      await axios.get(url).then(({ data }) => {
+        this.$store.commit("networkProfile/setNetworkInfo", data.data);
+        this.auth({
+          ...data.data,
+          profile_picture: data.data.image,
+          user_type: "network"
+        });
+      });
+    }
+  }
 };
 </script>
 

@@ -5,45 +5,49 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            :placeholder="$t('businessowner.Search_Something')" 
+            :placeholder="$t('businessowner.Search_Something')"
             v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text  @click="$refs.search.search()">
-            <b-icon-search  class="text-primary border-none"></b-icon-search>
+          <b-input-group-prepend is-text @click="$refs.search.search()">
+            <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
     <br />
-        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Follower" />
-    
+    <CommunityMembers
+      @BlockUser="BlockUser"
+      :searchh="keywords"
+      ref="search"
+      type="Follower"
+    />
   </div>
 </template>
 
 <script>
 import CommunityMembers from "../../communityMember";
 export default {
-   data() {
+  data() {
     return {
-        keywords:"",
-    }
-    },
+      keywords: ""
+    };
+  },
   components: {
     CommunityMembers
   },
 
-  computed: { },
+  computed: {},
   methods: {
     BlockUser(id) {
       console.log(id);
       let dataInfo = {
         id: id,
         refernce: "user",
-        type: "follower",
+        type: "follower"
       };
-      this.$emit('BlockUser', dataInfo);
-    },
+      this.$emit("BlockUser", dataInfo);
+    }
   }
 };
 </script>

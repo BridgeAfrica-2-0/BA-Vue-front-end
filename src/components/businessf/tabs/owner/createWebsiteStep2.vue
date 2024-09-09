@@ -5,22 +5,28 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              {{ $t('network.Create_personalised_website_for_your_business') }}
+              {{ $t("network.Create_personalised_website_for_your_business") }}
             </h2>
             <p class="my-2">
-              {{ $t('network.Start_with_a_template_and_male_it_your_own') }},
-               {{ $t('network.with_easy_drag_and_drop_and_1000s_of_design_features') }}
+              {{ $t("network.Start_with_a_template_and_male_it_your_own") }},
+              {{
+                $t(
+                  "network.with_easy_drag_and_drop_and_1000s_of_design_features"
+                )
+              }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block">{{ $t('network.Select_a_template') }}</span>
+                <span class="d-block">{{
+                  $t("network.Select_a_template")
+                }}</span>
               </p>
               <hr width="80%" class="row-step" />
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block">{{ $t('network.Launch') }}</span>
+                <span class="d-block">{{ $t("network.Launch") }}</span>
               </p>
             </b-col>
           </div>
@@ -35,16 +41,19 @@
               <template #header>
                 <p>
                   <span class="float-right">
-                    {{ $t('network.Selected_Template') }}
+                    {{ $t("network.Selected_Template") }}
                   </span>
                 </p>
               </template>
               <p class="mt-1 m-0 p-0">
                 <span class="float-left m-0 p-0">
-                  {{ $t('network.Template_Name') }} <strong class="color-site">{{ $t('network.Free') }}</strong>
+                  {{ $t("network.Template_Name") }}
+                  <strong class="color-site">{{ $t("network.Free") }}</strong>
                 </span>
                 <span class="float-right p-0 m-0">
-                  <b-link href="#foo">{{ $t('network.Choose_Another_Template') }}</b-link>
+                  <b-link href="#foo">{{
+                    $t("network.Choose_Another_Template")
+                  }}</b-link>
                 </span>
               </p>
               <img
@@ -61,7 +70,7 @@
                   class="upload-pic-icon"
                   aria-hidden="true"
                 ></b-icon-image-fill>
-                <p class="upload-text">{{ $t('network.Add_Company_logo') }}</p>
+                <p class="upload-text">{{ $t("network.Add_Company_logo") }}</p>
               </div>
               <div id="fileName"></div>
             </div>
@@ -82,7 +91,7 @@
 
             <b-form-group
               id="fieldset-1"
-              :label=" $t('network.Pick_a_subdomain_name')"
+              :label="$t('network.Pick_a_subdomain_name')"
               label-for="input-1"
             >
               <b-form-input
@@ -102,20 +111,25 @@
                   </div>
                   <div class="d-inline-block">
                     <h5 class="font-weight-bolder text-left mt-2">
-                      {{ $t('network.You_are_currently_subscribed_to_free_plan') }}
+                      {{
+                        $t("network.You_are_currently_subscribed_to_free_plan")
+                      }}
                     </h5>
                     <p class="text-left text-design">
-                      {{ $t('network.You_can_get_access_to_features_like_mapping_your_domain') }},
-                      {{ $t('network.Simply_upgrade_your_plan') }}.
-                      {{ $t('network.premium_template') }}, 
-                      {{ $t('network.premium_support_and_much_more') }}.
+                      {{
+                        $t(
+                          "network.You_can_get_access_to_features_like_mapping_your_domain"
+                        )
+                      }}, {{ $t("network.Simply_upgrade_your_plan") }}.
+                      {{ $t("network.premium_template") }},
+                      {{ $t("network.premium_support_and_much_more") }}.
                     </p>
                   </div>
 
                   <p class="text-right">
-                    <b-link href="/business_owner/create_website_plan"
-                      >{{ $t('network.Change_Plan') }}</b-link
-                    >
+                    <b-link href="/business_owner/create_website_plan">{{
+                      $t("network.Change_Plan")
+                    }}</b-link>
                   </p>
                 </div>
               </b-col>
@@ -126,13 +140,19 @@
                   variant="outline-dark"
                   class="ml-3 float-left"
                   size="sm"
-                  >{{ $t('network.Cancel') }}</b-button
+                  >{{ $t("network.Cancel") }}</b-button
                 >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >{{ $t('network.Save_and_Open_Editor') }}</b-button
+                <b-button
+                  variant="primary"
+                  class="ml-3 float-right"
+                  size="sm"
+                  >{{ $t("network.Save_and_Open_Editor") }}</b-button
                 >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >{{ $t('network.Save') }}</b-button
+                <b-button
+                  variant="primary"
+                  class="ml-3 float-right"
+                  size="sm"
+                  >{{ $t("network.Save") }}</b-button
                 >
               </b-col>
             </b-row>

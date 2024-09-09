@@ -15,36 +15,36 @@ export const loader = {
         title: "Important message",
         type: "warn",
         duration: 5000,
-        text,
+        text
       });
     },
     ...mapActions({
-      setLoaderState: "search/LOADING",
-    }),
+      setLoaderState: "search/LOADING"
+    })
   },
   computed: {
     ...mapGetters({
-      loaderState: "search/LOADING",
-    }),
+      loaderState: "search/LOADING"
+    })
   },
   data: () => ({
-    overlay: null,
-  }),
+    overlay: null
+  })
 };
 
 export const search = {
   components: {
     NotFound,
-    ScrollLoader: ClipLoader,
+    ScrollLoader: ClipLoader
   },
   props: {
     title: {
-      type: String,
-    },
+      type: String
+    }
   },
 
   data: () => ({
-    haveNotData: false,
+    haveNotData: false
   }),
 
   destroyed() {
@@ -56,24 +56,24 @@ export const search = {
   computed: {
     ...mapGetters({
       callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
-      getStack: "search/STACK_VALUE",
-    }),
+      getStack: "search/STACK_VALUE"
+    })
   },
   methods: {
     ...mapActions({
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-    }),
-  },
+      page: "search/SET_CURRENT_PAGINATION_PAGE"
+    })
+  }
 };
 
 export const NoMoreDataForComment = {
   components: {
-    NoMoreData,
+    NoMoreData
   },
   data: () => ({
     hasData: true,
-    page: 1,
-  }),
+    page: 1
+  })
 };
 
 export const WhoIsIt = {
@@ -81,37 +81,37 @@ export const WhoIsIt = {
     ...mapGetters({
       profile: "auth/profilConnected",
       token: "auth/getAuthToken",
-      isLogin: "auth/isLogged",
-    }),
+      isLogin: "auth/isLogged"
+    })
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
     async getAuth() {
       const type = [
         "NetworkEditors",
         "networks",
         "Membar Network Follower",
-        "memberNetwork",
+        "memberNetwork"
       ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
 
       const response = await this.$repository.share.WhoIsConnect({
         networkId: type,
-        type,
+        type
       });
       if (response.success) this.auth(response.data);
-    },
+    }
   },
 
   created() {
     if (this.isLogin) {
       this.getAuth();
     }
-  },
+  }
 };
 
 export const knowWhoIsConnected = {
@@ -119,38 +119,38 @@ export const knowWhoIsConnected = {
     ...mapGetters({
       profile: "auth/profilConnected",
       token: "auth/getAuthToken",
-      isLogin: "auth/isLogged",
-    }),
+      isLogin: "auth/isLogged"
+    })
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
     async getAuth() {
       const type = [
         "NetworkEditors",
         "networks",
         "Membar Network Follower",
-        "memberNetwork",
+        "memberNetwork"
       ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
 
       const response = await this.$repository.share.WhoIsConnect({
         networkId: type,
-        type,
+        type
       });
 
       if (response.success) this.auth(response.data);
-    },
+    }
   },
 
   created() {
     if (this.isLogin) {
       this.getAuth();
     }
-  },
+  }
 };
 
 export const commentMixinsBuisness = {
@@ -163,7 +163,7 @@ export const commentMixinsBuisness = {
       createPostRequestIsActive: false,
       loadComment: false,
       replyCommentHasBeload: false,
-      loading: false,
+      loading: false
     };
   },
 
@@ -173,21 +173,21 @@ export const commentMixinsBuisness = {
 
   computed: {
     ...mapGetters({
-      profile: "auth/profilConnected",
+      profile: "auth/profilConnected"
     }),
     icon() {
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
-    },
+    }
   },
 
   filters: {
     nFormatter: formatNumber,
-    now: fromNow,
+    now: fromNow
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: "auth/profilConnected"
     }),
 
     onLike: async function() {
@@ -198,7 +198,7 @@ export const commentMixinsBuisness = {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { network: this.profile.id });
@@ -212,7 +212,7 @@ export const commentMixinsBuisness = {
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
             ? this.comment.comment_likes - 1
-            : 0,
+            : 0
         });
     },
 
@@ -221,7 +221,7 @@ export const commentMixinsBuisness = {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        page: this.page,
+        page: this.page
       });
 
       if (request.success) {
@@ -246,7 +246,7 @@ export const commentMixinsBuisness = {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.profile.id });
@@ -254,7 +254,7 @@ export const commentMixinsBuisness = {
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data,
+        data
       });
 
       if (request.success) {
@@ -263,7 +263,7 @@ export const commentMixinsBuisness = {
         this.text = "";
 
         this.comment = Object.assign(this.comment, {
-          reply_comment_count: this.comment.reply_comment_count + 1,
+          reply_comment_count: this.comment.reply_comment_count + 1
         });
       }
 
@@ -278,8 +278,8 @@ export const commentMixinsBuisness = {
       if (!this.replyCommentHasBeload) this.replyCommentHasBeload = true;
 
       if (state) this.onShowReply();
-    },
-  },
+    }
+  }
 };
 
 export const commentMixins = {
@@ -289,7 +289,7 @@ export const commentMixins = {
       comment: null,
       comments: [],
       text: "",
-      createPostRequestIsActive: false,
+      createPostRequestIsActive: false
     };
   },
   created() {
@@ -298,19 +298,19 @@ export const commentMixins = {
   computed: {
     icon() {
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
-    },
+    }
   },
 
   filters: {
     nFormatter: formatNumber,
-    now: fromNow,
+    now: fromNow
   },
 
   methods: {
     onLike: async function() {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.id,
-        network: this.profile.id,
+        network: this.profile.id
       });
 
       if (request.success)
@@ -320,7 +320,7 @@ export const commentMixins = {
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
             ? this.comment.comment_likes - 1
-            : 0,
+            : 0
         });
     },
 
@@ -328,7 +328,7 @@ export const commentMixins = {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        page: 1,
+        page: 1
       });
 
       if (request.success) this.comments = request.data;
@@ -347,7 +347,7 @@ export const commentMixins = {
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
-          "memberNetwork",
+          "memberNetwork"
         ].includes(this.$route.name)
       )
         data = Object.assign(data, { networkId: this.$route.params.id });
@@ -355,7 +355,7 @@ export const commentMixins = {
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data,
+        data
       });
 
       if (request.success) {
@@ -363,7 +363,7 @@ export const commentMixins = {
         this.text = "";
 
         this.comment = Object.assign(this.comment, {
-          reply_comment_count: this.comment.reply_comment_count + 1,
+          reply_comment_count: this.comment.reply_comment_count + 1
         });
       }
 
@@ -373,8 +373,8 @@ export const commentMixins = {
     showReply() {
       this.reply = !this.reply;
       if (this.reply) this.onShowReply();
-    },
-  },
+    }
+  }
 };
 
 export const isYourOwnPostMixins = {
@@ -386,9 +386,9 @@ export const isYourOwnPostMixins = {
       );
     },
     ...mapGetters({
-      profile: "auth/profilConnected",
-    }),
-  },
+      profile: "auth/profilConnected"
+    })
+  }
 };
 
 export const PostComponentMixin = {
@@ -400,7 +400,7 @@ export const PostComponentMixin = {
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != "video") {
           mediaarr.push(item.media_url);
@@ -412,7 +412,7 @@ export const PostComponentMixin = {
 
     mapvideo(media) {
       let mediaarr = [];
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == "video") {
           mediaarr.push(item.media_url);
@@ -420,12 +420,12 @@ export const PostComponentMixin = {
       });
 
       return mediaarr;
-    },
-  },
+    }
+  }
 };
 
 export const AllPostFeatureMixin = {
-  mixins: [PostComponentMixin],
+  mixins: [PostComponentMixin]
 };
 
 export const defaultCoverImage = {
@@ -434,7 +434,7 @@ export const defaultCoverImage = {
     currentAuthType: null,
     strategy: null,
     isMobile: false,
-    placeholderImage: null,
+    placeholderImage: null
   }),
 
   created() {
@@ -446,12 +446,12 @@ export const defaultCoverImage = {
             ? [
                 "/covers/business-one.png",
                 "/covers/business-two.jpg",
-                "/covers/business-tree.jpg",
+                "/covers/business-tree.jpg"
               ]
             : [
                 "/covers/business-one.png",
                 "/covers/business-two.jpg",
-                "/covers/business-tree.jpg",
+                "/covers/business-tree.jpg"
               ];
         },
 
@@ -459,7 +459,7 @@ export const defaultCoverImage = {
           return "fr" == this.$i18n.locale
             ? ["/covers/profile mobile FR.png"]
             : ["/covers/profile mobile.png"];
-        },
+        }
       },
 
       desktop: {
@@ -469,12 +469,12 @@ export const defaultCoverImage = {
             ? [
                 "/covers/business-one.png",
                 "/covers/business-two.jpg",
-                "/covers/business-tree.jpg",
+                "/covers/business-tree.jpg"
               ]
             : [
                 "/covers/business-one.png",
                 "/covers/business-two.jpg",
-                "/covers/business-tree.jpg",
+                "/covers/business-tree.jpg"
               ];
         },
 
@@ -482,8 +482,8 @@ export const defaultCoverImage = {
           return "fr" == this.$i18n.locale
             ? ["/covers/profile FR.png"]
             : ["/covers/profile.png"];
-        },
-      },
+        }
+      }
     };
 
     window.addEventListener("resize", this.onChangeSize);
@@ -494,7 +494,7 @@ export const defaultCoverImage = {
   },
 
   watch: {
-    "$i18n.locale": function() {},
+    "$i18n.locale": function() {}
   },
 
   computed: {
@@ -510,7 +510,7 @@ export const defaultCoverImage = {
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
 
   methods: {
@@ -521,8 +521,8 @@ export const defaultCoverImage = {
 
     updateStatus(width) {
       this.isMobile = width <= this.limit ? true : false;
-    },
-  },
+    }
+  }
 };
 
 export const ResizeMediaImage = {
@@ -531,11 +531,11 @@ export const ResizeMediaImage = {
       return ["network"].includes(this.type)
         ? "width: 226px !important;height: 226px !important"
         : "width: 160px !important;height: 160px !important";
-    },
+    }
   },
 
   data: () => ({
-    style: null,
+    style: null
   }),
 
   mounted() {
@@ -550,6 +550,6 @@ export const ResizeMediaImage = {
     onResize() {
       const newWidth = document.documentElement.clientWidth;
       //console.log(newWidth)
-    },
-  },
+    }
+  }
 };

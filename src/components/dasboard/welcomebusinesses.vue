@@ -1,20 +1,12 @@
 <template>
   <div>
+    <Business v-for="item in business_around" :key="item.id" :business="item" />
 
-    <Business
-        v-for="item in business_around"
-        :key="item.id"
-        :business="item"
-    
-      />
-
-   
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-
 import Business from "@/components/Business";
 import axios from "axios";
 export default {
@@ -33,15 +25,15 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
     business_around() {
       return this.$store.state.auth.businessAround;
-    },
+    }
   },
 
   methods: {
@@ -61,35 +53,29 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-         
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
-    gotoBusiness(id){
+    gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },
     async infiniteHandler($state) {
       let url = "business/around?page=" + this.page;
 
-     
-
       await axios
         .get(url)
         .then(({ data }) => {
-       
-
           if (data.data.length) {
             this.business_around.push(...data.data);
             this.page += 1;
@@ -99,11 +85,9 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
-       
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
 
@@ -367,7 +351,7 @@ export default {
 }
 </style>
 
-<style >
+<style>
 .readmore p {
   margin: 0px !important;
 }

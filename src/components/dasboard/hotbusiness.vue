@@ -11,25 +11,32 @@
         </h6>
       </span>
 
-      <div class="s-comcardd pt-0"  infinite-wrapper >
+      <div class="s-comcardd pt-0" infinite-wrapper>
+        <VuePerfectScrollbar
+          class="scroll-area s-card p-1"
+          settings="{maxScrollbarLength: 60px}"
+          @ps-y-reach-end="scrollHandle"
+        >
+          <Business
+            v-for="item in business"
+            :key="item.id"
+            :business="item"
+            @getTotalCommunity="getTotalCommunity"
+          />
 
-         <VuePerfectScrollbar   class="scroll-area s-card p-1"  settings="{maxScrollbarLength: 60px}"  @ps-y-reach-end="scrollHandle" >
-  
-        <Business v-for="item in business" :key="item.id" :business="item"  @getTotalCommunity='getTotalCommunity' />
-         
-              <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
-  
-         </VuePerfectScrollbar>
-
-            
+          <infinite-loading
+            @infinite="infiniteHandler"
+            ref="infiniteLoading"
+          ></infinite-loading>
+        </VuePerfectScrollbar>
       </div>
     </b-card>
   </div>
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import Ps from 'perfect-scrollbar';
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Ps from "perfect-scrollbar";
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 import Business from "@/components/Business";
 
@@ -39,7 +46,7 @@ export default {
   components: {
     //  BtnCtaMessage,
     Business,
-     VuePerfectScrollbar
+    VuePerfectScrollbar
   },
   data() {
     return {
@@ -53,26 +60,25 @@ export default {
         pagination: false,
         disable: false,
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
-mounted(){
-  this.$refs.infiniteLoading.attemptLoad();
-},
+  mounted() {
+    this.$refs.infiniteLoading.attemptLoad();
+  },
   methods: {
     getTotalCommunity() {
       this.$store
         .dispatch("profile/Tcommunity")
-        .then((response) => {})
-        .catch((error) => {});
+        .then(response => {})
+        .catch(error => {});
     },
 
- scrollHandle(evt) {
-   
-        this.$refs.infiniteLoading.attemptLoad();
-        console.log(evt);
+    scrollHandle(evt) {
+      this.$refs.infiniteLoading.attemptLoad();
+      console.log(evt);
     },
 
     gotoBusiness(id) {
@@ -94,24 +100,24 @@ mounted(){
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "business"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
           this.getTotalCommunity();
         })
-        .catch((err) => {
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
       let url = "profile/hot/business/";
-     console.log('loading page '+this.page)
+      console.log("loading page " + this.page);
       axios
         .get(url + this.page)
         .then(({ data }) => {
@@ -120,17 +126,14 @@ mounted(){
 
             this.business.push(...data.data);
             $state.loaded();
-             this.$nextTick(() => {
-          
-        });
-
+            this.$nextTick(() => {});
           } else {
             $state.complete();
           }
         })
-        .catch((err) => {});
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
 

@@ -1,27 +1,24 @@
 <template>
   <div>
-     <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
-    
-
+    <div class=" blecrr" style=" height: 850px;     padding-bottom: 50px; ">
       <div class="ss-card">
-         <VuePerfectScrollbar
-      class="scroll-area s-card"
-      settings="{maxScrollbarLength: 60px}" >
+        <VuePerfectScrollbar
+          class="scroll-area s-card"
+          settings="{maxScrollbarLength: 60px}"
+        >
+          <Post
+            v-for="(item, index) in owner_post"
+            :key="index"
+            :post="item"
+            :mapvideo="() => mapvideo(item.media)"
+            :mapmediae="() => mapmediae(item.media)"
+            :businessLogo="item.logo_path"
+            :editPost="f => f"
+            :deletePost="f => f"
+          />
 
-        <Post 
-          v-for="(item, index) in owner_post"
-          :key="index"
-          :post="item"
-          :mapvideo="() => mapvideo(item.media)"
-          :mapmediae="() => mapmediae(item.media)"
-          :businessLogo="item.logo_path"
-          :editPost="(f) => f"
-          :deletePost="(f) => f"
-        />
-
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
-         </VuePerfectScrollbar>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>
@@ -31,12 +28,13 @@
 import { isYourOwnPostMixins } from "@/mixins";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import axios from "axios";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 export default {
   name: "postNetwork",
   mixins: [isYourOwnPostMixins],
   components: {
-    Post,VuePerfectScrollbar
+    Post,
+    VuePerfectScrollbar
   },
   data() {
     return {
@@ -48,18 +46,17 @@ export default {
       edit_image: null,
       edit_id: null,
 
-      fullPage: false,
+      fullPage: false
     };
   },
 
   methods: {
-
-      mapmediae(media) {
+    mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -74,9 +71,9 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -85,9 +82,8 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
-
 
     infiniteHandler($state) {
       axios
@@ -96,7 +92,7 @@ export default {
         )
         .then(({ data }) => {
           // commit('ownerPost', data.data);
-         
+
           if (data.data.length) {
             this.page += 1;
 
@@ -106,20 +102,18 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
-        
-        });
+        .catch(err => {});
     },
 
-    chooseImage: function () {
+    chooseImage: function() {
       document.getElementById("image").click();
     },
 
-    chooseVideo: function () {
+    chooseVideo: function() {
       document.getElementById("video").click();
     },
 
-    chooseDocument: function () {
+    chooseDocument: function() {
       document.getElementById("document").click();
     },
 
@@ -128,13 +122,13 @@ export default {
     },
     hideModal() {
       this.$refs["modal-3"].hide();
-    },
+    }
   },
 
   computed: {
     imageProfile() {
       return "yoo";
-    }, 
+    },
 
     business_logo() {
       return this.$store.state.businessOwner.businessInfo.logo_path;
@@ -145,14 +139,13 @@ export default {
     },
 
     owner_post() {
-    
       return this.$store.state.dashboard.bdasboard_post;
     },
 
     profileNamePost() {
       return "yoo";
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -327,22 +320,18 @@ export default {
   margin-top: -5px;
 }
 
-
 @media only screen and (max-width: 768px) {
-.blecrr .card-body{
-  padding-left: 4px !important;
+  .blecrr .card-body {
+    padding-left: 4px !important;
 
-   padding-right: 2px !important;
-}
+    padding-right: 2px !important;
+  }
 
-.ss-card{
-
-  height: 540px;
+  .ss-card {
+    height: 540px;
     overflow: auto;
     overflow-x: hidden;
     padding: 2px;
-    
-}
-
+  }
 }
 </style>

@@ -3,37 +3,45 @@
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
-  <div>
-  
-  <b-modal id="modal-center" ref="welcomemodal" centered hide-footer hide-header>
-  
-      <div class="container-fluid">      
+    <div>
+      <b-modal
+        id="modal-center"
+        ref="welcomemodal"
+        centered
+        hide-footer
+        hide-header
+      >
+        <div class="container-fluid">
+          <img src="@/assets/welcome.png" class="w-image" alt="" />
 
-        <img src="@/assets/welcome.png" class="w-image" alt="">
+          <h4 class="text-center  mt-2">
+            {{ $t("welcome.Hello") }} <b> {{ username }} </b>
+            {{ $t("auth.you_are_ready_to_start") }}
+          </h4>
 
-         <h4 class="text-center  mt-2">
-          {{ $t("welcome.Hello") }} <b> {{ username }}    </b
-          >    {{$t("auth.you_are_ready_to_start")}}
-        </h4>
-      
-       
+          <p class="text f-16">
+            {{ $t("auth.welcome_text") }}
+          </p>
 
-        <p class="text f-16">
-        {{$t("auth.welcome_text")}} 
-                  
-        </p>    
-
-
-
-          <div class="mt-5 ">  <b-button variant="primary" class="float-left w-120" @click="skipToDashboard"> {{$t("auth.skip")}} </b-button>  <b-button variant="danger" class="float-right w-120" @click="continueWelcome"> {{$t("auth.continue")}} </b-button>   </div>
-
-      </div>
-  </b-modal>
-</div>
-
-
-
-
+          <div class="mt-5 ">
+            <b-button
+              variant="primary"
+              class="float-left w-120"
+              @click="skipToDashboard"
+            >
+              {{ $t("auth.skip") }}
+            </b-button>
+            <b-button
+              variant="danger"
+              class="float-right w-120"
+              @click="continueWelcome"
+            >
+              {{ $t("auth.continue") }}
+            </b-button>
+          </div>
+        </div>
+      </b-modal>
+    </div>
 
     <div
       v-if="first_page == 'true'"
@@ -83,7 +91,11 @@
           ></b-form-radio-group>
         </b-form-group>
         <div class="text-center">
-          <b-button variant="outline-primary" class="first-step-btn" @click="choseModal">
+          <b-button
+            variant="outline-primary"
+            class="first-step-btn"
+            @click="choseModal"
+          >
             {{ $t("welcome.Continue") }} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
@@ -101,7 +113,6 @@
           <form-wizard
             @on-complete="onComplete"
             @on-loading="setLoading"
-            
             color="#e75c18"
           >
             <input
@@ -122,19 +133,18 @@
                     <div id="preview">
                       <!-- <img v-if="img_url" :src="img_url" /> -->
 
-                       <vue-cropper  v-if="img_url"
-                    :src="selectedFile"
-                    ref="cropper"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    
-                    :size="1"
-                    drag-mode="move"
-                    :view-mode="1"
-                  />
-
+                      <vue-cropper
+                        v-if="img_url"
+                        :src="selectedFile"
+                        ref="cropper"
+                        original:true
+                        info:false
+                        canScale:true
+                        maxImgSize:1000
+                        :size="1"
+                        drag-mode="move"
+                        :view-mode="1"
+                      />
                     </div>
 
                     <div class="text-center">
@@ -174,9 +184,14 @@
                       <label for="username" class="username">
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
-   
 
-                      <DropdownDatepicker   :minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker
+                        :minAge="18"
+                        v-model="dob"
+                        style="width:100%"
+                        dropdownClass="form-control mr-1 w-100"
+                        class="d-inline-flex"
+                      />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -248,26 +263,21 @@
                         {{ $t("welcome.City") }} :</label
                       ><br />
 
-                      
-
-                        <multiselect
+                      <multiselect
                         v-model="city"
-                      
                         :multiple="false"
                         :placeholder="$t('welcome.Search')"
                         label="name"
                         track-by="id"
                         :options="cities"
                       ></multiselect>
-
-
-                     
                     </div>
                     <div class="form-group">
-                      <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
+                      <label for="Neighbour" class="username">
+                        {{ $t("welcome.Neighbour") }}:</label
                       ><br />
-                      {{Neighbor}}
-                       <!-- <input
+                      {{ Neighbor }}
+                      <!-- <input
                         type="text"
                         name="alias"
                         id="Neighbor"
@@ -282,10 +292,9 @@
                       /> -->
                       <AutocompleteLocation
                         v-if="showMap"
-                       :region="region"
-                       @get-address-details="getAddressDetails"
-                       />
-                       
+                        :region="region"
+                        @get-address-details="getAddressDetails"
+                      />
                     </div>
                   </div>
 
@@ -297,7 +306,7 @@
               </div>
             </tab-content>
 
-               <tab-content :title="$t('welcome.Follow_People')">
+            <tab-content :title="$t('welcome.Follow_People')">
               <div class="div-h h-400">
                 <People />
               </div>
@@ -308,8 +317,6 @@
                 <Business />
               </div>
             </tab-content>
-
-         
 
             <tab-content :title="$t('welcome.Tutorial')">
               <div class="div-h h-tutorial">
@@ -348,20 +355,18 @@
                     <div id="preview">
                       <!-- <img v-if="img_url" :src="img_url" /> -->
 
-
-                    <vue-cropper  v-if="img_url"
-                    :src="selectedFile"
-                    ref="cropper"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    
-                    :size="1"
-                    drag-mode="move"
-                    :view-mode="1"
-                  />
-
+                      <vue-cropper
+                        v-if="img_url"
+                        :src="selectedFile"
+                        ref="cropper"
+                        original:true
+                        info:false
+                        canScale:true
+                        maxImgSize:1000
+                        :size="1"
+                        drag-mode="move"
+                        :view-mode="1"
+                      />
                     </div>
 
                     <div class="text-center">
@@ -401,9 +406,13 @@
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
 
-    
-
-                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker
+                        minAge="18"
+                        v-model="dob"
+                        style="width:100%"
+                        dropdownClass="form-control mr-1 w-100"
+                        class="d-inline-flex"
+                      />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -476,14 +485,12 @@
 
                       <multiselect
                         v-model="city"
-                      
                         :multiple="false"
                         :placeholder="$t('welcome.Search')"
                         label="name"
                         track-by="id"
                         :options="cities"
                       ></multiselect>
-
 
                       <!-- <input
                         type="text"
@@ -495,9 +502,10 @@
                       /> -->
                     </div>
                     <div class="form-group">
-                      <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
+                      <label for="Neighbour" class="username">
+                        {{ $t("welcome.Neighbour") }}:</label
                       ><br />
-                      {{Neighbor}}
+                      {{ Neighbor }}
                       <!-- <input
                         type="text"
                         name="alias"
@@ -512,10 +520,10 @@
                         @get-address-details="getAddressDetails"
                       /> -->
                       <AutocompleteLocation
-                      v-if="showMap"
-                       :region="region"
-                       @get-address-details="getAddressDetails"
-                       />
+                        v-if="showMap"
+                        :region="region"
+                        @get-address-details="getAddressDetails"
+                      />
                     </div>
                   </div>
                 </div>
@@ -539,19 +547,18 @@
                     <div id="preview">
                       <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
 
-                          <vue-cropper  v-if="logoimg_url"
-                    :src="selectedFile"
-                    ref="cropperr"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    
-                    :size="1"
-                    drag-mode="move"
-                    :view-mode="1"
-                  />
-
+                      <vue-cropper
+                        v-if="logoimg_url"
+                        :src="selectedFile"
+                        ref="cropperr"
+                        original:true
+                        info:false
+                        canScale:true
+                        maxImgSize:1000
+                        :size="1"
+                        drag-mode="move"
+                        :view-mode="1"
+                      />
                     </div>
 
                     <div class="text-center">
@@ -660,44 +667,44 @@
                   ></multiselect>
                 </div>
 
-                <div class="form-group">  
-                <label v-if="filterselectvalue.length" class="typo__label">{{
-                  $t("welcome.Fiters")
-                }}</label>
-                <div v-if="filterselectvalue.length">
-                  <b-card no-body>
-                    <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
-                        ><b-card-text>
-                          <b-form-group
-                            :label="$t('welcome.Filters')"
-                            class="d-inline-grid"
-                          >
-                            <b-form-checkbox-group
-                              id=""
-                              v-model="select_filterss"
-                              name="filters"
+                <div class="form-group">
+                  <label v-if="filterselectvalue.length" class="typo__label">{{
+                    $t("welcome.Fiters")
+                  }}</label>
+                  <div v-if="filterselectvalue.length">
+                    <b-card no-body>
+                      <b-tabs pills card vertical>
+                        <b-tab
+                          :title="filters.name"
+                          v-for="filters in filterselectvalue"
+                          :key="filters.id"
+                          active
+                          ><b-card-text>
+                            <b-form-group
+                              :label="$t('welcome.Filters')"
+                              class="d-inline-grid"
                             >
-                              <b-form-checkbox
-                                v-for="fil in filters.filters"
-                                :key="fil.id"
-                                :value="fil.id"
-                                class="d-inline-grid"
+                              <b-form-checkbox-group
+                                id=""
+                                v-model="select_filterss"
+                                name="filters"
                               >
-                                {{ fil.name }}
-                              </b-form-checkbox>
-                            </b-form-checkbox-group>
-                          </b-form-group>
-                        </b-card-text></b-tab
-                      >
-                    </b-tabs>
-                  </b-card>
+                                <b-form-checkbox
+                                  v-for="fil in filters.filters"
+                                  :key="fil.id"
+                                  :value="fil.id"
+                                  class="d-inline-grid"
+                                >
+                                  {{ fil.name }}
+                                </b-form-checkbox>
+                              </b-form-checkbox-group>
+                            </b-form-group>
+                          </b-card-text></b-tab
+                        >
+                      </b-tabs>
+                    </b-card>
+                  </div>
                 </div>
-           </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -797,14 +804,12 @@
 
                       <multiselect
                         v-model="city"
-                      
                         :multiple="false"
                         :placeholder="$t('welcome.Search')"
                         label="name"
                         track-by="id"
                         :options="cities"
                       ></multiselect>
-
 
                       <!-- <input
                         type="text"
@@ -866,7 +871,6 @@
                       <label for="username" class="username"
                         >{{ $t("welcome.TimeZone") }}:</label
                       ><br />
-                      
 
                       <b-form-select
                         id="timezone"
@@ -874,7 +878,7 @@
                         :options="timezone"
                       ></b-form-select>
                     </div>
-                  </div>  
+                  </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -895,21 +899,20 @@
                         class="form-control text"
                       />
                       <AutocompleteLocation
-                       v-if="!showMap"
-                       :region="region"
-                       @get-address-details="getAddressDetails"
-                       />
-                    </div> 
+                        v-if="!showMap"
+                        :region="region"
+                        @get-address-details="getAddressDetails"
+                      />
+                    </div>
                   </div>
-                </div> 
-               
-                  
-                  <!-- <AutocompleteMapbox
+                </div>
+
+                <!-- <AutocompleteMapbox
                     v-if="!showMap"
                        :region="region"
                        @get-address-details="getAddressDetails"
                        /> -->
-                        
+
                 <!-- <businessmap :center="businessInstanceCenter" /> -->
               </div>
             </tab-content>
@@ -932,7 +935,6 @@
               </div>
             </tab-content>
           </form-wizard>
-          
         </div>
       </form>
     </div>
@@ -951,7 +953,7 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import axios from "axios";
 
-import DropdownDatepicker from 'vue-dropdown-datepicker'; 
+import DropdownDatepicker from "vue-dropdown-datepicker";
 
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
@@ -967,7 +969,20 @@ export default {
   data() {
     return {
       useas: "",
-      monthShortValues:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      monthShortValues: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
       businessInstanceCenter: [11.504929555178624, 3.8465173382452815],
       municipality: [],
       min: moment()
@@ -977,7 +992,7 @@ export default {
       locality: [],
       division: [],
       selectedusecase: "",
-      selectedFile:null,
+      selectedFile: null,
       keywordds: [],
       first_page: "true",
       country: "",
@@ -991,31 +1006,31 @@ export default {
       select_filterss: [],
       sendingP: false,
       address: null,
-      adress:null,
+      adress: null,
       showMap: true,
       sendingB: false,
       profile_pic: "",
       dob: "2041-02-08",
       gender: null,
-      city:"",
+      city: "",
       Neighbor: "",
       step1: false,
       step2: false,
       logo_pic: "",
       logoimg_url: null,
       form: {
-        business_name: null,
+        business_name: null
       },
       business_category: "Testing",
       business_keyword: [],
-      time_zone: '+1',
+      time_zone: "+1",
       language: null,
       about: null,
       loadingWizard: false,
 
       center: {
         lat: 39.7837304,
-        lng: -100.4458825,
+        lng: -100.4458825
       },
       coordinates: [],
       locationMarkers: [],
@@ -1027,52 +1042,47 @@ export default {
       multiselec: [
         { name: "Vue.js", code: "vu" },
         { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: "Open Source", code: "os" }
       ],
 
       timezone: [
         { text: "(GMT+1) West African ", value: "+1" },
-        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" }
       ],
 
       options: [
         { text: this.$t("welcome.Person"), value: "person" },
-        { text: this.$t("welcome.Business"), value: "business" },
+        { text: this.$t("welcome.Business"), value: "business" }
       ],
 
-      category: "",
+      category: ""
     };
   },
 
   validations: {
     form: {
       business_name: {
-        required,
-      },
+        required
+      }
 
       //  business_category: {
       //   required,
       //  },
-    },
+    }
   },
 
   methods: {
-
-    skipToDashboard(){
-
-   this.$router.push("/dashboard");
-
+    skipToDashboard() {
+      this.$router.push("/dashboard");
     },
 
-    continueWelcome(){
-
-       this.$refs["welcomemodal"].hide();
-
+    continueWelcome() {
+      this.$refs["welcomemodal"].hide();
     },
 
-    changeTab(e,e1){
-      console.log('-----',e, '--',e1)
-      if(e == 1 && e1 == 0) this.showMap = true;
+    changeTab(e, e1) {
+      console.log("-----", e, "--", e1);
+      if (e == 1 && e1 == 0) this.showMap = true;
     },
     //  switchLang(value){
 
@@ -1086,13 +1096,13 @@ export default {
 
     getAddressDetails(details) {
       this.address = details.address;
-      this.Neighbor =  details.address;
+      this.Neighbor = details.address;
       this.coordinates = details.coordinates;
       this.address = details.address;
     },
     flashErrors(errors) {
       let err = "";
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -1102,7 +1112,7 @@ export default {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
@@ -1111,7 +1121,7 @@ export default {
     addkeywords(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.keywordds.push(tag);
       this.business_keyword.push(tag);
@@ -1120,7 +1130,7 @@ export default {
     addCategoryTag(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
@@ -1129,7 +1139,7 @@ export default {
     addFilter(newTag) {
       const tag = {
         name: newTag,
-        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
@@ -1141,25 +1151,19 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-getcities(){
-   
-
-   this.$store
+    getcities() {
+      this.$store
         .dispatch("auth/cities")
-        .then(() => {
-        
-        })
-        .catch((err) => {
+        .then(() => {})
+        .catch(err => {
           console.log({ err: err });
         });
-
-},
+    },
     subcategories() {
       let formData2 = new FormData();
       formData2.append("categoryId", this.selectedcategories);
@@ -1169,7 +1173,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1180,7 +1184,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1191,7 +1195,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1202,7 +1206,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1213,7 +1217,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1225,7 +1229,7 @@ getcities(){
       this.$store
         .dispatch("auth/region", formData2)
         .then(() => {})
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1239,7 +1243,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1253,7 +1257,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1267,7 +1271,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1281,7 +1285,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1299,7 +1303,7 @@ getcities(){
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          red: field.$invalid && field.$dirty,
+          red: field.$invalid && field.$dirty
         };
       }
     },
@@ -1322,7 +1326,7 @@ getcities(){
             container: this.fullPage ? null : this.$refs.loader,
             canCancel: true,
             onCancel: this.onCancel,
-            color: "#e75c18",
+            color: "#e75c18"
           });
 
           this.sendingB = true;
@@ -1345,11 +1349,11 @@ getcities(){
           formData2.append("council", this.selectedmunicipality);
 
           formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat",  this.coordinates[1]);
-          formData2.append("lng",  this.coordinates[0]);
+          formData2.append("lat", this.coordinates[1]);
+          formData2.append("lng", this.coordinates[0]);
 
           formData2.append("name", this.form.business_name);
-           formData2.append("keywords", this.selectedKeywords);
+          formData2.append("keywords", this.selectedKeywords);
           // formData2.append("keywords", "blec this");
           formData2.append("timezone", this.time_zone);
           formData2.append("language", this.language);
@@ -1359,7 +1363,7 @@ getcities(){
 
           axios
             .post("business/create", formData2)
-            .then((response) => {
+            .then(response => {
               console.log(response);
 
               this.sendingB = false;
@@ -1367,12 +1371,12 @@ getcities(){
               this.flashMessage.show({
                 status: "success",
 
-                message: this.$t("welcome.Business_Profile_Created"),
+                message: this.$t("welcome.Business_Profile_Created")
               });
               loader.hide();
               resolve(true);
             })
-            .catch((err) => {
+            .catch(err => {
               console.log({ err: err });
 
               this.sendingB = false;
@@ -1385,14 +1389,14 @@ getcities(){
                   status: "error",
 
                   message: this.flashErrors(err.response.data.errors),
-                  blockClass: "custom-block-class",
+                  blockClass: "custom-block-class"
                 });
               } else {
                 this.flashMessage.show({
                   status: "error",
 
                   message: this.$t("welcome.Unable_to_Create_Your_Business"),
-                  blockClass: "custom-block-class",
+                  blockClass: "custom-block-class"
                 });
                 console.log({ err: err });
               }
@@ -1409,7 +1413,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1420,7 +1424,7 @@ getcities(){
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1434,7 +1438,7 @@ getcities(){
       if (this.existingPlace) {
         const marker = {
           lat: this.existingPlace.geometry.location.lat(),
-          lng: this.existingPlace.geometry.location.lng(),
+          lng: this.existingPlace.geometry.location.lng()
         };
 
         this.locationMarkers.push({ position: marker });
@@ -1445,10 +1449,10 @@ getcities(){
     },
 
     locateGeoLocation: function() {
-      navigator.geolocation.getCurrentPosition((res) => {
+      navigator.geolocation.getCurrentPosition(res => {
         this.center = {
           lat: res.coords.latitude,
-          lng: res.coords.longitude,
+          lng: res.coords.longitude
         };
       });
     },
@@ -1456,21 +1460,14 @@ getcities(){
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
-   if(this.logo_pic != '')  {            
-this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+        if (this.logo_pic != "") {
+          this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
 
-this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
-
-     this.logo_pic=blob;
-  // formData.append("profile_picture", this.profile_pic);
-   
-   
-
-}, this.mime_type);
-
-   }
-
-
+          this.$refs.cropperr.getCroppedCanvas().toBlob(blob => {
+            this.logo_pic = blob;
+            // formData.append("profile_picture", this.profile_pic);
+          }, this.mime_type);
+        }
 
         let formData2 = new FormData();
         formData2.append("logo_path", this.logo_pic);
@@ -1496,7 +1493,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
 
         axios
           .post("business/create", formData2)
-          .then((response) => {
+          .then(response => {
             console.log(response);
 
             this.sendingB = false;
@@ -1504,12 +1501,12 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
             this.flashMessage.show({
               status: "success",
               blockClass: "custom-block-class",
-              message: this.$t("welcome.Business_Profile_Created"),
+              message: this.$t("welcome.Business_Profile_Created")
             });
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             this.sendingB = false;
@@ -1522,14 +1519,14 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
                 status: "error",
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
             } else {
               this.flashMessage.show({
                 status: "error",
 
                 message: this.$t("welcome.Unable_to_Create_Your_Business"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
             }
@@ -1544,39 +1541,29 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
-      
-      return new Promise((resolve, reject) => {
 
+      return new Promise((resolve, reject) => {
         let formData = new FormData();
 
-        if(this.profile_pic != '') {   
-        
-this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
+        if (this.profile_pic != "") {
+          this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
-this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+          this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
+            this.profile_pic = blob;
+            // formData.append("profile_picture", this.profile_pic);
+          }, this.mime_type);
+        }
 
-     this.profile_pic=blob;
-  // formData.append("profile_picture", this.profile_pic);
-   
-   
-
-}, this.mime_type);
-
- }
- 
-
-   
-        
-         formData.append("profile_picture", this.profile_pic);
+        formData.append("profile_picture", this.profile_pic);
         formData.append("dob", this.dob);
         formData.append("gender", this.gender);
         formData.append("city", this.city.name);
-          formData.append("councilId", this.city.id);
+        formData.append("councilId", this.city.id);
         formData.append("country", this.selectedpcountry);
         formData.append("region", this.selectedpregion);
-      
+
         formData.append("neighbor", this.Neighbor);
         formData.append("lat", this.coordinates[1]);
         formData.append("lng", this.coordinates[0]);
@@ -1584,9 +1571,9 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
         axios
           .post("/complete/profile", formData)
-          .then((response) => {
+          .then(response => {
             console.log(response);
-                this.showMap =false;
+            this.showMap = false;
             this.step1 = true;
             loader.hide();
 
@@ -1595,7 +1582,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
               message: this.$t("welcome.Profile_Updated"),
 
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             this.peopleAround();
@@ -1604,7 +1591,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             loader.hide();
@@ -1618,14 +1605,14 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
                 status: "error",
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
             } else {
               this.flashMessage.show({
                 status: "error",
                 title: this.$t("welcome.Registration_Failed"),
                 message: this.$t("welcome.Unable_to_update_your_Information"),
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
               loader.hide();
@@ -1643,7 +1630,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
           this.$store.state.profile.profileIntro.user.profile_complete = true;
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
 
@@ -1659,16 +1646,15 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
     },
 
     onFileChange(e) {
-
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
 
       this.mime_type = file.type;
 
-       if (typeof FileReader === "function") {
+      if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.selectedFile = event.target.result;
           this.$refs.cropper.replace(this.selectedFile);
         };
@@ -1676,28 +1662,18 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
       } else {
         alert("Sorry, FileReader API not supported");
       }
-
-
     },
-
-
-
-
-   
-
-
-
 
     onLogoChange(e) {
       this.logo_pic = e.target.files[0];
       const logofile = e.target.files[0];
       this.logoimg_url = URL.createObjectURL(logofile);
 
-       this.mime_type = logofile.type;
+      this.mime_type = logofile.type;
 
-        if (typeof FileReader === "function") {
+      if (typeof FileReader === "function") {
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = event => {
           this.selectedFile = event.target.result;
           this.$refs.cropperr.replace(this.selectedFile);
         };
@@ -1705,8 +1681,6 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
       } else {
         alert("Sorry, FileReader API not supported");
       }
-
-
     },
 
     chooselogo: function() {
@@ -1729,22 +1703,20 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
       }
 
       this.first_page = false;
-    },
+    }
   },
 
   mounted() {
-   
     const lal = this.$route.query.show;
-    
-     if(lal!='yes'){
-     this.$refs["welcomemodal"].show();
-     }
-    
+
+    if (lal != "yes") {
+      this.$refs["welcomemodal"].show();
+    }
+
     this.locateGeoLocation();
 
     this.Country();
     this.categories();
-
 
     this.getcities();
 
@@ -1767,24 +1739,20 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
   },
 
   computed: {
-
-     
-
-     cities(){
-
-       return this.$store.state.auth.cities;
-     },
+    cities() {
+      return this.$store.state.auth.cities;
+    },
 
     selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
     selectedKeywords: function() {
       let selectedUsers = [];
-      this.business_keyword.forEach((item) => {
+      this.business_keyword.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
@@ -1792,14 +1760,14 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
     selectedsubcategories: function() {
       let sub_cat = [];
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
     selectedcountry: function() {
       let sub_cat = [];
-      this.countryy.forEach((item) => {
+      this.countryy.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
@@ -1815,28 +1783,28 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
     selectedregion: function() {
       let sub_cat = [];
-      this.regionn.forEach((item) => {
+      this.regionn.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedlocality: function() {
       let sub_cat = [];
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
@@ -1873,25 +1841,24 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
     },
     business_around() {
       return this.$store.state.auth.businessAround;
-    },
-  },
+    }
+  }
 };
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style>
-
-.h-tutorial{
+.h-tutorial {
   height: 400px;
   overflow: auto;
 }
-.w-image{
+.w-image {
   max-height: 300px;
   object-fit: cover;
   width: 100%;
 }
-.w-120{
-  width: 120px;;
+.w-120 {
+  width: 120px;
 }
 #preview {
   display: flex;
@@ -1956,18 +1923,13 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-  
   }
-
-
 }
 
 @media only screen and (min-width: 768px) {
   .text {
     font-size: 14px !important;
-  
   }
-
 }
 
 .modal-body {
@@ -1981,11 +1943,8 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
   padding-bottom: 20px;
 }
 
-
-
 .f-20 {
   font-size: 18px !important;
-
 }
 
 .f-16 {

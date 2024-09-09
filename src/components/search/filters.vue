@@ -1,7 +1,25 @@
 <template>
-  <div> 
+  <div>
     <div
-      v-if="filterType == '0' || filterType == '1' || filterType == '5'"
+      v-if="
+        filterType == '0' || filterType == '1' || (filterType == '5' && islogin)
+      "
+      class="mt-2 mb-2"
+    >
+      <b-button
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="resetFilters"
+        >{{ $t("search.Reset") }}</b-button
+      >
+    </div>
+    <div
+      v-else-if="
+        filterType == '0' ||
+          filterType == '1' ||
+          (filterType == '4' && !islogin)
+      "
       class="mt-2 mb-2"
     >
       <b-button
@@ -15,9 +33,15 @@
 
     <br />
 
-    <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
-
-        <span v-if="suggestedKeyword.length">
+    <div
+      v-if="
+        filterType == '0' ||
+          filterType == '1' ||
+          (islogin && filterType == '5') ||
+          (!islogin && filterType == '4')
+      "
+    >
+      <span v-if="suggestedKeyword.length">
         <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
@@ -35,8 +59,6 @@
         <hr />
       </span>
 
-
-
       <b-form-group
         v-if="nameOfCategory"
         class="mb-0  text-left"
@@ -45,18 +67,25 @@
         label-size="md"
         label-class=" pt-0"
       >
-      <b-form-select
-        v-model="nameOfCategory"
-        :options="categoriesAll"
-        class="mb-2 select-category"
-        v-if="nameOfCategory && !activateMatching"
-      >
-      </b-form-select>
-
+        <b-form-select
+          v-model="nameOfCategory"
+          :options="categoriesAll"
+          class="mb-2 select-category"
+          v-if="nameOfCategory && !activateMatching"
+        >
+        </b-form-select>
       </b-form-group>
 
-      <div v-if="activateMatching" class="pb-2">
-        <b-badge
+      <div v-if="activateMatching" class="pb-2 badges-wrapper">
+        <span
+          v-for="item in categoryRendering"
+          :key="item.id"
+          @click="matching(item)"
+          :class="[item.activated ? 'activated' : 'inactied']"
+        >
+          {{ item.category }}
+        </span>
+        <!-- <b-badge
           v-for="item in categoryRendering"
           :key="item.id"
           :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
@@ -64,7 +93,7 @@
           @click="matching(item)"
         >
           {{ item.category }}
-        </b-badge>
+        </b-badge> -->
 
         <span v-if="activateMatching && !loading && !categoryRendering.length"
           >Not data found</span
@@ -138,12 +167,17 @@
         </div>
 
         <br />
-
       </b-modal>
 
       <!--  blec implementation for neigbourhood stuff -->
 
-      <div v-if="filterType == '0' || filterType == '1' || filterType == '5'">
+      <div
+        v-if="
+          filterType == '0' ||
+            filterType == '1' ||
+            (filterType == '5' && islogin)
+        "
+      >
         <div>
           <div>
             <b-form-group
@@ -173,19 +207,19 @@
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0 text-left"
-              > 
+              >
               </b-form-group>
-                  <multiselect 
-                  :value="city" 
-                  :options="citiesValues" 
-                  placeholder="Select City" 
-                  class="search-hh w-100 city-search"
-                  style="border-left: none"
-                  label="label" 
-                  track-by="code"
-                  @input="setSelectedLocation"
-                ></multiselect>
-          </div>
+              <multiselect
+                :value="city"
+                :options="citiesValues"
+                placeholder="Select City"
+                class="search-hh w-100 city-search"
+                style="border-left: none"
+                label="label"
+                track-by="code"
+                @input="setSelectedLocation"
+              ></multiselect>
+            </div>
 
             <div>
               <b-form-group
@@ -321,7 +355,190 @@
           </div>
         </div>
       </div>
+      <div
+        v-else-if="
+          filterType == '0' ||
+            filterType == '1' ||
+            (filterType == '4' && !islogin)
+        "
+      >
+        <div>
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Country')"
+              label-size="md"
+              label-class=" pt-0"
+              class="mb-0 pt-2 text-left"
+            >
+            </b-form-group>
+            <b-form-select
+              v-model="networkSelect.country"
+              :options="countries"
+              value-field="id"
+              text-field="name"
+              @change="getBRegions()"
+            >
+            </b-form-select>
+          </div>
 
+          <!-- city -->
+          <div v-if="!showMore">
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.City')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <multiselect
+                :value="city"
+                :options="citiesValues"
+                placeholder="Select City"
+                class="search-hh w-100 city-search"
+                style="border-left: none"
+                label="label"
+                track-by="code"
+                @input="setSelectedLocation"
+              ></multiselect>
+            </div>
+
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 mt-3 text-left"
+              >
+              </b-form-group>
+
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="lneighbourhoods"
+                :minMatchingChars="0"
+                @hit="searchThisNeibourhood(query)"
+                :maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class=""
+              />
+
+              <b-link
+                v-if="networkFilter.region"
+                class="float-right mt-2 mb-2"
+                @click="showMoreFilters"
+              >
+                More
+              </b-link>
+              <br />
+            </div>
+          </div>
+
+          <div class="more" v-if="showMore">
+            <hr />
+
+            <!-- Region -->
+            <div class="mt-1" v-if="networkFilter.region">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Region')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+
+              <b-form-select
+                v-model="networkSelect.region"
+                :options="regions"
+                value-field="id"
+                text-field="name"
+                @change="getBDivisions()"
+              >
+              </b-form-select>
+            </div>
+
+            <hr />
+
+            <!-- Division -->
+            <div v-if="networkFilter.division">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Division')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.division"
+                :options="divisions"
+                value-field="id"
+                text-field="name"
+                @change="getBCouncils()"
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Council -->
+            <div v-if="networkFilter.council">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Council')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.council"
+                :options="councils"
+                value-field="id"
+                text-field="name"
+                @change="
+                  getBNeighbourhoods({ council_id: networkSelect.council })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Neighbourhood -->
+            <div v-if="networkFilter.neighbourhood">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class="pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.neighbourhood"
+                :options="neighbourhoods"
+                value-field="id"
+                text-field="name"
+                @change="
+                  searchNeigbourhoods({
+                    neighborhood_id: networkSelect.neighbourhood,
+                  })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <b-link
+              v-if="networkFilter.region"
+              class="float-right mt-2 mb-2"
+              @click="hideMoreFilters"
+            >
+              Hide More
+            </b-link>
+          </div>
+        </div>
+      </div>
       <span v-if="showform == true">
         <b-form-group
           label-cols-lg="3"
@@ -392,13 +609,11 @@
         <hr />
       </span>
 
-      <div>
-     
-      </div>
+      <div></div>
     </div>
 
     <!-- Network -->
-    <div v-if="filterType == '3'">
+    <div v-if="filterType == '3' && islogin">
       <b-button
         v-if="networkFilter.region || networkFilter.category"
         class="float-right"
@@ -595,8 +810,6 @@
           {{ sub.name }}
         </b-form-radio>
       </div>
-
-
     </b-modal>
 
     <!-- Sub categories modal -->
@@ -614,8 +827,6 @@
           {{ filter.suggested_keyword }}
         </b-form-radio>
       </div>
-
-
     </b-modal>
   </div>
 </template>
@@ -638,7 +849,7 @@ export default {
     "activateMatching",
     "Selectedcategory",
     "Selectedparentcategory",
-    "categoryNameSelected"
+    "categoryNameSelected",
   ],
   watch: {
     query(newQuery) {
@@ -647,13 +858,11 @@ export default {
       });
     },
 
-
-
-    categoryNameSelected: function (newValue, oldValue) {
+    categoryNameSelected: function(newValue, oldValue) {
       this.nameOfCategory = newValue;
     },
 
-    activateMatching: async function (value) {
+    activateMatching: async function(value) {
       if (value) {
         this.matchingCategory = [];
         this.$store.commit("marketSearch/setSubFilters", []);
@@ -669,7 +878,7 @@ export default {
 
             return {
               ...item,
-              actived: false,
+              activated: false,
               sub_category: sub,
             };
           });
@@ -681,7 +890,7 @@ export default {
       }
     },
 
-    nameOfCategory: function (value) {
+    nameOfCategory: function(value) {
       if (!value.length) return false;
 
       const cat = this.$store.getters["marketSearch/getCategories"].find(
@@ -693,7 +902,7 @@ export default {
       this.showSubCat(cat.sub_cat);
     },
 
-    filterType: function (newId) {
+    filterType: function(newId) {
       try {
         this.currentFilter = this.strategies[newId]();
       } catch (error) {
@@ -702,7 +911,7 @@ export default {
       }
     },
 
-    Selectedparentcategory: function (newVal) {
+    Selectedparentcategory: function(newVal) {
       switch (newVal) {
         case "Agriculture":
           this.selectcategories = this.agriculture_filters;
@@ -717,8 +926,7 @@ export default {
           this.selectcategories = this.clothing_filters;
           break;
         case "Mayorcouncils":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
           break;
         case "Healthunits":
           this.selectcategories = this.Health_unit_filters;
@@ -732,7 +940,7 @@ export default {
       }
     },
 
-    Selectedcategory: function (newVal) {
+    Selectedcategory: function(newVal) {
       this.showform = false;
 
       switch (newVal) {
@@ -966,13 +1174,15 @@ export default {
       citiesValues: [],
       categories_filters: [],
       categories_sub_filters: [],
-      
     };
   },
 
   computed: {
-    city(){
-     return this.$store.getters["allSearch/getLocation"];
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    city() {
+      return this.$store.getters["allSearch/getLocation"];
     },
     categoryRendering() {
       return this.matchingCategory;
@@ -1032,19 +1242,52 @@ export default {
       return this.$store.getters["marketSearch/getLoader"];
     },
   },
+  mounted() {
+    console.log("Filter Type on page refresh:", this.filterType);
+    this.computedFilter();
+  },
 
   created() {
+    this.setupStrategies();
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getCities();
     this.getUserNeibourhoods();
-    this.strategies = {
-      2: () => PeopleFilter,
-      4: () => PostFilter,
-    };
   },
 
   methods: {
+    computedFilter() {
+      if (this.filterType !== null && this.strategies[this.filterType]) {
+        try {
+          this.currentFilter = this.strategies[this.filterType]();
+          console.log(
+            "========current filter=============",
+            this.currentFilter
+          );
+          return this.currentFilter;
+        } catch (error) {
+          this.nameOfCategory = null;
+          this.currentFilter = this.filterType;
+          console.error("Error applying filter:", error);
+          return null;
+        }
+      } else {
+        return null;
+      }
+    },
+    setupStrategies() {
+      if (this.islogin) {
+        this.strategies = {
+          2: () => PeopleFilter,
+          4: () => PostFilter,
+        };
+      } else {
+        this.strategies = {
+          2: () => PeopleFilter,
+          3: () => PostFilter,
+        };
+      }
+    },
     matching(cat) {
       this.$emit("onFinByCategory", { cat_id: cat.id });
 
@@ -1052,9 +1295,9 @@ export default {
 
       this.matchingCategory = this.matchingCategory.map((item) => {
         return item.id === cat.id
-          ? { ...item, actived: true }
-          : { ...item, actived: false };
-      }); 
+          ? { ...item, activated: true }
+          : { ...item, activated: false };
+      });
     },
 
     changesearchkeyword(keyword) {
@@ -1088,7 +1331,7 @@ export default {
       this.searchParams.filter_id = null;
 
       this.searchParams.neighbourhood = null;
-      this.searchParams.location = { code: 62, label: 'Yaoundé' };
+      this.searchParams.location = { code: 62, label: "Yaoundé" };
       this.searchParams.distanceInKM = null;
       this.searchParams.price_range = null;
 
@@ -1127,93 +1370,186 @@ export default {
 
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
-      if (this.filterType == 0) {
-        this.$store
-          .dispatch("marketSearch/getFilter", subCat.id)
-          .then((res) => {
-            // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
-            this.searchProducts(this.searchParams);
-            console.log("Filters: ");
-            console.log(res.data.data);
-            if (res.data.data.length === 0) {
-              let subName = "";
-              this.subCategories.map((sub) => {
-                if (sub.id) {
-                  subName = sub.name;
-                }
+      if (this.islogin) {
+        if (this.filterType == 0) {
+          this.$store
+            .dispatch("marketSearch/getFilter", subCat.id)
+            .then((res) => {
+              // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+              this.searchProducts(this.searchParams);
+              console.log("Filters: ");
+              console.log(res.data.data);
+              if (res.data.data.length === 0) {
+                let subName = "";
+                this.subCategories.map((sub) => {
+                  if (sub.id) {
+                    subName = sub.name;
+                  }
+                });
+                this.noFilter = `No filter available for ${subName}!`;
+              }
+              // this.filterLoader = false;
+              let filter = [];
+              res.data.data.map((filt) => {
+                filter.push({
+                  cat_id: subCat.cat_id,
+                  sub_cat_id: subCat.id,
+                  ...filt,
+                });
               });
-              this.noFilter = `No filter available for ${subName}!`;
-            }
-            // this.filterLoader = false;
-            let filter = [];
-            res.data.data.map((filt) => {
-              filter.push({
-                cat_id: subCat.cat_id,
-                sub_cat_id: subCat.id,
-                ...filt,
-              });
+              this.$store.commit("marketSearch/setSubFilters", filter);
+              //console.log("[DeBUG] FILTER: ", this.subFilter);
+            })
+            .catch((err) => {
+              console.error(err);
+              // this.filterLoader = false;
             });
-            this.$store.commit("marketSearch/setSubFilters", filter);
-            //console.log("[DeBUG] FILTER: ", this.subFilter);
-          })
-          .catch((err) => {
-            console.error(err);
-            // this.filterLoader = false;
-          });
-      } else if (this.filterType == 1 || this.filterType == 5) {
-        // method to search for a business lol
-        this.$store
-          .dispatch("marketSearch/getFilter", subCat.id)
-          .then((res) => {
-            // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+        } else if (this.filterType == 1 || this.filterType == 5) {
+          // method to search for a business lol
+          this.$store
+            .dispatch("marketSearch/getFilter", subCat.id)
+            .then((res) => {
+              // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+              if (this.islogin) {
+                this.searchBusiness(this.searchParams);
+              } else {
+                this.searchBusinessForGuestUser(this.searchParams);
+              }
 
-            this.searchBusiness(this.searchParams);
-
-            if (res.data.data.length === 0) {
-              let subName = "";
-              this.subCategories.map((sub) => {
-                if (sub.id) {
-                  subName = sub.name;
-                }
+              if (res.data.data.length === 0) {
+                let subName = "";
+                this.subCategories.map((sub) => {
+                  if (sub.id) {
+                    subName = sub.name;
+                  }
+                });
+                this.noFilter = `No filter available for ${subName}!`;
+              }
+              // this.filterLoader = false;
+              let filter = [];
+              res.data.data.map((filt) => {
+                filter.push({
+                  cat_id: subCat.cat_id,
+                  sub_cat_id: subCat.id,
+                  ...filt,
+                });
               });
-              this.noFilter = `No filter available for ${subName}!`;
-            }
-            // this.filterLoader = false;
-            let filter = [];
-            res.data.data.map((filt) => {
-              filter.push({
-                cat_id: subCat.cat_id,
-                sub_cat_id: subCat.id,
-                ...filt,
-              });
+              this.$store.commit("marketSearch/setSubFilters", filter);
+              //console.log("[DeBUG] FILTER: ", this.subFilter);
+            })
+            .catch((err) => {
+              console.error(err);
+              // this.filterLoader = false;
             });
-            this.$store.commit("marketSearch/setSubFilters", filter);
-            //console.log("[DeBUG] FILTER: ", this.subFilter);
-          })
-          .catch((err) => {
-            console.error(err);
-            // this.filterLoader = false;
-          });
 
-        if (this.filterType == 5) {
-          this.allSearch({
-            cat_id: subCat.cat_id,
-            sub_cat: subCat.id,
-            filter_id: subCat.id,
-          });
+          if (this.filterType == 5) {
+            this.allSearch({
+              cat_id: subCat.cat_id,
+              sub_cat: subCat.id,
+              filter_id: subCat.id,
+            });
+          }
+        }
+      } else {
+        if (this.filterType == 0) {
+          this.$store
+            .dispatch("marketSearch/getFilter", subCat.id)
+            .then((res) => {
+              // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+              this.searchProducts(this.searchParams);
+              console.log("Filters: ");
+              console.log(res.data.data);
+              if (res.data.data.length === 0) {
+                let subName = "";
+                this.subCategories.map((sub) => {
+                  if (sub.id) {
+                    subName = sub.name;
+                  }
+                });
+                this.noFilter = `No filter available for ${subName}!`;
+              }
+              // this.filterLoader = false;
+              let filter = [];
+              res.data.data.map((filt) => {
+                filter.push({
+                  cat_id: subCat.cat_id,
+                  sub_cat_id: subCat.id,
+                  ...filt,
+                });
+              });
+              this.$store.commit("marketSearch/setSubFilters", filter);
+              //console.log("[DeBUG] FILTER: ", this.subFilter);
+            })
+            .catch((err) => {
+              console.error(err);
+              // this.filterLoader = false;
+            });
+        } else if (this.filterType == 1 || this.filterType == 4) {
+          // method to search for a business lol
+          this.$store
+            .dispatch("marketSearch/getFilter", subCat.id)
+            .then((res) => {
+              // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+
+              this.searchBusiness(this.searchParams);
+
+              if (res.data.data.length === 0) {
+                let subName = "";
+                this.subCategories.map((sub) => {
+                  if (sub.id) {
+                    subName = sub.name;
+                  }
+                });
+                this.noFilter = `No filter available for ${subName}!`;
+              }
+              // this.filterLoader = false;
+              let filter = [];
+              res.data.data.map((filt) => {
+                filter.push({
+                  cat_id: subCat.cat_id,
+                  sub_cat_id: subCat.id,
+                  ...filt,
+                });
+              });
+              this.$store.commit("marketSearch/setSubFilters", filter);
+              //console.log("[DeBUG] FILTER: ", this.subFilter);
+            })
+            .catch((err) => {
+              console.error(err);
+              // this.filterLoader = false;
+            });
+
+          if (this.filterType == 4) {
+            this.allSearch({
+              cat_id: subCat.cat_id,
+              sub_cat: subCat.id,
+              filter_id: subCat.id,
+            });
+          }
         }
       }
     },
 
     searchProducts(data) {
-      this.$store
-        .dispatch("marketSearch/searchProducts", data)
-        .then((res) => {
-          // console.log("categories loaded!");
-        })
-        .catch((err) => {
-          console.log("Error erro!");
-        });
+      if (this.islogin) {
+        this.$store
+          .dispatch("marketSearch/searchProducts", data)
+          .then((res) => {
+            // console.log("categories loaded!");
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      } else {
+        this.$store
+          .dispatch("marketSearch/searchGuestUserProducts", data)
+          .then((res) => {
+            // console.log("categories loaded!");
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+      }
     },
 
     allSearch(data) {
@@ -1230,6 +1566,16 @@ export default {
     searchBusiness(data) {
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    searchBusinessForGuestUser(data) {
+      this.$store
+        .dispatch("business/FIND_BUSINESS_FOR_GUEST_USER", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1256,11 +1602,14 @@ export default {
         //   sub_cat: filter.sub_cat_id,
         //   filter_id: filter.id,
         // });
-
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType ==0) {
+      } else if (this.filterType == 0) {
         console.log("[DEBUG] Filter: ", filter);
         // this.searchProducts({
         //   cat_id: filter.cat_id,
@@ -1271,7 +1620,7 @@ export default {
         this.searchProducts(this.searchParams);
 
         this.$bvModal.hide("myModalllo");
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
         console.log("[DEBUG] Filter: ", filter);
         // this.allSearch({
         //   cat_id: filter.cat_id,
@@ -1281,6 +1630,10 @@ export default {
 
         this.allSearch(this.searchParams);
 
+        this.$bvModal.hide("myModalllo");
+      } else if (this.filterType == 4 && !this.islogin) {
+        console.log("[DEBUG] Filter: ", filter);
+        this.allSearch(this.searchParams);
         this.$bvModal.hide("myModalllo");
       }
     },
@@ -1301,25 +1654,36 @@ export default {
       this.searchParams.neighbourhood = keyword;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
-      } else if (this.filterType ==0) {
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
+      } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
 
     searchThiscity(keyword) {
-    
       let data = { city: keyword.code };
 
       this.searchParams.city = keyword.code;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
-      } else if (this.filterType ==0) {
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
+      } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1334,7 +1698,11 @@ export default {
       if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       }
     },
     searchByDistance(value) {
@@ -1349,7 +1717,11 @@ export default {
         this.searchProducts(this.searchParams);
       }
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       }
     },
     searchByPrice(value) {
@@ -1417,10 +1789,16 @@ export default {
         });
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1436,10 +1814,16 @@ export default {
       this.searchParams.region_id = this.networkSelect.region;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
 
@@ -1474,10 +1858,16 @@ export default {
       this.searchParams.neighborhood_id = null;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
 
@@ -1511,10 +1901,16 @@ export default {
       }
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1523,10 +1919,16 @@ export default {
       this.searchParams.neighborhood_id = data.neighborhood_id;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1535,10 +1937,16 @@ export default {
       this.searchParams.council_id = this.networkSelect.council;
 
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
 
@@ -1558,10 +1966,16 @@ export default {
           console.log("Error erro!");
         });
       if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
+        if (this.islogin) {
+          this.searchBusiness(this.searchParams);
+        } else {
+          this.searchBusinessForGuestUser(this.searchParams);
+        }
       } else if (this.filterType == 0) {
         this.searchProducts(this.searchParams);
-      } else if (this.filterType == 5) {
+      } else if (this.filterType == 5 && this.islogin) {
+        this.allSearch(this.searchParams);
+      } else if (this.filterType == 4 && !this.islogin) {
         this.allSearch(this.searchParams);
       }
     },
@@ -1599,14 +2013,21 @@ export default {
       // }
     },
 
-    getCities(){
-      const cities =  this.$store.getters["auth/cities"];
-        for (let index in cities) {
-        this.citiesValues.push({
-          label: cities[index].name,
-          code: cities[index].id
+    getCities() {
+      this.$store
+        .dispatch("auth/cities", {})
+        .then(() => {
+          const cities = this.$store.getters["auth/cities"];
+          for (let index in cities) {
+            this.citiesValues.push({
+              label: cities[index].name,
+              code: cities[index].id,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
         });
-      }
     },
 
     getDivisions() {
@@ -2012,23 +2433,32 @@ export default {
           break;
       }
     },
-    setSelectedLocation(value)
-    {  
-       this.$emit("updateSearchLocation", {code: value.code, label: value.label });
-       this.searchThiscity(value);
-    }
+    setSelectedLocation(value) {
+      this.$emit("updateSearchLocation", {
+        code: value.code,
+        label: value.label,
+      });
+      this.searchThiscity(value);
+    },
   },
 };
 </script>
 
 <style scoped>
+.badges-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
 .inactied {
   cursor: pointer;
   font-size: 14px;
-   color: #455a64;
-   font-weight: 400;
-  border: 1px solid #455a64; 
+  color: #455a64;
+  font-weight: 400;
+  border: 1px solid #455a64;
   background: transparent;
+  margin: 2px;
+  padding: 1px;
+  border-radius: 7px;
 }
 
 .actived {
@@ -2037,6 +2467,9 @@ export default {
   color: white;
   border: 1px solid #e75c18;
   background: #e75c18;
+  margin: 2px;
+  padding: 1px;
+  border-radius: 7px;
 }
 
 .br-3 {
@@ -2077,7 +2510,6 @@ export default {
 select option {
   margin: 40px;
   background: white;
-
 }
 .wi-25 {
   width: 25%;

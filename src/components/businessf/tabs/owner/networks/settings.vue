@@ -53,7 +53,10 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" default-country-code="CM"/>
+          <VuePhoneNumberInput
+            v-model="editnetworkinfo.primary_phone"
+            default-country-code="CM"
+          />
         </b-form-group>
       </b-container>
     </div>
@@ -67,7 +70,10 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" default-country-code="CM"/>
+          <VuePhoneNumberInput
+            v-model="editnetworkinfo.secondary_phone"
+            default-country-code="CM"
+          />
         </b-form-group>
       </b-container>
     </div>
@@ -223,7 +229,7 @@
         {{municipalities}} -->
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Municipality')"
+          :label="$t('network.Municipality')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -250,7 +256,7 @@
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
-        >   
+        >
           <multiselect
             v-model="locality"
             :placeholder="$t('network.Search')"
@@ -282,7 +288,7 @@
         </b-form-group>
       </b-container>
     </div>
-    
+
     <div class="b-bottom">
       <b-container>
         <b-form-group
@@ -292,9 +298,9 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-checkbox 
-            v-model="editnetworkinfo.allow_business" 
-            name="check-button" 
+          <b-form-checkbox
+            v-model="editnetworkinfo.allow_business"
+            name="check-button"
             value="1"
             unchecked-value="0"
             switch
@@ -313,7 +319,8 @@
               :loading="loader"
               @click="updateInfo(editnetworkinfo)"
               :disabled="Lspinner"
-            ><b-spinner v-if="Lspinner" small type="grow"></b-spinner> {{ $t('network.Save_Changes') }}
+              ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>
+              {{ $t("network.Save_Changes") }}
             </b-button>
           </div>
         </b-col>
@@ -321,11 +328,14 @@
     </b-container>
 
     <br />
-    
   </b-container>
   <b-container v-else>
     <div class="text-center">
-      <b-spinner style="width: 3.5rem; height: 3.5rem;" label="Text Centered Large Spinner" variant="primary"></b-spinner>
+      <b-spinner
+        style="width: 3.5rem; height: 3.5rem;"
+        label="Text Centered Large Spinner"
+        variant="primary"
+      ></b-spinner>
     </div>
   </b-container>
 </template>
@@ -339,7 +349,7 @@ export default {
   name: "general",
   components: {
     Multiselect,
-    VuePhoneNumberInput,
+    VuePhoneNumberInput
   },
   data: () => ({
     url: null,
@@ -352,14 +362,14 @@ export default {
     locality: [],
 
     loader: null,
-    Lspinner: false,
+    Lspinner: false
   }),
   computed: {
     ...mapGetters({
-      getNetworks: 'networkSetting/getNetworks',
+      getNetworks: "networkSetting/getNetworks"
     }),
     editnetworkinfo() {
-    //   return this.$store.state.NetworkSettings.networkinfo;
+      //   return this.$store.state.NetworkSettings.networkinfo;
       return this.$store.state.NetworkSettings.editnetworkinfo;
     },
     pcategories() {
@@ -386,61 +396,64 @@ export default {
 
     selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
-    
+
     selectedcountry: function() {
       let sub_cat = [];
-      this.country.forEach((item) => {
+      this.country.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedregion: function() {
       let sub_cat = [];
-      this.region.forEach((item) => {
+      this.region.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedlocality: function() {
       let sub_cat = [];
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
-    },
+    }
   },
   beforeMount() {
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
+    this.url =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.$router.push("notFound");
     this.getEditNetworkInfo();
   },
-  mounted(){
+  mounted() {
     this.categories();
     this.Country();
   },
 
   methods: {
     ...mapActions({
-      saveChange: 'networkSetting/saveChange',
-      getNetworks: 'networkSetting/getNetworks',
+      saveChange: "networkSetting/saveChange",
+      getNetworks: "networkSetting/getNetworks"
     }),
     getEditNetworkInfo() {
       console.log("getEditNetworkInfo");
@@ -451,18 +464,18 @@ export default {
           this.setEditData();
           console.log("Setting Network Available Information");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-    
+
     categories() {
       this.$store
         .dispatch("auth/categories")
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -472,7 +485,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -485,7 +498,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -498,7 +511,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -511,7 +524,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -524,24 +537,36 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-    setEditData(){
+    setEditData() {
       console.log("setting Network data");
       console.log(this.editnetworkinfo);
-      this.multiselecvalue=this.editnetworkinfo.assign_categories;
-      this.country.push({ id: this.editnetworkinfo.country_id, name: this.editnetworkinfo.country })
+      this.multiselecvalue = this.editnetworkinfo.assign_categories;
+      this.country.push({
+        id: this.editnetworkinfo.country_id,
+        name: this.editnetworkinfo.country
+      });
       // this.countries.forEach(e => {
       //   if(e.name == this.editnetworkinfo.country){
       //     this.country.push(e)
       //   }
       // });
-      this.region.push({ id: this.editnetworkinfo.region_id, name: this.editnetworkinfo.region })
-      this.division.push({ id: this.editnetworkinfo.division_id, name: this.editnetworkinfo.division })
-      this.municipality.push({ id: this.editnetworkinfo.council_id, name: this.editnetworkinfo.council })
-      this.locality=this.editnetworkinfo.neighborhood_name;
+      this.region.push({
+        id: this.editnetworkinfo.region_id,
+        name: this.editnetworkinfo.region
+      });
+      this.division.push({
+        id: this.editnetworkinfo.division_id,
+        name: this.editnetworkinfo.division
+      });
+      this.municipality.push({
+        id: this.editnetworkinfo.council_id,
+        name: this.editnetworkinfo.council
+      });
+      this.locality = this.editnetworkinfo.neighborhood_name;
 
       this.Region();
       this.Division();
@@ -551,52 +576,50 @@ export default {
 
     updateInfo(editnetworkinfo) {
       this.Lspinner = true;
-      console.log("updateInfo", editnetworkinfo)
+      console.log("updateInfo", editnetworkinfo);
 
       let formData = new FormData();
-      formData.append('name', editnetworkinfo.name);
-      formData.append('network_categories', this.selectedcategories);
+      formData.append("name", editnetworkinfo.name);
+      formData.append("network_categories", this.selectedcategories);
       formData.append("country_id", this.selectedcountry);
       formData.append("region_id", this.selectedregion);
       formData.append("division_id", this.selecteddivision);
       formData.append("council_id", this.selectedmunicipality);
       formData.append("neighborhood_id", this.selectedlocality);
-      formData.append('primary_phone', editnetworkinfo.primary_phone);
-      formData.append('secondary_phone', editnetworkinfo.secondary_phone);
-      formData.append('email', editnetworkinfo.email);
-      formData.append('purpose', editnetworkinfo.purpose);
-      formData.append('special_needs', editnetworkinfo.special_needs);
-      formData.append('address', editnetworkinfo.address);
-      formData.append('allow_business', editnetworkinfo.allow_business);
-      formData.append('description', editnetworkinfo.description);
+      formData.append("primary_phone", editnetworkinfo.primary_phone);
+      formData.append("secondary_phone", editnetworkinfo.secondary_phone);
+      formData.append("email", editnetworkinfo.email);
+      formData.append("purpose", editnetworkinfo.purpose);
+      formData.append("special_needs", editnetworkinfo.special_needs);
+      formData.append("address", editnetworkinfo.address);
+      formData.append("allow_business", editnetworkinfo.allow_business);
+      formData.append("description", editnetworkinfo.description);
 
-     
       this.$store
         .dispatch("NetworkSettings/updateNetworkInfo", {
-          path: "update/"+this.url,
-          formData: formData,
+          path: "update/" + this.url,
+          formData: formData
         })
         .then(({ data }) => {
-        console.log(data);
-       // this.getEditNetworkInfo();
-        console.log(this.networkInfo);
-        this.Lspinner = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('general.Changes_Made_Successfuly')
-        });  
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.Lspinner = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('general.Unable_To_Make_Changes')
+          console.log(data);
+          // this.getEditNetworkInfo();
+          console.log(this.networkInfo);
+          this.Lspinner = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("general.Changes_Made_Successfuly")
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.Lspinner = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("general.Unable_To_Make_Changes")
+          });
         });
-      });
-    },
-  },
-
+    }
+  }
 };
 </script>
 

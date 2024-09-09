@@ -18,7 +18,7 @@ export default {
   components: {
     Followers,
     Following
-  },
+  }
 };
 </script>
 

@@ -1,94 +1,104 @@
 <template>
   <div>
-
     <div class="s-cardd">
-        <Person  v-for="item in users"  :key="item.id" :person="item" @getTotalCommunity='getTotalCommunity' />
+      <Person
+        v-for="item in users"
+        :key="item.id"
+        :person="item"
+        @getTotalCommunity="getTotalCommunity"
+      />
     </div>
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
-
 <script>
-import axios from 'axios';
-import { isGuestUser } from '@/helpers';
+import axios from "axios";
+import { isGuestUser } from "@/helpers";
 import Person from "@/components/Person";
 
 export default {
-  props: ['type'],
+  props: ["type"],
   data() {
     return {
       page: 1,
       biz_id: null,
       users: [],
-      options: {  
+      options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1
       },
       isGuestUser: isGuestUser
     };
   },
 
-    components: {
-  Person
+  components: {
+    Person
   },
 
   mounted() {
-    this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound'); //! need some review
+    this.biz_id =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.$router.push("notFound"); //! need some review
     // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
   },
 
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    },
+      return this.$store.getters["auth/profilConnected"];
+    }
   },
 
   methods: {
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+      this.$store.commit("businessChat/setSelectedChat", data);
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 0 }
+      });
     },
-
 
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     infiniteHandler($state) {
-      let url = '';
-     
+      let url = "";
+
       if (this.isGuestUser()) {
-        url = this.type === 'Follower'
-          ? `guest/business/community/people-follower/${this.biz_id}/`
-          : `guest/business/community/people-following/${this.biz_id}/`;
+        url =
+          this.type === "Follower"
+            ? `guest/business/community/people-follower/${this.biz_id}/`
+            : `guest/business/community/people-following/${this.biz_id}/`;
       } else {
-        url = this.type === 'Follower'
-          ? `business/community/people-follower/${this.biz_id}/`
-          : `business/community/people-following/${this.biz_id}/`;
+        url =
+          this.type === "Follower"
+            ? `business/community/people-follower/${this.biz_id}/`
+            : `business/community/people-following/${this.biz_id}/`;
       }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.user_followers.length) {
               this.page += 1;
 
@@ -113,28 +123,28 @@ export default {
         });
     },
 
-     businessCommunityTotal() {
-      const dispatchMethod = this.isGuestUser() ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
+    businessCommunityTotal() {
+      const dispatchMethod = this.isGuestUser()
+        ? "businessGuest/businessCommunityTotal"
+        : "businessOwner/businessCommunityTotal";
 
       this.$store
         .dispatch(dispatchMethod, this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
     async handleFollow(user) {
-      
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user"
       };
 
       await axios
@@ -142,20 +152,17 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
 
-           this.businessCommunityTotal();
+          this.businessCommunityTotal();
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
-        });
-    },
 
-  },
+        .catch(err => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
+    }
+  }
 };
 </script>
 

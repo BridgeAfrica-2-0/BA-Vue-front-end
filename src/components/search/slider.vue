@@ -130,11 +130,11 @@ import Comment from "../comment";
 export default {
   data() {
     return {
-      viewProduct: false,
+      viewProduct: false
     };
   },
   components: {
-    Comment,
+    Comment
   },
   methods: {
     /**
@@ -144,8 +144,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    },
-  },
+    }
+  }
 };
 </script>
 

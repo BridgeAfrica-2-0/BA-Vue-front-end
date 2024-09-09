@@ -36,12 +36,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
+                    >{{ $t("network.") }}Make_Cover_Photo</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">{{ $t('network.') }}Make_Cover_Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -81,12 +87,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -127,12 +139,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -158,12 +176,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -189,12 +213,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -220,12 +250,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -251,12 +287,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                 <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -283,12 +325,18 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item>
-                  <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Download")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Profile_Picture")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Make_Cover_Photo")
+                  }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{
+                    $t("network.Delete")
+                  }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>

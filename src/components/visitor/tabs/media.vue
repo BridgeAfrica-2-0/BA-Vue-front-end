@@ -3,7 +3,7 @@
     <b-alert show class="primary-bg">
       <b-icon icon="image" class="purple"></b-icon>
       <b>
-       {{$t('general.Media')}} 
+        {{ $t("general.Media") }}
       </b></b-alert
     >
     <b-tabs content-class="mt-3">

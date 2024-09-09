@@ -4,29 +4,32 @@
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-    
-  <VuePerfectScrollbar class="scroll-area s-card" settings="{maxScrollbarLength: 60px}" >
-   
-  <Network v-for="item in network" :network="item" :key="item.id"  @getTotalCommunity='getTotalCommunity' />
-    
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-  </VuePerfectScrollbar>
+    <VuePerfectScrollbar
+      class="scroll-area s-card"
+      settings="{maxScrollbarLength: 60px}"
+    >
+      <Network
+        v-for="item in network"
+        :network="item"
+        :key="item.id"
+        @getTotalCommunity="getTotalCommunity"
+      />
 
-
-
-
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Network from "@/components/Network";
 
 export default {
   props: ["type"],
-   components: {
-    Network,VuePerfectScrollbar
+  components: {
+    Network,
+    VuePerfectScrollbar
   },
 
   data() {
@@ -40,31 +43,24 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
     biz_id() {
       return this.$store.state.dashboard.dBusinessId;
-    },
+    }
   },
 
   methods: {
-
-
-     businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-        
-        })
-        .catch((err) => {
-         
-        });
+        .then(() => {})
+        .catch(err => {});
     },
-
 
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
@@ -72,26 +68,23 @@ export default {
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
-         
+        .then(response => {
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
           this.businessCommunityTotal();
-           this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
             message: response.data.message,
-            blockClass: "custom-block-class",
-          })
-
-
+            blockClass: "custom-block-class"
+          });
         })
-        .catch((err) => {
-            document.getElementById("joinbtn" + user.id).disabled = false;
+        .catch(err => {
+          document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
@@ -101,24 +94,23 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: "network"
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch((err) => {
-        
+        .catch(err => {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     infiniteHandler($state) {
       const url =
-        this.type === "Follower"     
+        this.type === "Follower"
           ? `business/community/network-follower/${this.biz_id}/`
           : `business/community/network-following/${this.biz_id}/`;
 
@@ -145,11 +137,9 @@ export default {
             }
           }
         })
-        .catch((err) => {
-         
-        });
-    },
-  },
+        .catch(err => {});
+    }
+  }
 };
 </script>
 
@@ -210,8 +200,8 @@ export default {
     margin-right: -15px;
   }
 
-   .btn{
-    font-size:13px !important;
+  .btn {
+    font-size: 13px !important;
   }
 
   .s-button {

@@ -14,8 +14,8 @@
           type: 'image',
           thumb: product.picture,
           src: product.picture,
-          id: 'fTs87IawpN4',
-        },
+          id: 'fTs87IawpN4'
+        }
       ]"
       :show-caption="true"
       :show-light-box="false"
@@ -102,52 +102,58 @@ export default {
   props: {
     showModal: {
       type: Boolean,
-      default: false,
+      default: false
     },
     product: {
       type: [Array, Object],
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
     // ProductCaroussel,
     ProductComments,
-    LightBox,
+    LightBox
   },
   data() {
     return {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 2
       }),
       canShowModal: false,
       packageProduct: "basic",
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser
     };
   },
   computed: {
     getStatus() {
       return this.$store.state.cart.status;
     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    }
   },
   methods: {
     async handleAddToCard() {
       await this.$store
-        .dispatch("cart/addToCart", this.product)
-        .then((response) => {
+        .dispatch("cart/addToCart", {
+          product: this.product,
+          islogin: this.islogin
+        })
+        .then(response => {
           this.flashMessage.show({
             status: "success",
-            message: this.getStatus,
+            message: this.getStatus
           });
 
           this.$router.push({ name: "payment" });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "error occur",
+            message: "error occur"
           });
         });
     },
@@ -155,7 +161,7 @@ export default {
     goToWebsiteMarket(product) {
       this.$router.push({
         path: `/business/${product.business_slug}`,
-        query: { tabId: 3 },
+        query: { tabId: 3 }
       });
     },
 
@@ -165,12 +171,12 @@ export default {
     closeModal() {
       console.log("close modal");
       this.$emit("closemodal");
-    },
+    }
   },
   watch: {
     showModal(newValue) {
       this.canShowModal = newValue;
-    },
+    }
   },
   mounted() {
     const dispatchMethod = this.isGuestUser
@@ -189,7 +195,7 @@ export default {
     //     }
     //   });
     //     }
-  },
+  }
 };
 </script>
 

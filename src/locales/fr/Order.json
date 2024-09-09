@@ -1,7 +1,6 @@
 {
-    "Order":"Commander",
-    "Review_and_confirm_your_Order":"Vérifiez et confirmez votre commande",
-    "item":"article",
-    "Business":"Entreprise"
-   
+  "Order": "Commander",
+  "Review_and_confirm_your_Order": "Vérifiez et confirmez votre commande",
+  "item": "article",
+  "Business": "Entreprise"
 }

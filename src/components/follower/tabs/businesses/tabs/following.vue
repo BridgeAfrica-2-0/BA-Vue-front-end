@@ -5,12 +5,15 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-             :placeholder="$t('general.Search_Something')"
-             v-model="search"
+            :placeholder="$t('general.Search_Something')"
+            v-model="search"
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search  @click="$refs.search.search()" class="text-primary border-none"></b-icon-search>
+            <b-icon-search
+              @click="$refs.search.search()"
+              class="text-primary border-none"
+            ></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
@@ -18,32 +21,24 @@
 
     <br />
 
-          <CommunityBusiness  :searchh="search" ref="search"  type="Following"  />
-     
+    <CommunityBusiness :searchh="search" ref="search" type="Following" />
   </div>
 </template>
 
 <script>
-
-
-
-	import CommunityBusiness from "@/components/owner/tabs/communitybusiness";
+import CommunityBusiness from "@/components/owner/tabs/communitybusiness";
 export default {
-
-   data() {
+  data() {
     return {
-        search:"",
-    }
-    },
-    
+      search: ""
+    };
+  },
+
   components: {
     CommunityBusiness
   },
 
-   computed: {
-   
-  },
-
+  computed: {}
 };
 </script>
 

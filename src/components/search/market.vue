@@ -1,27 +1,31 @@
 <template>
-  <div>
+  <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
-    <b-alert v-if="articles.length === 0 && !prodLoader" show variant="warning"><a href="#" class="alert-link">
+    <b-alert v-if="products.data.length === 0 && !prodLoader" show variant="warning"><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert>
 
     <div v-if="!prodLoader" class="grid">
-      <div v-for="(product, index) in articles" :key="index" class="grid-item">
+      <div v-for="(product, index) in products.data" :key="index" class="grid-item">
 
-        <div class="image-container mb-2" @click="productDetails(product)">
+        <div class="image-container mb-2" @click="gotoproduct(product)">
           <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
         </div>
         <div class="content-container">
           <div class="stock-status" :class="{
-            'in-stock': product.inStock,
-            'out-of-stock': !product.inStock
+            'in-stock': product.in_stock,
+            'out-of-stock': !product.in_stock
           }">
             {{ product.in_stock ? "In Stock" : "Out of Stock" }}
           </div>
-          <h3 @click="productDetails(product)">{{ product.name }}</h3>
+          <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
           <p>
-            {{ product.description | format }}
+            {{
+              product.description.length > 50
+                ? product.description.slice(0, 50) + "..."
+                : product.description
+            }}
           </p>
         </div>
         <div class="bottom-info">
@@ -52,13 +56,202 @@
           </div>
         </div>
 
+        <!-- <span v-if="product">
+          <div class="d-inline-flex">
+            <div class="mr-2">
+              <div class="center-img">
+                <img
+                  :src="product.picture"
+                  class="r-image cursor-pointer"
+                  @click="productDetails(product)"
+                />
+              </div>
+            </div>
+
+            <div class="flx50">
+              <p class="text">
+                <span
+                  class="title cursor-pointer"
+                  @click="productDetails(product)"
+                >
+                  {{ product.name }}
+                </span>
+                <br />
+
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="product.description"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="100"
+                >
+                </read-more>
+                <span class="price  mt-2"> {{ product.price }} FCFA </span>
+              </p>
+            </div>
+          </div>
+          <br />
+
+          <div class="d-flex">
+            <b-badge
+              v-if="!product.in_stock"
+              class="text-center m-auto"
+              show
+              variant="info"
+              >Out of Stock</b-badge
+            >
+          </div>
+
+          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+            <div v-if="product.in_stock" class="">
+              <BtnCtaMessage
+                :element="product"
+                :isProduct="true"
+                :isBuyNow="true"
+                type="business"
+                :isPremium="product.user_package_name"
+              />
+            </div>
+
+            <div class="ml-2">
+              <b-button
+                :disabled="!product.in_stock"
+                size="sm"
+                v-if="product.user_package_name == 'premium'"
+                variant="primary"
+                @click="handleAddToCard(product)"
+                ><span>
+                  <b-icon icon="cart-plus"></b-icon>
+                  {{ $t("general.cart") }}</span
+                >
+              </b-button>
+            </div>
+          </div>
+
+          <br />
+          <br />
+        </span> -->
       </div>
     </div>
-
     <!-- pagination -->
-    <!-- <b-pagination v-if="products.next || products.previous" v-model="currentPage" :total-rows="total" pills
+    <b-pagination v-if="products.next || products.previous" v-model="currentPage" :total-rows="total" pills
       :per-page="per_page" aria-controls="my-table" @change="changePage" align="center"
-      :disabled="products.data.length > 0 ? false : true"></b-pagination> -->
+      :disabled="products.data.length > 0 ? false : true"></b-pagination>
+    <!-- End pagination -->
+
+    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
+  </div>
+
+  <div v-else>
+    <!-- <login /> -->
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <b-alert v-if="guestUserProducts.data.length === 0 && !prodLoader" show variant="warning"><a href="#"
+        class="alert-link">
+        {{ $t("search.No_product_available_for_that_search") }}!
+      </a></b-alert>
+
+    <div v-if="!prodLoader" class="grid">
+      <div v-for="(product, index) in guestUserProducts.data" :key="index" class="grid-item">
+
+        <div class="image-container mb-2" @click="gotoproduct(product)">
+          <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+        </div>
+        <div class="content-container">
+          <div class="stock-status" :class="{
+            'in-stock': product.in_stock,
+            'out-of-stock': !product.in_stock
+          }">
+            {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+          </div>
+          <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
+          <p>
+            {{
+              product.description.length > 50
+                ? product.description.slice(0, 50) + "..."
+                : product.description
+            }}
+          </p>
+        </div>
+        <div class="bottom-info">
+          <span class="price">{{ product.price | locationPrice }} </span>
+          <div class="desktop-buttons w-100">
+            <div class="d-flex justify-content-between w-100 mt-1">
+              <button class="buy-now-btn" @click="gotoproduct(product)">
+                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                <span class="arrow-icon">
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </button>
+              <button class="add-to-cart" @click="handleAddToCard(product)">
+                <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+              </button>
+            </div>
+          </div>
+          <div class="mobile-buttons w-100">
+            <div class="d-flex justify-content-between w-100 mt-1">
+              <button class="buy-now-btn" @click="gotoproduct(product)">
+                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+              </button>
+              <button class="add-to-cart" @click="handleAddToCard(product)">
+                <b-icon icon="cart-plus"></b-icon><span class="px-1"
+                  style="font-size: 12px; font-weight: bold;">Cart</span>
+              </button>
+            </div>
+          </div>
+        </div><!-- <span v-if="product">
+          <div class="d-inline-flex">
+            <div class="mr-2">
+              <div class="center-img">
+                <img :src="product.picture" class="r-image cursor-pointer" @click="productDetails(product)" />
+              </div>
+            </div>
+
+            <div class="flx50">
+              <p class="text">
+                <span class="title cursor-pointer" @click="productDetails(product)">
+                  {{ product.name }}
+                </span>
+                <br />
+
+                <read-more more-str="read more" class="readmore" :text="product.description" link="#"
+                  less-str="read less" :max-chars="100">
+                </read-more>
+                <span class="price  mt-2"> {{ product.price }} FCFA </span>
+              </p>
+            </div>
+          </div>
+          <br />
+
+          <div class="d-flex">
+            <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
+          </div>
+
+          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
+            <div v-if="product.in_stock" class="">
+              <BtnCtaMessage :element="product" :isProduct="true" :isBuyNow="true" type="business"
+                :isPremium="product.user_package_name" />
+            </div>
+
+            <div class="ml-2">
+              <b-button :disabled="!product.in_stock" size="sm" v-if="product.user_package_name == 'premium'"
+                variant="primary" @click="handleAddToCard(product)"><span>
+                  <b-icon icon="cart-plus"></b-icon>
+                  {{ $t("general.cart") }}</span>
+              </b-button>
+            </div>
+          </div>
+
+          <br />
+          <br />
+        </span> -->
+      </div>
+    </div>
+    <!-- pagination -->
+    <b-pagination v-if="guestUserProducts.next || guestUserProducts.previous" v-model="currentPage" :total-rows="total"
+      pills :per-page="per_page" aria-controls="my-table" @change="changePageForGuest" align="center"
+      :disabled="guestUserProducts.data.length > 0 ? false : true"></b-pagination>
     <!-- End pagination -->
 
     <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
@@ -74,33 +267,10 @@
  */
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import Skeleton from "@/components/skeleton";
-import { validate } from "uuid";
+
 
 import VLazyImage from "v-lazy-image/v2";
 
-
-class Article {
-  #name;
-  #price;
-  #description;
-  #inStock;
-
-  get description() {
-    return this.description.length > 50 ? this.description.slice(0, 50) + "..." : this.description
-  }
-
-  get name() {
-    return this.name
-  }
-
-  constructor(product) {
-    this.price = product.price
-    this.name = product.name
-    this.description = product.description
-    this.inStock = product.in_stock
-  }
-
-}
 
 export default {
   data() {
@@ -110,25 +280,10 @@ export default {
       per_page: 10,
       list: [],
       product: {},
-      articles: [],
 
       currentPage: 1,
       nextLoad: false
     };
-  },
-  filters: {
-    format: (val) => val.length > 50 ? val.slice(0, 50) + "..." : validate
-  },
-  watch: {
-    products: function (newData) {
-      console.log(newData)
-      this.articles = newData.map(v => new Article(v))
-    },
-
-    guestUserProducts: function (newData) {
-      this.articles = newData.map(v => new Article(v))
-    }
-    
   },
   computed: {
     islogin() {

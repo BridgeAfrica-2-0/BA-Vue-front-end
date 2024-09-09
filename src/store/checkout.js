@@ -85,7 +85,7 @@ const actions = {
       ? "update/shipping-address/status"
       : "guest/shipping-address/update/status";
     await axios
-      .post(`${url}?shipping_address_id=${payload.id}`, {
+      .post(`${url}?shipping_address_id=${payload.id.id}`, {
         guest_identifier: getGuestIdentifier(),
       })
       .then((response) => {

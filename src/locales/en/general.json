@@ -212,7 +212,7 @@
   "Country": "Country:",
   "Region": "Region:",
   "Destination": "Destination",
-  "Save": "Save",
+  "Save": "Save Address",
   "Cancel": "Cancel",
 
   "Name_of_item": "Name of item",
@@ -243,7 +243,7 @@
   "price": "Price",
 
   "Total": "Total",
-  "SHIPPING": "SHIPPING",
+  "SHIPPING": "Shipping",
   "ORDER_SUMMARY": "ORDER SUMMARY",
   "ITEMS": "ITEMS",
   "description": "description",
@@ -257,7 +257,8 @@
 
   "Product_Desciption": "Product desciption",
   "Check_On_Website": "Check on website",
-  "Shipping_Address": "Shipping address",
+  "Shipping_Address": "Saved Addresses",
+  "New_Address": "New Address",
   "Edit_Shipping_Address": "Edit shipping address",
   "Edit": "Edit",
   "Delete": "Delete",

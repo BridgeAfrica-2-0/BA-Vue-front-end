@@ -1,18 +1,22 @@
 <template>
   <div class="modal-shi">
     <b-modal
-      id="create-shipping-modal"
-      :title="title"
-      ref="create-shipping-modal"
-      hide-footer
-      v-if="mode === 'create'"
-    >
-      <FormCreateShippingAddress
-        @closecshippingm="hideModal"
-        :modal="true"
-        :form="shippingAddress"
-      />
-    </b-modal>
+  id="create-shipping-modal"
+  :title="title"
+  ref="create-shipping-modal"
+  hide-footer
+  v-if="mode === 'create'"
+  class="custom-right-modal"
+  :static="true" 
+  centered
+  no-fade
+>
+  <FormCreateShippingAddress
+    @closecshippingm="hideModal"
+    :modal="true"
+    :form="shippingAddress"
+  />
+</b-modal>
     <b-modal
       v-else
       id="edit-shipping-modal"
@@ -74,4 +78,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.custom-right-modal .modal-dialog {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transition: transform 0.3s ease-out;
+}
+
+.custom-right-modal .modal-content {
+  height: 100%;
+  border-radius: 0;
+}
+
+.custom-right-modal .modal-dialog-centered {
+  display: flex;
+  align-items: flex-start; 
+}
+
+</style>

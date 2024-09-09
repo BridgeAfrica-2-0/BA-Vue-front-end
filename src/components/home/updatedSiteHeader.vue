@@ -88,18 +88,26 @@
               />
             </a>
              <div class="auth-class d-md-none">
-                <span class="nav-span mr-3">
+                <span  v-if="!islogin"  class="nav-span mr-3">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
                   }}</router-link>
                 </span>
-                <router-link class="inactive" :to="{ name: 'signup' }">
+                <router-link   v-if="!islogin"  class="inactive" :to="{ name: 'Login' }">
                     <img
                       src="../../assets/user.svg"
                       alt="User Icon"
                       id="user-icon"
                     />
                   </router-link>
+                <span  v-if="islogin" >
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                    $t("general.dashboard")
+                  }}</router-link>
+                </span>
+                <span v-if="islogin" @click="logout"  class="logout-span">{{ $t("general.Logout") }}</span>
+
+
              </div>
           </div>
 
@@ -392,6 +400,11 @@ export default {
 </script>
 
 <style scoped>
+.logout-span{
+  margin-left: 10px;
+  color: black;
+  cursor: pointer;
+}
 .auth-class {
   justify-content: end;
   display: flex;

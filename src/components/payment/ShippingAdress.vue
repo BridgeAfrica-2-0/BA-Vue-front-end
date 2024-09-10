@@ -1,4 +1,5 @@
 <template>
+  <div class="row">
   <div class="col-8">
     <div class="row justify-content-between top-div">
       <div>
@@ -105,11 +106,16 @@
       </div>
     </div>
   </div>
+  <div class="col-4">
+   <OrderSummary/>
+  </div>
+</div>
 </template>
 
 <script>
 import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
+import OrderSummary from "../../components/order-summary/OrderSummary.vue";
 export default {
   name: "ShippingAddress",
   data() {
@@ -122,6 +128,7 @@ export default {
   components: {
     UpdatedConfirmOperation,
     CreateShippingModal,
+    OrderSummary
   },
 
   methods: {

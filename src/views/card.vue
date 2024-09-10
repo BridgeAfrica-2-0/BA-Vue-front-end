@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <navbar />
     <div class="row">
       <div class="col-12 col-md-12 col-lg-9 ">
@@ -162,8 +162,8 @@
         </div>
         <br />
         <form action="">
-          <!-- {{$t("general.SHIPPING")}}
-          <input type="text" class="form-control" /> -->
+          {{$t("general.SHIPPING")}}
+          <input type="text" class="form-control" />
           {{ $t("general.PROMO_CODE") }}
           <input type="text" class="form-control" />
           <button class="btn btncolor shadow">
@@ -189,6 +189,101 @@
         <br />
       </div>
     </div>
+  </div> -->
+  <div>
+    <navbar />
+    <div class="container" style="width: 90%; margin-bottom: 300px;">
+      <h1 class="mt-5 my-bag">My Cart (1)</h1>
+      <div class="row pt-5">
+        <div class="col-12 col-md-9 col-lg-9">
+          <div v-if="!loading" >
+            <div class="d-flex justify-content-between card-top-content">
+              <h4>Supplier 1</h4>
+              <a href="" class="clear">Clear</a>
+            </div>
+            <div v-for="(cart_item, i) in cart.data" :key="i">
+              <div class="d-flex mt-4">
+                <img :src="cart_item.product_picture" class="product-image" />
+                <div class="pl-4">
+                  <h6 class="product-name">{{ cart_item.product_name }}</h6>
+                  <p class="product-details">Color: Black</p>
+                  <p class="product-details">Size: 6.5</p>
+                  <p class="product-details">Width: Medium</p>
+
+                  <div class="d-flex align-items-center justify-content-between mt-3">
+                    <p class="mt-3">
+                      <img class="heart" src="assets/images/heart.png" alt="">
+                      <a href="" class="save">Save</a>
+                    </p>
+                    <select class="product-quantity">
+                      <option v-for="number in 10" :key="number" :value="number">{{ number }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="product-prices d-flex">
+                  <div class="pr-5">
+                    <h6 class="discount-price">{{ formatMoney(cart_item.product_price) }}</h6>
+                    <h6 class="actual-price">{{ formatMoney(cart_item.product_price) }}</h6>
+                  </div>
+                  <img class="cross" src="assets/images/cross.png" @click="removeIconFromCart(cart_item.product_id)" alt="cross">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="dotted-hr">
+
+          <h1 class="recommended-for-you">Recommended for You</h1>
+
+          <splide :options="options" class="r-image">
+            <splide-slide id="recomend-slide">
+              <div class="crtv-bans">
+                <img src="assets/images/product-dumy.png" alt="Image 1" class="slide-img">
+                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
+                <p>$210.00</p>
+                <a href="">Add to Cart</a>
+              </div>
+            </splide-slide>
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/images/product-dumy.png" alt="Image 1" class="slide-img">
+                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
+                <p>$210.00</p>
+                <a href="">Add to Cart</a>
+              </div>
+            </splide-slide>
+            <splide-slide>
+               <div class="crtv-bans">
+                <img src="assets/images/product-dumy.png" alt="Image 1" class="slide-img">
+                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
+                <p>$210.00</p>
+                <a href="">Add to Cart</a>
+              </div>
+            </splide-slide>
+            <splide-slide>
+               <div class="crtv-bans">
+                <img src="assets/images/product-dumy.png" alt="Image 1" class="slide-img">
+                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
+                <p>$210.00</p>
+                <a href="">Add to Cart</a>
+              </div>
+            </splide-slide>
+            <splide-slide>
+              <div class="crtv-bans">
+                <img src="assets/images/product-dumy.png" alt="Image 1" class="slide-img">
+                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
+                <p>$210.00</p>
+                <a href="">Add to Cart</a>
+              </div>
+            </splide-slide>
+          </splide>
+
+        </div>
+        <div class="col-12 col-md-3 col-lg-3" style="background-color: #F7F7F7; height: 500px;">
+          Oder Summary
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -209,7 +304,16 @@ export default {
         minimumFractionDigits: 2
       }),
       orderForCurrentPage: [],
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"]
+      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      options: {
+        perPage: 3,
+        height: '200px',
+        gap: '10px', 
+        pagination: false, 
+        arrows: true,
+        type: "loop",
+        perMove: 1,
+      },
     };
   },
   created() {
@@ -367,14 +471,10 @@ export default {
 };
 </script>
 <style scoped>
-@media only screen and (max-width: 1201px) {
-  /* .desktop {
-    display: none;
-  } */
+/* @media only screen and (max-width: 1201px) {
   .color {
     background-color: #c5c5c546;
     margin-top: 15px;
-    /* height: 500px; */
   }
 
   .marg1 {
@@ -382,7 +482,6 @@ export default {
   }
   .marg2 {
     margin-left: 90px;
-    /* padding-left: 2px; */
   }
 
   .marg5 {
@@ -410,18 +509,12 @@ export default {
 
   .btncolor {
     background-color: #e75c18;
-    /* margin-top: 10px;
-  height: 30px;
-  width: 120px; */
     color: white;
     line-height: 10px;
   }
 
   .btn1 {
     background-color: #e75c18;
-    /* margin-top: 10px;
-  height: 30px; */
-
     color: white;
     line-height: 10px;
   }
@@ -433,10 +526,10 @@ export default {
     border-radius: 5px;
     height: 150px;
   }
-}
+} */
 
 /* style for desktop ------------------------------------ */
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 1200px) {
   h3 {
     font-size: 14px;
     font-weight: bold;
@@ -598,5 +691,163 @@ export default {
 .btncolor:hover {
   color: white !important;
   background-color: #e75c;
+} */
+
+.my-bag {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000
 }
+
+.card-top-content {
+  margin-right: 150px;
+}
+
+.card-top-content h4 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000
+}
+
+.clear {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000
+}
+
+.product-image {
+  height: 165px;
+  width: 140px;
+  object-fit: contain; 
+  object-position: center; 
+  border: 1px solid #ccc;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
+.product-details {
+  font-size: 14px;
+  font-weight: 400;
+  color: #575757;
+  margin-bottom: 0 !important;
+}
+
+.heart {
+  width: 30px;
+}
+
+.save {
+  margin-left: 12px;
+  font-size: 15px;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.product-quantity {
+  width: 87px;  
+  height: 39px; 
+  padding: 0 10px; 
+  font-size: 16px; 
+  border: 2px solid #ACACAC !important;
+  border-radius: 5px;
+  background-color: #fff !important;
+  margin-left: 50px;
+  font-weight: 800;
+}
+
+.product-prices {
+  margin-right: 150px;
+  margin-left: auto
+}
+
+.discount-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
+.actual-price {
+  text-decoration: line-through;
+  color: #575757;
+}
+
+.cross {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.dotted-hr {
+  border: 0;
+  border-top: 2px dotted black; 
+  height: 0;
+  margin: 30px 0;
+  position: relative;
+  margin-right: 150px;
+}
+
+.recommended-for-you {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+}
+
+.r-image {
+  margin-right: 150px;
+}
+
+.splide__slide {
+  height: auto !important;
+}
+
+.crtv-bans {
+  height: 100%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+  padding: 15px; 
+}
+
+.crtv-bans h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  margin-top: 15px !important;
+}
+
+.crtv-bans p {
+  font-size: 14px;
+  color: black;
+}
+
+.crtv-bans a {
+  font-size: 14px;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+.slide-img {
+  width: 200px; 
+  height: 250px; 
+  object-fit: cover; 
+}
+
+.splide__arrow--prev {
+  background-color: unset !important;
+}
+
+ .splide__arrow--next {
+  background: grey !important;
+  background-color: grey !important;
+  margin-right: -25px !important;
+}
+
 </style>

@@ -27,7 +27,6 @@
       </b-row>
       <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
       <b-row v-if="current_step === 2 && !showRequestPayment">
-        <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
           <ShippingAdress
             @RefreshSipping="RefreshSipping"
@@ -35,12 +34,12 @@
             @loadActualComponent1="showActualComponent1"
           />
         </b-col>
-        <!-- Card Stepper for Shipping Address End -->
 
         <!-- Card Stepper for Order Start -->
-        <b-col class="my-4" cols="12">
+         <!-- This could be used for order review -->
+        <!-- <b-col class="my-4" cols="12">
           <Order @showoperator="handleShowOperator" ref="checkoutorder" />
-        </b-col>
+        </b-col> -->
         <!-- Card Stepper for Order End -->
       </b-row>
       <!-- Stepper Page 1  End -->
@@ -93,7 +92,7 @@
   </div>
 </template>
 <script>
-import Order from "./Order";
+// import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
 import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
@@ -106,7 +105,7 @@ import axios from "axios";
 export default {
   name: "PaymentStepper",
   components: {
-    Order,
+    // Order,
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,

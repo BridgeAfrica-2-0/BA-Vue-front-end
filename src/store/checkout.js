@@ -10,7 +10,13 @@ const state = {
   shippingsummary: [],
 
   cart: [],
-  cart_summary: {},
+  cart_summary: {
+    total_items: 0.0,
+    shipping: "FREE",
+    tax: 0.0,
+    total_cost: 0.0,
+    discount: 0.0,
+  },
   total: null,
 
   buisinessOrdered: [],
@@ -43,7 +49,7 @@ const actions = {
     await axios
       .get("cart/summary")
       .then((response) => {
-        console.log(response.data);
+        console.log("Cart Summary",   response.data);
 
         commit("setCartSummary", response.data.data);
       })
@@ -133,7 +139,9 @@ const actions = {
   },
 
   createOrder({ commit }, { isLogin }) {
-    let url = isLogin ? "cart/create" : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
+    let url = isLogin
+      ? "cart/create"
+      : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
       .post(url)
       .then((data) => {
@@ -169,7 +177,7 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response);
+        console.log("get cart", response);
         commit("setCart", response.data);
       })
       .catch((error) => {

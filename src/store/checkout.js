@@ -126,9 +126,11 @@ const actions = {
       .delete(`shipping/shippingAddress/${id}/delete`)
       .then(() => {
         commit("deleteShippingAdd", id);
+        return ;
       })
       .catch((error) => {
         console.log(error);
+        return Promise.reject(error);
       });
   },
 

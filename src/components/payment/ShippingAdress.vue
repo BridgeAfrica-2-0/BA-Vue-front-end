@@ -1,8 +1,8 @@
 <template>
   <div class="col-8">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between top-div">
       <div>
-        <h4>  {{ $t("general.SHIPPING") }}</h4>
+        <h4 class="title-style">  {{ $t("general.SHIPPING") }}</h4>
       </div>
       <div>
       <b-button v-b-modal.create-shipping-modal type="submit" variant="primary" class="hire-btn">
@@ -26,13 +26,7 @@
         <CreateShippingModal
           :title="$t('general.Edit_Shipping_Address')"
           mode="edit"
-          :editForm="shippingsTab[0]"
-        />
-      </div>
-      <div class="col-12">
-        <ChangeShippingAddress
-          :shippingsTab="shippingsTab"
-          :currentShipping="1"
+          :editForm="shippingsTab[selectedIndex]"
         />
       </div>
     </div>
@@ -43,7 +37,7 @@
         <div class=" dotted-border">
         <div
 					class="ship-add w-100  d-flex justify-content-between align-items-start"
-					v-for="shipping_item in shippingsTab"
+					v-for="(shipping_item,index) in shippingsTab"
 					:key="shipping_item.id"
 				>  <div class="d-inline-flex">
 
@@ -77,17 +71,18 @@
 
 
 					</div>
-						<div class="row">
+						<div class="row ml-2">
               <div>
                 <a
                   href="#"
                   v-b-modal.edit-shipping-modal
                   class="mr-1 mr-sm-2 icon-color"
+                  @click.prevent="openEditModal(index)"
                   >
                   <i  class='fas'>&#xf304;</i>
                   </a>
               </div>
-              <div>
+              <div class="ml-1">
                 <UpdatedConfirmOperation
 										:message="$t('general.Do_you_want_to_delete_this_shipping_address')"
 										@sendid="handleDeleteShipping"
@@ -115,19 +110,18 @@
 <script>
 import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
-import ChangeShippingAddress from "./ChangeShippingAddress.vue";
 export default {
   name: "ShippingAddress",
   data() {
     return {
       loading: false,
       selectedShipping: null,
+      selectedIndex: null,
     };
   },
   components: {
     UpdatedConfirmOperation,
     CreateShippingModal,
-    ChangeShippingAddress,
   },
 
   methods: {
@@ -159,7 +153,20 @@ export default {
     },
 
     handleDeleteShipping(id) {
-      this.$store.dispatch("checkout/deleteShippingAdd", id);
+      this.$store.dispatch("checkout/deleteShippingAdd", id)
+      .then(() => {
+        this.$flashMessage.success({
+          message: "Shipping address deleted successfully",
+          time: 3000,
+        });
+      })
+      .catch((error) => {
+        this.flashMessage.show({
+              status: "error",
+              message: "The shipping address that is in use can not be deleted",
+              time: 5000,
+            });
+      });
     },
     showConfirmModal() {
       this.$emit("showconfirm");
@@ -172,6 +179,11 @@ export default {
     loadActualComponent1() {
       this.$emit("loadActualComponent1");
     },
+    openEditModal(index) {
+    this.selectedIndex = index;
+    this.$bvModal.show('edit-shipping-modal');
+  }
+  
   },
   computed: {
     shippingsTab() {
@@ -214,6 +226,16 @@ export default {
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
+ .title-style {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  color: black;
+ }
+.top-div {
+  margin-left: 1px !important;
+  margin-right: 18px !important;
+  margin-bottom: 20px !important;
+}
 .hire-btn {
   margin-top: 2%;
   width: 160px;
@@ -224,6 +246,7 @@ export default {
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  border-radius: 10px;
 }
 .dotted-border {
     border-top: 2px dotted #455a64; 
@@ -239,7 +262,7 @@ export default {
 .fixed-width {
   text-align: start;
   width: 200px; 
-  margin-right: 20px; 
+  margin-right: 10px; 
 }
 
 .fixed-width:last-child {

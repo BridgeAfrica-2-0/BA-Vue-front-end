@@ -22,9 +22,14 @@
       id="edit-shipping-modal"
       :title="title"
       ref="create-shipping-modal"
+      class="custom-right-modal"
+      :static="true" 
       hide-footer
+      centered
+      no-fade
     >
       <FormCreateShippingAddress
+        v-if="editForm"
         :mode="mode"
         @closecshippingm="hideModal"
         :modal="true"
@@ -79,6 +84,10 @@ export default {
 </script>
 
 <style>
+.modal-header {
+  margin-top: 20px !important;
+  color: black
+}
 .custom-right-modal .modal-dialog {
   position: fixed;
   right: 0;

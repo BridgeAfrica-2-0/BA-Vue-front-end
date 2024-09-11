@@ -29,7 +29,7 @@
           </p>
         </div>
         <div class="bottom-info">
-          <span class="price">{{ product.price | locationPrice }} </span>
+          <span class="price">{{ product.price | locationPrice(rate) }} </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="gotoproduct(product)">
@@ -175,7 +175,7 @@
           </p>
         </div>
         <div class="bottom-info">
-          <span class="price">{{ product.price | locationPrice }} </span>
+          <span class="price">{{ product.price | locationPrice(rate) }} </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="gotoproduct(product)">
@@ -268,6 +268,8 @@
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import Skeleton from "@/components/skeleton";
 
+import { convertCurrency } from "@/helpers"
+
 
 import VLazyImage from "v-lazy-image/v2";
 
@@ -280,7 +282,7 @@ export default {
       per_page: 10,
       list: [],
       product: {},
-
+      rate: null,
       currentPage: 1,
       nextLoad: false
     };
@@ -302,7 +304,15 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     }
+  }, 
+
+  filters: {
+    locationPrice: function (ev, rate) {
+      return rate ? `${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    }
   },
+
+
 
   components: {
     ProductDetails,
@@ -312,6 +322,7 @@ export default {
   },
 
   created() {
+    this.onInit()
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
@@ -321,13 +332,10 @@ export default {
     }
   },
 
-  filters: {
-    locationPrice: function (ev) {
-      return ev + " XAF"
-    }
-  },
-
   methods: {
+    async onInit() {
+      this.rate = await convertCurrency()
+    },
     /**
      * This will be ignored on rendering
      * @private

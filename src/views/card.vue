@@ -149,7 +149,7 @@
         </div>
       </div>
       <OrderSummary></OrderSummary>
-      <!-- <div class="col-12 col-md-12 col-lg-3  color">
+      <div class="col-12 col-md-12 col-lg-3  color">
         <h3 class="my-2">{{ $t("general.cart_totals") }}</h3>
         <hr />
         <div class="row">
@@ -185,7 +185,7 @@
         </button>
         <br />
         <br />
-      </div> -->
+      </div> 
     </div>
   </div> -->
   <div>
@@ -277,8 +277,8 @@
           </splide>
 
         </div>
-        <div class="col-12 col-md-3 col-lg-3" style="background-color: #F7F7F7; height: 500px;">
-          Oder Summary
+        <div class="col-12 col-md-3 col-lg-3">
+          <OrderSummary />
         </div>
       </div>
     </div>

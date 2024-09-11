@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color: white;"> 
     <!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
 		<ProductDetails/> -->
     <!-- Stepper header start-->
@@ -27,7 +27,6 @@
       </b-row>
       <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
       <b-row v-if="current_step === 2 && !showRequestPayment">
-        <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
           <ShippingAdress
             @RefreshSipping="RefreshSipping"
@@ -35,11 +34,14 @@
             @loadActualComponent1="showActualComponent1"
           />
         </b-col>
-        <!-- Card Stepper for Shipping Address End -->
 
         <!-- Card Stepper for Order Start -->
-        <b-col class="my-4" cols="12">
+         <!-- This could be used for order review -->
+        <!-- <b-col class="my-4" cols="12">
           <Order @showoperator="handleShowOperator" ref="checkoutorder" />
+        </b-col> -->
+        <b-col class="mb-4" cols="6">
+          <ShippingMethods/>
         </b-col>
         <!-- Card Stepper for Order End -->
       </b-row>
@@ -93,26 +95,28 @@
   </div>
 </template>
 <script>
-import Order from "./Order";
+// import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
 import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
 import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
 import CreateShippingAddress from "./CreateShippingAddress";
+import ShippingMethods from "../shippingMethod/ShippingMethods.vue";
 import axios from "axios";
 // import ProductDetails from "./ProductDetails";
 
 export default {
   name: "PaymentStepper",
   components: {
-    Order,
+    // Order,
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,
     CreateShippingAddress,
     RequestPayment,
-    ConfirmPayment
+    ConfirmPayment,
+    ShippingMethods
   },
   data() {
     return {

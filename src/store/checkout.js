@@ -10,7 +10,13 @@ const state = {
   shippingsummary: [],
 
   cart: [],
-  cart_summary: {},
+  cart_summary: {
+    total_items: 0.0,
+    shipping: "FREE",
+    tax: 0.0,
+    total_cost: 0.0,
+    discount: 0.0,
+  },
   total: null,
 
   buisinessOrdered: [],
@@ -43,7 +49,7 @@ const actions = {
     await axios
       .get("cart/summary")
       .then((response) => {
-        console.log(response.data);
+        console.log("Cart Summary",   response.data);
 
         commit("setCartSummary", response.data.data);
       })
@@ -85,7 +91,7 @@ const actions = {
       ? "update/shipping-address/status"
       : "guest/shipping-address/update/status";
     await axios
-      .post(`${url}?shipping_address_id=${payload.id}`, {
+      .post(`${url}?shipping_address_id=${payload.id.id}`, {
         guest_identifier: getGuestIdentifier(),
       })
       .then((response) => {
@@ -126,14 +132,18 @@ const actions = {
       .delete(`shipping/shippingAddress/${id}/delete`)
       .then(() => {
         commit("deleteShippingAdd", id);
+        return ;
       })
       .catch((error) => {
         console.log(error);
+        return Promise.reject(error);
       });
   },
 
   createOrder({ commit }, { isLogin }) {
-    let url = isLogin ? "cart/create" : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
+    let url = isLogin
+      ? "cart/create"
+      : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
       .post(url)
       .then((data) => {
@@ -169,7 +179,7 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response);
+        console.log("get cart", response);
         commit("setCart", response.data);
       })
       .catch((error) => {

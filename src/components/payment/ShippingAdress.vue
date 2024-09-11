@@ -1,6 +1,18 @@
 <template>
-  <b-card class="">
-    <b-card-title class="headline-font-size font-weight-bold headline_and_btns">
+  <div class="row">
+  <div class="col-8">
+    <div class="row justify-content-between top-div">
+      <div>
+        <h4 class="title-style">  {{ $t("general.SHIPPING") }}</h4>
+      </div>
+      <div>
+      <b-button v-b-modal.create-shipping-modal type="submit" variant="primary" class="hire-btn">
+            {{ $t("general.New_Address") }}
+      </b-button>     
+      </div>
+      
+    </div>
+    <b-card-title class="headline-font-size font-weight-bold headline_and_btns mb-0">
       <span>{{ $t("general.Shipping_Address") }}</span>
       <!-- <div class="buttons">
 				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
@@ -15,13 +27,7 @@
         <CreateShippingModal
           :title="$t('general.Edit_Shipping_Address')"
           mode="edit"
-          :editForm="shippingsTab[0]"
-        />
-      </div>
-      <div class="col-12">
-        <ChangeShippingAddress
-          :shippingsTab="shippingsTab"
-          :currentShipping="1"
+          :editForm="shippingsTab[selectedIndex]"
         />
       </div>
     </div>
@@ -29,23 +35,66 @@
       class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
     >
       <div class="row w-100">
-        <div class="col-12">
-          <b-form-select
-            v-model="selectedShipping"
-            @change="shipping(selectedShipping)"
-          >
-            <b-form-select-option
-              v-for="shipping_item in shippingsTab"
-              :key="shipping_item.id"
-              :value="shipping_item.id"
-            >
-              {{ shipping_item.name }}, {{ shipping_item.phone }},
-              {{ shipping_item.country }}, {{ shipping_item.email }},
-              {{ shipping_item.region }}, {{ shipping_item.city }}
-            </b-form-select-option>
-          </b-form-select>
+        <div class=" dotted-border">
+        <div
+					class="ship-add w-100  d-flex justify-content-between align-items-start"
+					v-for="(shipping_item,index) in shippingsTab"
+					:key="shipping_item.id"
+				>  <div class="d-inline-flex">
+
+
+                        <div class="col-1">
+
+
+	   <input type="radio" :v-model="shipping_item.id"  @change="shipping(shipping_item)"   :checked="shipping_item.active==1"     name="shipping" value="">   </div>
+
+<div class="mb-3 d-flex justify-content-between">
+  <div class="flex-fill fixed-width">
+    <h5 class="h-color">Ship To</h5>
+    <p class="mb-1">{{ shipping_item.name }}</p>
+    <p class="mb-1">{{ shipping_item.city }},{{ shipping_item.region }}</p>
+    <p class="">{{ shipping_item.country }}</p> 
+  </div>
+
+  <div class="flex-fill fixed-width">
+    <h5 class="h-color">Contact Details</h5>
+    <p class="mb-1">{{ shipping_item.email }}</p>
+    <p class="">{{ shipping_item.phone }}</p>
+  </div>
+
+  <div class="flex-fill fixed-width">
+    <h5 class="h-color">Shipping Speed</h5>
+    <p class="mb-1">Business Days</p>
+    <p class="">FREE</p>
+  </div>
+</div>
+
+
+
+					</div>
+						<div class="row ml-2">
+              <div>
+                <a
+                  href="#"
+                  v-b-modal.edit-shipping-modal
+                  class="mr-1 mr-sm-2 icon-color"
+                  @click.prevent="openEditModal(index)"
+                  >
+                  <i  class='fas'>&#xf304;</i>
+                  </a>
+              </div>
+              <div class="ml-1">
+                <UpdatedConfirmOperation
+										:message="$t('general.Do_you_want_to_delete_this_shipping_address')"
+										@sendid="handleDeleteShipping"
+										:id_item="shipping_item.id"
+									/>
+              </div>
+
+						</div>
         </div>
       </div>
+        </div>
     </b-card-text>
     <div class="row" v-if="loading">
       <div class="col-12 d-flex justify-content-center">
@@ -56,24 +105,30 @@
         ></b-spinner>
       </div>
     </div>
-  </b-card>
+  </div>
+  <div class="col-4">
+   <OrderSummary/>
+  </div>
+</div>
 </template>
 
 <script>
-import ConfirmOperation from "./ConfirmOperation.vue";
+import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
-import ChangeShippingAddress from "./ChangeShippingAddress.vue";
+import OrderSummary from "../../components/order-summary/OrderSummary.vue";
 export default {
   name: "ShippingAddress",
   data() {
     return {
       loading: false,
       selectedShipping: null,
+      selectedIndex: null,
     };
   },
   components: {
+    UpdatedConfirmOperation,
     CreateShippingModal,
-    ChangeShippingAddress,
+    OrderSummary
   },
 
   methods: {
@@ -105,7 +160,20 @@ export default {
     },
 
     handleDeleteShipping(id) {
-      this.$store.dispatch("checkout/deleteShippingAdd", id);
+      this.$store.dispatch("checkout/deleteShippingAdd", id)
+      .then(() => {
+        this.$flashMessage.success({
+          message: "Shipping address deleted successfully",
+          time: 3000,
+        });
+      })
+      .catch((error) => {
+        this.flashMessage.show({
+              status: "error",
+              message: "The shipping address that is in use can not be deleted",
+              time: 5000,
+            });
+      });
     },
     showConfirmModal() {
       this.$emit("showconfirm");
@@ -118,6 +186,11 @@ export default {
     loadActualComponent1() {
       this.$emit("loadActualComponent1");
     },
+    openEditModal(index) {
+    this.selectedIndex = index;
+    this.$bvModal.show('edit-shipping-modal');
+  }
+  
   },
   computed: {
     shippingsTab() {
@@ -160,7 +233,51 @@ export default {
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
+ .title-style {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  color: black;
+ }
+.top-div {
+  margin-left: 1px !important;
+  margin-right: 18px !important;
+  margin-bottom: 20px !important;
+}
+.hire-btn {
+  margin-top: 2%;
+  width: 160px;
+  height: 46px;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.dotted-border {
+    border-top: 2px dotted #455a64; 
+    border-bottom: 2px dotted #455a64; 
+    padding: 10px 0; 
+  }
+ .icon-color {
+  color: black;
+ }
+ .h-color {
+  color: black;
+ }
+.fixed-width {
+  text-align: start;
+  width: 200px; 
+  margin-right: 10px; 
+}
 
+.fixed-width:last-child {
+  margin-right: 0; 
+}
+.title-font-size {
+  font-size: 18px !important;
+}
 .btnx {
   /* display: inline-block; */
   font-weight: 400;

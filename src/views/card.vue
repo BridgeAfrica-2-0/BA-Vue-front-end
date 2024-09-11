@@ -148,8 +148,8 @@
           </div>
         </div>
       </div>
-
-      <div class="col-12 col-md-12 col-lg-3  color">
+      <OrderSummary></OrderSummary>
+      <!-- <div class="col-12 col-md-12 col-lg-3  color">
         <h3 class="my-2">{{ $t("general.cart_totals") }}</h3>
         <hr />
         <div class="row">
@@ -162,8 +162,6 @@
         </div>
         <br />
         <form action="">
-          {{$t("general.SHIPPING")}}
-          <input type="text" class="form-control" />
           {{ $t("general.PROMO_CODE") }}
           <input type="text" class="form-control" />
           <button class="btn btncolor shadow">
@@ -187,7 +185,7 @@
         </button>
         <br />
         <br />
-      </div>
+      </div> -->
     </div>
   </div> -->
   <div>
@@ -288,10 +286,11 @@
 </template>
 <script>
 import navbar from "@/components/navbar.vue";
+import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import axios from "axios";
 import { getGuestIdentifier } from "../helpers";
 export default {
-  components: { navbar },
+  components: { navbar, OrderSummary },
   data() {
     return {
       currentPage: 1,
@@ -301,7 +300,7 @@ export default {
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
-        minimumFractionDigits: 2
+        minimumFractionDigits: 2,
       }),
       orderForCurrentPage: [],
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
@@ -327,7 +326,7 @@ export default {
         (val - 1) * this.per_page,
         val * this.per_page
       );
-    }
+    },
   },
 
   computed: {
@@ -355,25 +354,22 @@ export default {
 
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
   methods: {
     changePage(value) {
-      console.log("next page loading ");
-
       this.currentPage = value;
       let url = this.islogin
         ? "cart?page=" + value
-        : "guest/cart?page=" + value;
+        : `guest/cart?page=${value}&guest_identifier=${getGuestIdentifier()}`;
 
       this.$store
         .dispatch("checkout/next", url)
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.loader = false;
         })
 
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -382,7 +378,7 @@ export default {
       await this.$store
         .dispatch("checkout/getCartSummary")
         .then(() => {})
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -399,7 +395,7 @@ export default {
             this.currentPage
           );
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
           this.loading = false;
           this.error = true;
@@ -411,16 +407,16 @@ export default {
       if (quantity > 1) {
         await this.$store
           .dispatch("checkout/updateCart", { quantity: quantity, index: index })
-          .then(response => {
+          .then((response) => {
             this.getCartSummary();
           })
-          .catch(err => {
+          .catch((err) => {
             if (err) {
               this.getCartSummary();
               this.flashMessage.show({
                 status: "error",
 
-                message: "Quantity unavailable"
+                message: "Quantity unavailable",
               });
             }
           });
@@ -446,28 +442,28 @@ export default {
         : `guest/cart/item/${id}/delete?guest_identifier=${getGuestIdentifier()}`;
       await axios
         .delete(url)
-        .then(result => {
+        .then((result) => {
           this.getCartSummary();
           console.log(result);
           this.getCartItems();
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Item Removed Successfully"
+            message: "Item Removed Successfully",
           });
           this.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           this.flashMessage.show({
             status: "error",
             blockClass: "custom-block-class",
-            message: "Unable to remove item at this moment"
+            message: "Unable to remove item at this moment",
           });
           this.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

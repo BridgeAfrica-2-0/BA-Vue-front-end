@@ -162,17 +162,16 @@ export default {
     handleDeleteShipping(id) {
       this.$store.dispatch("checkout/deleteShippingAdd", id)
       .then(() => {
-        this.$flashMessage.success({
-          message: "Shipping address deleted successfully",
-          time: 3000,
-        });
       })
       .catch((error) => {
+        if(error)
+      {       
         this.flashMessage.show({
               status: "error",
               message: "The shipping address that is in use can not be deleted",
               time: 5000,
             });
+      }
       });
     },
     showConfirmModal() {

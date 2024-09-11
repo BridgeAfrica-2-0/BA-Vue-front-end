@@ -40,9 +40,6 @@
         <!-- <b-col class="my-4" cols="12">
           <Order @showoperator="handleShowOperator" ref="checkoutorder" />
         </b-col> -->
-        <b-col class="mb-4" cols="6">
-          <ShippingMethods/>
-        </b-col>
         <!-- Card Stepper for Order End -->
       </b-row>
       <!-- Stepper Page 1  End -->
@@ -102,7 +99,6 @@ import RequestPayment from "./RequestPayment";
 import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
 import CreateShippingAddress from "./CreateShippingAddress";
-import ShippingMethods from "../shippingMethod/ShippingMethods.vue";
 import axios from "axios";
 // import ProductDetails from "./ProductDetails";
 
@@ -116,7 +112,6 @@ export default {
     CreateShippingAddress,
     RequestPayment,
     ConfirmPayment,
-    ShippingMethods
   },
   data() {
     return {

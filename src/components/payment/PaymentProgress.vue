@@ -1,6 +1,7 @@
 <template>
   <b-row class="progress-content P-0">
     <b-col
+    cols="2"
       :disable="step.complete"
       class="progress-item-box p-2"
       :class="step.status ? 'progress-item-check' : ''"
@@ -25,13 +26,13 @@
           </a>
         </div>
         <div class="payment-progress-bar flex-grow-1">
-          <b-progress
+          <!-- <b-progress
             class="rounded-pill"
             height="8px"
             width="100%"
             :value="current_step >= i + 1 ? 100 : 0"
             :variant="current_step === i + 1 ? 'success' : 'secondary'"
-          ></b-progress>
+          ></b-progress> -->
         </div>
       </div>
     </b-col>

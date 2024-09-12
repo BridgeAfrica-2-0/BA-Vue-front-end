@@ -3,7 +3,7 @@
   <div class="order-summary">
     <div class="summary-section">
       <h3>Order Summary</h3>
-      <div class="summary-item">
+      <!-- <div class="summary-item">
         <span>Subtotal</span>
         <span>${{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
       </div>
@@ -25,7 +25,7 @@
       <p class="discount">
         You will save ${{ cartSummary?.discount.toFixed(2) ?? "" }} with this
         order
-      </p>
+      </p> -->
     </div>
     <div>
       <button @click="submitOrder" class="submit-order-btn">

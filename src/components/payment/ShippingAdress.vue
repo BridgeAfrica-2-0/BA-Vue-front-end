@@ -109,6 +109,12 @@
   <div class="col-4">
    <OrderSummary/>
   </div>
+  <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl" :hide-header-close="isCheckoutRoute"  
+  :no-close-on-backdrop="isCheckoutRoute"  
+  :no-fade="isCheckoutRoute" 
+  :backdrop="!isCheckoutRoute" >
+      <login @success="success" @hideAuthModal="hideAuthModal"  />
+    </b-modal>
 </div>
 </template>
 
@@ -116,6 +122,7 @@
 import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
 import OrderSummary from "../../components/order-summary/OrderSummary.vue";
+import login from "@/components/Login";
 export default {
   name: "ShippingAddress",
   data() {
@@ -123,12 +130,14 @@ export default {
       loading: false,
       selectedShipping: null,
       selectedIndex: null,
+      showModal: false,
     };
   },
   components: {
     UpdatedConfirmOperation,
     CreateShippingModal,
-    OrderSummary
+    OrderSummary,
+    login
   },
 
   methods: {
@@ -158,7 +167,12 @@ export default {
         })
         .catch(() => {});
     },
-
+    hideAuthModal() {
+      this.showModal = false;
+    },
+    success() {
+      this.showModal = false;
+    },
     handleDeleteShipping(id) {
       this.$store.dispatch("checkout/deleteShippingAdd", id)
       .then(() => {
@@ -192,6 +206,12 @@ export default {
   
   },
   computed: {
+     isCheckoutRoute(){
+      return this.$route.name === 'checkout' || this.$route.path === '/checkout';
+     },
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
     shippingsTab() {
       console.log(this.$store.state.checkout.allShipping);
       return this.$store.state.checkout.allShipping;
@@ -224,6 +244,10 @@ export default {
   created() {
     // Initialize selectedShipping with the ID of the active shipping item if available
     this.selectedShipping = this.selectedShippingId;
+    if(!(this.$store.getters["auth/isLogged"]))
+  {
+    this.showModal = true;
+  }
   },
 };
 </script>

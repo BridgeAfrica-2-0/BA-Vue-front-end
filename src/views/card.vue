@@ -31,6 +31,8 @@
                         type="number"
                         class="product-quantity numbersize form-control"
                         @change="changeQuantity($event,cart_item.item_id)"
+                        :max="cart_item.stock_available"
+                        :min="1"
                         v-model="cart_item.quantity"
                       />
                     </div>

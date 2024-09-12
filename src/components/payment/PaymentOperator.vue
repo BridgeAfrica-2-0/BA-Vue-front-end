@@ -66,7 +66,7 @@
   <!-- </div>
   </b-card> -->
   <div>
-    <div class="row pt-5">
+    <div class="row">
       <div class="col-12 col-md-8 col-lg-8">
         <div class="d-flex justify-content-between">
           <h4 class="title"> {{ $t("general.PAYMENT") }}</h4>
@@ -114,6 +114,53 @@
             <p class="mb-0 mx-4 title-font-size font-weight-bold">
               MTN Mobile Money
             </p>
+          </div>
+        </div>
+
+        <div v-if="operator === 'MTN'">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">Enter your MTN Mobile Money number</p>
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1"> 
+                  <b-form-input
+                    class="phone-input"
+                    id="phone-input"
+                    type="tel"
+                    required
+                  ></b-form-input>
+                </div>
+                <div>
+                  <b-button variant="primary" class="pay-btn">
+                    Pay: {{ formatMoney(price) }}
+                  </b-button>
+                </div>
+              </div>
+              <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
+            </div>
+          </div>
+        </div>
+        <div v-if="operator === 'ORANGE'">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">Enter your ORANGE Mobile Money number</p>
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1"> 
+                  <b-form-input
+                    class="phone-input"
+                    id="phone-input"
+                    type="tel"
+                    required
+                  ></b-form-input>
+                </div>
+                <div>
+                  <b-button variant="primary" class="pay-btn">
+                    Pay: {{ formatMoney(price) }}
+                  </b-button>
+                </div>
+              </div>
+              <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -244,5 +291,28 @@ export default {
   border: 2px solid lightgray;
   padding: 5px;
   border-radius: 7.5px;
+}
+
+.pay-btn {
+  color: #fff;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  font-weight: 600;
+  border-radius: 0px;
+  white-space: nowrap; 
+  padding: 0.5rem 1rem; 
+  min-width: 100px;
+}
+
+.price-note {
+  color: #ACACAC;
+  font-size: 14px;
+  margin-top: 15px;
+  margin-bottom: 0 !important;
+}
+
+.phone-input {
+  border-start-end-radius: 0px !important;
+  border-end-end-radius: 0px !important;
 }
 </style>

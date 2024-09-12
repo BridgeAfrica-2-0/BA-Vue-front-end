@@ -2,55 +2,55 @@
   <div>
     <navbar />
     <div class="cart-wrapper" style="margin-bottom: 300px;">
-      <h1 class="mt-5 my-bag">My Cart (1)</h1>
+      <h1 class="mt-5 my-bag">My Cart ({{ cart.data[0].cartItems }})</h1>
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
-          <div v-if="!loading">
-            <div class="d-flex justify-content-between card-top-content">
-              <h4>Supplier 1</h4>
-              <a href="" class="clear">Clear</a>
-            </div>
-            <div v-for="(cart_item, i) in cart.data" :key="i">
-              <div class="d-flex mt-4 cart-item-wrapper">
-                <img :src="cart_item.product_picture" class="product-image" />
-                <div class="pl-4">
-                  <h6 class="product-name">{{ cart_item.product_name }}</h6>
-                  <p class="product-details">Color: Black</p>
-                  <p class="product-details">Size: 6.5</p>
-                  <p class="product-details">Width: Medium</p>
+          <div v-for="(business, i) in cart.data[0].businesses" :key="i">
+            <div v-if="!loading" class="mb-5">
+              <div class="d-flex justify-content-between card-top-content">
+                <h4>{{ business.business_name }}</h4>
+                <a href="" class="clear">Clear</a>
+              </div>
+              <div v-for="(cart_item, i) in business.items" :key="i">
+                <div class="d-flex mt-4 cart-item-wrapper ml-4">
+                  <img :src="cart_item.product_picture" class="product-image" />
+                  <div class="pl-4">
+                    <h6 class="product-name">{{ cart_item.product_name }}</h6>
+                    <p class="product-details">Color: Black</p>
+                    <p class="product-details">Size: 6.5</p>
+                    <p class="product-details">Width: Medium</p>
 
-                  <div
-                    class="d-flex align-items-center justify-content-between mt-3"
-                  >
-                    <p class="mt-3">
-                      <img class="heart" src="assets/images/heart.png" alt="" />
-                      <a href="" class="save">Save</a>
-                    </p>
-                    <select class="product-quantity">
-                      <option
-                        v-for="number in 10"
-                        :key="number"
-                        :value="number"
-                        >{{ number }}</option
-                      >
-                    </select>
+                    <div
+                      class="d-flex align-items-center justify-content-between mt-3"
+                    >
+                      <p class="mt-3">
+                        <img class="heart" src="assets/images/heart.png" alt="" />
+                        <a href="" class="save">Save</a>
+                      </p>
+                      <input
+                        type="number"
+                        class="product-quantity numbersize form-control"
+                        @change="changeQuantity($event,cart_item.item_id)"
+                        v-model="cart_item.quantity"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="product-prices d-flex">
-                  <div class="pr-5">
-                    <h6 class="discount-price">
-                      {{ formatMoney(cart_item.product_price) }}
-                    </h6>
-                    <h6 class="actual-price">
-                      {{ formatMoney(cart_item.product_price) }}
-                    </h6>
+                  <div class="product-prices d-flex">
+                    <div class="pr-5">
+                      <h6 class="discount-price">
+                        {{ cart_item.discount_price &&  cart_item.discount_price > 0 ? formatMoney(cart_item.product_price - cart_item.discount_price) : formatMoney(cart_item.product_price)}}
+                      </h6>
+                      <h6 class="actual-price">
+                        {{ cart_item.discount_price && cart_item.discount_price > 0 ? formatMoney(cart_item.product_price) : "" }}
+                      </h6>
+                    </div>
+                    <img
+                      class="cross"
+                      src="assets/images/cross.png"
+                      @click="removeIconFromCart(cart_item.product_id)"
+                      alt="cross"
+                    />
                   </div>
-                  <img
-                    class="cross"
-                    src="assets/images/cross.png"
-                    @click="removeIconFromCart(cart_item.product_id)"
-                    alt="cross"
-                  />
                 </div>
               </div>
             </div>
@@ -324,7 +324,7 @@ export default {
 }
 
 .card-top-content {
-  margin-right: 120px;
+  margin-right: 150px;
 }
 
 .card-top-content h4 {

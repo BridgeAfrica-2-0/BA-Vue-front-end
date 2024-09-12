@@ -5,24 +5,25 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <!-- <span>${{ orderSummary?.total_items.toFixed(2) }}</span> -->
+        <span>${{ orderSummary?.total_items.toFixed(2) ?? "" }}</span>
       </div>
       <div class="summary-item">
         <span>Local Shipping</span>
-        <span>{{ orderSummary?.shipping }}</span>
+       
+        <span>{{ orderSummary?.shipping ?? "" }}</span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax</span>
-        <!-- <span>${{ orderSummary?.tax.toFixed(2) }}</span> -->
+        <span>${{ orderSummary?.tax.toFixed(2) ?? 0.0 }}</span>
       </div>
       <hr />
       <div class="summary-item total">
         <span>Total</span>
-        <!-- <span>${{ orderSummary?.total_cost.toFixed(2) }}</span> -->
+        <span>${{ orderSummary?.total_cost.toFixed(2) ?? "" }}</span>
       </div>
       <hr />
       <p class="discount">
-        <!-- You will save ${{ orderSummary?.discount.toFixed(2) }} with this order -->
+        You will save ${{ orderSummary?.discount.toFixed(2) ?? "" }} with this order
       </p>
     </div>
     <div>
@@ -67,6 +68,7 @@ export default {
       // Handle order submission logic here
       console.log("Order submitted:", this.orderSummary);
       this.$router.push("/checkout");
+      // this.$emit("showoperator");
     },
   },
   mounted() {

@@ -1,9 +1,7 @@
 <template>
   <div style="background-color: white;"> 
-    <!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
-		<ProductDetails/> -->
-    <!-- Stepper header start-->
 
+    <!-- Stepper header start-->
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
       <PaymentProgress
@@ -15,18 +13,9 @@
     </b-container>
     <!-- Stepper header end-->
 
+
     <b-container fluid="lg">
-      <!-- <b-row v-if="current_step === 1 && actualComponent1"> -->
       <b-row v-if="current_step === 1 && !showRequestPayment">
-        <b-col class="my-4" cols="12">
-          <CreateShippingAddress
-            :currentStep="current_step"
-            @switchstep="handleSwitchStep"
-          />
-        </b-col>
-      </b-row>
-      <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
-      <b-row v-if="current_step === 2 && !showRequestPayment">
         <b-col class="my-4" cols="12">
           <ShippingAdress
             @RefreshSipping="RefreshSipping"
@@ -34,33 +23,22 @@
             @loadActualComponent1="showActualComponent1"
           />
         </b-col>
-
-        <!-- Card Stepper for Order Start -->
-         <!-- This could be used for order review -->
-        <!-- <b-col class="my-4" cols="12">
-          <Order @showoperator="handleShowOperator" ref="checkoutorder" />
-        </b-col> -->
-        <b-col class="mb-4" cols="6">
-          <ShippingMethods/>
-        </b-col>
-        <!-- Card Stepper for Order End -->
       </b-row>
-      <!-- Stepper Page 1  End -->
-
-      <!-- <b-row v-if="current_step === 3 && actualComponent3"> -->
+      <b-row v-if="current_step === 2 && !showRequestPayment">
+        <b-col class="my-4" cols="12">
+           <PaymentOperator
+            @showoperator="handleShowOperator"
+            @showreview="handleShowReview"
+            :price="order_price"
+          />
+        </b-col>
+      </b-row>
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <!-- <PaymentOperator
-            @loadActualComponent2="showActualComponent2"
-            @requestpayment="handleRequestPayment"
-            @showreview="handleShowReview"
-            :price="order_price"
-          /> -->
-
-          <PaymentOperator
-            @requestpayment="handleRequestPayment"
-            @showreview="handleShowReview"
-            :price="order_price"
+          <ShippingAdress
+            @RefreshSipping="RefreshSipping"
+            @loadActualComponent3="showActualComponent3"
+            @loadActualComponent1="showActualComponent1"
           />
         </b-col>
       </b-row>
@@ -87,10 +65,6 @@
           <ConfirmPayment />
         </b-col>
       </b-row>
-
-      <!-- <div class="text-center">
-					<button class="backBtn mt-2 float-left" @click="onClickBack"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-				 </div> -->
     </b-container>
   </div>
 </template>
@@ -101,8 +75,7 @@ import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
 import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
-import CreateShippingAddress from "./CreateShippingAddress";
-import ShippingMethods from "../shippingMethod/ShippingMethods.vue";
+// import CreateShippingAddress from "./CreateShippingAddress";
 import axios from "axios";
 // import ProductDetails from "./ProductDetails";
 
@@ -113,10 +86,9 @@ export default {
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,
-    CreateShippingAddress,
+    // CreateShippingAddress,
     RequestPayment,
     ConfirmPayment,
-    ShippingMethods
   },
   data() {
     return {
@@ -124,19 +96,19 @@ export default {
       max_step: 5,
       steps: [
         {
-          text: this.$t("general.Shipping_Address"),
+          text: this.$t("general.Stepper_shipping"),
           status: true,
-          complete: false
+          complete: true
         },
         {
-          text: this.$t("general.Checkout"),
-          status: false,
-          complete: false
+          text: this.$t("general.Payment"),
+          status: true,
+          complete: true
         },
         {
-          text: this.$t("general.Confirm_Payment"),
-          status: false,
-          complete: false
+          text: this.$t("general.Review"),
+          status: true,
+          complete: true
         }
       ],
       sizeStepperIndicator: "md",
@@ -225,11 +197,11 @@ export default {
       this.steps[next_step - 1].status = true;
     },
 
-    handleShowOperator(price, order_ids) {
+    handleShowOperator() {
       // this.showOperators = true;
       // this.showReview = false;
-      this.order_price = price;
-      this.order_ids = order_ids;
+      // this.order_price = price;
+      // this.order_ids = order_ids;
       this.onClickNext();
     },
 
@@ -260,17 +232,17 @@ export default {
       this.showRequestPayment = false;
       this.steps = [
         {
-          text: "Shipping Address",
+          text: "SHIPPING",
           status: true,
           complete: false
         },
         {
-          text: "Checkout",
+          text: "PAYMENT",
           status: false,
           complete: false
         },
         {
-          text: "Confirm Payment",
+          text: "REVIEW",
           status: false,
           complete: false
         }

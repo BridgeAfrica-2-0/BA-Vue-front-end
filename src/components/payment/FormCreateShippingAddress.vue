@@ -281,7 +281,7 @@ export default {
             this.loading = false;
             this.errorAppend = false;
             this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
-            this.form = ''
+            this.form = {};
             if (this.modal) {
               this.$emit("closecshippingm");
             } else {
@@ -291,7 +291,7 @@ export default {
           .catch(() => {
             this.loading = false;
             this.errorAppend = true;
-            this.form = ''
+            this.form = {};
             if (this.modal) {
               this.$emit("closecshippingm");
             }

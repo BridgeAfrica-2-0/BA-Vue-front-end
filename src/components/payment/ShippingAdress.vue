@@ -50,20 +50,20 @@
 
 <div class="mb-3 d-flex justify-content-between">
   <div class="flex-fill fixed-width">
-    <h5 class="h-color">Ship To</h5>
+    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
     <p class="mb-1">{{ shipping_item.name }}</p>
     <p class="mb-1">{{ shipping_item.city }},{{ shipping_item.region }}</p>
     <p class="">{{ shipping_item.country }}</p> 
   </div>
 
   <div class="flex-fill fixed-width">
-    <h5 class="h-color">Contact Details</h5>
+    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
     <p class="mb-1">{{ shipping_item.email }}</p>
     <p class="">{{ shipping_item.phone }}</p>
   </div>
 
   <div class="flex-fill fixed-width">
-    <h5 class="h-color">Shipping Speed</h5>
+    <h5 class="h-color">{{$t("general.Shipping_speed") }}</h5>
     <p class="mb-1">Business Days</p>
     <p class="">FREE</p>
   </div>
@@ -162,17 +162,16 @@ export default {
     handleDeleteShipping(id) {
       this.$store.dispatch("checkout/deleteShippingAdd", id)
       .then(() => {
-        this.$flashMessage.success({
-          message: "Shipping address deleted successfully",
-          time: 3000,
-        });
       })
       .catch((error) => {
+        if(error)
+      {       
         this.flashMessage.show({
               status: "error",
               message: "The shipping address that is in use can not be deleted",
               time: 5000,
             });
+      }
       });
     },
     showConfirmModal() {

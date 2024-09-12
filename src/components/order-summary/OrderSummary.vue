@@ -9,7 +9,6 @@
       </div>
       <div class="summary-item">
         <span>Local Shipping</span>
-
         <span>{{ cartSummary?.shipping ?? "" }}</span>
       </div>
       <div class="summary-item">
@@ -54,10 +53,8 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters } from "vuex";
-
 export default {
   data() {
     return {
@@ -115,7 +112,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .order-summary {
   width: 100%;
@@ -125,7 +121,7 @@ export default {
 }
 .summary-section {
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #F8F9FA;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -152,7 +148,7 @@ export default {
 }
 .submit-order-btn {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #FF9900;
   color: white;
   padding: 10px;
   border: none;

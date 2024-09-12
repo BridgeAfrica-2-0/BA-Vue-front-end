@@ -136,7 +136,7 @@
                   </b-button>
                 </div>
               </div>
-              <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
+              <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
             </div>
           </div>
         </div>

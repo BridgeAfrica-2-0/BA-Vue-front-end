@@ -5,30 +5,31 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span>${{ orderSummary?.total_items.toFixed(2) ?? "" }}</span>
+        <span>${{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
       </div>
       <div class="summary-item">
         <span>Local Shipping</span>
-       
-        <span>{{ orderSummary?.shipping ?? "" }}</span>
+
+        <span>{{ cartSummary?.shipping ?? "" }}</span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax</span>
-        <span>${{ orderSummary?.tax.toFixed(2) ?? 0.0 }}</span>
+        <span>${{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
       </div>
       <hr />
       <div class="summary-item total">
         <span>Total</span>
-        <span>${{ orderSummary?.total_cost.toFixed(2) ?? "" }}</span>
+        <span>${{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
       </div>
       <hr />
       <p class="discount">
-        You will save ${{ orderSummary?.discount.toFixed(2) ?? "" }} with this order
+        You will save ${{ cartSummary?.discount.toFixed(2) ?? "" }} with this
+        order
       </p>
     </div>
     <div>
       <button @click="submitOrder" class="submit-order-btn">
-        Submit your order
+        {{ getButtonText }}
       </button>
       <small>
         By clicking Submit Your Order, you are agreeing to our Terms of use and
@@ -58,21 +59,59 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      cartSummary: {
+        total_items: 0,
+        shipping: "FREE",
+        tax: 0.0,
+        total_cost: 0.0,
+        sub_total: 0.0,
+        discount: 0.0,
+      },
+      currentStep: 0,
+    };
+  },
   computed: {
     ...mapGetters({
       orderSummary: "checkout/getCartSummary",
+      getCurrentStep: "checkout/getCurrentStep",
     }),
+    getButtonText() {
+      switch (this.currentStep) {
+        case 0:
+          return "Submit your order";
+        case 1:
+          return "Continue to payment";
+        case 2:
+          return "Confirm order";
+        default:
+          return "Submit your order";
+      }
+    },
   },
   methods: {
     submitOrder() {
-      // Handle order submission logic here
-      console.log("Order submitted:", this.orderSummary);
       this.$router.push("/checkout");
       // this.$emit("showoperator");
     },
   },
   mounted() {
-    console.log("order summary", this.orderSummary);
+    if (this.orderSummary) {
+      this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
+    }
+  },
+  watch: {
+    orderSummary(newVal) {
+      if (newVal) {
+        this.cartSummary = { ...this.cartSummary, ...newVal };
+      }
+    },
+    getCurrentStep(newVal) {
+      if (newVal) {
+        this.currentStep = newVal;
+      }
+    },
   },
 };
 </script>
@@ -129,7 +168,7 @@ export default {
 }
 .help-section h4 {
   font-weight: bolder;
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 .help-item {
   display: flex;

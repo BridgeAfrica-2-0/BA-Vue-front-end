@@ -11,13 +11,15 @@ const state = {
 
   cart: [],
   cart_summary: {
-    total_items: 0.0,
+    total_items: 0,
     shipping: "FREE",
     tax: 0.0,
     total_cost: 0.0,
+    sub_total: 0.0,
     discount: 0.0,
   },
   total: null,
+  currentStep: 0,
 
   buisinessOrdered: [],
   shippingAddressChanged: false,
@@ -26,6 +28,7 @@ const getters = {
   getAllShipping: (state) => state.allShipping,
   getCartSummary: (state) => state.cart_summary,
   shippingAddressChanges: (state) => state.shippingAddressChanged,
+  getCurrentStep: (state) => state.currentStep,
 };
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
@@ -37,7 +40,6 @@ const actions = {
     await axios
       .post(url, { ...newShippingAdd, guest_identifier })
       .then((response) => {
-        console.log(response.data);
         commit;
       })
       .catch((error) => {
@@ -45,12 +47,14 @@ const actions = {
       });
   },
 
-  async getCartSummary({ commit }) {
-    await axios
-      .get("cart/summary")
-      .then((response) => {
-        console.log("Cart Summary",   response.data);
+  async getCartSummary({ commit }, isLogin) {
+    const url = isLogin
+      ? "cart/summary"
+      : "guest/cart/summary?guest_identifier=" + getGuestIdentifier();
 
+    await axios
+      .get(url)
+      .then((response) => {
         commit("setCartSummary", response.data.data);
       })
       .catch((error) => {
@@ -86,7 +90,6 @@ const actions = {
   },
 
   async choseShipping({ commit }, payload) {
-    console.log("payload", payload);
     let url = payload.isLogin
       ? "update/shipping-address/status"
       : "guest/shipping-address/update/status";
@@ -107,9 +110,7 @@ const actions = {
       .post("cart/update-quantity/" + payload.index, {
         quantity: payload.quantity,
       })
-      .then((response) => {
-        console.log(response);
-      });
+      .then((response) => {});
   },
 
   async getAllShippingAdd({ commit }, { islogin, prefix = "" }) {
@@ -120,7 +121,6 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
         commit("setAllShipping", response.data.data);
       })
       .catch((error) => {
@@ -132,10 +132,9 @@ const actions = {
       .delete(`shipping/shippingAddress/${id}/delete`)
       .then(() => {
         commit("deleteShippingAdd", id);
-        return ;
+        return;
       })
       .catch((error) => {
-        console.log(error);
         return Promise.reject(error);
       });
   },
@@ -238,6 +237,9 @@ const actions = {
         console.log(error);
       });
   },
+  updateStepper({ commit }, step) {
+    commit("updateStep", step);
+  },
 };
 const mutations = {
   setAllShipping: (state, newShippingTab) =>
@@ -273,11 +275,10 @@ const mutations = {
     shippingUp.data.forEach(function(value, key) {
       shippingData[key] = value;
     });
-
-    console.log("mutation update", shippingData);
   },
   shippingAddressChanged: (state) =>
     (state.shippingAddressChanged = !state.shippingAddressChanged),
+  updateStep: (state, nextStep) => (state.currentStep = nextStep),
 };
 export default {
   namespaced: true,

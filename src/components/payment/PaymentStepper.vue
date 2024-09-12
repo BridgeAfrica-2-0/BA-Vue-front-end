@@ -1,6 +1,5 @@
 <template>
-  <div style="background-color: white;"> 
-
+  <div style="background-color: white;">
     <!-- Stepper header start-->
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
@@ -12,7 +11,6 @@
       <hr class="h-divider" />
     </b-container>
     <!-- Stepper header end-->
-
 
     <b-container fluid="lg">
       <b-row v-if="current_step === 1 && !showRequestPayment">
@@ -26,7 +24,7 @@
       </b-row>
       <b-row v-if="current_step === 2 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-           <PaymentOperator
+          <PaymentOperator
             @showoperator="handleShowOperator"
             @showreview="handleShowReview"
             :price="order_price"
@@ -98,18 +96,18 @@ export default {
         {
           text: this.$t("general.Stepper_shipping"),
           status: true,
-          complete: true
+          complete: true,
         },
         {
           text: this.$t("general.Payment"),
           status: true,
-          complete: true
+          complete: true,
         },
         {
           text: this.$t("general.Review"),
           status: true,
-          complete: true
-        }
+          complete: true,
+        },
       ],
       sizeStepperIndicator: "md",
       showOperators: false,
@@ -122,7 +120,7 @@ export default {
       loading: false,
       actualComponent1: true,
       actualComponent2: false,
-      actualComponent3: false
+      actualComponent3: false,
     };
   },
   computed: {
@@ -134,11 +132,13 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
 
   mounted() {
     this.loading = true;
+    this.$store.dispatch("checkout/updateStepper", 1);
+    this.$store.dispatch("checkout/getCartSummary");
     this.$store
       .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
       .then(() => {
@@ -218,13 +218,13 @@ export default {
         {
           text: "Request Payment",
           status: true,
-          complete: false
+          complete: false,
         },
         {
           text: "Confirm Payment",
           status: false,
-          complete: false
-        }
+          complete: false,
+        },
       ];
     },
     handleChangePayment() {
@@ -234,18 +234,18 @@ export default {
         {
           text: "SHIPPING",
           status: true,
-          complete: false
+          complete: false,
         },
         {
           text: "PAYMENT",
           status: false,
-          complete: false
+          complete: false,
         },
         {
           text: "REVIEW",
           status: false,
-          complete: false
-        }
+          complete: false,
+        },
       ];
     },
     handleConfirmPayment({ number, amount, operator }) {
@@ -257,49 +257,49 @@ export default {
         phone: number,
         amount: amount,
         orderId: this.order_ids.toString(),
-        operator: operator
+        operator: operator,
       };
       let url = null;
       if (operator == "ORANGE") {
         this.loading = true;
-        const userJson = localStorage.getItem('user');
+        const userJson = localStorage.getItem("user");
 
-      let userId = null;
-      const userObject = JSON.parse(userJson);
-      if(userObject)
-      {
-        try {
-        userId = userObject.user.id;
-        } catch (error) {
-        console.error('Error parsing user data from localStorage:', error);
+        let userId = null;
+        const userObject = JSON.parse(userJson);
+        if (userObject) {
+          try {
+            userId = userObject.user.id;
+          } catch (error) {
+            console.error("Error parsing user data from localStorage:", error);
+          }
         }
-      }
 
-        url = this.islogin ?`orange/start-orange-money-transaction?userId=${userId}`: "orange/start-orange-money-transaction";
+        url = this.islogin
+          ? `orange/start-orange-money-transaction?userId=${userId}`
+          : "orange/start-orange-money-transaction";
 
         axios
           .post(url, data)
-          .then(response => {
+          .then((response) => {
             // this.showConfirmPayment = true;
             //  this.onClickNext();
-            if(response.data)
-          {
-            this.flashMessage.show({
-              status: "success",
-              message: "Operation Successful! "
-            });
-            setTimeout(() => {
-             this.$router.push({ path: '/' }); 
-              }, 3000); 
-          }
+            if (response.data) {
+              this.flashMessage.show({
+                status: "success",
+                message: "Operation Successful! ",
+              });
+              setTimeout(() => {
+                this.$router.push({ path: "/" });
+              }, 3000);
+            }
             this.loading = false;
             console.log("testing orange");
           })
-          .catch(error => {
+          .catch((error) => {
             this.flashMessage.show({
               status: "error",
 
-              message: "Transaction Failed"
+              message: "Transaction Failed",
             });
             console.dir(error);
 
@@ -314,18 +314,18 @@ export default {
 
         axios
           .post(url, data)
-          .then(response => {
+          .then((response) => {
             this.showConfirmPayment = true;
             this.onClickNext();
             console.log(response);
             this.loading = false;
           })
-          .catch(error => {
+          .catch((error) => {
             this.$refs.request_payment.paymenterror(error);
             this.flashMessage.show({
               status: "error",
 
-              message: "Transaction Failed"
+              message: "Transaction Failed",
             });
             console.dir(error);
             this.loading = false;
@@ -333,8 +333,8 @@ export default {
       }
     },
 
-    shownextComponent() {}
-  }
+    shownextComponent() {},
+  },
 };
 </script>
 

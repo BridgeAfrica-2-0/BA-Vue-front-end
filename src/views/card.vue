@@ -166,6 +166,10 @@ export default {
     this.getCartSummary();
     console.log("loading cart items");
   },
+  mounted() {
+    this.$store.dispatch("checkout/updateStepper", 0);
+    this.$store.dispatch("checkout/getCartSummary");
+  },
   watch: {
     currentPage: function(val) {
       this.orderForCurrentPage = this.cart["data"].slice(

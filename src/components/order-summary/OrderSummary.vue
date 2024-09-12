@@ -68,6 +68,7 @@ export default {
       // Handle order submission logic here
       console.log("Order submitted:", this.orderSummary);
       this.$router.push("/checkout");
+      // this.$emit("showoperator");
     },
   },
   mounted() {

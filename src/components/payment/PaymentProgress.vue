@@ -101,7 +101,7 @@ export default {
   background-color: #6c757d;
 }
 .avatar-color-success {
-  background-color: #28a745;
+  background-color: #e75c18;
 }
 @media only screen and (max-width: 768px) {
   .title-font-size {
@@ -134,7 +134,7 @@ export default {
     position: relative;
   }
   .progress-item-check {
-    background: #28a745;
+    background: #e75c18;
   }
   .progress-item-box:not(:last-child):after {
     position: absolute;

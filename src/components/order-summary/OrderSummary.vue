@@ -24,7 +24,7 @@
       <hr />
       <p class="discount">
         You will save ${{ orderSummary?.discount.toFixed(2) ?? "" }} with this order
-      </p>
+      </p> -->
     </div>
     <div>
       <button @click="submitOrder" class="submit-order-btn">

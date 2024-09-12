@@ -491,5 +491,14 @@
   "Hot_Businesses": "Hot Businesses",
   "No_item": "No item",
   "Unable_to_Create_Your_Business": "Unable to Create Your Business",
-  "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account."
+  "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account.",
+
+  "PAYMENT" : "Payment",
+  "ADD_PAYMENT_METHOD": "Add Payment Method",
+  "SAVED_PAYMENT": "Saved Payment",
+  "CARD_NUMBER" : "Card Number",
+  "EXPIRATION_DATE" : "Expiration Date",
+  "CVV" : "CVV",
+  "SAVE_CARD_DETAILS" : "Save card details",
+  "PAYMENT_NOTICE" : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy."
 }

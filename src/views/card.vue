@@ -324,7 +324,7 @@ export default {
 }
 
 .card-top-content {
-  margin-right: 150px;
+  margin-right: 120px;
 }
 
 .card-top-content h4 {

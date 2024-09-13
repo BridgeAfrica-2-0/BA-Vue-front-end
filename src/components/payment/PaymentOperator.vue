@@ -65,17 +65,24 @@
       </div> -->
   <!-- </div>
   </b-card> -->
-  <div>
+  <div class="col">
+    <div class="mb-3">
+      <b-button
+          v-b-modal.edit-shipping-modal
+          variant="primary"
+          @click="goBack()"
+          class="back-btn"
+        >
+        <i class="fas fa-arrow-alt-circle-left mr-3"></i>
+          BACK
+        </b-button>
+    </div>
     <div class="row">
       <div class="col-12 col-md-8 col-lg-8">
         <div class="d-flex justify-content-between">
           <h4 class="title"> {{ $t("general.PAYMENT") }}</h4>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <CreatePaymentModal />
-          </div>
-        </div>
+        <h5 class="saved-payment">{{ $t("general.SAVED_PAYMENT") }}</h5>
         <hr class="dotted-hr" />
 
         <div class="my-4 operator d-flex align-items-center">
@@ -209,12 +216,27 @@ export default {
     handleSubmit(){
       console.log("step 3 calling")
       this.$emit("handleNextStep", 3);
-    }
+    },
+    goBack()
+    {
+      this.$emit("handleNextStep", 2);
+    },
   }
 };
 </script>
 
 <style scoped>
+.back-btn {
+  width: 100px;
+  height: 46px;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 10px;
+}
 /* .d-flex .img {
 		display: block;
 		width: 60px !important;

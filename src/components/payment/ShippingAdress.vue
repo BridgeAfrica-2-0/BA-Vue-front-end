@@ -1,4 +1,16 @@
 <template>
+  <div class="col">
+    <div v-if="review" class="mb-3">
+      <b-button
+          v-b-modal.edit-shipping-modal
+          variant="primary"
+          @click="goBack()"
+          class="back-btn"
+        >
+        <i class="fas fa-arrow-alt-circle-left mr-3"></i>
+          BACK
+        </b-button>
+    </div>
   <div class="row">
     <div class="col-8">
       <div class="row justify-content-between top-div" v-if="!review">
@@ -26,7 +38,7 @@
         <b-button
           :v-b-modal="!review ? 'edit-shipping-modal' : null"
           variant="primary"
-          @click="review ? handleEditClick() : openEditModal(selectedIndex)"
+          @click="onEdit()"
           class="edit-btn"
         >
           <i class="fas mr-3">&#xf304;</i>
@@ -184,6 +196,7 @@
       <login @success="success" @hideAuthModal="hideAuthModal" />
     </b-modal>
   </div>
+</div>
 </template>
 
 <script>
@@ -270,8 +283,32 @@ export default {
     },
     handleSubmit() {
       console.log("calling handle submit", 2);
+      if(this.review)
+    {
       this.$emit("handleNextStep", 3);
+    }
+    else 
+    {
+
+      this.$emit("handleNextStep", 2);
+    }
     },
+    goBack()
+    {
+      if(this.review)
+    {
+      this.$emit("handleNextStep", 1);
+    }
+    else 
+    {
+
+      this.$emit("handleNextStep", 2);
+    }
+    },
+    onEdit()
+    {
+      this.$emit("handleNextStep", 1);
+    }
   },
   computed: {
     isCheckoutRoute() {
@@ -310,6 +347,8 @@ export default {
   },
   mounted() {
     this.loading = true;
+    this.selectedShipping = this.selectedShippingId;
+    this.activeData = this.activeDataVal;
     this.$store
       .dispatch("checkout/getAllShippingAdd")
       .then(() => {
@@ -358,6 +397,17 @@ export default {
 }
 .edit-btn {
   margin-top: 2%;
+  width: 100px;
+  height: 46px;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.back-btn {
   width: 100px;
   height: 46px;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);

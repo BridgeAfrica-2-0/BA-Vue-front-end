@@ -1,28 +1,11 @@
 <template>
   <b-card class="">
-    <div class="card-header title-font-size font-weight-bold bg-white h-50">
-      {{ $t("Order.Review_and_confirm_your_Order") }} ( {{ cartLenght }}
-      {{ $t("Order.item") }})
-      <br />
-    </div>
     <div class="order card-body">
       <div>
         <OrderProductsList
           ref="checkoutorderr"
           @customEvent="handleCustomEvent"
         />
-        <div class="row">
-          <div class="col d-flex justify-content-end mt-4">
-            <button
-              @click="handleCreateOrder"
-              class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
-              :disabled="isDestinationAvailable"
-            >
-              <b-spinner v-if="loading" small variant="light"></b-spinner>
-              {{ $t("Order.Order") }}
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </b-card>
@@ -44,12 +27,9 @@ export default {
     };
   },
   computed: {
-    cartLenght() {
-      return this.$store.state.checkout.cart.data.length;
-    },
 
     order() {
-      return this.$store.state.checkout.cart.data;
+      return '';
     },
 
     // cart() {

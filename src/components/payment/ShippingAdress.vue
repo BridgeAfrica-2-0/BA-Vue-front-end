@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-8">
-      <div class="row justify-content-between top-div">
+      <div class="row justify-content-between top-div" v-if="!review">
         <div>
           <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
         </div>
@@ -16,14 +16,29 @@
           </b-button>
         </div>
       </div>
+
+      <!-- When review is true, only show title and Edit button -->
+      <div
+        v-if="review"
+        class="d-flex justify-content-between align-items-center"
+      >
+        <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+        <b-button
+          v-b-modal.edit-shipping-modal
+          variant="primary"
+          @click="openEditModal(selectedIndex)"
+          class="edit-btn"
+        >
+          <i class="fas mr-3">&#xf304;</i>
+          {{ $t("general.Edit") }}
+        </b-button>
+      </div>
+
+      <!-- Shipping Address Details -->
       <b-card-title
         class="headline-font-size font-weight-bold headline_and_btns mb-0"
       >
         <span>{{ $t("general.Shipping_Address") }}</span>
-        <!-- <div class="buttons">
-				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
-				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-			</div> -->
       </b-card-title>
       <div class="row">
         <div class="col-12">
@@ -37,13 +52,49 @@
           />
         </div>
       </div>
+      <!-- Active shipping address only when review is true -->
+      <b-card-text v-if="review" class="mt-4">
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="ship-add w-100 d-flex justify-content-between align-items-start"
+            >
+              <div class="d-inline-flex">
+                <div class="mb-3 d-flex justify-content-between">
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                    <p class="mb-1">{{ activeData.name }}</p>
+                    <p class="mb-1">
+                      {{ activeData.city }}, {{ activeData.region }}
+                    </p>
+                    <p class="">{{ activeData.country }}</p>
+                  </div>
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
+                    <p class="mb-1">{{ activeData.email }}</p>
+                    <p class="">{{ activeData.phone }}</p>
+                  </div>
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
+                    <p class="mb-1">Business Days</p>
+                    <p class="">FREE</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-card-text>
+
+      <!-- Show all shipping addresses if review is false -->
       <b-card-text
+        v-if="!review"
         class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
       >
         <div class="row w-100">
-          <div class=" dotted-border">
+          <div class="dotted-border">
             <div
-              class="ship-add w-100  d-flex justify-content-between align-items-start"
+              class="ship-add w-100 d-flex justify-content-between align-items-start"
               v-for="(shipping_item, index) in shippingsTab"
               :key="shipping_item.id"
             >
@@ -58,23 +109,20 @@
                     value=""
                   />
                 </div>
-
                 <div class="mb-3 d-flex justify-content-between">
                   <div class="flex-fill fixed-width">
                     <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                     <p class="mb-1">{{ shipping_item.name }}</p>
                     <p class="mb-1">
-                      {{ shipping_item.city }},{{ shipping_item.region }}
+                      {{ shipping_item.city }}, {{ shipping_item.region }}
                     </p>
                     <p class="">{{ shipping_item.country }}</p>
                   </div>
-
                   <div class="flex-fill fixed-width">
                     <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
                     <p class="mb-1">{{ shipping_item.email }}</p>
                     <p class="">{{ shipping_item.phone }}</p>
                   </div>
-
                   <div class="flex-fill fixed-width">
                     <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
                     <p class="mb-1">Business Days</p>
@@ -107,6 +155,7 @@
           </div>
         </div>
       </b-card-text>
+
       <div class="row" v-if="loading">
         <div class="col-12 d-flex justify-content-center">
           <b-spinner
@@ -117,9 +166,11 @@
         </div>
       </div>
     </div>
+
     <div class="col-4">
       <OrderSummary :step="1" :handleSubmit="handleSubmit" />
     </div>
+
     <b-modal
       v-model="showModal"
       @hidden="hideAuthModal"
@@ -140,14 +191,22 @@ import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
 import OrderSummary from "../../components/order-summary/OrderSummary.vue";
 import login from "@/components/Login";
+
 export default {
   name: "ShippingAddress",
+  props: {
+    review: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       loading: false,
       selectedShipping: null,
       selectedIndex: null,
       showModal: false,
+      activeData: {},
     };
   },
   components: {
@@ -156,9 +215,9 @@ export default {
     OrderSummary,
     login,
   },
-
   methods: {
     shipping(data) {
+      this.activeData = { ...data };
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
@@ -173,7 +232,6 @@ export default {
         .then(() => {
           this.$emit("RefreshSipping");
           loader.hide();
-
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
             .then(() => {
@@ -197,28 +255,18 @@ export default {
           if (error) {
             this.flashMessage.show({
               status: "error",
-              message: "The shipping address that is in use can not be deleted",
+              message: "The shipping address that is in use cannot be deleted",
               time: 5000,
             });
           }
         });
-    },
-    showConfirmModal() {
-      this.$emit("showconfirm");
-    },
-
-    loadActualComponent3() {
-      this.$emit("loadActualComponent3");
-    },
-    loadActualComponent1() {
-      this.$emit("loadActualComponent1");
     },
     openEditModal(index) {
       this.selectedIndex = index;
       this.$bvModal.show("edit-shipping-modal");
     },
     handleSubmit() {
-      console.log("calling handle submit" , 2)
+      console.log("calling handle submit", 2);
       this.$emit("handleNextStep", 3);
     },
   },
@@ -232,20 +280,28 @@ export default {
       return this.$store.getters["auth/isLogged"];
     },
     shippingsTab() {
-      console.log(this.$store.state.checkout.allShipping);
       return this.$store.state.checkout.allShipping;
     },
     selectedShippingId: {
       get() {
-        // Find the active shipping item and return its ID
         const activeShipping = this.shippingsTab.find(
           (item) => item.active == 1
         );
         return activeShipping ? activeShipping.id : null;
       },
       set(value) {
-        // Directly set the data property rather than the computed property
         this.selectedShipping = value;
+      },
+    },
+    activeDataVal: {
+      get() {
+        const activeShipping = this.shippingsTab.find(
+          (item) => item.active == 1
+        );
+        return activeShipping ? activeShipping : null;
+      },
+      set(value) {
+        this.activeData = value;
       },
     },
   },
@@ -261,8 +317,9 @@ export default {
       });
   },
   created() {
-    // Initialize selectedShipping with the ID of the active shipping item if available
     this.selectedShipping = this.selectedShippingId;
+    this.activeData = this.activeDataVal;
+    console.log("========active===========", this.activeData);
     if (!this.$store.getters["auth/isLogged"]) {
       this.showModal = true;
     }
@@ -287,6 +344,18 @@ export default {
 .hire-btn {
   margin-top: 2%;
   width: 160px;
+  height: 46px;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.edit-btn {
+  margin-top: 2%;
+  width: 100px;
   height: 46px;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;

@@ -165,7 +165,7 @@
         </div>
       </div>
       <div class="col-12 col-md-4 col-lg-4">
-        <OrderSummary />
+        <OrderSummary :step="3" :handleSubmit="handleSubmit" />
       </div>
     </div>
   </div>
@@ -206,6 +206,10 @@ export default {
     },
     loadActualComponent2() {
       this.$emit("loadActualComponent2");
+    },
+    handleSubmit(){
+      console.log("step 3 calling")
+      this.$emit("handleNextStep", 3);
     }
   }
 };

@@ -1,121 +1,138 @@
 <template>
   <div class="row">
-  <div class="col-8">
-    <div class="row justify-content-between top-div">
-      <div>
-        <h4 class="title-style">  {{ $t("general.SHIPPING") }}</h4>
-      </div>
-      <div>
-      <b-button v-b-modal.create-shipping-modal type="submit" variant="primary" class="hire-btn">
+    <div class="col-8">
+      <div class="row justify-content-between top-div">
+        <div>
+          <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+        </div>
+        <div>
+          <b-button
+            v-b-modal.create-shipping-modal
+            type="submit"
+            variant="primary"
+            class="hire-btn"
+          >
             {{ $t("general.New_Address") }}
-      </b-button>     
+          </b-button>
+        </div>
       </div>
-      
-    </div>
-    <b-card-title class="headline-font-size font-weight-bold headline_and_btns mb-0">
-      <span>{{ $t("general.Shipping_Address") }}</span>
-      <!-- <div class="buttons">
+      <b-card-title
+        class="headline-font-size font-weight-bold headline_and_btns mb-0"
+      >
+        <span>{{ $t("general.Shipping_Address") }}</span>
+        <!-- <div class="buttons">
 				<button class="btnx" @click="loadActualComponent3"><i class="fas fa-arrow-alt-circle-right"></i> Complete checkout</button>
 				<button class="backBtn" @click="loadActualComponent1"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
 			</div> -->
-    </b-card-title>
-    <div class="row">
-      <div class="col-12">
-        <CreateShippingModal />
+      </b-card-title>
+      <div class="row">
+        <div class="col-12">
+          <CreateShippingModal />
+        </div>
+        <div class="col-12">
+          <CreateShippingModal
+            :title="$t('general.Edit_Shipping_Address')"
+            mode="edit"
+            :editForm="shippingsTab[selectedIndex]"
+          />
+        </div>
       </div>
-      <div class="col-12">
-        <CreateShippingModal
-          :title="$t('general.Edit_Shipping_Address')"
-          mode="edit"
-          :editForm="shippingsTab[selectedIndex]"
-        />
-      </div>
-    </div>
-    <b-card-text
-      class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
-    >
-      <div class="row w-100">
-        <div class=" dotted-border">
-        <div
-					class="ship-add w-100  d-flex justify-content-between align-items-start"
-					v-for="(shipping_item,index) in shippingsTab"
-					:key="shipping_item.id"
-				>  <div class="d-inline-flex">
+      <b-card-text
+        class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
+      >
+        <div class="row w-100">
+          <div class=" dotted-border">
+            <div
+              class="ship-add w-100  d-flex justify-content-between align-items-start"
+              v-for="(shipping_item, index) in shippingsTab"
+              :key="shipping_item.id"
+            >
+              <div class="d-inline-flex">
+                <div class="col-1">
+                  <input
+                    type="radio"
+                    :v-model="shipping_item.id"
+                    @change="shipping(shipping_item)"
+                    :checked="shipping_item.active == 1"
+                    name="shipping"
+                    value=""
+                  />
+                </div>
 
+                <div class="mb-3 d-flex justify-content-between">
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                    <p class="mb-1">{{ shipping_item.name }}</p>
+                    <p class="mb-1">
+                      {{ shipping_item.city }},{{ shipping_item.region }}
+                    </p>
+                    <p class="">{{ shipping_item.country }}</p>
+                  </div>
 
-                        <div class="col-1">
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
+                    <p class="mb-1">{{ shipping_item.email }}</p>
+                    <p class="">{{ shipping_item.phone }}</p>
+                  </div>
 
-
-	   <input type="radio" :v-model="shipping_item.id"  @change="shipping(shipping_item)"   :checked="shipping_item.active==1"     name="shipping" value="">   </div>
-
-<div class="mb-3 d-flex justify-content-between">
-  <div class="flex-fill fixed-width">
-    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-    <p class="mb-1">{{ shipping_item.name }}</p>
-    <p class="mb-1">{{ shipping_item.city }},{{ shipping_item.region }}</p>
-    <p class="">{{ shipping_item.country }}</p> 
-  </div>
-
-  <div class="flex-fill fixed-width">
-    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
-    <p class="mb-1">{{ shipping_item.email }}</p>
-    <p class="">{{ shipping_item.phone }}</p>
-  </div>
-
-  <div class="flex-fill fixed-width">
-    <h5 class="h-color">{{$t("general.Shipping_speed") }}</h5>
-    <p class="mb-1">Business Days</p>
-    <p class="">FREE</p>
-  </div>
-</div>
-
-
-
-					</div>
-						<div class="row ml-2">
-              <div>
-                <a
-                  href="#"
-                  v-b-modal.edit-shipping-modal
-                  class="mr-1 mr-sm-2 icon-color"
-                  @click.prevent="openEditModal(index)"
+                  <div class="flex-fill fixed-width">
+                    <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
+                    <p class="mb-1">Business Days</p>
+                    <p class="">FREE</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row ml-2">
+                <div>
+                  <a
+                    href="#"
+                    v-b-modal.edit-shipping-modal
+                    class="mr-1 mr-sm-2 icon-color"
+                    @click.prevent="openEditModal(index)"
                   >
-                  <i  class='fas'>&#xf304;</i>
+                    <i class="fas">&#xf304;</i>
                   </a>
+                </div>
+                <div class="ml-1">
+                  <UpdatedConfirmOperation
+                    :message="
+                      $t('general.Do_you_want_to_delete_this_shipping_address')
+                    "
+                    @sendid="handleDeleteShipping"
+                    :id_item="shipping_item.id"
+                  />
+                </div>
               </div>
-              <div class="ml-1">
-                <UpdatedConfirmOperation
-										:message="$t('general.Do_you_want_to_delete_this_shipping_address')"
-										@sendid="handleDeleteShipping"
-										:id_item="shipping_item.id"
-									/>
-              </div>
-
-						</div>
+            </div>
+          </div>
         </div>
-      </div>
+      </b-card-text>
+      <div class="row" v-if="loading">
+        <div class="col-12 d-flex justify-content-center">
+          <b-spinner
+            variant="primary"
+            large
+            label="loading shipping..."
+          ></b-spinner>
         </div>
-    </b-card-text>
-    <div class="row" v-if="loading">
-      <div class="col-12 d-flex justify-content-center">
-        <b-spinner
-          variant="primary"
-          large
-          label="loading shipping..."
-        ></b-spinner>
       </div>
     </div>
-  </div>
-  <div class="col-4">
-   <OrderSummary/>
-  </div>
-  <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl" :hide-header-close="isCheckoutRoute"  
-  :no-close-on-backdrop="isCheckoutRoute"  
-  :no-fade="isCheckoutRoute" 
-  :backdrop="!isCheckoutRoute" >
-      <login @success="success" @hideAuthModal="hideAuthModal"  />
+    <div class="col-4">
+      <OrderSummary :step="1" :handleSubmit="handleSubmit" />
+    </div>
+    <b-modal
+      v-model="showModal"
+      @hidden="hideAuthModal"
+      hide-footer
+      size="xl"
+      :hide-header-close="isCheckoutRoute"
+      :no-close-on-backdrop="isCheckoutRoute"
+      :no-fade="isCheckoutRoute"
+      :backdrop="!isCheckoutRoute"
+    >
+      <login @success="success" @hideAuthModal="hideAuthModal" />
     </b-modal>
-</div>
+  </div>
 </template>
 
 <script>
@@ -137,7 +154,7 @@ export default {
     UpdatedConfirmOperation,
     CreateShippingModal,
     OrderSummary,
-    login
+    login,
   },
 
   methods: {
@@ -154,7 +171,6 @@ export default {
           isLogin: this.$store.getters["auth/isLogged"],
         })
         .then(() => {
-          
           this.$emit("RefreshSipping");
           loader.hide();
 
@@ -174,19 +190,18 @@ export default {
       this.showModal = false;
     },
     handleDeleteShipping(id) {
-      this.$store.dispatch("checkout/deleteShippingAdd", id)
-      .then(() => {
-      })
-      .catch((error) => {
-        if(error)
-      {       
-        this.flashMessage.show({
+      this.$store
+        .dispatch("checkout/deleteShippingAdd", id)
+        .then(() => {})
+        .catch((error) => {
+          if (error) {
+            this.flashMessage.show({
               status: "error",
               message: "The shipping address that is in use can not be deleted",
               time: 5000,
             });
-      }
-      });
+          }
+        });
     },
     showConfirmModal() {
       this.$emit("showconfirm");
@@ -195,20 +210,24 @@ export default {
     loadActualComponent3() {
       this.$emit("loadActualComponent3");
     },
-
     loadActualComponent1() {
       this.$emit("loadActualComponent1");
     },
     openEditModal(index) {
-    this.selectedIndex = index;
-    this.$bvModal.show('edit-shipping-modal');
-  }
-  
+      this.selectedIndex = index;
+      this.$bvModal.show("edit-shipping-modal");
+    },
+    handleSubmit() {
+      console.log("calling handle submit" , 2)
+      this.$emit("handleNextStep", 3);
+    },
   },
   computed: {
-     isCheckoutRoute(){
-      return this.$route.name === 'checkout' || this.$route.path === '/checkout';
-     },
+    isCheckoutRoute() {
+      return (
+        this.$route.name === "checkout" || this.$route.path === "/checkout"
+      );
+    },
     islogin() {
       return this.$store.getters["auth/isLogged"];
     },
@@ -244,10 +263,9 @@ export default {
   created() {
     // Initialize selectedShipping with the ID of the active shipping item if available
     this.selectedShipping = this.selectedShippingId;
-    if(!(this.$store.getters["auth/isLogged"]))
-  {
-    this.showModal = true;
-  }
+    if (!this.$store.getters["auth/isLogged"]) {
+      this.showModal = true;
+    }
   },
 };
 </script>
@@ -256,11 +274,11 @@ export default {
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
- .title-style {
+.title-style {
   font-size: 30px !important;
   font-weight: 700 !important;
   color: black;
- }
+}
 .top-div {
   margin-left: 1px !important;
   margin-right: 18px !important;
@@ -279,24 +297,24 @@ export default {
   border-radius: 10px;
 }
 .dotted-border {
-    border-top: 2px dotted #455a64; 
-    border-bottom: 2px dotted #455a64; 
-    padding: 10px 0; 
-  }
- .icon-color {
+  border-top: 2px dotted #455a64;
+  border-bottom: 2px dotted #455a64;
+  padding: 10px 0;
+}
+.icon-color {
   color: black;
- }
- .h-color {
+}
+.h-color {
   color: black;
- }
+}
 .fixed-width {
   text-align: start;
-  width: 200px; 
-  margin-right: 10px; 
+  width: 200px;
+  margin-right: 10px;
 }
 
 .fixed-width:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
 .title-font-size {
   font-size: 18px !important;

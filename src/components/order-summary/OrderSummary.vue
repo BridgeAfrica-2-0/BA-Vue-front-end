@@ -27,7 +27,7 @@
       </p>
     </div>
     <div>
-      <button @click="submitOrder" class="submit-order-btn">
+      <button @click="handleSubmit" class="submit-order-btn">
         {{ getButtonText }}
       </button>
       <small>
@@ -56,6 +56,17 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  props: {
+    handleSubmit: {
+      type: Function,
+      required: true,
+    },
+    step: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+  },
   data() {
     return {
       cartSummary: {
@@ -66,33 +77,26 @@ export default {
         sub_total: 0.0,
         discount: 0.0,
       },
-      currentStep: 0,
     };
   },
   computed: {
     ...mapGetters({
       orderSummary: "checkout/getCartSummary",
-      getCurrentStep: "checkout/getCurrentStep",
     }),
     getButtonText() {
-      switch (this.currentStep) {
+      switch (this.step) {
         case 0:
           return "Submit your order";
         case 1:
-          return "Continue to payment";
+          return "Continue";
         case 2:
-          return "Confirm order";
+          return "Proceed to payment ";
         default:
           return "Submit your order";
       }
     },
   },
-  methods: {
-    submitOrder() {
-      this.$router.push("/checkout");
-      // this.$emit("showoperator");
-    },
-  },
+  methods: {},
   mounted() {
     if (this.orderSummary) {
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
@@ -102,11 +106,6 @@ export default {
     orderSummary(newVal) {
       if (newVal) {
         this.cartSummary = { ...this.cartSummary, ...newVal };
-      }
-    },
-    getCurrentStep(newVal) {
-      if (newVal) {
-        this.currentStep = newVal;
       }
     },
   },
@@ -121,7 +120,7 @@ export default {
 }
 .summary-section {
   padding: 20px;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -148,7 +147,7 @@ export default {
 }
 .submit-order-btn {
   width: 100%;
-  background-color: #FF9900;
+  background-color: #ff9900;
   color: white;
   padding: 10px;
   border: none;

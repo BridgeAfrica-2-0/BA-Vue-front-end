@@ -66,8 +66,11 @@
   <!-- </div>
   </b-card> -->
   <div class="col">
-    <div class="mb-3">
-      <b-button
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-8">
+        <div class="d-flex justify-content-between">
+          <h4 class="title mb-0 p-1"> {{ $t("general.PAYMENT") }}</h4>
+          <b-button
           v-b-modal.edit-shipping-modal
           variant="primary"
           @click="goBack()"
@@ -76,11 +79,6 @@
         <i class="fas fa-arrow-alt-circle-left mr-3"></i>
           BACK
         </b-button>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-8 col-lg-8">
-        <div class="d-flex justify-content-between">
-          <h4 class="title"> {{ $t("general.PAYMENT") }}</h4>
         </div>
         <h5 class="saved-payment">{{ $t("general.SAVED_PAYMENT") }}</h5>
         <hr class="dotted-hr" />
@@ -279,7 +277,7 @@ export default {
 } */
 
 .title {
-  font-size: 26px !important;
+  font-size: 30px !important;
   color: #000;
   font-weight: bold;
 }

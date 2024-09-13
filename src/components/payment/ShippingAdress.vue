@@ -1,16 +1,5 @@
 <template>
   <div class="col">
-    <div v-if="review" class="mb-3">
-      <b-button
-          v-b-modal.edit-shipping-modal
-          variant="primary"
-          @click="goBack()"
-          class="back-btn"
-        >
-        <i class="fas fa-arrow-alt-circle-left mr-3"></i>
-          BACK
-        </b-button>
-    </div>
   <div class="row">
     <div class="col-8">
       <div class="row justify-content-between top-div" v-if="!review">
@@ -31,20 +20,36 @@
 
       <!-- When review is true, only show title and Edit button -->
       <div
-        v-if="review"
-        class="d-flex justify-content-between align-items-center"
-      >
-        <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
-        <b-button
-          :v-b-modal="!review ? 'edit-shipping-modal' : null"
-          variant="primary"
-          @click="onEdit()"
-          class="edit-btn"
-        >
-          <i class="fas mr-3">&#xf304;</i>
-          {{ $t("general.Edit") }}
-        </b-button>
-      </div>
+  v-if="review"
+  class="d-flex justify-content-between align-items-center"
+>
+  <!-- Title aligned to the left -->
+  <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+
+  <!-- Buttons aligned to the right -->
+  <div>
+    <b-button
+      v-b-modal.edit-shipping-modal
+      variant="primary"
+      @click="goBack()"
+      class="back-btn mr-2"
+    >
+      <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+      BACK
+    </b-button>
+
+    <b-button
+      :v-b-modal="!review ? 'edit-shipping-modal' : null"
+      variant="primary"
+      @click="onEdit()"
+      class="edit-btn"
+    >
+      <i class="fas mr-2">&#xf304;</i>
+      {{ $t("general.Edit") }}
+    </b-button>
+  </div>
+</div>
+
 
       <!-- Shipping Address Details -->
       <b-card-title v-if="!review"
@@ -251,6 +256,15 @@ export default {
         .then(() => {
           this.$emit("RefreshSipping");
           loader.hide();
+          this.$store
+         .dispatch("checkout/getAllShippingAdd",{ islogin: this.islogin })
+         .then(() => {
+          loader.hide();
+         })
+         .catch(() => {
+          loader.hide();
+         });
+          // this.shippingsTab();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
             .then(() => {

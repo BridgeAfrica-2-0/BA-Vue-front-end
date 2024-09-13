@@ -350,10 +350,10 @@
           </div>
         </b-col>
 
-        <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
+        <b-col cols="12" md="12" lg="12" xl="9" ref="middleblock">
           <div class="container-flex a-flex">
             <!--filter for all takes just two fields at a time  -->
-
+            
             <div id="all" v-if="selectedId == '5' && islogin">
               <h6>
                 {{ $t("search.Sponsored_Result") }}
@@ -661,7 +661,8 @@
             </div>
           </div>
         </b-col>
-        <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
+
+        <!-- <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
               <businessmap :businesses="businessess.data" />
@@ -688,7 +689,7 @@
               />
             </div>
           </div>
-        </b-col>
+        </b-col> -->
       </b-row>
     </div>
   </div>

@@ -194,7 +194,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("checkout/updateStepper", 0);
-    this.$store.dispatch("checkout/getCartSummary");
+    this.$store.dispatch("checkout/getCartSummary",this.islogin);
   },
   watch: {
     currentPage: function(val) {
@@ -255,7 +255,7 @@ export default {
 
     async getCartSummary() {
       await this.$store
-        .dispatch("checkout/getCartSummary")
+        .dispatch("checkout/getCartSummary",this.islogin)
         .then(() => {})
         .catch((err) => {
           console.log({ err: err });

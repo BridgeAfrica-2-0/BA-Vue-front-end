@@ -147,7 +147,7 @@ export default {
   mounted() {
     this.loading = true;
     this.$store.dispatch("checkout/updateStepper", 1);
-    this.$store.dispatch("checkout/getCartSummary");
+    this.$store.dispatch("checkout/getCartSummary", this.islogin);
     this.$store
       .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
       .then(() => {

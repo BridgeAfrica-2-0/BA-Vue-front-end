@@ -71,7 +71,6 @@
         <div class="d-flex justify-content-between">
           <h4 class="title"> {{ $t("general.PAYMENT") }}</h4>
         </div>
-        <h5 class="saved-payment">{{ $t("general.SAVED_PAYMENT") }}</h5>
         <div class="row">
           <div class="col-12">
             <CreatePaymentModal />

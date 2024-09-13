@@ -30,12 +30,14 @@
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
             :review=true
-             @handleNextStep="handleSwitchStep"
+            @edit-button-clicked="redirectToStep1"
+            @handleNextStep="handleSwitchStep"
           />
         </b-col>
-        <b-col class="my-4" cols="12">
+        <b-col cols="12">
           <Order @showoperator="handleShowOperator" ref="checkoutorder" />
         </b-col>
+
       </b-row>
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
@@ -157,6 +159,10 @@ export default {
   },
 
   methods: {
+    redirectToStep1() {
+      this.steps[0].status = true;
+      this.current_step = 1;
+    },
     RefreshSipping() {
       if (this.$refs.checkoutorder) {
        this.$refs.checkoutorder.RefreshSipping();

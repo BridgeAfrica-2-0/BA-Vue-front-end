@@ -43,6 +43,7 @@
                         v-model="cart_item.quantity"
                       />
                     </div>
+                    <p class="product-details">Only <b>{{ cart_item.stock_available }}</b> left in stock.</p>
                   </div>
                   <div class="product-prices d-flex">
                     <div class="pr-5">

@@ -28,7 +28,11 @@
             @RefreshSipping="RefreshSipping"
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
+            :review=true
           />
+        </b-col>
+        <b-col class="my-4" cols="12">
+          <Order @showoperator="handleShowOperator" ref="checkoutorder" />
         </b-col>
       </b-row>
       <b-row v-if="current_step === 3 && !showRequestPayment">
@@ -67,7 +71,7 @@
   </div>
 </template>
 <script>
-// import Order from "./Order";
+import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
 import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
@@ -80,7 +84,7 @@ import axios from "axios";
 export default {
   name: "PaymentStepper",
   components: {
-    // Order,
+    Order,
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,
@@ -151,7 +155,9 @@ export default {
 
   methods: {
     RefreshSipping() {
-      this.$refs.checkoutorder.RefreshSipping();
+      if (this.$refs.checkoutorder) {
+       this.$refs.checkoutorder.RefreshSipping();
+      }
     },
 
     onClickNext: function() {

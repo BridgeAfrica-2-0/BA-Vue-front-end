@@ -103,17 +103,17 @@ export default {
         {
           text: this.$t("general.Stepper_shipping"),
           status: true,
-          complete: true,
+          complete: false,
         },
         {
           text: this.$t("general.Review"),
-          status: true,
-          complete: true,
+          status: false,
+          complete: false,
         },
         {
           text: this.$t("general.Payment"),
-          status: true,
-          complete: true,
+          status: false,
+          complete: false,
         },
       ],
       sizeStepperIndicator: "md",
@@ -201,8 +201,8 @@ export default {
     },
 
     changeStatusProgress(current_step, next_step) {
-      this.steps[current_step - 1].status = false;
-      this.steps[current_step - 1].complete = true;
+      // this.steps[current_step - 1].status = false;
+      // this.steps[current_step - 1].complete = true;
       this.steps[next_step - 1].status = true;
     },
 

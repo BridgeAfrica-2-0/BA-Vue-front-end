@@ -24,19 +24,19 @@
       </b-row>
       <b-row v-if="current_step === 2 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <PaymentOperator
-            @showoperator="handleShowOperator"
-            @showreview="handleShowReview"
-            :price="order_price"
+          <ShippingAdress
+            @RefreshSipping="RefreshSipping"
+            @loadActualComponent3="showActualComponent3"
+            @loadActualComponent1="showActualComponent1"
           />
         </b-col>
       </b-row>
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <ShippingAdress
-            @RefreshSipping="RefreshSipping"
-            @loadActualComponent3="showActualComponent3"
-            @loadActualComponent1="showActualComponent1"
+          <PaymentOperator
+            @showoperator="handleShowOperator"
+            @showreview="handleShowReview"
+            :price="order_price"
           />
         </b-col>
       </b-row>
@@ -99,12 +99,12 @@ export default {
           complete: true,
         },
         {
-          text: this.$t("general.Payment"),
+          text: this.$t("general.Review"),
           status: true,
           complete: true,
         },
         {
-          text: this.$t("general.Review"),
+          text: this.$t("general.Payment"),
           status: true,
           complete: true,
         },

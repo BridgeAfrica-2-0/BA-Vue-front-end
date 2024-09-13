@@ -6,6 +6,9 @@
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
           <div v-for="(business, i) in cart.data[0].businesses" :key="i">
+            <div style="margin-right: 150px;">
+              <Skeleton :loading="loading" />
+            </div>
             <div v-if="!loading" class="mb-5">
               <div class="d-flex justify-content-between card-top-content">
                 <h4>{{ business.business_name }}</h4>
@@ -135,10 +138,11 @@
 <script>
 import navbar from "@/components/navbar.vue";
 import OrderSummary from "../components/order-summary/OrderSummary.vue";
+import Skeleton from "../components/skeleton";
 import axios from "axios";
 import { getGuestIdentifier } from "../helpers";
 export default {
-  components: { navbar, OrderSummary },
+  components: { navbar, OrderSummary, Skeleton },
   data() {
     return {
       currentPage: 1,
@@ -164,8 +168,10 @@ export default {
     };
   },
   created() {
+    this.loading = true;
     this.getCartItems();
     this.getCartSummary();
+    this.loading = false;
     console.log("loading cart items");
   },
   mounted() {

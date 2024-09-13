@@ -36,7 +36,7 @@
       >
         <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
         <b-button
-          v-b-modal.edit-shipping-modal
+          :v-b-modal="!review ? 'edit-shipping-modal' : null"
           variant="primary"
           @click="onEdit()"
           class="edit-btn"
@@ -47,7 +47,7 @@
       </div>
 
       <!-- Shipping Address Details -->
-      <b-card-title
+      <b-card-title v-if="!review"
         class="headline-font-size font-weight-bold headline_and_btns mb-0"
       >
         <span>{{ $t("general.Shipping_Address") }}</span>
@@ -229,6 +229,9 @@ export default {
     login,
   },
   methods: {
+    handleEditClick() {
+        this.$emit('edit-button-clicked');
+    },
     shipping(data) {
       this.activeData = { ...data };
       let loader = this.$loading.show({

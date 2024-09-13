@@ -1,14 +1,15 @@
 <template>
-  <b-card class="">
-    <div class="order card-body">
-      <div>
-        <OrderProductsList
-          ref="checkoutorderr"
-          @customEvent="handleCustomEvent"
-        />
+      <div class="row">
+        <div class="col-8">
+          <hr class="dotted-hr" />
+          <div>
+            <OrderProductsList
+              ref="checkoutorderr"
+              @customEvent="handleCustomEvent"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-  </b-card>
 </template>
 
 <script>
@@ -115,19 +116,22 @@ export default {
   min-width: 123px;
 }
 
+.dotted-hr {
+  border: 0;
+  border-top: 2px dotted black;
+  height: 0;
+  position: relative;
+  margin-top: 0px !important;
+  margin-bottom: 30px !important;
+}
+
+
 @media only screen and (max-width: 576px) {
   .btn-custom {
     display: block;
     height: 38px;
     width: 100%;
     min-width: 100% !important;
-  }
-  .order.card-body,
-  .card-header {
-    padding: 0 !important;
-  }
-  .order.card-body {
-    margin-top: 15px !important;
   }
 }
 </style>

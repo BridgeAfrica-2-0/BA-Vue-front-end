@@ -177,6 +177,7 @@
           ></b-spinner>
         </div>
       </div>
+      <Order v-if="review"/>
     </div>
 
     <div class="col-4">
@@ -203,6 +204,7 @@
 import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
 import OrderSummary from "../../components/order-summary/OrderSummary.vue";
+import Order from "../../components/payment/Order.vue";
 import login from "@/components/Login";
 
 export default {
@@ -223,6 +225,7 @@ export default {
     };
   },
   components: {
+    Order,
     UpdatedConfirmOperation,
     CreateShippingModal,
     OrderSummary,

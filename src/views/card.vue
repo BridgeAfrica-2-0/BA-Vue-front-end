@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar />
-    <div class="cart-wrapper" style="margin-bottom: 300px;">
+    <div  v-if="cart.data[0]" class="cart-wrapper" style="margin-bottom: 300px;">
       <h1 class="mt-5 my-bag">My Cart ({{ cart.data[0].cartItems }})</h1>
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
@@ -150,6 +150,9 @@
           <OrderSummary :handleSubmit="handleSubmit" :step="0" />
         </div>
       </div>
+    </div>
+    <div v-else class="empty-cart">
+       <p>Your Cart is empty!</p>
     </div>
   </div>
 </template>
@@ -346,6 +349,12 @@ export default {
 };
 </script>
 <style scoped>
+.empty-cart{
+  justify-content: center;
+  display: flex;
+  margin-top: 200px;
+  position: static;
+}
 .cart-wrapper {
   margin: 10px 100px 0 150px;
 }

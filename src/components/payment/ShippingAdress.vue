@@ -18,7 +18,10 @@
       </div>
 
       <!-- When review is true, only show title and Edit button -->
-      <div v-if="review" class="d-flex justify-content-between align-items-center">
+      <div
+        v-if="review"
+        class="d-flex justify-content-between align-items-center"
+      >
         <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
         <b-button
           v-b-modal.edit-shipping-modal
@@ -26,7 +29,7 @@
           @click="openEditModal(selectedIndex)"
           class="edit-btn"
         >
-        <i class="fas mr-3">&#xf304;</i>
+          <i class="fas mr-3">&#xf304;</i>
           {{ $t("general.Edit") }}
         </b-button>
       </div>
@@ -38,28 +41,32 @@
         <span>{{ $t("general.Shipping_Address") }}</span>
       </b-card-title>
       <div class="row">
-      <div class="col-12">
-        <CreateShippingModal />
+        <div class="col-12">
+          <CreateShippingModal />
+        </div>
+        <div class="col-12">
+          <CreateShippingModal
+            :title="$t('general.Edit_Shipping_Address')"
+            mode="edit"
+            :editForm="shippingsTab[selectedIndex]"
+          />
+        </div>
       </div>
-      <div class="col-12">
-        <CreateShippingModal
-          :title="$t('general.Edit_Shipping_Address')"
-          mode="edit"
-          :editForm="shippingsTab[selectedIndex]"
-        />
-      </div>
-    </div>
       <!-- Active shipping address only when review is true -->
       <b-card-text v-if="review" class="mt-4">
         <div class="row">
           <div class="col-12">
-            <div class="ship-add w-100 d-flex justify-content-between align-items-start">
+            <div
+              class="ship-add w-100 d-flex justify-content-between align-items-start"
+            >
               <div class="d-inline-flex">
                 <div class="mb-3 d-flex justify-content-between">
                   <div class="flex-fill fixed-width">
                     <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                     <p class="mb-1">{{ activeData.name }}</p>
-                    <p class="mb-1">{{ activeData.city }}, {{ activeData.region }}</p>
+                    <p class="mb-1">
+                      {{ activeData.city }}, {{ activeData.region }}
+                    </p>
                     <p class="">{{ activeData.country }}</p>
                   </div>
                   <div class="flex-fill fixed-width">
@@ -80,7 +87,10 @@
       </b-card-text>
 
       <!-- Show all shipping addresses if review is false -->
-      <b-card-text v-if="!review" class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start">
+      <b-card-text
+        v-if="!review"
+        class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
+      >
         <div class="row w-100">
           <div class="dotted-border">
             <div
@@ -103,7 +113,9 @@
                   <div class="flex-fill fixed-width">
                     <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                     <p class="mb-1">{{ shipping_item.name }}</p>
-                    <p class="mb-1">{{ shipping_item.city }}, {{ shipping_item.region }}</p>
+                    <p class="mb-1">
+                      {{ shipping_item.city }}, {{ shipping_item.region }}
+                    </p>
                     <p class="">{{ shipping_item.country }}</p>
                   </div>
                   <div class="flex-fill fixed-width">
@@ -131,7 +143,9 @@
                 </div>
                 <div class="ml-1">
                   <UpdatedConfirmOperation
-                    :message="$t('general.Do_you_want_to_delete_this_shipping_address')"
+                    :message="
+                      $t('general.Do_you_want_to_delete_this_shipping_address')
+                    "
                     @sendid="handleDeleteShipping"
                     :id_item="shipping_item.id"
                   />
@@ -144,13 +158,17 @@
 
       <div class="row" v-if="loading">
         <div class="col-12 d-flex justify-content-center">
-          <b-spinner variant="primary" large label="loading shipping..."></b-spinner>
+          <b-spinner
+            variant="primary"
+            large
+            label="loading shipping..."
+          ></b-spinner>
         </div>
       </div>
     </div>
 
     <div class="col-4">
-      <OrderSummary />
+      <OrderSummary :step="1" :handleSubmit="handleSubmit" />
     </div>
 
     <b-modal
@@ -168,7 +186,6 @@
   </div>
 </template>
 
-
 <script>
 import UpdatedConfirmOperation from "./UpdatedConfirmOperation.vue";
 import CreateShippingModal from "./CreateShippingModal.vue";
@@ -180,15 +197,15 @@ export default {
   props: {
     review: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       loading: false,
       selectedShipping: null,
       selectedIndex: null,
-      showModal: false, 
+      showModal: false,
       activeData: {},
     };
   },
@@ -196,11 +213,11 @@ export default {
     UpdatedConfirmOperation,
     CreateShippingModal,
     OrderSummary,
-    login
+    login,
   },
   methods: {
     shipping(data) {
-      this.activeData = {...data};
+      this.activeData = { ...data };
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
@@ -231,26 +248,33 @@ export default {
       this.showModal = false;
     },
     handleDeleteShipping(id) {
-      this.$store.dispatch("checkout/deleteShippingAdd", id)
-      .then(() => {})
-      .catch((error) => {
-        if (error) {
-          this.flashMessage.show({
-            status: "error",
-            message: "The shipping address that is in use cannot be deleted",
-            time: 5000,
-          });
-        }
-      });
+      this.$store
+        .dispatch("checkout/deleteShippingAdd", id)
+        .then(() => {})
+        .catch((error) => {
+          if (error) {
+            this.flashMessage.show({
+              status: "error",
+              message: "The shipping address that is in use cannot be deleted",
+              time: 5000,
+            });
+          }
+        });
     },
     openEditModal(index) {
       this.selectedIndex = index;
-      this.$bvModal.show('edit-shipping-modal');
-    }
+      this.$bvModal.show("edit-shipping-modal");
+    },
+    handleSubmit() {
+      console.log("calling handle submit", 2);
+      this.$emit("handleNextStep", 3);
+    },
   },
   computed: {
     isCheckoutRoute() {
-      return this.$route.name === 'checkout' || this.$route.path === '/checkout';
+      return (
+        this.$route.name === "checkout" || this.$route.path === "/checkout"
+      );
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
@@ -269,7 +293,7 @@ export default {
         this.selectedShipping = value;
       },
     },
-    activeDataVal :{
+    activeDataVal: {
       get() {
         const activeShipping = this.shippingsTab.find(
           (item) => item.active == 1
@@ -279,7 +303,7 @@ export default {
       set(value) {
         this.activeData = value;
       },
-    }
+    },
   },
   mounted() {
     this.loading = true;
@@ -295,7 +319,7 @@ export default {
   created() {
     this.selectedShipping = this.selectedShippingId;
     this.activeData = this.activeDataVal;
-    console.log("========active===========",this.activeData)
+    console.log("========active===========", this.activeData);
     if (!this.$store.getters["auth/isLogged"]) {
       this.showModal = true;
     }
@@ -303,16 +327,15 @@ export default {
 };
 </script>
 
-
 <style scoped>
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
- .title-style {
+.title-style {
   font-size: 30px !important;
   font-weight: 700 !important;
   color: black;
- }
+}
 .top-div {
   margin-left: 1px !important;
   margin-right: 18px !important;
@@ -343,24 +366,24 @@ export default {
   border-radius: 10px;
 }
 .dotted-border {
-    border-top: 2px dotted #455a64; 
-    border-bottom: 2px dotted #455a64; 
-    padding: 10px 0; 
-  }
- .icon-color {
+  border-top: 2px dotted #455a64;
+  border-bottom: 2px dotted #455a64;
+  padding: 10px 0;
+}
+.icon-color {
   color: black;
- }
- .h-color {
+}
+.h-color {
   color: black;
- }
+}
 .fixed-width {
   text-align: start;
-  width: 200px; 
-  margin-right: 10px; 
+  width: 200px;
+  margin-right: 10px;
 }
 
 .fixed-width:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
 .title-font-size {
   font-size: 18px !important;

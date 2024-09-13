@@ -24,13 +24,17 @@
                       class="d-flex align-items-center justify-content-between mt-3"
                     >
                       <p class="mt-3">
-                        <img class="heart" src="assets/images/heart.png" alt="" />
+                        <img
+                          class="heart"
+                          src="assets/images/heart.png"
+                          alt=""
+                        />
                         <a href="" class="save">Save</a>
                       </p>
                       <input
                         type="number"
                         class="product-quantity numbersize form-control"
-                        @change="changeQuantity($event,cart_item.item_id)"
+                        @change="changeQuantity($event, cart_item.item_id)"
                         :max="cart_item.stock_available"
                         :min="1"
                         v-model="cart_item.quantity"
@@ -40,10 +44,23 @@
                   <div class="product-prices d-flex">
                     <div class="pr-5">
                       <h6 class="discount-price">
-                        {{ cart_item.discount_price &&  cart_item.discount_price > 0 ? formatMoney(cart_item.product_price - cart_item.discount_price) : formatMoney(cart_item.product_price)}}
+                        {{
+                          cart_item.discount_price &&
+                          cart_item.discount_price > 0
+                            ? formatMoney(
+                                cart_item.product_price -
+                                  cart_item.discount_price
+                              )
+                            : formatMoney(cart_item.product_price)
+                        }}
                       </h6>
                       <h6 class="actual-price">
-                        {{ cart_item.discount_price && cart_item.discount_price > 0 ? formatMoney(cart_item.product_price) : "" }}
+                        {{
+                          cart_item.discount_price &&
+                          cart_item.discount_price > 0
+                            ? formatMoney(cart_item.product_price)
+                            : ""
+                        }}
                       </h6>
                     </div>
                     <img
@@ -126,7 +143,7 @@
           </splide>
         </div>
         <div class="col-12 col-md-3 col-lg-3">
-          <OrderSummary />
+          <OrderSummary :handleSubmit="handleSubmit" :step="0" />
         </div>
       </div>
     </div>
@@ -209,6 +226,9 @@ export default {
     },
   },
   methods: {
+    handleSubmit() {
+      this.$router.push("/checkout");
+    },
     changePage(value) {
       this.currentPage = value;
       let url = this.islogin

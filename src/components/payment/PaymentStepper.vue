@@ -19,6 +19,7 @@
             @RefreshSipping="RefreshSipping"
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
+            @handleNextStep="handleSwitchStep"
           />
         </b-col>
       </b-row>
@@ -29,6 +30,7 @@
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
             :review=true
+             @handleNextStep="handleSwitchStep"
           />
         </b-col>
         <b-col class="my-4" cols="12">
@@ -41,6 +43,7 @@
             @showoperator="handleShowOperator"
             @showreview="handleShowReview"
             :price="order_price"
+             @handleNextStep="handleSwitchStep"
           />
         </b-col>
       </b-row>

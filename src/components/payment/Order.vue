@@ -1,15 +1,13 @@
 <template>
-      <div class="row">
-        <div class="col-8">
-          <hr class="dotted-hr" />
           <div>
-            <OrderProductsList
-              ref="checkoutorderr"
-              @customEvent="handleCustomEvent"
-            />
+            <hr class="dotted-hr" />
+            <div>
+              <OrderProductsList
+                ref="checkoutorderr"
+                @customEvent="handleCustomEvent"
+              />
+            </div>
           </div>
-        </div>
-      </div>
 </template>
 
 <script>

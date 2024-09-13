@@ -34,9 +34,6 @@
             @handleNextStep="handleSwitchStep"
           />
         </b-col>
-        <b-col cols="12">
-          <Order @showoperator="handleShowOperator" ref="checkoutorder" />
-        </b-col>
 
       </b-row>
       <b-row v-if="current_step === 3 && !showRequestPayment">
@@ -76,7 +73,6 @@
   </div>
 </template>
 <script>
-import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
 import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
@@ -89,7 +85,6 @@ import axios from "axios";
 export default {
   name: "PaymentStepper",
   components: {
-    Order,
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,

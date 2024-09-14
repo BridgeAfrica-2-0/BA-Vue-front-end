@@ -135,7 +135,7 @@
                   ></b-form-input>
                 </div>
                 <div>
-                  <b-button variant="primary" class="pay-btn">
+                  <b-button @click="requestPayment" variant="primary" class="pay-btn">
                     Pay: {{ formatMoney(price) }}
                   </b-button>
                 </div>
@@ -158,7 +158,7 @@
                   ></b-form-input>
                 </div>
                 <div>
-                  <b-button variant="primary" class="pay-btn">
+                  <b-button @click="requestPayment" variant="primary" class="pay-btn">
                     Pay: {{ formatMoney(price) }}
                   </b-button>
                 </div>
@@ -202,7 +202,8 @@ export default {
       this.$emit("showreview");
     },
     requestPayment() {
-      if (this.operator !== "" && this.price > 0)
+      // if (this.operator !== "" && this.price > 0)
+      console.log("payment is being requested")
         this.$emit("requestpayment", this.price, this.operator);
     },
     formatMoney(money) {
@@ -213,7 +214,8 @@ export default {
     },
     handleSubmit(){
       console.log("step 3 calling")
-      this.$emit("handleNextStep", 3);
+      this.$router.push({ path: "/ThankYouPage" }); 
+      // this.$emit("handleNextStep", 3);
     },
     goBack()
     {

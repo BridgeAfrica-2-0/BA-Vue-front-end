@@ -36,6 +36,7 @@
         </b-col>
 
       </b-row>
+       <!-- @requestpayment="handleRequestPayment"  this is where payment is processing -->
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
           <PaymentOperator

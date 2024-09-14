@@ -2,7 +2,7 @@ import axios from "axios";
 import router from "../router";
 import { state } from "./search/state";
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
+import { getGuestIdentifier } from "../helpers";
 export default {
   namespaced: true,
 
@@ -212,7 +212,8 @@ export default {
     },
 
     login({ commit }, credentials) {
-      return axios.post("user/login", credentials).then(({ data }) => {
+      let guest_identifier = getGuestIdentifier();
+      return axios.post("user/login",  { ...credentials, guest_identifier }).then(({ data }) => {
         commit("setUserData", data.data);
       });
     },
@@ -333,9 +334,10 @@ export default {
     },
 
     verify({ commit }, mydata) {
+      let guest_identifier = getGuestIdentifier();
       const url = "user/verifyOtp/" + mydata.id;
 
-      return axios.post(url, mydata).then(({ data }) => {
+      return axios.post(url, {...mydata,guest_identifier}).then(({ data }) => {
         console.log(data.data);
 
         commit("setUserData", data.data);

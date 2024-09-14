@@ -82,6 +82,23 @@
             ></b-form-select>
           </b-form-group>
         </div>
+        <div class="col">
+          <b-form-group
+        class="body-font-size"
+        id="input-group-region"
+        :label="$t('general.Destination')"
+        label-for="destination-input"
+      >
+        <b-form-select
+          id="destination-input"
+          v-model="form.city"
+          :options="destinations"
+          value-field="id"
+          text-field="name"
+          required
+        ></b-form-select>
+      </b-form-group>
+        </div>
       </div>
       <!-- <div class="row">
 				<div class="col">
@@ -134,7 +151,7 @@
 					required
 				></b-form-input>
 			</b-form-group> -->
-      <b-form-group
+      <!-- <b-form-group
         class="body-font-size"
         id="input-group-region"
         :label="$t('general.Destination')"
@@ -148,7 +165,7 @@
           text-field="name"
           required
         ></b-form-select>
-      </b-form-group>
+      </b-form-group> -->
 
       <!-- <b-form-group
 				class="body-font-size"
@@ -165,20 +182,9 @@
 					required
 				></b-form-select>
 			</b-form-group> -->
-
-      <div class="d-flex justify-content-between align-items-center">
-        <b-button
-          class="btn-custom bg-secondary text-light"
-          type="reset"
-          variant="secondary"
-          >{{ $t("general.Cancel") }}</b-button
-        >
-
-        <b-button class="btn-custom mr-3" type="submit" variant="primary">
-          <b-spinner v-if="loading" small variant="light"></b-spinner>
-          {{ $t("general.Save") }}</b-button
-        >
-      </div>
+      <b-button  type="submit" variant="primary" class="hire-btn" style="">
+            {{ $t("general.Save") }}
+      </b-button>
 
       <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
         <p role="button" class="text-center" @click="closesipping">
@@ -248,11 +254,11 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("auth/country");
+    this.username = this.$store.state.auth.user?.user?.name || "";
     if (this.mode !== "create") {
       this.getRegions(this.form.country);
       this.getDestinations(this.form.region);
     }
-    this.username = this.$store.state.auth.user?.user?.name || "";
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
   },
   methods: {
@@ -275,6 +281,7 @@ export default {
             this.loading = false;
             this.errorAppend = false;
             this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+            this.form = {};
             if (this.modal) {
               this.$emit("closecshippingm");
             } else {
@@ -284,6 +291,7 @@ export default {
           .catch(() => {
             this.loading = false;
             this.errorAppend = true;
+            this.form = {};
             if (this.modal) {
               this.$emit("closecshippingm");
             }
@@ -295,8 +303,8 @@ export default {
         let shippingUp = {
           id: this.form.id,
           data: {
-            region_id: this.form.region_id,
-            country_id: this.form.country_id,
+            region: this.form.region,
+            country: this.form.country,
             name: this.username,
             phone: this.form.phone,
             city: this.form.city,
@@ -430,6 +438,29 @@ export default {
 };
 </script>
 <style scoped>
+.modal-header {
+  margin-top: 20px !important;
+  color: black;
+}
+.body-font-size {
+  color: black;
+}
+.hire-btn {
+  margin-top: 2%;
+  width: 300px;
+  height: 46px;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 100px; 
+  left: 40%; 
+  transform: translateX(-50%);
+}
 .btn-custom {
   height: 38px;
   min-width: 123px;

@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
-		<ProductDetails/> -->
+  <div style="background-color: white;">
     <!-- Stepper header start-->
-
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
       <PaymentProgress
@@ -16,49 +13,37 @@
     <!-- Stepper header end-->
 
     <b-container fluid="lg">
-      <!-- <b-row v-if="current_step === 1 && actualComponent1"> -->
       <b-row v-if="current_step === 1 && !showRequestPayment">
-        <b-col class="my-4" cols="12">
-          <CreateShippingAddress
-            :currentStep="current_step"
-            @switchstep="handleSwitchStep"
-          />
-        </b-col>
-      </b-row>
-      <!-- <b-row v-if="current_step === 2 && actualComponent2"> -->
-      <b-row v-if="current_step === 2 && !showRequestPayment">
-        <!-- Card Stepper for Shipping Address Start -->
         <b-col class="my-4" cols="12">
           <ShippingAdress
             @RefreshSipping="RefreshSipping"
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
+            @handleNextStep="handleSwitchStep"
           />
         </b-col>
-        <!-- Card Stepper for Shipping Address End -->
-
-        <!-- Card Stepper for Order Start -->
-        <b-col class="my-4" cols="12">
-          <Order @showoperator="handleShowOperator" ref="checkoutorder" />
-        </b-col>
-        <!-- Card Stepper for Order End -->
       </b-row>
-      <!-- Stepper Page 1  End -->
+      <b-row v-if="current_step === 2 && !showRequestPayment">
+        <b-col class="my-4" cols="12">
+          <ShippingAdress
+            @RefreshSipping="RefreshSipping"
+            @loadActualComponent3="showActualComponent3"
+            @loadActualComponent1="showActualComponent1"
+            :review=true
+            @edit-button-clicked="redirectToStep1"
+            @handleNextStep="handleSwitchStep"
+          />
+        </b-col>
 
-      <!-- <b-row v-if="current_step === 3 && actualComponent3"> -->
+      </b-row>
+       <!-- @requestpayment="handleRequestPayment"  this is where payment is processing -->
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <!-- <PaymentOperator
-            @loadActualComponent2="showActualComponent2"
-            @requestpayment="handleRequestPayment"
-            @showreview="handleShowReview"
-            :price="order_price"
-          /> -->
-
           <PaymentOperator
-            @requestpayment="handleRequestPayment"
+            @showoperator="handleShowOperator"
             @showreview="handleShowReview"
             :price="order_price"
+             @handleNextStep="handleSwitchStep"
           />
         </b-col>
       </b-row>
@@ -85,34 +70,28 @@
           <ConfirmPayment />
         </b-col>
       </b-row>
-
-      <!-- <div class="text-center">
-					<button class="backBtn mt-2 float-left" @click="onClickBack"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
-				 </div> -->
     </b-container>
   </div>
 </template>
 <script>
-import Order from "./Order";
 import ShippingAdress from "./ShippingAdress";
 import PaymentOperator from "./PaymentOperator";
 import RequestPayment from "./RequestPayment";
 import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
-import CreateShippingAddress from "./CreateShippingAddress";
+// import CreateShippingAddress from "./CreateShippingAddress";
 import axios from "axios";
 // import ProductDetails from "./ProductDetails";
 
 export default {
   name: "PaymentStepper",
   components: {
-    Order,
     ShippingAdress,
     PaymentOperator,
     PaymentProgress,
-    CreateShippingAddress,
+    // CreateShippingAddress,
     RequestPayment,
-    ConfirmPayment
+    ConfirmPayment,
   },
   data() {
     return {
@@ -120,20 +99,20 @@ export default {
       max_step: 5,
       steps: [
         {
-          text: this.$t("general.Shipping_Address"),
+          text: this.$t("general.Stepper_shipping"),
           status: true,
-          complete: false
+          complete: false,
         },
         {
-          text: this.$t("general.Checkout"),
+          text: this.$t("general.Review"),
           status: false,
-          complete: false
+          complete: false,
         },
         {
-          text: this.$t("general.Confirm_Payment"),
+          text: this.$t("general.Payment"),
           status: false,
-          complete: false
-        }
+          complete: false,
+        },
       ],
       sizeStepperIndicator: "md",
       showOperators: false,
@@ -146,7 +125,7 @@ export default {
       loading: false,
       actualComponent1: true,
       actualComponent2: false,
-      actualComponent3: false
+      actualComponent3: false,
     };
   },
   computed: {
@@ -158,11 +137,13 @@ export default {
     },
     islogin() {
       return this.$store.getters["auth/isLogged"];
-    }
+    },
   },
 
   mounted() {
     this.loading = true;
+    this.$store.dispatch("checkout/updateStepper", 1);
+    this.$store.dispatch("checkout/getCartSummary", this.islogin);
     this.$store
       .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
       .then(() => {
@@ -174,8 +155,14 @@ export default {
   },
 
   methods: {
+    redirectToStep1() {
+      this.steps[0].status = true;
+      this.current_step = 1;
+    },
     RefreshSipping() {
-      this.$refs.checkoutorder.RefreshSipping();
+      if (this.$refs.checkoutorder) {
+       this.$refs.checkoutorder.RefreshSipping();
+      }
     },
 
     onClickNext: function() {
@@ -216,16 +203,16 @@ export default {
     },
 
     changeStatusProgress(current_step, next_step) {
-      this.steps[current_step - 1].status = false;
-      this.steps[current_step - 1].complete = true;
+      // this.steps[current_step - 1].status = false;
+      // this.steps[current_step - 1].complete = true;
       this.steps[next_step - 1].status = true;
     },
 
-    handleShowOperator(price, order_ids) {
+    handleShowOperator() {
       // this.showOperators = true;
       // this.showReview = false;
-      this.order_price = price;
-      this.order_ids = order_ids;
+      // this.order_price = price;
+      // this.order_ids = order_ids;
       this.onClickNext();
     },
 
@@ -242,13 +229,13 @@ export default {
         {
           text: "Request Payment",
           status: true,
-          complete: false
+          complete: false,
         },
         {
           text: "Confirm Payment",
           status: false,
-          complete: false
-        }
+          complete: false,
+        },
       ];
     },
     handleChangePayment() {
@@ -256,20 +243,20 @@ export default {
       this.showRequestPayment = false;
       this.steps = [
         {
-          text: "Shipping Address",
+          text: "SHIPPING",
           status: true,
-          complete: false
+          complete: false,
         },
         {
-          text: "Checkout",
+          text: "PAYMENT",
           status: false,
-          complete: false
+          complete: false,
         },
         {
-          text: "Confirm Payment",
+          text: "REVIEW",
           status: false,
-          complete: false
-        }
+          complete: false,
+        },
       ];
     },
     handleConfirmPayment({ number, amount, operator }) {
@@ -281,49 +268,49 @@ export default {
         phone: number,
         amount: amount,
         orderId: this.order_ids.toString(),
-        operator: operator
+        operator: operator,
       };
       let url = null;
       if (operator == "ORANGE") {
         this.loading = true;
-        const userJson = localStorage.getItem('user');
+        const userJson = localStorage.getItem("user");
 
-      let userId = null;
-      const userObject = JSON.parse(userJson);
-      if(userObject)
-      {
-        try {
-        userId = userObject.user.id;
-        } catch (error) {
-        console.error('Error parsing user data from localStorage:', error);
+        let userId = null;
+        const userObject = JSON.parse(userJson);
+        if (userObject) {
+          try {
+            userId = userObject.user.id;
+          } catch (error) {
+            console.error("Error parsing user data from localStorage:", error);
+          }
         }
-      }
 
-        url = this.islogin ?`orange/start-orange-money-transaction?userId=${userId}`: "orange/start-orange-money-transaction";
+        url = this.islogin
+          ? `orange/start-orange-money-transaction?userId=${userId}`
+          : "orange/start-orange-money-transaction";
 
         axios
           .post(url, data)
-          .then(response => {
+          .then((response) => {
             // this.showConfirmPayment = true;
             //  this.onClickNext();
-            if(response.data)
-          {
-            this.flashMessage.show({
-              status: "success",
-              message: "Operation Successful! "
-            });
-            setTimeout(() => {
-             this.$router.push({ path: '/' }); 
-              }, 3000); 
-          }
+            if (response.data) {
+              this.flashMessage.show({
+                status: "success",
+                message: "Operation Successful! ",
+              });
+              setTimeout(() => {
+                this.$router.push({ path: "/" });
+              }, 3000);
+            }
             this.loading = false;
             console.log("testing orange");
           })
-          .catch(error => {
+          .catch((error) => {
             this.flashMessage.show({
               status: "error",
 
-              message: "Transaction Failed"
+              message: "Transaction Failed",
             });
             console.dir(error);
 
@@ -338,18 +325,18 @@ export default {
 
         axios
           .post(url, data)
-          .then(response => {
+          .then((response) => {
             this.showConfirmPayment = true;
             this.onClickNext();
             console.log(response);
             this.loading = false;
           })
-          .catch(error => {
+          .catch((error) => {
             this.$refs.request_payment.paymenterror(error);
             this.flashMessage.show({
               status: "error",
 
-              message: "Transaction Failed"
+              message: "Transaction Failed",
             });
             console.dir(error);
             this.loading = false;
@@ -357,8 +344,8 @@ export default {
       }
     },
 
-    shownextComponent() {}
-  }
+    shownextComponent() {},
+  },
 };
 </script>
 

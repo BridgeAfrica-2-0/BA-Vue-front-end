@@ -422,7 +422,7 @@
                 <span> {{ $t("general.let_help_u") }} </span>
                 <span style="color: black;">{{
                   $t("general.find_products_and_services")
-                }}</span>
+                  }}</span>
               </h3>
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
@@ -638,7 +638,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -646,7 +646,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -657,7 +657,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -665,7 +665,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -761,7 +761,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -769,7 +769,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -777,7 +777,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -785,7 +785,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -871,6 +871,10 @@ import FAQ from "../components/faq";
 import VLazyImage from "v-lazy-image/v2";
 
 import { convertCurrency } from "@/helpers"
+
+import {
+  buildByLocalisation,
+} from "@/application/products"
 
 export default {
   components: {
@@ -1125,21 +1129,24 @@ export default {
 
 
   async created() {
+    this.loading = true;
+
     this.onInit()
     localStorage.setItem("searchTab", 0);
     window.addEventListener("load", this.onWindowLoad);
     this.getLocation();
-    this.loading = true;
-    axios
-      .get("guest/home/products")
-      .then(({ data }) => {
-        this.products = data.data;
-        this.loading = false;
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-      });
+    // axios
+    //   .get("guest/home/products")
+    //   .then(({ data }) => {
+    //     this.products = data.data;
+    //     this.loading = false;
+    //   })
+    //   .catch(err => {
+    //     console.log({ err: err });
+    //     this.loading = false;
+    //   });
+
+
   },
 
   computed: {
@@ -1186,9 +1193,24 @@ export default {
   },
 
   methods: {
+
     async onInit() {
       this.rate = await convertCurrency()
+
+      const { api, callback } = buildByLocalisation('XAF' == this.rate.currency)
+
+      api()
+        .then(({ data }) => {
+          console.log("test api sending")
+          this.products = data.data;
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
     },
+
     setActiveTab(tab) {
       this.activeTab = tab;
     },

@@ -1,208 +1,218 @@
 <template>
   <div class="col">
-  <div class="row">
-    <div class="col-8">
-      <div class="row justify-content-between top-div" v-if="!review">
-        <div>
+    <div class="row">
+      <div class="col-8">
+        <div class="row justify-content-between top-div" v-if="!review">
+          <div>
+            <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+          </div>
+          <div>
+            <b-button
+              v-b-modal.create-shipping-modal
+              type="submit"
+              variant="primary"
+              class="hire-btn"
+            >
+              {{ $t("general.New_Address") }}
+            </b-button>
+          </div>
+        </div>
+
+        <!-- When review is true, only show title and Edit button -->
+        <div
+          v-if="review"
+          class="d-flex justify-content-between align-items-center"
+        >
+          <!-- Title aligned to the left -->
           <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+
+          <!-- Buttons aligned to the right -->
+          <div>
+            <b-button
+              v-b-modal.edit-shipping-modal
+              variant="primary"
+              @click="goBack()"
+              class="back-btn mr-2"
+            >
+              <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+              BACK
+            </b-button>
+
+            <b-button
+              :v-b-modal="!review ? 'edit-shipping-modal' : null"
+              variant="primary"
+              @click="onEdit()"
+              class="edit-btn"
+            >
+              <i class="fas mr-2">&#xf304;</i>
+              {{ $t("general.Edit") }}
+            </b-button>
+          </div>
         </div>
-        <div>
-          <b-button
-            v-b-modal.create-shipping-modal
-            type="submit"
-            variant="primary"
-            class="hire-btn"
-          >
-            {{ $t("general.New_Address") }}
-          </b-button>
-        </div>
-      </div>
 
-      <!-- When review is true, only show title and Edit button -->
-      <div
-  v-if="review"
-  class="d-flex justify-content-between align-items-center"
->
-  <!-- Title aligned to the left -->
-  <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
-
-  <!-- Buttons aligned to the right -->
-  <div>
-    <b-button
-      v-b-modal.edit-shipping-modal
-      variant="primary"
-      @click="goBack()"
-      class="back-btn mr-2"
-    >
-      <i class="fas fa-arrow-alt-circle-left mr-2"></i>
-      BACK
-    </b-button>
-
-    <b-button
-      :v-b-modal="!review ? 'edit-shipping-modal' : null"
-      variant="primary"
-      @click="onEdit()"
-      class="edit-btn"
-    >
-      <i class="fas mr-2">&#xf304;</i>
-      {{ $t("general.Edit") }}
-    </b-button>
-  </div>
-</div>
-
-
-      <!-- Shipping Address Details -->
-      <b-card-title v-if="!review"
-        class="headline-font-size font-weight-bold headline_and_btns mb-0"
-      >
-        <span>{{ $t("general.Shipping_Address") }}</span>
-      </b-card-title>
-      <div class="row">
-        <div class="col-12">
-          <CreateShippingModal />
-        </div>
-        <div class="col-12">
-          <CreateShippingModal
-            :title="$t('general.Edit_Shipping_Address')"
-            mode="edit"
-            :editForm="shippingsTab[selectedIndex]"
-          />
-        </div>
-      </div>
-      <!-- Active shipping address only when review is true -->
-      <b-card-text v-if="review" class="mt-4">
+        <!-- Shipping Address Details -->
+        <b-card-title
+          v-if="!review"
+          class="headline-font-size font-weight-bold headline_and_btns mb-0"
+        >
+          <span>{{ $t("general.Shipping_Address") }}</span>
+        </b-card-title>
         <div class="row">
           <div class="col-12">
-            <div
-              class="ship-add w-100 d-flex justify-content-between align-items-start"
-            >
-              <div class="d-inline-flex">
-                <div class="mb-3 d-flex justify-content-between">
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                    <p class="mb-1">{{ activeData.name }}</p>
-                    <p class="mb-1">
-                      {{ activeData.city }}, {{ activeData.region }}
-                    </p>
-                    <p class="">{{ activeData.country }}</p>
-                  </div>
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
-                    <p class="mb-1">{{ activeData.email }}</p>
-                    <p class="">{{ activeData.phone }}</p>
-                  </div>
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
-                    <p class="mb-1">Business Days</p>
-                    <p class="">FREE</p>
+            <CreateShippingModal />
+          </div>
+          <div class="col-12">
+            <CreateShippingModal
+              :title="$t('general.Edit_Shipping_Address')"
+              mode="edit"
+              :editForm="shippingsTab[selectedIndex]"
+            />
+          </div>
+        </div>
+        <!-- Active shipping address only when review is true -->
+        <b-card-text v-if="review" class="mt-4">
+          <div class="row">
+            <div class="col-12">
+              <div
+                class="ship-add w-100 d-flex justify-content-between align-items-start"
+              >
+                <div class="d-inline-flex">
+                  <div class="mb-3 d-flex justify-content-between">
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                      <p class="mb-1">{{ activeData.name }}</p>
+                      <p class="mb-1">
+                        {{ activeData.city }}, {{ activeData.region }}
+                      </p>
+                      <p class="">{{ activeData.country }}</p>
+                    </div>
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">
+                        {{ $t("general.Contact_details") }}
+                      </h5>
+                      <p class="mb-1">{{ activeData.email }}</p>
+                      <p class="">{{ activeData.phone }}</p>
+                    </div>
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">
+                        {{ $t("general.Shipping_speed") }}
+                      </h5>
+                      <p class="mb-1">Business Days</p>
+                      <p class="">FREE</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </b-card-text>
+        </b-card-text>
 
-      <!-- Show all shipping addresses if review is false -->
-      <b-card-text
-        v-if="!review"
-        class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
-      >
-        <div class="row w-100">
-          <div class="dotted-border">
-            <div
-              class="ship-add w-100 d-flex justify-content-between align-items-start"
-              v-for="(shipping_item, index) in shippingsTab"
-              :key="shipping_item.id"
-            >
-              <div class="d-inline-flex">
-                <div class="col-1">
-                  <input
-                    type="radio"
-                    :v-model="shipping_item.id"
-                    @change="shipping(shipping_item)"
-                    :checked="shipping_item.active == 1"
-                    name="shipping"
-                    value=""
-                  />
-                </div>
-                <div class="mb-3 d-flex justify-content-between">
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                    <p class="mb-1">{{ shipping_item.name }}</p>
-                    <p class="mb-1">
-                      {{ shipping_item.city }}, {{ shipping_item.region }}
-                    </p>
-                    <p class="">{{ shipping_item.country }}</p>
+        <!-- Show all shipping addresses if review is false -->
+        <b-card-text
+          v-if="!review"
+          class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
+        >
+          <div class="row w-100">
+            <div class="dotted-border">
+              <div
+                class="ship-add w-100 d-flex justify-content-between align-items-start"
+                v-for="(shipping_item, index) in shippingsTab"
+                :key="shipping_item.id"
+              >
+                <div class="d-inline-flex">
+                  <div class="col-1">
+                    <input
+                      type="radio"
+                      :v-model="shipping_item.id"
+                      @change="shipping(shipping_item)"
+                      :checked="shipping_item.active == 1"
+                      name="shipping"
+                      value=""
+                    />
                   </div>
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
-                    <p class="mb-1">{{ shipping_item.email }}</p>
-                    <p class="">{{ shipping_item.phone }}</p>
-                  </div>
-                  <div class="flex-fill fixed-width">
-                    <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
-                    <p class="mb-1">Business Days</p>
-                    <p class="">FREE</p>
+                  <div class="mb-3 d-flex justify-content-between">
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                      <p class="mb-1">{{ shipping_item.name }}</p>
+                      <p class="mb-1">
+                        {{ shipping_item.city }}, {{ shipping_item.region }}
+                      </p>
+                      <p class="">{{ shipping_item.country }}</p>
+                    </div>
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">
+                        {{ $t("general.Contact_details") }}
+                      </h5>
+                      <p class="mb-1">{{ shipping_item.email }}</p>
+                      <p class="">{{ shipping_item.phone }}</p>
+                    </div>
+                    <div class="flex-fill fixed-width">
+                      <h5 class="h-color">
+                        {{ $t("general.Shipping_speed") }}
+                      </h5>
+                      <p class="mb-1">Business Days</p>
+                      <p class="">FREE</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row ml-2">
-                <div>
-                  <a
-                    href="#"
-                    v-b-modal.edit-shipping-modal
-                    class="mr-1 mr-sm-2 icon-color"
-                    @click.prevent="openEditModal(index)"
-                  >
-                    <i class="fas">&#xf304;</i>
-                  </a>
-                </div>
-                <div class="ml-1">
-                  <UpdatedConfirmOperation
-                    :message="
-                      $t('general.Do_you_want_to_delete_this_shipping_address')
-                    "
-                    @sendid="handleDeleteShipping"
-                    :id_item="shipping_item.id"
-                  />
+                <div class="row ml-2">
+                  <div>
+                    <a
+                      href="#"
+                      v-b-modal.edit-shipping-modal
+                      class="mr-1 mr-sm-2 icon-color"
+                      @click.prevent="openEditModal(index)"
+                    >
+                      <i class="fas">&#xf304;</i>
+                    </a>
+                  </div>
+                  <div class="ml-1">
+                    <UpdatedConfirmOperation
+                      :message="
+                        $t(
+                          'general.Do_you_want_to_delete_this_shipping_address'
+                        )
+                      "
+                      @sendid="handleDeleteShipping"
+                      :id_item="shipping_item.id"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </b-card-text>
+        </b-card-text>
 
-      <div class="row" v-if="loading">
-        <div class="col-12 d-flex justify-content-center">
-          <b-spinner
-            variant="primary"
-            large
-            label="loading shipping..."
-          ></b-spinner>
+        <div class="row" v-if="loading">
+          <div class="col-12 d-flex justify-content-center">
+            <b-spinner
+              variant="primary"
+              large
+              label="loading shipping..."
+            ></b-spinner>
+          </div>
         </div>
+        <Order v-if="review" />
       </div>
-      <Order v-if="review"/>
-    </div>
 
-    <div class="col-4">
-      <OrderSummary :step="1" :handleSubmit="handleSubmit" />
-    </div>
+      <div class="col-4">
+        <OrderSummary :step="1" :handleSubmit="handleSubmit" />
+      </div>
 
-    <b-modal
-      v-model="showModal"
-      @hidden="hideAuthModal"
-      hide-footer
-      size="xl"
-      :hide-header-close="isCheckoutRoute"
-      :no-close-on-backdrop="isCheckoutRoute"
-      :no-fade="isCheckoutRoute"
-      :backdrop="!isCheckoutRoute"
-    >
-      <login @success="success" @hideAuthModal="hideAuthModal" />
-    </b-modal>
+      <b-modal
+        v-model="showModal"
+        @hidden="hideAuthModal"
+        hide-footer
+        size="xl"
+        :hide-header-close="isCheckoutRoute"
+        :no-close-on-backdrop="isCheckoutRoute"
+        :no-fade="isCheckoutRoute"
+        :backdrop="!isCheckoutRoute"
+      >
+        <login @success="success" @hideAuthModal="hideAuthModal" />
+      </b-modal>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -238,7 +248,7 @@ export default {
   },
   methods: {
     handleEditClick() {
-        this.$emit('edit-button-clicked');
+      this.$emit("edit-button-clicked");
     },
     shipping(data) {
       this.activeData = { ...data };
@@ -257,13 +267,13 @@ export default {
           this.$emit("RefreshSipping");
           loader.hide();
           this.$store
-         .dispatch("checkout/getAllShippingAdd",{ islogin: this.islogin })
-         .then(() => {
-          loader.hide();
-         })
-         .catch(() => {
-          loader.hide();
-         });
+            .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+            .then(() => {
+              loader.hide();
+            })
+            .catch(() => {
+              loader.hide();
+            });
           // this.shippingsTab();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
@@ -300,32 +310,22 @@ export default {
     },
     handleSubmit() {
       console.log("calling handle submit", 2);
-      if(this.review)
-    {
-      this.$emit("handleNextStep", 3);
-    }
-    else 
-    {
-
-      this.$emit("handleNextStep", 2);
-    }
+      if (this.review) {
+        this.$emit("handleNextStep", 3);
+      } else {
+        this.$emit("handleNextStep", 2);
+      }
     },
-    goBack()
-    {
-      if(this.review)
-    {
-      this.$emit("handleNextStep", 1);
-    }
-    else 
-    {
-
-      this.$emit("handleNextStep", 2);
-    }
+    goBack() {
+      if (this.review) {
+        this.$emit("handleNextStep", 1);
+      } else {
+        this.$emit("handleNextStep", 2);
+      }
     },
-    onEdit()
-    {
+    onEdit() {
       this.$emit("handleNextStep", 1);
-    }
+    },
   },
   computed: {
     isCheckoutRoute() {
@@ -367,8 +367,11 @@ export default {
     this.selectedShipping = this.selectedShippingId;
     this.activeData = this.activeDataVal;
     this.$store
-      .dispatch("checkout/getAllShippingAdd")
+      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
       .then(() => {
+        this.selectedShipping = this.selectedShippingId;
+        this.activeData = this.activeDataVal;
+
         this.loading = false;
       })
       .catch(() => {
@@ -378,7 +381,6 @@ export default {
   created() {
     this.selectedShipping = this.selectedShippingId;
     this.activeData = this.activeDataVal;
-    console.log("========active===========", this.activeData);
     if (!this.$store.getters["auth/isLogged"]) {
       this.showModal = true;
     }

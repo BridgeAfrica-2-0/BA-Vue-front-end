@@ -118,3 +118,56 @@ export const setGuestIdentifier = () => {
 export const getGuestIdentifier = () => {
   return localStorage.getItem("guest_identifier") ?? null;
 };
+
+
+const checkCountryLocalisation = async () => {
+  const response = await fetch('https://ipapi.co/json/');
+  const data = await response.json();
+  return data.country; // e.g., 'US'
+}
+
+const getRate =  async (fromCurrency, toCurrency) => {
+  const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+  const data = await response.json();
+  // console.log(data.rates)
+  return data.rates[toCurrency]; 
+}
+
+export const convertCurrency = async()  => {
+  try {
+      const userCountry = await checkCountryLocalisation();
+      const currencyMap = {
+        'US': 'USD',  // United States Dollar
+        'CA': 'CAD',  // Canadian Dollar
+        'GB': 'GBP',  // British Pound Sterling
+        'CM': 'XAF',  // Central African CFA Franc
+        'FR': 'EUR',  // Euro
+        'DE': 'EUR',  // Euro
+        'JP': 'JPY',  // Japanese Yen
+        'IN': 'INR',  // Indian Rupee
+        'AU': 'AUD',  // Australian Dollar
+        'CN': 'CNY',  // Chinese Yuan
+        'BR': 'BRL',  // Brazilian Real
+        'ZA': 'ZAR',  // South African Rand
+        'MX': 'MXN',  // Mexican Peso
+        'RU': 'RUB',  // Russian Ruble
+        'NG': 'NGN',  // Nigerian Naira
+        'KR': 'KRW',  // South Korean Won
+        'SE': 'SEK',  // Swedish Krona
+        'NO': 'NOK',  // Norwegian Krone
+        'CH': 'CHF',  // Swiss Franc
+        'SG': 'SGD',  // Singapore Dollar
+        // Add more countries as needed
+    };
+
+      const userCurrency = currencyMap[userCountry] || 'XAF'; 
+      
+      const conversionRate = await getRate(userCurrency, 'XAF');
+      // console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
+
+      return  {"currency": userCurrency, rate:conversionRate}
+      
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}

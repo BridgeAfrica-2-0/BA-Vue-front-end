@@ -288,6 +288,7 @@ export default {
     async changeQuantity(event, index) {
       let quantity = event.target.value;
       if (quantity > 1) {
+        this.buttonDisable = false;
         await this.$store
           .dispatch("checkout/updateCart", { quantity: quantity, index: index })
           .then((response) => {

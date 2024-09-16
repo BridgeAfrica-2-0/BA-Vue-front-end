@@ -1,6 +1,6 @@
 <template>
   <div class="bridge-home">
-    <site-header class="topbar" />
+    <site-header class="topbar" @change:currency="emitChangeCurrency"/>
 
     <!-- <section class="p-0">
   <div>
@@ -1194,14 +1194,17 @@ export default {
 
   methods: {
 
-    async onInit() {
-      this.rate = await convertCurrency()
+    async emitChangeCurrency(ev){
+      console.log(ev)
+      this.rate = await convertCurrency(ev)
+    },
+    async onInit(currency = null) {
+      this.rate = await convertCurrency(currency)
 
       const { api, callback } = buildByLocalisation('XAF' == this.rate.currency)
 
       api()
         .then(({ data }) => {
-          console.log("test api sending")
           this.products = data.data;
           this.loading = false;
         })

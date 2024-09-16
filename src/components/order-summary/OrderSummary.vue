@@ -31,6 +31,7 @@
         :disabled="disable"
         @click="handleSubmit"
         class="submit-order-btn"
+        :class="{ 'disabled-btn': disable }"
       >
         {{ getButtonText }}
       </button>
@@ -121,6 +122,11 @@ export default {
 };
 </script>
 <style scoped>
+
+.submit-order-btn:disabled {
+  cursor: not-allowed; 
+}
+
 .order-summary {
   width: 100%;
   max-width: 350px;

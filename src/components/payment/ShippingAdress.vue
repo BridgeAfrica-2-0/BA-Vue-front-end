@@ -80,18 +80,18 @@
                   <div class="mb-3 d-flex justify-content-between">
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ activeData.name }}</p>
+                      <p class="mb-1">{{ activeData?.name }}</p>
                       <p class="mb-1">
-                        {{ activeData.city }}, {{ activeData.region }}
+                        {{ activeData?.city }}, {{ activeData?.region }}
                       </p>
-                      <p class="">{{ activeData.country }}</p>
+                      <p class="">{{ activeData?.country }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
                         {{ $t("general.Contact_details") }}
                       </h5>
-                      <p class="mb-1">{{ activeData.email }}</p>
-                      <p class="">{{ activeData.phone }}</p>
+                      <p class="mb-1">{{ activeData?.email }}</p>
+                      <p class="">{{ activeData?.phone }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
@@ -192,11 +192,11 @@
             ></b-spinner>
           </div>
         </div>
-        <Order v-if="review" />
+        <Order v-if="review" @unavailableProducts="handleUnavailableProducts" />
       </div>
 
       <div class="col-4">
-        <OrderSummary :step="1" :handleSubmit="handleSubmit" />
+        <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled"/>
       </div>
 
       <b-modal
@@ -237,6 +237,7 @@ export default {
       selectedIndex: null,
       showModal: false,
       activeData: {},
+      buttonDisabled: false,
     };
   },
   components: {
@@ -317,6 +318,7 @@ export default {
       }
     },
     goBack() {
+      this.buttonDisabled = false;
       if (this.review) {
         this.$emit("handleNextStep", 1);
       } else {
@@ -326,6 +328,15 @@ export default {
     onEdit() {
       this.$emit("handleNextStep", 1);
     },
+    handleUnavailableProducts(productNames) {
+      if(productNames.length > 0) {
+        this.buttonDisabled = true;
+        this.flashMessage.show({
+            status: "error",
+            message: `${productNames}  not available for selected shipping Address`
+          });
+      }
+    }
   },
   computed: {
     isCheckoutRoute() {

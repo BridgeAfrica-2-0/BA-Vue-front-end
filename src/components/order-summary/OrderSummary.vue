@@ -100,9 +100,9 @@ export default {
         case 1:
           return "Continue";
         case 2:
-          return "Proceed to payment ";
+          return "Proceed to payment";
         default:
-          return "Submit your order";
+          return "Proceed to payment";
       }
     },
   },

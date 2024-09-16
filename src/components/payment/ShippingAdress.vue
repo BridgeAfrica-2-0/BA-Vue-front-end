@@ -28,7 +28,7 @@
 
           <!-- Buttons aligned to the right -->
           <div>
-            <b-button
+            <!-- <b-button
               v-b-modal.edit-shipping-modal
               variant="primary"
               @click="goBack()"
@@ -36,7 +36,7 @@
             >
               <i class="fas fa-arrow-alt-circle-left mr-2"></i>
               BACK
-            </b-button>
+            </b-button> -->
 
             <b-button
               :v-b-modal="!review ? 'edit-shipping-modal' : null"
@@ -312,7 +312,20 @@ export default {
     handleSubmit() {
       console.log("calling handle submit", 2);
       if (this.review) {
-        this.$emit("handleNextStep", 3);
+        this.$store
+          .dispatch("checkout/createOrder", {
+            isLogin: this.$store.getters["auth/isLogged"]
+          })
+          .then(({ data }) => {
+            this.$emit(
+              "showoperator",
+              data.data.total_orders_amount,
+              data.data.order_ids
+            );
+          })
+          .catch(() => {
+          });
+        // this.$emit("handleNextStep", 3);
       } else {
         this.$emit("handleNextStep", 2);
       }
@@ -326,6 +339,7 @@ export default {
       }
     },
     onEdit() {
+      this.buttonDisabled = false;
       this.$emit("handleNextStep", 1);
     },
     handleUnavailableProducts(productNames) {

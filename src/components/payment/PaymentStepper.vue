@@ -27,6 +27,7 @@
         <b-col class="my-4" cols="12">
           <ShippingAdress
             @RefreshSipping="RefreshSipping"
+            @showoperator="handleShowOperator"
             @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1"
             :review=true
@@ -40,7 +41,7 @@
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
           <PaymentOperator
-            @showoperator="handleShowOperator"
+            @requestpayment="handleRequestPayment"
             @showreview="handleShowReview"
             :price="order_price"
              @handleNextStep="handleSwitchStep"
@@ -208,11 +209,12 @@ export default {
       this.steps[next_step - 1].status = true;
     },
 
-    handleShowOperator() {
+    handleShowOperator(price, order_ids) {
       // this.showOperators = true;
       // this.showReview = false;
-      // this.order_price = price;
-      // this.order_ids = order_ids;
+      console.log("======price, and order_ids=========",price, order_ids);
+      this.order_price = price;
+      this.order_ids = order_ids;
       this.onClickNext();
     },
 
@@ -245,15 +247,15 @@ export default {
         {
           text: "SHIPPING",
           status: true,
-          complete: false,
-        },
-        {
-          text: "PAYMENT",
-          status: false,
-          complete: false,
+          complete: true,
         },
         {
           text: "REVIEW",
+          status: true,
+          complete: true,
+        },
+        {
+          text: "PAYMENT",
           status: false,
           complete: false,
         },
@@ -300,7 +302,7 @@ export default {
                 message: "Operation Successful! ",
               });
               setTimeout(() => {
-                this.$router.push({ path: "/" });
+                this.$router.push({ path: "/ThankYouPage" , query: { order_ids: this.order_ids.toString() }});
               }, 3000);
             }
             this.loading = false;

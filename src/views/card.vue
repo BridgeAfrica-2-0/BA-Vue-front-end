@@ -147,7 +147,7 @@
           </splide>
         </div>
         <div class="col-12 col-md-3 col-lg-3">
-          <OrderSummary :handleSubmit="handleSubmit" :step="0" />
+          <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable" />
         </div>
       </div>
     </div>
@@ -167,6 +167,7 @@ export default {
   data() {
     return {
       currentPage: 1,
+      buttonDisable: false,
       per_page: 5,
       loading: false,
       error: false,
@@ -294,6 +295,7 @@ export default {
           })
           .catch((err) => {
             if (err) {
+              this.buttonDisable = true;
               this.getCartSummary();
               this.flashMessage.show({
                 status: "error",

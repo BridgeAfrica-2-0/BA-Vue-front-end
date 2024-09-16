@@ -27,7 +27,11 @@
       </p>
     </div>
     <div>
-      <button @click="handleSubmit" class="submit-order-btn">
+      <button
+        :disabled="disable"
+        @click="handleSubmit"
+        class="submit-order-btn"
+      >
         {{ getButtonText }}
       </button>
       <small>
@@ -65,6 +69,11 @@ export default {
       type: Number,
       required: true,
       default: 0,
+    },
+    disable: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data() {

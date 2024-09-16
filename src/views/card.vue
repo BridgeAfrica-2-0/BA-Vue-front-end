@@ -12,7 +12,7 @@
             <div v-if="!loading" class="mb-5">
               <div class="d-flex justify-content-between card-top-content">
                 <h4>{{ business.business_name }}</h4>
-                <a href="" class="clear">Clear</a>
+                <a href="" class="clear" @click.prevent="clearBusinessItems(business.items)">Clear</a>
               </div>
               <div v-for="(cart_item, i) in business.items" :key="i">
                 <div class="d-flex mt-4 cart-item-wrapper ml-4">
@@ -348,6 +348,33 @@ export default {
           this.loading = false;
         });
     },
+    async clearBusinessItems(items) {
+      const businessId = items[0].business_id;
+      this.loading = true;
+      const url = `cart/item/${businessId}/deleteBusinessItems`;
+      await axios
+        .delete(url)
+        .then((result) => {
+          this.getCartSummary();
+          console.log(result);
+          this.getCartItems();
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Items Removed Successfully",
+          });
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            blockClass: "custom-block-class",
+            message: "Unable to remove items at this moment",
+          });
+          this.loading = false;
+        });
+  }
   },
 };
 </script>

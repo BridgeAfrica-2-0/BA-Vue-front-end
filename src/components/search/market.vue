@@ -9,7 +9,7 @@
     <div v-if="!prodLoader" class="grid">
       <div v-for="(product, index) in products.data" :key="index" class="grid-item">
 
-        <div class="image-container mb-2" @click="gotoproduct(product)">
+        <div class="image-container mb-2" @click="productDetails(product)">
           <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
         </div>
         <div class="content-container">
@@ -19,7 +19,7 @@
           }">
             {{ product.in_stock ? "In Stock" : "Out of Stock" }}
           </div>
-          <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
+          <h3 @click="productDetails(product)">{{ product.name }}</h3>
           <p>
             {{
               product.description.length > 50
@@ -32,7 +32,7 @@
           <span class="price">{{ product.price | locationPrice(rate) }} </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="gotoproduct(product)">
+              <button class="buy-now-btn" @click="productDetails(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
                 <span class="arrow-icon">
                   <i class="fas fa-arrow-right"></i>
@@ -45,7 +45,7 @@
           </div>
           <div class="mobile-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="gotoproduct(product)">
+              <button class="buy-now-btn" @click="productDetails(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
@@ -155,7 +155,7 @@
     <div v-if="!prodLoader" class="grid">
       <div v-for="(product, index) in guestUserProducts.data" :key="index" class="grid-item">
 
-        <div class="image-container mb-2" @click="gotoproduct(product)">
+        <div class="image-container mb-2" @click="productDetails(product)">
           <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
         </div>
         <div class="content-container">
@@ -165,7 +165,7 @@
           }">
             {{ product.in_stock ? "In Stock" : "Out of Stock" }}
           </div>
-          <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
+          <h3 @click="productDetails(product)">{{ product.name }}</h3>
           <p>
             {{
               product.description.length > 50
@@ -178,7 +178,7 @@
           <span class="price">{{ product.price | locationPrice(rate) }} </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="gotoproduct(product)">
+              <button class="buy-now-btn" @click="productDetails(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
                 <span class="arrow-icon">
                   <i class="fas fa-arrow-right"></i>
@@ -191,7 +191,7 @@
           </div>
           <div class="mobile-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="gotoproduct(product)">
+              <button class="buy-now-btn" @click="productDetails(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
@@ -827,3 +827,5 @@ h6 {
   }
 }
 </style>
+
+

@@ -43,7 +43,7 @@
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
             <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
               src="@/assets/img/cmr.webp">
-             {{ countrySelected }} {{ currencySelected }}
+            {{ countrySelected }} {{ currencySelected }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
@@ -55,21 +55,37 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="model-settings">For better delivery prices, select your country</h5>
+            <h5 class="modal-title text-center" id="model-settings">For better delivery prices, select your country</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <select class="custom-select my-1" v-model="country">
-              <option disabled value="">Select country</option>
-              <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
-            </select>
+            <div class="countries my-1">
+              <strong for="">Country</strong>
+              <select class="custom-select" v-model="country">
+                <option disabled value="">Select country</option>
+                <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
+              </select>
+            </div>
 
-            <select class="custom-select my-2" v-model="currency">
-              <option disabled value="">Select currency</option>
-              <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
-            </select>
+
+            <div class="countries my-2">
+              <strong for="">Currency</strong>
+              <select class="custom-select" v-model="currency">
+                <option disabled value="">Select currency</option>
+                <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
+              </select>
+            </div>
+
+            <div class="language my-2">
+              <strong for="">Language</strong>
+              <select class="custom-select" v-model="lang">
+                <option disabled value="">Select currency</option>
+                <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }}</option>
+              </select>
+            </div>
+
 
             <button class="btn btn-primary w-100" @click="onChange">Save</button>
 
@@ -246,12 +262,17 @@ export default {
       cartCount: 0,
       country: "",
       currency: "",
+      
       countrySelected: "CM",
       currencySelected: "XAF",
       countries: [
         { name: 'Cameroun', value: 'CM' },
         { name: 'USA', value: 'USA' },
         { name: 'Canada', value: 'CD' },
+      ],
+      langs: [
+        { name: 'Français', value: 'Français' },
+        { name: 'English', value: 'English' },
       ],
       currencies: []
     };

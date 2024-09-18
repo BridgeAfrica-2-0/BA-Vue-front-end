@@ -27,7 +27,12 @@
       </p>
     </div>
     <div>
-      <button @click="handleSubmit" class="submit-order-btn">
+      <button
+        :disabled="disable"
+        @click="handleSubmit"
+        class="submit-order-btn"
+        :class="{ 'disabled-btn': disable }"
+      >
         {{ getButtonText }}
       </button>
       <small>
@@ -66,6 +71,11 @@ export default {
       required: true,
       default: 0,
     },
+    disable: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
@@ -90,9 +100,9 @@ export default {
         case 1:
           return "Continue";
         case 2:
-          return "Proceed to payment ";
+          return "Proceed to payment";
         default:
-          return "Submit your order";
+          return "Proceed to payment";
       }
     },
   },
@@ -112,6 +122,11 @@ export default {
 };
 </script>
 <style scoped>
+
+.submit-order-btn:disabled {
+  cursor: not-allowed; 
+}
+
 .order-summary {
   width: 100%;
   max-width: 350px;

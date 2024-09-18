@@ -26,7 +26,7 @@
     components: { navbar },
     data() {
       return {
-        orderNumber: 23456, // Example order number, you can change this dynamically
+        orderNumber: this.$route.query.order_ids || '', // Example order number, you can change this dynamically
       };
     },
     methods: {

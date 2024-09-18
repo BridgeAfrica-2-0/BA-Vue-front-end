@@ -98,7 +98,7 @@
         </div>
         <div class="my-4 operator d-flex align-items-center">
           <div class="operator-select-box">
-          <b-form-radio v-model="operator" name="operator" value="ORANGE" class="operator-select"></b-form-radio>
+          <b-form-radio v-model="operator" name="operator" value="ORANGE"   class="operator-select"></b-form-radio>
           </div>
           <div class="operator-img-box ml-2 p-0 px-2 py-1">
             <img :src="require('@/assets/img/payment/orange-money-new.png')" alt="ORANGE MONEY" style="width:60px; height: 40px" />
@@ -109,7 +109,7 @@
         </div>
         <div class="my-4 operator d-flex align-items-center">
           <div class="operator-select-box">
-            <b-form-radio v-model="operator" name="operator" value="MTN" class="operator-select" style="font-size: 20px"></b-form-radio>
+            <b-form-radio v-model="operator" name="operator" value="MTN"  class="operator-select" style="font-size: 20px"></b-form-radio>
           </div>
           <div class="operator-img-box ml-2">
             <img :src="require('@/assets/img/payment/mtn-new.png')" style="width:67px" alt="MOBILE MONEY" />
@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <div v-if="operator === 'MTN'">
+        <!-- <div v-if="operator === 'MTN'">
           <div class="card">
             <div class="card-body">
               <p class="card-text">Enter your MTN Mobile Money number</p>
@@ -143,8 +143,8 @@
               <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
             </div>
           </div>
-        </div>
-        <div v-if="operator === 'ORANGE'">
+        </div> -->
+        <!-- <div v-if="operator === 'ORANGE'">
           <div class="card">
             <div class="card-body">
               <p class="card-text">Enter your ORANGE Mobile Money number</p>
@@ -166,10 +166,10 @@
               <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-12 col-md-4 col-lg-4">
-        <OrderSummary :step="3" :handleSubmit="handleSubmit" />
+        <OrderSummary :step="3" :handleSubmit="handleSubmit" :disable="!operator" />
       </div>
     </div>
   </div>
@@ -214,7 +214,9 @@ export default {
     },
     handleSubmit(){
       console.log("step 3 calling")
-      this.$router.push({ path: "/ThankYouPage" }); 
+
+      // this.$router.push({ path: "/ThankYouPage" }); 
+      this.$emit("requestpayment", 1, this.operator);/////////////////////////////
       // this.$emit("handleNextStep", 3);
     },
     goBack()

@@ -94,11 +94,12 @@ export default {
     },
     handleCustomEvent(payload) {
       this.cart = payload;
-      if (this.cart.data && this.cart.data.length > 0) {
-        this.isDestinationAvailable = this.cart.data.some(
-          obj => obj.isDestinationAvailable === false
-        );
-      }
+    if (Array.isArray(this.cart.data) && this.cart.data.length > 0) {
+     const unavailableProducts = this.cart.data
+    .filter(product => product.isDestinationAvailable === false) 
+    .flatMap(product => product.business_items.map(item => item.product_name)); 
+     this.$emit('unavailableProducts', unavailableProducts);
+}
     }
   },
   mounted() {}

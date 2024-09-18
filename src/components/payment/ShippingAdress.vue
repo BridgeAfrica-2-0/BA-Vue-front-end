@@ -297,6 +297,14 @@ export default {
       .catch(() => {
         this.loading = false;
       });
+      this.$store
+      .dispatch("checkout/getCartSummary", { islogin: this.islogin })
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
       this.showModal = false;
     },
     success() {
@@ -306,6 +314,14 @@ export default {
         this.selectedShipping = this.selectedShippingId;
         this.activeData = this.activeDataVal;
 
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
+      this.$store
+      .dispatch("checkout/getCartSummary", { islogin: this.islogin })
+      .then(() => {
         this.loading = false;
       })
       .catch(() => {

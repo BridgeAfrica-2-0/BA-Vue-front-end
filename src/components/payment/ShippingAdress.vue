@@ -135,7 +135,7 @@
                       <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                       <p class="mb-1">{{ shipping_item.name }}</p>
                       <p class="mb-1">
-                        {{ shipping_item.city }}, {{ shipping_item.region }}
+                        {{ shipping_item.city }}, {{ shipping_item.region }},{{ shipping_item?.address }},{{ shipping_item?.zip_code }}
                       </p>
                       <p class="">{{ shipping_item.country }}</p>
                     </div>

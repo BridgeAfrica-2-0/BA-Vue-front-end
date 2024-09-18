@@ -216,6 +216,8 @@
   "Country": "Country:",
   "Region": "Region:",
   "Destination": "Destination",
+  "Address": "Address",
+  "ZipCode": "Zip Code:",
   "Save": "Save Address",
   "Cancel": "Cancel",
 

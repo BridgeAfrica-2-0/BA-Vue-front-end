@@ -121,55 +121,29 @@
           </div>
         </div>
 
-        <!-- <div v-if="operator === 'MTN'">
+        <div v-if="operator == 'ORANGE' || operator == 'MTN'">
           <div class="card">
             <div class="card-body">
-              <p class="card-text">Enter your MTN Mobile Money number</p>
+              <p class="card-text">{{ operator === 'MTN' ? 'Enter your MTN Mobile Money number' : 'Enter your ORANGE Mobile Money number'}}</p>
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1"> 
                   <b-form-input
+                    v-model="phone"
                     class="phone-input"
                     id="phone-input"
                     type="tel"
                     required
+                    placeholder="237 6XX XXX XXX"
                   ></b-form-input>
-                </div>
-                <div>
-                  <b-button @click="requestPayment" variant="primary" class="pay-btn">
-                    Pay: {{ formatMoney(price) }}
-                  </b-button>
                 </div>
               </div>
               <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
             </div>
           </div>
-        </div> -->
-        <!-- <div v-if="operator === 'ORANGE'">
-          <div class="card">
-            <div class="card-body">
-              <p class="card-text">Enter your ORANGE Mobile Money number</p>
-              <div class="d-flex align-items-center">
-                <div class="flex-grow-1"> 
-                  <b-form-input
-                    class="phone-input"
-                    id="phone-input"
-                    type="tel"
-                    required
-                  ></b-form-input>
-                </div>
-                <div>
-                  <b-button @click="requestPayment" variant="primary" class="pay-btn">
-                    Pay: {{ formatMoney(price) }}
-                  </b-button>
-                </div>
-              </div>
-              <p class="price-note">Please make sure your account balance is greater than 162 001,00 FCFA, Otherwise your payment will not be completed.</p>
-            </div>
-          </div>
-        </div> -->
+        </div> 
       </div>
       <div class="col-12 col-md-4 col-lg-4">
-        <OrderSummary :step="3" :handleSubmit="handleSubmit" :disable="!operator" />
+        <OrderSummary :step="3" :handleSubmit="handleSubmit" :disable="!operator || (['ORANGE', 'MTN'].includes(operator) ? !phone : false)" />
       </div>
     </div>
   </div>
@@ -190,6 +164,7 @@ export default {
   data() {
     return {
       operator: "",
+      phone: "",
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
@@ -213,11 +188,15 @@ export default {
       this.$emit("loadActualComponent2");
     },
     handleSubmit(){
-      console.log("step 3 calling")
-
       // this.$router.push({ path: "/ThankYouPage" }); 
-      this.$emit("requestpayment", 1, this.operator);/////////////////////////////
+      // this.$emit("requestpayment", 1, this.operator);/////////////////////////////
       // this.$emit("handleNextStep", 3);
+
+      this.$emit('confirmpayment', {
+        number: this.phone,
+        amount: this.price,
+        operator: this.operator
+      });         
     },
     goBack()
     {

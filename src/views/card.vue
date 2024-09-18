@@ -2,7 +2,7 @@
   <div>
     <navbar />
     <div  class="cart-wrapper" style="margin-bottom: 300px;">
-      <h1 class="mt-5 my-bag">My Cart ({{ cart?.data[0]?.cartItems }})</h1>
+      <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems: 0  }})</h1>
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
           <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">

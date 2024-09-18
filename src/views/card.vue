@@ -12,7 +12,7 @@
             <div v-if="!loading" class="mb-5">
               <div class="d-flex justify-content-between card-top-content">
                 <h4>{{ business.business_name }}</h4>
-                <a href="" class="clear">Clear</a>
+                <a href="" class="clear" @click.prevent="clearBusinessItems(business.items)">Clear</a>
               </div>
               <div v-for="(cart_item, i) in business.items" :key="i">
                 <div class="d-flex mt-4 cart-item-wrapper ml-4">
@@ -147,7 +147,7 @@
           </splide>
         </div>
         <div class="col-12 col-md-3 col-lg-3">
-          <OrderSummary :handleSubmit="handleSubmit" :step="0" />
+          <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable" />
         </div>
       </div>
     </div>
@@ -167,6 +167,7 @@ export default {
   data() {
     return {
       currentPage: 1,
+      buttonDisable: false,
       per_page: 5,
       loading: false,
       error: false,
@@ -286,7 +287,8 @@ export default {
 
     async changeQuantity(event, index) {
       let quantity = event.target.value;
-      if (quantity > 1) {
+      if (quantity > 1 || quantity == 1) {
+        this.buttonDisable = false;
         await this.$store
           .dispatch("checkout/updateCart", { quantity: quantity, index: index })
           .then((response) => {
@@ -294,6 +296,7 @@ export default {
           })
           .catch((err) => {
             if (err) {
+              this.buttonDisable = true;
               this.getCartSummary();
               this.flashMessage.show({
                 status: "error",
@@ -345,6 +348,33 @@ export default {
           this.loading = false;
         });
     },
+    async clearBusinessItems(items) {
+      const businessId = items[0].business_id;
+      this.loading = true;
+      const url = `cart/item/${businessId}/deleteBusinessItems`;
+      await axios
+        .delete(url)
+        .then((result) => {
+          this.getCartSummary();
+          console.log(result);
+          this.getCartItems();
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Items Removed Successfully",
+          });
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            blockClass: "custom-block-class",
+            message: "Unable to remove items at this moment",
+          });
+          this.loading = false;
+        });
+  }
   },
 };
 </script>

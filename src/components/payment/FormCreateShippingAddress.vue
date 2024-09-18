@@ -100,6 +100,19 @@
       </b-form-group>
         </div>
       </div>
+      <div>
+      <b-form-checkbox
+      v-if='mode=="create"'
+      id="checkbox-1"
+      v-model="status"
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+      style="color: #82939b;"
+    >
+      Mark as default address
+    </b-form-checkbox>
+      </div>
       <!-- <div class="row">
 				<div class="col">
 					<b-form-group

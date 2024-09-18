@@ -45,6 +45,7 @@
             @showreview="handleShowReview"
             :price="order_price"
              @handleNextStep="handleSwitchStep"
+             @confirmpayment="handleConfirmPayment"
           />
         </b-col>
       </b-row>
@@ -272,6 +273,36 @@ export default {
         orderId: this.order_ids.toString(),
         operator: operator,
       };
+      if (operator == "Stripe") {
+        data.name = "Product 1";
+        data.order_id = this.order_ids.toString(),
+        delete data.orderId;
+        delete data.phone;
+        delete data.operator;
+        const url = "checkout-session/create";
+        axios
+          .post(url, data)
+          .then((response) => {
+            if (response.data) {
+              window.location.href = response.data.url;
+            }
+            this.loading = false;
+          })
+          .catch((error) => {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Transaction Failed",
+            });
+            console.dir(error);
+
+            this.loading = false;
+          });
+
+
+        return;
+      }
+      
       let url = null;
       if (operator == "ORANGE") {
         this.loading = true;

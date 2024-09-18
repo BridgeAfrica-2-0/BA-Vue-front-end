@@ -17,7 +17,7 @@
           @click.native="strategY['business']"
           v-if="selectedId == 1"
         />
-        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
+        
         <Button
           media="desktop"
           @click.native="strategY['network']"
@@ -79,7 +79,7 @@
       </template>
     </Nav>
 
-    <SubNav
+    <!-- <SubNav
       @onChangeCategoryName="(val) => (categoryName = val)"
       @category="getCategory"
       @parentcategory="getparentCategory"
@@ -89,9 +89,9 @@
       @activateSuggestion="activateSuggestion"
       @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
-    />
+    /> -->
 
-    <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
+    <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 
     <div v-if="islogin" class="container searchly moveup">
       <ly-tab
@@ -103,6 +103,7 @@
       >
       </ly-tab>
     </div>
+
     <div v-else class="container searchly moveup">
       <ly-tab
         v-model="selectedId"

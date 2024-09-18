@@ -30,7 +30,13 @@
           v-model="form.phone"
           type="tel"
           required
+          inputmode="numeric" 
+          pattern="[0-9]*"   
+          maxlength="15"   
         ></b-form-input>
+        <b-form-text class="text-muted">
+          Note:  Enter phone in digits only.
+         </b-form-text>
       </b-form-group>
       <b-form-group
         class="body-font-size"
@@ -45,7 +51,7 @@
           required
         ></b-form-input>
       </b-form-group>
-      <div class="row">
+      <div v-if="isCameroon" class="row">
         <div class="col">
           <b-form-group
             class="body-font-size"
@@ -100,100 +106,101 @@
       </b-form-group>
         </div>
       </div>
+      <div v-if="!isCameroon" class="row">
+        <div class="col">
+          <b-form-group
+            class="body-font-size"
+            id="input-group-country"
+            :label="$t('general.Country')"
+            label-for="country-input"
+          >
+            <b-form-input
+              id="country-input"
+              v-model="form.country"
+              value-field="id"
+              type="text"
+              required
+        ></b-form-input>
+          </b-form-group>
+        </div>
+        <div class="col">
+          <b-form-group
+            class="body-font-size"
+            id="input-group-region"
+            :label="$t('general.Region')"
+            label-for="region-input"
+          >
+            <b-form-input
+              id="region-input"
+              v-model="form.region"
+              value-field="id"
+              type="text"
+              required
+        ></b-form-input>
+          </b-form-group>
+        </div>
+        <div class="col">
+          <b-form-group
+            class="body-font-size"
+            id="input-group-region"
+            :label="$t('general.Destination')"
+            label-for="region-input"
+          >
+            <b-form-input
+              id="destination-input"
+              v-model="form.city"
+              value-field="id"
+              type="text"
+              required
+        ></b-form-input>
+          </b-form-group>
+        </div>
+      </div>
+      <div  v-if="!isCameroon" class="row">
+        <div class="col">
+          <b-form-group
+        class="body-font-size"
+        id="input-group-address"
+        :label="$t('general.Address')"
+        label-for="address-input"
+      >
+        <b-form-input
+          id="address-input"
+          v-model="form.address"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+        </div>
+        <div class="col">
+          <b-form-group
+        class="body-font-size"
+        id="input-group-zip_code"
+        :label="$t('general.ZipCode')"
+        label-for="zip_code-input"
+      >
+        <b-form-input
+          id="zip_code-input"
+          v-model="form.zip_code"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+        </div>
+      </div>
       <div>
       <b-form-checkbox
       v-if='mode=="create"'
       id="checkbox-1"
       name="checkbox-1"
       value="accepted"
+      v-model="isDefaultAddress"
       unchecked-value="not_accepted"
       style="color: #82939b;"
     >
       Mark as default address
     </b-form-checkbox>
       </div>
-      <!-- <div class="row">
-				<div class="col">
-					<b-form-group
-						class="body-font-size"
-						id="input-group-division"
-						label="Division :"
-						label-for="country-input"
-					>
-						<b-form-select
-							id="division-input"
-							v-model="form.division_id"
-							:options="divisions"
-							value-field="id"
-							text-field="name"
-							@change="getCouncils"
-							required
-						></b-form-select>
-					</b-form-group>
-				</div>
-				<div class="col">
-					<b-form-group
-						class="body-font-size"
-						id="input-group-council"
-						label="Council :"
-						label-for="council-input"
-					>
-						<b-form-select
-							id="council-input"
-							v-model="form.council_id"
-							:options="councils"
-							@change="getNeigbourhoods"
-							value-field="id"
-							text-field="name"
-							required
-						></b-form-select>
-					</b-form-group>
-				</div>
-			</div> -->
-      <!-- <b-form-group
-				class="body-font-size"
-				id="input-group-city"
-				label="City :"
-				label-for="city-input"
-			>
-				<b-form-input
-					id="city-input"
-					v-model="form.city"
-					type="text"
-					required
-				></b-form-input>
-			</b-form-group> -->
-      <!-- <b-form-group
-        class="body-font-size"
-        id="input-group-region"
-        :label="$t('general.Destination')"
-        label-for="destination-input"
-      >
-        <b-form-select
-          id="destination-input"
-          v-model="form.city"
-          :options="destinations"
-          value-field="id"
-          text-field="name"
-          required
-        ></b-form-select>
-      </b-form-group> -->
-
-      <!-- <b-form-group
-				class="body-font-size"
-				id="input-group-neigbourhood"
-				label="neigbourhood :"
-				label-for="neigbourhood-input"
-			>
-				<b-form-select
-					id="neigbourhood-input"
-					v-model="form.neighbourhood_id"
-					:options="neigbourhoods"
-					value-field="id"
-					text-field="name"
-					required
-				></b-form-select>
-			</b-form-group> -->
       <b-button  type="submit" variant="primary" class="hire-btn" style="">
             {{ $t("general.Save") }}
       </b-button>
@@ -210,6 +217,7 @@
 
 <script>
 import axios from "axios";
+import { checkCountryLocalisation } from "@/helpers";
 export default {
   name: "FormCreateShippingAddress",
 
@@ -235,6 +243,8 @@ export default {
       regions: [],
       destinations: [],
       username: "",
+      isCameroon: false,
+      isDefaultAddress: false
     };
   },
   created() {
@@ -272,6 +282,8 @@ export default {
       this.getDestinations(this.form.region);
     }
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
+    const userCountry = checkCountryLocalisation();
+    this.isCameroon = userCountry === 'CM';
   },
   methods: {
     closesipping() {
@@ -285,8 +297,17 @@ export default {
       this.loading = true;
       this.form.name = this.username;
       this.form.islogin = this.islogin;
-      //if component is called in create mode
+      this.form.isLocal= false;
+      if(this.isCameroon)
+      {
+        this.form.isLocal= true;
+      }
       if (this.mode === "create") {
+        this.form.active = "0";
+      if(this.isDefaultAddress)
+      {
+      this.form.active = "1";
+      }
         this.$store
           .dispatch("checkout/createShipping", this.form)
           .then(() => {
@@ -322,6 +343,8 @@ export default {
             city: this.form.city,
             neighbourhood_id: 1,
             email: this.form.email,
+            zip_code: this.form?.zip_code,
+            address: this.form?.address,
           },
         };
 
@@ -329,6 +352,11 @@ export default {
           formData.append(key, shippingUp.data[key]);
         }
         shippingUp.data = formData;
+        shippingUp.data.isLocal = false;
+        if(this.isCameroon)
+        {
+          shippingUp.data.isLocal= true;
+        }
 
         this.$store
           .dispatch("checkout/updateShippingAddress", shippingUp)

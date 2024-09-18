@@ -286,9 +286,31 @@ export default {
         .catch(() => {});
     },
     hideAuthModal() {
+      this.$store
+      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+      .then(() => {
+        this.selectedShipping = this.selectedShippingId;
+        this.activeData = this.activeDataVal;
+
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
       this.showModal = false;
     },
     success() {
+      this.$store
+      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+      .then(() => {
+        this.selectedShipping = this.selectedShippingId;
+        this.activeData = this.activeDataVal;
+
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
       this.showModal = false;
     },
     handleDeleteShipping(id) {

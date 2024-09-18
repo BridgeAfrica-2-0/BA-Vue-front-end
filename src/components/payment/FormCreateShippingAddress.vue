@@ -104,7 +104,6 @@
       <b-form-checkbox
       v-if='mode=="create"'
       id="checkbox-1"
-      v-model="status"
       name="checkbox-1"
       value="accepted"
       unchecked-value="not_accepted"

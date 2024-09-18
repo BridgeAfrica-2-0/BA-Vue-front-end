@@ -1,11 +1,11 @@
 <template>
   <div>
     <navbar />
-    <div  v-if="cart.data[0]" class="cart-wrapper" style="margin-bottom: 300px;">
-      <h1 class="mt-5 my-bag">My Cart ({{ cart.data[0].cartItems }})</h1>
+    <div  class="cart-wrapper" style="margin-bottom: 300px;">
+      <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems: 0  }})</h1>
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
-          <div v-for="(business, i) in cart.data[0].businesses" :key="i">
+          <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
             <div style="margin-right: 150px;">
               <Skeleton :loading="loading" />
             </div>
@@ -150,9 +150,6 @@
           <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable" />
         </div>
       </div>
-    </div>
-    <div v-else class="empty-cart">
-       <p>Your Cart is empty!</p>
     </div>
   </div>
 </template>
@@ -351,6 +348,8 @@ export default {
     async clearBusinessItems(items) {
       const businessId = items[0].business_id;
       this.loading = true;
+      if(this.islogin)
+    {
       const url = `cart/item/${businessId}/deleteBusinessItems`;
       await axios
         .delete(url)
@@ -374,6 +373,37 @@ export default {
           });
           this.loading = false;
         });
+     }
+     else
+     {
+      const payload = {
+        business_id: businessId,
+        guest_identifier: getGuestIdentifier()
+      }
+      const url = "guest/cart/items/delete";
+      await axios
+        .post(url,payload)
+        .then((result) => {
+          this.getCartSummary();
+          console.log(result);
+          this.getCartItems();
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Items Removed Successfully",
+          });
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            blockClass: "custom-block-class",
+            message: "Unable to remove items at this moment",
+          });
+          this.loading = false;
+        });
+     }
   }
   },
 };

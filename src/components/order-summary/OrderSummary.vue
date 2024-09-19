@@ -5,24 +5,24 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span>${{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
+        <span>{{ cartSummary.sub_total.toFixed(2) }}</span>
       </div>
       <div class="summary-item">
         <span>Local Shipping</span>
-        <span>{{ cartSummary?.shipping ?? "" }}</span>
+        <span>{{ cartSummary.shipping }}</span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax</span>
-        <span>${{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
+        <span>{{ cartSummary.tax.toFixed(2) }}</span>
       </div>
       <hr />
       <div class="summary-item total">
         <span>Total</span>
-        <span>${{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
+        <span>{{ cartSummary.total_cost.toFixed(2) }}</span>
       </div>
       <hr />
       <p class="discount">
-        You will save ${{ cartSummary?.discount.toFixed(2) ?? "" }} with this
+        You will save {{ cartSummary.discount.toFixed(2) }} with this
         order
       </p>
     </div>

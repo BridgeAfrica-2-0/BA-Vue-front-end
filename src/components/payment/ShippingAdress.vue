@@ -59,13 +59,14 @@
         </b-card-title>
         <div class="row">
           <div class="col-12">
-            <CreateShippingModal />
+            <CreateShippingModal @activeAddress="shipping" />
           </div>
           <div class="col-12">
             <CreateShippingModal
               :title="$t('general.Edit_Shipping_Address')"
               mode="edit"
               :editForm="shippingsTab[selectedIndex]"
+              @activeAddress="shipping"
             />
           </div>
         </div>
@@ -80,18 +81,18 @@
                   <div class="mb-3 d-flex justify-content-between">
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ activeData?.name }}</p>
+                      <p class="mb-1">{{ activeData.name }}</p>
                       <p class="mb-1">
-                        {{ activeData?.city }}, {{ activeData?.region }}
+                        {{ activeData.city }}, {{ activeData.region }}
                       </p>
-                      <p class="">{{ activeData?.country }}</p>
+                      <p class="">{{ activeData.country }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
                         {{ $t("general.Contact_details") }}
                       </h5>
-                      <p class="mb-1">{{ activeData?.email }}</p>
-                      <p class="">{{ activeData?.phone }}</p>
+                      <p class="mb-1">{{ activeData.email }}</p>
+                      <p class="">{{ activeData.phone }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
@@ -135,7 +136,7 @@
                       <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                       <p class="mb-1">{{ shipping_item.name }}</p>
                       <p class="mb-1">
-                        {{ shipping_item.city }}, {{ shipping_item.region }},{{ shipping_item?.address }},{{ shipping_item?.zip_code }}
+                        {{ shipping_item.city }}, {{ shipping_item.region }}
                       </p>
                       <p class="">{{ shipping_item.country }}</p>
                     </div>

@@ -127,7 +127,7 @@
           <b-form-group
             class="body-font-size"
             id="input-group-region"
-            :label="$t('general.Region')"
+            :label="$t('general.State')"
             label-for="region-input"
           >
             <b-form-input
@@ -143,7 +143,7 @@
           <b-form-group
             class="body-font-size"
             id="input-group-region"
-            :label="$t('general.Destination')"
+            :label="$t('general.City')"
             label-for="region-input"
           >
             <b-form-input

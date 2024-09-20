@@ -333,10 +333,19 @@ export default {
       this.showModal = false;
     },
     handleDeleteShipping(id) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
       this.$store
         .dispatch("checkout/deleteShippingAdd", id)
-        .then(() => {})
+        .then(() => {
+          loader.hide();
+        })
         .catch((error) => {
+          loader.hide();
           if (error) {
             this.flashMessage.show({
               status: "error",

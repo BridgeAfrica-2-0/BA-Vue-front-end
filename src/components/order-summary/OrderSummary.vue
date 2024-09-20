@@ -5,11 +5,11 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span>${{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
+        <span>{{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
       </div>
-      <div class="summary-item">
+      <div class="summary-item"  v-if="isCameroon">
         <span>Local Shipping</span>
-        <span>{{ cartSummary?.shipping ?? "" }}</span>
+        <span>{{ cartSummary.shipping_info[0].shipping_cost == 0 ? "Free" : cartSummary.shipping_info[0].shipping_cost }}</span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax</span>
@@ -60,6 +60,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { checkCountryLocalisation } from "@/helpers";
 export default {
   props: {
     handleSubmit: {
@@ -81,12 +82,13 @@ export default {
     return {
       cartSummary: {
         total_items: 0,
-        shipping: "FREE",
+        shipping_info: [],
         tax: 0.0,
         total_cost: 0.0,
         sub_total: 0.0,
         discount: 0.0,
       },
+      isCameroon : false
     };
   },
   computed: {
@@ -110,7 +112,11 @@ export default {
   mounted() {
     if (this.orderSummary) {
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
+      console.log(this.cartSummary);
+      
     }
+    const userCountry = checkCountryLocalisation();
+    this.isCameroon = userCountry === 'CM';
   },
   watch: {
     orderSummary(newVal) {

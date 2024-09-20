@@ -15,6 +15,7 @@
     @closecshippingm="hideModal"
     :modal="true"
     :form="shippingAddress"
+     @activeAddress="activeShipping"
   />
 </b-modal>
     <b-modal
@@ -34,6 +35,7 @@
         @closecshippingm="hideModal"
         :modal="true"
         :form="editForm"
+        @activeAddress="activeShipping"
       />
     </b-modal>
   </div>
@@ -78,6 +80,9 @@ export default {
     hideModal() {
       this.$refs["create-shipping-modal"].hide();
     },
+    activeShipping(data) { 
+      this.$emit('activeAddress', data);
+    }
   },
  
 };

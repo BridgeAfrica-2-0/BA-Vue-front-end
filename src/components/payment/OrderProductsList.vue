@@ -68,7 +68,7 @@
           </h6>
         </div>
       </div>
-      <hr />
+      <hr class="dotted-hr" />
     </div>
 
     <div class="row my-4" v-if="loading">
@@ -302,6 +302,14 @@ export default {
 }
 .capitalized {
   text-transform: capitalize;
+}
+
+.dotted-hr {
+  border: 0;
+  border-top: 2px dotted black;
+  height: 0;
+  margin: 20px 0;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {

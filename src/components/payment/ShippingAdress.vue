@@ -80,22 +80,22 @@
                 <div class="d-inline-flex">
                   <div class="mb-3 d-flex justify-content-between">
                     <div class="flex-fill fixed-width">
-                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ activeData.name }}</p>
+                      <h5 class="h-color mb-2">{{ $t("general.Ship_to") }}</h5>
+                      <p class="mb-1">{{ activeData?.name }}</p>
                       <p class="mb-1">
-                        {{ activeData.city }}, {{ activeData.region }}
+                        {{ activeData?.city }}, {{ activeData?.region }}, {{ activeData?.zip_code }}
                       </p>
-                      <p class="">{{ activeData.country }}</p>
+                      <p class="">{{ activeData?.country }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
-                      <h5 class="h-color">
+                      <h5 class="h-color mb-2">
                         {{ $t("general.Contact_details") }}
                       </h5>
-                      <p class="mb-1">{{ activeData.email }}</p>
-                      <p class="">{{ activeData.phone }}</p>
+                      <p class="mb-1">{{ activeData?.email }}</p>
+                      <p class="">{{ activeData?.phone }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
-                      <h5 class="h-color">
+                      <h5 class="h-color mb-2">
                         {{ $t("general.Shipping_speed") }}
                       </h5>
                       <p class="mb-1">Business Days</p>
@@ -134,18 +134,18 @@
                   <div class="mb-3 d-flex justify-content-between">
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ shipping_item.name }}</p>
+                      <p class="mb-1">{{ shipping_item?.name }}</p>
                       <p class="mb-1">
-                        {{ shipping_item.city }}, {{ shipping_item.region }}
+                        {{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code }}
                       </p>
-                      <p class="">{{ shipping_item.country }}</p>
+                      <p class="">{{ shipping_item?.country }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
                         {{ $t("general.Contact_details") }}
                       </h5>
-                      <p class="mb-1">{{ shipping_item.email }}</p>
-                      <p class="">{{ shipping_item.phone }}</p>
+                      <p class="mb-1">{{ shipping_item?.email }}</p>
+                      <p class="">{{ shipping_item?.phone }}</p>
                     </div>
                     <div class="flex-fill fixed-width">
                       <h5 class="h-color">
@@ -175,7 +175,7 @@
                         )
                       "
                       @sendid="handleDeleteShipping"
-                      :id_item="shipping_item.id"
+                      :id_item="shipping_item?.id"
                     />
                   </div>
                 </div>
@@ -222,6 +222,7 @@ import CreateShippingModal from "./CreateShippingModal.vue";
 import OrderSummary from "../../components/order-summary/OrderSummary.vue";
 import Order from "../../components/payment/Order.vue";
 import login from "@/components/Login";
+import { checkCountryLocalisation } from "@/helpers";
 
 export default {
   name: "ShippingAddress",
@@ -239,6 +240,7 @@ export default {
       showModal: false,
       activeData: {},
       buttonDisabled: false,
+      isCameroon: false
     };
   },
   components: {
@@ -381,8 +383,8 @@ export default {
       this.buttonDisabled = false;
       this.$emit("handleNextStep", 1);
     },
-    handleUnavailableProducts(productNames) {
-      if(productNames.length > 0) {
+    handleUnavailableProducts(productNames) {      
+      if(productNames.length > 0 && this.isCameroon) {
         this.buttonDisabled = true;
         this.flashMessage.show({
             status: "error",
@@ -441,6 +443,9 @@ export default {
       .catch(() => {
         this.loading = false;
       });
+
+      const userCountry = checkCountryLocalisation();
+      this.isCameroon = userCountry === 'CM';
   },
   created() {
     this.selectedShipping = this.selectedShippingId;

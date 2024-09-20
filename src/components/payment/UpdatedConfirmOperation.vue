@@ -14,12 +14,12 @@
       >
         <p class="my-4 headline-font-size text-center">{{ message }}</p>
         <div class="d-flex align-items-center justify-content-end">
-          <b-button class="mt-2 btn-custom" variant="primary" @click="sendId">{{
+          <b-button class="mt-2 btn-custom" variant="success" @click="sendId">{{
             $t("general.Continue")
           }}</b-button>
           <b-button
             class="mt-2 ml-4 btn-custom"
-            variant="success"
+            variant="primary"
             @click="hideModal"
             >{{ $t("general.Cancel") }}</b-button
           >

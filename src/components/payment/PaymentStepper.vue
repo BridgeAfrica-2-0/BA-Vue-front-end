@@ -266,7 +266,12 @@ export default {
       // this.$emit("nextpaymentstep");
       // this.showRequestPayment = false;
       // this.showConfirmPayment = true;
-
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
       const data = {
         phone: number,
         amount: amount,
@@ -287,6 +292,7 @@ export default {
               window.location.href = response.data.url;
             }
             this.loading = false;
+            loader.hide();
           })
           .catch((error) => {
             this.flashMessage.show({
@@ -295,7 +301,7 @@ export default {
               message: "Transaction Failed",
             });
             console.dir(error);
-
+            loader.hide();
             this.loading = false;
           });
 
@@ -336,6 +342,7 @@ export default {
                 this.$router.push({ path: "/ThankYouPage" , query: { order_ids: this.order_ids.toString() }});
               }, 3000);
             }
+            loader.hide();
             this.loading = false;
             console.log("testing orange");
           })
@@ -346,7 +353,7 @@ export default {
               message: "Transaction Failed",
             });
             console.dir(error);
-
+            loader.hide();
             this.loading = false;
           });
       }

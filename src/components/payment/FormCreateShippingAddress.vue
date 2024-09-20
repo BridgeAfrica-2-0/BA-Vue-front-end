@@ -201,8 +201,14 @@
       Mark as default address
     </b-form-checkbox>
       </div>
-      <b-button  type="submit" variant="primary" class="hire-btn" style="">
+      <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn" style="">
             {{ $t("general.Save") }}
+      <b-spinner
+      small
+      v-if="loading"
+      label="Loading..."
+      class="ml-3"
+    ></b-spinner>
       </b-button>
 
       <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">

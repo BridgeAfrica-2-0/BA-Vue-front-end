@@ -42,8 +42,8 @@
         {{ getButtonText }}
       </button>
       <small class="txt-color">
-        By clicking Submit Your Order, you are agreeing to our Terms of use and
-        Privacy Policy
+        BY CLICKING SUBMIT YOUR ORDER, YOU ARE AGREEING TO OUR <span class="span-txt pr-1"> TERMS OF USE </span> AND
+        <span class="span-txt pl-1"> PRIVACY POLICY </span>
       </small>
     </div>
     <div class="help-section">
@@ -54,13 +54,13 @@
       <hr class="straight-line"/>
       <div class="help-item">
         <i class="message-icon"></i>
-        <span><img src="@/assets/email-1.png" alt="Info Icon" class="mr-4 info-image">Leave us a message</span>
+        <span><img src="@/assets/email2.svg" alt="Info Icon" class="mr-4 info-image">Leave us a message</span>
         <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
       <hr class="straight-line"/>
       <div class="help-item">
         <i class="shipping-icon"></i>
-        <span><img src="@/assets/shipping.png" alt="Info Icon" class="mr-4 info-image">Shipping and Returns</span>
+        <span><img src="@/assets/shipping.svg" alt="Info Icon" class="mr-4 info-image1">Shipping and Returns</span>
         <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
     </div>
@@ -136,6 +136,12 @@ export default {
 };
 </script>
 <style scoped>
+
+.span-txt{
+text-decoration: underline;
+cursor: pointer;
+}
+
 .icon-color{
   color: #929292;
   margin-left: 10px;
@@ -147,6 +153,10 @@ export default {
 
 .info-image {
   width: 20px; 
+  height: 20px;
+}
+
+.info-image1 {
   height: 20px;
 }
 

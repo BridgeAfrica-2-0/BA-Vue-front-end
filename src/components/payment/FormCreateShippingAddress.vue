@@ -314,7 +314,7 @@ export default {
             this.loading = false;
             this.errorAppend = false;
             this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
-            this.form = {};
+            this.$emit('activeAddress', this.form);
             if (this.modal) {
               this.$emit("closecshippingm");
             } else {
@@ -324,7 +324,6 @@ export default {
           .catch(() => {
             this.loading = false;
             this.errorAppend = true;
-            this.form = {};
             if (this.modal) {
               this.$emit("closecshippingm");
             }
@@ -347,7 +346,7 @@ export default {
             address: this.form?.address,
           },
         };
-
+        const shipData = shippingUp.data;
         for (let key in shippingUp.data) {
           formData.append(key, shippingUp.data[key]);
         }
@@ -362,6 +361,7 @@ export default {
           .dispatch("checkout/updateShippingAddress", shippingUp)
           .then(() => {
             this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+            this.$emit('activeAddress', shipData);
             this.loading = false;
           })
           .catch(() => {

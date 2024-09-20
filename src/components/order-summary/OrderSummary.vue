@@ -7,22 +7,28 @@
         <span>Subtotal</span>
         <span>{{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
       </div>
-      <div class="summary-item"  v-if="isCameroon">
-        <span>Local Shipping</span>
+      <div class="summary-item">
+      <b-tooltip target="tooltip-target-1" triggers="hover">
+        This is the shipping method that is being applied to your order according to your location
+      </b-tooltip>
+      <b-tooltip target="tooltip-target-2" triggers="hover">
+        This is the Estimated tax that is applied to your order according to your location
+      </b-tooltip>
+        <span>{{ cartSummary.shipping_info[0].shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
         <span>{{ cartSummary.shipping_info[0].shipping_cost == 0 ? "Free" : cartSummary.shipping_info[0].shipping_cost }}</span>
       </div>
       <div class="summary-item">
-        <span>Estimated Tax</span>
-        <span>${{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
+        <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
+        <span>{{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
       </div>
-      <hr />
+      <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
-        <span>${{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
+        <span>{{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
       </div>
-      <hr />
+      <hr class="dotted-line"/>
       <p class="discount">
-        You will save ${{ cartSummary?.discount.toFixed(2) ?? "" }} with this
+        You will save {{ cartSummary?.discount.toFixed(2) ?? "" }} with this
         order
       </p>
     </div>
@@ -35,7 +41,7 @@
       >
         {{ getButtonText }}
       </button>
-      <small>
+      <small class="txt-color">
         By clicking Submit Your Order, you are agreeing to our Terms of use and
         Privacy Policy
       </small>
@@ -43,17 +49,19 @@
     <div class="help-section">
       <h4>Need Some Help?</h4>
       <div class="help-item">
-        <span>Call us at 0987654321</span>
+        <span> <img src="@/assets/phone.png" alt="Info Icon" class="mr-4 info-image">Call us at 0987654321</span>
       </div>
-      <hr />
+      <hr class="straight-line"/>
       <div class="help-item">
         <i class="message-icon"></i>
-        <span>Leave us a message</span>
+        <span><img src="@/assets/email-1.png" alt="Info Icon" class="mr-4 info-image">Leave us a message</span>
+        <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
-      <hr />
+      <hr class="straight-line"/>
       <div class="help-item">
         <i class="shipping-icon"></i>
-        <span>Shipping and Returns</span>
+        <span><img src="@/assets/shipping.png" alt="Info Icon" class="mr-4 info-image">Shipping and Returns</span>
+        <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
     </div>
   </div>
@@ -128,6 +136,27 @@ export default {
 };
 </script>
 <style scoped>
+.icon-color{
+  color: #929292;
+  margin-left: 10px;
+}
+
+.txt-color{
+  color: #575757;
+}
+
+.info-image {
+  width: 20px; 
+  height: 20px;
+}
+
+.dotted-line{
+  border: none; border-top: 2px dotted #929292;
+}
+
+.straight-line{
+  border: none; border-top: 1.5px solid #D8D8D8;
+}
 
 .submit-order-btn:disabled {
   cursor: not-allowed; 
@@ -138,6 +167,7 @@ export default {
   max-width: 350px;
   margin: 0 auto;
   max-height: 640px;
+  color: black;
 }
 .summary-section {
   padding: 20px;
@@ -160,7 +190,7 @@ export default {
   font-weight: bold;
 }
 .discount {
-  color: green;
+  color: black;
   font-size: 0.9rem;
   margin: 10px 0;
   text-align: center;
@@ -168,13 +198,14 @@ export default {
 }
 .submit-order-btn {
   width: 100%;
-  background-color: #ff9900;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   color: white;
   padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin: 15px 0 15px 0;
+  font-weight: 600;
 }
 .help-section {
   margin-top: 20px;

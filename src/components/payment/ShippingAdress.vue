@@ -372,7 +372,8 @@ export default {
       });
         this.$store
           .dispatch("checkout/createOrder", {
-            isLogin: this.$store.getters["auth/isLogged"]
+            isLogin: this.$store.getters["auth/isLogged"],
+            isLocal:  this.isCameroon
           })
           .then(({ data }) => {
             this.$emit(

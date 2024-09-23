@@ -280,7 +280,7 @@ export default {
       };
       if (operator == "Stripe") {
         data.name = "Product 1";
-        data.order_id = this.order_ids.toString(),
+        data.order_ids = this.order_ids,
         delete data.orderId;
         delete data.phone;
         delete data.operator;

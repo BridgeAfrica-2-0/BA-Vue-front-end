@@ -201,7 +201,7 @@
       Mark as default address
     </b-form-checkbox>
       </div>
-      <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn" style="">
+      <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn">
             {{ $t("general.Save") }}
       <b-spinner
       small
@@ -503,8 +503,8 @@ export default {
   font-weight: 600;
   border-radius: 10px;
   position: absolute;
-  bottom: 100px; 
-  left: 40%; 
+  bottom: 60px; 
+  left: 33%; 
   transform: translateX(-50%);
 }
 .btn-custom {

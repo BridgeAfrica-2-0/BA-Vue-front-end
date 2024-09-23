@@ -147,7 +147,7 @@
           </splide>
         </div>
         <div class="col-12 col-md-3 col-lg-3">
-          <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable" />
+          <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable || !cart?.data[0]?.cartItems" />
         </div>
       </div>
     </div>

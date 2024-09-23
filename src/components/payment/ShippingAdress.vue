@@ -364,6 +364,12 @@ export default {
     handleSubmit() {
       console.log("calling handle submit", 2);
       if (this.review) {
+        let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
         this.$store
           .dispatch("checkout/createOrder", {
             isLogin: this.$store.getters["auth/isLogged"]
@@ -374,8 +380,10 @@ export default {
               data.data.total_orders_amount,
               data.data.order_ids
             );
+            loader.hide();
           })
           .catch(() => {
+            loader.hide();
           });
         // this.$emit("handleNextStep", 3);
       } else {
@@ -472,7 +480,9 @@ export default {
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
-
+input[type="radio"] {
+  accent-color: #e07715;
+}
 .dotted-hr {
   border: 0;
   border-top: 2px dotted black;

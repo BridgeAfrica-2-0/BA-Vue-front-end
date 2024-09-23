@@ -1,7 +1,7 @@
 <template>
   <div class="col">
     <div class="row">
-      <div class="col-8">
+      <div class="col-8" style="padding-left: 0 !important;">
         <div class="row justify-content-between top-div" v-if="!review">
           <div>
             <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
@@ -109,20 +109,21 @@
         </b-card-text>
 
         <!-- Show all shipping addresses if review is false -->
+        <hr v-if="!review" class="dotted-hr" />
         <b-card-text
           v-if="!review"
-          class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start"
+          class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3"
         >
-          <div class="row w-100">
-            <div class="dotted-border">
+          <div class="row">
+            <div>
               <div
                 class="ship-add w-100 d-flex justify-content-between align-items-start"
                 v-for="(shipping_item, index) in shippingsTab"
                 :key="shipping_item.id"
               >
                 <div class="d-inline-flex">
-                  <div class="col-1">
-                    <input
+                  <div class="operator-select-box mr-2">
+                    <input 
                       type="radio"
                       :v-model="shipping_item.id"
                       @change="shipping(shipping_item)"
@@ -183,6 +184,7 @@
             </div>
           </div>
         </b-card-text>
+        <hr v-if="!review" class="dotted-hr" />
 
         <div class="row" v-if="loading">
           <div class="col-12 d-flex justify-content-center">
@@ -470,6 +472,14 @@ export default {
 /* .ship-add:not(:last-child){
 	border-bottom: 1px solid #c2c0c0;
 } */
+
+.dotted-hr {
+  border: 0;
+  border-top: 2px dotted black;
+  height: 0;
+  margin: 20px 25px 20px 0;
+  position: relative;
+}
 .title-style {
   font-size: 30px !important;
   font-weight: 700 !important;
@@ -514,11 +524,6 @@ export default {
   justify-content: center;
   font-weight: 600;
   border-radius: 10px;
-}
-.dotted-border {
-  border-top: 2px dotted #455a64;
-  border-bottom: 2px dotted #455a64;
-  padding: 10px 0;
 }
 .icon-color {
   color: black;

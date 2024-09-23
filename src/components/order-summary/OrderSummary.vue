@@ -14,8 +14,8 @@
       <b-tooltip target="tooltip-target-2" triggers="hover">
         This is the Estimated tax that is applied to your order according to your location
       </b-tooltip>
-        <span>{{ cartSummary.shipping_info[0].shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
-        <span>{{ cartSummary.shipping_info[0].shipping_cost == 0 ? "Free" : cartSummary.shipping_info[0].shipping_cost }}</span>
+        <span>{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
+        <span>{{ cartSummary?.shipping_info[0]?.shipping_cost == 0 ? "Free" : cartSummary?.shipping_info[0]?.shipping_cost }}</span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>

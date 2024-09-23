@@ -139,12 +139,12 @@ const actions = {
       });
   },
 
-  createOrder({ commit }, { isLogin }) {
+  createOrder({ commit }, { isLogin, isLocal }) {
     let url = isLogin
       ? "cart/create"
       : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
-      .post(url)
+      .post(url,{isLocal: isLocal})
       .then((data) => {
         let orderId = data.data.data;
         console.log(data.data);

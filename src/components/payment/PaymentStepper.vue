@@ -3,11 +3,7 @@
     <!-- Stepper header start-->
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
-      <PaymentProgress
-        :current_step="current_step"
-        @switchstep="handleSwitchStep"
-        :steps="steps"
-      />
+      <PaymentProgress :current_step="current_step" @switchstep="handleSwitchStep" :steps="steps" />
       <hr class="h-divider" />
     </b-container>
     <!-- Stepper header end-->
@@ -15,60 +11,31 @@
     <b-container fluid="lg">
       <b-row v-if="current_step === 1 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <ShippingAdress
-            @RefreshSipping="RefreshSipping"
-            @loadActualComponent3="showActualComponent3"
-            @loadActualComponent1="showActualComponent1"
-            @handleNextStep="handleSwitchStep"
-          />
+          <ShippingAdress @RefreshSipping="RefreshSipping" @loadActualComponent3="showActualComponent3"
+            @loadActualComponent1="showActualComponent1" @handleNextStep="handleSwitchStep" />
         </b-col>
       </b-row>
       <b-row v-if="current_step === 2 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <ShippingAdress
-            @RefreshSipping="RefreshSipping"
-            @showoperator="handleShowOperator"
-            @loadActualComponent3="showActualComponent3"
-            @loadActualComponent1="showActualComponent1"
-            :review=true
-            @edit-button-clicked="redirectToStep1"
-            @handleNextStep="handleSwitchStep"
-          />
+          <ShippingAdress @RefreshSipping="RefreshSipping" @showoperator="handleShowOperator"
+            @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" :review=true
+            @edit-button-clicked="redirectToStep1" @handleNextStep="handleSwitchStep" />
         </b-col>
 
       </b-row>
-       <!-- @requestpayment="handleRequestPayment"  this is where payment is processing -->
+      <!-- @requestpayment="handleRequestPayment"  this is where payment is processing -->
       <b-row v-if="current_step === 3 && !showRequestPayment">
         <b-col class="my-4" cols="12">
-          <PaymentOperator
-            @requestpayment="handleRequestPayment"
-            @showreview="handleShowReview"
-            :price="order_price"
-             @handleNextStep="handleSwitchStep"
-             @confirmpayment="handleConfirmPayment"
-          />
+          <PaymentOperator @requestpayment="handleRequestPayment" @showreview="handleShowReview" :price="order_price"
+            @handleNextStep="handleSwitchStep" @confirmpayment="handleConfirmPayment" />
         </b-col>
       </b-row>
       <b-row>
-        <b-col
-          v-if="current_step === 1 && showRequestPayment"
-          class="my-4"
-          cols="12"
-        >
-          <RequestPayment
-            :price="order_price"
-            :operator="operator"
-            ref="request_payment"
-            :loading="loading"
-            @changepayment="handleChangePayment"
-            @confirmpayment="handleConfirmPayment"
-          />
+        <b-col v-if="current_step === 1 && showRequestPayment" class="my-4" cols="12">
+          <RequestPayment :price="order_price" :operator="operator" ref="request_payment" :loading="loading"
+            @changepayment="handleChangePayment" @confirmpayment="handleConfirmPayment" />
         </b-col>
-        <b-col
-          v-if="current_step === 2 && showConfirmPayment"
-          class="my-4"
-          cols="12"
-        >
+        <b-col v-if="current_step === 2 && showConfirmPayment" class="my-4" cols="12">
           <ConfirmPayment />
         </b-col>
       </b-row>
@@ -83,6 +50,7 @@ import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
 // import CreateShippingAddress from "./CreateShippingAddress";
 import axios from "axios";
+import { checkCountry, convertToCurrency } from "@/helpers";
 // import ProductDetails from "./ProductDetails";
 
 export default {
@@ -131,7 +99,7 @@ export default {
     };
   },
   computed: {
-    progress: function() {
+    progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
     order() {
@@ -163,18 +131,18 @@ export default {
     },
     RefreshSipping() {
       if (this.$refs.checkoutorder) {
-       this.$refs.checkoutorder.RefreshSipping();
+        this.$refs.checkoutorder.RefreshSipping();
       }
     },
 
-    onClickNext: function() {
+    onClickNext: function () {
       this.changeStatusProgress(this.current_step, this.current_step + 1);
       this.current_step++;
     },
-    onClickBack: function() {
+    onClickBack: function () {
       this.current_step--;
     },
-    onClickFirst: function() {
+    onClickFirst: function () {
       this.current_step = 1;
     },
     handleSwitchStep(step) {
@@ -213,7 +181,7 @@ export default {
     handleShowOperator(price, order_ids) {
       // this.showOperators = true;
       // this.showReview = false;
-      console.log("======price, and order_ids=========",price, order_ids);
+      console.log("======price, and order_ids=========", price, order_ids);
       this.order_price = price;
       this.order_ids = order_ids;
       this.onClickNext();
@@ -262,7 +230,7 @@ export default {
         },
       ];
     },
-    handleConfirmPayment({ number, amount, operator }) {
+    async handleConfirmPayment({ number, amount, operator }) {
       // this.$emit("nextpaymentstep");
       // this.showRequestPayment = false;
       // this.showConfirmPayment = true;
@@ -279,11 +247,16 @@ export default {
         operator: operator,
       };
       if (operator == "Stripe") {
+        const rate = await convertToCurrency('US');
+        const amount_in_dollar = rate ? `${(amount / rate.rate).toFixed(2)}` : `${amount} XAF`
+        const amountInDollarInt = parseInt(amount_in_dollar);
         data.name = "Product 1";
         data.order_ids = this.order_ids,
-        delete data.orderId;
+          delete data.orderId;
         delete data.phone;
         delete data.operator;
+        data.amount = amountInDollarInt;
+        console.log("====dollar====",data.amount)
         const url = "checkout-session/create";
         axios
           .post(url, data)
@@ -308,7 +281,7 @@ export default {
 
         return;
       }
-      
+
       let url = null;
       if (operator == "ORANGE") {
         this.loading = true;
@@ -339,7 +312,7 @@ export default {
                 message: "Operation Successful! ",
               });
               setTimeout(() => {
-                this.$router.push({ path: "/ThankYouPage" , query: { order_ids: this.order_ids.toString() }});
+                this.$router.push({ path: "/ThankYouPage", query: { order_ids: this.order_ids.toString() } });
               }, 3000);
             }
             loader.hide();
@@ -384,7 +357,7 @@ export default {
       }
     },
 
-    shownextComponent() {},
+    shownextComponent() { },
   },
 };
 </script>
@@ -394,6 +367,7 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
+
 .step .icon {
   border-radius: 50%;
   display: flex;
@@ -405,40 +379,50 @@ export default {
   color: var(--primary-text);
   margin-right: 0.5rem;
 }
+
 .step.active .icon,
 .step.complete .icon {
   background-color: #13b93c;
 }
+
 .title-font-size {
   font-size: 16px !important;
   cursor: pointer !important;
   color: #000;
 }
+
 .headline-font-size {
   font-size: 20px;
   color: #000;
 }
+
 .avatar-size {
   height: 40px;
   width: 40px;
 }
+
 .body-font-size {
   font-size: 14px;
 }
+
 .text-14 {
   font-size: 14px;
 }
+
 @media only screen and (max-width: 768px) {
   .headline-font-size {
     font-size: 16px;
   }
+
   .title-font-size {
     font-size: 14px !important;
   }
+
   .avatar-size {
     height: 35px !important;
     width: 35px !important;
   }
+
   .body-font-size {
     font-size: 12px;
   }

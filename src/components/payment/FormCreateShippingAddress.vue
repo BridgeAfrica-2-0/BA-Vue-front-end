@@ -223,7 +223,7 @@
 
 <script>
 import axios from "axios";
-import { checkCountryLocalisation } from "@/helpers";
+import { checkCountry } from "@/helpers";
 export default {
   name: "FormCreateShippingAddress",
 
@@ -288,8 +288,8 @@ export default {
       this.getDestinations(this.form.region);
     }
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
-    const userCountry = checkCountryLocalisation();
-    this.isCameroon = userCountry === 'CM';
+    const userCountry = checkCountry();
+    this.isCameroon = userCountry?.country === 'CM';
   },
   methods: {
     closesipping() {

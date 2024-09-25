@@ -55,7 +55,7 @@
 
           <hr class="dotted-hr" />
 
-          <h1 class="recommended-for-you">Recommended for You</h1>
+          <h1 class="recommended-for-you" v-if="products.length > 0">Recommended for You</h1>
           <splide v-if="products.length > 0" :options="options" class="r-image">
             <splide-slide v-for="(product, index) in products" :key="index">
               <div class="crtv-bans">

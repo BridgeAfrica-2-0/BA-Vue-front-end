@@ -287,12 +287,18 @@ export default {
   },
   filters: {
     locationPrice(ev, rate) {
-      let priceFormatted;
-      if (rate && rate.currency === 'XAF') {
-        priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-      } else {
-        priceFormatted = ` ${(ev / rate.rate).toFixed(2)} ${rate.currency}`;
-      }      
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
       return priceFormatted;
     }
   },

@@ -5,8 +5,7 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span v-if="isCameroon"> {{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
-        <span v-else>{{ cartSummary?.sub_total.toFixed(2) ?? "" | locationPrice(rate) }}</span>
+        <span> {{ cartSummary?.sub_total.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
       <b-tooltip target="tooltip-target-1" triggers="hover">
@@ -21,13 +20,12 @@
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
-        <span v-if="isCameroon"> {{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
+        <span> {{ cartSummary?.tax.toFixed(2) ?? "0.0" }}</span>
       </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
-        <span v-if="isCameroon"> {{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
-        <span v-else>  {{ cartSummary?.total_cost.toFixed(2) ?? "" | locationPrice(rate) }}</span>
+        <span>  {{ cartSummary?.total_cost.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <hr class="dotted-line"/>
       <p class="discount">
@@ -127,6 +125,21 @@ export default {
       this.userLocation = await checkCountry();
       this.rate = await convertToCurrency();
       console.log("======rate======",this.rate )
+    },
+     locationPrice(ev, rate) {
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
+      return priceFormatted;
     }
   },
   async mounted() {
@@ -142,12 +155,18 @@ export default {
   },
   filters: {
     locationPrice(ev, rate) {
-      let priceFormatted;
-      if (rate && rate?.currency === 'XAF') {
-        priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-      } else {
-        priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
-      }      
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
       return priceFormatted;
     }
   },

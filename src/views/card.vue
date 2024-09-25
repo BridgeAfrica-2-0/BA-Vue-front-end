@@ -133,8 +133,14 @@ export default {
 
   },
   filters: {
-    locationPrice: function (ev, rate) {
-      return rate ? ` ${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    locationPrice(ev, rate) {
+      let priceFormatted;
+      if (rate && rate.currency === 'XAF') {
+        priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+      } else {
+        priceFormatted = ` ${(ev / rate.rate).toFixed(2)} ${rate.currency}`;
+      }      
+      return priceFormatted;
     }
   },
   watch: {

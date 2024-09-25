@@ -16,16 +16,12 @@
         This is the Estimated tax that is applied to your order according to your location
       </b-tooltip>
         <span>{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
-        <span v-if="isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
-        <span v-else-if="isCameroon && cartSummary?.shipping_info[0]?.shipping_cost == 0"> Free </span>
-        <span v-else-if="!isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
-        <span v-else-if="!isCameroon && cartSummary?.shipping_info[0]?.shipping_cost == 0"> Free </span>
-        <!-- <span v-else-if="!isCameroon">{{ cartSummary?.shipping_info[0]?.shipping_cost == 0 ? "Free" : cartSummary?.shipping_info[0]?.shipping_cost }}</span> -->
+        <span v-if="cartSummary?.shipping_info[0]?.shipping_cost !== 0">  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
+        <span v-else > Free </span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
         <span v-if="isCameroon"> {{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
-        <span v-if="!isCameroon"> {{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
       </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
@@ -145,8 +141,14 @@ export default {
     this.isCameroon = this.userLocation?.country === 'CM';
   },
   filters: {
-    locationPrice: function (ev, rate) {
-      return rate ? ` ${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    locationPrice(ev, rate) {
+      let priceFormatted;
+      if (rate && rate?.currency === 'XAF') {
+        priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+      } else {
+        priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+      }      
+      return priceFormatted;
     }
   },
   watch: {

@@ -449,9 +449,11 @@ export default {
     },
   },
   mounted() {
-    this.loading = true;
     this.selectedShipping = this.selectedShippingId;
     this.activeData = this.activeDataVal;
+    if(!this.review)
+    {
+    this.loading = true;
     this.$store
       .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
       .then(() => {
@@ -463,6 +465,7 @@ export default {
       .catch(() => {
         this.loading = false;
       });
+  }
 
       const userCountry = checkCountry();
       this.isCameroon = userCountry?.country === 'CM';

@@ -16,9 +16,9 @@
         This is the Estimated tax that is applied to your order according to your location
       </b-tooltip>
         <span>{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
-        <span v-if="isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost}} </span>
+        <span v-if="isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
         <span v-else-if="isCameroon && cartSummary?.shipping_info[0]?.shipping_cost == 0"> Free </span>
-        <span v-else-if="!isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost}} </span>
+        <span v-else-if="!isCameroon && !cartSummary?.shipping_info[0]?.shipping_cost == 0">  {{cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
         <span v-else-if="!isCameroon && cartSummary?.shipping_info[0]?.shipping_cost == 0"> Free </span>
         <!-- <span v-else-if="!isCameroon">{{ cartSummary?.shipping_info[0]?.shipping_cost == 0 ? "Free" : cartSummary?.shipping_info[0]?.shipping_cost }}</span> -->
       </div>

@@ -61,7 +61,7 @@
               <div class="crtv-bans">
                 <img :src="product.picture" alt="Product Image" class="slide-img" />
                 <h3 class="mt-2">{{ product.name }}</h3>
-                <p>{{ product.price }}</p>
+                <p>{{ product.price | locationPrice(rate) }}</p>
                 <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
               </div>
             </splide-slide>
@@ -109,7 +109,7 @@ export default {
         perMove: 1,
         arrows: true,
         pagination: false,
-        autoplay: true,
+        autoplay: false,
         gap: '1rem',
       },
     };
@@ -126,7 +126,7 @@ export default {
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
     this.userLocation = await checkCountry();
     this.rate = await convertToCurrency();
-    this.locale = this.userLocation?.country ?? 'fr-FR';
+    this.locale = this.userLocation?.country ?? 'CM';
     this.currency = this.rate.currency;
     this.isCameroon = this.userLocation?.country === 'CM';
     this.getRecommandedProducts('');

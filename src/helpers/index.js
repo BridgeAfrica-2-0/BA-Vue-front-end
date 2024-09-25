@@ -126,10 +126,29 @@ const checkCountryLocalisation = async () => {
   return data.country; // e.g., 'US'
 }
 
+export const checkCountry = async () => {
+  const res = await fetch('https://api.ipify.org?format=json');
+  const data1 = await res.json();
+  const ip = data1.ip; 
+  if(ip)
+  {
+    // const response = await axios.get(`user/location`,{ params: { ip: ip } });
+    try {
+      const response = await axios.get('user/location', { params: { ip: ip } });
+      return response.data;
+    } catch (error) {
+      console.error('API call failed:', error);
+    }
+    
+  }
+  return null;
+ 
+};
+
 const getRate =  async (fromCurrency, toCurrency) => {
-  const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-  const data = await response.json();
-  // console.log(data.rates)
+  // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+  const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
+  const data = response.data
   return data.rates[toCurrency]; 
 }
 
@@ -154,6 +173,7 @@ export const currencyMap = {
   'NO': 'NOK',  // Norwegian Krone
   'CH': 'CHF',  // Swiss Franc
   'SG': 'SGD',  // Singapore Dollar
+  'PK': 'PKR',
 };
 
 export const convertCurrency = async(defaultCurrency=null)  => {
@@ -172,6 +192,36 @@ export const convertCurrency = async(defaultCurrency=null)  => {
       const conversionRate = await getRate(userCurrency, 'XAF');
       // console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
 
+      return  {"currency": userCurrency, rate:conversionRate}
+      
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
+
+export const convertToCurrency = async(defaultCurrency=null)  => {
+  try {
+         let userCurrency;
+      let userCountry;
+      if (!defaultCurrency) {
+        userCountry = await checkCountry();
+      }else{
+        userCountry = defaultCurrency
+      }
+      if(!userCountry)
+      {
+        userCurrency = currencyMap['US']; 
+      }
+      else
+      {
+        userCurrency = currencyMap[userCountry.country]; 
+        if(!userCurrency)
+        {
+          userCurrency = 'USD' 
+        }
+      }
+      
+      const conversionRate = await getRate(userCurrency, 'XAF');
       return  {"currency": userCurrency, rate:conversionRate}
       
   } catch (error) {

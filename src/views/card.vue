@@ -1,8 +1,8 @@
 <template>
   <div>
     <navbar />
-    <div  class="cart-wrapper" style="margin-bottom: 300px;">
-      <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems: 0  }})</h1>
+    <div class="cart-wrapper" style="margin-bottom: 300px;">
+      <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
       <div class="row pt-5">
         <div class="col-12 col-md-9 col-lg-9">
           <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
@@ -12,7 +12,7 @@
             <div v-if="!loading" class="mb-5">
               <div class="d-flex justify-content-between card-top-content">
                 <h4>{{ business.business_name }}</h4>
-                <a href="" class="clear" @click.prevent="clearBusinessItems(business.items)">Clear</a>
+                <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">Clear</a>
               </div>
               <div v-for="(cart_item, i) in business.items" :key="i">
                 <div class="d-flex mt-4 cart-item-wrapper ml-4">
@@ -23,56 +23,30 @@
                     <p class="product-details">Size: 6.5</p>
                     <p class="product-details">Width: Medium</p>
 
-                    <div
-                      class="d-flex align-items-center justify-content-between mt-3"
-                    >
+                    <div class="d-flex align-items-center justify-content-between mt-3">
                       <p class="mt-3">
-                        <img
-                          class="heart"
-                          src="assets/images/heart.png"
-                          alt=""
-                        />
+                        <img class="heart" src="assets/images/heart.png" alt="" />
                         <a href="" class="save">Save</a>
                       </p>
-                      <input
-                        type="number"
-                        class="product-quantity numbersize form-control"
-                        @change="changeQuantity($event, cart_item.item_id)"
-                        :max="cart_item.stock_available"
-                        :min="1"
-                        v-model="cart_item.quantity"
-                      />
+                      <input type="number" class="product-quantity numbersize form-control"
+                        @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available" :min="1"
+                        v-model="cart_item.quantity" />
                     </div>
                     <p class="product-details">Only <b>{{ cart_item.stock_available }}</b> left in stock.</p>
                   </div>
                   <div class="product-prices d-flex">
                     <div class="pr-5">
-                      <h6 class="discount-price">
+                          <h6 class="discount-price">
+                            {{ (cart_item.product_price - cart_item?.discount_price) | locationPrice(rate) }}
+                          </h6>
+                      <h6 class="actual-price" v-if=" cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
-                          cart_item.discount_price &&
-                          cart_item.discount_price > 0
-                            ? formatMoney(
-                                cart_item.product_price -
-                                  cart_item.discount_price
-                              )
-                            : formatMoney(cart_item.product_price)
-                        }}
-                      </h6>
-                      <h6 class="actual-price">
-                        {{
-                          cart_item.discount_price &&
-                          cart_item.discount_price > 0
-                            ? formatMoney(cart_item.product_price)
-                            : ""
+                          cart_item.discount_price| locationPrice(rate)
                         }}
                       </h6>
                     </div>
-                    <img
-                      class="cross"
-                      src="assets/images/cross.png"
-                      @click="removeIconFromCart(cart_item.product_id)"
-                      alt="cross"
-                    />
+                    <img class="cross" src="assets/images/cross.png" @click="removeIconFromCart(cart_item.product_id)"
+                      alt="cross" />
                   </div>
                 </div>
               </div>
@@ -81,67 +55,14 @@
 
           <hr class="dotted-hr" />
 
-          <h1 class="recommended-for-you">Recommended for You</h1>
-
-          <splide :options="options" class="r-image">
-            <splide-slide id="recomend-slide">
+          <h1 class="recommended-for-you" v-if="products.length > 0">Recommended for You</h1>
+          <splide v-if="products.length > 0" :options="options" class="r-image">
+            <splide-slide v-for="(product, index) in products" :key="index">
               <div class="crtv-bans">
-                <img
-                  src="assets/images/product-dumy.png"
-                  alt="Image 1"
-                  class="slide-img"
-                />
-                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
-                <p>$210.00</p>
-                <a href="">Add to Cart</a>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img
-                  src="assets/images/product-dumy.png"
-                  alt="Image 1"
-                  class="slide-img"
-                />
-                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
-                <p>$210.00</p>
-                <a href="">Add to Cart</a>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img
-                  src="assets/images/product-dumy.png"
-                  alt="Image 1"
-                  class="slide-img"
-                />
-                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
-                <p>$210.00</p>
-                <a href="">Add to Cart</a>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img
-                  src="assets/images/product-dumy.png"
-                  alt="Image 1"
-                  class="slide-img"
-                />
-                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
-                <p>$210.00</p>
-                <a href="">Add to Cart</a>
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img
-                  src="assets/images/product-dumy.png"
-                  alt="Image 1"
-                  class="slide-img"
-                />
-                <h3 class="mt-2">JULIA SLINGBACK PUMP</h3>
-                <p>$210.00</p>
-                <a href="">Add to Cart</a>
+                <img :src="product.picture" alt="Product Image" class="slide-img" />
+                <h3 class="mt-2">{{ product.name }}</h3>
+                <p>{{ product.price | locationPrice(rate) }}</p>
+                <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
               </div>
             </splide-slide>
           </splide>
@@ -159,6 +80,7 @@ import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import Skeleton from "../components/skeleton";
 import axios from "axios";
 import { getGuestIdentifier } from "../helpers";
+import { checkCountry,convertToCurrency } from "../helpers";
 export default {
   components: { navbar, OrderSummary, Skeleton },
   data() {
@@ -168,21 +90,27 @@ export default {
       per_page: 5,
       loading: false,
       error: false,
+      products: [],
+      userLocation: {},
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
         minimumFractionDigits: 2,
       }),
+      locale: null,
+      currency: null,
+      rate: null,
+      isCameroon : false,
       orderForCurrentPage: [],
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: {
+        type: 'loop',
         perPage: 3,
-        height: "200px",
-        gap: "10px",
-        pagination: false,
-        arrows: true,
-        type: "loop",
         perMove: 1,
+        arrows: true,
+        pagination: false,
+        autoplay: false,
+        gap: '1rem',
       },
     };
   },
@@ -193,12 +121,36 @@ export default {
     this.loading = false;
     console.log("loading cart items");
   },
-  mounted() {
+  async mounted() {
     this.$store.dispatch("checkout/updateStepper", 0);
-    this.$store.dispatch("checkout/getCartSummary",this.islogin);
+    this.$store.dispatch("checkout/getCartSummary", this.islogin);
+    this.userLocation = await checkCountry();
+    this.rate = await convertToCurrency();
+    this.locale = this.userLocation?.country ?? 'CM';
+    this.currency = this.rate.currency;
+    this.isCameroon = this.userLocation?.country === 'CM';
+    this.getRecommandedProducts('');
+
+  },
+  filters: {
+    locationPrice(ev, rate) {
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+       priceFormatted = `0.0`
+     }
+      return priceFormatted;
+    }
   },
   watch: {
-    currentPage: function(val) {
+    currentPage: function (val) {
       this.orderForCurrentPage = this.cart["data"].slice(
         (val - 1) * this.per_page,
         val * this.per_page
@@ -234,6 +186,14 @@ export default {
     },
   },
   methods: {
+    formatCurrency(value) {
+      const formatter = new Intl.NumberFormat(this.locale, {
+        style: 'currency',
+        currency: this.currency,
+        minimumFractionDigits: 2,
+      });
+      return formatter.format(value);
+    },
     handleSubmit() {
       this.$router.push("/checkout");
     },
@@ -256,8 +216,8 @@ export default {
 
     async getCartSummary() {
       await this.$store
-        .dispatch("checkout/getCartSummary",this.islogin)
-        .then(() => {})
+        .dispatch("checkout/getCartSummary", this.islogin)
+        .then(() => { })
         .catch((err) => {
           console.log({ err: err });
         });
@@ -345,76 +305,127 @@ export default {
           this.loading = false;
         });
     },
+    async getRecommandedProducts(apiUrl) {
+      this.loading = true;
+      let url;
+      if (apiUrl) {
+        url = apiUrl
+      }
+      else {
+        url = this.islogin
+          ? `cart/recommended/items`
+          : `guest/cart/recommended/items?guest_identifier=${getGuestIdentifier()}`;
+      }
+      await axios
+        .get(url)
+        .then((result) => {
+          this.products = result.data.data;
+          console.log(result);
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            blockClass: "custom-block-class",
+            message: "Unable to remove item at this moment",
+          });
+          this.loading = false;
+        });
+    },
+    handleAddToCard(product) {
+      this.$store
+        .dispatch("cart/addToCart", { product, islogin: this.islogin })
+        .then(response => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Product added successfully to cart"
+          });
+          this.getCartItems();
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur"
+          });
+        });
+    },
+    async handleSlideChange(splide) {
+      // Check if the user reached the end of the slides and there's more data to fetch
+      if (splide.index >= this.products.length - 1 && this.nextPageUrl && !this.isLoading) {
+        await this.getRecommandedProducts(this.nextPageUrl); // Fetch next page of data
+      }
+    },
     async clearBusinessItems(items) {
       const businessId = items[0].business_id;
       this.loading = true;
-      if(this.islogin)
-    {
-      const url = `cart/item/${businessId}/deleteBusinessItems`;
-      await axios
-        .delete(url)
-        .then((result) => {
-          this.getCartSummary();
-          console.log(result);
-          this.getCartItems();
-          this.flashMessage.show({
-            status: "success",
-            blockClass: "custom-block-class",
-            message: "Items Removed Successfully",
+      if (this.islogin) {
+        const url = `cart/item/${businessId}/deleteBusinessItems`;
+        await axios
+          .delete(url)
+          .then((result) => {
+            this.getCartSummary();
+            console.log(result);
+            this.getCartItems();
+            this.flashMessage.show({
+              status: "success",
+              blockClass: "custom-block-class",
+              message: "Items Removed Successfully",
+            });
+            this.loading = false;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: "Unable to remove items at this moment",
+            });
+            this.loading = false;
           });
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-          this.flashMessage.show({
-            status: "error",
-            blockClass: "custom-block-class",
-            message: "Unable to remove items at this moment",
-          });
-          this.loading = false;
-        });
-     }
-     else
-     {
-      const payload = {
-        business_id: businessId,
-        guest_identifier: getGuestIdentifier()
       }
-      const url = "guest/cart/items/delete";
-      await axios
-        .post(url,payload)
-        .then((result) => {
-          this.getCartSummary();
-          console.log(result);
-          this.getCartItems();
-          this.flashMessage.show({
-            status: "success",
-            blockClass: "custom-block-class",
-            message: "Items Removed Successfully",
+      else {
+        const payload = {
+          business_id: businessId,
+          guest_identifier: getGuestIdentifier()
+        }
+        const url = "guest/cart/items/delete";
+        await axios
+          .post(url, payload)
+          .then((result) => {
+            this.getCartSummary();
+            console.log(result);
+            this.getCartItems();
+            this.flashMessage.show({
+              status: "success",
+              blockClass: "custom-block-class",
+              message: "Items Removed Successfully",
+            });
+            this.loading = false;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: "Unable to remove items at this moment",
+            });
+            this.loading = false;
           });
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-          this.flashMessage.show({
-            status: "error",
-            blockClass: "custom-block-class",
-            message: "Unable to remove items at this moment",
-          });
-          this.loading = false;
-        });
-     }
-  }
+      }
+    }
   },
 };
 </script>
 <style scoped>
-.empty-cart{
+.empty-cart {
   justify-content: center;
   display: flex;
   margin-top: 200px;
   position: static;
 }
+
 .cart-wrapper {
   margin: 10px 100px 0 150px;
 }
@@ -538,6 +549,7 @@ export default {
   align-items: center;
   text-align: center;
   padding: 15px;
+  width: 347.667px;
 }
 
 .crtv-bans h3 {

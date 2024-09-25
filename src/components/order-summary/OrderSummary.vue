@@ -5,7 +5,7 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span>{{ cartSummary?.sub_total.toFixed(2) ?? "" }}</span>
+        <span> {{ cartSummary?.sub_total.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
       <b-tooltip target="tooltip-target-1" triggers="hover">
@@ -15,16 +15,17 @@
         This is the Estimated tax that is applied to your order according to your location
       </b-tooltip>
         <span>{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
-        <span>{{ cartSummary?.shipping_info[0]?.shipping_cost == 0 ? "Free" : cartSummary?.shipping_info[0]?.shipping_cost }}</span>
+        <span v-if="cartSummary?.shipping_info[0]?.shipping_cost !== 0">  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
+        <span v-else > Free </span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
-        <span>{{ cartSummary?.tax.toFixed(2) ?? 0.0 }}</span>
+        <span> {{ cartSummary?.tax.toFixed(2) ?? "0.0" }}</span>
       </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
-        <span>{{ cartSummary?.total_cost.toFixed(2) ?? "" }}</span>
+        <span>  {{ cartSummary?.total_cost.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <hr class="dotted-line"/>
       <p class="discount">
@@ -68,7 +69,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { checkCountryLocalisation } from "@/helpers";
+import { checkCountry,convertToCurrency } from "@/helpers";
 export default {
   props: {
     handleSubmit: {
@@ -96,7 +97,9 @@ export default {
         sub_total: 0.0,
         discount: 0.0,
       },
-      isCameroon : false
+      isCameroon : false,
+      rate: null,
+      userLocation: {},
     };
   },
   computed: {
@@ -116,15 +119,56 @@ export default {
       }
     },
   },
-  methods: {},
-  mounted() {
+  methods: {
+   async getCurrencyConvert()
+    {
+      this.userLocation = await checkCountry();
+      this.rate = await convertToCurrency();
+      console.log("======rate======",this.rate )
+    },
+     locationPrice(ev, rate) {
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
+      return priceFormatted;
+    }
+  },
+  async mounted() {
     if (this.orderSummary) {
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
       console.log(this.cartSummary);
       
     }
-    const userCountry = checkCountryLocalisation();
-    this.isCameroon = userCountry === 'CM';
+    // this.userLocation = await checkCountry();
+    // this.rate = await convertToCurrency();
+    this.getCurrencyConvert();
+    this.isCameroon = this.userLocation?.country === 'CM';
+  },
+  filters: {
+    locationPrice(ev, rate) {
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
+      return priceFormatted;
+    }
   },
   watch: {
     orderSummary(newVal) {

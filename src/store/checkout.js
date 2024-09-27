@@ -106,8 +106,9 @@ const actions = {
   },
 
   async updateCart({ commit }, payload) {
+    const url = payload.islogin ? 'cart/update-quantity/' : 'guest/cart/update-quantity/';
     return await axios
-      .post("cart/update-quantity/" + payload.index, {
+      .post(url+ payload.index, {
         quantity: payload.quantity,
       })
       .then((response) => {});

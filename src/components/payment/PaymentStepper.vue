@@ -249,7 +249,7 @@ export default {
       if (operator == "Stripe") {
         const rate = await convertToCurrency('US');
         const amount_in_dollar = rate ? `${(amount / rate.rate).toFixed(2)}` : `${amount} XAF`
-        const amountInDollarInt = parseInt(amount_in_dollar);
+        const amountInDollarInt = parseFloat(amount_in_dollar);
         data.name = "Product 1";
         data.order_ids = this.order_ids,
           delete data.orderId;

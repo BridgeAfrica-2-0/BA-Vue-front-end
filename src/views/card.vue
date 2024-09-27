@@ -247,7 +247,7 @@ export default {
       if (quantity > 1 || quantity == 1) {
         this.buttonDisable = false;
         await this.$store
-          .dispatch("checkout/updateCart", { quantity: quantity, index: index })
+          .dispatch("checkout/updateCart", { quantity: quantity, index: index, islogin: this.islogin })
           .then((response) => {
             this.getCartSummary();
           })

@@ -122,7 +122,14 @@ export default {
   methods: {
    async getCurrencyConvert()
     {
-      this.userLocation = await checkCountry();
+      let isLocal = localStorage.getItem("isLocal") ?? null;
+      if(isLocal && isLocal === 'true') {
+        this.userLocation.country = 'CM';
+      } else {
+        this.userLocation = await checkCountry();
+        if(this.userLocation?.country === 'CM') localStorage.setItem("isLocal", true);
+        else localStorage.setItem("isLocal", false);
+      }
       this.rate = await convertToCurrency();
       console.log("======rate======",this.rate )
     },

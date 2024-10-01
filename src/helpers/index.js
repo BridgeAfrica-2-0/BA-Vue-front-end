@@ -208,10 +208,10 @@ export const convertToCurrency = async(defaultCurrency=null)  => {
   try {
       let userCurrency;
       let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
-      if (!defaultCurrency && !userCountry.country) {
+      if (!defaultCurrency && !userCountry?.country) {
         userCountry = await checkCountry();
       }
-      if(defaultCurrency && !userCountry.country){
+      if(defaultCurrency && !userCountry?.country){
         userCountry = defaultCurrency
       }
       if(!userCountry)

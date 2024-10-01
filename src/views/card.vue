@@ -128,7 +128,7 @@ export default {
     if(country) this.userLocation.country = country;
     else {
       this.userLocation = await checkCountry();
-      localStorage.setItem('country', JSON.stringify({ country: this.userLocation.country }));
+      localStorage.setItem('country', JSON.stringify({ country: this.userLocation?.country }));
     }
     
     this.rate = await convertToCurrency();

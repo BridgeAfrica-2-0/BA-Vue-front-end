@@ -132,9 +132,11 @@ export default {
    async getCurrencyConvert()
     {
       let isLocal = localStorage.getItem("isLocal") ?? null;
+      let country = localStorage.getItem("country") ?? null;
       if(isLocal && isLocal === 'true') {
         this.userLocation.country = 'CM';
-      } else {
+      }else if(country)this.userLocation.country = country;
+       else {
         this.userLocation = await checkCountry();
         if(this.userLocation?.country === 'CM') localStorage.setItem("isLocal", true);
         else localStorage.setItem("isLocal", false);

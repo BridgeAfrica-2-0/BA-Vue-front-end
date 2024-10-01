@@ -280,6 +280,20 @@ export default {
             .catch(() => {
               loader.hide();
             });
+            this.$store.dispatch("checkout/shippingFee")
+            .then(() => {
+              this.buttonDisabled = false;
+            })
+           .catch((error) => {
+          if (error) {
+            this.buttonDisabled = true;
+            this.flashMessage.show({
+              status: "error",
+              message: "The shipping address is not valid",
+              time: 5000,
+            });
+          }
+        });
           // this.shippingsTab();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
@@ -373,7 +387,9 @@ export default {
         this.$store
           .dispatch("checkout/createOrder", {
             isLogin: this.$store.getters["auth/isLogged"],
-            isLocal:  this.isCameroon
+            isLocal:  this.isCameroon,
+            shipping_fee: !this.isCameroon ? this.shippingFee: null,
+            shipping_method: !this.isCameroon ? this.shippingMethod : null
           })
           .then(({ data }) => {
             this.$emit(
@@ -425,11 +441,21 @@ export default {
     shippingsTab() {
       return this.$store.state.checkout.allShipping;
     },
+    shippingFee() {
+      return this.$store.state.checkout.shippingFee;
+    },
+    shippingMethod() {
+      return this.$store.state.checkout.shippingMethod;
+    },
     selectedShippingId: {
       get() {
         const activeShipping = this.shippingsTab.find(
           (item) => item.active == 1
         );
+        if(activeShipping?.id)
+      {
+        this.$store.dispatch("checkout/shippingFee");
+      }
         return activeShipping ? activeShipping.id : null;
       },
       set(value) {

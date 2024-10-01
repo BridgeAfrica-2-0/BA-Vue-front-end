@@ -127,29 +127,33 @@ const checkCountryLocalisation = async () => {
 }
 
 export const checkCountry = async () => {
-  const res = await fetch('https://api.ipify.org?format=json');
-  const data1 = await res.json();
-  const ip = data1.ip; 
-  if(ip)
-  {
-    // const response = await axios.get(`user/location`,{ params: { ip: ip } });
-    try {
+  let ip = localStorage.getItem("ip") ?? null;
+  if(!ip) {  
+    const res = await fetch('https://api.ipify.org?format=json');
+    const data1 = await res.json();
+    ip = data1.ip; 
+    localStorage.setItem("ip", ip);
+  }
+  try {
       const response = await axios.get('user/location', { params: { ip: ip } });
       return response.data;
-    } catch (error) {
+  } catch (error) {
       console.error('API call failed:', error);
-    }
-    
   }
   return null;
- 
 };
 
 const getRate =  async (fromCurrency, toCurrency) => {
-  // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-  const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
-  const data = response.data
-  return data.rates[toCurrency]; 
+  let conversionRate = localStorage.getItem("conversionRate") ?? null;
+  if(!conversionRate){
+    // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+    const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
+    const data = response.data
+    localStorage.setItem("conversionRate", data.rates[toCurrency]);
+    return data.rates[toCurrency]; 
+  } else {
+    return conversionRate;
+  }
 }
 
 export const currencyMap = {
@@ -190,6 +194,7 @@ export const convertCurrency = async(defaultCurrency=null)  => {
       const userCurrency = currencyMap[userCountry] || 'XAF'; 
       
       const conversionRate = await getRate(userCurrency, 'XAF');
+      
       // console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
 
       return  {"currency": userCurrency, rate:conversionRate}
@@ -201,11 +206,12 @@ export const convertCurrency = async(defaultCurrency=null)  => {
 
 export const convertToCurrency = async(defaultCurrency=null)  => {
   try {
-         let userCurrency;
-      let userCountry;
-      if (!defaultCurrency) {
+      let userCurrency;
+      let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
+      if (!defaultCurrency && !userCountry.country) {
         userCountry = await checkCountry();
-      }else{
+      }
+      if(defaultCurrency && !userCountry.country){
         userCountry = defaultCurrency
       }
       if(!userCountry)
@@ -219,9 +225,10 @@ export const convertToCurrency = async(defaultCurrency=null)  => {
         {
           userCurrency = 'USD' 
         }
-      }
+      }      
       
       const conversionRate = await getRate(userCurrency, 'XAF');
+      console.log(conversionRate, "crate");
       return  {"currency": userCurrency, rate:conversionRate}
       
   } catch (error) {

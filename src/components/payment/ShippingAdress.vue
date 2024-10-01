@@ -224,7 +224,6 @@ import CreateShippingModal from "./CreateShippingModal.vue";
 import OrderSummary from "../../components/order-summary/OrderSummary.vue";
 import Order from "../../components/payment/Order.vue";
 import login from "@/components/Login";
-import { checkCountry } from "@/helpers";
 
 export default {
   name: "ShippingAddress",
@@ -492,9 +491,7 @@ export default {
         this.loading = false;
       });
   }
-
-      const userCountry = checkCountry();
-      this.isCameroon = userCountry?.country === 'CM';
+      this.isCameroon = localStorage.getItem("isLocal");
   },
   created() {
     this.selectedShipping = this.selectedShippingId;

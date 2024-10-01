@@ -124,7 +124,13 @@ export default {
   async mounted() {
     this.$store.dispatch("checkout/updateStepper", 0);
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
-    this.userLocation = await checkCountry();
+    let country = localStorage.getItem("country") ?? null;
+    if(country) this.userLocation.country = country;
+    else {
+      this.userLocation = await checkCountry();
+      localStorage.setItem('country', JSON.stringify({ country: this.userLocation.country }));
+    }
+    
     this.rate = await convertToCurrency();
     this.locale = this.userLocation?.country ?? 'CM';
     this.currency = this.rate.currency;

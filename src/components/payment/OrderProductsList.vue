@@ -104,7 +104,7 @@
 import axios from "axios";
 import { getGuestIdentifier } from "../../helpers";
 import { mapGetters } from "vuex";
-import { checkCountry,convertToCurrency } from "../../helpers";
+import { convertToCurrency } from "../../helpers";
 export default {
   name: "OrderProductsList",
   components: {

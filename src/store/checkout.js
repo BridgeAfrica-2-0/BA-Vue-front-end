@@ -3,6 +3,8 @@ import { getGuestIdentifier } from "../helpers";
 
 const state = {
   allShipping: [],
+  shippingFee: 0.0,
+  shippingMethod: '',
   order: {
     data: { order_id: "", total_cost: 0 },
   },
@@ -105,6 +107,30 @@ const actions = {
       });
   },
 
+  async shippingFee({ commit }) {
+    let url ="/dhl/shippingFee"
+    await axios
+      .get(url)
+      .then((response) => {
+        if(response.data.products)
+        {
+          commit("setShippingFee", response.data.products[0].totalPrice[0].price);
+          commit("setShippingMethod", response.data.products[0].productName);
+          console.log(response.data.products[0].totalPrice[0].price);
+        }
+        else{
+          commit("setShippingFee", 0.0);
+          commit("setShippingMethod", "");
+          return Promise.reject(response.data.error);
+        }
+      })
+      .catch((error) => {
+        commit("setShippingFee", 0.0);
+        commit("setShippingMethod", "");
+        return Promise.reject(error);
+      });
+  },
+
   async updateCart({ commit }, payload) {
     const url = payload.islogin ? 'cart/update-quantity/' : 'guest/cart/update-quantity/';
     return await axios
@@ -140,12 +166,12 @@ const actions = {
       });
   },
 
-  createOrder({ commit }, { isLogin, isLocal }) {
+  createOrder({ commit }, { isLogin, isLocal, shipping_fee, shipping_method }) {
     let url = isLogin
       ? "cart/create"
       : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
-      .post(url,{isLocal: isLocal})
+      .post(url,{isLocal: isLocal, shipping_fee: shipping_fee,shipping_method: shipping_method })
       .then((data) => {
         let orderId = data.data.data;
         console.log(data.data);
@@ -266,6 +292,14 @@ const mutations = {
 
   setshippingsummary(state, data) {
     state.shippingsummary = data;
+  },
+  
+  setShippingFee(state, data) {
+    state.shippingFee = data;
+  },
+
+  setShippingMethod(state, data) {
+    state.shippingMethod = data;
   },
 
   setBuisiness: (state, newBuis) => {

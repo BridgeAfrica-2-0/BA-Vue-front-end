@@ -14,9 +14,10 @@
       <b-tooltip target="tooltip-target-2" triggers="hover">
         This is the Estimated tax that is applied to your order according to your location
       </b-tooltip>
-        <span>{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
-        <span v-if="cartSummary?.shipping_info[0]?.shipping_cost !== 0">  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
-        <span v-else > Free </span>
+        <span v-if="isCameroon">{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
+        <span v-if="!isCameroon">DHL <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
+        <span v-if="isCameroon && cartSummary?.shipping_info[0]?.shipping_cost !== 0">  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
+        <span v-if="!isCameroon">  {{ shippingFee | locationPrice(rate)}} </span>
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
@@ -25,7 +26,9 @@
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
-        <span>  {{ cartSummary?.total_cost.toFixed(2) ?? "" | locationPrice(rate) }}</span>
+        <span>
+        {{ (cartSummary?.sub_total + shippingFee)?.toFixed(2) ?? "" | locationPrice(rate) }}
+        </span>
       </div>
       <hr class="dotted-line"/>
       <p class="discount">
@@ -117,6 +120,12 @@ export default {
         default:
           return "Proceed to payment";
       }
+    },
+    shippingFee() {
+      return this.$store.state.checkout.shippingFee;
+    },
+    shippingMethod() {
+      return this.$store.state.checkout.shippingMethod;
     },
   },
   methods: {

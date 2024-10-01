@@ -554,8 +554,8 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 15px;
-  width: 347.667px;
+  /* padding: 15px;
+  width: 347.667px; */
 }
 
 .crtv-bans h3 {

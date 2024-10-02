@@ -50,7 +50,7 @@ import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
 // import CreateShippingAddress from "./CreateShippingAddress";
 import axios from "axios";
-import { checkCountry, convertToCurrency } from "@/helpers";
+import { convertToCurrency } from "@/helpers";
 // import ProductDetails from "./ProductDetails";
 
 export default {

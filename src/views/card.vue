@@ -124,7 +124,13 @@ export default {
   async mounted() {
     this.$store.dispatch("checkout/updateStepper", 0);
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
-    this.userLocation = await checkCountry();
+    let country = localStorage.getItem("country") ?? null;
+    if(country) this.userLocation.country = country;
+    else {
+      this.userLocation = await checkCountry();
+      localStorage.setItem('country', JSON.stringify({ country: this.userLocation?.country }));
+    }
+    
     this.rate = await convertToCurrency();
     this.locale = this.userLocation?.country ?? 'CM';
     this.currency = this.rate.currency;
@@ -548,8 +554,8 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 15px;
-  width: 347.667px;
+  /* padding: 15px;
+  width: 347.667px; */
 }
 
 .crtv-bans h3 {

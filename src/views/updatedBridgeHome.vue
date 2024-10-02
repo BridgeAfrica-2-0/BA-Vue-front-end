@@ -2247,11 +2247,11 @@ export default {
   /* Ensure the button is on top */
 }
 
-.splide__arrow--prev {
+.top-slider .splide__arrow--prev {
   margin-left: 20px;
 }
 
-.splide__arrow--next {
+.top-slider .splide__arrow--next {
   margin-right: 20px;
 }
 

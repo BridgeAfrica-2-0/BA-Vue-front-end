@@ -48,6 +48,7 @@ import OrderDetails from "@/views/OrderDetails";
 import businessordersdetail from "@/views/businessordersdetail";
 import businessOwnerOrders from "@/views/businessOwnerOrders";
 import payment from "@/views/payment";
+import ThankYouPage from "@/views/ThankYouPage.vue";
 
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
@@ -358,6 +359,12 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: signup
+  },
+  
+  {
+    path: "/ThankYouPage",
+    name: "ThankYouPage",
+    component: ThankYouPage
   },
 
   {

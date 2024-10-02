@@ -26,7 +26,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Amount") }} : </b-td>
                   <b-th>
-                    {{ formatMoney(Number(cart_item.product_price)) }}
+                    {{ cart_item.product_price | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
 
@@ -47,7 +47,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Total") }}: </b-td>
                   <b-th>
-                    {{ formatMoney(Number(cart_item.sub_total)) }}
+                    {{ (cart_item.sub_total) | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
               </div>
@@ -63,12 +63,12 @@
           <h6>
             Shipping Fee:
             <span class="shipping-t">
-              {{ formatMoney(Number(business.business_shipping_cost)) }}
+              {{ (business.business_shipping_cost) | locationPrice(rate) }}
             </span>
           </h6>
         </div>
       </div>
-      <hr />
+      <hr class="dotted-hr" />
     </div>
 
     <div class="row my-4" v-if="loading">
@@ -104,7 +104,7 @@
 import axios from "axios";
 import { getGuestIdentifier } from "../../helpers";
 import { mapGetters } from "vuex";
-
+import { convertToCurrency } from "../../helpers";
 export default {
   name: "OrderProductsList",
   components: {
@@ -241,6 +241,7 @@ export default {
       cart: [],
       infiniteId: +new Date(),
       page: 1,
+      rate: null,
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
@@ -280,6 +281,27 @@ export default {
       return this.$store.state.checkout.shippingsummary;
     }
   },
+  async mounted() {
+    this.rate = await convertToCurrency();
+
+  },
+  filters: {
+    locationPrice(ev, rate) {
+      let priceFormatted=0.0;
+      if(rate)
+     {
+       if (rate?.currency === 'XAF') {
+         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+       } else {
+         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+       }      
+     }
+     else{
+      priceFormatted = `0.0`
+     }
+      return priceFormatted;
+    }
+  },
   watch: {
     currentPage: function(val) {
       this.orderForCurrentPage = this.cart["data"].slice(
@@ -302,6 +324,14 @@ export default {
 }
 .capitalized {
   text-transform: capitalize;
+}
+
+.dotted-hr {
+  border: 0;
+  border-top: 2px dotted black;
+  height: 0;
+  margin: 20px 0;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {

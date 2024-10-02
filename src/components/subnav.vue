@@ -1,11 +1,11 @@
 <template>
   <div class="container-flex mobi d-none d-lg-none d-xl-block search">
     <b-row>
-      <b-col cols="1" lg="2"> </b-col>
-      <b-col cols="8" lg="10" style="text-align: left">
+      <!-- <b-col cols="1" lg="2"> </b-col> -->
+      <b-col cols="12" lg="12" style="text-align: left">
         <span style="display: inline-flex">
           <span
-            v-for="(category, index) in categories.slice(0, 6)"
+            v-for="(category, index) in categories.slice(0, 10)"
             :key="index"
           >
             <b-nav-item-dropdown :id="'dropdown-' + index">
@@ -105,7 +105,7 @@
         </span>
       </b-col>
 
-      <b-col cols="1" lg="2"> </b-col>
+      <!-- <b-col cols="1" lg="2"> </b-col> -->
     </b-row>
   </div>
 </template>

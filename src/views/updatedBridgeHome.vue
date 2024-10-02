@@ -1,6 +1,6 @@
 <template>
   <div class="bridge-home">
-    <site-header class="topbar" />
+    <site-header class="topbar" @change:currency="emitChangeCurrency"/>
 
     <!-- <section class="p-0">
   <div>
@@ -108,7 +108,7 @@
                 </p>
               </div>
               <div class="bottom-info">
-                <span class="price">{{ product.price }} FCFA </span>
+                <span class="price">{{ product.price | locationPrice(rate) }} </span>
                 <div class="desktop-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="gotoproduct(product)">
@@ -127,7 +127,7 @@
                     <button class="buy-now-btn" @click="gotoproduct(product)">
                       <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
                     </button>
-                    <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
+                    <button class="add-to-cart" @click="handleAddToCard(product)">
                       <b-icon icon="cart-plus"></b-icon><span class="px-1"
                         style="font-size: 12px; font-weight: bold;">Cart</span>
                     </button>
@@ -212,44 +212,62 @@
     </section>
 
     <section style="background: #FFFFFF" class="ba-section-mobile">
-      <div class="container ba-business pt-5 mt-4 pb-5" style="padding: 0 25px !important">
+      <div class="container ba-business pt-5 pb-5">
         <h3 class="ba-title">
-          <span class="m-header-color">Bridge Africa</span> <br />
-          <span style="color: black;">{{ $t("general.for_busineses") }}</span>
+          <span class="m-header-color">Bridge Africa </span> <br />
+          <span style="color: black;">{{ $t("general.for_busineses") }} </span>
         </h3>
         <p class="ba-description" style="color: black;">
-          {{ $t("general.sell_online_in_person-mobile") }}
+          {{ $t("general.sell_online_in_person") }}
         </p>
         <div class="row">
           <div class="col-lg-6 ba-video" data-aos="slide-left" data-aos-offset="70px" data-aos-duration="1500">
-            <div class="image-slider">
-              <div class="image-wrapper">
-                <video width="100%" style="object-fit:contain; border-radius: 10px;" autoplay muted loop
-                  poster="assets/home/ba_business.png">
-                  <source :src="videos[currentSlide]" type="video/mp4" />
-                </video>
-                <!-- <v-lazy-image :src="images[currentSlide]" alt="" /> -->
-              </div>
-
-              <div class="progress-bar-wrapper">
-                <div v-for="(progress, index) in totalSlides" :key="index"
-                  :class="['progress-bar', { active: currentSlide === index, initial: currentSlide !== index }]"></div>
-              </div>
+            <div>
+              <video width="100%" style="object-fit:contain; border-radius: 10px;" autoplay muted loop
+                poster="assets/home/ba_business.png">
+                <source src="assets/video/ba_for_business.mp4" type="video/mp4" />
+              </video>
             </div>
-            <div class="col-lg-6 p-0 m-0" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
-              <div class="border-left-biz">
-                <div class="babiz-list d-flex">
-                  <span class="p-1 create-your-shop">
-                    <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing" />
-                  </span>
-                  <div class="ml-2">
-                    <h5>
-                      {{ $t("general.business_identity_and_oline_mobile") }}
-                    </h5>
-                    <p>
-                      {{ $t("general.create_your_business_page") }}
-                    </p>
-                  </div>
+          </div>
+          <div class="col-lg-6" data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500">
+            <div class="border-left-biz">
+              <div class="babiz-list d-flex">
+                <span class="p-1 create-your-shop">
+                  <v-lazy-image src="assets/home/ba_business_1.png" alt="Icon" class="icon-spacing" />
+                </span>
+                <div class="bottom-border">
+                  <h5>
+                    {{ $t("general.business_identity_and_oline") }}
+                  </h5>
+                  <p>
+                    {{ $t("general.create_your_business_page") }}
+                  </p>
+                </div>
+              </div>
+              <div class="babiz-list d-flex">
+                <span class="p-1 ship-globally">
+                  <v-lazy-image src="assets/home/ba_business_2.png" alt="Icon" class="icon-spacing" />
+                </span>
+                <div class="bottom-border">
+                  <h5>
+                    {{ $t("general.online_business_database") }}
+                  </h5>
+                  <p>
+                    {{ $t("general.make_your_business_visible") }}
+                  </p>
+                </div>
+              </div>
+              <div class="babiz-list d-flex">
+                <span class="p-1 get-paid">
+                  <v-lazy-image src="assets/home/ba_business_3.png" alt="Icon" class="icon-spacing" />
+                </span>
+                <div class="bottom-border">
+                  <h5>
+                    {{ $t("general.unified_back_office") }}
+                  </h5>
+                  <p>
+                    {{ $t("general.easily_manage_your_business") }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -259,7 +277,8 @@
     </section>
 
     <section class="pt-1 pb-1 bg-gradient sales-channel-section">
-      <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500">
+      <div class="container pt-5  pb-5 " data-aos="zoom-out" data-aos-offset="70px" data-aos-duration="1500"
+        convertCurrency>
         <div class="flex-container">
           <h3>
             <span class="line1">Sales channel</span><br />
@@ -319,27 +338,50 @@
         <div class="row start-selling-mobile">
           <div class="col-md-12 p-0">
             <div class="position-relative">
-              <div class="image-slider">
-                <div class="image-wrapper">
-                  <v-lazy-image :src="images[currentSlide]" alt="" />
-                </div>
-
-                <div class="progress-bar-wrapper mt-3">
-                  <div v-for="(progress, index) in totalSlides" :key="index"
-                    :class="['progress-bar', { active: currentSlide === index, initial: currentSlide !== index }]">
+              <splide :options="options" class="r-image">
+                <splide-slide>
+                  <div class="col-md-4 pt-2">
+                    <div class="p-3 about-p" data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+                      <div class="mb-3">
+                        <v-lazy-image src="assets/home/new_about_5.png" alt="" />
+                      </div>
+                      <h6 class="bold">{{ $t("general.sell_world_wide") }}</h6>
+                      <p>
+                        {{ $t("general.all_in_one") }}
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-              </div>
-              <div class="py-3 about-p" data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
-                <h6 class="bold">{{ $t("general.sell_world_wide") }}</h6>
-                <p>
-                  {{ $t("general.all_in_one") }}
-                </p>
-              </div>
+                </splide-slide>
+                <splide-slide>
+                  <div class="col-md-4 pt-2">
+                    <div class="p-3 about-p" data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+                      <div class="mb-3">
+                        <v-lazy-image src="assets/home/new_about_1.png" alt="" />
+                      </div>
+                      <h6 class="bold">{{ $t("general.buy_world_wide") }}</h6>
+                      <p>
+                        {{ $t("general.buy_world_wide_customers") }}
+                      </p>
+                    </div>
+                  </div>
+                </splide-slide>
+                <splide-slide>
+                  <div class="col-md-4 pt-2">
+                    <div class="p-3 about-p" data-aos="fade-up" data-aos-offset="70px" data-aos-duration="1500">
+                      <div class="mb-3">
+                        <v-lazy-image src="assets/home/new_about_3.png" alt="" />
+                      </div>
+                      <h6 class="bold">
+                        {{ $t("general.logistics_support") }}
+                      </h6>
+                      <p>{{ $t("general.we_support_businese_throughout") }}</p>
+                    </div>
+                  </div>
+                </splide-slide>
+              </splide>
               <router-link to="/search" class="mobile-start-selling-btn">
-                <b-button type="submit" variant="primary" class="mb-3 selling-btn-mobile">
-                  Start Sellingg
+                <b-button type="submit" variant="primary" class="mb-3 mt-3 selling-btn-mobile">
+                  Start Selling
                   <span class="arrow-icon-wrapper">
                     <i class="fas fa-arrow-right"></i>
                   </span>
@@ -367,8 +409,8 @@
       </div>
     </section>
 
-    <section class="p-0 m-0 quotation-form-desktop">
-      <div class="container mt-0 p-0 " data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+    <section class="p-0 m-0 bg-color">
+      <div class="container mt-0 p-0" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row mt-0">
           <div class="col-lg-4 p-0 h-100 quote-img">
             <v-lazy-image src="assets/home/quotation.png" alt="" />
@@ -382,101 +424,6 @@
                   $t("general.find_products_and_services")
                   }}</span>
               </h3>
-              <form novalidate @submit.prevent="validateUser">
-                <div class="form pt-1 row">
-                  <div class="col-md-12 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.looking_for_something") }}
-                    </label>
-                    <md-field :class="getValidationClass('pname')">
-                      <md-input type="text" name="name" class="ba-input" id="name"
-                        placeholder="Input Product Keyword or Name" v-model="form.pname" />
-
-                      <span class="md-error" v-if="!$v.form.pname.required">
-                        required
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="qunatity" class="pb-0 label-color">
-                      {{ $t("general.Quantity") }}
-                    </label>
-                    <md-field :class="getValidationClass('quantity')">
-                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity" placeholder="Quantity"
-                        v-model="form.quantity" />
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="uname" class="pb-0 label-color">
-                      {{ $t("general.full_name") }}
-                    </label>
-                    <md-field :class="getValidationClass('name')">
-                      <md-input type="text" name="uname" id="uname" class="ba-input" placeholder="Full Name"
-                        v-model="form.name" />
-
-                      <span class="md-error" v-if="!$v.form.name.required">
-                        {{ $t("auth.First_Name_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="email" class="pb-0 label-color">
-                      {{ $t("general.Email") }}
-                    </label>
-                    <md-field class="">
-                      <md-input type="email" name="email" id="email" placeholder="Email" class="ba-input"
-                        v-model="form.email" />
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.Tel") }}
-                    </label>
-                    <md-field :class="getValidationClass('tel')">
-                      <md-input type="tel" name="tel" id="tel" placeholder="Tel." class="ba-input "
-                        v-model="form.tel" />
-
-                      <span class="md-error" v-if="!$v.form.tel.required">
-                        {{ $t("auth.tel_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-                  <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
-                    <b-button type="submit" variant="primary" class="quote-btn">
-                      {{ $t("general.Request_For_Quotation") }}
-                      <span class="arrow-icon-wrapper">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </b-button>
-                  </div>
-                  <div></div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="p-0 m-0 quotation-form-mobile">
-      <div class="container mt-0" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-        <div class="row mt-0">
-          <div class="text-center">
-            <h3> Looking for something special?</h3>
-            <p style="color: black;" class="px-2"> Explore Cameroon's products and services. From custom tailoring to
-              local crafts, we've got you covered.to Measure tailoring service that represents outstanding value for
-              money</p>
-          </div>
-          <div class="col-lg-4 h-100 quote-img">
-            <v-lazy-image src="assets/home/quotation-img-mobile.png" alt="" />
-          </div>
-
-          <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
-            <div class="m-left">
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
                   <div class="col-md-12 p-0">
@@ -876,7 +823,7 @@
     </section>
 
     <section class="bg-whitee faq">
-      <div class="container pb-5 pl-4 pr-4">
+      <div class="container pb-5">
         <div class="text-center">
           <h3 style="color: #e75b17">
             {{ $t("general.faq") }}
@@ -923,6 +870,12 @@ import Categories from "../components/categories";
 import FAQ from "../components/faq";
 import VLazyImage from "v-lazy-image/v2";
 
+import { convertCurrency } from "@/helpers"
+
+import {
+  buildByLocalisation,
+} from "@/application/products"
+
 export default {
   components: {
     SiteHeader,
@@ -941,11 +894,11 @@ export default {
     AOS.init();
     this.startRotation();
     this.bannerRotation();
-    this.startSlideShow();
   },
 
   data() {
     return {
+      rate: null,
       activeTab: "cameroon",
       products: [],
       infiniteId: +new Date(),
@@ -1134,15 +1087,12 @@ export default {
 
       userSaved: false,
       sending: false,
-      lastUser: null,
-      currentSlide: 0,
-      totalSlides: 3, // Assuming 3 slides
-      videos: ['assets/video/ba_for_business.mp4', 'assets/video/ba_for_business.mp4', 'assets/video/ba_for_business.mp4'],
-      images: ['assets/home/new_about_5.png', 'assets/home/new_about_1.png', 'assets/home/new_about_3.png'],
+      lastUser: null
     };
   },
 
   mixins: [validationMixin],
+
   validations: {
     form: {
       pname: {
@@ -1171,21 +1121,32 @@ export default {
     }
   },
 
-  created() {
+  filters: {
+    locationPrice: function (ev, rate) {
+      return rate ? `${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    }
+  },
+
+
+  async created() {
+    this.loading = true;
+
+    this.onInit()
     localStorage.setItem("searchTab", 0);
     window.addEventListener("load", this.onWindowLoad);
     this.getLocation();
-    this.loading = true;
-    axios
-      .get("guest/home/products")
-      .then(({ data }) => {
-        this.products = data.data;
-        this.loading = false;
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-      });
+    // axios
+    //   .get("guest/home/products")
+    //   .then(({ data }) => {
+    //     this.products = data.data;
+    //     this.loading = false;
+    //   })
+    //   .catch(err => {
+    //     console.log({ err: err });
+    //     this.loading = false;
+    //   });
+
+
   },
 
   computed: {
@@ -1232,6 +1193,27 @@ export default {
   },
 
   methods: {
+
+    async emitChangeCurrency(ev){
+      console.log(ev)
+      this.rate = await convertCurrency(ev)
+    },
+    async onInit(currency = null) {
+      this.rate = await convertCurrency(currency)
+
+      const { api, callback } = buildByLocalisation('XAF' == this.rate.currency)
+
+      api()
+        .then(({ data }) => {
+          this.products = data.data;
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+
     setActiveTab(tab) {
       this.activeTab = tab;
     },
@@ -1459,70 +1441,12 @@ export default {
           }
         }
       }
-    },
-    startSlideShow() {
-      setInterval(() => {
-        this.updateSlide();
-      }, 3000); // 3 seconds for each slide (adjust as needed)
-    },
-    updateSlide() {
-      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-    },
+    }
   }
 };
 </script>
 
 <style>
-.image-slider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-  max-width: 600px;
-  border-radius: 10px;
-}
-
-.progress-bar-wrapper {
-  display: flex;
-  justify-content: start;
-  margin-top: 10px;
-  width: 100%;
-  max-width: 600px;
-}
-
-.progress-bar {
-  width: 0;
-  height: 3px;
-  background-color: #4caf50;
-  /* Fill color */
-  transition: width 3s linear;
-  /* Adjust speed */
-  margin-right: 5px;
-}
-
-.progress-bar.initial {
-  background-color: #D6D6D6;
-  /* Initial color */
-  width: 30%;
-}
-
-.progress-bar.active {
-  width: 30%;
-  background-color: #E07715;
-}
-
-.progress-bar:last-child {
-  margin-right: 0;
-}
-
-.quotation-form-mobile {
-  display: none;
-}
-
 .mobile-buttons {
   display: none !important;
 }
@@ -1887,7 +1811,7 @@ export default {
 }
 
 .buy-now-btn {
-  padding: 5px 8px;
+  padding: 5px 5px;
   cursor: pointer;
   height: auto;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
@@ -1897,6 +1821,7 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding-left: 12px !important;
 }
 
 .buy-now-btn:hover {
@@ -2322,11 +2247,11 @@ export default {
   /* Ensure the button is on top */
 }
 
-.splide__arrow--prev {
+.top-slider .splide__arrow--prev {
   margin-left: 20px;
 }
 
-.splide__arrow--next {
+.top-slider .splide__arrow--next {
   margin-right: 20px;
 }
 
@@ -2727,32 +2652,6 @@ export default {
 }
 
 @media screen and (max-width: 431px) {
-  .mobile-add-to-cart-btn {
-    display: none;
-  }
-  .quotation-form-desktop {
-    display: none;
-  }
-
-  .quotation-form-mobile {
-    display: block;
-    background-color: #fff;
-  }
-
-  .quotation-form-mobile h3 {
-    color: #E75B17;
-  }
-
-  .quotation-form-mobile .ba-input {
-    box-shadow: none !important;
-    border: 1px solid #E7E7E7 !important;
-    background-color: #FAFAFA !important;
-  }
-
-  .quotation-form-mobile .ba-input::placeholder {
-    color: #A5A5A5;
-  }
-
   .top-slider {
     height: 200px;
   }
@@ -2904,10 +2803,6 @@ export default {
     display: block !important;
   }
 
-  .start-selling-mobile .splide__arrow {
-    top: 40% !important;
-  }
-
   .selling-btn {
     display: none !important;
   }
@@ -3042,7 +2937,7 @@ export default {
   .create-your-shop,
   .ship-globally,
   .get-paid {
-    width: 68px;
+    width: 75px;
     display: flex !important;
     align-items: center;
     justify-content: center;

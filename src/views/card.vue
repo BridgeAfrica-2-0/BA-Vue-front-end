@@ -56,17 +56,20 @@
           <hr class="dotted-hr" />
 
           <h1 class="recommended-for-you" v-if="products.length > 0">Recommended for You</h1>
-          <splide v-if="products.length > 0" :options="options" class="r-image">
-            <splide-slide v-for="(product, index) in products" :key="index">
-              <div class="crtv-bans">
-                <img :src="product.picture" alt="Product Image" class="slide-img" />
-                <h3 class="mt-2">{{ product.name }}</h3>
-                <p>{{ product.price | locationPrice(rate) }}</p>
-                <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
-              </div>
-            </splide-slide>
-          </splide>
-        </div>
+          <div class="splide-class">
+
+            <splide v-if="products.length > 0" :options="options" class="r-image">
+              <splide-slide v-for="(product, index) in products" :key="index">
+                <div class="crtv-bans">
+                  <img :src="product.picture" alt="Product Image" class="slide-img" />
+                  <h3 class="mt-2">{{ product.name }}</h3>
+                  <p>{{ product.price | locationPrice(rate) }}</p>
+                  <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
+                </div>
+              </splide-slide>
+            </splide>
+          </div>
+          </div>
         <div class="col-12 col-md-3 col-lg-3">
           <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable || !cart?.data[0]?.cartItems" />
         </div>
@@ -547,6 +550,9 @@ export default {
 .splide__slide {
   height: auto !important;
 }
+.splide-class .splide__arrow--next{
+  margin-right: -30px !important;
+}
 
 .crtv-bans {
   height: 100%;
@@ -555,7 +561,7 @@ export default {
   align-items: center;
   text-align: center;
   padding: 15px;
-  width: 347.667px;
+  /* width: 347.667px; */
 }
 
 .crtv-bans h3 {

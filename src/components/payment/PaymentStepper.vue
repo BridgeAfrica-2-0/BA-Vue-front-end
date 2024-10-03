@@ -247,7 +247,7 @@ export default {
         operator: operator,
       };
       if (operator == "Stripe") {
-        const rate = await convertToCurrency('US');
+        const rate = await convertToCurrency('USD');
         const amount_in_dollar = rate ? `${(amount / rate.rate).toFixed(2)}` : `${amount} XAF`
         const amountInDollarInt = parseFloat(amount_in_dollar);
         data.name = "Product 1";
@@ -256,7 +256,7 @@ export default {
         delete data.phone;
         delete data.operator;
         data.amount = amountInDollarInt;
-        console.log("====dollar====",data.amount)
+        console.log("====dollar====",rate)
         const url = "checkout-session/create";
         axios
           .post(url, data)

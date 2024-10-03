@@ -387,8 +387,8 @@ export default {
           .dispatch("checkout/createOrder", {
             isLogin: this.$store.getters["auth/isLogged"],
             isLocal:  this.isCameroon,
-            shipping_fee: !this.isCameroon ? this.shippingFee: null,
-            shipping_method: !this.isCameroon ? this.shippingMethod : null
+            shipping_fee: this.shippingFee ? this.shippingFee: null,
+            shipping_method: this.shippingFee ? this.shippingMethod : null
           })
           .then(({ data }) => {
             this.$emit(

@@ -144,15 +144,29 @@ export const checkCountry = async () => {
 };
 
 const getRate =  async (fromCurrency, toCurrency) => {
-  let conversionRate = localStorage.getItem("conversionRate") ?? null;
-  if(!conversionRate){
-    // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+  let currencyCheck;
+  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
+  if(userCountry?.country)
+  {
+    currencyCheck = currencyMap[userCountry?.country]; 
+  }
+  if(currencyCheck===fromCurrency)
+  {
+    let conversionRate = localStorage.getItem("conversionRate") ?? null;
+    if(!conversionRate){
+      // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+      const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
+      const data = response.data
+      localStorage.setItem("conversionRate", data.rates[toCurrency]);
+      return data.rates[toCurrency]; 
+    } else {
+      return conversionRate;
+    }
+  }
+  else{
     const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
-    const data = response.data
-    localStorage.setItem("conversionRate", data.rates[toCurrency]);
+    const data = response.data;
     return data.rates[toCurrency]; 
-  } else {
-    return conversionRate;
   }
 }
 
@@ -207,20 +221,17 @@ export const convertCurrency = async(defaultCurrency=null)  => {
 export const convertToCurrency = async(defaultCurrency=null)  => {
   try {
       let userCurrency;
-      let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
-      if (!defaultCurrency && !userCountry?.country) {
-        userCountry = await checkCountry();
-      }
-      if(defaultCurrency && !userCountry?.country){
-        userCountry = defaultCurrency
-      }
-      if(!userCountry)
+      if(defaultCurrency)
       {
-        userCurrency = currencyMap['US']; 
+        userCurrency = defaultCurrency;
       }
-      else
-      {
-        userCurrency = currencyMap[userCountry.country]; 
+      else{
+
+        let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
+        if (!userCountry?.country) {
+          userCountry = await checkCountry();
+        }
+        userCurrency = currencyMap[userCountry?.country]; 
         if(!userCurrency)
         {
           userCurrency = 'USD' 

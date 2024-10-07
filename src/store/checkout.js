@@ -19,6 +19,7 @@ const state = {
     total_cost: 0.0,
     sub_total: 0.0,
     discount: 0.0,
+    product_kg: 0.0,
   },
   total: null,
   currentStep: 0,
@@ -57,6 +58,10 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
+        let totalWeight = response.data.data.cartItems.reduce((total, item) => {
+          return total + parseFloat(item.product_kg || 0);
+        }, 0);
+         localStorage.setItem('totalWeight', totalWeight);
         commit("setCartSummary", response.data.data);
       })
       .catch((error) => {
@@ -108,12 +113,17 @@ const actions = {
   },
 
   async shippingFee({ commit }) {
-    let url ="/dhl/shippingFee"
+    let totalWeight = localStorage.getItem('totalWeight');
+    let url ="/dhl/shippingFee/" + totalWeight
     await axios
       .get(url)
       .then((response) => {
         if(response.data.products)
         {
+          if(totalWeight==1)
+          {
+            localStorage.setItem('shippingFee', response.data.products[0].totalPrice[0].price);
+          }
           commit("setShippingFee", response.data.products[0].totalPrice[0].price);
           commit("setShippingMethod", response.data.products[0].productName);
           console.log(response.data.products[0].totalPrice[0].price);
@@ -122,6 +132,27 @@ const actions = {
           commit("setShippingFee", 0.0);
           commit("setShippingMethod", "");
           return Promise.reject(response.data.error);
+        }
+      })
+      .catch((error) => {
+        commit("setShippingFee", 0.0);
+        commit("setShippingMethod", "");
+        return Promise.reject(error);
+      });
+  },
+
+  async globalShippingFee({ commit }) {
+    let totalWeight = localStorage.getItem('fixedWeight');
+    let url ="/dhl/shippingFee/" + totalWeight
+    await axios
+      .get(url)
+      .then((response) => {
+        if(response.data.products)
+        {
+          if(totalWeight==1)
+          {
+            localStorage.setItem('shippingFee', response.data.products[0].totalPrice[0].price);
+          }
         }
       })
       .catch((error) => {

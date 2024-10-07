@@ -37,7 +37,7 @@
                   <div class="product-prices d-flex">
                     <div class="pr-5">
                           <h6 class="discount-price">
-                            {{ (cart_item.product_price - cart_item?.discount_price) | locationPrice(rate) }}
+                            {{ (cart_item.product_price + shippingFee - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate) }}
                           </h6>
                       <h6 class="actual-price" v-if=" cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
@@ -61,7 +61,7 @@
               <div class="crtv-bans">
                 <img :src="product.picture" alt="Product Image" class="slide-img" />
                 <h3 class="mt-2">{{ product.name }}</h3>
-                <p>{{ product.price | locationPrice(rate) }}</p>
+                <p>{{ (product.price + shippingFee) | locationPrice(rate) }}</p>
                 <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
               </div>
             </splide-slide>
@@ -112,6 +112,7 @@ export default {
         autoplay: false,
         gap: '1rem',
       },
+      shippingFee: 0,
     };
   },
   created() {
@@ -122,6 +123,7 @@ export default {
     console.log("loading cart items");
   },
   async mounted() {
+    this.shippingFee = localStorage.getItem("shippingFee");
     this.$store.dispatch("checkout/updateStepper", 0);
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
     let country = localStorage.getItem("country") ?? null;

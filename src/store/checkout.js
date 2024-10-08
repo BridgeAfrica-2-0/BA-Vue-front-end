@@ -120,10 +120,6 @@ const actions = {
       .then((response) => {
         if(response.data.products)
         {
-          if(totalWeight==1)
-          {
-            localStorage.setItem('shippingFee', response.data.products[0].totalPrice[0].price);
-          }
           commit("setShippingFee", response.data.products[0].totalPrice[0].price);
           commit("setShippingMethod", response.data.products[0].productName);
           console.log(response.data.products[0].totalPrice[0].price);

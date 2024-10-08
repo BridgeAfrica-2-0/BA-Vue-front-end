@@ -111,6 +111,9 @@ export default {
   },
 
   mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const stepValue = urlParams.get('step') || 'default value'; 
+    console.log("************url***",stepValue);
     this.loading = true;
     this.$store.dispatch("checkout/updateStepper", 1);
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
@@ -122,6 +125,10 @@ export default {
       .catch(() => {
         this.loading = false;
       });
+      if(stepValue)
+      {
+        this.current_step = parseInt(stepValue);
+      }
   },
 
   methods: {

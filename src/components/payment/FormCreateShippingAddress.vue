@@ -287,7 +287,8 @@ export default {
       this.getDestinations(this.form.region);
     }
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
-    this.isCameroon = localStorage.getItem("isLocal");
+    const isLocalVal = localStorage.getItem("isLocal");
+    this.isCameroon = isLocalVal !== "false";
   },
   methods: {
     closesipping() {

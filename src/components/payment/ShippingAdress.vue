@@ -388,7 +388,7 @@ export default {
             isLogin: this.$store.getters["auth/isLogged"],
             isLocal:  this.isCameroon,
             shipping_fee: this.shippingFee ? this.shippingFee: null,
-            shipping_method: this.shippingFee ? this.shippingMethod : null
+            shipping_method: this.shippingMethod ? this.shippingMethod : null
           })
           .then(({ data }) => {
             this.$emit(

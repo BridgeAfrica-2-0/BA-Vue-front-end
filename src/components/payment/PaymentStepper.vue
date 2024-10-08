@@ -112,7 +112,7 @@ export default {
 
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
-    const stepValue = urlParams.get('step') || 'default value'; 
+    const stepValue = urlParams.get('step'); 
     console.log("************url***",stepValue);
     this.loading = true;
     this.$store.dispatch("checkout/updateStepper", 1);

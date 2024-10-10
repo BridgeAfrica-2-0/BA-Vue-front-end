@@ -19,6 +19,7 @@ const state = {
     total_cost: 0.0,
     sub_total: 0.0,
     discount: 0.0,
+    product_kg: 0.0,
   },
   total: null,
   currentStep: 0,
@@ -49,7 +50,7 @@ const actions = {
       });
   },
 
-  async getCartSummary({ commit }, isLogin) {
+  async getCartSummary({ commit, dispatch }, isLogin) {
     const url = isLogin
       ? "cart/summary"
       : "guest/cart/summary?guest_identifier=" + getGuestIdentifier();
@@ -57,7 +58,12 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
+        let totalWeight = response.data.data.cartItems.reduce((total, item) => {
+          return total + parseFloat(item.product_kg || 0);
+        }, 0);
+         localStorage.setItem('totalWeight', totalWeight);
         commit("setCartSummary", response.data.data);
+        dispatch("checkout/shippingFee", null, { root: true });
       })
       .catch((error) => {
         console.log(error);
@@ -108,7 +114,8 @@ const actions = {
   },
 
   async shippingFee({ commit }) {
-    let url ="/dhl/shippingFee"
+    let totalWeight = localStorage.getItem('totalWeight');
+    let url ="/dhl/shippingFee/" + totalWeight
     await axios
       .get(url)
       .then((response) => {
@@ -130,6 +137,7 @@ const actions = {
         return Promise.reject(error);
       });
   },
+
 
   async updateCart({ commit }, payload) {
     const url = payload.islogin ? 'cart/update-quantity/' : 'guest/cart/update-quantity/';

@@ -26,7 +26,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Amount") }} : </b-td>
                   <b-th>
-                    {{ cart_item.product_price | locationPrice(rate) }}
+                    {{ cart_item.product_price  | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
 
@@ -47,7 +47,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Total") }}: </b-td>
                   <b-th>
-                    {{ (cart_item.sub_total) | locationPrice(rate) }}
+                    {{ cart_item.sub_total?.toFixed(2) ?? " " | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
               </div>
@@ -262,7 +262,7 @@ export default {
           img: require("@/assets/img/payment/headset3.jpg")
         }
       ],
-      goNextPage: true
+      goNextPage: true,
     };
   },
   computed: {
@@ -283,7 +283,6 @@ export default {
   },
   async mounted() {
     this.rate = await convertToCurrency();
-
   },
   filters: {
     locationPrice(ev, rate) {

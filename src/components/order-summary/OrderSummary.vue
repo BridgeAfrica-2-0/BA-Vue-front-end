@@ -5,7 +5,7 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span> {{ cartSummary?.sub_total.toFixed(2) ?? "" | locationPrice(rate) }}</span>
+        <span> {{ cartSummary?.sub_total?.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
       <b-tooltip target="tooltip-target-1" triggers="hover">
@@ -161,15 +161,14 @@ export default {
     }
   },
   async mounted() {
-    if (this.orderSummary) {
-      this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
-      console.log(this.cartSummary);
-      
-    }
     // this.userLocation = await checkCountry();
     // this.rate = await convertToCurrency();
     this.getCurrencyConvert();
     this.isCameroon = this.userLocation?.country === 'CM';
+    if (this.orderSummary) {
+      this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
+      console.log(this.cartSummary);
+    }
   },
   filters: {
     locationPrice(ev, rate) {

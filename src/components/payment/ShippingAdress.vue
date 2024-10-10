@@ -388,7 +388,7 @@ export default {
             isLogin: this.$store.getters["auth/isLogged"],
             isLocal:  this.isCameroon,
             shipping_fee: this.shippingFee ? this.shippingFee: null,
-            shipping_method: this.shippingFee ? this.shippingMethod : null
+            shipping_method: this.shippingMethod ? this.shippingMethod : null
           })
           .then(({ data }) => {
             this.$emit(
@@ -491,7 +491,8 @@ export default {
         this.loading = false;
       });
   }
-      this.isCameroon = localStorage.getItem("isLocal");
+     const isLocalVal = localStorage.getItem("isLocal");
+     this.isCameroon = isLocalVal !== "false";
   },
   created() {
     this.selectedShipping = this.selectedShippingId;

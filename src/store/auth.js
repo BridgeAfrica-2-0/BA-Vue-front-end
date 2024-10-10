@@ -215,8 +215,6 @@ export default {
       let guest_identifier = getGuestIdentifier();
       return axios.post("user/login",  { ...credentials, guest_identifier }).then(({ data }) => {
         commit("setUserData", data.data);
-        localStorage.setItem('fixedWeight', 1);
-        dispatch("checkout/globalShippingFee", null, { root: true });
       });
     },
 

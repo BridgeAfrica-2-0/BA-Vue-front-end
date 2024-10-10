@@ -50,7 +50,7 @@ const actions = {
       });
   },
 
-  async getCartSummary({ commit }, isLogin) {
+  async getCartSummary({ commit, dispatch }, isLogin) {
     const url = isLogin
       ? "cart/summary"
       : "guest/cart/summary?guest_identifier=" + getGuestIdentifier();
@@ -63,6 +63,7 @@ const actions = {
         }, 0);
          localStorage.setItem('totalWeight', totalWeight);
         commit("setCartSummary", response.data.data);
+        dispatch("checkout/shippingFee", null, { root: true });
       })
       .catch((error) => {
         console.log(error);
@@ -137,26 +138,6 @@ const actions = {
       });
   },
 
-  async globalShippingFee({ commit }) {
-    let totalWeight = localStorage.getItem('fixedWeight');
-    let url ="/dhl/shippingFee/" + totalWeight
-    await axios
-      .get(url)
-      .then((response) => {
-        if(response.data.products)
-        {
-          if(totalWeight==1)
-          {
-            localStorage.setItem('shippingFee', response.data.products[0].totalPrice[0].price);
-          }
-        }
-      })
-      .catch((error) => {
-        commit("setShippingFee", 0.0);
-        commit("setShippingMethod", "");
-        return Promise.reject(error);
-      });
-  },
 
   async updateCart({ commit }, payload) {
     const url = payload.islogin ? 'cart/update-quantity/' : 'guest/cart/update-quantity/';

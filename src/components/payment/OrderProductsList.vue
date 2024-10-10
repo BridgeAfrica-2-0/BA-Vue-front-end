@@ -26,7 +26,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Amount") }} : </b-td>
                   <b-th>
-                    {{ cart_item.product_price + globalShippingFee | locationPrice(rate) }}
+                    {{ cart_item.product_price  | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
 
@@ -47,7 +47,7 @@
                 <b-tr>
                   <b-td class="b-none"> {{ $t("general.Total") }}: </b-td>
                   <b-th>
-                    {{ (Number(cart_item.sub_total) + Number(globalShippingFee))?.toFixed(2) ?? " " | locationPrice(rate) }}
+                    {{ cart_item.sub_total?.toFixed(2) ?? " " | locationPrice(rate) }}
                   </b-th>
                 </b-tr>
               </div>
@@ -263,7 +263,6 @@ export default {
         }
       ],
       goNextPage: true,
-      globalShippingFee: 0,
     };
   },
   computed: {
@@ -284,7 +283,6 @@ export default {
   },
   async mounted() {
     this.rate = await convertToCurrency();
-    this.globalShippingFee = localStorage.getItem("shippingFee")
   },
   filters: {
     locationPrice(ev, rate) {

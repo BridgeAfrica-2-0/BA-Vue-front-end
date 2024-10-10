@@ -1,6 +1,6 @@
 <template>
   <header class="">
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded bg-white">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -50,7 +50,7 @@
               />
             </b-input-group>
 
-            <span style="display: none; " ref="mobileinput">
+            <!-- <span style="display: none; " ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
                 <div
                   class="input-group-append color-mobile"
@@ -68,10 +68,10 @@
                   ></multiselect>
                 </div>
               </b-input-group>
-            </span>
+            </span> -->
           </form>
           <span class="d-none d-lg-block">
-            <form class="form-inline input-group b-shadow b-radius">
+            <form class="form-inline input-group b-radius">
               <input
                 id="search-ba"
                 type="search"
@@ -84,9 +84,9 @@
                 data-original-title=""
                 title=""
                 v-on:keyup.enter="getKeyword"
-              />
+              />              
 
-              <multiselect
+              <!-- <multiselect
                 :value="city"
                 :options="citiesValues"
                 placeholder="Select City"
@@ -99,7 +99,8 @@
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
-              </slot>
+              </slot> -->
+              <button @click.native="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -168,7 +169,7 @@
                 </router-link>
               </div>
 
-              <div v-if="!islogin" class="nav-item mr-5">
+              <div v-if="!islogin" class="nav-item mr-2">
                 <router-link
                   :to="{ name: 'Login' }"
                   class="nav-link text-dark hov"
@@ -176,6 +177,27 @@
                   {{ $t("auth.login") }}
                 </router-link>
               </div>
+              <div class="text-center my-3">
+  <b-button id="popover-target-1" class="nav-link text-dark hov">
+    <b-link class="d-flex align-items-center" v-b-toggle="'collapse-2'">
+      <img :src="img" class="size poslang mr-1 imgLangSize" alt="">
+                        {{lang}}<a class="nav-link arrow-down p-0"></a>
+    </b-link>
+  </b-button>
+  <b-popover target="popover-target-1" triggers="hover" placement="top">
+    <b-card-text
+         @click="change('en')"
+                          class="cursor-pointer mb-2 d-flex align-items-center"
+                          ><img class="imgLangSize" src="../assets/img/about/en.png" alt="en"/>
+                          <span class="ml-1">{{ $t("auth.english") }}</span>
+                          </b-card-text
+                        >
+                        <b-card-text class="cursor-pointer d-flex align-items-center" @click="change('fr')">
+                          <img class="imgLangSize" src="../assets/img/la-france.png" alt="fr"/>
+                          <span class="ml-1">{{$t("auth.french")}}</span>
+                        </b-card-text>
+  </b-popover>
+</div>
 
               <!-- Messages Started -->
               <div v-if="islogin" class="nav-item">
@@ -691,6 +713,14 @@ export default {
     this.fetchCartCount();
   },
   created() {
+    const currentLang = this.$i18n.locale;
+    if(currentLang == 'en'){
+        this.img = require("../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
     //check for authentication
     this.getCities();
 
@@ -1095,6 +1125,21 @@ export default {
 };
 </script>
 <style>
+
+.size, .imgLangSize{
+  height: 15px !important;
+  width: 15px !important;
+}
+.search-button {
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  color: white;
+  font-weight: bold;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border: none;
+  min-width: 100px;
+
+}
 .cart-icon {
   color: #e75c18 !important;
   position: relative;

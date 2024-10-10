@@ -149,5 +149,6 @@
   "Enter_a_description": "Entrez une description",
   "Add_Item": "Ajouter un article",
   "Operation_success": "Opération effectuée avec succès",
-  "Failed_to_copy_the_text_to_the_clipboard": "Échec de la copie du texte dans le presse-papiers"
+  "Failed_to_copy_the_text_to_the_clipboard": "Échec de la copie du texte dans le presse-papiers",
+  "search": "Rechercher"
 }

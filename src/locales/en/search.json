@@ -153,5 +153,6 @@
   "Enter_a_description": "Enter a description",
   "Add_Item": "Add Item",
   "Operation_success": "Operation success",
-  "Failed_to_copy_the_text_to_the_clipboard": "Failed to copy the text to the clipboard"
+  "Failed_to_copy_the_text_to_the_clipboard": "Failed to copy the text to the clipboard",
+  "search": "Search"
 }

@@ -5,7 +5,7 @@
       <h3>Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
-        <span> {{ (cartSummary?.sub_total + globalShipping * totalItems)?.toFixed(2) ?? "" | locationPrice(rate) }}</span>
+        <span> {{ cartSummary?.sub_total?.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
       <b-tooltip target="tooltip-target-1" triggers="hover">
@@ -103,8 +103,6 @@ export default {
       isCameroon : false,
       rate: null,
       userLocation: {},
-      globalShipping: 0,
-      totalItems: 0,
     };
   },
   computed: {
@@ -167,14 +165,9 @@ export default {
     // this.rate = await convertToCurrency();
     this.getCurrencyConvert();
     this.isCameroon = this.userLocation?.country === 'CM';
-    this.globalShipping = localStorage.getItem("shippingFee");
     if (this.orderSummary) {
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
       console.log(this.cartSummary);
-      this.totalItems = this.cartSummary?.cartItems?.reduce((total, item) => {
-      return total + item.quantity;
-      }, 0);
-      console.log("***************",this.totalItems);
     }
   },
   filters: {

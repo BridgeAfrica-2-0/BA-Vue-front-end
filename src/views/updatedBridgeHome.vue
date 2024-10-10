@@ -440,7 +440,7 @@
                     </md-field>
                   </div>
 
-                  <div class="col-md-6 p-0">
+                  <div class="col-md-6 p-0 pr-2">
                     <label for="qunatity" class="pb-0 label-color">
                       {{ $t("general.Quantity") }}
                     </label>
@@ -464,7 +464,7 @@
                     </md-field>
                   </div>
 
-                  <div class="col-md-6 p-0">
+                  <div class="col-md-6 p-0 pr-2">
                     <label for="email" class="pb-0 label-color">
                       {{ $t("general.Email") }}
                     </label>

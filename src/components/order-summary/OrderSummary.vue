@@ -23,6 +23,10 @@
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
         <span> {{ cartSummary?.tax.toFixed(2) ?? "0.0" }}</span>
       </div>
+      <div v-if="!isCameroon && cartSummary?.shipping_info[0]?.shipping_cost !== 0" class="summary-item">
+        <span>Packaging & Labeling</span>
+        <span>  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
+      </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>

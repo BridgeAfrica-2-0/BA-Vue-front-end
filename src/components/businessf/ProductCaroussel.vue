@@ -3,9 +3,9 @@
     <b-carousel
       id="caroussel-product"
       v-model="slide"
-      :interval="2000"
+      :interval="9000"
       controls
-      background="#ababab"
+      background="#f5f5f5"
       style="text-shadow: 1px 1px 2px #333;"
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
@@ -33,26 +33,26 @@
 <script>
 export default {
   props: {
-    productImages: Array
+    // productImages: Array
   },
   data() {
     return {
       slide: 0,
-      sliding: null
-      // productImages: [
-      // 	{
-      // 		img: require("@/assets/img/payment/headset.jpg"),
-      // 	},
-      // 	{
-      // 		img: require("@/assets/img/payment/headset1.jpg"),
-      // 	},
-      // 	{
-      // 		img: require("@/assets/img/payment/headset2.jpg"),
-      // 	},
-      // 	{
-      // 		img: require("@/assets/img/payment/headset3.jpg"),
-      // 	},
-      // ],
+      sliding: null,
+      productImages: [
+      	{
+      		img: require("@/assets/img/payment/headset.jpg"),
+      	},
+      	{
+      		img: require("@/assets/img/payment/headset1.jpg"),
+      	},
+      	{
+      		img: require("@/assets/img/payment/headset2.jpg"),
+      	},
+      	{
+      		img: require("@/assets/img/payment/headset3.jpg"),
+      	},
+      ],
     };
   },
   methods: {
@@ -89,6 +89,6 @@ export default {
 }
 
 .sizee {
-  object-fit: cover !important;
+  object-fit: contain !important;
 }
 </style>

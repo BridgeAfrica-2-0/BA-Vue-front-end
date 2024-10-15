@@ -2,7 +2,7 @@
   <header class="">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded bg-white">
       <div class="container-fluid">
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
+        <div class="col-md-12 col-lg-3 col-xl-3">
           <span class="d-block d-lg-none">
             <b-icon
               icon="house-fill"
@@ -20,7 +20,7 @@
           </router-link>
         </div>
 
-        <div class="col-lg-9 col-xl-6">
+        <div class="col-lg-5 col-xl-5">
           <form class="d-block d-lg-none">
             <b-input-group class="b-shadow mt-3">
               <div class="input-group-append color-mobile" style="border: none">
@@ -106,7 +106,7 @@
           <div id="search-popover" class="d-none"></div>
         </div>
 
-        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer">
+        <div class="col-md-12 col-lg-4 col-xl-4" ref="toglercontainer">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <button
@@ -160,12 +160,12 @@
                 </router-link>
               </div>
 
-              <div v-if="!islogin" class="nav-item">
+              <div v-if="!islogin" class="nav-item" style="border-right: 1px solid #c0c0c08c;">
                 <router-link
                   :to="{ name: 'signup' }"
                   class="nav-link text-dark hov"
                 >
-                  {{ $t("auth.signup") }}
+                 <i class="fa fa-user"></i> {{ $t("auth.signup") }}
                 </router-link>
               </div>
 
@@ -687,6 +687,8 @@ export default {
       selectedUser: null,
       users: [],
       citiesValues: [],
+      img: null,
+      lang: '',
     };
   },
 
@@ -831,6 +833,17 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
+    change(lang){
+      this.$i18n.locale = lang;
+
+      if(lang == 'en'){
+        this.img = require("../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
+    },
     setSelectedLocation(value) {
       this.city = value;
       this.credentials.location = { code: value.code, label: value.label };

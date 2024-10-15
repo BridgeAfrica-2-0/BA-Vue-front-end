@@ -1,10 +1,25 @@
 <template>
   <div>
+
+
+    <br />
+
     <div
+      v-if="
+        filterType == '0' ||
+          filterType == '1' ||
+          (islogin && filterType == '5') ||
+          (!islogin && filterType == '4')
+      "
+    >
+      <span v-if="suggestedKeyword.length">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="bold" style="font-size: 13px;">{{ $t("search.suggested_keywords") }}</h6>
+        <div>
+          <div
       v-if="
         filterType == '0' || filterType == '1' || (filterType == '5' && islogin)
       "
-      class="mt-2 mb-2"
     >
       <b-button
         class="float-right"
@@ -20,7 +35,6 @@
           filterType == '1' ||
           (filterType == '4' && !islogin)
       "
-      class="mt-2 mb-2"
     >
       <b-button
         class="float-right"
@@ -30,19 +44,8 @@
         >{{ $t("search.Reset") }}</b-button
       >
     </div>
-
-    <br />
-
-    <div
-      v-if="
-        filterType == '0' ||
-          filterType == '1' ||
-          (islogin && filterType == '5') ||
-          (!islogin && filterType == '4')
-      "
-    >
-      <span v-if="suggestedKeyword.length">
-        <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
+        </div>
+        </div>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
           :key="i.value"
@@ -179,7 +182,7 @@
         "
       >
         <div>
-          <div>
+          <!-- <div>
             <b-form-group
               label-cols-lg="3"
               :label="$t('search.Country')"
@@ -196,10 +199,10 @@
               @change="getBRegions()"
             >
             </b-form-select>
-          </div>
+          </div> -->
 
           <!-- city -->
-          <div v-if="!showMore">
+          <!-- <div v-if="!showMore">
             <div>
               <b-form-group
                 label-cols-lg="3"
@@ -251,13 +254,13 @@
               </b-link>
               <br />
             </div>
-          </div>
+          </div> -->
 
           <div class="more" v-if="showMore">
             <hr />
 
             <!-- Region -->
-            <div class="mt-1" v-if="networkFilter.region">
+            <!-- <div class="mt-1" v-if="networkFilter.region">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Region')"
@@ -277,10 +280,10 @@
               </b-form-select>
             </div>
 
-            <hr />
+            <hr /> -->
 
             <!-- Division -->
-            <div v-if="networkFilter.division">
+            <!-- <div v-if="networkFilter.division">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Division')"
@@ -297,10 +300,10 @@
                 @change="getBCouncils()"
               >
               </b-form-select>
-            </div>
+            </div> -->
 
             <!-- Council -->
-            <div v-if="networkFilter.council">
+            <!-- <div v-if="networkFilter.council">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Council')"
@@ -319,10 +322,10 @@
                 "
               >
               </b-form-select>
-            </div>
+            </div> -->
 
             <!-- Neighbourhood -->
-            <div v-if="networkFilter.neighbourhood">
+            <!-- <div v-if="networkFilter.neighbourhood">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Neighbourhood')"
@@ -343,15 +346,15 @@
                 "
               >
               </b-form-select>
-            </div>
+            </div> -->
 
-            <b-link
+            <!-- <b-link
               v-if="networkFilter.region"
               class="float-right mt-2 mb-2"
               @click="hideMoreFilters"
             >
               Hide More
-            </b-link>
+            </b-link> -->
           </div>
         </div>
       </div>

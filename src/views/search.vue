@@ -17,7 +17,6 @@
           @click.native="strategY['business']"
           v-if="selectedId == 1"
         />
-        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
         <Button
           media="desktop"
           @click.native="strategY['network']"
@@ -78,7 +77,21 @@
         />
       </template>
     </Nav>
-
+    <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
+      <div class="row mb-5 mt-4 gap-3 align-items-center">
+      <div class="col-lg-7">
+        <h1 class="font-weight-bold" style="font-size: 3.2em;">
+          <span class="primary">{{ $t("search.buy_quality_products") }}</span>
+          <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world") }}</span>
+        </h1>
+        <div class="text-dark mt-3 text-black font-weight-bold" style="font-size: 1.3em;">{{ $t("search.with_over_100_categories_of_products") }}</div>
+      </div>
+      <div class="col-lg-5 shadow-sm text-center">
+        <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" src="assets/home/marketplace.png" class="aos-init aos-animate img-size"
+        >
+      </div>
+    </div>
+    </div>
     <SubNav
       @onChangeCategoryName="(val) => (categoryName = val)"
       @category="getCategory"
@@ -91,9 +104,9 @@
       style="margin-top: -25px"
     />
 
-    <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
+    <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 
-    <div v-if="islogin" class="container searchly moveup">
+    <!-- <div v-if="islogin" class="container searchly moveup">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -112,7 +125,7 @@
         @change="handleChange"
       >
       </ly-tab>
-    </div>
+    </div> -->
 
     <hr style="margin-top: -0px" />
 
@@ -335,7 +348,7 @@
     </div>
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
-        <b-col cols="0" md="0" xl="3" class="leftblock">
+        <b-col cols="0" md="0" xl="2" class="leftblock">
           <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
@@ -350,272 +363,17 @@
           </div>
         </b-col>
 
-        <b-col cols="12" md="9" lg="9" xl="9" ref="middleblock">
-          <div class="container-flex a-flex">
-            <!--filter for all takes just two fields at a time  -->
-
-            <div id="all" v-if="selectedId == '5' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Network") }}
-              </h6>
-
-              <MiniNetwork />
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 4">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-            <div v-else-if="selectedId == '4' && !islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-
-            <!--  select just businesses      -->
-
-            <div id="businesses" v-if="selectedId == '1'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-              <!-- <b-spinner
-                v-if="prodLoaderr"
-                variant="primary"
-                :label="$t('search.Spinning')"
-              ></b-spinner> -->
-            </div>
-
-            <!-- filter out only people -->
-
-            <component :is="isComponent" :title="notFoundComponentTitle" />
-
-            <!-- filter out just the network  -->
-
-            <div v-if="selectedId == '3' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Networks") }}
-              </h6>
-
-              <Network />
-            </div>
+        <b-col cols="12" md="10" lg="10" xl="10" ref="middleblock">
+          <div class="container-flex a-flex"> 
 
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '0'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
 
               <div>
                 <Sponsor />
               </div>
-              <br />
-              <h6 class="mb-3">
+              <!-- <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
                 <b-button
@@ -649,7 +407,7 @@
                     ></span>
                   </b-button>
                 </div>
-              </h6>
+              </h6> -->
               <b-alert
                 v-model="showDismissibleAlert"
                 variant="success"
@@ -657,7 +415,7 @@
               >
                 {{ $t("search.List_of_products_up_to_date") }}
               </b-alert>
-              <Market class="mt-3" />
+              <Market class="mt-1" />
             </div>
           </div>
         </b-col>
@@ -2058,6 +1816,10 @@ export default {
 </script>
 
 <style scoped>
+.img-size {
+  height: 100%;
+  width: 500px
+}
 .searchpage {
   font-family: poppins !important;
   color: #455a64 !important;

@@ -78,6 +78,8 @@ export default {
         council_id: "",
         city: "",
         neighbourhood_id: "",
+        address: "",
+        zip_code: "",
       },
       order_items: [],
     };

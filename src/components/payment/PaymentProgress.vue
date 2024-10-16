@@ -1,6 +1,7 @@
 <template>
   <b-row class="progress-content P-0">
     <b-col
+    cols="2"
       :disable="step.complete"
       class="progress-item-box p-2"
       :class="step.status ? 'progress-item-check' : ''"
@@ -25,13 +26,13 @@
           </a>
         </div>
         <div class="payment-progress-bar flex-grow-1">
-          <b-progress
+          <!-- <b-progress
             class="rounded-pill"
             height="8px"
             width="100%"
             :value="current_step >= i + 1 ? 100 : 0"
             :variant="current_step === i + 1 ? 'success' : 'secondary'"
-          ></b-progress>
+          ></b-progress> -->
         </div>
       </div>
     </b-col>
@@ -100,7 +101,7 @@ export default {
   background-color: #6c757d;
 }
 .avatar-color-success {
-  background-color: #28a745;
+  background-color: #e75c18;
 }
 @media only screen and (max-width: 768px) {
   .title-font-size {
@@ -133,7 +134,7 @@ export default {
     position: relative;
   }
   .progress-item-check {
-    background: #28a745;
+    background: #e75c18;
   }
   .progress-item-box:not(:last-child):after {
     position: absolute;

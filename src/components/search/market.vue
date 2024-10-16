@@ -2,22 +2,61 @@
   <div v-if="islogin">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
-    <b-alert
-      v-if="products.data.length === 0 && !prodLoader"
-      show
-      variant="warning"
-      ><a href="#" class="alert-link">
+    <b-alert v-if="products.data.length === 0 && !prodLoader" show variant="warning"><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
-      </a></b-alert
-    >
+      </a></b-alert>
 
-    <div v-if="!prodLoader">
-      <div
-        v-for="(product, index) in products.data"
-        :key="index"
-        class="people-style p-3 border h-100"
-      >
-        <span v-if="product">
+    <div v-if="!prodLoader" class="grid">
+      <div v-for="(product, index) in products.data" :key="index" class="grid-item">
+
+        <div class="image-container mb-2" @click="productDetails(product)">
+          <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+        </div>
+        <div class="content-container">
+          <div class="stock-status" :class="{
+            'in-stock': product.in_stock,
+            'out-of-stock': !product.in_stock
+          }">
+            {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+          </div>
+          <h3 @click="productDetails(product)">{{ product.name }}</h3>
+          <p>
+            {{
+              product.description.length > 50
+                ? product.description.slice(0, 50) + "..."
+                : product.description
+            }}
+          </p>
+        </div>
+        <div class="bottom-info">
+          <span class="price">{{ product.price | locationPrice(rate) }} </span>
+          <div class="desktop-buttons w-100">
+            <div class="d-flex justify-content-between w-100 mt-1">
+              <button class="buy-now-btn" @click="productDetails(product)">
+                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                <span class="arrow-icon">
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </button>
+              <button class="add-to-cart" @click="handleAddToCard(product)">
+                <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+              </button>
+            </div>
+          </div>
+          <div class="mobile-buttons w-100">
+            <div class="d-flex justify-content-between w-100 mt-1">
+              <button class="buy-now-btn" @click="productDetails(product)">
+                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+              </button>
+              <button class="add-to-cart" @click="handleAddToCard(product)">
+                <b-icon icon="cart-plus"></b-icon><span class="px-1"
+                  style="font-size: 12px; font-weight: bold;">Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <span v-if="product">
           <div class="d-inline-flex">
             <div class="mr-2">
               <div class="center-img">
@@ -92,39 +131,24 @@
 
           <br />
           <br />
-        </span>
+        </span> -->
       </div>
     </div>
     <!-- pagination -->
-    <b-pagination
-      v-if="products.next || products.previous"
-      v-model="currentPage"
-      :total-rows="total"
-      pills
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-      :disabled="products.data.length > 0 ? false : true"
-    ></b-pagination>
+    <b-pagination v-if="products.next || products.previous" v-model="currentPage" :total-rows="total" pills
+      :per-page="per_page" aria-controls="my-table" @change="changePage" align="center"
+      :disabled="products.data.length > 0 ? false : true"></b-pagination>
     <!-- End pagination -->
 
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
+    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
   </div>
 
   <div v-else>
     <!-- <login /> -->
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
-    <b-alert
-      v-if="guestUserProducts.data.length === 0 && !prodLoader"
-      show
-      variant="warning"
-      ><a href="#" class="alert-link">
+    <b-alert v-if="guestUserProducts.data.length === 0 && !prodLoader" show variant="warning"><a href="#"
+        class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
@@ -191,32 +215,19 @@
           <div class="d-inline-flex">
             <div class="mr-2">
               <div class="center-img">
-                <img
-                  :src="product.picture"
-                  class="r-image cursor-pointer"
-                  @click="productDetails(product)"
-                />
+                <img :src="product.picture" class="r-image cursor-pointer" @click="productDetails(product)" />
               </div>
             </div>
 
             <div class="flx50">
               <p class="text">
-                <span
-                  class="title cursor-pointer"
-                  @click="productDetails(product)"
-                >
+                <span class="title cursor-pointer" @click="productDetails(product)">
                   {{ product.name }}
                 </span>
                 <br />
 
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="product.description"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="100"
-                >
+                <read-more more-str="read more" class="readmore" :text="product.description" link="#"
+                  less-str="read less" :max-chars="100">
                 </read-more>
                 <span class="price  mt-2"> {{ product.price }} FCFA </span>
               </p>
@@ -225,37 +236,20 @@
           <br />
 
           <div class="d-flex">
-            <b-badge
-              v-if="!product.in_stock"
-              class="text-center m-auto"
-              show
-              variant="info"
-              >Out of Stock</b-badge
-            >
+            <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
           </div>
 
           <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
             <div v-if="product.in_stock" class="">
-              <BtnCtaMessage
-                :element="product"
-                :isProduct="true"
-                :isBuyNow="true"
-                type="business"
-                :isPremium="product.user_package_name"
-              />
+              <BtnCtaMessage :element="product" :isProduct="true" :isBuyNow="true" type="business"
+                :isPremium="product.user_package_name" />
             </div>
 
             <div class="ml-2">
-              <b-button
-                :disabled="!product.in_stock"
-                size="sm"
-                v-if="product.user_package_name == 'premium'"
-                variant="primary"
-                @click="handleAddToCard(product)"
-                ><span>
+              <b-button :disabled="!product.in_stock" size="sm" v-if="product.user_package_name == 'premium'"
+                variant="primary" @click="handleAddToCard(product)"><span>
                   <b-icon icon="cart-plus"></b-icon>
-                  {{ $t("general.cart") }}</span
-                >
+                  {{ $t("general.cart") }}</span>
               </b-button>
             </div>
           </div>
@@ -267,24 +261,12 @@
       </div> -->
     </div>
     <!-- pagination -->
-    <b-pagination
-      v-if="guestUserProducts.next || guestUserProducts.previous"
-      v-model="currentPage"
-      :total-rows="total"
-      pills
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePageForGuest"
-      align="center"
-      :disabled="guestUserProducts.data.length > 0 ? false : true"
-    ></b-pagination>
+    <b-pagination v-if="guestUserProducts.next || guestUserProducts.previous" v-model="currentPage" :total-rows="total"
+      pills :per-page="per_page" aria-controls="my-table" @change="changePageForGuest" align="center"
+      :disabled="guestUserProducts.data.length > 0 ? false : true"></b-pagination>
     <!-- End pagination -->
 
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
+    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
   </div>
 </template>
 
@@ -296,7 +278,6 @@
  * Copyright (c) Bridge Africa. All rights reserved.
  */
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
-// import login from "@/components/search/login";
 import Skeleton from "@/components/skeleton";
 import VLazyImage from "v-lazy-image/v2";
 export default {
@@ -307,7 +288,7 @@ export default {
       per_page: 10,
       list: [],
       product: {},
-
+      rate: null,
       currentPage: 1,
       nextLoad: false
     };
@@ -329,16 +310,25 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     }
+  }, 
+
+  filters: {
+    locationPrice: function (ev, rate) {
+      return rate ? `${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    }
   },
+
+
 
   components: {
     ProductDetails,
+    VLazyImage,
     // login,
     Skeleton,
-    VLazyImage
   },
 
   created() {
+    this.onInit()
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
@@ -349,6 +339,9 @@ export default {
   },
 
   methods: {
+    async onInit() {
+      this.rate = await convertCurrency()
+    },
     /**
      * This will be ignored on rendering
      * @private
@@ -425,7 +418,7 @@ export default {
         .then(res => {
           this.total = this.products.total;
         })
-        .catch(err => {});
+        .catch(err => { });
     },
     async getGuestUserProducts() {
       /**
@@ -437,7 +430,7 @@ export default {
         .then(res => {
           this.total = this.guestUserProducts.total;
         })
-        .catch(err => {});
+        .catch(err => { });
     },
 
     /**
@@ -595,76 +588,96 @@ button.pagination {
   color: orange;
   margin-left: 60px;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }
+
 p {
   text-align: left;
 }
+
 input {
   border-radius: 15px;
   padding: 5px;
   border: solid 1px #ccc;
   width: 250px;
 }
+
 input:focus {
   outline-color: none;
   border: none;
 }
+
 .post {
   position: relative;
   left: -24px;
 }
+
 .prod {
   max-width: 14rem;
   cursor: pointer;
 }
+
 .stock {
   color: green;
 }
+
 .btn:focus {
   outline: none;
 }
+
 h6 {
   text-align: center;
   font-weight: bold;
 }
+
 .short {
   text-align: center;
 }
+
 .price {
   text-align: center;
   font-weight: 600;
 }
+
 .buy {
   border-radius: 0px;
   width: 100%;
 }
+
 .reply {
   cursor: pointer;
 }
+
 @media only screen and (min-width: 768px) {
   .marge {
     margin-left: 200px;
   }
+
   .pos {
     margin-left: 200px;
   }
+
   .center-img {
     margin-right: -60px;
   }
 }
+
 .buybtn {
   width: 100px;
 }
+
 .marketbtn {
   margin-bottom: 3px;
   float: right;
 }
+
 .price {
   font-size: 18px;
   font-weight: 400;
 }
+
 .people-style {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -676,6 +689,7 @@ h6 {
 
   margin-bottom: 10px;
 }
+
 @media only screen and (max-width: 540px) {
   .text {
     font-weight: normal;
@@ -691,6 +705,7 @@ h6 {
     /* margin-left: -30px; */
     line-height: 25px;
   }
+
   .r-image {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -700,12 +715,14 @@ h6 {
     height: 100px;
     padding: 4px;
   }
+
   .title {
     font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: capitalize;
   }
+
   .btn {
     padding-top: 6px;
     font-size: 10px;
@@ -713,6 +730,7 @@ h6 {
     /* width: 85px; */
   }
 }
+
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -730,6 +748,7 @@ h6 {
     line-height: 25px;
     margin-left: 75px;
   }
+
   .r-image {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -739,11 +758,13 @@ h6 {
     width: 100px;
     padding: 4px;
   }
+
   .btn {
     padding-top: 6px;
     height: 38px;
     /* min-width: 123px; */
   }
+
   .title {
     font-size: 1.2625rem;
     font-weight: 500;
@@ -751,37 +772,46 @@ h6 {
     text-transform: capitalize;
   }
 }
+
 .discount {
   color: orange;
   margin-left: 60px;
 }
+
 p {
   text-align: left;
 }
+
 input {
   border-radius: 15px;
   padding: 5px;
   border: solid 1px #ccc;
   width: 250px;
 }
+
 input:focus {
   outline-color: none;
   border: none;
 }
+
 .post {
   position: relative;
   left: -24px;
 }
+
 .prod {
   max-width: 14rem;
   cursor: pointer;
 }
+
 .stock {
   color: green;
 }
+
 .btn:focus {
   outline: none;
 }
+
 .comment {
   width: 90%;
   border: solid 1px #ccc;
@@ -791,33 +821,41 @@ input:focus {
   padding-left: 10px;
   margin-left: 20px;
 }
+
 .comment:focus {
   outline: none;
 }
+
 .send-cmt {
   position: relative;
   margin-left: 93%;
   top: -28px;
   cursor: pointer;
 }
+
 h6 {
   text-align: center;
   font-weight: bold;
 }
+
 .short {
   text-align: center;
 }
+
 .price {
   text-align: center;
   font-weight: 400;
 }
+
 .buy {
   border-radius: 0px;
   width: 100%;
 }
+
 .reply {
   cursor: pointer;
 }
+
 @media only screen and (min-width: 762px) {
   .text {
     font-weight: normal;
@@ -834,6 +872,7 @@ h6 {
     line-height: 25px;
     margin-left: 75px;
   }
+
   .r-image {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -843,11 +882,13 @@ h6 {
     width: 160px;
     padding: 4px;
   }
+
   .btn {
     padding-top: 6px;
     height: 38px;
     width: 80px;
   }
+
   .title {
     font-size: 1.0625rem;
     font-weight: 500;
@@ -856,3 +897,5 @@ h6 {
   }
 }
 </style>
+
+

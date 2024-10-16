@@ -102,7 +102,7 @@
       @activateSuggestion="activateSuggestion"
       @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
-    />
+    /> -->
 
     <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 
@@ -116,6 +116,7 @@
       >
       </ly-tab>
     </div>
+
     <div v-else class="container searchly moveup">
       <ly-tab
         v-model="selectedId"

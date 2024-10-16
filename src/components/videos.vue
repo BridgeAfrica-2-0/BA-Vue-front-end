@@ -112,8 +112,27 @@ export default {
   color: #fff !important;
 }
 
-.splide__arrow--prev {
+.bridge-resources .splide__arrow--prev {
   left: 0 !important;
+  margin-left: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(224, 119, 21, 1),
+    rgba(255, 158, 25, 1)
+  ) !important;
+}
+
+.bridge-resources .splide__arrow--next {
+  right: 0 !important;
+  margin-right: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(224, 119, 21, 1),
+    rgba(255, 158, 25, 1)
+  ) !important;
+}
+
+.splide__arrow--prev {
   background: linear-gradient(
     90deg,
     rgba(224, 119, 21, 1),
@@ -122,7 +141,6 @@ export default {
 }
 
 .splide__arrow--next {
-  right: 0 !important;
   background: linear-gradient(
     90deg,
     rgba(224, 119, 21, 1),

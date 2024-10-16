@@ -168,6 +168,15 @@ export default {
   height: 38px;
   min-width: 123px;
   font-size: 14px;
+  color: #fff;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  font-weight: 600;
+  border-radius: 0px;
+  white-space: nowrap; 
+  padding: 0.5rem 1rem; 
+  min-width: 100px;
+  border-radius: 10px;
 }
 @media only screen and (max-width: 768px) {
   /* .btn-custom {

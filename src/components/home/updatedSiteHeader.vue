@@ -1,49 +1,25 @@
 <template>
   <div>
-    <div
-      class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto"
-    >
-      <div
-        class="container p-0 m-auto d-flex justify-content-between align-items-center"
-      >
+    <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
+      <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
         <div class="contact-info d-flex align-items-center">
           <div class="d-flex">
             <span class="d-flex justify-content-center align-items-center">
-              <img
-                src="../../../public/assets/home/phone.png"
-                class="size2 mr-2"
-                alt=""
-              />
+              <img src="../../../public/assets/home/phone.png" class="size2 mr-2" alt="" />
               <span style="color: #8C8C8C !important">+237697157690</span>
             </span>
             <span class="d-flex justify-content-center align-items-center">
-              <img
-                src="../../../public/assets/home/email.png"
-                id="mail-icon"
-                class="mr-2"
-                alt=""
-              />
-              <span style="color: #8C8C8C !important"
-                >info@bridgeafrica.com</span
-              >
+              <img src="../../../public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+              <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
             </span>
           </div>
           <div>
             <span class="media-icons">
-              <a href="https://twitter.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="http://facebook.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="https://instagram.com/bridgeafricacom" target="_blank"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a
-                href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
-                target="_blank"
-                ><i class="fab fa-youtube"></i
-              ></a>
+              <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i
+                  class="fab fa-youtube"></i></a>
             </span>
           </div>
         </div>
@@ -54,22 +30,69 @@
               <img :src="img" class="size poslang" alt="" />
             </template>
             <b-dropdown-item @click="change('en')">
-              <img
-                src="../../assets/img/about/en.png"
-                class="size mr-1"
-                alt=""
-              />
+              <img src="../../assets/img/about/en.png" class="size mr-1" alt="" />
               English
             </b-dropdown-item>
             <b-dropdown-item @click="change('fr')">
-              <img
-                src="../../assets/img/la-france.png"
-                class="size mr-1"
-                alt=""
-              />
+              <img src="../../assets/img/la-france.png" class="size mr-1" alt="" />
               French
             </b-dropdown-item>
           </b-dropdown>
+        </div>
+        <div class="language-selection" data-toggle="modal" data-target="#settings">
+          <span style="font-size: 14px; color: #000; padding: 0 15px;">
+            <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
+              src="@/assets/img/cmr.webp">
+            {{ countrySelected }} {{ currencySelected }}
+            <i class="fa fa-caret-down"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="model-settings"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="model-settings">For better delivery prices, select your country</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="countries my-1">
+              <strong for="">Country</strong>
+              <select class="custom-select" v-model="country">
+                <option disabled value="">Select country</option>
+                <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
+              </select>
+            </div>
+
+
+            <div class="countries my-2">
+              <strong for="">Currency</strong>
+              <select class="custom-select" v-model="currency">
+                <option disabled value="">Select currency</option>
+                <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
+              </select>
+            </div>
+
+            <div class="language my-2">
+              <strong for="">Language</strong>
+              <select class="custom-select" v-model="lang">
+                <option disabled value="">Select currency</option>
+                <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }}</option>
+              </select>
+            </div>
+
+
+            <button class="btn btn-primary w-100" @click="onChange">Save</button>
+
+          </div>
+
+
+
         </div>
       </div>
     </div>
@@ -80,35 +103,26 @@
         <div class="container p-0 m-0">
           <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
             <a class="d-inline-block align-top mt-1 float-left mobile1_1" href="#">
-              <img
-                src="@/assets/logo.png"
-                alt=""
-                class="balogo desktop mobile1"
-                loading="lazy"
-              />
+              <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             </a>
-             <div class="auth-class d-md-none">
-                <span  v-if="!islogin"  class="nav-span mr-3">
-                  <router-link class="inactive" :to="{ name: 'signup' }">{{
-                    $t("general.Sign_Up")
+            <div class="auth-class d-md-none">
+              <span v-if="!islogin" class="nav-span mr-3">
+                <router-link class="inactive" :to="{ name: 'signup' }">{{
+                  $t("general.Sign_Up")
                   }}</router-link>
-                </span>
-                <router-link   v-if="!islogin"  class="inactive" :to="{ name: 'Login' }">
-                    <img
-                      src="../../assets/user.svg"
-                      alt="User Icon"
-                      id="user-icon"
-                    />
-                  </router-link>
-                <span  v-if="islogin" >
-                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                    $t("general.dashboard")
+              </span>
+              <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
+                <img src="../../assets/user.svg" alt="User Icon" id="user-icon" />
+              </router-link>
+              <span v-if="islogin">
+                <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                  $t("general.dashboard")
                   }}</router-link>
-                </span>
-                <span v-if="islogin" @click="logout"  class="logout-span">{{ $t("general.Logout") }}</span>
+              </span>
+              <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
 
-             </div>
+            </div>
           </div>
 
           <div class="d-flex w-100 p-0 mobile-search">
@@ -116,20 +130,13 @@
               <div class="d-flex">
                 <b-input-group class="binput">
                   <b-input-group-prepend @click="Search">
-                    <div
-                      class="border"
-                      style="
+                    <div class="border" style="
                         color: white !important;
                         background-color: #fff; 
                         border-top-left-radius: 0.25rem !important;
                         border-bottom-left-radius: 0.25rem !important;
-                      "
-                    >
-                      <b-icon
-                        style="color: #DDDDDD"
-                        class="ml-2"
-                        icon="search"
-                      ></b-icon>
+                      ">
+                      <b-icon style="color: #DDDDDD" class="ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
                   <b-form-input
@@ -141,59 +148,35 @@
                     :placeholder="$t('general.search')"
                   ></b-form-input>
                 </b-input-group>
-                <div
-                  style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;"
-                  @click="Search"
-                >
-                  <b-icon
-                    style="color: #fff"
-                    class="mt-2 ml-2 mx-3 search-icon"
-                    icon="search"
-                  ></b-icon>
+                <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;"
+                  @click="Search">
+                  <b-icon style="color: #fff" class="mt-2 ml-2 mx-3 search-icon" icon="search"></b-icon>
                 </div>
               </div>
             </div>
-            <b-navbar-toggle
-              target="nav-collapse"
-              class="b-none"
-            ></b-navbar-toggle>
+            <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav class="mr-auto">
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">
-                    <router-link
-                      :to="{ name: 'Bridge-home' }"
-                      :class="
-                        currentRouteName == 'Bridge-home'
-                          ? 'active'
-                          : 'inactive'
-                      "
-                      >{{ $t("general.Home") }}</router-link
-                    >
+                    <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'Bridge-home'
+                      ? 'active'
+                      : 'inactive'
+                      ">{{ $t("general.Home") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link
-                      :to="{ name: 'about' }"
-                      :class="
-                        currentRouteName == 'about' ? 'active' : 'inactive'
-                      "
-                      >{{ $t("general.About_Us") }}</router-link
-                    >
+                    <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'
+                      ">{{ $t("general.About_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
-                    <router-link
-                      :to="{ name: 'contact' }"
-                      :class="
-                        currentRouteName == 'contact' ? 'active' : 'inactive'
-                      "
-                      >{{ $t("general.Contact_Us") }}</router-link
-                    >
+                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
+                      ">{{ $t("general.Contact_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
@@ -204,20 +187,13 @@
               <b-nav-item class="ml-md-1">
                 <b-input-group class="binput">
                   <b-input-group-prepend @click="Search">
-                    <div
-                      class="border"
-                      style="
+                    <div class="border" style="
                         color: white !important;
                         background-color: #fff; 
                         border-top-left-radius: 0.25rem !important;
                         border-bottom-left-radius: 0.25rem !important;
-                      "
-                    >
-                      <b-icon
-                        style="color: #DDDDDD"
-                        class="mt-2 ml-2"
-                        icon="search"
-                      ></b-icon>
+                      ">
+                      <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
                   <b-form-input
@@ -233,22 +209,15 @@
               <b-nav-item class="ml-md-3 m-auto" @click="navigateToCart">
                 <span class="cart-icon position-relative" style="color:#455a64">
                   <b-icon icon="cart4" class="icon-size"></b-icon>
-                  <span
-                    v-if="cartCount > 0"
-                    class="badge badge-pill badge-danger position-absolute"
-                    style="top: 0; right: 0;"
-                  >
+                  <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"
+                    style="top: 0; right: 0;">
                     {{ cartCount }}
                   </span>
                 </span>
               </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto">
                 <span class="nav-span" style="color:#455a64">
-                  <img
-                    src="../../assets/user.svg"
-                    alt="User Icon"
-                    id="user-icon"
-                  />
+                  <img src="../../assets/user.svg" alt="User Icon" id="user-icon" />
                 </span>
               </b-nav-item>
               <b-nav-item v-if="!islogin" class="m-auto">
@@ -259,10 +228,7 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-              <div
-                class="m-auto py-1"
-                style="height: 15px; border-right: 2px solid #282828"
-              ></div>
+              <div class="m-auto py-1" style="height: 15px; border-right: 2px solid #282828"></div>
               <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
@@ -294,7 +260,10 @@
 <script>
 import { mapActions } from "vuex";
 import axios from "axios";
-import { getGuestIdentifier } from "../../helpers";
+import { getGuestIdentifier, currencyMap } from "../../helpers";
+
+
+
 export default {
   data() {
     return {
@@ -303,8 +272,31 @@ export default {
       keyword: "",
       scrollPosition: 0,
       cartCount: 0,
+      country: "",
+      currency: "",
+      
+      countrySelected: "CM",
+      currencySelected: "XAF",
+      countries: [
+        { name: 'Cameroun', value: 'CM' },
+        { name: 'USA', value: 'USA' },
+        { name: 'Canada', value: 'CD' },
+      ],
+      langs: [
+        { name: 'Français', value: 'Français' },
+        { name: 'English', value: 'English' },
+      ],
+      currencies: []
     };
   },
+
+  created() {
+    this.currencies = Object.entries(currencyMap).map(([name, value]) => {
+      return { name, value };
+    });
+  },
+
+
   computed: {
     currentRouteName() {
       return this.$route.name;
@@ -321,7 +313,18 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    onChange() {
+
+      this.countrySelected = this.country
+      this.currencySelected = this.currency
+
+      this.$emit('change:currency', this.currency)
+
+      this.$refs.close.click();
+    },
+
     handleScroll() {
+
       this.scrollPosition = window.scrollY;
 
       const targetElement = this.$refs.homeNav;
@@ -335,7 +338,7 @@ export default {
     ...mapActions({
       Logout: "auth/logout",
     }),
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -400,17 +403,19 @@ export default {
 </script>
 
 <style scoped>
-.logout-span{
+.logout-span {
   margin-left: 10px;
   color: black;
   cursor: pointer;
 }
+
 .auth-class {
   justify-content: end;
   display: flex;
   margin-right: 20px;
   margin-top: 20px;
 }
+
 li .nav-link:hover {
   background-color: none !important;
 }
@@ -456,40 +461,49 @@ li .nav-link:hover {
   background-color: #f2f2f2;
   border-bottom: 1px solid #dee2e6;
 }
+
 .contact-info span {
   margin-right: 25px;
   display: inline-flex;
   align-items: center;
 }
+
 .contact-info i {
   margin-right: 5px;
   color: #8c8c8c;
 }
+
 .contact-info a {
   margin-left: 10px;
   color: #ff9e19;
 }
+
 .media-icons i {
   color: #ff9e19;
   margin-left: 15px;
 }
+
 .contact-info a:hover {
   color: #ff9e19;
 }
+
 .size {
   height: 15px;
   width: 15px;
 }
+
 .size2 {
   height: 20px;
   width: 20px;
   color: #8c8c8c !important;
 }
+
 .poslang {
   margin-right: 10px;
   margin-left: -10px;
   font-weight: 600 !important;
 }
+
 .media-icon {
   color: #ff9e19;
 }
@@ -544,10 +558,12 @@ a {
   line-height: 21px;
   color: #282828 !important;
 }
+
 .cart-icon {
   color: #e75c18 !important;
   position: relative;
 }
+
 .badge {
   position: absolute;
   top: -10px !important;
@@ -555,6 +571,7 @@ a {
   font-size: 10px;
   padding: 0.25em 0.5em;
 }
+
 .icon-size {
   font-size: 1.7rem !important;
 }
@@ -583,9 +600,11 @@ a {
   .mobile1 {
     width: 140px !important;
   }
+
   .mobile1_1 {
     margin-left: 50px !important;
   }
+
   .balogo {
     width: 70px;
   }
@@ -612,6 +631,7 @@ a {
     top: 18px !important;
     right: auto !important;
   }
+
   .mobile-nav {
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
@@ -687,6 +707,7 @@ a {
   .mobile1_1 {
     margin-left: 30px !important;
   }
+
   .mobile-search-input {
     display: block;
     padding-bottom: 10px;
@@ -701,9 +722,11 @@ a {
     /* width: 90%;
     margin: auto;; */
   }
+
   #nav-collapse {
     width: 100%;
   }
+
   .mobile-search {
     flex-direction: column;
   }

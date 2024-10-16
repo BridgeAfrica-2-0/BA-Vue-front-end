@@ -139,6 +139,10 @@
   "Country_is_required": "Country is required",
   "Region_is_required": "Region is required",
   "Payment_Method": "Payment Method",
+  "Payment":"PAYMENT",
+  "Ship_to":"Ship To",
+  "Contact_details":"Contact Details",
+  "Shipping_speed":"Shipping Speed",
   "Max_Budget_is_required": "Max Budget is required",
   "Lead_time_is_required": "Lead time is required",
   "Max_Budget": "Max Budget",
@@ -239,7 +243,10 @@
   "Country": "Country:",
   "Region": "Region:",
   "Destination": "Destination",
-  "Save": "Save",
+  "Address": "Address",
+  "ZipCode": "Zip Code:",
+  "State": "State:",
+  "Save": "Save Address",
   "Cancel": "Cancel",
 
   "Name_of_item": "Name of item",
@@ -250,6 +257,7 @@
   "Review_and_confirm_your_Order": "Review and confirm your Order",
   "Business": "Business",
   "Previous": "Previous",
+  "Review": "REVIEW",
   "Next": "Next",
   "Order": "Order",
   "Buy_Now": "Buy now",
@@ -270,7 +278,7 @@
   "price": "Price",
 
   "Total": "Total",
-  "SHIPPING": "SHIPPING",
+  "SHIPPING": "Shipping",
   "ORDER_SUMMARY": "ORDER SUMMARY",
   "ITEMS": "ITEMS",
   "description": "description",
@@ -284,7 +292,9 @@
 
   "Product_Desciption": "Product desciption",
   "Check_On_Website": "Check on website",
-  "Shipping_Address": "Shipping address",
+  "Shipping_Address": "Saved Addresses",
+  "Stepper_shipping":"SHIPPING",
+  "New_Address": "New Address",
   "Edit_Shipping_Address": "Edit shipping address",
   "Edit": "Edit",
   "Delete": "Delete",
@@ -517,5 +527,14 @@
   "Hot_Businesses": "Hot Businesses",
   "No_item": "No item",
   "Unable_to_Create_Your_Business": "Unable to Create Your Business",
-  "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account."
+  "PREMIUM_ACCOUNT_FEATURE": "This feature is only available in premium account.",
+
+  "PAYMENT" : "Payment",
+  "ADD_PAYMENT_METHOD": "Add Payment Method",
+  "SAVED_PAYMENT": "Saved Payment",
+  "CARD_NUMBER" : "Card Number",
+  "EXPIRATION_DATE" : "Expiration Date",
+  "CVV" : "CVV",
+  "SAVE_CARD_DETAILS" : "Save card details",
+  "PAYMENT_NOTICE" : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy."
 }

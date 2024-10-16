@@ -29,8 +29,8 @@
         <b-col cols="12" sm="12" md="7">
           <div>
             <h4 class="">{{ product.name }}</h4>
-            <span class="text-success" v-if="product.in_stock">In Stock</span>
-            <span class="text-danger" v-else>Out of stock</span>
+            <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
+            <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
             <h4 class="">{{ formatMoney(Number(product.price)) }}</h4>
           </div>
           <hr class="h-divider" />

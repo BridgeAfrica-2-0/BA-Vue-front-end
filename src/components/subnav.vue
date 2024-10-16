@@ -4,7 +4,7 @@
       <b-col cols="8" lg="12">
         <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 25px;">
         <span>
-          <b-nav-item-dropdown id="dropdown-1" text="All" ref="more">
+          <b-nav-item-dropdown id="dropdown-1" :text="$t('general.all')" ref="more">
             <hr
               style="
                 margin-top: -10px;
@@ -51,7 +51,7 @@
             :key="index"
           >
           
-          <div
+          <div class="search-item"
                   @click="
                     () => {
                       showSubCat(category.category, category.sub_cat);
@@ -222,6 +222,9 @@ export default {
 </script>
 
 <style scoped>
+.search-item:hover {
+  color: #e75c18 !important;
+}
 .logo-img {
   width: 25px;
 }

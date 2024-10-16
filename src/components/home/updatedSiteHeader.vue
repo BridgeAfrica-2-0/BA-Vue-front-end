@@ -31,11 +31,11 @@
             </template>
             <b-dropdown-item @click="change('en')">
               <img src="../../assets/img/about/en.png" class="size mr-1" alt="" />
-              English
+              {{ $t("auth.english") }}
             </b-dropdown-item>
             <b-dropdown-item @click="change('fr')">
               <img src="../../assets/img/la-france.png" class="size mr-1" alt="" />
-              French
+              {{$t("auth.french")}}
             </b-dropdown-item>
           </b-dropdown>
         </div>
@@ -267,13 +267,15 @@ import { getGuestIdentifier, currencyMap } from "../../helpers";
 export default {
   data() {
     return {
-      img: require("../../assets/img/about/en.png"),
-      lang: "English",
+      // img: require("../../assets/img/about/en.png"),
+      // lang: "English",
       keyword: "",
       scrollPosition: 0,
       cartCount: 0,
       country: "",
       currency: "",
+      img: null,
+      lang: '',
       
       countrySelected: "CM",
       currencySelected: "XAF",
@@ -294,6 +296,14 @@ export default {
     this.currencies = Object.entries(currencyMap).map(([name, value]) => {
       return { name, value };
     });
+    const currentLang = this.$i18n.locale;
+    if(currentLang == 'en'){
+        this.img = require("../../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
   },
 
 
@@ -313,6 +323,17 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    change(lang){
+      this.$i18n.locale = lang;
+
+      if(lang == 'en'){
+        this.img = require("../../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
+    },
     onChange() {
 
       this.countrySelected = this.country
@@ -372,17 +393,17 @@ export default {
         });
       }
     },
-    change(lang) {
-      this.$i18n.locale = lang;
+    // change(lang) {
+    //   this.$i18n.locale = lang;
 
-      if (lang == "en") {
-        this.img = require("../../assets/img/about/en.png");
-        this.lang = "English";
-      } else {
-        this.img = require("../../assets/img/la-france.png");
-        this.lang = "French";
-      }
-    },
+    //   if (lang == "en") {
+    //     this.img = require("../../assets/img/about/en.png");
+    //     this.lang = "English";
+    //   } else {
+    //     this.img = require("../../assets/img/la-france.png");
+    //     this.lang = "French";
+    //   }
+    // },
     navigateToCart() {
       this.$router.push("/cart");
     },

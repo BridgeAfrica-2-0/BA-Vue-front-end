@@ -13,11 +13,9 @@
           <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
         </div>
         <div class="content-container">
-          <div class="stock-status" :class="{
-            'in-stock': product.in_stock,
-            'out-of-stock': !product.in_stock
-          }">
-            {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+          <div class="stock-status">
+            <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
+            <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
           </div>
           <h3 @click="productDetails(product)">{{ product.name }}</h3>
           <p>
@@ -33,24 +31,24 @@
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="productDetails(product)">
-                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
                 <span class="arrow-icon">
                   <i class="fas fa-arrow-right"></i>
                 </span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
-                <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+                <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t('general.Add_to_Cart') }}</span>
               </button>
             </div>
           </div>
           <div class="mobile-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="productDetails(product)">
-                <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
                 <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                  style="font-size: 12px; font-weight: bold;">Cart</span>
+                  style="font-size: 12px; font-weight: bold;">{{ $t('general.cart') }}</span>
               </button>
             </div>
           </div>
@@ -164,11 +162,9 @@
         </div>
               </div>
               <div class="content-container">
-                <div class="stock-status" :class="{
-                  'in-stock': product.in_stock,
-                  'out-of-stock': !product.in_stock
-                }">
-                  {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+                <div class="stock-status">
+                  <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
+                  <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
                 </div>
                 <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
                 <p>
@@ -184,7 +180,7 @@
                 <div class="desktop-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="handleAddToCard(product)">
-                      <span class="font-weight-bold" style="font-size: 12px !important;">Add to Cart</span>
+                      <span class="font-weight-bold" style="font-size: 12px !important;">{{ $t('general.Add_to_Cart') }}</span>
                       <span class="arrow-icon">
                         <i class="fas fa-arrow-right"></i>
                       </span>
@@ -194,11 +190,11 @@
                 <div class="mobile-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="productDetails(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
                     </button>
                     <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
                       <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                        style="font-size: 12px; font-weight: bold;">Cart</span>
+                        style="font-size: 12px; font-weight: bold;">{{ $t('general.cart') }}</span>
                     </button>
                   </div>
                 </div>

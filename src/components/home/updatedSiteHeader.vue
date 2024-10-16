@@ -138,7 +138,7 @@
                     style="border-left:none"
                     type="search"
                     v-model="keyword"
-                    placeholder="Search"
+                    :placeholder="$t('general.search')"
                   ></b-form-input>
                 </b-input-group>
                 <div
@@ -226,7 +226,7 @@
                     style="border-left:none"
                     type="search"
                     v-model="keyword"
-                    placeholder="Search"
+                    :placeholder="$t('general.search')"
                   ></b-form-input>
                 </b-input-group>
               </b-nav-item>

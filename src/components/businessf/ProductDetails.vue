@@ -24,13 +24,7 @@
     <b-container>
       <b-row>
         <b-col cols="12" sm="12" md="5">
-          <!-- <ProductCaroussel :productImages="[{ img: product.picture }]" /> -->
-          <b-img
-            :src="product.picture"
-            class="w-100"
-            @click="$refs.lightboxh.showImage(0)"
-          >
-          </b-img>
+          <ProductCaroussel :productImages="[{ img: product.picture }]" />
         </b-col>
         <b-col cols="12" sm="12" md="7">
           <div>
@@ -92,7 +86,7 @@
 </template>
 
 <script>
-//import ProductCaroussel from "./ProductCaroussel";
+import ProductCaroussel from "./ProductCaroussel";
 import LightBox from "vue-it-bigger";
 import ProductComments from "./ProductComments";
 import { isGuestUser } from "@/helpers";
@@ -110,7 +104,7 @@ export default {
     }
   },
   components: {
-    // ProductCaroussel,
+    ProductCaroussel,
     ProductComments,
     LightBox
   },

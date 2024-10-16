@@ -449,6 +449,7 @@
         </b-col> -->
       </b-row>
     </div>
+    <footer />
   </div>
 </template>
 
@@ -493,6 +494,7 @@ import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { getGuestIdentifier } from '../helpers';
+import footer from "../components/home/updatedSiteFooter.vue";
 
 export default {
   components: {
@@ -519,6 +521,7 @@ export default {
     MiniMarket,
     PostComponent,
     PeopleComponent,
+    footer,
     // Footer,
   },
 

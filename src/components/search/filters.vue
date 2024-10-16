@@ -109,7 +109,7 @@
         v-if="loading"
       ></b-spinner>
 
-      <!-- <div class="mt-3" v-if="subCategories.length">
+      <div class="mt-3" v-if="subCategories.length">
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 5)"
@@ -172,7 +172,7 @@
         <br />
       </b-modal>
 
-      
+      <!--  blec implementation for neigbourhood stuff -->
 
       <div
         v-if="
@@ -182,7 +182,7 @@
         "
       >
         <div>
-          <div>
+          <!-- <div>
             <b-form-group
               label-cols-lg="3"
               :label="$t('search.Country')"
@@ -385,7 +385,7 @@
             </b-form-select>
           </div>
 
-         
+          <!-- city -->
           <div v-if="!showMore">
             <div>
               <b-form-group
@@ -443,7 +443,7 @@
           <div class="more" v-if="showMore">
             <hr />
 
-            
+            <!-- Region -->
             <div class="mt-1" v-if="networkFilter.region">
               <b-form-group
                 label-cols-lg="3"
@@ -466,7 +466,7 @@
 
             <hr />
 
-       
+            <!-- Division -->
             <div v-if="networkFilter.division">
               <b-form-group
                 label-cols-lg="3"
@@ -486,7 +486,7 @@
               </b-form-select>
             </div>
 
-           >
+            <!-- Council -->
             <div v-if="networkFilter.council">
               <b-form-group
                 label-cols-lg="3"
@@ -508,7 +508,7 @@
               </b-form-select>
             </div>
 
-         
+            <!-- Neighbourhood -->
             <div v-if="networkFilter.neighbourhood">
               <b-form-group
                 label-cols-lg="3"

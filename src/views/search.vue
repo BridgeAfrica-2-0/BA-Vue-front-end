@@ -102,7 +102,7 @@
       @activateSuggestion="activateSuggestion"
       @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
-    /> -->
+    />
 
     <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 

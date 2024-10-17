@@ -30,8 +30,11 @@
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
-        <span>
-        {{ (cartSummary?.sub_total + shippingFee)?.toFixed(2) ?? "" | locationPrice(rate) }}
+        <span v-if="!isCameroon">
+        {{ (cartSummary?.sub_total + shippingFee + cartSummary?.shipping_info[0]?.shipping_cost)?.toFixed(2) ?? "" | locationPrice(rate) }}
+        </span>
+        <span v-if="isCameroon">
+        {{ (cartSummary?.sub_total + cartSummary?.shipping_info[0]?.shipping_cost )?.toFixed(2) ?? "" | locationPrice(rate) }}
         </span>
       </div>
       <hr class="dotted-line"/>

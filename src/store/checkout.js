@@ -121,9 +121,10 @@ const actions = {
       .then((response) => {
         if(response.data.products)
         {
-          commit("setShippingFee", response.data.products[0].totalPrice[0].price);
-          commit("setShippingMethod", response.data.products[0].productName);
-          console.log(response.data.products[0].totalPrice[0].price);
+          const product = response.data.products.find(p => p.productCode === "P");
+          console.log("**********product**************",product);
+          commit("setShippingFee", product.totalPrice[0].price);
+          commit("setShippingMethod", product.productName);
         }
         else{
           commit("setShippingFee", 0.0);

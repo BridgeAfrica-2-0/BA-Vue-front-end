@@ -446,7 +446,7 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-
+      
       this.$store
         .dispatch("cart/addToCart", { product, islogin: this.islogin })
         .then(response => {

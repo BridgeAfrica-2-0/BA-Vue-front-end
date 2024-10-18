@@ -21,20 +21,20 @@
       </div>
       <div class="summary-item">
         <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
-        <span> {{ cartSummary?.tax.toFixed(2) ?? "0.0" }}</span>
+        <span> {{ cartSummary?.tax.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div v-if="!isCameroon && cartSummary?.shipping_info[0]?.shipping_cost !== 0" class="summary-item">
         <span>Packaging & Labeling</span>
-        <span>  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
+        <span>  {{ cartSummary?.shipping_info[0]?.shipping_cost ?? ""  | locationPrice(rate)}} </span>
       </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
         <span>Total</span>
         <span v-if="!isCameroon">
-        {{ (cartSummary?.sub_total + shippingFee + cartSummary?.shipping_info[0]?.shipping_cost)?.toFixed(2) ?? "" | locationPrice(rate) }}
+          {{ ((cartSummary?.sub_total ?? 0) + (shippingFee ?? 0) + (cartSummary?.shipping_info?.[0]?.shipping_cost ?? 0)).toFixed(2) | locationPrice(rate) }}
         </span>
         <span v-if="isCameroon">
-        {{ (cartSummary?.sub_total + cartSummary?.shipping_info[0]?.shipping_cost )?.toFixed(2) ?? "" | locationPrice(rate) }}
+        {{ ((cartSummary?.sub_total + cartSummary?.shipping_info[0]?.shipping_cost )?.toFixed(2) )?? "" | locationPrice(rate) }}
         </span>
       </div>
       <hr class="dotted-line"/>

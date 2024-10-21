@@ -610,11 +610,11 @@ import AutocompleteLocation from "@/components/AutocompleteLocation";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
-import { convertCurrency } from "@/helpers";
+import { LocalisationMixins } from "@/mixins"
 
 
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin, LocalisationMixins],
   data() {
     return {
       useas: "",
@@ -704,12 +704,14 @@ export default {
       ],
 
       category: "",
-      isGlobal: false,
     };
   },
 
-  created() {
-    this.onInit()
+  watch: {
+    isGlobal(newvalue){
+      if (!newvalue)
+        this.options = [...this.options, { text: this.$t("welcome.Business"), value: "business" }];
+    }
   },
 
   validations: {
@@ -725,13 +727,6 @@ export default {
   },
 
   methods: {
-    async onInit() {
-      const rate = await convertCurrency()
-      this.isGlobal = 'XAF' == rate.currency ? false : true;
-
-      if (!this.isGlobal)
-        this.options = [...this.options, { text: this.$t("welcome.Business"), value: "business" }];
-    },
     skipToDashboard() {
       this.$router.push("/dashboard");
     },

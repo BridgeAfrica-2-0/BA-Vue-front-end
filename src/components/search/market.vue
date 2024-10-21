@@ -167,6 +167,7 @@
                   <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
                 </div>
                 <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
+                <router-link :to="{ name: 'product-details', params: { id: 1 } }">{{ product.name }}</router-link>
                 <p>
                   {{
                     product.description.length > 50

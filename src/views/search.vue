@@ -450,7 +450,75 @@
         </b-col> -->
       </b-row>
     </div>
-    <footer />
+    <div class="container mb-3 mt-4" style="max-width: 80%;">
+    <div class="row g-0">
+      <!-- Image à gauche -->
+      <div class="col-md-6">
+        <img src="../assets/img/coach2.png" class="img-fluid rounded" alt="Pottery Image">
+      </div>
+
+      <!-- Contenu à droite -->
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <div class="bg-white p-4" style="border-radius: 25px; margin-left: -150px;">
+          <div class="">
+          <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span> 
+            <span class="text-black"> Selling to the World.</span> </h3>
+          <p class="card-text text-black my-4">
+            While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will enable you to do the full e-commerce transaction cycle.
+          </p>
+
+          <!-- Liste d'avantages -->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Marketplace access:</strong> 
+                <div class="text-black">Unlimited marketplace to sell to millions around you and the world.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-credit-card mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Online Payment System:</strong> 
+                <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-search mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Rank top on search results:</strong> 
+                <div class="text-black">Businesses on advanced accounts are ranked first on our search results.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-sms mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Advanced messaging system:</strong> 
+                <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Bouton Upgrade -->
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div style="margin-top: 20em;">
+      <SiteFooter />
+    </div>
   </div>
 </template>
 
@@ -495,7 +563,7 @@ import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { getGuestIdentifier } from '../helpers';
-import footer from "../components/home/updatedSiteFooter.vue";
+import SiteFooter from "../components/home/updatedSiteFooter.vue";
 
 export default {
   components: {
@@ -522,7 +590,7 @@ export default {
     MiniMarket,
     PostComponent,
     PeopleComponent,
-    footer,
+    SiteFooter,
     // Footer,
   },
 
@@ -1820,6 +1888,20 @@ export default {
 </script>
 
 <style scoped>
+.rounded {
+  border-radius: 25px !important;
+}
+.text-orange {
+  color: #ff6f00; /* Couleur orange personnalisée */
+}
+.btn-orange {
+  background-color: #ff6f00;
+  color: white;
+  border: none;
+}
+.btn-orange:hover {
+  background-color: #e65c00;
+}
 .img-size {
   height: 100%;
   width: 500px

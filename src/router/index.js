@@ -55,6 +55,7 @@ import memberNetwork from "@/views/memberNetwork";
 import networkEditors from "@/views/networkEditors";
 import businessFollower from "@/views/businessFollower";
 import profileFollower from "@/views/profileFollower";
+import productDetails from "../components/businessf/productDetailView.vue";
 //import businessOwner from "@/views/businessOwner";
 //import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -456,6 +457,11 @@ const routes = [
     path: "/search/:id",
     name: "Search",
     component: search
+  },
+  {
+    path: "/product-details/:id",
+    name: "product-details",
+    component: productDetails
   },
   {
     path: "/forgotpass",

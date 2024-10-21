@@ -31,11 +31,11 @@
             </template>
             <b-dropdown-item @click="change('en')">
               <img src="../../assets/img/about/en.png" class="size mr-1" alt="" />
-              {{ $t("auth.english") }}
+              English
             </b-dropdown-item>
             <b-dropdown-item @click="change('fr')">
               <img src="../../assets/img/la-france.png" class="size mr-1" alt="" />
-              {{$t("auth.french")}}
+              French
             </b-dropdown-item>
           </b-dropdown>
         </div>
@@ -137,14 +137,8 @@
                       <b-icon style="color: #DDDDDD" class="ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input
-                    v-on:keyup.enter="Search"
-                    class="search"
-                    style="border-left:none"
-                    type="search"
-                    v-model="keyword"
-                    :placeholder="$t('general.search')"
-                  ></b-form-input>
+                  <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
+                    v-model="keyword" placeholder="Search"></b-form-input>
                 </b-input-group>
                 <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;"
                   @click="Search">
@@ -194,14 +188,8 @@
                       <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input
-                    v-on:keyup.enter="Search"
-                    class="search"
-                    style="border-left:none"
-                    type="search"
-                    v-model="keyword"
-                    :placeholder="$t('general.search')"
-                  ></b-form-input>
+                  <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
+                    v-model="keyword" placeholder="Search"></b-form-input>
                 </b-input-group>
               </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto" @click="navigateToCart">
@@ -265,16 +253,13 @@ import { getGuestIdentifier, currencyMap } from "../../helpers";
 export default {
   data() {
     return {
-      // img: require("../../assets/img/about/en.png"),
-      // lang: "English",
+      img: require("../../assets/img/about/en.png"),
+      lang: "English",
       keyword: "",
       scrollPosition: 0,
-      cartCount: 0,
-      country: "",
-      currency: "",
-      img: null,
-      lang: '',
-      
+      country: "CM",
+      currency: "XAF",
+
       countrySelected: "CM",
       currencySelected: "XAF",
       countries: [
@@ -304,14 +289,6 @@ export default {
     this.currencies = Object.entries(uniqueCurrencyMap).map(([name, value]) => {
       return { name, value };
     });
-    const currentLang = this.$i18n.locale;
-    if(currentLang == 'en'){
-        this.img = require("../../assets/img/about/en.png");
-        this.lang = 'English'
-      }else {
-        this.img = require("../../assets/img/la-france.png");
-         this.lang = 'Français'
-      }
   },
 
 
@@ -334,17 +311,6 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    change(lang){
-      this.$i18n.locale = lang;
-
-      if(lang == 'en'){
-        this.img = require("../../assets/img/about/en.png");
-        this.lang = 'English'
-      }else {
-        this.img = require("../../assets/img/la-france.png");
-         this.lang = 'Français'
-      }
-    },
     onChange() {
 
       this.countrySelected = this.country
@@ -407,17 +373,17 @@ export default {
         });
       }
     },
-    // change(lang) {
-    //   this.$i18n.locale = lang;
+    change(lang) {
+      this.$i18n.locale = lang;
 
-    //   if (lang == "en") {
-    //     this.img = require("../../assets/img/about/en.png");
-    //     this.lang = "English";
-    //   } else {
-    //     this.img = require("../../assets/img/la-france.png");
-    //     this.lang = "French";
-    //   }
-    // },
+      if (lang == "en") {
+        this.img = require("../../assets/img/about/en.png");
+        this.lang = "English";
+      } else {
+        this.img = require("../../assets/img/la-france.png");
+        this.lang = "French";
+      }
+    },
     navigateToCart() {
       this.$router.push("/cart");
     },

@@ -3,9 +3,9 @@
     <b-carousel
       id="caroussel-product"
       v-model="slide"
-      :interval="4000"
+      :interval="2000"
       controls
-      background="#f5f5f5"
+      background="#ababab"
       style="text-shadow: 1px 1px 2px #333;"
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       slide: 0,
-      sliding: null,
+      sliding: null
       // productImages: [
       // 	{
       // 		img: require("@/assets/img/payment/headset.jpg"),
@@ -89,6 +89,6 @@ export default {
 }
 
 .sizee {
-  object-fit: contain !important;
+  object-fit: cover !important;
 }
 </style>

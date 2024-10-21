@@ -5,13 +5,14 @@
         :class="['subscription-box', { 'footer-subscription': isSmallScreen }]"
       >
         <p style="color: black" class="subs-p">
-          <span style="color: #e75c18;">{{ $t("general.subscribe_to_our_newsletter") }}</span>
-          {{ $t("general.and_be_the_first_to_know_about_new_arrivals") }}
+          <span style="color: #e75c18;">Subscribe to our newsletter</span>
+          and be the first to know about new arrivals, exclusive offers, and
+          handicraft.
         </p>
         <form @submit.prevent="subscribe">
-          <input type="email" v-model="email" :placeholder="$t('general.enter_your_email')" />
+          <input type="email" v-model="email" placeholder="Enter your email" />
           <b-button type="submit" variant="primary" class="hire-btn">
-            {{ $t("general.subscribe") }}
+            Subscribe
             <span class="arrow-icon-wrapper">
               <i class="fas fa-arrow-right"></i>
             </span>

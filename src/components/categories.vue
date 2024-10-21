@@ -4,7 +4,7 @@
       <div class="col-md-6 col-lg-6 desktop-image">
         <div class="home-decor">
           <router-link to="/search">
-            <h1> {{ $t("general.home_decor") }}</h1>
+            <h1>Home Decor</h1>
             <i class="fas fa-arrow-right"></i>
           </router-link>
         </div>
@@ -12,7 +12,7 @@
       <div class="col-md-6 col-lg-6 desktop-image">
         <div class="fashion">
           <router-link to="/search">
-            <h1> {{ $t("general.fashion") }}</h1>
+            <h1>Fashion</h1>
             <i class="fas fa-arrow-right"></i>
           </router-link>
         </div>
@@ -20,7 +20,7 @@
       <div class="col-md-6 col-lg-6 mobile-image">
         <div class="mobile-home-decor">
           <router-link to="/search">
-            <h1> {{ $t("general.home_decor") }}</h1>
+            <h1>Home Decor</h1>
             <i class="fas fa-arrow-right"></i>
           </router-link>
         </div>

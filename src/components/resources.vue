@@ -13,7 +13,7 @@
       <div class=" text-center">
         <b-tabs lazy active-nav-item-class="active-tab-item">
           <b-tab
-            :title="$t('general.how_to_use')"
+            title="How to Use"
             title-link-class="title-linkClass"
             @click="changeResource('Creation')"
           >
@@ -21,14 +21,14 @@
           </b-tab>
 
           <b-tab
-            :title="$t('general.digital_education')"
+            title="Digital Education"
             title-link-class="title-linkClass"
             @click="changeResource('Digital')"
           >
             <Videos :videos="renderResources" />
           </b-tab>
           <b-tab
-            :title="$t('general.cameroon_business')"
+            title="Cameroon Business"
             title-link-class="title-linkClass"
             @click="changeResource('Cameroon')"
           >
@@ -78,7 +78,7 @@ export default {
             perPage: 2,
             gap: "1rem"
           }
-        },
+        }
       },
 
       subEmail: "",

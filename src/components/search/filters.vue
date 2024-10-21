@@ -1,25 +1,10 @@
 <template>
   <div>
-
-
-    <br />
-
     <div
-      v-if="
-        filterType == '0' ||
-          filterType == '1' ||
-          (islogin && filterType == '5') ||
-          (!islogin && filterType == '4')
-      "
-    >
-      <span v-if="suggestedKeyword.length">
-        <div class="d-flex align-items-center justify-content-between">
-          <h6 class="bold" style="font-size: 13px;">{{ $t("search.suggested_keywords") }}</h6>
-        <div>
-          <div
       v-if="
         filterType == '0' || filterType == '1' || (filterType == '5' && islogin)
       "
+      class="mt-2 mb-2"
     >
       <b-button
         class="float-right"
@@ -35,6 +20,7 @@
           filterType == '1' ||
           (filterType == '4' && !islogin)
       "
+      class="mt-2 mb-2"
     >
       <b-button
         class="float-right"
@@ -44,8 +30,19 @@
         >{{ $t("search.Reset") }}</b-button
       >
     </div>
-        </div>
-        </div>
+
+    <br />
+
+    <div
+      v-if="
+        filterType == '0' ||
+          filterType == '1' ||
+          (islogin && filterType == '5') ||
+          (!islogin && filterType == '4')
+      "
+    >
+      <span v-if="suggestedKeyword.length">
+        <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
           :key="i.value"
@@ -109,7 +106,7 @@
         v-if="loading"
       ></b-spinner>
 
-      <div class="mt-3" v-if="subCategories.length">
+      <!-- <div class="mt-3" v-if="subCategories.length">
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 5)"
@@ -172,197 +169,13 @@
         <br />
       </b-modal>
 
-      <!--  blec implementation for neigbourhood stuff -->
+      
 
       <div
         v-if="
           filterType == '0' ||
             filterType == '1' ||
             (filterType == '5' && islogin)
-        "
-      >
-        <div>
-          <!-- <div>
-            <b-form-group
-              label-cols-lg="3"
-              :label="$t('search.Country')"
-              label-size="md"
-              label-class=" pt-0"
-              class="mb-0 pt-2 text-left"
-            >
-            </b-form-group>
-            <b-form-select
-              v-model="networkSelect.country"
-              :options="countries"
-              value-field="id"
-              text-field="name"
-              @change="getBRegions()"
-            >
-            </b-form-select>
-          </div> -->
-
-          <!-- city -->
-          <!-- <div v-if="!showMore">
-            <div>
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.City')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-              <multiselect
-                :value="city"
-                :options="citiesValues"
-                placeholder="Select City"
-                class="search-hh w-100 city-search"
-                style="border-left: none"
-                label="label"
-                track-by="code"
-                @input="setSelectedLocation"
-              ></multiselect>
-            </div>
-
-            <div>
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Neighbourhood')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 mt-3 text-left"
-              >
-              </b-form-group>
-
-              <vue-bootstrap-typeahead
-                v-model="query"
-                :data="lneighbourhoods"
-                :minMatchingChars="0"
-                @hit="searchThisNeibourhood(query)"
-                :maxMatches="10"
-                :serializer="(item) => item.name"
-                placeholder="Where"
-                class=""
-              />
-
-              <b-link
-                v-if="networkFilter.region"
-                class="float-right mt-2 mb-2"
-                @click="showMoreFilters"
-              >
-                More
-              </b-link>
-              <br />
-            </div>
-          </div> -->
-
-          <div class="more" v-if="showMore">
-            <hr />
-
-            <!-- Region -->
-            <!-- <div class="mt-1" v-if="networkFilter.region">
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Region')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-
-              <b-form-select
-                v-model="networkSelect.region"
-                :options="regions"
-                value-field="id"
-                text-field="name"
-                @change="getBDivisions()"
-              >
-              </b-form-select>
-            </div>
-
-            <hr /> -->
-
-            <!-- Division -->
-            <!-- <div v-if="networkFilter.division">
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Division')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-              <b-form-select
-                v-model="networkSelect.division"
-                :options="divisions"
-                value-field="id"
-                text-field="name"
-                @change="getBCouncils()"
-              >
-              </b-form-select>
-            </div> -->
-
-            <!-- Council -->
-            <!-- <div v-if="networkFilter.council">
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Council')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-              <b-form-select
-                v-model="networkSelect.council"
-                :options="councils"
-                value-field="id"
-                text-field="name"
-                @change="
-                  getBNeighbourhoods({ council_id: networkSelect.council })
-                "
-              >
-              </b-form-select>
-            </div> -->
-
-            <!-- Neighbourhood -->
-            <!-- <div v-if="networkFilter.neighbourhood">
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Neighbourhood')"
-                label-size="md"
-                label-class="pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-              <b-form-select
-                v-model="networkSelect.neighbourhood"
-                :options="neighbourhoods"
-                value-field="id"
-                text-field="name"
-                @change="
-                  searchNeigbourhoods({
-                    neighborhood_id: networkSelect.neighbourhood,
-                  })
-                "
-              >
-              </b-form-select>
-            </div> -->
-
-            <!-- <b-link
-              v-if="networkFilter.region"
-              class="float-right mt-2 mb-2"
-              @click="hideMoreFilters"
-            >
-              Hide More
-            </b-link> -->
-          </div>
-        </div>
-      </div>
-      <div
-        v-else-if="
-          filterType == '0' ||
-            filterType == '1' ||
-            (filterType == '4' && !islogin)
         "
       >
         <div>
@@ -385,7 +198,6 @@
             </b-form-select>
           </div>
 
-          <!-- city -->
           <div v-if="!showMore">
             <div>
               <b-form-group
@@ -443,7 +255,7 @@
           <div class="more" v-if="showMore">
             <hr />
 
-            <!-- Region -->
+            
             <div class="mt-1" v-if="networkFilter.region">
               <b-form-group
                 label-cols-lg="3"
@@ -466,7 +278,7 @@
 
             <hr />
 
-            <!-- Division -->
+            
             <div v-if="networkFilter.division">
               <b-form-group
                 label-cols-lg="3"
@@ -486,7 +298,7 @@
               </b-form-select>
             </div>
 
-            <!-- Council -->
+          
             <div v-if="networkFilter.council">
               <b-form-group
                 label-cols-lg="3"
@@ -508,7 +320,191 @@
               </b-form-select>
             </div>
 
-            <!-- Neighbourhood -->
+           
+            <div v-if="networkFilter.neighbourhood">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class="pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.neighbourhood"
+                :options="neighbourhoods"
+                value-field="id"
+                text-field="name"
+                @change="
+                  searchNeigbourhoods({
+                    neighborhood_id: networkSelect.neighbourhood,
+                  })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <b-link
+              v-if="networkFilter.region"
+              class="float-right mt-2 mb-2"
+              @click="hideMoreFilters"
+            >
+              Hide More
+            </b-link>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else-if="
+          filterType == '0' ||
+            filterType == '1' ||
+            (filterType == '4' && !islogin)
+        "
+      >
+        <div>
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Country')"
+              label-size="md"
+              label-class=" pt-0"
+              class="mb-0 pt-2 text-left"
+            >
+            </b-form-group>
+            <b-form-select
+              v-model="networkSelect.country"
+              :options="countries"
+              value-field="id"
+              text-field="name"
+              @change="getBRegions()"
+            >
+            </b-form-select>
+          </div>
+
+         
+          <div v-if="!showMore">
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.City')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <multiselect
+                :value="city"
+                :options="citiesValues"
+                placeholder="Select City"
+                class="search-hh w-100 city-search"
+                style="border-left: none"
+                label="label"
+                track-by="code"
+                @input="setSelectedLocation"
+              ></multiselect>
+            </div>
+
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 mt-3 text-left"
+              >
+              </b-form-group>
+
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="lneighbourhoods"
+                :minMatchingChars="0"
+                @hit="searchThisNeibourhood(query)"
+                :maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class=""
+              />
+
+              <b-link
+                v-if="networkFilter.region"
+                class="float-right mt-2 mb-2"
+                @click="showMoreFilters"
+              >
+                More
+              </b-link>
+              <br />
+            </div>
+          </div>
+
+          <div class="more" v-if="showMore">
+            <hr />
+
+            
+            <div class="mt-1" v-if="networkFilter.region">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Region')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+
+              <b-form-select
+                v-model="networkSelect.region"
+                :options="regions"
+                value-field="id"
+                text-field="name"
+                @change="getBDivisions()"
+              >
+              </b-form-select>
+            </div>
+
+            <hr />
+
+       
+            <div v-if="networkFilter.division">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Division')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.division"
+                :options="divisions"
+                value-field="id"
+                text-field="name"
+                @change="getBCouncils()"
+              >
+              </b-form-select>
+            </div>
+
+           >
+            <div v-if="networkFilter.council">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Council')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.council"
+                :options="councils"
+                value-field="id"
+                text-field="name"
+                @change="
+                  getBNeighbourhoods({ council_id: networkSelect.council })
+                "
+              >
+              </b-form-select>
+            </div>
+
+         
             <div v-if="networkFilter.neighbourhood">
               <b-form-group
                 label-cols-lg="3"
@@ -610,7 +606,7 @@
         </b-form-select>
         <br />
         <hr />
-      </span>
+      </span> -->
 
       <div></div>
     </div>

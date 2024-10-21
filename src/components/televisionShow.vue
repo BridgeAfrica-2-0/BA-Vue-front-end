@@ -12,9 +12,11 @@
             <source src="assets/video/intro_video.mp4" type="video/mp4" />
           </video>
           <div class="card-body">
-            <h5 class="card-title">{{ $t("general.checkout_our_biz_show_on_CRTV") }}</h5>
+            <h5 class="card-title">Checkout our Biz Show on CRTV</h5>
             <p class="card-text">
-              {{ $t("general.use_our_specially_designed_training_curriculum") }}
+              Use our specially designed training curriculum to help enhance
+              your entrepreneurial and digital skills, learn how to properly use
+              your bridgeafrica.
             </p>
           </div>
         </div>
@@ -34,7 +36,7 @@
             <div class="card-body p-0 pl-3">
               <p class="view-text p-0 m-0">VIEW</p>
               <h5 class="card-title">
-                {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                Checkout our Biz Show on CRTV for latest new and update
               </h5>
             </div>
           </div>
@@ -54,7 +56,7 @@
             <div class="card-body p-0 pl-3">
               <p class="view-text p-0 m-0">VIEW</p>
               <h5 class="card-title">
-                {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                Checkout our Biz Show on CRTV for latest new and update
               </h5>
             </div>
           </div>
@@ -74,7 +76,7 @@
             <div class="card-body p-0 pl-3">
               <p class="view-text p-0 m-0">VIEW</p>
               <h5 class="card-title">
-                {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                Checkout our Biz Show on CRTV for latest new and update
               </h5>
             </div>
           </div>
@@ -95,9 +97,11 @@
                 <source src="assets/video/intro_video.mp4" type="video/mp4" />
               </video>
               <div class="card-body">
-                <h5 class="card-title">{{ $t("general.checkout_our_biz_show_on_CRTV") }}</h5>
+                <h5 class="card-title">Checkout our Biz Show on CRTV</h5>
                 <p class="card-text">
-                  {{ $t("general.use_our_specially_designed_training_curriculum") }}
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -116,10 +120,12 @@
               </video>
               <div class="card-body">
                 <h5 class="card-title">
-                  {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                  Checkout our Biz Show on CRTV for latest new and update
                 </h5>
                 <p class="card-text">
-                  {{ $t("general.use_our_specially_designed_training_curriculum") }}
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -138,10 +144,12 @@
               </video>
               <div class="card-body">
                 <h5 class="card-title">
-                  {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                  Checkout our Biz Show on CRTV for latest new and update
                 </h5>
                 <p class="card-text">
-                  {{ $t("general.use_our_specially_designed_training_curriculum") }}
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>
@@ -160,10 +168,12 @@
               </video>
               <div class="card-body">
                 <h5 class="card-title">
-                  {{ $t("general.checkout_our_biz_show_on_CRTV_for_latest_new_and_update") }}
+                  Checkout our Biz Show on CRTV for latest new and update
                 </h5>
                 <p class="card-text">
-                  {{ $t("general.use_our_specially_designed_training_curriculum") }}
+                  Use our specially designed training curriculum to help enhance
+                  your entrepreneurial and digital skills, learn how to properly
+                  use your bridgeafrica.
                 </p>
               </div>
             </div>

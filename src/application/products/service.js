@@ -37,6 +37,8 @@ export const makeByLocalisation = (localProduct,  globalProduct) => {
   
   return (isLocal) => {
 
+    console.log(isLocal)
+    
     const pack = () => isLocal ? localProduct() : globalProduct()
 
     const {api, callback} = pack()

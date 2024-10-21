@@ -16,10 +16,10 @@ export const fullMediaLink = (media) => {
     const render = media.startsWith("https://www.youtube.com")
       ? media
       : media.startsWith(scheme)
-      ? media
-      : media.startsWith("/storage/")
-      ? `${scheme}${media}`
-      : media;
+        ? media
+        : media.startsWith("/storage/")
+          ? `${scheme}${media}`
+          : media;
     return render;
   }
   return "";
@@ -58,9 +58,8 @@ export const notification = (notification) => {
   return `
     <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
         <div>
-            <img src="${
-              notification.avatar
-            }" class="rounded-circle" alt="" width="30" height="30" />
+            <img src="${notification.avatar
+    }" class="rounded-circle" alt="" width="30" height="30" />
         </div>
         <div class="d-flex flex-column ml-3">
             <div>${notification.notification_text}</div>
@@ -128,45 +127,43 @@ const checkCountryLocalisation = async () => {
 
 export const checkCountry = async () => {
   let ip = localStorage.getItem("ip") ?? null;
-  if(!ip) {  
+  if (!ip) {
     const res = await fetch('https://api.ipify.org?format=json');
     const data1 = await res.json();
-    ip = data1.ip; 
+    ip = data1.ip;
     localStorage.setItem("ip", ip);
   }
   try {
-      const response = await axios.get('user/location', { params: { ip: ip } });
-      return response.data;
+    const response = await axios.get('user/location', { params: { ip: ip } });
+    return response.data;
   } catch (error) {
-      console.error('API call failed:', error);
+    console.error('API call failed:', error);
   }
   return null;
 };
 
-const getRate =  async (fromCurrency, toCurrency) => {
+const getRate = async (fromCurrency, toCurrency) => {
   let currencyCheck;
-  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
-  if(userCountry?.country)
-  {
-    currencyCheck = currencyMap[userCountry?.country]; 
+  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;
+  if (userCountry?.country) {
+    currencyCheck = currencyMap[userCountry?.country];
   }
-  if(currencyCheck===fromCurrency)
-  {
+  if (currencyCheck === fromCurrency) {
     let conversionRate = localStorage.getItem("conversionRate") ?? null;
-    if(!conversionRate){
+    if (!conversionRate) {
       // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-      const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
+      const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
       const data = response.data
       localStorage.setItem("conversionRate", data.rates[toCurrency]);
-      return data.rates[toCurrency]; 
+      return data.rates[toCurrency];
     } else {
       return conversionRate;
     }
   }
-  else{
-    const response = await axios.get(`user/currency`,{ params: { currency: fromCurrency } });
+  else {
+    const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
     const data = response.data;
-    return data.rates[toCurrency]; 
+    return data.rates[toCurrency];
   }
 }
 
@@ -194,55 +191,52 @@ export const currencyMap = {
   'PK': 'PKR',
 };
 
-export const convertCurrency = async(defaultCurrency=null)  => {
+export const convertCurrency = async (defaultCurrency = null) => {
   try {
+    let userCountry = null
+    let userCurrency = null
+    if (!defaultCurrency) {
+      userCountry = await checkCountryLocalisation();
+      userCurrency = currencyMap[userCountry] || 'XAF';
+    } else {
 
-      let userCountry
-      if (!defaultCurrency) {
-        userCountry = await checkCountryLocalisation();
-      }else{
-        userCountry = defaultCurrency
-      }
-      
+      userCurrency = defaultCurrency
+    }
 
-      const userCurrency = currencyMap[userCountry] || 'XAF'; 
-      
-      const conversionRate = await getRate(userCurrency, 'XAF');
-      
-      // console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
+    const conversionRate = await getRate(userCurrency, 'XAF');
 
-      return  {"currency": userCurrency, rate:conversionRate}
-      
+    console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
+
+    return { "currency": userCurrency, rate: conversionRate }
+
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
   }
 }
 
-export const convertToCurrency = async(defaultCurrency=null)  => {
+export const convertToCurrency = async (defaultCurrency = null) => {
   try {
-      let userCurrency;
-      if(defaultCurrency)
-      {
-        userCurrency = defaultCurrency;
-      }
-      else{
+    let userCurrency;
+    if (defaultCurrency) {
+      userCurrency = defaultCurrency;
+    }
+    else {
 
-        let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;      
-        if (!userCountry?.country) {
-          userCountry = await checkCountry();
-        }
-        userCurrency = currencyMap[userCountry?.country]; 
-        if(!userCurrency)
-        {
-          userCurrency = 'USD' 
-        }
-      }      
-      
-      const conversionRate = await getRate(userCurrency, 'XAF');
-      console.log(conversionRate, "crate");
-      return  {"currency": userCurrency, rate:conversionRate}
-      
+      let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;
+      if (!userCountry?.country) {
+        userCountry = await checkCountry();
+      }
+      userCurrency = currencyMap[userCountry?.country];
+      if (!userCurrency) {
+        userCurrency = 'USD'
+      }
+    }
+
+    const conversionRate = await getRate(userCurrency, 'XAF');
+
+    return { "currency": userCurrency, rate: conversionRate }
+
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
   }
 }

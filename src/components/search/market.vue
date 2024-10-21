@@ -17,7 +17,10 @@
             <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
             <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
           </div>
-          <h3 @click="productDetails(product)">{{ product.name }}</h3>
+          <!-- <h3 @click="productDetails(product)">{{ product.name }}</h3> -->
+          <div class="d-flex">
+            <h3 @click="goToDetail(1)">{{ product.name }}</h3>
+          </div>
           <p>
             {{
               product.description.length > 50
@@ -346,6 +349,10 @@ export default {
     closeDetailsProduct() {
       this.viewProduct = false;
     },
+    
+    goToDetail(id) {
+      this.$router.push(`/product-details/${id}`);
+    },
 
     getProductDetails(product) {
       /**
@@ -449,7 +456,7 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-
+      
       this.$store
         .dispatch("cart/addToCart", { product, islogin: this.islogin })
         .then(response => {
@@ -494,6 +501,9 @@ export default {
 </script>
 
 <style scoped>
+.text-left {
+  text-align: left;
+}
 .image-container {
   position: relative;
   width: 100%;

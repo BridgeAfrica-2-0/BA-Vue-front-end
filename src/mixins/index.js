@@ -7,6 +7,8 @@ import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
 export { Redis, Pusher } from "./notifications.mixins";
 
+import { convertCurrency } from "@/helpers";
+
 export const loader = {
   methods: {
     onNotified(text) {
@@ -190,7 +192,7 @@ export const commentMixinsBuisness = {
       auth: "auth/profilConnected"
     }),
 
-    onLike: async function() {
+    onLike: async function () {
       let data = { comment: this.comment.id };
 
       if (
@@ -211,12 +213,12 @@ export const commentMixinsBuisness = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0
+              ? this.comment.comment_likes - 1
+              : 0
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
@@ -233,7 +235,7 @@ export const commentMixinsBuisness = {
       this.loadComment = false;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
@@ -307,7 +309,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.id,
         network: this.profile.id
@@ -319,12 +321,12 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0
+              ? this.comment.comment_likes - 1
+              : 0
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
@@ -334,7 +336,7 @@ export const commentMixins = {
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
@@ -444,15 +446,15 @@ export const defaultCoverImage = {
           this.placeholderImage = "/covers/business-msg-en.png";
           return "fr" == this.$i18n.locale
             ? [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ]
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ]
             : [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ];
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ];
         },
 
         profile: () => {
@@ -467,15 +469,15 @@ export const defaultCoverImage = {
           this.placeholderImage = "/covers/business-msg-en.png";
           return "fr" == this.$i18n.locale
             ? [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ]
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ]
             : [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ];
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ];
         },
 
         profile: () => {
@@ -494,7 +496,7 @@ export const defaultCoverImage = {
   },
 
   watch: {
-    "$i18n.locale": function() {}
+    "$i18n.locale": function () { }
   },
 
   computed: {
@@ -553,3 +555,21 @@ export const ResizeMediaImage = {
     }
   }
 };
+
+
+export const LocalisationMixins = {
+  data: () => ({
+    isGlobal: true
+  }),
+
+  created() {
+    this.onInitLocalisation()
+    console.log("[start] localisation")
+  },
+  methods: {
+    async onInitLocalisation() {
+      const rate = await convertCurrency()
+      this.isGlobal = 'XAF' == rate.currency ? false : true;
+    },
+  }
+}

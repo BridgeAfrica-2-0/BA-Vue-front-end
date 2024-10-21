@@ -1,6 +1,6 @@
 <template>
   <div class="bridge-home">
-    <site-header class="topbar" @change:currency="emitChangeCurrency"/>
+    <site-header class="topbar" @change:currency="emitChangeCurrency" />
 
     <!-- <section class="p-0">
   <div>
@@ -422,7 +422,7 @@
                 <span> {{ $t("general.let_help_u") }} </span>
                 <span style="color: black;">{{
                   $t("general.find_products_and_services")
-                  }}</span>
+                }}</span>
               </h3>
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
@@ -638,7 +638,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                  }}</span>
+                }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -646,7 +646,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                  }}</span>
+                }}</span>
               </span>
             </div>
           </div>
@@ -657,7 +657,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                  }}</span>
+                }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -665,7 +665,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                  }}</span>
+                }}</span>
               </span>
             </div>
           </div>
@@ -761,7 +761,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                  }}</span>
+                }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -769,7 +769,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                  }}</span>
+                }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -777,7 +777,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                  }}</span>
+                }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -785,7 +785,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                  }}</span>
+                }}</span>
               </span>
             </div>
           </div>
@@ -870,7 +870,7 @@ import Categories from "../components/categories";
 import FAQ from "../components/faq";
 import VLazyImage from "v-lazy-image/v2";
 
-import { convertCurrency } from "@/helpers"
+import { convertCurrency, currencyMap } from "@/helpers"
 
 import {
   buildByLocalisation,
@@ -1194,14 +1194,25 @@ export default {
 
   methods: {
 
-    async emitChangeCurrency(ev){
+    async emitChangeCurrency(ev) {
       console.log(ev)
-      this.rate = await convertCurrency(ev)
+      this.rate = await convertCurrency(ev.currency)
+      console.log(this.rate)
+      try {
+        const countrySelectedCurrency = currencyMap[ev.country]
+        this.onInit(countrySelectedCurrency)
+      } catch (err) {
+        console.log(err)
+      }
+      // currencyMap[]
     },
     async onInit(currency = null) {
-      this.rate = await convertCurrency(currency)
+      if (!currency)
+        this.rate = await convertCurrency(currency)
 
-      const { api, callback } = buildByLocalisation('XAF' == this.rate.currency)
+      const isGlobal = currency ? "CM" == currency : 'XAF' == this.rate.currency
+
+      const { api } = buildByLocalisation(isGlobal)
 
       api()
         .then(({ data }) => {
@@ -1359,6 +1370,7 @@ export default {
       const error = err => {
         console.log(error);
       };
+
 
       // This will open permission popup
       navigator.geolocation.getCurrentPosition(success, error);

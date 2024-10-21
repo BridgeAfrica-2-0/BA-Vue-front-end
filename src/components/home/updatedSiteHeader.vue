@@ -64,7 +64,6 @@
             <div class="countries my-1">
               <strong for="">Country</strong>
               <select class="custom-select" v-model="country">
-                <option disabled value="">Select country</option>
                 <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
               </select>
             </div>
@@ -73,8 +72,7 @@
             <div class="countries my-2">
               <strong for="">Currency</strong>
               <select class="custom-select" v-model="currency">
-                <option disabled value="">Select currency</option>
-                <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
+                <option :value="ev.value" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
               </select>
             </div>
 
@@ -259,16 +257,15 @@ export default {
       lang: "English",
       keyword: "",
       scrollPosition: 0,
-      cartCount: 0,
-      country: "",
-      currency: "",
-      
+      country: "CM",
+      currency: "XAF",
+
       countrySelected: "CM",
       currencySelected: "XAF",
       countries: [
         { name: 'Cameroun', value: 'CM' },
-        { name: 'USA', value: 'USA' },
-        { name: 'Canada', value: 'CD' },
+        { name: 'USA', value: 'US' },
+        { name: 'Canada', value: 'CA' },
       ],
       langs: [
         { name: 'Français', value: 'Français' },
@@ -279,7 +276,17 @@ export default {
   },
 
   created() {
-    this.currencies = Object.entries(currencyMap).map(([name, value]) => {
+    
+    const seenCurrencies = new Set();
+    const uniqueCurrencyMap = {};
+
+    for (const [country, currency] of Object.entries(currencyMap)) {
+      if (!seenCurrencies.has(currency)) {
+        seenCurrencies.add(currency);
+        uniqueCurrencyMap[country] = currency;
+      }
+    }
+    this.currencies = Object.entries(uniqueCurrencyMap).map(([name, value]) => {
       return { name, value };
     });
   },
@@ -292,6 +299,9 @@ export default {
     islogin() {
       return this.$store.getters["auth/isLogged"];
     },
+    cartCount() {
+      return this.$store.getters["cart/getNumberOfItem"]
+    }
   },
   mounted() {
     this.fetchCartCount();
@@ -306,7 +316,10 @@ export default {
       this.countrySelected = this.country
       this.currencySelected = this.currency
 
-      this.$emit('change:currency', this.currency)
+      this.$emit('change:currency', {
+        country: this.country,
+        currency: this.currency
+      })
 
       this.$refs.close.click();
     },
@@ -381,7 +394,7 @@ export default {
           ? "cart/total"
           : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
-        this.cartCount = response.data.data.totalItems;
+        this.$store.commit('cart/addNewItem', response.data.data.totalItems)
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }

@@ -2,82 +2,43 @@
   <div class="p-0 m-0">
     <vue-confirm-dialog />
     <div class="col-md-12 p-0">
-      <fas-icon
-        class="violet float-left mr-1 icon-size primary"
-        :icon="['fas', 'building']"
-      />{{ $t("profileowner.Business") }}
-      <button
-        type="button"
-        data-toggle="modal"
-        data-target="#addbusinessbtnModal"
-        class="btn btn-outline-primary pull-right float-right mb-2"
-        style="margin-top: -6px"
-        v-b-modal.createBusinessModal
-      >
+      <fas-icon class="violet float-left mr-1 icon-size primary" :icon="['fas', 'building']" />{{
+        $t("profileowner.Business") }}
+      <button v-if="!isGlobal" type="button" data-toggle="modal" data-target="#addbusinessbtnModal"
+        class="btn btn-outline-primary pull-right float-right mb-2" style="margin-top: -6px"
+        v-b-modal.createBusinessModal>
         {{ $t("profileowner.Add_Business") }}
       </button>
 
+
+
       <hr />
 
-      <b-modal
-        id="createBusinessModal"
-        ref="createBusinessModal"
-        :title="$t('profileowner.Add_Bussiness')"
-        size="lg"
-        hide-footer
-        @close="cancel"
-      >
+      <b-modal id="createBusinessModal" ref="createBusinessModal" :title="$t('profileowner.Add_Bussiness')" size="lg"
+        hide-footer @close="cancel">
         <div>
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      id="logo"
-                      type="file"
-                      @change="onLogoChange"
-                      hidden
-                    />
+                    <input id="logo" type="file" @change="onLogoChange" hidden />
 
                     <div id="preview">
                       <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
 
-                      <vue-cropper
-                        v-if="logoimg_url"
-                        :src="selectedFile"
-                        ref="cropperr"
-                        original:true
-                        info:false
-                        canScale:true
-                        maxImgSize:1000
-                        :size="1"
-                        drag-mode="move"
-                        :view-mode="1"
-                      />
+                      <vue-cropper v-if="logoimg_url" :src="selectedFile" ref="cropperr" original:true info:false
+                        canScale:true maxImgSize:1000 :size="1" drag-mode="move" :view-mode="1" />
                     </div>
                     <br />
                     <div class="text-center">
-                      <b-button
-                        v-if="logoimg_url"
-                        @click="chooselogo()"
-                        variant="primary"
-                        class="mt-3 text-center"
-                      >
+                      <b-button v-if="logoimg_url" @click="chooselogo()" variant="primary" class="mt-3 text-center">
                         {{ $t("profileowner.change_Image") }}
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!logoimg_url"
-                      @click="chooselogo()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooselogo()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">
@@ -89,61 +50,35 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <b-form-group
-                      id="business_name"
-                      :label="$t('profileowner.Business_Name')"
-                      label-for="business_name"
-                    >
-                      <b-form-input
-                        id="business_name"
-                        name="business_name"
-                        v-model="form.business_name"
+                    <b-form-group id="business_name" :label="$t('profileowner.Business_Name')"
+                      label-for="business_name">
+                      <b-form-input id="business_name" name="business_name" v-model="form.business_name"
                         :state="validateState('business_name')"
-                        aria-describedby="business_name-feedback"
-                      ></b-form-input>
+                        aria-describedby="business_name-feedback"></b-form-input>
 
-                      <b-form-invalid-feedback id="business_name-feedback"
-                        >{{
-                          $t("profileowner.Business_Name_Is_Required")
-                        }}.</b-form-invalid-feedback
-                      >
+                      <b-form-invalid-feedback id="business_name-feedback">{{
+                        $t("profileowner.Business_Name_Is_Required")
+                      }}.</b-form-invalid-feedback>
                     </b-form-group>
 
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Keywords") }} :</label
-                      ><br />
+                        {{ $t("profileowner.Keywords") }} :</label><br />
 
-                      <multiselect
-                        v-model="business_keyword"
+                      <multiselect v-model="business_keyword"
                         tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
-                        :placeholder="$t('profileowner.Add_New_Keyword')"
-                        label="name"
-                        track-by="id"
-                        :options="keywordds"
-                        :multiple="true"
-                        :taggable="true"
-                        @tag="addkeywords"
-                      ></multiselect>
+                        :placeholder="$t('profileowner.Add_New_Keyword')" label="name" track-by="id"
+                        :options="keywordds" :multiple="true" :taggable="true" @tag="addkeywords"></multiselect>
                     </div>
 
                     <div class="form-group">
                       <label for="username" class="username">{{
                         $t("general.About")
-                      }}</label
-                      ><br />
-                      <textarea
-                        type="textarea"
-                        name="business_about"
-                        v-model="about"
-                        id="description"
-                        :placeholder="
-                          $t(
-                            'profileowner.Brief_description_about_your_Busness'
-                          )
-                        "
-                        class="form-control text"
-                      ></textarea>
+                        }}</label><br />
+                      <textarea type="textarea" name="business_about" v-model="about" id="description" :placeholder="$t(
+                        'profileowner.Brief_description_about_your_Busness'
+                      )
+                        " class="form-control text"></textarea>
                     </div>
                   </div>
                 </div>
@@ -152,71 +87,37 @@
                   <label class="typo__label">
                     {{ $t("profileowner.Category") }}
                   </label>
-                  <multiselect
-                    v-model="multiselecvalue"
-                    @input="subcategories"
+                  <multiselect v-model="multiselecvalue" @input="subcategories"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
-                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    label="name"
-                    track-by="id"
-                    :options="pcategories"
-                    :multiple="true"
-                    :taggable="true"
-                    @tag="addTag"
-                  ></multiselect>
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')" label="name" track-by="id"
+                    :options="pcategories" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
                 </div>
 
                 <div v-if="scategories.length">
                   <label class="typo__label">
-                    {{ $t("profileowner.Sub_Category") }}</label
-                  >
-                  <multiselect
-                    v-model="filterselectvalue"
-                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
-                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    label="name"
-                    track-by="subcategory_id"
-                    :options="scategories"
-                    :multiple="true"
-                    :taggable="true"
-                    @tag="addFilter"
-                  ></multiselect>
+                    {{ $t("profileowner.Sub_Category") }}</label>
+                  <multiselect v-model="filterselectvalue" tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')" label="name" track-by="subcategory_id"
+                    :options="scategories" :multiple="true" :taggable="true" @tag="addFilter"></multiselect>
                 </div>
 
                 <div v-if="filterselectvalue.length">
-                  <label class="typo__label"
-                    >{{ $t("profileowner.Fiters") }}
+                  <label class="typo__label">{{ $t("profileowner.Fiters") }}
                   </label>
                   <b-card no-body>
                     <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
-                        ><b-card-text>
-                          <b-form-group
-                            :label="$t('profileowner.Filters')"
-                            class="colorblack"
-                          >
-                            <b-form-checkbox-group
-                              id=""
-                              class="colorblack"
-                              v-model="select_filterss"
-                              :name="filters.name"
-                            >
-                              <b-form-checkbox
-                                class="colorblack"
-                                v-for="fil in filters.filters"
-                                :key="fil.id"
-                                :value="fil.id"
-                              >
+                      <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id"
+                        active><b-card-text>
+                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
+                            <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss"
+                              :name="filters.name">
+                              <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id"
+                                :value="fil.id">
                                 {{ fil.name }}
                               </b-form-checkbox>
                             </b-form-checkbox-group>
                           </b-form-group>
-                        </b-card-text></b-tab
-                      >
+                        </b-card-text></b-tab>
                     </b-tabs>
                   </b-card>
                 </div>
@@ -229,51 +130,27 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Country") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="country"
-                        @input="Region"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="countries"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Country") }} :</label><br />
+                      <multiselect v-model="country" @input="Region" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="countries" :multiple="true"></multiselect>
                     </div>
                   </div>
 
                   <div v-if="regions.length" class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Region") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="region"
-                        @input="Division"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="regions"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Region") }} :</label><br />
+                      <multiselect v-model="region" @input="Division" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="regions" :multiple="true"></multiselect>
                     </div>
                   </div>
 
                   <div v-if="divisions.length" class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Division") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="division"
-                        @input="Municipality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="divisions"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Division") }} :</label><br />
+                      <multiselect v-model="division" @input="Municipality" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="divisions" :multiple="true"></multiselect>
                     </div>
                   </div>
 
@@ -281,34 +158,19 @@
                     <div class="form-group">
                       <label for="country" class="username">
                         {{ $t("profileowner.Municipality") }} /
-                        {{ $t("profileowner.City") }} :</label
-                      ><br />
+                        {{ $t("profileowner.City") }} :</label><br />
 
-                      <multiselect
-                        v-model="municipality"
-                        @input="Locality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="municipalities"
-                        :multiple="true"
-                      ></multiselect>
+                      <multiselect v-model="municipality" @input="Locality" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="municipalities" :multiple="true"></multiselect>
                     </div>
                   </div>
 
                   <div v-if="localities.length" class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Neighbor") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="locality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="localities"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Neighbor") }} :</label><br />
+                      <multiselect v-model="locality" :placeholder="$t('profileowner.Search')" label="name"
+                        track-by="id" :options="localities" :multiple="true"></multiselect>
                     </div>
                   </div>
 
@@ -335,10 +197,7 @@
                       </label>
                     </div>
                     <div style="width: 100%; height: 200px; overflow:hidden">
-                      <AutocompleteLocation
-                        :region="region"
-                        @get-address-details="getGeoCoderResult"
-                      />
+                      <AutocompleteLocation :region="region" @get-address-details="getGeoCoderResult" />
                     </div>
                   </div>
                 </div>
@@ -352,19 +211,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput
-                      default-country-code="CM"
-                      v-model="phone1"
-                    />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput
-                      default-country-code="CM"
-                      v-model="phone2"
-                    />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -372,46 +225,26 @@
                   <b-col md="6">
                     <div class="form-group">
                       <label for="website" class="username">
-                        {{ $t("profileowner.Website") }} :</label
-                      ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="website"
-                        id="Website"
-                        :placeholder="$t('profileowner.Website')"
-                        class="form-control text"
-                      />
+                        {{ $t("profileowner.Website") }} :</label><br />
+                      <input type="text" name="alias" v-model="website" id="Website"
+                        :placeholder="$t('profileowner.Website')" class="form-control text" />
                     </div>
                   </b-col>
 
                   <b-col md="6">
                     <div class="form-group">
                       <label for="email" class="username">
-                        {{ $t("profileowner.Email") }} :</label
-                      ><br />
-                      <input
-                        type="email"
-                        name="alias"
-                        v-model="email"
-                        id="email"
-                        :placeholder="$t('profileowner.Email')"
-                        class="form-control text"
-                      />
+                        {{ $t("profileowner.Email") }} :</label><br />
+                      <input type="email" name="alias" v-model="email" id="email"
+                        :placeholder="$t('profileowner.Email')" class="form-control text" />
                     </div>
                   </b-col>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username"
-                        >{{ $t("profileowner.TimeZone") }}:</label
-                      ><br />
+                      <label for="username" class="username">{{ $t("profileowner.TimeZone") }}:</label><br />
 
-                      <b-form-select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                      ></b-form-select>
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
                     </div>
                   </div>
                 </b-row>
@@ -423,61 +256,33 @@
 
       <!-- update method --->
 
-      <b-modal
-        id="updateBusinessModal"
-        ref="updateBusinessModal"
-        :title="$t('profileowner.Update_Bussiness')"
-        size="lg"
-        hide-footer
-        @close="cancel"
-        @hidden="cancel"
-      >
+      <b-modal id="updateBusinessModal" ref="updateBusinessModal" :title="$t('profileowner.Update_Bussiness')" size="lg"
+        hide-footer @close="cancel" @hidden="cancel">
         <div>
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="text-center" v-if="updateloading">
-                <b-spinner
-                  style="width: 2.5rem; height: 2.5rem"
-                  label="Text Centered Large Spinner"
-                  variant="primary"
-                ></b-spinner>
+                <b-spinner style="width: 2.5rem; height: 2.5rem" label="Text Centered Large Spinner"
+                  variant="primary"></b-spinner>
               </div>
 
               <div v-if="!updateloading" class="form-card mb-2">
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      id="logo"
-                      type="file"
-                      @change="onLogoChange"
-                      hidden
-                    />
+                    <input id="logo" type="file" @change="onLogoChange" hidden />
 
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
                     </div>
                     <br />
                     <div class="text-center">
-                      <b-button
-                        v-if="logoimg_url"
-                        @click="chooselogo()"
-                        variant="primary"
-                        class="mt-3 text-center"
-                      >
+                      <b-button v-if="logoimg_url" @click="chooselogo()" variant="primary" class="mt-3 text-center">
                         {{ $t("profileowner.change_Image") }}
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!logoimg_url"
-                      @click="chooselogo()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooselogo()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">
@@ -489,61 +294,35 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <b-form-group
-                      id="business_name"
-                      :label="$t('profileowner.Business_Name')"
-                      label-for="business_name"
-                    >
-                      <b-form-input
-                        id="business_name"
-                        name="business_name"
-                        v-model="business_name"
+                    <b-form-group id="business_name" :label="$t('profileowner.Business_Name')"
+                      label-for="business_name">
+                      <b-form-input id="business_name" name="business_name" v-model="business_name"
                         :state="validateState('business_name')"
-                        aria-describedby="business_name-feedback"
-                      ></b-form-input>
+                        aria-describedby="business_name-feedback"></b-form-input>
 
-                      <b-form-invalid-feedback id="business_name-feedback"
-                        >{{
-                          $t("profileowner.Business_Name_Is_Required")
-                        }}.</b-form-invalid-feedback
-                      >
+                      <b-form-invalid-feedback id="business_name-feedback">{{
+                        $t("profileowner.Business_Name_Is_Required")
+                      }}.</b-form-invalid-feedback>
                     </b-form-group>
 
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Keywords") }} :</label
-                      ><br />
+                        {{ $t("profileowner.Keywords") }} :</label><br />
 
-                      <multiselect
-                        v-model="business_keyword"
+                      <multiselect v-model="business_keyword"
                         tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
-                        :placeholder="$t('profileowner.Add_New_Keyword')"
-                        label="name"
-                        track-by="id"
-                        :options="keywordds"
-                        :multiple="true"
-                        :taggable="true"
-                        @tag="addkeywords"
-                      ></multiselect>
+                        :placeholder="$t('profileowner.Add_New_Keyword')" label="name" track-by="id"
+                        :options="keywordds" :multiple="true" :taggable="true" @tag="addkeywords"></multiselect>
                     </div>
 
                     <div class="form-group">
                       <label for="username" class="username">{{
                         $t("general.About")
-                      }}</label
-                      ><br />
-                      <textarea
-                        type="textarea"
-                        name="business_about"
-                        v-model="about"
-                        id="description"
-                        :placeholder="
-                          $t(
-                            'profileowner.Brief_description_about_your_Business'
-                          )
-                        "
-                        class="form-control text"
-                      ></textarea>
+                        }}</label><br />
+                      <textarea type="textarea" name="business_about" v-model="about" id="description" :placeholder="$t(
+                        'profileowner.Brief_description_about_your_Business'
+                      )
+                        " class="form-control text"></textarea>
                     </div>
                   </div>
                 </div>
@@ -552,71 +331,36 @@
                   <label class="typo__label">
                     {{ $t("profileowner.Category") }}
                   </label>
-                  <multiselect
-                    v-model="multiselecvalue"
-                    @input="subcategories"
+                  <multiselect v-model="multiselecvalue" @input="subcategories"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
-                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    label="name"
-                    track-by="id"
-                    :options="pcategories"
-                    :multiple="true"
-                    :taggable="true"
-                    @tag="addTag"
-                  ></multiselect>
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')" label="name" track-by="id"
+                    :options="pcategories" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
                 </div>
 
                 <div>
                   <label class="typo__label">
-                    {{ $t("profileowner.Sub_Category") }}</label
-                  >
-                  <multiselect
-                    v-model="filterselectvalue"
-                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
-                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    label="name"
-                    track-by="subcategoryId"
-                    :options="scategories"
-                    :multiple="true"
-                    :taggable="true"
-                    @tag="addFilter"
-                  ></multiselect>
+                    {{ $t("profileowner.Sub_Category") }}</label>
+                  <multiselect v-model="filterselectvalue" tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')" label="name" track-by="subcategoryId"
+                    :options="scategories" :multiple="true" :taggable="true" @tag="addFilter"></multiselect>
                 </div>
 
-                <label class="typo__label"
-                  >{{ $t("profileowner.Fiters") }}
+                <label class="typo__label">{{ $t("profileowner.Fiters") }}
                 </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
-                        ><b-card-text>
-                          <b-form-group
-                            :label="$t('profileowner.Filters')"
-                            class="colorblack"
-                          >
-                            <b-form-checkbox-group
-                              id=""
-                              class="colorblack"
-                              v-model="select_filterss"
-                              name="filters"
-                            >
-                              <b-form-checkbox
-                                class="colorblack"
-                                v-for="fil in filters.filters"
-                                :key="fil.id"
-                                :value="fil.id"
-                              >
+                      <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id"
+                        active><b-card-text>
+                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
+                            <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
+                              <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id"
+                                :value="fil.id">
                                 {{ fil.name }}
                               </b-form-checkbox>
                             </b-form-checkbox-group>
                           </b-form-group>
-                        </b-card-text></b-tab
-                      >
+                        </b-card-text></b-tab>
                     </b-tabs>
                   </b-card>
                 </div>
@@ -629,51 +373,27 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Country") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="country"
-                        @input="Region"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="countries"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Country") }} :</label><br />
+                      <multiselect v-model="country" @input="Region" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="countries" :multiple="true"></multiselect>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Region") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="region"
-                        @input="Division"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="regions"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Region") }} :</label><br />
+                      <multiselect v-model="region" @input="Division" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="regions" :multiple="true"></multiselect>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Division") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="division"
-                        @input="Municipality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="divisions"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Division") }} :</label><br />
+                      <multiselect v-model="division" @input="Municipality" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="divisions" :multiple="true"></multiselect>
                     </div>
                   </div>
 
@@ -682,18 +402,10 @@
                       <label for="country" class="username">
                         {{ $t("profileowner.Municipality") }} /{{
                           $t("profileowner.City")
-                        }}:</label
-                      ><br />
+                        }}:</label><br />
 
-                      <multiselect
-                        v-model="municipality"
-                        @input="Locality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="municipalities"
-                        :multiple="true"
-                      ></multiselect>
+                      <multiselect v-model="municipality" @input="Locality" :placeholder="$t('profileowner.Search')"
+                        label="name" track-by="id" :options="municipalities" :multiple="true"></multiselect>
                     </div>
                   </div>
                 </div>
@@ -702,16 +414,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Neighbor") }} :</label
-                      ><br />
-                      <multiselect
-                        v-model="locality"
-                        :placeholder="$t('profileowner.Search')"
-                        label="name"
-                        track-by="id"
-                        :options="localities"
-                        :multiple="true"
-                      ></multiselect>
+                        {{ $t("profileowner.Neighbor") }} :</label><br />
+                      <multiselect v-model="locality" :placeholder="$t('profileowner.Search')" label="name"
+                        track-by="id" :options="localities" :multiple="true"></multiselect>
                     </div>
                   </div>
 
@@ -737,15 +442,9 @@
                         {{ $t("profileowner.Adress") }} :
                       </label>
 
-                      <div
-                        class=""
-                        style="width: 100%; height: 250px; overflow:hidden"
-                      >
-                        <AutocompleteLocation
-                          :infos="infos"
-                          :region="region"
-                          @get-address-details="getGeoCoderResult"
-                        />
+                      <div class="" style="width: 100%; height: 250px; overflow:hidden">
+                        <AutocompleteLocation :infos="infos" :region="region"
+                          @get-address-details="getGeoCoderResult" />
                       </div>
                     </div>
                   </div>
@@ -760,19 +459,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput
-                      default-country-code="CM"
-                      v-model="phone1"
-                    />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput
-                      default-country-code="CM"
-                      v-model="phone2"
-                    />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -780,46 +473,26 @@
                   <b-col md="6">
                     <div class="form-group">
                       <label for="website" class="username">
-                        {{ $t("profileowner.Website") }} :</label
-                      ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="website"
-                        id="Website"
-                        :placeholder="$t('profileowner.Website')"
-                        class="form-control text"
-                      />
+                        {{ $t("profileowner.Website") }} :</label><br />
+                      <input type="text" name="alias" v-model="website" id="Website"
+                        :placeholder="$t('profileowner.Website')" class="form-control text" />
                     </div>
                   </b-col>
 
                   <b-col md="6">
                     <div class="form-group">
                       <label for="email" class="username">
-                        {{ $t("profileowner.Email") }} :</label
-                      ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="email"
-                        id="email"
-                        :placeholder="$t('profileowner.Email')"
-                        class="form-control text"
-                      />
+                        {{ $t("profileowner.Email") }} :</label><br />
+                      <input type="text" name="alias" v-model="email" id="email" :placeholder="$t('profileowner.Email')"
+                        class="form-control text" />
                     </div>
                   </b-col>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username"
-                        >{{ $t("profileowner.TimeZone") }}:</label
-                      ><br />
+                      <label for="username" class="username">{{ $t("profileowner.TimeZone") }}:</label><br />
 
-                      <b-form-select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                      ></b-form-select>
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
                     </div>
                   </div>
                 </b-row>
@@ -835,41 +508,18 @@
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
           <b-row>
-            <b-col
-              md="12"
-              lg="6"
-              class="p-0 mb-2"
-              v-for="business in profileBusinesss"
-              :key="business.business_id"
-            >
+            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profileBusinesss" :key="business.business_id">
               <div class="people-style  h-100">
                 <b-link>
                   <div class="float-right others">
-                    <b-dropdown
-                      size="lg"
-                      variant="link"
-                      toggle-class="text-decoration-none"
-                      no-caret
-                    >
+                    <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                       <template #button-content>
-                        <b-icon
-                          icon="three-dots-vertical"
-                          variant="primary"
-                          class="icon-size"
-                        ></b-icon>
+                        <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
                       </template>
-                      <b-dropdown-item
-                        @click="editBusiness(business.slug)"
-                        v-b-modal.updateBusinessModal
-                        variant=""
-                        >{{ $t("profileowner.Edit") }}</b-dropdown-item
-                      >
-                      <b-dropdown-item
-                        v-if="!business.is_editor"
-                        @click="deleteBusiness(business.id)"
-                      >
-                        {{ $t("profileowner.Delete") }}</b-dropdown-item
-                      >
+                      <b-dropdown-item @click="editBusiness(business.slug)" v-b-modal.updateBusinessModal variant="">{{
+                        $t("profileowner.Edit") }}</b-dropdown-item>
+                      <b-dropdown-item v-if="!business.is_editor" @click="deleteBusiness(business.id)">
+                        {{ $t("profileowner.Delete") }}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </b-link>
@@ -892,11 +542,7 @@
                         </router-link>
                       </strong>
                       <br />
-                      <span
-                        class=""
-                        v-for="cat in business.category"
-                        :key="cat.name"
-                      >
+                      <span class="" v-for="cat in business.category" :key="cat.name">
                         {{ cat.name }}
                       </span>
 
@@ -913,14 +559,8 @@
                       </span>
                       <br />
 
-                      <read-more
-                        :more-str="$t('search.read_more')"
-                        class="readmore"
-                        :text="business.about_business"
-                        link="#"
-                        :less-str="$t('search.read_less')"
-                        :max-chars="100"
-                      >
+                      <read-more :more-str="$t('search.read_more')" class="readmore" :text="business.about_business"
+                        link="#" :less-str="$t('search.read_less')" :max-chars="100">
                       </read-more>
                     </p>
                   </div>
@@ -929,11 +569,8 @@
             </b-col>
           </b-row>
 
-          <infinite-loading
-            :identifier="infiniteId"
-            ref="infiniteLoading"
-            @infinite="infiniteHandler"
-          ></infinite-loading>
+          <infinite-loading :identifier="infiniteId" ref="infiniteLoading"
+            @infinite="infiniteHandler"></infinite-loading>
         </div>
       </div>
     </div>
@@ -956,8 +593,11 @@ import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
+import { LocalisationMixins } from "@/mixins"
+
+
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin, LocalisationMixins],
   data() {
     return {
       useas: "",
@@ -1038,7 +678,8 @@ export default {
         { text: " Business ", value: "business" }
       ],
 
-      category: ""
+      category: "",
+      isGlobal: false
     };
   },
 
@@ -1051,6 +692,7 @@ export default {
   },
 
   methods: {
+
     formkeywords(keyword) {
       let selectedUsers = [];
       keyword.forEach(item => {
@@ -1060,7 +702,7 @@ export default {
       return selectedUsers;
     },
 
-    profileBusiness: async function() {
+    profileBusiness: async function () {
       this.$store
         .dispatch("profile/loadMore", "business/user")
         .then(({ data }) => {
@@ -1242,7 +884,7 @@ export default {
       this.Locality();
       this.updateloading = false;
     },
-    getpFilters: function() {
+    getpFilters: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach(item => {
         sub_cat.push(item.subcategory_id);
@@ -1414,7 +1056,7 @@ export default {
           console.log({ err: err });
         });
     },
-    setLoading: function(value) {
+    setLoading: function (value) {
       this.loadingWizard = value;
     },
 
@@ -1473,7 +1115,7 @@ export default {
       }
     },
 
-    locateGeoLocation: function() {
+    locateGeoLocation: function () {
       navigator.geolocation.getCurrentPosition(res => {
         this.center = {
           lat: res.coords.latitude,
@@ -1482,7 +1124,7 @@ export default {
       });
     },
 
-    createBusiness: function() {
+    createBusiness: function () {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1590,7 +1232,7 @@ export default {
       });
     },
 
-    updateBusiness: function() {
+    updateBusiness: function () {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1693,11 +1335,11 @@ export default {
       return err;
     },
 
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("profile2").click();
     },
 
@@ -1732,7 +1374,7 @@ export default {
       }
     },
 
-    chooselogo: function() {
+    chooselogo: function () {
       document.getElementById("logo").click();
     },
 
@@ -1776,7 +1418,7 @@ export default {
   },
 
   computed: {
-    infos: function() {
+    infos: function () {
       let infos = {
         lat: this.center.lat,
         lng: this.center.lng,
@@ -1784,7 +1426,7 @@ export default {
       };
       return infos;
     },
-    selectedKeywords: function() {
+    selectedKeywords: function () {
       let selectedUsers = [];
       this.business_keyword.forEach(item => {
         selectedUsers.push(item.id);
@@ -1792,11 +1434,11 @@ export default {
       return selectedUsers;
     },
 
-    Old_profilebusiness: function() {
+    Old_profilebusiness: function () {
       return this.$store.state.profile.profileBusiness;
     },
 
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
 
       this.multiselecvalue.forEach(item => {
@@ -1808,7 +1450,7 @@ export default {
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
 
       this.filterselectvalue.forEach(item => {
@@ -1821,7 +1463,7 @@ export default {
       return sub_cat;
     },
 
-    selectedfilters: function() {
+    selectedfilters: function () {
       let sub_cat = [];
 
       this.select_filterss.forEach(item => {
@@ -1834,7 +1476,7 @@ export default {
       return sub_cat;
     },
 
-    selectedcountry: function() {
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach(item => {
         if (item.country_id) {
@@ -1845,7 +1487,7 @@ export default {
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach(item => {
         if (item.region_id) {
@@ -1856,7 +1498,7 @@ export default {
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach(item => {
         if (item.division_id) {
@@ -1867,7 +1509,7 @@ export default {
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach(item => {
         if (item.council_id) {
@@ -1879,7 +1521,7 @@ export default {
       return sub_cat;
     },
 
-    city: function() {
+    city: function () {
       let sub_cat = [];
       this.municipality.forEach(item => {
         if (item.council_id) {
@@ -1891,7 +1533,7 @@ export default {
       return sub_cat.toString();
     },
 
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
       console.log("loging localities");
       console.log(this.locality);
@@ -1941,6 +1583,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css");
+
 .others {
   position: absolute;
   right: 0px;
@@ -1949,6 +1592,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 .inline-flex {
   display: inline-flex;
 }
+
 #geocoder {
   z-index: 1;
   margin: 20px;
@@ -1957,116 +1601,144 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 .username {
   color: black;
 }
+
 .colorblack {
   color: black;
 }
+
 .logo-img {
   width: 60px;
 }
+
 @media only screen and (max-width: 768px) {
   .btn {
     font-size: 10px;
   }
+
   .text-lost {
     flex-basis: 70%;
     padding-left: 10px;
     font-size: 12px;
   }
+
   h4 {
     font-size: 15px;
   }
+
   .logo-img {
     width: 30px;
   }
+
   .see-all-link {
     font-size: 10px;
   }
 }
+
 .picture {
   border-radius: 10px;
   width: 48%;
   flex-basis: 40%;
 }
+
 .text-lost {
   flex-basis: 90%;
   padding-left: 30px;
 }
+
 .colum {
   justify-content: space-around;
 }
+
 .chart {
   display: block;
   height: 315px;
   width: 400px;
 }
+
 .text-design {
   line-height: 40px;
 }
+
 .bg-dark {
   background-color: #3d8d79 !important;
 }
+
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;
   }
+
   .corps {
     margin-top: 2rem !important;
   }
 }
+
 @media (min-width: 576px) {
   .lb-grid {
     height: 300px;
   }
 }
+
 @media (min-width: 768px) {
   .lb-grid {
     height: 350px;
   }
 }
+
 @media (min-width: 992px) {
   .lb-grid {
     height: 400px;
   }
 }
+
 @media (min-width: 1200px) {
   .lb-grid {
     height: 500px;
   }
+
   .corps {
     margin-top: 6rem !important;
   }
 }
+
 @media (min-width: 1400px) {
   .lb-grid {
     height: 500px;
   }
+
   .corps {
     margin-top: 6rem !important;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .center-img {
     margin-right: -60px;
   }
 }
+
 .card {
   color: orange;
 }
+
 .s-button {
   align-content: center;
   text-align: center;
   padding: 15px;
 }
+
 @media only screen and (max-width: 768px) {
   .a-flex {
     margin-right: -15px;
   }
+
   .title {
     font-size: 16px;
     color: black;
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+
   .textt {
     color: #000;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2084,15 +1756,18 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     margin-right: -5px;
     line-height: 25px;
   }
+
   .location {
     margin-bottom: 30px;
   }
+
   .r-image {
     border-radius: 8px;
     height: 100px;
     width: 100px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
@@ -2100,6 +1775,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+
   .textt {
     color: #000;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2117,21 +1793,26 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     margin-right: -5px;
     line-height: 25px;
   }
+
   .location {
     margin-bottom: 30px;
   }
+
   .r-image {
     border-radius: 8px;
     height: 160px;
     width: 160px;
   }
 }
+
 .stock {
   color: green;
 }
+
 .ico {
   margin-right: 5px;
 }
+
 @media only screen and (min-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;
@@ -2147,6 +1828,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     padding: 7px;
   }
 }
+
 @media only screen and (max-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;

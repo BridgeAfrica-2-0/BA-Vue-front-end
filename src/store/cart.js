@@ -6,12 +6,19 @@ export default {
   state: {
     cart: [],
     status: "",
+    nbreOfItem: 0
   },
 
   mutations: {
     setStatus(state, status) {
       state.status = status;
     },
+    addNewItem(state, itemNumber=1) {
+      state.nbreOfItem = state.nbreOfItem + itemNumber
+    }
+  },
+  getters: {
+    getNumberOfItem: state => state.nbreOfItem,
   },
   actions: {
     async addToCart({ commit }, { product, islogin }) {
@@ -38,6 +45,8 @@ export default {
           //   console.log("No Set-Cookie header received");
           // }
           commit("setStatus", data.data.message);
+          commit("addNewItem");
+
         })
         .catch((error) => {
           console.log({ error: error });

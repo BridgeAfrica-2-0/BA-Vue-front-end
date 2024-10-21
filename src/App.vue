@@ -243,6 +243,10 @@ export default {
   z-index: 9999 !important;
 }
 
+.text-black {
+  color: #000
+}
+
 .primary {
   color: #e75c18;
 }

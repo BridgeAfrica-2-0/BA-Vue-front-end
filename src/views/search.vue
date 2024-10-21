@@ -17,7 +17,6 @@
           @click.native="strategY['business']"
           v-if="selectedId == 1"
         />
-        
         <Button
           media="desktop"
           @click.native="strategY['network']"
@@ -78,8 +77,22 @@
         />
       </template>
     </Nav>
-
-    <!-- <SubNav
+    <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
+      <div class="row mb-5 mt-4 gap-3 align-items-center">
+      <div class="col-lg-7">
+        <h1 class="font-weight-bold" style="font-size: 3.2em;">
+          <span class="primary">{{ $t("search.buy_quality_products") }}</span>
+          <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world") }}</span>
+        </h1>
+        <div class="text-dark mt-3 text-black font-weight-bold" style="font-size: 1.3em;">{{ $t("search.with_over_100_categories_of_products") }}</div>
+      </div>
+      <div class="col-lg-5 shadow-sm text-center">
+        <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" src="assets/home/marketplace.png" class="aos-init aos-animate img-size"
+        >
+      </div>
+    </div>
+    </div>
+    <SubNav
       @onChangeCategoryName="(val) => (categoryName = val)"
       @category="getCategory"
       @parentcategory="getparentCategory"
@@ -89,11 +102,11 @@
       @activateSuggestion="activateSuggestion"
       @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
-    /> -->
+    />
 
     <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 
-    <div v-if="islogin" class="container searchly moveup">
+    <!-- <div v-if="islogin" class="container searchly moveup">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -113,7 +126,7 @@
         @change="handleChange"
       >
       </ly-tab>
-    </div>
+    </div> -->
 
     <hr style="margin-top: -0px" />
 
@@ -336,7 +349,7 @@
     </div>
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
-        <b-col cols="0" md="0" xl="3" class="leftblock">
+        <b-col cols="0" md="0" xl="2" class="leftblock">
           <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
@@ -351,272 +364,17 @@
           </div>
         </b-col>
 
-        <b-col cols="12" md="12" lg="12" xl="9" ref="middleblock">
-          <div class="container-flex a-flex">
-            <!--filter for all takes just two fields at a time  -->
-            
-            <div id="all" v-if="selectedId == '5' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Network") }}
-              </h6>
-
-              <MiniNetwork />
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 4">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-            <div v-else-if="selectedId == '4' && !islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-
-            <!--  select just businesses      -->
-
-            <div id="businesses" v-if="selectedId == '1'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-              <!-- <b-spinner
-                v-if="prodLoaderr"
-                variant="primary"
-                :label="$t('search.Spinning')"
-              ></b-spinner> -->
-            </div>
-
-            <!-- filter out only people -->
-
-            <component :is="isComponent" :title="notFoundComponentTitle" />
-
-            <!-- filter out just the network  -->
-
-            <div v-if="selectedId == '3' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Networks") }}
-              </h6>
-
-              <Network />
-            </div>
+        <b-col cols="12" md="10" lg="10" xl="10" ref="middleblock">
+          <div class="container-flex a-flex"> 
 
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '0'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
 
               <div>
                 <Sponsor />
               </div>
-              <br />
-              <h6 class="mb-3">
+              <!-- <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
                 <b-button
@@ -650,7 +408,7 @@
                     ></span>
                   </b-button>
                 </div>
-              </h6>
+              </h6> -->
               <b-alert
                 v-model="showDismissibleAlert"
                 variant="success"
@@ -658,11 +416,10 @@
               >
                 {{ $t("search.List_of_products_up_to_date") }}
               </b-alert>
-              <Market class="mt-3" />
+              <Market class="mt-1" />
             </div>
           </div>
         </b-col>
-
         <!-- <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
@@ -692,6 +449,129 @@
           </div>
         </b-col> -->
       </b-row>
+    </div>
+    <div class="container mb-3 mt-4" style="max-width: 80%;">
+    <div class="row g-0">
+      <!-- Image à gauche -->
+      <div class="col-lg-6 col-md-12">
+        <img src="../assets/img/coach2.png" class="img-fluid rounded" alt="Pottery Image">
+      </div>
+
+      <!-- Contenu à droite -->
+      <div class="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
+        <div class="bg-white p-4 d-none d-lg-block" style="border-radius: 25px; margin-left: -150px;">
+          <div class="">
+          <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span> 
+            <span class="text-black"> Selling to the World.</span> </h3>
+          <p class="card-text text-black my-4">
+            While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will enable you to do the full e-commerce transaction cycle.
+          </p>
+
+          <!-- Liste d'avantages -->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Marketplace access:</strong> 
+                <div class="text-black">Unlimited marketplace to sell to millions around you and the world.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-credit-card mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Online Payment System:</strong> 
+                <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-search mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Rank top on search results:</strong> 
+                <div class="text-black">Businesses on advanced accounts are ranked first on our search results.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-sms mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Advanced messaging system:</strong> 
+                <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Bouton Upgrade -->
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+          </div>
+        </div>
+        </div>
+        <div class="bg-white p-4 d-block d-lg-none" style="border-radius: 25px; margin-left: 0;">
+          <div class="">
+          <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span> 
+            <span class="text-black"> Selling to the World.</span> </h3>
+          <p class="card-text text-black my-4">
+            While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will enable you to do the full e-commerce transaction cycle.
+          </p>
+
+          <!-- Liste d'avantages -->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Marketplace access:</strong> 
+                <div class="text-black">Unlimited marketplace to sell to millions around you and the world.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-credit-card mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Online Payment System:</strong> 
+                <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-search mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Rank top on search results:</strong> 
+                <div class="text-black">Businesses on advanced accounts are ranked first on our search results.</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex mb-3">
+              <i class="fa fa-sms mr-2 text-primary"></i>
+              <div>
+                <strong class="text-black">Advanced messaging system:</strong> 
+                <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Bouton Upgrade -->
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div style="margin-top: 20em;">
+      <SiteFooter />
     </div>
   </div>
 </template>
@@ -737,6 +617,7 @@ import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { getGuestIdentifier } from '../helpers';
+import SiteFooter from "../components/home/updatedSiteFooter.vue";
 
 export default {
   components: {
@@ -763,6 +644,7 @@ export default {
     MiniMarket,
     PostComponent,
     PeopleComponent,
+    SiteFooter,
     // Footer,
   },
 
@@ -2060,6 +1942,24 @@ export default {
 </script>
 
 <style scoped>
+.rounded {
+  border-radius: 25px !important;
+}
+.text-orange {
+  color: #ff6f00; /* Couleur orange personnalisée */
+}
+.btn-orange {
+  background-color: #ff6f00;
+  color: white;
+  border: none;
+}
+.btn-orange:hover {
+  background-color: #e65c00;
+}
+.img-size {
+  height: 100%;
+  width: 500px
+}
 .searchpage {
   font-family: poppins !important;
   color: #455a64 !important;

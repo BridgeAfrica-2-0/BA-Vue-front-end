@@ -45,7 +45,7 @@
               </splide>
               <router-link to="/search">
                 <button class="shop-now-btn">
-                  <span class="shop-span">SHOP NOW</span>
+                  <span class="shop-span">{{ $t("general.shop_now") }}</span>
                 </button>
               </router-link>
             </div>
@@ -57,28 +57,27 @@
     <section class="product-section">
       <div class="container p-0">
         <h3 class="sections-title">
-          <span style="color: #E75B17;">Our</span> Quality Products
+          <span style="color: #E75B17;">{{ $t("general.our") }}</span> {{ $t("general.quality_products") }}
         </h3>
         <p class="section-description">
-          With over 100 categories of products, easily shop from businesses in
-          Cameroon anytime, anywhere.
+          {{ $t("general.with_over_100_categories") }}
         </p>
         <div class="button-group">
           <div class="button-start">
             <button class="filter-button" :class="{ active: activeTab === 'cameroon' }"
               @click="setActiveTab('cameroon')">
-              Available Cameroon
+              {{ $t("general.avaliable_in_cameroon") }}
             </button>
             <button class="filter-button" :class="{ active: activeTab === 'worldwide' }"
               @click="setActiveTab('worldwide')">
-              Available Worldwide
+              {{ $t("general.avaliable_in_worlwide") }}
             </button>
           </div>
         </div>
         <div v-if="activeTab === 'cameroon'">
           <div class="see-all-p">
             <router-link to="/search">
-              <p>See All Cameroon</p>
+              <p>{{ $t("general.see_all_cameroon") }}</p>
             </router-link>
           </div>
           <div v-if="loading" class="m-auto">
@@ -112,20 +111,20 @@
                 <div class="desktop-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="gotoproduct(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
                       <span class="arrow-icon">
                         <i class="fas fa-arrow-right"></i>
                       </span>
                     </button>
                     <button class="add-to-cart" @click="handleAddToCard(product)">
-                      <span class="px-2" style="font-size: 12px; font-weight: bold;">Add to Cart</span>
+                      <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart") }}</span>
                     </button>
                   </div>
                 </div>
                 <div class="mobile-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="gotoproduct(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">Buy Now</span>
+                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
                     </button>
                     <button class="add-to-cart" @click="handleAddToCard(product)">
                       <b-icon icon="cart-plus"></b-icon><span class="px-1"
@@ -281,9 +280,9 @@
         convertCurrency>
         <div class="flex-container">
           <h3>
-            <span class="line1">Sales channel</span><br />
-            <span class="line2">Sell to Every Buyer,</span><br />
-            <span class="line3">Everywhere</span>
+            <span class="line1">{{ $t("general.sales_channel") }}</span><br />
+            <span class="line2">{{ $t("general.sell_to_every_buyer") }},</span><br />
+            <span class="line3">{{ $t("general.everywhere") }}</span>
           </h3>
 
           <p>
@@ -291,7 +290,7 @@
             <br />
             <router-link to="/search">
               <b-button type="submit" variant="primary" block class="mb-3 mt-3 selling-btn">
-                Start Selling
+                {{ $t("general.start_selling") }}
                 <span class="arrow-icon-wrapper">
                   <i class="fas fa-arrow-right"></i>
                 </span>
@@ -397,7 +396,7 @@
       <div class="container pt-5 pb-5">
         <div class="text-center">
           <h3>
-            <span> Our </span>
+            <span> {{ $t("general.our") }} </span>
             <span style="color: black !important">{{ $t("general.categories") }}
             </span>
           </h3>
@@ -432,7 +431,7 @@
                     </label>
                     <md-field :class="getValidationClass('pname')">
                       <md-input type="text" name="name" class="ba-input" id="name"
-                        placeholder="Input Product Keyword or Name" v-model="form.pname" />
+                      :placeholder="$t('general.input_product_keyword_or_name')" v-model="form.pname" />
 
                       <span class="md-error" v-if="!$v.form.pname.required">
                         required
@@ -441,6 +440,101 @@
                   </div>
 
                   <div class="col-md-6 p-0 pr-2">
+                    <label for="qunatity" class="pb-0 label-color">
+                      {{ $t("general.Quantity") }}
+                    </label>
+                    <md-field :class="getValidationClass('quantity')">
+                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity" :placeholder="$t('general.quantity')"
+                        v-model="form.quantity" />
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="uname" class="pb-0 label-color">
+                      {{ $t("general.full_name") }}
+                    </label>
+                    <md-field :class="getValidationClass('name')">
+                      <md-input type="text" name="uname" id="uname" class="ba-input" :placeholder="$t('general.full_name')"
+                        v-model="form.name" />
+
+                      <span class="md-error" v-if="!$v.form.name.required">
+                        {{ $t("auth.First_Name_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="email" class="pb-0 label-color">
+                      {{ $t("general.Email") }}
+                    </label>
+                    <md-field class="">
+                      <md-input type="email" name="email" id="email" placeholder="Email" class="ba-input"
+                        v-model="form.email" />
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
+                    <label for="name" class="pb-0 label-color">
+                      {{ $t("general.Tel") }}
+                    </label>
+                    <md-field :class="getValidationClass('tel')">
+                      <md-input type="tel" name="tel" id="tel" placeholder="Tel." class="ba-input "
+                        v-model="form.tel" />
+
+                      <span class="md-error" v-if="!$v.form.tel.required">
+                        {{ $t("auth.tel_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+                  <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
+                    <b-button type="submit" variant="primary" class="quote-btn">
+                      {{ $t("general.Request_For_Quotation") }}
+                      <span class="arrow-icon-wrapper">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
+                    </b-button>
+                  </div>
+                  <div></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-0 m-0 quotation-form-mobile">
+      <div class="container mt-0" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+        <div class="row mt-0">
+          <div class="text-center">
+            <h3> {{ $t("general.looking_for_something_special") }} ?</h3>
+            <p style="color: black;" class="px-2"> Explore Cameroon's products and services. From custom tailoring to
+              local crafts, we've got you covered.to Measure tailoring service that represents outstanding value for
+              money</p>
+          </div>
+          <div class="col-lg-4 h-100 quote-img">
+            <v-lazy-image src="assets/home/quotation-img-mobile.png" alt="" />
+          </div>
+
+          <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
+            <div class="m-left">
+              <form novalidate @submit.prevent="validateUser">
+                <div class="form pt-1 row">
+                  <div class="col-md-12 p-0">
+                    <label for="name" class="pb-0 label-color">
+                      {{ $t("general.looking_for_something") }}
+                    </label>
+                    <md-field :class="getValidationClass('pname')">
+                      <md-input type="text" name="name" class="ba-input" id="name"
+                        placeholder="Input Product Keyword or Name" v-model="form.pname" />
+
+                      <span class="md-error" v-if="!$v.form.pname.required">
+                        required
+                      </span>
+                    </md-field>
+                  </div>
+
+                  <div class="col-md-6 p-0">
                     <label for="qunatity" class="pb-0 label-color">
                       {{ $t("general.Quantity") }}
                     </label>
@@ -464,7 +558,7 @@
                     </md-field>
                   </div>
 
-                  <div class="col-md-6 p-0 pr-2">
+                  <div class="col-md-6 p-0">
                     <label for="email" class="pb-0 label-color">
                       {{ $t("general.Email") }}
                     </label>
@@ -558,7 +652,7 @@
                   <div class="col-8 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage">4</span>
-                      <span class="text">Countries</span>
+                      <span class="text">{{ $t("general.countries") }}</span>
                     </div>
                   </div>
                 </div>
@@ -573,7 +667,7 @@
                   <div class="col-9 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage pl-1">500+</span>
-                      <span class="text">Deals Globally</span>
+                      <span class="text">{{ $t("general.deals_globally") }}</span>
                     </div>
                   </div>
                 </div>
@@ -622,12 +716,12 @@
               <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img" />
               <h3 class="mb-0 market-heading">
                 <span>{{ $t("general.cameroon_focus") }}</span>
-                <span style="color: black;">Focused {{ $t("network.Marketplace") }}</span>
+                <span style="color: black;"> {{ $t("general.focused_marketplace") }}</span>
               </h3>
             </div>
             <div class="col-12 pl-0">
               <h3 class="statistics">
-                Some of our statistics on stage performances in Cameroon
+                {{ $t("general.Some_of_our_statistics") }}
               </h3>
             </div>
           </div>
@@ -681,7 +775,7 @@
           <span style="color: black;">Focused {{ $t("network.Marketplace") }}</span>
         </h3>
         <h3 class="statistics text-center">
-          Some of our statistics on stage performances in Cameroon
+          {{ $t("general.Some_of_our_statistics") }}
         </h3>
         <div class="d-flex row">
           <div class="col-4 mt-5">
@@ -695,7 +789,7 @@
                     <div class="col-8 card-padding">
                       <div class="d-flex flex-column">
                         <span class="percentage">4</span>
-                        <span class="text">Countries</span>
+                        <span class="text">{{ $t("general.countries") }}</span>
                       </div>
                     </div>
                   </div>
@@ -710,7 +804,7 @@
                     <div class="col-9 card-padding">
                       <div class="d-flex flex-column">
                         <span class="percentage pl-1">500+</span>
-                        <span class="text">Deals Globally</span>
+                        <span class="text">{{ $t("general.deals_globally") }}</span>
                       </div>
                     </div>
                   </div>

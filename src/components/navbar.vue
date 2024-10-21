@@ -1,8 +1,8 @@
 <template>
   <header class="">
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded bg-white">
       <div class="container-fluid">
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
+        <div class="col-md-12 col-lg-3 col-xl-3">
           <span class="d-block d-lg-none">
             <b-icon icon="house-fill" style="float: left" font-scale="1.5; margin-top:5px" variant="primary"></b-icon>
           </span>
@@ -12,7 +12,7 @@
           </router-link>
         </div>
 
-        <div class="col-lg-9 col-xl-6">
+        <div class="col-lg-5 col-xl-5">
           <form class="d-block d-lg-none">
             <b-input-group class="b-shadow mt-3">
               <div class="input-group-append color-mobile" style="border: none">
@@ -29,34 +29,52 @@
                 v-on:keyup.enter="getKeyword" />
             </b-input-group>
 
-            <span style="display: none; " ref="mobileinput">
+            <!-- <span style="display: none; " ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
                 <div class="input-group-append color-mobile" style="border: none">
                   <multiselect :value="city" :options="citiesValues" placeholder="Select City" class="search-hh w-100"
                     style="border-left: none" label="label" track-by="code" @input="setSelectedLocation"></multiselect>
                 </div>
               </b-input-group>
-            </span>
+            </span> -->
           </form>
           <span class="d-none d-lg-block">
-            <form class="form-inline input-group b-shadow b-radius">
-              <input id="search-ba" type="search" data-toggle="popover" class="form-control search-h"
-                style="font-size: 17px !important" :placeholder="credentials.placeholder" v-model="credentials.keyword"
-                aria-label="" data-original-title="" title="" v-on:keyup.enter="getKeyword" />
+            <form class="form-inline input-group b-radius">
+              <input
+                id="search-ba"
+                type="search"
+                data-toggle="popover"
+                class="form-control search-h"
+                style="font-size: 17px !important"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
+                aria-label=""
+                data-original-title=""
+                title=""
+                v-on:keyup.enter="getKeyword"
+              />              
 
-              <multiselect :value="city" :options="citiesValues" placeholder="Select City"
-                class="search-hh w-44 city-search" style="border-left: none" label="label" track-by="code"
-                @input="setSelectedLocation"></multiselect>
+              <!-- <multiselect
+                :value="city"
+                :options="citiesValues"
+                placeholder="Select City"
+                class="search-hh w-44 city-search"
+                style="border-left: none"
+                label="label"
+                track-by="code"
+                @input="setSelectedLocation"
+              ></multiselect>
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
-              </slot>
+              </slot> -->
+              <button @click.native="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
         </div>
 
-        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer">
+        <div class="col-md-12 col-lg-4 col-xl-4" ref="toglercontainer">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
@@ -98,6 +116,27 @@
                   {{ $t("auth.login") }}
                 </router-link>
               </div>
+              <div class="text-center my-3">
+  <b-button id="popover-target-1" class="nav-link text-dark hov">
+    <b-link class="d-flex align-items-center" v-b-toggle="'collapse-2'">
+      <img :src="img" class="size poslang mr-1 imgLangSize" alt="">
+                        {{lang}}<a class="nav-link arrow-down p-0"></a>
+    </b-link>
+  </b-button>
+  <b-popover target="popover-target-1" triggers="hover" placement="top">
+    <b-card-text
+         @click="change('en')"
+                          class="cursor-pointer mb-2 d-flex align-items-center"
+                          ><img class="imgLangSize" src="../assets/img/about/en.png" alt="en"/>
+                          <span class="ml-1">{{ $t("auth.english") }}</span>
+                          </b-card-text
+                        >
+                        <b-card-text class="cursor-pointer d-flex align-items-center" @click="change('fr')">
+                          <img class="imgLangSize" src="../assets/img/la-france.png" alt="fr"/>
+                          <span class="ml-1">{{$t("auth.french")}}</span>
+                        </b-card-text>
+  </b-popover>
+</div>
 
               <!-- Messages Started -->
               <div v-if="islogin" class="nav-item">
@@ -427,6 +466,8 @@ export default {
       selectedUser: null,
       users: [],
       citiesValues: [],
+      img: null,
+      lang: '',
     };
   },
 
@@ -453,6 +494,14 @@ export default {
     this.fetchCartCount();
   },
   created() {
+    const currentLang = this.$i18n.locale;
+    if(currentLang == 'en'){
+        this.img = require("../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
     //check for authentication
     this.getCities();
 
@@ -559,6 +608,17 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
+    change(lang){
+      this.$i18n.locale = lang;
+
+      if(lang == 'en'){
+        this.img = require("../assets/img/about/en.png");
+        this.lang = 'English'
+      }else {
+        this.img = require("../assets/img/la-france.png");
+         this.lang = 'Français'
+      }
+    },
     setSelectedLocation(value) {
       this.city = value;
       this.credentials.location = { code: value.code, label: value.label };
@@ -855,6 +915,21 @@ export default {
 };
 </script>
 <style>
+
+.size, .imgLangSize{
+  height: 15px !important;
+  width: 15px !important;
+}
+.search-button {
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  color: white;
+  font-weight: bold;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border: none;
+  min-width: 100px;
+
+}
 .cart-icon {
   color: #e75c18 !important;
   position: relative;

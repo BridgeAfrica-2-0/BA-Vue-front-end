@@ -1207,11 +1207,13 @@ export default {
             if (err.response.status == 422) {
               console.log({ err: err });
               console.log(err.response.data.message);
+              console.log(err.response.data.errors)
+
 
               this.flashMessage.show({
                 status: "error",
-
-                message: this.flashErrors(err.response.data.errors)
+                html: this.flashErrors(err.response.data.errors),
+                wrapperClass: "p-2 d-flex"
               });
             } else if (err.response.status == 403) {
               this.flashMessage.show({
@@ -1221,7 +1223,6 @@ export default {
             } else {
               this.flashMessage.show({
                 status: "error",
-
                 message: this.$t("general.Unable_to_Create_Your_Business")
               });
               console.log({ err: err });
@@ -1329,9 +1330,8 @@ export default {
     flashErrors(errors) {
       let err = "";
       Object.values(errors).forEach(element => {
-        err = element[0];
+        err += `<p>${element[0]}</p>`;
       });
-
       return err;
     },
 

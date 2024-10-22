@@ -199,18 +199,20 @@ export const convertCurrency = async (defaultCurrency = null) => {
       userCountry = await checkCountryLocalisation();
       userCurrency = currencyMap[userCountry] || 'XAF';
     } else {
-
       userCurrency = defaultCurrency
     }
 
     const conversionRate = await getRate(userCurrency, 'XAF');
 
+    console.log(conversionRate)
     console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
 
     return { "currency": userCurrency, rate: conversionRate }
 
   } catch (error) {
     console.error('Error:', error);
+    console.error('Error in helpers:', error);
+
   }
 }
 

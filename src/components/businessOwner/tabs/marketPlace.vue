@@ -3,33 +3,19 @@
     <div class="row ">
       <div class="col-4 col-md-8">
         <p>
-          <b-icon
-            font-scale="1.8"
-            icon="shop"
-            variant="primary"
-            class="mr-2"
-          ></b-icon>
+          <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
           <span class="font-weight-bold">{{ $t("businessowner.Market") }}</span>
         </p>
       </div>
 
       <div class="col-8 col-md ">
         <div class="inline-flex marg float-right">
-          <b-button
-            v-if="isPremium"
-            class=" mx-1"
-            variant="outline-primary"
-            @click="displayOrders"
-            >{{ my_orders }}</b-button
-          >
+          <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
+            }}</b-button>
 
           <!-- <div class="col col-md"> -->
-          <b-button
-            variant="outline-primary"
-            v-if="isPremium"
-            @click="createProduct"
-            >{{ $t("businessowner.Add_Product") }}</b-button
-          >
+          <b-button variant="outline-primary" v-if="isPremium && !isGlobal" @click="createProduct">{{
+            $t("businessowner.Add_Product") }}</b-button>
         </div>
       </div>
       <!-- </div> -->
@@ -73,68 +59,28 @@
       <b-link @click="swap">{{ $t("businessowner.Archive") }}</b-link>
     </div>
     <!-- ADDPRODUCT FORM -->
-    <b-modal
-      hide-footer
-      :title="$t('businessowner.Add_product')"
-      size="lg"
-      @hidden="resetPostData"
-      v-model="showModal"
-    >
+    <b-modal hide-footer :title="$t('businessowner.Add_product')" size="lg" @hidden="resetPostData" v-model="showModal"
+      no-close-on-backdrop>
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              :label="$t('businessowner.Product_Name')"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                v-model="newProduct.name"
-                required
-              ></b-form-input>
+            <b-form-group id="input-group-1" :label="$t('businessowner.Product_Name')" label-for="input-1"
+              label-size="sm">
+              <b-form-input id="input-1" class="mt-1" type="text" v-model="newProduct.name" required></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="input-group-1"
-              :label="$t('businessowner.Product_Description')"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                v-model="newProduct.description"
-                type="text"
-                required
-              ></b-textarea>
+            <b-form-group id="input-group-1" :label="$t('businessowner.Product_Description')" label-for="input-1"
+              label-size="sm">
+              <b-textarea id="input-1" class="mt-2" v-model="newProduct.description" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div
-              class="image-upload-wrap"
-              @click="picImage"
-              style="display: flex; justify-content: center; align-items: center; overflow: hidden"
-            >
-              <input
-                type="file"
-                name=""
-                @change="getImage"
-                accept="image/*"
-                id="image"
-                v-show="false"
-                required
-              />
+            <div class="image-upload-wrap" @click="picImage"
+              style="display: flex; justify-content: center; align-items: center; overflow: hidden">
+              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div v-if="selectedImagePrv">
-                  <img
-                    :src="selectedImagePrv"
-                    :srcset="selectedImagePrv"
-                    style="min-width: 100%; min-height: 100%"
-                  />
+                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%" />
                 </div>
                 <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -145,75 +91,32 @@
           </b-col>
         </b-row>
 
-        <b-form-group
-          id="input-group-1"
-          :label="$t('businessowner.Product_Price') + '(Fcfa)'"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.price"
-            class="mt-1"
-            type="number"
-            id="price"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-1" :label="$t('businessowner.Product_Price') + '(Fcfa)'" label-for="input-1"
+          label-size="sm">
+          <b-form-input v-model="newProduct.price" class="mt-1" type="number" id="price" required></b-form-input>
         </b-form-group>
-        <b-form-checkbox
-          id="checkbox-1"
-          v-model="newProduct.on_discount"
-          name="checkbox-1"
-          value="1"
-          unchecked-value="0"
-        >
+        <b-form-checkbox id="checkbox-1" v-model="newProduct.on_discount" name="checkbox-1" value="1"
+          unchecked-value="0">
           {{ $t("businessowner.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
-        <b-form-group
-          v-if="newProduct.on_discount == 1"
-          id="input-group-1"
-          :label="$t('businessowner.discount_percentage')"
-          label-for="input-1"
-          label-size=""
-        >
-          <b-form-input
-            v-model="newProduct.discount_price"
-            class="mt-1"
-            type="number"
-            id="price"
-            required
-          ></b-form-input>
+        <b-form-group v-if="newProduct.on_discount == 1" id="input-group-1"
+          :label="$t('businessowner.discount_percentage')" label-for="input-1" label-size="">
+          <b-form-input v-model="newProduct.discount_price" class="mt-1" type="number" id="price"
+            required></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="conditions"
-          :label="$t('businessowner.Conditions')"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.condition"
-            class="mt-1"
-            id="conditions"
-            required
-          ></b-form-input>
+        <b-form-group id="conditions" :label="$t('businessowner.Conditions')" label-for="input-1" label-size="sm">
+          <b-form-input v-model="newProduct.condition" class="mt-1" id="conditions" required></b-form-input>
         </b-form-group>
 
         <!-- CHECKBOX FLEX BOX -->
         <div class="d-flex justify-content-between align-items-start flex-wrap">
-          <b-form-checkbox
-            value="1"
-            v-model="newProduct.is_service"
-            unchecked-value="0"
-          >
+          <b-form-checkbox value="1" v-model="newProduct.is_service" unchecked-value="0">
             {{ $t("businessowner.This_Item_Is_A_Service") }} ?
           </b-form-checkbox>
 
-          <b-form-checkbox
-            value="1"
-            v-model="newProduct.in_stock"
-            unchecked-value="0"
-          >
+          <b-form-checkbox value="1" v-model="newProduct.in_stock" unchecked-value="0">
             {{ $t("businessowner.In_stock") }}
           </b-form-checkbox>
 
@@ -222,107 +125,48 @@
           </b-form-checkbox>
         </div>
 
-        <b-form-group
-          id="kg"
-          :label="$t('businessowner.quantity')"
-          label-for="quantity"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.quantity"
-            class="mt-1"
-            id="quantity"
-            type="number"
-          ></b-form-input>
+        <b-form-group id="kg" :label="$t('businessowner.quantity')" label-for="quantity" label-size="sm">
+          <b-form-input v-model="newProduct.quantity" class="mt-1" id="quantity" type="number"></b-form-input>
         </b-form-group>
 
         <!-- TAX and KG -->
 
-        <b-form-input
-          v-model="newProduct.tax_amount"
-          class="mt-1"
-          id="tax"
-          type="number"
-          required
-          hidden
-        ></b-form-input>
+        <b-form-input v-model="newProduct.tax_amount" class="mt-1" id="tax" type="number" required
+          hidden></b-form-input>
 
-        <b-form-group
-          id="kg"
-          :label="$t('businessowner.Kilogramme')"
-          label-for="input-kg"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.kg"
-            class="mt-1"
-            id="kg"
-            type="number"
-            min="0"
-            required
-          ></b-form-input>
+        <b-form-group id="kg" :label="$t('businessowner.Kilogramme')" label-for="input-kg" label-size="sm">
+          <b-form-input v-model="newProduct.kg" class="mt-1" id="kg" type="number" min="0" required></b-form-input>
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
           <label class="typo__label">
             {{ $t("businessowner.Category") }}
           </label>
-          <multi-select
-            v-model="multiselecvalue"
-            @input="subcategories"
+          <multi-select v-model="multiselecvalue" @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
-            :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            label="name"
-            track-by="id"
-            :options="BuCategories"
-          ></multi-select>
+            :placeholder="$t('businessowner.Search_or_add_a_tag')" label="name" track-by="id"
+            :options="BuCategories"></multi-select>
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
           <label class="typo__label">
-            {{ $t("businessowner.Sub_Category") }}</label
-          >
-          <multi-select
-            v-model="filterselectvalue"
-            :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            label="name"
-            track-by="subcategory_id"
-            :options="scategories"
-            :multiple="true"
-          ></multi-select>
+            {{ $t("businessowner.Sub_Category") }}</label>
+          <multi-select v-model="filterselectvalue" :placeholder="$t('businessowner.Search_or_add_a_tag')" label="name"
+            track-by="subcategory_id" :options="scategories" :multiple="true"></multi-select>
         </div>
         <label class="typo__label">{{ $t("businessowner.Filters") }} </label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab
-                :title="filters.name"
-                v-for="filters in filterselectvalue"
-                :key="filters.id"
-                active
-                ><b-card-text>
-                  <b-form-group
-                    :label="$t('businessowner.Filters')"
-                    class="colorblack"
-                  >
-                    <b-form-checkbox-group
-                      id=""
-                      class="colorblack"
-                      v-model="select_filterss"
-                      name="filters"
-                    >
-                      <b-form-checkbox
-                        class="colorblack"
-                        v-for="fil in filters.filters"
-                        :key="fil.id"
-                        :value="fil.id"
-                      >
+              <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active><b-card-text>
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                    <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
+                      <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
                       </b-form-checkbox>
                     </b-form-checkbox-group>
                   </b-form-group>
-                </b-card-text></b-tab
-              >
+                </b-card-text></b-tab>
             </b-tabs>
           </b-card>
         </div>
@@ -331,8 +175,7 @@
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
 
-          {{ $t("businessowner.Add") }}</b-button
-        >
+          {{ $t("businessowner.Add") }}</b-button>
       </b-form>
     </b-modal>
   </div>
@@ -345,8 +188,11 @@ import Product from "../product";
 import Orders from "@/views/businessOwnerOrders";
 import Archive from "../archive";
 import { isPremium } from "@/helpers";
+import { LocalisationMixins } from "@/mixins"
+
 export default {
   name: "MarketPlace",
+  mixins: [LocalisationMixins],
   components: {
     MultiSelect,
     Product,
@@ -408,7 +254,7 @@ export default {
       return this.$store.state.market.products;
     },
 
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedCatUsers = [];
       if (this.multiselecvalue.id) {
         // selectedUsers.push(item.id);
@@ -447,7 +293,7 @@ export default {
       console.log("----" + this.status);
     },
 
-    getProducts: async function() {
+    getProducts: async function () {
       let url = "/market?slug=" + this.businessSlug;
       await this.$store
         .dispatch("market/getBproducts", url)
@@ -465,10 +311,9 @@ export default {
     flashErrors(errors) {
       let err = "";
       Object.values(errors).forEach(element => {
-        err = element[0];
+        err += `<p>${element[0]}</p>`;
       });
-
-      return err;
+      return `<div class="p-3">${err}</div>`;
     },
 
     resetPostData() {
@@ -525,13 +370,11 @@ export default {
           this.load = false;
 
           if (err.response.status == 422) {
-            console.log({ err: err });
-
+            // console.log({ err: err });
+            // console.log(err.response.data.errors)
             this.flashMessage.show({
               status: "error",
-
-              message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class"
+              html: this.flashErrors(err.response.data.errors),
             });
           } else {
             this.flashMessage.show({
@@ -617,6 +460,7 @@ export default {
   /* margin-left: 900px; */
   margin-bottom: 22px;
 }
+
 .order-button {
   height: 40px;
   color: white;
@@ -624,10 +468,12 @@ export default {
   border: none;
   background-color: #e75c18;
 }
+
 .load {
   display: flex;
   justify-content: center;
 }
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -637,6 +483,7 @@ export default {
   opacity: 0.5;
   color: #e75d29;
 }
+
 .text-hover {
   position: relative;
   top: 80px;
@@ -686,6 +533,7 @@ export default {
   cursor: pointer;
   background-color: transparent;
 }
+
 .pic:hover {
   box-shadow: 5px 10px 8px 2px #888888;
 }
@@ -713,11 +561,19 @@ export default {
   height: 190px;
   cursor: pointer;
 }
+
+._vue-flash-msg-body ._vue-flash-msg-wrapper {
+  display: block !important;
+  width: 100%  !important;
+  padding: 20px  !important;
+}
+
 @media only screen and (min-width: 768px) {
   .marg {
     margin-left: 50px;
   }
 }
+
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;
@@ -732,9 +588,11 @@ export default {
     height: 150px;
     left: 23px;
   }
+
   .text {
     margin-top: 30px;
   }
+
   .btn {
     font-size: 12px;
   }

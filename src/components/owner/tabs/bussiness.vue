@@ -1205,11 +1205,7 @@ export default {
             this.sendingB = false;
 
             if (err.response.status == 422) {
-              console.log({ err: err });
-              console.log(err.response.data.message);
-              console.log(err.response.data.errors)
-
-
+              
               this.flashMessage.show({
                 status: "error",
                 html: this.flashErrors(err.response.data.errors),

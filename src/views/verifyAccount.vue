@@ -382,6 +382,9 @@ export default {
 </script>
 
 <style scoped>
+.md-field {
+  align-items: end;
+}
 .w-90 {
   width: 90%;
 }

@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
-      <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
+  <div style="height: 100vh;">
+    <form novalidate class="md-layout" @submit.prevent="validateUser" style="height: 100vh;">
+      <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
         <md-card-header>
-          <div class="md-title center">
+          <div class="md-title center font-weight-bold">
             {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
           </div>
         </md-card-header>
@@ -14,7 +14,7 @@
               <b-col cols="12" md="6" lg="12" xl="6">
                 <md-button
                   @click.prevent="authProvider('facebook')"
-                  class="md-raised md-primary b-w"
+                  class="md-raised md-primary b-w rounded"
                 >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon>
                   {{ $t("auth.Sign_Up_with_facebook") }}
@@ -24,7 +24,7 @@
               <b-col cols="12" md="6" lg="12" xl="6">
                 <md-button
                   @click.prevent="authProvider('google')"
-                  class="b-color b-w"
+                  class="b-color b-w rounded"
                   style="color: white"
                 >
                   <b-icon icon="google" aria-hidden="true"></b-icon>
@@ -149,44 +149,47 @@
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <div>
-          <b-row>
-            <b-col cols="6">
               <md-button
                 type="submit"
-                class="b-color f-left"
+                class="btn btn-primary px-4 w-100 rounded m-0"
                 style="color: white"
                 :disabled="sending"
               >
                 {{ $t("auth.signup") }}
               </md-button>
-            </b-col>
-            <b-col cols="6">
-              <router-link to="login">
-                <md-button class="md-raised f-right"
-                  >{{ $t("auth.login") }}
-                </md-button>
+              <div class="row m-0 mt-2">
+                <span class="mr-2 text-secondary">{{ $t("auth.Already_have_an_account") }}</span>
+                <router-link to="login">
+                  {{ $t("auth.login") }}
               </router-link>
-            </b-col>
-          </b-row>
+              </div>
         </div>
 
-        <div>
-          <br />
-          <br />
+        <div class="mt-4 text-center" style="font-size: 15px;">
 
           <label>
             {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
           </label>
-          <br />
 
-          <label>
-            <b-link href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
-            <b-link href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
+          <label class="ml-2">
+            <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+            <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
           </label>
+        <p class="text-center" style="font-size: 14px;">
+          <span class="display-inline">
+            <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+            <span class="vl"></span>
+            <b-link class="ml-2" @click="setLang('fr')">
+              {{ $t("auth.french") }}
+            </b-link>
+          </span>
+
+          Bridge Africa © 2021
+        </p>
         </div>
       </md-card>
 
-      <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
+      <div class="md-layout-item md-size-55 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
         {{ $t("auth.the_user") }} {{ lastUser }}
@@ -194,19 +197,7 @@
       </md-snackbar>
     </form>
 
-    <hr class="localfoter" />
-
-    <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="setLang('fr')">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-
-      Bridge Africa © 2021
-    </p>
+    
   </div>
 </template>
 
@@ -393,6 +384,12 @@ export default {
 </script>
 
 <style scoped>
+.md-field {
+  align-items: end;
+}
+.md-field.md-theme-default:after {
+  background-color: #ccc;
+}
 .vl {
   border-left: 1px solid green;
   height: 50px;
@@ -423,7 +420,7 @@ export default {
   display: flex;
 }
 .b-color {
-  background-color: orange;
+  background-color: #FF0000;
   color: white;
 }
 

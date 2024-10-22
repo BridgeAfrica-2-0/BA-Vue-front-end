@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div style="height: 100vh;">
     <form
       novalidate
       autocomplete="off"
       class="md-layout"
       @submit.prevent="validateUser"
+      style="height: 100vh;"
     >
-      <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
+      <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
         <md-card-header>
           <div class="md-title center f-22">
             {{ $t("auth.Login_To_Bridge_Africa") }}
@@ -19,7 +20,7 @@
               <b-col cols="12" md="6" lg="12" xl="6">
                 <md-button
                   @click.prevent="authProvider('facebook')"
-                  class="md-raised md-primary b-w"
+                  class="md-raised md-primary b-w rounded"
                 >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon>
                   {{ $t("auth.Login_With_Facebook") }}
@@ -29,7 +30,7 @@
               <b-col cols="12" md="6" lg="12" xl="6">
                 <md-button
                   @click.prevent="authProvider('google')"
-                  class="b-color b-w"
+                  class="b-color b-w rounded"
                   style="color: white"
                 >
                   <b-icon icon="google" aria-hidden="true"></b-icon>
@@ -96,25 +97,22 @@
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <div>
-          <b-row>
-            <b-col cols="6">
+          <div>
               <md-button
                 type="submit"
-                :disabled="sending"
-                class="b-color f-left"
+                class="btn btn-primary px-4 w-100 rounded m-0"
                 style="color: white"
+                :disabled="sending"
               >
-                {{ $t("auth.login") }}
+              {{ $t("auth.login") }}
               </md-button>
-            </b-col>
-            <b-col cols="6">
-              <router-link to="signup">
-                <md-button class="md-raised f-right"
-                  >{{ $t("auth.signup") }}
-                </md-button>
+              <div class="row m-0 mt-2">
+                <span class="mr-2 text-secondary">{{ $t("auth.You_dont_have_an_account") }}</span>
+                <router-link to="signup">
+                  {{ $t("auth.signup") }}
               </router-link>
-            </b-col>
-          </b-row>
+              </div>
+        </div>
 
           <router-link to="password" class="nav-link text">
             {{ $t("auth.forget_password") }}
@@ -123,23 +121,31 @@
 
         <div></div>
 
-        <div>
-          <br />
-          <br />
+        <div class="mt-4 text-center" style="font-size: 15px;">
 
-          <label class="f-12">
-            {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
-          </label>
-          <br />
+<label>
+  {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
+</label>
 
-          <label class="f-12">
-            <b-link href="#"> {{ $t("auth.terms_and_conditions") }} </b-link> &
-            <b-link href="#"> {{ $t("auth.Privacy_policies") }} </b-link>
-          </label>
-        </div>
+<label class="ml-2">
+  <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+  <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
+</label>
+<p class="text-center" style="font-size: 14px;">
+<span class="display-inline">
+  <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+  <span class="vl"></span>
+  <b-link class="ml-2" @click="setLang('fr')">
+    {{ $t("auth.french") }}
+  </b-link>
+</span>
+
+Bridge Africa © 2021
+</p>
+</div>
       </md-card>
 
-      <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
+      <div class="md-layout-item md-size-55 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
         {{ $t("auth.the_user") }} {{ lastUser }}
@@ -345,6 +351,12 @@ export default {
 </script>
 
 <style scoped>
+.md-field {
+  align-items: end;
+}
+.md-field.md-theme-default:after {
+  background-color: #ccc;
+}
 .vl {
   border-left: 1px solid green;
   height: 50px;
@@ -372,7 +384,7 @@ export default {
   display: flex;
 }
 .b-color {
-  background-color: orange;
+  background-color: #FF0000;
   color: white;
 }
 .p-card {

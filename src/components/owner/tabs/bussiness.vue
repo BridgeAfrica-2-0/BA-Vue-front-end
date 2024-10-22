@@ -15,7 +15,7 @@
       <hr />
 
       <b-modal id="createBusinessModal" ref="createBusinessModal" :title="$t('profileowner.Add_Bussiness')" size="lg"
-        hide-footer @close="cancel">
+        hide-footer @close="cancel" no-close-on-backdrop>
         <div>
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
@@ -1209,7 +1209,6 @@ export default {
               this.flashMessage.show({
                 status: "error",
                 html: this.flashErrors(err.response.data.errors),
-                wrapperClass: "p-2 d-flex"
               });
             } else if (err.response.status == 403) {
               this.flashMessage.show({
@@ -1305,8 +1304,7 @@ export default {
 
               this.flashMessage.show({
                 status: "error",
-
-                message: this.flashErrors(err.response.data.errors)
+                html: this.flashErrors(err.response.data.errors),
               });
             } else {
               this.flashMessage.show({
@@ -1328,7 +1326,7 @@ export default {
       Object.values(errors).forEach(element => {
         err += `<p>${element[0]}</p>`;
       });
-      return err;
+      return `<div class="p-3">${err}</div>`;
     },
 
     chooseProfile1: function () {

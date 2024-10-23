@@ -35,7 +35,7 @@
             </b-dropdown-item>
             <b-dropdown-item @click="change('fr')">
               <img src="../../assets/img/la-france.png" class="size mr-1" alt="" />
-              {{$t("auth.french")}}
+              {{ $t("auth.french") }}
             </b-dropdown-item>
           </b-dropdown>
         </div>
@@ -50,50 +50,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="model-settings"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center" id="model-settings">For better delivery prices, select your country</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="countries my-1">
-              <strong for="">Country</strong>
-              <select class="custom-select" v-model="country">
-                <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
-              </select>
-            </div>
-
-
-            <div class="countries my-2">
-              <strong for="">Currency</strong>
-              <select class="custom-select" v-model="currency">
-                <option :value="ev.value" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
-              </select>
-            </div>
-
-            <div class="language my-2">
-              <strong for="">Language</strong>
-              <select class="custom-select" v-model="lang">
-                <option disabled value="">Select currency</option>
-                <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }}</option>
-              </select>
-            </div>
-
-
-            <button class="btn btn-primary w-100" @click="onChange">Save</button>
-
-          </div>
-
-
-
-        </div>
-      </div>
-    </div>
+    
 
     <!-- Header Bar -->
     <div ref="homeNav" class="container-flex home-nav">
@@ -107,7 +64,7 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="../../assets/user.svg" alt="User Icon" id="user-icon" />
@@ -115,7 +72,7 @@
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                   $t("general.dashboard")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
@@ -137,14 +94,8 @@
                       <b-icon style="color: #DDDDDD" class="ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input
-                    v-on:keyup.enter="Search"
-                    class="search"
-                    style="border-left:none"
-                    type="search"
-                    v-model="keyword"
-                    :placeholder="$t('general.search')"
-                  ></b-form-input>
+                  <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
+                    v-model="keyword" :placeholder="$t('general.search')"></b-form-input>
                 </b-input-group>
                 <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;"
                   @click="Search">
@@ -194,14 +145,8 @@
                       <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
                     </div>
                   </b-input-group-prepend>
-                  <b-form-input
-                    v-on:keyup.enter="Search"
-                    class="search"
-                    style="border-left:none"
-                    type="search"
-                    v-model="keyword"
-                    :placeholder="$t('general.search')"
-                  ></b-form-input>
+                  <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
+                    v-model="keyword" :placeholder="$t('general.search')"></b-form-input>
                 </b-input-group>
               </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto" @click="navigateToCart">
@@ -222,7 +167,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -231,7 +176,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -239,7 +184,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -260,58 +205,29 @@ import { mapActions } from "vuex";
 import axios from "axios";
 import { getGuestIdentifier, currencyMap } from "../../helpers";
 
-
-
 export default {
   data() {
     return {
-      // img: require("../../assets/img/about/en.png"),
-      // lang: "English",
       keyword: "",
       scrollPosition: 0,
-      cartCount: 0,
       country: "",
       currency: "",
       img: null,
       lang: '',
       
-      countrySelected: "CM",
-      currencySelected: "XAF",
-      countries: [
-        { name: 'Cameroun', value: 'CM' },
-        { name: 'USA', value: 'US' },
-        { name: 'Canada', value: 'CA' },
-      ],
-      langs: [
-        { name: 'Français', value: 'Français' },
-        { name: 'English', value: 'English' },
-      ],
       currencies: []
     };
   },
 
   created() {
-    
-    const seenCurrencies = new Set();
-    const uniqueCurrencyMap = {};
-
-    for (const [country, currency] of Object.entries(currencyMap)) {
-      if (!seenCurrencies.has(currency)) {
-        seenCurrencies.add(currency);
-        uniqueCurrencyMap[country] = currency;
-      }
-    }
-    this.currencies = Object.entries(uniqueCurrencyMap).map(([name, value]) => {
-      return { name, value };
-    });
     const currentLang = this.$i18n.locale;
-    if(currentLang == 'en'){
-        this.img = require("../../assets/img/about/en.png");
-        this.lang = 'English'
-      }else {
-        this.img = require("../../assets/img/la-france.png");
-         this.lang = 'Français'
-      }
+    if (currentLang == 'en') {
+      this.img = require("../../assets/img/about/en.png");
+      this.lang = 'English'
+    } else {
+      this.img = require("../../assets/img/la-france.png");
+      this.lang = 'Français'
+    }
   },
 
 
@@ -334,15 +250,15 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    change(lang){
+    change(lang) {
       this.$i18n.locale = lang;
 
-      if(lang == 'en'){
+      if (lang == 'en') {
         this.img = require("../../assets/img/about/en.png");
         this.lang = 'English'
-      }else {
+      } else {
         this.img = require("../../assets/img/la-france.png");
-         this.lang = 'Français'
+        this.lang = 'Français'
       }
     },
     onChange() {
@@ -378,7 +294,7 @@ export default {
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
 
       const requestForReset = await this.$repository.share.switch(
@@ -403,7 +319,7 @@ export default {
       if (this.$route.name != "Search") {
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.keyword },
+          query: { keyword: this.keyword }
         });
       }
     },
@@ -424,16 +340,14 @@ export default {
     async fetchCartCount() {
       try {
         let guest_identifier = getGuestIdentifier();
-        const url = this.islogin
-          ? "cart/total"
-          : `guest/cart/total?guest_identifier=${guest_identifier}`;
+        const url = this.islogin ? "cart/total" : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
         this.$store.commit('cart/addNewItem', response.data.data.totalItems)
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

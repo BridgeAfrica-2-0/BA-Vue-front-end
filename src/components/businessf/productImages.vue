@@ -6,7 +6,7 @@
           <img
             :src="image.src"
             class="img-thumbnail rounded-0 p-3"
-            :alt="`Image ${index + 1}`"
+            :alt="image.alt"
             @click="showImage(index)"
             :class="{ 'border-primary': currentIndex === index }"
           />
@@ -22,7 +22,7 @@
         <img
           :src="currentImage.src"
           class="img-fluid"
-          :alt="`Main Image ${currentIndex + 1}`"
+          :alt="currentImage.alt"
         />
       </div>
     </div>

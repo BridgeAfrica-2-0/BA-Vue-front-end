@@ -75,7 +75,8 @@
         </div>
 
         <div class="col-md-12 col-lg-4 col-xl-4" ref="toglercontainer">
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <div class="d-flex justify-content-between align-content-center" style="flex-wrap: wrap;">
+            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
             aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" v-b-modal="'myModallnav'"
@@ -313,6 +314,7 @@
                 </b-popover>
               </div>
             </b-collapse>
+          </div>
           </div>
         </div>
 

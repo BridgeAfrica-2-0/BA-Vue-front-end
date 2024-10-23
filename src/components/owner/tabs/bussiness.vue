@@ -15,7 +15,7 @@
       <hr />
 
       <b-modal id="createBusinessModal" ref="createBusinessModal" :title="$t('profileowner.Add_Bussiness')" size="lg"
-        hide-footer @close="cancel">
+        hide-footer @close="cancel" no-close-on-backdrop>
         <div>
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
@@ -1205,13 +1205,10 @@ export default {
             this.sendingB = false;
 
             if (err.response.status == 422) {
-              console.log({ err: err });
-              console.log(err.response.data.message);
-
+              
               this.flashMessage.show({
                 status: "error",
-
-                message: this.flashErrors(err.response.data.errors)
+                html: this.flashErrors(err.response.data.errors),
               });
             } else if (err.response.status == 403) {
               this.flashMessage.show({
@@ -1221,7 +1218,6 @@ export default {
             } else {
               this.flashMessage.show({
                 status: "error",
-
                 message: this.$t("general.Unable_to_Create_Your_Business")
               });
               console.log({ err: err });
@@ -1308,8 +1304,7 @@ export default {
 
               this.flashMessage.show({
                 status: "error",
-
-                message: this.flashErrors(err.response.data.errors)
+                html: this.flashErrors(err.response.data.errors),
               });
             } else {
               this.flashMessage.show({
@@ -1329,10 +1324,9 @@ export default {
     flashErrors(errors) {
       let err = "";
       Object.values(errors).forEach(element => {
-        err = element[0];
+        err += `<p>${element[0]}</p>`;
       });
-
-      return err;
+      return `<div class="p-3">${err}</div>`;
     },
 
     chooseProfile1: function () {

@@ -109,9 +109,9 @@
             </div>
             <div>
               <label for="" class="text-black">Availability:</label>
-              <span class="ml-2">Only 2 in stock</span>
+              <span class="ml-2">Only {{ marketDetails.quantity }} in stock</span>
             </div>
-            <h2 class="text-black">{{ product.name }}</h2>
+            <h2 class="text-black">{{ marketDetails.name }}</h2>
 
             <!-- Notes (étoiles) -->
             <div>
@@ -145,7 +145,7 @@
                 FCFA (inc. of all taxes)
               </div>
               <div>
-                <span class="price">{{ product.price.current }} FCFA</span>
+                <span class="price">{{ marketDetails.price }} FCFA</span>
                 <span
                   v-if="product.price.original"
                   class="old-price text-muted ml-3"
@@ -273,6 +273,7 @@ import Nav from "@/components/navbar";
 import QuantitySelector from "./QuantitySelector.vue";
 import StarRating from "./StarDisplay.vue";
 import SiteFooter from "../home/updatedSiteFooter.vue";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Nav,
@@ -285,6 +286,8 @@ export default {
   },
   data() {
     return {
+      marketDetails: null,
+      marketId: 6,
       value: 1,
       product: {
         name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
@@ -334,14 +337,27 @@ export default {
     };
   },
   methods: {
+    ...mapActions("marketDetails", ["getdetails"]),
+
+    async fetchMarketDetails() {
+      const marketId = this.$route.params.id;
+      try {
+        const details = await this.getdetails(marketId);
+        this.marketDetails = details.data;
+        console.log("marketDetails", this.marketDetails);
+      } catch (error) {
+        console.error("Error fetching market details:", error.message);
+      }
+    },
     onSizeSelected(size) {
       this.selectedSize = size.value;
       console.log("Size", size);
     },
-    buyNow() {
-    },
-    addToCart() {
-    },
+    buyNow() {},
+    addToCart() {},
+  },
+  mounted() {
+    this.fetchMarketDetails(); // Récupérer les détails dès que la page est montée
   },
 };
 </script>

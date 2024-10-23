@@ -53,6 +53,7 @@ import { social } from "./social";
 import networkSetting from "./networkSetting";
 import productDetails from "./productDetails";
 import businessGuest from "./businessGuest";
+import marketDetails from "./marketDetails";
 
 Vue.use(Vuex);
 
@@ -108,6 +109,7 @@ export default new Vuex.Store({
     profileOrders,
     productComments,
     productDetails,
-    businessGuest
+    businessGuest,
+    marketDetails
   }
 });

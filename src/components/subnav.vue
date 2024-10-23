@@ -2,7 +2,7 @@
   <div class="container-flex container-fluid mobi d-none d-lg-none d-xl-block search px-4">
     <b-row>
       <b-col cols="8" lg="12">
-        <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 25px;">
+        <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 25px; flex-wrap: wrap;">
         <span>
           <b-nav-item-dropdown id="dropdown-1" :text="$t('general.all')" ref="more">
             <hr
@@ -224,6 +224,14 @@ export default {
 <style scoped>
 .search-item:hover {
   color: #e75c18 !important;
+}
+.search-item {
+  flex-flow: 1;
+}
+@media screen and (max-width: 1500px) {
+  .search-item {
+    /* font-size: 15px; */
+}
 }
 .logo-img {
   width: 25px;

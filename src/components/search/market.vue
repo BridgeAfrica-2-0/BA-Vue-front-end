@@ -19,7 +19,7 @@
           </div>
           <!-- <h3 @click="productDetails(product)">{{ product.name }}</h3> -->
           <div class="d-flex">
-            <h3 @click="goToDetail(1)">{{ product.name }}</h3>
+            <h3 @click="goToDetail(product.id)">{{ product.name }}</h3>
           </div>
           <p>
             {{
@@ -164,13 +164,12 @@
                 <div class="position-absolute top-right">
         </div>
               </div>
-              <div class="content-container">
+              <div class="content-container text-left">
                 <div class="stock-status">
                   <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
                   <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
                 </div>
-                <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
-                <router-link :to="{ name: 'product-details', params: { id: 1 } }">{{ product.name }}</router-link>
+                <router-link class="font-weight-bold text-left text-black" :to="{ name: 'product-details', params: { id: product.id } }">{{ product.name }}</router-link>
                 <p>
                   {{
                     product.description.length > 50

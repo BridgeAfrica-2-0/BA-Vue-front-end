@@ -19,7 +19,7 @@
           </div>
           <!-- <h3 @click="productDetails(product)">{{ product.name }}</h3> -->
           <div class="d-flex">
-            <h3 @click="goToDetail(1)">{{ product.name }}</h3>
+            <h3 @click="goToDetail(product.id)">{{ product.name }}</h3>
           </div>
           <p>
             {{

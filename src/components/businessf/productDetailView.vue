@@ -6,7 +6,7 @@
         @updateSearchKeyword="updateSearchKeyword"
         id="top"
       >
-        <template v-slot:button>
+        <!-- <template v-slot:button>
           <Button
             media="desktop"
             @click.native="strategY['all']"
@@ -76,9 +76,9 @@
             @click.native="strategies"
             v-if="[2, 3].includes(selectedId) && !islogin"
           />
-        </template>
+        </template> -->
       </Nav>
-      <div class="px-4 mt-4">
+      <!-- <div class="px-4 mt-4">
         <SubNav
           @onChangeCategoryName="(val) => (categoryName = val)"
           @category="getCategory"
@@ -89,83 +89,72 @@
           @activateSuggestion="activateSuggestion"
           @activate:matching:category="(val) => (activateMatching = val)"
         />
-      </div>
+      </div> -->
       <div class="mt-4">
         <div class="product-page row">
           <!-- Galerie d'images -->
           <div class="col-md-5">
-            <ProductImages :images="productImages" />
+            <ProductImages
+              :images="[
+                {
+                  src: marketDetails.picture,
+                  alt: marketDetails.name,
+                },
+              ]"
+            />
           </div>
 
           <!-- Informations produit -->
           <div class="col-md-7">
-            <div>
-              <label for="" class="text-black">Brand:</label>
-              <span class="ml-2">LG</span>
-            </div>
-            <div>
-              <label for="" class="text-black">Model:</label>
-              <span class="ml-2">{{ product.model }}</span>
+            <h3 class="text-black">{{ marketDetails.name }}</h3>
+            <div class="stock-status">
+              <span
+                class="text-success font-weight-bold"
+                v-if="marketDetails.in_stock"
+                >{{ $t("general.in_stock") }}</span
+              >
+              <span class="text-danger" v-else>{{
+                $t("general.out_of_stock")
+              }}</span>
             </div>
             <div>
               <label for="" class="text-black">Availability:</label>
-              <span class="ml-2">Only 2 in stock</span>
-            </div>
-            <h2 class="text-black">{{ product.name }}</h2>
-
-            <!-- Notes (étoiles) -->
-            <div>
-              <StarRating :rating="4" />
-            </div>
-
-            <div></div>
-            <!-- Liste des caractéristiques -->
-            <ul class="mt-3" style="padding-inline: 25px;">
-              <li
-                class="pb-2"
-                v-for="feature in product.features"
-                :key="feature"
+              <span class="ml-2"
+                >Only {{ marketDetails.quantity }} in stock</span
               >
-                {{ feature }}
-              </li>
-            </ul>
+            </div>
 
-            <!-- Choix de taille d'écran (Composant externe) -->
-            <ScreenSizeSelector
-              :sizes="product.sizes"
-              :selectedSize="selectedSize"
-              @size-selected="onSizeSelected"
-            />
+            <div class="">
+              {{
+                marketDetails.description.length > 400
+                  ? marketDetails.description.slice(0, 400) + "..."
+                  : marketDetails.description
+              }}
+            </div>
 
             <hr class="my-3" />
 
             <!-- Prix -->
             <div class="pricing">
-              <div class="text-black" style="font-size: 14px;">
+              <!-- <div class="text-black" style="font-size: 14px;">
                 FCFA (inc. of all taxes)
-              </div>
+              </div> -->
               <div>
-                <span class="price">{{ product.price.current }} FCFA</span>
-                <span
-                  v-if="product.price.original"
-                  class="old-price text-muted ml-3"
-                  >{{ product.price.original }} FCFA</span
-                >
+                <span class="price">{{ marketDetails.price }} USD</span>
               </div>
             </div>
 
-            <div class="d-flex align-items-center gap-25 mt-4">
+            <div class="d-flex align-items-center mt-4">
               <!-- Sélection de la quantité -->
               <div class="quantity-selector">
-                <div>
+                <!-- <div>
                   <QuantitySelector v-model="quantity" :min="1" :max="10" />
-                  <!-- <p>Quantité sélectionnée : {{ quantity }}</p> -->
-                </div>
+                </div> -->
               </div>
-              <button class="btn btn-primary" @click="buyNow">Buy Now</button>
+              <button class="btn btn-primary" @click="navigateToCart">Buy Now</button>
               <button
-                class="btn btn-outline-primary font-weight-bold"
-                @click="addToCart"
+                class="btn btn-outline-primary font-weight-bold ml-3"
+                @click="handleAddToCard()"
               >
                 Add to Cart
               </button>
@@ -230,11 +219,7 @@
               aria-labelledby="pills-home-tab"
             >
               <p>
-                The LG C2 42 (106cm) 4K Smart OLED evo TV is the best all-around
-                OLED TV we've tested. Although all OLEDs deliver similar
-                fantastic picture quality, this one stands out for its value
-                because it has many gaming-oriented features that are great for
-                gamers.
+                {{ marketDetails.description }}
               </p>
             </div>
             <div
@@ -242,17 +227,13 @@
               id="pills-profile"
               role="tabpanel"
               aria-labelledby="pills-profile-tab"
-            >
-              <p>Here is the specification content.</p>
-            </div>
+            ></div>
             <div
               class="tab-pane fade"
               id="pills-contact"
               role="tabpanel"
               aria-labelledby="pills-contact-tab"
-            >
-              <p>Here is the reviews content.</p>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -266,25 +247,22 @@
   </div>
 </template>
 <script>
-import SubNav from "@/components/subnav";
 import ProductImages from "./productImages.vue";
-import ScreenSizeSelector from "./ScreenSizeSelector.vue";
 import Nav from "@/components/navbar";
-import QuantitySelector from "./QuantitySelector.vue";
-import StarRating from "./StarDisplay.vue";
+// import QuantitySelector from "./QuantitySelector.vue";
 import SiteFooter from "../home/updatedSiteFooter.vue";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Nav,
-    SubNav,
     SiteFooter,
     ProductImages,
-    ScreenSizeSelector,
-    QuantitySelector,
-    StarRating,
+    // QuantitySelector,
   },
   data() {
     return {
+      marketDetails: null,
+      marketId: 6,
       value: 1,
       product: {
         name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
@@ -333,15 +311,52 @@ export default {
       quantity: 1,
     };
   },
+  computed: {
+    islogin() {
+      return this.$store.getters["auth/isLogged"];
+    },
+    getStatus() {
+      return this.$store.state.cart.status;
+    },
+  },
   methods: {
-    onSizeSelected(size) {
-      this.selectedSize = size.value;
-      console.log("Size", size);
+    ...mapActions("marketDetails", ["getdetails"]),
+
+    async fetchMarketDetails() {
+      const marketId = this.$route.params.id;
+      try {
+        const details = await this.getdetails(marketId);
+        this.marketDetails = details.data;
+      } catch (error) {
+        console.error("Error fetching market details:", error.message);
+      }
     },
-    buyNow() {
+    handleAddToCard() {
+      this.$store
+        .dispatch("cart/addToCart", {
+          product: this.marketDetails,
+          islogin: this.islogin,
+        })
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
     },
-    addToCart() {
+    navigateToCart() {
+      this.$router.push("/cart");
     },
+  },
+  mounted() {
+    this.fetchMarketDetails(); // Récupérer les détails dès que la page est montée
   },
 };
 </script>

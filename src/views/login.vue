@@ -17,7 +17,7 @@
         <md-card-content>
           <div class="center">
             <b-row>
-              <b-col cols="12" md="6" lg="12" xl="6">
+              <b-col lg="6" md="12">
                 <md-button
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w rounded"
@@ -27,7 +27,7 @@
                 </md-button>
               </b-col>
 
-              <b-col cols="12" md="6" lg="12" xl="6">
+              <b-col lg="6" md="12">
                 <md-button
                   @click.prevent="authProvider('google')"
                   class="b-color b-w rounded"
@@ -408,7 +408,7 @@ export default {
 }
 
 .b-w {
-  width: 230px;
+  /* width: 230px; */
 }
 
 .f-22 {

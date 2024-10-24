@@ -133,11 +133,11 @@
     <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
       <div class="row mb-5 mt-4 gap-3 align-items-center">
       <div class="col-lg-7">
-        <h1 class="font-weight-bold" style="font-size: 3.2em;">
+        <h1 class="font-weight-bold section_title">
           <span class="primary">{{ $t("search.buy_quality_products") }}</span>
           <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world") }}</span>
         </h1>
-        <div class="text-dark mt-3 text-black font-weight-bold" style="font-size: 1.3em;">{{ $t("search.with_over_100_categories_of_products") }}</div>
+        <div class="text-dark mt-3 text-black font-weight-bold subTitle" style="font-size: 1.3em;">{{ $t("search.with_over_100_categories_of_products") }}</div>
       </div>
       <div class="col-lg-5 shadow-sm text-center">
         <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" src="assets/home/marketplace.png" class="aos-init aos-animate img-size"
@@ -2000,6 +2000,17 @@ export default {
 </script>
 
 <style scoped>
+.section_title {
+  font-size: 3.2em;
+}
+@media screen and (max-width: 1500px) {
+  .section_title {
+    font-size: 2.6em;
+  }
+  .subTitle {
+    font-size: 1.3em;
+  }
+}
 .rounded {
   border-radius: 25px !important;
 }

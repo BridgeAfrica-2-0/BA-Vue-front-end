@@ -30,7 +30,7 @@
           </p>
         </div>
         <div class="bottom-info">
-          <span class="price">{{ product.price | locationPrice(rate) }} </span>
+          <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button class="buy-now-btn" @click="productDetails(product)">
@@ -50,8 +50,8 @@
                 <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
               </button>
               <button class="add-to-cart" @click="handleAddToCard(product)">
-                <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                  style="font-size: 12px; font-weight: bold;">{{ $t('general.cart') }}</span>
+                <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">{{
+                  $t('general.cart') }}</span>
               </button>
             </div>
           </div>
@@ -151,58 +151,61 @@
     <b-alert v-if="guestUserProducts.data.length === 0 && !prodLoader" show variant="warning"><a href="#"
         class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
-      </a></b-alert
-    >
+      </a></b-alert>
 
     <div v-if="!prodLoader">
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 mb-4" v-for="(product, index) in guestUserProducts.data.slice(0, 8)" :key="index">
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-4" v-for="(product, index) in guestUserProducts.data.slice(0, 8)"
+          :key="index">
           <div class="card shadow-none m-0 p-0">
-            
+
             <div class="image-container mb-2" @click="productDetails(product)">
-                <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
-                <div class="position-absolute top-right">
-        </div>
+              <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+              <div class="position-absolute top-right">
               </div>
-              <div class="content-container">
-                <div class="stock-status">
-                  <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
-                  <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
-                </div>
-                <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
-                <router-link :to="{ name: 'product-details', params: { id: 1 } }">{{ product.name }}</router-link>
-                <p>
-                  {{
-                    product.description.length > 50
-                      ? product.description.slice(0, 50) + "..."
-                      : product.description
-                  }}
-                </p>
+            </div>
+            <div class="content-container">
+              <div class="stock-status">
+                <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
+                <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
               </div>
-              <div class="bottom-info">
-                <span class="price text-black font-weight-bold">{{ product.price }} FCFA </span>
-                <div class="desktop-buttons w-100">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button class="buy-now-btn" @click="handleAddToCard(product)">
-                      <span class="font-weight-bold" style="font-size: 12px !important;">{{ $t('general.Add_to_Cart') }}</span>
-                      <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div class="mobile-buttons w-100">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button class="buy-now-btn" @click="productDetails(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
-                    </button>
-                    <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
-                      <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                        style="font-size: 12px; font-weight: bold;">{{ $t('general.cart') }}</span>
-                    </button>
-                  </div>
+              <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
+              <router-link :to="{ name: 'product-details', params: { id: 1 } }">{{ product.name }}</router-link>
+              <p>
+                {{
+                  product.description.length > 50
+                    ? product.description.slice(0, 50) + "..."
+                    : product.description
+                }}
+              </p>
+            </div>
+            <div class="bottom-info">
+              <span class="price text-black font-weight-bold">{{ product.price | locationPrice(rate, currencySelected)
+                }} </span>
+
+              <div class="desktop-buttons w-100">
+                <div class="d-flex justify-content-between w-100 mt-1">
+                  <button class="buy-now-btn" @click="handleAddToCard(product)">
+                    <span class="font-weight-bold" style="font-size: 12px !important;">{{ $t('general.Add_to_Cart')
+                      }}</span>
+                    <span class="arrow-icon">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+                  </button>
                 </div>
               </div>
+              <div class="mobile-buttons w-100">
+                <div class="d-flex justify-content-between w-100 mt-1">
+                  <button class="buy-now-btn" @click="productDetails(product)">
+                    <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
+                  </button>
+                  <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
+                    <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">{{
+                      $t('general.cart') }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -280,7 +283,10 @@
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import Skeleton from "@/components/skeleton";
 import VLazyImage from "v-lazy-image/v2";
+
+import { LocalisationMixins } from "@/mixins"
 export default {
+  mixins: [LocalisationMixins],
   data() {
     return {
       viewProduct: false,
@@ -288,7 +294,6 @@ export default {
       per_page: 10,
       list: [],
       product: {},
-      rate: null,
       currentPage: 1,
       nextLoad: false
     };
@@ -310,11 +315,12 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     }
-  }, 
+  },
 
   filters: {
-    locationPrice: function (ev, rate) {
-      return rate ? `${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    locationPrice: function (ev, rate, currency) {
+      const symbol = currency?.symbol ? currency?.symbol : 'XAF'
+      return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`
     }
   },
 
@@ -349,7 +355,7 @@ export default {
     closeDetailsProduct() {
       this.viewProduct = false;
     },
-    
+
     goToDetail(id) {
       this.$router.push(`/product-details/${id}`);
     },
@@ -456,7 +462,7 @@ export default {
 
     handleAddToCard(product) {
       this.product = product;
-      
+
       this.$store
         .dispatch("cart/addToCart", { product, islogin: this.islogin })
         .then(response => {
@@ -504,6 +510,7 @@ export default {
 .text-left {
   text-align: left;
 }
+
 .image-container {
   position: relative;
   width: 100%;
@@ -536,6 +543,7 @@ export default {
 .in-stock {
   color: #23c73d;
 }
+
 .bottom-info {
   padding: 2px 15px 10px 15px;
   display: flex;
@@ -544,13 +552,16 @@ export default {
   /*  */
   justify-content: space-between;
 }
+
 .bottom-info {
-    padding: 0px 15px 15px 15px !important;
-  }
+  padding: 0px 15px 15px 15px !important;
+}
+
 .desc {
   font-size: 15px;
   line-height: 1.2;
 }
+
 .card-custom img {
   height: 200px;
   object-fit: cover;
@@ -568,6 +579,7 @@ export default {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
 /* ED css */
 button.pagination {
   width: 50px;
@@ -904,5 +916,3 @@ h6 {
   }
 }
 </style>
-
-

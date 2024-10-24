@@ -1,5 +1,6 @@
 <template>
-  <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="model-settings" aria-hidden="true">
+  <div v-if="open" class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="model-settings"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +13,8 @@
           <div class="countries my-1">
             <strong for="">Country</strong>
             <select class="custom-select" v-model="country">
-              <option :value="ev.value" v-for="(ev, index) in countries" :key="index">{{ ev.name }}</option>
+              <option :value="ev.sigle" v-for="(ev, index) in countries" :key="index"> {{ ev.flag }} {{ ev.name }}
+              </option>
             </select>
           </div>
 
@@ -20,15 +22,16 @@
           <div class="countries my-2">
             <strong for="">Currency</strong>
             <select class="custom-select" v-model="currency">
-              <option :value="ev.value" v-for="(ev, index) in currencies" :key="index">{{ ev.value }}</option>
+              <option :value="ev" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol }})
+              </option>
             </select>
           </div>
 
           <div class="language my-2">
             <strong for="">Language</strong>
             <select class="custom-select" v-model="lang">
-              <option disabled value="">Select currency</option>
-              <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }}</option>
+              <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }} {{ ev.value.symbol }}
+              </option>
             </select>
           </div>
 
@@ -36,9 +39,6 @@
           <button class="btn btn-primary w-100" @click="onChange">Save</button>
 
         </div>
-
-
-
       </div>
     </div>
   </div>
@@ -47,50 +47,86 @@
 
 
 <script>
+import { LocalisationMixins } from "@/mixins"
 
 export default {
+  mixins: [LocalisationMixins],
   data: () => ({
-    countrySelected: "CM",
-    currencySelected: "XAF",
-    countries: [
-      { name: 'Cameroun', value: 'CM' },
-      { name: 'USA', value: 'US' },
-      { name: 'Canada', value: 'CA' },
-    ],
+    country: "",
+    currency: "",
+    lang: "en",
     langs: [
-      { name: 'Français', value: 'Français' },
-      { name: 'English', value: 'English' },
+      { name: 'Français', value: 'fr' },
+      { name: 'English', value: 'en' },
     ],
+    currencies: []
   }),
-
   created() {
 
-    const seenCurrencies = new Set();
-    const uniqueCurrencyMap = {};
+    this.country = this.countrySelected
+    this.currency = this.currencySelected
+  },
+  watch: {
+    countries(newValue) {
+      this.country = this.countrySelected
+      this.currency = this.currencySelected
 
-    for (const [country, currency] of Object.entries(currencyMap)) {
-      if (!seenCurrencies.has(currency)) {
-        seenCurrencies.add(currency);
-        uniqueCurrencyMap[country] = currency;
+      if (!newValue.length)
+        return false
+
+      const currencies = newValue.map(c => c.currency).filter(c => c)
+
+      const seenCurrencies = new Set();
+      const uniqueCurrencyMap = {};
+
+      for (const [key, value] of Object.entries(currencies)) {
+
+        const [currency] = Object.keys(value)
+
+        if (!seenCurrencies.has(currency)) {
+          seenCurrencies.add(currency);
+          uniqueCurrencyMap[currency] = value[currency];
+        }
       }
-    }
-    this.currencies = Object.entries(uniqueCurrencyMap).map(([name, value]) => {
-      return { name, value };
-    });
 
+
+      this.currencies = Object.entries(uniqueCurrencyMap).map(curreny => {
+        const [key, value] = curreny
+        return { name: key, value };
+      });
+    }
+  },
+
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    }
   },
 
   methods: {
+    change(lang) {
+      this.$i18n.locale = lang;
+
+      if (lang == 'en') {
+        this.img = require("@/assets/img/about/en.png");
+        this.lang = 'English'
+      } else {
+        this.img = require("@/assets/img/la-france.png");
+        this.lang = 'Français'
+      }
+    },
+
     onChange() {
+      const findCountryInfo = this.countries.find(c => c.sigle == this.country)
 
-      this.countrySelected = this.country
-      this.currencySelected = this.currency
+      console.log(findCountryInfo)
+      console.log(this.currency.value)
+      this.$store.commit("localisation/setSelectedCurrency", this.currency.value)
+      this.$store.commit("localisation/setSelectedCountry", findCountryInfo)
+      this.$store.dispatch("localisation/updateRate", this.currency.value)
 
-      this.$emit('change:currency', {
-        country: this.country,
-        currency: this.currency
-      })
-
+      this.change(this.lang)
       this.$refs.close.click();
     },
   }

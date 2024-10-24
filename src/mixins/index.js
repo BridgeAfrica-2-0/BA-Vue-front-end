@@ -7,8 +7,6 @@ import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
 export { Redis, Pusher } from "./notifications.mixins";
 
-import { convertCurrency } from "@/helpers";
-
 export const loader = {
   methods: {
     onNotified(text) {
@@ -556,20 +554,27 @@ export const ResizeMediaImage = {
   }
 };
 
-
 export const LocalisationMixins = {
   data: () => ({
     isGlobal: true
   }),
 
+  computed: {
+    ...mapGetters({
+      countryLocalisation: "localisation/getLocalisationCountry",
+      countrySelected: "localisation/getSelectedCountry",
+      currencySelected: "localisation/getSelectedCurrency",
+      countries: "localisation/getCountries",
+      rate: "localisation/getRate",
+    })
+  },
+
   created() {
     this.onInitLocalisation()
-    console.log("[start] localisation")
   },
   methods: {
     async onInitLocalisation() {
-      const rate = await convertCurrency()
-      this.isGlobal = 'XAF' == rate.currency ? false : true;
+      this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
     },
   }
 }

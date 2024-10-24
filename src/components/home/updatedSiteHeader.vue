@@ -4,15 +4,16 @@
       <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
         <div class="contact-info d-flex align-items-center">
           <div class="d-flex">
-            <span class="d-flex justify-content-center align-items-center">
-              <img src="../../../public/assets/home/phone.png" class="size2 mr-2" alt="" />
+            <!-- <span class="d-flex justify-content-center align-items-center">
+              <img src="public/assets/home/phone.png" class="size2 mr-2" alt="" />
               <span style="color: #8C8C8C !important">+237697157690</span>
             </span>
             <span class="d-flex justify-content-center align-items-center">
-              <img src="../../../public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+              <img src="public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
               <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
-            </span>
+            </span> -->
           </div>
+
           <div>
             <span class="media-icons">
               <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -39,18 +40,20 @@
             </b-dropdown-item>
           </b-dropdown>
         </div>
-        <div class="language-selection" data-toggle="modal" data-target="#settings">
+        <div class="language-selection" data-toggle="modal" data-target="#settings" @click="() => isOpen = true">
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
-            <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
-              src="@/assets/img/cmr.webp">
-            {{ countrySelected }} {{ currencySelected }}
+            <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
+              src="@/assets/img/cmr.webp"> -->
+              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.symbol }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
       </div>
     </div>
 
-    
+    <settings-contries :open="isOpen">
+
+    </settings-contries>
 
     <!-- Header Bar -->
     <div ref="homeNav" class="container-flex home-nav">
@@ -67,7 +70,7 @@
                 }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
-                <img src="../../assets/user.svg" alt="User Icon" id="user-icon" />
+                <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
               </router-link>
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
@@ -203,9 +206,17 @@
 <script>
 import { mapActions } from "vuex";
 import axios from "axios";
-import { getGuestIdentifier, currencyMap } from "../../helpers";
+import { getGuestIdentifier } from "../../helpers";
+import settingsContries from "@/components/SetupContries"
+
+import { LocalisationMixins } from "@/mixins"
+
 
 export default {
+  mixins:[LocalisationMixins],
+  components: {
+    settingsContries
+  },
   data() {
     return {
       keyword: "",
@@ -214,8 +225,8 @@ export default {
       currency: "",
       img: null,
       lang: '',
-      
-      currencies: []
+      currencies: [],
+      isOpen: false
     };
   },
 
@@ -254,25 +265,14 @@ export default {
       this.$i18n.locale = lang;
 
       if (lang == 'en') {
-        this.img = require("../../assets/img/about/en.png");
+        this.img = require("@/assets/img/about/en.png");
         this.lang = 'English'
       } else {
-        this.img = require("../../assets/img/la-france.png");
+        this.img = require("@/assets/img/la-france.png");
         this.lang = 'Français'
       }
     },
-    onChange() {
 
-      this.countrySelected = this.country
-      this.currencySelected = this.currency
-
-      this.$emit('change:currency', {
-        country: this.country,
-        currency: this.currency
-      })
-
-      this.$refs.close.click();
-    },
 
     handleScroll() {
 

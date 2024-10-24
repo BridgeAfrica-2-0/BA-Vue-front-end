@@ -107,7 +107,7 @@
                 </p>
               </div>
               <div class="bottom-info">
-                <span class="price">{{ product.price | locationPrice(rate) }} </span>
+                <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
                 <div class="desktop-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
                     <button class="buy-now-btn" @click="gotoproduct(product)">
@@ -117,7 +117,8 @@
                       </span>
                     </button>
                     <button class="add-to-cart" @click="handleAddToCard(product)">
-                      <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart") }}</span>
+                      <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart")
+                        }}</span>
                     </button>
                   </div>
                 </div>
@@ -431,7 +432,7 @@
                     </label>
                     <md-field :class="getValidationClass('pname')">
                       <md-input type="text" name="name" class="ba-input" id="name"
-                      :placeholder="$t('general.input_product_keyword_or_name')" v-model="form.pname" />
+                        :placeholder="$t('general.input_product_keyword_or_name')" v-model="form.pname" />
 
                       <span class="md-error" v-if="!$v.form.pname.required">
                         required
@@ -444,8 +445,8 @@
                       {{ $t("general.Quantity") }}
                     </label>
                     <md-field :class="getValidationClass('quantity')">
-                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity" :placeholder="$t('general.quantity')"
-                        v-model="form.quantity" />
+                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity"
+                        :placeholder="$t('general.quantity')" v-model="form.quantity" />
                     </md-field>
                   </div>
 
@@ -454,8 +455,8 @@
                       {{ $t("general.full_name") }}
                     </label>
                     <md-field :class="getValidationClass('name')">
-                      <md-input type="text" name="uname" id="uname" class="ba-input" :placeholder="$t('general.full_name')"
-                        v-model="form.name" />
+                      <md-input type="text" name="uname" id="uname" class="ba-input"
+                        :placeholder="$t('general.full_name')" v-model="form.name" />
 
                       <span class="md-error" v-if="!$v.form.name.required">
                         {{ $t("auth.First_Name_is_required") }}
@@ -567,7 +568,6 @@
                         v-model="form.email" />
                     </md-field>
                   </div>
-
                   <div class="col-md-6 p-0">
                     <label for="name" class="pb-0 label-color">
                       {{ $t("general.Tel") }}
@@ -964,7 +964,9 @@ import Categories from "../components/categories";
 import FAQ from "../components/faq";
 import VLazyImage from "v-lazy-image/v2";
 
-import { convertCurrency, currencyMap } from "@/helpers"
+import { LocalisationMixins } from "@/mixins"
+
+
 
 import {
   buildByLocalisation,
@@ -981,7 +983,7 @@ export default {
     SiteFooter,
     LightBox,
     ProductDetails,
-    VLazyImage
+    VLazyImage,
   },
 
   mounted() {
@@ -992,7 +994,6 @@ export default {
 
   data() {
     return {
-      rate: null,
       activeTab: "cameroon",
       products: [],
       infiniteId: +new Date(),
@@ -1185,7 +1186,7 @@ export default {
     };
   },
 
-  mixins: [validationMixin],
+  mixins: [validationMixin, LocalisationMixins],
 
   validations: {
     form: {
@@ -1216,8 +1217,9 @@ export default {
   },
 
   filters: {
-    locationPrice: function (ev, rate) {
-      return rate ? `${(ev / rate.rate).toFixed(2)} ${rate.currency}` : `${ev} XAF`
+    locationPrice: function (ev, rate, currency) {
+      const symbol = currency?.symbol ? currency?.symbol : 'XAF'
+      return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`
     }
   },
 
@@ -1248,7 +1250,7 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      neigbourhoods: "auth/cities"
+      neigbourhoods: "auth/cities",
     }),
 
     query() {
@@ -1279,6 +1281,9 @@ export default {
   },
 
   watch: {
+    countrySelected(newValue) {
+      this.onInit()
+    },
     word2(newQuery) {
       axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
         this.$store.commit("auth/setCities", data.data);
@@ -1289,23 +1294,12 @@ export default {
   methods: {
 
     async emitChangeCurrency(ev) {
-      console.log(ev)
-      this.rate = await convertCurrency(ev.currency)
-      console.log(this.rate)
-      try {
-        const countrySelectedCurrency = currencyMap[ev.country]
-        this.onInit(countrySelectedCurrency)
-      } catch (err) {
-        console.log(err)
-      }
+
       // currencyMap[]
     },
     async onInit(currency = null) {
-      if (!currency)
-        this.rate = await convertCurrency(currency)
 
-      const isGlobal = currency ? "CM" == currency : 'XAF' == this.rate.currency
-
+      const isGlobal = this.countrySelected?.sigle == 'CM' ? false : true
       const { api } = buildByLocalisation(isGlobal)
 
       api()

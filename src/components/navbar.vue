@@ -68,7 +68,7 @@
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
               </slot> -->
-              <button @click.native="getKeyword" class="search-button">{{ $t('search.search') }}</button>
+              <button @click="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>

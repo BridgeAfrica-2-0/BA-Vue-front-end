@@ -22,7 +22,8 @@
           <div class="countries my-2">
             <strong for="">Currency</strong>
             <select class="custom-select" v-model="currency">
-              <option :value="ev" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol }})
+              <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol
+                }})
               </option>
             </select>
           </div>
@@ -30,11 +31,10 @@
           <div class="language my-2">
             <strong for="">Language</strong>
             <select class="custom-select" v-model="lang">
-              <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }} {{ ev.value.symbol }}
+              <option :value="ev.value" v-for="(ev, index) in langs" :key="index">{{ ev.name }}
               </option>
             </select>
           </div>
-
 
           <button class="btn btn-primary w-100" @click="onChange">Save</button>
 
@@ -61,18 +61,18 @@ export default {
     ],
     currencies: []
   }),
-  created() {
 
-    this.country = this.countrySelected
-    this.currency = this.currencySelected
-  },
   watch: {
     countries(newValue) {
-      this.country = this.countrySelected
-      this.currency = this.currencySelected
 
       if (!newValue.length)
         return false
+
+
+      if (!this.currency && !this.country) {
+        this.country = this.countrySelected.sigle
+        this.currency = this.currencySelected.name
+      }
 
       const currencies = newValue.map(c => c.currency).filter(c => c)
 
@@ -88,7 +88,6 @@ export default {
           uniqueCurrencyMap[currency] = value[currency];
         }
       }
-
 
       this.currencies = Object.entries(uniqueCurrencyMap).map(curreny => {
         const [key, value] = curreny
@@ -110,21 +109,17 @@ export default {
 
       if (lang == 'en') {
         this.img = require("@/assets/img/about/en.png");
-        this.lang = 'English'
       } else {
         this.img = require("@/assets/img/la-france.png");
-        this.lang = 'Français'
       }
     },
 
     onChange() {
       const findCountryInfo = this.countries.find(c => c.sigle == this.country)
 
-      console.log(findCountryInfo)
-      console.log(this.currency.value)
-      this.$store.commit("localisation/setSelectedCurrency", this.currency.value)
-      this.$store.commit("localisation/setSelectedCountry", findCountryInfo)
-      this.$store.dispatch("localisation/updateRate", this.currency.value)
+      this.$store.dispatch("localisation/updateCountry", this.country)
+      this.$store.dispatch("localisation/updateCurrency", this.currency)
+      this.$store.dispatch("localisation/updateRate", this.currency)
 
       this.change(this.lang)
       this.$refs.close.click();

@@ -44,7 +44,7 @@
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
             <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
               src="@/assets/img/cmr.webp"> -->
-              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.symbol }}
+              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
@@ -342,7 +342,7 @@ export default {
         let guest_identifier = getGuestIdentifier();
         const url = this.islogin ? "cart/total" : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
-        this.$store.commit('cart/addNewItem', response.data.data.totalItems)
+        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }

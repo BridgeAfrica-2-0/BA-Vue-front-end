@@ -569,6 +569,7 @@ export const LocalisationMixins = {
     })
   },
 
+  
   created() {
     this.onInitLocalisation()
   },

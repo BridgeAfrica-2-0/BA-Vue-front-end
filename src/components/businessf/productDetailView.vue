@@ -280,7 +280,7 @@ export default {
 
   filters: {
     locationPrice: function (ev, rate, currency) {
-      const symbol = currency?.symbol ? currency?.symbol : 'XAF'
+      const symbol = currency?.name ? currency?.name : 'XAF'
       return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`
     }
   },

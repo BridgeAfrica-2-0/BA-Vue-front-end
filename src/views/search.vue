@@ -1,5 +1,58 @@
 <template>
   <div style="" class="searchpage">
+    <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
+      <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
+        <!-- <div class="contact-info d-flex align-items-center">
+          <div class="d-flex">
+            <span class="d-flex justify-content-center align-items-center">
+              <img src="public/assets/home/phone.png" class="size2 mr-2" alt="" />
+              <span style="color: #8C8C8C !important">+237697157690</span>
+            </span>
+            <span class="d-flex justify-content-center align-items-center">
+              <img src="public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+              <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
+            </span>
+          </div>
+          <div>
+            <span class="media-icons">
+              <a href="https://twitter.com/bridgeafricacom" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="http://facebook.com/bridgeafricacom" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/bridgeafricacom" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank"><i
+                  class="fab fa-youtube"></i></a>
+            </span>
+          </div>
+        </div>
+        <div class="language-selection">
+          <b-dropdown variant="light">
+            <template #button-content>
+              <span class="poslang pr-1">{{ lang }}</span>
+              <img :src="img" class="size poslang" alt="" />
+            </template>
+            <b-dropdown-item @click="change('en')">
+              <img src="@/assets/img/about/en.png" class="size mr-1" alt="" />
+              {{ $t("auth.english") }}
+            </b-dropdown-item>
+            <b-dropdown-item @click="change('fr')">
+              <img src="@/assets/img/la-france.png" class="size mr-1" alt="" />
+              {{ $t("auth.french") }}
+            </b-dropdown-item>
+          </b-dropdown>
+        </div> -->
+        <div class="language-selection" data-toggle="modal" data-target="#settings" @click="() => isOpen = true">
+          <span style="font-size: 14px; color: #000; padding: 0 15px;">
+            <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
+              src="@/assets/img/cmr.webp"> -->
+              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.symbol }}
+            <i class="fa fa-caret-down"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <settings-contries :open="isOpen">
+
+    </settings-contries>
     <Nav
       :credentials.sync="searchParams"
       @updateSearchKeyword="updateSearchKeyword"
@@ -619,9 +672,13 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 import { getGuestIdentifier } from '../helpers';
 import SiteFooter from "../components/home/updatedSiteFooter.vue";
 
+import { LocalisationMixins } from "@/mixins"
+import settingsContries from "@/components/SetupContries"
+
 export default {
   components: {
     Button,
+    settingsContries,
     LyTab,
     Nav,
     SubNav,
@@ -648,7 +705,7 @@ export default {
     // Footer,
   },
 
-  mixins: [loader],
+  mixins: [loader, LocalisationMixins],
 
   computed: {
     islogin() {
@@ -770,6 +827,7 @@ export default {
     return {
       activateMatching: null,
       cartCount: 0,
+      isOpen:false,
       catChose: "",
       subCatChose: "",
       filterChose: "",

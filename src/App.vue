@@ -15,20 +15,10 @@
       <login @success="success" @hideAuthModal="hideAuthModal" />
     </b-modal> -->
 
-    <transition
-      name="fade"
-      mode="out-in"
-      @beforeLeave="beforeLeave"
-      @enter="enter"
-      @afterEnter="afterEnter"
-    >
+    <transition name="fade" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
       <router-view />
     </transition>
-    <notifications
-      group="app"
-      position="bottom right"
-      classes="my-custom-class"
-    />
+    <notifications group="app" position="bottom right" classes="my-custom-class" />
   </div>
 </template>
 <script>
@@ -37,13 +27,14 @@ import { Redis } from "@/mixins";
 
 import { mapGetters, mapActions, mapState } from "vuex";
 
+import { onInitializer } from "@/helpers"
+
 export default {
   mixins: [Redis],
   // components: { login },
   data() {
     return {
       prevHeight: 0,
-
       showblock: true,
       showfadde: false,
       showfaddeB: true
@@ -66,7 +57,7 @@ export default {
     }
   },
   watch: {
-    "$store.state.auth.profilConnected": function(newProfile) {
+    "$store.state.auth.profilConnected": function (newProfile) {
       const uuid = "network" === newProfile.user_type ? newProfile.id : null;
 
       this.getNetworkAndBusiness(
@@ -74,7 +65,7 @@ export default {
       );
     },
 
-    "$i18n.locale": function(newLanguage) {
+    "$i18n.locale": function (newLanguage) {
       localStorage.setItem("lang", newLanguage);
     },
 
@@ -84,15 +75,17 @@ export default {
         : this.$bvModal.hide("authModal");
     }
 
-    // "authModal": function(newvalue){
-    //   newvalue?this.$bvModal.show('authModal'):this.$bvModal.hide('authModal');
-
-    // }
   },
 
-  created() {},
-
+  beforeMount() {
+    this.onInit();
+  },
   methods: {
+    async onInit() {
+      await onInitializer()
+      this.$store.dispatch('localisation/startLocalisation')
+    },
+
     onWindowLoad() {
       this.showfadde = true;
       setTimeout(() => {
@@ -110,7 +103,6 @@ export default {
 
     loadfinish() {
       this.showblock = false;
-
       this.showfadde = false;
       this.showfaddeB = false;
     },
@@ -120,7 +112,7 @@ export default {
       setBusiness: "social/FIND_USER_BUSNESS"
     }),
 
-    getNetworkAndBusiness: async function(uuid) {
+    getNetworkAndBusiness: async function (uuid) {
       let request = await this.$repository.share.getNetworkAndBusiness(uuid);
       if (request.success) {
         this.setBusiness(request.data.business);
@@ -151,6 +143,7 @@ export default {
 .wrap-text {
   overflow-wrap: anywhere;
 }
+
 .wrapp-text {
   white-space: normal;
 
@@ -282,7 +275,7 @@ export default {
 // }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   background-color: #e75c18;
 }
 
@@ -343,12 +336,14 @@ export default {
 .no-js #loader {
   display: none;
 }
+
 .js #loader {
   display: block;
   position: absolute;
   left: 100px;
   top: 0;
 }
+
 .sep {
   position: fixed;
   left: 0px;
@@ -391,7 +386,7 @@ export default {
   color: red !important;
 }
 
-.nav-tabs > li.active {
+.nav-tabs>li.active {
   background-color: #272727 !important;
   color: red;
 }

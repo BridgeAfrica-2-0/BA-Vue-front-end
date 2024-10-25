@@ -119,13 +119,14 @@ export const getGuestIdentifier = () => {
 };
 
 
-const checkCountryLocalisation = async () => {
+export const checkCountryLocalisation = async () => {
   const response = await fetch('https://ipapi.co/json/');
   const data = await response.json();
   return data.country; // e.g., 'US'
 }
 
 export const checkCountry = async () => {
+  console.log('in helpers')
   let ip = localStorage.getItem("ip") ?? null;
   if (!ip) {
     const res = await fetch('https://api.ipify.org?format=json');
@@ -142,11 +143,11 @@ export const checkCountry = async () => {
   return null;
 };
 
-const getRate = async (fromCurrency, toCurrency) => {
+export const getRate = async (fromCurrency, toCurrency) => {
   let currencyCheck;
   let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;
   if (userCountry?.country) {
-    currencyCheck = currencyMap[userCountry?.country];
+    currencyCheck = CurrencyMap[userCountry?.country];
   }
   if (currencyCheck === fromCurrency) {
     let conversionRate = localStorage.getItem("conversionRate") ?? null;
@@ -167,29 +168,17 @@ const getRate = async (fromCurrency, toCurrency) => {
   }
 }
 
-export const currencyMap = {
-  'US': 'USD',  // United States Dollar
-  'CA': 'CAD',  // Canadian Dollar
-  'GB': 'GBP',  // British Pound Sterling
-  'CM': 'XAF',  // Central African CFA Franc
-  'FR': 'EUR',  // Euro
-  'DE': 'EUR',  // Euro
-  'JP': 'JPY',  // Japanese Yen
-  'IN': 'INR',  // Indian Rupee
-  'AU': 'AUD',  // Australian Dollar
-  'CN': 'CNY',  // Chinese Yuan
-  'BR': 'BRL',  // Brazilian Real
-  'ZA': 'ZAR',  // South African Rand
-  'MX': 'MXN',  // Mexican Peso
-  'RU': 'RUB',  // Russian Ruble
-  'NG': 'NGN',  // Nigerian Naira
-  'KR': 'KRW',  // South Korean Won
-  'SE': 'SEK',  // Swedish Krona
-  'NO': 'NOK',  // Norwegian Krone
-  'CH': 'CHF',  // Swiss Franc
-  'SG': 'SGD',  // Singapore Dollar
-  'PK': 'PKR',
-};
+let CurrencyMap = null
+
+export const onInitializer = async ()  => {
+  const response = await axios.get("https://restcountries.com/v3.1/all")  
+  CurrencyMap = response.data.map(country => ({
+    "name": country.name.common,
+    "sigle": country.cca2,
+    "currency": country.currencies,
+    "flag": country.flag,
+  }))
+}
 
 export const convertCurrency = async (defaultCurrency = null) => {
   try {
@@ -197,22 +186,18 @@ export const convertCurrency = async (defaultCurrency = null) => {
     let userCurrency = null
     if (!defaultCurrency) {
       userCountry = await checkCountryLocalisation();
-      userCurrency = currencyMap[userCountry] || 'XAF';
+      userCurrency = CurrencyMap[userCountry] || 'XAF';
     } else {
       userCurrency = defaultCurrency
     }
 
     const conversionRate = await getRate(userCurrency, 'XAF');
 
-    console.log(conversionRate)
-    console.log(`1 ${userCurrency} = ${conversionRate} XAF`);
-
     return { "currency": userCurrency, rate: conversionRate }
 
   } catch (error) {
     console.error('Error:', error);
     console.error('Error in helpers:', error);
-
   }
 }
 
@@ -228,7 +213,7 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       if (!userCountry?.country) {
         userCountry = await checkCountry();
       }
-      userCurrency = currencyMap[userCountry?.country];
+      userCurrency = CurrencyMap[userCountry?.country];
       if (!userCurrency) {
         userCurrency = 'USD'
       }
@@ -242,3 +227,6 @@ export const convertToCurrency = async (defaultCurrency = null) => {
     console.error('Error:', error);
   }
 }
+
+
+export const currencyMap = () => CurrencyMap

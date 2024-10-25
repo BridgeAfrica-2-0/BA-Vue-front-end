@@ -13,8 +13,8 @@ export default {
     setStatus(state, status) {
       state.status = status;
     },
-    addNewItem(state, itemNumber=1) {
-      state.nbreOfItem = state.nbreOfItem + itemNumber
+    addNewItem(state, { items = 1, add = false }) {
+      state.nbreOfItem =  add ? state.nbreOfItem + items : items
     }
   },
   getters: {
@@ -33,19 +33,11 @@ export default {
       return await axios
         .post(url, body)
         .then((data) => {
-          console.log(data);
+
           const setCookieHeader = data.data.data.guest_identifier;
 
-          // Log the cookie value if it exists
-          // if (setCookieHeader) {
-          //   document.cookie = `guest_identifier=${setCookieHeader}; path=/; samesite=None; secure`;
-
-          //   console.log("Cookie received:", setCookieHeader);
-          // } else {
-          //   console.log("No Set-Cookie header received");
-          // }
           commit("setStatus", data.data.message);
-          commit("addNewItem");
+          commit("addNewItem", { items: 1, add: true });
 
         })
         .catch((error) => {

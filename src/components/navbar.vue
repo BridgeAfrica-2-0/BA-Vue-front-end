@@ -68,7 +68,7 @@
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
               </slot> -->
-              <button @click.native="getKeyword" class="search-button">{{ $t('search.search') }}</button>
+              <button @click="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -707,7 +707,7 @@ export default {
 
         const response = await axios.get(url);        
 
-        this.$store.commit('cart/addNewItem', response.data.data.totalItems)
+        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
 
       } catch (error) {
         console.error("Error fetching cart count:", error);

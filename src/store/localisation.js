@@ -18,7 +18,6 @@ export default {
       state.selectedCountry = country;
     },
     setSelectedCurrency(state, currency) {
-      console.log(currency)
       state.selectedCurrency = currency;
     },
     setContryLocatisation(state, country) {
@@ -48,6 +47,21 @@ export default {
 
     },
 
+    updateCountry({ commit, state }, countryCode) {
+      const findCountryInfo = state.countries.find(u => u && u.sigle == countryCode)
+      commit("setSelectedCountry", findCountryInfo)
+    },
+
+    updateCurrency({ commit, state }, currencyCode) {
+      const findCountryInfo = state.countries.find(u => u && u.currency && u.currency[currencyCode])
+
+      commit("setSelectedCurrency", {
+        ...findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]],
+        name: Object.keys(findCountryInfo.currency)[0]
+      })
+
+    },
+
     async startLocalisation({ commit }) {
 
       const countries = currencyMap()
@@ -55,12 +69,17 @@ export default {
       const findCountryInfo = countries.find(u => u.sigle == userCountry)
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
 
-      
-      commit("setRate", rate)
-      commit("setContries", countries)
+
       commit("setSelectedCountry", findCountryInfo)
-      commit("setSelectedCurrency", findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]])
+      commit("setSelectedCurrency", {
+        ...findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]],
+        name: Object.keys(findCountryInfo.currency)[0]
+      })
       commit("setContryLocatisation", findCountryInfo)
+      commit("setContries", countries)
+      commit("setRate", rate)
+
+
     }
   },
 };

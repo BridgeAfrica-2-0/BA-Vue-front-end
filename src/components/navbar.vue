@@ -707,7 +707,7 @@ export default {
 
         const response = await axios.get(url);        
 
-        this.$store.commit('cart/addNewItem', response.data.data.totalItems)
+        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
 
       } catch (error) {
         console.error("Error fetching cart count:", error);

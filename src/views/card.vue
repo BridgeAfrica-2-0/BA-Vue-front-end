@@ -36,12 +36,13 @@
                   </div>
                   <div class="product-prices d-flex">
                     <div class="pr-5">
-                          <h6 class="discount-price">
-                            {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate) }}
-                          </h6>
-                      <h6 class="actual-price" v-if=" cart_item?.discount_price && cart_item?.discount_price > 0">
+                      <h6 class="discount-price">
+                        {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate)
+                        }}
+                      </h6>
+                      <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
-                          cart_item.discount_price| locationPrice(rate)
+                          cart_item.discount_price | locationPrice(rate)
                         }}
                       </h6>
                     </div>
@@ -61,7 +62,7 @@
               <div class="crtv-bans">
                 <img :src="product.picture" alt="Product Image" class="slide-img" />
                 <h3 class="mt-2">{{ product.name }}</h3>
-                <p>{{ product.price  | locationPrice(rate) }}</p>
+                <p>{{ product.price | locationPrice(rate) }}</p>
                 <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
               </div>
             </splide-slide>
@@ -80,7 +81,7 @@ import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import Skeleton from "../components/skeleton";
 import axios from "axios";
 import { getGuestIdentifier } from "../helpers";
-import { checkCountry,convertToCurrency } from "../helpers";
+import { checkCountry, convertToCurrency } from "../helpers";
 export default {
   components: { navbar, OrderSummary, Skeleton },
   data() {
@@ -100,7 +101,7 @@ export default {
       locale: null,
       currency: null,
       rate: null,
-      isCameroon : false,
+      isCameroon: false,
       orderForCurrentPage: [],
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: {
@@ -125,12 +126,12 @@ export default {
     this.$store.dispatch("checkout/updateStepper", 0);
     this.$store.dispatch("checkout/getCartSummary", this.islogin);
     let country = localStorage.getItem("country") ?? null;
-    if(country) this.userLocation.country = country;
+    if (country) this.userLocation.country = country;
     else {
       this.userLocation = await checkCountry();
       localStorage.setItem('country', JSON.stringify({ country: this.userLocation?.country }));
     }
-    
+
     this.rate = await convertToCurrency();
     this.locale = this.userLocation?.country ?? 'CM';
     this.currency = this.rate.currency;
@@ -140,18 +141,17 @@ export default {
   },
   filters: {
     locationPrice(ev, rate) {
-      let priceFormatted=0.0;
-      if(rate)
-     {
-       if (rate?.currency === 'XAF') {
-         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-       } else {
-         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
-       }      
-     }
-     else{
-       priceFormatted = `0.0`
-     }
+      let priceFormatted = 0.0;
+      if (rate) {
+        if (rate?.currency === 'XAF') {
+          priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+        } else {
+          priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+        }
+      }
+      else {
+        priceFormatted = `0.0`
+      }
       return priceFormatted;
     }
   },
@@ -283,6 +283,7 @@ export default {
     gotoCheckout() {
       this.$router.push("/checkout");
     },
+
     async removeIconFromCart(id) {
       this.loading = true;
       const url = this.islogin
@@ -291,6 +292,7 @@ export default {
       await axios
         .delete(url)
         .then((result) => {
+          this.$store.commit("cart/addNewItem", { items: -1, add: true })
           this.getCartSummary();
           console.log(result);
           this.getCartItems();
@@ -592,6 +594,7 @@ export default {
   background-color: grey !important;
   margin-right: -25px !important;
 }
+
 .cart-item-wrapper {
   gap: 25px;
 }

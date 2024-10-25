@@ -10,8 +10,9 @@ const state = {
   },
 
   shippingsummary: [],
-
+  
   cart: [],
+  
   cart_summary: {
     total_items: 0,
     shipping: "FREE",
@@ -214,7 +215,7 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log("get cart", response);
+        console.log("get cart----------------------", response);
         commit("setCart", response.data);
       })
       .catch((error) => {

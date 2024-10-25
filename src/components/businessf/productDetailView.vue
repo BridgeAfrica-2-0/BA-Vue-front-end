@@ -118,9 +118,17 @@
               }}</span>
             </div>
             <div>
-              <label for="" class="text-black">Availability:</label>
+              <label for="" class="text-black"
+                >{{ $t("general.availability") }}:</label
+              >
               <span class="ml-2"
-                >Only {{ marketDetails.quantity }} in stock</span
+                >{{ $t("general.only") }} {{ marketDetails.quantity }}
+                <span class="" v-if="marketDetails.in_stock">{{
+                  $t("general.in_stock")
+                }}</span>
+                <span class="text-danger" v-else>{{
+                  $t("general.out_of_stock")
+                }}</span></span
               >
             </div>
 
@@ -151,12 +159,14 @@
                   <QuantitySelector v-model="quantity" :min="1" :max="10" />
                 </div> -->
               </div>
-              <button class="btn btn-primary" @click="navigateToCart">Buy Now</button>
+              <button class="btn btn-primary" @click="navigateToCart">
+                {{ $t("general.buy_now") }}
+              </button>
               <button
                 class="btn btn-outline-primary font-weight-bold ml-3"
                 @click="handleAddToCard()"
               >
-                Add to Cart
+                {{ $t("general.Add_to_Cart") }}
               </button>
             </div>
           </div>
@@ -170,7 +180,7 @@
           >
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link active"
+                class="nav-link active text-capitalize"
                 id="pills-home-tab"
                 data-toggle="pill"
                 data-target="#pills-home"
@@ -179,7 +189,7 @@
                 aria-controls="pills-home"
                 aria-selected="true"
               >
-                Description
+                {{ $t("general.description") }}
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -262,53 +272,6 @@ export default {
   data() {
     return {
       marketDetails: null,
-      marketId: 6,
-      value: 1,
-      product: {
-        name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
-        model: "OLED42C2PSA",
-        rating: 4,
-        features: [
-          "α9 Gen5 AI Processor with AI Picture Pro & AI 4K Upscaling",
-          "Pixel Dimming, Perfect Black, 100% Color Fidelity & Color Volume",
-          "Hands-free Voice Control, Always Ready",
-          "Dolby Vision IQ with Precision Detail, Dolby Atmos, Filmmaker Mode",
-          "Eye Comfort Display: Low-Blue Light, Flicker-Free",
-        ],
-        sizes: [
-          { label: "106 cm (42)", value: "42" },
-          { label: "121 cm (48)", value: "48" },
-          { label: "139 cm (55)", value: "55" },
-        ],
-        price: {
-          current: 600.72,
-          original: 800.0,
-        },
-      },
-      productImages: [
-        {
-          src:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-cCVix5RT5nVbM3LjZzXwtxzDeqaGvRLQCw&s",
-          name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
-        },
-        {
-          src:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeQwBPmIKY6DK5L1vCSPaG071bl48ekcxqAg&s",
-          name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
-        },
-        {
-          src:
-            "https://site.glotelho.cm/media/catalog/product/cache/3d5322e2293df1ca8e64a115bdb04917//t/v/tv-led-samsung---55-pouces--ua55au8000uxly.jpg",
-          name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
-        },
-        {
-          src:
-            "https://www.sencor.com/Sencor/media/content/Products/SLE-55US800TCSB-2.jpg",
-          name: "LG C2 42 (106CM) 4K SMART OLED EVO TV",
-        },
-      ],
-      selectedSize: "42",
-      quantity: 1,
     };
   },
   computed: {

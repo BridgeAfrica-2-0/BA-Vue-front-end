@@ -487,5 +487,8 @@
   "Hot_Businesses": "Entreprises Populaires",
   "No_item": "Aucun élément",
   "Unable_to_Create_Your_Business": "Impossible de créer votre entreprise",
-  "No_Member": "Aucun membre"
+  "No_Member": "Aucun membre",
+  "availability": "Disponibilité",
+  "only": "Seulement",
+  "specification": "Specification"
 }

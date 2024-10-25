@@ -539,5 +539,8 @@
   "EXPIRATION_DATE" : "Expiration Date",
   "CVV" : "CVV",
   "SAVE_CARD_DETAILS" : "Save card details",
-  "PAYMENT_NOTICE" : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy."
+  "PAYMENT_NOTICE" : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.",
+  "availability": "Availability",
+  "only": "Only",
+  "specification": "Specification"
 }

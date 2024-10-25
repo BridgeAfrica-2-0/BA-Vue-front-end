@@ -39,7 +39,7 @@
                   <i class="fas fa-arrow-right"></i>
                 </span>
               </button>
-              <button class="add-to-cart" @click="handleAddToCard(product)">
+              <button class="add-to-cart" v-if="product.in_stock" @click="handleAddToCard(product)">
                 <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t('general.Add_to_Cart') }}</span>
               </button>
             </div>
@@ -49,7 +49,7 @@
               <button class="buy-now-btn" @click="productDetails(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
               </button>
-              <button class="add-to-cart" @click="handleAddToCard(product)">
+              <button class="add-to-cart" v-if="product.in_stock" @click="handleAddToCard(product)">
                 <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">{{
                   $t('general.cart') }}</span>
               </button>
@@ -185,7 +185,7 @@
 
               <div class="desktop-buttons w-100">
                 <div class="d-flex justify-content-between w-100 mt-1">
-                  <button class="buy-now-btn" @click="handleAddToCard(product)">
+                  <button v-if="product.in_stock" class="buy-now-btn" @click="handleAddToCard(product)">
                     <span class="font-weight-bold" style="font-size: 12px !important;">{{ $t('general.Add_to_Cart')
                       }}</span>
                     <span class="arrow-icon">
@@ -199,7 +199,7 @@
                   <button class="buy-now-btn" @click="productDetails(product)">
                     <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
                   </button>
-                  <button class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
+                  <button  v-if="product.in_stock" class="add-to-cart mobile-add-to-cart-btn" @click="handleAddToCard(product)">
                     <b-icon icon="cart-plus"></b-icon><span class="px-1" style="font-size: 12px; font-weight: bold;">{{
                       $t('general.cart') }}</span>
                   </button>

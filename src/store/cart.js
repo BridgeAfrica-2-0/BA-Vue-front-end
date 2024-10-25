@@ -14,13 +14,6 @@ export default {
       state.status = status;
     },
     addNewItem(state, { items = 1, add = false }) {
-
-      console.log("================")
-      console.log(items)
-      console.log(add)
-      console.log("================")
-
-
       state.nbreOfItem =  add ? state.nbreOfItem + items : items
     }
   },

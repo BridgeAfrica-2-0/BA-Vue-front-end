@@ -116,7 +116,7 @@
                         <i class="fas fa-arrow-right"></i>
                       </span>
                     </button>
-                    <button class="add-to-cart" @click="handleAddToCard(product)">
+                    <button  v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
                       <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart")
                         }}</span>
                     </button>

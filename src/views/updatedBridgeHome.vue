@@ -87,7 +87,7 @@
           </div>
           <div v-else class="grid">
             <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-              <div class="image-container mb-2" @click="gotoproduct(product)">
+              <div class="image-container mb-2" @click="goToDetail(product.id)">
                 <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
               </div>
               <div class="content-container">
@@ -95,9 +95,9 @@
                   'in-stock': product.in_stock,
                   'out-of-stock': !product.in_stock
                 }">
-                  {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+                    {{ product.in_stock ? "In Stock" : "Out of Stock" }}
                 </div>
-                <h3 @click="gotoproduct(product)">{{ product.name }}</h3>
+                <h3 class="font-weight-bold" @click="goToDetail(product.id)">{{ product.name }}</h3>
                 <p>
                   {{
                     product.description.length > 50
@@ -1292,6 +1292,10 @@ export default {
   },
 
   methods: {
+
+    goToDetail(id) {
+      this.$router.push(`/product-details/${id}`);
+    },
 
     async emitChangeCurrency(ev) {
 

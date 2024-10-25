@@ -19,9 +19,28 @@
                   <img :src="cart_item.product_picture" class="product-image" />
                   <div class="pl-4">
                     <h6 class="product-name">{{ cart_item.product_name }}</h6>
-                    <p class="product-details">Color: Black</p>
-                    <p class="product-details">Size: 6.5</p>
-                    <p class="product-details">Width: Medium</p>
+                    <div>
+                      <label for="" class="text-black"
+                        >{{ $t("general.availability") }}:</label
+                      >
+                      <span class="ml-2"
+                        >{{ $t("general.only") }} {{ cart_item.stock_available }}
+                        <span class="" v-if="cart_item.product_in_stock">{{
+                          $t("general.in_stock")
+                        }}</span>
+                        <span class="text-danger" v-else>{{
+                          $t("general.out_of_stock")
+                        }}</span></span
+                      >
+                      <!-- {{ cart_item }} -->
+                    </div>
+                    <div class="">
+                        {{
+                          cart_item.product_description.length > 150
+                            ? cart_item.product_description.slice(0, 150) + "..."
+                            : cart_item.product_description
+                        }}
+                      </div>
 
                     <div class="d-flex align-items-center justify-content-between mt-3">
                       <p class="mt-3">
@@ -32,7 +51,6 @@
                         @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available" :min="1"
                         v-model="cart_item.quantity" />
                     </div>
-                    <p class="product-details">Only <b>{{ cart_item.stock_available }}</b> left in stock.</p>
                   </div>
                   <div class="product-prices d-flex">
                     <div class="pr-5">

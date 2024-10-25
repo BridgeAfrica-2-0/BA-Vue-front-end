@@ -9,7 +9,7 @@
     <div v-if="!prodLoader" class="grid">
       <div v-for="(product, index) in products.data" :key="index" class="grid-item">
 
-        <div class="image-container mb-2" @click="productDetails(product)">
+        <div class="image-container mb-2" @click="goToDetail(product.id)">
           <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
         </div>
         <div class="content-container">
@@ -169,8 +169,7 @@
                 <span class="text-success" v-if="product.in_stock">{{ $t("general.in_stock") }}</span>
                 <span class="text-danger" v-else>{{ $t("general.out_of_stock") }}</span>
               </div>
-              <h3 class="font-weight-bold" @click="productDetails(product)">{{ product.name }}</h3>
-              <router-link :to="{ name: 'product-details', params: { id: 1 } }">{{ product.name }}</router-link>
+              <h3 class="font-weight-bold" @click="goToDetail(product.id)">{{ product.name }}</h3>
               <p>
                 {{
                   product.description.length > 50

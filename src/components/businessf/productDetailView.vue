@@ -138,6 +138,7 @@
                   ? marketDetails.description.slice(0, 400) + "..."
                   : marketDetails.description
               }}
+              <!-- {{currencySelected}} -->
             </div>
 
             <hr class="my-3" />
@@ -148,7 +149,7 @@
                 FCFA (inc. of all taxes)
               </div> -->
               <div>
-                <span class="price">{{ marketDetails.price }} USD</span>
+                <span class="price">{{ marketDetails.price | locationPrice(rate, currencySelected) }}</span>
               </div>
             </div>
 
@@ -259,10 +260,12 @@
 <script>
 import ProductImages from "./productImages.vue";
 import Nav from "@/components/navbar";
+import { LocalisationMixins } from "@/mixins"
 // import QuantitySelector from "./QuantitySelector.vue";
 import SiteFooter from "../home/updatedSiteFooter.vue";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
+  mixins: [LocalisationMixins],
   components: {
     Nav,
     SiteFooter,
@@ -274,6 +277,14 @@ export default {
       marketDetails: null,
     };
   },
+
+  filters: {
+    locationPrice: function (ev, rate, currency) {
+      const symbol = currency?.name ? currency?.name : 'XAF'
+      return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`
+    }
+  },
+
   computed: {
     islogin() {
       return this.$store.getters["auth/isLogged"];

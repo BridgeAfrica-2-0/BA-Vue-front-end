@@ -110,7 +110,7 @@
                 <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
                 <div class="desktop-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
-                    <button class="buy-now-btn" @click="gotoproduct(product)">
+                    <button class="buy-now-btn" @click="navigateToCart(product)">
                       <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
                       <span class="arrow-icon">
                         <i class="fas fa-arrow-right"></i>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="mobile-buttons w-100">
                   <div class="d-flex justify-content-between w-100 mt-1">
-                    <button class="buy-now-btn" @click="gotoproduct(product)">
+                    <button class="buy-now-btn" @click="navigateToCart(product)">
                       <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
                     </button>
                     <button class="add-to-cart" @click="handleAddToCard(product)">
@@ -1340,6 +1340,10 @@ export default {
             message: "error occur"
           });
         });
+    },
+    navigateToCart(product) {
+      this.handleAddToCard(product);
+      this.$router.push("/cart");
     },
 
     closeDetailsProduct() {

@@ -17,6 +17,7 @@
           <b-button variant="outline-primary" v-if="isPremium && !isGlobal" @click="createProduct">{{
             $t("businessowner.Add_Product") }}</b-button>
         </div>
+
       </div>
       <!-- </div> -->
     </div>
@@ -75,12 +76,17 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage"
+            <div class="image-upload-wrap" @click="selectImages"
               style="display: flex; justify-content: center; align-items: center; overflow: hidden">
-              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
+              <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" v-show="false"
+                required />
+
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div v-if="selectedImagePrv">
-                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%" />
+                <div v-if="selectedImagesPrv.length > 0" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                  <div v-for="(image, index) in selectedImagesPrv" :key="index">
+                    <img :src="image" :srcset="image"
+                      style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc" />
+                  </div>
                 </div>
                 <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -239,7 +245,8 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
-      isShowOrders: false
+      isShowOrders: false,
+      selectedImagesPrv: []
     };
   },
   computed: {
@@ -266,6 +273,23 @@ export default {
     }
   },
   methods: {
+    selectImages() {
+      document.getElementById("image").click();
+    },
+    handleImageUpload(event) {
+      const files = event.target.files;
+      this.selectedImagesPrv = [];
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          this.selectedImagesPrv.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      console.log(this.selectedImagesPrv)
+    },
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
@@ -564,8 +588,8 @@ export default {
 
 ._vue-flash-msg-body ._vue-flash-msg-wrapper {
   display: block !important;
-  width: 100%  !important;
-  padding: 20px  !important;
+  width: 100% !important;
+  padding: 20px !important;
 }
 
 @media only screen and (min-width: 768px) {

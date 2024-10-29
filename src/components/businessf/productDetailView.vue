@@ -149,7 +149,9 @@
                 FCFA (inc. of all taxes)
               </div> -->
               <div>
-                <span class="price">{{ marketDetails.price | locationPrice(rate, currencySelected) }}</span>
+                <span class="price">{{
+                  marketDetails.price | locationPrice(rate, currencySelected)
+                }}</span>
               </div>
             </div>
 
@@ -260,7 +262,7 @@
 <script>
 import ProductImages from "./productImages.vue";
 import Nav from "@/components/navbar";
-import { LocalisationMixins } from "@/mixins"
+import { LocalisationMixins } from "@/mixins";
 // import QuantitySelector from "./QuantitySelector.vue";
 import SiteFooter from "../home/updatedSiteFooter.vue";
 import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -279,10 +281,10 @@ export default {
   },
 
   filters: {
-    locationPrice: function (ev, rate, currency) {
-      const symbol = currency?.name ? currency?.name : 'XAF'
-      return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`
-    }
+    locationPrice: function(ev, rate, currency) {
+      const symbol = currency?.name ? currency?.name : "XAF";
+      return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`;
+    },
   },
 
   computed: {
@@ -326,7 +328,13 @@ export default {
         });
     },
     navigateToCart() {
-      this.$router.push("/cart");
+      this.handleAddToCard()
+        .then(() => {
+          this.$router.push("/cart");
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
     },
   },
   mounted() {

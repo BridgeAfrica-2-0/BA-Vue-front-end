@@ -8,11 +8,11 @@ export const makeLocalProduct = (action) => {
   }
 
   return () => {
-      return {
-        api: () => action(),
-        callback: () => make(),
+    return {
+      api: () => action(),
+      callback: () => make(),
 
-      }
+    }
   }
 }
 
@@ -24,24 +24,22 @@ export const makeGlobalProduct = (action) => {
   }
 
   return () => {
-      return {
-        api: () => action(),
-        callback: () => make(),
+    return {
+      api: () => action(),
+      callback: () => make(),
 
-      }
+    }
   }
 }
 
-export const makeByLocalisation = (localProduct,  globalProduct) => {
-  
-  
-  return (isLocal) => {
+export const makeByLocalisation = (localProduct, globalProduct) => {
 
-    console.log(isLocal)
-    
-    const pack = () => isLocal ? localProduct() : globalProduct()
 
-    const {api, callback} = pack()
+  return (isGlobal) => {
+
+    const pack = () => !isGlobal ? localProduct() : globalProduct()
+
+    const { api, callback } = pack()
 
     return {
       api: () => api(),

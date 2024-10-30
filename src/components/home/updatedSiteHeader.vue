@@ -40,14 +40,16 @@
             </b-dropdown-item>
           </b-dropdown>
         </div>
-        <div class="language-selection" data-toggle="modal" data-target="#settings" @click="() => isOpen = true">
+        <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
+          @click="() => isOpen = true">
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
             <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
               src="@/assets/img/cmr.webp"> -->
-              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
+            {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
+        <div v-else></div>
       </div>
     </div>
 
@@ -67,7 +69,7 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                }}</router-link>
+                  }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
@@ -75,7 +77,7 @@
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                   $t("general.dashboard")
-                }}</router-link>
+                  }}</router-link>
               </span>
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
@@ -170,7 +172,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -179,7 +181,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -187,7 +189,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -213,7 +215,7 @@ import { LocalisationMixins } from "@/mixins"
 
 
 export default {
-  mixins:[LocalisationMixins],
+  mixins: [LocalisationMixins],
   components: {
     settingsContries
   },
@@ -342,7 +344,7 @@ export default {
         let guest_identifier = getGuestIdentifier();
         const url = this.islogin ? "cart/total" : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
-        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
+        this.$store.commit('cart/addNewItem', { items: response.data.data.totalItems, add: false })
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }

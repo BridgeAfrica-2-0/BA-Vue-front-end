@@ -34,7 +34,6 @@ export const makeGlobalProduct = (action) => {
 
 export const makeByLocalisation = (localProduct, globalProduct) => {
 
-
   return (isGlobal) => {
 
     const pack = () => !isGlobal ? localProduct() : globalProduct()

@@ -12,7 +12,6 @@
         <div class="inline-flex marg float-right">
           <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
             }}</b-button>
-
           <!-- <div class="col col-md"> -->
           <b-button variant="outline-primary" v-if="isPremium && !isGlobal" @click="createProduct">{{
             $t("businessowner.Add_Product") }}</b-button>
@@ -76,7 +75,23 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="selectImages"
+            <div class="image-upload-wrap" @click="picImage"
+              style="display: flex; justify-content: center; align-items: center; overflow: hidden">
+              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
+
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div v-if="selectedImagePrv">
+                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%" />
+
+                </div>
+                <div v-else class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
+                </div>
+              </a>
+            </div>
+            <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" required />
+            <!-- <div class="image-upload-wrap" @click="selectImages"
               style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" v-show="false"
                 required />
@@ -86,6 +101,7 @@
                   <div v-for="(image, index) in selectedImagesPrv" :key="index">
                     <img :src="image" :srcset="image"
                       style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc" />
+                    <span style="font-size:24px">X</span>
                   </div>
                 </div>
                 <div v-else class="drag-text">
@@ -93,7 +109,7 @@
                   <h6>{{ $t("businessowner.Product_Image") }}</h6>
                 </div>
               </a>
-            </div>
+            </div> -->
           </b-col>
         </b-row>
 
@@ -273,21 +289,21 @@ export default {
     }
   },
   methods: {
+    resizeImage(index, size) {
+
+      return
+    },
     selectImages() {
       document.getElementById("image").click();
     },
-    handleImageUpload(event) {
-      const files = event.target.files;
+    handleImageUpload(e) {
+      const files = e.target.files;
       this.selectedImagesPrv = [];
 
-      Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          this.selectedImagesPrv.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
-      });
-
+      // this.selectedImagesPrv =  Array.from(files).forEach(file => {
+      //   this.selectedImagesPrv.push(URL.createObjectURL(file));
+      // });
+      this.selectedImagesPrv = Array.from(files)
       console.log(this.selectedImagesPrv)
     },
     swap() {
@@ -366,8 +382,16 @@ export default {
 
       console.log("starting to display the map data");
 
+      console.log(this.selectedImagesPrv)
       // transform product data in form data
       for (const key in this.newProduct) {
+
+        if ("picture" == key && this.selectedImagesPrv.length)
+          this.selectedImagesPrv.forEach((file, index) => {
+            fd.append(`additional_images[${index}]`, file);
+          });
+
+
         fd.append(key, this.newProduct[key]);
       }
       console.log("NEW PRODUCT", this.newProduct);

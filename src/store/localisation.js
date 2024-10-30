@@ -15,9 +15,12 @@ export default {
 
   mutations: {
     setSelectedCountry(state, country) {
+
+      localStorage.setItem("countrySelected", JSON.stringify(country))
       state.selectedCountry = country;
     },
     setSelectedCurrency(state, currency) {
+      localStorage.setItem("currencySelected", JSON.stringify(currency))
       state.selectedCurrency = currency;
     },
     setContryLocatisation(state, country) {
@@ -70,14 +73,31 @@ export default {
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
 
 
-      commit("setSelectedCountry", findCountryInfo)
-      commit("setSelectedCurrency", {
-        ...findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]],
-        name: Object.keys(findCountryInfo.currency)[0]
-      })
+
+      const constrySelected = localStorage.getItem("countrySelected")
+      const currencySelected = localStorage.getItem("currencySelected")
+
+      if (constrySelected) {
+        commit("setSelectedCountry", JSON.parse(constrySelected))
+      } else {
+        commit("setSelectedCountry", findCountryInfo)
+      }
+
+      if (currencySelected) {
+        commit("setSelectedCurrency", JSON.parse(currencySelected))
+
+      } else {
+        commit("setSelectedCurrency", {
+          ...findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]],
+          name: Object.keys(findCountryInfo.currency)[0]
+        })
+      }
+
+
+      commit("setRate", rate)
+
       commit("setContryLocatisation", findCountryInfo)
       commit("setContries", countries)
-      commit("setRate", rate)
 
 
     }

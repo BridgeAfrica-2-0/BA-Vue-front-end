@@ -1,6 +1,6 @@
 <template>
   <div class="bridge-home">
-    <site-header class="topbar" @change:currency="emitChangeCurrency" />
+    <site-header class="topbar" />
 
     <!-- <section class="p-0">
   <div>
@@ -1298,10 +1298,7 @@ export default {
       this.$router.push(`/product-details/${id}`);
     },
 
-    async emitChangeCurrency(ev) {
-
-      // currencyMap[]
-    },
+   
     async onInit(currency = null) {
 
       const isGlobal = this.countrySelected?.sigle == 'CM' ? false : true

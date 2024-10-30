@@ -37,11 +37,7 @@
           </div>
           <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
           <div class="container text-center">
-            <img
-              src="@/assets/img/fruits.jpg"
-              class="img-fluid banner"
-              alt="Kitten"
-            />
+            <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
             <div class="text-center">
               <router-link to="/settings?tab=account">
                 <b-button variant="primary" class="text-center mt-3">

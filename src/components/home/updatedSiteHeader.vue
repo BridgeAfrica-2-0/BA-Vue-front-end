@@ -69,7 +69,7 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
@@ -77,7 +77,7 @@
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                   $t("general.dashboard")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
@@ -172,7 +172,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -181,7 +181,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -189,7 +189,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>

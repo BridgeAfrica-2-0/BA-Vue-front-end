@@ -1,42 +1,50 @@
 <template>
-  <b-row class="progress-content P-0">
-    <b-col
-    cols="2"
-      :disable="step.complete"
-      class="progress-item-box p-2"
-      :class="step.status ? 'progress-item-check' : ''"
-      v-for="(step, i) in steps"
-      :key="i"
-      @click="switchStep(step, i)"
-    >
-      <div class="d-flex align-items-center flex-row justify-content-start">
-        <div
-          class="mx-2 progress-item-name d-flex align-items-center flex-row justify-content-start"
-        >
-          <!-- :variant="step.status ? 'success' : 'secondary'" -->
-          <b-avatar
-            class="mr-2 avatar-size"
-            :class="step.status ? 'avatar-color-success' : 'avatar-color'"
-            :text="(i + 1).toString()"
-          ></b-avatar>
-          <a class="step">
-            <span class="label title-font-size font-weight-bold text-black">{{
-              step.text
-            }}</span>
-          </a>
-        </div>
-        <div class="payment-progress-bar flex-grow-1">
-          <!-- <b-progress
+  <div>
+    <b-row class="progress-content P-0">
+      <b-col
+        cols="2"
+        :disable="step.complete"
+        class="progress-item-box p-2"
+        :class="step.status ? 'progress-item-check' : ''"
+        v-for="(step, i) in steps"
+        :key="i"
+        @click="switchStep(step, i)"
+      >
+        <div class="d-flex align-items-center flex-row justify-content-start">
+          <div
+            class="mx-2 progress-item-name d-flex align-items-center flex-row justify-content-start"
+          >
+            <!-- :variant="step.status ? 'success' : 'secondary'" -->
+            <b-avatar
+              class="mr-2 avatar-size"
+              :class="step.status ? 'avatar-color-success' : 'avatar-color'"
+              :text="(i + 1).toString()"
+            ></b-avatar>
+            <a class="step">
+              <span
+                class="label title-font-size font-weight-bold text-black d-none d-md-block"
+                >{{ step.text }}</span
+              >
+            </a>
+          </div>
+          <div class="payment-progress-bar flex-grow-1">
+            <!-- <b-progress
             class="rounded-pill"
             height="8px"
             width="100%"
             :value="current_step >= i + 1 ? 100 : 0"
             :variant="current_step === i + 1 ? 'success' : 'secondary'"
           ></b-progress> -->
+          </div>
         </div>
-      </div>
-    </b-col>
-  </b-row>
+      </b-col>
+    </b-row>
+    <div
+      class="label title-font-size font-weight-bold text-secondary d-block d-md-none mt-2"
+    >
+      {{ getShippingStep(current_step) }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,17 +52,17 @@ export default {
   props: {
     steps: {
       type: Array,
-      required: true
+      required: true,
     },
-    current_step: Number
+    current_step: Number,
   },
   data() {
     return {
       next_step: {
         text_color: "text-black",
         avatar: "success",
-        progress: "success"
-      }
+        progress: "success",
+      },
     };
   },
   methods: {
@@ -63,8 +71,17 @@ export default {
         const goTo = i + 1;
         this.$emit("switchstep", goTo);
       }
-    }
-  }
+    },
+    getShippingStep(n) {
+      const steps = {
+        1: "SHIPPING",
+        2: "REVIEW",
+        3: "PAYMENT",
+      };
+
+      return steps[n] || null; // Retourne null si n n'est pas dans les clés
+    },
+  },
 };
 </script>
 

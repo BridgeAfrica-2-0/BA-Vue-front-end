@@ -58,11 +58,11 @@
                         {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate)
                         }}
                       </h6>
-                      <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
+                      <!-- <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
                           cart_item.discount_price | locationPrice(rate)
                         }}
-                      </h6>
+                      </h6> -->
                     </div>
                     <img class="cross" src="assets/images/cross.png" @click="removeIconFromCart(cart_item.product_id)"
                       alt="cross" />

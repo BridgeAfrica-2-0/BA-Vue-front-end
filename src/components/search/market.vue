@@ -51,7 +51,7 @@
           </span>
           <div class="desktop-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="navigateToCart(product)">
+              <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{
                   $t("general.buy_now")
                 }}</span>
@@ -74,7 +74,7 @@
           </div>
           <div class="mobile-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
-              <button class="buy-now-btn" @click="navigateToCart(product)">
+              <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{
                   $t("general.buy_now")
                 }}</span>

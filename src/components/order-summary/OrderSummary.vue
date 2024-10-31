@@ -174,7 +174,6 @@ export default {
     this.isCameroon = this.userLocation?.country === 'CM';
     if (this.orderSummary) {
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
-      console.log(this.cartSummary);
     }
   },
   filters: {

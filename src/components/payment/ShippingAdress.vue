@@ -1,20 +1,19 @@
 <template>
-  <div class="col">
+  <div class="col bg-white">
     <div class="row">
-      <div class="col-8" style="padding-left: 0 !important;">
-        <div class="row justify-content-between top-div" v-if="!review">
+      <div class="col-lg-8">
+        <div class="row justify-content-between align-items-center top-div" v-if="!review">
           <div>
-            <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
+            <h4 class="title-style m-0 p-0">{{ $t("general.SHIPPING") }}</h4>
           </div>
           <div>
-            <b-button
+            <button
               v-b-modal.create-shipping-modal
               type="submit"
-              variant="primary"
-              class="hire-btn"
+              class="btn btn-primary hire-btn"
             >
               {{ $t("general.New_Address") }}
-            </b-button>
+            </button>
           </div>
         </div>
 
@@ -114,14 +113,14 @@
           v-if="!review"
           class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3"
         >
-          <div class="row">
+          <div class="row bg-white">
             <div>
               <div
                 class="ship-add w-100 d-flex justify-content-between align-items-start"
                 v-for="(shipping_item, index) in shippingsTab"
                 :key="shipping_item.id"
               >
-                <div class="d-inline-flex">
+                <div class="d-inline-flex" style="flex-grow: 1;">
                   <div class="operator-select-box mr-2">
                     <input 
                       type="radio"
@@ -157,7 +156,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row ml-2">
+                <div class="row ml-2" style="flex-grow: 1;">
                   <div>
                     <a
                       href="#"
@@ -198,7 +197,7 @@
         <Order v-if="review" @unavailableProducts="handleUnavailableProducts" />
       </div>
 
-      <div class="col-4">
+      <div class="col-lg-4 mb-4">
         <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled"/>
       </div>
 
@@ -529,14 +528,8 @@ input[type="radio"] {
   margin-bottom: 20px !important;
 }
 .hire-btn {
-  margin-top: 2%;
-  width: 160px;
-  height: 46px;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
   border-radius: 10px;
 }
@@ -624,6 +617,11 @@ input[type="radio"] {
     margin-top: 7px;
     margin-bottom: -12px;
   }
+.title-style {
+  font-size: 20px!important;
+  
+}
+  
 }
 
 @media screen and (max-width: 376px) {

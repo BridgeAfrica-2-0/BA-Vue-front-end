@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: white;">
+  <div style="background-color: white; padding-bottom: 100px;">
     <!-- Stepper header start-->
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />

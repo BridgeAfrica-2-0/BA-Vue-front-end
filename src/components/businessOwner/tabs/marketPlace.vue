@@ -12,11 +12,11 @@
         <div class="inline-flex marg float-right">
           <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
             }}</b-button>
-
           <!-- <div class="col col-md"> -->
           <b-button variant="outline-primary" v-if="isPremium && !isGlobal" @click="createProduct">{{
             $t("businessowner.Add_Product") }}</b-button>
         </div>
+
       </div>
       <!-- </div> -->
     </div>
@@ -78,9 +78,11 @@
             <div class="image-upload-wrap" @click="picImage"
               style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
+
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div v-if="selectedImagePrv">
                   <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%" />
+
                 </div>
                 <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -88,6 +90,26 @@
                 </div>
               </a>
             </div>
+            <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" required />
+            <!-- <div class="image-upload-wrap" @click="selectImages"
+              style="display: flex; justify-content: center; align-items: center; overflow: hidden">
+              <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" v-show="false"
+                required />
+
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div v-if="selectedImagesPrv.length > 0" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                  <div v-for="(image, index) in selectedImagesPrv" :key="index">
+                    <img :src="image" :srcset="image"
+                      style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc" />
+                    <span style="font-size:24px">X</span>
+                  </div>
+                </div>
+                <div v-else class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
+                </div>
+              </a>
+            </div> -->
           </b-col>
         </b-row>
 
@@ -239,7 +261,8 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
-      isShowOrders: false
+      isShowOrders: false,
+      selectedImagesPrv: []
     };
   },
   computed: {
@@ -266,6 +289,23 @@ export default {
     }
   },
   methods: {
+    resizeImage(index, size) {
+
+      return
+    },
+    selectImages() {
+      document.getElementById("image").click();
+    },
+    handleImageUpload(e) {
+      const files = e.target.files;
+      this.selectedImagesPrv = [];
+
+      // this.selectedImagesPrv =  Array.from(files).forEach(file => {
+      //   this.selectedImagesPrv.push(URL.createObjectURL(file));
+      // });
+      this.selectedImagesPrv = Array.from(files)
+      console.log(this.selectedImagesPrv)
+    },
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
@@ -342,8 +382,16 @@ export default {
 
       console.log("starting to display the map data");
 
+      console.log(this.selectedImagesPrv)
       // transform product data in form data
       for (const key in this.newProduct) {
+
+        if ("picture" == key && this.selectedImagesPrv.length)
+          this.selectedImagesPrv.forEach((file, index) => {
+            fd.append(`additional_images[${index}]`, file);
+          });
+
+
         fd.append(key, this.newProduct[key]);
       }
       console.log("NEW PRODUCT", this.newProduct);
@@ -564,8 +612,8 @@ export default {
 
 ._vue-flash-msg-body ._vue-flash-msg-wrapper {
   display: block !important;
-  width: 100%  !important;
-  padding: 20px  !important;
+  width: 100% !important;
+  padding: 20px !important;
 }
 
 @media only screen and (min-width: 768px) {

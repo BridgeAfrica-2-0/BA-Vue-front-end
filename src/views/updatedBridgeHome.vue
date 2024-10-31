@@ -95,7 +95,7 @@
                   'in-stock': product.in_stock,
                   'out-of-stock': !product.in_stock
                 }">
-                    {{ product.in_stock ? "In Stock" : "Out of Stock" }}
+                  {{ product.in_stock ? "In Stock" : "Out of Stock" }}
                 </div>
                 <h3 class="font-weight-bold" @click="goToDetail(product.id)">{{ product.name }}</h3>
                 <p>
@@ -116,7 +116,7 @@
                         <i class="fas fa-arrow-right"></i>
                       </span>
                     </button>
-                    <button  v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
+                    <button v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
                       <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart")
                         }}</span>
                     </button>
@@ -422,7 +422,7 @@
                 <span> {{ $t("general.let_help_u") }} </span>
                 <span style="color: black;">{{
                   $t("general.find_products_and_services")
-                }}</span>
+                  }}</span>
               </h3>
               <form novalidate @submit.prevent="validateUser">
                 <div class="form pt-1 row">
@@ -732,7 +732,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -740,7 +740,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -751,7 +751,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-6 statistic-box">
@@ -759,7 +759,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -855,7 +855,7 @@
                 <h3>7500+</h3>
                 <span style="color: black;">{{
                   $t("general.7k_business")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -863,7 +863,7 @@
                 <h3>13000+</h3>
                 <span style="color: black;">{{
                   $t("general.13k_customers")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -871,7 +871,7 @@
                 <h3>100+</h3>
                 <span style="color: black;">{{
                   $t("general.100_industries")
-                }}</span>
+                  }}</span>
               </span>
             </div>
             <div class="col-3 statistic-box">
@@ -879,7 +879,7 @@
                 <h3>72H</h3>
                 <span style="color: black;">{{
                   $t("general.48h_respond_time")
-                }}</span>
+                  }}</span>
               </span>
             </div>
           </div>
@@ -1282,6 +1282,7 @@ export default {
 
   watch: {
     countrySelected(newValue) {
+      console.log(newValue)
       this.onInit()
     },
     word2(newQuery) {

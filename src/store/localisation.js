@@ -24,7 +24,7 @@ export default {
       state.countryLocalisation = country
     },
     setContries(state, countries) {
-      state.countries = countries
+      state.countries = countries.sort()
     },
     setRate(state, rate) {
       state.rate = rate

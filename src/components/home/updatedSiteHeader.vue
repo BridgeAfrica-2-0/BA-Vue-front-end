@@ -40,14 +40,16 @@
             </b-dropdown-item>
           </b-dropdown>
         </div>
-        <div class="language-selection" data-toggle="modal" data-target="#settings" @click="() => isOpen = true">
+        <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
+          @click="() => isOpen = true">
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
             <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
               src="@/assets/img/cmr.webp"> -->
-              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
+            {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
+        <div v-else></div>
       </div>
     </div>
 
@@ -213,7 +215,7 @@ import { LocalisationMixins } from "@/mixins"
 
 
 export default {
-  mixins:[LocalisationMixins],
+  mixins: [LocalisationMixins],
   components: {
     settingsContries
   },
@@ -342,7 +344,7 @@ export default {
         let guest_identifier = getGuestIdentifier();
         const url = this.islogin ? "cart/total" : `guest/cart/total?guest_identifier=${guest_identifier}`;
         const response = await axios.get(url);
-        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
+        this.$store.commit('cart/addNewItem', { items: response.data.data.totalItems, add: false })
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }

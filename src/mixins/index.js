@@ -4,6 +4,7 @@ import { formatNumber, fromNow } from "@/helpers";
 import NotFound from "@/components/NotFoundComponent";
 import NoMoreData from "@/components/businessOwner/PaginationMessage";
 import ClipLoader from "vue-spinner/src/ClipLoader.vue";
+import { watch } from "less";
 
 export { Redis, Pusher } from "./notifications.mixins";
 
@@ -569,12 +570,15 @@ export const LocalisationMixins = {
     })
   },
 
-  
-  created() {
-    this.onInitLocalisation()
+  watch: {
+    countrySelected() {
+      this.onInitLocalisation()
+    }
   },
+
   methods: {
     async onInitLocalisation() {
+      console.log(this.countryLocalisation?.sigle)
       this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
     },
   }

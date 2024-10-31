@@ -112,16 +112,6 @@
 
                       <DropdownDatepicker :minAge="18" v-model="dob" style="width:100%"
                         dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
-
-                      <!-- <b-form-datepicker
-                        name="dob"
-                        :max="min"
-                        id="dob"
-                        v-model="dob"
-                        class=" text"
-                        :locale="this.$i18n.locale"
-                        :placeholder="$t('welcome.DOB')"
-                      ></b-form-datepicker> -->
                     </div>
 
                     <div class="form-group">
@@ -133,10 +123,10 @@
                         <option value="male">{{ $t("welcome.Male") }}</option>
                         <option value="female">{{
                           $t("welcome.Female")
-                          }}</option>
+                        }}</option>
                         <option value="others">{{
                           $t("welcome.Other")
-                          }}</option>
+                        }}</option>
                       </select>
                     </div>
 
@@ -167,19 +157,7 @@
                       <label for="Neighbour" class="username">
                         {{ $t("welcome.Neighbour") }}:</label><br />
                       {{ Neighbor }}
-                      <!-- <input
-                        type="text"
-                        name="alias"
-                        id="Neighbor"
-                        v-model="Neighbor"
-                        placeholder="Neighbor"
-                        class="form-control text"
-                      /> -->
-                      <!-- <autocomplete-mapbox
-                        v-if="region"
-                        :region="region"
-                        @get-address-details="getAddressDetails"
-                      /> -->
+
                       <AutocompleteLocation v-if="showMap" :region="region" @get-address-details="getAddressDetails" />
                     </div>
                   </div>
@@ -276,10 +254,10 @@
                         <option value="male">{{ $t("welcome.Male") }}</option>
                         <option value="female">{{
                           $t("welcome.Female")
-                          }}</option>
+                        }}</option>
                         <option value="others">{{
                           $t("welcome.Other")
-                          }}</option>
+                        }}</option>
                       </select>
                     </div>
 
@@ -378,7 +356,7 @@
 
                       <b-form-invalid-feedback id="business_name-feedback">{{
                         $t("welcome.Business_Name_Is_Required")
-                      }}.</b-form-invalid-feedback>
+                        }}.</b-form-invalid-feedback>
                     </b-form-group>
 
                     <div></div>
@@ -386,7 +364,7 @@
                     <div class="form-group">
                       <label for="username" class="username">{{
                         $t("welcome.About")
-                        }}</label><br />
+                      }}</label><br />
                       <textarea type="textarea" name="business_about" v-model="about" id="description"
                         :placeholder="$t('welcome.brief_des')" class="form-control text"></textarea>
                     </div>
@@ -414,7 +392,7 @@
                 <div class="form-group">
                   <label v-if="filterselectvalue.length" class="typo__label">{{
                     $t("welcome.Fiters")
-                    }}</label>
+                  }}</label>
                   <div v-if="filterselectvalue.length">
                     <b-card no-body>
                       <b-tabs pills card vertical>
@@ -708,7 +686,7 @@ export default {
   },
 
   watch: {
-    isGlobal(newvalue){
+    isGlobal(newvalue) {
       if (!newvalue)
         this.options = [...this.options, { text: this.$t("welcome.Business"), value: "business" }];
     }
@@ -1201,6 +1179,8 @@ export default {
 
       return new Promise((resolve, reject) => {
         let formData = new FormData();
+
+        
 
         if (this.profile_pic != "") {
           this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();

@@ -67,6 +67,7 @@ export default {
 
     async startLocalisation({ commit }) {
 
+      
       const countries = currencyMap()
       const userCountry = await checkCountryLocalisation()
       const findCountryInfo = countries.find(u => u.sigle == userCountry)
@@ -92,12 +93,12 @@ export default {
           name: Object.keys(findCountryInfo.currency)[0]
         })
       }
-
+      
 
       commit("setRate", rate)
 
       commit("setContryLocatisation", findCountryInfo)
-      commit("setContries", countries)
+      commit("setContries", countries.sort((a, b) => a.name.localeCompare(b.name)))
 
 
     }

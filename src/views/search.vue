@@ -1,70 +1,57 @@
 <template>
-  <div style="" class="searchpage">
-    <div class="container-fluid d-md-flex justify-content-end">
-      <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings" @click="() => isOpen = true">
-        <span style="font-size: 14px; color: #000; padding: 0 15px;">
-          <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
-              src="@/assets/img/cmr.webp"> -->
-          {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.symbol }}
-          <i class="fa fa-caret-down"></i>
-        </span>
-      </div>
+  <base-layout>
+    <template v-slot:main>
+      <div style="" class="searchpage">
+        <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
+          <template v-slot:button>
+            <Button media="desktop" @click.native="strategY['all']" v-if="selectedId == 5" />
 
-    </div>
+            <Button media="desktop" @click.native="strategY['business']" v-if="selectedId == 1" />
+            <Button media="desktop" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
+            <Button media="desktop" @click.native="strategY['market']" v-if="selectedId == 0" />
 
-    <settings-contries :open="isOpen">
+            <Button media="desktop" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
+            <Button media="desktop" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
+          </template>
 
-    </settings-contries>
-    <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
-      <template v-slot:button>
-        <Button media="desktop" @click.native="strategY['all']" v-if="selectedId == 5" />
+          <template v-slot:mobile>
+            <Button media="mobile" @click.native="strategY['all']" v-if="selectedId == 5" />
 
-        <Button media="desktop" @click.native="strategY['business']" v-if="selectedId == 1" />
-        <Button media="desktop" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
-        <Button media="desktop" @click.native="strategY['market']" v-if="selectedId == 0" />
+            <Button media="mobile" @click.native="strategY['business']" v-if="selectedId == 1" />
 
-        <Button media="desktop" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
-        <Button media="desktop" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
-      </template>
+            <Button media="mobile" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
 
-      <template v-slot:mobile>
-        <Button media="mobile" @click.native="strategY['all']" v-if="selectedId == 5" />
+            <Button media="mobile" @click.native="strategY['market']" v-if="selectedId == 0" />
 
-        <Button media="mobile" @click.native="strategY['business']" v-if="selectedId == 1" />
-
-        <Button media="mobile" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
-
-        <Button media="mobile" @click.native="strategY['market']" v-if="selectedId == 0" />
-
-        <Button media="mobile" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
-        <Button media="mobile" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
-      </template>
-    </Nav>
-    <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
-      <div class="row mb-5 mt-4 gap-3 align-items-center">
-        <div class="col-lg-7">
-          <h1 class="font-weight-bold section_title">
-            <span class="primary">{{ $t("search.buy_quality_products") }}</span>
-            <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world")
-              }}</span>
-          </h1>
-          <div class="text-dark mt-3 text-black font-weight-bold subTitle" style="font-size: 1.3em;">{{
-            $t("search.with_over_100_categories_of_products") }}</div>
+            <Button media="mobile" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
+            <Button media="mobile" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
+          </template>
+        </Nav>
+        <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
+          <div class="row mb-5 mt-4 gap-3 align-items-center">
+            <div class="col-lg-7">
+              <h1 class="font-weight-bold section_title">
+                <span class="primary">{{ $t("search.buy_quality_products") }}</span>
+                <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world")
+                  }}</span>
+              </h1>
+              <div class="text-dark mt-3 text-black font-weight-bold subTitle" style="font-size: 1.3em;">{{
+                $t("search.with_over_100_categories_of_products") }}</div>
+            </div>
+            <div class="col-lg-5 shadow-sm text-center">
+              <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500"
+                src="assets/home/marketplace.png" class="aos-init aos-animate img-size">
+            </div>
+          </div>
         </div>
-        <div class="col-lg-5 shadow-sm text-center">
-          <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500" src="assets/home/marketplace.png"
-            class="aos-init aos-animate img-size">
-        </div>
-      </div>
-    </div>
-    <SubNav @onChangeCategoryName="(val) => (categoryName = val)" @category="getCategory"
-      @parentcategory="getparentCategory" @update:keyword="(val) => (searchParams = Object.assign(searchParams, val))
-        " @activateSuggestion="activateSuggestion" @activate:matching:category="(val) => (activateMatching = val)"
-      style="margin-top: -25px" />
+        <SubNav @onChangeCategoryName="(val) => (categoryName = val)" @category="getCategory"
+          @parentcategory="getparentCategory" @update:keyword="(val) => (searchParams = Object.assign(searchParams, val))
+            " @activateSuggestion="activateSuggestion" @activate:matching:category="(val) => (activateMatching = val)"
+          style="margin-top: -25px" />
 
-    <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
+        <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
 
-    <!-- <div v-if="islogin" class="container searchly moveup">
+        <!-- <div v-if="islogin" class="container searchly moveup">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -86,67 +73,67 @@
       </ly-tab>
     </div> -->
 
-    <hr style="margin-top: -0px" />
+        <hr style="margin-top: -0px" />
 
-    <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
-      <b-row align-v="start">
-        <b-col cols="3" class="text-center" v-for="(category, index) in categories.slice(0, 7)" :key="index">
-          <b-link class="cat" @click="() => {
-              categoryName = category.category.name;
-              getCategory({ cat_id: category.category.id });
-              searchParams = Object.assign(searchParams, {
-                keyword: category.category.name,
-                cat_id: category.category.id,
-              });
-            }
-            ">
-            <img class="img-fluid picture logo-img" :src="category.category.cat_image" />
+        <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
+          <b-row align-v="start">
+            <b-col cols="3" class="text-center" v-for="(category, index) in categories.slice(0, 7)" :key="index">
+              <b-link class="cat" @click="() => {
+                categoryName = category.category.name;
+                getCategory({ cat_id: category.category.id });
+                searchParams = Object.assign(searchParams, {
+                  keyword: category.category.name,
+                  cat_id: category.category.id,
+                });
+              }
+                ">
+                <img class="img-fluid picture logo-img" :src="category.category.cat_image" />
 
-            {{
-              category.category.name.length > 11
-                ? category.category.name.substring(0, 11) + "..."
-                : category.category.name
-            }}
-          </b-link>
-        </b-col>
-        <b-col align-self="center" cols="3" class="text-center" @mouseover="onOverMore()" @mouseleave="onLeaveMore()"
-          ref="more">
-          <b-link class="cat mt-4" v-b-modal.myModalla>
-            <b-icon icon="chevron-down" aria-hidden="true"></b-icon> More
-          </b-link>
-        </b-col>
-      </b-row>
+                {{
+                  category.category.name.length > 11
+                    ? category.category.name.substring(0, 11) + "..."
+                    : category.category.name
+                }}
+              </b-link>
+            </b-col>
+            <b-col align-self="center" cols="3" class="text-center" @mouseover="onOverMore()"
+              @mouseleave="onLeaveMore()" ref="more">
+              <b-link class="cat mt-4" v-b-modal.myModalla>
+                <b-icon icon="chevron-down" aria-hidden="true"></b-icon> More
+              </b-link>
+            </b-col>
+          </b-row>
 
-      <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
-        <div style="column-count: 2">
-          <b-form-radio v-for="(category, index) in categories" :key="index" v-model="catChose"
-            :value="category.category.id" @change="getCategory({ cat_id: category.category.id })"
-            name="subCategories-list-modal" class="mt-2">
-            <img class="img-fluid picture" style="max-height: 26px" :src="category.category.cat_image" />
-            {{ category.category.name }}
-          </b-form-radio>
-        </div>
-      </b-modal>
-    </div>
-
-    <div class="container-fluid medium-filters">
-      <b-row>
-        <b-col cols="3">
-          <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
-            {{ $t("search.Filter") }}
-          </b-button>
-        </b-col>
-
-        <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
-            <div class="ml-3">
-              <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
-                v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
-                @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
-                @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
+          <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
+            <div style="column-count: 2">
+              <b-form-radio v-for="(category, index) in categories" :key="index" v-model="catChose"
+                :value="category.category.id" @change="getCategory({ cat_id: category.category.id })"
+                name="subCategories-list-modal" class="mt-2">
+                <img class="img-fluid picture" style="max-height: 26px" :src="category.category.cat_image" />
+                {{ category.category.name }}
+              </b-form-radio>
             </div>
+          </b-modal>
+        </div>
 
-            <!--            
+        <div class="container-fluid medium-filters">
+          <b-row>
+            <b-col cols="3">
+              <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
+                {{ $t("search.Filter") }}
+              </b-button>
+            </b-col>
+
+            <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
+              <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+                <div class="ml-3">
+                  <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
+                    v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
+                    @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
+                    @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
+                </div>
+
+                <!--            
             <div v-if="!isFilter">
             
               <div v-if="categories.length > 0">
@@ -228,62 +215,62 @@
               </div>
             </div>
      -->
-            <component :is="isFilter" />
-            <hr v-if="!isFilter" />
+                <component :is="isFilter" />
+                <hr v-if="!isFilter" />
 
-            <b-button v-if="!isFilter" variant="primary" class="m-3 float-right" @click="searchFilter">
-              {{ $t("search.Search") }}
-            </b-button>
-          </div>
-
-          <div class="d-block text-center"></div>
-        </b-modal>
-      </b-row>
-    </div>
-
-    <div class="container-fluid mobile-filters mt-2 mb-3">
-      <b-row>
-        <b-col cols="5">
-          <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters">
-            {{ $t("search.Filter") }}
-          </b-button>
-        </b-col>
-
-        <b-col cols="3" md>
-          <b-button class="shadow border mob-btn" @click="togglelist">
-            {{ $t("search.List") }}
-          </b-button>
-        </b-col>
-
-        <b-col cols="4">
-          <b-button class="shadow border mob-btn" @click="togglemap()">
-            {{ $t("search.Map") }}
-          </b-button>
-        </b-col>
-      </b-row>
-    </div>
-    <div class="container-flex p-md-3 p-t-0 upp">
-      <b-row class="p-3">
-        <b-col cols="0" md="0" xl="2" class="leftblock">
-          <div class="ml-3">
-            <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
-              v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
-              @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
-              @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
-          </div>
-        </b-col>
-
-        <b-col cols="12" md="10" lg="10" xl="10" ref="middleblock">
-          <div class="container-flex a-flex">
-
-            <!-- Filter out just the market -->
-
-            <div v-if="selectedId == '0'">
-
-              <div>
-                <Sponsor />
+                <b-button v-if="!isFilter" variant="primary" class="m-3 float-right" @click="searchFilter">
+                  {{ $t("search.Search") }}
+                </b-button>
               </div>
-              <!-- <h6 class="mb-3">
+
+              <div class="d-block text-center"></div>
+            </b-modal>
+          </b-row>
+        </div>
+
+        <div class="container-fluid mobile-filters mt-2 mb-3">
+          <b-row>
+            <b-col cols="5">
+              <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters">
+                {{ $t("search.Filter") }}
+              </b-button>
+            </b-col>
+
+            <b-col cols="3" md>
+              <b-button class="shadow border mob-btn" @click="togglelist">
+                {{ $t("search.List") }}
+              </b-button>
+            </b-col>
+
+            <b-col cols="4">
+              <b-button class="shadow border mob-btn" @click="togglemap()">
+                {{ $t("search.Map") }}
+              </b-button>
+            </b-col>
+          </b-row>
+        </div>
+        <div class="container-flex p-md-3 p-t-0 upp">
+          <b-row class="p-3">
+            <b-col cols="0" md="0" xl="2" class="leftblock">
+              <div class="ml-3">
+                <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
+                  v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
+                  @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
+                  @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
+              </div>
+            </b-col>
+
+            <b-col cols="12" md="10" lg="10" xl="10" ref="middleblock">
+              <div class="container-flex a-flex">
+
+                <!-- Filter out just the market -->
+
+                <div v-if="selectedId == '0'">
+
+                  <div>
+                    <Sponsor />
+                  </div>
+                  <!-- <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
                 <b-button
@@ -318,14 +305,14 @@
                   </b-button>
                 </div>
               </h6> -->
-              <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
-                {{ $t("search.List_of_products_up_to_date") }}
-              </b-alert>
-              <Market class="mt-1" />
-            </div>
-          </div>
-        </b-col>
-        <!-- <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
+                  <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
+                    {{ $t("search.List_of_products_up_to_date") }}
+                  </b-alert>
+                  <Market class="mt-1" />
+                </div>
+              </div>
+            </b-col>
+            <!-- <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
               <businessmap :businesses="businessess.data" />
@@ -353,140 +340,148 @@
             </div>
           </div>
         </b-col> -->
-      </b-row>
-    </div>
-    <div class="container mb-3 mt-4" style="max-width: 80%;">
-      <div class="row g-0">
-        <!-- Image à gauche -->
-        <div class="col-lg-6 col-md-12">
-          <img src="../assets/img/coach2.png" class="img-fluid rounded" alt="Pottery Image">
+          </b-row>
         </div>
+        <div class="container mb-3 mt-4" style="max-width: 80%;">
+          <div class="row g-0">
+            <!-- Image à gauche -->
+            <div class="col-lg-6 col-md-12">
+              <img src="../assets/img/coach2.png" class="img-fluid rounded" alt="Pottery Image">
+            </div>
 
-        <!-- Contenu à droite -->
-        <div class="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
-          <div class="bg-white p-4 d-none d-lg-block" style="border-radius: 25px; margin-left: -150px;">
-            <div class="">
-              <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
-                <span class="text-black"> Selling to the World.</span>
-              </h3>
-              <p class="card-text text-black my-4">
-                While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will
-                enable you to do the full e-commerce transaction cycle.
-              </p>
+            <!-- Contenu à droite -->
+            <div class="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
+              <div class="bg-white p-4 d-none d-lg-block" style="border-radius: 25px; margin-left: -150px;">
+                <div class="">
+                  <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
+                    <span class="text-black"> Selling to the World.</span>
+                  </h3>
+                  <p class="card-text text-black my-4">
+                    While you can use Bridge Africa for free through a basic account, upgrading to an advanced account
+                    will
+                    enable you to do the full e-commerce transaction cycle.
+                  </p>
 
-              <!-- Liste d'avantages -->
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-shopping-bag mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Marketplace access:</strong>
-                      <div class="text-black">Unlimited marketplace to sell to millions around you and the world.</div>
+                  <!-- Liste d'avantages -->
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Marketplace access:</strong>
+                          <div class="text-black">Unlimited marketplace to sell to millions around you and the world.
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-credit-card mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Online Payment System:</strong>
-                      <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-credit-card mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Online Payment System:</strong>
+                          <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-search mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Rank top on search results:</strong>
+                          <div class="text-black">Businesses on advanced accounts are ranked first on our search
+                            results.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-sms mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Advanced messaging system:</strong>
+                          <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-search mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Rank top on search results:</strong>
-                      <div class="text-black">Businesses on advanced accounts are ranked first on our search results.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-sms mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Advanced messaging system:</strong>
-                      <div class="text-black">Reach a wider community with our group messaging functionality.</div>
-                    </div>
+
+                  <!-- Bouton Upgrade -->
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
                   </div>
                 </div>
               </div>
+              <div class="bg-white p-4 d-block d-lg-none" style="border-radius: 25px; margin-left: 0;">
+                <div class="">
+                  <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
+                    <span class="text-black"> Selling to the World.</span>
+                  </h3>
+                  <p class="card-text text-black my-4">
+                    While you can use Bridge Africa for free through a basic account, upgrading to an advanced account
+                    will
+                    enable you to do the full e-commerce transaction cycle.
+                  </p>
 
-              <!-- Bouton Upgrade -->
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+                  <!-- Liste d'avantages -->
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Marketplace access:</strong>
+                          <div class="text-black">Unlimited marketplace to sell to millions around you and the world.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-credit-card mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Online Payment System:</strong>
+                          <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-search mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Rank top on search results:</strong>
+                          <div class="text-black">Businesses on advanced accounts are ranked first on our search
+                            results.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-sms mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Advanced messaging system:</strong>
+                          <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bouton Upgrade -->
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="bg-white p-4 d-block d-lg-none" style="border-radius: 25px; margin-left: 0;">
-            <div class="">
-              <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
-                <span class="text-black"> Selling to the World.</span>
-              </h3>
-              <p class="card-text text-black my-4">
-                While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will
-                enable you to do the full e-commerce transaction cycle.
-              </p>
-
-              <!-- Liste d'avantages -->
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-shopping-bag mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Marketplace access:</strong>
-                      <div class="text-black">Unlimited marketplace to sell to millions around you and the world.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-credit-card mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Online Payment System:</strong>
-                      <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-search mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Rank top on search results:</strong>
-                      <div class="text-black">Businesses on advanced accounts are ranked first on our search results.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="d-flex mb-3">
-                    <i class="fa fa-sms mr-2 text-primary"></i>
-                    <div>
-                      <strong class="text-black">Advanced messaging system:</strong>
-                      <div class="text-black">Reach a wider community with our group messaging functionality.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Bouton Upgrade -->
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div style="margin-top: 20em;">
+          <SiteFooter />
         </div>
       </div>
-    </div>
-    <div style="margin-top: 20em;">
-      <SiteFooter />
-    </div>
-  </div>
+    </template>
+  </base-layout>
 </template>
 
 <script>
@@ -535,8 +530,11 @@ import SiteFooter from "../components/home/updatedSiteFooter.vue";
 import { LocalisationMixins } from "@/mixins"
 import settingsContries from "@/components/SetupContries"
 
+import BaseLayout from "@/layouts/Layout"
+
 export default {
   components: {
+    BaseLayout,
     Button,
     settingsContries,
     LyTab,

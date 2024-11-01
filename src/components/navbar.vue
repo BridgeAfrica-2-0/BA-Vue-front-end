@@ -40,19 +40,9 @@
           </form>
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-radius">
-              <input
-                id="search-ba"
-                type="search"
-                data-toggle="popover"
-                class="form-control search-h"
-                style="font-size: 17px !important"
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
-                aria-label=""
-                data-original-title=""
-                title=""
-                v-on:keyup.enter="getKeyword"
-              />              
+              <input id="search-ba" type="search" data-toggle="popover" class="form-control search-h"
+                style="font-size: 17px !important" :placeholder="credentials.placeholder" v-model="credentials.keyword"
+                aria-label="" data-original-title="" title="" v-on:keyup.enter="getKeyword" />
 
               <!-- <multiselect
                 :value="city"
@@ -78,243 +68,240 @@
           <div class="d-flex justify-content-between align-content-center" style="flex-wrap: wrap;">
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
-            aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" v-b-modal="'myModallnav'"
-            @click="togglenav()" :class="{ togglebtn: isActive }">
-            <fas-icon class="primary search" :icon="['fas', 'bars']" />
-          </button>
-          <div style="float: left; cursor: pointer;" class="mt-2" @click="navigateToCart">
-            <span class="cart-icon position-relative" style="color:#455a64">
-              <b-icon icon="cart4" class="icon-size"></b-icon>
-              <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"
-                style="top: 0; right: 0;">
-                {{ cartCount }}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
+              aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" v-b-modal="'myModallnav'"
+              @click="togglenav()" :class="{ togglebtn: isActive }">
+              <fas-icon class="primary search" :icon="['fas', 'bars']" />
+            </button>
+            <div style="float: left; cursor: pointer;" class="mt-2" @click="navigateToCart">
+              <span class="cart-icon position-relative" style="color:#455a64">
+                <b-icon icon="cart4" class="icon-size"></b-icon>
+                <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"
+                  style="top: 0; right: 0;">
+                  {{ cartCount }}
+                </span>
               </span>
-            </span>
-          </div>
-          <div style="float: right" ref="isnaav">
-            <b-collapse id="nav-collapse" is-nav>
-              <div v-if="islogin" class="nav-item">
-                <router-link :to="navLink('home')" class="nav-link text-dark hov">
-                  Dashboard
-                </router-link>
-              </div>
+            </div>
+            <div style="float: right" ref="isnaav">
+              <b-collapse id="nav-collapse" is-nav>
+                <div v-if="islogin" class="nav-item">
+                  <router-link :to="navLink('home')" class="nav-link text-dark hov">
+                    Dashboard
+                  </router-link>
+                </div>
 
-              <div v-if="islogin" class="nav-item">
-                <router-link :to="{ name: 'GlobalSearch', query: { tab: 0 } }" class="nav-link text-dark hov">
-                  {{ $t("general.Market") }}
-                </router-link>
-              </div>
+                <div v-if="islogin" class="nav-item">
+                  <router-link :to="{ name: 'GlobalSearch', query: { tab: 0 } }" class="nav-link text-dark hov">
+                    {{ $t("general.Market") }}
+                  </router-link>
+                </div>
 
-              <div v-if="!islogin" class="nav-item">
-                <router-link :to="{ name: 'signup' }" class="nav-link text-dark hov">
-                  {{ $t("auth.signup") }}
-                </router-link>
-              </div>
+                <div v-if="!islogin" class="nav-item">
+                  <router-link :to="{ name: 'signup' }" class="nav-link text-dark hov">
+                    {{ $t("auth.signup") }}
+                  </router-link>
+                </div>
 
-              <div v-if="!islogin" class="nav-item mr-5">
-                <router-link :to="{ name: 'Login' }" class="nav-link text-dark hov">
-                  {{ $t("auth.login") }}
-                </router-link>
-              </div>
-              <div class="text-center my-3">
-  <b-button id="popover-target-1" class="nav-link text-dark hov">
-    <b-link class="d-flex align-items-center" v-b-toggle="'collapse-2'">
-      <img :src="img" class="size poslang mr-1 imgLangSize" alt="">
-                        {{lang}}<a class="nav-link arrow-down p-0"></a>
-    </b-link>
-  </b-button>
-  <b-popover target="popover-target-1" triggers="hover" placement="top">
-    <b-card-text
-         @click="change('en')"
-                          class="cursor-pointer mb-2 d-flex align-items-center"
-                          ><img class="imgLangSize" src="../assets/img/about/en.png" alt="en"/>
-                          <span class="ml-1">{{ $t("auth.english") }}</span>
-                          </b-card-text
-                        >
-                        <b-card-text class="cursor-pointer d-flex align-items-center" @click="change('fr')">
-                          <img class="imgLangSize" src="../assets/img/la-france.png" alt="fr"/>
-                          <span class="ml-1">{{$t("auth.french")}}</span>
-                        </b-card-text>
-  </b-popover>
-</div>
+                <div v-if="!islogin" class="nav-item mr-5">
+                  <router-link :to="{ name: 'Login' }" class="nav-link text-dark hov">
+                    {{ $t("auth.login") }}
+                  </router-link>
+                </div>
+                <div class="text-center my-3">
+                  <b-button id="popover-target-1" class="nav-link text-dark hov">
+                    <b-link class="d-flex align-items-center" v-b-toggle="'collapse-2'">
+                      <img :src="img" class="size poslang mr-1 imgLangSize" alt="">
+                      {{ lang }}<a class="nav-link arrow-down p-0"></a>
+                    </b-link>
+                  </b-button>
+                  <b-popover target="popover-target-1" triggers="hover" placement="top">
+                    <b-card-text @click="change('en')" class="cursor-pointer mb-2 d-flex align-items-center"><img
+                        class="imgLangSize" src="../assets/img/about/en.png" alt="en" />
+                      <span class="ml-1">{{ $t("auth.english") }}</span>
+                    </b-card-text>
+                    <b-card-text class="cursor-pointer d-flex align-items-center" @click="change('fr')">
+                      <img class="imgLangSize" src="../assets/img/la-france.png" alt="fr" />
+                      <span class="ml-1">{{ $t("auth.french") }}</span>
+                    </b-card-text>
+                  </b-popover>
+                </div>
 
-              <!-- Messages Started -->
-              <div v-if="islogin" class="nav-item">
-                <a id="messages" class="nav-link" role="button" data-original-title="" title=""><span
-                    class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /> </span></a>
-                <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">Messages</p>
-                    <div v-if="messages.length">
-                      <div v-for="message in messages" :key="message.id">
-                        <hr class="h-divider" />
-                        <div
-                          class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer">
-                          <div class="d-inline-flex flex-row align-items-center">
-                            <div>
-                              <img :src="profileSenderImange(
-                                message.sender
-                                  ? message.sender
-                                  : message.sender_network
-                                    ? message.sender_network
-                                    : message.sender_business
-                              )
-                                " class="rounded" alt="" width="40" height="65" />
-                            </div>
-                            <div class="d-flex flex-column ml-1 line-size">
-                              <div class="font-weight-bold">
-                                {{
-                                  message.sender_business
-                                    ? message.sender_business.name
+                <!-- Messages Started -->
+                <div v-if="islogin" class="nav-item">
+                  <a id="messages" class="nav-link" role="button" data-original-title="" title=""><span
+                      class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /> </span></a>
+                  <b-popover target="messages" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <p class="font-weight-bold">Messages</p>
+                      <div v-if="messages.length">
+                        <div v-for="message in messages" :key="message.id">
+                          <hr class="h-divider" />
+                          <div
+                            class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer">
+                            <div class="d-inline-flex flex-row align-items-center">
+                              <div>
+                                <img :src="profileSenderImange(
+                                  message.sender
+                                    ? message.sender
                                     : message.sender_network
-                                      ? message.sender_network.name
-                                      : message.sender
-                                        ? message.sender.name
-                                        : ""
-                                }}
+                                      ? message.sender_network
+                                      : message.sender_business
+                                )
+                                  " class="rounded" alt="" width="40" height="65" />
                               </div>
-                              <div class="small text-muted">
-                                {{
-                                  checkIfExists(message, "message") &&
-                                    message.message != null
-                                    ? message.message.substring(0, 20)
-                                    : ""
-                                }}
+                              <div class="d-flex flex-column ml-1 line-size">
+                                <div class="font-weight-bold">
+                                  {{
+                                    message.sender_business
+                                      ? message.sender_business.name
+                                      : message.sender_network
+                                        ? message.sender_network.name
+                                        : message.sender
+                                          ? message.sender.name
+                                          : ""
+                                  }}
+                                </div>
+                                <div class="small text-muted">
+                                  {{
+                                    checkIfExists(message, "message") &&
+                                      message.message != null
+                                      ? message.message.substring(0, 20)
+                                      : ""
+                                  }}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="small text-muted">
-                            {{ message.created_at | moment("from", "now") }}
+                            <div class="small text-muted">
+                              {{ message.created_at | moment("from", "now") }}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <hr class="h-divider" />
-                    <router-link :to="newRedirection('message')" v-if="islogin">
-                      <u>{{ $t("general.See_Inbox") }}</u>
-                    </router-link>
-                  </div>
-                </b-popover>
-              </div>
-              <!-- Messages Ended -->
-              <!-- Notifications Started -->
-              <div v-if="islogin" class="nav-item">
-                <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""><span
-                    class="text-ored"><b-icon-bell-fill class="col-bg"> </b-icon-bell-fill></span></a>
-                <b-popover target="notif" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">
-                      {{ $t("general.Notifications") }}
-                    </p>
-                    <div v-for="notification in notifications" :key="notification.id">
                       <hr class="h-divider" />
-
-                      <router-link v-if="islogin" :to="newRedirection('notification')">
-                        <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                          <div>
-                            <b-avatar :src="notification.profile_picture" size="2rem">
-                            </b-avatar>
-                          </div>
-                          <div class="d-flex flex-column ml-3">
-                            <div class="wrap-text">
-                              {{ notification.notification_text }}
-                            </div>
-                            <div class="small text-muted">
-                              <span class="text-capitalize">
-                                {{
-                                  notification.created_at
-                                  | moment("from", "now")
-                                }}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                      <router-link :to="newRedirection('message')" v-if="islogin">
+                        <u>{{ $t("general.See_Inbox") }}</u>
                       </router-link>
                     </div>
-                    <hr class="h-divider" />
+                  </b-popover>
+                </div>
+                <!-- Messages Ended -->
+                <!-- Notifications Started -->
+                <div v-if="islogin" class="nav-item">
+                  <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title=""
+                    title=""><span class="text-ored"><b-icon-bell-fill class="col-bg"> </b-icon-bell-fill></span></a>
+                  <b-popover target="notif" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <p class="font-weight-bold">
+                        {{ $t("general.Notifications") }}
+                      </p>
+                      <div v-for="notification in notifications" :key="notification.id">
+                        <hr class="h-divider" />
 
-                    <router-link v-if="islogin" :to="newRedirection('notification')"><u>{{
-                      $t("general.See_all_Notifications")
-                        }}</u></router-link>
-                  </div>
-                </b-popover>
-              </div>
-              <!-- Notifications Ended -->
+                        <router-link v-if="islogin" :to="newRedirection('notification')">
+                          <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+                            <div>
+                              <b-avatar :src="notification.profile_picture" size="2rem">
+                              </b-avatar>
+                            </div>
+                            <div class="d-flex flex-column ml-3">
+                              <div class="wrap-text">
+                                {{ notification.notification_text }}
+                              </div>
+                              <div class="small text-muted">
+                                <span class="text-capitalize">
+                                  {{
+                                    notification.created_at
+                                    | moment("from", "now")
+                                  }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </router-link>
+                      </div>
+                      <hr class="h-divider" />
 
-              <div v-if="islogin" class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
-                <router-link :to="userOwnPage">
-                  <b-avatar variant="light" :src="user.profile_picture"
-                    :square="'user' == user.user_type ? false : true" class="logo-sizee"></b-avatar>
-                </router-link>
-              </div>
-
-              <b-tooltip v-if="islogin" target="profilepic" variant="light" triggers="hover">
-                {{ user.name }}
-              </b-tooltip>
-
-              <div v-if="islogin" class="nav-item">
-                <a id="other-menu" class="nav-link text-dark arrow-down" data-toggle="popover" role="button"
-                  data-original-title="" title="">
-                </a>
-                <b-popover target="other-menu" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <a v-if="'user' != user.user_type" @click.prevent="switchToProfile" href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'user']" /></span>
-                      Profile
-                    </a>
-                    <hr class="h-divider" />
-
-                    <div style="width: 100%" class="d-inline-flex flex-row align-items-center mb-1">
-                      <Activity class="w-full" />
+                      <router-link v-if="islogin" :to="newRedirection('notification')"><u>{{
+                        $t("general.See_all_Notifications")
+                          }}</u></router-link>
                     </div>
+                  </b-popover>
+                </div>
+                <!-- Notifications Ended -->
 
-                    <router-link :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
-                      {{ $t("general.My_orders") }}
-                    </router-link>
-                    <hr class="h-divider" />
+                <div v-if="islogin" class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+                  <router-link :to="userOwnPage">
+                    <b-avatar variant="light" :src="user.profile_picture"
+                      :square="'user' == user.user_type ? false : true" class="logo-sizee"></b-avatar>
+                  </router-link>
+                </div>
 
-                    <router-link :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full">
-                      <span class="mr-2 w-full" style="display: inline-block;"><fas-icon class="violet search"
-                          :icon="['fas', 'cogs']" />
-                        {{ $t("general.Account_Settings") }}
-                      </span>
-                    </router-link>
-                    <hr class="h-divider" />
-                    <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
-                      {{ $t("general.Help_and_Support") }}
+                <b-tooltip v-if="islogin" target="profilepic" variant="light" triggers="hover">
+                  {{ user.name }}
+                </b-tooltip>
+
+                <div v-if="islogin" class="nav-item">
+                  <a id="other-menu" class="nav-link text-dark arrow-down" data-toggle="popover" role="button"
+                    data-original-title="" title="">
+                  </a>
+                  <b-popover target="other-menu" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <a v-if="'user' != user.user_type" @click.prevent="switchToProfile" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'user']" /></span>
+                        Profile
+                      </a>
+                      <hr class="h-divider" />
+
+                      <div style="width: 100%" class="d-inline-flex flex-row align-items-center mb-1">
+                        <Activity class="w-full" />
+                      </div>
+
+                      <router-link :to="{ name: 'orders' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                        {{ $t("general.My_orders") }}
+                      </router-link>
+                      <hr class="h-divider" />
+
+                      <router-link :to="{ name: 'settings' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full">
+                        <span class="mr-2 w-full" style="display: inline-block;"><fas-icon class="violet search"
+                            :icon="['fas', 'cogs']" />
+                          {{ $t("general.Account_Settings") }}
+                        </span>
+                      </router-link>
+                      <hr class="h-divider" />
+                      <div class="other-menu suggest-item cursor-pointer">
+                        <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+                        {{ $t("general.Help_and_Support") }}
+                      </div>
+                      <hr class="h-divider" />
+
+                      <div class="other-menu suggest-item cursor-pointer">
+                        <b-link v-b-toggle="'collapse-2'"><fas-icon class="violet search mr-1"
+                            :icon="['fas', 'globe-americas']" />
+                          {{ $t("general.Language") }}</b-link>
+
+                        <b-collapse id="collapse-2" class="mt-1">
+                          <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{ $t("auth.english")
+                            }}</b-card-text>
+                          <b-card-text @click="$i18n.locale = 'fr'">{{
+                            $t("auth.french")
+                            }}</b-card-text>
+                        </b-collapse>
+                      </div>
+                      <hr class="h-divider" />
+                      <a @click="logout" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+                        {{ $t("general.Logout") }}
+                      </a>
                     </div>
-                    <hr class="h-divider" />
-
-                    <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'"><fas-icon class="violet search mr-1"
-                          :icon="['fas', 'globe-americas']" />
-                        {{ $t("general.Language") }}</b-link>
-
-                      <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{ $t("auth.english")
-                          }}</b-card-text>
-                        <b-card-text @click="$i18n.locale = 'fr'">{{
-                          $t("auth.french")
-                        }}</b-card-text>
-                      </b-collapse>
-                    </div>
-                    <hr class="h-divider" />
-                    <a @click="logout" href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
-                      {{ $t("general.Logout") }}
-                    </a>
-                  </div>
-                </b-popover>
-              </div>
-            </b-collapse>
-          </div>
+                  </b-popover>
+                </div>
+              </b-collapse>
+            </div>
           </div>
         </div>
 
@@ -409,7 +396,7 @@
                   }}</b-card-text>
                 <b-card-text @click="$i18n.locale = 'fr'">{{
                   $t("auth.french")
-                }}</b-card-text>
+                  }}</b-card-text>
               </b-collapse>
             </div>
             <hr class="h-divider" />
@@ -497,13 +484,13 @@ export default {
   },
   created() {
     const currentLang = this.$i18n.locale;
-    if(currentLang == 'en'){
-        this.img = require("../assets/img/about/en.png");
-        this.lang = 'English'
-      }else {
-        this.img = require("../assets/img/la-france.png");
-         this.lang = 'Français'
-      }
+    if (currentLang == 'en') {
+      this.img = require("../assets/img/about/en.png");
+      this.lang = 'English'
+    } else {
+      this.img = require("../assets/img/la-france.png");
+      this.lang = 'Français'
+    }
     //check for authentication
     this.getCities();
 
@@ -610,15 +597,15 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
-    change(lang){
+    change(lang) {
       this.$i18n.locale = lang;
 
-      if(lang == 'en'){
+      if (lang == 'en') {
         this.img = require("../assets/img/about/en.png");
         this.lang = 'English'
-      }else {
+      } else {
         this.img = require("../assets/img/la-france.png");
-         this.lang = 'Français'
+        this.lang = 'Français'
       }
     },
     setSelectedLocation(value) {
@@ -705,9 +692,9 @@ export default {
           ? "cart/total"
           : `guest/cart/total?guest_identifier=${guest_identifier}`;
 
-        const response = await axios.get(url);        
+        const response = await axios.get(url);
 
-        this.$store.commit('cart/addNewItem', {items: response.data.data.totalItems, add:false})
+        this.$store.commit('cart/addNewItem', { items: response.data.data.totalItems, add: false })
 
       } catch (error) {
         console.error("Error fetching cart count:", error);
@@ -917,11 +904,12 @@ export default {
 };
 </script>
 <style>
-
-.size, .imgLangSize{
+.size,
+.imgLangSize {
   height: 15px !important;
   width: 15px !important;
 }
+
 .search-button {
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   color: white;
@@ -932,6 +920,7 @@ export default {
   min-width: 100px;
 
 }
+
 .cart-icon {
   color: #e75c18 !important;
   position: relative;

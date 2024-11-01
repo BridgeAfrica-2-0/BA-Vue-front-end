@@ -11,21 +11,44 @@
         </div>
         <div class="modal-body">
           <div class="countries my-1">
-            <strong for="">Country</strong>
-            <select class="custom-select" v-model="country">
-              <option :value="ev.sigle" v-for="(ev, index) in countries" :key="index"> {{ ev.flag }} {{ ev.name }}
-              </option>
-            </select>
+            <strong for="">Country {{ country }}</strong>
+            <v-select v-model="country" :options="countries" label="name" :reduce="country => country.sigle">
+              <template #option="option">
+                <span>
+                  {{ option.flag }}
+                  {{ option.name }}
+                </span>
+              </template>
+              <template #selected-option="option">
+                <span>
+                  {{ option.flag }}
+                  {{ option.name }}
+                </span>
+              </template>
+              
+            </v-select>
           </div>
 
 
           <div class="countries my-2">
             <strong for="">Currency</strong>
-            <select class="custom-select" v-model="currency">
-              <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol
+            <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency.name">
+              <!-- <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol
                 }})
-              </option>
-            </select>
+              </option> -->
+              <template #option="option">
+                <span>
+                  ({{ option.value.symbol }})
+                  {{ option.name }}
+                </span>
+              </template>
+              <template #selected-option="option">
+                <span>
+                  ({{ option.value.symbol }})
+                  {{ option.name }}
+                </span>
+              </template>
+            </v-select>
           </div>
 
           <div class="language my-2">
@@ -47,9 +70,19 @@
 
 
 <script>
+
+
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
+
+
 import { LocalisationMixins } from "@/mixins"
 
 export default {
+  components: {
+    vSelect
+  },
   mixins: [LocalisationMixins],
   data: () => ({
     country: "",
@@ -92,7 +125,7 @@ export default {
       this.currencies = Object.entries(uniqueCurrencyMap).map(curreny => {
         const [key, value] = curreny
         return { name: key, value };
-      });
+      }).sort((a, b) => a.name.localeCompare(b.name));
     }
   },
 

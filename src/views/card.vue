@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="bg-white">
     <navbar />
-    <div class="cart-wrapper" style="margin-bottom: 300px;">
+    <div class="cart-wrapper container" style="margin-bottom: 300px;">
       <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
       <div class="row pt-5">
-        <div class="col-12 col-md-9 col-lg-9">
+        <div class="col-lg-8">
           <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
             <div style="margin-right: 150px;">
               <Skeleton :loading="loading" />
@@ -15,9 +15,11 @@
                 <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">Clear</a>
               </div>
               <div v-for="(cart_item, i) in business.items" :key="i">
-                <div class="d-flex mt-4 cart-item-wrapper ml-4">
-                  <img :src="cart_item.product_picture" class="product-image" />
-                  <div class="pl-4">
+                <div class="mt-4 d-flex cart-item-wrapper">
+                   <div class="row" style="flex-grow: 1;">
+                    <img :src="cart_item.product_picture" class="product-image col-lg-3" />
+                    <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
+                  <div class="col-lg-9 col-md-6 mt-3">
                     <h6 class="product-name">{{ cart_item.product_name }}</h6>
                     <div>
                       <label for="" class="text-black"
@@ -52,8 +54,9 @@
                         v-model="cart_item.quantity" />
                     </div>
                   </div>
-                  <div class="product-prices d-flex">
-                    <div class="pr-5">
+                   </div>
+                  <div class="product-prices d-flex" style="gap: 10px;">
+                    <div class="">
                       <h6 class="discount-price">
                         {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate)
                         }}
@@ -86,7 +89,7 @@
             </splide-slide>
           </splide>
         </div>
-        <div class="col-12 col-md-3 col-lg-3">
+        <div class="col-lg-4" style="padding-inline: 32px;">
           <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable || !cart?.data[0]?.cartItems" />
         </div>
       </div>
@@ -452,18 +455,10 @@ export default {
   position: static;
 }
 
-.cart-wrapper {
-  margin: 10px 100px 0 150px;
-}
-
 .my-bag {
   font-size: 26px;
   font-weight: 700;
   color: #000;
-}
-
-.card-top-content {
-  margin-right: 150px;
 }
 
 .card-top-content h4 {
@@ -521,11 +516,6 @@ export default {
   background-color: #fff !important;
   margin-left: 50px;
   font-weight: 800;
-}
-
-.product-prices {
-  margin-right: 150px;
-  margin-left: auto;
 }
 
 .discount-price {

@@ -2,9 +2,10 @@
 <template>
   <div class="order-summary">
     <div class="summary-section">
-      <h3>Order Summary</h3>
+      <h3>Yo Order Summary</h3>
       <div class="summary-item">
         <span>Subtotal</span>
+        <!-- {{ cartSummary }} -->
         <span> {{ cartSummary?.sub_total?.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
@@ -151,21 +152,6 @@ export default {
       this.rate = await convertToCurrency();
       console.log("======rate======",this.rate )
     },
-     locationPrice(ev, rate) {
-      let priceFormatted=0.0;
-      if(rate)
-     {
-       if (rate?.currency === 'XAF') {
-         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-       } else {
-         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
-       }      
-     }
-     else{
-      priceFormatted = `0.0`
-     }
-      return priceFormatted;
-    }
   },
   async mounted() {
     // this.userLocation = await checkCountry();
@@ -173,6 +159,7 @@ export default {
     this.getCurrencyConvert();
     this.isCameroon = this.userLocation?.country === 'CM';
     if (this.orderSummary) {
+      console.log("this.orderSummary", this.orderSummary);
       this.cartSummary = { ...this.cartSummary, ...this.orderSummary };
     }
   },

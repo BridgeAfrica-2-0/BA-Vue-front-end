@@ -58,8 +58,7 @@
                   <div class="product-prices d-flex" style="gap: 10px;">
                     <div class="">
                       <h6 class="discount-price">
-                        {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate)
-                        }}
+                        {{ calculateDiscountedPrice(cart_item) }}
                       </h6>
                       <!-- <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
@@ -154,29 +153,35 @@ export default {
     }
 
     this.rate = await convertToCurrency();
+    this.test();
     this.locale = this.userLocation?.country ?? 'CM';
     this.currency = this.rate.currency;
     this.isCameroon = this.userLocation?.country === 'CM';
     this.getRecommandedProducts('');
 
   },
-  filters: {
-    locationPrice(ev, rate) {
-      let priceFormatted = 0.0;
-      if (rate) {
-        if (rate?.currency === 'XAF') {
-          priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-        } else {
-          priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
-        }
-      }
-      else {
-        priceFormatted = `0.0`
-      }
-      return priceFormatted;
-    }
-  },
+  // filters: {
+  //   locationPrice(ev, rate) {
+  //     let priceFormatted = 0.0;
+  //     if (rate) {
+  //       if (rate?.currency === 'XAF') {
+  //         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+  //       } else {
+  //         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+  //       }
+  //     }
+  //     else {
+  //       priceFormatted = `0.0`
+  //     }
+  //     return priceFormatted;
+  //   }
+  // },
   watch: {
+    rate(newRate) {
+      if (newRate) {
+        console.log("Rate mis à jour, les prix seront recalculés automatiquement.");
+      }
+    },
     currentPage: function (val) {
       this.orderForCurrentPage = this.cart["data"].slice(
         (val - 1) * this.per_page,
@@ -213,6 +218,21 @@ export default {
     },
   },
   methods: {
+    async test(){
+      this.rate = await convertToCurrency();
+      console.log("======rate====== copy",this.rate )
+    },
+    calculateDiscountedPrice(cart_item) {
+      if (!this.rate) return "Calcul en cours...";
+      const price = cart_item.product_price - (cart_item.discount_price ?? 0);
+      return this.locationPrice(price, this.rate);
+    },
+    locationPrice(ev, rate) {
+      if (!rate) return "0.0";
+      return rate.currency === "XAF"
+        ? `${(ev / rate.rate).toFixed(2).replace(".", ",")} ${rate.currency}`
+        : `${(ev / rate.rate).toFixed(2)} ${rate.currency}`;
+    },
     formatCurrency(value) {
       const formatter = new Intl.NumberFormat(this.locale, {
         style: 'currency',

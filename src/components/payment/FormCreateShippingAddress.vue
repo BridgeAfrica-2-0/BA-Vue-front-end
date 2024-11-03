@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-dark">
     <b-form @submit="onSubmit" @reset="onReset">
       <b-alert :show="errorAppend" variant="danger"
         >One problem must append!</b-alert
@@ -255,6 +255,7 @@ export default {
   created() {
     this.getcountries();
     console.log(this.form.country);
+    console.log("Form created", this.form);
   },
   computed: {
     shippingsTab() {
@@ -349,13 +350,16 @@ export default {
             email: this.form.email,
             zip_code: this.form?.zip_code,
             address: this.form?.address,
+            is_local: this.form.is_local
           },
         };
         const shipData = shippingUp.data;
+        console.log("Shipping", shipData);
         for (let key in shippingUp.data) {
           formData.append(key, shippingUp.data[key]);
         }
         shippingUp.data = formData;
+        console.log("Ship", shippingUp);
         shippingUp.data.isLocal = false;
         if(this.isCameroon)
         {
@@ -391,6 +395,7 @@ export default {
         this.form.region_id = "";
         this.form.division_id = "";
         this.form.council_id = "";
+        this.is_local = "";
       }
       if (this.modal) {
         this.$emit("closecshippingm");

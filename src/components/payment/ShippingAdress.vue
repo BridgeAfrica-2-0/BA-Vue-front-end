@@ -255,6 +255,7 @@ export default {
       this.$emit("edit-button-clicked");
     },
     shipping(data) {
+      console.log("Data", data);
       this.activeData = { ...data };
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
@@ -283,6 +284,7 @@ export default {
               this.buttonDisabled = false;
             })
            .catch((error) => {
+            console.log("Err", error);
           if (error) {
             this.buttonDisabled = true;
             this.flashMessage.show({

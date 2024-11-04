@@ -284,6 +284,7 @@ export default {
             })
            .catch((error) => {
           if (error) {
+            console.log("Erro+++++++++++++++", error);
             this.buttonDisabled = true;
             this.flashMessage.show({
               status: "error",

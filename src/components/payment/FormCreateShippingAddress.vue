@@ -288,6 +288,7 @@ export default {
     }
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
     const isLocalVal = localStorage.getItem("isLocal");
+    console.log("isLocalVal", isLocalVal);
     this.isCameroon = isLocalVal !== "false";
   },
   methods: {
@@ -349,6 +350,9 @@ export default {
             email: this.form.email,
             zip_code: this.form?.zip_code,
             address: this.form?.address,
+            islogin: this.islogin,
+            isLocal: this.form.isLocal,
+            active: this.form.active,
           },
         };
         const shipData = shippingUp.data;

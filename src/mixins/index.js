@@ -578,7 +578,7 @@ export const LocalisationMixins = {
 
   methods: {
     async onInitLocalisation() {
-      console.log(this.countryLocalisation?.sigle)
+      console.log("lkjhgfdxcfvgbn", this.countryLocalisation);
       this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
     },
   }

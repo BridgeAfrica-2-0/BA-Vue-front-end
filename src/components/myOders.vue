@@ -779,7 +779,7 @@ export default {
 
   methods: {
     changeElementType(p) {
-      console.log("------------------" + p);
+      
       this.status = p;
 
       if (p == 1) {

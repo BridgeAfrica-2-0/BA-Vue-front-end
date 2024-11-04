@@ -10,12 +10,9 @@
           </button>
         </div>
         <div class="modal-body">
-          {{ countries.length }}
-          {{ country }}
-
           <div class="countries my-1">
-            <strong for="">Country {{ country }}</strong>
-            <v-select v-model="country" :options="countries" label="name" :reduce="country => country.sigle">
+          <strong for="">Country</strong>
+            <v-select v-model="country" :options="countries" label="name" :reduce="country => country">
               <template #option="option">
                 <span>
                   <img :src="option.flag" class="flag" />
@@ -32,24 +29,19 @@
             </v-select>
           </div>
 
-
           <div class="countries my-2">
-            {{ currencies.length }}
-            {{ currency }}
-
-
             <strong for="">Currency</strong>
-            <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency.name">
+            <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency">
 
               <template #option="option">
                 <span>
-                  ({{ option.value.symbol }})
+                  ({{ option.symbol }})
                   {{ option.name }}
                 </span>
               </template>
               <template #selected-option="option">
                 <span>
-                  ({{ option.value.symbol }})
+                  ({{ option.symbol }})
                   {{ option.name }}
                 </span>
               </template>
@@ -81,7 +73,6 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 
 
-
 import { LocalisationMixins } from "@/mixins"
 
 export default {
@@ -89,6 +80,7 @@ export default {
     vSelect
   },
   mixins: [LocalisationMixins],
+
   data: () => ({
     country: "",
     currency: "",
@@ -100,7 +92,20 @@ export default {
     currencies: []
   }),
 
+  created() {
+    this.country = this.countrySelected
+    this.currency = this.currencySelected
+    this.onStart(this.countries.length ? this.countries : [])
+  },
+
   watch: {
+    countrySelected(newValue) {
+      this.country = newValue
+
+    },
+    currencySelected(newValue) {
+      this.currency = newValue
+    },
     countries(newValue) {
 
       if (!newValue.length)
@@ -111,7 +116,20 @@ export default {
         this.country = this.countrySelected.sigle
         this.currency = this.currencySelected.name
       }
+      this.onStart(newValue)
 
+    }
+  },
+
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    onStart(newValue) {
       const currencies = newValue.map(c => c.currency).filter(c => c)
 
       const seenCurrencies = new Set();
@@ -129,19 +147,10 @@ export default {
 
       this.currencies = Object.entries(uniqueCurrencyMap).map(curreny => {
         const [key, value] = curreny
-        return { name: key, value };
+        return { name: key, symbol: value.symbol };
       }).sort((a, b) => a.name.localeCompare(b.name));
-    }
-  },
 
-  props: {
-    open: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  methods: {
+    },
     change(lang) {
       this.$i18n.locale = lang;
 
@@ -153,11 +162,10 @@ export default {
     },
 
     onChange() {
-      const findCountryInfo = this.countries.find(c => c.sigle == this.country)
 
       this.$store.dispatch("localisation/updateCountry", this.country)
       this.$store.dispatch("localisation/updateCurrency", this.currency)
-      this.$store.dispatch("localisation/updateRate", this.currency)
+      this.$store.dispatch("localisation/updateRate", this.currency.name)
 
       this.change(this.lang)
       this.$refs.close.click();

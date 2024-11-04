@@ -294,7 +294,7 @@ export default {
       await axios
         .post(`shipping-checkout/re-order?order_id=${order.order_id}`)
         .then(res => {
-          console.log(res);
+     
 
           this.order_price = res.data.data.total_amount;
           this.order_id = res.data.data.order_id;

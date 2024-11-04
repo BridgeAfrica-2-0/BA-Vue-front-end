@@ -1,342 +1,223 @@
 <template>
-  <div class="container-flex">
-    <navbar />
-    <hr />
-    <!-- Desktop Top Bar -->
-    <div class="container">
-      <div v-if="showPayment">
-        <PaymentOperator
-          v-if="showOperator"
-          @requestpayment="handleRequestPayment"
-          @showreview="handleShowReview"
-          :price="order_price"
-        />
+  <base-layout>
+    <template v-slot:main>
+      <div class="container-flex">
+        <navbar />
+        <hr />
+        <!-- Desktop Top Bar -->
+        <div class="container">
+          <div v-if="showPayment">
+            <PaymentOperator v-if="showOperator" @requestpayment="handleRequestPayment" @showreview="handleShowReview"
+              :price="order_price" />
 
-        <RequestPayment
-          v-if="showRequestPayment"
-          :price="order_price"
-          :operator="operator"
-          :loading="loading"
-          @changepayment="handleChangePayment"
-          @confirmpayment="handleConfirmPayment"
-        />
-      </div>
-
-      <div v-if="!showPayment">
-        <div class="row m-0 parent desktop">
-          <b-avatar
-            id="a1"
-            class="avatar"
-            :class="isTabActive == 1 ? 'bg-success' : ''"
-            text="1"
-            @click="changeTab(1)"
-          ></b-avatar>
-          <h2 class="text cursor" @click="changeTab(1)">
-            {{ $t("myOrders.All") }}
-          </h2>
-          <div
-            id="p1"
-            class="progress prog cursor gris"
-            :class="isTabActive == 1 ? 'bg-success' : ''"
-            @click="changeTab(1)"
-          >
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
+            <RequestPayment v-if="showRequestPayment" :price="order_price" :operator="operator" :loading="loading"
+              @changepayment="handleChangePayment" @confirmpayment="handleConfirmPayment" />
           </div>
 
-          <b-avatar
-            id="a2"
-            class="avatar"
-            :class="isTabActive == 2 ? 'bg-success' : ''"
-            text="2"
-            @click="changeTab(2)"
-          ></b-avatar>
-          <h2 class="text cursor" @click="changeTab(2)">
-            {{ $t("myOrders.In_Progress") }}
-          </h2>
-          <div
-            id="p2"
-            class="progress prog cursor gris"
-            :class="isTabActive == 2 ? 'bg-success' : ''"
-            @click="changeTab(2)"
-          >
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-
-          <b-avatar
-            id="a3"
-            class="avatar"
-            :class="isTabActive == 3 ? 'bg-success' : ''"
-            text="3"
-            @click="changeTab(3)"
-          ></b-avatar>
-          <h2 class="text cursor" @click="changeTab(3)">
-            {{ $t("myOrders.Complete") }}
-          </h2>
-          <div
-            id="p3"
-            class="progress prog cursor gris"
-            :class="isTabActive == 3 ? 'bg-success' : ''"
-            @click="changeTab(3)"
-          >
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-
-          <b-avatar
-            id="a4"
-            class="avatar"
-            :class="isTabActive == 4 ? 'bg-success' : ''"
-            text="4"
-            @click="changeTab(4)"
-          ></b-avatar>
-          <h2 class="text cursor" @click="changeTab(4)">
-            {{ $t("myOrders.Cancel") }}
-          </h2>
-          <div
-            id="p4"
-            class="progress prog cursor gris"
-            :class="isTabActive == 4 ? 'bg-success' : ''"
-            @click="changeTab(4)"
-          >
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-        </div>
-        <!-- Mobile Top Bar -->
-        <div class="mobile-view">
-          <div class="justify-content-between d-flex row cd B m-0">
-            <div
-              id="m1"
-              class="mobile bg-success t col transition pl-4"
-              @click="changeTab(1)"
-            >
-              <div class="cercle1">1</div>
-              <h2 class="h2 text-position">{{ $t("myOrders.All") }}</h2>
-            </div>
-            <div id="m2" class="mobile1 col t start-50" @click="changeTab(2)">
-              <div class="cercle2">2</div>
-
-              <h2 class="h2 text-position text-center">
-                {{ $t("myOrders.In_progress") }}
+          <div v-if="!showPayment">
+            <div class="row m-0 parent desktop">
+              <b-avatar id="a1" class="avatar" :class="isTabActive == 1 ? 'bg-success' : ''" text="1"
+                @click="changeTab(1)"></b-avatar>
+              <h2 class="text cursor" @click="changeTab(1)">
+                {{ $t("myOrders.All") }}
               </h2>
-            </div>
-            <div id="m3" class="mobile3 col t start-50" @click="changeTab(3)">
-              <div class="cercle2">3</div>
+              <div id="p1" class="progress prog cursor gris" :class="isTabActive == 1 ? 'bg-success' : ''"
+                @click="changeTab(1)">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
 
-              <h2 class="h2 text-position text-center">
+              <b-avatar id="a2" class="avatar" :class="isTabActive == 2 ? 'bg-success' : ''" text="2"
+                @click="changeTab(2)"></b-avatar>
+              <h2 class="text cursor" @click="changeTab(2)">
+                {{ $t("myOrders.In_Progress") }}
+              </h2>
+              <div id="p2" class="progress prog cursor gris" :class="isTabActive == 2 ? 'bg-success' : ''"
+                @click="changeTab(2)">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+
+              <b-avatar id="a3" class="avatar" :class="isTabActive == 3 ? 'bg-success' : ''" text="3"
+                @click="changeTab(3)"></b-avatar>
+              <h2 class="text cursor" @click="changeTab(3)">
                 {{ $t("myOrders.Complete") }}
               </h2>
-            </div>
-            <div id="m4" class="mobile2 col t" @click="changeTab(4)">
-              <div class="cercle2">4</div>
-              <h2 class="h2 text-position text-center">
+              <div id="p3" class="progress prog cursor gris" :class="isTabActive == 3 ? 'bg-success' : ''"
+                @click="changeTab(3)">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+
+              <b-avatar id="a4" class="avatar" :class="isTabActive == 4 ? 'bg-success' : ''" text="4"
+                @click="changeTab(4)"></b-avatar>
+              <h2 class="text cursor" @click="changeTab(4)">
                 {{ $t("myOrders.Cancel") }}
               </h2>
-            </div>
-          </div>
-        </div>
-
-        <!-- Top Bar Ended -->
-
-        <div class="d-flex justify-content-between my-4">
-          <h2 class="font-20 align-self-center">
-            {{ $t("myOrders.My_orders") }}
-          </h2>
-          <b-button variant="link" class="align-self-center text-capitalize">{{
-            $t("myOrders.clear_history")
-          }}</b-button>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 d-flex justify-content-between mb-4">
-            <p class="align-self-center">{{ $t("myOrders.Show") }}:</p>
-            <b-form-select
-              v-model="selectedShow"
-              :options="showOptions"
-              @change="getOrderByStatus(status)"
-              class="mx-3 align-self-center"
-            ></b-form-select>
-          </div>
-        </div>
-        <div class="row my-4" v-if="loading">
-          <div class="col-12 d-flex justify-content-center align-items-center">
-            <b-spinner
-              variant="primary"
-              style="width: 3rem; height: 3rem"
-              label="Loading"
-            ></b-spinner>
-          </div>
-        </div>
-        <div v-for="order in orders" :key="order.order_id">
-          <div class="row d-flex justify-content-between px-3 bg-light pt-2">
-            <p class="order-text align-self-center pb-0 mb-0">
-              <span class="font-weight-bold">
-                {{ $t("myOrders.Order") }}
-              </span>
-              <span
-                class="text-success cursor"
-                @click="gotoOrderDetails(order.order_id)"
-                >#{{ order.order_id }}</span
-              >
-            </p>
-          </div>
-          <div
-            class="row d-flex justify-content-between align-items-center px-3 bg-light"
-          >
-            <div>
-              <span class="flou align-self-center">
-                {{ order.user_name }}
-                {{ moment(order.created_at).format("MM/DD/YYYY") }}
-                12H00
-              </span>
-              <div class="d-block d-lg-none align-self-center text-small">
-                <span
-                  >Status:
-                  <span class="text-success">{{ order.status }}</span></span
-                >
+              <div id="p4" class="progress prog cursor gris" :class="isTabActive == 4 ? 'bg-success' : ''"
+                @click="changeTab(4)">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
               </div>
             </div>
-            <b-dropdown
-              variant="ligth"
-              id="dropdown-1"
-              text="Manage"
-              class="align-self-center p-0 mr-2"
-            >
-              <b-dropdown-item
-                @click="updateOrderStatus('complete', order.order_id)"
-                >Complete</b-dropdown-item
-              >
-              <b-dropdown-item
-                @click="updateOrderStatus('archive', order.order_id)"
-                >Archive</b-dropdown-item
-              >
-              <b-dropdown-item
-                @click="updateOrderStatus('delete', order.order_id)"
-                >{{ $t("general.Delete") }}</b-dropdown-item
-              >
-            </b-dropdown>
-          </div>
-          <div
-            class="row px-3 mb-4 pt-4 pb-2 cursor row-shadow"
-            @click="gotoOrderDetails(order.order_id)"
-          >
-            <div class="col-lg-3 col-4">
-              <splide :options="{ rewind: true }" class="r-img">
-                <splide-slide
-                  cl
-                  v-for="(im, index) in order.images"
-                  :key="index"
-                >
-                  <img :src="im" class="r-img" />
-                </splide-slide>
-              </splide>
-            </div>
-            <div class="col-lg-3 col-4 font-weight-bold text-left m-auto">
-              <h3 class="text-small text-capitalize">
-                {{ $t("myOrders.Product_Qty") }} :
-              </h3>
-              <h3 class="text-small text-capitalize">
-                {{ $t("myOrders.Price") }} :
-              </h3>
-              <h3 class="text-small text-capitalize">
-                {{ $t("myOrders.shipping_cost") }}:
-              </h3>
-              <h3 class="text-small text-capitalize">
-                {{ $t("myOrders.Total") }} :
-              </h3>
-            </div>
-            <div class="col-lg-2 col-4 text-left m-auto">
-              <h3 class="text-small">
-                {{ order.order_items_count }}
-              </h3>
-              <h3 class="text-small">{{ order.order_price }} Fcfa</h3>
-              <h3 class="text-small">{{ order.shipping_amount }} Fcfa</h3>
-              <h3 class="text-small">{{ order.total_amount }} Fcfa</h3>
-            </div>
-            <div class="col-lg-2 d-none d-lg-block m-auto text-center">
-              <h3 class="font-weight-bold text-small text-capitalize">
-                {{ $t("myOrders.status") }}
-              </h3>
-              <h3
-                class="text-success font-weight-normal text-small text-capitalize"
-              >
-                {{ order.status }}
-              </h3>
+            <!-- Mobile Top Bar -->
+            <div class="mobile-view">
+              <div class="justify-content-between d-flex row cd B m-0">
+                <div id="m1" class="mobile bg-success t col transition pl-4" @click="changeTab(1)">
+                  <div class="cercle1">1</div>
+                  <h2 class="h2 text-position">{{ $t("myOrders.All") }}</h2>
+                </div>
+                <div id="m2" class="mobile1 col t start-50" @click="changeTab(2)">
+                  <div class="cercle2">2</div>
+
+                  <h2 class="h2 text-position text-center">
+                    {{ $t("myOrders.In_progress") }}
+                  </h2>
+                </div>
+                <div id="m3" class="mobile3 col t start-50" @click="changeTab(3)">
+                  <div class="cercle2">3</div>
+
+                  <h2 class="h2 text-position text-center">
+                    {{ $t("myOrders.Complete") }}
+                  </h2>
+                </div>
+                <div id="m4" class="mobile2 col t" @click="changeTab(4)">
+                  <div class="cercle2">4</div>
+                  <h2 class="h2 text-position text-center">
+                    {{ $t("myOrders.Cancel") }}
+                  </h2>
+                </div>
+              </div>
             </div>
 
-            <div class="col-lg-2 d-none d-lg-block m-auto text-right">
-              <b-button variant="primary" class="px-3" @click="reOrder(order)">
-                <b-spinner
-                  style="width: 1.2rem; height: 1.5rem"
-                  variant="light"
-                  v-if="order_loading"
-                  label="Loading"
-                ></b-spinner>
-                {{ $t("myOrders.Reorder") }}
-              </b-button>
+            <!-- Top Bar Ended -->
+
+            <div class="d-flex justify-content-between my-4">
+              <h2 class="font-20 align-self-center">
+                {{ $t("myOrders.My_orders") }}
+              </h2>
+              <b-button variant="link" class="align-self-center text-capitalize">{{
+                $t("myOrders.clear_history")
+                }}</b-button>
             </div>
-          </div>
-          <div
-            class="
+            <div class="row">
+              <div class="col-md-6 col-lg-4 d-flex justify-content-between mb-4">
+                <p class="align-self-center">{{ $t("myOrders.Show") }}:</p>
+                <b-form-select v-model="selectedShow" :options="showOptions" @change="getOrderByStatus(status)"
+                  class="mx-3 align-self-center"></b-form-select>
+              </div>
+            </div>
+            <div class="row my-4" v-if="loading">
+              <div class="col-12 d-flex justify-content-center align-items-center">
+                <b-spinner variant="primary" style="width: 3rem; height: 3rem" label="Loading"></b-spinner>
+              </div>
+            </div>
+            <div v-for="order in orders" :key="order.order_id">
+              <div class="row d-flex justify-content-between px-3 bg-light pt-2">
+                <p class="order-text align-self-center pb-0 mb-0">
+                  <span class="font-weight-bold">
+                    {{ $t("myOrders.Order") }}
+                  </span>
+                  <span class="text-success cursor" @click="gotoOrderDetails(order.order_id)">#{{ order.order_id
+                    }}</span>
+                </p>
+              </div>
+              <div class="row d-flex justify-content-between align-items-center px-3 bg-light">
+                <div>
+                  <span class="flou align-self-center">
+                    {{ order.user_name }}
+                    {{ moment(order.created_at).format("MM/DD/YYYY") }}
+                    12H00
+                  </span>
+                  <div class="d-block d-lg-none align-self-center text-small">
+                    <span>Status:
+                      <span class="text-success">{{ order.status }}</span></span>
+                  </div>
+                </div>
+                <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="align-self-center p-0 mr-2">
+                  <b-dropdown-item @click="updateOrderStatus('complete', order.order_id)">Complete</b-dropdown-item>
+                  <b-dropdown-item @click="updateOrderStatus('archive', order.order_id)">Archive</b-dropdown-item>
+                  <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)">{{ $t("general.Delete")
+                    }}</b-dropdown-item>
+                </b-dropdown>
+              </div>
+              <div class="row px-3 mb-4 pt-4 pb-2 cursor row-shadow" @click="gotoOrderDetails(order.order_id)">
+                <div class="col-lg-3 col-4">
+                  <splide :options="{ rewind: true }" class="r-img">
+                    <splide-slide cl v-for="(im, index) in order.images" :key="index">
+                      <img :src="im" class="r-img" />
+                    </splide-slide>
+                  </splide>
+                </div>
+                <div class="col-lg-3 col-4 font-weight-bold text-left m-auto">
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Product_Qty") }} :
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Price") }} :
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.shipping_cost") }}:
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Total") }} :
+                  </h3>
+                </div>
+                <div class="col-lg-2 col-4 text-left m-auto">
+                  <h3 class="text-small">
+                    {{ order.order_items_count }}
+                  </h3>
+                  <h3 class="text-small">{{ order.order_price }} Fcfa</h3>
+                  <h3 class="text-small">{{ order.shipping_amount }} Fcfa</h3>
+                  <h3 class="text-small">{{ order.total_amount }} Fcfa</h3>
+                </div>
+                <div class="col-lg-2 d-none d-lg-block m-auto text-center">
+                  <h3 class="font-weight-bold text-small text-capitalize">
+                    {{ $t("myOrders.status") }}
+                  </h3>
+                  <h3 class="text-success font-weight-normal text-small text-capitalize">
+                    {{ order.status }}
+                  </h3>
+                </div>
+
+                <div class="col-lg-2 d-none d-lg-block m-auto text-right">
+                  <b-button variant="primary" class="px-3" @click="reOrder(order)">
+                    <b-spinner style="width: 1.2rem; height: 1.5rem" variant="light" v-if="order_loading"
+                      label="Loading"></b-spinner>
+                    {{ $t("myOrders.Reorder") }}
+                  </b-button>
+                </div>
+              </div>
+              <div class="
           d-flex d-lg-none
           justify-content-lg-end justify-content-center
           my-3
-        "
-          >
-            <b-button variant="primary" class="px-5" @click="reOrder(order)">
-              <b-spinner
-                style="width: 1.5rem; height: 1.5rem"
-                variant="light"
-                v-if="order_loading"
-                label="Loading"
-              ></b-spinner>
-              {{ $t("myOrders.Reorder") }}
-            </b-button>
-          </div>
-        </div>
-        <div class="row my-4" v-if="loading">
-          <div class="col-12 d-flex justify-content-center align-items-center">
-            <!-- <b-spinner
+        ">
+                <b-button variant="primary" class="px-5" @click="reOrder(order)">
+                  <b-spinner style="width: 1.5rem; height: 1.5rem" variant="light" v-if="order_loading"
+                    label="Loading"></b-spinner>
+                  {{ $t("myOrders.Reorder") }}
+                </b-button>
+              </div>
+            </div>
+            <div class="row my-4" v-if="loading">
+              <div class="col-12 d-flex justify-content-center align-items-center">
+                <!-- <b-spinner
           style="width: 3rem; height: 3rem"
           variant="primary"
           label="Loading"
         ></b-spinner> -->
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+              <b-pagination v-if="(!loading && next) || prev" v-model="currentPage" pills :total-rows="totalOrders"
+                :per-page="orderPerPage" @change="handlePageChange"></b-pagination>
+            </div>
           </div>
         </div>
-        <div class="row d-flex justify-content-center">
-          <b-pagination
-            v-if="(!loading && next) || prev"
-            v-model="currentPage"
-            pills
-            :total-rows="totalOrders"
-            :per-page="orderPerPage"
-            @change="handlePageChange"
-          ></b-pagination>
-        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </base-layout>
 </template>
 <script>
 import axios from "axios";
@@ -344,8 +225,11 @@ import navbar from "./navbar.vue";
 import PaymentOperator from "./payment/PaymentOperator";
 import RequestPayment from "./payment/RequestPayment";
 import moment from "moment";
+
+import BaseLayout from "@/layouts/Layout"
+
 export default {
-  components: { navbar, PaymentOperator, RequestPayment },
+  components: { navbar, PaymentOperator, RequestPayment, BaseLayout },
   computed: {
     islogin() {
       return this.$store.getters["auth/isLogged"];
@@ -451,17 +335,16 @@ export default {
 
         const userJson = localStorage.getItem('user');
 
-       let userId = null;
-       const userObject = JSON.parse(userJson);
-       if(userObject)
-       {
-       try {
-       userId = userObject.user.id;
-      } catch (error) {
-      console.error('Error parsing user data from localStorage:', error);
-     }
-      }
-       url = this.islogin ?`orange/start-orange-money-transaction?userId=${userId}`: "orange/start-orange-money-transaction";
+        let userId = null;
+        const userObject = JSON.parse(userJson);
+        if (userObject) {
+          try {
+            userId = userObject.user.id;
+          } catch (error) {
+            console.error('Error parsing user data from localStorage:', error);
+          }
+        }
+        url = this.islogin ? `orange/start-orange-money-transaction?userId=${userId}` : "orange/start-orange-money-transaction";
 
         axios
           .post(url, data)
@@ -665,9 +548,11 @@ export default {
   margin-right: 10px !important;
   width: 130px !important;
 }
+
 .gris {
   background-color: #6c757d;
 }
+
 .text {
   margin-top: 35px;
 }
@@ -679,6 +564,7 @@ export default {
   background-color: #bfbfbf;
   clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 0 52%, 0% 0%);
 }
+
 .mobile1 {
   width: 200px;
   height: 50px;
@@ -688,6 +574,7 @@ export default {
   background-color: #bfbfbf;
   clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
+
 .mobile2 {
   width: 200px;
   height: 50px;
@@ -697,6 +584,7 @@ export default {
   background-color: #bfbfbf;
   clip-path: polygon(75% 0%, 75% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
+
 .mobile3 {
   width: 200px;
   height: 50px;
@@ -706,6 +594,7 @@ export default {
   background-color: #bfbfbf;
   clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
+
 .cercle1 {
   margin-top: 15px;
   border-radius: 50%;
@@ -718,6 +607,7 @@ export default {
   text-align: center;
   line-height: 23px;
 }
+
 .cercle2 {
   margin-top: 15px;
   border-radius: 50%;
@@ -737,18 +627,23 @@ export default {
   font-size: 14px;
   margin-left: 5px;
 }
+
 .mobile-view {
   max-width: 100%;
 }
+
 .font-20 {
   font-size: 20px;
 }
+
 .flou {
   color: #b6b2b2;
 }
+
 .text-small {
   font-size: 16px;
 }
+
 .r-img {
   border-radius: 5px;
   width: 100%;
@@ -763,27 +658,33 @@ export default {
   .order-text {
     font-size: 12px;
   }
+
   .flou {
     font-size: 12px !important;
   }
+
   .text-small {
     font-size: 12px;
   }
 }
+
 @media only screen and (max-width: 1200px) {
   .desktop.parent {
     display: none;
   }
 }
+
 @media only screen and (max-width: 470px) {
   .h2 {
     font-size: 10px !important;
     margin-left: 12px;
   }
+
   .cercle2 {
     margin-left: -4px !important;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   .mobile-view {
     display: none !important;

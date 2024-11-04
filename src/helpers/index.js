@@ -177,7 +177,7 @@ export const onInitializer = async ()  => {
     "name": country.name.common,
     "sigle": country.cca2,
     "currency": country.currencies,
-    "flag": country.flag,
+    "flag": country.flags.png,
   }))
 }
 

@@ -10,32 +10,37 @@
           </button>
         </div>
         <div class="modal-body">
+          {{ countries.length }}
+          {{ country }}
+
           <div class="countries my-1">
             <strong for="">Country {{ country }}</strong>
             <v-select v-model="country" :options="countries" label="name" :reduce="country => country.sigle">
               <template #option="option">
                 <span>
-                  {{ option.flag }}
+                  <img :src="option.flag" class="flag" />
                   {{ option.name }}
                 </span>
               </template>
               <template #selected-option="option">
                 <span>
-                  {{ option.flag }}
+                  <img :src="option.flag" class="flag" />
                   {{ option.name }}
                 </span>
               </template>
-              
+
             </v-select>
           </div>
 
 
           <div class="countries my-2">
+            {{ currencies.length }}
+            {{ currency }}
+
+
             <strong for="">Currency</strong>
             <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency.name">
-              <!-- <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol
-                }})
-              </option> -->
+
               <template #option="option">
                 <span>
                   ({{ option.value.symbol }})
@@ -160,3 +165,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.flag {
+  width: 28px !important;
+  height: 22px !important;
+}
+</style>

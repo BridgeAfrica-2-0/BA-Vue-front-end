@@ -45,9 +45,7 @@
           <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
             @click="() => isOpen = true">
             <span style="font-size: 14px; color: #000; padding: 0 15px;">
-              <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
-              src="@/assets/img/cmr.webp"> -->
-              {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
+              <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
               <i class="fa fa-caret-down"></i>
             </span>
           </div>

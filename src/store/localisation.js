@@ -35,8 +35,16 @@ export default {
   },
   getters: {
     getLocalisationCountry: state => state.countryLocalisation,
-    getSelectedCountry: state => state.selectedCountry,
-    getSelectedCurrency: state => state.selectedCurrency,
+    getSelectedCountry: state => {
+      console.log("+++++++++++++++ state.selectedCountry")
+      console.log(state.selectedCountry)
+      return state.selectedCountry
+    },
+    getSelectedCurrency: state => {
+      console.log("+++++++++++++++ state.selectedCurrency")
+      console.log(state.selectedCurrency)
+      return state.selectedCurrency
+    },
     getCountries: state => state.countries,
     getRate: state => state.rate,
 
@@ -67,13 +75,11 @@ export default {
 
     async startLocalisation({ commit }) {
 
-      
+
       const countries = currencyMap()
       const userCountry = await checkCountryLocalisation()
       const findCountryInfo = countries.find(u => u.sigle == userCountry)
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
-
-
 
       const constrySelected = localStorage.getItem("countrySelected")
       const currencySelected = localStorage.getItem("currencySelected")
@@ -93,10 +99,8 @@ export default {
           name: Object.keys(findCountryInfo.currency)[0]
         })
       }
-      
 
       commit("setRate", rate)
-
       commit("setContryLocatisation", findCountryInfo)
       commit("setContries", countries.sort((a, b) => a.name.localeCompare(b.name)))
 

@@ -1,108 +1,84 @@
 <template>
-  <div style="overflow-x: hidden" class="dashboard">
-    <navbar></navbar>
+  <base-layout>
+    <template v-slot:main>
+      <div style="overflow-x: hidden" class="dashboard">
+        <navbar></navbar>
 
-    <div class="main row">
-      <div class="sidebar d-none d-xl-block"><SideBar /></div>
-
-      <div class="main-content row wi-100">
-        <div class=" col-lg-7">
-          <div class="text-justify p-card ">
-            <CompleteProfile class="mb-2" v-if="!Profile_complete" />
+        <div class="main row">
+          <div class="sidebar d-none d-xl-block">
+            <SideBar />
           </div>
 
-          <div class="">
-            <b-card>
-              <span class="d-flex text-center">
-                <b-avatar
-                  :src="profille.user.profile_picture"
-                  variant="primary"
-                  size="3em"
-                ></b-avatar>
-
-                <span class="mt-2 ml-3">
-                  Your current plan:
-                  <span class="sub-title" v-if="profile_package.user_package">
-                    {{ profile_package.user_package.name }} Account
-                  </span>
-
-                  <span class="sub-title" v-else>
-                    Basic Account
-                  </span>
-                </span>
-              </span>
-              <div class="text-center">
-                <router-link to="/settings?tab=account">
-                  <b-button variant="outline-primary">
-                    Upgrade Account
-                  </b-button>
-                </router-link>
+          <div class="main-content row wi-100">
+            <div class=" col-lg-7">
+              <div class="text-justify p-card ">
+                <CompleteProfile class="mb-2" v-if="!Profile_complete" />
               </div>
-            </b-card>
+
+              <div class="">
+                <b-card>
+                  <span class="d-flex text-center">
+                    <b-avatar :src="profille.user.profile_picture" variant="primary" size="3em"></b-avatar>
+
+                    <span class="mt-2 ml-3">
+                      Your current plan:
+                      <span class="sub-title" v-if="profile_package.user_package">
+                        {{ profile_package.user_package.name }} Account
+                      </span>
+
+                      <span class="sub-title" v-else>
+                        Basic Account
+                      </span>
+                    </span>
+                  </span>
+                  <div class="text-center">
+                    <router-link to="/settings?tab=account">
+                      <b-button variant="outline-primary">
+                        Upgrade Account
+                      </b-button>
+                    </router-link>
+                  </div>
+                </b-card>
+              </div>
+
+              <div class="d-block d-lg-none">
+                <NewProfile class="mt-1" v-if="selectedb == 'owner'" :boptions="boptions" :selectedb="selectedb"
+                  @switchBusiness="switchBusiness" />
+
+                <new-business class="mt-1" style="height: 400px" v-if="selectedb != 'owner'" :boptions="boptions"
+                  :selectedb="selectedb" @switchBusiness="switchBusiness" />
+              </div>
+
+              <DashboardTab :usertype="selectedb" class="mt-2" />
+
+              <ProductActivities v-if="selectedb == 'owner'" class="mt-2" />
+              <ProductBactivities v-if="selectedb != 'owner'" class="mt-2" />
+
+              <Tutorial class="mt-2" style="overflow:hidden" />
+            </div>
+
+            <div class=" col-lg-5 pl-0">
+              <div class="d-none d-lg-block">
+                <NewProfile v-if="selectedb == 'owner'" :boptions="boptions" :selectedb="selectedb"
+                  @switchBusiness="switchBusiness" />
+
+                <new-business style="height: 380px" v-if="selectedb != 'owner'" :boptions="boptions"
+                  :selectedb="selectedb" @switchBusiness="switchBusiness" />
+              </div>
+              <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
+
+              <comuniti-dashboard v-if="selectedb == 'owner'" class="mt-2"></comuniti-dashboard>
+
+              <comuniti-Bdashboard v-if="selectedb != 'owner'" class="mt-2"></comuniti-Bdashboard>
+
+              <Business class="mt-2" />
+              <Popularnetwork class="mt-2" />
+            </div>
           </div>
-
-          <div class="d-block d-lg-none">
-            <NewProfile
-              class="mt-1"
-              v-if="selectedb == 'owner'"
-              :boptions="boptions"
-              :selectedb="selectedb"
-              @switchBusiness="switchBusiness"
-            />
-
-            <new-business
-              class="mt-1"
-              style="height: 400px"
-              v-if="selectedb != 'owner'"
-              :boptions="boptions"
-              :selectedb="selectedb"
-              @switchBusiness="switchBusiness"
-            />
-          </div>
-
-          <DashboardTab :usertype="selectedb" class="mt-2" />
-
-          <ProductActivities v-if="selectedb == 'owner'" class="mt-2" />
-          <ProductBactivities v-if="selectedb != 'owner'" class="mt-2" />
-
-          <Tutorial class="mt-2" style="overflow:hidden" />
-        </div>
-
-        <div class=" col-lg-5 pl-0">
-          <div class="d-none d-lg-block">
-            <NewProfile
-              v-if="selectedb == 'owner'"
-              :boptions="boptions"
-              :selectedb="selectedb"
-              @switchBusiness="switchBusiness"
-            />
-
-            <new-business
-              style="height: 380px"
-              v-if="selectedb != 'owner'"
-              :boptions="boptions"
-              :selectedb="selectedb"
-              @switchBusiness="switchBusiness"
-            />
-          </div>
-          <!-- <ProfileInsight class="mt-2" :selectedb="selectedb" /> -->
-
-          <comuniti-dashboard
-            v-if="selectedb == 'owner'"
-            class="mt-2"
-          ></comuniti-dashboard>
-
-          <comuniti-Bdashboard
-            v-if="selectedb != 'owner'"
-            class="mt-2"
-          ></comuniti-Bdashboard>
-
-          <Business class="mt-2" />
-          <Popularnetwork class="mt-2" />
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </base-layout>
 </template>
 
 <script>
@@ -136,6 +112,8 @@ import { WhoIsIt } from "@/mixins";
 import { isPremium } from "@/helpers";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
+import BaseLayout from "@/layouts/Layout"
+
 export default {
   name: "dashboard",
 
@@ -158,6 +136,7 @@ export default {
   },
 
   components: {
+    BaseLayout,
     ComunitiDashboard,
     ComunitiBdashboard,
     // BusinessDashboard,
@@ -205,7 +184,7 @@ export default {
       console.log(this.profille);
     },
 
-    BusinessProcess: async function(id, type) {
+    BusinessProcess: async function (id, type) {
       try {
         const request = await this.$repository.share.switch(id, type);
         if (request.success) {
@@ -247,7 +226,7 @@ export default {
           .then(res => {
             this.data1 = true;
           })
-          .catch(err => {});
+          .catch(err => { });
 
         this.businessCommunityTotal();
 
@@ -261,36 +240,36 @@ export default {
     dashboardPpost() {
       this.$store
         .dispatch("dashboard/dashboardPpost")
-        .then(() => {})
-        .catch(err => {});
+        .then(() => { })
+        .catch(err => { });
     },
 
     dashboardBpost() {
       this.$store
         .dispatch("dashboard/dashboardBpost", this.url_data)
-        .then(() => {})
-        .catch(err => {});
+        .then(() => { })
+        .catch(err => { });
     },
 
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {})
-        .catch(err => {});
+        .then(() => { })
+        .catch(err => { });
     },
 
     CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {})
-        .catch(err => {});
+        .then(() => { })
+        .catch(err => { });
     },
 
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)
-        .then(() => {})
-        .catch(err => {});
+        .then(() => { })
+        .catch(err => { });
     },
     getbusiness() {
       let owner = JSON.parse(
@@ -335,7 +314,7 @@ export default {
           this.showcompleteprofile = false;
         }
       })
-      .catch(error => {});
+      .catch(error => { });
 
     this.checkIfItNetwork();
 
@@ -376,7 +355,7 @@ export default {
       return this.$store.state.auth.profile_package;
     },
 
-    selectedBusiness: function() {
+    selectedBusiness: function () {
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat = data.latitute;
       data.lng = data.longitute;
@@ -419,7 +398,7 @@ export default {
   color: red !important;
 }
 
-.nav-tabs > li.active {
+.nav-tabs>li.active {
   background-color: #272727 !important;
   color: red;
 }
@@ -474,14 +453,14 @@ export default {
 .dashboard .card-body {
   padding-right: 0px !important;
 }
+
 .dashboard .dashboard-tab .card-body {
   padding-left: 0px !important;
 }
 </style>
 
 <style scoped>
-@media only screen and (min-width: 768px) {
-}
+@media only screen and (min-width: 768px) {}
 
 @media only screen and (max-width: 992px) {
   .wi-100 {
@@ -542,6 +521,7 @@ export default {
   .logo-img {
     width: 30px;
   }
+
   .see-all-link {
     font-size: 10px;
   }

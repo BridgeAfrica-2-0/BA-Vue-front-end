@@ -14,8 +14,6 @@ const scrollElements2 = document.querySelectorAll(".hidde");
 
 const elementInView = (el, dividend = 1) => {
   const elementTop = el.getBoundingClientRect().top;
-  console.log(document.documentElement.clientHeight);
-
   return (
     elementTop <= 30 / dividend
     //( 100) / dividen

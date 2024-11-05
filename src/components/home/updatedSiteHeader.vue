@@ -40,13 +40,11 @@
             </b-dropdown-item>
           </b-dropdown>
         </div>
-        
+
         <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
           @click="() => isOpen = true">
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
-            <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
-              src="@/assets/img/cmr.webp"> -->
-            {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
+            <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
@@ -70,7 +68,7 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                }}</router-link>
+                  }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
@@ -78,7 +76,7 @@
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                   $t("general.dashboard")
-                }}</router-link>
+                  }}</router-link>
               </span>
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
@@ -173,7 +171,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -182,7 +180,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -190,7 +188,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -326,7 +324,7 @@ export default {
         });
       }
     },
-    
+
     navigateToCart() {
       this.$router.push("/cart");
     },

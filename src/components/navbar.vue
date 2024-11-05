@@ -557,7 +557,7 @@ export default {
       this.updateNotificationEvent();
     }
 
-    console.log("updated city: ", this.credentials.location);
+
   },
 
   watch: {
@@ -786,7 +786,7 @@ export default {
       this.$store
         .dispatch("userChat/GET_USERS", "")
         .then(() => {
-          console.log("->[Data logged]<-");
+         
         })
         .catch(() => console.log("error"));
     },

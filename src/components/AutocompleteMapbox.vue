@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     handleResult(response) {
-      console.log(response.result);
+  
       let details = {
         coordinates: response.result.center,
         address: response.result.text
@@ -42,10 +42,10 @@ export default {
         zoom: this.zoom,
         center: this.center
       });
-      console.log(this.region);
+     
       var regon = this.region ? this.region.name.toLowerCase() : "centre";
       regon = regon.charAt(0).toUpperCase() + regon.slice(1);
-      console.log(regon);
+      
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,

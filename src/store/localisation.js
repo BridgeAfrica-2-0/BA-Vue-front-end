@@ -6,6 +6,7 @@ export default {
   namespaced: true,
 
   state: {
+    hasBeenLoad: false,
     countryLocalisation: null,
     selectedCountry: null,
     selectedCurrency: null,
@@ -14,8 +15,10 @@ export default {
   },
 
   mutations: {
+    setHasBeenLoad(state){
+      state.hasBeenLoad = true
+    },
     setSelectedCountry(state, country) {
-
       localStorage.setItem("countrySelected", JSON.stringify(country))
       state.selectedCountry = country;
     },
@@ -34,46 +37,39 @@ export default {
     }
   },
   getters: {
+    hasBeenLoad: state => state.hasBeenLoad,
     getLocalisationCountry: state => state.countryLocalisation,
-    getSelectedCountry: state => state.selectedCountry,
-    getSelectedCurrency: state => state.selectedCurrency,
+    getSelectedCountry: state => {
+      return state.selectedCountry
+    },
+    getSelectedCurrency: state => {
+      return state.selectedCurrency
+    },
     getCountries: state => state.countries,
     getRate: state => state.rate,
-
-
-
   },
   actions: {
     async updateRate({ commit }, currency) {
       const rate = await getRate(currency, 'XAF')
       commit("setRate", rate)
-
     },
 
-    updateCountry({ commit, state }, countryCode) {
-      const findCountryInfo = state.countries.find(u => u && u.sigle == countryCode)
-      commit("setSelectedCountry", findCountryInfo)
+    updateCountry({ commit, state }, country) {
+      // const findCountryInfo = state.countries.find(u => u && u.sigle == country.sigle)
+      commit("setSelectedCountry", country)
     },
 
-    updateCurrency({ commit, state }, currencyCode) {
-      const findCountryInfo = state.countries.find(u => u && u.currency && u.currency[currencyCode])
-
-      commit("setSelectedCurrency", {
-        ...findCountryInfo.currency[(Object.keys(findCountryInfo.currency))[0]],
-        name: Object.keys(findCountryInfo.currency)[0]
-      })
+    updateCurrency({ commit }, currency) {
+      commit("setSelectedCurrency", currency)
 
     },
 
     async startLocalisation({ commit }) {
 
-      
       const countries = currencyMap()
       const userCountry = await checkCountryLocalisation()
       const findCountryInfo = countries.find(u => u.sigle == userCountry)
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
-
-
 
       const constrySelected = localStorage.getItem("countrySelected")
       const currencySelected = localStorage.getItem("currencySelected")
@@ -93,14 +89,12 @@ export default {
           name: Object.keys(findCountryInfo.currency)[0]
         })
       }
-      
 
       commit("setRate", rate)
-
       commit("setContryLocatisation", findCountryInfo)
       commit("setContries", countries.sort((a, b) => a.name.localeCompare(b.name)))
 
-
+      commit("setHasBeenLoad")
     }
   },
 };

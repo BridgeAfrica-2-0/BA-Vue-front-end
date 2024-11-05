@@ -1,10 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
-import Login from "../views/login.vue";
 import LoginValidation from "../views/LoginValidation.vue";
 import home1 from "@/views/home1.vue";
-import signup from "../views/signup.vue";
 import success from "../views/success.vue";
 import failure from "../views/failure.vue";
 import Password from "../views/recoverPassword.vue";
@@ -88,9 +86,12 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
+import authRoutes from "./auth.routes";
+
 const previousRoute = { value: null };
 
 const routes = [
+  ... authRoutes,
   {
     path: "/notFound",
     name: "notFoundd",
@@ -333,23 +334,7 @@ const routes = [
     }
   },
 
-  {
-    path: "/login",
-    name: "Login",
-    component: Login
-  },
-
-  {
-    path: "/auth/facebook/callback",
-    name: "Loginfacebook",
-    component: Login
-  },
-
-  {
-    path: "/auth/google/callback",
-    name: "Logingoogle",
-    component: Login
-  },
+ 
 
   {
     path: "/login/validation",
@@ -357,11 +342,7 @@ const routes = [
     component: LoginValidation
   },
 
-  {
-    path: "/signup",
-    name: "signup",
-    component: signup
-  },
+  
   
   {
     path: "/ThankYouPage",

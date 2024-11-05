@@ -1,119 +1,124 @@
 <template>
   <div>
-    <base-layout :callback="validateUser">
+    <layout>
       <template v-slot:main>
-        <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
-          <md-card-header>
-            <div class="md-title center f-22">
-              {{ $t("auth.Login_To_Bridge_Africa") }}
-            </div>
-          </md-card-header>
+        <base-layout :callback="validateUser">
+          <template v-slot:main>
+            <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
+              <md-card-header>
+                <div class="md-title center f-22">
+                  {{ $t("auth.Login_To_Bridge_Africa") }}
+                </div>
+              </md-card-header>
 
-          <md-card-content>
-            <div class="center">
-              <b-row>
-                <b-col lg="6" md="12">
-                  <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w rounded">
-                    <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                    {{ $t("auth.Login_With_Facebook") }}
-                  </md-button>
-                </b-col>
+              <md-card-content>
+                <div class="center">
+                  <b-row>
+                    <b-col lg="6" md="12">
+                      <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w rounded">
+                        <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                        {{ $t("auth.Login_With_Facebook") }}
+                      </md-button>
+                    </b-col>
 
-                <b-col lg="6" md="12">
-                  <md-button @click.prevent="authProvider('google')" class="b-color b-w rounded" style="color: white">
-                    <b-icon icon="google" aria-hidden="true"></b-icon>
-                    {{ $t("auth.login_with_google") }}
-                  </md-button>
-                </b-col>
-              </b-row>
-            </div>
+                    <b-col lg="6" md="12">
+                      <md-button @click.prevent="authProvider('google')" class="b-color b-w rounded"
+                        style="color: white">
+                        <b-icon icon="google" aria-hidden="true"></b-icon>
+                        {{ $t("auth.login_with_google") }}
+                      </md-button>
+                    </b-col>
+                  </b-row>
+                </div>
 
-            <br />
-
-            <p class="t-center">- {{ $t("auth.OR") }} -</p>
-
-            <md-field :class="getValidationClass('email')">
-              <label for="email">
-                {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
-              </label>
-              <md-input type="text" name="email" id="email" autocomplete="off" v-model="form.email"
-                :disabled="sending" />
-              <span class="md-error" v-if="!$v.form.email.required">
-                {{ $t("auth.the_email_is_required") }}
-              </span>
-              <span class="md-error" v-else-if="!$v.form.email.email">
-                {{ $t("auth.invalid_email") }}
-              </span>
-            </md-field>
-
-            <md-field>
-              <label for="password"> {{ $t("auth.Password") }} </label>
-              <md-input type="password" name="password" autocomplete="off" id="password" v-model="form.password"
-                :disabled="sending" />
-            </md-field>
-
-            <div class="md-layout md-gutter">
-              <div class="md-layout-item md-small-size-100 m-left">
-                <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
-                  {{ $t("auth.remeber_me") }}
-                </b-form-checkbox>
-              </div>
-
-              <div class="md-layout-item md-small-size-100">
                 <br />
-              </div>
-            </div>
-          </md-card-content>
 
-          <md-progress-bar md-mode="indeterminate" v-if="sending" />
+                <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
-          <div>
-            <div>
-              <md-button type="submit" class="btn btn-primary px-4 w-100 rounded m-0" style="color: white"
-                :disabled="sending">
-                {{ $t("auth.login") }}
-              </md-button>
-              <div class="row m-0 mt-2">
-                <span class="mr-2 text-secondary">{{ $t("auth.You_dont_have_an_account") }}</span>
-                <router-link to="signup">
-                  {{ $t("auth.signup") }}
+                <md-field :class="getValidationClass('email')">
+                  <label for="email">
+                    {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
+                  </label>
+                  <md-input type="text" name="email" id="email" autocomplete="off" v-model="form.email"
+                    :disabled="sending" />
+                  <span class="md-error" v-if="!$v.form.email.required">
+                    {{ $t("auth.the_email_is_required") }}
+                  </span>
+                  <span class="md-error" v-else-if="!$v.form.email.email">
+                    {{ $t("auth.invalid_email") }}
+                  </span>
+                </md-field>
+
+                <md-field>
+                  <label for="password"> {{ $t("auth.Password") }} </label>
+                  <md-input type="password" name="password" autocomplete="off" id="password" v-model="form.password"
+                    :disabled="sending" />
+                </md-field>
+
+                <div class="md-layout md-gutter">
+                  <div class="md-layout-item md-small-size-100 m-left">
+                    <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
+                      {{ $t("auth.remeber_me") }}
+                    </b-form-checkbox>
+                  </div>
+
+                  <div class="md-layout-item md-small-size-100">
+                    <br />
+                  </div>
+                </div>
+              </md-card-content>
+
+              <md-progress-bar md-mode="indeterminate" v-if="sending" />
+
+              <div>
+                <div>
+                  <md-button type="submit" class="btn btn-primary px-4 w-100 rounded m-0" style="color: white"
+                    :disabled="sending">
+                    {{ $t("auth.login") }}
+                  </md-button>
+                  <div class="row m-0 mt-2">
+                    <span class="mr-2 text-secondary">{{ $t("auth.You_dont_have_an_account") }}</span>
+                    <router-link to="signup">
+                      {{ $t("auth.signup") }}
+                    </router-link>
+                  </div>
+                </div>
+
+                <router-link to="password" class="nav-link text">
+                  {{ $t("auth.forget_password") }}
                 </router-link>
               </div>
-            </div>
 
-            <router-link to="password" class="nav-link text">
-              {{ $t("auth.forget_password") }}
-            </router-link>
-          </div>
+              <div></div>
 
-          <div></div>
+              <div class="mt-4 text-center" style="font-size: 15px;">
 
-          <div class="mt-4 text-center" style="font-size: 15px;">
+                <label>
+                  {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
+                </label>
 
-            <label>
-              {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
-            </label>
-
-            <label class="ml-2">
-              <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
-              <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
-            </label>
-            <p class="text-center" style="font-size: 14px;">
-              <span class="display-inline">
-                <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
-                <span class="vl"></span>
-                <b-link class="ml-2" @click="setLang('fr')">
-                  {{ $t("auth.french") }}
-                </b-link>
-              </span>
-            </p>
-            <p>
-              Bridge Africa © 2021- {{ new Date().getFullYear() }}
-            </p>
-          </div>
-        </md-card>
+                <label class="ml-2">
+                  <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+                  <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
+                </label>
+                <p class="text-center" style="font-size: 14px;">
+                  <span class="display-inline">
+                    <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+                    <span class="vl"></span>
+                    <b-link class="ml-2" @click="setLang('fr')">
+                      {{ $t("auth.french") }}
+                    </b-link>
+                  </span>
+                </p>
+                <p>
+                  Bridge Africa © 2021- {{ new Date().getFullYear() }}
+                </p>
+              </div>
+            </md-card>
+          </template>
+        </base-layout>
       </template>
-    </base-layout>
+    </layout>
   </div>
 </template>
 
@@ -127,13 +132,16 @@ import { required, email } from "vuelidate/lib/validators";
 
 
 import baseLayout from "@/layouts/AuthLayout"
+import layout from "@/layouts/Layout"
+
 export default {
-  name: "FormValidation",
+  name: "AuthLoginView",
   boolean: true,
   mixins: [validationMixin],
 
   components: {
-    baseLayout
+    baseLayout,
+    layout
   },
   data: () => ({
     form: {

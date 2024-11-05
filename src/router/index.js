@@ -14,7 +14,7 @@ import verifyAccount from "../views/verifyAccount.vue";
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
 import BridgeHome from "@/views/BridgeHome";
-import updatedBridgeHome from "@/views/updatedBridgeHome";
+
 import Quote from "@/views/quote";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
@@ -87,11 +87,13 @@ import cart from "@/views/card";
 Vue.use(VueRouter);
 
 import authRoutes from "./auth.routes";
+import rootRoutes from "./root.routes";
 
 const previousRoute = { value: null };
 
 const routes = [
   ... authRoutes,
+  ... rootRoutes,
   {
     path: "/notFound",
     name: "notFoundd",
@@ -401,13 +403,6 @@ const routes = [
     name: "GlobalSearch",
     component: search
   },
-
-  {
-    path: "/",
-    name: "Bridge-home",
-    component: updatedBridgeHome
-  },
-
   {
     path: "/blecc",
     name: "Blecc",

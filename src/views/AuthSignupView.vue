@@ -1,73 +1,77 @@
 <template>
   <div>
-    <base-layout :callback="validateUser">
+    <layout>
       <template v-slot:main>
-        <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
-          <md-card-header>
-            <div class="md-title center font-weight-bold">
-              {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
-            </div>
-          </md-card-header>
+        <base-layout :callback="validateUser">
+          <template v-slot:main>
+            <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
+              <md-card-header>
+                <div class="md-title center font-weight-bold">
+                  {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
+                </div>
+              </md-card-header>
 
-          <md-card-content>
-            <div class="center">
-              <b-row>
-                <b-col cols="12" md="6" lg="12" xl="6">
-                  <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w rounded">
-                    <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                    {{ $t("auth.Sign_Up_with_facebook") }}
-                  </md-button>
-                </b-col>
+              <md-card-content>
+                <div class="center">
+                  <b-row>
+                    <b-col cols="12" md="6" lg="12" xl="6">
+                      <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w rounded">
+                        <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                        {{ $t("auth.Sign_Up_with_facebook") }}
+                      </md-button>
+                    </b-col>
 
-                <b-col cols="12" md="6" lg="12" xl="6">
-                  <md-button @click.prevent="authProvider('google')" class="b-color b-w rounded" style="color: white">
-                    <b-icon icon="google" aria-hidden="true"></b-icon>
-                    {{ $t("auth.Sign_Up_with_Google") }}
-                  </md-button>
-                </b-col>
-              </b-row>
-            </div>
+                    <b-col cols="12" md="6" lg="12" xl="6">
+                      <md-button @click.prevent="authProvider('google')" class="b-color b-w rounded"
+                        style="color: white">
+                        <b-icon icon="google" aria-hidden="true"></b-icon>
+                        {{ $t("auth.Sign_Up_with_Google") }}
+                      </md-button>
+                    </b-col>
+                  </b-row>
+                </div>
 
-            <br />
+                <br />
 
-            <p class="t-center">- {{ $t("auth.OR") }} -</p>
+                <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
-            <div class="md-layout md-gutter">
-              <div class="md-layout-item md-small-size-100 m-left">
-                <md-field :class="getValidationClass('firstName')">
-                  <label for="first_name"> {{ $t("auth.First_Name") }} </label>
-                  <md-input type="text" name="firstName" id="firstName" v-model="form.firstName" :disabled="sending" />
-                  <span class="md-error" v-if="!$v.form.firstName.required">
-                    {{ $t("auth.First_Name_is_required") }}
+                <div class="md-layout md-gutter">
+                  <div class="md-layout-item md-small-size-100 m-left">
+                    <md-field :class="getValidationClass('firstName')">
+                      <label for="first_name"> {{ $t("auth.First_Name") }} </label>
+                      <md-input type="text" name="firstName" id="firstName" v-model="form.firstName"
+                        :disabled="sending" />
+                      <span class="md-error" v-if="!$v.form.firstName.required">
+                        {{ $t("auth.First_Name_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+
+                  <div class="md-layout-item md-small-size-100">
+                    <md-field :class="getValidationClass('lastName')">
+                      <label for="lastName"> {{ $t("auth.Last_Name") }} </label>
+                      <md-input type="text" name="lastName" id="lastName" v-model="form.lastName" :disabled="sending" />
+                      <span class="md-error" v-if="!$v.form.lastName.required">
+                        {{ $t("auth.last_Name_is_required") }}
+                      </span>
+                    </md-field>
+                  </div>
+                </div>
+
+                <md-field :class="getValidationClass('email')">
+                  <label for="email">
+                    {{ $t("auth.email") }} {{ $t("auth.or") }} {{ $t("auth.Tel") }}
+                  </label>
+                  <md-input type="text" name="email" id="email" autocomplete="email" v-model="form.email"
+                    :disabled="sending" />
+                  <span class="md-error" v-if="!$v.form.email.required">
+                    {{ $t("auth.email_or_tel_is_required") }}
+                  </span>
+                  <span class="md-error" v-else-if="!$v.form.email.email">{{ $t("auth.invalid_email") }}
                   </span>
                 </md-field>
-              </div>
 
-              <div class="md-layout-item md-small-size-100">
-                <md-field :class="getValidationClass('lastName')">
-                  <label for="lastName"> {{ $t("auth.Last_Name") }} </label>
-                  <md-input type="text" name="lastName" id="lastName" v-model="form.lastName" :disabled="sending" />
-                  <span class="md-error" v-if="!$v.form.lastName.required">
-                    {{ $t("auth.last_Name_is_required") }}
-                  </span>
-                </md-field>
-              </div>
-            </div>
-
-            <md-field :class="getValidationClass('email')">
-              <label for="email">
-                {{ $t("auth.email") }} {{ $t("auth.or") }} {{ $t("auth.Tel") }}
-              </label>
-              <md-input type="text" name="email" id="email" autocomplete="email" v-model="form.email"
-                :disabled="sending" />
-              <span class="md-error" v-if="!$v.form.email.required">
-                {{ $t("auth.email_or_tel_is_required") }}
-              </span>
-              <span class="md-error" v-else-if="!$v.form.email.email">{{ $t("auth.invalid_email") }}
-              </span>
-            </md-field>
-
-            <!-- <md-field :class="getValidationClass('tel')">
+                <!-- <md-field :class="getValidationClass('tel')">
             <label for="tel"> {{ $t("auth.Tel") }} </label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
             <span class="md-error" v-if="!$v.form.tel.required">
@@ -75,79 +79,81 @@
             </span>
           </md-field> -->
 
-            <md-field :class="getValidationClass('password')">
-              <label for="password"> {{ $t("auth.Password") }} </label>
-              <md-input type="password" name="password" id="password" v-model="form.password" :disabled="sending" />
+                <md-field :class="getValidationClass('password')">
+                  <label for="password"> {{ $t("auth.Password") }} </label>
+                  <md-input type="password" name="password" id="password" v-model="form.password" :disabled="sending" />
 
-              <span class="md-error" v-if="!$v.form.password.required">
-                {{ $t("auth.password_is_required") }}
-              </span>
+                  <span class="md-error" v-if="!$v.form.password.required">
+                    {{ $t("auth.password_is_required") }}
+                  </span>
 
-              <span class="md-error" v-if="!$v.form.password.minLength">
-                {{ $t("auth.password_is_required") }}
-                {{ $t("auth.Password_must_have_at_least") }}
-                {{ $v.form.password.$params.minLength.min }} letters.
-              </span>
-            </md-field>
+                  <span class="md-error" v-if="!$v.form.password.minLength">
+                    {{ $t("auth.password_is_required") }}
+                    {{ $t("auth.Password_must_have_at_least") }}
+                    {{ $v.form.password.$params.minLength.min }} letters.
+                  </span>
+                </md-field>
 
-            <md-field :class="getValidationClass('confirmPassword')">
-              <label for="confirmPassword">
-                {{ $t("auth.confirm_password") }}
-              </label>
-              <md-input type="password" name="confirmPassword" id="confirmPassword" v-model="form.confirmPassword"
-                :disabled="sending" />
-              <span class="md-error" v-if="!$v.form.confirmPassword.required">
-                {{ $t("auth.password_is_required") }}
-              </span>
+                <md-field :class="getValidationClass('confirmPassword')">
+                  <label for="confirmPassword">
+                    {{ $t("auth.confirm_password") }}
+                  </label>
+                  <md-input type="password" name="confirmPassword" id="confirmPassword" v-model="form.confirmPassword"
+                    :disabled="sending" />
+                  <span class="md-error" v-if="!$v.form.confirmPassword.required">
+                    {{ $t("auth.password_is_required") }}
+                  </span>
 
-              <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword">
-                {{ $t("auth.Password_is_required") }}
-                {{ $t("auth.Passwords_must_be_identical") }} .
-              </span>
-            </md-field>
-          </md-card-content>
+                  <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword">
+                    {{ $t("auth.Password_is_required") }}
+                    {{ $t("auth.Passwords_must_be_identical") }} .
+                  </span>
+                </md-field>
+              </md-card-content>
 
-          <md-progress-bar md-mode="indeterminate" v-if="sending" />
+              <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-          <div>
-            <md-button type="submit" class="btn btn-primary px-4 w-100 rounded m-0" style="color: white"
-              :disabled="sending">
-              {{ $t("auth.signup") }}
-            </md-button>
-            <div class="row m-0 mt-2">
-              <span class="mr-2 text-secondary">{{ $t("auth.Already_have_an_account") }}</span>
-              <router-link to="login">
-                {{ $t("auth.login") }}
-              </router-link>
-            </div>
-          </div>
+              <div>
+                <md-button type="submit" class="btn btn-primary px-4 w-100 rounded m-0" style="color: white"
+                  :disabled="sending">
+                  {{ $t("auth.signup") }}
+                </md-button>
+                <div class="row m-0 mt-2">
+                  <span class="mr-2 text-secondary">{{ $t("auth.Already_have_an_account") }}</span>
+                  <router-link to="login">
+                    {{ $t("auth.login") }}
+                  </router-link>
+                </div>
+              </div>
 
-          <div class="mt-4 text-center" style="font-size: 15px;">
+              <div class="mt-4 text-center" style="font-size: 15px;">
 
-            <label>
-              {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
-            </label>
+                <label>
+                  {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
+                </label>
 
-            <label class="ml-2">
-              <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
-              <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
-            </label>
-            <p class="text-center" style="font-size: 14px;">
-              <span class="display-inline">
-                <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
-                <span class="vl"></span>
-                <b-link class="ml-2" @click="setLang('fr')">
-                  {{ $t("auth.french") }}
-                </b-link>
-              </span>
-
-              Bridge Africa © 2021
-            </p>
-          </div>
-        </md-card>
-
+                <label class="ml-2">
+                  <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+                  <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
+                </label>
+                <p class="text-center" style="font-size: 14px;">
+                  <span class="display-inline">
+                    <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+                    <span class="vl"></span>
+                    <b-link class="ml-2" @click="setLang('fr')">
+                      {{ $t("auth.french") }}
+                    </b-link>
+                  </span>
+                </p>
+                <p>
+                  Bridge Africa © 2021- {{ new Date().getFullYear() }}
+                </p>
+              </div>
+            </md-card>
+          </template>
+        </base-layout>
       </template>
-    </base-layout>
+    </layout>
   </div>
 </template>
 
@@ -157,8 +163,16 @@ import axios from "axios";
 
 import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 
+import baseLayout from "@/layouts/AuthLayout"
+import layout from "@/layouts/Layout"
+
 export default {
-  name: "FormValidation",
+  components: {
+    baseLayout,
+    layout
+  },
+
+  name: "AuthSignupView",
   mixins: [validationMixin],
   data: () => ({
     baseurl: process.env.baseURL,

@@ -8,6 +8,7 @@
         </p>
       </div>
 
+
       <div class="col-8 col-md ">
         <div class="inline-flex marg float-right">
           <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
@@ -204,6 +205,7 @@
 </template>
 
 <script>
+
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
 import Product from "../product";
@@ -390,11 +392,9 @@ export default {
           this.selectedImagesPrv.forEach((file, index) => {
             fd.append(`additional_images[${index}]`, file);
           });
-
-
         fd.append(key, this.newProduct[key]);
       }
-      console.log("NEW PRODUCT", this.newProduct);
+
       axios
         .post("market?slug=" + this.businessSlug, fd)
         .then(res => {

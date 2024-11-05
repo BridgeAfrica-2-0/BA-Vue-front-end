@@ -576,6 +576,10 @@ export const LocalisationMixins = {
     }
   },
 
+  created(){
+    this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
+  },
+
   methods: {
     async onInitLocalisation() {
       this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;

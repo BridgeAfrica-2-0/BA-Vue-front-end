@@ -235,8 +235,6 @@ export default {
   },
 
   created() {
-
-    console.log("start running layout")
     const currentLang = this.$i18n.locale;
     if (currentLang == 'en') {
       this.img = require("@/assets/img/about/en.png");

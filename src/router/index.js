@@ -9,7 +9,7 @@ import Password from "../views/recoverPassword.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 
-import verifyAccount from "../views/verifyAccount.vue";
+
 
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
@@ -358,14 +358,7 @@ const routes = [
     component: Password
   },
 
-  {
-    path: "/verify",
-    name: "verifyAccount",
-    component: verifyAccount,
-    meta: {
-      //  auth: true,
-    }
-  },
+  
 
   {
     path: "/recoverPass2",

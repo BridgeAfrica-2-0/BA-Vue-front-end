@@ -21,4 +21,14 @@ export default [
     name: "Logingoogle",
     component: () => import("@/views/AuthLoginView.vue")
   },
+
+  {
+    path: "/verify",
+    name: "verifyAccount",
+    component: () => import("@/views/AuthVerifyAccountView.vue"),
+    meta: {
+      //  auth: true,
+    }
+  },
+
 ]

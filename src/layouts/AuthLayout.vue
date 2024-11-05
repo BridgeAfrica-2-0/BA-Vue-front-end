@@ -4,6 +4,7 @@
       <slot name="main"></slot>
       <div class="md-layout-item md-size-55 md-small-size-100 b-div"></div>
     </form>
+
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default {
     }
   },
   methods: {
-    onSubmit(){
+    onSubmit() {
       console.log("on start submit in layout")
       this.callback()
     }

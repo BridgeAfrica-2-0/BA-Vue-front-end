@@ -223,7 +223,7 @@ export default {
         .authenticate(provider)
         .then(response => {
           self.socialLogin(provider, response);
-          console.log(response);
+        
         })
         .catch(err => {
           console.log({ err: err });
@@ -238,7 +238,7 @@ export default {
       this.$http
         .post("user/social/" + provider, response)
         .then(({ data }) => {
-          console.log(data);
+          
 
           this.$store.commit("auth/setUserData", data.data);
           this.$store.dispatch("auth/profilePackage");

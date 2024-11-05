@@ -172,12 +172,12 @@ let CurrencyMap = null
 
 export const onInitializer = async ()  => {
   const response = await axios.get("https://restcountries.com/v3.1/all")
-  console.log(response.data)
+  
   CurrencyMap = response.data.map(country => ({
     "name": country.name.common,
     "sigle": country.cca2,
     "currency": country.currencies,
-    "flag": country.flag,
+    "flag": country.flags.png,
   }))
 }
 

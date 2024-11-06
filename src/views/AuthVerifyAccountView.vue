@@ -1,6 +1,6 @@
 <template>
   <div>
-    <layout>
+    <layout :show-footer="false">
       <template v-slot:main>
         <base-layout :callback="() => {}">
           <template v-slot:main>

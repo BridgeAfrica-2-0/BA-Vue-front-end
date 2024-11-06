@@ -25,7 +25,7 @@
               </span>
             </div>
           </div>
-          <div class="language-selection">
+          <div class="language-selection" v-if="hasTranslation">
             <b-dropdown variant="light">
               <template #button-content>
                 <span class="poslang pr-1">{{ lang }}</span>
@@ -56,7 +56,7 @@
       <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal"
         data-target="#settings" @click="() => isOpen = true">
         <span style="font-size: 14px; color: #000; padding: 0 15px;">
-          <img :src="countrySelected?.flag" style="height: 12px;width: 20px;" />{{ countrySelected?.sigle }} {{
+          <img :src="countrySelected?.flag" style="height: 12px;width: 20px;" /> &nbsp; &nbsp;{{ countrySelected?.sigle }} {{
             currencySelected?.name }}
           <i class="fa fa-caret-down"></i>
         </span>
@@ -214,6 +214,9 @@
     </slot>
     <slot name="main"></slot>
     <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
+    <div class="bottom-bar">
+      <span>©2021- {{ new Date().getFullYear() }}- Bridge Africa</span>
+    </div>
   </div>
 </template>
 
@@ -235,6 +238,10 @@ export default {
     SiteFooter
   },
   props: {
+    hasTranslation: {
+      type: Boolean,
+      default: false
+    },
     showFooter: {
       type: Boolean,
       default: true
@@ -720,5 +727,15 @@ a {
     display: flex;
     align-items: center;
   }
+
+
+}
+
+.bottom-bar {
+  display: flex;
+  justify-content: center;
+  background-color: #2d2d2d;
+  padding: 5px 0;
+  color: white;
 }
 </style>

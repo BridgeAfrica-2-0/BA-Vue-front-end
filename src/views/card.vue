@@ -5,7 +5,7 @@
         <navbar />
 
         <div class="cart-wrapper container" style="margin-bottom: 300px;">
-          <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
+          <h1 class="mt-5 my-bag">{{ $t("general.My_Cart") }} ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
           <div class="row pt-5">
             <div class="col-lg-8">
               <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
@@ -15,7 +15,7 @@
                 <div v-if="!loading" class="mb-5">
                   <div class="d-flex justify-content-between card-top-content">
                     <h4>{{ business.business_name }}</h4>
-                    <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">Clear</a>
+                    <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</a>
                   </div>
                   <div v-for="(cart_item, i) in business.items" :key="i">
                     <div class="mt-4 d-flex cart-item-wrapper">
@@ -77,14 +77,14 @@
 
               <hr class="dotted-hr" />
 
-              <h1 class="recommended-for-you" v-if="products.length > 0">Recommended for You</h1>
+              <h1 class="recommended-for-you" v-if="products.length > 0">{{ $t("general.Recommended_For_You") }}</h1>
               <splide v-if="products.length > 0" :options="options" class="r-image">
                 <splide-slide v-for="(product, index) in products" :key="index">
                   <div class="crtv-bans">
                     <img :src="product.picture" alt="Product Image" class="slide-img" />
                     <h3 class="mt-2">{{ product.name }}</h3>
                     <p>{{ product.price | locationPrice(rate) }}</p>
-                    <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
+                    <a href="#" @click.prevent="handleAddToCard(product)">{{ $t("general.Add_to_Cart") }}</a>
                   </div>
                 </splide-slide>
               </splide>
@@ -479,8 +479,8 @@ export default {
 }
 
 .product-image {
-  height: 165px;
-  width: 200px;
+  height: 165px !important;
+  width: 200px !important;
   object-fit: contain;
   object-position: center;
   border: 1px solid #ccc;

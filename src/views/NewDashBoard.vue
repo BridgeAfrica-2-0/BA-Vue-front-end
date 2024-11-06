@@ -1,5 +1,5 @@
 <template>
-  <base-layout>
+  <base-layout :show-footer="false">
     <template v-slot:main>
       <div style="overflow-x: hidden" class="dashboard">
         <navbar></navbar>

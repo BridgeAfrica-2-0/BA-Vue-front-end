@@ -1,5 +1,5 @@
 <template>
-  <base-layout>
+  <base-layout  >
     <template v-slot:main>
       <div ref="wrapper">
         <Navbar />
@@ -371,8 +371,6 @@
             <b-col> </b-col>
           </b-row>
         </div>
-
-        <Footer />
       </div>
     </template>
   </base-layout>
@@ -394,7 +392,6 @@ export default {
   components: {
     BaseLayout,
     Navbar,
-    Footer,
     SettingsNotifications,
     Payment,
     Blocking,

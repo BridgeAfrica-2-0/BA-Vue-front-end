@@ -68,7 +68,7 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
@@ -76,7 +76,7 @@
               <span v-if="islogin">
                 <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                   $t("general.dashboard")
-                  }}</router-link>
+                }}</router-link>
               </span>
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
@@ -134,6 +134,25 @@
                   <hr class="mobile navstyle" />
                 </b-nav-item>
 
+                <b-nav-item class="ml-md-1 text-center">
+                  <span class="font-arvo nav-span">
+                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
+                      ">{{ $t("general.Contact_Us") }}</router-link>
+                  </span>
+                  <hr class="mobile navstyle" />
+                </b-nav-item>
+
+                <b-nav-item class="ml-md-1 text-center">
+                  <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal" data-target="#settings"
+                    @click="() => isOpen = true">
+                    <span style="font-size: 14px; color: #000; padding: 0 15px;">
+                      <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                  </div>
+                </b-nav-item>
+
+
               </b-navbar-nav>
             </b-collapse>
             <b-navbar-nav class="mr-auto d-none d-lg-flex">
@@ -171,7 +190,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -180,7 +199,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -188,7 +207,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                  }}</router-link>
+                    }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -196,6 +215,7 @@
                 <span class="nav-span">{{ $t("general.Logout") }}</span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
+
             </b-navbar-nav>
           </div>
         </div>
@@ -595,6 +615,10 @@ a {
     width: 165px;
   }
 
+  .language-selection.hidden-countries {
+    display: none !important
+  }
+
   .mobile {
     display: none;
   }
@@ -609,9 +633,12 @@ a {
     margin-right: 15px;
   }
 
+
   .media-icons i {
     margin-left: 10px;
   }
+
+  
 }
 
 @media (max-width: 576px) {
@@ -619,6 +646,10 @@ a {
     flex-direction: row;
     align-items: flex-start;
     padding: 10px 20px;
+  }
+
+  .hidden-countries {
+    display: block !important
   }
 
   .contact-info {

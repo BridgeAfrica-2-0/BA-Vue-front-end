@@ -6,13 +6,13 @@
           <div class="contact-info d-flex align-items-center">
             <div class="d-flex">
               <span class="d-flex justify-content-center align-items-center">
-              <img src="assets/home/phone.png" class="size2 mr-2" alt="" />
-              <span style="color: #8C8C8C !important">+237697157690</span>
-            </span>
-            <span class="d-flex justify-content-center align-items-center">
-              <img src="assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
-              <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
-            </span>
+                <img src="assets/home/phone.png" class="size2 mr-2" alt="" />
+                <span style="color: #8C8C8C !important">+237697157690</span>
+              </span>
+              <span class="d-flex justify-content-center align-items-center">
+                <img src="assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+                <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
+              </span>
             </div>
 
             <div>
@@ -51,6 +51,15 @@
           </div>
           <div v-else></div>
         </div>
+      </div>
+
+      <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal"
+        data-target="#settings" @click="() => isOpen = true">
+        <span style="font-size: 14px; color: #000; padding: 0 15px;">
+          <img :src="countrySelected?.flag" style="height: 12px;width: 20px;" />{{ countrySelected?.sigle }} {{
+            currencySelected?.name }}
+          <i class="fa fa-caret-down"></i>
+        </span>
       </div>
 
       <settings-contries :open="isOpen">
@@ -204,6 +213,7 @@
       </div> -->
     </slot>
     <slot name="main"></slot>
+    <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
   </div>
 </template>
 
@@ -215,11 +225,24 @@ import settingsContries from "@/components/SetupContries"
 
 import { LocalisationMixins } from "@/mixins"
 
+import SiteFooter from "@/components/home/updatedSiteFooter.vue";
+
 
 export default {
   mixins: [LocalisationMixins],
   components: {
-    settingsContries
+    settingsContries,
+    SiteFooter
+  },
+  props: {
+    showFooter: {
+      type: Boolean,
+      default: true
+    },
+    top: {
+      type: Number,
+      default: 20
+    }
   },
   data() {
     return {
@@ -592,6 +615,10 @@ a {
     margin-right: 10px;
     margin-left: -10px;
   }
+
+  .language-selection.hidden-countries {
+    display: block !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -602,6 +629,11 @@ a {
   .mobile {
     display: none;
   }
+
+  .language-selection.hidden-countries {
+    display: none !important
+  }
+
 }
 
 @media (max-width: 768px) {

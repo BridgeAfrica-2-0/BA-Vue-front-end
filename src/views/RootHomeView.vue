@@ -1,31 +1,6 @@
 <template>
   <div class="bridge-home">
     <site-header class="topbar" />
-
-    <!-- <section class="p-0">
-  <div>
-    <div class="row">
-      <div class="col-md-12 p-0">
-        <div class="position-relative">
-          <splide :options="options" class="r-image">
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
-              </div>
-            </splide-slide>
-          </splide>
-          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
     <section class="p-0">
       <div class="top-slider">
         <div class="row">

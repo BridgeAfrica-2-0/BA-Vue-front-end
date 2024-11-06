@@ -542,5 +542,21 @@
   "PAYMENT_NOTICE" : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.",
   "availability": "Availability",
   "only": "Only",
-  "specification": "Specification"
+  "specification": "Specification",
+  "Recommended_For_You": "Recommended for you",
+  "Clear": "Clear",
+  "this_is_the_shipping_method": "This is the shipping method that is being applied to your order according to your location",
+  "This_is_the_Estimated": "This is the Estimated tax that is applied to your order according to your location",
+  "Estimated_Tax": "Estimated Tax",
+  "Packaging_Labeling": "Packaging & Labeling",
+  "You_will_save": "You will save",
+  "with_this_order": "With this order",
+  "Need_Some_Help": "Need Some Help",
+  "BY_CLICKING_SUBMIT_YOUR_ORDER_YOU_ARE_AGREEING_TO_OUR": "BY CLICKING SUBMIT YOUR ORDER, YOU ARE AGREEING TO OUR",
+  "TERMS_OF_USE": "TERMS OF USE",
+  "PRIVACY_POLICY": "PRIVACY POLICY",
+  "AND": "ET",
+  "Call_us_at": "Call us at",
+  "Leave_us_a_message": "Leave us a message",
+  "Shipping_and_Returns": "Shipping and Returns"
 }

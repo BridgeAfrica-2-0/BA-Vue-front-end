@@ -14,7 +14,7 @@
 
         <div class="col-lg-5 col-xl-5">
           <form class="d-block d-lg-none">
-            <b-input-group class="b-shadow mt-3">
+            <b-input-group class="mt-3">
               <div class="input-group-append color-mobile" style="border: none">
                 <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
                   <slot name="mobile">

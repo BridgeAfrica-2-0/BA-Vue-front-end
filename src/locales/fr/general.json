@@ -490,5 +490,21 @@
   "No_Member": "Aucun membre",
   "availability": "Disponibilité",
   "only": "Seulement",
-  "specification": "Specification"
+  "specification": "Specification",
+  "Recommended_For_You": "Reommandé pour vous",
+  "Clear": "Vider",
+  "this_is_the_shipping_method": "Il s'agit du mode d'expédition appliqué à votre commande en fonction de votre lieu de résidence",
+  "This_is_the_Estimated": "C'est la taxe estimée qui est appliquée à votre commande en fonction de votre lieu de résidence.",
+  "Estimated_Tax": "Estimation de la taxe",
+  "Packaging_Labeling": "Emballage et étiquetage",
+  "You_will_save": "Vous économiserez",
+  "with_this_order": "avec cette commande",
+  "Need_Some_Help": "Besoin d'aide",
+  "BY_CLICKING_SUBMIT_YOUR_ORDER_YOU_ARE_AGREEING_TO_OUR": "EN CLIQUANT SUR SOUMETTRE VOTRE COMMANDE, VOUS ACCEPTEZ NOS CONDITIONS D'UTILISATION.",
+  "TERMS_OF_USE": "CONDITIONS D'UTILISATION",
+  "PRIVACY_POLICY": "POLITIQUE DE CONFIDENTIALITÉ",
+  "AND": "ET",
+  "Call_us_at": "Appelez-nous au",
+  "Leave_us_a_message": "Laissez-nous un message",
+  "Shipping_and_Returns": "Expédition et retours"
 }

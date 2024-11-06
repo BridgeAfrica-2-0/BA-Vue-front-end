@@ -391,8 +391,8 @@ li .nav-link:hover {
 }
 
 .d-flex img {
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
 }
 
 #mail-icon {

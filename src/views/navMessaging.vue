@@ -1,5 +1,5 @@
 <template>
-  <base-layout>
+  <base-layout top="15">
     <template v-slot:main>
       <div>
         <Navbar />

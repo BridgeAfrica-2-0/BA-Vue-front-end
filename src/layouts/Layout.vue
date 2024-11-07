@@ -5,14 +5,14 @@
         <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
           <div class="contact-info d-flex align-items-center">
             <div class="d-flex">
-              <!-- <span class="d-flex justify-content-center align-items-center">
-              <img src="public/assets/home/phone.png" class="size2 mr-2" alt="" />
+              <span class="d-flex justify-content-center align-items-center">
+              <img src="assets/home/phone.png" class="size2 mr-2" alt="" />
               <span style="color: #8C8C8C !important">+237697157690</span>
             </span>
             <span class="d-flex justify-content-center align-items-center">
-              <img src="public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
+              <img src="assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
               <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
-            </span> -->
+            </span>
             </div>
 
             <div>
@@ -236,7 +236,6 @@ export default {
 
   created() {
 
-    console.log("start running layout")
     const currentLang = this.$i18n.locale;
     if (currentLang == 'en') {
       this.img = require("@/assets/img/about/en.png");

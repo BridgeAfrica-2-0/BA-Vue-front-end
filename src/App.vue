@@ -97,10 +97,7 @@ export default {
       this.$store.dispatch("auth/hideAuthModal");
     },
 
-    success() {
-      console.log("success");
-    },
-
+ 
     loadfinish() {
       this.showblock = false;
       this.showfadde = false;

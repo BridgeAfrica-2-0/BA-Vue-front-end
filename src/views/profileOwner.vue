@@ -35,7 +35,6 @@
             </b-col>
           </b-row>
         </div>
-        <Footer> </Footer>
       </div>
     </template>
   </base-layout>
@@ -67,7 +66,6 @@ export default {
     navbar,
     headPage,
     Post,
-    Footer,
     About,
     Media,
     Networks

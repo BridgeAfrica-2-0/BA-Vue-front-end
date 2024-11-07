@@ -476,9 +476,7 @@
             </div>
           </div>
         </div>
-        <div style="margin-top: 20em;">
-          <SiteFooter />
-        </div>
+      
       </div>
     </template>
   </base-layout>

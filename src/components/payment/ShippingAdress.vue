@@ -1,7 +1,7 @@
 <template>
-  <div class="col bg-white">
+  <div class="col bg-white p-0">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8 p-0 m-0">
         <div class="row justify-content-between align-items-center top-div" v-if="!review">
           <div>
             <h4 class="title-style m-0 p-0">{{ $t("general.SHIPPING") }}</h4>

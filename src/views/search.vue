@@ -27,7 +27,7 @@
             <Button media="mobile" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
           </template>
         </Nav>
-        <div class="d-flex justify-content-center mb-4 container-fluid" style="padding-inline: 50px;">
+        <div class="d-flex justify-content-center mb-4 container-fluid d-content">
           <div class="row mb-5 mt-4 gap-3 align-items-center">
             <div class="col-lg-7">
               <h1 class="font-weight-bold section_title">
@@ -35,7 +35,7 @@
                 <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world")
                   }}</span>
               </h1>
-              <div class="text-dark mt-3 text-black font-weight-bold subTitle" style="font-size: 1.3em;">{{
+              <div class="text-dark mt-3 text-black font-weight-bold subTitle">{{
                 $t("search.with_over_100_categories_of_products") }}</div>
             </div>
             <div class="col-lg-5 shadow-sm text-center">
@@ -342,7 +342,7 @@
         </b-col> -->
           </b-row>
         </div>
-        <div class="container mb-3 mt-4" style="max-width: 80%;">
+        <div class="container mb-3 mt-4 sec">
           <div class="row g-0">
             <!-- Image à gauche -->
             <div class="col-lg-6 col-md-12">
@@ -1862,6 +1862,18 @@ export default {
   font-size: 3.2em;
 }
 
+.d-content {
+  padding-inline: 50px;
+}
+
+.subTitle {
+  font-size: 1.3em;
+}
+
+.sec {
+  max-width: 80%;
+}
+
 @media screen and (max-width: 1500px) {
   .section_title {
     font-size: 2.6em;
@@ -1869,6 +1881,22 @@ export default {
 
   .subTitle {
     font-size: 1.3em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .section_title {
+    font-size: 1.8em;
+  }
+
+  .subTitle {
+    font-size: 1em;
+  }
+  .d-content {
+    padding-inline: 15px;
+  }
+
+  .sec {
+    max-width: 100%;
   }
 }
 

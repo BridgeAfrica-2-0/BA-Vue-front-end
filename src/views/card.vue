@@ -19,7 +19,7 @@
                   </div>
                   <div v-for="(cart_item, i) in business.items" :key="i">
                     <div class="mt-4 d-flex cart-item-wrapper">
-                      <div class="row" style="flex-grow: 1;">
+                      <div class="row m-0 p-0" style="flex-grow: 1;">
                         <img :src="cart_item.product_picture" class="product-image col-lg-3" />
                         <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
                         <div class="col-lg-9 col-md-6 mt-3">

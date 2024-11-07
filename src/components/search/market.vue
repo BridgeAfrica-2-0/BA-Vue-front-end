@@ -50,8 +50,8 @@
             >{{ product.price | locationPrice(rate, currencySelected) }}
           </span>
           <div class="desktop-buttons w-100">
-            <div class="d-flex justify-content-between w-100 mt-1">
-              <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
+            <div class="row justify-content-between w-100 mt-1">
+              <button v-if="product.in_stock" class="col-lg-6 buy-now-btn" @click="navigateToCart(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{
                   $t("general.buy_now")
                 }}</span>
@@ -60,7 +60,7 @@
                 </span>
               </button>
               <button
-                class="add-to-cart"
+                class="add-to-cart col-lg-6"
                 v-if="product.in_stock"
                 @click="handleAddToCard(product)"
               >
@@ -249,10 +249,10 @@
               </span>
 
               <div class="desktop-buttons w-100">
-                <div class="d-flex justify-content-between w-100 mt-1">
+                <div class="row justify-content-between w-100 mt-1">
                   <button
                     v-if="product.in_stock"
-                    class="buy-now-btn"
+                    class="col-lg-6 buy-now-btn"
                     @click="handleAddToCard(product)"
                   >
                     <span
@@ -267,8 +267,8 @@
                 </div>
               </div>
               <div class="mobile-buttons w-100">
-                <div class="d-flex justify-content-between w-100 mt-1">
-                  <button class="buy-now-btn" @click="navigateToCart(product)">
+                <div class="row justify-content-between w-100 mt-1">
+                  <button class="col-lg-6 buy-now-btn" @click="navigateToCart(product)">
                     <span
                       style="font-size: 12px !important; font-weight: bold;"
                       >{{ $t("general.buy_now") }}</span
@@ -276,7 +276,7 @@
                   </button>
                   <button
                     v-if="product.in_stock"
-                    class="add-to-cart mobile-add-to-cart-btn"
+                    class="col-lg-6 add-to-cart mobile-add-to-cart-btn"
                     @click="handleAddToCard(product)"
                   >
                     <b-icon icon="cart-plus"></b-icon

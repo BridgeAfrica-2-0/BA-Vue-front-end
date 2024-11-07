@@ -1,5 +1,5 @@
 <template>
-  <div v-if="islogin">
+  <div v-if="islogin" class="bg-danger">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
     <b-alert
@@ -49,18 +49,20 @@
           <span class="price"
             >{{ product.price | locationPrice(rate, currencySelected) }}
           </span>
-          <div class="desktop-buttons w-100">
-            <div class="row justify-content-between w-100 mt-1">
-              <button v-if="product.in_stock" class="col-lg-6 buy-now-btn" @click="navigateToCart(product)">
+            <div class="row p-0 m-0 justify-content-between w-100 mt-1">
+              <div class="col-lg-6">
+                <button v-if="product.in_stock" class="buy_now_btn btn" @click="navigateToCart(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{
                   $t("general.buy_now")
                 }}</span>
-                <span class="arrow-icon">
+                <span class="arrow_icon">
                   <i class="fas fa-arrow-right"></i>
                 </span>
               </button>
-              <button
-                class="add-to-cart col-lg-6"
+              </div>
+              <div class="col-lg-6">
+                <button
+                class="add_to_cart btn"
                 v-if="product.in_stock"
                 @click="handleAddToCard(product)"
               >
@@ -70,9 +72,9 @@
                   >{{ $t("general.Add_to_Cart") }}</span
                 >
               </button>
+              </div>
             </div>
-          </div>
-          <div class="mobile-buttons w-100">
+          <!-- <div class="mobile-buttons w-100">
             <div class="d-flex justify-content-between w-100 mt-1">
               <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
                 <span style="font-size: 12px !important; font-weight: bold;">{{
@@ -92,7 +94,7 @@
                 >
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <!-- <span v-if="product">
@@ -194,7 +196,7 @@
     />
   </div>
 
-  <div v-else>
+  <div v-else class="">
     <!-- <login /> -->
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
@@ -248,7 +250,7 @@
                 >{{ product.price | locationPrice(rate, currencySelected) }}
               </span>
 
-              <div class="desktop-buttons w-100">
+              <div class="w-100">
                 <div class="row justify-content-between w-100 mt-1">
                   <button
                     v-if="product.in_stock"
@@ -263,28 +265,6 @@
                     <span class="arrow-icon">
                       <i class="fas fa-arrow-right"></i>
                     </span>
-                  </button>
-                </div>
-              </div>
-              <div class="mobile-buttons w-100">
-                <div class="row justify-content-between w-100 mt-1">
-                  <button class="col-lg-6 buy-now-btn" @click="navigateToCart(product)">
-                    <span
-                      style="font-size: 12px !important; font-weight: bold;"
-                      >{{ $t("general.buy_now") }}</span
-                    >
-                  </button>
-                  <button
-                    v-if="product.in_stock"
-                    class="col-lg-6 add-to-cart mobile-add-to-cart-btn"
-                    @click="handleAddToCard(product)"
-                  >
-                    <b-icon icon="cart-plus"></b-icon
-                    ><span
-                      class="px-1"
-                      style="font-size: 12px; font-weight: bold;"
-                      >{{ $t("general.cart") }}</span
-                    >
                   </button>
                 </div>
               </div>
@@ -604,6 +584,30 @@ export default {
 </script>
 
 <style scoped>
+.add_to_cart {
+  cursor: pointer;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.add_to_cart:hover {
+  background-color: #e68a00;
+}
+
+.buy_now_btn {
+  cursor: pointer;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.buy_now_btn:hover {
+  background-color: #e68a00;
+}
+
 .text-left {
   text-align: left;
 }

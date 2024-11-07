@@ -201,7 +201,8 @@
       Mark as default address
     </b-form-checkbox>
       </div>
-      <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn">
+      <div class="d-flex align-items-center justify-content-center mt-4">
+          <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn w-100">
             {{ $t("general.Save") }}
       <b-spinner
       small
@@ -210,6 +211,7 @@
       class="ml-3"
     ></b-spinner>
       </b-button>
+      </div>
 
       <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
         <p role="button" class="text-center" @click="closesipping">
@@ -495,20 +497,10 @@ export default {
   color: black;
 }
 .hire-btn {
-  margin-top: 2%;
-  width: 300px;
-  height: 46px;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
   border-radius: 10px;
-  position: absolute;
-  bottom: 60px; 
-  left: 33%; 
-  transform: translateX(-50%);
 }
 .btn-custom {
   height: 38px;

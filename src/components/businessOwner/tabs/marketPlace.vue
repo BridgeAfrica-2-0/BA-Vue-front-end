@@ -75,41 +75,9 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage"
-              style="display: flex; justify-content: center; align-items: center; overflow: hidden">
-              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
-
-              <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div v-if="selectedImagePrv">
-                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%" />
-
-                </div>
-                <div v-else class="drag-text">
-                  <i class="fa fa-plus"></i>
-                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
-                </div>
-              </a>
-            </div>
-            <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" required />
-            <!-- <div class="image-upload-wrap" @click="selectImages"
-              style="display: flex; justify-content: center; align-items: center; overflow: hidden">
-              <input type="file" multiple @change="handleImageUpload" accept="image/*" id="image" v-show="false"
-                required />
-
-              <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div v-if="selectedImagesPrv.length > 0" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                  <div v-for="(image, index) in selectedImagesPrv" :key="index">
-                    <img :src="image" :srcset="image"
-                      style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc" />
-                    <span style="font-size:24px">X</span>
-                  </div>
-                </div>
-                <div v-else class="drag-text">
-                  <i class="fa fa-plus"></i>
-                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
-                </div>
-              </a>
-            </div> -->
+            <vue-upload-multiple-image limit-exceeded="5" markIsPrimaryText="" primaryText="Cover image" browseText=""
+              dragText="Drag or upload images" @upload-success="uploadImageSuccess" @before-remove="beforeRemove"
+              @edit-image="editImage" @data-change="dataChange"></vue-upload-multiple-image>
           </b-col>
         </b-row>
 
@@ -212,11 +180,15 @@ import Archive from "../archive";
 import { isPremium } from "@/helpers";
 import { LocalisationMixins } from "@/mixins"
 
+import VueUploadMultipleImage from 'vue-upload-multiple-image'
+
+
 export default {
   name: "MarketPlace",
   mixins: [LocalisationMixins],
   components: {
     MultiSelect,
+    VueUploadMultipleImage,
     Product,
     Orders,
     Archive
@@ -289,6 +261,40 @@ export default {
     }
   },
   methods: {
+    uploadImageSuccess(event) {
+      const iterator = event.entries()
+
+
+      for (const value of iterator) {
+        this.selectedImagesPrv.push(value[1])
+      }
+      console.log('upload success')
+    },
+
+    beforeRemove(index, done, fileList) {
+      this.selectedImagesPrvarray.splice(index, 1)
+      done()
+    },
+
+    editImage(formData, index, fileList) {
+
+      const iterator = formData.entries()
+      let file = null
+
+      for (const value of iterator) {
+        file = value[1]
+      }
+      this.selectedImagesPrv[index] = file
+
+      console.log('edit image success')
+    },
+
+    dataChange(event) {
+      console.log(event)
+
+      console.log('data change success')
+
+    },
     resizeImage(index, size) {
 
       return
@@ -304,7 +310,7 @@ export default {
       //   this.selectedImagesPrv.push(URL.createObjectURL(file));
       // });
       this.selectedImagesPrv = Array.from(files)
-      console.log(this.selectedImagesPrv)
+      
     },
     swap() {
       console.log("orders: ", this.orders);
@@ -380,19 +386,32 @@ export default {
         .join();
       this.newProduct.filterId = this.select_filterss.join();
 
-      console.log("starting to display the map data");
-
+     
       console.log(this.selectedImagesPrv)
       // transform product data in form data
+
+
+      if (this.selectedImagesPrv.length) {
+        const picture = this.selectedImagesPrv[0]
+        const additionals = this.selectedImagesPrv.splice(0, 1)
+
+        console.log("=====================")
+        console.log(picture)
+        console.log(additionals)
+        console.log("=====================")
+
+        additionals.forEach((file, index) => {
+          fd.append(`additional_images[${index}]`, file);
+        });
+
+        fd.append(`picture`, picture);
+      }
+
+
       for (const key in this.newProduct) {
 
-        if ("picture" == key && this.selectedImagesPrv.length)
-          this.selectedImagesPrv.forEach((file, index) => {
-            fd.append(`additional_images[${index}]`, file);
-          });
-
-
-        fd.append(key, this.newProduct[key]);
+        if ("picture" != key)
+          fd.append(key, this.newProduct[key]);
       }
       console.log("NEW PRODUCT", this.newProduct);
       axios
@@ -584,6 +603,10 @@ export default {
 
 .pic:hover {
   box-shadow: 5px 10px 8px 2px #888888;
+}
+
+.image-container.position-relative.text-center {
+  width: 100% !important;
 }
 
 .create {

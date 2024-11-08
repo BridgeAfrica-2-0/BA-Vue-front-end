@@ -12,13 +12,13 @@
                 <div style="margin-right: 150px;">
                   <Skeleton :loading="loading" />
                 </div>
-                <div v-if="!loading" class="mb-5">
-                  <div class="d-flex justify-content-between card-top-content">
+                <div v-if="!loading" class="mt-4">
+                  <div class="d-flex justify-content-between card-top-content mb-3">
                     <h4>{{ business.business_name }}</h4>
                     <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</a>
                   </div>
                   <div v-for="(cart_item, i) in business.items" :key="i">
-                    <div class="mt-4 d-flex cart-item-wrapper">
+                    <div class="d-flex cart-item-wrapper mt-4">
                       <div class="row m-0 p-0" style="flex-grow: 1;">
                         <img :src="cart_item.product_picture" class="product-image col-lg-3" />
                         <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
@@ -546,7 +546,6 @@ export default {
   height: 0;
   margin: 30px 0;
   position: relative;
-  margin-right: 150px;
 }
 
 .recommended-for-you {
@@ -609,6 +608,6 @@ export default {
 }
 
 .cart-item-wrapper {
-  gap: 25px;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.493);
 }
 </style>

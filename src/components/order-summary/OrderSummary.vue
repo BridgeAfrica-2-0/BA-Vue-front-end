@@ -246,7 +246,6 @@ cursor: pointer;
   width: 100%;
   max-width: 350px;
   margin: 0 auto;
-  max-height: 640px;
   color: black;
 }
 .summary-section {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <slot name="header">
       <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
         <div class="container p-0 m-auto d-flex justify-content-between align-items-center">

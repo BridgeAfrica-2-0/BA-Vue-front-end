@@ -83,31 +83,6 @@
               </div>
               <div class="bottom-info">
                 <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
-                <div class="desktop-buttons w-100" v-if="islogin">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
-                      <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </button>
-                    <button v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
-                      <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart")
-                        }}</span>
-                    </button>
-                  </div>
-                </div>
-                <div class="mobile-buttons w-100" v-if="islogin">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
-                    </button>
-                    <button v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
-                      <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                        style="font-size: 12px; font-weight: bold;">Cart</span>
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

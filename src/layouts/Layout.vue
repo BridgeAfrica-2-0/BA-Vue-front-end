@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <slot name="header">
       <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
         <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
@@ -45,7 +45,7 @@
           <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
             @click="() => isOpen = true">
             <span style="font-size: 14px; color: #000; padding: 0 15px;">
-              <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+              <img :src="countrySelected?.flag" style="width: 18px; height: 18px;" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
               <i class="fa fa-caret-down"></i>
             </span>
           </div>
@@ -214,7 +214,7 @@
     </slot>
     <slot name="main"></slot>
     <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
-    <div class="bottom-bar">
+    <div class="bottom-bar" v-if="showFooter">
       <span>©2021- {{ new Date().getFullYear() }}- Bridge Africa</span>
     </div>
   </div>
@@ -419,10 +419,6 @@ li .nav-link:hover {
   border-color: #f2f2f2 !important;
 }
 
-.d-flex img {
-  /* width: 18px;
-  height: 18px; */
-}
 
 #mail-icon {
   width: 28px !important;

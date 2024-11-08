@@ -200,49 +200,50 @@
       v-model="requestModal" no-close-on-backdrop>
       <b-form>
 
-
-
-        <b-form-group id="input-group-1" :label="'Product Name'" label-for="input-1" label-size="">
-          <b-form-input v-model="newProduct.name" class="mt-1" type="text" id="name" required></b-form-input>
+        <b-form-group id="quantity" :label="'Quantity'" label-for="quantity" label-size="">
+          <b-form-input v-model="newProduct.quantity" class="mt-1" type="number" id="quantity" required></b-form-input>
         </b-form-group>
 
-        <b-form-group id="kg" :label="'Available quandity'" label-for="quantity" label-size="sm">
-          <b-form-input v-model="newProduct.quantity" class="mt-1" id="quantity" type="number"></b-form-input>
+        <b-form-group id="length" :label="'Length'" label-for="quantity" label-size="">
+          <b-form-input v-model="newProduct.length" class="mt-1" type="number" id="quantity" required></b-form-input>
         </b-form-group>
 
-        <b-form-group id="conditions" :label="$t('businessowner.Conditions')" label-for="input-1" label-size="sm">
-          <b-form-input v-model="newProduct.condition" class="mt-1" id="conditions" required></b-form-input>
+        <b-form-group id="width" :label="'Width'" label-for="quantity" label-size="">
+          <b-form-input v-model="newProduct.width" class="mt-1" type="number" id="quantity" required></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="height" :label="'Height'" label-for="quantity" label-size="">
+          <b-form-input v-model="newProduct.height" class="mt-1" type="number" id="quantity" required></b-form-input>
+        </b-form-group>
+
+
+        <b-form-group id="conditions" :label="'Description'" label-for="input-1" label-size="sm">
+          <b-form-textarea v-model="newProduct.description" class="mt-1" rows="4" max-rows="8" id="conditions"
+            required></b-form-textarea>
         </b-form-group>
 
 
 
         <b-form-group id="location" :label="'Location'" label-for="location" label-size="sm">
-          <b-form-input v-model="newProduct.quantity" class="mt-1" id="location" type="text"></b-form-input>
+          <b-form-input v-model="newProduct.location" class="mt-1" id="location" type="text"></b-form-input>
         </b-form-group>
 
 
         <b-form-group id="contact" :label="'contact'" label-for="contact" label-size="sm">
-          <b-form-input v-model="newProduct.quantity" class="mt-1" id="contact" type="text"></b-form-input>
+          <b-form-input v-model="newProduct.contact" class="mt-1" id="contact" type="text"></b-form-input>
         </b-form-group>
 
-        <!-- TAX and KG -->
-
-        <b-form-input v-model="newProduct.tax_amount" class="mt-1" id="tax" type="number" required
-          hidden></b-form-input>
-
-
         <!-- <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert> -->
+
         <div class="d-flex justify-content-end">
-          <b-button class="mt-2 btn-block btn-outline-secondary">
-            <!-- <b-spinner small v-if="load" variant="white"></b-spinner> -->
-
-            cancel</b-button>
-          <b-button class="mt-2 btn-block" variant="primary">
-            <!-- <b-spinner small v-if="load" variant="white"></b-spinner> -->
-
-            Send request</b-button>
+          <b-button class="mt-2 btn-block btn-outline-secondary" @click="requestModal">
+            Cancel
+          </b-button>
+          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block" variant="primary" :disabled="canSendRequest">
+            <b-spinner small v-if="startRequest" variant="white"></b-spinner>
+            Send request
+          </b-button>
         </div>
-
       </b-form>
 
     </b-modal>
@@ -251,14 +252,20 @@
 </template>
 
 <script>
+
 import axios from "axios";
+
 import ProductDetails from "./ProductDetails.vue";
+
 import MultiSelect from "vue-multiselect";
+
 // import EditProduct from "./editProduct.vue";
 export default {
   // props: ["product"],
   data() {
     return {
+      product: null,
+      startRequest: false,
       requestModal: false,
       newProduct: {},
       viewProduct: false,
@@ -290,6 +297,13 @@ export default {
     //  EditProduct
   },
   computed: {
+
+    canSendRequest() {
+      return this.newProduct.quantity &&
+        this.newProduct.length && this.newProduct.width && this.newProduct.height && this.newProduct.description &&
+        this.newProduct.location && this.newProduct.contact ? false : true
+    },
+
     products() {
       return this.$store.state.market.products;
     },
@@ -297,11 +311,6 @@ export default {
     BuCategories() {
       return this.$store.state.auth.categories;
     },
-
-    //  selectedImagePrv(){
-    //    return  this.product.picture;
-
-    //  },
 
     scategories() {
       return this.$store.state.auth.subcategories;
@@ -324,16 +333,6 @@ export default {
       return sub_cat;
     }
 
-    // selectedcategories: function () {
-    //   let selectedCatUsers = [];
-    //   if (this.product.categories.id) {
-    //     // selectedUsers.push(item.id);
-    //     selectedCatUsers.push(this.product.categories.id);
-    //   } else {
-    //     selectedCatUsers.push(this.product.categories.category_id);
-    //   }
-    //   return selectedCatUsers;
-    // },
   },
 
   beforeMount() {
@@ -342,31 +341,50 @@ export default {
     this.getProducts();
     this.categories();
   },
+
   methods: {
     requestToWhareHouse(product) {
+      this.product=product
       this.requestModal = true
     },
 
     onSendRequest() {
+      this.startRequest = true
       const data = {
-        "product_id": "",
-        "quantity": "",
-        "length": "",
-        "width": "",
-        "height": "",
-        "description": "",
-        "location": "",
-        "contact": "",
+        "product_id": this.product.id,
+        "quantity": this.newProduct.quantity,
+        "length": this.newProduct.length,
+        "width": this.newProduct.width,
+        "height": this.newProduct.height,
+        "description": this.newProduct.description,
+        "location": this.newProduct.location,
+        "contact": this.newProduct.contact,
       }
+
+      axios.post(`market/warehouse/request`, data)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Changes Made Successfuly"
+          });
+
+        })
+        .finally(() => {
+          this.startRequest = false
+        })
     },
 
     callactions(product) {
+
       this.product = product;
+
       this.selectedImagePrv = product.picture;
 
       this.multiselecvalue = product.categories[0];
 
       this.subcategories();
+
       this.select_filterss = this.editfilters(product.filters);
     },
 

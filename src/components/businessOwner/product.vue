@@ -245,7 +245,6 @@
 
       </b-form>
 
-
     </b-modal>
     <!-- <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" /> -->
   </div>
@@ -346,6 +345,19 @@ export default {
   methods: {
     requestToWhareHouse(product) {
       this.requestModal = true
+    },
+
+    onSendRequest() {
+      const data = {
+        "product_id": "",
+        "quantity": "",
+        "length": "",
+        "width": "",
+        "height": "",
+        "description": "",
+        "location": "",
+        "contact": "",
+      }
     },
 
     callactions(product) {

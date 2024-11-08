@@ -10,13 +10,13 @@
 
     <b-container fluid="lg">
       <b-row v-if="current_step === 1 && !showRequestPayment">
-        <b-col class="my-4" cols="12">
+        <b-col class="" cols="">
           <ShippingAdress @RefreshSipping="RefreshSipping" @loadActualComponent3="showActualComponent3"
             @loadActualComponent1="showActualComponent1" @handleNextStep="handleSwitchStep" />
         </b-col>
       </b-row>
       <b-row v-if="current_step === 2 && !showRequestPayment">
-        <b-col class="my-4" cols="12">
+        <b-col class="" cols="">
           <ShippingAdress @RefreshSipping="RefreshSipping" @showoperator="handleShowOperator"
             @loadActualComponent3="showActualComponent3" @loadActualComponent1="showActualComponent1" :review=true
             @edit-button-clicked="redirectToStep1" @handleNextStep="handleSwitchStep" />

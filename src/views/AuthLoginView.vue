@@ -1,171 +1,124 @@
 <template>
-  <div style="height: 100vh;">
-    <form
-      novalidate
-      autocomplete="off"
-      class="md-layout"
-      @submit.prevent="validateUser"
-      style="height: 100vh;"
-    >
-      <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
-        <md-card-header>
-          <div class="md-title center f-22">
-            {{ $t("auth.Login_To_Bridge_Africa") }}
-          </div>
-        </md-card-header>
+  <div>
+    <layout :show-footer="false">
+      <template v-slot:main>
+        <base-layout :callback="validateUser">
+          <template v-slot:main>
+            <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
+              <md-card-header>
+                <div class="md-title center f-22">
+                  {{ $t("auth.Login_To_Bridge_Africa") }}
+                </div>
+              </md-card-header>
 
-        <md-card-content>
-          <div class="center">
-            <b-row>
-              <b-col lg="6" md="12">
-                <md-button
-                  @click.prevent="authProvider('facebook')"
-                  class="md-raised md-primary b-w rounded"
-                >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                  {{ $t("auth.Login_With_Facebook") }}
-                </md-button>
-              </b-col>
+              <md-card-content>
+                <div class="center">
+                  <b-row>
+                    <b-col lg="6" md="12">
+                      <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w rounded">
+                        <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                        {{ $t("auth.Login_With_Facebook") }}
+                      </md-button>
+                    </b-col>
 
-              <b-col lg="6" md="12">
-                <md-button
-                  @click.prevent="authProvider('google')"
-                  class="b-color b-w rounded"
-                  style="color: white"
-                >
-                  <b-icon icon="google" aria-hidden="true"></b-icon>
-                  {{ $t("auth.login_with_google") }}
-                </md-button>
-              </b-col>
-            </b-row>
-          </div>
+                    <b-col lg="6" md="12">
+                      <md-button @click.prevent="authProvider('google')" class="b-color b-w rounded"
+                        style="color: white">
+                        <b-icon icon="google" aria-hidden="true"></b-icon>
+                        {{ $t("auth.login_with_google") }}
+                      </md-button>
+                    </b-col>
+                  </b-row>
+                </div>
 
-          <br />
+                <br />
 
-          <p class="t-center">- {{ $t("auth.OR") }} -</p>
+                <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
-          <md-field :class="getValidationClass('email')">
-            <label for="email">
-              {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
-            </label>
-            <md-input
-              type="text"
-              name="email"
-              id="email"
-              autocomplete="off"
-              v-model="form.email"
-              :disabled="sending"
-            />
-            <span class="md-error" v-if="!$v.form.email.required">
-              {{ $t("auth.the_email_is_required") }}
-            </span>
-            <span class="md-error" v-else-if="!$v.form.email.email">
-              {{ $t("auth.invalid_email") }}
-            </span>
-          </md-field>
+                <md-field :class="getValidationClass('email')">
+                  <label for="email">
+                    {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
+                  </label>
+                  <md-input type="text" name="email" id="email" autocomplete="off" v-model="form.email"
+                    :disabled="sending" />
+                  <span class="md-error" v-if="!$v.form.email.required">
+                    {{ $t("auth.the_email_is_required") }}
+                  </span>
+                  <span class="md-error" v-else-if="!$v.form.email.email">
+                    {{ $t("auth.invalid_email") }}
+                  </span>
+                </md-field>
 
-          <md-field>
-            <label for="password"> {{ $t("auth.Password") }} </label>
-            <md-input
-              type="password"
-              name="password"
-              autocomplete="off"
-              id="password"
-              v-model="form.password"
-              :disabled="sending"
-            />
-          </md-field>
+                <md-field>
+                  <label for="password"> {{ $t("auth.Password") }} </label>
+                  <md-input type="password" name="password" autocomplete="off" id="password" v-model="form.password"
+                    :disabled="sending" />
+                </md-field>
 
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100 m-left">
-              <b-form-checkbox
-                id="checkbox-1"
-                name="checkbox-1"
-                value="accepted"
-                unchecked-value="not_accepted"
-              >
-                {{ $t("auth.remeber_me") }}
-              </b-form-checkbox>
-            </div>
+                <div class="md-layout md-gutter">
+                  <div class="md-layout-item md-small-size-100 m-left">
+                    <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
+                      {{ $t("auth.remeber_me") }}
+                    </b-form-checkbox>
+                  </div>
 
-            <div class="md-layout-item md-small-size-100">
-              <br />
-            </div>
-          </div>
-        </md-card-content>
+                  <div class="md-layout-item md-small-size-100">
+                    <br />
+                  </div>
+                </div>
+              </md-card-content>
 
-        <md-progress-bar md-mode="indeterminate" v-if="sending" />
+              <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-        <div>
-          <div>
-              <md-button
-                type="submit"
-                class="btn btn-primary px-4 w-100 rounded m-0"
-                style="color: white"
-                :disabled="sending"
-              >
-              {{ $t("auth.login") }}
-              </md-button>
-              <div class="row m-0 mt-2">
-                <span class="mr-2 text-secondary">{{ $t("auth.You_dont_have_an_account") }}</span>
-                <router-link to="signup">
-                  {{ $t("auth.signup") }}
-              </router-link>
+              <div>
+                <div>
+                  <md-button type="submit" class="btn btn-primary px-4 w-100 rounded m-0" style="color: white"
+                    :disabled="sending">
+                    {{ $t("auth.login") }}
+                  </md-button>
+                  <div class="row m-0 mt-2">
+                    <span class="mr-2 text-secondary">{{ $t("auth.You_dont_have_an_account") }}</span>
+                    <router-link to="signup">
+                      {{ $t("auth.signup") }}
+                    </router-link>
+                  </div>
+                </div>
+
+                <router-link to="password" class="nav-link text">
+                  {{ $t("auth.forget_password") }}
+                </router-link>
               </div>
-        </div>
 
-          <router-link to="password" class="nav-link text">
-            {{ $t("auth.forget_password") }}
-          </router-link>
-        </div>
+              <div></div>
 
-        <div></div>
+              <div class="mt-4 text-center" style="font-size: 15px;">
 
-        <div class="mt-4 text-center" style="font-size: 15px;">
+                <label>
+                  {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
+                </label>
 
-<label>
-  {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
-</label>
-
-<label class="ml-2">
-  <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
-  <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
-</label>
-<p class="text-center" style="font-size: 14px;">
-<span class="display-inline">
-  <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
-  <span class="vl"></span>
-  <b-link class="ml-2" @click="setLang('fr')">
-    {{ $t("auth.french") }}
-  </b-link>
-</span>
-
-Bridge Africa © 2021
-</p>
-</div>
-      </md-card>
-
-      <div class="md-layout-item md-size-55 md-small-size-100 b-div"></div>
-
-      <md-snackbar :md-active.sync="userSaved">
-        {{ $t("auth.the_user") }} {{ lastUser }}
-        {{ $t("auth.was_saved_with_success") }} !
-      </md-snackbar>
-    </form>
-
-    <hr class="localfoter" />
-
-    <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="setLang('fr')">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-
-      Bridge Africa © 2021
-    </p>
+                <label class="ml-2">
+                  <b-link class="font-weight-bold" href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+                  <b-link class="font-weight-bold" href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
+                </label>
+                <p class="text-center" style="font-size: 14px;">
+                  <span class="display-inline">
+                    <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+                    <span class="vl"></span>
+                    <b-link class="ml-2" @click="setLang('fr')">
+                      {{ $t("auth.french") }}
+                    </b-link>
+                  </span>
+                </p>
+                <p>
+                  Bridge Africa © 2021- {{ new Date().getFullYear() }}
+                </p>
+              </div>
+            </md-card>
+          </template>
+        </base-layout>
+      </template>
+    </layout>
   </div>
 </template>
 
@@ -176,10 +129,20 @@ import "vue-material/dist/vue-material.min.css";
 
 import "@/assets/default.css";
 import { required, email } from "vuelidate/lib/validators";
+
+
+import baseLayout from "@/layouts/AuthLayout"
+import layout from "@/layouts/Layout"
+
 export default {
-  name: "FormValidation",
+  name: "AuthLoginView",
   boolean: true,
   mixins: [validationMixin],
+
+  components: {
+    baseLayout,
+    layout
+  },
   data: () => ({
     form: {
       password: null,
@@ -354,9 +317,11 @@ export default {
 .md-field {
   align-items: end;
 }
+
 .md-field.md-theme-default:after {
   background-color: #ccc;
 }
+
 .vl {
   border-left: 1px solid green;
   height: 50px;
@@ -374,30 +339,32 @@ export default {
   align-content: left;
   text-align: left;
 }
+
 .md-progress-bar {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
 }
+
 .md-checkbox {
   display: flex;
 }
+
 .b-color {
   background-color: #FF0000;
   color: white;
 }
+
 .p-card {
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 80px;
   padding-bottom: 80px;
 }
-.b-div {
-  background-image: url("/assets/home/login-ban.jpg");
-  background-position: center;
-  background-size: cover;
-}
+
+
+
 .t-center {
   text-align: center;
 }
@@ -414,9 +381,11 @@ export default {
 .f-22 {
   font-size: 22px;
 }
+
 .f-12 {
   font-size: 12px;
 }
+
 @media only screen and (max-width: 768px) {
   .p-card {
     padding-left: 10px;

@@ -2,17 +2,17 @@
 <template>
   <div class="order-summary">
     <div class="summary-section">
-      <h3>Order Summary</h3>
+      <h3>{{ $t("general.Order_Summary") }}</h3>
       <div class="summary-item">
-        <span>Subtotal</span>
+        <span>{{ $t("network.Sub_Total") }}</span>
         <span> {{ cartSummary?.sub_total?.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div class="summary-item">
       <b-tooltip target="tooltip-target-1" triggers="hover">
-        This is the shipping method that is being applied to your order according to your location
+        {{ $t("general.this_is_the_shipping_method") }}
       </b-tooltip>
       <b-tooltip target="tooltip-target-2" triggers="hover">
-        This is the Estimated tax that is applied to your order according to your location
+        {{ $t("general.This_is_the_Estimated") }}
       </b-tooltip>
         <span v-if="isCameroon">{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
         <span v-if="!isCameroon">DHL <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
@@ -20,16 +20,16 @@
         <span v-if="!isCameroon">  {{ shippingFee | locationPrice(rate)}} </span>
       </div>
       <div class="summary-item">
-        <span>Estimated Tax <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
+        <span>{{ $t("general.Estimated_Tax") }} <img src="@/assets/filled.png" id="tooltip-target-2" alt="Info Icon" class="ml-1 info-image"> </span>
         <span> {{ cartSummary?.tax.toFixed(2) ?? "" | locationPrice(rate) }}</span>
       </div>
       <div v-if="!isCameroon && cartSummary?.shipping_info[0]?.shipping_cost !== 0" class="summary-item">
-        <span>Packaging & Labeling</span>
+        <span>{{ $t("general.Packaging_Labeling") }}</span>
         <span>  {{ cartSummary?.shipping_info[0]?.shipping_cost ?? ""  | locationPrice(rate)}} </span>
       </div>
       <hr class="dotted-line"/>
       <div class="summary-item total">
-        <span>Total</span>
+        <span>{{ $t("general.Total") }}</span>
         <span v-if="!isCameroon">
           {{ ((cartSummary?.sub_total ?? 0) + (shippingFee ?? 0) + (cartSummary?.shipping_info?.[0]?.shipping_cost ?? 0)).toFixed(2) | locationPrice(rate) }}
         </span>
@@ -39,8 +39,7 @@
       </div>
       <hr class="dotted-line"/>
       <p class="discount">
-        You will save {{ cartSummary?.discount.toFixed(2) ?? "" }} with this
-        order
+        {{ $t("general.You_will_save") }} {{ cartSummary?.discount.toFixed(2) ?? "" }} {{ $t("general.with_this_order") }}
       </p>
     </div>
     <div>
@@ -53,25 +52,25 @@
         {{ getButtonText }}
       </button>
       <small class="txt-color">
-        BY CLICKING SUBMIT YOUR ORDER, YOU ARE AGREEING TO OUR <span class="span-txt pr-1"> TERMS OF USE </span> AND
-        <span class="span-txt pl-1"> PRIVACY POLICY </span>
+        {{ $t('general.BY_CLICKING_SUBMIT_YOUR_ORDER_YOU_ARE_AGREEING_TO_OUR') }} <span class="span-txt pr-1"> {{ $t('general.TERMS_OF_USE') }} </span> {{ $t('general.AND') }}
+        <span class="span-txt pl-1"> {{ $t('general.PRIVACY_POLICY') }} </span>
       </small>
     </div>
     <div class="help-section">
-      <h4>Need Some Help?</h4>
+      <h4>{{ $t('general.Need_Some_Help') }}?</h4>
       <div class="help-item">
-        <span> <img src="@/assets/phone.png" alt="Info Icon" class="mr-4 info-image">Call us at 0987654321</span>
+        <span> <img src="@/assets/phone.png" alt="Info Icon" class="mr-4 info-image">{{ $t('general.Call_us_at') }} 0987654321</span>
       </div>
       <hr class="straight-line"/>
       <div class="help-item">
         <i class="message-icon"></i>
-        <span><img src="@/assets/email2.svg" alt="Info Icon" class="mr-4 info-image">Leave us a message</span>
+        <span><img src="@/assets/email2.svg" alt="Info Icon" class="mr-4 info-image">{{ $t('general.Leave_us_a_message') }}</span>
         <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
       <hr class="straight-line"/>
       <div class="help-item">
         <i class="shipping-icon"></i>
-        <span><img src="@/assets/shipping.svg" alt="Info Icon" class="mr-4 info-image1">Shipping and Returns</span>
+        <span><img src="@/assets/shipping.svg" alt="Info Icon" class="mr-4 info-image1">{{ $t('general.Shipping_and_Returns') }}</span>
         <i class="fas fa-chevron-right ml-auto mr-3"></i>
       </div>
     </div>
@@ -110,7 +109,11 @@ export default {
       isCameroon : false,
       rate: null,
       userLocation: {},
+      currentLang: "",
     };
+  },
+  created() {
+    this.currentLang = this.$i18n.locale;
   },
   computed: {
     ...mapGetters({
@@ -119,13 +122,13 @@ export default {
     getButtonText() {
       switch (this.step) {
         case 0:
-          return "Submit your order";
+          return this.currentLang === 'en' ? "Submit your order" : "Soumettre votre commande";
         case 1:
-          return "Continue";
+          return this.currentLang === 'en' ? "Continue" : "Continuer";
         case 2:
-          return "Proceed to payment";
+          return this.currentLang === 'en' ? "Proceed to payment" : "Procéder au paiement";
         default:
-          return "Proceed to payment";
+          return this.currentLang === 'en' ? "Proceed to payment" : "Procéder au paiement";
       }
     },
     shippingFee() {

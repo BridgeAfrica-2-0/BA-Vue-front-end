@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <div class="countries my-1">
-          <strong for="">Country</strong>
+            <strong for="">Country</strong>
             <v-select v-model="country" :options="countries" label="name" :reduce="country => country">
               <template #option="option">
                 <span>
@@ -101,7 +101,6 @@ export default {
   watch: {
     countrySelected(newValue) {
       this.country = newValue
-
     },
     currencySelected(newValue) {
       this.currency = newValue

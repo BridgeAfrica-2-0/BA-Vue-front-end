@@ -1,7 +1,7 @@
 <template>
   <base-layout>
     <template v-slot:main>
-      <div style="" class="searchpage">
+      <div style="" class="searchpage bg-white">
         <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
           <template v-slot:button>
             <Button media="desktop" @click.native="strategY['all']" v-if="selectedId == 5" />
@@ -229,25 +229,14 @@
         </div>
 
         <div class="container-fluid mobile-filters mt-2 mb-3">
-          <b-row>
-            <b-col cols="5">
-              <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters">
-                {{ $t("search.Filter") }}
-              </b-button>
-            </b-col>
-
-            <b-col cols="3" md>
-              <b-button class="shadow border mob-btn" @click="togglelist">
-                {{ $t("search.List") }}
-              </b-button>
-            </b-col>
-
-            <b-col cols="4">
-              <b-button class="shadow border mob-btn" @click="togglemap()">
-                {{ $t("search.Map") }}
-              </b-button>
-            </b-col>
-          </b-row>
+          <div class="d-flex justify-content-between px-3" style="gap: 10px">
+            <button class="shadow border mob-btn flex-grow-1 text-white justify-content-center" id="show-btn" @click="showFilters">
+               <i class="fas fa-filter mr-2"></i> {{ $t("search.Filter") }}
+              </button>
+              <button class="shadow border mob-btn flex-grow-1 text-white d-flex justify-content-center" @click="togglelist">
+               <i class="fas fa-list mr-2"></i> {{ $t("search.List") }}
+              </button>
+          </div>
         </div>
         <div class="container-flex p-md-3 p-t-0 upp">
           <b-row class="p-3">
@@ -1974,8 +1963,8 @@ export default {
   }
 
   .mob-btn {
-    background-color: white;
-    color: #455a64 !important;
+    background-color: black;
+    color: white !important;
     border-color: white;
     width: 80px;
     padding: 3px;

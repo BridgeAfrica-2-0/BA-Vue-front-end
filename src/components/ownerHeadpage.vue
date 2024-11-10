@@ -435,8 +435,7 @@ export default {
             this.$store
               .dispatch("profile/loadUserPostIntro", null)
               .then(response => {
-                console.log(response);
-                this.flashMessage.show({
+                console.log(response);this.flashMessage.show({
                   status: "success",
                   message: this.$t("profileowner.Cover_Updated"),
                   blockClass: "custom-block-class"

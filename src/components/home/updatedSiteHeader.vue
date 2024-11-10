@@ -40,12 +40,11 @@
             </b-dropdown-item>
           </b-dropdown>
         </div>
+
         <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
           @click="() => isOpen = true">
           <span style="font-size: 14px; color: #000; padding: 0 15px;">
-            <!-- <img style="width: 20px; height: 15.5px; padding-bottom: 0px; padding-bottom: 2px; margin-right: 5px;"
-              src="@/assets/img/cmr.webp"> -->
-            {{ countrySelected?.flag }} {{ countrySelected?.sigle }} {{ currencySelected?.name }}
+            <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
@@ -135,6 +134,25 @@
                   <hr class="mobile navstyle" />
                 </b-nav-item>
 
+                <b-nav-item class="ml-md-1 text-center">
+                  <span class="font-arvo nav-span">
+                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
+                      ">{{ $t("general.Contact_Us") }}</router-link>
+                  </span>
+                  <hr class="mobile navstyle" />
+                </b-nav-item>
+
+                <b-nav-item class="ml-md-1 text-center">
+                  <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal" data-target="#settings"
+                    @click="() => isOpen = true">
+                    <span style="font-size: 14px; color: #000; padding: 0 15px;">
+                      <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                  </div>
+                </b-nav-item>
+
+
               </b-navbar-nav>
             </b-collapse>
             <b-navbar-nav class="mr-auto d-none d-lg-flex">
@@ -197,6 +215,7 @@
                 <span class="nav-span">{{ $t("general.Logout") }}</span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
+
             </b-navbar-nav>
           </div>
         </div>
@@ -325,17 +344,7 @@ export default {
         });
       }
     },
-    // change(lang) {
-    //   this.$i18n.locale = lang;
 
-    //   if (lang == "en") {
-    //     this.img = require("../../assets/img/about/en.png");
-    //     this.lang = "English";
-    //   } else {
-    //     this.img = require("../../assets/img/la-france.png");
-    //     this.lang = "French";
-    //   }
-    // },
     navigateToCart() {
       this.$router.push("/cart");
     },
@@ -606,6 +615,10 @@ a {
     width: 165px;
   }
 
+  .language-selection.hidden-countries {
+    display: none !important
+  }
+
   .mobile {
     display: none;
   }
@@ -620,9 +633,12 @@ a {
     margin-right: 15px;
   }
 
+
   .media-icons i {
     margin-left: 10px;
   }
+
+  
 }
 
 @media (max-width: 576px) {
@@ -630,6 +646,10 @@ a {
     flex-direction: row;
     align-items: flex-start;
     padding: 10px 20px;
+  }
+
+  .hidden-countries {
+    display: block !important
   }
 
   .contact-info {

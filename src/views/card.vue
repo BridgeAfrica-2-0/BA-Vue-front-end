@@ -1,100 +1,103 @@
 <template>
-  <div class="bg-white">
-    <navbar />
-    <div class="cart-wrapper container" style="margin-bottom: 300px;">
-      <h1 class="mt-5 my-bag">My Cart ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
-      <div class="row pt-5">
-        <div class="col-lg-8">
-          <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
-            <div style="margin-right: 150px;">
-              <Skeleton :loading="loading" />
-            </div>
-            <div v-if="!loading" class="mb-5">
-              <div class="d-flex justify-content-between card-top-content">
-                <h4>{{ business.business_name }}</h4>
-                <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">Clear</a>
-              </div>
-              <div v-for="(cart_item, i) in business.items" :key="i">
-                <div class="mt-4 d-flex cart-item-wrapper">
-                   <div class="row" style="flex-grow: 1;">
-                    <img :src="cart_item.product_picture" class="product-image col-lg-3" />
-                    <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
-                  <div class="col-lg-9 col-md-6 mt-3">
-                    <h6 class="product-name">{{ cart_item.product_name }}</h6>
-                    <div>
-                      <label for="" class="text-black"
-                        >{{ $t("general.availability") }}:</label
-                      >
-                      <span class="ml-2"
-                        >{{ $t("general.only") }} {{ cart_item.stock_available }}
-                        <span class="" v-if="cart_item.product_in_stock">{{
-                          $t("general.in_stock")
-                        }}</span>
-                        <span class="text-danger" v-else>{{
-                          $t("general.out_of_stock")
-                        }}</span></span
-                      >
-                      <!-- {{ cart_item }} -->
-                    </div>
-                    <div class="">
-                        {{
-                          cart_item.product_description.length > 150
-                            ? cart_item.product_description.slice(0, 150) + "..."
-                            : cart_item.product_description
-                        }}
-                      </div>
+  <base-layout :top="30">
+    <template v-slot:main>
+      <div class="bg-white">
+        <navbar />
 
-                    <div class="d-flex align-items-center justify-content-between mt-3">
-                      <p class="mt-3">
-                        <img class="heart" src="assets/images/heart.png" alt="" />
-                        <a href="" class="save">Save</a>
-                      </p>
-                      <input type="number" class="product-quantity numbersize form-control"
-                        @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available" :min="1"
-                        v-model="cart_item.quantity" />
-                    </div>
+        <div class="cart-wrapper container" style="margin-bottom: 300px;">
+          <h1 class="mt-5 my-bag">{{ $t("general.My_Cart") }} ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
+          <div class="row pt-5">
+            <div class="col-lg-8">
+              <div v-for="(business, i) in cart?.data[0]?.businesses" :key="i">
+                <div style="margin-right: 150px;">
+                  <Skeleton :loading="loading" />
+                </div>
+                <div v-if="!loading" class="mt-4">
+                  <div class="d-flex justify-content-between card-top-content mb-3">
+                    <h4>{{ business.business_name }}</h4>
+                    <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</a>
                   </div>
-                   </div>
-                  <div class="product-prices d-flex" style="gap: 10px;">
-                    <div class="">
-                      <h6 class="discount-price">
-                        {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" | locationPrice(rate)
-                        }}
-                      </h6>
-                      <!-- <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
+                  <div v-for="(cart_item, i) in business.items" :key="i">
+                    <div class="d-flex cart-item-wrapper mt-4">
+                      <div class="row m-0 p-0" style="flex-grow: 1;">
+                        <img :src="cart_item.product_picture" class="product-image col-lg-3" />
+                        <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
+                        <div class="col-lg-9 col-md-6 mt-3">
+                          <h6 class="product-name">{{ cart_item.product_name }}</h6>
+                          <div>
+                            <label for="" class="text-black">{{ $t("general.availability") }}:</label>
+                            <span class="ml-2">{{ $t("general.only") }} {{ cart_item.stock_available }}
+                              <span class="" v-if="cart_item.product_in_stock">{{
+                                $t("general.in_stock")
+                                }}</span>
+                              <span class="text-danger" v-else>{{
+                                $t("general.out_of_stock")
+                                }}</span></span>
+                            <!-- {{ cart_item }} -->
+                          </div>
+                          <div class="">
+                            {{
+                              cart_item.product_description.length > 150
+                                ? cart_item.product_description.slice(0, 150) + "..."
+                                : cart_item.product_description
+                            }}
+                          </div>
+
+                          <div class="d-flex align-items-center justify-content-between mt-3">
+                            <p class="mt-3">
+                              <img class="heart" src="assets/images/heart.png" alt="" />
+                              <a href="" class="save">Save</a>
+                            </p>
+                            <input type="number" class="product-quantity numbersize form-control"
+                              @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available"
+                              :min="1" v-model="cart_item.quantity" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-prices d-flex" style="gap: 10px;">
+                        <div class="">
+                          <h6 class="discount-price">
+                            {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" |
+                              locationPrice(rate)
+                            }}
+                          </h6>
+                          <!-- <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
                         {{
                           cart_item.discount_price | locationPrice(rate)
                         }}
                       </h6> -->
+                        </div>
+                        <img class="cross" src="assets/images/cross.png"
+                          @click="removeIconFromCart(cart_item.product_id)" alt="cross" />
+                      </div>
                     </div>
-                    <img class="cross" src="assets/images/cross.png" @click="removeIconFromCart(cart_item.product_id)"
-                      alt="cross" />
                   </div>
                 </div>
               </div>
+
+              <hr class="dotted-hr" />
+
+              <h1 class="recommended-for-you" v-if="products.length > 0">{{ $t("general.Recommended_For_You") }}</h1>
+              <splide v-if="products.length > 0" :options="options" class="r-image">
+                <splide-slide v-for="(product, index) in products" :key="index">
+                  <div class="crtv-bans">
+                    <img :src="product.picture" alt="Product Image" class="slide-img" />
+                    <h3 class="mt-2">{{ product.name }}</h3>
+                    <p>{{ product.price | locationPrice(rate) }}</p>
+                    <a href="#" @click.prevent="handleAddToCard(product)">{{ $t("general.Add_to_Cart") }}</a>
+                  </div>
+                </splide-slide>
+              </splide>
+            </div>
+            <div class="col-lg-4" style="padding-inline: 32px;">
+              <OrderSummary :handleSubmit="handleSubmit" :step="0"
+                :disable="buttonDisable || !cart?.data[0]?.cartItems" />
             </div>
           </div>
-
-          <hr class="dotted-hr" />
-
-          <h1 class="recommended-for-you" v-if="products.length > 0">Recommended for You</h1>
-          <splide v-if="products.length > 0" :options="options" class="r-image">
-            <splide-slide v-for="(product, index) in products" :key="index">
-              <div class="crtv-bans">
-                <img :src="product.picture" alt="Product Image" class="slide-img" />
-                <h3 class="mt-2">{{ product.name }}</h3>
-                <p>{{ product.price | locationPrice(rate) }}</p>
-                <a href="#" @click.prevent="handleAddToCard(product)">Add to Cart</a>
-              </div>
-            </splide-slide>
-          </splide>
-        </div>
-        <div class="col-lg-4" style="padding-inline: 32px;">
-          <OrderSummary :handleSubmit="handleSubmit" :step="0" :disable="buttonDisable || !cart?.data[0]?.cartItems" />
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </base-layout>
 </template>
 <script>
 import navbar from "@/components/navbar.vue";
@@ -103,8 +106,10 @@ import Skeleton from "../components/skeleton";
 import axios from "axios";
 import { getGuestIdentifier } from "../helpers";
 import { checkCountry, convertToCurrency } from "../helpers";
+
+import BaseLayout from "@/layouts/Layout"
 export default {
-  components: { navbar, OrderSummary, Skeleton },
+  components: { navbar, OrderSummary, Skeleton, BaseLayout },
   data() {
     return {
       currentPage: 1,
@@ -474,8 +479,8 @@ export default {
 }
 
 .product-image {
-  height: 165px;
-  width: 200px;
+  height: 165px !important;
+  width: 200px !important;
   object-fit: contain;
   object-position: center;
   border: 1px solid #ccc;
@@ -541,7 +546,6 @@ export default {
   height: 0;
   margin: 30px 0;
   position: relative;
-  margin-right: 150px;
 }
 
 .recommended-for-you {
@@ -604,6 +608,6 @@ export default {
 }
 
 .cart-item-wrapper {
-  gap: 25px;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.493);
 }
 </style>

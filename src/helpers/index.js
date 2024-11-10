@@ -168,15 +168,42 @@ export const getRate = async (fromCurrency, toCurrency) => {
   }
 }
 
+
+export const  axiosWithRetry = async (options, retryCount = 3, retryDelay = 4000) => {
+  for (let attempt = 0; attempt < retryCount; attempt++) {
+    try {
+      const response = await axios(options);
+      return response; // If the request succeeds, return the response
+    } catch (error) {
+      if (attempt < retryCount - 1) {
+        // Wait before retrying
+        await new Promise(resolve => setTimeout(resolve, retryDelay));
+      } else {
+        // Throw the error if it's the last attempt
+        throw error;
+      }
+    }
+  }
+};
 let CurrencyMap = null
 
 export const onInitializer = async ()  => {
-  const response = await axios.get("https://restcountries.com/v3.1/all")  
+
+  axiosWithRetry({
+    method: 'get',
+    url: 'https://restcountries.com/v3.1/all',
+  })
+  const response = await axiosWithRetry({
+    method: 'get',
+    url: 'https://restcountries.com/v3.1/all',
+  })
+
+  console.log(response.data)
   CurrencyMap = response.data.map(country => ({
     "name": country.name.common,
     "sigle": country.cca2,
     "currency": country.currencies,
-    "flag": country.flag,
+    "flag": country.flags.png,
   }))
 }
 

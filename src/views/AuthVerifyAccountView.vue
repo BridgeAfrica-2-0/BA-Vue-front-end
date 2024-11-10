@@ -1,154 +1,121 @@
 <template>
   <div>
-    <form
-      novalidate
-      autocomplete="off"
-      class="md-layout"
-      @submit.prevent="validateUser"
-    >
-      <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
-        <md-card-header>
-          <div class="md-title center f-22">
-            {{ $t("verification.Verification") }}
-          </div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="center"></div>
-
-          <br />
-
-          <div v-if="!verify_method">
-            <b-row class="row border">
-              <b-col cols="10">
-                <div class="d-inline-flex mt-3 mb-3">
-                  <span class="mr-4">
-                    <b-icon
-                      icon="envelope"
-                      variant="primary"
-                      font-scale="3"
-                    ></b-icon>
-                  </span>
-
-                  <span class="ml-3 md-title l-20">
-                    {{ $t("verification.Via_Email_To") }} <br />
-                    {{ auth.email }}
-                  </span>
+    <layout :show-footer="false">
+      <template v-slot:main>
+        <base-layout :callback="() => {}">
+          <template v-slot:main>
+            <md-card class="md-layout-item md-size-45 md-small-size-100 p-card shadow-none">
+              <md-card-header>
+                <div class="md-title center f-22">
+                  {{ $t("verification.Verification") }}
                 </div>
-              </b-col>
-              <b-col class="d-" cols="1">
-                <span class="float-right mt-3">
-                  <b-button @click="verifyMethod('email')">
-                    <b-icon
-                      icon="chevron-right"
-                      variant=""
-                      class="mt-1"
-                      font-scale="2"
-                    ></b-icon>
-                  </b-button>
-                </span>
-              </b-col>
-            </b-row>
+              </md-card-header>
 
-            <div class="row border mt-3">
-              <b-col cols="10">
-                <div class="d-inline-flex mt-3 mb-3">
-                  <span class="mr-4">
-                    <b-icon
-                      icon="telephone"
-                      variant="primary"
-                      font-scale="3"
-                    ></b-icon>
-                  </span>
+              <md-card-content>
+                <div class="center"></div>
 
-                  <span class="ml-3 md-title l-20">
-                    {{ $t("verification.Via_SMS_To") }} <br />
-                    {{ auth.phone }}
-                  </span>
+                <br />
+
+                <div v-if="!verify_method">
+                  <b-row class="row border">
+                    <b-col cols="10">
+                      <div class="d-inline-flex mt-3 mb-3">
+                        <span class="mr-4">
+                          <b-icon icon="envelope" variant="primary" font-scale="3"></b-icon>
+                        </span>
+
+                        <span class="ml-3 md-title l-20">
+                          {{ $t("verification.Via_Email_To") }} <br />
+                          {{ auth.email }}
+                        </span>
+                      </div>
+                    </b-col>
+                    <b-col class="d-" cols="1">
+                      <span class="float-right mt-3">
+                        <b-button @click="verifyMethod('email')">
+                          <b-icon icon="chevron-right" variant="" class="mt-1" font-scale="2"></b-icon>
+                        </b-button>
+                      </span>
+                    </b-col>
+                  </b-row>
+
+                  <div class="row border mt-3">
+                    <b-col cols="10">
+                      <div class="d-inline-flex mt-3 mb-3">
+                        <span class="mr-4">
+                          <b-icon icon="telephone" variant="primary" font-scale="3"></b-icon>
+                        </span>
+
+                        <span class="ml-3 md-title l-20">
+                          {{ $t("verification.Via_SMS_To") }} <br />
+                          {{ auth.phone }}
+                        </span>
+                      </div>
+                    </b-col>
+                    <div class="col-1">
+                      <span class="ml-4 float-right mt-3">
+                        <b-button @click="verifyMethod('tel')">
+                          <b-icon icon="chevron-right" variant="" class="mt-1" font-scale="2"></b-icon>
+                        </b-button>
+                      </span>
+                    </div>
+                  </div>
+
+                  <br />
+                  <br />
+                  <br />
+                  <br />
                 </div>
-              </b-col>
-              <div class="col-1">
-                <span class="ml-4 float-right mt-3">
-                  <b-button @click="verifyMethod('tel')">
-                    <b-icon
-                      icon="chevron-right"
-                      variant=""
-                      class="mt-1"
-                      font-scale="2"
-                    ></b-icon>
+
+                <div v-if="verify_method">
+                  <md-field>
+                    <label for="otp"> {{ $t("verification.OTP") }}</label>
+
+                    <md-input type="text" name="otp" id="otp" v-model="token" required />
+                  </md-field>
+
+                  <br />
+
+                  <div class="md-layout md-gutter">
+                    <br />
+                  </div>
+                </div>
+              </md-card-content>
+
+              <md-progress-bar md-mode="indeterminate" v-if="sending" />
+
+              <div v-if="verify_method">
+                <div class="center">
+                  <b-button class="buttonn" @click.prevent="Verify" :disabled="sending" variant="primary" type="submit">
+                    {{ $t("verification.Verify") }}
                   </b-button>
-                </span>
+                </div>
+
+                <br />
+                <br />
+
+                <p class="mt-5 mt-md-2">
+                  {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
+                  <b-link @click.prevent="resendOtp()">
+                    {{ $t("verification.Resend_OTP") }}
+                  </b-link>
+                </p>
               </div>
-            </div>
 
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
+              <div></div>
 
-          <div v-if="verify_method">
-            <md-field>
-              <label for="otp"> {{ $t("verification.OTP") }}</label>
+              <div>
+                <br />
+                <br />
 
-              <md-input
-                type="text"
-                name="otp"
-                id="otp"
-                v-model="token"
-                required
-              />
-            </md-field>
-
-            <br />
-
-            <div class="md-layout md-gutter">
-              <br />
-            </div>
-          </div>
-        </md-card-content>
-
-        <md-progress-bar md-mode="indeterminate" v-if="sending" />
-
-        <div v-if="verify_method">
-          <div class="center">
-            <b-button
-              class="buttonn"
-              @click.prevent="Verify"
-              :disabled="sending"
-              variant="primary"
-              type="submit"
-            >
-              {{ $t("verification.Verify") }}
-            </b-button>
-          </div>
-
-          <br />
-          <br />
-
-          <p class="mt-5 mt-md-2">
-            {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
-            <b-link @click.prevent="resendOtp()">
-              {{ $t("verification.Resend_OTP") }}
-            </b-link>
-          </p>
-        </div>
-
-        <div></div>
-
-        <div>
-          <br />
-          <br />
-
-          <br />
-          <br />
-        </div>
-      </md-card>
-
-      <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
-    </form>
-
-    <hr class="localfoter" />
+                <br />
+                <br />
+              </div>
+            </md-card>
+          </template>
+        </base-layout>
+      </template>
+    </layout>
   </div>
 </template>
 
@@ -159,10 +126,22 @@ import { mapActions } from "vuex";
 import axios from "axios";
 import "@/assets/default.css";
 import { required, email } from "vuelidate/lib/validators";
+
+
+import baseLayout from "@/layouts/AuthLayout"
+import layout from "@/layouts/Layout"
+
+
 export default {
-  name: "FormValidation",
+  name: "AuthVerifyAccontView",
   boolean: true,
   mixins: [validationMixin],
+  
+  components: {
+    baseLayout,
+    layout
+  },
+
   data: () => ({
     form: {
       password: null,

@@ -1,31 +1,6 @@
 <template>
   <div class="bridge-home">
-    <site-header class="topbar" @change:currency="emitChangeCurrency" />
-
-    <!-- <section class="p-0">
-  <div>
-    <div class="row">
-      <div class="col-md-12 p-0">
-        <div class="position-relative">
-          <splide :options="options" class="r-image">
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/header_slide_1.png" alt="Image 1" class="slide-img">
-              </div>
-            </splide-slide>
-            <splide-slide>
-              <div class="crtv-bans">
-                <img src="assets/home/slide2.png" alt="Image 2" class="slide-img">
-              </div>
-            </splide-slide>
-          </splide>
-          <button class="shop-now-btn"><span class="shop-span">SHOP NOW</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
+    <site-header class="topbar" />
     <section class="p-0">
       <div class="top-slider">
         <div class="row">
@@ -108,31 +83,6 @@
               </div>
               <div class="bottom-info">
                 <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
-                <div class="desktop-buttons w-100">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
-                      <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </button>
-                    <button v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
-                      <span class="px-2" style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart")
-                        }}</span>
-                    </button>
-                  </div>
-                </div>
-                <div class="mobile-buttons w-100">
-                  <div class="d-flex justify-content-between w-100 mt-1">
-                    <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t("general.buy_now") }}</span>
-                    </button>
-                    <button v-if="product.in_stock" class="add-to-cart" @click="handleAddToCard(product)">
-                      <b-icon icon="cart-plus"></b-icon><span class="px-1"
-                        style="font-size: 12px; font-weight: bold;">Cart</span>
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1298,10 +1248,7 @@ export default {
       this.$router.push(`/product-details/${id}`);
     },
 
-    async emitChangeCurrency(ev) {
-
-      // currencyMap[]
-    },
+   
     async onInit(currency = null) {
 
       const isGlobal = this.countrySelected?.sigle == 'CM' ? false : true

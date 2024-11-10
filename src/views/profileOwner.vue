@@ -1,48 +1,43 @@
 <template>
-  <div class="mx-auto" style="overflow-x: clip;">
-    <navbar></navbar>
-    <head-page></head-page>
-    <div class="container text-justify corps prof center-content wahala">
-      <b-row class="">
-        <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
-            <b-tab :title="$t('profileowner.Posts')" href="#post">
-              <Post @on:media="value => goToMedia(value)" />
-            </b-tab>
-            <b-tab :title="$t('profileowner.About')" href="#about">
-              <About />
-            </b-tab>
+  <base-layout>
+    <template v-slot:main>
+      <div class="mx-auto" style="overflow-x: clip;">
+        <navbar></navbar>
+        <head-page></head-page>
+        <div class="container text-justify corps prof center-content wahala">
+          <b-row class="">
+            <b-col cols="12" class="p-3">
+              <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
+                <b-tab :title="$t('profileowner.Posts')" href="#post">
+                  <Post @on:media="value => goToMedia(value)" />
+                </b-tab>
+                <b-tab :title="$t('profileowner.About')" href="#about">
+                  <About />
+                </b-tab>
 
-            <b-tab :title="$t('profileowner.Media')" href="#media">
-              <Media type="profile" />
-            </b-tab>
+                <b-tab :title="$t('profileowner.Media')" href="#media">
+                  <Media type="profile" />
+                </b-tab>
 
-            <b-tab
-              :title="$t('profileowner.Business')"
-              href="#business"
-              class="m-0 p-0"
-            > 
-              <Bussiness />
+                <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
+                  <Bussiness />
 
-            </b-tab>
-            
-            <b-tab :title="$t('profileowner.Networks')">
-              <Networks />
-            </b-tab>
+                </b-tab>
 
-            <b-tab
-              :title="$t('profileowner.Community')"
-              href="#community"
-              class="m-0 p-0"
-            >
-              <Following />
-            </b-tab>
-          </b-tabs>
-        </b-col>
-      </b-row>
-    </div>
-    <Footer> </Footer>
-  </div>
+                <b-tab :title="$t('profileowner.Networks')">
+                  <Networks />
+                </b-tab>
+
+                <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
+                  <Following />
+                </b-tab>
+              </b-tabs>
+            </b-col>
+          </b-row>
+        </div>
+      </div>
+    </template>
+  </base-layout>
 </template>
 
 <script>
@@ -59,16 +54,18 @@ import { mapGetters, mapMutations } from "vuex";
 
 import { WhoIsIt } from "@/mixins";
 
+import BaseLayout from "@/layouts/Layout"
+
 export default {
   name: "profileOwner",
   mixins: [WhoIsIt],
   components: {
+    BaseLayout,
     Bussiness,
     Following,
     navbar,
     headPage,
     Post,
-    Footer,
     About,
     Media,
     Networks
@@ -157,7 +154,7 @@ export default {
   mounted() {
     this.$store
       .dispatch("profile/Tcommunity", null)
-      .then(response => {})
+      .then(response => { })
       .catch(error => {
         console.log({ error: error });
       });
@@ -170,33 +167,40 @@ export default {
   .lb-grid {
     height: 200px;
   }
+
   .corps {
     margin-top: 2rem !important;
   }
 }
+
 @media (min-width: 576px) {
   .lb-grid {
     height: 300px;
   }
 }
+
 @media (min-width: 768px) {
   .lb-grid {
     height: 350px;
   }
 }
+
 @media (min-width: 992px) {
   .lb-grid {
     height: 400px;
   }
 }
+
 @media (min-width: 1200px) {
   .lb-grid {
     height: 500px;
   }
+
   .corps {
     margin-top: 2rem !important;
   }
 }
+
 @media (min-width: 1400px) {
   .lb-grid {
     height: 500px;

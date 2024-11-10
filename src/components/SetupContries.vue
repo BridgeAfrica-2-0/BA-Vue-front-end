@@ -12,20 +12,40 @@
         <div class="modal-body">
           <div class="countries my-1">
             <strong for="">Country</strong>
-            <select class="custom-select" v-model="country">
-              <option :value="ev.sigle" v-for="(ev, index) in countries" :key="index"> {{ ev.flag }} {{ ev.name }}
-              </option>
-            </select>
-          </div>
+            <v-select v-model="country" :options="countries" label="name" :reduce="country => country">
+              <template #option="option">
+                <span>
+                  <img :src="option.flag" class="flag" />
+                  {{ option.name }}
+                </span>
+              </template>
+              <template #selected-option="option">
+                <span>
+                  <img :src="option.flag" class="flag" />
+                  {{ option.name }}
+                </span>
+              </template>
 
+            </v-select>
+          </div>
 
           <div class="countries my-2">
             <strong for="">Currency</strong>
-            <select class="custom-select" v-model="currency">
-              <option :value="ev.name" v-for="(ev, index) in currencies" :key="index">{{ ev.name }} ({{ ev.value.symbol
-                }})
-              </option>
-            </select>
+            <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency">
+
+              <template #option="option">
+                <span>
+                  ({{ option.symbol }})
+                  {{ option.name }}
+                </span>
+              </template>
+              <template #selected-option="option">
+                <span>
+                  ({{ option.symbol }})
+                  {{ option.name }}
+                </span>
+              </template>
+            </v-select>
           </div>
 
           <div class="language my-2">
@@ -47,10 +67,20 @@
 
 
 <script>
+
+
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
+
 import { LocalisationMixins } from "@/mixins"
 
 export default {
+  components: {
+    vSelect
+  },
   mixins: [LocalisationMixins],
+
   data: () => ({
     country: "",
     currency: "",
@@ -62,7 +92,19 @@ export default {
     currencies: []
   }),
 
+  created() {
+    this.country = this.countrySelected
+    this.currency = this.currencySelected
+    this.onStart(this.countries.length ? this.countries : [])
+  },
+
   watch: {
+    countrySelected(newValue) {
+      this.country = newValue
+    },
+    currencySelected(newValue) {
+      this.currency = newValue
+    },
     countries(newValue) {
 
       if (!newValue.length)
@@ -73,7 +115,20 @@ export default {
         this.country = this.countrySelected.sigle
         this.currency = this.currencySelected.name
       }
+      this.onStart(newValue)
 
+    }
+  },
+
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    onStart(newValue) {
       const currencies = newValue.map(c => c.currency).filter(c => c)
 
       const seenCurrencies = new Set();
@@ -91,19 +146,10 @@ export default {
 
       this.currencies = Object.entries(uniqueCurrencyMap).map(curreny => {
         const [key, value] = curreny
-        return { name: key, value };
-      });
-    }
-  },
+        return { name: key, symbol: value.symbol };
+      }).sort((a, b) => a.name.localeCompare(b.name));
 
-  props: {
-    open: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  methods: {
+    },
     change(lang) {
       this.$i18n.locale = lang;
 
@@ -115,11 +161,10 @@ export default {
     },
 
     onChange() {
-      const findCountryInfo = this.countries.find(c => c.sigle == this.country)
 
       this.$store.dispatch("localisation/updateCountry", this.country)
       this.$store.dispatch("localisation/updateCurrency", this.currency)
-      this.$store.dispatch("localisation/updateRate", this.currency)
+      this.$store.dispatch("localisation/updateRate", this.currency.name)
 
       this.change(this.lang)
       this.$refs.close.click();
@@ -127,3 +172,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.flag {
+  width: 28px !important;
+  height: 22px !important;
+}
+</style>

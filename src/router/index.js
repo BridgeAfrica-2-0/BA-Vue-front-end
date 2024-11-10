@@ -1,22 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
-import Login from "../views/login.vue";
 import LoginValidation from "../views/LoginValidation.vue";
 import home1 from "@/views/home1.vue";
-import signup from "../views/signup.vue";
 import success from "../views/success.vue";
 import failure from "../views/failure.vue";
 import Password from "../views/recoverPassword.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 
-import verifyAccount from "../views/verifyAccount.vue";
+
 
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
 import BridgeHome from "@/views/BridgeHome";
-import updatedBridgeHome from "@/views/updatedBridgeHome";
+
 import Quote from "@/views/quote";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
@@ -62,6 +60,7 @@ import businessVisitor from "@/views/businessVisitor";
 //import networks from "@/views/networks";
 //import search from "@/views/search";
 
+
 const search = () => import("@/views/search");
 const networks = () => import("@/views/networks");
 const businessOwner = () => import("@/views/businessOwner");
@@ -87,9 +86,14 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
+import authRoutes from "./auth.routes";
+import rootRoutes from "./root.routes";
+
 const previousRoute = { value: null };
 
 const routes = [
+  ... authRoutes,
+  ... rootRoutes,
   {
     path: "/notFound",
     name: "notFoundd",
@@ -332,23 +336,7 @@ const routes = [
     }
   },
 
-  {
-    path: "/login",
-    name: "Login",
-    component: Login
-  },
-
-  {
-    path: "/auth/facebook/callback",
-    name: "Loginfacebook",
-    component: Login
-  },
-
-  {
-    path: "/auth/google/callback",
-    name: "Logingoogle",
-    component: Login
-  },
+ 
 
   {
     path: "/login/validation",
@@ -356,11 +344,7 @@ const routes = [
     component: LoginValidation
   },
 
-  {
-    path: "/signup",
-    name: "signup",
-    component: signup
-  },
+  
   
   {
     path: "/ThankYouPage",
@@ -374,14 +358,7 @@ const routes = [
     component: Password
   },
 
-  {
-    path: "/verify",
-    name: "verifyAccount",
-    component: verifyAccount,
-    meta: {
-      //  auth: true,
-    }
-  },
+  
 
   {
     path: "/recoverPass2",
@@ -419,13 +396,6 @@ const routes = [
     name: "GlobalSearch",
     component: search
   },
-
-  {
-    path: "/",
-    name: "Bridge-home",
-    component: updatedBridgeHome
-  },
-
   {
     path: "/blecc",
     name: "Blecc",

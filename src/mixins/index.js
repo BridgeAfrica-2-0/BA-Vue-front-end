@@ -559,7 +559,7 @@ export const LocalisationMixins = {
   data: () => ({
     isGlobal: true
   }),
-
+ 
   computed: {
     ...mapGetters({
       countryLocalisation: "localisation/getLocalisationCountry",
@@ -578,7 +578,6 @@ export const LocalisationMixins = {
 
   methods: {
     async onInitLocalisation() {
-      console.log(this.countryLocalisation?.sigle)
       this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
     },
   }

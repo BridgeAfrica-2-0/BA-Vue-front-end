@@ -1,5 +1,5 @@
 <template>
-  <div v-if="islogin">
+  <div v-if="islogin" class="">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
     <b-alert
@@ -11,13 +11,15 @@
       </a></b-alert
     >
 
-    <div v-if="!prodLoader" class="grid">
-      <div
+    <div v-if="!prodLoader">
+      <div class="row">
+        <div
         v-for="(product, index) in products.data"
         :key="index"
-        class="grid-item"
+        class="col-lg-3 col-md-6 col-sm-6 mb-4"
       >
-        <div class="image-container mb-2" @click="goToDetail(product.id)">
+        <div class="card shadow-none m-0 p-0">
+          <div class="image-container mb-2" @click="goToDetail(product.id)">
           <v-lazy-image
             :src="product.picture"
             :alt="product.name"
@@ -46,22 +48,20 @@
           </p>
         </div>
         <div class="bottom-info">
-          <span class="price"
+          <span class="price font-weight-bold"
             >{{ product.price | locationPrice(rate, currencySelected) }}
           </span>
-          <div class="desktop-buttons w-100">
-            <div class="d-flex justify-content-between w-100 mt-1">
-              <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                <span style="font-size: 12px !important; font-weight: bold;">{{
-                  $t("general.buy_now")
-                }}</span>
-                <span class="arrow-icon">
-                  <i class="fas fa-arrow-right"></i>
-                </span>
-              </button>
-              <button
-                class="add-to-cart"
-                v-if="product.in_stock"
+          <div class="w-100"  v-if="product.in_stock">
+                  <div class="d-flex justify-content-between w-100 mt-1" style="gap: 20px;">
+                    <button class="buy-now-btn flex-grow-1" @click="navigateToCart(product)">
+                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
+                      <span class="arrow-icon">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
+                    </button>
+                    <button
+                class="add-to-cart flex-grow-1"
+               
                 @click="handleAddToCard(product)"
               >
                 <span
@@ -70,29 +70,9 @@
                   >{{ $t("general.Add_to_Cart") }}</span
                 >
               </button>
-            </div>
-          </div>
-          <div class="mobile-buttons w-100">
-            <div class="d-flex justify-content-between w-100 mt-1">
-              <button v-if="product.in_stock" class="buy-now-btn" @click="navigateToCart(product)">
-                <span style="font-size: 12px !important; font-weight: bold;">{{
-                  $t("general.buy_now")
-                }}</span>
-              </button>
-              <button
-                class="add-to-cart"
-                v-if="product.in_stock"
-                @click="handleAddToCard(product)"
-              >
-                <b-icon icon="cart-plus"></b-icon
-                ><span
-                  class="px-1"
-                  style="font-size: 12px; font-weight: bold;"
-                  >{{ $t("general.cart") }}</span
-                >
-              </button>
-            </div>
-          </div>
+                  </div>
+                </div>
+        </div>
         </div>
 
         <!-- <span v-if="product">
@@ -172,6 +152,7 @@
           <br />
         </span> -->
       </div>
+      </div>
     </div>
     <!-- pagination -->
     <b-pagination
@@ -194,7 +175,7 @@
     />
   </div>
 
-  <div v-else>
+  <div v-else class="">
     <!-- <login /> -->
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
@@ -244,15 +225,35 @@
               </p>
             </div>
             <div class="bottom-info">
+          <span class="price font-weight-bold"
+            >{{ product.price | locationPrice(rate, currencySelected) }}
+          </span>
+          <div class="w-100" v-if="product.in_stock">
+                  <div class="d-flex justify-content-between w-100 mt-1" style="gap: 10px;">
+                    <button
+                class="add-to-cart flex-grow-1"
+                
+                @click="handleAddToCard(product)"
+              >
+                <span
+                  class="px-2"
+                  style="font-size: 12px; font-weight: bold;"
+                  >{{ $t("general.Add_to_Cart") }}</span
+                >
+              </button>
+                  </div>
+                </div>
+        </div>
+            <!-- <div class="bottom-info">
               <span class="price text-black font-weight-bold"
                 >{{ product.price | locationPrice(rate, currencySelected) }}
               </span>
 
-              <div class="desktop-buttons w-100">
-                <div class="d-flex justify-content-between w-100 mt-1">
+              <div class="w-100">
+                <div class="row justify-content-between w-100 mt-1">
                   <button
                     v-if="product.in_stock"
-                    class="buy-now-btn"
+                    class="col-lg-6 buy-now-btn"
                     @click="handleAddToCard(product)"
                   >
                     <span
@@ -266,29 +267,7 @@
                   </button>
                 </div>
               </div>
-              <div class="mobile-buttons w-100">
-                <div class="d-flex justify-content-between w-100 mt-1">
-                  <button class="buy-now-btn" @click="navigateToCart(product)">
-                    <span
-                      style="font-size: 12px !important; font-weight: bold;"
-                      >{{ $t("general.buy_now") }}</span
-                    >
-                  </button>
-                  <button
-                    v-if="product.in_stock"
-                    class="add-to-cart mobile-add-to-cart-btn"
-                    @click="handleAddToCard(product)"
-                  >
-                    <b-icon icon="cart-plus"></b-icon
-                    ><span
-                      class="px-1"
-                      style="font-size: 12px; font-weight: bold;"
-                      >{{ $t("general.cart") }}</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -604,6 +583,30 @@ export default {
 </script>
 
 <style scoped>
+.add_to_cart {
+  cursor: pointer;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.add_to_cart:hover {
+  background-color: #e68a00;
+}
+
+.buy_now_btn {
+  cursor: pointer;
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.buy_now_btn:hover {
+  background-color: #e68a00;
+}
+
 .text-left {
   text-align: left;
 }

@@ -75,7 +75,7 @@
 
         <hr style="margin-top: -0px" />
 
-        <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
+        <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none p-3">
           <b-row align-v="start">
             <b-col cols="3" class="text-center" v-for="(category, index) in categories.slice(0, 7)" :key="index">
               <b-link class="cat" @click="() => {
@@ -87,7 +87,7 @@
                 });
               }
                 ">
-                <img class="img-fluid picture logo-img" :src="category.category.cat_image" />
+                <!-- <img class="img-fluid picture logo-img" :src="category.category.cat_image" /> -->
 
                 {{
                   category.category.name.length > 11

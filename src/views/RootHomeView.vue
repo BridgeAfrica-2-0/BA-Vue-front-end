@@ -60,9 +60,10 @@
               <i class="fas fa-spinner fa-spin"></i>
             </div>
           </div>
-          <div v-else class="grid">
-            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="grid-item">
-              <div class="image-container mb-2" @click="goToDetail(product.id)">
+          <div v-else class="row">
+            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative">
+              <div class="card shadow-none p-0 h-100">
+                <div class="image-container mb-2" @click="goToDetail(product.id)">
                 <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
               </div>
               <div class="content-container">
@@ -73,7 +74,7 @@
                   {{ product.in_stock ? "In Stock" : "Out of Stock" }}
                 </div>
                 <h3 class="font-weight-bold" @click="goToDetail(product.id)">{{ product.name }}</h3>
-                <p>
+                <p style="margin-bottom: 4em;">
                   {{
                     product.description.length > 50
                       ? product.description.slice(0, 50) + "..."
@@ -83,6 +84,7 @@
               </div>
               <div class="bottom-info">
                 <span class="price">{{ product.price | locationPrice(rate, currencySelected) }} </span>
+              </div>
               </div>
             </div>
           </div>
@@ -1502,7 +1504,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .mobile-buttons {
   display: none !important;
 }
@@ -1840,6 +1842,8 @@ export default {
   align-items: flex-start;
   /*  */
   justify-content: space-between;
+  position: absolute;
+  bottom: 0;
 }
 
 .price {
@@ -2772,10 +2776,6 @@ export default {
     height: 150px !important;
   }
 
-  .content-container {
-    padding: 0px 5px;
-  }
-
   .content-container h3 {
     font-size: 15px !important;
     margin: 0;
@@ -2789,10 +2789,6 @@ export default {
 
   .stock-status {
     margin-bottom: 3px;
-  }
-
-  .bottom-info {
-    padding: 2px 5px 10px 5px;
   }
 
   .product-section {

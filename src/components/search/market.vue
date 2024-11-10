@@ -1,5 +1,5 @@
 <template>
-  <div v-if="islogin" class="">
+  <div v-if="islogin" class="px-3">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
     <b-alert
@@ -16,9 +16,9 @@
         <div
         v-for="(product, index) in products.data"
         :key="index"
-        class="col-lg-3 col-md-6 col-sm-6 mb-4"
+        class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative"
       >
-        <div class="card shadow-none m-0 p-0">
+        <div class="card shadow-none p-0 h-100">
           <div class="image-container mb-2" @click="goToDetail(product.id)">
           <v-lazy-image
             :src="product.picture"
@@ -26,7 +26,7 @@
             class="product-image"
           />
         </div>
-        <div class="content-container">
+        <div class="content-container  cursor-pointer" @click="goToDetail(product.id)">
           <div class="stock-status">
             <span class="text-success" v-if="product.in_stock">{{
               $t("general.in_stock")
@@ -36,10 +36,10 @@
             }}</span>
           </div>
           <!-- <h3 @click="navigateToCart(product)">{{ product.name }}</h3> -->
-          <div class="d-flex">
-            <h3 @click="goToDetail(product.id)">{{ product.name }}</h3>
-          </div>
-          <p>
+          <h3 class="font-weight-bold">
+                {{ product.name }}
+            </h3>
+          <p style="margin-bottom: 7em;">
             {{
               product.description.length > 50
                 ? product.description.slice(0, 50) + "..."
@@ -53,104 +53,29 @@
           </span>
           <div class="w-100"  v-if="product.in_stock">
                   <div class="d-flex justify-content-between w-100 mt-1" style="gap: 20px;">
-                    <button class="buy-now-btn flex-grow-1" @click="navigateToCart(product)">
+                    <!-- <button class="buy_now_btn btn flex-grow-1 d-flex align-items-center" @click="navigateToCart(product)">
                       <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
                       <span class="arrow-icon">
                         <i class="fas fa-arrow-right"></i>
                       </span>
-                    </button>
+                    </button> -->
                     <button
-                class="add-to-cart flex-grow-1"
+                class="add_to_cart btn flex-grow-1 d-flex align-items-center"
                
                 @click="handleAddToCard(product)"
               >
                 <span
-                  class="px-2"
                   style="font-size: 12px; font-weight: bold;"
                   >{{ $t("general.Add_to_Cart") }}</span
                 >
+                <span class="arrow-icon">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
               </button>
                   </div>
                 </div>
         </div>
         </div>
-
-        <!-- <span v-if="product">
-          <div class="d-inline-flex">
-            <div class="mr-2">
-              <div class="center-img">
-                <img
-                  :src="product.picture"
-                  class="r-image cursor-pointer"
-                  @click="navigateToCart(product)"
-                />
-              </div>
-            </div>
-
-            <div class="flx50">
-              <p class="text">
-                <span
-                  class="title cursor-pointer"
-                  @click="navigateToCart(product)"
-                >
-                  {{ product.name }}
-                </span>
-                <br />
-
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="product.description"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="100"
-                >
-                </read-more>
-                <span class="price  mt-2"> {{ product.price }} FCFA </span>
-              </p>
-            </div>
-          </div>
-          <br />
-
-          <div class="d-flex">
-            <b-badge
-              v-if="!product.in_stock"
-              class="text-center m-auto"
-              show
-              variant="info"
-              >Out of Stock</b-badge
-            >
-          </div>
-
-          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
-            <div v-if="product.in_stock" class="">
-              <BtnCtaMessage
-                :element="product"
-                :isProduct="true"
-                :isBuyNow="true"
-                type="business"
-                :isPremium="product.user_package_name"
-              />
-            </div>
-
-            <div class="ml-2">
-              <b-button
-                :disabled="!product.in_stock"
-                size="sm"
-                v-if="product.user_package_name == 'premium'"
-                variant="primary"
-                @click="handleAddToCard(product)"
-                ><span>
-                  <b-icon icon="cart-plus"></b-icon>
-                  {{ $t("general.cart") }}</span
-                >
-              </b-button>
-            </div>
-          </div>
-
-          <br />
-          <br />
-        </span> -->
       </div>
       </div>
     </div>
@@ -175,7 +100,7 @@
     />
   </div>
 
-  <div v-else class="">
+  <div v-else class="px-3">
     <!-- <login /> -->
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
@@ -191,12 +116,12 @@
     <div v-if="!prodLoader">
       <div class="row">
         <div
-          class="col-lg-3 col-md-6 col-sm-6 mb-4"
+          class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative"
           v-for="(product, index) in guestUserProducts.data.slice(0, 8)"
           :key="index"
         >
-          <div class="card shadow-none m-0 p-0">
-            <div class="image-container mb-2" @click="navigateToCart(product)">
+          <div class="card shadow-none m-0 p-0 h-100">
+            <div class="image-container mb-2" @click="goToDetail(product.id)">
               <v-lazy-image
                 :src="product.picture"
                 :alt="product.name"
@@ -204,7 +129,7 @@
               />
               <div class="position-absolute top-right"></div>
             </div>
-            <div class="content-container">
+            <div class="content-container cursor-pointer" @click="goToDetail(product.id)">
               <div class="stock-status">
                 <span class="text-success" v-if="product.in_stock">{{
                   $t("general.in_stock")
@@ -213,10 +138,10 @@
                   $t("general.out_of_stock")
                 }}</span>
               </div>
-              <h3 class="font-weight-bold" @click="goToDetail(product.id)">
+              <h3 class="font-weight-bold">
                 {{ product.name }}
               </h3>
-              <p>
+              <p style="margin-bottom: 7em;">
                 {{
                   product.description.length > 50
                     ? product.description.slice(0, 50) + "..."
@@ -231,99 +156,22 @@
           <div class="w-100" v-if="product.in_stock">
                   <div class="d-flex justify-content-between w-100 mt-1" style="gap: 10px;">
                     <button
-                class="add-to-cart flex-grow-1"
+                class="add_to_cart flex-grow-1 btn d-flex align-items-center"
+                style="font-size: 12px; font-weight: bold;"
                 
                 @click="handleAddToCard(product)"
               >
-                <span
-                  class="px-2"
-                  style="font-size: 12px; font-weight: bold;"
-                  >{{ $t("general.Add_to_Cart") }}</span
-                >
+              {{ $t("general.Add_to_Cart") }}
+              <span class="arrow-icon">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
               </button>
                   </div>
                 </div>
         </div>
-            <!-- <div class="bottom-info">
-              <span class="price text-black font-weight-bold"
-                >{{ product.price | locationPrice(rate, currencySelected) }}
-              </span>
-
-              <div class="w-100">
-                <div class="row justify-content-between w-100 mt-1">
-                  <button
-                    v-if="product.in_stock"
-                    class="col-lg-6 buy-now-btn"
-                    @click="handleAddToCard(product)"
-                  >
-                    <span
-                      class="font-weight-bold"
-                      style="font-size: 12px !important;"
-                      >{{ $t("general.Add_to_Cart") }}</span
-                    >
-                    <span class="arrow-icon">
-                      <i class="fas fa-arrow-right"></i>
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
-      <!-- <div
-        v-for="(product, index) in guestUserProducts.data"
-        :key="index"
-        class="col-md-3 mb-4"
-      >
-        <span v-if="product">
-          <div class="d-inline-flex">
-            <div class="mr-2">
-              <div class="center-img">
-                <img :src="product.picture" class="r-image cursor-pointer" @click="navigateToCart(product)" />
-              </div>
-            </div>
-
-            <div class="flx50">
-              <p class="text">
-                <span class="title cursor-pointer" @click="navigateToCart(product)">
-                  {{ product.name }}
-                </span>
-                <br />
-
-                <read-more more-str="read more" class="readmore" :text="product.description" link="#"
-                  less-str="read less" :max-chars="100">
-                </read-more>
-                <span class="price  mt-2"> {{ product.price }} FCFA </span>
-              </p>
-            </div>
-          </div>
-          <br />
-
-          <div class="d-flex">
-            <b-badge v-if="!product.in_stock" class="text-center m-auto" show variant="info">Out of Stock</b-badge>
-          </div>
-
-          <div v-if="product.in_stock" class="d-inline-flex float-right mt-2">
-            <div v-if="product.in_stock" class="">
-              <BtnCtaMessage :element="product" :isProduct="true" :isBuyNow="true" type="business"
-                :isPremium="product.user_package_name" />
-            </div>
-
-            <div class="ml-2">
-              <b-button :disabled="!product.in_stock" size="sm" v-if="product.user_package_name == 'premium'"
-                variant="primary" @click="handleAddToCard(product)"><span>
-                  <b-icon icon="cart-plus"></b-icon>
-                  {{ $t("general.cart") }}</span>
-              </b-button>
-            </div>
-          </div>
-
-          <br />
-          <br />
-        </span>
-
-      </div> -->
     </div>
     <!-- pagination -->
     <b-pagination
@@ -583,6 +431,56 @@ export default {
 </script>
 
 <style scoped>
+.arrow-icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.arrow-icon i {
+  color: #ff6200;
+}
+.content-container {
+  padding: 0px 15px;
+}
+.content-container h3 {
+  font-size: 17px !important;
+  line-height: 20px !important;
+  color: #000000;
+  text-align: left !important;
+  cursor: pointer;
+}
+
+.content-container p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  text-align: left !important;
+  color: #000000;
+}
+
+.bottom-info {
+  padding: 2px 15px 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /*  */
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
 .add_to_cart {
   cursor: pointer;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
@@ -651,6 +549,8 @@ export default {
   align-items: flex-start;
   /*  */
   justify-content: space-between;
+  position: absolute;
+  bottom: 0;
 }
 
 .bottom-info {
@@ -744,6 +644,10 @@ input:focus {
 
 .btn:focus {
   outline: none;
+}
+
+.btn {
+  border-radius: 30px;
 }
 
 h6 {
@@ -1000,12 +904,6 @@ h6 {
     height: 160px;
     width: 160px;
     padding: 4px;
-  }
-
-  .btn {
-    padding-top: 6px;
-    height: 38px;
-    width: 80px;
   }
 
   .title {

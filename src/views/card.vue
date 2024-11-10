@@ -42,15 +42,19 @@
                                 : cart_item.product_description
                             }}
                           </div>
-
-                          <div class="d-flex align-items-center justify-content-between mt-3">
-                            <p class="mt-3">
+                          <p class="mt-3 d-block d-sm-none">
+                              <img class="heart" src="assets/images/heart.png" alt="" />
+                              <a href="" class="save">Save</a>
+                            </p>
+                          <div class="d-flex align-items-center justify-content-between mt-3 mb-3">
+                            <p class="mt-3 d-none d-sm-block">
                               <img class="heart" src="assets/images/heart.png" alt="" />
                               <a href="" class="save">Save</a>
                             </p>
                             <input type="number" class="product-quantity numbersize form-control"
                               @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available"
                               :min="1" v-model="cart_item.quantity" />
+                            <button class="btn btn-secondary d-block d-sm-none" @click="removeIconFromCart(cart_item.product_id)">Remove</button>
                           </div>
                         </div>
                       </div>
@@ -67,7 +71,7 @@
                         }}
                       </h6> -->
                         </div>
-                        <img class="cross" src="assets/images/cross.png"
+                        <img class="cross d-none d-sm-block" src="assets/images/cross.png"
                           @click="removeIconFromCart(cart_item.product_id)" alt="cross" />
                       </div>
                     </div>
@@ -519,7 +523,6 @@ export default {
   border: 2px solid #acacac !important;
   border-radius: 5px;
   background-color: #fff !important;
-  margin-left: 50px;
   font-weight: 800;
 }
 

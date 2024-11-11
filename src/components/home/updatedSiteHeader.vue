@@ -48,7 +48,7 @@
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
-        <div v-else></div>
+        <span  v-else class="start-loader"></span>
       </div>
     </div>
 
@@ -150,7 +150,9 @@
                       <i class="fa fa-caret-down"></i>
                     </span>
                   </div>
+                  <span  v-else class="start-loader"></span>
                 </b-nav-item>
+
 
 
               </b-navbar-nav>
@@ -714,6 +716,41 @@ a {
   .border {
     display: flex;
     align-items: center;
+  }
+}
+</style>
+<style scoped>
+.start-loader {
+  width: 45px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 25px;
+  color: #e75c18;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#e75c18 0 0);
+  background:
+    var(--c) 0% 100%,
+    var(--c) 50% 100%,
+    var(--c) 100% 100%;
+  background-size: 20% 43%;
+  animation: l5 1s infinite linear;
+}
+
+@keyframes l5 {
+  20% {
+    background-position: 0% 50%, 50% 100%, 100% 100%
+  }
+
+  40% {
+    background-position: 0% 0%, 50% 50%, 100% 100%
+  }
+
+  60% {
+    background-position: 0% 100%, 50% 0%, 100% 50%
+  }
+
+  80% {
+    background-position: 0% 100%, 50% 100%, 100% 0%
   }
 }
 </style>

@@ -254,7 +254,7 @@ export default {
   },
 
   created() {
-    this.onInit();
+    
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
@@ -265,9 +265,7 @@ export default {
   },
 
   methods: {
-    async onInit() {
-      //this.rate = await convertCurrency()
-    },
+   
     /**
      * This will be ignored on rendering
      * @private

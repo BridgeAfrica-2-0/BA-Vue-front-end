@@ -4,7 +4,7 @@ import { formatNumber, fromNow } from "@/helpers";
 import NotFound from "@/components/NotFoundComponent";
 import NoMoreData from "@/components/businessOwner/PaginationMessage";
 import ClipLoader from "vue-spinner/src/ClipLoader.vue";
-import { watch } from "less";
+import { onInitializer } from "@/helpers"
 
 export { Redis, Pusher } from "./notifications.mixins";
 
@@ -559,7 +559,7 @@ export const LocalisationMixins = {
   data: () => ({
     isGlobal: true
   }),
- 
+
   computed: {
     ...mapGetters({
       countryLocalisation: "localisation/getLocalisationCountry",
@@ -567,7 +567,23 @@ export const LocalisationMixins = {
       currencySelected: "localisation/getSelectedCurrency",
       countries: "localisation/getCountries",
       rate: "localisation/getRate",
+      hasBeenLoad: "localisation/hasBeenLoad",
+      isLoading: "localisation/loading"
     })
+  },
+
+  created() {
+
+    if (!this.hasBeenLoad && !this.isLoading) {
+      onInitializer()
+        .then(() => {
+          console.log('finish initializer')
+          this.$store.dispatch('localisation/startLocalisation')
+        })
+        .catch(err => {
+          console.log("[err]===== in mixins", err)
+        })
+    }
   },
 
   watch: {

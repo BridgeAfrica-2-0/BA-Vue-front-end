@@ -99,6 +99,7 @@
     "vue-spinner": "^1.0.4",
     "vue-star-rating": "^1.7.0",
     "vue-textarea-autosize": "^1.1.1",
+    "vue-upload-multiple-image": "^1.1.6",
     "vue-youtube": "^1.4.0",
     "vue2-google-maps": "^0.10.7",
     "vue2-loading-bar": "^0.0.1",

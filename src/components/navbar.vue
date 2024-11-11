@@ -1,7 +1,7 @@
 <template>
   <header class="">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded bg-white">
-      <div class="container-fluid">
+      <div class="container-fluid position-relative">
         <div class="col-md-12 col-lg-3 col-xl-3">
           <span class="d-block d-lg-none">
             <b-icon icon="house-fill" style="float: left" font-scale="1.5; margin-top:5px" variant="primary"></b-icon>
@@ -11,6 +11,17 @@
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
         </div>
+          <div class="d-block d-lg-none">
+            <div style="cursor: pointer; position: absolute; left: 50%; top: 0;" @click="navigateToCart">
+              <span class="cart-icon position-relative" style="color:#455a64">
+                <b-icon icon="cart4" class="icon-size"></b-icon>
+                <span v-if="cartCount > 0" class="badge badge-pill badge-danger"
+                  style="top: 0; right: 0;">
+                  {{ cartCount }}
+                </span>
+              </span>
+            </div>
+          </div>
 
         <div class="col-lg-5 col-xl-5">
           <form class="d-block d-lg-none">
@@ -73,7 +84,7 @@
               @click="togglenav()" :class="{ togglebtn: isActive }">
               <fas-icon class="primary search" :icon="['fas', 'bars']" />
             </button>
-            <div style="float: left; cursor: pointer;" class="mt-2" @click="navigateToCart">
+            <div style="float: left; cursor: pointer;" class="mt-2 d-none d-lg-block" @click="navigateToCart">
               <span class="cart-icon position-relative" style="color:#455a64">
                 <b-icon icon="cart4" class="icon-size"></b-icon>
                 <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"

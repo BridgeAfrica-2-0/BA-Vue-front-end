@@ -264,7 +264,7 @@ export default {
   // props: ["product"],
   data() {
     return {
-      product: null,
+      productRequest: null,
       startRequest: false,
       requestModal: false,
       newProduct: {},
@@ -344,14 +344,14 @@ export default {
 
   methods: {
     requestToWhareHouse(product) {
-      this.product=product
+      this.productRequest=product
       this.requestModal = true
     },
 
     onSendRequest() {
       this.startRequest = true
       const data = {
-        "product_id": this.product.id,
+        "product_id": this.productRequest.id,
         "quantity": this.newProduct.quantity,
         "length": this.newProduct.length,
         "width": this.newProduct.width,

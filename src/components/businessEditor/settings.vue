@@ -2,13 +2,7 @@
   <div>
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <div class="d-block d-md-none" style="margin-top: 30px">
-        <ly-tab
-          v-model="seetings_id"
-          :items="items"
-          :options="options"
-          class="center-ly"
-          vertical
-        >
+        <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical>
         </ly-tab>
       </div>
 
@@ -37,48 +31,45 @@
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs
-              lazy
-              pills
-              v-model="tabIndex"
-              vertical
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <!-- <b-tab title="General">
                 <b-card-text> <General /> </b-card-text
               ></b-tab> -->
 
               <b-tab title="Notification">
-                <b-card-text> <Notification /> </b-card-text
-              ></b-tab>
+                <b-card-text>
+                  <Notification />
+                </b-card-text></b-tab>
 
               <b-tab title="Business Info">
-                <b-card-text> <Info /> </b-card-text
-              ></b-tab>
+                <b-card-text>
+                  <Info />
+                </b-card-text></b-tab>
 
               <!-- <b-tab title="Business Roles">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab> -->
 
               <b-tab :title="$t('search.Insight')">
-                <b-card-text> <Insight /> </b-card-text
-              ></b-tab>
+                <b-card-text>
+                  <Insight />
+                </b-card-text></b-tab>
 
-              <!-- <b-tab :title="$t('general.Pending_Post')">
+              <b-tab :title="$t('general.Pending_Post')">
                 <b-card-text> <Pending /> </b-card-text
-              ></b-tab> -->
-
-              <!-- <b-tab title="Payment">
-                <b-card-text> <Payment /> </b-card-text
-              ></b-tab> -->
-
-              <!-- <b-tab title="Account Type">
-                <b-card-text> <Website /> </b-card-text
-              ></b-tab> -->
-              <b-tab title="Blocking">
-                <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
+
+              <b-tab title="Payment">
+                <b-card-text> <Payment /> </b-card-text
+              ></b-tab>
+
+              <b-tab title="Account Type">
+                <b-card-text> <Website /> </b-card-text
+              ></b-tab>
+              <b-tab title="Blocking">
+                <b-card-text>
+                  <Blocking />
+                </b-card-text></b-tab>
             </b-tabs>
           </div>
         </div>
@@ -183,6 +174,7 @@ export default {
 .border-none {
   border: none;
 }
+
 .card-header {
   background-color: white;
 }
@@ -229,11 +221,13 @@ export default {
   align-content: right;
   float: right;
 }
+
 .a-text {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .settings {
   margin-left: 90%;
   position: relative;

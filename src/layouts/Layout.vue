@@ -42,23 +42,29 @@
             </b-dropdown>
           </div>
 
-          <!-- <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
+          <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
             @click="() => isOpen = true">
             <span style="font-size: 14px; color: #000; padding: 0 15px;">
               <img :src="countrySelected?.flag" style="width: 18px; height: 18px;" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
               <i class="fa fa-caret-down"></i>
             </span>
-          </div> -->
-          <span   class="load"></span>
+          </div>
+          <span v-else class="load"></span>
         </div>
       </div>
 
-
+      <div v-if="countries.length" class="language-selection  hidden-countries gray" data-toggle="modal"
+        data-target="#settings" @click="() => isOpen = true">
+        <span style="font-size: 14px; color: #000; padding: 0 15px;">
+          <img :src="countrySelected?.flag" style="height: 17px; width: 18px;" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+          <i class="fa fa-caret-down"></i>
+        </span>
+      </div>
       <settings-contries :open="isOpen">
 
       </settings-contries>
 
-     
+
     </slot>
     <slot name="main"></slot>
     <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
@@ -360,9 +366,10 @@ a {
 }
 
 @media (min-width: 992px) {
-  .poslang {
-    /* margin-bottom: 10px; */
-  }
+  .gray {
+  background-color: #dddada !important;
+  display: none !important
+}
 
   .navbar-expand-lg {
     padding-right: 0px;
@@ -499,6 +506,12 @@ a {
   .media-icons i {
     margin-left: 10px;
   }
+
+  .gray {
+    background-color: #dddada !important;
+    display: block !important;
+    margin-right: 10px !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -527,6 +540,12 @@ a {
   .media-icons i {
     margin-left: 0;
     margin-right: 10px;
+  }
+
+  .gray {
+    background-color: #dddada !important;
+    display: block !important;
+    margin-right: 0 !important;
   }
 }
 

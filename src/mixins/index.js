@@ -583,6 +583,8 @@ export const LocalisationMixins = {
         .catch(err => {
           console.log("[err]===== in mixins", err)
         })
+    }else {
+      this.onInitLocalisation()
     }
   },
 

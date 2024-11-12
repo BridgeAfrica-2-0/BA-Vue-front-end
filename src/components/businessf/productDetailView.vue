@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="container-fluid">
-      <Nav
-        :credentials.sync="searchParams"
-        @updateSearchKeyword="updateSearchKeyword"
-        id="top"
-      >
-        <!-- <template v-slot:button>
+  <base-layout top="25">
+    <template v-slot:main>
+      <div>
+        <div class="container-fluid">
+          <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
+            <!-- <template v-slot:button>
           <Button
             media="desktop"
             @click.native="strategY['all']"
@@ -41,7 +39,7 @@
           />
         </template>
 
-        <template v-slot:mobile>
+<template v-slot:mobile>
           <Button
             media="mobile"
             @click.native="strategY['all']"
@@ -77,8 +75,8 @@
             v-if="[2, 3].includes(selectedId) && !islogin"
           />
         </template> -->
-      </Nav>
-      <!-- <div class="px-4 mt-4">
+          </Nav>
+          <!-- <div class="px-4 mt-4">
         <SubNav
           @onChangeCategoryName="(val) => (categoryName = val)"
           @category="getCategory"
@@ -90,174 +88,116 @@
           @activate:matching:category="(val) => (activateMatching = val)"
         />
       </div> -->
-      <div class="mt-4">
-        <div class="product-page row">
-          <!-- Galerie d'images -->
-          <div class="col-md-5">
-            <ProductImages
-              :images="[
-                {
-                  src: marketDetails.picture,
-                  alt: marketDetails.name,
-                },
-              ]"
-            />
-          </div>
+          <div class="mt-4">
+            <div class="product-page row">
+              <!-- Galerie d'images -->
+              <div class="col-md-5">
+                <ProductImages :images="[
+                  {
+                    src: marketDetails.picture,
+                    alt: marketDetails.name,
+                  },
+                ]" />
+              </div>
 
-          <!-- Informations produit -->
-          <div class="col-md-7">
-            <h3 class="text-black p-name">{{ marketDetails.name }}</h3>
-            <div class="stock-status">
-              <span
-                class="text-success font-weight-bold"
-                v-if="marketDetails.in_stock"
-                >{{ $t("general.in_stock") }}</span
-              >
-              <span class="text-danger" v-else>{{
-                $t("general.out_of_stock")
-              }}</span>
-            </div>
-            <div>
-              <label for="" class="text-black"
-                >{{ $t("general.availability") }}:</label
-              >
-              <span class="ml-2"
-                >{{ $t("general.only") }} {{ marketDetails.quantity }}
-                <span class="" v-if="marketDetails.in_stock">{{
-                  $t("general.in_stock")
-                }}</span>
-                <span class="text-danger" v-else>{{
-                  $t("general.out_of_stock")
-                }}</span></span
-              >
-            </div>
+              <!-- Informations produit -->
+              <div class="col-md-7">
+                <h3 class="text-black p-name">{{ marketDetails.name }}</h3>
+                <div class="stock-status">
+                  <span class="text-success font-weight-bold" v-if="marketDetails.in_stock">{{ $t("general.in_stock")
+                    }}</span>
+                  <span class="text-danger" v-else>{{
+                    $t("general.out_of_stock")
+                    }}</span>
+                </div>
+                <div>
+                  <label for="" class="text-black">{{ $t("general.availability") }}:</label>
+                  <span class="ml-2">{{ $t("general.only") }} {{ marketDetails.quantity }}
+                    <span class="" v-if="marketDetails.in_stock">{{
+                      $t("general.in_stock")
+                      }}</span>
+                    <span class="text-danger" v-else>{{
+                      $t("general.out_of_stock")
+                      }}</span></span>
+                </div>
 
-            <div class="">
-              {{
-                marketDetails.description.length > 400
-                  ? marketDetails.description.slice(0, 400) + "..."
-                  : marketDetails.description
-              }}
-              <!-- {{currencySelected}} -->
-            </div>
+                <div class="">
+                  {{
+                    marketDetails.description.length > 400
+                      ? marketDetails.description.slice(0, 400) + "..."
+                      : marketDetails.description
+                  }}
+                  <!-- {{currencySelected}} -->
+                </div>
 
-            <hr class="my-3" />
+                <hr class="my-3" />
 
-            <!-- Prix -->
-            <div class="pricing">
-              <!-- <div class="text-black" style="font-size: 14px;">
+                <!-- Prix -->
+                <div class="pricing">
+                  <!-- <div class="text-black" style="font-size: 14px;">
                 FCFA (inc. of all taxes)
               </div> -->
-              <div>
-                <span class="price">{{
-                  marketDetails.price | locationPrice(rate, currencySelected)
-                }}</span>
-              </div>
-            </div>
+                  <div>
+                    <span class="price">{{
+                      marketDetails.price | locationPrice(rate, currencySelected)
+                      }}</span>
+                  </div>
+                </div>
 
-            <div class="d-flex align-items-center mt-4">
-              <!-- Sélection de la quantité -->
-              <div class="quantity-selector">
-                <!-- <div>
+                <div class="d-flex align-items-center mt-4">
+                  <!-- Sélection de la quantité -->
+                  <div class="quantity-selector">
+                    <!-- <div>
                   <QuantitySelector v-model="quantity" :min="1" :max="10" />
                 </div> -->
+                  </div>
+                  <button class="btn btn-primary" @click="navigateToCart">
+                    {{ $t("general.buy_now") }}
+                  </button>
+                  <button class="btn btn-outline-primary font-weight-bold ml-3" @click="handleAddToCard()">
+                    {{ $t("general.Add_to_Cart") }}
+                  </button>
+                </div>
               </div>
-              <button class="btn btn-primary" @click="navigateToCart">
-                {{ $t("general.buy_now") }}
-              </button>
-              <button
-                class="btn btn-outline-primary font-weight-bold ml-3"
-                @click="handleAddToCard()"
-              >
-                {{ $t("general.Add_to_Cart") }}
-              </button>
             </div>
-          </div>
-        </div>
 
-        <div class="container" style="margin-top: 4em;">
-          <ul
-            class="nav nav-pills mb-3 justify-content-around"
-            id="pills-tab"
-            role="tablist"
-          >
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link active text-capitalize"
-                id="pills-home-tab"
-                data-toggle="pill"
-                data-target="#pills-home"
-                type="button"
-                role="tab"
-                aria-controls="pills-home"
-                aria-selected="true"
-              >
-                {{ $t("general.description") }}
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="pills-profile-tab"
-                data-toggle="pill"
-                data-target="#pills-profile"
-                type="button"
-                role="tab"
-                aria-controls="pills-profile"
-                aria-selected="false"
-              >
-                Specification
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="pills-contact-tab"
-                data-toggle="pill"
-                data-target="#pills-contact"
-                type="button"
-                role="tab"
-                aria-controls="pills-contact"
-                aria-selected="false"
-              >
-                Reviews
-              </button>
-            </li>
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div
-              class="tab-pane fade show active"
-              id="pills-home"
-              role="tabpanel"
-              aria-labelledby="pills-home-tab"
-            >
-              <p>
-                {{ marketDetails.description }}
-              </p>
+            <div class="container" style="margin-top: 4em;">
+              <ul class="nav nav-pills mb-3 justify-content-around" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active text-capitalize" id="pills-home-tab" data-toggle="pill"
+                    data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                    {{ $t("general.description") }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile"
+                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                    Specification
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact"
+                    type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    Reviews
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                  <p>
+                    {{ marketDetails.description }}
+                  </p>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+              </div>
             </div>
-            <div
-              class="tab-pane fade"
-              id="pills-profile"
-              role="tabpanel"
-              aria-labelledby="pills-profile-tab"
-            ></div>
-            <div
-              class="tab-pane fade"
-              id="pills-contact"
-              role="tabpanel"
-              aria-labelledby="pills-contact-tab"
-            ></div>
           </div>
         </div>
+       
       </div>
-    </div>
-    <div class="mt-4" style="margin-top: 20em !important;">
-      <SiteFooter />
-      <div class="bottom-bar">
-        <span>©2021 Bridge Africa</span>
-      </div>
-    </div>
-  </div>
+    </template>
+  </base-layout>
 </template>
 <script>
 import ProductImages from "./productImages.vue";
@@ -266,11 +206,14 @@ import { LocalisationMixins } from "@/mixins";
 // import QuantitySelector from "./QuantitySelector.vue";
 import SiteFooter from "../home/updatedSiteFooter.vue";
 import { mapGetters, mapActions, mapMutations } from "vuex";
+
+import BaseLayout from "@/layouts/Layout"
+
 export default {
   mixins: [LocalisationMixins],
   components: {
+    BaseLayout,
     Nav,
-    SiteFooter,
     ProductImages,
     // QuantitySelector,
   },
@@ -281,7 +224,7 @@ export default {
   },
 
   filters: {
-    locationPrice: function(ev, rate, currency) {
+    locationPrice: function (ev, rate, currency) {
       const symbol = currency?.name ? currency?.name : "XAF";
       return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`;
     },
@@ -347,16 +290,19 @@ export default {
   font-weight: bold;
   font-size: 1.2em !important;
 }
+
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: #e75c18 !important;
   background-color: transparent !important;
   border-bottom: 2px solid #e75c18 !important;
   border-radius: 0;
 }
+
 .gap-25 {
   gap: 25px;
 }
+
 .checked {
   color: orange;
 }

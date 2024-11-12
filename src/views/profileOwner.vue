@@ -2,7 +2,7 @@
   <base-layout>
     <template v-slot:main>
       <div class="mx-auto" style="overflow-x: clip;">
-        <navbar></navbar>
+      
         <head-page></head-page>
         <div class="container text-justify corps prof center-content wahala">
           <b-row class="">
@@ -63,7 +63,6 @@ export default {
     BaseLayout,
     Bussiness,
     Following,
-    navbar,
     headPage,
     Post,
     About,

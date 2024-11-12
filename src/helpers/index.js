@@ -1,5 +1,6 @@
 import moment from "moment";
 import axios from "axios";
+import { faQq } from "@fortawesome/free-brands-svg-icons";
 
 export const getRootSchemeForRedis = () =>
   axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8);
@@ -147,7 +148,7 @@ export const getRate = async (fromCurrency, toCurrency) => {
   let currencyCheck;
   let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;
   if (userCountry?.country) {
-    currencyCheck = CurrencyMap[userCountry?.country];
+    currencyCheck = currencyMap[userCountry?.country];
   }
   if (currencyCheck === fromCurrency) {
     let conversionRate = localStorage.getItem("conversionRate") ?? null;
@@ -168,43 +169,40 @@ export const getRate = async (fromCurrency, toCurrency) => {
   }
 }
 
+export let currencyMap = []
 
-export const  axiosWithRetry = async (options, retryCount = 3, retryDelay = 4000) => {
-  for (let attempt = 0; attempt < retryCount; attempt++) {
+async function fetchDataWithRetry(url, maxRetries = 3) {
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
     try {
-      const response = await axios(options);
-      return response; // If the request succeeds, return the response
+      const response = await axios.get(url);
+      return response.data;
     } catch (error) {
-      if (attempt < retryCount - 1) {
-        // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, retryDelay));
-      } else {
-        // Throw the error if it's the last attempt
-        throw error;
+      attempt++;
+      console.error(`Attempt ${attempt} failed. Retrying...`);
+      if (attempt >= maxRetries) {
+        console.error('All retry attempts failed.');
+        throw error; // Lance une erreur après le dernier échec
       }
     }
   }
-};
-let CurrencyMap = null
+}
 
-export const onInitializer = async ()  => {
 
-  axiosWithRetry({
-    method: 'get',
-    url: 'https://restcountries.com/v3.1/all',
-  })
-  const response = await axiosWithRetry({
-    method: 'get',
-    url: 'https://restcountries.com/v3.1/all',
-  })
+export const onInitializer = () => {
 
-  console.log(response.data)
-  CurrencyMap = response.data.map(country => ({
-    "name": country.name.common,
-    "sigle": country.cca2,
-    "currency": country.currencies,
-    "flag": country.flags.png,
-  }))
+  console.log('start initializer')
+  return axios.get('https://restcountries.com/v3.1/all')
+    .then(response => {
+      console.log("==================================")
+      currencyMap = response.data.map(country => ({
+        "name": country.name.common,
+        "sigle": country.cca2,
+        "currency": country.currencies,
+        "flag": country.flags.png,
+      }))
+    })
 }
 
 export const convertCurrency = async (defaultCurrency = null) => {
@@ -213,7 +211,7 @@ export const convertCurrency = async (defaultCurrency = null) => {
     let userCurrency = null
     if (!defaultCurrency) {
       userCountry = await checkCountryLocalisation();
-      userCurrency = CurrencyMap[userCountry] || 'XAF';
+      userCurrency = currencyMap[userCountry] || 'XAF';
     } else {
       userCurrency = defaultCurrency
     }
@@ -240,7 +238,7 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       if (!userCountry?.country) {
         userCountry = await checkCountry();
       }
-      userCurrency = CurrencyMap[userCountry?.country];
+      userCurrency = currencyMap[userCountry?.country];
       if (!userCurrency) {
         userCurrency = 'USD'
       }
@@ -255,5 +253,3 @@ export const convertToCurrency = async (defaultCurrency = null) => {
   }
 }
 
-
-export const currencyMap = () => CurrencyMap

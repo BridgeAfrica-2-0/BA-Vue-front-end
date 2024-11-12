@@ -61,7 +61,7 @@
             </div>
           </div>
           <div v-else class="row">
-            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative">
+            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative">
               <div class="card shadow-none p-0 h-100">
                 <div class="image-container mb-2" @click="goToDetail(product.id)">
                 <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />

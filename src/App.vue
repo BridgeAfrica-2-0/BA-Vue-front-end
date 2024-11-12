@@ -81,9 +81,16 @@ export default {
     this.onInit();
   },
   methods: {
-    async onInit() {
-      await onInitializer()
-      this.$store.dispatch('localisation/startLocalisation')
+    onInit() {
+      this.$store.commit('localisation/setLoading', true)
+      onInitializer()
+        .then(() => {
+          console.log('finish initializer')
+          this.$store.dispatch('localisation/startLocalisation')
+        })
+        .catch(err => {
+          console.log("[err]===== in app.vue", err)
+        })
     },
 
     onWindowLoad() {
@@ -97,7 +104,7 @@ export default {
       this.$store.dispatch("auth/hideAuthModal");
     },
 
- 
+
     loadfinish() {
       this.showblock = false;
       this.showfadde = false;

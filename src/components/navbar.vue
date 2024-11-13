@@ -442,6 +442,7 @@ export default {
     // NavBarNotifications
   },
   props: {
+    
     credentials: {
       type: Object,
       default: function () {

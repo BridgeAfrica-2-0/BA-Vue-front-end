@@ -63,7 +63,7 @@
       <settings-contries :open="isOpen">
 
       </settings-contries>
-      <nav-bar></nav-bar>
+      <nav-bar v-if="hiddenSearch"></nav-bar>
 
     </slot>
     <slot name="main"></slot>
@@ -93,6 +93,10 @@ export default {
     SiteFooter
   },
   props: {
+    hiddenSearch: {
+      type: Boolean,
+      default: true
+    },
     hasTranslation: {
       type: Boolean,
       default: false

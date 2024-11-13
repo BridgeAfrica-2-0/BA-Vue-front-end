@@ -106,7 +106,7 @@
 
           <!-- Informations produit -->
           <div class="col-md-7">
-            <h3 class="text-black">{{ marketDetails.name }}</h3>
+            <h3 class="text-black p-name">{{ marketDetails.name }}</h3>
             <div class="stock-status">
               <span
                 class="text-success font-weight-bold"
@@ -378,5 +378,12 @@ export default {
 
 .btn {
   height: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .p-name {
+    font-size: 1.2em;
+    margin-top: 1.5em;
+  }
 }
 </style>

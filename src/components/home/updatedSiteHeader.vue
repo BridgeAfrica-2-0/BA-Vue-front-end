@@ -73,12 +73,6 @@
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
               </router-link>
-              <span v-if="islogin">
-                <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                  $t("general.dashboard")
-                }}</router-link>
-              </span>
-              <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
 
             </div>
@@ -119,6 +113,14 @@
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
+                <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
+                <span class="nav-span">
+                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                    $t("general.dashboard")
+                    }}</router-link>
+                </span>
+                <hr class="mobile navstyle" />
+              </b-nav-item>
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
                     <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'
@@ -151,6 +153,11 @@
                     </span>
                   </div>
                 </b-nav-item>
+
+              <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
+                <span class="nav-span">{{ $t("general.Logout") }}</span>
+                <hr class="mobile navstyle" />
+              </b-nav-item>
 
 
               </b-navbar-nav>

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <div class="row justify-content-center">
     <div class="px-3">
       <ul class="list-unstyled">
         <li v-for="(image, index) in images" :key="index" class="mb-3">

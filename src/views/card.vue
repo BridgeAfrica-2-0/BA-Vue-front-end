@@ -2,7 +2,7 @@
   <base-layout :top="30">
     <template v-slot:main>
       <div class="bg-white">
-        <navbar />
+        <!-- <navbar /> -->
 
         <div class="cart-wrapper container" style="margin-bottom: 300px;">
           <h1 class="mt-5 my-bag">{{ $t("general.My_Cart") }} ({{ (cart?.data[0]?.cartItems) ? cart?.data[0]?.cartItems : 0 }})</h1>
@@ -82,7 +82,7 @@
               <hr class="dotted-hr" />
 
               <h1 class="recommended-for-you" v-if="products.length > 0">{{ $t("general.Recommended_For_You") }}</h1>
-              <splide v-if="products.length > 0" :options="options" class="r-image">
+              <splide v-if="products.length > 0" :options="options">
                 <splide-slide v-for="(product, index) in products" :key="index">
                   <div class="crtv-bans">
                     <img :src="product.picture" alt="Product Image" class="slide-img" />
@@ -104,6 +104,7 @@
   </base-layout>
 </template>
 <script>
+
 import navbar from "@/components/navbar.vue";
 import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import Skeleton from "../components/skeleton";
@@ -113,7 +114,7 @@ import { checkCountry, convertToCurrency } from "../helpers";
 
 import BaseLayout from "@/layouts/Layout"
 export default {
-  components: { navbar, OrderSummary, Skeleton, BaseLayout },
+  components: {  OrderSummary, Skeleton, BaseLayout },
   data() {
     return {
       currentPage: 1,
@@ -136,7 +137,7 @@ export default {
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: {
         type: 'loop',
-        perPage: 3,
+        perPage: 2,
         perMove: 1,
         arrows: true,
         pagination: false,

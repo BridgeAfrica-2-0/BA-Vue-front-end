@@ -48,7 +48,7 @@
             <i class="fa fa-caret-down"></i>
           </span>
         </div>
-        <div v-else></div>
+        <span v-else class="start-loader"></span>
       </div>
     </div>
 
@@ -68,11 +68,17 @@
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
-                }}</router-link>
+                  }}</router-link>
               </span>
               <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
                 <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
               </router-link>
+              <span v-if="islogin">
+                <router-link class="inactive" :to="{ name: 'dashboard' }">{{
+                  $t("general.dashboard")
+                  }}</router-link>
+              </span>
+              <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
 
             </div>
@@ -104,6 +110,17 @@
             <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav class="mr-auto">
+                <b-nav-item class="ml-md-1 text-left w-100 gray">
+
+                  <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal"
+                    data-target="#settings" @click="() => isOpen = true">
+                    <span style="font-size: 14px; color: #000; padding: 0 15px;">
+                      <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                  </div>
+                  <span v-else class="start-loader"></span>
+                </b-nav-item>
                 <b-nav-item class="text-center">
                   <span class="font-arvo nav-span">
                     <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'Bridge-home'
@@ -128,13 +145,6 @@
                   </span>
                   <hr class="mobile navstyle" />
                 </b-nav-item>
-                <b-nav-item class="ml-md-1 text-center">
-                  <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
-                      ">{{ $t("general.Contact_Us") }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
 
                 <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
@@ -144,6 +154,14 @@
                   <hr class="mobile navstyle" />
                 </b-nav-item>
 
+                <b-nav-item class="ml-md-1 text-center">
+                  <span class="font-arvo nav-span">
+                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
+                      ">{{ $t("general.Contact_Us") }}</router-link>
+                  </span>
+                  <hr class="mobile navstyle" />
+                </b-nav-item>
+                <!-- 
                 <b-nav-item class="ml-md-1 text-center">
                   <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal" data-target="#settings"
                     @click="() => isOpen = true">
@@ -152,7 +170,8 @@
                       <i class="fa fa-caret-down"></i>
                     </span>
                   </div>
-                </b-nav-item>
+                  <span  v-else class="start-loader"></span>
+                </b-nav-item> -->
 
               <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
                 <span class="nav-span">{{ $t("general.Logout") }}</span>
@@ -197,7 +216,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
                     $t("general.Sign_Up")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -206,7 +225,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'Login' }">{{
                     $t("general.Login")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -214,7 +233,7 @@
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
-                    }}</router-link>
+                  }}</router-link>
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
@@ -519,6 +538,7 @@ a {
   }
 }
 
+
 .nav-span {
   font-size: 14px;
   font-weight: 500;
@@ -615,6 +635,10 @@ a {
     margin-right: 10px;
     margin-left: -10px;
   }
+
+  .bg-customer {
+    background-color: red !important
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -624,6 +648,16 @@ a {
 
   .language-selection.hidden-countries {
     display: none !important
+  }
+
+
+.gray {
+  background-color: #dddada !important;
+  display: none !important
+}
+
+  .bg-customer {
+    background-color: #f8f8f8 !important
   }
 
   .mobile {
@@ -636,6 +670,10 @@ a {
     padding: 5px 20px;
   }
 
+  .bg-customer {
+    display: none
+  }
+
   .contact-info span {
     margin-right: 15px;
   }
@@ -645,7 +683,7 @@ a {
     margin-left: 10px;
   }
 
-  
+
 }
 
 @media (max-width: 576px) {
@@ -657,6 +695,15 @@ a {
 
   .hidden-countries {
     display: block !important
+  }
+
+  .gray {
+  background-color: #dddada !important;
+  display: block !important
+}
+
+  .bg-customer {
+    background-color: red !important
   }
 
   .contact-info {
@@ -721,6 +768,41 @@ a {
   .border {
     display: flex;
     align-items: center;
+  }
+}
+</style>
+<style scoped>
+.start-loader {
+  width: 45px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 25px;
+  color: #e75c18;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#e75c18 0 0);
+  background:
+    var(--c) 0% 100%,
+    var(--c) 50% 100%,
+    var(--c) 100% 100%;
+  background-size: 20% 43%;
+  animation: l5 1s infinite linear;
+}
+
+@keyframes l5 {
+  20% {
+    background-position: 0% 50%, 50% 100%, 100% 100%
+  }
+
+  40% {
+    background-position: 0% 0%, 50% 50%, 100% 100%
+  }
+
+  60% {
+    background-position: 0% 100%, 50% 0%, 100% 50%
+  }
+
+  80% {
+    background-position: 0% 100%, 50% 100%, 100% 0%
   }
 }
 </style>

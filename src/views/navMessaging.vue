@@ -2,7 +2,6 @@
   <base-layout top="15">
     <template v-slot:main>
       <div>
-        <Navbar />
         <b-container class="wahala">
           <!-- selected Chat  -->
 
@@ -1333,7 +1332,7 @@ import BaseLayout from "@/layouts/Layout"
 
 export default {
   components: {
-    Navbar,
+
     EmojiPicker,
     VuePerfectScrollbar,
     BaseLayout

@@ -2,8 +2,6 @@
   <base-layout :show-footer="false">
     <template v-slot:main>
       <div style="overflow-x: hidden" class="dashboard">
-        <navbar></navbar>
-
         <div class="main row">
           <div class="sidebar d-none d-xl-block">
             <SideBar />
@@ -157,7 +155,6 @@ export default {
     // EmptyBusiness,
     // Profile,
 
-    Navbar
     // mapbox
   },
 

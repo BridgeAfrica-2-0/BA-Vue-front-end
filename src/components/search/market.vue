@@ -16,7 +16,7 @@
         <div
         v-for="(product, index) in products.data"
         :key="index"
-        class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative"
+        class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative"
       >
         <div class="card shadow-none p-0 h-100">
           <div class="image-container mb-2" @click="goToDetail(product.id)">
@@ -116,7 +116,7 @@
     <div v-if="!prodLoader">
       <div class="row">
         <div
-          class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative"
+          class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative"
           v-for="(product, index) in guestUserProducts.data.slice(0, 8)"
           :key="index"
         >
@@ -206,6 +206,7 @@ import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import Skeleton from "@/components/skeleton";
 import VLazyImage from "v-lazy-image/v2";
 
+
 import { LocalisationMixins } from "@/mixins";
 export default {
   mixins: [LocalisationMixins],
@@ -254,7 +255,7 @@ export default {
   },
 
   created() {
-    this.onInit();
+    
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
@@ -265,9 +266,7 @@ export default {
   },
 
   methods: {
-    async onInit() {
-      //this.rate = await convertCurrency()
-    },
+   
     /**
      * This will be ignored on rendering
      * @private

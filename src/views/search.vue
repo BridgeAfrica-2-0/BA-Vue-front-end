@@ -1,5 +1,5 @@
 <template>
-  <base-layout>
+  <base-layout :hidden-search="false">
     <template v-slot:main>
       <div style="" class="searchpage bg-white">
         <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">

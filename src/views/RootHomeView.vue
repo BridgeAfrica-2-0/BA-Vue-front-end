@@ -61,7 +61,7 @@
             </div>
           </div>
           <div v-else class="row">
-            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="col-lg-3 col-md-6 col-sm-6 mb-4 position-relative">
+            <div v-for="(product, index) in products.slice(0, 8)" :key="index" class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative">
               <div class="card shadow-none p-0 h-100">
                 <div class="image-container mb-2" @click="goToDetail(product.id)">
                 <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
@@ -457,7 +457,7 @@
     </section>
 
     <section class="p-0 m-0 quotation-form-mobile">
-      <div class="container mt-0" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+      <div class="container mt-4" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
         <div class="row mt-0">
           <div class="text-center">
             <h3> {{ $t("general.looking_for_something_special") }} ?</h3>
@@ -551,12 +551,12 @@
     </section>
 
     <!-- background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%); -->
-    <section style="background-color: white;" class="tailor-section">
-      <div class="container pt-5 pb-5 pl-lg-0 pr-lg-0 border-class" data-aos="fade-left" data-aos-offset="70px"
+    <section style="background-color: white;" class="tailor-section p-0 mt-4 container">
+      <div class="border-class pb-4" data-aos="fade-left" data-aos-offset="70px"
         data-aos-duration="1500">
-        <div class="row ">
-          <div class="col-md-6 p-0 tailor-content">
-            <div class="">
+        <div class="row">
+          <div class="col-md-6 tailor-content px-4">
+            <div class="pl-4">
               <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;">
                 <h3>
                   <span> {{ $t("general.Tailor") }} </span>
@@ -580,7 +580,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 mt-4" style="display: flex; justify-content: center;">
             <div class="hire-div">
               <video width="100%" style="object-fit:contain; border-radius: 10px;  border-radius:10px" controls
                 poster="assets/home/new_hire.png">
@@ -591,9 +591,10 @@
         </div>
       </div>
     </section>
+
     <section class="bg-whitee network camroon-focus-desktop">
       <div class="container row  mt-3" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-        <div class="col-2 mt-5">
+        <div class="col-lg-4 col-md-6 mt-5">
           <div class="card-container">
             <div class="card">
               <div class="card-content">
@@ -613,10 +614,10 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-3 pr-0">
+                  <div class="col-4 pr-0">
                     <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon" />
                   </div>
-                  <div class="col-9 card-padding">
+                  <div class="col-8 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage pl-1">500+</span>
                       <span class="text">{{ $t("general.deals_globally") }}</span>
@@ -658,11 +659,11 @@
             </div>
           </div>
         </div>
-        <div class="col-5 mt-5">
+        <div class="col-lg-4 col-md-6 mt-5">
           <v-lazy-image src="/assets/home/new_globe.png" alt="" />
         </div>
 
-        <div class="col-5 pl-5 mt-5">
+        <div class="col-lg-4 col-md-6 mt-5">
           <div class="row">
             <div class="col-12 d-flex align-items-center pl-0">
               <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img" />
@@ -750,10 +751,10 @@
               <div class="card">
                 <div class="card-content">
                   <div class="row">
-                    <div class="col-3 pr-0">
+                    <div class="col-4 pr-0">
                       <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon" />
                     </div>
-                    <div class="col-9 card-padding">
+                    <div class="col-8 card-padding">
                       <div class="d-flex flex-column">
                         <span class="percentage pl-1">500+</span>
                         <span class="text">{{ $t("general.deals_globally") }}</span>
@@ -1544,6 +1545,22 @@ export default {
   line-height: 36px !important;
 }
 
+.statistics {
+  font-size: 25px;
+  font-weight: normal !important;
+  color: black !important;
+  line-height: 40px !important;
+}
+
+@media (max-width: 500px) {
+  .market-heading {
+    font-size: 20px !important;
+  }
+  .statistics {
+    font-size: 18px !important;
+  }
+}
+
 .create-your-shop {
   height: 30px !important;
   width: 45px;
@@ -1571,12 +1588,6 @@ export default {
   margin-left: 3px;
   margin-top: -4px;
 } */
-.statistics {
-  font-size: 25px !important;
-  font-weight: normal !important;
-  color: black !important;
-  line-height: 40px !important;
-}
 
 .logo-img {
   width: 60px !important;

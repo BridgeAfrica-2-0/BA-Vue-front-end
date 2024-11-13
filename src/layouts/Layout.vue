@@ -49,168 +49,22 @@
               <i class="fa fa-caret-down"></i>
             </span>
           </div>
-          <div v-else></div>
+          <span v-else class="load"></span>
         </div>
       </div>
 
-      <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal"
+      <div v-if="countries.length" class="language-selection  hidden-countries gray" data-toggle="modal"
         data-target="#settings" @click="() => isOpen = true">
         <span style="font-size: 14px; color: #000; padding: 0 15px;">
-          <img :src="countrySelected?.flag" style="height: 12px;width: 20px;" /> &nbsp; &nbsp;{{ countrySelected?.sigle }} {{
-            currencySelected?.name }}
+          <img :src="countrySelected?.flag" style="height: 17px; width: 18px;" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
           <i class="fa fa-caret-down"></i>
         </span>
       </div>
-
       <settings-contries :open="isOpen">
 
       </settings-contries>
+      <nav-bar v-if="hiddenSearch"></nav-bar>
 
-      <!-- Header Bar -->
-      <!-- <div ref="homeNav" class="container-flex home-nav">
-        <b-navbar toggleable="lg" class="p-0">
-          <div class="container p-0 m-0">
-            <div class="col-md-12 col-lg-2 col-xl-2 text-center p-0 py-2">
-              <a class="d-inline-block align-top mt-1 float-left mobile1_1" href="#">
-                <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
-              </a>
-              <div class="auth-class d-md-none">
-                <span v-if="!islogin" class="nav-span mr-3">
-                  <router-link class="inactive" :to="{ name: 'signup' }">{{
-                    $t("general.Sign_Up")
-                    }}</router-link>
-                </span>
-                <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
-                  <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
-                </router-link>
-                <span v-if="islogin">
-                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                    $t("general.dashboard")
-                    }}</router-link>
-                </span>
-                <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
-
-
-              </div>
-            </div>
-
-            <div class="d-flex w-100 p-0 mobile-search">
-              <div class="w-90 mobile-search-input m-auto">
-                <div class="d-flex">
-                  <b-input-group class="binput">
-                    <b-input-group-prepend @click="Search">
-                      <div class="border" style="
-                        color: white !important;
-                        background-color: #fff; 
-                        border-top-left-radius: 0.25rem !important;
-                        border-bottom-left-radius: 0.25rem !important;
-                      ">
-                        <b-icon style="color: #DDDDDD" class="ml-2" icon="search"></b-icon>
-                      </div>
-                    </b-input-group-prepend>
-                    <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
-                      v-model="keyword" :placeholder="$t('general.search')"></b-form-input>
-                  </b-input-group>
-                  <div style="background-color: #E75B17; z-index: 100; border-radius: 6px; cursor: pointer;"
-                    @click="Search">
-                    <b-icon style="color: #fff" class="mt-2 ml-2 mx-3 search-icon" icon="search"></b-icon>
-                  </div>
-                </div>
-              </div>
-              <b-navbar-toggle target="nav-collapse" class="b-none"></b-navbar-toggle>
-              <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-nav class="mr-auto">
-                  <b-nav-item class="text-center">
-                    <span class="font-arvo nav-span">
-                      <router-link :to="{ name: 'Bridge-home' }" :class="currentRouteName == 'Bridge-home'
-                        ? 'active'
-                        : 'inactive'
-                        ">{{ $t("general.Home") }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                  <b-nav-item class="ml-md-1 text-center">
-                    <span class="font-arvo nav-span">
-                      <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'
-                        ">{{ $t("general.About_Us") }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-                  <b-nav-item class="ml-md-1 text-center">
-                    <span class="font-arvo nav-span">
-                      <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
-                        ">{{ $t("general.Contact_Us") }}</router-link>
-                    </span>
-                    <hr class="mobile navstyle" />
-                  </b-nav-item>
-
-                </b-navbar-nav>
-              </b-collapse>
-              <b-navbar-nav class="mr-auto d-none d-lg-flex">
-                <b-nav-item class="ml-md-1">
-                  <b-input-group class="binput">
-                    <b-input-group-prepend @click="Search">
-                      <div class="border" style="
-                        color: white !important;
-                        background-color: #fff; 
-                        border-top-left-radius: 0.25rem !important;
-                        border-bottom-left-radius: 0.25rem !important;
-                      ">
-                        <b-icon style="color: #DDDDDD" class="mt-2 ml-2" icon="search"></b-icon>
-                      </div>
-                    </b-input-group-prepend>
-                    <b-form-input v-on:keyup.enter="Search" class="search" style="border-left:none" type="search"
-                      v-model="keyword" :placeholder="$t('general.search')"></b-form-input>
-                  </b-input-group>
-                </b-nav-item>
-                <b-nav-item class="ml-md-3 m-auto" @click="navigateToCart">
-                  <span class="cart-icon position-relative" style="color:#455a64">
-                    <b-icon icon="cart4" class="icon-size"></b-icon>
-                    <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"
-                      style="top: 0; right: 0;">
-                      {{ cartCount }}
-                    </span>
-                  </span>
-                </b-nav-item>
-                <b-nav-item class="ml-md-3 m-auto">
-                  <span class="nav-span" style="color:#455a64">
-                    <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
-                  </span>
-                </b-nav-item>
-                <b-nav-item v-if="!islogin" class="m-auto">
-                  <span class="nav-span">
-                    <router-link class="inactive" :to="{ name: 'signup' }">{{
-                      $t("general.Sign_Up")
-                      }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
-                <div class="m-auto py-1" style="height: 15px; border-right: 2px solid #282828"></div>
-                <b-nav-item v-if="!islogin" class="ml-md-1 m-auto">
-                  <span class="nav-span">
-                    <router-link class="inactive" :to="{ name: 'Login' }">{{
-                      $t("general.Login")
-                      }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
-                <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
-                  <span class="nav-span">
-                    <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                      $t("general.dashboard")
-                      }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
-                <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
-                  <span class="nav-span">{{ $t("general.Logout") }}</span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
-              </b-navbar-nav>
-            </div>
-          </div>
-        </b-navbar>
-      </div> -->
     </slot>
     <slot name="main"></slot>
     <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
@@ -229,15 +83,20 @@ import settingsContries from "@/components/SetupContries"
 import { LocalisationMixins } from "@/mixins"
 
 import SiteFooter from "@/components/home/updatedSiteFooter.vue";
-
+import navBar from "@/components/navbar.vue";
 
 export default {
   mixins: [LocalisationMixins],
   components: {
     settingsContries,
+    navBar,
     SiteFooter
   },
   props: {
+    hiddenSearch: {
+      type: Boolean,
+      default: true
+    },
     hasTranslation: {
       type: Boolean,
       default: false
@@ -324,7 +183,7 @@ export default {
       Logout: "auth/logout",
     }),
     logout: async function () {
-      let loader = this.$loading.show({
+      let loader = this.$loader.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
@@ -511,9 +370,10 @@ a {
 }
 
 @media (min-width: 992px) {
-  .poslang {
-    /* margin-bottom: 10px; */
-  }
+  .gray {
+  background-color: #dddada !important;
+  display: none !important
+}
 
   .navbar-expand-lg {
     padding-right: 0px;
@@ -650,6 +510,12 @@ a {
   .media-icons i {
     margin-left: 10px;
   }
+
+  .gray {
+    background-color: #dddada !important;
+    display: block !important;
+    margin-right: 10px !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -678,6 +544,12 @@ a {
   .media-icons i {
     margin-left: 0;
     margin-right: 10px;
+  }
+
+  .gray {
+    background-color: #dddada !important;
+    display: block !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -732,5 +604,41 @@ a {
   background-color: #2d2d2d;
   padding: 5px 0;
   color: white;
+}
+</style>
+
+<style scoped>
+.load {
+  width: 30px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  /* height: 25px; */
+  color: #e75c18;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#e75c18 0 0);
+  background:
+    var(--c) 0% 100%,
+    var(--c) 50% 100%,
+    var(--c) 100% 100%;
+  background-size: 20% 43%;
+  animation: l5 1s infinite linear;
+}
+
+@keyframes l5 {
+  20% {
+    background-position: 0% 50%, 50% 100%, 100% 100%
+  }
+
+  40% {
+    background-position: 0% 0%, 50% 50%, 100% 100%
+  }
+
+  60% {
+    background-position: 0% 100%, 50% 0%, 100% 50%
+  }
+
+  80% {
+    background-position: 0% 100%, 50% 100%, 100% 0%
+  }
 }
 </style>

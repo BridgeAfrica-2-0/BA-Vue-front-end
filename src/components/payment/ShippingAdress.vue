@@ -1,10 +1,10 @@
 <template>
-  <div class="col bg-white p-0">
+  <div class="bg-white">
     <div class="row">
-      <div class="col-lg-8 p-0 m-0">
+      <div class="col-lg-8">
         <div class="row justify-content-between align-items-center top-div" v-if="!review">
           <div>
-            <h4 class="title-style m-0 p-0">{{ $t("general.SHIPPING") }}</h4>
+            <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
           </div>
           <div>
             <button
@@ -113,7 +113,7 @@
           v-if="!review"
           class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3"
         >
-          <div class="row bg-white">
+          <div class="row bg-white" style="padding: 10px 20px 0 0px;">
             <div>
               <div
                 class="ship-add w-100 d-flex justify-content-between align-items-start"

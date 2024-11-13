@@ -568,8 +568,25 @@ export const LocalisationMixins = {
       currencySelected: "localisation/getSelectedCurrency",
       countries: "localisation/getCountries",
       rate: "localisation/getRate",
-      hasBeenLoad: "localisation/hasBeenLoad"
+      hasBeenLoad: "localisation/hasBeenLoad",
+      isLoading: "localisation/loading"
     })
+  },
+
+  created() {
+
+    if (!this.hasBeenLoad && !this.isLoading) {
+      onInitializer()
+        .then(() => {
+          console.log('finish initializer')
+          this.$store.dispatch('localisation/startLocalisation')
+        })
+        .catch(err => {
+          console.log("[err]===== in mixins", err)
+        })
+    }else {
+      this.onInitLocalisation()
+    }
   },
 
   watch: {
@@ -578,19 +595,7 @@ export const LocalisationMixins = {
     }
   },
 
-  created() {
-
-    if (!this.hasBeenLoad) {
-      onInitializer()
-        .then(() => {
-          this.$store.dispatch('localisation/startLocalisation')
-        })
-        .then(() => {
-          this.onInitLocalisation()
-        })
-    }
-    this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
-  },
+ 
 
   methods: {
     async onInitLocalisation() {

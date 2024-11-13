@@ -2,7 +2,6 @@
   <base-layout  >
     <template v-slot:main>
       <div ref="wrapper">
-        <Navbar />
         <div class="container wahala">
           <b-row>
             <b-col cols="12" md="12" lg="12" xl="12">
@@ -391,7 +390,6 @@ import BaseLayout from "@/layouts/Layout"
 export default {
   components: {
     BaseLayout,
-    Navbar,
     SettingsNotifications,
     Payment,
     Blocking,

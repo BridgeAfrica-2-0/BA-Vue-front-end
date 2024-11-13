@@ -7,6 +7,7 @@ export default {
 
   state: {
     hasBeenLoad: false,
+    loading:false,
     countryLocalisation: null,
     selectedCountry: null,
     selectedCurrency: null,
@@ -17,6 +18,9 @@ export default {
   mutations: {
     setHasBeenLoad(state){
       state.hasBeenLoad = true
+    },
+    setLoading(state, status){
+      state.loading = status
     },
     setSelectedCountry(state, country) {
       localStorage.setItem("countrySelected", JSON.stringify(country))
@@ -38,16 +42,15 @@ export default {
   },
   getters: {
     hasBeenLoad: state => state.hasBeenLoad,
+    loading: state => state.loading,
+
     getLocalisationCountry: state => state.countryLocalisation,
-    getSelectedCountry: state => {
-      return state.selectedCountry
-    },
-    getSelectedCurrency: state => {
-      return state.selectedCurrency
-    },
+    getSelectedCountry: state => state.selectedCountry,
+    getSelectedCurrency: state => state.selectedCurrency,
     getCountries: state => state.countries,
     getRate: state => state.rate,
   },
+
   actions: {
     async updateRate({ commit }, currency) {
       const rate = await getRate(currency, 'XAF')
@@ -66,7 +69,7 @@ export default {
 
     async startLocalisation({ commit }) {
 
-      const countries = currencyMap()
+      const countries = currencyMap
       const userCountry = await checkCountryLocalisation()
       const findCountryInfo = countries.find(u => u.sigle == userCountry)
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
@@ -95,6 +98,8 @@ export default {
       commit("setContries", countries.sort((a, b) => a.name.localeCompare(b.name)))
 
       commit("setHasBeenLoad")
+
+      commit("setLoading", false)
     }
   },
 };

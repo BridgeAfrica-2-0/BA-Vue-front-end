@@ -2,7 +2,7 @@
   <base-layout>
     <template v-slot:main>
       <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper">
-        <navbar />
+
         <Skeleton :loading="!isloaded" />
         <div v-if="isloaded">
           <div class="container-fluid">
@@ -66,7 +66,6 @@ export default {
   mixins: [WhoIsIt],
   components: {
     BaseLayout,
-    navbar,
     Skeleton,
     Business,
     LyTab,

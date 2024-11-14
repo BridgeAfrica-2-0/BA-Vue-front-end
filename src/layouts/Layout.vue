@@ -99,7 +99,7 @@ export default {
     },
     hasTranslation: {
       type: Boolean,
-      default: false
+      default: true
     },
     showFooter: {
       type: Boolean,

@@ -115,24 +115,7 @@
                     {{ $t("auth.login") }}
                   </router-link>
                 </div>
-                <div class="text-center my-3">
-                  <b-button id="popover-target-1" class="nav-link text-dark hov">
-                    <b-link class="d-flex align-items-center" v-b-toggle="'collapse-2'">
-                      <img :src="img" class="size poslang mr-1 imgLangSize" alt="">
-                      {{ lang }}<a class="nav-link arrow-down p-0"></a>
-                    </b-link>
-                  </b-button>
-                  <b-popover target="popover-target-1" triggers="hover" placement="top">
-                    <b-card-text @click="change('en')" class="cursor-pointer mb-2 d-flex align-items-center"><img
-                        class="imgLangSize" src="../assets/img/about/en.png" alt="en" />
-                      <span class="ml-1">{{ $t("auth.english") }}</span>
-                    </b-card-text>
-                    <b-card-text class="cursor-pointer d-flex align-items-center" @click="change('fr')">
-                      <img class="imgLangSize" src="../assets/img/la-france.png" alt="fr" />
-                      <span class="ml-1">{{ $t("auth.french") }}</span>
-                    </b-card-text>
-                  </b-popover>
-                </div>
+                
 
                 <!-- Messages Started -->
                 <div v-if="islogin" class="nav-item">

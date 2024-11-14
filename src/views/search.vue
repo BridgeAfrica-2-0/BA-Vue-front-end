@@ -88,7 +88,6 @@
               }
                 ">
                 <!-- <img class="img-fluid picture logo-img" :src="category.category.cat_image" /> -->
-
                 {{
                   category.category.name.length > 11
                     ? category.category.name.substring(0, 11) + "..."

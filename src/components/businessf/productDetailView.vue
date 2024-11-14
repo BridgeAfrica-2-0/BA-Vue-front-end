@@ -3,91 +3,7 @@
     <template v-slot:main>
       <div>
         <div class="container-fluid">
-          <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
-            <!-- <template v-slot:button>
-          <Button
-            media="desktop"
-            @click.native="strategY['all']"
-            v-if="selectedId == 5"
-          />
-
-          <Button
-            media="desktop"
-            @click.native="strategY['business']"
-            v-if="selectedId == 1"
-          />
-          <Button
-            media="desktop"
-            @click.native="strategY['network']"
-            v-if="selectedId == 3 && islogin"
-          />
-          <Button
-            media="desktop"
-            @click.native="strategY['market']"
-            v-if="selectedId == 0"
-          />
-
-          <Button
-            media="desktop"
-            @click.native="strategies"
-            v-if="[2, 4].includes(selectedId) && islogin"
-          />
-          <Button
-            media="desktop"
-            @click.native="strategies"
-            v-if="[2, 3].includes(selectedId) && !islogin"
-          />
-        </template>
-
-<template v-slot:mobile>
-          <Button
-            media="mobile"
-            @click.native="strategY['all']"
-            v-if="selectedId == 5"
-          />
-
-          <Button
-            media="mobile"
-            @click.native="strategY['business']"
-            v-if="selectedId == 1"
-          />
-
-          <Button
-            media="mobile"
-            @click.native="strategY['network']"
-            v-if="selectedId == 3 && islogin"
-          />
-
-          <Button
-            media="mobile"
-            @click.native="strategY['market']"
-            v-if="selectedId == 0"
-          />
-
-          <Button
-            media="mobile"
-            @click.native="strategies"
-            v-if="[2, 4].includes(selectedId) && islogin"
-          />
-          <Button
-            media="mobile"
-            @click.native="strategies"
-            v-if="[2, 3].includes(selectedId) && !islogin"
-          />
-        </template> -->
-          </Nav>
-          <!-- <div class="px-4 mt-4">
-        <SubNav
-          @onChangeCategoryName="(val) => (categoryName = val)"
-          @category="getCategory"
-          @parentcategory="getparentCategory"
-          @update:keyword="
-            (val) => (searchParams = Object.assign(searchParams, val))
-          "
-          @activateSuggestion="activateSuggestion"
-          @activate:matching:category="(val) => (activateMatching = val)"
-        />
-      </div> -->
+         
           <div class="mt-4">
             <div class="product-page row">
               <!-- Galerie d'images -->
@@ -213,7 +129,6 @@ export default {
   mixins: [LocalisationMixins],
   components: {
     BaseLayout,
-    Nav,
     ProductImages,
     // QuantitySelector,
   },
@@ -281,7 +196,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchMarketDetails(); // Récupérer les détails dès que la page est montée
+    this.fetchMarketDetails();
   },
 };
 </script>

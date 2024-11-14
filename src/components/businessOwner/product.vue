@@ -18,7 +18,8 @@
                 <b-dropdown-item @click="deleteProduct(product)" v-b-modal="`modal-D${product.id}`">
                   {{ $t("profileowner.Delete") }}</b-dropdown-item>
 
-                <b-dropdown-item @click="requestToWhareHouse(product)" v-b-modal="`modal-warehouse-${product.id}`">
+                <b-dropdown-item v-if="!product.warehouseRequestStatus" @click="requestToWhareHouse(product)"
+                  v-b-modal="`modal-warehouse-${product.id}`">
                   Request to wareHouse</b-dropdown-item>
 
               </b-dropdown>
@@ -47,10 +48,13 @@
                   :less-str="$t('search.read_less')" :max-chars="100">
                 </read-more>
 
+
                 <span class="price username mt-2">
                   {{ product.price }} FCFA
                 </span>
               </p>
+
+              <p class="rq-st" v-if="product.warehouseRequestStatus == 'pending'">Pending request</p>
             </div>
           </div>
         </div>
@@ -239,7 +243,8 @@
           <b-button class="mt-2 btn-block btn-outline-secondary w-100" @click="requestModal">
             Cancel
           </b-button>
-          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block  w-100" variant="primary" :disabled="canSendRequest">
+          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block  w-100" variant="primary"
+            :disabled="canSendRequest">
             <b-spinner small v-if="startRequest" variant="white"></b-spinner>
             Send request
           </b-button>
@@ -304,8 +309,19 @@ export default {
         this.newProduct.location && this.newProduct.contact ? false : true
     },
 
-    products() {
-      return this.$store.state.market.products;
+    products: {
+      get() {
+        return this.$store.state.market.products;
+      },
+      set(val) {
+        const products = this.$store.state.market.products
+
+        return products.map(product => {
+          if (val.id == product.id)
+            return val
+          return product
+        })
+      }
     },
 
     BuCategories() {
@@ -344,7 +360,7 @@ export default {
 
   methods: {
     requestToWhareHouse(product) {
-      this.productRequest=product
+      this.productRequest = product
       this.requestModal = true
     },
 
@@ -368,10 +384,11 @@ export default {
             blockClass: "custom-block-class",
             message: "Changes Made Successfuly"
           });
+          this.products({ ...this.productRequest, warehouseRequestStatus: "pending" })
         })
         .finally(() => {
           this.startRequest = false
-          this.requestModal= false
+          this.requestModal = false
         })
     },
 
@@ -735,6 +752,19 @@ h6 {
   width: 100px;
 }
 
+.rq-st {
+  color: white;
+  background: #1aad1a;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  right: 1rem;
+  position: absolute;
+  bottom: 0;
+  border-radius: 14px;
+  padding: 4px;
+}
+
 .marketbtn {
   margin-bottom: 3px;
   float: right;
@@ -842,6 +872,8 @@ h6 {
 
     line-height: 25px;
   }
+
+
 
   .r-image {
     border-top-left-radius: 10px;

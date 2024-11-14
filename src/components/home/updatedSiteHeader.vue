@@ -64,7 +64,7 @@
             <a class="d-inline-block align-top mt-1 float-left mobile1_1" href="#">
               <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             </a>
-            <div class="auth-class d-md-none">
+            <!-- <div class="auth-class d-md-none">
               <span v-if="!islogin" class="nav-span mr-3">
                 <router-link class="inactive" :to="{ name: 'signup' }">{{
                   $t("general.Sign_Up")
@@ -81,7 +81,7 @@
               <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
 
 
-            </div>
+            </div> -->
           </div>
 
           <div class="d-flex w-100 p-0 mobile-search">
@@ -138,15 +138,15 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-                <b-nav-item class="ml-md-1 text-center">
+                <!-- <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
                     <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'
                       ">{{ $t("general.About_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
-                </b-nav-item>
+                </b-nav-item> -->
 
-                <b-nav-item class="ml-md-1 text-center">
+                <!-- <b-nav-item class="ml-md-1 text-center">
                   <span class="font-arvo nav-span">
                     <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
                       ">{{ $t("general.Contact_Us") }}</router-link>
@@ -160,7 +160,7 @@
                       ">{{ $t("general.Contact_Us") }}</router-link>
                   </span>
                   <hr class="mobile navstyle" />
-                </b-nav-item>
+                </b-nav-item> -->
                 <!-- 
                 <b-nav-item class="ml-md-1 text-center">
                   <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal" data-target="#settings"
@@ -229,7 +229,7 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-              <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
+              <!-- <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'dashboard' }">{{
                     $t("general.dashboard")
@@ -240,7 +240,7 @@
               <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
                 <span class="nav-span">{{ $t("general.Logout") }}</span>
                 <hr class="mobile navstyle" />
-              </b-nav-item>
+              </b-nav-item> -->
 
             </b-navbar-nav>
           </div>

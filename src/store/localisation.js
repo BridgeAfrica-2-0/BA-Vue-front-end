@@ -12,7 +12,7 @@ export default {
     selectedCountry: null,
     selectedCurrency: null,
     countries: [],
-    rate: 1
+    rate: 1,
   },
 
   mutations: {

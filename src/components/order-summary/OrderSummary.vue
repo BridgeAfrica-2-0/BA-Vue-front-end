@@ -244,7 +244,7 @@ cursor: pointer;
 
 .order-summary {
   width: 100%;
-  max-width: 350px;
+  /* max-width: 350px; */
   margin: 0 auto;
   color: black;
 }

@@ -8,6 +8,7 @@
         </p>
       </div>
 
+
       <div class="col-8 col-md ">
         <div class="inline-flex marg float-right">
           <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
@@ -172,6 +173,7 @@
 </template>
 
 <script>
+
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
 import Product from "../product";
@@ -237,6 +239,7 @@ export default {
       selectedImagesPrv: []
     };
   },
+  
   computed: {
     BuCategories() {
       return this.$store.state.auth.categories;
@@ -310,7 +313,7 @@ export default {
       //   this.selectedImagesPrv.push(URL.createObjectURL(file));
       // });
       this.selectedImagesPrv = Array.from(files)
-      
+
     },
     swap() {
       console.log("orders: ", this.orders);
@@ -386,7 +389,7 @@ export default {
         .join();
       this.newProduct.filterId = this.select_filterss.join();
 
-     
+
       console.log(this.selectedImagesPrv)
       // transform product data in form data
 
@@ -395,11 +398,6 @@ export default {
         const picture = this.selectedImagesPrv[0]
         const additionals = this.selectedImagesPrv.splice(0, 1)
 
-        console.log("=====================")
-        console.log(picture)
-        console.log(additionals)
-        console.log("=====================")
-
         additionals.forEach((file, index) => {
           fd.append(`additional_images[${index}]`, file);
         });
@@ -407,13 +405,14 @@ export default {
         fd.append(`picture`, picture);
       }
 
-
       for (const key in this.newProduct) {
-
-        if ("picture" != key)
-          fd.append(key, this.newProduct[key]);
+        if ("picture" == key && this.selectedImagesPrv.length)
+          this.selectedImagesPrv.forEach((file, index) => {
+            fd.append(`additional_images[${index}]`, file);
+          });
+        fd.append(key, this.newProduct[key]);
       }
-      console.log("NEW PRODUCT", this.newProduct);
+
       axios
         .post("market?slug=" + this.businessSlug, fd)
         .then(res => {

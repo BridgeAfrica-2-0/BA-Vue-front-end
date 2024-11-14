@@ -14,6 +14,7 @@
           <div class="" v-if="selectedId == '0'">
             <Business @pageChange="pageChange" />
           </div>
+          
 
           <div class="mt-3" v-if="selectedId == '1'">
             <Inbox />
@@ -25,6 +26,7 @@
 
           <div class="mt-3" v-if="selectedId == '3'">
             <Settings v-bind:currenttab="selectedId" />
+            
           </div>
 
           <div class="mt-3" v-if="selectedId == '4'">

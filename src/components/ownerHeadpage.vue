@@ -2,27 +2,16 @@
   <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
-        <img
-          :src="auth.cover_picture ? auth.cover_picture : getCustomCover[0]"
-          class="img-fluid banner"
-          alt="Cover Image"
-        />
+        <img :src="auth.cover_picture ? auth.cover_picture : getCustomCover[0]" class="img-fluid banner"
+          alt="Cover Image" />
       </div>
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
-            <b-avatar
-              :src="auth.profile_picture"
-              class="avat text-center bg-light"
-              badge-variant="primary"
-              badge-offset="10px"
-            ></b-avatar>
+            <b-avatar :src="auth.profile_picture" class="avat text-center bg-light" badge-variant="primary"
+              badge-offset="10px"></b-avatar>
 
-            <b-icon
-              icon="camera-fill"
-              class="avatar-header-icon btn cursor-pointer size"
-              @click="selectlogo"
-            ></b-icon>
+            <b-icon icon="camera-fill" class="avatar-header-icon btn cursor-pointer size" @click="selectlogo"></b-icon>
 
             <span style="display: inline-block">
               <h6 class="profile-name text-center">
@@ -37,65 +26,32 @@
               </h6>
             </span>
 
-            <input
-              type="file"
-              id="cover_pic"
-              @change="selectCropCoverModal"
-              accept="video/mpeg, video/mp4, image/*"
-              hidden
-              ref="movie"
-            />
+            <input type="file" id="cover_pic" @change="selectCropCoverModal" accept="video/mpeg, video/mp4, image/*"
+              hidden ref="movie" />
 
-            <input
-              type="file"
-              id="cover_pic_edit"
-              @change="selectCropImageModal"
-              accept="video/mpeg, video/mp4, image/*"
-              hidden
-              ref="movie"
-            />
+            <input type="file" id="cover_pic_edit" @change="selectCropImageModal"
+              accept="video/mpeg, video/mp4, image/*" hidden ref="movie" />
 
-            <input
-              type="file"
-              id="logo_pic"
-              @change="setlogo"
-              accept=" image/*"
-              hidden
-              ref="logo_pic"
-            />
+            <input type="file" id="logo_pic" @change="setlogo" accept=" image/*" hidden ref="logo_pic" />
 
             <div class="">
               <div class="text-box">
                 <div class="">
                   <span class="float-right profileedit-btn put-topbtn">
-                    <b-button
-                      @click="editCoverNull"
-                      variant="primary"
-                      class="d-none d-md-inline edit-btn"
-                      v-b-modal.modal-upp
-                    >
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'pencil-alt']"
-                        size="lg"
-                      />
+                    <b-button @click="editCoverNull" variant="primary" class="d-none d-md-inline edit-btn"
+                      v-b-modal.modal-upp>
+                      <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
                       {{ $t("profileowner.Edit") }}
                     </b-button>
 
-                    <b-dropdown
-                      id="dropdown-1"
-                      class="float-right dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
-                      no-caret
-                      variant="outline"
-                      style="border-color: #ffD20; color: #ffD20"
-                    >
+                    <b-dropdown id="dropdown-1" class="float-right dot-btn mt-2 mt-sm-2 mt-md-0 mr-3" no-caret
+                      variant="outline" style="border-color: '#ffD20'; color: '#ffD20'">
                       <template #button-content>
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
                       <b-dropdown-item @click="selectCover">
-                        {{ $t("profileowner.Change_Cover") }}</b-dropdown-item
-                      >
+                        {{ $t("profileowner.Change_Cover") }}</b-dropdown-item>
                       <b-dropdown-item @click="RemoveCover">
                         {{ $t("profileowner.Remove_Cover") }}
                       </b-dropdown-item>
@@ -105,110 +61,55 @@
                       <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
                       <b-dropdown-item @click="viewAs">{{
                         $t("profileowner.View_As")
-                      }}</b-dropdown-item>
+                        }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal
-              id="logomodal"
-              ref="logomodal"
-              @ok="submitLogo"
-              :title="$t('profileowner.Upload_Your_Logo')"
-            >
+            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
               <div class="w3-container">
                 <div id="preview">
-                  <vue-cropper
-                    :src="logoselectedFile"
-                    ref="logocropper"
-                    :aspect-ratio="6.5 / 3"
-                    drag-mode="move"
-                    :view-mode="1"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    :size="1"
-                  />
+                  <vue-cropper :src="logoselectedFile" ref="logocropper" :aspect-ratio="6.5 / 3" drag-mode="move"
+                    :view-mode="1" original:true info:false canScale:true maxImgSize:1000 :size="1" />
                 </div>
               </div>
             </b-modal>
 
             <!-- Crop cover photo Modal -->
-            <b-modal
-              id="coverphotoCrop"
-              ref="coverphotoCrop"
-              ok-title="Crop and Save"
-              @ok="submitCroppedCover"
-              :title="$t('profileowner.Crop_Cover_Photo')"
-            >
+            <b-modal id="coverphotoCrop" ref="coverphotoCrop" ok-title="Crop and Save" @ok="submitCroppedCover"
+              :title="$t('profileowner.Crop_Cover_Photo')">
               <div class="w3-container">
                 <div id="preview">
-                  <vue-cropper
-                    :src="selectedFile"
-                    ref="cropper"
-                    :aspect-ratio="6.5 / 3"
-                    drag-mode="move"
-                    :view-mode="1"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    :size="1"
-                  />
+                  <vue-cropper :src="selectedFile" ref="cropper" :aspect-ratio="6.5 / 3" drag-mode="move" :view-mode="1"
+                    original:true info:false canScale:true maxImgSize:1000 :size="1" />
                 </div>
               </div>
             </b-modal>
 
-            <b-modal
-              id="modal-upp"
-              ref="modalxl"
-              :title="$t('profileowner.Upload_Cover_Picture')"
-            >
+            <b-modal id="modal-upp" ref="modalxl" :title="$t('profileowner.Upload_Cover_Picture')">
               <div class="w3-container">
                 <div class="row pb3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right: 1px solid rgb(222, 226, 230)"
-                  >
+                  <div class="col-sm-6 text-center" style="border-right: 1px solid rgb(222, 226, 230)">
                     <h1 @click="selectCover">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="upload"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                        class="primary svg-inline--fa fa-upload fa-w-16"
-                      >
-                        <path
-                          fill="currentColor"
+                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="upload" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                        class="primary svg-inline--fa fa-upload fa-w-16">
+                        <path fill="currentColor"
                           d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
-                          class=""
-                        ></path>
+                          class=""></path>
                       </svg>
                       <h4>{{ $t("profileowner.Upload_a_New_picture") }}</h4>
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
                     <h1 @click="selectEditCover">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="edit"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        class="primary svg-inline--fa fa-edit fa-w-18"
-                      >
-                        <path
-                          fill="currentColor"
+                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="edit" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                        class="primary svg-inline--fa fa-edit fa-w-18">
+                        <path fill="currentColor"
                           d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
-                          class=""
-                        ></path>
+                          class=""></path>
                       </svg>
                     </h1>
                     <h4>{{ $t("profileowner.Edit_Your_New_Picture") }}</h4>
@@ -218,25 +119,12 @@
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal
-              id="coverphoto"
-              ref="coverphotoCropping"
-              @ok="submitCover"
-              :title="$t('profileowner.Upload_Cover_Photo')"
-            >
+            <b-modal id="coverphoto" ref="coverphotoCropping" @ok="submitCover"
+              :title="$t('profileowner.Upload_Cover_Photo')">
               <div class="w3-container">
                 <div id="preview">
-                  <vue-cropper
-                    :src="selectedFile"
-                    ref="cropperphotoCropping"
-                    original:true
-                    info:false
-                    canScale:true
-                    maxImgSize:1000
-                    :size="1"
-                    drag-mode="move"
-                    :view-mode="1"
-                  />
+                  <vue-cropper :src="selectedFile" ref="cropperphotoCropping" original:true info:false canScale:true
+                    maxImgSize:1000 :size="1" drag-mode="move" :view-mode="1" />
                 </div>
               </div>
             </b-modal>
@@ -397,11 +285,11 @@ export default {
       }
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("cover-imag").click();
     },
 
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile-imag").click();
     },
 
@@ -435,7 +323,7 @@ export default {
             this.$store
               .dispatch("profile/loadUserPostIntro", null)
               .then(response => {
-                console.log(response);this.flashMessage.show({
+                console.log(response); this.flashMessage.show({
                   status: "success",
                   message: this.$t("profileowner.Cover_Updated"),
                   blockClass: "custom-block-class"
@@ -756,7 +644,7 @@ export default {
       return this.$store.state.profile.Tcommunity;
     },
 
-    info: function() {
+    info: function () {
       return this.$store.getters["profile/getUserPostIntro"];
     }
   },
@@ -799,6 +687,7 @@ export default {
     font-size: 22px;
   }
 }
+
 #preview {
   display: flex;
   justify-content: center;
@@ -848,15 +737,17 @@ export default {
     display: inherit;
   }
 }
+
 @media (max-width: 768px) {
   .options {
     margin-right: -5px;
   }
 }
-@media (min-width: 992px) {
-}
-@media (min-width: 1200px) {
-}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
 @media (min-width: 1400px) {
   .header-group {
     float: right;
@@ -965,6 +856,7 @@ export default {
     width: 168px;
     height: 168px;
   }
+
   .banner {
     height: 426px;
 
@@ -1000,17 +892,17 @@ export default {
  */
 
 .edit-btn:hover {
-  border-color: #b39500 !important ;
-  background-color: #b39500 !important ;
+  border-color: #b39500 !important;
+  background-color: #b39500 !important;
 }
 
 .btn:focus {
   border-color: #b39500 !important;
-  background-color: #b39500 !important ;
+  background-color: #b39500 !important;
 }
 
 .btn:active {
   border-color: #e4c229 !important;
-  background-color: #b39500 !important ;
+  background-color: #b39500 !important;
 }
 </style>

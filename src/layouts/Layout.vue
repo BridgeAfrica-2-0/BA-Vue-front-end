@@ -68,7 +68,7 @@
     </slot>
     <slot name="main"></slot>
     <site-footer :style="`margin-top: ${top}em !important;`" v-if="showFooter" />
-    <div class="bottom-bar">
+    <div class="bottom-bar" v-if="showFooter">
       <span>©2021- {{ new Date().getFullYear() }}- Bridge Africa</span>
     </div>
   </div>
@@ -124,7 +124,6 @@ export default {
   },
 
   created() {
-
     const currentLang = this.$i18n.locale;
     if (currentLang == 'en') {
       this.img = require("@/assets/img/about/en.png");

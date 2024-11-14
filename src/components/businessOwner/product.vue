@@ -236,10 +236,10 @@
         <!-- <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert> -->
 
         <div class="d-flex justify-content-end">
-          <b-button class="mt-2 btn-block btn-outline-secondary" @click="requestModal">
+          <b-button class="mt-2 btn-block btn-outline-secondary w-100" @click="requestModal">
             Cancel
           </b-button>
-          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block" variant="primary" :disabled="canSendRequest">
+          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block  w-100" variant="primary" :disabled="canSendRequest">
             <b-spinner small v-if="startRequest" variant="white"></b-spinner>
             Send request
           </b-button>
@@ -368,10 +368,10 @@ export default {
             blockClass: "custom-block-class",
             message: "Changes Made Successfuly"
           });
-
         })
         .finally(() => {
           this.startRequest = false
+          this.requestModal= false
         })
     },
 

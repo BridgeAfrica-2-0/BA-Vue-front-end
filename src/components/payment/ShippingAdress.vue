@@ -7,21 +7,14 @@
             <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
           </div>
           <div>
-            <button
-              v-b-modal.create-shipping-modal
-              type="submit"
-              class="btn btn-primary hire-btn"
-            >
+            <button v-b-modal.create-shipping-modal type="submit" class="btn btn-primary hire-btn">
               {{ $t("general.New_Address") }}
             </button>
           </div>
         </div>
 
         <!-- When review is true, only show title and Edit button -->
-        <div
-          v-if="review"
-          class="d-flex justify-content-between align-items-center"
-        >
+        <div v-if="review" class="d-flex justify-content-between align-items-center">
           <!-- Title aligned to the left -->
           <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
 
@@ -37,12 +30,8 @@
               BACK
             </b-button> -->
 
-            <b-button
-              :v-b-modal="!review ? 'edit-shipping-modal' : null"
-              variant="primary"
-              @click="onEdit()"
-              class="edit-btn"
-            >
+            <b-button :v-b-modal="!review ? 'edit-shipping-modal' : null" variant="primary" @click="onEdit()"
+              class="edit-btn">
               <i class="fas mr-2">&#xf304;</i>
               {{ $t("general.Edit") }}
             </b-button>
@@ -50,10 +39,7 @@
         </div>
 
         <!-- Shipping Address Details -->
-        <b-card-title
-          v-if="!review"
-          class="headline-font-size font-weight-bold headline_and_btns mb-0"
-        >
+        <b-card-title v-if="!review" class="headline-font-size font-weight-bold headline_and_btns mb-0">
           <span>{{ $t("general.Shipping_Address") }}</span>
         </b-card-title>
         <div class="row">
@@ -61,21 +47,15 @@
             <CreateShippingModal @activeAddress="shipping" />
           </div>
           <div class="col-12">
-            <CreateShippingModal
-              :title="$t('general.Edit_Shipping_Address')"
-              mode="edit"
-              :editForm="shippingsTab[selectedIndex]"
-              @activeAddress="shipping"
-            />
+            <CreateShippingModal :title="$t('general.Edit_Shipping_Address')" mode="edit"
+              :editForm="shippingsTab[selectedIndex]" @activeAddress="shipping" />
           </div>
         </div>
         <!-- Active shipping address only when review is true -->
         <b-card-text v-if="review" class="mt-4">
           <div class="row">
             <div class="col-12">
-              <div
-                class="ship-add w-100 d-flex justify-content-between align-items-start"
-              >
+              <div class="ship-add w-100 d-flex justify-content-between align-items-start">
                 <div class="d-inline-flex">
                   <div class="mb-3 d-flex justify-content-between">
                     <div class="flex-fill fixed-width">
@@ -109,11 +89,60 @@
 
         <!-- Show all shipping addresses if review is false -->
         <hr v-if="!review" class="dotted-hr" />
-        <b-card-text
+        <b-card-text v-if="!review" class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3">
+          <div class="row bg-white" style="padding: 10px 20px 0 0px;">
+            <div>
+              <div class="ship-add w-100 d-flex justify-content-between align-items-start flex-wrap"
+                v-for="(shipping_item, index) in shippingsTab" :key="shipping_item.id">
+                <div class="d-inline-flex flex-column flex-md-row w-100" style="flex-grow: 1;">
+                  <!-- Radio Button Container -->
+                  <div class="operator-select-box mr-2 mb-2">
+                    <input type="radio" :v-model="shipping_item.id" @change="shipping(shipping_item)"
+                      :checked="shipping_item.active == 1" name="shipping" value="" />
+                  </div>
+                  <!-- Address and Details Container -->
+                  <div class="details-container d-flex flex-column flex-md-row w-100 justify-content-between">
+                    <!-- Shipping Address -->
+                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
+                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                      <p class="mb-1">{{ shipping_item?.name }}</p>
+                      <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code
+                        }}</p>
+                      <p>{{ shipping_item?.country }}</p>
+                    </div>
+                    <!-- Contact Details -->
+                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
+                      <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
+                      <p class="mb-1">{{ shipping_item?.email }}</p>
+                      <p>{{ shipping_item?.phone }}</p>
+                    </div>
+                    <!-- Shipping Speed -->
+                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
+                      <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
+                      <p class="mb-1">Business Days</p>
+                      <p>FREE</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Edit and Delete Buttons -->
+                <div class="actions-container d-flex mt-2">
+                  <a href="#" v-b-modal.edit-shipping-modal class="icon-color mr-2"
+                    @click.prevent="openEditModal(index)">
+                    <i class="fas">&#xf304;</i>
+                  </a>
+                  <UpdatedConfirmOperation :message="$t('general.Do_you_want_to_delete_this_shipping_address')"
+                    @sendid="handleDeleteShipping" :id_item="shipping_item?.id" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-card-text>
+        <!-- <b-card-text
           v-if="!review"
           class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3"
         >
           <div class="row bg-white" style="padding: 10px 20px 0 0px;">
+      
             <div>
               <div
                 class="ship-add w-100 d-flex justify-content-between align-items-start"
@@ -182,35 +211,23 @@
               </div>
             </div>
           </div>
-        </b-card-text>
+        </b-card-text> -->
         <hr v-if="!review" class="dotted-hr" />
 
         <div class="row" v-if="loading">
           <div class="col-12 d-flex justify-content-center">
-            <b-spinner
-              variant="primary"
-              large
-              label="loading shipping..."
-            ></b-spinner>
+            <b-spinner variant="primary" large label="loading shipping..."></b-spinner>
           </div>
         </div>
         <Order v-if="review" @unavailableProducts="handleUnavailableProducts" />
       </div>
 
       <div class="col-lg-4 mb-4">
-        <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled"/>
+        <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled" />
       </div>
 
-      <b-modal
-        v-model="showModal"
-        @hidden="hideAuthModal"
-        hide-footer
-        size="xl"
-        :hide-header-close="isCheckoutRoute"
-        :no-close-on-backdrop="isCheckoutRoute"
-        :no-fade="isCheckoutRoute"
-        :backdrop="!isCheckoutRoute"
-      >
+      <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl" :hide-header-close="isCheckoutRoute"
+        :no-close-on-backdrop="isCheckoutRoute" :no-fade="isCheckoutRoute" :backdrop="!isCheckoutRoute">
         <login @success="success" @hideAuthModal="hideAuthModal" />
       </b-modal>
     </div>
@@ -278,73 +295,73 @@ export default {
             .catch(() => {
               loader.hide();
             });
-            this.$store.dispatch("checkout/shippingFee")
+          this.$store.dispatch("checkout/shippingFee")
             .then(() => {
               this.buttonDisabled = false;
             })
-           .catch((error) => {
-          if (error) {
-            console.log("Erro+++++++++++++++", error);
-            this.buttonDisabled = true;
-            this.flashMessage.show({
-              status: "error",
-              message: "The shipping address is not valid",
-              time: 5000,
+            .catch((error) => {
+              if (error) {
+                console.log("Erro+++++++++++++++", error);
+                this.buttonDisabled = true;
+                this.flashMessage.show({
+                  status: "error",
+                  message: "The shipping address is not valid",
+                  time: 5000,
+                });
+              }
             });
-          }
-        });
           // this.shippingsTab();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
             .then(() => {
               loader.hide();
             })
-            .catch(() => {});
+            .catch(() => { });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     hideAuthModal() {
       this.$store
-      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
-      .then(() => {
-        this.selectedShipping = this.selectedShippingId;
-        this.activeData = this.activeDataVal;
+        .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+        .then(() => {
+          this.selectedShipping = this.selectedShippingId;
+          this.activeData = this.activeDataVal;
 
-        this.loading = false;
-      })
-      .catch(() => {
-        this.loading = false;
-      });
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
       this.$store
-      .dispatch("checkout/getCartSummary", { islogin: this.islogin })
-      .then(() => {
-        this.loading = false;
-      })
-      .catch(() => {
-        this.loading = false;
-      });
+        .dispatch("checkout/getCartSummary", { islogin: this.islogin })
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
       this.showModal = false;
     },
     success() {
       this.$store
-      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
-      .then(() => {
-        this.selectedShipping = this.selectedShippingId;
-        this.activeData = this.activeDataVal;
+        .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+        .then(() => {
+          this.selectedShipping = this.selectedShippingId;
+          this.activeData = this.activeDataVal;
 
-        this.loading = false;
-      })
-      .catch(() => {
-        this.loading = false;
-      });
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
       this.$store
-      .dispatch("checkout/getCartSummary", { islogin: this.islogin })
-      .then(() => {
-        this.loading = false;
-      })
-      .catch(() => {
-        this.loading = false;
-      });
+        .dispatch("checkout/getCartSummary", { islogin: this.islogin })
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
       this.showModal = false;
     },
     handleDeleteShipping(id) {
@@ -378,16 +395,16 @@ export default {
       console.log("calling handle submit", 2);
       if (this.review) {
         let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.preview,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+          container: this.fullPage ? null : this.$refs.preview,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18",
+        });
         this.$store
           .dispatch("checkout/createOrder", {
             isLogin: this.$store.getters["auth/isLogged"],
-            isLocal:  this.isCameroon,
-            shipping_fee: this.shippingFee ? this.shippingFee: null,
+            isLocal: this.isCameroon,
+            shipping_fee: this.shippingFee ? this.shippingFee : null,
             shipping_method: this.shippingMethod ? this.shippingMethod : null
           })
           .then(({ data }) => {
@@ -418,13 +435,13 @@ export default {
       this.buttonDisabled = false;
       this.$emit("handleNextStep", 1);
     },
-    handleUnavailableProducts(productNames) {      
-      if(productNames.length > 0 && this.isCameroon) {
+    handleUnavailableProducts(productNames) {
+      if (productNames.length > 0 && this.isCameroon) {
         this.buttonDisabled = true;
         this.flashMessage.show({
-            status: "error",
-            message: `${productNames}  not available for selected shipping Address`
-          });
+          status: "error",
+          message: `${productNames}  not available for selected shipping Address`
+        });
       }
     }
   },
@@ -451,10 +468,9 @@ export default {
         const activeShipping = this.shippingsTab.find(
           (item) => item.active == 1
         );
-        if(activeShipping?.id)
-      {
-        this.$store.dispatch("checkout/shippingFee");
-      }
+        if (activeShipping?.id) {
+          this.$store.dispatch("checkout/shippingFee");
+        }
         return activeShipping ? activeShipping.id : null;
       },
       set(value) {
@@ -476,23 +492,22 @@ export default {
   mounted() {
     this.selectedShipping = this.selectedShippingId;
     this.activeData = this.activeDataVal;
-    if(!this.review)
-    {
-    this.loading = true;
-    this.$store
-      .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
-      .then(() => {
-        this.selectedShipping = this.selectedShippingId;
-        this.activeData = this.activeDataVal;
+    if (!this.review) {
+      this.loading = true;
+      this.$store
+        .dispatch("checkout/getAllShippingAdd", { islogin: this.islogin })
+        .then(() => {
+          this.selectedShipping = this.selectedShippingId;
+          this.activeData = this.activeDataVal;
 
-        this.loading = false;
-      })
-      .catch(() => {
-        this.loading = false;
-      });
-  }
-     const isLocalVal = localStorage.getItem("isLocal");
-     this.isCameroon = isLocalVal !== "false";
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+    }
+    const isLocalVal = localStorage.getItem("isLocal");
+    this.isCameroon = isLocalVal !== "false";
   },
   created() {
     this.selectedShipping = this.selectedShippingId;
@@ -511,6 +526,7 @@ export default {
 input[type="radio"] {
   accent-color: #e07715;
 }
+
 .dotted-hr {
   border: 0;
   border-top: 2px dotted black;
@@ -518,22 +534,26 @@ input[type="radio"] {
   margin: 20px 25px 20px 0;
   position: relative;
 }
+
 .title-style {
   font-size: 30px !important;
   font-weight: 700 !important;
   color: black;
 }
+
 .top-div {
   margin-left: 1px !important;
   margin-right: 18px !important;
   margin-bottom: 20px !important;
 }
+
 .hire-btn {
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;
   font-weight: 600;
   border-radius: 10px;
 }
+
 .edit-btn {
   margin-top: 2%;
   width: 100px;
@@ -546,6 +566,7 @@ input[type="radio"] {
   font-weight: 600;
   border-radius: 10px;
 }
+
 .back-btn {
   width: 100px;
   height: 46px;
@@ -557,12 +578,15 @@ input[type="radio"] {
   font-weight: 600;
   border-radius: 10px;
 }
+
 .icon-color {
   color: black;
 }
+
 .h-color {
   color: black;
 }
+
 .fixed-width {
   text-align: start;
   width: 200px;
@@ -572,9 +596,11 @@ input[type="radio"] {
 .fixed-width:last-child {
   margin-right: 0;
 }
+
 .title-font-size {
   font-size: 18px !important;
 }
+
 .btnx {
   /* display: inline-block; */
   font-weight: 400;
@@ -618,14 +644,16 @@ input[type="radio"] {
     margin-top: 7px;
     margin-bottom: -12px;
   }
-.title-style {
-  font-size: 20px!important;
-  
-}
-  
+
+  .title-style {
+    font-size: 20px !important;
+
+  }
+
 }
 
 @media screen and (max-width: 376px) {
+
   .btnx,
   .backBtn {
     float: left;

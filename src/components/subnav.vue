@@ -2,7 +2,7 @@
   <div class="container-flex container-fluid mobi d-none d-lg-none d-xl-block search px-4">
     <b-row>
       <b-col cols="8" lg="12">
-        <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 25px; flex-wrap: wrap;">
+        <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 1px; flex-wrap: wrap;">
         <span>
           <b-nav-item-dropdown id="dropdown-1" :text="$t('general.all')" ref="more">
             <hr
@@ -46,12 +46,12 @@
             </div>
           </b-nav-item-dropdown>
         </span>
-          <div class="cursor-pointer"
-            v-for="(category, index) in categories.slice(0, 6)"
+          <div class="cursor-pointer custom"
+            v-for="(category, index) in categories.slice(0, 10)"
             :key="index"
           >
           
-          <div class="search-item"
+          <div class="search-items"
                   @click="
                     () => {
                       showSubCat(category.category, category.sub_cat);
@@ -221,6 +221,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .search-item:hover {
   color: #e75c18 !important;
@@ -250,6 +251,10 @@ export default {
 }
 .drop-text {
   color: black;
+}
+
+.custom {
+  font-size: 14px
 }
 </style>
 

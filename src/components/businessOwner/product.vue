@@ -18,7 +18,8 @@
                 <b-dropdown-item @click="deleteProduct(product)" v-b-modal="`modal-D${product.id}`">
                   {{ $t("profileowner.Delete") }}</b-dropdown-item>
 
-                <b-dropdown-item @click="requestToWhareHouse(product)" v-b-modal="`modal-warehouse-${product.id}`">
+                <b-dropdown-item v-if="!product.warehouseRequestStatus || profile_package.user_package.name == FEATURE_WAREHOUSE" @click="requestToWhareHouse(product)"
+                  v-b-modal="`modal-warehouse-${product.id}`">
                   Request to wareHouse</b-dropdown-item>
 
               </b-dropdown>
@@ -32,6 +33,7 @@
               </div>
             </div>
 
+            
             <div class="flx50">
               <p class="text">
                 <span class="title cursor-pointer" @click="productDetails(product)">
@@ -47,10 +49,13 @@
                   :less-str="$t('search.read_less')" :max-chars="100">
                 </read-more>
 
+
                 <span class="price username mt-2">
                   {{ product.price }} FCFA
                 </span>
               </p>
+              
+              <p class="rq-st" v-if="product.warehouseRequestStatus == 'pending'">Pending request</p>
             </div>
           </div>
         </div>
@@ -239,7 +244,8 @@
           <b-button class="mt-2 btn-block btn-outline-secondary w-100" @click="requestModal">
             Cancel
           </b-button>
-          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block  w-100" variant="primary" :disabled="canSendRequest">
+          <b-button @click.prevent="onSendRequest" class="mt-2 btn-block  w-100" variant="primary"
+            :disabled="canSendRequest">
             <b-spinner small v-if="startRequest" variant="white"></b-spinner>
             Send request
           </b-button>
@@ -258,6 +264,8 @@ import axios from "axios";
 import ProductDetails from "./ProductDetails.vue";
 
 import MultiSelect from "vue-multiselect";
+
+import {FEATURE_WAREHOUSE} from "@/const"
 
 // import EditProduct from "./editProduct.vue";
 export default {
@@ -304,6 +312,10 @@ export default {
         this.newProduct.location && this.newProduct.contact ? false : true
     },
 
+    profile_package() {
+      return this.$store.state.auth.profile_package;
+    },
+
     products() {
       return this.$store.state.market.products;
     },
@@ -344,10 +356,14 @@ export default {
 
   methods: {
     requestToWhareHouse(product) {
-      this.productRequest=product
+      this.productRequest = product
       this.requestModal = true
     },
 
+    onResetRequestData() {
+      this.newProduct = {}
+      this.productRequest = null
+    },
     onSendRequest() {
       this.startRequest = true
       const data = {
@@ -368,10 +384,24 @@ export default {
             blockClass: "custom-block-class",
             message: "Changes Made Successfuly"
           });
+
+          const news = { ...this.productRequest, warehouseRequestStatus: "pending" }
+
+          this.products.data.forEach((product, index, arr) => {
+            arr[index] = product.id == news.id ? news : product
+          })
         })
         .finally(() => {
           this.startRequest = false
-          this.requestModal= false
+          this.requestModal = false
+          this.onResetRequestData()
+
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Request has been created"
+          });
+
         })
     },
 
@@ -735,6 +765,19 @@ h6 {
   width: 100px;
 }
 
+.rq-st {
+  color: white;
+  background: #1aad1a;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  right: 1rem;
+  position: absolute;
+  bottom: 0;
+  border-radius: 14px;
+  padding: 4px;
+}
+
 .marketbtn {
   margin-bottom: 3px;
   float: right;
@@ -842,6 +885,8 @@ h6 {
 
     line-height: 25px;
   }
+
+
 
   .r-image {
     border-top-left-radius: 10px;

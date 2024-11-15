@@ -195,7 +195,6 @@ export const onInitializer = () => {
   console.log('start initializer')
   return axios.get('https://restcountries.com/v3.1/all')
     .then(response => {
-      console.log("==================================")
       currencyMap = response.data.map(country => ({
         "name": country.name.common,
         "sigle": country.cca2,

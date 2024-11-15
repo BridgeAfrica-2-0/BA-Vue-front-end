@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <slot name="header">
-      <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto">
+      <div class="top-bar d-none d-md-flex justify-content-between align-items-center m-auto" ref="homeNav">
         <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
           <div class="contact-info d-flex align-items-center">
             <div class="d-flex">
@@ -99,7 +99,7 @@ export default {
     },
     hasTranslation: {
       type: Boolean,
-      default: false
+      default: true
     },
     showFooter: {
       type: Boolean,

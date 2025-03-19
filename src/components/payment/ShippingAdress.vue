@@ -14,7 +14,7 @@
         </div>
 
         <!-- When review is true, only show title and Edit button -->
-        <div v-if="review" class="d-flex justify-content-between align-items-center">
+        <div v-if="review" class="d-flex justify-content-between align-items-center mobile-padding">
           <!-- Title aligned to the left -->
           <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
 
@@ -52,40 +52,40 @@
           </div>
         </div>
         <!-- Active shipping address only when review is true -->
-        <b-card-text v-if="review" class="mt-4">
+        <b-card-text v-if="review" class="mt-4 mobile-padding">
           <div class="row">
             <div class="col-12">
-              <div class="ship-add w-100 d-flex justify-content-between align-items-start">
-                <div class="d-inline-flex">
-                  <div class="mb-3 d-flex justify-content-between">
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ activeData?.name }}</p>
-                      <p class="mb-1">
-                        {{ activeData?.city }}, {{ activeData?.region }}, {{ activeData?.zip_code }}
-                      </p>
-                      <p class="">{{ activeData?.country }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">
-                        {{ $t("general.Contact_details") }}
-                      </h5>
-                      <p class="mb-1">{{ activeData?.email }}</p>
-                      <p class="">{{ activeData?.phone }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">
-                        {{ $t("general.Shipping_speed") }}
-                      </h5>
-                      <p class="mb-1">Business Days</p>
-                      <p class="">FREE</p>
-                    </div>
+              <div class="ship-add w-100 d-flex flex-wrap justify-content-between align-items-start">
+                <div class="d-flex flex-column flex-md-row w-100">
+                  <div class="flex-fill fixed-width mb-3 mb-md-0">
+                    <h5 class="h-color mb-2">{{ $t("general.Ship_to") }}</h5>
+                    <p class="mb-1">{{ activeData?.name }}</p>
+                    <p class="mb-1">
+                      {{ activeData?.city }}, {{ activeData?.region }}, {{ activeData?.zip_code }}
+                    </p>
+                    <p>{{ activeData?.country }}</p>
                   </div>
+                  <div class="flex-fill fixed-width mb-3 mb-md-0 d-none d-md-block">
+                    <h5 class="h-color mb-2">{{ $t("general.Contact_details") }}</h5>
+                    <p class="mb-1">{{ activeData?.email }}</p>
+                    <p>{{ activeData?.phone }}</p>
+                  </div>
+                  <div class="flex-fill fixed-width d-none d-md-block">
+                    <h5 class="h-color mb-2">{{ $t("general.Shipping_speed") }}</h5>
+                    <p class="mb-1">Business Days</p>
+                    <p>FREE</p>
+                  </div>
+                </div>
+                <div class="d-md-none mt-2">
+                  <button class="btn btn-sm btn-link text-primary p-0" @click="openDetailsModal(activeData)">
+                    {{ $t("general.View_details") }}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </b-card-text>
+
 
         <!-- Show all shipping addresses if review is false -->
         <hr v-if="!review" class="dotted-hr" />
@@ -104,7 +104,7 @@
                     <h5 class="h-color mb-1">{{ $t("general.Ship_to") }}</h5>
                     <p class="mb-1">{{ shipping_item?.name }}</p>
                     <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code
-                      }}</p>
+                    }}</p>
                     <p>{{ shipping_item?.country }}</p>
                   </div>
                 </div>
@@ -161,27 +161,6 @@
 
 
 
-          <b-modal v-model="showDetailsModal" title="Shipping Details" dialog-class="custom-modal">
-            <div v-if="selectedShipping" class="p-3">
-              <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-              <p class="mb-1">{{ selectedShipping?.name }}</p>
-              <p class="mb-1">{{ selectedShipping?.city }}, {{ selectedShipping?.region }}, {{
-                selectedShipping?.zip_code }}</p>
-              <p>{{ selectedShipping?.country }}</p>
-
-              <h5 class="h-color mt-3">{{ $t("general.Contact_details") }}</h5>
-              <p class="mb-1">{{ selectedShipping?.email }}</p>
-              <p>{{ selectedShipping?.phone }}</p>
-
-              <h5 class="h-color mt-3">{{ $t("general.Shipping_speed") }}</h5>
-              <p class="mb-1">Business Days</p>
-              <p>FREE</p>
-            </div>
-            <template #modal-footer>
-              <b-button variant="secondary" @click="showDetailsModal = false">{{ $t("general.Close") }}</b-button>
-            </template>
-          </b-modal>
-
         </b-card-text>
         <hr v-if="!review" class="dotted-hr" />
 
@@ -196,7 +175,26 @@
       <div class="col-lg-4 mb-4">
         <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled" />
       </div>
+      <b-modal v-model="showDetailsModal" title="Shipping Details" dialog-class="custom-modal">
+        <div v-if="selectedShipping" class="p-3">
+          <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+          <p class="mb-1">{{ selectedShipping?.name }}</p>
+          <p class="mb-1">{{ selectedShipping?.city }}, {{ selectedShipping?.region }}, {{
+            selectedShipping?.zip_code }}</p>
+          <p>{{ selectedShipping?.country }}</p>
 
+          <h5 class="h-color mt-3">{{ $t("general.Contact_details") }}</h5>
+          <p class="mb-1">{{ selectedShipping?.email }}</p>
+          <p>{{ selectedShipping?.phone }}</p>
+
+          <h5 class="h-color mt-3">{{ $t("general.Shipping_speed") }}</h5>
+          <p class="mb-1">Business Days</p>
+          <p>FREE</p>
+        </div>
+        <template #modal-footer>
+          <b-button variant="secondary" @click="showDetailsModal = false">{{ $t("general.Close") }}</b-button>
+        </template>
+      </b-modal>
       <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl" :hide-header-close="isCheckoutRoute"
         :no-close-on-backdrop="isCheckoutRoute" :no-fade="isCheckoutRoute" :backdrop="!isCheckoutRoute">
         <login @success="success" @hideAuthModal="hideAuthModal" />
@@ -499,13 +497,18 @@ export default {
 input[type="radio"] {
   accent-color: #e07715;
 }
+
 .margin-btn {
   text-align: left !important;
   margin-left: 30px !important;
 }
+
 @media (max-width: 768px) {
   .shipping-info {
     margin-left: 10px;
+  }
+  .mobile-padding {
+    padding-left: 10px;
   }
 }
 

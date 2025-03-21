@@ -10,6 +10,7 @@
   :static="true" 
   centered
   no-fade
+  @show="resetShippingAddress" 
 >
   <FormCreateShippingAddress
     @closecshippingm="hideModal"
@@ -82,7 +83,21 @@ export default {
     },
     activeShipping(data) { 
       this.$emit('activeAddress', data);
+    },
+    resetShippingAddress() {
+    if (this.mode === 'create') {
+      this.shippingAddress = {
+        name: "",
+        phone: "",
+        country_id: "",
+        region_id: "",
+        division_id: "",
+        council_id: "",
+        city: "",
+        neighbourhood_id: "",
+      };
     }
+  }
   },
  
 };

@@ -20,8 +20,7 @@
                   <div v-for="(cart_item, i) in business.items" :key="i">
                     <div class="d-flex cart-item-wrapper mt-4">
                       <div class="row m-0 p-0" style="flex-grow: 1;">
-                        <img :src="cart_item.product_picture" class="product-image col-lg-3" />
-                        <!-- <img src="../assets/img/coach2.png" class="product-image col-lg-3" alt=""> -->
+                        <img :src="cart_item.product_picture" class="product-image col-lg-3 m-0" />
                         <div class="col-lg-9 col-md-6 mt-3">
                           <h6 class="product-name">{{ cart_item.product_name }}</h6>
                           <div>
@@ -33,7 +32,6 @@
                               <span class="text-danger" v-else>{{
                                 $t("general.out_of_stock")
                                 }}</span></span>
-                            <!-- {{ cart_item }} -->
                           </div>
                           <div class="">
                             {{
@@ -54,7 +52,7 @@
                             <input type="number" class="product-quantity numbersize form-control"
                               @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available"
                               :min="1" v-model="cart_item.quantity" />
-                            <button class="btn btn-secondary d-block d-sm-none" @click="removeIconFromCart(cart_item.product_id)">Remove</button>
+                            <button class="btn btn-secondary d-block d-sm-none color-btn" @click="removeIconFromCart(cart_item.product_id)">Remove</button>
                           </div>
                         </div>
                       </div>
@@ -65,11 +63,6 @@
                               locationPrice(rate)
                             }}
                           </h6>
-                          <!-- <h6 class="actual-price" v-if="cart_item?.discount_price && cart_item?.discount_price > 0">
-                        {{
-                          cart_item.discount_price | locationPrice(rate)
-                        }}
-                      </h6> -->
                         </div>
                         <img class="cross d-none d-sm-block" src="assets/images/cross.png"
                           @click="removeIconFromCart(cart_item.product_id)" alt="cross" />
@@ -458,6 +451,9 @@ export default {
 };
 </script>
 <style scoped>
+.color-btn {
+  color: red;
+}
 .empty-cart {
   justify-content: center;
   display: flex;

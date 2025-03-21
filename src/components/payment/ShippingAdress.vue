@@ -14,7 +14,7 @@
         </div>
 
         <!-- When review is true, only show title and Edit button -->
-        <div v-if="review" class="d-flex justify-content-between align-items-center">
+        <div v-if="review" class="d-flex justify-content-between align-items-center mobile-padding">
           <!-- Title aligned to the left -->
           <h4 class="title-style">{{ $t("general.SHIPPING") }}</h4>
 
@@ -52,166 +52,116 @@
           </div>
         </div>
         <!-- Active shipping address only when review is true -->
-        <b-card-text v-if="review" class="mt-4">
+        <b-card-text v-if="review" class="mt-4 mobile-padding">
           <div class="row">
             <div class="col-12">
-              <div class="ship-add w-100 d-flex justify-content-between align-items-start">
-                <div class="d-inline-flex">
-                  <div class="mb-3 d-flex justify-content-between">
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ activeData?.name }}</p>
-                      <p class="mb-1">
-                        {{ activeData?.city }}, {{ activeData?.region }}, {{ activeData?.zip_code }}
-                      </p>
-                      <p class="">{{ activeData?.country }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">
-                        {{ $t("general.Contact_details") }}
-                      </h5>
-                      <p class="mb-1">{{ activeData?.email }}</p>
-                      <p class="">{{ activeData?.phone }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color mb-2">
-                        {{ $t("general.Shipping_speed") }}
-                      </h5>
-                      <p class="mb-1">Business Days</p>
-                      <p class="">FREE</p>
-                    </div>
+              <div class="ship-add w-100 d-flex flex-wrap justify-content-between align-items-start">
+                <div class="d-flex flex-column flex-md-row w-100">
+                  <div class="flex-fill fixed-width mb-3 mb-md-0">
+                    <h5 class="h-color mb-2">{{ $t("general.Ship_to") }}</h5>
+                    <p class="mb-1">{{ activeData?.name }}</p>
+                    <p class="mb-1">
+                      {{ activeData?.city }}, {{ activeData?.region }}, {{ activeData?.zip_code }}
+                    </p>
+                    <p>{{ activeData?.country }}</p>
                   </div>
+                  <div class="flex-fill fixed-width mb-3 mb-md-0 d-none d-md-block">
+                    <h5 class="h-color mb-2">{{ $t("general.Contact_details") }}</h5>
+                    <p class="mb-1">{{ activeData?.email }}</p>
+                    <p>{{ activeData?.phone }}</p>
+                  </div>
+                  <div class="flex-fill fixed-width d-none d-md-block">
+                    <h5 class="h-color mb-2">{{ $t("general.Shipping_speed") }}</h5>
+                    <p class="mb-1">Business Days</p>
+                    <p>FREE</p>
+                  </div>
+                </div>
+                <div class="d-md-none mt-2">
+                  <button class="btn btn-sm btn-link text-primary p-0" @click="openDetailsModal(activeData)">
+                    {{ $t("general.View_details") }}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </b-card-text>
 
+
         <!-- Show all shipping addresses if review is false -->
         <hr v-if="!review" class="dotted-hr" />
-        <b-card-text v-if="!review" class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3">
-          <div class="row bg-white" style="padding: 10px 20px 0 0px;">
-            <div>
-              <div class="ship-add w-100 d-flex justify-content-between align-items-start flex-wrap"
-                v-for="(shipping_item, index) in shippingsTab" :key="shipping_item.id">
-                <div class="d-inline-flex flex-column flex-md-row w-100" style="flex-grow: 1;">
-                  <!-- Radio Button Container -->
-                  <div class="operator-select-box mr-2 mb-2">
-                    <input type="radio" :v-model="shipping_item.id" @change="shipping(shipping_item)"
-                      :checked="shipping_item.active == 1" name="shipping" value="" />
-                  </div>
-                  <!-- Address and Details Container -->
-                  <div class="details-container d-flex flex-column flex-md-row w-100 justify-content-between">
-                    <!-- Shipping Address -->
-                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
-                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ shipping_item?.name }}</p>
-                      <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code
-                        }}</p>
-                      <p>{{ shipping_item?.country }}</p>
-                    </div>
-                    <!-- Contact Details -->
-                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
-                      <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
-                      <p class="mb-1">{{ shipping_item?.email }}</p>
-                      <p>{{ shipping_item?.phone }}</p>
-                    </div>
-                    <!-- Shipping Speed -->
-                    <div class="flex-fill mb-2 mb-md-0 pr-md-3">
-                      <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
-                      <p class="mb-1">Business Days</p>
-                      <p>FREE</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Edit and Delete Buttons -->
-                <div class="actions-container d-flex mt-2">
-                  <a href="#" v-b-modal.edit-shipping-modal class="icon-color mr-2"
-                    @click.prevent="openEditModal(index)">
-                    <i class="fas">&#xf304;</i>
-                  </a>
-                  <UpdatedConfirmOperation :message="$t('general.Do_you_want_to_delete_this_shipping_address')"
-                    @sendid="handleDeleteShipping" :id_item="shipping_item?.id" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </b-card-text>
-        <!-- <b-card-text
-          v-if="!review"
-          class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start pl-3"
-        >
-          <div class="row bg-white" style="padding: 10px 20px 0 0px;">
-      
-            <div>
-              <div
-                class="ship-add w-100 d-flex justify-content-between align-items-start"
-                v-for="(shipping_item, index) in shippingsTab"
-                :key="shipping_item.id"
-              >
-                <div class="d-inline-flex" style="flex-grow: 1;">
+        <b-card-text v-if="!review" class="mt-4 w-100">
+          <div v-for="(shipping_item, index) in shippingsTab" :key="shipping_item.id"
+            class="shipping-item p-3 mb-2 pr-5 rounded d-flex flex-column flex-md-row align-items-start"
+            :class="{ 'selected-address': shipping_item.active == 1 }">
+            <div class="d-flex align-items-center w-100 d-md-none justify-content-between">
+              <div class="d-flex flex-column">
+                <div class="d-flex align-items-center">
                   <div class="operator-select-box mr-2">
-                    <input 
-                      type="radio"
-                      :v-model="shipping_item.id"
-                      @change="shipping(shipping_item)"
-                      :checked="shipping_item.active == 1"
-                      name="shipping"
-                      value=""
-                    />
+                    <input type="radio" v-model="selectedShippingId" @change="shipping(shipping_item)"
+                      :value="shipping_item.id" />
                   </div>
-                  <div class="mb-3 d-flex justify-content-between">
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
-                      <p class="mb-1">{{ shipping_item?.name }}</p>
-                      <p class="mb-1">
-                        {{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code }}
-                      </p>
-                      <p class="">{{ shipping_item?.country }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color">
-                        {{ $t("general.Contact_details") }}
-                      </h5>
-                      <p class="mb-1">{{ shipping_item?.email }}</p>
-                      <p class="">{{ shipping_item?.phone }}</p>
-                    </div>
-                    <div class="flex-fill fixed-width">
-                      <h5 class="h-color">
-                        {{ $t("general.Shipping_speed") }}
-                      </h5>
-                      <p class="mb-1">Business Days</p>
-                      <p class="">FREE</p>
-                    </div>
+                  <div class="shipping-info">
+                    <h5 class="h-color mb-1">{{ $t("general.Ship_to") }}</h5>
+                    <p class="mb-1">{{ shipping_item?.name }}</p>
+                    <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code
+                    }}</p>
+                    <p>{{ shipping_item?.country }}</p>
                   </div>
                 </div>
-                <div class="row ml-2" style="flex-grow: 1;">
-                  <div>
-                    <a
-                      href="#"
-                      v-b-modal.edit-shipping-modal
-                      class="mr-1 mr-sm-2 icon-color"
-                      @click.prevent="openEditModal(index)"
-                    >
-                      <i class="fas">&#xf304;</i>
-                    </a>
-                  </div>
-                  <div class="ml-1">
-                    <UpdatedConfirmOperation
-                      :message="
-                        $t(
-                          'general.Do_you_want_to_delete_this_shipping_address'
-                        )
-                      "
-                      @sendid="handleDeleteShipping"
-                      :id_item="shipping_item?.id"
-                    />
-                  </div>
-                </div>
+                <button class="margin-btn btn btn-sm btn-link text-primary p-0 mt-1"
+                  @click="openDetailsModal(shipping_item)">
+                  {{ $t("general.View_details") }}
+                </button>
+              </div>
+              <div class="d-flex align-items-center">
+                <a href="#" class="icon-color mr-2" v-b-modal.edit-shipping-modal @click.prevent="openEditModal(index)">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <UpdatedConfirmOperation :message="$t('general.Do_you_want_to_delete_this_shipping_address')"
+                  @sendid="handleDeleteShipping" :id_item="shipping_item?.id" />
               </div>
             </div>
+            <div class="details-container flex-grow-1 d-none d-md-flex flex-md-row w-100 align-items-start">
+              <div class="d-flex align-items-start">
+                <div class="operator-select-box mr-2 d-flex align-items-start mt-2">
+                  <input type="radio" v-model="selectedShippingId" @change="shipping(shipping_item)"
+                    :value="shipping_item.id" />
+                </div>
+                <div class="shipping-info">
+                  <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+                  <p class="mb-1">{{ shipping_item?.name }}</p>
+                  <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code }}
+                  </p>
+                  <p>{{ shipping_item?.country }}</p>
+                </div>
+              </div>
+              <div class="contact-info flex-fill pr-md-3">
+                <h5 class="h-color">{{ $t("general.Contact_details") }}</h5>
+                <p class="mb-1">{{ shipping_item?.email }}</p>
+                <p>{{ shipping_item?.phone }}</p>
+              </div>
+              <div class="shipping-speed flex-fill">
+                <h5 class="h-color">{{ $t("general.Shipping_speed") }}</h5>
+                <p class="mb-1">Business Days</p>
+                <p>FREE</p>
+              </div>
+            </div>
+
+            <div class="actions-container d-none d-md-flex mt-2">
+              <a href="#" class="icon-color mr-2" v-b-modal.edit-shipping-modal @click.prevent="openEditModal(index)">
+                <i class="fas fa-edit"></i>
+              </a>
+              <UpdatedConfirmOperation :message="$t('general.Do_you_want_to_delete_this_shipping_address')"
+                @sendid="handleDeleteShipping" :id_item="shipping_item?.id" />
+            </div>
+
           </div>
-        </b-card-text> -->
+
+
+
+
+
+        </b-card-text>
         <hr v-if="!review" class="dotted-hr" />
 
         <div class="row" v-if="loading">
@@ -225,7 +175,26 @@
       <div class="col-lg-4 mb-4">
         <OrderSummary :step="1" :handleSubmit="handleSubmit" :disable="buttonDisabled" />
       </div>
+      <b-modal v-model="showDetailsModal" title="Shipping Details" dialog-class="custom-modal">
+        <div v-if="selectedShipping" class="p-3">
+          <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
+          <p class="mb-1">{{ selectedShipping?.name }}</p>
+          <p class="mb-1">{{ selectedShipping?.city }}, {{ selectedShipping?.region }}, {{
+            selectedShipping?.zip_code }}</p>
+          <p>{{ selectedShipping?.country }}</p>
 
+          <h5 class="h-color mt-3">{{ $t("general.Contact_details") }}</h5>
+          <p class="mb-1">{{ selectedShipping?.email }}</p>
+          <p>{{ selectedShipping?.phone }}</p>
+
+          <h5 class="h-color mt-3">{{ $t("general.Shipping_speed") }}</h5>
+          <p class="mb-1">Business Days</p>
+          <p>FREE</p>
+        </div>
+        <template #modal-footer>
+          <b-button variant="secondary" @click="showDetailsModal = false">{{ $t("general.Close") }}</b-button>
+        </template>
+      </b-modal>
       <b-modal v-model="showModal" @hidden="hideAuthModal" hide-footer size="xl" :hide-header-close="isCheckoutRoute"
         :no-close-on-backdrop="isCheckoutRoute" :no-fade="isCheckoutRoute" :backdrop="!isCheckoutRoute">
         <login @success="success" @hideAuthModal="hideAuthModal" />
@@ -257,7 +226,8 @@ export default {
       showModal: false,
       activeData: {},
       buttonDisabled: false,
-      isCameroon: false
+      isCameroon: false,
+      showDetailsModal: false,
     };
   },
   components: {
@@ -319,6 +289,10 @@ export default {
             .catch(() => { });
         })
         .catch(() => { });
+    },
+    openDetailsModal(shipping) {
+      this.selectedShipping = shipping;
+      this.showDetailsModal = true;
     },
     hideAuthModal() {
       this.$store
@@ -520,11 +494,67 @@ export default {
 </script>
 
 <style scoped>
-/* .ship-add:not(:last-child){
-	border-bottom: 1px solid #c2c0c0;
-} */
 input[type="radio"] {
   accent-color: #e07715;
+}
+
+.margin-btn {
+  text-align: left !important;
+  margin-left: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .shipping-info {
+    margin-left: 10px;
+  }
+  .mobile-padding {
+    padding-left: 10px;
+  }
+}
+
+.custom-modal .modal-dialog {
+  margin: 40px auto;
+  max-width: 90%;
+}
+
+@media (min-width: 768px) {
+  .custom-modal .modal-dialog {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+  .shipping-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .shipping-info,
+  .contact-info,
+  .shipping-speed {
+    min-width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .selected-address {
+    border: 2px solid #ff6600;
+    background: #fffaf0;
+  }
+
+  .shipping-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shipping-info {
+    width: 100%;
+  }
+
+  .actions-container {
+    margin-top: 10px;
+  }
 }
 
 .dotted-hr {

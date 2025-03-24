@@ -72,19 +72,6 @@
                 </div>
               </div>
 
-              <hr class="dotted-hr" />
-
-              <h1 class="recommended-for-you" v-if="products.length > 0">{{ $t("general.Recommended_For_You") }}</h1>
-              <splide v-if="products.length > 0" :options="options">
-                <splide-slide v-for="(product, index) in products" :key="index">
-                  <div class="crtv-bans">
-                    <img :src="product.picture" alt="Product Image" class="slide-img" />
-                    <h3 class="mt-2">{{ product.name }}</h3>
-                    <p>{{ product.price | locationPrice(rate) }}</p>
-                    <a href="#" @click.prevent="handleAddToCard(product)">{{ $t("general.Add_to_Cart") }}</a>
-                  </div>
-                </splide-slide>
-              </splide>
             </div>
             <div class="col-lg-4" style="padding-inline: 32px;">
               <OrderSummary :handleSubmit="handleSubmit" :step="0"
@@ -98,7 +85,7 @@
 </template>
 <script>
 
-import navbar from "@/components/navbar.vue";
+// import navbar from "@/components/navbar.vue";
 import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import Skeleton from "../components/skeleton";
 import axios from "axios";
@@ -207,7 +194,7 @@ export default {
     },
 
     getTotalPrice() {
-      let totalItems = this.cart.total;
+      // let totalItems = this.cart.total;
       return 0;
     },
 
@@ -235,7 +222,7 @@ export default {
 
       this.$store
         .dispatch("checkout/next", url)
-        .then((res) => {
+        .then(() => {
           this.loader = false;
         })
 
@@ -278,7 +265,7 @@ export default {
         this.buttonDisable = false;
         await this.$store
           .dispatch("checkout/updateCart", { quantity: quantity, index: index, islogin: this.islogin })
-          .then((response) => {
+          .then(() => {
             this.getCartSummary();
           })
           .catch((err) => {
@@ -368,7 +355,7 @@ export default {
     handleAddToCard(product) {
       this.$store
         .dispatch("cart/addToCart", { product, islogin: this.islogin })
-        .then(response => {
+        .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Product added successfully to cart"

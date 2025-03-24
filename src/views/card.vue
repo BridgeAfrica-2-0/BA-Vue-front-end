@@ -15,10 +15,61 @@
                 <div v-if="!loading" class="mt-4">
                   <div class="d-flex justify-content-between card-top-content mb-3">
                     <h4>{{ business.business_name }}</h4>
-                    <a href="" class="clear" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</a>
+                    <button class="clear-btn d-block d-sm-none" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</button>
+                    <a href="" class="clear d-none d-sm-block" @click.prevent="clearBusinessItems(business?.items)">{{ $t("general.Clear") }}</a>
                   </div>
                   <div v-for="(cart_item, i) in business.items" :key="i">
-                    <div class="d-flex cart-item-wrapper mt-4">
+                    <div class="mobile-cart-item d-block d-sm-none">
+                      <div class="d-flex cart-item-wrapper mt-4">
+                        <div class="row m-0 p-0" style="flex-grow: 1;">
+                          <div class="col-12">
+                            <img :src="cart_item.product_picture" class="product-image w-100" />
+                          </div>
+                          <div class="col-12 product-details-container">
+                            <h6 class="product-name">{{ cart_item.product_name }}</h6>
+                            <div class="availability-section">
+                              <label for="" class="text-black availability-label">{{ $t("general.availability") }}:</label>
+                              <span class="ml-2" :class="cart_item.product_in_stock ? 'in-stock' : 'out-of-stock'">
+                                {{ $t("general.only") }} {{ cart_item.stock_available }}
+                                <span v-if="cart_item.product_in_stock">{{
+                                  $t("general.in_stock")
+                                  }}</span>
+                                <span v-else>{{
+                                  $t("general.out_of_stock")
+                                  }}</span>
+                              </span>
+                            </div>
+                            <div class="product-description">
+                              {{
+                                cart_item.product_description.length > 150
+                                  ? cart_item.product_description.slice(0, 150) + "..."
+                                  : cart_item.product_description
+                              }}
+                            </div>
+                            <div class="price-section my-2">
+                              <h6 class="discount-price mb-0">
+                                {{ (cart_item.product_price - cart_item?.discount_price)?.toFixed(2) ?? "" |
+                                  locationPrice(rate)
+                                }}
+                              </h6>
+                            </div>
+                            <button class="save-button d-flex align-items-center mt-3" @click.prevent>
+                              <img class="heart" src="assets/images/heart.png" alt="" />
+                              <span class="save-text">Save</span>
+                            </button>
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+                              <input type="number" class="product-quantity numbersize form-control"
+                                @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available"
+                                :min="1" v-model="cart_item.quantity" />
+                              <button class="remove-btn" @click="removeIconFromCart(cart_item.product_id)">Remove</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Desktop view (unchanged) -->
+                    <div class="d-none d-sm-flex cart-item-wrapper mt-4">
                       <div class="row m-0 p-0" style="flex-grow: 1;">
                         <img :src="cart_item.product_picture" class="product-image col-lg-3 m-0" />
                         <div class="col-lg-9 col-md-6 mt-3">
@@ -40,19 +91,14 @@
                                 : cart_item.product_description
                             }}
                           </div>
-                          <p class="mt-3 d-block d-sm-none">
-                              <img class="heart" src="assets/images/heart.png" alt="" />
-                              <a href="" class="save">Save</a>
-                            </p>
                           <div class="d-flex align-items-center justify-content-between mt-3 mb-3">
-                            <p class="mt-3 d-none d-sm-block">
+                            <p class="mt-3">
                               <img class="heart" src="assets/images/heart.png" alt="" />
                               <a href="" class="save">Save</a>
                             </p>
                             <input type="number" class="product-quantity numbersize form-control"
                               @change="changeQuantity($event, cart_item.item_id)" :max="cart_item.stock_available"
                               :min="1" v-model="cart_item.quantity" />
-                            <button class="btn btn-secondary d-block d-sm-none color-btn" @click="removeIconFromCart(cart_item.product_id)">Remove</button>
                           </div>
                         </div>
                       </div>
@@ -64,14 +110,13 @@
                             }}
                           </h6>
                         </div>
-                        <img class="cross d-none d-sm-block" src="assets/images/cross.png"
+                        <img class="cross" src="assets/images/cross.png"
                           @click="removeIconFromCart(cart_item.product_id)" alt="cross" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="col-lg-4" style="padding-inline: 32px;">
               <OrderSummary :handleSubmit="handleSubmit" :step="0"
@@ -83,8 +128,8 @@
     </template>
   </base-layout>
 </template>
-<script>
 
+<script>
 // import navbar from "@/components/navbar.vue";
 import OrderSummary from "../components/order-summary/OrderSummary.vue";
 import Skeleton from "../components/skeleton";
@@ -437,7 +482,9 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+/* Original styles */
 .color-btn {
   color: red;
 }
@@ -555,8 +602,6 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* padding: 15px;
-  width: 347.667px; */
 }
 
 .crtv-bans h3 {
@@ -596,5 +641,117 @@ export default {
 
 .cart-item-wrapper {
   border-bottom: 1px solid rgba(192, 192, 192, 0.493);
+}
+
+/* NEW MOBILE STYLES */
+@media (max-width: 767.98px) {
+  .product-image {
+    height: auto !important;
+    width: 100% !important;
+    max-height: 200px !important;
+    object-fit: contain;
+    object-position: center;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 15px !important;
+    border-radius: 4px;
+  }
+  
+  .mobile-cart-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+  }
+  
+  .mobile-cart-item .cart-item-wrapper {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .product-details-container {
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  .availability-section {
+    margin: 12px 0;
+    padding: 5px 0;
+  }
+  
+  .availability-label {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .in-stock {
+    color: #2e7d32;
+    font-weight: 500;
+  }
+  
+  .out-of-stock {
+    color: #d32f2f;
+    font-weight: 500;
+  }
+  
+  .product-description {
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #575757;
+    font-size: 14px;
+  }
+  
+  .price-section {
+    background-color: rgba(0,0,0,0.03);
+    padding: 8px;
+    border-radius: 4px;
+  }
+  
+  .remove-btn {
+    background-color: #fff;
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    min-width: 100px;
+    transition: all 0.2s ease;
+  }
+  
+  .remove-btn:active {
+    background-color: #ffebee;
+  }
+  
+  .save-button {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+  }
+  
+  .save-button:active {
+    opacity: 0.7;
+  }
+  
+  .save-text {
+    margin-left: 8px;
+    text-decoration: underline;
+    font-weight: 500;
+    color: #000;
+  }
+  
+  .clear-btn {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
 </style>

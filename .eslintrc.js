@@ -14,4 +14,7 @@ module.exports = {
   globals: {
     google: "readonly",
   },
+  rules: {
+   "no-unused-vars": "warn", // ✅ warn the unused variable rule
+  },
 };

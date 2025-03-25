@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-form @submit="onSubmit" @reset="onReset">
+  <div class="shipping-form-container">
+    <b-form @submit="onSubmit" @reset="onReset" class="shipping-form">
       <b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
       <b-form-group class="body-font-size" id="input-group-name" :label="$t('general.Name')" label-for="name-input">
         <b-form-input id="name-input" v-model="username" type="text" required :readonly="!!username"></b-form-input>
@@ -13,50 +13,8 @@
         <b-form-input id="email-input" v-model="form.email" type="email" required></b-form-input>
       </b-form-group>
       
-      <!-- Dropdown selectors for Cameroon -->
-      <!-- <div v-if="isCameroon" class="row">
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-country" :label="$t('general.Country')" label-for="country-input">
-            <b-form-select
-              id="country-input"
-              v-model="form.country"
-              :options="countries"
-              value-field="id"
-              text-field="name"
-              @change="getRegions"
-              required
-            ></b-form-select>
-          </b-form-group>
-        </div>
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Region')" label-for="region-input">
-            <b-form-select
-              id="region-input"
-              v-model="form.region"
-              :options="regions"
-              value-field="id"
-              text-field="name"
-              @change="getDestinations"
-              required
-            ></b-form-select>
-          </b-form-group>
-        </div>
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Destination')" label-for="destination-input">
-            <b-form-select
-              id="destination-input"
-              v-model="form.city"
-              :options="destinations"
-              value-field="id"
-              text-field="name"
-              required
-            ></b-form-select>
-          </b-form-group>
-        </div>
-      </div> -->
-      
-      <!-- For non-Cameroon users, just use Google Map -->
-      <div>
+      <!-- For all users, use Google Map -->
+      <div class="map-container">
         <!-- Hidden inputs for values that will be populated by Google Maps -->
         <input type="hidden" v-model="form.country">
         <input type="hidden" v-model="form.region">
@@ -64,11 +22,10 @@
         <input type="hidden" v-model="form.zip_code">
         <input type="hidden" v-model="form.address">
         
-        <!-- Google Map Component -->
         <GoogleMap v-model="form.addressData" @update:modelValue="extractLocationData" />
       </div>
       
-      <div>
+      <div class="checkbox-container">
         <b-form-checkbox
           v-if="mode=='create'"
           id="checkbox-1"
@@ -82,14 +39,14 @@
         </b-form-checkbox>
       </div>
       
-      <div class="d-flex align-items-center justify-content-center mt-4">
+      <div class="button-container">
         <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn w-100">
           {{ $t("general.Save") }}
           <b-spinner small v-if="loading" label="Loading..." class="ml-3"></b-spinner>
         </b-button>
       </div>
 
-      <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
+      <div class="skip-container" v-if="shippingsTab.length && current_step == 1">
         <p role="button" class="text-center" @click="closesipping">
           Skip
           <b-icon variant="primary" icon="arrow-right-circle-fill"> </b-icon>
@@ -182,6 +139,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
+    // Fix scroll on mobile devices
+    this.fixMobileScroll();
+  },
+  beforeDestroy() {
+    // Clean up any event listeners
+    if (this._scrollHandler) {
+      window.removeEventListener('resize', this._scrollHandler);
+    }
   },
   computed: {
     shippingsTab() {
@@ -192,12 +157,32 @@ export default {
     }
   },
   methods: {
+    fixMobileScroll() {
+      this._scrollHandler = () => {
+        if (window.innerWidth <= 768) {
+          const formContainer = document.querySelector('.shipping-form-container');
+          if (formContainer) {
+            formContainer.style.overflow = 'auto';
+            formContainer.style.maxHeight = 'calc(100vh - 120px)';
+            formContainer.style.WebkitOverflowScrolling = 'touch'; 
+          }
+          const mapContainer = document.querySelector('.map-container');
+          if (mapContainer) {
+            mapContainer.style.height = '200px';
+          }
+        }
+      };
+      this._scrollHandler();
+      window.addEventListener('resize', this._scrollHandler);
+      window.scrollTo(0, 0);
+    },
+    
     initializeFormFields() {
       // Set default values for all required fields
       if (!this.form.country) this.form.country = "";
       if (!this.form.region) this.form.region = "";
       if (!this.form.city) this.form.city = "";
-      if (!this.form.zip_code) this.form.zip_code = ""; // Empty string instead of default
+      if (!this.form.zip_code) this.form.zip_code = "";
       if (!this.form.address) this.form.address = "";
     },
     
@@ -223,14 +208,11 @@ export default {
       // First try to geocode using the user's selected location
       geocoder.geocode({ 'location': { lat: parseFloat(lat), lng: parseFloat(lng) } }, (results, status) => {
         if (status === 'OK' && results && results.length > 0) {
-          console.log("Full geocode results:", results);
           this.processGeocodeResults(results);
         } else {
           // If location geocoding fails, try geocoding by address string
-          console.log("Location geocoding failed, trying by address string");
           geocoder.geocode({ 'address': address }, (results, status) => {
             if (status === 'OK' && results && results.length > 0) {
-              console.log("Address geocode results:", results);
               this.processGeocodeResults(results);
             } else {
               console.error('Geocoder failed due to: ' + status);
@@ -247,8 +229,6 @@ export default {
       const addressComponents = results[0].address_components;
       const formattedAddress = results[0].formatted_address;
       
-      console.log("Processing address:", formattedAddress);
-      
       // Reset values
       let city = "";
       let region = "";
@@ -258,7 +238,6 @@ export default {
       // Extract components
       for (let component of addressComponents) {
         const types = component.types;
-        console.log("Component:", component.long_name, "Types:", types);
         
         if (types.includes('country')) {
           country = component.long_name;
@@ -275,7 +254,6 @@ export default {
         // Extract postal code from Google API - this works for most countries
         if (types.includes('postal_code')) {
           postalCode = component.long_name;
-          console.log("✅ Found postal code from Google API:", postalCode);
         }
       }
       
@@ -291,15 +269,6 @@ export default {
         // If Google didn't provide a postal code, try to extract it from the formatted address
         this.extractPostalCodeFromText(formattedAddress);
       }
-      
-      // Log the final extracted values
-      console.log("Final extracted values:", {
-        country: this.form.country,
-        region: this.form.region,
-        city: this.form.city,
-        postalCode: this.form.zip_code,
-        address: this.form.address
-      });
     },
     
     tryDetailedGeocoding(address) {
@@ -311,10 +280,8 @@ export default {
       const potentialCity = parts.length > 0 ? parts[0] : "";
       
       if (potentialCity) {
-        console.log("Trying detailed geocoding with city:", potentialCity);
         geocoder.geocode({ 'address': potentialCity }, (results, status) => {
           if (status === 'OK' && results && results.length > 0) {
-            console.log("Detailed geocode results:", results);
             this.processGeocodeResults(results);
           } else {
             console.error('Detailed geocoding failed:', status);
@@ -350,17 +317,13 @@ export default {
                 text.match(asianPostalRegex);
       
       if (match) {
-        console.log("✅ Found postal code in text:", match[0]);
         this.form.zip_code = match[0];
       } else {
-        console.log("❌ No postal code pattern found in text");
-        this.form.zip_code = "00000"; // Empty string if no postal code found
+        this.form.zip_code = "00000"; // Default if no postal code found
       }
     },
     
     fallbackAddressExtraction(address) {
-      console.log("Using fallback address extraction for:", address);
-      
       // Simple fallback method
       const addressParts = address.split(',').map(part => part.trim());
       
@@ -469,8 +432,6 @@ export default {
           active: this.form.active
         };
         
-        console.log("Submitting form data:", formData);
-        
         this.$store
           .dispatch("checkout/createShipping", formData)
           .then(() => {
@@ -515,8 +476,6 @@ export default {
             active: this.form.active
           }
         };
-        
-        console.log("Updating with data:", shippingUpdate.data);
         
         const shipData = { ...shippingUpdate.data };
         
@@ -650,28 +609,82 @@ export default {
 </script>
 
 <style scoped>
-.modal-header {
-  margin-top: 20px !important;
-  color: black;
+.shipping-form-container {
+  width: 100%;
+  max-height: 100vh;
+  position: relative;
+  -webkit-overflow-scrolling: touch; 
+  overflow-y: auto;
+  padding-bottom: 20px;
 }
-.body-font-size {
-  color: black;
+
+.shipping-form {
+  padding: 0 10px;
 }
+
+.map-container {
+  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.checkbox-container {
+  margin: 15px 0;
+}
+
+.button-container {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.skip-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .hire-btn {
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
   border: none;
   font-weight: 600;
   border-radius: 10px;
+  padding: 12px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 }
-.btn-custom {
-  height: 38px;
-  min-width: 123px;
-  font-size: 14px;
+
+.body-font-size {
+  color: black;
 }
 @media only screen and (max-width: 768px) {
-  .btn-custom {
-    display: block;
-    width: 100%;
+  .shipping-form-container {
+    padding-bottom: 60px; 
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
+  }
+  
+  .map-container {
+    max-height: 200px;
+  }
+  
+  .button-container {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 10px 0;
+    margin-bottom: 0;
+    z-index: 100;
+  }
+  
+  .hire-btn {
+    font-size: 16px;
+    padding: 14px 20px;
   }
 }
 </style>

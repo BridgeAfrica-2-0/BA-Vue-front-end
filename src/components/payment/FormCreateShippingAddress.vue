@@ -626,7 +626,7 @@ export default {
   margin-bottom: 20px;
   width: 100%;
   height: auto;
-  min-height: 200px;
+  min-height: 300px;
   max-height: 300px;
 }
 

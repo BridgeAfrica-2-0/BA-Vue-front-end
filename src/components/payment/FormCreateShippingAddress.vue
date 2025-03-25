@@ -626,7 +626,7 @@ export default {
   margin-bottom: 20px;
   width: 100%;
   height: auto;
-  min-height: 300px;
+  min-height: 200px;
   max-height: 300px;
 }
 
@@ -668,7 +668,7 @@ export default {
   }
   
   .map-container {
-    max-height: 200px;
+    max-height: 300px;
   }
   
   .button-container {

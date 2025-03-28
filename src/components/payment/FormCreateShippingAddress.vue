@@ -1,52 +1,72 @@
 <template>
-  <div class="shipping-form-container">
-    <b-form @submit="onSubmit" @reset="onReset" class="shipping-form">
+  <div>
+    <b-form @submit="onSubmit" @reset="onReset">
       <b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
       <b-form-group class="body-font-size" id="input-group-name" :label="$t('general.Name')" label-for="name-input">
         <b-form-input id="name-input" v-model="username" type="text" required :readonly="!!username"></b-form-input>
       </b-form-group>
       <b-form-group class="body-font-size" id="input-group-phone" :label="$t('general.Phone')" label-for="phone-input">
-        <b-form-input id="phone-input" v-model="form.phone" type="tel" required inputmode="numeric" pattern="[0-9]*" maxlength="15"></b-form-input>
+        <b-form-input id="phone-input" v-model="form.phone" type="tel" required inputmode="numeric" pattern="[0-9]*"
+          maxlength="15"></b-form-input>
         <b-form-text class="text-muted">Note: Enter phone in digits only.</b-form-text>
       </b-form-group>
       <b-form-group class="body-font-size" id="input-group-email" :label="$t('general.email')" label-for="email-input">
         <b-form-input id="email-input" v-model="form.email" type="email" required></b-form-input>
       </b-form-group>
-      
-      <!-- For all users, use Google Map -->
-      <div class="map-container">
+
+      <!-- Dropdown selectors for Cameroon -->
+      <div v-if="isCameroon" class="row">
+        <div class="col">
+          <b-form-group class="body-font-size" id="input-group-country" :label="$t('general.Country')"
+            label-for="country-input">
+            <b-form-select id="country-input" v-model="form.country" :options="countries" value-field="id"
+              text-field="name" @change="getRegions" required></b-form-select>
+          </b-form-group>
+        </div>
+        <div class="col">
+          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Region')"
+            label-for="region-input">
+            <b-form-select id="region-input" v-model="form.region" :options="regions" value-field="id" text-field="name"
+              @change="getDestinations" required></b-form-select>
+          </b-form-group>
+        </div>
+        <div class="col">
+          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Destination')"
+            label-for="destination-input">
+            <b-form-select id="destination-input" v-model="form.city" :options="destinations" value-field="id"
+              text-field="name" required></b-form-select>
+          </b-form-group>
+        </div>
+      </div>
+
+      <!-- For non-Cameroon users, just use Google Map -->
+      <div v-if="!isCameroon">
         <!-- Hidden inputs for values that will be populated by Google Maps -->
         <input type="hidden" v-model="form.country">
         <input type="hidden" v-model="form.region">
         <input type="hidden" v-model="form.city">
         <input type="hidden" v-model="form.zip_code">
         <input type="hidden" v-model="form.address">
-        
+
+        <!-- Google Map Component -->
         <GoogleMap v-model="form.addressData" @update:modelValue="extractLocationData" />
       </div>
-      
-      <div class="checkbox-container">
-        <b-form-checkbox
-          v-if="mode=='create'"
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          v-model="isDefaultAddress"
-          unchecked-value="not_accepted"
-          style="color: #82939b;"
-        >
+
+      <div>
+        <b-form-checkbox v-if="mode == 'create'" id="checkbox-1" name="checkbox-1" value="accepted"
+          v-model="isDefaultAddress" unchecked-value="not_accepted" style="color: #82939b;">
           Mark as default address
         </b-form-checkbox>
       </div>
-      
-      <div class="button-container">
+
+      <div class="d-flex align-items-center justify-content-center mt-4">
         <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn w-100">
           {{ $t("general.Save") }}
           <b-spinner small v-if="loading" label="Loading..." class="ml-3"></b-spinner>
         </b-button>
       </div>
 
-      <div class="skip-container" v-if="shippingsTab.length && current_step == 1">
+      <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
         <p role="button" class="text-center" @click="closesipping">
           Skip
           <b-icon variant="primary" icon="arrow-right-circle-fill"> </b-icon>
@@ -93,11 +113,11 @@ export default {
   created() {
     // Initialize data
     this.username = this.$store.state.auth.user?.user?.name || "";
-    
+
     // Check if user is from Cameroon
     const isLocalVal = localStorage.getItem("isLocal");
     this.isCameroon = isLocalVal !== "false";
-    
+
     // Make sure form has required properties
     if (!this.form.addressData) {
       this.form.addressData = {
@@ -106,7 +126,7 @@ export default {
         longitude: null
       };
     }
-    
+
     // Initialize Google Maps if needed
     if (typeof google === 'undefined') {
       const script = document.createElement('script');
@@ -208,11 +228,14 @@ export default {
       // First try to geocode using the user's selected location
       geocoder.geocode({ 'location': { lat: parseFloat(lat), lng: parseFloat(lng) } }, (results, status) => {
         if (status === 'OK' && results && results.length > 0) {
+          console.log("Full geocode results:", results);
           this.processGeocodeResults(results);
         } else {
           // If location geocoding fails, try geocoding by address string
+          console.log("Location geocoding failed, trying by address string");
           geocoder.geocode({ 'address': address }, (results, status) => {
             if (status === 'OK' && results && results.length > 0) {
+              console.log("Address geocode results:", results);
               this.processGeocodeResults(results);
             } else {
               console.error('Geocoder failed due to: ' + status);
@@ -228,7 +251,9 @@ export default {
       // Get all address components from the first result
       const addressComponents = results[0].address_components;
       const formattedAddress = results[0].formatted_address;
-      
+
+      console.log("Processing address:", formattedAddress);
+
       // Reset values
       let city = "";
       let region = "";
@@ -238,7 +263,8 @@ export default {
       // Extract components
       for (let component of addressComponents) {
         const types = component.types;
-        
+        console.log("Component:", component.long_name, "Types:", types);
+
         if (types.includes('country')) {
           country = component.long_name;
         }
@@ -246,14 +272,15 @@ export default {
         if (types.includes('administrative_area_level_1')) {
           region = component.long_name;
         }
-        
+
         if (types.includes('locality') || types.includes('administrative_area_level_2')) {
           city = component.long_name;
         }
-        
+
         // Extract postal code from Google API - this works for most countries
         if (types.includes('postal_code')) {
           postalCode = component.long_name;
+          console.log("✅ Found postal code from Google API:", postalCode);
         }
       }
       
@@ -269,6 +296,15 @@ export default {
         // If Google didn't provide a postal code, try to extract it from the formatted address
         this.extractPostalCodeFromText(formattedAddress);
       }
+
+      // Log the final extracted values
+      console.log("Final extracted values:", {
+        country: this.form.country,
+        region: this.form.region,
+        city: this.form.city,
+        postalCode: this.form.zip_code,
+        address: this.form.address
+      });
     },
     
     tryDetailedGeocoding(address) {
@@ -280,8 +316,10 @@ export default {
       const potentialCity = parts.length > 0 ? parts[0] : "";
       
       if (potentialCity) {
+        console.log("Trying detailed geocoding with city:", potentialCity);
         geocoder.geocode({ 'address': potentialCity }, (results, status) => {
           if (status === 'OK' && results && results.length > 0) {
+            console.log("Detailed geocode results:", results);
             this.processGeocodeResults(results);
           } else {
             console.error('Detailed geocoding failed:', status);
@@ -311,19 +349,23 @@ export default {
       const asianPostalRegex = /\b\d{6,7}\b/;
       
       // Try in order of specificity/format
-      let match = text.match(alphaNumericPostalRegex) || 
-                text.match(numericPostalRegex) || 
-                text.match(europeanPostalRegex) ||
-                text.match(asianPostalRegex);
-      
+      let match = text.match(alphaNumericPostalRegex) ||
+        text.match(numericPostalRegex) ||
+        text.match(europeanPostalRegex) ||
+        text.match(asianPostalRegex);
+
       if (match) {
+        console.log("✅ Found postal code in text:", match[0]);
         this.form.zip_code = match[0];
       } else {
-        this.form.zip_code = "00000"; // Default if no postal code found
+        console.log("❌ No postal code pattern found in text");
+        this.form.zip_code = "00000"; // Empty string if no postal code found
       }
     },
-    
+
     fallbackAddressExtraction(address) {
+      console.log("Using fallback address extraction for:", address);
+
       // Simple fallback method
       const addressParts = address.split(',').map(part => part.trim());
       
@@ -412,34 +454,42 @@ export default {
       
       // Set active status based on checkbox
       this.form.active = this.isDefaultAddress ? "1" : "0";
-      
+
+      // Ensure city and region are strings, not objects
+      let cityValue = typeof this.form.city === 'object' ? this.form.city.id || this.form.city.destination || "" : this.form.city;
+      let regionValue = typeof this.form.region === 'object' ? this.form.region.id || this.form.region.destination_region || "" : this.form.region;
+
       if (this.mode === "create") {
-        // Create API payload
+        // Create API payload with string values for city and region
         const formData = {
           name: this.form.name,
           phone: this.form.phone,
           email: this.form.email,
           country: this.form.country,
-          region: this.form.region,
-          city: this.form.city,
-          // If zip_code is empty string, null, or undefined, don't add a default
-          zip_code: this.form.zip_code || "",
-          address: this.form.address,
+          region: regionValue,
+          city: cityValue,
+          zip_code: this.form.zip_code || null,
+          address: this.form.address || null,
           latitude: this.form.addressData?.latitude || null,
           longitude: this.form.addressData?.longitude || null,
           islogin: this.form.islogin,
           isLocal: this.form.isLocal,
           active: this.form.active
         };
-        
+
+        console.log("Submitting form data:", formData);
+
         this.$store
           .dispatch("checkout/createShipping", formData)
           .then(() => {
             this.loading = false;
             this.errorAppend = false;
             this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
+            if(this.form.active == '1')
+          {
             this.$emit("activeAddress", formData);
-            
+          }
+
             if (this.modal) {
               this.$emit("closecshippingm");
             } else {
@@ -465,20 +515,22 @@ export default {
             phone: this.form.phone,
             email: this.form.email,
             country: this.form.country,
-            region: this.form.region,
-            city: this.form.city,
+            region: regionValue,
+            city: cityValue,
             zip_code: this.form.zip_code || "",
             address: this.form.address,
             latitude: this.form.addressData?.latitude || null,
-            longitude: this.form.addressData?.longitude || null, 
+            longitude: this.form.addressData?.longitude || null,
             islogin: this.islogin,
             isLocal: this.isCameroon,
             active: this.form.active
           }
         };
-        
+
+        console.log("Updating with data:", shippingUpdate.data);
+
         const shipData = { ...shippingUpdate.data };
-        
+
         // Create FormData object
         for (let key in shippingUpdate.data) {
           formData.append(key, shippingUpdate.data[key]);
@@ -562,47 +614,101 @@ export default {
     },
     
     async getRegions(country) {
+      // Make sure country is a string
+      if (!country) return;
+
       this.loading = true;
-      let data = {
+      let requestData = {
         country: country,
       };
+
+      console.log("Getting regions for country:", country);
+
       await axios
-        .post(`shipping-address/select-region`, data)
+        .post(`shipping-address/select-region`, requestData)
         .then((res) => {
+          console.log("Region API response:", res.data);
+
           let data = [];
           for (let i = 0; i < res.data.data.length; i++) {
+            // Store both region ID (which is the region name) and the display name
+            const regionItem = res.data.data[i];
+            const regionId = regionItem.regions || regionItem; // Handle different API response formats
+            const regionName = regionItem.destination_region || regionId;
+
             let region = {
-              id: res.data.data[i].regions,
-              name: res.data.data[i].regions,
+              id: regionId,
+              name: regionName,
             };
             data.push(region);
           }
-          this.loading = false;
+
           this.regions = data;
+
+          // If we have regions but no selection, select the first one
+          if (this.regions.length > 0 && !this.form.region) {
+            this.form.region = this.regions[0].id;
+            // Since we've selected a region, get its destinations
+            this.getDestinations(this.form.region);
+          }
+
+          this.loading = false;
+          console.log("Regions loaded:", this.regions);
+          console.log("Selected region:", this.form.region);
         })
-        .catch((error) => console.dir(error));
+        .catch((error) => {
+          console.error("Error loading regions:", error);
+          this.loading = false;
+        });
     },
-    
+
     async getDestinations(region) {
+      // Make sure region is defined
+      if (!region) return;
+
+      console.log("Getting destinations for region:", region);
+
       this.loading = true;
-      let data = {
-        region: region,
+
+      // Create a simple request with the region name as a string
+      const requestData = {
+        region: region.destination_region
       };
+
+      console.log("Destination API request payload:", requestData);
+
       await axios
-        .post(`shipping-address/select-destination`, data)
+        .post(`shipping-address/select-destination`, requestData)
         .then((res) => {
+          console.log("Destinations API response:", res.data);
+
           let data = [];
           for (let i = 0; i < res.data.data.length; i++) {
-            let region = {
-              id: res.data.data[i].destinations,
-              name: res.data.data[i].destinations,
+            const destItem = res.data.data[i];
+            const destId = destItem.destinations || destItem;
+            const destName = destItem.destination || destId;
+
+            let destination = {
+              id: destId,
+              name: destName,
             };
-            data.push(region);
+            data.push(destination);
           }
           this.destinations = data;
+
+          // If we have destinations but no selection, select the first one
+          if (this.destinations.length > 0 && !this.form.city) {
+            this.form.city = this.destinations[0].id;
+          }
+
           this.loading = false;
+          console.log("Destinations loaded:", this.destinations);
+          console.log("Selected destination:", this.form.city);
         })
-        .catch((error) => console.dir(error));
+        .catch((error) => {
+          console.error("Error loading destinations:", error);
+          this.loading = false;
+        });
     }
   }
 };

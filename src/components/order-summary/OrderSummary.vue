@@ -14,7 +14,7 @@
       <b-tooltip target="tooltip-target-2" triggers="hover">
         {{ $t("general.This_is_the_Estimated") }}
       </b-tooltip>
-        <span v-if="isCameroon">{{ cartSummary?.shipping_info[0]?.shipping_method }} <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
+        <span v-if="isCameroon">Shipping Fee <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
         <span v-if="!isCameroon">DHL <img src="@/assets/filled.png" id="tooltip-target-1" alt="Info Icon" class="ml-1 info-image"></span>
         <span v-if="isCameroon && cartSummary?.shipping_info[0]?.shipping_cost !== 0">  {{ cartSummary?.shipping_info[0]?.shipping_cost  | locationPrice(rate)}} </span>
         <span v-if="!isCameroon">  {{ shippingFee | locationPrice(rate)}} </span>

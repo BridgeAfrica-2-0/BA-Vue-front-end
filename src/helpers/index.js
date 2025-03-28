@@ -127,7 +127,7 @@ export const checkCountryLocalisation = async () => {
 }
 
 export const checkCountry = async () => {
-  console.log('in helpers')
+  // console.log('in helpers')
   let ip = localStorage.getItem("ip") ?? null;
   if (!ip) {
     const res = await fetch('https://api.ipify.org?format=json');
@@ -146,16 +146,37 @@ export const checkCountry = async () => {
 
 export const getRate = async (fromCurrency, toCurrency) => {
   let currencyCheck;
-  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;
+  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;  
   if (userCountry?.country) {
-    currencyCheck = currencyMap[userCountry?.country];
+    // Get currency code from the country
+    const userCurrencyObject = currencyMap[userCountry?.country];
+    console.log("In getRate - userCurrencyObject:", userCurrencyObject);
+    
+    // Extract the currency code
+    if (userCurrencyObject && typeof userCurrencyObject === 'object') {
+      if (userCurrencyObject.currency) {
+        // If it has a currency property, extract the first currency code
+        const currencyCodes = Object.keys(userCurrencyObject.currency);
+        if (currencyCodes.length > 0) {
+          currencyCheck = currencyCodes[0];
+        }
+      } else {
+        // Direct access for any other structure
+        currencyCheck = Object.keys(userCurrencyObject)[0];
+      }
+    } else if (typeof userCurrencyObject === 'string') {
+      currencyCheck = userCurrencyObject;
+    }
+    
+    console.log("In getRate - extracted currencyCheck:", currencyCheck);
   }
+  
   if (currencyCheck === fromCurrency) {
     let conversionRate = localStorage.getItem("conversionRate") ?? null;
     if (!conversionRate) {
       // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
       const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
-      const data = response.data
+      const data = response.data;
       localStorage.setItem("conversionRate", data.rates[toCurrency]);
       return data.rates[toCurrency];
     } else {
@@ -168,7 +189,6 @@ export const getRate = async (fromCurrency, toCurrency) => {
     return data.rates[toCurrency];
   }
 }
-
 export let currencyMap = []
 
 async function fetchDataWithRetry(url, maxRetries = 3) {
@@ -191,19 +211,19 @@ async function fetchDataWithRetry(url, maxRetries = 3) {
 
 
 export const onInitializer = () => {
-
-  console.log('start initializer')
   return axios.get('https://restcountries.com/v3.1/all')
     .then(response => {
-      currencyMap = response.data.map(country => ({
-        "name": country.name.common,
-        "sigle": country.cca2,
-        "currency": country.currencies,
-        "flag": country.flags.png,
-      }))
+      // Convert array to object with country codes as keys
+      response.data.forEach(country => {
+        currencyMap[country.cca2] = {
+          "name": country.name.common,
+          "sigle": country.cca2,
+          "currency": country.currencies ,
+          "flag": country.flags.png,
+        };
+      });
     })
 }
-
 export const convertCurrency = async (defaultCurrency = null) => {
   try {
     let userCountry = null
@@ -224,7 +244,27 @@ export const convertCurrency = async (defaultCurrency = null) => {
     console.error('Error in helpers:', error);
   }
 }
-
+export const getCurrencyForCountry = (countryCode) => {
+  if (!countryCode || !currencyMap[countryCode]) {
+    return 'USD'; // Default fallback
+  }
+  
+  // Get the first currency code from the country's currencies object
+  const userCurrencyObject = currencyMap[countryCode].currency;
+  
+  // If userCurrencyObject is already the currency code, return it directly
+  if (typeof userCurrencyObject === 'string') {
+    return userCurrencyObject;
+  }
+  
+  // Otherwise extract the first key from the currency object
+  if (userCurrencyObject && typeof userCurrencyObject === 'object') {
+    const currencyCode = Object.keys(userCurrencyObject)[0];
+    return currencyCode;
+  }
+  
+  return 'USD'; // Fallback
+};
 export const convertToCurrency = async (defaultCurrency = null) => {
   try {
     let userCurrency;
@@ -237,7 +277,10 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       if (!userCountry?.country) {
         userCountry = await checkCountry();
       }
-      userCurrency = currencyMap[userCountry?.country];
+    //  let  userCurrencyObject = currencyMap[userCountry?.country];
+      // userCurrency = userCurrencyObject?.currency;
+      userCurrency = getCurrencyForCountry(userCountry?.country);
+      console.log("*********",userCurrency)
       if (!userCurrency) {
         userCurrency = 'USD'
       }

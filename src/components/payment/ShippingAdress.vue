@@ -265,21 +265,24 @@ export default {
             .catch(() => {
               loader.hide();
             });
-          this.$store.dispatch("checkout/shippingFee")
-            .then(() => {
-              this.buttonDisabled = false;
-            })
-            .catch((error) => {
-              if (error) {
-                console.log("Erro+++++++++++++++", error);
-                this.buttonDisabled = true;
-                this.flashMessage.show({
-                  status: "error",
-                  message: "The shipping address is not valid",
-                  time: 5000,
+            if(!this.isCameroon)
+            {
+              this.$store.dispatch("checkout/shippingFee")
+                .then(() => {
+                  this.buttonDisabled = false;
+                })
+                .catch((error) => {
+                  if (error) {
+                    console.log("Erro+++++++++++++++", error);
+                    this.buttonDisabled = true;
+                    this.flashMessage.show({
+                      status: "error",
+                      message: "The shipping address is not valid",
+                      time: 5000,
+                    });
+                  }
                 });
-              }
-            });
+            }
           // this.shippingsTab();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])

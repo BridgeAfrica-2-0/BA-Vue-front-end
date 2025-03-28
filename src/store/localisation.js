@@ -71,8 +71,10 @@ export default {
 
       const countries = currencyMap
       const userCountry = await checkCountryLocalisation()
-      const findCountryInfo = countries.find(u => u.sigle == userCountry)
+      // const findCountryInfo = countries.find(u => u.sigle == userCountry)
+      const findCountryInfo = countries[userCountry];
       const rate = await getRate((Object.keys(findCountryInfo.currency))[0], 'XAF')
+      console.log("+++++++++++",rate)
 
       const constrySelected = localStorage.getItem("countrySelected")
       const currencySelected = localStorage.getItem("currencySelected")

@@ -241,6 +241,14 @@ export default {
     handleEditClick() {
       this.$emit("edit-button-clicked");
     },
+    async getCartSummary() {
+      await this.$store
+        .dispatch("checkout/getCartSummary", this.islogin)
+        .then(() => { })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
     shipping(data) {
       this.activeData = { ...data };
       let loader = this.$loading.show({
@@ -284,6 +292,7 @@ export default {
                 });
             }
           // this.shippingsTab();
+          this.getCartSummary();
           this.$store
             .dispatch("checkout/getCartt", this.$store.getters["auth/isLogged"])
             .then(() => {

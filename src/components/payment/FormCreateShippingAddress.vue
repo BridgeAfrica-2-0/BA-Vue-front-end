@@ -15,28 +15,41 @@
       </b-form-group>
 
       <!-- Dropdown selectors for Cameroon -->
-      <div v-if="isCameroon" class="row">
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-country" :label="$t('general.Country')"
-            label-for="country-input">
-            <b-form-select id="country-input" v-model="form.country" :options="countries" value-field="id"
-              text-field="name" @change="getRegions" required></b-form-select>
-          </b-form-group>
+      <div v-if="isCameroon">
+        <div class="row">
+          <div class="col">
+            <b-form-group class="body-font-size" id="input-group-country" :label="$t('general.Country')"
+              label-for="country-input">
+              <b-form-select id="country-input" v-model="form.country" :options="countries" value-field="id"
+                text-field="name" @change="getRegions" required></b-form-select>
+            </b-form-group>
+          </div>
+          <div class="col">
+            <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Region')"
+              label-for="region-input">
+              <b-form-select id="region-input" v-model="form.region" :options="regions" value-field="id" text-field="name"
+                @change="getDestinations" required></b-form-select>
+            </b-form-group>
+          </div>
+          <div class="col">
+            <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Destination')"
+              label-for="destination-input">
+              <b-form-select id="destination-input" v-model="form.city" :options="destinations" value-field="id"
+                text-field="name" required></b-form-select>
+            </b-form-group>
+          </div>
         </div>
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Region')"
-            label-for="region-input">
-            <b-form-select id="region-input" v-model="form.region" :options="regions" value-field="id" text-field="name"
-              @change="getDestinations" required></b-form-select>
-          </b-form-group>
-        </div>
-        <div class="col">
-          <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Destination')"
-            label-for="destination-input">
-            <b-form-select id="destination-input" v-model="form.city" :options="destinations" value-field="id"
-              text-field="name" required></b-form-select>
-          </b-form-group>
-        </div>
+        
+        <!-- Add address text field for Cameroon users -->
+        <b-form-group class="body-font-size" id="input-group-address" :label="$t('general.Address')" label-for="address-input">
+          <b-form-input
+            id="address-input"
+            v-model="form.address"
+            type="text"
+            placeholder="Enter your detailed address"
+            required
+          ></b-form-input>
+        </b-form-group>
       </div>
 
       <!-- For non-Cameroon users, just use Google Map -->
@@ -441,6 +454,13 @@ export default {
         if (!this.form.country || !this.form.region || !this.form.city) {
           this.errorAppend = true;
           alert("Country, Region, and City are required fields. Please select a valid address.");
+          return;
+        }
+      } else {
+        // For Cameroon users, check if address field is empty
+        if (!this.form.address) {
+          this.errorAppend = true;
+          alert("Detailed address is required. Please enter your address.");
           return;
         }
       }

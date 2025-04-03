@@ -130,7 +130,7 @@
                 <div class="shipping-info">
                   <h5 class="h-color">{{ $t("general.Ship_to") }}</h5>
                   <p class="mb-1">{{ shipping_item?.name }}</p>
-                  <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }}, {{ shipping_item?.zip_code }}
+                  <p class="mb-1">{{ shipping_item?.city }}, {{ shipping_item?.region }} {{ shipping_item?.zip_code ? ','+ shipping_item?.zip_code : '' }} {{ shipping_item?.address ? ','+ shipping_item?.address : ''  }} 
                   </p>
                   <p>{{ shipping_item?.country }}</p>
                 </div>

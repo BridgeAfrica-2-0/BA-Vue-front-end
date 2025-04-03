@@ -2,7 +2,6 @@
   <base-layout>
     <template v-slot:main>
       <div class="container-flex">
-        <navbar />
         <hr />
         <!-- Desktop Top Bar -->
         <div class="container">
@@ -221,7 +220,7 @@
 </template>
 <script>
 import axios from "axios";
-import navbar from "./navbar.vue";
+// import navbar from "./navbar.vue";
 import PaymentOperator from "./payment/PaymentOperator";
 import RequestPayment from "./payment/RequestPayment";
 import moment from "moment";
@@ -229,7 +228,7 @@ import moment from "moment";
 import BaseLayout from "@/layouts/Layout"
 
 export default {
-  components: { navbar, PaymentOperator, RequestPayment, BaseLayout },
+  components: {  PaymentOperator, RequestPayment, BaseLayout },
   computed: {
     islogin() {
       return this.$store.getters["auth/isLogged"];

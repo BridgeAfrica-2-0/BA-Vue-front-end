@@ -361,236 +361,101 @@
       </div>
     </section>
 
-    <section class="p-0 m-0 bg-color">
-      <div class="container mt-0 p-0" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-        <div class="row mt-0">
-          <div class="col-lg-4 p-0 h-100 quote-img">
-            <v-lazy-image src="assets/home/quotation.png" alt="" />
-          </div>
 
-          <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
-            <div class="m-left">
-              <h3>
-                <span> {{ $t("general.let_help_u") }} </span>
-                <span style="color: black;">{{
-                  $t("general.find_products_and_services")
-                  }}</span>
-              </h3>
-              <form novalidate @submit.prevent="validateUser">
-                <div class="form pt-1 row">
-                  <div class="col-md-12 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.looking_for_something") }}
-                    </label>
-                    <md-field :class="getValidationClass('pname')">
-                      <md-input type="text" name="name" class="ba-input" id="name"
-                        :placeholder="$t('general.input_product_keyword_or_name')" v-model="form.pname" />
-
-                      <span class="md-error" v-if="!$v.form.pname.required">
-                        required
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0 pr-2">
-                    <label for="qunatity" class="pb-0 label-color">
-                      {{ $t("general.Quantity") }}
-                    </label>
-                    <md-field :class="getValidationClass('quantity')">
-                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity"
-                        :placeholder="$t('general.quantity')" v-model="form.quantity" />
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="uname" class="pb-0 label-color">
-                      {{ $t("general.full_name") }}
-                    </label>
-                    <md-field :class="getValidationClass('name')">
-                      <md-input type="text" name="uname" id="uname" class="ba-input"
-                        :placeholder="$t('general.full_name')" v-model="form.name" />
-
-                      <span class="md-error" v-if="!$v.form.name.required">
-                        {{ $t("auth.First_Name_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="email" class="pb-0 label-color">
-                      {{ $t("general.Email") }}
-                    </label>
-                    <md-field class="">
-                      <md-input type="email" name="email" id="email" placeholder="Email" class="ba-input"
-                        v-model="form.email" />
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.Tel") }}
-                    </label>
-                    <md-field :class="getValidationClass('tel')">
-                      <md-input type="tel" name="tel" id="tel" placeholder="Tel." class="ba-input "
-                        v-model="form.tel" />
-
-                      <span class="md-error" v-if="!$v.form.tel.required">
-                        {{ $t("auth.tel_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-                  <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
-                    <b-button type="submit" variant="primary" class="quote-btn">
-                      {{ $t("general.Request_For_Quotation") }}
-                      <span class="arrow-icon-wrapper">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </b-button>
-                  </div>
-                  <div></div>
-                </div>
-              </form>
-            </div>
-          </div>
+    <section class="p-0 m-0 merged-section">
+  <div class="container mt-4" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
+    <div class="text-center">
+      <h3>{{ $t("general.looking_for_something_special") }} ?</h3>
+      <p style="color: black;" class="px-2">Explore Cameroon's products and services. From custom tailoring to local crafts, we've got you covered.to Measure tailoring service that represents outstanding value for money</p>
+    </div>
+    
+    <div class="row mt-md-5 mb-md-5">
+      <div class="col-md-5 mt-4" style="display: flex; justify-content: center;">
+        <div class="hire-div">
+          <video width="100%" style="object-fit:contain; border-radius: 10px; border-radius:10px" controls poster="assets/home/new_hire.png">
+            <source src="assets/video/intro_video.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
-    </section>
-
-    <section class="p-0 m-0 quotation-form-mobile">
-      <div class="container mt-4" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-        <div class="row mt-0">
-          <div class="text-center">
-            <h3> {{ $t("general.looking_for_something_special") }} ?</h3>
-            <p style="color: black;" class="px-2"> Explore Cameroon's products and services. From custom tailoring to
-              local crafts, we've got you covered.to Measure tailoring service that represents outstanding value for
-              money</p>
-          </div>
-          <div class="col-lg-4 h-100 quote-img">
-            <v-lazy-image src="assets/home/quotation-img-mobile.png" alt="" />
-          </div>
-
-          <div class="col-lg-8 mt-md-5 align-items-center pl-lg-5 pl-md-5 quote-form" id="quote">
-            <div class="m-left">
-              <form novalidate @submit.prevent="validateUser">
-                <div class="form pt-1 row">
-                  <div class="col-md-12 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.looking_for_something") }}
-                    </label>
-                    <md-field :class="getValidationClass('pname')">
-                      <md-input type="text" name="name" class="ba-input" id="name"
-                        placeholder="Input Product Keyword or Name" v-model="form.pname" />
-
-                      <span class="md-error" v-if="!$v.form.pname.required">
-                        required
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="qunatity" class="pb-0 label-color">
-                      {{ $t("general.Quantity") }}
-                    </label>
-                    <md-field :class="getValidationClass('quantity')">
-                      <md-input class="ba-input " type="tel" name="qunatity" id="quantity" placeholder="Quantity"
-                        v-model="form.quantity" />
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="uname" class="pb-0 label-color">
-                      {{ $t("general.full_name") }}
-                    </label>
-                    <md-field :class="getValidationClass('name')">
-                      <md-input type="text" name="uname" id="uname" class="ba-input" placeholder="Full Name"
-                        v-model="form.name" />
-
-                      <span class="md-error" v-if="!$v.form.name.required">
-                        {{ $t("auth.First_Name_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-
-                  <div class="col-md-6 p-0">
-                    <label for="email" class="pb-0 label-color">
-                      {{ $t("general.Email") }}
-                    </label>
-                    <md-field class="">
-                      <md-input type="email" name="email" id="email" placeholder="Email" class="ba-input"
-                        v-model="form.email" />
-                    </md-field>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <label for="name" class="pb-0 label-color">
-                      {{ $t("general.Tel") }}
-                    </label>
-                    <md-field :class="getValidationClass('tel')">
-                      <md-input type="tel" name="tel" id="tel" placeholder="Tel." class="ba-input "
-                        v-model="form.tel" />
-
-                      <span class="md-error" v-if="!$v.form.tel.required">
-                        {{ $t("auth.tel_is_required") }}
-                      </span>
-                    </md-field>
-                  </div>
-                  <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
-                    <b-button type="submit" variant="primary" class="quote-btn">
-                      {{ $t("general.Request_For_Quotation") }}
-                      <span class="arrow-icon-wrapper">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </b-button>
-                  </div>
-                  <div></div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- background: linear-gradient(to right, #FFF 20%, rgba(255, 234, 224, 0.3) 50%, #FFF 100%); -->
-    <section style="background-color: white;" class="tailor-section p-0 mt-4 container">
-      <div class="border-class pb-4" data-aos="fade-left" data-aos-offset="70px"
-        data-aos-duration="1500">
-        <div class="row">
-          <div class="col-md-6 tailor-content px-4">
-            <div class="pl-4">
-              <div class=" m-auto mt-md-3  p-2 " style="border-radius: 15px;">
-                <h3>
-                  <span> {{ $t("general.Tailor") }} </span>
-                  <span style="color: black;">- {{ $t("general.Transformed") }}
+      
+      <div class="col-md-7 align-items-center pl-lg-4 pl-md-4 quote-form" id="quote">
+        <div class="m-left">
+          <form novalidate @submit.prevent="validateUser">
+            <div class="form pt-1 row">
+              <div class="col-md-12 p-0">
+                <label for="name" class="pb-0 label-color">
+                  {{ $t("general.looking_for_something") }}
+                </label>
+                <md-field :class="getValidationClass('pname')">
+                  <md-input type="text" name="name" class="ba-input" id="name"
+                    placeholder="Input Product Keyword or Name" v-model="form.pname" />
+                  <span class="md-error" v-if="!$v.form.pname.required">
+                    required
                   </span>
-                </h3>
-                <div class="d-block">
-                  <p style="color: black;">
-                    {{ $t("general.hire_a_professional_tailor") }}
-                  </p>
-                </div>
+                </md-field>
               </div>
-              <div class=" p-2 hire-btn-div">
-                <b-button @click="scrollTo" variant="primary" class="hire-btn">
-                  {{ $t("general.hire_tailor") }}
+
+              <div class="col-md-6 p-0">
+                <label for="qunatity" class="pb-0 label-color">
+                  {{ $t("general.Quantity") }}
+                </label>
+                <md-field :class="getValidationClass('quantity')">
+                  <md-input class="ba-input" type="tel" name="qunatity" id="quantity" placeholder="Quantity"
+                    v-model="form.quantity" />
+                </md-field>
+              </div>
+
+              <div class="col-md-6 p-0">
+                <label for="uname" class="pb-0 label-color">
+                  {{ $t("general.full_name") }}
+                </label>
+                <md-field :class="getValidationClass('name')">
+                  <md-input type="text" name="uname" id="uname" class="ba-input" placeholder="Full Name"
+                    v-model="form.name" />
+                  <span class="md-error" v-if="!$v.form.name.required">
+                    {{ $t("auth.First_Name_is_required") }}
+                  </span>
+                </md-field>
+              </div>
+
+              <div class="col-md-6 p-0">
+                <label for="email" class="pb-0 label-color">
+                  {{ $t("general.Email") }}
+                </label>
+                <md-field class="">
+                  <md-input type="email" name="email" id="email" placeholder="Email" class="ba-input"
+                    v-model="form.email" />
+                </md-field>
+              </div>
+              
+              <div class="col-md-6 p-0">
+                <label for="name" class="pb-0 label-color">
+                  {{ $t("general.Tel") }}
+                </label>
+                <md-field :class="getValidationClass('tel')">
+                  <md-input type="tel" name="tel" id="tel" placeholder="Tel." class="ba-input"
+                    v-model="form.tel" />
+                  <span class="md-error" v-if="!$v.form.tel.required">
+                    {{ $t("auth.tel_is_required") }}
+                  </span>
+                </md-field>
+              </div>
+              
+              <div class="col-md-12 col-lg-5 mt-3 quote-btn-div p-0">
+                <b-button type="submit" variant="primary" class="quote-btn">
+                  {{ $t("general.Request_For_Quotation") }}
                   <span class="arrow-icon-wrapper">
                     <i class="fas fa-arrow-right"></i>
                   </span>
                 </b-button>
               </div>
             </div>
-          </div>
-
-          <div class="col-md-6 mt-4" style="display: flex; justify-content: center;">
-            <div class="hire-div">
-              <video width="100%" style="object-fit:contain; border-radius: 10px;  border-radius:10px" controls
-                poster="assets/home/new_hire.png">
-                <source src="assets/video/intro_video.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <section class="bg-whitee network camroon-focus-desktop">
       <div class="container row  mt-3" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">

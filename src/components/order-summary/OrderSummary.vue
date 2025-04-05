@@ -1,4 +1,3 @@
-<!-- OrderSummary.vue -->
 <template>
   <div class="order-summary">
     <div class="summary-section">
@@ -171,8 +170,6 @@ export default {
     }
   },
   async mounted() {
-    // this.userLocation = await checkCountry();
-    // this.rate = await convertToCurrency();
     this.getCurrencyConvert();
     this.isCameroon = this.userLocation?.country === 'CM';
     if (this.orderSummary) {
@@ -244,7 +241,6 @@ cursor: pointer;
 
 .order-summary {
   width: 100%;
-  /* max-width: 350px; */
   margin: 0 auto;
   color: black;
 }

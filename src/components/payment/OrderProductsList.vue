@@ -285,21 +285,52 @@ export default {
     this.rate = await convertToCurrency();
   },
   filters: {
+    // locationPrice(ev, rate) {
+    //   let priceFormatted=0.0;
+    //   if(rate)
+    //  {
+    //    if (rate?.currency === 'XAF') {
+    //      priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
+    //    } else {
+    //      priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
+    //    }      
+    //  }
+    //  else{
+    //   priceFormatted = `0.0`
+    //  }
+    //   return priceFormatted;
+    // }
     locationPrice(ev, rate) {
-      let priceFormatted=0.0;
-      if(rate)
-     {
-       if (rate?.currency === 'XAF') {
-         priceFormatted = `${(ev / rate.rate).toFixed(2).replace('.', ',')} ${rate.currency}`;
-       } else {
-         priceFormatted = ` ${(ev / rate?.rate).toFixed(2)} ${rate?.currency}`;
-       }      
-     }
-     else{
-      priceFormatted = `0.0`
-     }
-      return priceFormatted;
+    if (!ev || isNaN(ev)) return '0.00';
+    if (!rate || !rate.currency) return `${parseFloat(ev).toFixed(2)} USD`;
+    
+    try {
+      // Convert the value according to the rate
+      const convertedValue = parseFloat(ev) / (rate.rate || 1);
+      
+      // Format according to currency
+      switch (rate.currency) {
+        case 'XAF':
+          // Use comma as decimal separator for XAF
+          return `${convertedValue.toFixed(2).replace('.', ',')} ${rate.currency}`;
+        case 'EUR':
+          return `${convertedValue.toFixed(2)} €`;
+        case 'GBP':
+          return `£${convertedValue.toFixed(2)}`;
+        case 'JPY':
+          // No decimal places for JPY
+          return `¥${Math.round(convertedValue)}`;
+        case 'PKR':
+          return `Rs ${convertedValue.toFixed(2)}`;
+        default:
+          // Default format with currency code
+          return `${convertedValue.toFixed(2)} ${rate.currency}`;
+      }
+    } catch (error) {
+      console.error('Error in locationPrice filter:', error);
+      return `${parseFloat(ev).toFixed(2)} ${rate?.currency || 'USD'}`;
     }
+  }
   },
   watch: {
     currentPage: function(val) {

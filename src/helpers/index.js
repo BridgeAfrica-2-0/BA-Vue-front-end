@@ -44,8 +44,6 @@ export const formatNumber = (num) => {
   return num;
 };
 
-console.log(localStorage.getItem("lang"));
-
 export const diffBetweenTwoDate = (end, start) => {
   const startDate = moment(start);
   const endDate = moment(end);
@@ -115,150 +113,182 @@ export const setGuestIdentifier = () => {
   localStorage.setItem("guest_identifier", guestIdentifier);
   return guestIdentifier;
 };
+
 export const getGuestIdentifier = () => {
   return localStorage.getItem("guest_identifier") ?? null;
 };
 
+export let currencyMap = [];
 
-// export const checkCountryLocalisation = async () => {
-//   const response = await fetch('https://ipapi.co/json/');
-//   const data = await response.json();
-//   return data.country; // e.g., 'US'
-// }
+export const checkCountry = async () => {
+  try {
+    // Try to get cached country data first
+    const cachedCountry = localStorage.getItem('country');
+    if (cachedCountry) {
+      try {
+        const countryData = JSON.parse(cachedCountry);
+        if (countryData && countryData.country) {
+          console.log("Using cached country data:", countryData);
+          return countryData;
+        }
+      } catch (e) {
+        console.error("Error parsing cached country data:", e);
+      }
+    }
+    
+    // Get IP address
+    let ip = localStorage.getItem("ip");
+    if (!ip) {
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        ip = data.ip;
+        localStorage.setItem("ip", ip);
+      } catch (ipError) {
+        console.error('Failed to get IP address:', ipError);
+        return { country: 'US' }; // Default fallback
+      }
+    }
+    
+    const response = await axios.get('user/location', { params: { ip: ip } });
+    const countryData = response.data;
+    
+    // Cache the result
+    if (countryData && countryData.country) {
+      localStorage.setItem('country', JSON.stringify(countryData));
+    }
+    
+    return countryData;
+  } catch (error) {
+    console.error('API call failed in checkCountry:', error);
+    
+    // Try navigator.language as fallback
+    try {
+      if (navigator && navigator.language) {
+        const language = navigator.language;
+        const countryCode = language.split('-')[1] || language.substring(0, 2).toUpperCase();
+        return { country: countryCode };
+      }
+    } catch (navError) {
+      console.error('Navigator language fallback failed:', navError);
+    }
+    
+    return { country: 'US' }; // Ultimate fallback
+  }
+};
+
+// Legacy function for backward compatibility
 export const checkCountryLocalisation = async () => {
   try {
-    let ip = localStorage.getItem("ip") ?? null;
-    if (!ip) {
-      const res = await fetch('https://api.ipify.org?format=json');
-      const data1 = await res.json();
-      ip = data1.ip;
-      localStorage.setItem("ip", ip);
-    }
-    const response = await axios.get('user/location', { params: { ip: ip } });
-    return response.data.country; 
+    const countryData = await checkCountry();
+    return countryData?.country || 'US';
   } catch (error) {
     console.error('Failed to get country location:', error);
     return localStorage.getItem("country")?.country || 'US';
   }
 };
-export const checkCountry = async () => {
-  // console.log('in helpers')
-  let ip = localStorage.getItem("ip") ?? null;
-  if (!ip) {
-    const res = await fetch('https://api.ipify.org?format=json');
-    const data1 = await res.json();
-    ip = data1.ip;
-    localStorage.setItem("ip", ip);
-  }
+
+// Improved getRate function with better error handling
+export const getRate = async (fromCurrency, toCurrency) => {
+  // If currencies are the same, return 1
+  if (fromCurrency === toCurrency) return 1;
+  
   try {
-    const response = await axios.get('user/location', { params: { ip: ip } });
-    return response.data;
+    // Check if we have a cached rate
+    const cacheKey = `rate_${fromCurrency}_${toCurrency}`;
+    const cachedRate = localStorage.getItem(cacheKey);
+    
+    if (cachedRate) {
+      console.log(`Using cached conversion rate for ${fromCurrency} to ${toCurrency}`);
+      return parseFloat(cachedRate);
+    }
+    
+    // Fetch fresh rate from API
+    console.log(`Fetching conversion rate for ${fromCurrency} to ${toCurrency}`);
+    const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
+    
+    if (response.data && response.data.rates && response.data.rates[toCurrency]) {
+      const rate = response.data.rates[toCurrency];
+      
+      // Cache the result for future use (1 hour expiration)
+      localStorage.setItem(cacheKey, rate.toString());
+      setTimeout(() => localStorage.removeItem(cacheKey), 60 * 60 * 1000);
+      
+      return rate;
+    } else {
+      console.error("Invalid response format from currency API:", response.data);
+      return getFallbackRate(fromCurrency, toCurrency);
+    }
   } catch (error) {
-    console.error('API call failed:', error);
+    console.error(`Error getting conversion rate from ${fromCurrency} to ${toCurrency}:`, error);
+    return getFallbackRate(fromCurrency, toCurrency);
   }
-  return null;
 };
 
-export const getRate = async (fromCurrency, toCurrency) => {
-  let currencyCheck;
-  let userCountry = JSON.parse(localStorage.getItem('country')) ?? null;  
-  if (userCountry?.country) {
-    // Get currency code from the country
-    const userCurrencyObject = currencyMap[userCountry?.country];
-    console.log("In getRate - userCurrencyObject:", userCurrencyObject);
-    
-    // Extract the currency code
-    if (userCurrencyObject && typeof userCurrencyObject === 'object') {
-      if (userCurrencyObject.currency) {
-        // If it has a currency property, extract the first currency code
-        const currencyCodes = Object.keys(userCurrencyObject.currency);
-        if (currencyCodes.length > 0) {
-          currencyCheck = currencyCodes[0];
-        }
-      } else {
-        // Direct access for any other structure
-        currencyCheck = Object.keys(userCurrencyObject)[0];
-      }
-    } else if (typeof userCurrencyObject === 'string') {
-      currencyCheck = userCurrencyObject;
-    }
-    
-    console.log("In getRate - extracted currencyCheck:", currencyCheck);
+// Fallback for when the API fails
+const getFallbackRate = (fromCurrency, toCurrency) => {
+  // Common fallback rates to XAF (Central African CFA franc)
+  const fallbackRates = {
+    'USD': 582.25,  // USD to XAF
+    'EUR': 636.88,  // EUR to XAF
+    'GBP': 754.59,  // GBP to XAF
+    'JPY': 3.91,    // JPY to XAF
+    'CNY': 80.29,   // CNY to XAF
+    'INR': 6.97,    // INR to XAF
+    'PKR': 2.08,    // PKR to XAF
+    'NGN': 0.37,    // NGN to XAF
+    'ZAR': 31.54,   // ZAR to XAF
+    'XAF': 1.0      // XAF to XAF
+  };
+  
+  if (toCurrency === 'XAF' && fallbackRates[fromCurrency]) {
+    console.log(`Using fallback rate for ${fromCurrency} to XAF`);
+    return fallbackRates[fromCurrency];
   }
   
-  if (currencyCheck === fromCurrency) {
-    let conversionRate = localStorage.getItem("conversionRate") ?? null;
-    if (!conversionRate) {
-      // const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-      const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
-      const data = response.data;
-      localStorage.setItem("conversionRate", data.rates[toCurrency]);
-      return data.rates[toCurrency];
-    } else {
-      return conversionRate;
+  // Default fallback (approximate USD to XAF rate)
+  console.log(`No fallback rate available for ${fromCurrency} to ${toCurrency}, using USD rate`);
+  return fallbackRates['USD'];
+};
+
+// New, improved function to extract currency code from country code
+export const extractCurrencyCode = (countryCode) => {
+  if (!countryCode) return null;
+  
+  const countryEntry = currencyMap[countryCode];
+  if (!countryEntry) return null;
+  
+  // Handle the structure that comes from REST Countries API
+  if (countryEntry.currency) {
+    const currencyObj = countryEntry.currency;
+    
+    // If it's directly a string (rare case)
+    if (typeof currencyObj === 'string') {
+      return currencyObj;
     }
-  }
-  else {
-    const response = await axios.get(`user/currency`, { params: { currency: fromCurrency } });
-    const data = response.data;
-    return data.rates[toCurrency];
-  }
-}
-export let currencyMap = []
-
-async function fetchDataWithRetry(url, maxRetries = 3) {
-  let attempt = 0;
-
-  while (attempt < maxRetries) {
-    try {
-      const response = await axios.get(url);
-      return response.data;
-    } catch (error) {
-      attempt++;
-      console.error(`Attempt ${attempt} failed. Retrying...`);
-      if (attempt >= maxRetries) {
-        console.error('All retry attempts failed.');
-        throw error; // Lance une erreur après le dernier échec
+    
+    // Most common case: object with currency codes as keys
+    if (typeof currencyObj === 'object' && currencyObj !== null) {
+      const currencyCodes = Object.keys(currencyObj);
+      if (currencyCodes.length > 0) {
+        return currencyCodes[0]; // Return first currency code (e.g., "PKR" for Pakistan)
       }
     }
   }
-}
+  
+  // For specific countries, provide common currencies
+  const countryCurrencyMap = {
+    'US': 'USD', 'GB': 'GBP', 'EU': 'EUR', 'JP': 'JPY', 'CN': 'CNY',
+    'IN': 'INR', 'RU': 'RUB', 'BR': 'BRL', 'CA': 'CAD', 'AU': 'AUD',
+    'ZA': 'ZAR', 'CH': 'CHF', 'PK': 'PKR', 'NG': 'NGN', 'EG': 'EGP',
+    'AE': 'AED', 'SA': 'SAR', 'TR': 'TRY', 'CM': 'XAF'
+  };
+  
+  // Fallback to hardcoded map for common country/currency pairs
+  return countryCurrencyMap[countryCode] || null;
+};
 
-
-export const onInitializer = () => {
-  return axios.get('https://restcountries.com/v3.1/all')
-    .then(response => {
-      // Convert array to object with country codes as keys
-      response.data.forEach(country => {
-        currencyMap[country.cca2] = {
-          "name": country.name.common,
-          "sigle": country.cca2,
-          "currency": country.currencies ,
-          "flag": country.flags.png,
-        };
-      });
-    })
-}
-export const convertCurrency = async (defaultCurrency = null) => {
-  try {
-    let userCountry = null
-    let userCurrency = null
-    if (!defaultCurrency) {
-      userCountry = await checkCountryLocalisation();
-      userCurrency = currencyMap[userCountry] || 'XAF';
-    } else {
-      userCurrency = defaultCurrency
-    }
-
-    const conversionRate = await getRate(userCurrency, 'XAF');
-
-    return { "currency": userCurrency, rate: conversionRate }
-
-  } catch (error) {
-    console.error('Error:', error);
-    console.error('Error in helpers:', error);
-  }
-}
+// Updated convertToCurrency function with better currency detection
 export const convertToCurrency = async (defaultCurrency = null) => {
   try {
     let userCurrency;
@@ -275,10 +305,10 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       }
     }
     
-    // Use provided default, or proceed with detection
+    // Use provided default currency if specified
     if (defaultCurrency) {
       userCurrency = defaultCurrency;
-      console.log("Using default currency:", userCurrency);
+      console.log("Using provided default currency:", userCurrency);
     }
     else {
       // Get country information from storage or API
@@ -304,37 +334,10 @@ export const convertToCurrency = async (defaultCurrency = null) => {
         }
       }
       
-      // Debug: Check country map
-      console.log("Country code:", userCountry?.country);
-      console.log("Currency map entry:", currencyMap[userCountry?.country]);
-      
-      // Get currency for country
+      // Get currency for country using improved extraction
       if (userCountry?.country) {
-        // Direct access to country's currency map
-        const countryMapEntry = currencyMap[userCountry.country];
-        console.log("Currency map entry for country:", countryMapEntry);
-        
-        if (countryMapEntry) {
-          // Check currency property format
-          if (countryMapEntry.currency) {
-            // If it has a currency property with object structure
-            const currencyObj = countryMapEntry.currency;
-            if (typeof currencyObj === 'object') {
-              // Get first currency code
-              const firstCurrencyKey = Object.keys(currencyObj)[0];
-              userCurrency = firstCurrencyKey;
-              console.log("Extracted currency from object:", userCurrency);
-            } else {
-              // Direct string value
-              userCurrency = currencyObj;
-              console.log("Using direct currency string:", userCurrency);
-            }
-          } else {
-            // Try getCurrencyForCountry as fallback
-            userCurrency = getCurrencyForCountry(userCountry.country);
-            console.log("Using getCurrencyForCountry result:", userCurrency);
-          }
-        }
+        userCurrency = extractCurrencyCode(userCountry.country);
+        console.log("Extracted currency for country:", userCurrency);
       }
       
       // Final fallback - use cached or default
@@ -377,54 +380,119 @@ export const convertToCurrency = async (defaultCurrency = null) => {
   }
 };
 
-// Improved getCurrencyForCountry function with better debugging
-export const getCurrencyForCountry = (countryCode) => {
-  console.log("getCurrencyForCountry called with:", countryCode);
+// Legacy function for backward compatibility
+export const convertCurrency = async (defaultCurrency = null) => {
+  console.warn("convertCurrency is deprecated, use convertToCurrency instead");
+  return convertToCurrency(defaultCurrency);
+};
+
+// Improved format function for displaying prices correctly
+export const locationPrice = (value, rate) => {
+  if (!value || value === 0) return '0.00';
+  if (!rate || !rate.currency) return `${value.toFixed(2)} USD`;
   
-  if (!countryCode) {
-    console.log("No country code provided, returning USD");
-    return 'USD';
-  }
+  let formattedPrice;
   
-  if (!currencyMap[countryCode]) {
-    console.log("Country not found in currency map, returning USD");
-    return 'USD';
-  }
-  
-  console.log("Currency map entry:", currencyMap[countryCode]);
-  
-  // Get the currency object from the country's data
-  const countryData = currencyMap[countryCode];
-  
-  // Check if currency is directly a string
-  if (typeof countryData === 'string') {
-    console.log("Currency is direct string:", countryData);
-    return countryData;
-  }
-  
-  // If the country data contains a currency property
-  if (countryData.currency) {
-    const currencyObj = countryData.currency;
-    console.log("Currency object:", currencyObj);
+  try {
+    // Convert the value according to the rate
+    const convertedValue = value / (rate.rate || 1);
     
-    // If it's already a string, return it
-    if (typeof currencyObj === 'string') {
-      console.log("Currency is string:", currencyObj);
-      return currencyObj;
+    // Format according to currency
+    switch (rate.currency) {
+      case 'XAF':
+        // Use comma as decimal separator for XAF
+        formattedPrice = `${convertedValue.toFixed(2).replace('.', ',')} ${rate.currency}`;
+        break;
+      case 'EUR':
+        formattedPrice = `${convertedValue.toFixed(2)} €`;
+        break;
+      case 'GBP':
+        formattedPrice = `£${convertedValue.toFixed(2)}`;
+        break;
+      case 'JPY':
+        // No decimal places for JPY
+        formattedPrice = `¥${Math.round(convertedValue)}`;
+        break;
+      case 'PKR':
+        formattedPrice = `Rs ${convertedValue.toFixed(2)}`;
+        break;
+      default:
+        // Default format with currency code
+        formattedPrice = `${convertedValue.toFixed(2)} ${rate.currency}`;
     }
     
-    // If it's an object, get the first currency code
-    if (typeof currencyObj === 'object') {
-      const currencyCodes = Object.keys(currencyObj);
-      if (currencyCodes.length > 0) {
-        console.log("Extracted currency code:", currencyCodes[0]);
-        return currencyCodes[0];
+    return formattedPrice;
+  } catch (error) {
+    console.error('Error formatting price:', error);
+    return `${value.toFixed(2)} ${rate?.currency || 'USD'}`;
+  }
+};
+
+// Improved getCurrencyForCountry function (legacy, for backward compatibility)
+export const getCurrencyForCountry = (countryCode) => {
+  console.warn("getCurrencyForCountry is deprecated, use extractCurrencyCode instead");
+  return extractCurrencyCode(countryCode);
+};
+
+// Updated onInitializer function to correctly map currencies
+export const onInitializer = () => {
+  return axios.get('https://restcountries.com/v3.1/all')
+    .then(response => {
+      // Convert array to object with country codes as keys
+      response.data.forEach(country => {
+        // Store the properly structured country data
+        currencyMap[country.cca2] = {
+          "name": country.name.common,
+          "sigle": country.cca2,
+          "currency": country.currencies, // This is already in the right format
+          "flag": country.flags.png,
+        };
+      });
+      console.log("Currency map initialized with", Object.keys(currencyMap).length, "countries");
+    })
+    .catch(error => {
+      console.error("Error initializing currency map:", error);
+      // Initialize a fallback map with common currencies
+      initializeFallbackCurrencyMap();
+    });
+};
+
+// Fallback currency map in case the API fails
+const initializeFallbackCurrencyMap = () => {
+  const commonCurrencies = {
+    'US': 'USD', 'GB': 'GBP', 'FR': 'EUR', 'DE': 'EUR', 'IT': 'EUR', 
+    'ES': 'EUR', 'JP': 'JPY', 'CN': 'CNY', 'IN': 'INR', 'RU': 'RUB',
+    'BR': 'BRL', 'CA': 'CAD', 'AU': 'AUD', 'ZA': 'ZAR', 'CH': 'CHF',
+    'PK': 'PKR', 'NG': 'NGN', 'EG': 'EGP', 'AE': 'AED', 'SA': 'SAR',
+    'TR': 'TRY', 'CM': 'XAF'
+  };
+  
+  Object.entries(commonCurrencies).forEach(([countryCode, currencyCode]) => {
+    currencyMap[countryCode] = {
+      name: countryCode,
+      sigle: countryCode,
+      currency: { [currencyCode]: { name: currencyCode } }
+    };
+  });
+  
+  console.log("Initialized fallback currency map with", Object.keys(currencyMap).length, "countries");
+};
+
+// Legacy function for backward compatibility
+export const fetchDataWithRetry = async (url, maxRetries = 3) => {
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      attempt++;
+      console.error(`Attempt ${attempt} failed. Retrying...`);
+      if (attempt >= maxRetries) {
+        console.error('All retry attempts failed.');
+        throw error;
       }
     }
   }
-  
-  // If we couldn't find the currency, log it and return USD
-  console.log("Could not determine currency, returning USD");
-  return 'USD';
 };
-

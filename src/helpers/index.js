@@ -479,7 +479,7 @@ export const getCurrencyForCountry = (countryCode) => {
 
 // Updated onInitializer function to correctly map currencies
 export const onInitializer = () => {
-  return axios.get('https://restcountries.com/v3.1/all')
+  return axios.get('https://restcountries.com/v3/all')
     .then(response => {
       // Convert array to object with country codes as keys
       response.data.forEach(country => {

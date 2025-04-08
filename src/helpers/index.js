@@ -120,6 +120,7 @@ export const getGuestIdentifier = () => {
 
 export let currencyMap = [];
 
+// Updated checkCountry function with proper isLocal flag setting
 export const checkCountry = async () => {
   try {
     // Try to get cached country data first
@@ -129,6 +130,14 @@ export const checkCountry = async () => {
         const countryData = JSON.parse(cachedCountry);
         if (countryData && countryData.country) {
           console.log("Using cached country data:", countryData);
+          
+          // Set isLocal flag based on whether user is from Cameroon
+          if (countryData.country === 'CM') {
+            localStorage.setItem("isLocal", 'true');
+          } else {
+            localStorage.setItem("isLocal", 'false');
+          }
+          
           return countryData;
         }
       } catch (e) {
@@ -146,16 +155,25 @@ export const checkCountry = async () => {
         localStorage.setItem("ip", ip);
       } catch (ipError) {
         console.error('Failed to get IP address:', ipError);
+        localStorage.setItem("isLocal", 'false');
         return { country: 'US' }; // Default fallback
       }
     }
     
+    // Get location from IP
     const response = await axios.get('user/location', { params: { ip: ip } });
     const countryData = response.data;
     
-    // Cache the result
+    // Cache the result and set isLocal flag
     if (countryData && countryData.country) {
       localStorage.setItem('country', JSON.stringify(countryData));
+      
+      // Set isLocal flag based on whether user is from Cameroon
+      if (countryData.country === 'CM') {
+        localStorage.setItem("isLocal", 'true');
+      } else {
+        localStorage.setItem("isLocal", 'false');
+      }
     }
     
     return countryData;
@@ -167,13 +185,23 @@ export const checkCountry = async () => {
       if (navigator && navigator.language) {
         const language = navigator.language;
         const countryCode = language.split('-')[1] || language.substring(0, 2).toUpperCase();
+        
+        // Set isLocal flag for fallback
+        if (countryCode === 'CM') {
+          localStorage.setItem("isLocal", 'true');
+        } else {
+          localStorage.setItem("isLocal", 'false');
+        }
+        
         return { country: countryCode };
       }
     } catch (navError) {
       console.error('Navigator language fallback failed:', navError);
     }
     
-    return { country: 'US' }; // Ultimate fallback
+    // Ultimate fallback
+    localStorage.setItem("isLocal", 'false');
+    return { country: 'US' };
   }
 };
 
@@ -288,7 +316,7 @@ export const extractCurrencyCode = (countryCode) => {
   return countryCurrencyMap[countryCode] || null;
 };
 
-// Updated convertToCurrency function with better currency detection
+// Updated convertToCurrency function with isLocal flag handling
 export const convertToCurrency = async (defaultCurrency = null) => {
   try {
     let userCurrency;
@@ -305,8 +333,16 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       }
     }
     
+    // Check isLocal flag first
+    const isLocal = localStorage.getItem("isLocal") === 'true';
+    
+    // If user is from Cameroon, immediately use XAF
+    if (isLocal) {
+      userCurrency = 'XAF';
+      console.log("User is from Cameroon, using XAF currency");
+    }
     // Use provided default currency if specified
-    if (defaultCurrency) {
+    else if (defaultCurrency) {
       userCurrency = defaultCurrency;
       console.log("Using provided default currency:", userCurrency);
     }
@@ -327,16 +363,18 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       if (!userCountry?.country) {
         userCountry = await checkCountry();
         console.log("Got country from API:", userCountry);
-        
-        // Save country data for future use
-        if (userCountry) {
-          localStorage.setItem('country', JSON.stringify(userCountry));
-        }
       }
       
       // Get currency for country using improved extraction
       if (userCountry?.country) {
-        userCurrency = extractCurrencyCode(userCountry.country);
+        // Special case for Cameroon
+        if (userCountry.country === 'CM') {
+          userCurrency = 'XAF';
+          localStorage.setItem("isLocal", 'true');
+        } else {
+          userCurrency = extractCurrencyCode(userCountry.country);
+          localStorage.setItem("isLocal", 'false');
+        }
         console.log("Extracted currency for country:", userCurrency);
       }
       
@@ -373,6 +411,11 @@ export const convertToCurrency = async (defaultCurrency = null) => {
       }
     } catch (e) {
       console.error("Error using cached currency data:", e);
+    }
+    
+    // Check if isLocal is true as a final fallback
+    if (localStorage.getItem("isLocal") === 'true') {
+      return { "currency": "XAF", rate: 1 };
     }
     
     // Ultimate fallback

@@ -391,7 +391,7 @@ export default {
             isLogin: this.$store.getters["auth/isLogged"],
             isLocal: this.isCameroon,
             shipping_fee: this.shippingFee ? this.shippingFee : null,
-            shipping_method: this.shippingMethod ? this.shippingMethod : null
+            shipping_method: this.isCameroon ? 'local' : 'dhl'
           })
           .then(({ data }) => {
             this.$emit(

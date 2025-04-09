@@ -84,6 +84,10 @@
                                 $t("general.out_of_stock")
                                 }}</span></span>
                           </div>
+                          <div>
+                            <label for="" class="text-black">{{ $t("general.business_info") }}:</label>
+                            <span class="ml-2 cursor-pointer" @click="handleBusinessClick(business.slug)"> {{ business.business_name }}</span>
+                          </div>
                           <div class="">
                             {{
                               cart_item.product_description.length > 150
@@ -288,6 +292,14 @@ export default {
         minimumFractionDigits: 2,
       });
       return formatter.format(value);
+    },
+    handleBusinessClick(slug) {
+      if (this.islogin) {
+        this.$router.push({
+          name: "BusinessFollower",
+          params: { id: slug }
+        });
+      } 
     },
     handleSubmit() {
       this.$router.push("/checkout");

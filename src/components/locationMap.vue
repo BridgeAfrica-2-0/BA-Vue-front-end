@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- Address Input -->
-    <b-form-group class="body-font-size" label="Search" label-for="address-input">
+    <b-form-group class="body-font-size txt-color" label="Location:" label-for="address-input">
       <input
         id="address-input"
         ref="addressInput"
         v-model="address"
         type="text"
         class="form-control"
-        placeholder="Search your address"
+        placeholder="Search your Location"
         required
       />
     </b-form-group>
@@ -290,7 +290,9 @@ getAddressFromCoordinates(location) {
   border-radius: 10px;
   margin-top: 10px;
 }
-
+.txt-color{
+  color: black;
+}
 /* Fix for autocomplete dropdown visibility */
 #address-input {
   position: relative;

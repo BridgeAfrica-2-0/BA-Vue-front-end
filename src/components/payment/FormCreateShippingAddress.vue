@@ -170,20 +170,20 @@
                 </b-form-group>
               </div>
               <div class="col-md-6">
-                <b-form-group class="body-font-size" id="input-group-region-global" :label="$t('general.State/Province/Region')" label-for="region-input-global">
+                <b-form-group class="body-font-size" id="input-group-region-global" :label="`${$t('general.State2')}/${$t('general.Province')}/${$t('general.Region')}`" label-for="region-input-global">
                   <b-form-input
                     id="region-input-global"
                     v-model="form.region"
                     type="text"
                     required
-                    placeholder="Enter state/province/region"
+                    placeholder="Enter data"
                   ></b-form-input>
                 </b-form-group>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <b-form-group class="body-font-size" id="input-group-city-global" :label="$t('general.City')" label-for="city-input-global">
+                <b-form-group class="body-font-size" id="input-group-city-global" :label="`${$t('general.City')}:`" label-for="city-input-global">
                   <b-form-input
                     id="city-input-global"
                     v-model="form.city"
@@ -194,17 +194,17 @@
                 </b-form-group>
               </div>
               <div class="col-md-6">
-                <b-form-group class="body-font-size" id="input-group-zipcode-global" :label="$t('general.Zip/Postal Code')" label-for="zipcode-input-global">
+                <b-form-group class="body-font-size" id="input-group-zipcode-global" :label="`${$t('general.zip')}/${$t('general.Postal_code')}`" label-for="zipcode-input-global">
                   <b-form-input
                     id="zipcode-input-global"
                     v-model="form.zip_code"
                     type="text"
-                    placeholder="Enter zip/postal code"
+                    placeholder="Enter data"
                   ></b-form-input>
                 </b-form-group>
               </div>
             </div>
-            <b-form-group class="body-font-size mb-3" id="input-group-address-global" :label="$t('general.Address')" label-for="address-input-global">
+            <b-form-group class="body-font-size mb-3" id="input-group-address-global" :label="`${$t('general.Address')}:`" label-for="address-input-global">
               <b-form-input
                 id="address-input-global"
                 v-model="form.address"

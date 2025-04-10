@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Address Input -->
-    <b-form-group class="body-font-size" label="Address" label-for="address-input">
+    <b-form-group class="body-font-size" label="Search" label-for="address-input">
       <input
         id="address-input"
         ref="addressInput"

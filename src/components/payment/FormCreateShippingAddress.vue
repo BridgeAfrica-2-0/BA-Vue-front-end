@@ -1,89 +1,242 @@
-<template>
-  <div>
-    <b-form @submit="onSubmit" @reset="onReset">
-      <b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
-      <b-form-group class="body-font-size" id="input-group-name" :label="$t('general.Name')" label-for="name-input">
-        <b-form-input id="name-input" v-model="username" type="text" required :readonly="!!username"></b-form-input>
-      </b-form-group>
-      <b-form-group class="body-font-size" id="input-group-phone" :label="$t('general.Phone')" label-for="phone-input">
-        <b-form-input id="phone-input" v-model="form.phone" type="tel" required inputmode="numeric" pattern="[0-9]*"
-          maxlength="15"></b-form-input>
-        <b-form-text class="text-muted">Note: Enter phone in digits only.</b-form-text>
-      </b-form-group>
-      <b-form-group class="body-font-size" id="input-group-email" :label="$t('general.email')" label-for="email-input">
-        <b-form-input id="email-input" v-model="form.email" type="email" required></b-form-input>
-      </b-form-group>
+<style scoped>
+.shipping-form-container {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 70px); /* Account for modal header */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
-      <!-- Dropdown selectors for Cameroon -->
-      <div v-if="isCameroon">
-        <div class="row">
-          <div class="col">
-            <b-form-group class="body-font-size" id="input-group-country" :label="$t('general.Country')"
-              label-for="country-input">
-              <b-form-select id="country-input" v-model="form.country" :options="countries" value-field="id"
-                text-field="name" @change="getRegions" required></b-form-select>
-            </b-form-group>
+.form-content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 10px;
+  padding-bottom: 20px;
+}
+
+.sticky-button-container {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 15px 10px;
+  border-top: 1px solid #eee;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.map-container {
+  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+  min-height: 250px;
+  max-height: 300px;
+}
+
+.checkbox-container {
+  margin: 15px 0;
+}
+
+.hire-btn {
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  border: none;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 12px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.body-font-size {
+  color: black;
+}
+
+/* Ensure global fields are visible */
+.global-fields {
+  display: block;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.map-instruction {
+  color: #666;
+  font-size: 14px;
+  background-color: #f0f8ff;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #4a90e2;
+}
+
+@media only screen and (max-width: 768px) {
+  .shipping-form-container {
+    max-height: calc(100vh - 60px);
+  }
+  
+  .map-container {
+    max-height: 200px;
+  }
+  
+  .hire-btn {
+    font-size: 16px;
+    padding: 14px 20px;
+  }
+}
+</style>
+
+<template>
+  <div class="shipping-form-container">
+    <b-form @submit="onSubmit" @reset="onReset" class="d-flex flex-column h-100">
+      <!-- Scrollable content area -->
+      <div class="form-content-scroll">
+        <b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
+        <b-form-group class="body-font-size" id="input-group-name" :label="$t('general.Name')" label-for="name-input">
+          <b-form-input id="name-input" v-model="username" type="text" required :readonly="!!username"></b-form-input>
+        </b-form-group>
+        <b-form-group class="body-font-size" id="input-group-phone" :label="$t('general.Phone')" label-for="phone-input">
+          <b-form-input id="phone-input" v-model="form.phone" type="tel" required inputmode="numeric" pattern="[0-9]*"
+            maxlength="15"></b-form-input>
+          <b-form-text class="text-muted">Note: Enter phone in digits only.</b-form-text>
+        </b-form-group>
+        <b-form-group class="body-font-size" id="input-group-email" :label="$t('general.email')" label-for="email-input">
+          <b-form-input id="email-input" v-model="form.email" type="email" required></b-form-input>
+        </b-form-group>
+
+        <!-- Dropdown selectors for Cameroon -->
+        <div v-if="isCameroon">
+          <div class="row">
+            <div class="col">
+              <b-form-group class="body-font-size" id="input-group-country-cam" :label="$t('general.Country')"
+                label-for="country-input-cam">
+                <b-form-select id="country-input-cam" v-model="form.country" :options="countries" value-field="id"
+                  text-field="name" @change="getRegions" required></b-form-select>
+              </b-form-group>
+            </div>
+            <div class="col">
+              <b-form-group class="body-font-size" id="input-group-region-cam" :label="$t('general.Region')"
+                label-for="region-input-cam">
+                <b-form-select id="region-input-cam" v-model="form.region" :options="regions" value-field="id" text-field="name"
+                  @change="getDestinations" required></b-form-select>
+              </b-form-group>
+            </div>
+            <div class="col">
+              <b-form-group class="body-font-size" id="input-group-city-cam" :label="$t('general.Destination')"
+                label-for="destination-input-cam">
+                <b-form-select id="destination-input-cam" v-model="form.city" :options="destinations" value-field="id"
+                  text-field="name" required></b-form-select>
+              </b-form-group>
+            </div>
           </div>
-          <div class="col">
-            <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Region')"
-              label-for="region-input">
-              <b-form-select id="region-input" v-model="form.region" :options="regions" value-field="id" text-field="name"
-                @change="getDestinations" required></b-form-select>
-            </b-form-group>
+          
+          <!-- Add address text field for Cameroon users -->
+          <b-form-group class="body-font-size" id="input-group-address-cam" :label="$t('general.Address')" label-for="address-input-cam">
+            <b-form-input
+              id="address-input-cam"
+              v-model="form.address"
+              type="text"
+              placeholder="Enter your detailed address"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </div>
+
+        <!-- For global users (non-Cameroon) -->
+        <div v-else>
+          <!-- Google Map Component - ensure it's visible -->
+          <div class="map-container">
+            <GoogleMap v-model="form.addressData" @update:modelValue="extractLocationData" />
           </div>
-          <div class="col">
-            <b-form-group class="body-font-size" id="input-group-region" :label="$t('general.Destination')"
-              label-for="destination-input">
-              <b-form-select id="destination-input" v-model="form.city" :options="destinations" value-field="id"
-                text-field="name" required></b-form-select>
+          
+          <!-- Visible and Editable Address Fields for Global Users -->
+          <div class="global-fields">
+            <b-form-text class="map-instruction mb-3">
+              <i class="fa fa-info-circle mr-1"></i> Search and select a location on the map to auto-fill these fields or enter them manually
+            </b-form-text>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <b-form-group class="body-font-size" id="input-group-country-global" :label="$t('general.Country')" label-for="country-input-global">
+                  <b-form-input
+                    id="country-input-global"
+                    v-model="form.country"
+                    type="text"
+                    required
+                    placeholder="Enter country"
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+              <div class="col-md-6">
+                <b-form-group class="body-font-size" id="input-group-region-global" :label="$t('general.State/Province/Region')" label-for="region-input-global">
+                  <b-form-input
+                    id="region-input-global"
+                    v-model="form.region"
+                    type="text"
+                    required
+                    placeholder="Enter state/province/region"
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <b-form-group class="body-font-size" id="input-group-city-global" :label="$t('general.City')" label-for="city-input-global">
+                  <b-form-input
+                    id="city-input-global"
+                    v-model="form.city"
+                    type="text"
+                    required
+                    placeholder="Enter city"
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+              <div class="col-md-6">
+                <b-form-group class="body-font-size" id="input-group-zipcode-global" :label="$t('general.Zip/Postal Code')" label-for="zipcode-input-global">
+                  <b-form-input
+                    id="zipcode-input-global"
+                    v-model="form.zip_code"
+                    type="text"
+                    placeholder="Enter zip/postal code"
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+            </div>
+            <b-form-group class="body-font-size mb-3" id="input-group-address-global" :label="$t('general.Address')" label-for="address-input-global">
+              <b-form-input
+                id="address-input-global"
+                v-model="form.address"
+                type="text"
+                required
+                placeholder="Enter full address"
+              ></b-form-input>
             </b-form-group>
           </div>
         </div>
+
+        <div>
+          <b-form-checkbox v-if="mode == 'create'" id="checkbox-1" name="checkbox-1" value="accepted"
+            v-model="isDefaultAddress" unchecked-value="not_accepted" style="color: #82939b;">
+            Mark as default address
+          </b-form-checkbox>
+        </div>
         
-        <!-- Add address text field for Cameroon users -->
-        <b-form-group class="body-font-size" id="input-group-address" :label="$t('general.Address')" label-for="address-input">
-          <b-form-input
-            id="address-input"
-            v-model="form.address"
-            type="text"
-            placeholder="Enter your detailed address"
-            required
-          ></b-form-input>
-        </b-form-group>
+        <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
+          <p role="button" class="text-center" @click="closesipping">
+            Skip
+            <b-icon variant="primary" icon="arrow-right-circle-fill"> </b-icon>
+          </p>
+        </div>
       </div>
 
-      <!-- For non-Cameroon users, just use Google Map -->
-      <div v-if="!isCameroon">
-        <!-- Hidden inputs for values that will be populated by Google Maps -->
-        <input type="hidden" v-model="form.country">
-        <input type="hidden" v-model="form.region">
-        <input type="hidden" v-model="form.city">
-        <input type="hidden" v-model="form.zip_code">
-        <input type="hidden" v-model="form.address">
-
-        <!-- Google Map Component -->
-        <GoogleMap v-model="form.addressData" @update:modelValue="extractLocationData" />
-      </div>
-
-      <div>
-        <b-form-checkbox v-if="mode == 'create'" id="checkbox-1" name="checkbox-1" value="accepted"
-          v-model="isDefaultAddress" unchecked-value="not_accepted" style="color: #82939b;">
-          Mark as default address
-        </b-form-checkbox>
-      </div>
-
-      <div class="d-flex align-items-center justify-content-center mt-4">
+      <!-- Sticky button container -->
+      <div class="sticky-button-container">
         <b-button :disabled="loading" type="submit" variant="primary" class="hire-btn w-100">
           {{ $t("general.Save") }}
           <b-spinner small v-if="loading" label="Loading..." class="ml-3"></b-spinner>
         </b-button>
-      </div>
-
-      <div class="mt-3 pr-3" v-if="shippingsTab.length && current_step == 1">
-        <p role="button" class="text-center" @click="closesipping">
-          Skip
-          <b-icon variant="primary" icon="arrow-right-circle-fill"> </b-icon>
-        </p>
       </div>
     </b-form>
   </div>
@@ -127,9 +280,11 @@ export default {
     // Initialize data
     this.username = this.$store.state.auth.user?.user?.name || "";
 
-    // Check if user is from Cameroon
+    // Check if user is from Cameroon - ensure proper boolean evaluation
     const isLocalVal = localStorage.getItem("isLocal");
+    console.log("isLocal from localStorage:", isLocalVal);
     this.isCameroon = isLocalVal !== "false";
+    console.log("isCameroon set to:", this.isCameroon);
 
     // Make sure form has required properties
     if (!this.form.addressData) {
@@ -172,14 +327,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("checkout/getAllShippingAdd", { islogin: this.islogin });
-    // Fix scroll on mobile devices
-    this.fixMobileScroll();
-  },
-  beforeDestroy() {
-    // Clean up any event listeners
-    if (this._scrollHandler) {
-      window.removeEventListener('resize', this._scrollHandler);
-    }
+    
+    // Force refresh data binding
+    this.$nextTick(() => {
+      this.$forceUpdate();
+    });
   },
   computed: {
     shippingsTab() {
@@ -190,26 +342,6 @@ export default {
     }
   },
   methods: {
-    fixMobileScroll() {
-      this._scrollHandler = () => {
-        if (window.innerWidth <= 768) {
-          const formContainer = document.querySelector('.shipping-form-container');
-          if (formContainer) {
-            formContainer.style.overflow = 'auto';
-            formContainer.style.maxHeight = 'calc(100vh - 120px)';
-            formContainer.style.WebkitOverflowScrolling = 'touch'; 
-          }
-          const mapContainer = document.querySelector('.map-container');
-          if (mapContainer) {
-            mapContainer.style.height = '200px';
-          }
-        }
-      };
-      this._scrollHandler();
-      window.addEventListener('resize', this._scrollHandler);
-      window.scrollTo(0, 0);
-    },
-    
     initializeFormFields() {
       // Set default values for all required fields
       if (!this.form.country) this.form.country = "";
@@ -229,6 +361,9 @@ export default {
         // Store the full address
         this.form.address = data.address;
         
+        // Show loading indicator
+        this.loading = true;
+        
         // Use the Google Maps Geocoding API to get detailed address components
         this.extractAddressComponents(data.address, data.latitude, data.longitude);
       }
@@ -243,6 +378,7 @@ export default {
         if (status === 'OK' && results && results.length > 0) {
           console.log("Full geocode results:", results);
           this.processGeocodeResults(results);
+          this.loading = false;
         } else {
           // If location geocoding fails, try geocoding by address string
           console.log("Location geocoding failed, trying by address string");
@@ -250,6 +386,7 @@ export default {
             if (status === 'OK' && results && results.length > 0) {
               console.log("Address geocode results:", results);
               this.processGeocodeResults(results);
+              this.loading = false;
             } else {
               console.error('Geocoder failed due to: ' + status);
               // Fallback: Try a more detailed geocoding by components
@@ -286,11 +423,17 @@ export default {
           region = component.long_name;
         }
 
-        if (types.includes('locality') || types.includes('administrative_area_level_2')) {
+        if (types.includes('locality')) {
+          city = component.long_name;
+        } else if (city === "" && types.includes('administrative_area_level_2')) {
+          // Use administrative_area_level_2 as fallback for city
+          city = component.long_name;
+        } else if (city === "" && types.includes('sublocality_level_1')) {
+          // Use sublocality as another fallback
           city = component.long_name;
         }
 
-        // Extract postal code from Google API - this works for most countries
+        // Extract postal code from Google API
         if (types.includes('postal_code')) {
           postalCode = component.long_name;
           console.log("✅ Found postal code from Google API:", postalCode);
@@ -310,6 +453,11 @@ export default {
         this.extractPostalCodeFromText(formattedAddress);
       }
 
+      // Set the full formatted address if it's better than what we have
+      if (formattedAddress && (!this.form.address || this.form.address.length < formattedAddress.length)) {
+        this.form.address = formattedAddress;
+      }
+
       // Log the final extracted values
       console.log("Final extracted values:", {
         country: this.form.country,
@@ -318,6 +466,9 @@ export default {
         postalCode: this.form.zip_code,
         address: this.form.address
       });
+      
+      // Force update view
+      this.$forceUpdate();
     },
     
     tryDetailedGeocoding(address) {
@@ -334,15 +485,18 @@ export default {
           if (status === 'OK' && results && results.length > 0) {
             console.log("Detailed geocode results:", results);
             this.processGeocodeResults(results);
+            this.loading = false;
           } else {
             console.error('Detailed geocoding failed:', status);
             // Last resort: use the simple fallback
             this.fallbackAddressExtraction(address);
+            this.loading = false;
           }
         });
       } else {
         // If we can't extract a city, use the fallback
         this.fallbackAddressExtraction(address);
+        this.loading = false;
       }
     },
     
@@ -372,7 +526,7 @@ export default {
         this.form.zip_code = match[0];
       } else {
         console.log("❌ No postal code pattern found in text");
-        this.form.zip_code = "00000"; // Empty string if no postal code found
+        this.form.zip_code = ""; // Empty string if no postal code found
       }
     },
 
@@ -392,11 +546,17 @@ export default {
         this.extractPostalCodeFromText(address);
       } else {
         // If we don't have enough parts, use defaults for required fields
-        this.form.city = "Unknown";
+        this.form.city = addressParts[0] || "Unknown";
         this.form.region = "Unknown";
         this.form.country = "Unknown";
         // Leave postal code as is
       }
+      
+      // Always ensure we have an address
+      this.form.address = address || "Unknown";
+      
+      // Force update view
+      this.$forceUpdate();
     },
     
     ensureRequiredFields() {
@@ -408,29 +568,18 @@ export default {
         const parts = address.split(',').map(part => part.trim());
         
         // Set default values if we can't extract
-        this.form.country = this.form.country || "Default Country";
-        this.form.region = this.form.region || "Default Region";
-        this.form.city = this.form.city || "Default City";
+        this.form.country = this.form.country || parts[parts.length - 1] || "Unknown";
+        this.form.region = this.form.region || (parts.length > 1 ? parts[parts.length - 2] : "Unknown");
+        this.form.city = this.form.city || (parts.length > 0 ? parts[0] : "Unknown");
         
-        // Try to extract better values if possible
-        if (parts.length >= 3) {
-          // Very simple extraction - last part is typically country
-          if (!this.form.country || this.form.country === "Default Country") {
-            this.form.country = parts[parts.length - 1] || "Default Country";
-          }
-          
-          // Second to last might be region/state
-          if (!this.form.region || this.form.region === "Default Region") {
-            this.form.region = parts[parts.length - 2] || "Default Region";
-          }
-          
-          // First part might be city
-          if (!this.form.city || this.form.city === "Default City") {
-            this.form.city = parts[0] || "Default City";
-          }
-          
-          // Try to extract postal code using our enhanced method
+        // Try to extract postal code using our enhanced method
+        if (!this.form.zip_code) {
           this.extractPostalCodeFromText(address);
+        }
+        
+        // Ensure we have the address
+        if (!this.form.address) {
+          this.form.address = address;
         }
       }
     },
@@ -453,7 +602,7 @@ export default {
         // Double check if fields are still missing
         if (!this.form.country || !this.form.region || !this.form.city) {
           this.errorAppend = true;
-          alert("Country, Region, and City are required fields. Please select a valid address.");
+          alert("Country, Region, and City are required fields. Please select a valid address on the map or enter them manually.");
           return;
         }
       } else {
@@ -488,8 +637,8 @@ export default {
           country: this.form.country,
           region: regionValue,
           city: cityValue,
-          zip_code: this.form.zip_code || null,
-          address: this.form.address || null,
+          zip_code: this.form.zip_code || "",
+          address: this.form.address || "",
           latitude: this.form.addressData?.latitude || null,
           longitude: this.form.addressData?.longitude || null,
           islogin: this.form.islogin,
@@ -733,84 +882,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.shipping-form-container {
-  width: 100%;
-  max-height: 100vh;
-  position: relative;
-  -webkit-overflow-scrolling: touch; 
-  overflow-y: auto;
-  padding-bottom: 20px;
-}
-
-.shipping-form {
-  padding: 0 10px;
-}
-
-.map-container {
-  margin-bottom: 20px;
-  width: 100%;
-  height: auto;
-  min-height: 250px;
-  max-height: 300px;
-}
-
-.checkbox-container {
-  margin: 15px 0;
-}
-
-.button-container {
-  margin-top: 20px;
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-.skip-container {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.hire-btn {
-  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
-  border: none;
-  font-weight: 600;
-  border-radius: 10px;
-  padding: 12px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
-}
-
-.body-font-size {
-  color: black;
-}
-@media only screen and (max-width: 768px) {
-  .shipping-form-container {
-    padding-bottom: 60px; 
-    -webkit-overflow-scrolling: touch;
-    overflow-y: auto;
-    max-height: calc(100vh - 60px);
-  }
-  
-  .map-container {
-    max-height: 200px;
-  }
-  
-  .button-container {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 10px 0;
-    margin-bottom: 0;
-    z-index: 100;
-  }
-  
-  .hire-btn {
-    font-size: 16px;
-    padding: 14px 20px;
-  }
-}
-</style>

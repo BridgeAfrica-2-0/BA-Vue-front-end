@@ -4,14 +4,6 @@
       <div class="container p-0 m-auto d-flex justify-content-between align-items-center">
         <div class="contact-info d-flex align-items-center">
           <div class="d-flex">
-            <!-- <span class="d-flex justify-content-center align-items-center">
-              <img src="public/assets/home/phone.png" class="size2 mr-2" alt="" />
-              <span style="color: #8C8C8C !important">+237697157690</span>
-            </span>
-            <span class="d-flex justify-content-center align-items-center">
-              <img src="public/assets/home/email.png" id="mail-icon" class="mr-2" alt="" />
-              <span style="color: #8C8C8C !important">info@bridgeafrica.com</span>
-            </span> -->
           </div>
 
           <div>
@@ -64,24 +56,6 @@
             <a class="d-inline-block align-top mt-1 float-left mobile1_1" href="#">
               <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             </a>
-            <!-- <div class="auth-class d-md-none">
-              <span v-if="!islogin" class="nav-span mr-3">
-                <router-link class="inactive" :to="{ name: 'signup' }">{{
-                  $t("general.Sign_Up")
-                  }}</router-link>
-              </span>
-              <router-link v-if="!islogin" class="inactive" :to="{ name: 'Login' }">
-                <img src="@/assets/user.svg" alt="User Icon" id="user-icon" />
-              </router-link>
-              <span v-if="islogin">
-                <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                  $t("general.dashboard")
-                  }}</router-link>
-              </span>
-              <span v-if="islogin" @click="logout" class="logout-span">{{ $t("general.Logout") }}</span>
-
-
-            </div> -->
           </div>
 
           <div class="d-flex w-100 p-0 mobile-search">
@@ -138,40 +112,6 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-                <!-- <b-nav-item class="ml-md-1 text-center">
-                  <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'about' }" :class="currentRouteName == 'about' ? 'active' : 'inactive'
-                      ">{{ $t("general.About_Us") }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item> -->
-
-                <!-- <b-nav-item class="ml-md-1 text-center">
-                  <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
-                      ">{{ $t("general.Contact_Us") }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item>
-
-                <b-nav-item class="ml-md-1 text-center">
-                  <span class="font-arvo nav-span">
-                    <router-link :to="{ name: 'contact' }" :class="currentRouteName == 'contact' ? 'active' : 'inactive'
-                      ">{{ $t("general.Contact_Us") }}</router-link>
-                  </span>
-                  <hr class="mobile navstyle" />
-                </b-nav-item> -->
-                <!-- 
-                <b-nav-item class="ml-md-1 text-center">
-                  <div v-if="countries.length" class="language-selection  hidden-countries" data-toggle="modal" data-target="#settings"
-                    @click="() => isOpen = true">
-                    <span style="font-size: 14px; color: #000; padding: 0 15px;">
-                      <img :src="countrySelected?.flag" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
-                      <i class="fa fa-caret-down"></i>
-                    </span>
-                  </div>
-                  <span  v-else class="start-loader"></span>
-                </b-nav-item> -->
 
               <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
                 <span class="nav-span">{{ $t("general.Logout") }}</span>
@@ -229,18 +169,6 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
-              <!-- <b-nav-item v-if="islogin" class="ml-md-1 m-auto">
-                <span class="nav-span">
-                  <router-link class="inactive" :to="{ name: 'dashboard' }">{{
-                    $t("general.dashboard")
-                  }}</router-link>
-                </span>
-                <hr class="mobile navstyle" />
-              </b-nav-item>
-              <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
-                <span class="nav-span">{{ $t("general.Logout") }}</span>
-                <hr class="mobile navstyle" />
-              </b-nav-item> -->
 
             </b-navbar-nav>
           </div>
@@ -258,6 +186,7 @@ import settingsContries from "@/components/SetupContries"
 
 import { LocalisationMixins } from "@/mixins"
 
+import { onInitializer2 } from "@/helpers/index";
 
 export default {
   mixins: [LocalisationMixins],
@@ -273,7 +202,8 @@ export default {
       img: null,
       lang: '',
       currencies: [],
-      isOpen: false
+      isOpen: false,
+      countries: []
     };
   },
 
@@ -286,6 +216,7 @@ export default {
       this.img = require("../../assets/img/la-france.png");
       this.lang = 'Français'
     }
+    this.loadCountries();
   },
 
 
@@ -319,6 +250,18 @@ export default {
         this.lang = 'Français'
       }
     },
+    async loadCountries() {
+  try {
+    const countriesData = await onInitializer2();
+    if (countriesData.length > 0) {
+      this.countries = countriesData;
+    } else {
+      console.error("No countries data available.");
+    }
+  } catch (error) {
+    console.error("Error loading countries:", error);
+  }
+},
 
 
     handleScroll() {

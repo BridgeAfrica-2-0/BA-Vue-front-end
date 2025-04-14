@@ -499,6 +499,27 @@ export const onInitializer = () => {
       initializeFallbackCurrencyMap();
     });
 };
+export const onInitializer2 = async () => {
+  try {
+    const response = await axios.get('https://restcountries.com/v3/all');
+    const countries = response.data.map(country => {
+      const flag = country.flags && country.flags.length > 1 ? country.flags[1] : '/path/to/default/flag.png';
+      
+      return {
+        name: country.name.common,
+        code: country.cca2,
+        currency: country.currencies,
+        flag: flag  
+      };
+    });
+
+    console.log("Countries initialized:", countries);
+    return countries; 
+  } catch (error) {
+    console.error("Error initializing countries:", error);
+    return [];
+  }
+};
 
 // Fallback currency map in case the API fails
 const initializeFallbackCurrencyMap = () => {

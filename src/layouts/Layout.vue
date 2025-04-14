@@ -84,7 +84,7 @@ import { LocalisationMixins } from "@/mixins"
 
 import SiteFooter from "@/components/home/updatedSiteFooter.vue";
 import navBar from "@/components/navbar.vue";
-
+import { onInitializer2 } from "@/helpers/index";
 export default {
   mixins: [LocalisationMixins],
   components: {
@@ -119,7 +119,8 @@ export default {
       img: null,
       lang: '',
       currencies: [],
-      isOpen: false
+      isOpen: false,
+      countries: []
     };
   },
 
@@ -132,6 +133,7 @@ export default {
       this.img = require("@/assets/img/la-france.png");
       this.lang = 'Français'
     }
+    this.loadCountries();
   },
 
 
@@ -166,7 +168,18 @@ export default {
       }
     },
 
-
+    async loadCountries() {
+  try {
+    const countriesData = await onInitializer2();
+    if (countriesData.length > 0) {
+      this.countries = countriesData;
+    } else {
+      console.error("No countries data available.");
+    }
+  } catch (error) {
+    console.error("Error loading countries:", error);
+  }
+},
     handleScroll() {
 
       this.scrollPosition = window.scrollY;

@@ -74,7 +74,7 @@ import 'vue-select/dist/vue-select.css';
 
 
 import { LocalisationMixins } from "@/mixins"
-
+import { onInitializer2 } from "@/helpers/index";
 export default {
   components: {
     vSelect
@@ -89,13 +89,15 @@ export default {
       { name: 'Français', value: 'fr' },
       { name: 'English', value: 'en' },
     ],
-    currencies: []
+    currencies: [],
+    countries: []
   }),
 
   created() {
     this.country = this.countrySelected
     this.currency = this.currencySelected
     this.onStart(this.countries.length ? this.countries : [])
+    this.loadCountries();
   },
 
   watch: {
@@ -150,6 +152,18 @@ export default {
       }).sort((a, b) => a.name.localeCompare(b.name));
 
     },
+    async loadCountries() {
+  try {
+    const countriesData = await onInitializer2();
+    if (countriesData.length > 0) {
+      this.countries = countriesData;
+    } else {
+      console.error("No countries data available.");
+    }
+  } catch (error) {
+    console.error("Error loading countries:", error);
+  }
+},
     change(lang) {
       this.$i18n.locale = lang;
 

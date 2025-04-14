@@ -45,7 +45,7 @@
           <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
             @click="() => isOpen = true">
             <span style="font-size: 14px; color: #000; padding: 0 15px;">
-              <img :src="countrySelected?.flag" style="width: 18px; height: 18px; padding-right: 2px;" />{{ countrySelected?.code }} | {{ currencySelected?.name }}
+              <img :src="countrySelected?.flag" style="width: 28px; height: 18px; padding-right: 2px;" />{{ countrySelected?.code }} | {{ currencySelected?.name }}
               <i class="fa fa-caret-down"></i>
             </span>
           </div>
@@ -56,7 +56,7 @@
       <div v-if="countries.length" class="language-selection  hidden-countries gray" data-toggle="modal"
         data-target="#settings" @click="() => isOpen = true">
         <span style="font-size: 14px; color: #000; padding: 0 15px;">
-          <img :src="countrySelected?.flag" style="height: 17px; width: 18px;" />{{ countrySelected?.sigle }} {{ currencySelected?.name }}
+          <img :src="countrySelected?.flag" style="height: 17px; width: 18px;" />{{ countrySelected?.code }} {{ currencySelected?.name }}
           <i class="fa fa-caret-down"></i>
         </span>
       </div>

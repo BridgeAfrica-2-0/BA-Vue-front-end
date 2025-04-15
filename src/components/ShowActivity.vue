@@ -37,7 +37,7 @@
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.name }}</span>
+                <span class="font-weight-bold">{{ item?.business_name ? item.business_name : item?.name  }}</span>
               </div>
             </div>
           </div>

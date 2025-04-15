@@ -36,15 +36,6 @@
                 aria-label="" data-original-title="" title="" v-on:click="toggleinput()"
                 v-on:keyup.enter="getKeyword" />
             </b-input-group>
-
-            <!-- <span style="display: none; " ref="mobileinput">
-              <b-input-group class="b-shadow mt-2">
-                <div class="input-group-append color-mobile" style="border: none">
-                  <multiselect :value="city" :options="citiesValues" placeholder="Select City" class="search-hh w-100"
-                    style="border-left: none" label="label" track-by="code" @input="setSelectedLocation"></multiselect>
-                </div>
-              </b-input-group>
-            </span> -->
           </form>
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-radius">
@@ -52,20 +43,6 @@
                 style="font-size: 17px !important" :placeholder="credentials.placeholder" v-model="credentials.keyword"
                 aria-label="" data-original-title="" title="" v-on:keyup.enter="getKeyword" />
 
-              <!-- <multiselect
-                :value="city"
-                :options="citiesValues"
-                placeholder="Select City"
-                class="search-hh w-44 city-search"
-                style="border-left: none"
-                label="label"
-                track-by="code"
-                @input="setSelectedLocation"
-              ></multiselect>
-
-              <slot name="button">
-                <Button @click.native="getKeyword" media="desktop" />
-              </slot> -->
               <button @click="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>

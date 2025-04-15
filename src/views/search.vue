@@ -49,30 +49,6 @@
             " @activateSuggestion="activateSuggestion" @activate:matching:category="(val) => (activateMatching = val)"
           style="margin-top: -25px" />
 
-        <!-- <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" /> -->
-
-        <!-- <div v-if="islogin" class="container searchly moveup">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="optionsnav"
-        activeColor="#e75c18"
-        @change="handleChange"
-      >
-      </ly-tab>
-    </div>
-
-    <div v-else class="container searchly moveup">
-      <ly-tab
-        v-model="selectedId"
-        :items="guestItems"
-        :options="optionsnav"
-        activeColor="#e75c18"
-        @change="handleChange"
-      >
-      </ly-tab>
-    </div> -->
-
         <hr style="margin-top: -0px" />
 
         <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none p-3">
@@ -132,88 +108,6 @@
                     @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
                 </div>
 
-                <!--            
-            <div v-if="!isFilter">
-            
-              <div v-if="categories.length > 0">
-                <b-form-group
-                  label-cols-lg="3"
-                  :label="$t('search.Categories')"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="catChose">
-                  <option :value="null" disabled>
-                    -- Please select a category --
-                  </option>
-                  <option
-                    v-for="(elm, index) in categories"
-                    :key="index"
-                    :value="elm"
-                  >
-                    {{ elm.category.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div> 
-
-            <hr v-if="!isFilter" />
-            <div v-if="!isFilter">
-             
-              <div v-if="catChose">
-                <b-form-group
-                  label-cols-lg="3"
-                  label="sub categories"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="subCatChose" @change="getFilter">
-                  <option :value="null" disabled>
-                    -- Please select a sub category --
-                  </option>
-                  <option
-                    v-for="(elm, index) in catChose.sub_cat"
-                    :key="index"
-                    :value="elm"
-                  >
-                    {{ elm.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div>
-
-            <hr v-if="!isFilter" />
-
-            <div v-if="!isFilter">
-              
-              <div v-if="subFilters.length > 0">
-                <b-form-group
-                  label-cols-lg="3"
-                  label="Filters"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="filterChose">
-                  <option :value="null" disabled>
-                    -- Please select a filter --
-                  </option>
-                  <option
-                    v-for="(elm, index) in subFilters"
-                    :key="index"
-                    :value="elm.id"
-                  >
-                    {{ elm.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div>
-     -->
                 <component :is="isFilter" />
                 <hr v-if="!isFilter" />
 
@@ -258,41 +152,7 @@
                   <div>
                     <Sponsor />
                   </div>
-                  <!-- <h6 class="mb-3">
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-                <b-button
-                  to="/cart"
-                  size="sm"
-                  variant="primary"
-                  class="float-right position-relative"
-                >
-                  <b-icon icon="cart4"></b-icon> Cart
-                  <span
-                    v-if="cartCount > 0"
-                    class="badge badge-pill badge-danger position-absolute"
-                    style="top: 0 !important; right: 0 !important; transform: translate(50%, -50%);"
-                  >
-                    {{ cartCount }}
-                  </span>
-                </b-button>
-                <div class="float-right">
-                  <b-button
-                    size="sm"
-                    variant="outline-primary"
-                    @click="getProducts"
-                    class="mx-3"
-                  >
-                    <b-spinner small v-if="prodLoader"></b-spinner>
-                    <span v-else
-                      ><b-icon
-                        icon="arrow-clockwise"
-                        aria-hidden="true"
-                      ></b-icon
-                    ></span>
-                  </b-button>
-                </div>
-              </h6> -->
+
                   <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
                     {{ $t("search.List_of_products_up_to_date") }}
                   </b-alert>
@@ -300,34 +160,7 @@
                 </div>
               </div>
             </b-col>
-            <!-- <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class="">
-            <div v-if="selectedId == '1'">
-              <businessmap :businesses="businessess.data" />
-            </div>
-            <div v-if="selectedId == '0'">
-              <mapbox :products="allproducts.data" />
-            </div>
-            <div v-if="selectedId == '5' && islogin">
-              <mapbox
-                :businesses="businesses.data"
-                :products="miniproducts.data"
-                :networks="mininetworks.data"
-                :defaultLocation="searchParams.location.label"
-                :isSearched="isSearched"
-              />
-            </div>
-            <div v-if="selectedId == '4' && !islogin">
-              <mapbox
-                :businesses="businesses.data"
-                :products="miniproducts.data"
-                :networks="mininetworks.data"
-                :defaultLocation="searchParams.location.label"
-                :isSearched="isSearched"
-              />
-            </div>
-          </div>
-        </b-col> -->
+
           </b-row>
         </div>
         <div class="container mb-3 mt-4 sec">

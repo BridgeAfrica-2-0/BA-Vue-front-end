@@ -21,7 +21,7 @@
           </div>
 
         <div class="col-lg-5 col-xl-5">
-          <form class="d-block d-lg-none">
+          <form class="d-block d-lg-none" @submit.prevent="getKeyword">
             <b-input-group class="mt-3">
               <div class="input-group-append color-mobile" style="border: none">
                 <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
@@ -38,12 +38,12 @@
             </b-input-group>
           </form>
           <span class="d-none d-lg-block">
-            <form class="form-inline input-group b-radius">
+            <form class="form-inline input-group b-radius" @submit.prevent="getKeyword">
               <input id="search-ba" type="search" data-toggle="popover" class="form-control search-h"
                 style="font-size: 17px !important" :placeholder="credentials.placeholder" v-model="credentials.keyword"
                 aria-label="" data-original-title="" title="" v-on:keyup.enter="getKeyword" />
 
-              <button @click="getKeyword" class="search-button">{{ $t('search.search') }}</button>
+              <button @click.prevent="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -708,31 +708,37 @@ export default {
       }
     },
 
-    getKeyword() {
-      if (!this.credentials.keyword) return false;
+    getKeyword(event) {
+  if (event) event.preventDefault();
+  
+  if (!this.credentials.keyword) return false;
 
-      if (this.$route.name != "search") {
-        this.$emit("updateSearchKeyword", this.credentials.keyword);
-      }
+  if (this.$route.name != "search") {
+    this.$emit("updateSearchKeyword", this.credentials.keyword);
+  }
 
-      if (this.$route.name != "search") {
-        this.$store
-          .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log("Error erro!");
-          });
-
-        this.$router.push({
-          name: "GlobalSearch",
-          query: {
-            keyword: this.credentials.keyword,
-            location: this.credentials.location,
-          },
+  if (this.$route.name != "search") {
+    try {
+      this.$store
+        .dispatch("allSearch/SEARCH", {
+          keyword: this.credentials.keyword,
+        })
+        .catch((err) => {
+          console.error("Error in search dispatch:", err);
         });
-      }
-    },
+
+      this.$router.push({
+        name: "GlobalSearch",
+        query: {
+          keyword: this.credentials.keyword,
+          location: this.credentials.location,
+        },
+      });
+    } catch (error) {
+      console.error("Error in getKeyword function:", error);
+    }
+  }
+},
     navLink(type) {
       const link = {
         home: () => {

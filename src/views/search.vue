@@ -660,22 +660,20 @@ export default {
       this.$store.commit("allSearch/setLocation", location);
     },
 
-    updateSearchKeyword(keyword) {
-      //  this.activateSuggestion(keyword);
-      this.searchParams.keyword = keyword;
-      if (this.selectedId == 5) {
-        this.getKeyword();
-      } else if (this.selectedId == 1) {
-        this.onFindBusiness();
-      } else if (this.selectedId == 3) {
-        this.searchNetworks();
-      } else if (this.selectedId == 0) {
-        this.searchProducts({});
-      } else if (this.selectedId == 4 && !this.islogin) {
-        this.getKeyword();
-      }
-    },
-
+updateSearchKeyword(keyword) {
+  this.searchParams.keyword = keyword;
+  if (this.selectedId == 5) {
+    this.getKeyword();
+  } else if (this.selectedId == 1) {
+    this.onFindBusiness();
+  } else if (this.selectedId == 3) {
+    this.searchNetworks();
+  } else if (this.selectedId == 0) {
+    this.searchProducts({});
+  } else if (this.selectedId == 4 && !this.islogin) {
+    this.getKeyword();
+  }
+},
     activateSuggestion: async function (value) {
       this.$store.commit("allSearch/setSuggestedKeyword", []);
       if (value) {

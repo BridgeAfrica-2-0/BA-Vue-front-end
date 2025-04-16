@@ -112,6 +112,14 @@
                 </span>
                 <hr class="mobile navstyle" />
               </b-nav-item>
+              <b-nav-item class="ml-md-1 m-auto">
+                <span class="nav-span">
+                  <router-link class="inactive" to="/search">{{
+                    $t("general.Market")
+                    }}</router-link>
+                </span>
+                <hr class="mobile navstyle" />
+              </b-nav-item>
 
               <b-nav-item v-if="islogin" @click="logout" class="ml-md-1 m-auto">
                 <span class="nav-span">{{ $t("general.Logout") }}</span>

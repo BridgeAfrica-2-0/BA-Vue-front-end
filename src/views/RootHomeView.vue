@@ -37,18 +37,6 @@
         <p class="section-description">
           {{ $t("general.with_over_100_categories") }}
         </p>
-        <div class="button-group">
-          <div class="button-start">
-            <button class="filter-button" :class="{ active: activeTab === 'cameroon' }"
-              @click="setActiveTab('cameroon')">
-              {{ $t("general.avaliable_in_cameroon") }}
-            </button>
-            <button class="filter-button" :class="{ active: activeTab === 'worldwide' }"
-              @click="setActiveTab('worldwide')">
-              {{ $t("general.avaliable_in_worlwide") }}
-            </button>
-          </div>
-        </div>
         <div v-if="activeTab === 'cameroon'">
           <div class="see-all-p">
             <router-link to="/search">

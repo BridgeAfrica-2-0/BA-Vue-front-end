@@ -447,12 +447,12 @@
 
     <section class="bg-whitee network camroon-focus-desktop">
       <div class="container row  mt-3" data-aos="zoom-in-up" data-aos-offset="70px" data-aos-duration="1500">
-        <div class="col-lg-4 col-md-6 mt-5">
+        <div class="col-lg-3 col-md-6 mt-5">
           <div class="card-container">
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0">
+                  <div class="col-4 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_1.png" alt="Icon" class="icon" />
                   </div>
                   <div class="col-8 card-padding">
@@ -467,7 +467,7 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0">
+                  <div class="col-4 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon" />
                   </div>
                   <div class="col-8 card-padding">
@@ -482,7 +482,7 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0">
+                  <div class="col-4 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_3.png" alt="Icon" class="icon" />
                   </div>
                   <div class="col-8 card-padding">
@@ -498,7 +498,7 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0">
+                  <div class="col-4 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_4.png" alt="Icon" class="icon" />
                   </div>
                   <div class="col-8 card-padding">
@@ -516,7 +516,7 @@
           <v-lazy-image src="/assets/home/new_globe.png" alt="" />
         </div>
 
-        <div class="col-lg-4 col-md-6 mt-5">
+        <div class="col-lg-5 col-md-6 mt-5">
           <div class="row">
             <div class="col-12 d-flex align-items-center pl-0">
               <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img" />
@@ -1817,9 +1817,13 @@ export default {
 
 .icon {
   width: 30px;
-  height: 50px;
+  height: 30px;
 }
-
+.img-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .percentage {
   font-size: 22px;
   font-weight: bold;

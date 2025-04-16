@@ -156,10 +156,78 @@
                 </span>
               </b-nav-item>
               <b-nav-item class="ml-md-3 m-auto">
-                <span class="nav-span" style="color:#455a64">
-                  <img src="../../assets/user.svg" alt="User Icon" id="user-icon" />
-                </span>
-              </b-nav-item>
+                <b-tooltip v-if="islogin" target="profilepic" variant="light" triggers="hover">
+                  {{ user.name }}
+                </b-tooltip>
+                <div v-if="islogin" class="d-flex align-items-center nav-item gap-1">
+                <div  class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+                  <router-link :to="userOwnPage">
+                    <b-avatar variant="light" :src="user.profile_picture"
+                      :square="'user' == user.user_type ? false : true" class="logo-sizee"></b-avatar>
+                  </router-link>
+                </div>
+                <div class="nav-item">
+                  <a id="other-menu" class="nav-link text-dark arrow-down" style="color: rgba(43, 39, 60, 1) !important;" data-toggle="popover" role="button"
+                    data-original-title="" title="">
+                  </a>
+                  <b-popover target="other-menu" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <a v-if="'user' != user.user_type" @click.prevent="switchToProfile" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'user']" /></span>
+                        Profile
+                      </a>
+                      <hr class="h-divider" />
+
+                      <div style="width: 100%" class="d-inline-flex flex-row align-items-center mb-1">
+                        <Activity class="w-full" />
+                      </div>
+
+                      <router-link :to="{ name: 'orders' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                        {{ $t("general.My_orders") }}
+                      </router-link>
+                      <hr class="h-divider" />
+
+                      <router-link :to="{ name: 'settings' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full">
+                        <span class="mr-2 w-full" style="display: inline-block;"><fas-icon class="violet search"
+                            :icon="['fas', 'cogs']" />
+                          {{ $t("general.Account_Settings") }}
+                        </span>
+                      </router-link>
+                      <hr class="h-divider" />
+                      <div class="other-menu suggest-item cursor-pointer">
+                        <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+                        {{ $t("general.Help_and_Support") }}
+                      </div>
+                      <hr class="h-divider" />
+
+                      <div class="other-menu suggest-item cursor-pointer">
+                        <b-link v-b-toggle="'collapse-2'"><fas-icon class="violet search mr-1"
+                            :icon="['fas', 'globe-americas']" />
+                          {{ $t("general.Language") }}</b-link>
+
+                        <b-collapse id="collapse-2" class="mt-1">
+                          <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{ $t("auth.english")
+                            }}</b-card-text>
+                          <b-card-text @click="$i18n.locale = 'fr'">{{
+                            $t("auth.french")
+                            }}</b-card-text>
+                        </b-collapse>
+                      </div>
+                      <hr class="h-divider" />
+                      <a @click="logout" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+                        {{ $t("general.Logout") }}
+                      </a>
+                    </div>
+                  </b-popover>
+                </div>
+              </div>
+             </b-nav-item>
               <b-nav-item v-if="!islogin" class="m-auto">
                 <span class="nav-span">
                   <router-link class="inactive" :to="{ name: 'signup' }">{{
@@ -187,19 +255,19 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 import { getGuestIdentifier } from "../../helpers";
 import settingsContries from "@/components/SetupContries"
-
 import { LocalisationMixins } from "@/mixins"
-
+import _ from "lodash";
 import { onInitializer2 } from "@/helpers/index";
-
+import Activity from "@/components/ShowActivity.vue";
 export default {
   mixins: [LocalisationMixins],
   components: {
-    settingsContries
+    Activity,
+    settingsContries,
   },
   data() {
     return {
@@ -225,6 +293,11 @@ export default {
       this.lang = 'Français'
     }
     this.loadCountries();
+    if(this.islogin)
+    {
+      this.init();
+      this.userOwnPage = this.onRedirect();
+    }
   },
 
 
@@ -237,7 +310,11 @@ export default {
     },
     cartCount() {
       return this.$store.getters["cart/getNumberOfItem"]
-    }
+    },
+    ...mapGetters({
+      auth: "auth/user",
+      user: "auth/profilConnected",
+    }),
   },
   mounted() {
     this.fetchCartCount();
@@ -271,7 +348,25 @@ export default {
   }
 },
 
+switchToProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
 
+      const response = await this.$repository.share.switch(null, "reset");
+
+      if (response.success) {
+        this.profile({ ...this.auth.user, user_type: "user" });
+        this.$router.push({
+          name: "profile_owner",
+        });
+      }
+
+      loader.hide();
+    },
     handleScroll() {
 
       this.scrollPosition = window.scrollY;
@@ -286,6 +381,9 @@ export default {
     },
     ...mapActions({
       Logout: "auth/logout",
+      setBusiness: "social/FIND_USER_BUSNESS",
+      profile: "auth/profilConnected",
+      setNetworks: "social/FIND_USER_NETWORK",
     }),
     logout: async function () {
       let loader = this.$loading.show({
@@ -334,7 +432,57 @@ export default {
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }
-    }
+    },
+    navLink(type) {
+      const link = {
+        home: () => {
+          return this.profile ? { name: "dashboard" } : { name: "Bridge-home" };
+        },
+      };
+      try {
+        return link[type]();
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    getNetworks: async function () {
+      let request = await this.$repository.share.getNetworks();
+      if (request.success) this.setNetworks(request.data);
+    },
+
+    getBusiness: async function () {
+      let request = await this.$repository.share.getBusiness();
+      if (request.success) this.setBusiness(request.data);
+    },
+    init() {
+      try {
+        if (!this.hasLauchNetworkRequest) {
+          this.getNetworks();
+          this.getBusiness();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+   
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
+    onRedirect() {
+      const link = {
+        network: () => ({
+          name: "networks",
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug },
+        }),
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.slug ? this.user.slug : this.user.user_slug },
+        }),
+        user: () => ({ name: "profile_owner" }),
+      };
+      return link[this.user.user_type]();
+    },
   }
 };
 </script>
@@ -755,5 +903,16 @@ a {
   80% {
     background-position: 0% 100%, 50% 100%, 100% 0%
   }
+}
+</style>
+<style>
+.text-dark {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: rgba(43, 39, 60, 1) !important;
+  text-align: left;
 }
 </style>

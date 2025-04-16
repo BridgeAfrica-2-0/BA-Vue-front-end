@@ -360,7 +360,7 @@
     <div class="row mt-md-5 mb-md-5">
       <div class="col-md-5 mt-4" style="display: flex; justify-content: center;">
         <div class="hire-div">
-          <video width="100%" style="object-fit:contain; border-radius: 10px; border-radius:10px" controls poster="assets/home/new_hire.png">
+          <video width="100%" class="mbl-view" style="object-fit:contain; border-radius: 10px; border-radius:10px" controls poster="assets/home/new_hire.png">
             <source src="assets/video/intro_video.mp4" type="video/mp4" />
           </video>
         </div>
@@ -1797,6 +1797,13 @@ export default {
 .mbl-margin{
   margin-top: 0px !important;
 }
+.mbl-view{
+  margin-top: -10px !important;
+}
+}
+.mbl-view{
+  height: 450px !important;
+  margin-top: -110px !important;
 }
 .globe-align{
   display: flex;

@@ -452,10 +452,10 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0 img-align">
+                  <div class="col-5 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_1.png" alt="Icon" class="icon" />
                   </div>
-                  <div class="col-8 card-padding">
+                  <div class="col-7 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage">4</span>
                       <span class="text">{{ $t("general.countries") }}</span>
@@ -467,10 +467,10 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0 img-align">
+                  <div class="col-5 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_2.png" alt="Icon" class="icon" />
                   </div>
-                  <div class="col-8 card-padding">
+                  <div class="col-7 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage pl-1">500+</span>
                       <span class="text">{{ $t("general.deals_globally") }}</span>
@@ -482,10 +482,10 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0 img-align">
+                  <div class="col-5 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_3.png" alt="Icon" class="icon" />
                   </div>
-                  <div class="col-8 card-padding">
+                  <div class="col-7 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage">70M+</span>
                       <span class="text">Revenue</span>
@@ -498,10 +498,10 @@
             <div class="card">
               <div class="card-content">
                 <div class="row">
-                  <div class="col-4 pr-0 img-align">
+                  <div class="col-5 pr-0 img-align">
                     <v-lazy-image src="assets/home/m_4.png" alt="Icon" class="icon" />
                   </div>
-                  <div class="col-8 card-padding">
+                  <div class="col-7 card-padding">
                     <div class="d-flex flex-column">
                       <span class="percentage">98%</span>
                       <span class="text">Satisfaction</span>
@@ -512,11 +512,11 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt-5">
-          <v-lazy-image src="/assets/home/new_globe.png" alt="" />
+        <div class="col-lg-4 col-md-6 mt-5 globe-align">
+          <v-lazy-image src="/assets/home/new_globe.png" alt="" class="globe-img" />
         </div>
 
-        <div class="col-lg-5 col-md-6 mt-5">
+        <div class="col-lg-5 col-md-6 mt-5 mbl-margin">
           <div class="row">
             <div class="col-12 d-flex align-items-center pl-0">
               <v-lazy-image src="/assets/home/new_logo.svg" alt="" class="logo-img" />
@@ -532,7 +532,7 @@
             </div>
           </div>
 
-          <div class="row mt-4">
+          <div class="row mt-4 mbl-align">
             <div class="col-6 statistic-box">
               <span class="text-left">
                 <h3>7500+</h3>
@@ -551,7 +551,7 @@
             </div>
           </div>
 
-          <div class="row mt-5">
+          <div class="row mt-5 mbl-align">
             <div class="col-6 statistic-box">
               <span class="text-left">
                 <h3>100+</h3>
@@ -1780,11 +1780,28 @@ export default {
 }
 
 .globe-img {
-  height: 488px !important;
-  width: 488px !important;
+  height: 458px !important;
+  width: 458px !important;
   max-width: 500px;
 }
-
+@media (max-width: 768px) {
+  .globe-img {
+  height: auto !important;
+  width: 300px !important;
+  max-width: 300px;
+}
+.mbl-align{
+  margin-bottom: 20px !important;
+  margin-left: 20px !important;
+}
+.mbl-margin{
+  margin-top: 0px !important;
+}
+}
+.globe-align{
+  display: flex;
+  justify-content: center;
+}
 .card-container {
   display: flex;
   flex-direction: column;

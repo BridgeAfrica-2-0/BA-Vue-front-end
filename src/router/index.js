@@ -20,6 +20,7 @@ import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
 import market from "@/views/market";
 import settings from "@/views/settings";
+import helpAndSupport from "@/views/help&support";
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
@@ -238,6 +239,12 @@ const routes = [
     path: "/settings",
     name: "settings",
     component: settings
+  },
+
+  {
+    path: "/helpAndSupport",
+    name: "helpAndSupport",
+    component: helpAndSupport
   },
 
   {

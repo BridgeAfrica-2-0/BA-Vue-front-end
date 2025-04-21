@@ -13,6 +13,7 @@ export default {
     selectedCurrency: null,
     countries: [],
     rate: 1,
+    settingsLastUpdated: null
   },
 
   mutations: {
@@ -38,6 +39,9 @@ export default {
     },
     setRate(state, rate) {
       state.rate = rate
+    },
+    SETTINGS_UPDATED(state) {
+      state.settingsLastUpdated = new Date().getTime();
     }
   },
   getters: {
@@ -102,6 +106,13 @@ export default {
       commit("setHasBeenLoad")
 
       commit("setLoading", false)
+    },
+    settingsUpdated({ commit }, settings) {
+      // Update the timestamp to trigger reactivity
+      commit('SETTINGS_UPDATED');
+      
+      // You can also log or process the settings here if needed
+      console.log('Settings updated in store:', settings);
     }
   },
 };

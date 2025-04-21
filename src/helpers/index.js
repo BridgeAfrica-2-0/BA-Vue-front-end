@@ -317,71 +317,189 @@ export const extractCurrencyCode = (countryCode) => {
 };
 
 // Updated convertToCurrency function with isLocal flag handling
+// export const convertToCurrency = async (defaultCurrency = null) => {
+//   try {
+//     let userCurrency;
+//     const cachedCurrencyData = localStorage.getItem("currencyRate");
+//     let cachedCurrency = null;
+    
+//     if (cachedCurrencyData) {
+//       try {
+//         const parsed = JSON.parse(cachedCurrencyData);
+//         cachedCurrency = parsed.currency;
+//         console.log("Found cached currency:", cachedCurrency);
+//       } catch (e) {
+//         console.error("Error parsing cached currency:", e);
+//       }
+//     }
+    
+//     // Check isLocal flag first
+//     const isLocal = localStorage.getItem("isLocal") === 'true';
+    
+//     // If user is from Cameroon, immediately use XAF
+//     if (isLocal) {
+//       userCurrency = 'XAF';
+//       console.log("User is from Cameroon, using XAF currency");
+//     }
+//     // Use provided default currency if specified
+//     else if (defaultCurrency) {
+//       userCurrency = defaultCurrency;
+//       console.log("Using provided default currency:", userCurrency);
+//     }
+//     else {
+//       // Get country information from storage or API
+//       let userCountry = null;
+//       try {
+//         const countryData = localStorage.getItem('country');
+//         if (countryData) {
+//           userCountry = JSON.parse(countryData);
+//           console.log("Using country from localStorage:", userCountry);
+//         }
+//       } catch (e) {
+//         console.error("Error parsing country data:", e);
+//       }
+      
+//       // If we don't have country data, get it from API
+//       if (!userCountry?.country) {
+//         userCountry = await checkCountry();
+//         console.log("Got country from API:", userCountry);
+//       }
+      
+//       // Get currency for country using improved extraction
+//       if (userCountry?.country) {
+//         // Special case for Cameroon
+//         if (userCountry.country === 'CM') {
+//           userCurrency = 'XAF';
+//           localStorage.setItem("isLocal", 'true');
+//         } else {
+//           userCurrency = extractCurrencyCode(userCountry.country);
+//           localStorage.setItem("isLocal", 'false');
+//         }
+//         console.log("Extracted currency for country:", userCurrency);
+//       }
+      
+//       // Final fallback - use cached or default
+//       if (!userCurrency) {
+//         userCurrency = cachedCurrency || 'USD';
+//         console.log("Using fallback currency:", userCurrency);
+//       }
+//     }
+    
+//     // Store detected currency for future reference
+//     localStorage.setItem("detectedCurrency", userCurrency);
+    
+//     // Get conversion rate
+//     console.log("Getting conversion rate for:", userCurrency);
+//     const conversionRate = await getRate(userCurrency, 'XAF');
+//     console.log("Conversion rate:", conversionRate);
+    
+//     // Prepare result
+//     const result = { "currency": userCurrency, rate: conversionRate };
+    
+//     // Cache the result for future use
+//     localStorage.setItem("currencyRate", JSON.stringify(result));
+    
+//     return result;
+//   } catch (error) {
+//     console.error('Error in convertToCurrency:', error);
+    
+//     // Try to use cached currency data
+//     try {
+//       const cachedData = localStorage.getItem("currencyRate");
+//       if (cachedData) {
+//         return JSON.parse(cachedData);
+//       }
+//     } catch (e) {
+//       console.error("Error using cached currency data:", e);
+//     }
+    
+//     // Check if isLocal is true as a final fallback
+//     if (localStorage.getItem("isLocal") === 'true') {
+//       return { "currency": "XAF", rate: 1 };
+//     }
+    
+//     // Ultimate fallback
+//     return { "currency": "USD", rate: 1 };
+//   }
+// };
+// Modified convertToCurrency function that prioritizes explicit user currency selection
 export const convertToCurrency = async (defaultCurrency = null) => {
   try {
     let userCurrency;
-    const cachedCurrencyData = localStorage.getItem("currencyRate");
-    let cachedCurrency = null;
     
-    if (cachedCurrencyData) {
-      try {
-        const parsed = JSON.parse(cachedCurrencyData);
-        cachedCurrency = parsed.currency;
-        console.log("Found cached currency:", cachedCurrency);
-      } catch (e) {
-        console.error("Error parsing cached currency:", e);
-      }
-    }
+    // HIGHEST PRIORITY: Check if the user explicitly selected a currency in the dropdown
+    const explicitCurrencySelection = localStorage.getItem("isExplicitCurrencySelection") === 'true';
+    const userSelectedCurrency = localStorage.getItem("userSelectedCurrency");
     
-    // Check isLocal flag first
-    const isLocal = localStorage.getItem("isLocal") === 'true';
-    
-    // If user is from Cameroon, immediately use XAF
-    if (isLocal) {
-      userCurrency = 'XAF';
-      console.log("User is from Cameroon, using XAF currency");
+    if (explicitCurrencySelection && userSelectedCurrency) {
+      console.log("Using explicitly selected currency from dropdown:", userSelectedCurrency);
+      userCurrency = userSelectedCurrency;
     }
-    // Use provided default currency if specified
-    else if (defaultCurrency) {
-      userCurrency = defaultCurrency;
-      console.log("Using provided default currency:", userCurrency);
-    }
+    // SECOND PRIORITY: Check cached currency data
     else {
-      // Get country information from storage or API
-      let userCountry = null;
-      try {
-        const countryData = localStorage.getItem('country');
-        if (countryData) {
-          userCountry = JSON.parse(countryData);
-          console.log("Using country from localStorage:", userCountry);
+      const cachedCurrencyData = localStorage.getItem("currencyRate");
+      let cachedCurrency = null;
+      
+      if (cachedCurrencyData) {
+        try {
+          const parsed = JSON.parse(cachedCurrencyData);
+          cachedCurrency = parsed.currency;
+          console.log("Found cached currency:", cachedCurrency);
+        } catch (e) {
+          console.error("Error parsing cached currency:", e);
         }
-      } catch (e) {
-        console.error("Error parsing country data:", e);
       }
       
-      // If we don't have country data, get it from API
-      if (!userCountry?.country) {
-        userCountry = await checkCountry();
-        console.log("Got country from API:", userCountry);
-      }
+      // THIRD PRIORITY: Check isLocal flag (Cameroon special case)
+      const isLocal = localStorage.getItem("isLocal") === 'true';
       
-      // Get currency for country using improved extraction
-      if (userCountry?.country) {
-        // Special case for Cameroon
-        if (userCountry.country === 'CM') {
-          userCurrency = 'XAF';
-          localStorage.setItem("isLocal", 'true');
-        } else {
-          userCurrency = extractCurrencyCode(userCountry.country);
-          localStorage.setItem("isLocal", 'false');
+      if (isLocal) {
+        userCurrency = 'XAF';
+        console.log("User is from Cameroon, using XAF currency");
+      }
+      // FOURTH PRIORITY: Use provided default currency
+      else if (defaultCurrency) {
+        userCurrency = defaultCurrency;
+        console.log("Using provided default currency:", userCurrency);
+      }
+      // FIFTH PRIORITY: Use country-based detection
+      else {
+        // Get country information from storage or API
+        let userCountry = null;
+        try {
+          const countryData = localStorage.getItem('country');
+          if (countryData) {
+            userCountry = JSON.parse(countryData);
+            console.log("Using country from localStorage:", userCountry);
+          }
+        } catch (e) {
+          console.error("Error parsing country data:", e);
         }
-        console.log("Extracted currency for country:", userCurrency);
-      }
-      
-      // Final fallback - use cached or default
-      if (!userCurrency) {
-        userCurrency = cachedCurrency || 'USD';
-        console.log("Using fallback currency:", userCurrency);
+        
+        // If we don't have country data, get it from API
+        if (!userCountry?.country) {
+          userCountry = await checkCountry();
+          console.log("Got country from API:", userCountry);
+        }
+        
+        // Get currency for country using improved extraction
+        if (userCountry?.country) {
+          // Special case for Cameroon
+          if (userCountry.country === 'CM') {
+            userCurrency = 'XAF';
+            localStorage.setItem("isLocal", 'true');
+          } else {
+            userCurrency = extractCurrencyCode(userCountry.country);
+            localStorage.setItem("isLocal", 'false');
+          }
+          console.log("Extracted currency for country:", userCurrency);
+        }
+        
+        // Final fallback - use cached or default
+        if (!userCurrency) {
+          userCurrency = cachedCurrency || 'USD';
+          console.log("Using fallback currency:", userCurrency);
+        }
       }
     }
     
@@ -422,7 +540,6 @@ export const convertToCurrency = async (defaultCurrency = null) => {
     return { "currency": "USD", rate: 1 };
   }
 };
-
 // Legacy function for backward compatibility
 export const convertCurrency = async (defaultCurrency = null) => {
   console.warn("convertCurrency is deprecated, use convertToCurrency instead");

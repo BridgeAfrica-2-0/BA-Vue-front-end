@@ -173,6 +173,7 @@ export default {
         autoplay: false,
         gap: '1rem',
       },
+      storageListener: null,
     };
   },
   created() {
@@ -181,6 +182,16 @@ export default {
     this.getCartSummary();
     this.loading = false;
     console.log("loading cart items");
+    this.storageListener = this.handleStorageChange.bind(this);
+    window.addEventListener('storage', this.storageListener);
+    document.addEventListener('settings-updated', this.refreshCurrencyAndRates.bind(this));
+  },
+  beforeDestroy() {
+    // Remove event listeners when component is destroyed
+    if (this.storageListener) {
+      window.removeEventListener('storage', this.storageListener);
+    }
+    document.removeEventListener('settings-updated', this.refreshCurrencyAndRates);
   },
   async mounted() {
     this.$store.dispatch("checkout/updateStepper", 0);
@@ -216,37 +227,95 @@ export default {
   //   }
   // },
   filters: {
-  locationPrice(ev, rate) {
-    if (!ev || isNaN(ev)) return '0.00';
-    if (!rate || !rate.currency) return `${parseFloat(ev).toFixed(2)} USD`;
+  // locationPrice(ev, rate) {
+  //   if (!ev || isNaN(ev)) return '0.00';
+  //   if (!rate || !rate.currency) return `${parseFloat(ev).toFixed(2)} USD`;
     
-    try {
-      // Convert the value according to the rate
-      const convertedValue = parseFloat(ev) / (rate.rate || 1);
+  //   try {
+  //     // Convert the value according to the rate
+  //     const convertedValue = parseFloat(ev) / (rate.rate || 1);
       
-      // Format according to currency
-      switch (rate.currency) {
-        case 'XAF':
-          // Use comma as decimal separator for XAF
-          return `${convertedValue.toFixed(2).replace('.', ',')} ${rate.currency}`;
-        case 'EUR':
-          return `${convertedValue.toFixed(2)} €`;
-        case 'GBP':
-          return `£${convertedValue.toFixed(2)}`;
-        case 'JPY':
-          // No decimal places for JPY
-          return `¥${Math.round(convertedValue)}`;
-        case 'PKR':
-          return `Rs ${convertedValue.toFixed(2)}`;
-        default:
-          // Default format with currency code
-          return `${convertedValue.toFixed(2)} ${rate.currency}`;
+  //     // Format according to currency
+  //     switch (rate.currency) {
+  //       case 'XAF':
+  //         // Use comma as decimal separator for XAF
+  //         return `${convertedValue.toFixed(2).replace('.', ',')} ${rate.currency}`;
+  //       case 'EUR':
+  //         return `${convertedValue.toFixed(2)} €`;
+  //       case 'GBP':
+  //         return `£${convertedValue.toFixed(2)}`;
+  //       case 'JPY':
+  //         // No decimal places for JPY
+  //         return `¥${Math.round(convertedValue)}`;
+  //       case 'PKR':
+  //         return `Rs ${convertedValue.toFixed(2)}`;
+  //       default:
+  //         // Default format with currency code
+  //         return `${convertedValue.toFixed(2)} ${rate.currency}`;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error in locationPrice filter:', error);
+  //     return `${parseFloat(ev).toFixed(2)} ${rate?.currency || 'USD'}`;
+  //   }
+  // }
+  // Enhanced locationPrice function for more consistent currency display
+ locationPrice(value, rate) {
+  if (!value || isNaN(value)) return '0.00';
+  if (!rate || !rate.currency) return `${parseFloat(value).toFixed(2)} USD`;
+  
+  try {
+    // Convert the value according to the rate
+    const convertedValue = parseFloat(value) / (rate.rate || 1);
+    
+    // Get symbol from currency data if available
+    const cachedCurrencyData = localStorage.getItem("currencyRate");
+    let symbol = "";
+    
+    if (cachedCurrencyData) {
+      try {
+        const parsed = JSON.parse(cachedCurrencyData);
+        symbol = parsed.symbol || "";
+      } catch (e) {
+        console.error("Error parsing cached currency for symbol:", e);
       }
-    } catch (error) {
-      console.error('Error in locationPrice filter:', error);
-      return `${parseFloat(ev).toFixed(2)} ${rate?.currency || 'USD'}`;
     }
+    
+    // Format according to currency code
+    switch (rate.currency) {
+      case 'XAF':
+        // Use comma as decimal separator for XAF
+        return `${convertedValue.toFixed(2).replace('.', ',')} ${symbol || rate.currency}`;
+      case 'EUR':
+        return `${convertedValue.toFixed(2)} ${symbol || '€'}`;
+      case 'GBP':
+        return `${symbol || '£'}${convertedValue.toFixed(2)}`;
+      case 'JPY':
+        // No decimal places for JPY
+        return `${symbol || '¥'}${Math.round(convertedValue)}`;
+      case 'PKR':
+        return `${symbol || 'Rs'} ${convertedValue.toFixed(2)}`;
+      case 'USD':
+        return `${symbol || '$'}${convertedValue.toFixed(2)}`;
+      default:
+        // Try to get a formatter based on locale if available
+        try {
+          const locale = localStorage.getItem("lang") || 'en';
+          const formatter = new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: rate.currency,
+            minimumFractionDigits: 2
+          });
+          return formatter.format(convertedValue);
+        } catch (e) {
+          // Default format with currency code if formatter fails
+          return `${convertedValue.toFixed(2)} ${symbol || rate.currency}`;
+        }
+    }
+  } catch (error) {
+    console.error('Error formatting price:', error);
+    return `${parseFloat(value).toFixed(2)} ${rate?.currency || 'USD'}`;
   }
+}
 },
   watch: {
     currentPage: function (val) {
@@ -320,7 +389,51 @@ export default {
           console.error(err);
         });
     },
-
+    async handleStorageChange(event) {
+      // Check if relevant localStorage keys were changed
+      if (
+        event.key === 'country' ||
+        event.key === 'currencyRate' ||
+        event.key === 'userSelectedCurrency' ||
+        event.key === 'isLocal'
+      ) {
+        console.log('Detected settings change, refreshing currency data');
+        await this.refreshCurrencyAndRates();
+      }
+    },
+    async refreshCurrencyAndRates() {
+      console.log('Refreshing currency and rates');
+      try {
+        // Re-fetch currency rate
+        this.rate = await convertToCurrency();
+        
+        // Update locale and currency from new settings
+        let countryData = localStorage.getItem("country");
+        if (countryData) {
+          try {
+            const parsedCountry = JSON.parse(countryData);
+            this.locale = parsedCountry.country || 'CM';
+            this.isCameroon = this.locale === 'CM';
+          } catch (e) {
+            console.error('Error parsing country data:', e);
+          }
+        }
+        
+        this.currency = this.rate.currency;
+        
+        // Force component re-render
+        this.$forceUpdate();
+        
+        console.log('Updated currency settings:', {
+          locale: this.locale,
+          currency: this.currency,
+          rate: this.rate,
+          isCameroon: this.isCameroon
+        });
+      } catch (err) {
+        console.error('Error refreshing currency settings:', err);
+      }
+    },
     async getCartSummary() {
       await this.$store
         .dispatch("checkout/getCartSummary", this.islogin)

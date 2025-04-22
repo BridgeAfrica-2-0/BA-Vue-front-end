@@ -29,7 +29,7 @@
                     <img
                       src="../../assets/img/bavlogo.png"
                       width="250px"
-                      class="size px-n1 px-md-0"
+                      class="px-n1 px-md-0"
                       alt=""
                     />
                   </div>

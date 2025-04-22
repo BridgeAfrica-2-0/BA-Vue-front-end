@@ -240,10 +240,10 @@
                         </span>
                       </router-link>
                       <hr class="h-divider" />
-                      <div class="other-menu suggest-item cursor-pointer">
+                      <router-link  :to="{ name: 'helpAndSupport' }" class="other-menu suggest-item cursor-pointer">
                         <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
                         {{ $t("general.Help_and_Support") }}
-                      </div>
+                      </router-link >
                       <hr class="h-divider" />
 
                       <div class="other-menu suggest-item cursor-pointer">

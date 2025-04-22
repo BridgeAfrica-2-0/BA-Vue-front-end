@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div class="countries my-1">
             <strong for="">Country</strong>
-            <v-select v-model="country" :options="countries" label="name" :reduce="country => country">
+            <v-select v-model="country" :options="countries" label="name" :reduce="country => country" @input="onCountryChange">
               <template #option="option">
                 <span>
                   <img :src="option.flag" class="flag" />
@@ -25,14 +25,12 @@
                   {{ option.name }}
                 </span>
               </template>
-
             </v-select>
           </div>
 
           <div class="countries my-2">
             <strong for="">Currency</strong>
             <v-select v-model="currency" :options="currencies" label="name" :reduce="currency => currency">
-
               <template #option="option">
                 <span>
                   ({{ option.symbol }})
@@ -62,19 +60,16 @@
       </div>
     </div>
   </div>
-
 </template>
 
 
 <script>
-
-
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 
-
 import { LocalisationMixins } from "@/mixins"
 import { onInitializer2 } from "@/helpers/index";
+
 export default {
   components: {
     vSelect
@@ -108,17 +103,14 @@ export default {
       this.currency = newValue
     },
     countries(newValue) {
-
       if (!newValue.length)
         return false
 
-
       if (!this.currency && !this.country) {
-        this.country = this.countrySelected.sigle
-        this.currency = this.currencySelected.name
+        this.country = this.countrySelected
+        this.currency = this.currencySelected
       }
       this.onStart(newValue)
-
     }
   },
 
@@ -137,7 +129,6 @@ export default {
       const uniqueCurrencyMap = {};
 
       for (const [key, value] of Object.entries(currencies)) {
-
         const [currency] = Object.keys(value)
 
         if (!seenCurrencies.has(currency)) {
@@ -150,20 +141,37 @@ export default {
         const [key, value] = curreny
         return { name: key, symbol: value.symbol };
       }).sort((a, b) => a.name.localeCompare(b.name));
-
     },
+    
     async loadCountries() {
-  try {
-    const countriesData = await onInitializer2();
-    if (countriesData.length > 0) {
-      this.countries = countriesData;
-    } else {
-      console.error("No countries data available.");
-    }
-  } catch (error) {
-    console.error("Error loading countries:", error);
-  }
-},
+      try {
+        const countriesData = await onInitializer2();
+        if (countriesData.length > 0) {
+          this.countries = countriesData;
+        } else {
+          console.error("No countries data available.");
+        }
+      } catch (error) {
+        console.error("Error loading countries:", error);
+      }
+    },
+    
+    onCountryChange(selectedCountry) {
+      if (!selectedCountry || !selectedCountry.currency) return;
+      
+      // Get the default currency for this country
+      const countryCurrency = selectedCountry.currency;
+      const currencyKey = Object.keys(countryCurrency)[0];
+      
+      // Find the corresponding currency object in our currencies list
+      const defaultCurrency = this.currencies.find(curr => curr.name === currencyKey);
+      
+      // Set the currency if found
+      if (defaultCurrency) {
+        this.currency = defaultCurrency;
+      }
+    },
+    
     change(lang) {
       this.$i18n.locale = lang;
 
@@ -175,7 +183,6 @@ export default {
     },
 
     onChange() {
-
       this.$store.dispatch("localisation/updateCountry", this.country)
       this.$store.dispatch("localisation/updateCurrency", this.currency)
       this.$store.dispatch("localisation/updateRate", this.currency.name)
@@ -184,126 +191,86 @@ export default {
       this.notifySettingsChanged();
       this.$refs.close.click();
     },
-   // Updated updateHelperValues method for settings component
-// updateHelperValues() {
-//   // First, create a complete country object that includes the selected currency
-//   if (this.country && this.currency) {
-//     // Create a modified country object that includes the user's currency choice
-//     const countryWithCurrency = {
-//       country: this.country.code,
-//       name: this.country.name,
-//       // This is the key change - store the user's explicit currency choice with the country
-//       userSelectedCurrency: this.currency.name
-//     };
     
-//     // Save the modified country object
-//     localStorage.setItem('country', JSON.stringify(countryWithCurrency));
+    updateHelperValues() {
+      // Handle country selection
+      if (this.country) {
+        const countryData = {
+          country: this.country.code,
+          name: this.country.name
+        };
+        localStorage.setItem('country', JSON.stringify(countryData));
+        
+        // Set isLocal flag based on country selection
+        if (this.country.code === 'CM') {
+          localStorage.setItem("isLocal", 'true');
+        } else {
+          localStorage.setItem("isLocal", 'false');
+        }
+      }
+      
+      // Handle currency selection
+      if (this.currency) {
+        // Store the explicitly selected currency code
+        const currencyCode = this.currency.name;
+        
+        // Set a flag that indicates currency was explicitly selected by user
+        localStorage.setItem("userSelectedCurrency", currencyCode);
+        localStorage.setItem("isExplicitCurrencySelection", "true");
+        
+        // Prepare and store currency data with explicit symbol
+        const currencyData = {
+          "currency": currencyCode,
+          "symbol": this.currency.symbol || "",
+          "rate": 1 // Default rate, will be updated by getRate on next use
+        };
+        
+        localStorage.setItem("currencyRate", JSON.stringify(currencyData));
+        localStorage.setItem("detectedCurrency", currencyCode);
+        
+        // Clear any cached rates to force refresh with new currency
+        const cacheKeys = Object.keys(localStorage).filter(key => key.startsWith('rate_'));
+        cacheKeys.forEach(key => localStorage.removeItem(key));
+      }
+      
+      // Update language for moment.js formatting in the helper
+      localStorage.setItem("lang", this.lang);
+      
+      // Add timestamp of when settings were last updated
+      localStorage.setItem("settingsLastUpdated", Date.now().toString());
+    },
     
-//     // Set isLocal flag based on country selection (keep this behavior)
-//     if (this.country.code === 'CM') {
-//       localStorage.setItem("isLocal", 'true');
-//     } else {
-//       localStorage.setItem("isLocal", 'false');
-//     }
-    
-//     // Store the explicitly selected currency data
-//     const currencyData = {
-//       "currency": this.currency.name,
-//       "rate": 1 // Default rate, will be updated by getRate on next use
-//     };
-    
-//     localStorage.setItem("currencyRate", JSON.stringify(currencyData));
-//     localStorage.setItem("detectedCurrency", this.currency.name);
-//     localStorage.setItem("userSelectedCurrency", this.currency.name);
-    
-//     // Clear any cached rates to force refresh with new currency
-//     const cacheKeys = Object.keys(localStorage).filter(key => key.startsWith('rate_'));
-//     cacheKeys.forEach(key => localStorage.removeItem(key));
-//   }
-  
-//   // Update language for moment.js formatting in the helper
-//   localStorage.setItem("lang", this.lang);
-// },
-// Enhanced updateHelperValues method for settings component
-updateHelperValues() {
-  // Handle country selection
-  if (this.country) {
-    const countryData = {
-      country: this.country.code,
-      name: this.country.name
-    };
-    localStorage.setItem('country', JSON.stringify(countryData));
-    
-    // Set isLocal flag based on country selection (keep this behavior)
-    if (this.country.code === 'CM') {
-      localStorage.setItem("isLocal", 'true');
-    } else {
-      localStorage.setItem("isLocal", 'false');
-    }
-  }
-  
-  // Handle currency selection - this is the key part we're enhancing
-  if (this.currency) {
-    // Store the explicitly selected currency code
-    const currencyCode = this.currency.name;
-    
-    // Important: Set a flag that indicates currency was explicitly selected by user
-    // This ensures the helper functions won't override it with country-based currency
-    localStorage.setItem("userSelectedCurrency", currencyCode);
-    localStorage.setItem("isExplicitCurrencySelection", "true");
-    
-    // Prepare and store currency data with explicit symbol
-    const currencyData = {
-      "currency": currencyCode,
-      "symbol": this.currency.symbol || "",
-      "rate": 1 // Default rate, will be updated by getRate on next use
-    };
-    
-    localStorage.setItem("currencyRate", JSON.stringify(currencyData));
-    localStorage.setItem("detectedCurrency", currencyCode);
-    
-    // Clear any cached rates to force refresh with new currency
-    const cacheKeys = Object.keys(localStorage).filter(key => key.startsWith('rate_'));
-    cacheKeys.forEach(key => localStorage.removeItem(key));
-  }
-  
-  // Update language for moment.js formatting in the helper
-  localStorage.setItem("lang", this.lang);
-  
-  // Add timestamp of when settings were last changed
-  localStorage.setItem("settingsLastUpdated", Date.now().toString());
-},
-notifySettingsChanged() {
-    // Method 1: Use a custom event that components can listen for
-    const event = new CustomEvent('settings-updated', { 
-      detail: {
+    notifySettingsChanged() {
+      // Method 1: Use a custom event that components can listen for
+      const event = new CustomEvent('settings-updated', { 
+        detail: {
+          country: this.country,
+          currency: this.currency,
+          language: this.lang
+        }
+      });
+      document.dispatchEvent(event);
+      
+      // Method 2: If using Vuex, can dispatch an event through store
+      this.$store.dispatch("localisation/settingsUpdated", {
         country: this.country,
         currency: this.currency,
         language: this.lang
-      }
-    });
-    document.dispatchEvent(event);
-    
-    // Method 2: If using Vuex, can dispatch an event through store
-    this.$store.dispatch("localisation/settingsUpdated", {
-      country: this.country,
-      currency: this.currency,
-      language: this.lang
-    });
-    
-    // Method 3: Trigger localStorage event for components using storage listener
-    // This helps when components are in different browser tabs
-    const storageEvent = new StorageEvent('storage', {
-      key: 'settings-updated',
-      newValue: JSON.stringify({
-        timestamp: new Date().getTime()
-      }),
-      url: window.location.href
-    });
-    window.dispatchEvent(storageEvent);
-    
-    console.log('Settings change notification sent');
-  }
+      });
+      
+      // Method 3: Trigger localStorage event for components using storage listener
+      // This helps when components are in different browser tabs
+      const storageEvent = new StorageEvent('storage', {
+        key: 'settings-updated',
+        newValue: JSON.stringify({
+          timestamp: new Date().getTime()
+        }),
+        url: window.location.href
+      });
+      window.dispatchEvent(storageEvent);
+      
+      console.log('Settings change notification sent');
+    }
   }
 }
 </script>

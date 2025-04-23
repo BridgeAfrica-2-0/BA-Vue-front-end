@@ -2,7 +2,6 @@
   <base-layout>
     <template v-slot:main>
       <div>
-        <navbar />
         <div class="px-md-5 px-4">
           <hr />
           <div class="row d-block px-md-3">
@@ -198,13 +197,12 @@
   </base-layout>
 </template>
 <script>
-import navbar from "@/components/navbar.vue";
 import moment from "moment";
 import axios from "axios";
 import BaseLayout from "@/layouts/Layout"
 
 export default {
-  components: { navbar, BaseLayout },
+  components: {  BaseLayout },
   data() {
     return {
       moment: moment,

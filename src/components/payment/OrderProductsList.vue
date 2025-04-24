@@ -66,6 +66,12 @@
               {{ (business.business_shipping_cost) | locationPrice(rate) }}
             </span>
           </h6>
+          <h6 v-if="business.duration !== '-'">
+            Estimated delivery time:
+            <span class="shipping-t">
+              {{ (business.duration) }}
+            </span>
+          </h6>
         </div>
       </div>
       <hr class="dotted-hr" />

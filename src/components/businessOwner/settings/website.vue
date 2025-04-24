@@ -114,7 +114,7 @@
               <h4>{{ $t("businessowner.Choose_Your_Plan") }}</h4>
               <br />
               <b-row>
-                <b-col>{{ $t("businessowner.Monthly") }}</b-col>
+                <b-col>{{ $t("businessowner.6Monthly") }}</b-col>
                 <b-col
                   ><b-button
                     variant="primary"
@@ -191,7 +191,7 @@
                   ><span class="text-success"
                     ><b>{{ $t("businessowner.Most_Popular") }}:</b></span
                   >
-                  {{ $t("businessowner.Monthly") }}<br />{{
+                  {{ $t("businessowner.6Monthly") }}<br />{{
                     $t("businessowner.Billed_Monthly")
                   }}</b-col
                 >
@@ -201,7 +201,7 @@
                   }}
                   <b-button
                     v-b-modal.PackageSelection
-                    @click="PaymentForm.subscribe = 'one month'"
+                    @click="PaymentForm.subscribe = '6 months'"
                     variant="primary"
                     >{{ $t("businessowner.Select") }}</b-button
                   ></b-col

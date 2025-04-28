@@ -85,12 +85,14 @@ export default {
       { name: 'English', value: 'en' },
     ],
     currencies: [],
-    countries: []
+    countries: [],
+    capital: "",
   }),
 
   created() {
     this.country = this.countrySelected
     this.currency = this.currencySelected
+    this.capital = this.selectedCountryCapital
     this.onStart(this.countries.length ? this.countries : [])
     this.loadCountries();
   },
@@ -102,6 +104,9 @@ export default {
     currencySelected(newValue) {
       this.currency = newValue
     },
+    selectedCountryCapital(newValue) {
+      this.capital = newValue
+    },
     countries(newValue) {
       if (!newValue.length)
         return false
@@ -109,6 +114,7 @@ export default {
       if (!this.currency && !this.country) {
         this.country = this.countrySelected
         this.currency = this.currencySelected
+        this.capital = this.selectedCountryCapital
       }
       this.onStart(newValue)
     }
@@ -146,6 +152,7 @@ export default {
     async loadCountries() {
       try {
         const countriesData = await onInitializer2();
+        console.log("Countries data loaded:::::::::::::::", countriesData);
         if (countriesData.length > 0) {
           this.countries = countriesData;
         } else {
@@ -156,21 +163,39 @@ export default {
       }
     },
     
+    // onCountryChange(selectedCountry) {
+    //   if (!selectedCountry || !selectedCountry.currency) return;
+      
+    //   // Get the default currency for this country
+    //   const countryCurrency = selectedCountry.currency;
+    //   const currencyKey = Object.keys(countryCurrency)[0];
+      
+    //   // Find the corresponding currency object in our currencies list
+    //   const defaultCurrency = this.currencies.find(curr => curr.name === currencyKey);
+      
+    //   // Set the currency if found
+    //   if (defaultCurrency) {
+    //     this.currency = defaultCurrency;
+    //   }
+    // },
     onCountryChange(selectedCountry) {
-      if (!selectedCountry || !selectedCountry.currency) return;
-      
-      // Get the default currency for this country
-      const countryCurrency = selectedCountry.currency;
-      const currencyKey = Object.keys(countryCurrency)[0];
-      
-      // Find the corresponding currency object in our currencies list
-      const defaultCurrency = this.currencies.find(curr => curr.name === currencyKey);
-      
-      // Set the currency if found
-      if (defaultCurrency) {
-        this.currency = defaultCurrency;
-      }
-    },
+  if (!selectedCountry) return;
+  
+  // Update the capital
+  this.capital = selectedCountry.capital || '';
+  
+  // Handle currency (existing code)
+  if (selectedCountry.currency) {
+    const countryCurrency = selectedCountry.currency;
+    const currencyKey = Object.keys(countryCurrency)[0];
+    
+    const defaultCurrency = this.currencies.find(curr => curr.name === currencyKey);
+    
+    if (defaultCurrency) {
+      this.currency = defaultCurrency;
+    }
+  }
+},
     
     change(lang) {
       this.$i18n.locale = lang;
@@ -186,6 +211,7 @@ export default {
       this.$store.dispatch("localisation/updateCountry", this.country)
       this.$store.dispatch("localisation/updateCurrency", this.currency)
       this.$store.dispatch("localisation/updateRate", this.currency.name)
+      this.$store.dispatch("localisation/updateCountryCapital", this.capital)
       this.updateHelperValues();
       this.change(this.lang)
       this.notifySettingsChanged();
@@ -232,7 +258,9 @@ export default {
         const cacheKeys = Object.keys(localStorage).filter(key => key.startsWith('rate_'));
         cacheKeys.forEach(key => localStorage.removeItem(key));
       }
-      
+      if(this.capital) {
+        localStorage.setItem("countryCapital", this.capital);
+      }
       // Update language for moment.js formatting in the helper
       localStorage.setItem("lang", this.lang);
       

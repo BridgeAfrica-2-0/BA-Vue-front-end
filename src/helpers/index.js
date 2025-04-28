@@ -626,7 +626,8 @@ export const onInitializer2 = async () => {
         name: country.name.common,
         code: country.cca2,
         currency: country.currencies,
-        flag: flag  
+        flag: flag,  
+        capital: country.capital ? country.capital[0] : 'N/A',
       };
     });
 

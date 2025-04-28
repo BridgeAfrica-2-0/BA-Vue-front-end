@@ -273,6 +273,9 @@
   "Active": "Active",
   "Your_Businesses": "Your Businesses",
   "home": "Home",
+  "estimate_shipping":"Estimated shipping fee",
+  "estimated_delivery":"Estimated delivery time",
+  "days":"days",
 
   "privacy_policy": "Privacy policy",
   "contact_us": "Contact us",

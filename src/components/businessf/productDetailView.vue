@@ -49,10 +49,10 @@
 
             <!-- Currency Selection -->
             <div v-if="countries.length" class="mb-3 cursor-pointer" data-toggle="modal" data-target="#settings">
-             <span class="font-weight-bold">Currency: </span>
+             <span class="font-weight-bold">Get in {{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} {{ $t("general.days") }}: </span>
              <span style="font-size: 14px; color: #000; padding: 0 15px;">
                <img :src="countrySelected?.flag" style="padding-right: 2px; width: 28px !important;" />
-               {{ countrySelected?.code }} | {{ currencySelected?.name }}
+               {{ countrySelected?.name }} 
                <i class="fa fa-caret-down"></i>
              </span>
             </div>
@@ -67,7 +67,7 @@
               </div>
             </div>
 <!-- Add this after the pricing div -->
-<div class="shipping-estimate mt-3">
+<!-- <div class="shipping-estimate mt-3">
   <button 
     class="btn btn-sm btn-outline-secondary" 
     @click="calculateShippingEstimate"
@@ -87,7 +87,7 @@
       <span>{{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} {{ $t("general.days") }}</span>
     </div>
   </div>
-</div>
+</div> -->
             <div class="d-flex align-items-center mt-4">
               <!-- Sélection de la quantité -->
               <div class="quantity-selector">
@@ -104,7 +104,7 @@
             </div>
           </div>
         </div>
-        <div class="container" style="margin-top: 4em;">
+        <!-- <div class="container" style="margin-top: 4em;">
           <ul class="nav nav-pills mb-3 justify-content-between flex-nowrap overflow-auto" id="pills-tab"
             role="tablist">
             <li class="nav-item mx-1" role="presentation">
@@ -157,7 +157,107 @@
               </div>
             </div>
           </div>
+        </div> -->
+        <div class="container" style="margin-top: 4em;">
+  <!-- Description Tab -->
+  <div class="accordion-item">
+    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTab('description')">
+      <div class="tab-title">Description</div>
+      <button class="btn accordion-toggle p-0">
+        <i class="fa" :class="isTabActive('description') ? 'fa-minus' : 'fa-plus'"></i>
+      </button>
+    </div>
+    <div class="accordion-content py-3 px-3" :style="{display: isTabActive('description') ? 'block' : 'none'}">
+      <p>{{ marketDetails.description }}</p>
+      <hr>
+       <!-- Shipping Delivery Info -->
+    <div class="delivery-delays mt-3">
+      <h5 class="mb-3">Delivery Times by Region</h5>
+      <ul>
+        <li>France (DOM) from 15 to 21 days.</li>
+        <li>France from 15 to 21 days.</li>
+        <li>United States from 15 to 21 days.</li>
+        <li>Africa from 20 to 26 days.</li>
+        <li>Europe from 15 to 21 days.</li>
+        <li>Australia (Oceania) from 15 to 21 days.</li>
+        <li>International from 15 to 21 days.</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  
+  <!-- Reviews Tab -->
+  <div class="accordion-item mt-2">
+    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTab('reviews')">
+      <div class="tab-title">
+        Reviews 
+        <span class="ml-2">
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          (588)
+        </span>
+      </div>
+      <button class="btn accordion-toggle p-0">
+        <i class="fa" :class="isTabActive('reviews') ? 'fa-minus' : 'fa-plus'"></i>
+      </button>
+    </div>
+    <div class="accordion-content py-3 px-3" :style="{display: isTabActive('reviews') ? 'block' : 'none'}">
+      <!-- Review content here -->
+      <p>Product reviews will appear here.</p>
+    </div>
+  </div>
+  
+  <!-- Shipping Tab -->
+  <!-- <div class="accordion-item">
+    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3"  @click="toggleTab('shipping')">
+      <div class="tab-title">Shipping</div>
+      <button class="btn accordion-toggle p-0">
+        <i class="fa" :class="isTabActive('description') ? 'fa-minus' : 'fa-plus'"></i>
+      </button>
+    </div>
+    <div class="accordion-content py-3" :style="{display: isTabActive('shipping') ? 'block' : 'none'}">
+      <div class="delivery-delays">
+        <ul>
+          <li>France (DOM) from 15 to 21 days.</li>
+          <li>France from 15 to 21 days.</li>
+          <li>United States from 15 to 21 days.</li>
+          <li>Africa from 20 to 26 days.</li>
+          <li>Europe from 15 to 21 days.</li>
+          <li>Australia (Oceania) from 15 to 21 days.</li>
+          <li>International from 15 to 21 days.</li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+<!-- Shipping Tab with Automatic Fee Display -->
+<div class="accordion-item mt-2">
+  <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTabAndCalculateShipping('shipping')">
+    <div class="tab-title">Shipping</div>
+    <button class="btn accordion-toggle p-0">
+      <i class="fa" :class="isTabActive('shipping') ? 'fa-minus' : 'fa-plus'"></i>
+    </button>
+  </div>
+  <div class="accordion-content py-3 px-3" :style="{display: isTabActive('shipping') ? 'block' : 'none'}">
+    <!-- Shipping Estimate Information -->
+    <div class="shipping-info mb-4">
+      <div class="shipping-fee-box border p-3 mb-3" style="max-width: 300px; border-radius: 4px;">
+        <div class="text-muted">Estimated shipping fee</div>
+      </div>
+      <div class="mt-2">
+        <div class="font-weight-bold mb-1">
+          Estimated shipping fee: <span class="text-primary">{{ shippingEstimate.fee | locationPrice(rate, currencySelected) }}</span>
         </div>
+        <div class="text-muted">
+          Estimated delivery time: {{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} days
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
       </div>
     </div>
 
@@ -167,6 +267,31 @@
 </template>
 </base-layout>
 </template>
+<script>
+// Add this to your mounted hook or as a separate script
+document.addEventListener('DOMContentLoaded', function() {
+  const accordionToggles = document.querySelectorAll('.accordion-toggle');
+  
+  accordionToggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      const accordionItem = this.closest('.accordion-item');
+      const content = accordionItem.querySelector('.accordion-content');
+      const icon = this.querySelector('i');
+      
+      // Toggle visibility
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.classList.remove('fa-plus');
+        icon.classList.add('fa-minus');
+      } else {
+        content.style.display = 'none';
+        icon.classList.remove('fa-minus');
+        icon.classList.add('fa-plus');
+      }
+    });
+  });
+});
+</script>
 <script>
 import ProductImages from "./productImages.vue";
 import { LocalisationMixins } from "@/mixins";
@@ -200,7 +325,8 @@ return {
       fee: null,
       method: null,
       deliveryDays: { min: 0, max: 0 }
-    }
+    },
+    activeTab: null 
 };
 },
 
@@ -232,6 +358,33 @@ async fetchMarketDetails() {
     this.marketDetails = details.data;
   } catch (error) {
     console.error("Error fetching market details:", error.message);
+  }
+},
+toggleTab(tabName) {
+    this.activeTab = this.activeTab === tabName ? null : tabName;
+  },
+  isTabActive(tabName) {
+    return this.activeTab === tabName;
+  },
+  toggleTabAndCalculateShipping(tabName) {
+  const wasActive = this.activeTab === tabName;
+  this.activeTab = wasActive ? null : tabName;
+  
+  // If opening the shipping tab, calculate shipping automatically
+  if (tabName === 'shipping' && !wasActive) {
+    // Set default values if shipping hasn't been calculated yet
+    if (!this.shippingEstimate.fee) {
+      // Set initial values while loading
+      this.shippingEstimate = {
+        fee: 0,
+        method: null,
+        deliveryDays: { min: 12, max: 14 } // Default values
+      };
+      this.isCalculatingShipping = true;
+      
+      // Calculate the actual shipping
+      this.calculateShippingEstimateInBackground();
+    }
   }
 },
 handleAddToCard() {
@@ -416,6 +569,63 @@ calculateShippingEstimate() {
       this.isCalculatingShipping = false;
     });
 },
+calculateShippingEstimateInBackground() {
+  if (!this.marketDetails || !this.countrySelected) {
+    this.isCalculatingShipping = false;
+    return;
+  }
+
+  // Default weight if not available
+  const weight = this.marketDetails.kg || 1;
+  
+  // Prepare the data for the shipping API
+  const shippingData = {
+    totalWeight: weight,
+    name: this.countrySelected.name,
+    code: '00000', // Use default if no shipping address available
+    capital: this.countrySelected.capital || '',
+    countryCode: this.countrySelected.code,
+  };
+  
+  // Call the DHL shipping API to get a fee estimate
+  this.$axios.post('/dhl/shippingFeeRoughCalculation', shippingData)
+    .then(response => {
+      if (response.data.products) {
+        // Find the product with code "P" (same as in shippingFee action)
+        const product = response.data.products.find(p => p.productCode === "P");
+        
+        if (product) {
+          // Extract fee and delivery information
+          this.shippingEstimate.fee = product.totalPrice[0].price;
+          this.shippingEstimate.method = product.productName;
+          
+          // Set delivery days based on product info or fallback to region estimates
+          if (product.deliveryCapabilities && product.deliveryCapabilities.estimatedDeliveryDateAndTime) {
+            // If DHL provides specific delivery date, calculate days difference
+            const deliveryDate = new Date(product.deliveryCapabilities.estimatedDeliveryDateAndTime);
+            const today = new Date();
+            const daysDiff = Math.ceil((deliveryDate - today) / (1000 * 60 * 60 * 24));
+            
+            this.shippingEstimate.deliveryDays = {
+              min: daysDiff,
+              max: daysDiff + 2 // Add buffer of 2 days
+            };
+          } else {
+            // Fallback to region-based estimates
+            this.shippingEstimate.deliveryDays = this.estimateDeliveryDays(this.countrySelected.code);
+          }
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error calculating shipping estimate:', error);
+      // Use default shipping estimate values on error
+      this.shippingEstimate.deliveryDays = this.estimateDeliveryDays(this.countrySelected?.code || 'INTL');
+    })
+    .finally(() => {
+      this.isCalculatingShipping = false;
+    });
+},
 // Add helper method to estimate delivery days based on region
 estimateDeliveryDays(countryCode) {
   // Map regions to delivery times based on your delivery-delays content
@@ -574,5 +784,37 @@ display: none;
 font-size: 1.2em;
 margin-top: 1.5em;
 }
+}
+</style>
+<style scoped>
+.accordion-item {
+  border: 1px solid #f0f0f0;
+}
+
+.accordion-header {
+  cursor: pointer;
+}
+
+.tab-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.accordion-toggle {
+  color: #ccc;
+  transition: transform 0.3s ease;
+}
+
+.accordion-toggle i {
+  font-size: 18px;
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.checked {
+  color: #ffc107;
 }
 </style>

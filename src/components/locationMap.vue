@@ -62,7 +62,7 @@ export default {
         }
 
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCziAaniffzINQlfuNhkzCTHm_hWPvVZxw&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC6jOjPzLb6hxXDSV-gLqMUpgNlk4Ob-Rg&libraries=places`;
         script.defer = true;
         script.async = true;
         script.onload = () => {

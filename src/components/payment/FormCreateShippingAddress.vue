@@ -298,7 +298,7 @@ export default {
     // Initialize Google Maps if needed
     if (typeof google === 'undefined') {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCziAaniffzINQlfuNhkzCTHm_hWPvVZxw&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC6jOjPzLb6hxXDSV-gLqMUpgNlk4Ob-Rg&libraries=places`;
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);

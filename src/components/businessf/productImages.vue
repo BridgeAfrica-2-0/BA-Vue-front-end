@@ -1,19 +1,5 @@
 <template>
-  <div class="row justify-content-center">
-    <div class="px-3">
-      <ul class="list-unstyled">
-        <li v-for="(image, index) in images" :key="index" class="mb-3">
-          <img
-            :src="image.src"
-            class="img-thumbnail rounded-0 p-3"
-            :alt="image.alt"
-            @click="showImage(index)"
-            :class="{ 'border-primary': currentIndex === index }"
-          />
-        </li>
-      </ul>
-    </div>
-
+  <div class="col justify-content-center">
     <div
       class=" d-flex align-items-center justify-content-center"
       style="flex-grow: 1; background-color: whitesmoke;"
@@ -25,6 +11,19 @@
           :alt="currentImage.alt"
         />
       </div>
+    </div>
+    <div class="px-3 mt-2">
+      <ul class="list-unstyled">
+        <li v-for="(image, index) in images" :key="index" class="mb-3 img-align">
+          <img
+            :src="image.src"
+            class="img-thumbnail rounded-0 p-3"
+            :alt="image.alt"
+            @click="showImage(index)"
+            :class="{ 'border-primary': currentIndex === index }"
+          />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -57,6 +56,11 @@ export default {
 </script>
 
 <style scoped>
+.img-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .main-image-container {
   position: relative;
   height: 300px;

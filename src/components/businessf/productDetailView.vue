@@ -66,28 +66,6 @@
                   }}</span>
               </div>
             </div>
-<!-- Add this after the pricing div -->
-<!-- <div class="shipping-estimate mt-3">
-  <button 
-    class="btn btn-sm btn-outline-secondary" 
-    @click="calculateShippingEstimate"
-    :disabled="isCalculatingShipping"
-  >
-    <span v-if="!isCalculatingShipping">{{ $t("general.estimate_shipping")  }}</span>
-    <span v-else class="start-loader small-loader"></span>
-  </button>
-  
-  <div v-if="showShippingEstimate" class="mt-2">
-    <div class="shipping-cost">
-      <span class="font-weight-bold">{{ $t("general.estimate_shipping") }}: </span>
-      <span>{{ shippingEstimate.fee | locationPrice(rate, currencySelected) }}</span>
-    </div>
-    <div class="delivery-time mt-1">
-      <span class="font-weight-bold">{{ $t("general.estimated_delivery") }}: </span>
-      <span>{{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} {{ $t("general.days") }}</span>
-    </div>
-  </div>
-</div> -->
             <div class="d-flex align-items-center mt-4">
               <!-- Sélection de la quantité -->
               <div class="quantity-selector">
@@ -104,60 +82,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="container" style="margin-top: 4em;">
-          <ul class="nav nav-pills mb-3 justify-content-between flex-nowrap overflow-auto" id="pills-tab"
-            role="tablist">
-            <li class="nav-item mx-1" role="presentation">
-              <button class="nav-link active text-capitalize px-2 px-md-3" id="pills-home-tab" data-toggle="pill"
-                data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                {{ $t("general.description") }}
-              </button>
-            </li>
-            <li class="nav-item mx-1" role="presentation">
-              <button class="nav-link px-2 px-md-3" id="pills-profile-tab" data-toggle="pill"
-                data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                aria-selected="false">
-                Specification
-              </button>
-            </li>
-            <li class="nav-item mx-1" role="presentation">
-              <button class="nav-link px-2 px-md-3" id="pills-contact-tab" data-toggle="pill"
-                data-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                aria-selected="false">
-                Reviews
-              </button>
-            </li>
-            <li class="nav-item mx-1" role="presentation">
-              <button class="nav-link px-2 px-md-3" id="pills-delivery-tab" data-toggle="pill"
-                data-target="#pills-delivery" type="button" role="tab" aria-controls="pills-delivery"
-                aria-selected="false">
-                Delivery Delay
-              </button>
-            </li>
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <p>
-                {{ marketDetails.description }}
-              </p>
-            </div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
-            <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">
-              <div class="delivery-delays mt-3">
-                <ul>
-                  <li>France (DOM) from 15 to 21 days.</li>
-                  <li>France from 15 to 21 days.</li>
-                  <li>United States from 15 to 21 days.</li>
-                  <li>Africa from 20 to 26 days.</li>
-                  <li>Europe from 15 to 21 days.</li>
-                  <li>Australia (Oceania) from 15 to 21 days.</li>
-                  <li>International from 15 to 21 days.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="container" style="margin-top: 4em;">
   <!-- Description Tab -->
   <div class="accordion-item">
@@ -210,28 +134,6 @@
     </div>
   </div>
   
-  <!-- Shipping Tab -->
-  <!-- <div class="accordion-item">
-    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3"  @click="toggleTab('shipping')">
-      <div class="tab-title">Shipping</div>
-      <button class="btn accordion-toggle p-0">
-        <i class="fa" :class="isTabActive('description') ? 'fa-minus' : 'fa-plus'"></i>
-      </button>
-    </div>
-    <div class="accordion-content py-3" :style="{display: isTabActive('shipping') ? 'block' : 'none'}">
-      <div class="delivery-delays">
-        <ul>
-          <li>France (DOM) from 15 to 21 days.</li>
-          <li>France from 15 to 21 days.</li>
-          <li>United States from 15 to 21 days.</li>
-          <li>Africa from 20 to 26 days.</li>
-          <li>Europe from 15 to 21 days.</li>
-          <li>Australia (Oceania) from 15 to 21 days.</li>
-          <li>International from 15 to 21 days.</li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 <!-- Shipping Tab with Automatic Fee Display -->
 <div class="accordion-item mt-2">
   <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTabAndCalculateShipping('shipping')">
@@ -313,12 +215,6 @@ data() {
 return {
   marketDetails: null,
   countries: [],
-  // showShippingEstimate: false,
-  //   isCalculatingShipping: false,
-  //   shippingEstimate: {
-  //     fee: null,
-  //     deliveryDays: null
-  //   }
   showShippingEstimate: false,
     isCalculatingShipping: false,
     shippingEstimate: {
@@ -432,54 +328,7 @@ toggleCurrencySelector() {
   this.showCurrencySelector = true;
   // We're setting the open prop to true which should handle the modal visibility in the component
 },
-// Add this to your methods section
-// calculateShippingEstimate() {
-//   if (!this.marketDetails || !this.countrySelected) {
-//     this.flashMessage.show({
-//       status: "error",
-//       message: "Product or country information missing",
-//     });
-//     return;
-//   }
 
-//   // Default weight if not available
-//   const weight = this.marketDetails.kg || 1;
-  
-//   this.isCalculatingShipping = true;
-//   console.log("--------------------",this.countrySelected)
-//   // Prepare the data for the shipping API
-//   const shippingData = {
-//     totalWeight: weight,
-//     name: this.countrySelected.name,
-//     code: '00000', // Use default if no shipping address available
-//     capital: this.countrySelected.capital || '',
-//   };
-  
-//   // Call the DHL shipping API to get a fee estimate
-//   this.$axios.post('/dhl/shippingFeeRoughCalculation', shippingData)
-//     .then(response => {
-//       // Handle the API response
-//       if (response.data && response.data.totalPrice) {
-//         this.shippingEstimate.fee = response.data.totalPrice;
-        
-//         // Estimate delivery days based on country region
-//         this.shippingEstimate.deliveryDays = this.estimateDeliveryDays(this.countrySelected.code);
-//         this.showShippingEstimate = true;
-//       } else {
-//         throw new Error('Invalid shipping rate response');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error calculating shipping estimate:', error);
-//       this.flashMessage.show({
-//         status: "error",
-//         message: "Unable to calculate shipping at this time",
-//       });
-//     })
-//     .finally(() => {
-//       this.isCalculatingShipping = false;
-//     });
-// },
 calculateShippingEstimate() {
   if (!this.marketDetails || !this.countrySelected) {
     this.flashMessage.show({

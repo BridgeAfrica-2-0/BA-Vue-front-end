@@ -120,10 +120,9 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        if(response.data.products)
+        if(response.data.data.products)
         {
-          const product = response.data.products.find(p => p.productCode === "P");
-          console.log("**********product**************",product);
+          const product = response.data.data.products.find(p => p.productCode === "P");
           commit("setShippingFee", product.totalPrice[0].price);
           commit("setShippingMethod", product.productName);
         }

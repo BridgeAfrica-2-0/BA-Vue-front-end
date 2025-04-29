@@ -525,9 +525,10 @@ calculateShippingEstimate() {
   //   });
   this.$axios.post('/dhl/shippingFeeRoughCalculation', shippingData)
     .then(response => {
-      if (response.data.products) {
+      if (response.data.data.products) {
+        console.log("**********product**************",response);
         // Find the product with code "P" (same as in shippingFee action)
-        const product = response.data.products.find(p => p.productCode === "P");
+        const product = response.data.data.products.find(p => p.productCode === "P");
         
         if (product) {
           // Extract fee and delivery information
@@ -590,9 +591,9 @@ calculateShippingEstimateInBackground() {
   // Call the DHL shipping API to get a fee estimate
   this.$axios.post('/dhl/shippingFeeRoughCalculation', shippingData)
     .then(response => {
-      if (response.data.products) {
+      if (response.data.data.products) {
         // Find the product with code "P" (same as in shippingFee action)
-        const product = response.data.products.find(p => p.productCode === "P");
+        const product = response.data.data.products.find(p => p.productCode === "P");
         
         if (product) {
           // Extract fee and delivery information

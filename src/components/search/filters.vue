@@ -1,7 +1,13 @@
 <template>
   <div>
 
-
+    <b-button
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="resetFilters"
+        >{{ $t("search.Reset") }}</b-button
+      >
     <br />
 
     <div
@@ -16,34 +22,6 @@
         <div class="d-flex align-items-center justify-content-between">
           <h6 class="bold" style="font-size: 13px;">{{ $t("search.suggested_keywords") }}</h6>
         <div>
-          <div
-      v-if="
-        filterType == '0' || filterType == '1' || (filterType == '5' && islogin)
-      "
-    >
-      <b-button
-        class="float-right"
-        size="sm"
-        variant="outline-primary"
-        @click="resetFilters"
-        >{{ $t("search.Reset") }}</b-button
-      >
-    </div>
-    <div
-      v-else-if="
-        filterType == '0' ||
-          filterType == '1' ||
-          (filterType == '4' && !islogin)
-      "
-    >
-      <b-button
-        class="float-right"
-        size="sm"
-        variant="outline-primary"
-        @click="resetFilters"
-        >{{ $t("search.Reset") }}</b-button
-      >
-    </div>
         </div>
         </div>
         <b-form-radio
@@ -88,15 +66,6 @@
         >
           {{ item.category }}
         </span>
-        <!-- <b-badge
-          v-for="item in categoryRendering"
-          :key="item.id"
-          :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
-          variant="light"
-          @click="matching(item)"
-        >
-          {{ item.category }}
-        </b-badge> -->
 
         <span v-if="activateMatching && !loading && !categoryRendering.length"
           >Not data found</span
@@ -182,7 +151,7 @@
         "
       >
         <div>
-          <!-- <div>
+          <div>
             <b-form-group
               label-cols-lg="3"
               :label="$t('search.Country')"
@@ -199,11 +168,11 @@
               @change="getBRegions()"
             >
             </b-form-select>
-          </div> -->
+          </div>
 
           <!-- city -->
-          <!-- <div v-if="!showMore">
-            <div>
+          <div v-if="!showMore">
+            <div class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.City')"
@@ -225,42 +194,15 @@
             </div>
 
             <div>
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Neighbourhood')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 mt-3 text-left"
-              >
-              </b-form-group>
-
-              <vue-bootstrap-typeahead
-                v-model="query"
-                :data="lneighbourhoods"
-                :minMatchingChars="0"
-                @hit="searchThisNeibourhood(query)"
-                :maxMatches="10"
-                :serializer="(item) => item.name"
-                placeholder="Where"
-                class=""
-              />
-
-              <b-link
-                v-if="networkFilter.region"
-                class="float-right mt-2 mb-2"
-                @click="showMoreFilters"
-              >
-                More
-              </b-link>
               <br />
             </div>
-          </div> -->
+          </div>
 
-          <div class="more" v-if="showMore">
+          <div >
             <hr />
 
             <!-- Region -->
-            <!-- <div class="mt-1" v-if="networkFilter.region">
+            <div class="mt-1" v-if="networkFilter.region">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Region')"
@@ -280,10 +222,10 @@
               </b-form-select>
             </div>
 
-            <hr /> -->
+            <!-- <hr /> -->
 
             <!-- Division -->
-            <!-- <div v-if="networkFilter.division">
+            <div v-if="networkFilter.division" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Division')"
@@ -300,10 +242,10 @@
                 @change="getBCouncils()"
               >
               </b-form-select>
-            </div> -->
+            </div>
 
             <!-- Council -->
-            <!-- <div v-if="networkFilter.council">
+            <div v-if="networkFilter.council" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Council')"
@@ -322,10 +264,10 @@
                 "
               >
               </b-form-select>
-            </div> -->
+            </div>
 
             <!-- Neighbourhood -->
-            <!-- <div v-if="networkFilter.neighbourhood">
+            <div v-if="networkFilter.neighbourhood" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Neighbourhood')"
@@ -346,7 +288,7 @@
                 "
               >
               </b-form-select>
-            </div> -->
+            </div>
 
             <!-- <b-link
               v-if="networkFilter.region"
@@ -1308,6 +1250,7 @@ export default {
     },
 
     resetFilters(restName) {
+      console.log("-=-==-=-=-==-=-=-",this.searchParams)
       this.matchingCategory = [];
       this.activateMatching = false;
       this.nameOfCategory = null;

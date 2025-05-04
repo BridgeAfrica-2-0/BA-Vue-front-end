@@ -8,18 +8,14 @@
         </p>
       </div>
 
-
       <div class="col-8 col-md ">
         <div class="inline-flex marg float-right">
           <b-button v-if="isPremium" class=" mx-1" variant="outline-primary" @click="displayOrders">{{ my_orders
             }}</b-button>
-          <!-- <div class="col col-md"> -->
           <b-button variant="outline-primary" v-if="isPremium && !isGlobal" @click="createProduct">{{
             $t("businessowner.Add_Product") }}</b-button>
         </div>
-
       </div>
-      <!-- </div> -->
     </div>
     <div class="col-12">
       <hr class="h-divider" />
@@ -32,9 +28,6 @@
         {{ $t("general.PREMIUM_ACCOUNT_FEATURE") }}
       </b-card-text>
 
-      <!-- <div class="col-md-6" v-for="(product, index) in products" :key="index">
-            <Product v-show="!orders && market"  :product="products" />
-          </div> -->
       <Product v-show="!orders && market && isPremium" />
 
       <b-col v-if="loader" class="load">
@@ -76,9 +69,64 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <vue-upload-multiple-image limit-exceeded="5" markIsPrimaryText="" primaryText="Cover image" browseText=""
-              dragText="Drag or upload images" @upload-success="uploadImageSuccess" @before-remove="beforeRemove"
-              @edit-image="editImage" @data-change="dataChange"></vue-upload-multiple-image>
+            <!-- Product Media Section -->
+            <b-tabs content-class="mt-3" nav-class="border-bottom">
+              <b-tab :title="$t('businessowner.Images')" active>
+                <label class="d-block mb-2">{{ $t("businessowner.Product_Images") }}</label>
+                <vue-upload-multiple-image 
+                  limit-exceeded="10"
+                  markIsPrimaryText="" 
+                  primaryText="Cover image" 
+                  browseText=""
+                  dragText="Drag or upload images" 
+                  @upload-success="uploadImageSuccess" 
+                  @before-remove="beforeRemove"
+                  @edit-image="editImage" 
+                  @data-change="dataChange">
+                </vue-upload-multiple-image>
+                <small class="text-muted">{{ $t("businessowner.First_image_will_be_the_cover_image") }}</small>
+              </b-tab>
+              
+              <b-tab :title="$t('businessowner.Video')">
+                <label class="d-block mb-2">{{ $t("businessowner.Product_Video") }}</label>
+                <div class="card p-3 media-upload-card">
+                  <!-- Video Upload -->
+                  <div v-if="!videoPreview" class="text-center video-upload-zone py-4">
+                    <div class="mb-3">
+                      <i class="fa fa-video-camera fa-3x text-muted"></i>
+                    </div>
+                    <p class="mb-2">{{ $t("businessowner.Drag_video_or_click_to_upload") }}</p>
+                    <b-button variant="outline-primary" @click="$refs.videoInput.click()">
+                      {{ $t("businessowner.Choose_Video") }}
+                    </b-button>
+                    <input 
+                      type="file" 
+                      class="d-none" 
+                      id="product-video"
+                      accept="video/*"
+                      @change="handleVideoUpload"
+                      ref="videoInput">
+                  </div>
+                  
+                  <!-- Video Preview -->
+                  <div v-if="videoPreview" class="text-center">
+                    <div class="video-player-container mb-2">
+                      <video class="product-video-preview" controls>
+                        <source :src="videoPreview">
+                        {{ $t("businessowner.Video_Not_Supported") }}
+                      </video>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">{{ videoFileName }}</small>
+                      <b-button size="sm" variant="outline-danger" @click="removeVideo">
+                        <i class="fa fa-trash mr-1"></i> {{ $t("businessowner.Remove") }}
+                      </b-button>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted mt-2 d-block">{{ $t("businessowner.Video_should_be_less_than_50MB") }}</small>
+              </b-tab>
+            </b-tabs>
           </b-col>
         </b-row>
 
@@ -121,7 +169,6 @@
         </b-form-group>
 
         <!-- TAX and KG -->
-
         <b-form-input v-model="newProduct.tax_amount" class="mt-1" id="tax" type="number" required
           hidden></b-form-input>
 
@@ -173,7 +220,6 @@
 </template>
 
 <script>
-
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
 import Product from "../product";
@@ -206,6 +252,11 @@ export default {
       my_orders: this.$t("businessowner.orders"),
       selectedImagePrv: "",
 
+      // Video data
+      productVideo: null,
+      videoPreview: null,
+      videoFileName: "",
+
       showModal: false,
       load: false,
       loader: false,
@@ -228,7 +279,6 @@ export default {
         tax_amount: "",
         kg: ""
       },
-      // products: [],
       val: "",
       msg: "",
       success: false,
@@ -255,7 +305,6 @@ export default {
     selectedcategories: function () {
       let selectedCatUsers = [];
       if (this.multiselecvalue.id) {
-        // selectedUsers.push(item.id);
         selectedCatUsers.push(this.multiselecvalue.id);
       } else {
         selectedCatUsers.push(this.multiselecvalue.category_id);
@@ -264,57 +313,76 @@ export default {
     }
   },
   methods: {
+    // Image methods
     uploadImageSuccess(event) {
-      const iterator = event.entries()
-
-
+      const iterator = event.entries();
       for (const value of iterator) {
-        this.selectedImagesPrv.push(value[1])
+        this.selectedImagesPrv.push(value[1]);
       }
-      console.log('upload success')
+      console.log('upload success');
     },
 
     beforeRemove(index, done, fileList) {
-      this.selectedImagesPrvarray.splice(index, 1)
-      done()
+      this.selectedImagesPrv.splice(index, 1);
+      done();
     },
 
     editImage(formData, index, fileList) {
-
-      const iterator = formData.entries()
-      let file = null
+      const iterator = formData.entries();
+      let file = null;
 
       for (const value of iterator) {
-        file = value[1]
+        file = value[1];
       }
-      this.selectedImagesPrv[index] = file
+      this.selectedImagesPrv[index] = file;
 
-      console.log('edit image success')
+      console.log('edit image success');
     },
 
     dataChange(event) {
-      console.log(event)
-
-      console.log('data change success')
-
+      console.log(event);
+      console.log('data change success');
     },
-    resizeImage(index, size) {
 
-      return
+    // Video methods
+    handleVideoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      // Check if it's a video file
+      if (!file.type.match('video.*')) {
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t("businessowner.Please_select_a_video_file"),
+        });
+        return;
+      }
+      
+      // Check file size (limit to 50MB)
+      const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+      if (file.size > maxSize) {
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t("businessowner.Video_file_too_large"),
+        });
+        return;
+      }
+      
+      this.productVideo = file;
+      this.videoFileName = file.name;
+      this.videoPreview = URL.createObjectURL(file);
     },
-    selectImages() {
-      document.getElementById("image").click();
+    
+    removeVideo() {
+      this.productVideo = null;
+      this.videoPreview = null;
+      this.videoFileName = "";
+      // Reset file input
+      if (this.$refs.videoInput) {
+        this.$refs.videoInput.value = '';
+      }
     },
-    handleImageUpload(e) {
-      const files = e.target.files;
-      this.selectedImagesPrv = [];
 
-      // this.selectedImagesPrv =  Array.from(files).forEach(file => {
-      //   this.selectedImagesPrv.push(URL.createObjectURL(file));
-      // });
-      this.selectedImagesPrv = Array.from(files)
-
-    },
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
@@ -366,13 +434,31 @@ export default {
     },
 
     resetPostData() {
-      this.newProduct = [];
+      this.newProduct = {
+        name: "",
+        description: "",
+        picture: null,
+        price: "",
+        quantity: "",
+        in_stock: 1,
+        on_discount: 0,
+        discount_price: 0,
+        condition: "",
+        is_service: 0,
+        status: 1,
+        business_id: "",
+        categoryId: "",
+        subCategoryId: "",
+        filterId: "",
+        tax_amount: "",
+        kg: ""
+      };
       this.selectedImagePrv = "";
+      this.selectedImagesPrv = [];
       this.filterselectvalue = [];
-
       this.multiselecvalue = [];
-
       this.select_filterss = [];
+      this.removeVideo();
     },
 
     addProduct() {
@@ -381,43 +467,42 @@ export default {
 
       //init data
       this.newProduct.slug = this.$route.params.id;
-
       this.newProduct.categoryId = this.multiselecvalue.id;
-
       this.newProduct.subCategoryId = this.filterselectvalue
         .map(el => el.subcategory_id)
         .join();
       this.newProduct.filterId = this.select_filterss.join();
 
-
-      console.log(this.selectedImagesPrv)
-      // transform product data in form data
-
-
+      // Add images to form data
       if (this.selectedImagesPrv.length) {
-        const picture = this.selectedImagesPrv[0]
-        const additionals = this.selectedImagesPrv.splice(0, 1)
-
-        additionals.forEach((file, index) => {
-          fd.append(`additional_images[${index}]`, file);
-        });
-
-        fd.append(`picture`, picture);
+        // First image is the main product image
+        const mainImage = this.selectedImagesPrv[0];
+        fd.append('picture', mainImage);
+        
+        // Additional images start from index 1
+        for (let i = 1; i < this.selectedImagesPrv.length; i++) {
+          fd.append(`additional_images[${i-1}]`, this.selectedImagesPrv[i]);
+        }
+      }
+      
+      // Add video if available
+      if (this.productVideo) {
+        fd.append('product_video', this.productVideo);
       }
 
+      // Add all other product data
       for (const key in this.newProduct) {
-        if ("picture" == key && this.selectedImagesPrv.length)
-          this.selectedImagesPrv.forEach((file, index) => {
-            fd.append(`additional_images[${index}]`, file);
-          });
-        fd.append(key, this.newProduct[key]);
+        if (key !== 'picture') { // Skip picture as we handled it separately
+          fd.append(key, this.newProduct[key]);
+        }
       }
 
       axios
         .post("market?slug=" + this.businessSlug, fd)
         .then(res => {
           this.load = false;
-          (this.success = true), (this.val = "success");
+          this.success = true;
+          this.val = "success";
           this.msg = this.$t("businessowner.Operation_was_successful");
 
           this.flashMessage.show({
@@ -427,17 +512,13 @@ export default {
           });
 
           this.showModal = false;
-
           this.getProducts();
         })
         .catch(err => {
           console.log({ err: err });
-
           this.load = false;
 
-          if (err.response.status == 422) {
-            // console.log({ err: err });
-            // console.log(err.response.data.errors)
+          if (err.response && err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
               html: this.flashErrors(err.response.data.errors),
@@ -445,7 +526,6 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-
               message: this.$t("businessowner.Something_went_wrong"),
               blockClass: "custom-block-class"
             });
@@ -453,24 +533,12 @@ export default {
           }
         });
     },
-    picImage() {
-      document.querySelector("#image").click();
-    },
 
-    getImage(e) {
-      console.log("getImage");
-      console.log(e.target.files[0]);
-      this.newProduct.picture = e.target.files[0];
-      let file = e.target.files[0] || e.dataTransfer.files;
-      this.selectedImagePrv = URL.createObjectURL(file);
-      console.log("this.selectedImagePrv", this.selectedImagePrv);
-    },
     createProduct() {
       if (!this.isPremium && this.products.data) {
         if (this.products.data.length > 10) {
           this.flashMessage.show({
             status: "success",
-
             message: this.$t("general.max_product_reach")
           });
         } else {
@@ -484,12 +552,14 @@ export default {
     categories() {
       this.$store.dispatch("auth/categories");
     },
+    
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
       formData2.append("categoryId", this.selectedcategories);
       this.$store.dispatch("auth/subcategories", formData2);
     },
+    
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -498,6 +568,7 @@ export default {
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
     },
+    
     addFilter(newTag) {
       const tag = {
         name: newTag,
@@ -508,9 +579,7 @@ export default {
     }
   },
   beforeMount() {
-    //this.loader = true;
     this.businessSlug = this.$route.params.id;
-
     this.categories();
     this.subcategories();
   }
@@ -523,7 +592,6 @@ export default {
 }
 
 .pos {
-  /* margin-left: 900px; */
   margin-bottom: 22px;
 }
 
@@ -636,6 +704,40 @@ export default {
   display: block !important;
   width: 100% !important;
   padding: 20px !important;
+}
+
+/* Product media styling */
+.media-upload-card {
+  border: 1px dashed #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.video-upload-zone {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.video-upload-zone:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+
+.product-video-preview {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.video-player-container {
+  position: relative;
+  background-color: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Custom file input styling */
+.custom-file-label::after {
+  content: "Browse";
 }
 
 @media only screen and (min-width: 768px) {

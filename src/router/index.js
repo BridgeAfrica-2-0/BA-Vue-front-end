@@ -48,6 +48,7 @@ import businessordersdetail from "@/views/businessordersdetail";
 import businessOwnerOrders from "@/views/businessOwnerOrders";
 import payment from "@/views/payment";
 import ThankYouPage from "@/views/ThankYouPage.vue";
+import AddProduct from "../components/businessOwner/AddProduct.vue";
 
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
@@ -155,6 +156,22 @@ const routes = [
     name: "market",
     component: market
   },
+
+  {
+    path: "/AddProduct",
+    name: "AddProduct",
+    component: AddProduct,
+    props: true
+  },
+
+  // {
+  //   path: 'edit-product/:productId',
+  //   name: 'edit_product',
+  //   component: () => import('../components/businessOwner/EditProduct.vue'),
+  //   meta: {
+  //     requiresAuth: true
+  //   }
+  // },
 
   {
     path: "/success",

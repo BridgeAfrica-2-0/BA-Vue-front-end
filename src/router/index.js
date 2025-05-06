@@ -49,6 +49,7 @@ import businessOwnerOrders from "@/views/businessOwnerOrders";
 import payment from "@/views/payment";
 import ThankYouPage from "@/views/ThankYouPage.vue";
 import AddProduct from "../components/businessOwner/AddProduct.vue";
+import EditProduct from "../components/businessOwner/EditProduct.vue";
 
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
@@ -164,14 +165,15 @@ const routes = [
     props: true
   },
 
-  // {
-  //   path: 'edit-product/:productId',
-  //   name: 'edit_product',
-  //   component: () => import('../components/businessOwner/EditProduct.vue'),
-  //   meta: {
-  //     requiresAuth: true
-  //   }
-  // },
+  {
+    path: '/edit-product/:productId',
+    name: 'EditProduct',
+    component: EditProduct,
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
 
   {
     path: "/success",

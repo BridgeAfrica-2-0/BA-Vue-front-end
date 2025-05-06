@@ -4,16 +4,14 @@
     <!-- Photos and Video Section -->
     <div class="mb-4">
       <h6 class="mb-2">{{ $t("businessowner.Photos_and_video") }} <span class="text-danger">*</span>
-        <b-icon-question-circle class="ml-1 text-muted" v-b-tooltip.hover :title="$t('businessowner.Image_upload_help')" />
+        <b-icon-question-circle class="ml-1 text-muted" v-b-tooltip.hover
+          :title="$t('businessowner.Image_upload_help')" />
       </h6>
       <small class="text-muted d-block mb-3">{{ $t("businessowner.Add_up_to_10_photos_and_1_video") }}</small>
-      
+
       <!-- Empty state / Upload prompt -->
-      <div v-if="productImages.length === 0" 
-        class="upload-placeholder p-4 mb-4"
-        @dragover.prevent="onDragOver"
-        @dragleave.prevent="onDragLeave"
-        @drop.prevent="onDrop">
+      <div v-if="productImages.length === 0" class="upload-placeholder p-4 mb-4" @dragover.prevent="onDragOver"
+        @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
         <div class="text-center py-4">
           <p class="mb-3">{{ $t("businessowner.Drag_Drop_or") }}</p>
           <b-button variant="outline-primary" @click="openImageFileDialog()">
@@ -28,20 +26,11 @@
           <!-- Primary Image Slot -->
           <div class="slot primary-slot">
             <div class="image-wrapper">
-              <img 
-                :src="getImagePreview(productImages[0])" 
-                alt="Primary product image" 
-                class="product-image"
-              >
+              <img :src="getImagePreview(productImages[0])" alt="Primary product image" class="product-image">
               <div class="slot-label primary-badge">{{ $t("businessowner.Primary") }}</div>
               <div class="image-actions">
-                <b-button 
-                  variant="danger" 
-                  size="sm" 
-                  @click="removeImage(0)"
-                  class="action-btn"
-                >
-                  <i class="fa fa-trash"></i>
+                <b-button variant="danger" size="sm" @click="removeImage(0)" class="action-btn">
+                  <i class="fa fa-trash bright-icon"></i>
                 </b-button>
               </div>
             </div>
@@ -57,23 +46,14 @@
               </video>
               <div class="slot-label video-badge">{{ $t("businessowner.Video") }}</div>
               <div class="image-actions">
-                <b-button 
-                  variant="danger" 
-                  size="sm" 
-                  @click="removeVideo"
-                  class="action-btn"
-                >
-                  <i class="fa fa-trash"></i>
+                <b-button variant="danger" size="sm" @click="removeVideo" class="action-btn">
+                  <i class="fa fa-trash bright-icon"></i>
                 </b-button>
               </div>
             </div>
-            
+
             <!-- Video Upload Placeholder -->
-            <div 
-              v-else 
-              class="add-video-placeholder"
-              @click="openVideoFileDialog()"
-            >
+            <div v-else class="add-video-placeholder" @click="openVideoFileDialog()">
               <i class="fa fa-video-camera fa-2x text-muted"></i>
               <p class="mb-0 mt-2 text-muted small">{{ $t("businessowner.Add_Video") }}</p>
             </div>
@@ -82,58 +62,32 @@
           <!-- Additional Image Slots -->
           <template v-for="index in 9">
             <!-- Filled Image Slot -->
-            <div 
-              v-if="productImages.length > index"
-              :key="'image-' + index"
-              class="slot image-slot"
-            >
+            <div v-if="productImages.length > index" :key="'image-' + index" class="slot image-slot">
               <div class="image-wrapper">
-                <img 
-                  :src="getImagePreview(productImages[index])" 
-                  alt="Product image" 
-                  class="product-image"
-                >
+                <img :src="getImagePreview(productImages[index])" alt="Product image" class="product-image">
                 <div class="image-actions">
-                  <b-button 
-                    variant="light" 
-                    size="sm" 
-                    @click="setAsPrimary(index)"
-                    class="action-btn"
-                    v-b-tooltip.hover title="Set as primary"
-                  >
-                    <i class="fa fa-star"></i>
+                  <b-button variant="danger" size="sm" @click="setAsPrimary(index)" class="action-btn" v-b-tooltip.hover
+                    title="Set as primary">
+                    <i class="fa fa-star bright-icon"></i>
                   </b-button>
-                  <b-button 
-                    variant="danger" 
-                    size="sm" 
-                    @click="removeImage(index)"
-                    class="action-btn"
-                  >
-                    <i class="fa fa-trash"></i>
+                  <b-button variant="danger" size="sm" @click="removeImage(index)" class="action-btn">
+                    <i class="fa fa-trash bright-icon"></i>
                   </b-button>
                 </div>
               </div>
             </div>
-            
+
             <!-- Empty Slot / Add More Button -->
-            <div 
-              v-else-if="index === productImages.length" 
-              :key="'empty-' + index"
-              class="slot empty-slot"
-              @click="openImageFileDialog()"
-            >
+            <div v-else-if="index === productImages.length" :key="'empty-' + index" class="slot empty-slot"
+              @click="openImageFileDialog()">
               <div class="add-more-placeholder">
                 <i class="fa fa-plus fa-2x text-muted"></i>
                 <p class="mb-0 mt-2 text-muted small">{{ $t("businessowner.Add_Image") }}</p>
               </div>
             </div>
-            
+
             <!-- Future Empty Slots -->
-            <div 
-              v-else
-              :key="'future-' + index"
-              class="slot future-slot"
-            >
+            <div v-else :key="'future-' + index" class="slot future-slot">
               <div class="future-slot-placeholder">
                 <i class="fa fa-image fa-2x text-muted opacity-25"></i>
               </div>
@@ -151,12 +105,8 @@
         </p>
         <div class="d-flex justify-content-between align-items-start">
           <div class="thumbnail-preview">
-            <img 
-              v-if="productImages.length > 0" 
-              :src="getImagePreview(productImages[0])" 
-              alt="Thumbnail preview" 
-              class="thumbnail-image"
-            >
+            <img v-if="productImages.length > 0" :src="getImagePreview(productImages[0])" alt="Thumbnail preview"
+              class="thumbnail-image">
           </div>
           <b-button variant="outline-secondary" class="ml-3" size="sm">
             <i class="fa fa-arrows-alt mr-1"></i> {{ $t("businessowner.Adjust_thumbnail") }}
@@ -164,40 +114,8 @@
         </div>
       </div>
     </div>
-
-    <!-- Video Upload Section (shown only when no video is uploaded in grid) -->
-    <!-- <div v-if="!videoPreview" class="video-upload-section mt-4">
-      <h6 class="mb-2">{{ $t("businessowner.Product_Video") }}</h6>
-      <div class="card p-3 media-upload-card">
-        <div class="text-center video-upload-zone py-4">
-          <div class="mb-3">
-            <i class="fa fa-video-camera fa-3x text-muted"></i>
-          </div>
-          <p class="mb-2">{{ $t("businessowner.Drag_video_or_click_to_upload") }}</p>
-          <b-button variant="outline-primary" @click="openVideoFileDialog()">
-            {{ $t("businessowner.Choose_Video") }}
-          </b-button>
-        </div>
-      </div>
-      <small class="text-muted mt-2 d-block">{{ $t("businessowner.Video_should_be_less_than_50MB") }}</small>
-    </div> -->
-    
-    <!-- Hidden file inputs - exist outside of loops -->
-    <input 
-      type="file" 
-      id="hidden-image-input"
-      multiple 
-      accept="image/*"
-      style="display: none;"
-      @change="onFileSelect"
-    >
-    <input 
-      type="file" 
-      id="hidden-video-input"
-      accept="video/*"
-      style="display: none;"
-      @change="handleVideoUpload"
-    >
+    <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
+    <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload">
   </div>
 </template>
 
@@ -224,6 +142,7 @@ export default {
     };
   },
   created() {
+  console.log("-=-=-=-=-=-=-=-=-=-=",this.value)
     if (this.value && this.value.length > 0) {
       this.productImages = [...this.value];
     }
@@ -246,13 +165,13 @@ export default {
         this.imageInput.click();
       }
     },
-    
+
     openVideoFileDialog() {
       if (this.videoInput) {
         this.videoInput.click();
       }
     },
-    
+
     onDragOver(e) {
       this.isDragging = true;
     },
@@ -272,7 +191,7 @@ export default {
       if (!files || files.length === 0) return;
 
       // Filter out only image files
-      const imageFiles = Array.from(files).filter(file => 
+      const imageFiles = Array.from(files).filter(file =>
         file.type.startsWith('image/')
       );
 
@@ -283,7 +202,7 @@ export default {
       if (imagesToAdd.length > 0) {
         // Add new images to the array
         this.productImages = [...this.productImages, ...imagesToAdd];
-        
+
         // Emit change to parent component
         this.$emit('input', this.productImages);
         this.$emit('images-updated', this.productImages);
@@ -318,7 +237,7 @@ export default {
       ];
 
       this.productImages = newImages;
-      
+
       // Emit change to parent component
       this.$emit('input', this.productImages);
       this.$emit('images-updated', this.productImages);
@@ -327,7 +246,7 @@ export default {
       if (index < 0 || index >= this.productImages.length) return;
 
       this.productImages.splice(index, 1);
-      
+
       // Emit change to parent component
       this.$emit('input', this.productImages);
       this.$emit('images-updated', this.productImages);
@@ -352,12 +271,12 @@ export default {
       this.productVideo = file;
       this.videoFileName = file.name;
       this.videoPreview = URL.createObjectURL(file);
-      
+
       // Reset video input value
       if (this.videoInput) {
         this.videoInput.value = '';
       }
-      
+
       // Emit to parent
       this.$emit('video-updated', this.productVideo);
     },
@@ -365,7 +284,7 @@ export default {
       this.productVideo = null;
       this.videoPreview = null;
       this.videoFileName = "";
-      
+
       // Emit to parent
       this.$emit('video-updated', null);
     }
@@ -380,6 +299,25 @@ export default {
   border-radius: 6px;
   background-color: #f8f9fa;
   min-height: 120px;
+}
+
+.bright-icon {
+  color: #141414;
+  /* Bright red color */
+  font-size: 1.2em;
+  /* Slightly larger */
+  text-shadow: 0 0 2px white;
+  /* White outline */
+}
+
+.action-btn {
+  background-color: rgba(248, 245, 246, 0.7);
+  /* Semi-transparent background */
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 250, 251, 0.9);
+  /* More solid on hover */
 }
 
 /* Slot-based layout styling */

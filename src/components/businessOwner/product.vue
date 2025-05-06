@@ -13,7 +13,7 @@
                 <template #button-content>
                   <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
                 </template>
-                <b-dropdown-item @click="callactions(product)" v-b-modal="`modal-${product.id}`">
+                <b-dropdown-item @click="navigateToEditProduct(product)" v-b-modal="`modal-${product.id}`">
                   {{ $t("profileowner.Edit") }}</b-dropdown-item>
                 <b-dropdown-item @click="deleteProduct(product)" v-b-modal="`modal-D${product.id}`">
                   {{ $t("profileowner.Delete") }}</b-dropdown-item>
@@ -364,6 +364,15 @@ export default {
       this.newProduct = {}
       this.productRequest = null
     },
+    navigateToEditProduct(product) {
+    this.$router.push({
+      name: 'EditProduct',
+      params: {
+        businessSlug: this.businessSlug,
+        productId: product.id
+      }
+    });
+  },
     onSendRequest() {
       this.startRequest = true
       const data = {

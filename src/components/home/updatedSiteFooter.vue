@@ -5,14 +5,13 @@
         :class="['subscription-box', { 'footer-subscription': isSmallScreen }]"
       >
         <p style="color: black" class="subs-p">
-          <span style="color: #e75c18;">Subscribe to our newsletter</span>
-          and be the first to know about new arrivals, exclusive offers, and
-          handicraft.
+          <span style="color: #e75c18;">{{ $t("general.subscribe_to_our_newsletter") }}</span>
+          {{ $t("general.and_be_the_first_to_know_about_new_arrivals") }}
         </p>
         <form @submit.prevent="subscribe">
-          <input type="email" v-model="email" placeholder="Enter your email" />
+          <input type="email" v-model="email" :placeholder="$t('general.enter_your_email')" />
           <b-button type="submit" variant="primary" class="hire-btn">
-            Subscribe
+            {{ $t("general.subscribe") }}
             <span class="arrow-icon-wrapper">
               <i class="fas fa-arrow-right"></i>
             </span>
@@ -30,7 +29,7 @@
                     <img
                       src="../../assets/img/bavlogo.png"
                       width="250px"
-                      class="size px-n1 px-md-0"
+                      class="px-n1 px-md-0"
                       alt=""
                     />
                   </div>

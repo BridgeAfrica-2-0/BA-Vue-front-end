@@ -1,133 +1,60 @@
 <template>
-  <div style="" class="searchpage">
-    <Nav
-      :credentials.sync="searchParams"
-      @updateSearchKeyword="updateSearchKeyword"
-      id="top"
-    >
-      <template v-slot:button>
-        <Button
-          media="desktop"
-          @click.native="strategY['all']"
-          v-if="selectedId == 5"
-        />
+  <base-layout :hidden-search="false">
+    <template v-slot:main>
+      <div style="" class="searchpage bg-white">
+        <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
+          <template v-slot:button>
+            <Button media="desktop" @click.native="strategY['all']" v-if="selectedId == 5" />
 
-        <Button
-          media="desktop"
-          @click.native="strategY['business']"
-          v-if="selectedId == 1"
-        />
-        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
-        <Button
-          media="desktop"
-          @click.native="strategY['network']"
-          v-if="selectedId == 3 && islogin"
-        />
-        <Button
-          media="desktop"
-          @click.native="strategY['market']"
-          v-if="selectedId == 0"
-        />
+            <Button media="desktop" @click.native="strategY['business']" v-if="selectedId == 1" />
+            <Button media="desktop" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
+            <Button media="desktop" @click.native="strategY['market']" v-if="selectedId == 0" />
 
-        <Button
-          media="desktop"
-          @click.native="strategies"
-          v-if="[2, 4].includes(selectedId) && islogin"
-        />
-        <Button
-          media="desktop"
-          @click.native="strategies"
-          v-if="[2, 3].includes(selectedId) && !islogin"
-        />
-      </template>
+            <Button media="desktop" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
+            <Button media="desktop" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
+          </template>
 
-      <template v-slot:mobile>
-        <Button
-          media="mobile"
-          @click.native="strategY['all']"
-          v-if="selectedId == 5"
-        />
+          <template v-slot:mobile>
+            <Button media="mobile" @click.native="strategY['all']" v-if="selectedId == 5" />
 
-        <Button
-          media="mobile"
-          @click.native="strategY['business']"
-          v-if="selectedId == 1"
-        />
+            <Button media="mobile" @click.native="strategY['business']" v-if="selectedId == 1" />
 
-        <Button
-          media="mobile"
-          @click.native="strategY['network']"
-          v-if="selectedId == 3 && islogin"
-        />
+            <Button media="mobile" @click.native="strategY['network']" v-if="selectedId == 3 && islogin" />
 
-        <Button
-          media="mobile"
-          @click.native="strategY['market']"
-          v-if="selectedId == 0"
-        />
+            <Button media="mobile" @click.native="strategY['market']" v-if="selectedId == 0" />
 
-        <Button
-          media="mobile"
-          @click.native="strategies"
-          v-if="[2, 4].includes(selectedId) && islogin"
-        />
-        <Button
-          media="mobile"
-          @click.native="strategies"
-          v-if="[2, 3].includes(selectedId) && !islogin"
-        />
-      </template>
-    </Nav>
+            <Button media="mobile" @click.native="strategies" v-if="[2, 4].includes(selectedId) && islogin" />
+            <Button media="mobile" @click.native="strategies" v-if="[2, 3].includes(selectedId) && !islogin" />
+          </template>
+        </Nav>
+        <div class="d-flex justify-content-center mb-4 container-fluid d-content">
+          <div class="row mb-5 mt-4 gap-3 align-items-center">
+            <div class="col-lg-7">
+              <h1 class="font-weight-bold section_title">
+                <span class="primary">{{ $t("search.buy_quality_products") }}</span>
+                <span class="ml-2 text-black">{{ $t("search.from_our_marketplace_in_cameroon_and_around_the_world")
+                  }}</span>
+              </h1>
+              <div class="text-dark mt-3 text-black font-weight-bold subTitle">{{
+                $t("search.with_over_100_categories_of_products") }}</div>
+            </div>
+            <div class="col-lg-5 shadow-sm text-center">
+              <img data-aos="slide-right" data-aos-offset="70px" data-aos-duration="1500"
+                src="assets/home/marketplace.png" class="aos-init aos-animate img-size">
+            </div>
+          </div>
+        </div>
+        <SubNav @onChangeCategoryName="(val) => (categoryName = val)" @category="getCategory"
+          @parentcategory="getparentCategory" @update:keyword="(val) => (searchParams = Object.assign(searchParams, val))
+            " @activateSuggestion="activateSuggestion" @activate:matching:category="(val) => (activateMatching = val)"
+          style="margin-top: -25px" />
 
-    <SubNav
-      @onChangeCategoryName="(val) => (categoryName = val)"
-      @category="getCategory"
-      @parentcategory="getparentCategory"
-      @update:keyword="
-        (val) => (searchParams = Object.assign(searchParams, val))
-      "
-      @activateSuggestion="activateSuggestion"
-      @activate:matching:category="(val) => (activateMatching = val)"
-      style="margin-top: -25px"
-    />
+        <hr style="margin-top: -0px" />
 
-    <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
-
-    <div v-if="islogin" class="container searchly moveup">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="optionsnav"
-        activeColor="#e75c18"
-        @change="handleChange"
-      >
-      </ly-tab>
-    </div>
-    <div v-else class="container searchly moveup">
-      <ly-tab
-        v-model="selectedId"
-        :items="guestItems"
-        :options="optionsnav"
-        activeColor="#e75c18"
-        @change="handleChange"
-      >
-      </ly-tab>
-    </div>
-
-    <hr style="margin-top: -0px" />
-
-    <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
-      <b-row align-v="start">
-        <b-col
-          cols="3"
-          class="text-center"
-          v-for="(category, index) in categories.slice(0, 7)"
-          :key="index"
-        >
-          <b-link
-            class="cat"
-            @click="
-              () => {
+        <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none p-3">
+          <b-row align-v="start">
+            <b-col cols="3" class="text-center" v-for="(category, index) in categories.slice(0, 7)" :key="index">
+              <b-link class="cat" @click="() => {
                 categoryName = category.category.name;
                 getCategory({ cat_id: category.category.id });
                 searchParams = Object.assign(searchParams, {
@@ -135,563 +62,245 @@
                   cat_id: category.category.id,
                 });
               }
-            "
-          >
-            <img
-              class="img-fluid picture logo-img"
-              :src="category.category.cat_image"
-            />
+                ">
+                <!-- <img class="img-fluid picture logo-img" :src="category.category.cat_image" /> -->
+                {{
+                  category.category.name.length > 11
+                    ? category.category.name.substring(0, 11) + "..."
+                    : category.category.name
+                }}
+              </b-link>
+            </b-col>
+            <b-col align-self="center" cols="3" class="text-center" @mouseover="onOverMore()"
+              @mouseleave="onLeaveMore()" ref="more">
+              <b-link class="cat mt-4" v-b-modal.myModalla>
+                <b-icon icon="chevron-down" aria-hidden="true"></b-icon> More
+              </b-link>
+            </b-col>
+          </b-row>
 
-            {{
-              category.category.name.length > 11
-                ? category.category.name.substring(0, 11) + "..."
-                : category.category.name
-            }}
-          </b-link>
-        </b-col>
-        <b-col
-          align-self="center"
-          cols="3"
-          class="text-center"
-          @mouseover="onOverMore()"
-          @mouseleave="onLeaveMore()"
-          ref="more"
-        >
-          <b-link class="cat mt-4" v-b-modal.myModalla>
-            <b-icon icon="chevron-down" aria-hidden="true"></b-icon> More
-          </b-link>
-        </b-col>
-      </b-row>
-
-      <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
-        <div style="column-count: 2">
-          <b-form-radio
-            v-for="(category, index) in categories"
-            :key="index"
-            v-model="catChose"
-            :value="category.category.id"
-            @change="getCategory({ cat_id: category.category.id })"
-            name="subCategories-list-modal"
-            class="mt-2"
-          >
-            <img
-              class="img-fluid picture"
-              style="max-height: 26px"
-              :src="category.category.cat_image"
-            />
-            {{ category.category.name }}
-          </b-form-radio>
+          <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
+            <div style="column-count: 2">
+              <b-form-radio v-for="(category, index) in categories" :key="index" v-model="catChose"
+                :value="category.category.id" @change="getCategory({ cat_id: category.category.id })"
+                name="subCategories-list-modal" class="mt-2">
+                <img class="img-fluid picture" style="max-height: 26px" :src="category.category.cat_image" />
+                {{ category.category.name }}
+              </b-form-radio>
+            </div>
+          </b-modal>
         </div>
-      </b-modal>
-    </div>
 
-    <div class="container-fluid medium-filters">
-      <b-row>
-        <b-col cols="3">
-          <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
-            {{ $t("search.Filter") }}
-          </b-button>
-        </b-col>
-
-        <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
-            <div class="ml-3">
-              <Filters
-                v-bind:filterType="selectedId"
-                v-bind:Selectedcategory="Selectedcategory"
-                v-bind:Selectedparentcategory="Selectedparentcategory"
-                v-bind:categoryNameSelected="categoryName"
-                @onFinByCategory="getCategory"
-                @updateSearchKeyword="updateSearchKeyword"
-                @updateSearchLocation="updateSearchLocation"
-                :activateMatching="activateMatching"
-              />
-            </div>
-
-            <!--            
-            <div v-if="!isFilter">
-            
-              <div v-if="categories.length > 0">
-                <b-form-group
-                  label-cols-lg="3"
-                  :label="$t('search.Categories')"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="catChose">
-                  <option :value="null" disabled>
-                    -- Please select a category --
-                  </option>
-                  <option
-                    v-for="(elm, index) in categories"
-                    :key="index"
-                    :value="elm"
-                  >
-                    {{ elm.category.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div> 
-
-            <hr v-if="!isFilter" />
-            <div v-if="!isFilter">
-             
-              <div v-if="catChose">
-                <b-form-group
-                  label-cols-lg="3"
-                  label="sub categories"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="subCatChose" @change="getFilter">
-                  <option :value="null" disabled>
-                    -- Please select a sub category --
-                  </option>
-                  <option
-                    v-for="(elm, index) in catChose.sub_cat"
-                    :key="index"
-                    :value="elm"
-                  >
-                    {{ elm.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div>
-
-            <hr v-if="!isFilter" />
-
-            <div v-if="!isFilter">
-              
-              <div v-if="subFilters.length > 0">
-                <b-form-group
-                  label-cols-lg="3"
-                  label="Filters"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0 pt-6 text-left"
-                >
-                </b-form-group>
-                <b-form-select v-model="filterChose">
-                  <option :value="null" disabled>
-                    -- Please select a filter --
-                  </option>
-                  <option
-                    v-for="(elm, index) in subFilters"
-                    :key="index"
-                    :value="elm.id"
-                  >
-                    {{ elm.name }}
-                  </option>
-                </b-form-select>
-              </div>
-            </div>
-     -->
-            <component :is="isFilter" />
-            <hr v-if="!isFilter" />
-
-            <b-button
-              v-if="!isFilter"
-              variant="primary"
-              class="m-3 float-right"
-              @click="searchFilter"
-            >
-              {{ $t("search.Search") }}
-            </b-button>
-          </div>
-
-          <div class="d-block text-center"></div>
-        </b-modal>
-      </b-row>
-    </div>
-
-    <div class="container-fluid mobile-filters mt-2 mb-3">
-      <b-row>
-        <b-col cols="5">
-          <b-button
-            class="shadow border mob-btn"
-            id="show-btn"
-            @click="showFilters"
-          >
-            {{ $t("search.Filter") }}
-          </b-button>
-        </b-col>
-
-        <b-col cols="3" md>
-          <b-button class="shadow border mob-btn" @click="togglelist">
-            {{ $t("search.List") }}
-          </b-button>
-        </b-col>
-
-        <b-col cols="4">
-          <b-button class="shadow border mob-btn" @click="togglemap()">
-            {{ $t("search.Map") }}
-          </b-button>
-        </b-col>
-      </b-row>
-    </div>
-    <div class="container-flex p-md-3 p-t-0 upp">
-      <b-row class="p-3">
-        <b-col cols="0" md="0" xl="3" class="leftblock">
-          <div class="ml-3">
-            <Filters
-              v-bind:filterType="selectedId"
-              v-bind:Selectedcategory="Selectedcategory"
-              v-bind:Selectedparentcategory="Selectedparentcategory"
-              v-bind:categoryNameSelected="categoryName"
-              @onFinByCategory="getCategory"
-              @updateSearchKeyword="updateSearchKeyword"
-              @updateSearchLocation="updateSearchLocation"
-              :activateMatching="activateMatching"
-            />
-          </div>
-        </b-col>
-
-        <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
-          <div class="container-flex a-flex">
-            <!--filter for all takes just two fields at a time  -->
-
-            <div id="all" v-if="selectedId == '5' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Network") }}
-              </h6>
-
-              <MiniNetwork />
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 4">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-            <div v-else-if="selectedId == '4' && !islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-
-              <MiniBusiness :businesses="businesses" />
-
-              <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <div class="d-flex">
-                <fas-icon
-                  class="icons mr-1"
-                  :icon="['fas', 'users']"
-                  size="lg"
-                />
-
-                <h6>{{ $t("search.People") }}</h6>
-              </div>
-
-              <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-              </h6>
-
-              <MiniMarket :products="miniproducts" />
-
-              <span class="float-right mb-3" @click="selectedId = 0">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                {{ $t("search.Post") }}
-              </h6>
-
-              <MiniPost />
-
-              <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
-              </span>
-              <br />
-
-              <hr />
-            </div>
-
-            <!--  select just businesses      -->
-
-            <div id="businesses" v-if="selectedId == '1'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-
-                {{ $t("search.Businesses") }}
-              </h6>
-              <!-- <b-spinner
-                v-if="prodLoaderr"
-                variant="primary"
-                :label="$t('search.Spinning')"
-              ></b-spinner> -->
-            </div>
-
-            <!-- filter out only people -->
-
-            <component :is="isComponent" :title="notFoundComponentTitle" />
-
-            <!-- filter out just the network  -->
-
-            <div v-if="selectedId == '3' && islogin">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <br />
-              <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
-                {{ $t("search.Networks") }}
-              </h6>
-
-              <Network />
-            </div>
-
-            <!-- Filter out just the market -->
-
-            <div v-if="selectedId == '0'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <br />
-              <h6 class="mb-3">
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{ $t("search.Market") }}
-                <b-button
-                  to="/cart"
-                  size="sm"
-                  variant="primary"
-                  class="float-right position-relative"
-                >
-                  <b-icon icon="cart4"></b-icon> Cart
-                  <span
-                    v-if="cartCount > 0"
-                    class="badge badge-pill badge-danger position-absolute"
-                    style="top: 0 !important; right: 0 !important; transform: translate(50%, -50%);"
-                  >
-                    {{ cartCount }}
-                  </span>
-                </b-button>
-                <div class="float-right">
-                  <b-button
-                    size="sm"
-                    variant="outline-primary"
-                    @click="getProducts"
-                    class="mx-3"
-                  >
-                    <b-spinner small v-if="prodLoader"></b-spinner>
-                    <span v-else
-                      ><b-icon
-                        icon="arrow-clockwise"
-                        aria-hidden="true"
-                      ></b-icon
-                    ></span>
-                  </b-button>
+        <div class="container-fluid medium-filters">
+          <b-row>
+            <b-col cols="3">
+              <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
+                {{ $t("search.Filter") }}
+              </b-button>
+            </b-col>
+
+            <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
+              <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+                <div class="ml-3">
+                  <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
+                    v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
+                    @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
+                    @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
                 </div>
-              </h6>
-              <b-alert
-                v-model="showDismissibleAlert"
-                variant="success"
-                dismissible
-              >
-                {{ $t("search.List_of_products_up_to_date") }}
-              </b-alert>
-              <Market class="mt-3" />
+
+                <component :is="isFilter" />
+                <hr v-if="!isFilter" />
+
+                <b-button v-if="!isFilter" variant="primary" class="m-3 float-right" @click="searchFilter">
+                  {{ $t("search.Search") }}
+                </b-button>
+              </div>
+
+              <div class="d-block text-center"></div>
+            </b-modal>
+          </b-row>
+        </div>
+
+        <div class="container-fluid mobile-filters mt-2 mb-3">
+          <div class="d-flex justify-content-between px-3" style="gap: 10px">
+            <button class="shadow border mob-btn flex-grow-1 text-white justify-content-center" id="show-btn" @click="showFilters">
+               <i class="fas fa-filter mr-2"></i> {{ $t("search.Filter") }}
+              </button>
+              <button class="shadow border mob-btn flex-grow-1 text-white d-flex justify-content-center" @click="togglelist">
+               <i class="fas fa-list mr-2"></i> {{ $t("search.List") }}
+              </button>
+          </div>
+        </div>
+        <div class="container-flex p-md-3 p-t-0 upp">
+          <b-row class="p-3">
+            <b-col cols="0" md="0" xl="2" class="leftblock">
+              <div class="ml-3">
+                <Filters v-bind:filterType="selectedId" v-bind:Selectedcategory="Selectedcategory"
+                  v-bind:Selectedparentcategory="Selectedparentcategory" v-bind:categoryNameSelected="categoryName"
+                  @onFinByCategory="getCategory" @updateSearchKeyword="updateSearchKeyword"
+                  @updateSearchLocation="updateSearchLocation" :activateMatching="activateMatching" />
+              </div>
+            </b-col>
+
+            <b-col cols="12" md="10" lg="10" xl="10" ref="middleblock">
+              <div class="container-flex a-flex">
+
+                <!-- Filter out just the market -->
+
+                <div v-if="selectedId == '0'">
+
+                  <div>
+                    <Sponsor />
+                  </div>
+
+                  <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
+                    {{ $t("search.List_of_products_up_to_date") }}
+                  </b-alert>
+                  <Market class="mt-1" />
+                </div>
+              </div>
+            </b-col>
+
+          </b-row>
+        </div>
+        <div class="container mb-3 mt-4 sec">
+          <div class="row g-0">
+            <!-- Image à gauche -->
+            <div class="col-lg-6 col-md-12">
+              <img src="../assets/img/coach2.png" class="img-fluid rounded" alt="Pottery Image">
+            </div>
+
+            <!-- Contenu à droite -->
+            <div class="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
+              <div class="bg-white p-4 d-none d-lg-block" style="border-radius: 25px; margin-left: -150px;">
+                <div class="">
+                  <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
+                    <span class="text-black"> Selling to the World.</span>
+                  </h3>
+                  <p class="card-text text-black my-4">
+                    While you can use Bridge Africa for free through a basic account, upgrading to an advanced account
+                    will
+                    enable you to do the full e-commerce transaction cycle.
+                  </p>
+
+                  <!-- Liste d'avantages -->
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Marketplace access:</strong>
+                          <div class="text-black">Unlimited marketplace to sell to millions around you and the world.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-credit-card mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Online Payment System:</strong>
+                          <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-search mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Rank top on search results:</strong>
+                          <div class="text-black">Businesses on advanced accounts are ranked first on our search
+                            results.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-sms mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Advanced messaging system:</strong>
+                          <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bouton Upgrade -->
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white p-4 d-block d-lg-none" style="border-radius: 25px; margin-left: 0;">
+                <div class="">
+                  <h3 class="font-weight-bold"><span class="text-primary">Upgrade your Account Today and Start</span>
+                    <span class="text-black"> Selling to the World.</span>
+                  </h3>
+                  <p class="card-text text-black my-4">
+                    While you can use Bridge Africa for free through a basic account, upgrading to an advanced account
+                    will
+                    enable you to do the full e-commerce transaction cycle.
+                  </p>
+
+                  <!-- Liste d'avantages -->
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-shopping-bag mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Marketplace access:</strong>
+                          <div class="text-black">Unlimited marketplace to sell to millions around you and the world.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-credit-card mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Online Payment System:</strong>
+                          <div class="text-black">Sell, get paid and accept payment from buyers in and out of Cameroon.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-search mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Rank top on search results:</strong>
+                          <div class="text-black">Businesses on advanced accounts are ranked first on our search
+                            results.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex mb-3">
+                        <i class="fa fa-sms mr-2 text-primary"></i>
+                        <div>
+                          <strong class="text-black">Advanced messaging system:</strong>
+                          <div class="text-black">Reach a wider community with our group messaging functionality.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bouton Upgrade -->
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-lg mt-3">Upgrade</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </b-col>
-        <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class="">
-            <div v-if="selectedId == '1'">
-              <businessmap :businesses="businessess.data" />
-            </div>
-            <div v-if="selectedId == '0'">
-              <mapbox :products="allproducts.data" />
-            </div>
-            <div v-if="selectedId == '5' && islogin">
-              <mapbox
-                :businesses="businesses.data"
-                :products="miniproducts.data"
-                :networks="mininetworks.data"
-                :defaultLocation="searchParams.location.label"
-                :isSearched="isSearched"
-              />
-            </div>
-            <div v-if="selectedId == '4' && !islogin">
-              <mapbox
-                :businesses="businesses.data"
-                :products="miniproducts.data"
-                :networks="mininetworks.data"
-                :defaultLocation="searchParams.location.label"
-                :isSearched="isSearched"
-              />
-            </div>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-  </div>
+        </div>
+      
+      </div>
+    </template>
+  </base-layout>
 </template>
 
 <script>
@@ -735,10 +344,18 @@ import { loader } from "@/mixins";
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { getGuestIdentifier } from '../helpers';
+import SiteFooter from "../components/home/updatedSiteFooter.vue";
+
+import { LocalisationMixins } from "@/mixins"
+import settingsContries from "@/components/SetupContries"
+
+import BaseLayout from "@/layouts/Layout"
 
 export default {
   components: {
+    BaseLayout,
     Button,
+    settingsContries,
     LyTab,
     Nav,
     SubNav,
@@ -761,10 +378,11 @@ export default {
     MiniMarket,
     PostComponent,
     PeopleComponent,
+    SiteFooter,
     // Footer,
   },
 
-  mixins: [loader],
+  mixins: [loader, LocalisationMixins],
 
   computed: {
     islogin() {
@@ -886,6 +504,7 @@ export default {
     return {
       activateMatching: null,
       cartCount: 0,
+      isOpen: false,
       catChose: "",
       subCatChose: "",
       filterChose: "",
@@ -956,7 +575,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1041,23 +660,21 @@ export default {
       this.$store.commit("allSearch/setLocation", location);
     },
 
-    updateSearchKeyword(keyword) {
-      //  this.activateSuggestion(keyword);
-      this.searchParams.keyword = keyword;
-      if (this.selectedId == 5) {
-        this.getKeyword();
-      } else if (this.selectedId == 1) {
-        this.onFindBusiness();
-      } else if (this.selectedId == 3) {
-        this.searchNetworks();
-      } else if (this.selectedId == 0) {
-        this.searchProducts({});
-      } else if (this.selectedId == 4 && !this.islogin) {
-        this.getKeyword();
-      }
-    },
-
-    activateSuggestion: async function(value) {
+updateSearchKeyword(keyword) {
+  this.searchParams.keyword = keyword;
+  if (this.selectedId == 5) {
+    this.getKeyword();
+  } else if (this.selectedId == 1) {
+    this.onFindBusiness();
+  } else if (this.selectedId == 3) {
+    this.searchNetworks();
+  } else if (this.selectedId == 0) {
+    this.searchProducts({});
+  } else if (this.selectedId == 4 && !this.islogin) {
+    this.getKeyword();
+  }
+},
+    activateSuggestion: async function (value) {
       this.$store.commit("allSearch/setSuggestedKeyword", []);
       if (value) {
         const response = await this.$repository.search.sugesstion(value);
@@ -1268,7 +885,7 @@ export default {
         console.log("non-login---------");
         this.$store
           .dispatch("marketSearch/searchGuestUserProducts", data)
-          .then((res) => {})
+          .then((res) => { })
           .catch((err) => {
             console.log("Error erro!");
           });
@@ -2058,16 +1675,84 @@ export default {
 </script>
 
 <style scoped>
+.section_title {
+  font-size: 3.2em;
+}
+
+.d-content {
+  padding-inline: 50px;
+}
+
+.subTitle {
+  font-size: 1.3em;
+}
+
+.sec {
+  max-width: 80%;
+}
+
+@media screen and (max-width: 1500px) {
+  .section_title {
+    font-size: 2.6em;
+  }
+
+  .subTitle {
+    font-size: 1.3em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .section_title {
+    font-size: 1.8em;
+  }
+
+  .subTitle {
+    font-size: 1em;
+  }
+  .d-content {
+    padding-inline: 15px;
+  }
+
+  .sec {
+    max-width: 100%;
+  }
+}
+
+.rounded {
+  border-radius: 25px !important;
+}
+
+.text-orange {
+  color: #ff6f00;
+  /* Couleur orange personnalisée */
+}
+
+.btn-orange {
+  background-color: #ff6f00;
+  color: white;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #e65c00;
+}
+
+.img-size {
+  height: 100%;
+  width: 500px
+}
+
 .searchpage {
   font-family: poppins !important;
   color: #455a64 !important;
   overflow-x: hidden;
 }
+
 .badge {
   position: absolute;
   font-size: 10px;
   padding: 0.25em 0.5em;
 }
+
 .icon-color {
   color: #e75c18;
 }
@@ -2108,8 +1793,8 @@ export default {
   }
 
   .mob-btn {
-    background-color: white;
-    color: #455a64 !important;
+    background-color: black;
+    color: white !important;
     border-color: white;
     width: 80px;
     padding: 3px;
@@ -2139,6 +1824,7 @@ export default {
     margin-right: 200px;
     margin-left: -100px;
   }
+
   .mobile-filters {
     display: none;
   }

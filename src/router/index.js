@@ -1,27 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
-import Login from "../views/login.vue";
 import LoginValidation from "../views/LoginValidation.vue";
 import home1 from "@/views/home1.vue";
-import signup from "../views/signup.vue";
 import success from "../views/success.vue";
 import failure from "../views/failure.vue";
 import Password from "../views/recoverPassword.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 
-import verifyAccount from "../views/verifyAccount.vue";
+
 
 import createService from "@/views/createService";
 import newHome from "@/views/newHome";
 import BridgeHome from "@/views/BridgeHome";
-import updatedBridgeHome from "@/views/updatedBridgeHome";
+
 import Quote from "@/views/quote";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
 import market from "@/views/market";
 import settings from "@/views/settings";
+import helpAndSupport from "@/views/help&support";
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
@@ -48,17 +47,22 @@ import OrderDetails from "@/views/OrderDetails";
 import businessordersdetail from "@/views/businessordersdetail";
 import businessOwnerOrders from "@/views/businessOwnerOrders";
 import payment from "@/views/payment";
+import ThankYouPage from "@/views/ThankYouPage.vue";
+import AddProduct from "../components/businessOwner/AddProduct.vue";
+import EditProduct from "../components/businessOwner/EditProduct.vue";
 
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
 import networkEditors from "@/views/networkEditors";
 import businessFollower from "@/views/businessFollower";
 import profileFollower from "@/views/profileFollower";
+import productDetails from "../components/businessf/productDetailView.vue";
 //import businessOwner from "@/views/businessOwner";
 //import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 //import networks from "@/views/networks";
 //import search from "@/views/search";
+
 
 const search = () => import("@/views/search");
 const networks = () => import("@/views/networks");
@@ -85,9 +89,14 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
+import authRoutes from "./auth.routes";
+import rootRoutes from "./root.routes";
+
 const previousRoute = { value: null };
 
 const routes = [
+  ... authRoutes,
+  ... rootRoutes,
   {
     path: "/notFound",
     name: "notFoundd",
@@ -147,6 +156,23 @@ const routes = [
     path: "/market",
     name: "market",
     component: market
+  },
+
+  {
+    path: "/AddProduct",
+    name: "AddProduct",
+    component: AddProduct,
+    props: true
+  },
+
+  {
+    path: '/edit-product/:productId',
+    name: 'EditProduct',
+    component: EditProduct,
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   },
 
   {
@@ -232,6 +258,12 @@ const routes = [
     path: "/settings",
     name: "settings",
     component: settings
+  },
+
+  {
+    path: "/helpAndSupport",
+    name: "helpAndSupport",
+    component: helpAndSupport
   },
 
   {
@@ -330,23 +362,7 @@ const routes = [
     }
   },
 
-  {
-    path: "/login",
-    name: "Login",
-    component: Login
-  },
-
-  {
-    path: "/auth/facebook/callback",
-    name: "Loginfacebook",
-    component: Login
-  },
-
-  {
-    path: "/auth/google/callback",
-    name: "Logingoogle",
-    component: Login
-  },
+ 
 
   {
     path: "/login/validation",
@@ -354,10 +370,12 @@ const routes = [
     component: LoginValidation
   },
 
+  
+  
   {
-    path: "/signup",
-    name: "signup",
-    component: signup
+    path: "/ThankYouPage",
+    name: "ThankYouPage",
+    component: ThankYouPage
   },
 
   {
@@ -366,14 +384,7 @@ const routes = [
     component: Password
   },
 
-  {
-    path: "/verify",
-    name: "verifyAccount",
-    component: verifyAccount,
-    meta: {
-      //  auth: true,
-    }
-  },
+  
 
   {
     path: "/recoverPass2",
@@ -411,13 +422,6 @@ const routes = [
     name: "GlobalSearch",
     component: search
   },
-
-  {
-    path: "/",
-    name: "Bridge-home",
-    component: updatedBridgeHome
-  },
-
   {
     path: "/blecc",
     name: "Blecc",
@@ -449,6 +453,11 @@ const routes = [
     path: "/search/:id",
     name: "Search",
     component: search
+  },
+  {
+    path: "/product-details/:id",
+    name: "product-details",
+    component: productDetails
   },
   {
     path: "/forgotpass",

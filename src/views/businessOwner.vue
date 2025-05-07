@@ -1,50 +1,52 @@
 <template>
-  <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper">
-    <navbar />
-    <Skeleton :loading="!isloaded" />
-    <div v-if="isloaded">
-      <div class="container-fluid">
-        <ly-tab
-          v-model="selectedId"
-          :items="items"
-          :options="options"
-          class="center-ly"
-        >
-        </ly-tab>
-        <hr width="100%" class="d-none" d-md-block />
-      </div>
+  <base-layout>
+    <template v-slot:main>
+      <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper">
 
-      <div class="" v-if="selectedId == '0'">
-        <Business @pageChange="pageChange" />
-      </div>
+        <Skeleton :loading="!isloaded" />
+        <div v-if="isloaded">
+          <div class="container-fluid">
+            <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly">
+            </ly-tab>
+            <hr width="100%" class="d-none" d-md-block />
+          </div>
 
-      <div class="mt-3" v-if="selectedId == '1'">
-        <Inbox />
-      </div>
+          <div class="" v-if="selectedId == '0'">
+            <Business @pageChange="pageChange" />
+          </div>
+          
 
-      <div class="mt-3" v-if="selectedId == '2'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+          <div class="mt-3" v-if="selectedId == '1'">
+            <Inbox />
+          </div>
 
-      <div class="mt-3" v-if="selectedId == '3'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+          <div class="mt-3" v-if="selectedId == '2'">
+            <Settings v-bind:currenttab="selectedId" />
+          </div>
 
-      <div class="mt-3" v-if="selectedId == '4'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+          <div class="mt-3" v-if="selectedId == '3'">
+            <Settings v-bind:currenttab="selectedId" />
+            
+          </div>
 
-      <div class="mt-3" v-if="selectedId == '5'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+          <div class="mt-3" v-if="selectedId == '4'">
+            <Settings v-bind:currenttab="selectedId" />
+          </div>
 
-      <div class="mt-3" v-if="selectedId == '6'">
-        <Settings v-bind:currenttab="selectedId" />
+          <div class="mt-3" v-if="selectedId == '5'">
+            <Settings v-bind:currenttab="selectedId" />
+          </div>
+
+          <div class="mt-3" v-if="selectedId == '6'">
+            <Settings v-bind:currenttab="selectedId" />
+          </div>
+        </div>
+        <!-- <Footer /> -->
       </div>
-    </div>
-    <!-- <Footer /> -->
-  </div>
+    </template>
+  </base-layout>
 </template>
+
 
 <script>
 import navbar from "@/components/navbar";
@@ -57,11 +59,13 @@ import { WhoIsIt } from "@/mixins";
 import axios from "axios";
 import { isPremium } from "@/helpers";
 import Skeleton from "@/components/businessPageSkeleton";
+import BaseLayout from "@/layouts/Layout"
+
 export default {
   name: "Home",
   mixins: [WhoIsIt],
   components: {
-    navbar,
+    BaseLayout,
     Skeleton,
     Business,
     LyTab,
@@ -149,12 +153,12 @@ export default {
     }
   },
   watch: {
-    "$route.query.tabId": function() {
+    "$route.query.tabId": function () {
       this.selectedId = this.$route.query.tabId;
     }
   },
 
-  beforeCreate: async function() {
+  beforeCreate: async function () {
     await this.$repository.share.switch(this.$route.params.id, "business");
   },
 
@@ -224,23 +228,29 @@ export default {
 .mar-left {
   margin-left: 25px;
 }
+
 .tabs {
   width: 100%;
 }
+
 .settings {
   margin-left: 90%;
   position: relative;
   top: 40px;
 }
+
 .a-left {
   align-content: left;
 }
+
 .nav-text {
   cursor: pointer;
 }
+
 .tab-title-class {
   color: #ffffff !important;
 }
+
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;
@@ -263,6 +273,7 @@ export default {
   padding-right: 20px;
   border: 1px solid gray;
 }
+
 @media only screen and (max-width: 768px) {
   .business-owner-tab .nav-pills .nav-link {
     border-radius: 0.25rem;
@@ -276,6 +287,7 @@ export default {
 .center-ly {
   margin-top: -25px;
 }
+
 .hrr {
   margin-top: 0px;
 }

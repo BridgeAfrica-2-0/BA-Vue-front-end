@@ -153,5 +153,10 @@
   "Enter_a_description": "Enter a description",
   "Add_Item": "Add Item",
   "Operation_success": "Operation success",
-  "Failed_to_copy_the_text_to_the_clipboard": "Failed to copy the text to the clipboard"
+  "Failed_to_copy_the_text_to_the_clipboard": "Failed to copy the text to the clipboard",
+  "buy_quality_products": "Buy quality products",
+  "from_our_marketplace_in_cameroon_and_around_the_world": "from our Marketplace in Cameroon and around the world",
+  "with_over_100_categories_of_products": "With over 100 categories of products, easily shop from businesses in Cameroon anything, anywhere.",
+  "search": "Search",
+  "reset": "Reset"
 }

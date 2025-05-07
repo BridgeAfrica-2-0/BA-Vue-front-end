@@ -275,13 +275,15 @@ export default {
   },
 
   created() {
-    this.currentTab = this.$route.query.tabId
-      ? this.$route.query.tabId
-      : this.tabs.findIndex(tab => tab === this.$route.hash);
-    this.currentAuthType = "business";
-    this.url_data = this.$route.params.id;
-  },
-
+  this.currentTab = this.$route.query.tabId
+    ? parseInt(this.$route.query.tabId)
+    : this.$route.hash
+    ? this.tabs.findIndex(tab => tab === this.$route.hash)
+    : 3; // Default to Market tab (index 3)
+  
+  this.currentAuthType = "business";
+  this.url_data = this.$route.params.id;
+},
   watch: {
     "$store.state.businessOwner.businessInfo": function() {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;

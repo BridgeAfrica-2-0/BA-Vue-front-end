@@ -1,36 +1,13 @@
 <template>
   <div>
-    <div
-      v-if="
-        filterType == '0' || filterType == '1' || (filterType == '5' && islogin)
-      "
-      class="mt-2 mb-2"
-    >
-      <b-button
-        class="float-right"
-        size="sm"
-        variant="outline-primary"
-        @click="resetFilters"
-        >{{ $t("search.Reset") }}</b-button
-      >
-    </div>
-    <div
-      v-else-if="
-        filterType == '0' ||
-          filterType == '1' ||
-          (filterType == '4' && !islogin)
-      "
-      class="mt-2 mb-2"
-    >
-      <b-button
-        class="float-right"
-        size="sm"
-        variant="outline-primary"
-        @click="resetFilters"
-        >{{ $t("search.Reset") }}</b-button
-      >
-    </div>
 
+    <b-button
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="resetFilters"
+        >{{ $t("search.Reset") }}</b-button
+      >
     <br />
 
     <div
@@ -42,7 +19,11 @@
       "
     >
       <span v-if="suggestedKeyword.length">
-        <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="bold" style="font-size: 13px;">{{ $t("search.suggested_keywords") }}</h6>
+        <div>
+        </div>
+        </div>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
           :key="i.value"
@@ -85,15 +66,6 @@
         >
           {{ item.category }}
         </span>
-        <!-- <b-badge
-          v-for="item in categoryRendering"
-          :key="item.id"
-          :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
-          variant="light"
-          @click="matching(item)"
-        >
-          {{ item.category }}
-        </b-badge> -->
 
         <span v-if="activateMatching && !loading && !categoryRendering.length"
           >Not data found</span
@@ -200,7 +172,7 @@
 
           <!-- city -->
           <div v-if="!showMore">
-            <div>
+            <div class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.City')"
@@ -222,38 +194,11 @@
             </div>
 
             <div>
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Neighbourhood')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0 mt-3 text-left"
-              >
-              </b-form-group>
-
-              <vue-bootstrap-typeahead
-                v-model="query"
-                :data="lneighbourhoods"
-                :minMatchingChars="0"
-                @hit="searchThisNeibourhood(query)"
-                :maxMatches="10"
-                :serializer="(item) => item.name"
-                placeholder="Where"
-                class=""
-              />
-
-              <b-link
-                v-if="networkFilter.region"
-                class="float-right mt-2 mb-2"
-                @click="showMoreFilters"
-              >
-                More
-              </b-link>
               <br />
             </div>
           </div>
 
-          <div class="more" v-if="showMore">
+          <div >
             <hr />
 
             <!-- Region -->
@@ -277,10 +222,10 @@
               </b-form-select>
             </div>
 
-            <hr />
+            <!-- <hr /> -->
 
             <!-- Division -->
-            <div v-if="networkFilter.division">
+            <div v-if="networkFilter.division" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Division')"
@@ -300,7 +245,7 @@
             </div>
 
             <!-- Council -->
-            <div v-if="networkFilter.council">
+            <div v-if="networkFilter.council" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Council')"
@@ -322,7 +267,7 @@
             </div>
 
             <!-- Neighbourhood -->
-            <div v-if="networkFilter.neighbourhood">
+            <div v-if="networkFilter.neighbourhood" class="mt-2">
               <b-form-group
                 label-cols-lg="3"
                 :label="$t('search.Neighbourhood')"
@@ -345,13 +290,13 @@
               </b-form-select>
             </div>
 
-            <b-link
+            <!-- <b-link
               v-if="networkFilter.region"
               class="float-right mt-2 mb-2"
               @click="hideMoreFilters"
             >
               Hide More
-            </b-link>
+            </b-link> -->
           </div>
         </div>
       </div>
@@ -612,7 +557,7 @@
       <div></div>
     </div>
 
-    <!-- Network -->
+   
     <div v-if="filterType == '3' && islogin">
       <b-button
         v-if="networkFilter.region || networkFilter.category"
@@ -1305,6 +1250,7 @@ export default {
     },
 
     resetFilters(restName) {
+      console.log("-=-==-=-=-==-=-=-",this.searchParams)
       this.matchingCategory = [];
       this.activateMatching = false;
       this.nameOfCategory = null;

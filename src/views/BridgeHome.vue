@@ -204,7 +204,7 @@
             </span>
             {{ $t("general.from_ourMarket_place") }}
           </h3>
-          <p class="mt-2">{{ $t("general.with_over_100_categories") }}</p>
+          <p class="mt-2">uyevfugqhn {{ $t("general.with_over_100_categories") }}</p>
           <!-- <div class="d-none d-lg-flex">
            <b-button @click="gotoSearch" variant="primary" class=" moreproducts-btn">
              {{ $t("general.more_products") }}  <b-icon icon="arrow-right"> </b-icon>

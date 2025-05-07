@@ -42,14 +42,6 @@
           {{ $t("businessf.Community") }}
         </p>
         <p>
-          <b-icon icon="telephone-fill" class="primary h_icon"></b-icon>
-          {{ business_intro.phone }}
-        </p>
-        <p>
-          <b-icon icon="envelope-fill" class="primary h_icon"></b-icon>
-          {{ business_intro.email }}
-        </p>
-        <p>
           <b-icon icon="clock" class="primary h_icon"></b-icon>
           <b-link> {{ $t("businessf.Open_now") }}</b-link>
           <br />

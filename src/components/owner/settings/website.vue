@@ -221,16 +221,16 @@
                   ><span class="text-success"
                     ><b>{{ $t("businessowner.Most_Popular") }}:</b></span
                   >
-                  {{ $t("businessowner.Monthly") }}<br />{{
+                  {{ $t("businessowner.6Monthly") }}<br />{{
                     $t("businessowner.Billed_Monthly")
                   }}</b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices[0] }}XAF
+                  >{{ Packages.premium_package_prices[1]/2 }}XAF
                   <br />
                   <b-button
                     v-b-modal.PackageSelection
-                    @click="PaymentForm.subscribe = 'one month'"
+                    @click="PaymentForm.subscribe = '6 months'"
                     variant="primary"
                     >{{ $t("businessowner.Select") }}</b-button
                   ></b-col
@@ -366,8 +366,8 @@
                       )
                     }}
 
-                    <span v-if="PaymentForm.subscribe == 'one month'">
-                      {{ Packages.premium_package_prices[0] }}XAF
+                    <span v-if="PaymentForm.subscribe == '6 months'">
+                      {{ Packages.premium_package_prices[1]/2 }}XAF
                     </span>
                     <span v-else>
                       {{ Packages.premium_package_prices[1] }}XAF
@@ -467,6 +467,7 @@ export default {
       }
     },
 
+    
     getAccounts() {
       this.$store
         .dispatch("profileAccountType/getaccounts", {

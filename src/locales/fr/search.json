@@ -149,5 +149,10 @@
   "Enter_a_description": "Entrez une description",
   "Add_Item": "Ajouter un article",
   "Operation_success": "Opération effectuée avec succès",
-  "Failed_to_copy_the_text_to_the_clipboard": "Échec de la copie du texte dans le presse-papiers"
+  "Failed_to_copy_the_text_to_the_clipboard": "Échec de la copie du texte dans le presse-papiers",
+  "buy_quality_products": "Acheter des produits de qualité",
+  "from_our_marketplace_in_cameroon_and_around_the_world": "de notre marché au Cameroun et dans le monde entier",
+  "with_over_100_categories_of_products": "Avec plus de 100 catégories de produits, vous pouvez facilement faire des achats auprès d'entreprises camerounaises, n'importe où et n'importe quand.",
+  "search": "Rechercher",
+  "reset": "Réinitialiser"
 }

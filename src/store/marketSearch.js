@@ -82,10 +82,10 @@ export default {
   actions: {
     getCategories({ state, commit }, bussiness_id) {
       return axios
-        .get("category")
+        .get("category/search")
         .then(res => {
           console.log("my Categories: ");
-          let categories = res.data.data;
+          let categories = res.data.data.main;
           let all = [];
 
           // console.log(categories);

@@ -1,472 +1,378 @@
 <template>
-  <div ref="wrapper">
-    <Navbar />
-    <div class="container wahala">
-      <b-row>
-        <b-col cols="12" md="12" lg="12" xl="12">
-          <div class="mbl-wrap">
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-              v-model="activeTab"
-              lazy
-            >
-              <!-- NOTIFICATIONS TAB -->
-              <b-tab :title="$t('settings.Notifications')">
-                <b-card-text class="mt-3">
-                  <b-row>
-                    <b-col cols="12" md="12">
-                      <SettingsNotifications />
-                    </b-col>
-                  </b-row>
-                </b-card-text>
-              </b-tab>
+  <base-layout  >
+    <template v-slot:main>
+      <div ref="wrapper">
+        <div class="container wahala">
+          <b-row>
+            <b-col cols="12" md="12" lg="12" xl="12">
+              <div class="mbl-wrap">
+                <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15" v-model="activeTab" lazy>
+                  <!-- NOTIFICATIONS TAB -->
+                  <b-tab :title="$t('settings.Notifications')">
+                    <b-card-text class="mt-3">
+                      <b-row>
+                        <b-col cols="12" md="12">
+                          <SettingsNotifications />
+                        </b-col>
+                      </b-row>
+                    </b-card-text>
+                  </b-tab>
 
-              <b-tab :title="$t('businessowner.Account_Type')">
-                <b-card-text> <Website /> </b-card-text
-              ></b-tab>
+                  <b-tab :title="$t('businessowner.Account_Type')">
+                    <b-card-text>
+                      <Website />
+                    </b-card-text></b-tab>
 
-              <b-tab :title="$t('settings.General')">
-                <b-card-text class="mt-3">
-                  <b-row>
-                    <b-col cols="12" md="12">
-                      <div>
-                        <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.id">
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Name") }}
-                              </b-td>
+                  <b-tab :title="$t('settings.General')">
+                    <b-card-text class="mt-3">
+                      <b-row>
+                        <b-col cols="12" md="12">
+                          <div>
+                            <b-table-simple hover small caption-top responsive>
+                              <b-tbody v-if="getUserInfos.id">
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.Name") }}
+                                  </b-td>
 
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.name
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.name
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
 
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Public_url") }}
-                              </b-td>
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.Public_url") }}
+                                  </b-td>
 
-                              <b-td class="text"
-                                ><b-link href="#">
-                                  http://www.bridgeafrica.com
-                                </b-link>
-                              </b-td>
-                            </b-tr>
+                                  <b-td class="text"><b-link href="#">
+                                      http://www.bridgeafrica.com
+                                    </b-link>
+                                  </b-td>
+                                </b-tr>
 
-                            <br />
+                                <br />
 
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Email") }}
-                              </b-td>
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.Email") }}
+                                  </b-td>
 
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.email
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.email
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
 
-                            <br />
+                                <br />
 
-                            <b-tr>
-                              <b-td class="a-text text"
-                                >{{ $t("settings.Phone") }}
-                              </b-td>
+                                <b-tr>
+                                  <b-td class="a-text text">{{ $t("settings.Phone") }}
+                                  </b-td>
 
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.phone
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.phone
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
 
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.DOB") }}
-                              </b-td>
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.DOB") }}
+                                  </b-td>
 
-                              <b-td class="a-text text">
-                                <b-link href="#">{{ getUserInfos.dob }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{ getUserInfos.dob }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
 
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Gender") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.gender
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Proffession") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.profession
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Country") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">
-                                  {{
-                                    getUserInfos && getUserInfos.country
-                                      ? getUserInfos.country.name
-                                      : null
-                                  }}
-                                </b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Region") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">
-                                  {{
-                                    getUserInfos.region
-                                      ? getUserInfos.region.name
-                                      : Null
-                                  }}
-                                </b-link>
-                              </b-td>
-                            </b-tr>
-
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Division") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.division
-                                    ? getUserInfos.division.name
-                                    : Null
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Municipality") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.council
-                                    ? getUserInfos.council.name
-                                    : Null
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text tetx">
-                                {{ $t("settings.City") }}
-                              </b-td>
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.city
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
-
-                            <b-tr>
-                              <b-td class="a-text text">
-                                {{ $t("settings.Neighbourhood") }}</b-td
-                              >
-
-                              <b-td class="a-text text">
-                                <b-link href="#">{{
-                                  getUserInfos.neigborhood
-                                    ? getUserInfos.neigborhood.name
-                                    : Null
-                                }}</b-link>
-                              </b-td>
-                            </b-tr>
-                            <br />
-                            <div>
-                              <b-button
-                                variant="ligth"
-                                class="btn btn-primary button"
-                                v-b-modal.modal-10
-                                >{{ $t("settings.Edit") }}
-                              </b-button>
-
-                              <b-modal
-                                id="modal-10"
-                                ref="modal-10"
-                                :title="
-                                  $t('settings.Edit_your_information_here')
-                                "
-                                hide-footer
-                              >
-                                <form>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Name")
-                                    }}</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="getUserInfos.name"
-                                    />
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Email")
-                                    }}</label>
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      v-model="getUserInfos.email"
-                                    />
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.Phone")
-                                    }}</label>
-
-                                    <VuePhoneNumberInput
-                                      default-country-code="CM"
-                                      v-model="getUserInfos.phone"
-                                      required
-                                    />
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.DOB")
-                                    }}</label>
-                                    <input
-                                      type="date"
-                                      class="form-control"
-                                      v-model="getUserInfos.dob"
-                                    />
-                                  </div>
-                                  <div class="mb-3">
+                                <b-tr>
+                                  <b-td class="a-text text">
                                     {{ $t("settings.Gender") }}
+                                  </b-td>
 
-                                    <b-form-select
-                                      v-model="selectedGender"
-                                      :options="genderOptions"
-                                    ></b-form-select>
-                                  </div>
-                                  <div class="mb-3">
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.gender
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
+
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.Proffession") }}
+                                  </b-td>
+
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.profession
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
+
+                                <b-tr>
+                                  <b-td class="a-text text">
                                     {{ $t("settings.Country") }}
-                                    <b-form-select
-                                      v-model="selectedCounty"
-                                      :options="country"
-                                      @change="getRegion"
-                                    ></b-form-select>
-                                  </div>
-                                  <div class="mb-3">
+                                  </b-td>
+
+                                  <b-td class="a-text text">
+                                    <b-link href="#">
+                                      {{
+                                        getUserInfos && getUserInfos.country
+                                          ? getUserInfos.country.name
+                                          : null
+                                      }}
+                                    </b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
+                                <b-tr>
+                                  <b-td class="a-text text">
                                     {{ $t("settings.Region") }}
-                                    <b-form-select
-                                      v-model="selectedRegion"
-                                      :options="region"
-                                      @change="getDivision"
-                                      required
-                                    ></b-form-select>
-                                  </div>
+                                  </b-td>
 
-                                  <div class="mb-3">
+                                  <b-td class="a-text text">
+                                    <b-link href="#">
+                                      {{
+                                        getUserInfos.region
+                                          ? getUserInfos.region.name
+                                          : Null
+                                      }}
+                                    </b-link>
+                                  </b-td>
+                                </b-tr>
+
+                                <br />
+
+                                <b-tr>
+                                  <b-td class="a-text text">
                                     {{ $t("settings.Division") }}
-                                    <b-form-select
-                                      v-model="selectedDivision"
-                                      :options="division"
-                                      @change="getMunicipality"
-                                      required
-                                    ></b-form-select>
-                                  </div>
+                                  </b-td>
 
-                                  <div class="mb-3">
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.division
+                                        ? getUserInfos.division.name
+                                        : Null
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+
+                                <br />
+
+                                <b-tr>
+                                  <b-td class="a-text text">
                                     {{ $t("settings.Municipality") }}
-                                    <b-form-select
-                                      v-model="selectedMunicipality"
-                                      :options="municipality"
-                                      @change="getNeighbor"
-                                      required
-                                    ></b-form-select>
-                                  </div>
+                                  </b-td>
 
-                                  <div class="mb-3">
-                                    {{ $t("settings.Neighbourhood") }}
-                                    <b-form-select
-                                      v-model="selectedNeighbor"
-                                      :options="neighbor"
-                                      required
-                                    ></b-form-select>
-                                  </div>
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.council
+                                        ? getUserInfos.council.name
+                                        : Null
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
 
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      $t("settings.City")
-                                    }}</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="getUserInfos.city"
-                                    />
-                                  </div>
-                                  <button
-                                    class="btn btn-primary"
-                                    @click="update"
-                                  >
-                                    {{ $t("settings.Save_Changes") }}
-                                  </button>
-                                </form>
-                              </b-modal>
-                            </div>
-                            <br />
+                                <br />
 
-                            <br />
-                          </b-tbody>
-                        </b-table-simple>
+                                <b-tr>
+                                  <b-td class="a-text tetx">
+                                    {{ $t("settings.City") }}
+                                  </b-td>
+
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.city
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
+
+                                <b-tr>
+                                  <b-td class="a-text text">
+                                    {{ $t("settings.Neighbourhood") }}</b-td>
+
+                                  <b-td class="a-text text">
+                                    <b-link href="#">{{
+                                      getUserInfos.neigborhood
+                                        ? getUserInfos.neigborhood.name
+                                        : Null
+                                      }}</b-link>
+                                  </b-td>
+                                </b-tr>
+                                <br />
+                                <div>
+                                  <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>{{
+                                    $t("settings.Edit") }}
+                                  </b-button>
+
+                                  <b-modal id="modal-10" ref="modal-10" :title="$t('settings.Edit_your_information_here')
+                                    " hide-footer>
+                                    <form>
+                                      <div class="mb-3">
+                                        <label class="form-label">{{
+                                          $t("settings.Name")
+                                          }}</label>
+                                        <input type="text" class="form-control" v-model="getUserInfos.name" />
+                                      </div>
+                                      <div class="mb-3">
+                                        <label class="form-label">{{
+                                          $t("settings.Email")
+                                          }}</label>
+                                        <input type="email" class="form-control" v-model="getUserInfos.email" />
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <label class="form-label">{{
+                                          $t("settings.Phone")
+                                          }}</label>
+
+                                        <VuePhoneNumberInput default-country-code="CM" v-model="getUserInfos.phone"
+                                          required />
+                                      </div>
+                                      <div class="mb-3">
+                                        <label class="form-label">{{
+                                          $t("settings.DOB")
+                                          }}</label>
+                                        <input type="date" class="form-control" v-model="getUserInfos.dob" />
+                                      </div>
+                                      <div class="mb-3">
+                                        {{ $t("settings.Gender") }}
+
+                                        <b-form-select v-model="selectedGender"
+                                          :options="genderOptions"></b-form-select>
+                                      </div>
+                                      <div class="mb-3">
+                                        {{ $t("settings.Country") }}
+                                        <b-form-select v-model="selectedCounty" :options="country"
+                                          @change="getRegion"></b-form-select>
+                                      </div>
+                                      <div class="mb-3">
+                                        {{ $t("settings.Region") }}
+                                        <b-form-select v-model="selectedRegion" :options="region" @change="getDivision"
+                                          required></b-form-select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                        {{ $t("settings.Division") }}
+                                        <b-form-select v-model="selectedDivision" :options="division"
+                                          @change="getMunicipality" required></b-form-select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                        {{ $t("settings.Municipality") }}
+                                        <b-form-select v-model="selectedMunicipality" :options="municipality"
+                                          @change="getNeighbor" required></b-form-select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                        {{ $t("settings.Neighbourhood") }}
+                                        <b-form-select v-model="selectedNeighbor" :options="neighbor"
+                                          required></b-form-select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <label class="form-label">{{
+                                          $t("settings.City")
+                                          }}</label>
+                                        <input type="text" class="form-control" v-model="getUserInfos.city" />
+                                      </div>
+                                      <button class="btn btn-primary" @click="update">
+                                        {{ $t("settings.Save_Changes") }}
+                                      </button>
+                                    </form>
+                                  </b-modal>
+                                </div>
+                                <br />
+
+                                <br />
+                              </b-tbody>
+                            </b-table-simple>
+                          </div>
+                        </b-col>
+                      </b-row>
+                    </b-card-text>
+                  </b-tab>
+
+                  <b-tab :title="$t('settings.Payment')">
+                    <Payment :profileId="getUserInfos.id" />
+                  </b-tab>
+
+                  <b-tab :title="$t('settings.Blocking')">
+                    <Blocking :profileId="getUserInfos.id" />
+                  </b-tab>
+
+                  <b-tab :title="`${$t('settings.Password')}`">
+                    <b-card-text class="mt-3 text">
+                      <h3 class="username">
+                        {{ $t("settings.Change_current_password") }}
+                      </h3>
+                      <br />
+
+                      <div class="b-bottom">
+                        <b-container>
+                          <b-form-group label-cols-lg="3" :label="`${$t('settings.Current_password')}`" label-size="md"
+                            label-class=" text" class="mb-0">
+                            <b-form-input id="bname" type="password" placeholder="" required
+                              v-model="currentPass"></b-form-input>
+                          </b-form-group>
+                        </b-container>
                       </div>
-                    </b-col>
-                  </b-row>
-                </b-card-text>
-              </b-tab>
 
-              <b-tab :title="$t('settings.Payment')">
-                <Payment :profileId="getUserInfos.id" />
-              </b-tab>
+                      <br />
 
-              <b-tab :title="$t('settings.Blocking')">
-                <Blocking :profileId="getUserInfos.id" />
-              </b-tab>
+                      <div class="b-bottom">
+                        <b-container>
+                          <b-form-group label-cols-lg="3" :label="`${$t('settings.New_password')}`" label-size="md"
+                            label-class=" text" class="mb-0">
+                            <VuePassword v-model="newPass" id="password1" :strength="psw1Strength" type="password"
+                              @input="update1Strength" required />
+                          </b-form-group>
+                        </b-container>
+                      </div>
 
-              <b-tab :title="`${$t('settings.Password')}`">
-                <b-card-text class="mt-3 text">
-                  <h3 class="username">
-                    {{ $t("settings.Change_current_password") }}
-                  </h3>
-                  <br />
+                      <br />
 
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Current_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-                        <b-form-input
-                          id="bname"
-                          type="password"
-                          placeholder=""
-                          required
-                          v-model="currentPass"
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-container>
-                  </div>
+                      <div class="b-bottom">
+                        <b-container>
+                          <b-form-group label-cols-lg="3" :label="`${$t('settings.Confirm_password')}`" label-size="md"
+                            label-class="text" class="mb-0">
+                            <VuePassword v-model="newPass1" id="password2" type="password" :strength="psw2Strength"
+                              @input="update2Strength" required />
+                            <br />
+                            <button class=" btn btn-primary" @click="changePassword">
+                              {{ $t("settings.Change") }}
+                            </button>
+                          </b-form-group>
+                        </b-container>
+                      </div>
 
-                  <br />
+                      <br />
+                    </b-card-text>
+                  </b-tab>
 
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.New_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-                        <VuePassword
-                          v-model="newPass"
-                          id="password1"
-                          :strength="psw1Strength"
-                          type="password"
-                          @input="update1Strength"
-                          required
-                        />
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Confirm_password')}`"
-                        label-size="md"
-                        label-class="text"
-                        class="mb-0"
-                      >
-                        <VuePassword
-                          v-model="newPass1"
-                          id="password2"
-                          type="password"
-                          :strength="psw2Strength"
-                          @input="update2Strength"
-                          required
-                        />
-                        <br />
-                        <button
-                          class=" btn btn-primary"
-                          @click="changePassword"
-                        >
-                          {{ $t("settings.Change") }}
-                        </button>
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-                </b-card-text>
-              </b-tab>
-
-              <b-tab :title="$t('settings.delete_account')">
-                <Delete />
-              </b-tab>
-            </b-tabs>
-          </div>
-        </b-col>
-        <b-col> </b-col>
-      </b-row>
-    </div>
-
-    <Footer />
-  </div>
+                  <b-tab :title="$t('settings.delete_account')">
+                    <Delete />
+                  </b-tab>
+                </b-tabs>
+              </div>
+            </b-col>
+            <b-col> </b-col>
+          </b-row>
+        </div>
+      </div>
+    </template>
+  </base-layout>
 </template>
 
 <script>
@@ -479,11 +385,11 @@ import Delete from "@/components/owner/settings/delete";
 import Website from "@/components/owner/settings/website";
 import VuePassword from "vue-password";
 import VuePhoneNumberInput from "vue-phone-number-input";
+import BaseLayout from "@/layouts/Layout"
 
 export default {
   components: {
-    Navbar,
-    Footer,
+    BaseLayout,
     SettingsNotifications,
     Payment,
     Blocking,
@@ -822,7 +728,7 @@ export default {
   },
 
   watch: {
-    "$store.state.profileSettingsEdit.userInfos": function() {
+    "$store.state.profileSettingsEdit.userInfos": function () {
       this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
       this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
 
@@ -851,7 +757,7 @@ export default {
     // this.getLocality();
 
     var that = this;
-    window.onresize = function() {
+    window.onresize = function () {
       that.size = window.innerWidth;
     };
 
@@ -875,21 +781,26 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
   }
+
   .mbl-wrap {
     overflow: hidden;
     width: 100%;
     display: flex;
     flex-direction: row;
   }
+
   .nav.nav-pills {
     flex-wrap: nowrap;
     white-space: nowrap;
     max-width: 500px;
     overflow: auto;
 
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
   }
+
   .nav.nav-pills::-webkit-scrollbar {
     display: none;
   }
@@ -907,11 +818,13 @@ export default {
 .mt-15 {
   margin-top: 15px;
 }
+
 .button {
   background-color: rgb(238, 119, 40);
   border: none;
   border-radius: 4px;
 }
+
 @media only screen and (min-width: 768px) {
   .cent {
     margin-left: 170px;

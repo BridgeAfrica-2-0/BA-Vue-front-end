@@ -5,6 +5,8 @@ import NotFound from "@/components/NotFoundComponent";
 import NoMoreData from "@/components/businessOwner/PaginationMessage";
 import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
+import { onInitializer } from "@/helpers"
+
 export { Redis, Pusher } from "./notifications.mixins";
 
 export const loader = {
@@ -190,7 +192,7 @@ export const commentMixinsBuisness = {
       auth: "auth/profilConnected"
     }),
 
-    onLike: async function() {
+    onLike: async function () {
       let data = { comment: this.comment.id };
 
       if (
@@ -211,12 +213,12 @@ export const commentMixinsBuisness = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0
+              ? this.comment.comment_likes - 1
+              : 0
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
@@ -233,7 +235,7 @@ export const commentMixinsBuisness = {
       this.loadComment = false;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
@@ -307,7 +309,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.id,
         network: this.profile.id
@@ -319,12 +321,12 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0
+              ? this.comment.comment_likes - 1
+              : 0
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
@@ -334,7 +336,7 @@ export const commentMixins = {
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
         return false;
 
@@ -444,15 +446,15 @@ export const defaultCoverImage = {
           this.placeholderImage = "/covers/business-msg-en.png";
           return "fr" == this.$i18n.locale
             ? [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ]
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ]
             : [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ];
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ];
         },
 
         profile: () => {
@@ -467,15 +469,15 @@ export const defaultCoverImage = {
           this.placeholderImage = "/covers/business-msg-en.png";
           return "fr" == this.$i18n.locale
             ? [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ]
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ]
             : [
-                "/covers/business-one.png",
-                "/covers/business-two.jpg",
-                "/covers/business-tree.jpg"
-              ];
+              "/covers/business-one.png",
+              "/covers/business-two.jpg",
+              "/covers/business-tree.jpg"
+            ];
         },
 
         profile: () => {
@@ -494,7 +496,7 @@ export const defaultCoverImage = {
   },
 
   watch: {
-    "$i18n.locale": function() {}
+    "$i18n.locale": function () { }
   },
 
   computed: {
@@ -553,3 +555,51 @@ export const ResizeMediaImage = {
     }
   }
 };
+
+export const LocalisationMixins = {
+  data: () => ({
+    isGlobal: true
+  }),
+
+  computed: {
+    ...mapGetters({
+      countryLocalisation: "localisation/getLocalisationCountry",
+      countrySelected: "localisation/getSelectedCountry",
+      currencySelected: "localisation/getSelectedCurrency",
+      countries: "localisation/getCountries",
+      rate: "localisation/getRate",
+      hasBeenLoad: "localisation/hasBeenLoad",
+      isLoading: "localisation/loading"
+    })
+  },
+
+  created() {
+
+    if (!this.hasBeenLoad && !this.isLoading) {
+      onInitializer()
+        .then(() => {
+          console.log('finish initializer')
+          this.$store.dispatch('localisation/startLocalisation')
+        })
+        .catch(err => {
+          console.log("[err]===== in mixins", err)
+        })
+    }else {
+      this.onInitLocalisation()
+    }
+  },
+
+  watch: {
+    countrySelected() {
+      this.onInitLocalisation()
+    }
+  },
+
+ 
+
+  methods: {
+    async onInitLocalisation() {
+      this.isGlobal = 'CM' == this.countryLocalisation?.sigle ? false : true;
+    },
+  }
+}

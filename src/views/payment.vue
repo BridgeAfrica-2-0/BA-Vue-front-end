@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <navbar />
+  <base-layout :top="20">
+  <template v-slot:main>
     <stepper />
-  </div>
+  </template>
+  </base-layout>
 </template>
 
+
 <script>
-import navbar from "@/components/navbar";
+
 import stepper from "@/components/payment/PaymentStepper";
-// import stepper from '@/components/payment/Stepper'
-// import info from '@/components/payment/Info'
+import BaseLayout from "@/layouts/Layout"
 export default {
   name: "payment",
   components: {
-    navbar,
-    stepper
+    stepper,
+    BaseLayout
   }
 };
 </script>

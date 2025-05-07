@@ -3,15 +3,27 @@ import { getGuestIdentifier } from "../helpers";
 
 const state = {
   allShipping: [],
+  shippingFee: 0.0,
+  shippingMethod: '',
   order: {
     data: { order_id: "", total_cost: 0 },
   },
 
   shippingsummary: [],
-
+  
   cart: [],
-  cart_summary: {},
+  
+  cart_summary: {
+    total_items: 0,
+    shipping: "FREE",
+    tax: 0.0,
+    total_cost: 0.0,
+    sub_total: 0.0,
+    discount: 0.0,
+    product_kg: 0.0,
+  },
   total: null,
+  currentStep: 0,
 
   buisinessOrdered: [],
   shippingAddressChanged: false,
@@ -20,6 +32,7 @@ const getters = {
   getAllShipping: (state) => state.allShipping,
   getCartSummary: (state) => state.cart_summary,
   shippingAddressChanges: (state) => state.shippingAddressChanged,
+  getCurrentStep: (state) => state.currentStep,
 };
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
@@ -31,7 +44,6 @@ const actions = {
     await axios
       .post(url, { ...newShippingAdd, guest_identifier })
       .then((response) => {
-        console.log(response.data);
         commit;
       })
       .catch((error) => {
@@ -39,13 +51,20 @@ const actions = {
       });
   },
 
-  async getCartSummary({ commit }) {
-    await axios
-      .get("cart/summary")
-      .then((response) => {
-        console.log(response.data);
+  async getCartSummary({ commit, dispatch }, isLogin) {
+    const url = isLogin
+      ? "cart/summary"
+      : "guest/cart/summary?guest_identifier=" + getGuestIdentifier();
 
+    await axios
+      .get(url)
+      .then((response) => {
+        let totalWeight = response.data.data.cartItems.reduce((total, item) => {
+          return total + parseFloat(item.product_kg || 0);
+        }, 0);
+         localStorage.setItem('totalWeight', totalWeight);
         commit("setCartSummary", response.data.data);
+        dispatch("checkout/shippingFee", null, { root: true });
       })
       .catch((error) => {
         console.log(error);
@@ -80,12 +99,11 @@ const actions = {
   },
 
   async choseShipping({ commit }, payload) {
-    console.log("payload", payload);
     let url = payload.isLogin
       ? "update/shipping-address/status"
       : "guest/shipping-address/update/status";
     await axios
-      .post(`${url}?shipping_address_id=${payload.id}`, {
+      .post(`${url}?shipping_address_id=${payload.id.id}`, {
         guest_identifier: getGuestIdentifier(),
       })
       .then((response) => {
@@ -96,14 +114,39 @@ const actions = {
       });
   },
 
+  async shippingFee({ commit }) {
+    let totalWeight = localStorage.getItem('totalWeight');
+    let url ="/dhl/shippingFee/" + totalWeight
+    await axios
+      .get(url)
+      .then((response) => {
+        if(response.data.data.products)
+        {
+          const product = response.data.data.products.find(p => p.productCode === "P");
+          commit("setShippingFee", product.totalPrice[0].price);
+          commit("setShippingMethod", product.productName);
+        }
+        else{
+          commit("setShippingFee", 0.0);
+          commit("setShippingMethod", "");
+          return Promise.reject(response.data.error);
+        }
+      })
+      .catch((error) => {
+        commit("setShippingFee", 0.0);
+        commit("setShippingMethod", "");
+        return Promise.reject(error);
+      });
+  },
+
+
   async updateCart({ commit }, payload) {
+    const url = payload.islogin ? 'cart/update-quantity/' : 'guest/cart/update-quantity/';
     return await axios
-      .post("cart/update-quantity/" + payload.index, {
+      .post(url+ payload.index, {
         quantity: payload.quantity,
       })
-      .then((response) => {
-        console.log(response);
-      });
+      .then((response) => {});
   },
 
   async getAllShippingAdd({ commit }, { islogin, prefix = "" }) {
@@ -114,7 +157,6 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
         commit("setAllShipping", response.data.data);
       })
       .catch((error) => {
@@ -126,16 +168,19 @@ const actions = {
       .delete(`shipping/shippingAddress/${id}/delete`)
       .then(() => {
         commit("deleteShippingAdd", id);
+        return;
       })
       .catch((error) => {
-        console.log(error);
+        return Promise.reject(error);
       });
   },
 
-  createOrder({ commit }, { isLogin }) {
-    let url = isLogin ? "cart/create" : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
+  createOrder({ commit }, { isLogin, isLocal, shipping_fee, shipping_method }) {
+    let url = isLogin
+      ? "cart/create"
+      : `guest/cart/create?guest_identifier=${getGuestIdentifier()}`;
     return axios
-      .post(url)
+      .post(url,{isLocal: isLocal, shipping_fee: shipping_fee,shipping_method: shipping_method })
       .then((data) => {
         let orderId = data.data.data;
         console.log(data.data);
@@ -169,7 +214,7 @@ const actions = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response);
+        console.log("get cart----------------------", response);
         commit("setCart", response.data);
       })
       .catch((error) => {
@@ -228,6 +273,9 @@ const actions = {
         console.log(error);
       });
   },
+  updateStepper({ commit }, step) {
+    commit("updateStep", step);
+  },
 };
 const mutations = {
   setAllShipping: (state, newShippingTab) =>
@@ -254,6 +302,14 @@ const mutations = {
   setshippingsummary(state, data) {
     state.shippingsummary = data;
   },
+  
+  setShippingFee(state, data) {
+    state.shippingFee = data;
+  },
+
+  setShippingMethod(state, data) {
+    state.shippingMethod = data;
+  },
 
   setBuisiness: (state, newBuis) => {
     state.buisinessOrdered = newBuis;
@@ -263,11 +319,10 @@ const mutations = {
     shippingUp.data.forEach(function(value, key) {
       shippingData[key] = value;
     });
-
-    console.log("mutation update", shippingData);
   },
   shippingAddressChanged: (state) =>
     (state.shippingAddressChanged = !state.shippingAddressChanged),
+  updateStep: (state, nextStep) => (state.currentStep = nextStep),
 };
 export default {
   namespaced: true,

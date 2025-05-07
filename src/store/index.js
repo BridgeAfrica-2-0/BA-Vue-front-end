@@ -53,6 +53,8 @@ import { social } from "./social";
 import networkSetting from "./networkSetting";
 import productDetails from "./productDetails";
 import businessGuest from "./businessGuest";
+import localisation from "./localisation";
+import marketDetails from "./marketDetails";
 
 Vue.use(Vuex);
 
@@ -62,6 +64,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     businessOrderDetails,
+    localisation,
     networkDetails,
     dashboardcommunity,
     ProfileAndBusinessDetails,
@@ -108,6 +111,7 @@ export default new Vuex.Store({
     profileOrders,
     productComments,
     productDetails,
-    businessGuest
+    businessGuest,
+    marketDetails
   }
 });

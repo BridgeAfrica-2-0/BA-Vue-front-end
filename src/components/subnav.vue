@@ -1,14 +1,69 @@
 <template>
-  <div class="container-flex mobi d-none d-lg-none d-xl-block search">
+  <div class="container-flex container-fluid mobi d-none d-lg-none d-xl-block search px-4">
     <b-row>
-      <b-col cols="1" lg="2"> </b-col>
-      <b-col cols="8" lg="10" style="text-align: left">
-        <span style="display: inline-flex">
-          <span
-            v-for="(category, index) in categories.slice(0, 6)"
+      <b-col cols="8" lg="12">
+        <div class="d-flex align-items-center justify-content-around" style="display: flex; gap: 1px; flex-wrap: wrap;">
+        <span>
+          <b-nav-item-dropdown id="dropdown-1" :text="$t('general.all')" ref="more">
+            <hr
+              style="
+                margin-top: -10px;
+                background-color: red;
+                height: 3px;
+                width: 40%;
+                float: left;
+              "
+            />
+            <br />
+
+            <div>
+              <b-row>
+                <b-col
+                  cols="6"
+                  v-for="(category, index) in categories.slice(6)"
+                  :key="index"
+                  class="padding:50px"
+                >
+                  <b-dropdown-item
+                    class="ml-1"
+                    @click="
+                      () => {
+                        $emit('onChangeCategoryName', category.category.name);
+                        bcategory({ cat_id: category.category.id });
+                        $emit('activate:matching:category', null);
+                        $emit('activateSuggestion', category.category.name);
+                        $emit('update:keyword', {
+                          keyword: category.category.name,
+                          cat_id: category.category.id
+                        });
+                      }
+                    "
+                  >
+                    {{ category.category.name }}
+                  </b-dropdown-item>
+                </b-col>
+              </b-row>
+            </div>
+          </b-nav-item-dropdown>
+        </span>
+          <div class="cursor-pointer custom"
+            v-for="(category, index) in categories.slice(0, 10)"
             :key="index"
           >
-            <b-nav-item-dropdown :id="'dropdown-' + index">
+          
+          <div class="search-items"
+                  @click="
+                    () => {
+                      showSubCat(category.category, category.sub_cat);
+                      bcategory({ cat_id: category.category.id });
+                      $emit('activate:matching:category', null);
+                      $emit('activateSuggestion', category.category.name);
+                    }
+                  "
+                >
+                  {{ category.category.name }}
+                  </div>
+            <!-- <b-nav-item-dropdown :id="'dropdown-' + index">
               <template slot="button-content">
                 <span
                   @click="
@@ -57,55 +112,10 @@
                   </b-dropdown-item>
                 </div>
               </div>
-            </b-nav-item-dropdown>
-          </span>
-        </span>
-        <span @mouseover="onOverMore()" @mouseleave="onLeaveMore()">
-          <b-nav-item-dropdown id="dropdown-1" text="More" ref="more">
-            <hr
-              style="
-                margin-top: -10px;
-                background-color: red;
-                height: 3px;
-                width: 40%;
-                float: left;
-              "
-            />
-            <br />
-
-            <div>
-              <b-row>
-                <b-col
-                  cols="6"
-                  v-for="(category, index) in categories.slice(6)"
-                  :key="index"
-                  class="padding:50px"
-                >
-                  <b-dropdown-item
-                    class="ml-1"
-                    @click="
-                      () => {
-                        $emit('onChangeCategoryName', category.category.name);
-                        bcategory({ cat_id: category.category.id });
-                        $emit('activate:matching:category', null);
-                        $emit('activateSuggestion', category.category.name);
-                        $emit('update:keyword', {
-                          keyword: category.category.name,
-                          cat_id: category.category.id
-                        });
-                      }
-                    "
-                  >
-                    {{ category.category.name }}
-                  </b-dropdown-item>
-                </b-col>
-              </b-row>
-            </div>
-          </b-nav-item-dropdown>
-        </span>
+            </b-nav-item-dropdown> -->
+          </div>
+        </div>
       </b-col>
-
-      <b-col cols="1" lg="2"> </b-col>
     </b-row>
   </div>
 </template>
@@ -176,17 +186,17 @@ export default {
         });
     },
 
-    showSubCat(category, subCat, show = true) {
+    showSubCat(category, subCat) {
       this.$store.commit("marketSearch/setSubFilters", []);
-      this.$refs[category.id][0].visible = true;
+      // this.$refs[category.id][0].visible = true;
 
-      if (show) this.$emit("parentcategory", category.id);
+      // if (show) this.$emit("parentcategory", category.id);
 
       this.$emit("onChangeCategoryName", category.name);
       // this.subCategories.push(subCat);
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
-      if (!subCat.length) this.hideSubCat(category.id);
+      // if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
       console.log(category);
       this.$emit("update:keyword", {
@@ -211,7 +221,19 @@ export default {
 };
 </script>
 
+
 <style scoped>
+.search-item:hover {
+  color: #e75c18 !important;
+}
+.search-item {
+  flex-flow: 1;
+}
+@media screen and (max-width: 1500px) {
+  .search-item {
+    /* font-size: 15px; */
+}
+}
 .logo-img {
   width: 25px;
 }
@@ -229,6 +251,10 @@ export default {
 }
 .drop-text {
   color: black;
+}
+
+.custom {
+  font-size: 14px
 }
 </style>
 

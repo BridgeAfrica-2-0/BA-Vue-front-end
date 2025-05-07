@@ -1,476 +1,285 @@
 <template>
   <header class="">
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
-      <div class="container-fluid">
-        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
-          <span class="d-block d-lg-none">
-            <b-icon
-              icon="house-fill"
-              style="float: left"
-              font-scale="1.5; margin-top:5px"
-              variant="primary"
-            ></b-icon>
-          </span>
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded bg-white">
+      <div class="container-fluid position-relative">
+        <div class="col-md-12 col-lg-3 col-xl-3">
 
-          <router-link
-            class="d-inline-block align-top mt-1"
-            :to="{ name: 'Bridge-home' }"
-          >
+          <router-link class="d-inline-block align-top mt-1" :to="{ name: 'Bridge-home' }">
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
         </div>
+          <div class="d-block d-lg-none">
+            <div style="cursor: pointer; position: absolute; left: 82%; top: 0;" @click="navigateToCart">
+              <span class="cart-icon position-relative" style="color:#455a64">
+                <b-icon icon="cart4" class="icon-size"></b-icon>
+                <span v-if="cartCount > 0" class="badge badge-pill badge-danger"
+                  style="top: 0; right: 0;">
+                  {{ cartCount }}
+                </span>
+              </span>
+            </div>
+          </div>
 
-        <div class="col-lg-9 col-xl-6">
-          <form class="d-block d-lg-none">
-            <b-input-group class="b-shadow mt-3">
+        <div class="col-lg-5 col-xl-5">
+          <form class="d-block d-lg-none" @submit.prevent="getKeyword">
+            <b-input-group class="mt-3">
               <div class="input-group-append color-mobile" style="border: none">
-                <span
-                  class="input-group-text border-left-0 color-mobile"
-                  style="width: 40px; border-right: none"
-                >
+                <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
                   <slot name="mobile">
                     <Button @click.native="getKeyword" media="mobile" />
                   </slot>
                 </span>
               </div>
 
-              <input
-                id="search-ba"
-                type="search"
-                data-toggle="popover"
-                class="form-control search-mobile"
-                style="border-left: none"
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
-                aria-label=""
-                data-original-title=""
-                title=""
-                v-on:click="toggleinput()"
-                v-on:keyup.enter="getKeyword"
-              />
+              <input id="search-ba" type="search" data-toggle="popover" class="form-control search-mobile"
+                style="border-left: none" :placeholder="credentials.placeholder" v-model="credentials.keyword"
+                aria-label="" data-original-title="" title="" v-on:click="toggleinput()"
+                v-on:keyup.enter="getKeyword" />
             </b-input-group>
-
-            <span style="display: none; " ref="mobileinput">
-              <b-input-group class="b-shadow mt-2">
-                <div
-                  class="input-group-append color-mobile"
-                  style="border: none"
-                >
-                  <multiselect
-                    :value="city"
-                    :options="citiesValues"
-                    placeholder="Select City"
-                    class="search-hh w-100"
-                    style="border-left: none"
-                    label="label"
-                    track-by="code"
-                    @input="setSelectedLocation"
-                  ></multiselect>
-                </div>
-              </b-input-group>
-            </span>
           </form>
           <span class="d-none d-lg-block">
-            <form class="form-inline input-group b-shadow b-radius">
-              <input
-                id="search-ba"
-                type="search"
-                data-toggle="popover"
-                class="form-control search-h"
-                style="font-size: 17px !important"
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
-                aria-label=""
-                data-original-title=""
-                title=""
-                v-on:keyup.enter="getKeyword"
-              />
+            <form class="form-inline input-group b-radius" @submit.prevent="getKeyword">
+              <input id="search-ba" type="search" data-toggle="popover" class="form-control search-h"
+                style="font-size: 17px !important" :placeholder="credentials.placeholder" v-model="credentials.keyword"
+                aria-label="" data-original-title="" title="" v-on:keyup.enter="getKeyword" />
 
-              <multiselect
-                :value="city"
-                :options="citiesValues"
-                placeholder="Select City"
-                class="search-hh w-44 city-search"
-                style="border-left: none"
-                label="label"
-                track-by="code"
-                @input="setSelectedLocation"
-              ></multiselect>
-
-              <slot name="button">
-                <Button @click.native="getKeyword" media="desktop" />
-              </slot>
+              <button @click.prevent="getKeyword" class="search-button">{{ $t('search.search') }}</button>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
         </div>
 
-        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer">
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <div class="col-md-12 col-lg-4 col-xl-4" ref="toglercontainer">
+          <div class="d-flex justify-content-between align-content-center" style="flex-wrap: wrap;">
+            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarMenu"
-            aria-controls="navbarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            v-b-modal="'myModallnav'"
-            @click="togglenav()"
-            :class="{ togglebtn: isActive }"
-          >
-            <fas-icon class="primary search" :icon="['fas', 'bars']" />
-          </button>
-          <div
-            style="float: left; cursor: pointer;"
-            class="mt-2"
-            @click="navigateToCart"
-          >
-            <span class="cart-icon position-relative" style="color:#455a64">
-              <b-icon icon="cart4" class="icon-size"></b-icon>
-              <span
-                v-if="cartCount > 0"
-                class="badge badge-pill badge-danger position-absolute"
-                style="top: 0; right: 0;"
-              >
-                {{ cartCount }}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
+              aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" v-b-modal="'myModallnav'"
+              @click="togglenav()" :class="{ togglebtn: isActive }">
+              <fas-icon class="primary search" :icon="['fas', 'bars']" />
+            </button>
+            <div style="float: left; cursor: pointer;" class="mt-2 d-none d-lg-block" @click="navigateToCart">
+              <span class="cart-icon position-relative" style="color:#455a64">
+                <b-icon icon="cart4" class="icon-size"></b-icon>
+                <span v-if="cartCount > 0" class="badge badge-pill badge-danger position-absolute"
+                  style="top: 0; right: 0;">
+                  {{ cartCount }}
+                </span>
               </span>
-            </span>
-          </div>
+            </div>
+            <div style="float: right" ref="isnaav">
+              <b-collapse id="nav-collapse" is-nav>
+                <div v-if="islogin" class="nav-item">
+                  <router-link :to="navLink('home')" class="nav-link text-dark hov">
+                    Dashboard
+                  </router-link>
+                </div>
 
-          <div style="float: right" ref="isnaav">
-            <b-collapse id="nav-collapse" is-nav>
-              <div v-if="islogin" class="nav-item">
-                <router-link
-                  :to="navLink('home')"
-                  class="nav-link text-dark hov"
-                >
-                  Dashboard
-                </router-link>
-              </div>
+                <div v-if="islogin" class="nav-item">
+                  <router-link :to="{ name: 'GlobalSearch', query: { tab: 0 } }" class="nav-link text-dark hov">
+                    {{ $t("general.Market") }}
+                  </router-link>
+                </div>
 
-              <div v-if="islogin" class="nav-item">
-                <router-link
-                  :to="{ name: 'GlobalSearch', query: { tab: 0 } }"
-                  class="nav-link text-dark hov"
-                >
-                  {{ $t("general.Market") }}
-                </router-link>
-              </div>
+                <div v-if="!islogin" class="nav-item">
+                  <router-link :to="{ name: 'signup' }" class="nav-link text-dark hov">
+                    {{ $t("auth.signup") }}
+                  </router-link>
+                </div>
 
-              <div v-if="!islogin" class="nav-item">
-                <router-link
-                  :to="{ name: 'signup' }"
-                  class="nav-link text-dark hov"
-                >
-                  {{ $t("auth.signup") }}
-                </router-link>
-              </div>
+                <div v-if="!islogin" class="nav-item mr-5">
+                  <router-link :to="{ name: 'Login' }" class="nav-link text-dark hov">
+                    {{ $t("auth.login") }}
+                  </router-link>
+                </div>
+                
 
-              <div v-if="!islogin" class="nav-item mr-5">
-                <router-link
-                  :to="{ name: 'Login' }"
-                  class="nav-link text-dark hov"
-                >
-                  {{ $t("auth.login") }}
-                </router-link>
-              </div>
-
-              <!-- Messages Started -->
-              <div v-if="islogin" class="nav-item">
-                <a
-                  id="messages"
-                  class="nav-link"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']"
-                    /> </span
-                ></a>
-                <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">Messages</p>
-                    <div v-if="messages.length">
-                      <div v-for="message in messages" :key="message.id">
-                        <hr class="h-divider" />
-                        <div
-                          class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
-                        >
+                <!-- Messages Started -->
+                <div v-if="islogin" class="nav-item">
+                  <a id="messages" class="nav-link" role="button" data-original-title="" title=""><span
+                      class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /> </span></a>
+                  <b-popover target="messages" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <p class="font-weight-bold">Messages</p>
+                      <div v-if="messages.length">
+                        <div v-for="message in messages" :key="message.id">
+                          <hr class="h-divider" />
                           <div
-                            class="d-inline-flex flex-row align-items-center"
-                          >
-                            <div>
-                              <img
-                                :src="
-                                  profileSenderImange(
-                                    message.sender
-                                      ? message.sender
-                                      : message.sender_network
+                            class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer">
+                            <div class="d-inline-flex flex-row align-items-center">
+                              <div>
+                                <img :src="profileSenderImange(
+                                  message.sender
+                                    ? message.sender
+                                    : message.sender_network
                                       ? message.sender_network
                                       : message.sender_business
-                                  )
-                                "
-                                class="rounded"
-                                alt=""
-                                width="40"
-                                height="65"
-                              />
-                            </div>
-                            <div class="d-flex flex-column ml-1 line-size">
-                              <div class="font-weight-bold">
-                                {{
-                                  message.sender_business
-                                    ? message.sender_business.name
-                                    : message.sender_network
-                                    ? message.sender_network.name
-                                    : message.sender
-                                    ? message.sender.name
-                                    : ""
-                                }}
+                                )
+                                  " class="rounded" alt="" width="40" height="65" />
                               </div>
-                              <div class="small text-muted">
-                                {{
-                                  checkIfExists(message, "message") &&
-                                  message.message != null
-                                    ? message.message.substring(0, 20)
-                                    : ""
-                                }}
+                              <div class="d-flex flex-column ml-1 line-size">
+                                <div class="font-weight-bold">
+                                  {{
+                                    message.sender_business
+                                      ? message.sender_business.name
+                                      : message.sender_network
+                                        ? message.sender_network.name
+                                        : message.sender
+                                          ? message.sender.name
+                                          : ""
+                                  }}
+                                </div>
+                                <div class="small text-muted">
+                                  {{
+                                    checkIfExists(message, "message") &&
+                                      message.message != null
+                                      ? message.message.substring(0, 20)
+                                      : ""
+                                  }}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="small text-muted">
-                            {{ message.created_at | moment("from", "now") }}
+                            <div class="small text-muted">
+                              {{ message.created_at | moment("from", "now") }}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <hr class="h-divider" />
-                    <router-link :to="newRedirection('message')" v-if="islogin">
-                      <u>{{ $t("general.See_Inbox") }}</u>
-                    </router-link>
-                  </div>
-                </b-popover>
-              </div>
-              <!-- Messages Ended -->
-              <!-- Notifications Started -->
-              <div v-if="islogin" class="nav-item">
-                <a
-                  id="notif"
-                  class="nav-link"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><b-icon-bell-fill class="col-bg"> </b-icon-bell-fill></span
-                ></a>
-                <b-popover target="notif" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">
-                      {{ $t("general.Notifications") }}
-                    </p>
-                    <div
-                      v-for="notification in notifications"
-                      :key="notification.id"
-                    >
                       <hr class="h-divider" />
-
-                      <router-link
-                        v-if="islogin"
-                        :to="newRedirection('notification')"
-                      >
-                        <div
-                          class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
-                        >
-                          <div>
-                            <b-avatar
-                              :src="notification.profile_picture"
-                              size="2rem"
-                            >
-                            </b-avatar>
-                          </div>
-                          <div class="d-flex flex-column ml-3">
-                            <div class="wrap-text">
-                              {{ notification.notification_text }}
-                            </div>
-                            <div class="small text-muted">
-                              <span class="text-capitalize">
-                                {{
-                                  notification.created_at
-                                    | moment("from", "now")
-                                }}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                      <router-link :to="newRedirection('message')" v-if="islogin">
+                        <u>{{ $t("general.See_Inbox") }}</u>
                       </router-link>
                     </div>
-                    <hr class="h-divider" />
+                  </b-popover>
+                </div>
+                <!-- Messages Ended -->
+                <!-- Notifications Started -->
+                <div v-if="islogin" class="nav-item">
+                  <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title=""
+                    title=""><span class="text-ored"><b-icon-bell-fill class="col-bg"> </b-icon-bell-fill></span></a>
+                  <b-popover target="notif" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <p class="font-weight-bold">
+                        {{ $t("general.Notifications") }}
+                      </p>
+                      <div v-for="notification in notifications" :key="notification.id">
+                        <hr class="h-divider" />
 
-                    <router-link
-                      v-if="islogin"
-                      :to="newRedirection('notification')"
-                      ><u>{{
+                        <router-link v-if="islogin" :to="newRedirection('notification')">
+                          <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+                            <div>
+                              <b-avatar :src="notification.profile_picture" size="2rem">
+                              </b-avatar>
+                            </div>
+                            <div class="d-flex flex-column ml-3">
+                              <div class="wrap-text">
+                                {{ notification.notification_text }}
+                              </div>
+                              <div class="small text-muted">
+                                <span class="text-capitalize">
+                                  {{
+                                    notification.created_at
+                                    | moment("from", "now")
+                                  }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </router-link>
+                      </div>
+                      <hr class="h-divider" />
+
+                      <router-link v-if="islogin" :to="newRedirection('notification')"><u>{{
                         $t("general.See_all_Notifications")
-                      }}</u></router-link
-                    >
-                  </div>
-                </b-popover>
-              </div>
-              <!-- Notifications Ended -->
-
-              <div
-                v-if="islogin"
-                class="nav-item cursor"
-                id="profilepic"
-                triggers="hover"
-                data-toggle="popover"
-              >
-                <router-link :to="userOwnPage">
-                  <b-avatar
-                    variant="light"
-                    :src="user.profile_picture"
-                    :square="'user' == user.user_type ? false : true"
-                    class="logo-sizee"
-                  ></b-avatar>
-                </router-link>
-              </div>
-
-              <b-tooltip
-                v-if="islogin"
-                target="profilepic"
-                variant="light"
-                triggers="hover"
-              >
-                {{ user.name }}
-              </b-tooltip>
-
-              <div v-if="islogin" class="nav-item">
-                <a
-                  id="other-menu"
-                  class="nav-link text-dark arrow-down"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                >
-                </a>
-                <b-popover target="other-menu" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <a
-                      v-if="'user' != user.user_type"
-                      @click.prevent="switchToProfile"
-                      href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-                    >
-                      <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'user']"
-                      /></span>
-                      Profile
-                    </a>
-                    <hr class="h-divider" />
-
-                    <div
-                      style="width: 100%"
-                      class="d-inline-flex flex-row align-items-center mb-1"
-                    >
-                      <Activity class="w-full" />
+                          }}</u></router-link>
                     </div>
+                  </b-popover>
+                </div>
+                <!-- Notifications Ended -->
 
-                    <router-link
-                      :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-                    >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cart-arrow-down']"
-                      /></span>
-                      {{ $t("general.My_orders") }}
-                    </router-link>
-                    <hr class="h-divider" />
+                <div v-if="islogin" class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+                  <router-link :to="userOwnPage">
+                    <b-avatar variant="light" :src="user.profile_picture"
+                      :square="'user' == user.user_type ? false : true" class="logo-sizee"></b-avatar>
+                  </router-link>
+                </div>
 
-                    <router-link
-                      :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
-                    >
-                      <span class="mr-2 w-full" style="display: inline-block;"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cogs']"
-                        />
-                        {{ $t("general.Account_Settings") }}
-                      </span>
-                    </router-link>
-                    <hr class="h-divider" />
-                    <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'question']"
-                      /></span>
-                      {{ $t("general.Help_and_Support") }}
+                <b-tooltip v-if="islogin" target="profilepic" variant="light" triggers="hover">
+                  {{ user.name }}
+                </b-tooltip>
+
+                <div v-if="islogin" class="nav-item">
+                  <a id="other-menu" class="nav-link text-dark arrow-down" data-toggle="popover" role="button"
+                    data-original-title="" title="">
+                  </a>
+                  <b-popover target="other-menu" triggers="hover" placement="top">
+                    <div class="popover-body">
+                      <a v-if="'user' != user.user_type" @click.prevent="switchToProfile" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'user']" /></span>
+                        Profile
+                      </a>
+                      <hr class="h-divider" />
+
+                      <div style="width: 100%" class="d-inline-flex flex-row align-items-center mb-1">
+                        <Activity class="w-full" />
+                      </div>
+
+                      <router-link :to="{ name: 'orders' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                        {{ $t("general.My_orders") }}
+                      </router-link>
+                      <hr class="h-divider" />
+
+                      <router-link :to="{ name: 'settings' }"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full">
+                        <span class="mr-2 w-full" style="display: inline-block;"><fas-icon class="violet search"
+                            :icon="['fas', 'cogs']" />
+                          {{ $t("general.Account_Settings") }}
+                        </span>
+                      </router-link>
+                      <hr class="h-divider" />
+                      <router-link  :to="{ name: 'helpAndSupport' }" class="other-menu suggest-item cursor-pointer">
+                        <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+                        {{ $t("general.Help_and_Support") }}
+                      </router-link >
+                      <hr class="h-divider" />
+
+                      <div class="other-menu suggest-item cursor-pointer">
+                        <b-link v-b-toggle="'collapse-2'"><fas-icon class="violet search mr-1"
+                            :icon="['fas', 'globe-americas']" />
+                          {{ $t("general.Language") }}</b-link>
+
+                        <b-collapse id="collapse-2" class="mt-1">
+                          <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{ $t("auth.english")
+                            }}</b-card-text>
+                          <b-card-text @click="$i18n.locale = 'fr'">{{
+                            $t("auth.french")
+                            }}</b-card-text>
+                        </b-collapse>
+                      </div>
+                      <hr class="h-divider" />
+                      <a @click="logout" href="#"
+                        class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                        <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+                        {{ $t("general.Logout") }}
+                      </a>
                     </div>
-                    <hr class="h-divider" />
-
-                    <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'"
-                        ><fas-icon
-                          class="violet search mr-1"
-                          :icon="['fas', 'globe-americas']"
-                        />
-                        {{ $t("general.Language") }}</b-link
-                      >
-
-                      <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text
-                          @click="$i18n.locale = 'en'"
-                          class="cursor-pointer mb-1"
-                          >{{ $t("auth.english") }}</b-card-text
-                        >
-                        <b-card-text @click="$i18n.locale = 'fr'">{{
-                          $t("auth.french")
-                        }}</b-card-text>
-                      </b-collapse>
-                    </div>
-                    <hr class="h-divider" />
-                    <a
-                      @click="logout"
-                      href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-                    >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'sign-out-alt']"
-                      /></span>
-                      {{ $t("general.Logout") }}
-                    </a>
-                  </div>
-                </b-popover>
-              </div>
-            </b-collapse>
+                  </b-popover>
+                </div>
+              </b-collapse>
+            </div>
           </div>
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div
-                class="d-inline-flex flex-row align-items-center"
-                @click="gotoProfile"
-              >
+              <div class="d-inline-flex flex-row align-items-center" @click="gotoProfile">
                 <div>
-                  <b-avatar
-                    variant="light"
-                    :src="user.profile_picture"
-                    :square="'user' == user.user_type ? false : true"
-                    class="logo-sizee"
-                  ></b-avatar>
+                  <b-avatar variant="light" :src="user.profile_picture"
+                    :square="'user' == user.user_type ? false : true" class="logo-sizee"></b-avatar>
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -485,133 +294,83 @@
             </div>
 
             <div class="other-menu suggest-item cursor-pointer">
-              <router-link
-                :to="navLink('home')"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-              >
-                <span class="mr-3"
-                  ><fas-icon class="violet search" :icon="['fas', 'home']"
-                /></span>
+              <router-link :to="navLink('home')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'home']" /></span>
                 Dashboard
               </router-link>
             </div>
             <hr class="h-divider" />
 
             <div class="other-menu suggest-item cursor-pointer">
-              <router-link
-                :to="{ name: 'GlobalSearch', query: { tab: 0 } }"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-              >
-                <span class="mr-3"
-                  ><fas-icon
-                    class="violet search"
-                    :icon="['fas', 'shopping-bag']"
-                /></span>
+              <router-link :to="{ name: 'GlobalSearch', query: { tab: 0 } }"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'shopping-bag']" /></span>
                 {{ $t("general.Market") }}
               </router-link>
             </div>
             <hr class="h-divider" />
 
             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
-              <router-link
-                :to="newRedirection('message')"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-              >
-                <span class="mr-3"
-                  ><fas-icon class="violet search" :icon="['fas', 'comment']"
-                /></span>
+              <router-link :to="newRedirection('message')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'comment']" /></span>
                 Messages
               </router-link>
             </div>
             <hr class="h-divider" v-if="islogin" />
 
             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
-              <router-link
-                :to="newRedirection('notification')"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-              >
-                <span class="mr-3"
-                  ><fas-icon class="violet search" :icon="['fas', 'bell']"
-                /></span>
+              <router-link :to="newRedirection('notification')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'bell']" /></span>
                 {{ $t("general.Notifications") }}
               </router-link>
             </div>
             <hr class="h-divider" v-if="islogin" />
 
-            <div
-              v-if="'user' != user.user_type"
-              @click.prevent="switchToProfile"
-              href="#"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark mx-1"
-            >
+            <div v-if="'user' != user.user_type" @click.prevent="switchToProfile" href="#"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark mx-1">
               <span class="mr-3">
-                <fas-icon
-                  class="violet search"
-                  :icon="['fas', 'user']"
-                /> </span
-              >Profile
+                <fas-icon class="violet search" :icon="['fas', 'user']" /> </span>Profile
               <hr class="h-divider" v-if="'user' === user.user_type" />
             </div>
-            <router-link
-              :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-            >
-              <span class="mr-3"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'cart-arrow-down']"
-              /></span>
+            <router-link :to="{ name: 'orders' }"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+              <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               {{ $t("general.My_orders") }}
             </router-link>
             <hr class="h-divider" />
 
-            <router-link
-              :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-            >
-              <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'cogs']"
-              /></span>
+            <router-link :to="{ name: 'settings' }"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+              <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               {{ $t("general.Account_Settings") }}
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'question']"
-              /></span>
+              <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
               {{ $t("general.Help_and_Support") }}
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'"
-                ><fas-icon
-                  class="violet search mr-1"
-                  :icon="['fas', 'globe-americas']"
-                />
-                {{ $t("general.Language") }}</b-link
-              >
+              <b-link v-b-toggle="'collapse-2'"><fas-icon class="violet search mr-1"
+                  :icon="['fas', 'globe-americas']" />
+                {{ $t("general.Language") }}</b-link>
 
               <b-collapse id="collapse-2" class="mt-1">
-                <b-card-text
-                  @click="$i18n.locale = 'en'"
-                  class="cursor-pointer mb-1"
-                  >{{ $t("auth.english") }}</b-card-text
-                >
+                <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{ $t("auth.english")
+                  }}</b-card-text>
                 <b-card-text @click="$i18n.locale = 'fr'">{{
                   $t("auth.french")
-                }}</b-card-text>
+                  }}</b-card-text>
               </b-collapse>
             </div>
             <hr class="h-divider" />
-            <a
-              href="#"
-              @click.prevent="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-            >
-              <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
-              /></span>
+            <a href="#" @click.prevent="logout"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+              <span class="mr-3"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               {{ $t("general.Logout") }}
             </a>
           </div>
@@ -640,9 +399,10 @@ export default {
     // NavBarNotifications
   },
   props: {
+    
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -655,7 +415,6 @@ export default {
   data() {
     return {
       isActive: false,
-      cartCount: 0,
       shownav: false,
       notifications: [],
       messages: [],
@@ -665,6 +424,8 @@ export default {
       selectedUser: null,
       users: [],
       citiesValues: [],
+      img: null,
+      lang: '',
     };
   },
 
@@ -673,8 +434,8 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      // neigbourhoods: "auth/neigbourhoods",
       cities: "auth/cities",
+      cartCount: "cart/getNumberOfItem"
     }),
     city() {
       return this.credentials.location;
@@ -691,6 +452,14 @@ export default {
     this.fetchCartCount();
   },
   created() {
+    const currentLang = this.$i18n.locale;
+    if (currentLang == 'en') {
+      this.img = require("../assets/img/about/en.png");
+      this.lang = 'English'
+    } else {
+      this.img = require("../assets/img/la-france.png");
+      this.lang = 'Français'
+    }
     //check for authentication
     this.getCities();
 
@@ -701,24 +470,20 @@ export default {
       this.notificationPatterns = {
         user: () => "user/notification",
         business: () =>
-          `/notification/business/${
-            this.user.slug ? this.user.slug : this.user.user_slug
+          `/notification/business/${this.user.slug ? this.user.slug : this.user.user_slug
           }`,
         network: () =>
-          `/notification/network/${
-            this.user.slug ? this.user.slug : this.user.user_slug
+          `/notification/network/${this.user.slug ? this.user.slug : this.user.user_slug
           }`,
       };
 
       this.messagePatterns = {
         user: () => "/messages/latest/user",
         business: () =>
-          `/messages/latest/${
-            this.user.slug ? this.user.slug : this.user.user_slug
+          `/messages/latest/${this.user.slug ? this.user.slug : this.user.user_slug
           }/business`,
         network: () =>
-          `/messages/latest/${
-            this.user.slug ? this.user.slug : this.user.user_slug
+          `/messages/latest/${this.user.slug ? this.user.slug : this.user.user_slug
           }/network`,
       };
 
@@ -761,16 +526,16 @@ export default {
       this.updateNotificationEvent();
     }
 
-    console.log("updated city: ", this.credentials.location);
+
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function() {
+    "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function() {
+    "$i18n.locale": async function () {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale
       );
@@ -801,6 +566,17 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
+    change(lang) {
+      this.$i18n.locale = lang;
+
+      if (lang == 'en') {
+        this.img = require("../assets/img/about/en.png");
+        this.lang = 'English'
+      } else {
+        this.img = require("../assets/img/la-france.png");
+        this.lang = 'Français'
+      }
+    },
     setSelectedLocation(value) {
       this.city = value;
       this.credentials.location = { code: value.code, label: value.label };
@@ -811,10 +587,10 @@ export default {
       const picture = image.profile_picture
         ? image.profile_picture
         : image.logo_path
-        ? image.logo_path
-        : image.image
-        ? image.image
-        : null;
+          ? image.logo_path
+          : image.image
+            ? image.image
+            : null;
 
       return picture;
     },
@@ -886,7 +662,9 @@ export default {
           : `guest/cart/total?guest_identifier=${guest_identifier}`;
 
         const response = await axios.get(url);
-        this.cartCount = response.data.data.totalItems;
+
+        this.$store.commit('cart/addNewItem', { items: response.data.data.totalItems, add: false })
+
       } catch (error) {
         console.error("Error fetching cart count:", error);
       }
@@ -930,31 +708,37 @@ export default {
       }
     },
 
-    getKeyword() {
-      if (!this.credentials.keyword) return false;
+    getKeyword(event) {
+  if (event) event.preventDefault();
+  
+  if (!this.credentials.keyword) return false;
 
-      if (this.$route.name != "search") {
-        this.$emit("updateSearchKeyword", this.credentials.keyword);
-      }
+  if (this.$route.name != "search") {
+    this.$emit("updateSearchKeyword", this.credentials.keyword);
+  }
 
-      if (this.$route.name != "search") {
-        this.$store
-          .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log("Error erro!");
-          });
-
-        this.$router.push({
-          name: "GlobalSearch",
-          query: {
-            keyword: this.credentials.keyword,
-            location: this.credentials.location,
-          },
+  if (this.$route.name != "search") {
+    try {
+      this.$store
+        .dispatch("allSearch/SEARCH", {
+          keyword: this.credentials.keyword,
+        })
+        .catch((err) => {
+          console.error("Error in search dispatch:", err);
         });
-      }
-    },
+
+      this.$router.push({
+        name: "GlobalSearch",
+        query: {
+          keyword: this.credentials.keyword,
+          location: this.credentials.location,
+        },
+      });
+    } catch (error) {
+      console.error("Error in getKeyword function:", error);
+    }
+  }
+},
     navLink(type) {
       const link = {
         home: () => {
@@ -977,12 +761,12 @@ export default {
       this.$store
         .dispatch("userChat/GET_USERS", "")
         .then(() => {
-          console.log("->[Data logged]<-");
+         
         })
         .catch(() => console.log("error"));
     },
 
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -1008,7 +792,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function() {
+    switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -1039,12 +823,12 @@ export default {
       this.$refs.isnaav.style.display = "none";
     },
 
-    getNetworks: async function() {
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -1095,10 +879,28 @@ export default {
 };
 </script>
 <style>
+.size,
+.imgLangSize {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.search-button {
+  background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);
+  color: white;
+  font-weight: bold;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border: none;
+  min-width: 100px;
+
+}
+
 .cart-icon {
   color: #e75c18 !important;
   position: relative;
 }
+
 .badge {
   position: absolute;
   top: -10px !important;
@@ -1106,9 +908,11 @@ export default {
   font-size: 10px;
   padding: 0.25em 0.5em;
 }
+
 .icon-size {
   font-size: 1.7rem !important;
 }
+
 .m-where {
   width: 87.8%;
   padding: 0px;
@@ -1120,6 +924,7 @@ export default {
 .m-where input {
   border: none;
 }
+
 .vbst-item:hover {
   color: white !important;
 }
@@ -1135,6 +940,7 @@ export default {
   height: 40px !important;
   object-fit: cover;
 }
+
 .hov:hover {
   background-color: #eeeeef;
   border-color: #eeeeef;
@@ -1203,6 +1009,7 @@ export default {
   .lb-grid {
     height: 200px;
   }
+
   .corps {
     margin-top: 2rem !important;
   }
@@ -1211,34 +1018,42 @@ export default {
     display: none;
   }
 }
+
 @media (min-width: 576px) {
   .lb-grid {
     height: 300px;
   }
+
   .show {
     display: block;
   }
 }
+
 @media (min-width: 768px) {
   .lb-grid {
     height: 350px;
   }
+
   .show {
     display: block;
   }
 }
+
 @media (min-width: 992px) {
   .lb-grid {
     height: 400px;
   }
+
   .show {
     display: block;
   }
 }
+
 @media (min-width: 1200px) {
   .lb-grid {
     height: 500px;
   }
+
   .corps {
     margin-top: 6rem !important;
   }
@@ -1247,6 +1062,7 @@ export default {
     display: block;
   }
 }
+
 @media (min-width: 1400px) {
   .lb-grid {
     height: 500px;
@@ -1266,10 +1082,12 @@ export default {
   color: #2e2e2e;
   margin-top: 2px;
 }
+
 .vl {
   border-left: 1px solid #dee2e6;
   height: 20px;
 }
+
 .text-ored {
   color: #e75c18;
 }
@@ -1294,7 +1112,7 @@ export default {
 
 @media (max-width: 992px) {
   .navbar-toggler {
-    padding: 0.25rem 1.5rem;
+    /* padding: 0.25rem 1.5rem; */
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
@@ -1302,7 +1120,7 @@ export default {
     border-radius: 0.25rem;
     position: absolute !important;
 
-    margin-top: -100px !important;
+    margin-top: -26% !important;
 
     right: 13px !important;
   }
@@ -1311,12 +1129,15 @@ export default {
     margin-top: -145px !important;
   }
 }
+
 .shadow-nav {
   box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%) !important;
 }
+
 .mup {
   margin-top: -5px;
 }
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -1324,6 +1145,7 @@ export default {
   left: 0;
   z-index: 1030;
 }
+
 .msg-number {
   color: black;
   background: transparent;

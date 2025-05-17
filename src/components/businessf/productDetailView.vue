@@ -1,185 +1,199 @@
 <template>
-<base-layout top="25">
-<template v-slot:main>
-  <div>
-    <div class="container-fluid">
+  <base-layout top="25">
+    <template v-slot:main>
+      <div>
+        <div class="container-fluid">
 
-      <div class="mt-4">
-        <div class="product-page row">
-          <!-- Galerie d'images -->
-          <div class="col-md-5">
-            <ProductImages :images="[
-              {
-                src: marketDetails.picture,
-                alt: marketDetails.name,
-              },
-            ]" />
-          </div>
-
-          <!-- Informations produit -->
-          <div class="col-md-7">
-            <h3 class="text-black p-name">{{ marketDetails.name }}</h3>
-            <div class="stock-status">
-              <span class="text-success font-weight-bold" v-if="marketDetails.in_stock">{{ $t("general.in_stock")
-                }}</span>
-              <span class="text-danger" v-else>{{
-                $t("general.out_of_stock")
-                }}</span>
-            </div>
-            <div>
-              <label for="" class="text-black">{{ $t("general.availability") }}:</label>
-              <span class="ml-2">{{ $t("general.only") }} {{ marketDetails.quantity }}
-                <span class="" v-if="marketDetails.in_stock">{{
-                  $t("general.in_stock")
-                  }}</span>
-                <span class="text-danger" v-else>{{
-                  $t("general.out_of_stock")
-                  }}</span></span>
-            </div>
-
-            <div class="">
-              {{
-                marketDetails.description.length > 400
-                  ? marketDetails.description.slice(0, 400) + "..."
-                  : marketDetails.description
-              }}
-            </div>
-
-            <hr class="my-3" />
-
-            <!-- Currency Selection -->
-            <div v-if="countries.length" class="mb-3 cursor-pointer" data-toggle="modal" data-target="#settings">
-             <span class="font-weight-bold">Get in {{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} {{ $t("general.days") }}: </span>
-             <span style="font-size: 14px; color: #000; padding: 0 15px;">
-               <img :src="countrySelected?.flag" style="padding-right: 2px; width: 28px !important;" />
-               {{ countrySelected?.name }} 
-               <i class="fa fa-caret-down"></i>
-             </span>
-            </div>
-            <span v-else class="start-loader"></span>
-
-            <!-- Prix -->
-            <div class="pricing">
-              <div>
-                <span class="price">{{
-                  marketDetails.price | locationPrice(rate, currencySelected)
-                  }}</span>
+          <div class="mt-4">
+            <div class="product-page row">
+              <!-- Galerie d'images -->
+              <div class="col-md-5">
+                <ProductImages :images="[
+                  {
+                    src: marketDetails.picture,
+                    alt: marketDetails.name,
+                  },
+                ]" />
               </div>
-            </div>
-            <div class="d-flex align-items-center mt-4">
-              <!-- Sélection de la quantité -->
-              <div class="quantity-selector">
-                <!-- <div>
+
+              <!-- Informations produit -->
+              <div class="col-md-7">
+                <h3 class="text-black p-name">{{ marketDetails.name }}</h3>
+                <div>
+                  <label>{{ $t("general.visit_shop") }}</label>
+                  <span class="ml-1 text-primary font-weight-medium cursor-pointer"
+                    @click="handleBusinessClick(marketDetails.business_slug)">
+                    {{ marketDetails.business_name }}
+                  </span>
+                </div>
+                <div class="stock-status">
+                  <span class="text-success font-weight-bold" v-if="marketDetails.in_stock">{{ $t("general.in_stock")
+                    }}</span>
+                  <span class="text-danger" v-else>{{
+                    $t("general.out_of_stock")
+                    }}</span>
+                </div>
+                <div>
+                  <label for="" class="text-black">{{ $t("general.availability") }}:</label>
+                  <span class="ml-2">{{ $t("general.only") }} {{ marketDetails.quantity }}
+                    <span class="" v-if="marketDetails.in_stock">{{
+                      $t("general.in_stock")
+                      }}</span>
+                    <span class="text-danger" v-else>{{
+                      $t("general.out_of_stock")
+                      }}</span></span>
+                </div>
+
+                <div class="">
+                  {{
+                    marketDetails.description.length > 400
+                      ? marketDetails.description.slice(0, 400) + "..."
+                      : marketDetails.description
+                  }}
+                </div>
+
+                <hr class="my-3" />
+
+                <!-- Currency Selection -->
+                <div v-if="countries.length" class="mb-3 cursor-pointer" data-toggle="modal" data-target="#settings">
+                  <span class="font-weight-bold">Get in {{ shippingEstimate.deliveryDays.min }} - {{
+                    shippingEstimate.deliveryDays.max }} {{ $t("general.days") }}: </span>
+                  <span style="font-size: 14px; color: #000; padding: 0 15px;">
+                    <img :src="countrySelected?.flag" style="padding-right: 2px; width: 28px !important;" />
+                    {{ countrySelected?.name }}
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                </div>
+                <span v-else class="start-loader"></span>
+
+                <!-- Prix -->
+                <div class="pricing">
+                  <div>
+                    <span class="price">{{
+                      marketDetails.price | locationPrice(rate, currencySelected)
+                      }}</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mt-4">
+                  <!-- Sélection de la quantité -->
+                  <div class="quantity-selector">
+                    <!-- <div>
               <QuantitySelector v-model="quantity" :min="1" :max="10" />
             </div> -->
+                  </div>
+                  <button class="btn btn-primary" @click="navigateToCart">
+                    {{ $t("general.buy_now") }}
+                  </button>
+                  <button class="btn btn-outline-primary font-weight-bold ml-3" @click="handleAddToCard()">
+                    {{ $t("general.Add_to_Cart") }}
+                  </button>
+                </div>
               </div>
-              <button class="btn btn-primary" @click="navigateToCart">
-                {{ $t("general.buy_now") }}
-              </button>
-              <button class="btn btn-outline-primary font-weight-bold ml-3" @click="handleAddToCard()">
-                {{ $t("general.Add_to_Cart") }}
-              </button>
+            </div>
+            <div class="container" style="margin-top: 4em;">
+              <!-- Description Tab -->
+              <div class="accordion-item">
+                <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3"
+                  @click="toggleTab('description')">
+                  <div class="tab-title">Description</div>
+                  <button class="btn accordion-toggle p-0">
+                    <i class="fa" :class="isTabActive('description') ? 'fa-minus' : 'fa-plus'"></i>
+                  </button>
+                </div>
+                <div class="accordion-content py-3 px-3"
+                  :style="{ display: isTabActive('description') ? 'block' : 'none' }">
+                  <p>{{ marketDetails.description }}</p>
+                  <hr>
+                  <!-- Shipping Delivery Info -->
+                  <div class="delivery-delays mt-3">
+                    <h5 class="mb-3">Delivery Times by Region</h5>
+                    <ul>
+                      <li>France (DOM) from 15 to 21 days.</li>
+                      <li>France from 15 to 21 days.</li>
+                      <li>United States from 15 to 21 days.</li>
+                      <li>Africa from 20 to 26 days.</li>
+                      <li>Europe from 15 to 21 days.</li>
+                      <li>Australia (Oceania) from 15 to 21 days.</li>
+                      <li>International from 15 to 21 days.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reviews Tab -->
+              <div class="accordion-item mt-2">
+                <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3"
+                  @click="toggleTab('reviews')">
+                  <div class="tab-title">
+                    Reviews
+                    <span class="ml-2">
+                      <i class="fa fa-star checked"></i>
+                      <i class="fa fa-star checked"></i>
+                      <i class="fa fa-star checked"></i>
+                      <i class="fa fa-star checked"></i>
+                      <i class="fa fa-star checked"></i>
+                      (588)
+                    </span>
+                  </div>
+                  <button class="btn accordion-toggle p-0">
+                    <i class="fa" :class="isTabActive('reviews') ? 'fa-minus' : 'fa-plus'"></i>
+                  </button>
+                </div>
+                <div class="accordion-content py-3 px-3" :style="{ display: isTabActive('reviews') ? 'block' : 'none' }">
+                  <!-- Review content here -->
+                  <p>Product reviews will appear here.</p>
+                </div>
+              </div>
+
+              <!-- Shipping Tab with Automatic Fee Display -->
+              <div class="accordion-item mt-2">
+                <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3"
+                  @click="toggleTabAndCalculateShipping('shipping')">
+                  <div class="tab-title">Shipping</div>
+                  <button class="btn accordion-toggle p-0">
+                    <i class="fa" :class="isTabActive('shipping') ? 'fa-minus' : 'fa-plus'"></i>
+                  </button>
+                </div>
+                <div class="accordion-content py-3 px-3" :style="{ display: isTabActive('shipping') ? 'block' : 'none' }">
+                  <!-- Shipping Estimate Information -->
+                  <div class="shipping-info mb-4">
+                    <div class="shipping-fee-box border p-3 mb-3" style="max-width: 300px; border-radius: 4px;">
+                      <div class="text-muted">Estimated shipping fee</div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="font-weight-bold mb-1">
+                        Estimated shipping fee: <span class="text-primary">{{ shippingEstimate.fee | locationPrice(rate,
+                          currencySelected) }}</span>
+                      </div>
+                      <div class="text-muted">
+                        Estimated delivery time: {{ shippingEstimate.deliveryDays.min }} - {{
+                          shippingEstimate.deliveryDays.max }} days
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="container" style="margin-top: 4em;">
-  <!-- Description Tab -->
-  <div class="accordion-item">
-    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTab('description')">
-      <div class="tab-title">Description</div>
-      <button class="btn accordion-toggle p-0">
-        <i class="fa" :class="isTabActive('description') ? 'fa-minus' : 'fa-plus'"></i>
-      </button>
-    </div>
-    <div class="accordion-content py-3 px-3" :style="{display: isTabActive('description') ? 'block' : 'none'}">
-      <p>{{ marketDetails.description }}</p>
-      <hr>
-       <!-- Shipping Delivery Info -->
-    <div class="delivery-delays mt-3">
-      <h5 class="mb-3">Delivery Times by Region</h5>
-      <ul>
-        <li>France (DOM) from 15 to 21 days.</li>
-        <li>France from 15 to 21 days.</li>
-        <li>United States from 15 to 21 days.</li>
-        <li>Africa from 20 to 26 days.</li>
-        <li>Europe from 15 to 21 days.</li>
-        <li>Australia (Oceania) from 15 to 21 days.</li>
-        <li>International from 15 to 21 days.</li>
-      </ul>
-    </div>
-    </div>
-  </div>
-  
-  <!-- Reviews Tab -->
-  <div class="accordion-item mt-2">
-    <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTab('reviews')">
-      <div class="tab-title">
-        Reviews 
-        <span class="ml-2">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          (588)
-        </span>
-      </div>
-      <button class="btn accordion-toggle p-0">
-        <i class="fa" :class="isTabActive('reviews') ? 'fa-minus' : 'fa-plus'"></i>
-      </button>
-    </div>
-    <div class="accordion-content py-3 px-3" :style="{display: isTabActive('reviews') ? 'block' : 'none'}">
-      <!-- Review content here -->
-      <p>Product reviews will appear here.</p>
-    </div>
-  </div>
-  
-<!-- Shipping Tab with Automatic Fee Display -->
-<div class="accordion-item mt-2">
-  <div class="accordion-header d-flex justify-content-between align-items-center border-bottom py-3 px-3" @click="toggleTabAndCalculateShipping('shipping')">
-    <div class="tab-title">Shipping</div>
-    <button class="btn accordion-toggle p-0">
-      <i class="fa" :class="isTabActive('shipping') ? 'fa-minus' : 'fa-plus'"></i>
-    </button>
-  </div>
-  <div class="accordion-content py-3 px-3" :style="{display: isTabActive('shipping') ? 'block' : 'none'}">
-    <!-- Shipping Estimate Information -->
-    <div class="shipping-info mb-4">
-      <div class="shipping-fee-box border p-3 mb-3" style="max-width: 300px; border-radius: 4px;">
-        <div class="text-muted">Estimated shipping fee</div>
-      </div>
-      <div class="mt-2">
-        <div class="font-weight-bold mb-1">
-          Estimated shipping fee: <span class="text-primary">{{ shippingEstimate.fee | locationPrice(rate, currencySelected) }}</span>
-        </div>
-        <div class="text-muted">
-          Estimated delivery time: {{ shippingEstimate.deliveryDays.min }} - {{ shippingEstimate.deliveryDays.max }} days
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-      </div>
-    </div>
 
-    <!-- Currency Settings Modal -->
-    <settings-contries :open="true"></settings-contries>
-  </div>
-</template>
-</base-layout>
+        <!-- Currency Settings Modal -->
+        <settings-contries :open="true"></settings-contries>
+      </div>
+    </template>
+  </base-layout>
 </template>
 <script>
 // Add this to your mounted hook or as a separate script
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const accordionToggles = document.querySelectorAll('.accordion-toggle');
-  
+
   accordionToggles.forEach(toggle => {
-    toggle.addEventListener('click', function() {
+    toggle.addEventListener('click', function () {
       const accordionItem = this.closest('.accordion-item');
       const content = accordionItem.querySelector('.accordion-content');
       const icon = this.querySelector('i');
-      
+
       // Toggle visibility
       if (content.style.display === 'none') {
         content.style.display = 'block';
@@ -303,6 +317,14 @@ handleAddToCard() {
       });
     });
 },
+handleBusinessClick(slug) {
+      if (this.islogin) {
+        this.$router.push({
+          name: "BusinessFollower",
+          params: { id: slug }
+        });
+      }
+    },
 navigateToCart() {
   this.handleAddToCard()
     .then(() => {
@@ -524,116 +546,116 @@ this.fetchMarketDetails();
 </script>
 <style scoped>
 .nav-link {
-font-weight: bold;
-font-size: 1.2em !important;
+  font-weight: bold;
+  font-size: 1.2em !important;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-color: #e75c18 !important;
-background-color: transparent !important;
-border-bottom: 2px solid #e75c18 !important;
-border-radius: 0;
+  color: #e75c18 !important;
+  background-color: transparent !important;
+  border-bottom: 2px solid #e75c18 !important;
+  border-radius: 0;
 }
 
 .gap-25 {
-gap: 25px;
+  gap: 25px;
 }
 
 .checked {
-color: orange;
+  color: orange;
 }
 
 .price {
-font-size: 1.5em;
-font-weight: bold;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .old-price {
-font-size: 1.3em;
-text-decoration: line-through;
-color: silver !important;
+  font-size: 1.3em;
+  text-decoration: line-through;
+  color: silver !important;
 }
 
 .quantity-selector input {
-width: 80px;
+  width: 80px;
 }
 
 .btn {
-height: 50px;
+  height: 50px;
 }
 
 .delivery-delays {
-color: #455a64;
+  color: #455a64;
 }
 
 .cursor-pointer {
-cursor: pointer;
+  cursor: pointer;
 }
 
 /* Loading spinner */
 .start-loader {
-width: 45px;
-border: 0 !important;
-border-radius: 0 !important;
-height: 25px;
-color: #e75c18;
-aspect-ratio: .75;
---c: no-repeat linear-gradient(#e75c18 0 0);
-background:
-var(--c) 0% 100%,
-var(--c) 50% 100%,
-var(--c) 100% 100%;
-background-size: 20% 43%;
-animation: l5 1s infinite linear;
+  width: 45px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 25px;
+  color: #e75c18;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#e75c18 0 0);
+  background:
+    var(--c) 0% 100%,
+    var(--c) 50% 100%,
+    var(--c) 100% 100%;
+  background-size: 20% 43%;
+  animation: l5 1s infinite linear;
 }
 
 @keyframes l5 {
-20% {
-background-position: 0% 50%, 50% 100%, 100% 100%
-}
+  20% {
+    background-position: 0% 50%, 50% 100%, 100% 100%
+  }
 
-40% {
-background-position: 0% 0%, 50% 50%, 100% 100%
-}
+  40% {
+    background-position: 0% 0%, 50% 50%, 100% 100%
+  }
 
-60% {
-background-position: 0% 100%, 50% 0%, 100% 50%
-}
+  60% {
+    background-position: 0% 100%, 50% 0%, 100% 50%
+  }
 
-80% {
-background-position: 0% 100%, 50% 100%, 100% 0%
-}
+  80% {
+    background-position: 0% 100%, 50% 100%, 100% 0%
+  }
 }
 
 @media (max-width: 575.98px) {
-.nav-pills .nav-link {
-font-size: 13px;
-white-space: nowrap;
-}
+  .nav-pills .nav-link {
+    font-size: 13px;
+    white-space: nowrap;
+  }
 
-.nav-pills {
-padding-bottom: 5px;
-}
+  .nav-pills {
+    padding-bottom: 5px;
+  }
 
-/* Add smooth scrolling for horizontal nav */
-.overflow-auto {
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
-/* Firefox */
-}
+  /* Add smooth scrolling for horizontal nav */
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+  }
 
-.overflow-auto::-webkit-scrollbar {
-display: none;
-/* Chrome, Safari, Edge */
-}
+  .overflow-auto::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge */
+  }
 }
 
 @media screen and (max-width: 768px) {
-.p-name {
-font-size: 1.2em;
-margin-top: 1.5em;
-}
+  .p-name {
+    font-size: 1.2em;
+    margin-top: 1.5em;
+  }
 }
 </style>
 <style scoped>

@@ -71,9 +71,9 @@
                     <!-- Desktop view (unchanged) -->
                     <div class="d-none d-sm-flex cart-item-wrapper mt-4">
                       <div class="row m-0 p-0" style="flex-grow: 1;">
-                        <img :src="cart_item.product_picture" class="product-image col-lg-3 m-0" />
+                        <img :src="cart_item.product_picture" class="product-image col-lg-3 m-0 cursor-pointer" @click="goToDetail(cart_item.product_id)"/>
                         <div class="col-lg-9 col-md-6 mt-3">
-                          <h6 class="product-name">{{ cart_item.product_name }}</h6>
+                          <h6 class="product-name cursor-pointer" @click="goToDetail(cart_item.product_id)">{{ cart_item.product_name }}</h6>
                           <div>
                             <label for="" class="text-black">{{ $t("general.availability") }}:</label>
                             <span class="ml-2">{{ $t("general.only") }} {{ cart_item.stock_available }}
@@ -361,6 +361,9 @@ export default {
         minimumFractionDigits: 2,
       });
       return formatter.format(value);
+    },
+    goToDetail(id) {
+      this.$router.push(`/product-details/${id}`);
     },
     handleBusinessClick(slug) {
       if (this.islogin) {

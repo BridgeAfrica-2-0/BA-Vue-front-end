@@ -2,131 +2,91 @@
   <div v-if="islogin" class="px-3">
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
-    <b-alert
-      v-if="products.data.length === 0 && !prodLoader"
-      show
-      variant="warning"
-      ><a href="#" class="alert-link">
+    <b-alert v-if="products.data.length === 0 && !prodLoader" show variant="warning"><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
-      </a></b-alert
-    >
+      </a></b-alert>
 
     <div v-if="!prodLoader">
       <div class="row">
-        <div
-        v-for="(product, index) in products.data"
-        :key="index"
-        class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative"
-      >
-        <div class="card shadow-none p-0 h-100">
-          <div class="image-container mb-2" @click="goToDetail(product.id)">
-          <v-lazy-image
-            :src="product.picture"
-            :alt="product.name"
-            class="product-image"
-          />
-        </div>
-        <div class="content-container  cursor-pointer" @click="goToDetail(product.id)">
-          <div class="stock-status">
-            <span class="text-success" v-if="product.in_stock">{{
-              $t("general.in_stock")
-            }}</span>
-            <span class="text-danger" v-else>{{
-              $t("general.out_of_stock")
-            }}</span>
-          </div>
-          <!-- <h3 @click="navigateToCart(product)">{{ product.name }}</h3> -->
-          <h3 class="font-weight-bold">
+        <div v-for="(product, index) in products.data" :key="index"
+          class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative">
+          <div class="card shadow-none p-0 h-100">
+            <div class="image-container mb-2" @click="goToDetail(product.id)">
+              <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
+            </div>
+            <div class="content-container  cursor-pointer">
+              <div class="stock-status">
+                <span class="text-success" v-if="product.in_stock">{{
+                  $t("general.in_stock")
+                }}</span>
+                <span class="text-danger" v-else>{{
+                  $t("general.out_of_stock")
+                }}</span>
+              </div>
+              <!-- <h3 @click="navigateToCart(product)">{{ product.name }}</h3> -->
+              <div>
+                <label class="text-muted small mb-0">{{ $t("general.visit_shop") }}:</label>
+                <span class="ml-1 text-primary font-weight-medium cursor-pointer"
+                  @click="handleBusinessClick(product.business_slug)">
+                  {{ product.business_name }}
+                </span>
+              </div>
+
+              <h3 class="font-weight-bold" @click="goToDetail(product.id)">
                 {{ product.name }}
-            </h3>
-          <p style="margin-bottom: 7em;">
-            {{
-              product.description.length > 50
-                ? product.description.slice(0, 50) + "..."
-                : product.description
-            }}
-          </p>
-        </div>
-        <div class="bottom-info">
-          <span class="price font-weight-bold"
-            >{{ product.price | locationPrice(rate, currencySelected) }}
-          </span>
-          <div class="w-100"  v-if="product.in_stock">
-                  <div class="d-flex justify-content-between w-100 mt-1" style="gap: 20px;">
-                    <!-- <button class="buy_now_btn btn flex-grow-1 d-flex align-items-center" @click="navigateToCart(product)">
-                      <span style="font-size: 12px !important; font-weight: bold;">{{ $t('general.buy_now') }}</span>
-                      <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-                    </button> -->
-                    <button
-                class="add_to_cart btn flex-grow-1 d-flex align-items-center"
-               
-                @click="handleAddToCard(product)"
-              >
-                <span
-                  style="font-size: 12px; font-weight: bold;"
-                  >{{ $t("general.Add_to_Cart") }}</span
-                >
-                <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-              </button>
-                  </div>
+              </h3>
+              <p style="margin-bottom: 7em;">
+                {{
+                  product.description.length > 50
+                    ? product.description.slice(0, 50) + "..."
+                    : product.description
+                }}
+              </p>
+            </div>
+            <div class="bottom-info">
+              <span class="price font-weight-bold">{{ product.price | locationPrice(rate, currencySelected) }}
+              </span>
+              <div class="w-100" v-if="product.in_stock">
+                <div class="d-flex justify-content-between w-100 mt-1" style="gap: 20px;">
+                  <button class="add_to_cart btn flex-grow-1 d-flex align-items-center"
+                    @click="handleAddToCard(product)">
+                    <span style="font-size: 12px; font-weight: bold;">{{ $t("general.Add_to_Cart") }}</span>
+                    <span class="arrow-icon">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+                  </button>
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
     </div>
     <!-- pagination -->
-    <b-pagination
-      v-if="products.next || products.previous"
-      v-model="currentPage"
-      :total-rows="total"
-      pills
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-      :disabled="products.data.length > 0 ? false : true"
-    ></b-pagination>
+    <b-pagination v-if="products.next || products.previous" v-model="currentPage" :total-rows="total" pills
+      :per-page="per_page" aria-controls="my-table" @change="changePage" align="center"
+      :disabled="products.data.length > 0 ? false : true"></b-pagination>
     <!-- End pagination -->
 
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
+    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
   </div>
 
   <div v-else class="px-3">
     <!-- <login /> -->
     <Skeleton :loading="prodLoader" />
     <Skeleton :loading="prodLoader" />
-    <b-alert
-      v-if="guestUserProducts.data.length === 0 && !prodLoader"
-      show
-      variant="warning"
-      ><a href="#" class="alert-link">
+    <b-alert v-if="guestUserProducts.data.length === 0 && !prodLoader" show variant="warning"><a href="#"
+        class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
-      </a></b-alert
-    >
+      </a></b-alert>
 
     <div v-if="!prodLoader">
       <div class="row">
-        <div
-          class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative"
-          v-for="(product, index) in guestUserProducts.data.slice(0, 8)"
-          :key="index"
-        >
+        <div class="col-lg-3 col-md-6 col-sm-4 col-6 mb-4 position-relative"
+          v-for="(product, index) in guestUserProducts.data.slice(0, 8)" :key="index">
           <div class="card shadow-none m-0 p-0 h-100">
             <div class="image-container mb-2" @click="goToDetail(product.id)">
-              <v-lazy-image
-                :src="product.picture"
-                :alt="product.name"
-                class="product-image"
-              />
+              <v-lazy-image :src="product.picture" :alt="product.name" class="product-image" />
               <div class="position-absolute top-right"></div>
             </div>
             <div class="content-container cursor-pointer" @click="goToDetail(product.id)">
@@ -150,48 +110,31 @@
               </p>
             </div>
             <div class="bottom-info">
-          <span class="price font-weight-bold"
-            >{{ product.price | locationPrice(rate, currencySelected) }}
-          </span>
-          <div class="w-100" v-if="product.in_stock">
-                  <div class="d-flex justify-content-between w-100 mt-1" style="gap: 10px;">
-                    <button
-                class="add_to_cart flex-grow-1 btn d-flex align-items-center"
-                style="font-size: 12px; font-weight: bold;"
-                
-                @click="handleAddToCard(product)"
-              >
-              {{ $t("general.Add_to_Cart") }}
-              <span class="arrow-icon">
-                        <i class="fas fa-arrow-right"></i>
-                      </span>
-              </button>
-                  </div>
+              <span class="price font-weight-bold">{{ product.price | locationPrice(rate, currencySelected) }}
+              </span>
+              <div class="w-100" v-if="product.in_stock">
+                <div class="d-flex justify-content-between w-100 mt-1" style="gap: 10px;">
+                  <button class="add_to_cart flex-grow-1 btn d-flex align-items-center"
+                    style="font-size: 12px; font-weight: bold;" @click="handleAddToCard(product)">
+                    {{ $t("general.Add_to_Cart") }}
+                    <span class="arrow-icon">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+                  </button>
                 </div>
-        </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <!-- pagination -->
-    <b-pagination
-      v-if="guestUserProducts.next || guestUserProducts.previous"
-      v-model="currentPage"
-      :total-rows="total"
-      pills
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePageForGuest"
-      align="center"
-      :disabled="guestUserProducts.data.length > 0 ? false : true"
-    ></b-pagination>
+    <b-pagination v-if="guestUserProducts.next || guestUserProducts.previous" v-model="currentPage" :total-rows="total"
+      pills :per-page="per_page" aria-controls="my-table" @change="changePageForGuest" align="center"
+      :disabled="guestUserProducts.data.length > 0 ? false : true"></b-pagination>
     <!-- End pagination -->
 
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
+    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
   </div>
 </template>
 
@@ -241,7 +184,7 @@ export default {
   },
 
   filters: {
-    locationPrice: function(ev, rate, currency) {
+    locationPrice: function (ev, rate, currency) {
       const symbol = currency?.symbol ? currency?.name : "XAF";
       return rate ? `${(ev / rate).toFixed(2)} ${symbol}` : `${ev} ${symbol}`;
     },
@@ -255,7 +198,7 @@ export default {
   },
 
   created() {
-    
+
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
@@ -266,7 +209,7 @@ export default {
   },
 
   methods: {
-   
+
     /**
      * This will be ignored on rendering
      * @private
@@ -278,7 +221,14 @@ export default {
     goToDetail(id) {
       this.$router.push(`/product-details/${id}`);
     },
-
+    handleBusinessClick(slug) {
+      if (this.islogin) {
+        this.$router.push({
+          name: "BusinessFollower",
+          params: { id: slug }
+        });
+      }
+    },
     getProductDetails(product) {
       /**
        * Fired when the button is clicked.
@@ -351,7 +301,7 @@ export default {
         .then((res) => {
           this.total = this.products.total;
         })
-        .catch((err) => {});
+        .catch((err) => { });
     },
     async getGuestUserProducts() {
       /**
@@ -363,7 +313,7 @@ export default {
         .then((res) => {
           this.total = this.guestUserProducts.total;
         })
-        .catch((err) => {});
+        .catch((err) => { });
     },
 
     /**
@@ -445,9 +395,11 @@ export default {
 .arrow-icon i {
   color: #ff6200;
 }
+
 .content-container {
   padding: 0px 15px;
 }
+
 .content-container h3 {
   font-size: 17px !important;
   line-height: 20px !important;
@@ -480,6 +432,7 @@ export default {
   color: #333;
   margin-bottom: 5px;
 }
+
 .add_to_cart {
   cursor: pointer;
   background: linear-gradient(323.09deg, #e07715 6.03%, #ff9e19 85.15%);

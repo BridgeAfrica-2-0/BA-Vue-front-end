@@ -62,6 +62,13 @@
                   {{ product.in_stock ? "In Stock" : "Out of Stock" }}
                 </div>
                 <h3 class="font-weight-bold" @click="goToDetail(product.id)">{{ product.name }}</h3>
+                <div>
+                  <label>{{ $t("general.visit_shop") }}</label>
+                  <span class="ml-1 text-primary font-weight-medium cursor-pointer"
+                    @click="handleBusinessClick(product.business_slug)">
+                    {{ product.business_name }}
+                  </span>
+                </div>
                 <p style="margin-bottom: 4em;">
                   {{
                     product.description.length > 50
@@ -1127,6 +1134,14 @@ export default {
     gotoproduct(pro) {
       this.product = pro;
       this.viewProduct = true;
+    },
+    handleBusinessClick(slug) {
+      if (this.islogin) {
+        this.$router.push({
+          name: "BusinessFollower",
+          params: { id: slug }
+        });
+      }
     },
     handleAddToCard(product) {
       this.$store

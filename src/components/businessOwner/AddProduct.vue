@@ -232,140 +232,153 @@ export default {
     },
 
     // Modified addProduct method that fixes validation issues
-    addProduct() {
-      // 1. Set default values for any required fields that might be empty
-      if (!this.newProduct.tax_amount) {
-        this.newProduct.tax_amount = "0";
+    // Method in AddProduct.vue component
+addProduct() {
+  // 1. Set default values for any required fields that might be empty
+  if (!this.newProduct.tax_amount) {
+    this.newProduct.tax_amount = "0";
+  }
+
+  this.load = true;
+  let fd = new FormData();
+
+  // Get the slug from route params or from component data
+  const businessSlug = this.$route.params.id;
+  
+  // Validate slug before proceeding
+  if (!businessSlug) {
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Invalid_business_slug"),
+    });
+    this.load = false;
+    return;
+  }
+
+  console.log("Business slug for API call:", businessSlug);
+
+  // init data
+  this.newProduct.slug = businessSlug;
+  fd.append('slug', businessSlug); // Explicitly add the slug to FormData
+  
+  // Check if multiselecvalue has an id before trying to access it
+  if (this.multiselecvalue && this.multiselecvalue.id) {
+    this.newProduct.categoryId = this.multiselecvalue.id;
+  } else {
+    console.warn("No category selected, using default");
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Please_select_a_category"),
+    });
+    this.load = false;
+    return; // Stop form submission if required data is missing
+  }
+  
+  // Check if filterselectvalue is valid before mapping
+  if (this.filterselectvalue && this.filterselectvalue.length > 0) {
+    this.newProduct.subCategoryId = this.filterselectvalue
+      .map(el => el.subcategory_id)
+      .join();
+  } else {
+    console.warn("No subcategory selected");
+  }
+  
+  this.newProduct.filterId = this.select_filterss.join();
+
+  // Process images
+  if (this.selectedImagesPrv.length > 0) {
+    // FIX: Add the main image to 'images' field which is required by the API
+    fd.append('images', this.selectedImagesPrv[0]);
+    
+    // Still include picture field for backward compatibility if needed
+    fd.append('picture', this.selectedImagesPrv[0]);
+
+    // Additional images (if any) go to additional_images array
+    if (this.selectedImagesPrv.length > 1) {
+      for (let i = 1; i < this.selectedImagesPrv.length; i++) {
+        fd.append('additional_images[]', this.selectedImagesPrv[i]);
+        
+        // Also append all images to the 'images[]' array field
+        // This ensures the 'images' field contains all images
+        fd.append('images[]', this.selectedImagesPrv[i]);
       }
+    } else {
+      // IMPORTANT FIX: Always include additional_images[] even if empty
+      // This satisfies the API requirement for the field to be present
+      fd.append('additional_images[]', '');
+    }
+  } else {
+    // No image selected, show error and stop submission
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Please_select_at_least_one_image"),
+    });
+    this.load = false;
+    return;
+  }
 
-      this.load = true;
-      let fd = new FormData();
+  // Add video if available
+  if (this.productVideo) {
+    fd.append('product_video', this.productVideo);
+  }
 
-      // Get the slug from route params or from component data
-      const businessSlug = this.$route.params.id;
-      
-      // Validate slug before proceeding
-      if (!businessSlug) {
+  // Add all other product data
+  for (const key in this.newProduct) {
+    if (key !== 'picture') { // Skip picture as we handled it separately
+      fd.append(key, this.newProduct[key]);
+    }
+  }
+
+  // Debug logging
+  console.log('Submitting form with business slug:', businessSlug);
+  
+  // Log FormData entries for debugging purposes
+  for (let pair of fd.entries()) {
+    console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
+  }
+  
+  axios
+    .post(`/market?slug=${businessSlug}`, fd, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(res => {
+      console.log('API Response:', res);
+      this.load = false;
+      this.success = true;
+      this.val = "success";
+      this.msg = this.$t("businessowner.Operation_was_successful");
+
+      this.flashMessage.show({
+        status: "success",
+        message: this.msg,
+        blockClass: "custom-block-class"
+      });
+
+      // Redirect back to marketplace after successful submission
+      setTimeout(() => {
+        this.goBack();
+      }, 1500);
+    })
+    .catch(err => {
+      console.log('API Error:', err);
+      this.load = false;
+
+      if (err.response && err.response.status == 422) {
         this.flashMessage.show({
           status: "error",
-          message: this.$t("businessowner.Invalid_business_slug"),
+          html: this.flashErrors(err.response.data.errors),
         });
-        this.load = false;
-        return;
-      }
-
-      console.log("Business slug for API call:", businessSlug);
-
-      // init data
-      this.newProduct.slug = businessSlug;
-      fd.append('slug', businessSlug); // Explicitly add the slug to FormData
-      
-      // Check if multiselecvalue has an id before trying to access it
-      if (this.multiselecvalue && this.multiselecvalue.id) {
-        this.newProduct.categoryId = this.multiselecvalue.id;
       } else {
-        console.warn("No category selected, using default");
         this.flashMessage.show({
           status: "error",
-          message: this.$t("businessowner.Please_select_a_category"),
+          message: this.$t("businessowner.Something_went_wrong"),
+          blockClass: "custom-block-class"
         });
-        this.load = false;
-        return; // Stop form submission if required data is missing
       }
-      
-      // Check if filterselectvalue is valid before mapping
-      if (this.filterselectvalue && this.filterselectvalue.length > 0) {
-        this.newProduct.subCategoryId = this.filterselectvalue
-          .map(el => el.subcategory_id)
-          .join();
-      } else {
-        console.warn("No subcategory selected");
-      }
-      
-      this.newProduct.filterId = this.select_filterss.join();
-
-      // Process images
-      if (this.selectedImagesPrv.length > 0) {
-        // First image is the main product image (cover image)
-        fd.append('picture', this.selectedImagesPrv[0]);
-
-        // Additional images (if any) go to additional_images array
-        if (this.selectedImagesPrv.length > 1) {
-          for (let i = 1; i < this.selectedImagesPrv.length; i++) {
-            fd.append('additional_images[]', this.selectedImagesPrv[i]);
-          }
-        } else {
-          // IMPORTANT FIX: Always include additional_images[] even if empty
-          // This satisfies the API requirement for the field to be present
-          fd.append('additional_images[]', '');
-        }
-      } else {
-        // No image selected, show error and stop submission
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t("businessowner.Please_select_at_least_one_image"),
-        });
-        this.load = false;
-        return;
-      }
-
-      // Add video if available
-      if (this.productVideo) {
-        fd.append('product_video', this.productVideo);
-      }
-
-      // Add all other product data
-      for (const key in this.newProduct) {
-        if (key !== 'picture') { // Skip picture as we handled it separately
-          fd.append(key, this.newProduct[key]);
-        }
-      }
-
-      // Debug logging
-      console.log('Submitting form with business slug:', businessSlug);
-      
-      axios
-        .post(`/market?slug=${businessSlug}`, fd, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(res => {
-          console.log('API Response:', res);
-          this.load = false;
-          this.success = true;
-          this.val = "success";
-          this.msg = this.$t("businessowner.Operation_was_successful");
-
-          this.flashMessage.show({
-            status: "success",
-            message: this.msg,
-            blockClass: "custom-block-class"
-          });
-
-          // Redirect back to marketplace after successful submission
-          setTimeout(() => {
-            this.goBack();
-          }, 1500);
-        })
-        .catch(err => {
-          console.log('API Error:', err);
-          this.load = false;
-
-          if (err.response && err.response.status == 422) {
-            this.flashMessage.show({
-              status: "error",
-              html: this.flashErrors(err.response.data.errors),
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: this.$t("businessowner.Something_went_wrong"),
-              blockClass: "custom-block-class"
-            });
-          }
-        });
-    },
+    });
+},
 
     flashErrors(errors) {
       let err = "";

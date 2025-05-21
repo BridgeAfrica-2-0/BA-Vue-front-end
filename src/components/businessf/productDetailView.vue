@@ -8,12 +8,22 @@
             <div class="product-page row">
               <!-- Galerie d'images -->
               <div class="col-md-5">
-                <ProductImages :images="[
+                <!-- <ProductImages :images="[
                   {
                     src: marketDetails.picture,
                     alt: marketDetails.name,
                   },
-                ]" />
+                ]" /> -->
+                <!-- <ProductImages
+                  :images="normalizeImages(marketDetails.images, marketDetails.name)"
+                  /> -->
+                  <ProductImages
+  :images="normalizeImages(marketDetails.images, marketDetails.name)"
+  :picture="marketDetails.picture"
+  :name="marketDetails.name"
+  :video-url="marketDetails.video_url"
+/>
+
               </div>
 
               <!-- Informations produit -->
@@ -266,6 +276,7 @@ async fetchMarketDetails() {
   try {
     const details = await this.getdetails(marketId);
     this.marketDetails = details.data;
+    console.log("Market Details--------------------", this.marketDetails);
   } catch (error) {
     console.error("Error fetching market details:", error.message);
   }
@@ -350,7 +361,13 @@ toggleCurrencySelector() {
   this.showCurrencySelector = true;
   // We're setting the open prop to true which should handle the modal visibility in the component
 },
-
+normalizeImages(images, altText) {
+    const imgArray = Array.isArray(images) ? images : [images];
+    return imgArray.map(src => ({
+      src,
+      alt: altText || '',
+    }));
+  },
 calculateShippingEstimate() {
   if (!this.marketDetails || !this.countrySelected) {
     this.flashMessage.show({

@@ -364,132 +364,156 @@ handleImageInput(newImages) {
       }
     },
     // Save edited product
-    editProduct() {
-      this.loading = true;
-      let fd = new FormData();
+   // Updated editProduct method
+editProduct() {
+  this.loading = true;
+  let fd = new FormData();
 
-      // Add basic product info
-      fd.append('name', this.editedProduct.name);
-      fd.append('description', this.editedProduct.description);
-      fd.append('price', this.editedProduct.price);
-      fd.append('on_discount', this.editedProduct.on_discount);
-      fd.append('discount_price', this.editedProduct.discount_price || 0);
-      fd.append('condition', this.editedProduct.condition);
-      fd.append('is_service', this.editedProduct.is_service);
-      fd.append('in_stock', this.editedProduct.in_stock);
-      fd.append('status', this.editedProduct.status);
-      fd.append('quantity', this.editedProduct.quantity);
-      fd.append('kg', this.editedProduct.kg);
-      fd.append('tax_amount', this.editedProduct.tax_amount || 0);
+  // Add basic product info
+  fd.append('name', this.editedProduct.name);
+  fd.append('description', this.editedProduct.description);
+  fd.append('price', this.editedProduct.price);
+  fd.append('on_discount', this.editedProduct.on_discount);
+  fd.append('discount_price', this.editedProduct.discount_price || 0);
+  fd.append('condition', this.editedProduct.condition);
+  fd.append('is_service', this.editedProduct.is_service);
+  fd.append('in_stock', this.editedProduct.in_stock);
+  fd.append('status', this.editedProduct.status);
+  fd.append('quantity', this.editedProduct.quantity);
+  fd.append('kg', this.editedProduct.kg);
+  fd.append('tax_amount', this.editedProduct.tax_amount || 0);
 
-      // Add slug
-      fd.append('slug', this.businessSlug);
+  // Add slug
+  fd.append('slug', this.businessSlug);
 
-      // Add category and subcategory
-      if (this.multiselecvalue && this.multiselecvalue.id) {
-        fd.append('categoryId', this.multiselecvalue.id);
+  // Add category and subcategory
+  if (this.multiselecvalue && this.multiselecvalue.id) {
+    fd.append('categoryId', this.multiselecvalue.id);
+  }
+
+  if (this.filterselectvalue && this.filterselectvalue.length > 0) {
+    fd.append('subCategoryId', this.filterselectvalue
+      .map(el => el.subcategory_id)
+      .join());
+  }
+
+  // Add filters
+  fd.append('filterId', this.select_filterss.join());
+
+  // Process images
+  if (this.selectedImagesPrv.length > 0) {
+    // Check if the first image is a File object or a URL
+    const firstImage = this.selectedImagesPrv[0];
+    
+    // FIX: Add the main image to 'images' field which is required by the API
+    if (firstImage instanceof File) {
+      fd.append('picture', firstImage);
+      fd.append('images', firstImage); // Add to images field as required by API
+    } else if (typeof firstImage === 'string') {
+      // Keep existing image URL
+      fd.append('images', firstImage); // Add existing URL to images field
+    } else if (firstImage.isUrl) {
+      // For object with isUrl property
+      fd.append('images', firstImage.url || firstImage.path || ''); // Add URL to images field
+    } else {
+      fd.append('picture', firstImage);
+      fd.append('images', firstImage); // Add to images field as required by API
+    }
+
+    // Handle additional images
+    let hasAdditionalImages = false;
+
+    if (this.selectedImagesPrv.length > 1) {
+      for (let i = 1; i < this.selectedImagesPrv.length; i++) {
+        const img = this.selectedImagesPrv[i];
+        
+        if (img instanceof File) {
+          fd.append('additional_images[]', img);
+          fd.append('images[]', img); // Also add to images[] array
+          hasAdditionalImages = true;
+        } else if (typeof img === 'string') {
+          // For string URLs, we don't need to re-upload but add to images[] array
+          fd.append('images[]', img);
+          hasAdditionalImages = true;
+        } else if (img.isUrl) {
+          // For objects with isUrl property, we reference the existing image
+          fd.append('images[]', img.url || img.path || '');
+          hasAdditionalImages = true;
+        } else if (!img.isUrl) {
+          fd.append('additional_images[]', img);
+          fd.append('images[]', img); // Also add to images[] array
+          hasAdditionalImages = true;
+        }
       }
+    }
 
-      if (this.filterselectvalue && this.filterselectvalue.length > 0) {
-        fd.append('subCategoryId', this.filterselectvalue
-          .map(el => el.subcategory_id)
-          .join());
+    // Add empty additional_images[] if needed
+    if (!hasAdditionalImages) {
+      fd.append('additional_images[]', '');
+    }
+  } else {
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Please_select_at_least_one_image"),
+    });
+    this.loading = false;
+    return;
+  }
+
+  // Add video if available
+  if (this.productVideo) {
+    fd.append('product_video', this.productVideo);
+  }
+
+  // Log FormData entries for debugging purposes
+  console.log('FormData contents:');
+  for (let pair of fd.entries()) {
+    console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
+  }
+
+  // Send the update request
+  axios
+    .post(`/market/${this.productId}`, fd, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
+    })
+    .then(res => {
+      console.log('API Response:', res);
+      this.loading = false;
+      this.success = true;
+      this.val = "success";
+      this.msg = this.$t("businessowner.Product_updated_successfully");
 
-      // Add filters
-      fd.append('filterId', this.select_filterss.join());
+      this.flashMessage.show({
+        status: "success",
+        message: this.msg,
+        blockClass: "custom-block-class"
+      });
 
-      // Process images
-      if (this.selectedImagesPrv.length > 0) {
-        // Check if the first image is a File object or a URL
-        const firstImage = this.selectedImagesPrv[0];
-        if (firstImage instanceof File) {
-          fd.append('picture', firstImage);
-        } else if (typeof firstImage === 'string') {
-          // Keep existing image
-        } else if (firstImage.isUrl) {
-          // Do nothing - keep existing image URL
-        } else {
-          fd.append('picture', firstImage);
-        }
+      // Redirect back to marketplace after successful update
+      setTimeout(() => {
+        this.goBack();
+      }, 1500);
+    })
+    .catch(err => {
+      console.error('API Error:', err);
+      this.loading = false;
 
-        // Handle additional images
-        let hasAdditionalImages = false;
-
-        if (this.selectedImagesPrv.length > 1) {
-          for (let i = 1; i < this.selectedImagesPrv.length; i++) {
-            const img = this.selectedImagesPrv[i];
-            if (img instanceof File) {
-              fd.append('additional_images[]', img);
-              hasAdditionalImages = true;
-            } else if (!img.isUrl) {
-              fd.append('additional_images[]', img);
-              hasAdditionalImages = true;
-            }
-          }
-        }
-
-        // Add empty additional_images[] if needed
-        if (!hasAdditionalImages) {
-          fd.append('additional_images[]', '');
-        }
+      if (err.response && err.response.status == 422) {
+        this.flashMessage.show({
+          status: "error",
+          html: this.flashErrors(err.response.data.errors),
+        });
       } else {
         this.flashMessage.show({
           status: "error",
-          message: this.$t("businessowner.Please_select_at_least_one_image"),
+          message: this.$t("businessowner.Something_went_wrong"),
+          blockClass: "custom-block-class"
         });
-        this.loading = false;
-        return;
       }
-
-      // Add video if available
-      if (this.productVideo) {
-        fd.append('product_video', this.productVideo);
-      }
-
-      // Send the update request
-      axios
-        .post(`/market/${this.productId}`, fd, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(res => {
-          console.log('API Response:', res);
-          this.loading = false;
-          this.success = true;
-          this.val = "success";
-          this.msg = this.$t("businessowner.Product_updated_successfully");
-
-          this.flashMessage.show({
-            status: "success",
-            message: this.msg,
-            blockClass: "custom-block-class"
-          });
-
-          // Redirect back to marketplace after successful update
-          setTimeout(() => {
-            this.goBack();
-          }, 1500);
-        })
-        .catch(err => {
-          console.error('API Error:', err);
-          this.loading = false;
-
-          if (err.response && err.response.status == 422) {
-            this.flashMessage.show({
-              status: "error",
-              html: this.flashErrors(err.response.data.errors),
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: this.$t("businessowner.Something_went_wrong"),
-              blockClass: "custom-block-class"
-            });
-          }
-        });
-    },
+    });
+},
 
     flashErrors(errors) {
       let err = "";

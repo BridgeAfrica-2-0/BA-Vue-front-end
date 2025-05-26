@@ -16,7 +16,7 @@
             </span>
           </div>
         </div>
-        <div class="language-selection">
+        <!-- <div class="language-selection">
           <b-dropdown variant="light">
             <template #button-content>
               <span class="poslang pr-1">{{ lang }}</span>
@@ -31,7 +31,7 @@
               {{ $t("auth.french") }}
             </b-dropdown-item>
           </b-dropdown>
-        </div>
+        </div> -->
 
         <div v-if="countries.length" class="language-selection" data-toggle="modal" data-target="#settings"
           @click="() => isOpen = true">

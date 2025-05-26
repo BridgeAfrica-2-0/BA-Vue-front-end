@@ -4,6 +4,7 @@ import { getGuestIdentifier } from "../helpers";
 const state = {
   allShipping: [],
   shippingFee: 0.0,
+  estimatedDeliveryDays: 0,
   shippingMethod: '',
   order: {
     data: { order_id: "", total_cost: 0 },
@@ -123,17 +124,29 @@ const actions = {
         if(response.data.data.products)
         {
           const product = response.data.data.products.find(p => p.productCode === "P");
+          console.log("------------------------------",product)
+          const deliveryDate = new Date(product.deliveryCapabilities.estimatedDeliveryDateAndTime);
+          const today = new Date();
+          const daysDiff = Math.ceil((deliveryDate - today) / (1000 * 60 * 60 * 24));
+          
+          const deliveryDays = {
+            min: daysDiff,
+            max: daysDiff + 2 // Add buffer of 2 days
+          };
           commit("setShippingFee", product.totalPrice[0].price);
+          commit("setEstimatedDeliveryDays", deliveryDays);
           commit("setShippingMethod", product.productName);
         }
         else{
           commit("setShippingFee", 0.0);
+          commit("setEstimatedDeliveryDays", 0);
           commit("setShippingMethod", "");
           return Promise.reject(response.data.error);
         }
       })
       .catch((error) => {
         commit("setShippingFee", 0.0);
+        commit("setEstimatedDeliveryDays", 0);
         commit("setShippingMethod", "");
         return Promise.reject(error);
       });
@@ -305,6 +318,10 @@ const mutations = {
   
   setShippingFee(state, data) {
     state.shippingFee = data;
+  },
+
+  setEstimatedDeliveryDays(state, data) {
+    state.estimatedDeliveryDays = data;
   },
 
   setShippingMethod(state, data) {

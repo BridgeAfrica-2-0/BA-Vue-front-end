@@ -1,17 +1,24 @@
 <template>
   <div>
     <!-- Address Input -->
-    <b-form-group class="body-font-size txt-color" label="Location:" label-for="address-input">
-      <input
-        id="address-input"
-        ref="addressInput"
-        v-model="address"
-        type="text"
-        class="form-control"
-        placeholder="Search your Location"
-        required
-      />
-    </b-form-group>
+    <input
+  id="address-input"
+  ref="addressInput"
+  v-model="address"
+  @input="fetchPredictions"
+  type="text"
+  class="form-control"
+  placeholder="Search your Location"
+  required
+/>
+
+<!-- Custom Suggestions Dropdown -->
+<ul v-if="predictions.length > 0" class="autocomplete-dropdown">
+  <li v-for="prediction in predictions" :key="prediction.place_id" @click="selectPrediction(prediction)">
+    {{ prediction.description }}
+  </li>
+</ul>
+
 
     <!-- Google Map -->
     <div ref="map" id="map"></div>
@@ -30,6 +37,10 @@ export default {
       autocomplete: null,
       address: "", // Start with empty search bar
       fallbackLocation: { lat: 0, lng: 0 }, // Only used if geolocation fails completely
+      autocompleteService: null,
+placesService: null,
+predictions: [],
+
     };
   },
   watch: {
@@ -45,6 +56,8 @@ export default {
   mounted() {
     // Load Google Maps with a slight delay to ensure DOM is ready
     setTimeout(() => {
+      this.autocompleteService = new google.maps.places.AutocompleteService();
+this.placesService = new google.maps.places.PlacesService(this.map);
       this.loadGoogleMaps();
     }, 100);
   },
@@ -72,7 +85,48 @@ export default {
         document.head.appendChild(script);
       }
     },
+    fetchPredictions() {
+  if (!this.address) {
+    this.predictions = [];
+    return;
+  }
 
+  this.autocompleteService.getPlacePredictions(
+    { input: this.address },
+    (predictions, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && predictions) {
+        this.predictions = predictions;
+      } else {
+        this.predictions = [];
+      }
+    }
+  );
+},
+selectPrediction(prediction) {
+    this.predictions = [];
+  const service = new google.maps.places.PlacesService(this.map);
+
+  service.getDetails({ placeId: prediction.place_id }, (place, status) => {
+    if (status !== google.maps.places.PlacesServiceStatus.OK || !place.geometry) {
+      console.error("Error fetching place details or no geometry found", status);
+      return;
+    }
+
+    const address = place.formatted_address || place.name || "";
+    const location = {
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    };
+
+    console.log("Updating location from selected custom suggestion:", location, address);
+
+    this.address = address; // Update visible input
+    this.updateLocation(location, address); // Set map center, marker, and emit
+  });
+
+  // Clear the suggestions list after selection
+  this.suggestions = [];
+},
     initMap() {
       this.$nextTick(() => {
         const inputElement = this.$refs.addressInput;
@@ -101,13 +155,13 @@ export default {
         }
 
         // Create Autocomplete instance
-        this.autocomplete = new google.maps.places.Autocomplete(inputElement, {
-          types: ["geocode"],
-          fields: ["address_components", "formatted_address", "geometry", "name"],
-        });
+        // this.autocomplete = new google.maps.places.Autocomplete(inputElement, {
+        //   types: ["geocode"],
+        //   fields: ["address_components", "formatted_address", "geometry", "name"],
+        // });
         
-        // Set up event listener for place selection
-        google.maps.event.addListener(this.autocomplete, "place_changed", this.handlePlaceSelect);
+        // // Set up event listener for place selection
+        // google.maps.event.addListener(this.autocomplete, "place_changed", this.handlePlaceSelect);
         
         console.log("Autocomplete setup complete");
 
@@ -284,6 +338,28 @@ getAddressFromCoordinates(location) {
 </script>
 
 <style scoped>
+.autocomplete-dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1001;
+  position: absolute;
+  width: 100%;
+}
+
+.autocomplete-dropdown li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.autocomplete-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
 #map {
   width: 100%;
   height: 300px;

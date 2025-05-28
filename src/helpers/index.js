@@ -315,7 +315,22 @@ export const extractCurrencyCode = (countryCode) => {
   // Fallback to hardcoded map for common country/currency pairs
   return countryCurrencyMap[countryCode] || null;
 };
-
+export const convertToCurrencyUSD = async (defaultCurrency = null) => {
+  try {
+    let userCurrency;
+       if (defaultCurrency) {
+        userCurrency = defaultCurrency;
+      }
+    const conversionRate = await getRate(userCurrency, 'XAF');
+    console.log("Conversion rate:", conversionRate);
+    const result = { "currency": userCurrency, rate: conversionRate };
+    
+    
+    return result;
+  } catch (error) {
+    console.error('Error in convertToCurrency:', error);
+  }
+};
 export const convertToCurrency = async (defaultCurrency = null) => {
   try {
     let userCurrency;

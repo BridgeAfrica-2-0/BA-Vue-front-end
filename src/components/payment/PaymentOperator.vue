@@ -83,7 +83,7 @@
         <h5 class="saved-payment">{{ $t("general.SAVED_PAYMENT") }}</h5>
         <hr class="dotted-hr" />
 
-        <div class="my-4 operator d-flex align-items-center">
+        <div v-if="!isCameroon" class="my-4 operator d-flex align-items-center">
           <div class="operator-select-box">
             <b-form-radio v-model="operator" name="operator" value="Stripe" class="operator-select"></b-form-radio>
           </div>
@@ -165,12 +165,26 @@ export default {
     return {
       operator: "",
       phone: "",
+      isCameroon : false,
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
         minimumFractionDigits: 2
       })
     };
+  },
+  mounted()
+  {
+    let countryData = localStorage.getItem("country");
+        if (countryData) {
+          try {
+            const parsedCountry = JSON.parse(countryData);
+            const country = parsedCountry.country || 'CM';
+            this.isCameroon = country === 'CM';
+          } catch (e) {
+            console.error('Error parsing country data:', e);
+          }
+        }
   },
   methods: {
     showRewiew() {

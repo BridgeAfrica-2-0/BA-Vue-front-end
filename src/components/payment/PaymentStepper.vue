@@ -50,7 +50,7 @@ import ConfirmPayment from "./ConfirmPayment";
 import PaymentProgress from "./PaymentProgress";
 // import CreateShippingAddress from "./CreateShippingAddress";
 import axios from "axios";
-import { convertToCurrency } from "@/helpers";
+import { convertToCurrencyUSD } from "@/helpers";
 // import ProductDetails from "./ProductDetails";
 
 export default {
@@ -254,7 +254,7 @@ export default {
         operator: operator,
       };
       if (operator == "Stripe") {
-        const rate = await convertToCurrency('USD');
+        const rate = await convertToCurrencyUSD('USD');
         const amount_in_dollar = rate ? `${(amount / rate.rate).toFixed(2)}` : `${amount} XAF`
         const amountInDollarInt = parseFloat(amount_in_dollar);
         data.name = "Product 1";
@@ -263,7 +263,7 @@ export default {
         delete data.phone;
         delete data.operator;
         data.amount = amountInDollarInt;
-        console.log("====dollar====",rate)
+        // console.log("====dollar====",rate)
         const url = "checkout-session/create";
         axios
           .post(url, data)

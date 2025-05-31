@@ -262,7 +262,7 @@ export default {
           delete data.orderId;
         delete data.phone;
         delete data.operator;
-        data.amount = amountInDollarInt;
+        // data.amount = amountInDollarInt;
         // console.log("====dollar====",rate)
         const url = "checkout-session/create";
         axios

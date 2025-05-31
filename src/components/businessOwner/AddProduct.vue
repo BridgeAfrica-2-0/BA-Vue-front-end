@@ -70,6 +70,9 @@
         </b-form-group>
 
         <!-- TAX and KG -->
+        <b-form-group id="tax" :label="$t('businessowner.tax')" label-for="tax" label-size="sm">
+          <b-form-input v-model="newProduct.tax_amount" class="mt-1" id="tax" type="number"></b-form-input>
+        </b-form-group>
         <!-- <b-form-input v-model="newProduct.tax_amount" class="visually-hidden" id="tax" type="number" required></b-form-input> -->
         <b-form-group id="kg" :label="$t('businessowner.Kilogramme')" label-for="input-kg" label-size="sm">
           <b-form-input v-model="newProduct.kg" class="mt-1" id="kg" type="number" min="0" required></b-form-input>
@@ -235,12 +238,15 @@ export default {
     // Method in AddProduct.vue component
 addProduct() {
   // 1. Set default values for any required fields that might be empty
+  
+  this.load = true;
+  let fd = new FormData();
   if (!this.newProduct.tax_amount) {
     this.newProduct.tax_amount = "0";
   }
-
-  this.load = true;
-  let fd = new FormData();
+  else{
+    fd.append('tax_amount', parseInt(this.newProduct.tax_amount) || 0);
+  }
 
   // Get the slug from route params or from component data
   const businessSlug = this.$route.params.id;
@@ -288,25 +294,16 @@ addProduct() {
   // Process images
   if (this.selectedImagesPrv.length > 0) {
     // FIX: Add the main image to 'images' field which is required by the API
-    fd.append('images', this.selectedImagesPrv[0]);
+    // fd.append('images', this.selectedImagesPrv[0]);
     
     // Still include picture field for backward compatibility if needed
     fd.append('picture', this.selectedImagesPrv[0]);
 
-    // Additional images (if any) go to additional_images array
-    if (this.selectedImagesPrv.length > 1) {
-      for (let i = 1; i < this.selectedImagesPrv.length; i++) {
-        fd.append('additional_images[]', this.selectedImagesPrv[i]);
-        
-        // Also append all images to the 'images[]' array field
-        // This ensures the 'images' field contains all images
+    // if (this.selectedImagesPrv.length > 1) {
+      for (let i = 0; i < this.selectedImagesPrv.length; i++) {
         fd.append('images[]', this.selectedImagesPrv[i]);
       }
-    } else {
-      // IMPORTANT FIX: Always include additional_images[] even if empty
-      // This satisfies the API requirement for the field to be present
-      fd.append('additional_images[]', '');
-    }
+    // } 
   } else {
     // No image selected, show error and stop submission
     this.flashMessage.show({
@@ -319,7 +316,7 @@ addProduct() {
 
   // Add video if available
   if (this.productVideo) {
-    fd.append('product_video', this.productVideo);
+    fd.append('video', this.productVideo);
   }
 
   // Add all other product data
@@ -368,7 +365,7 @@ addProduct() {
       if (err.response && err.response.status == 422) {
         this.flashMessage.show({
           status: "error",
-          html: this.flashErrors(err.response.data.errors),
+          message: err.response.data.message,
         });
       } else {
         this.flashMessage.show({

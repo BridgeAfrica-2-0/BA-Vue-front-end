@@ -9,8 +9,8 @@
       </h6>
       <small class="text-muted d-block mb-3">{{ $t("businessowner.Add_up_to_10_photos_and_1_video") }}</small>
 
-      <!-- Empty state / Upload prompt -->
-      <div v-if="productImages.length === 0" class="upload-placeholder p-4 mb-4" @dragover.prevent="onDragOver"
+      <!-- Empty state / Upload prompt (only show when no images AND no video) -->
+      <div v-if="productImages.length === 0 && !videoPreview" class="upload-placeholder p-4 mb-4" @dragover.prevent="onDragOver"
         @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
         <div class="text-center py-4">
           <p class="mb-3">{{ $t("businessowner.Drag_Drop_or") }}</p>
@@ -20,11 +20,11 @@
         </div>
       </div>
 
-      <!-- Image Grid with Separate Slots (when images are present) -->
-      <div v-if="productImages.length > 0" class="mb-4">
+      <!-- Image Grid with Separate Slots (when images are present OR video is present) -->
+      <div v-if="productImages.length > 0 || videoPreview" class="mb-4">
         <div class="slot-based-layout">
-          <!-- Primary Image Slot -->
-          <div class="slot primary-slot">
+          <!-- Primary Image Slot (only show if there are images) -->
+          <div v-if="productImages.length > 0" class="slot primary-slot">
             <div class="image-wrapper">
               <img :src="getImagePreview(productImages[0])" alt="Primary product image" class="product-image">
               <div class="slot-label primary-badge">{{ $t("businessowner.Primary") }}</div>
@@ -36,7 +36,7 @@
             </div>
           </div>
 
-          <!-- Video Slot -->
+          <!-- Video Slot (always show when grid is visible) -->
           <div class="slot video-slot">
             <!-- Video Preview -->
             <div v-if="videoPreview" class="video-preview-container">
@@ -59,6 +59,14 @@
             </div>
           </div>
 
+          <!-- Add Image Button Slot (show when no images exist) -->
+          <div v-if="productImages.length === 0" class="slot empty-slot" @click="openImageFileDialog()">
+            <div class="add-more-placeholder">
+              <i class="fa fa-plus fa-2x text-muted"></i>
+              <p class="mb-0 mt-2 text-muted small">{{ $t("businessowner.Add_Image") }}</p>
+            </div>
+          </div>
+
           <!-- Additional Image Slots -->
           <template v-for="index in 9">
             <!-- Filled Image Slot -->
@@ -77,8 +85,8 @@
               </div>
             </div>
 
-            <!-- Empty Slot / Add More Button -->
-            <div v-else-if="index === productImages.length" :key="'empty-' + index" class="slot empty-slot"
+            <!-- Empty Slot / Add More Button (only show if we have images to maintain the grid) -->
+            <div v-else-if="index === productImages.length && productImages.length > 0" :key="'empty-' + index" class="slot empty-slot"
               @click="openImageFileDialog()">
               <div class="add-more-placeholder">
                 <i class="fa fa-plus fa-2x text-muted"></i>
@@ -86,15 +94,15 @@
               </div>
             </div>
 
-            <!-- Future Empty Slots -->
-            <div v-else :key="'future-' + index" class="slot future-slot">
+            <!-- Future Empty Slots (only show if we have images to maintain the grid) -->
+            <div v-else-if="productImages.length > 0" :key="'future-' + index" class="slot future-slot">
               <div class="future-slot-placeholder">
                 <i class="fa fa-image fa-2x text-muted opacity-25"></i>
               </div>
             </div>
           </template>
         </div>
-        <small class="text-muted mt-2">{{ $t("businessowner.First_image_will_be_the_cover_image") }}</small>
+        <small v-if="productImages.length > 0" class="text-muted mt-2">{{ $t("businessowner.First_image_will_be_the_cover_image") }}</small>
       </div>
 
       <!-- Thumbnail Section -->
@@ -108,9 +116,9 @@
             <img v-if="productImages.length > 0" :src="getImagePreview(productImages[0])" alt="Thumbnail preview"
               class="thumbnail-image">
           </div>
-          <b-button variant="outline-secondary" class="ml-3" size="sm">
+          <!-- <b-button variant="outline-secondary" class="ml-3" size="sm">
             <i class="fa fa-arrows-alt mr-1"></i> {{ $t("businessowner.Adjust_thumbnail") }}
-          </b-button>
+          </b-button> -->
         </div>
       </div>
     </div>
@@ -141,16 +149,50 @@ export default {
       productVideo: null
     };
   },
+  watch: {
+    // Watch for changes to the value prop
+    value: {
+      handler(newValue) {
+        console.log("ProductImageUpload: value prop changed:", newValue);
+        if (newValue && Array.isArray(newValue)) {
+          this.productImages = [...newValue];
+          console.log("ProductImageUpload: productImages updated:", this.productImages);
+        } else {
+          this.productImages = [];
+        }
+      },
+      immediate: true,
+      deep: true
+    },
+    // Watch for changes to the videoFile prop
+    videoFile: {
+      handler(newVideoFile) {
+        console.log("ProductImageUpload: videoFile prop changed:", newVideoFile);
+        if (newVideoFile) {
+          this.productVideo = newVideoFile;
+          this.videoFileName = newVideoFile.name || 'Current video';
+          
+          // Handle existing video (URL) vs new video (File)
+          if (newVideoFile.url) {
+            this.videoPreview = newVideoFile.url;
+          } else if (newVideoFile instanceof File) {
+            this.videoPreview = URL.createObjectURL(newVideoFile);
+          } else {
+            this.videoPreview = newVideoFile;
+          }
+        } else {
+          this.productVideo = null;
+          this.videoPreview = null;
+          this.videoFileName = '';
+        }
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   created() {
-  console.log("-=-=-=-=-=-=-=-=-=-=",this.value)
-    if (this.value && this.value.length > 0) {
-      this.productImages = [...this.value];
-    }
-    if (this.videoFile) {
-      this.productVideo = this.videoFile;
-      this.videoFileName = this.videoFile.name;
-      this.videoPreview = URL.createObjectURL(this.videoFile);
-    }
+    console.log("ProductImageUpload created with value:", this.value);
+    console.log("ProductImageUpload created with videoFile:", this.videoFile);
   },
   mounted() {
     // Add these file inputs to the document directly, outside Vue's control
@@ -214,7 +256,9 @@ export default {
       }
     },
     getImagePreview(image) {
-      // If it's already a File object
+      console.log("Getting preview for image:", image);
+      
+      // If it's a File object
       if (image instanceof File) {
         return URL.createObjectURL(image);
       }
@@ -222,7 +266,20 @@ export default {
       else if (typeof image === 'string') {
         return image;
       }
-      // Fallback
+      // If it's an object with url property (existing images)
+      else if (image && image.url) {
+        return image.url;
+      }
+      // If it's an object with preview property
+      else if (image && image.preview) {
+        return image.preview;
+      }
+      // Fallback for toString method
+      else if (image && typeof image.toString === 'function') {
+        return image.toString();
+      }
+      
+      console.warn("Could not get preview for image:", image);
       return '';
     },
     setAsPrimary(index) {

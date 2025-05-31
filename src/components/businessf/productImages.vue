@@ -64,8 +64,14 @@
         <template v-if="image.type === 'image'">
   <img :src="image.src" :alt="image.alt || name" />
 </template>
-<template v-else-if="image.type === 'video'">
+<!-- <template v-else-if="image.type === 'video'">
   <video :src="image.src" muted playsinline></video>
+</template> -->
+<template v-else-if="image.type === 'video'">
+  <div class="video-thumbnail-wrapper">
+    <video :src="image.src" muted playsinline></video>
+    <div class="play-button-overlay">▶</div>
+  </div>
 </template>
 
         </div>
@@ -223,6 +229,32 @@ export default {
 };
 </script>
 <style scoped>
+.video-thumbnail-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-thumbnail-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #2b2525;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  border-radius: 50%;
+  padding: 0.4rem 0.6rem;
+  pointer-events: none;
+}
+
 .main-image-container {
   position: relative;
   height: 300px;

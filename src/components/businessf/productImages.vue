@@ -4,13 +4,28 @@
       class=" d-flex align-items-center justify-content-center"
       style="flex-grow: 1; background-color: whitesmoke;"
     >
-      <div class="main-image-container">
+      <!-- <div class="main-image-container">
         <img
           :src="currentImage.src"
           class="img-fluid"
           :alt="currentImage.alt"
         />
-      </div>
+      </div> -->
+      <div class="main-image-container">
+  <img
+    v-if="currentImage.type === 'image'"
+    :src="currentImage.src"
+    class="img-fluid"
+    :alt="currentImage.alt"
+  />
+  <video
+    v-else-if="currentImage.type === 'video'"
+    class="img-fluid"
+    :src="currentImage.src"
+    controls
+  ></video>
+</div>
+
     </div>
     <!-- <div class="px-3 mt-2">
       <ul class="list-unstyled">
@@ -46,7 +61,13 @@
           @click="showImage(thumbnailStart + index)"
           :class="{ selected: currentIndex === thumbnailStart + index }"
         >
-          <img :src="image.src" :alt="image.alt || name" />
+        <template v-if="image.type === 'image'">
+  <img :src="image.src" :alt="image.alt || name" />
+</template>
+<template v-else-if="image.type === 'video'">
+  <video :src="image.src" muted playsinline></video>
+</template>
+
         </div>
       </div>
     </div>
@@ -99,37 +120,72 @@ export default {
     //   currentIndex: -1,
     // };
     return {
-    currentIndex: -1,
+    currentIndex: 0,
     thumbnailStart: 0,
     thumbnailsToShow: 3,
   };
   },
+  // computed: {
+  //   // currentImage() {
+  //   //   return this.images[this.currentIndex];
+  //   // },
+  //   // currentImage() {
+  //   //   if (this.currentIndex === -1 || this.images.length === 0) {
+  //   //     return {
+  //   //       src: this.picture,
+  //   //       alt: this.name,
+  //   //     };
+  //   //   }
+  //   //   return this.images[this.currentIndex];
+  //   // },
+  //   currentImage() {
+  //     console.log('.................', this.images);
+  //   if (this.currentIndex === -1 || this.images.length === 0) {
+  //     return {
+  //       src: this.picture,
+  //       alt: this.name,
+  //     };
+  //   }
+  //   return this.images[this.currentIndex];
+  // },
+  // visibleThumbnails() {
+  //   return this.images.slice(this.thumbnailStart, this.thumbnailStart + this.thumbnailsToShow);
+  // },
+  // },
   computed: {
-    // currentImage() {
-    //   return this.images[this.currentIndex];
-    // },
-    // currentImage() {
-    //   if (this.currentIndex === -1 || this.images.length === 0) {
-    //     return {
-    //       src: this.picture,
-    //       alt: this.name,
-    //     };
-    //   }
-    //   return this.images[this.currentIndex];
-    // },
-    currentImage() {
-    if (this.currentIndex === -1 || this.images.length === 0) {
-      return {
-        src: this.picture,
+  currentImage() {
+    // if (this.currentIndex === -1 || this.mediaList.length === 0) {
+    //   return {
+    //     type: 'image',
+    //     src: this.picture,
+    //     alt: this.name,
+    //   };
+    // }
+    return this.mediaList[this.currentIndex];
+  },
+  mediaList() {
+    let media = [...this.images.map(img => ({
+      type: 'image',
+      src: img.src,
+      alt: img.alt || this.name,
+    }))];
+
+    if (this.videoUrl) {
+      // Insert video as second item (index 1)
+      media.splice(1, 0, {
+        type: 'video',
+        src: this.videoUrl,
         alt: this.name,
-      };
+      });
     }
-    return this.images[this.currentIndex];
+
+    return media;
   },
   visibleThumbnails() {
-    return this.images.slice(this.thumbnailStart, this.thumbnailStart + this.thumbnailsToShow);
+    return this.mediaList.slice(this.thumbnailStart, this.thumbnailStart + this.thumbnailsToShow);
   },
-  },
+},
+
   methods: {
     // showImage(index) {
     //   this.currentIndex = index;
@@ -167,6 +223,18 @@ export default {
 };
 </script>
 <style scoped>
+.main-image-container {
+  position: relative;
+  height: 300px;
+}
+
+.main-image-container img,
+.main-image-container video {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
 .thumbnail-carousel {
   user-select: none;
 }

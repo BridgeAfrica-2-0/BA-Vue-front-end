@@ -21,7 +21,7 @@
   :images="normalizeImages(marketDetails.images, marketDetails.name)"
   :picture="marketDetails.picture"
   :name="marketDetails.name"
-  :video-url="marketDetails.video_url"
+  :video-url="marketDetails.video"
 />
 
               </div>
@@ -363,10 +363,14 @@ toggleCurrencySelector() {
 },
 normalizeImages(images, altText) {
     const imgArray = Array.isArray(images) ? images : [images];
-    return imgArray.map(src => ({
-      src,
-      alt: altText || '',
-    }));
+    // return imgArray.map(src => ({
+    //   src: src.image,
+    //   alt: altText || '',
+    // }));
+    return imgArray.slice(1).map(src => ({
+    src: src.image,
+    alt: altText || '',
+  }));
   },
 calculateShippingEstimate() {
   if (!this.marketDetails || !this.countrySelected) {

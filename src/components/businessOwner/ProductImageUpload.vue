@@ -10,7 +10,7 @@
       <small class="text-muted d-block mb-3">{{ $t("businessowner.Add_up_to_10_photos_and_1_video") }}</small>
 
       <!-- Empty state / Upload prompt (only show when no images AND no video) -->
-      <div v-if="productImages.length === 0 && !videoPreview" class="upload-placeholder p-4 mb-4" @dragover.prevent="onDragOver"
+      <div v-if="productImages.length === 0 && !hasVideo" class="upload-placeholder p-4 mb-4" @dragover.prevent="onDragOver"
         @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
         <div class="text-center py-4">
           <p class="mb-3">{{ $t("businessowner.Drag_Drop_or") }}</p>
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Image Grid with Separate Slots (when images are present OR video is present) -->
-      <div v-if="productImages.length > 0 || videoPreview" class="mb-4">
+      <div v-if="productImages.length > 0 || hasVideo" class="mb-4">
         <div class="slot-based-layout">
           <!-- Primary Image Slot (only show if there are images) -->
           <div v-if="productImages.length > 0" class="slot primary-slot">
@@ -39,9 +39,9 @@
           <!-- Video Slot (always show when grid is visible) -->
           <div class="slot video-slot">
             <!-- Video Preview -->
-            <div v-if="videoPreview" class="video-preview-container">
+            <div v-if="hasVideo" class="video-preview-container">
               <video class="video-preview" controls>
-                <source :src="videoPreview">
+                <source :src="videoPreview" :type="videoMimeType">
                 {{ $t("businessowner.Video_Not_Supported") }}
               </video>
               <div class="slot-label video-badge">{{ $t("businessowner.Video") }}</div>
@@ -146,8 +146,14 @@ export default {
       isDragging: false,
       videoPreview: null,
       videoFileName: '',
-      productVideo: null
+      productVideo: null,
+      videoMimeType: ''
     };
+  },
+  computed: {
+    hasVideo() {
+      return !!(this.productVideo || this.videoPreview);
+    }
   },
   watch: {
     // Watch for changes to the value prop
@@ -175,15 +181,22 @@ export default {
           // Handle existing video (URL) vs new video (File)
           if (newVideoFile.url) {
             this.videoPreview = newVideoFile.url;
+            this.videoMimeType = '';
           } else if (newVideoFile instanceof File) {
             this.videoPreview = URL.createObjectURL(newVideoFile);
+            this.videoMimeType = newVideoFile.type;
+          } else if (typeof newVideoFile === 'string') {
+            this.videoPreview = newVideoFile;
+            this.videoMimeType = '';
           } else {
             this.videoPreview = newVideoFile;
+            this.videoMimeType = '';
           }
         } else {
           this.productVideo = null;
           this.videoPreview = null;
           this.videoFileName = '';
+          this.videoMimeType = '';
         }
       },
       immediate: true,
@@ -232,27 +245,42 @@ export default {
     processFiles(files) {
       if (!files || files.length === 0) return;
 
-      // Filter out only image files
-      const imageFiles = Array.from(files).filter(file =>
-        file.type.startsWith('image/')
-      );
+      // Separate images and videos
+      const imageFiles = [];
+      const videoFiles = [];
+      
+      Array.from(files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+          imageFiles.push(file);
+        } else if (file.type.startsWith('video/')) {
+          videoFiles.push(file);
+        }
+      });
 
-      // Check how many images we can still add
-      const availableSlots = 10 - this.productImages.length;
-      const imagesToAdd = imageFiles.slice(0, availableSlots);
+      // Process images
+      if (imageFiles.length > 0) {
+        const availableSlots = 10 - this.productImages.length;
+        const imagesToAdd = imageFiles.slice(0, availableSlots);
 
-      if (imagesToAdd.length > 0) {
-        // Add new images to the array
-        this.productImages = [...this.productImages, ...imagesToAdd];
+        if (imagesToAdd.length > 0) {
+          this.productImages = [...this.productImages, ...imagesToAdd];
+          this.$emit('input', this.productImages);
+          this.$emit('images-updated', this.productImages);
+        }
+      }
 
-        // Emit change to parent component
-        this.$emit('input', this.productImages);
-        this.$emit('images-updated', this.productImages);
+      // Process video (only take the first one)
+      if (videoFiles.length > 0 && !this.hasVideo) {
+        const videoFile = videoFiles[0];
+        this.handleVideoFile(videoFile);
       }
 
       // Reset file input values
       if (this.imageInput) {
         this.imageInput.value = '';
+      }
+      if (this.videoInput) {
+        this.videoInput.value = '';
       }
     },
     getImagePreview(image) {
@@ -312,6 +340,14 @@ export default {
       const file = e.target.files[0];
       if (!file) return;
 
+      this.handleVideoFile(file);
+
+      // Reset video input value
+      if (this.videoInput) {
+        this.videoInput.value = '';
+      }
+    },
+    handleVideoFile(file) {
       // Check if it's a video file
       if (!file.type.match('video.*')) {
         this.$emit('video-error', 'Please_select_a_video_file');
@@ -327,23 +363,36 @@ export default {
 
       this.productVideo = file;
       this.videoFileName = file.name;
-      this.videoPreview = URL.createObjectURL(file);
-
-      // Reset video input value
-      if (this.videoInput) {
-        this.videoInput.value = '';
+      this.videoMimeType = file.type;
+      
+      // Create object URL for preview
+      if (this.videoPreview && this.videoPreview.startsWith('blob:')) {
+        URL.revokeObjectURL(this.videoPreview);
       }
+      this.videoPreview = URL.createObjectURL(file);
 
       // Emit to parent
       this.$emit('video-updated', this.productVideo);
     },
     removeVideo() {
+      // Clean up object URL if it exists
+      if (this.videoPreview && this.videoPreview.startsWith('blob:')) {
+        URL.revokeObjectURL(this.videoPreview);
+      }
+      
       this.productVideo = null;
       this.videoPreview = null;
       this.videoFileName = "";
+      this.videoMimeType = '';
 
       // Emit to parent
       this.$emit('video-updated', null);
+    }
+  },
+  beforeDestroy() {
+    // Clean up object URLs to prevent memory leaks
+    if (this.videoPreview && this.videoPreview.startsWith('blob:')) {
+      URL.revokeObjectURL(this.videoPreview);
     }
   }
 };
@@ -503,6 +552,15 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.add-video-placeholder {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-video-placeholder:hover {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .opacity-25 {

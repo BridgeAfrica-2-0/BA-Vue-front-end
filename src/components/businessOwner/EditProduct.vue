@@ -541,7 +541,7 @@ createImageObject(url, index = 0) {
       }
       else
       {
-        fd.append('video', null);
+        fd.append('video', "");
       }
 
       // Debug FormData

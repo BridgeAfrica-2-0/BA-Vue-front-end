@@ -123,7 +123,7 @@
 
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
 
-        <div class="d-flex justify-content-end mt-4">
+          <div class="d-flex justify-content-start justify-content-sm-end mt-4 flex-wrap w-100">
           <b-button variant="outline-secondary" class="mr-2" @click="goBack">
             {{ $t("general.Cancel") }}
           </b-button>

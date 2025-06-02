@@ -29,14 +29,14 @@
           <div class="d-inline-flex">
             <div>
               <div class="center-img">
-                <img :src="product.picture" class="r-image cursor-pointer" @click="productDetails(product)" />
+                <img :src="product.picture" class="r-image cursor-pointer" @click="goToDetail(product.id)" />
               </div>
             </div>
 
             
             <div class="flx50">
               <p class="text">
-                <span class="title cursor-pointer" @click="productDetails(product)">
+                <span class="title cursor-pointer" @click="goToDetail(product.id)">
                   {{ product.name }}
                 </span>
                 <br />
@@ -199,7 +199,7 @@
     </b-modal>
 
     <!-- PRODUCT DETAILS MODAL -->
-    <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" />
+    <!-- <ProductDetails @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product" /> -->
 
     <b-modal hide-footer :title="'Request for use warehouse'" size="lg" @hidden="requestModal = false"
       v-model="requestModal" no-close-on-backdrop>
@@ -261,7 +261,7 @@
 
 import axios from "axios";
 
-import ProductDetails from "./ProductDetails.vue";
+// import ProductDetails from "./ProductDetails.vue";
 
 import MultiSelect from "vue-multiselect";
 
@@ -300,7 +300,7 @@ export default {
   },
 
   components: {
-    ProductDetails,
+    // ProductDetails,
     MultiSelect
     //  EditProduct
   },
@@ -373,6 +373,9 @@ export default {
       }
     });
   },
+  goToDetail(id) {
+      this.$router.push(`/product-details/${id}`);
+    },
     onSendRequest() {
       this.startRequest = true
       const data = {
@@ -510,10 +513,10 @@ export default {
         });
     },
 
-    productDetails(product) {
-      this.product = product;
-      this.viewProduct = true;
-    },
+    // productDetails(product) {
+    //   this.product = product;
+    //   this.viewProduct = true;
+    // },
     showEdit() {
       this.Edit = true;
     },

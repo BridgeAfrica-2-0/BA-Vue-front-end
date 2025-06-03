@@ -677,6 +677,57 @@ export default {
 </script>
 
 <style scoped>
+/* Add to your <style> section */
+@media screen and (max-width: 768px) {
+  /* Android-specific fixes */
+  html {
+    -webkit-overflow-scrolling: touch; /* This is the correct property */
+  }
+  
+  body {
+    /* Prevent Android WebView from auto-scrolling */
+    overflow-anchor: none;
+  }
+  
+  /* Prevent scroll restoration on Android */
+  .container, .row {
+    overflow-anchor: none;
+  }
+  
+  /* Android WebView specific fixes */
+  .modal-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  /* Prevent Android modal scroll issues */
+  .modal-backdrop {
+    position: fixed !important;
+  }
+}
+
+/* Additional Android fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific - exclude Android */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Target Android specifically */
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .people-style {
+    /* Prevent Android scroll anchor issues */
+    overflow-anchor: none;
+  }
+  
+  .modal {
+    /* Fix Android modal positioning */
+    position: fixed !important;
+  }
+}
 .others {
   position: absolute;
   right: 0px;

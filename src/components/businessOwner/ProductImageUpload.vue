@@ -124,10 +124,10 @@
     </div>
     <!-- <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload"> -->
-    <!-- <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"
+    <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"  capture="false"
       style="display: none;" @change="onFileSelect">
-    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v" style="display: none;"
-      @change="handleVideoUpload"> -->
+    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"  capture="false" style="display: none;"
+      @change="handleVideoUpload">
       <!-- <input type="file" id="hidden-image-input" multiple 
        accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"
        capture="false"
@@ -136,13 +136,7 @@
        accept="video/mp4,video/webm,video/quicktime"
        capture="false"
        style="display: none;" @change="handleVideoUpload"> -->
-       <input type="file" id="hidden-image-input" multiple 
-       accept="image/jpeg,image/png,image/gif,image/webp"
-       style="display: none;" @change="onFileSelect">
-<input type="file" id="hidden-video-input" 
-       accept="video/mp4,video/webm"
-       style="display: none;" @change="handleVideoUpload">
-  </div>
+       </div>
 </template>
 
 <script>

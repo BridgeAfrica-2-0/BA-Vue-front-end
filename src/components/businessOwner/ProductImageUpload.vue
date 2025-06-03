@@ -124,9 +124,9 @@
     </div>
     <!-- <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload"> -->
-    <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"  capture="false"
+    <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg" 
       style="display: none;" @change="onFileSelect">
-    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"  capture="false" style="display: none;"
+    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"  style="display: none;"
       @change="handleVideoUpload">
       <!-- <input type="file" id="hidden-image-input" multiple 
        accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"

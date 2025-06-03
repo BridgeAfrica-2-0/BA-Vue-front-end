@@ -578,8 +578,7 @@ export default {
 
           this.showModal = false;
 
-          // this.changePage(this.currentPage);
-          this.getProducts();
+          this.changePage(this.currentPage);
 
         })
         .catch(err => {

@@ -124,12 +124,10 @@
     </div>
     <!-- <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload"> -->
-    <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif"  data-capture="false"
-     
+    <!-- <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif"  
       style="display: none;" @change="onFileSelect">
-    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"  data-capture="false"
-     style="display: none;"
-      @change="handleVideoUpload">
+    <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"   style="display: none;"
+      @change="handleVideoUpload"> -->
       <!-- <input type="file" id="hidden-image-input" multiple 
        accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"
        capture="false"
@@ -224,23 +222,49 @@ export default {
   mounted() {
     // Add these file inputs to the document directly, outside Vue's control
     // This avoids the $refs issues entirely
-    this.imageInput = document.getElementById('hidden-image-input');
-    this.videoInput = document.getElementById('hidden-video-input');
+    // this.imageInput = document.getElementById('hidden-image-input');
+    // this.videoInput = document.getElementById('hidden-video-input');
   },
   methods: {
     // Use direct DOM methods instead of $refs
+    // openImageFileDialog() {
+    //   if (this.imageInput) {
+    //     this.imageInput.click();
+    //   }
+    // },
+
+    // openVideoFileDialog() {
+    //   if (this.videoInput) {
+    //     this.videoInput.click();
+    //   }
+    // },
     openImageFileDialog() {
-      if (this.imageInput) {
-        this.imageInput.click();
-      }
-    },
+    // Create file input programmatically
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = '.jpg,.jpeg,.png,.gif';
+    
+    input.onchange = (e) => {
+      this.onFileSelect(e);
+    };
+    
+    input.click();
+  },
 
-    openVideoFileDialog() {
-      if (this.videoInput) {
-        this.videoInput.click();
-      }
-    },
-
+  // Replace the existing openVideoFileDialog method  
+  openVideoFileDialog() {
+    // Create file input programmatically
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v';
+    
+    input.onchange = (e) => {
+      this.handleVideoUpload(e);
+    };
+    
+    input.click();
+  },
     onDragOver(e) {
       this.isDragging = true;
     },

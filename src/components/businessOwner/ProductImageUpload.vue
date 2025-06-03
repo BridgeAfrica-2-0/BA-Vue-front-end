@@ -125,10 +125,10 @@
     <!-- <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload"> -->
     <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif"  data-capture="false"
-       webkitdirectory="false"
+     
       style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"  data-capture="false"
-    webkitdirectory="false" style="display: none;"
+     style="display: none;"
       @change="handleVideoUpload">
       <!-- <input type="file" id="hidden-image-input" multiple 
        accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"

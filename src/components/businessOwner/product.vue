@@ -413,7 +413,9 @@ export default {
             blockClass: "custom-block-class",
             message: "Request has been created"
           });
-
+          this.$nextTick(() => {
+          this.scrollToTop();
+        });
         })
     },
 
@@ -536,7 +538,12 @@ export default {
       this.selectedImagePrv = URL.createObjectURL(fille);
       // console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
-
+    scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  },
     editProduct(Product) {
       this.sendingp = true;
       console.log("editProduct");
@@ -579,6 +586,9 @@ export default {
           this.showModal = false;
 
           this.changePage(this.currentPage);
+          this.$nextTick(() => {
+          this.scrollToTop();
+        });
 
         })
         .catch(err => {
@@ -631,6 +641,9 @@ export default {
                   blockClass: "custom-block-class",
                   message: this.$t("general.Product_Deleted_Successfuly")
                 });
+                this.$nextTick(() => {
+                this.scrollToTop();
+              });
               })
               .catch(err => {
                 console.log({ err: err });
@@ -673,7 +686,22 @@ export default {
       this.multiselec.push(tag);
       this.product.subcategories.push(tag);
     }
-  }
+  },
+  // Add this to handle when component is activated (if using keep-alive)
+activated() {
+  // Scroll to top when component becomes active
+  this.scrollToTop();
+},
+
+// Add this to handle route changes
+beforeRouteEnter(to, from, next) {
+  next(vm => {
+    // Scroll to top when entering this route
+    vm.$nextTick(() => {
+      vm.scrollToTop();
+    });
+  });
+}
 };
 </script>
 

@@ -122,20 +122,12 @@
         </div>
       </div>
     </div>
-    <!-- <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
-    <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload"> -->
-    <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif"  
+    <input type="file" id="hidden-image-input" multiple accept="image/*" style="display: none;" @change="onFileSelect">
+    <input type="file" id="hidden-video-input" accept="video/*" style="display: none;" @change="handleVideoUpload">
+    <!-- <input type="file" id="hidden-image-input" multiple accept=".jpg,.jpeg,.png,.gif"  
       style="display: none;" @change="onFileSelect">
     <input type="file" id="hidden-video-input" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.m4v"   style="display: none;"
-      @change="handleVideoUpload">
-      <!-- <input type="file" id="hidden-image-input" multiple 
-       accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"
-       capture="false"
-       style="display: none;" @change="onFileSelect">
-<input type="file" id="hidden-video-input" 
-       accept="video/mp4,video/webm,video/quicktime"
-       capture="false"
-       style="display: none;" @change="handleVideoUpload"> -->
+      @change="handleVideoUpload"> -->
        </div>
 </template>
 

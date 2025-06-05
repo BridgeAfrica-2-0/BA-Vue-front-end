@@ -414,7 +414,7 @@ position: absolute;top: 101px; left: 42px;color: #e75c19;
 }
 
 
-body {color: #333; font-family: 'Roboto', sans-serif; font-size: 14px;}
+body {color: #333; font-family: 'Roboto', sans-serif; font-size: 14px; margin: 0; padding: 0;}
 a {color: #e75c18;}
 a:hover {color: #333; text-decoration: none;}
 /*------------------Sections General------------------*/

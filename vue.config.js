@@ -8,11 +8,18 @@ module.exports = {
     }
   },
   transpileDependencies: [
-    // can be string or regex
-    'vue-moment',
-    'vue-mapbox',
-    'vue-animate-onscroll',
-    'vue-agile',
-    'mapbox-gl'
-  ]
+    "core-js",
+    "vue-moment",
+    "vue-mapbox",
+    "vue-animate-onscroll",
+    "vue-agile",
+    "mapbox-gl"
+  ],
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "core-js/es6": "core-js/es"
+      }
+    }
+  }
 };

@@ -317,7 +317,7 @@
                   <VuePhoneNumberInput
                     default-country-code="CM"
                     v-model="PaymentForm.phone"
-                    placeholder="237 6XX XXX XXX"
+                    placeholder="6XX XXX XXX"
                     required
                   />
                 </div>

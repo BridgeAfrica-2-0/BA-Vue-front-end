@@ -299,7 +299,7 @@ addProduct() {
     fd.append('picture', this.selectedImagesPrv[0]);
 
     // if (this.selectedImagesPrv.length > 1) {
-      for (let i = 0; i < this.selectedImagesPrv.length; i++) {
+      for (let i = 1; i < this.selectedImagesPrv.length; i++) {
         fd.append('images[]', this.selectedImagesPrv[i]);
       }
     // } 

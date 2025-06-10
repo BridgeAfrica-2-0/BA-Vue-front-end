@@ -1,4 +1,3 @@
-// EditProduct.vue - Fixed version
 <template>
   <div>
     <div class="container py-4">
@@ -31,6 +30,7 @@
           @images-updated="handleImagesUpdated" 
           @video-updated="handleVideoUpdated"
           @video-error="handleVideoError"
+          @primary-changed="handlePrimaryImageChanged"
         ></product-image-upload>
 
         <b-form-group id="input-group-1" :label="$t('businessowner.Product_Price') + '(Fcfa)'" label-for="input-1"
@@ -200,6 +200,9 @@ export default {
       existingVideoUrl: null,
       originalImages: [],
       imagesToDeleteIds:[],
+      originalPrimaryImageId: null,
+      currentPrimaryImageId: null,
+      primaryImageChanged: false,
     };
   },
   computed: {
@@ -224,30 +227,71 @@ export default {
     handleImagesUpdated(images) {
       console.log('Images updated:', images);
       this.selectedImagesPrv = images;
+      
+      // Check if primary image changed
+      this.checkPrimaryImageChange();
     },
 
-    // handleImageInput(newImages) {
-    //   console.log("Received images from component:", newImages);
-    //   this.selectedImagesPrv = newImages;
-    // },
     handleImageInput(newImages) {
-  console.log("Received images from component:", newImages);
+      console.log("Received images from component:", newImages);
 
-  // Find deleted images from originalImages that are missing in newImages
-  const deleted = this.originalImages.filter(original =>
-    original.id && !newImages.some(img => img.id === original.id)
-  );
+      // Find deleted images from originalImages that are missing in newImages
+      const deleted = this.originalImages.filter(original =>
+        original.id && !newImages.some(img => img.id === original.id)
+      );
 
-  // Add their IDs to imagesToDeleteIds if not already included
-  deleted.forEach(img => {
-    if (!this.imagesToDeleteIds.includes(img.id)) {
-      this.imagesToDeleteIds.push(img.id);
-    }
+      // Add their IDs to imagesToDeleteIds if not already included
+      deleted.forEach(img => {
+        if (!this.imagesToDeleteIds.includes(img.id)) {
+          this.imagesToDeleteIds.push(img.id);
+        }
+      });
+
+      // Update the current image list
+      this.selectedImagesPrv = newImages;
+      
+      // Check if primary image changed
+      this.checkPrimaryImageChange();
+    },
+
+    handlePrimaryImageChanged(newPrimaryImage) {
+      console.log('Primary image changed to:', newPrimaryImage);
+      this.checkPrimaryImageChange();
+    },
+
+    // Check if the primary image has changed
+    checkPrimaryImageChange() {
+  if (this.selectedImagesPrv.length === 0) {
+    this.currentPrimaryImageId = null;
+    this.primaryImageChanged = this.originalPrimaryImageId !== null;
+    console.log('No images - primary changed:', this.primaryImageChanged);
+    return;
+  }
+
+  const currentPrimary = this.selectedImagesPrv[0];
+  
+  // Get the ID of the current primary image
+  if (currentPrimary && currentPrimary.id) {
+    this.currentPrimaryImageId = currentPrimary.id;
+  } else {
+    // If it's a new file, it doesn't have an ID
+    this.currentPrimaryImageId = null;
+  }
+
+  // Check if primary image changed
+  // Case 1: Original had ID, current has different ID
+  // Case 2: Original had ID, current has no ID (new file)
+  // Case 3: Original had no ID, current has ID (shouldn't happen in edit mode)
+  this.primaryImageChanged = this.originalPrimaryImageId !== this.currentPrimaryImageId;
+  
+  console.log('Primary image change check:', {
+    original: this.originalPrimaryImageId,
+    current: this.currentPrimaryImageId,
+    changed: this.primaryImageChanged,
+    currentImageName: currentPrimary ? (currentPrimary.name || 'unnamed') : 'none'
   });
-
-  // Update the current image list
-  this.selectedImagesPrv = newImages;
 },
+
     handleVideoUpdated(video) {
       console.log('Video updated:', video);
       this.productVideo = video;
@@ -273,66 +317,42 @@ export default {
     },
 
     // Create proper image objects that the component can handle
-    // createImageObject(url, index = 0) {
-    //   // Extract filename from URL or create a default one
-    //   console.log("URL:::::::::::::::::::::::::::::", url);
-    //   let  urlParts;
-    //   if(index==0)
-    // {
-    //   urlParts = url.split('/');
-    // }
-    // else{
-    //   urlParts = url.image.split('/');
-    // }
-    //   const filename = urlParts[urlParts.length - 1] || `image-${index}.jpg`;
+    createImageObject(url, index = 0) {
+      // Handle different URL formats based on index
+      let urlParts;
+      let actualUrl;
+      let imageId = null;
       
-    //   // Ensure the filename has a proper extension
-    //   const hasExtension = /\.(jpg|jpeg|png|gif|webp)$/i.test(filename);
-    //   const finalFilename = hasExtension ? filename : `${filename}.jpg`;
+      if (index == 0) {
+        // For first index, url is a string
+        urlParts = url.split('/');
+        actualUrl = url;
+      } else {
+        // For other indices, url is an object with image property
+        urlParts = url.image.split('/');
+        actualUrl = url.image;
+        imageId = url.id || null;
+      }
+      
+      // Extract filename from URL or create a default one
+      const filename = urlParts[urlParts.length - 1] || `image-${index}.jpg`;
+      
+      // Ensure the filename has a proper extension
+      const hasExtension = /\.(jpg|jpeg|png|gif|webp)$/i.test(filename);
+      const finalFilename = hasExtension ? filename : `${filename}.jpg`;
+      
+      return {
+        name: finalFilename,
+        type: this.getImageTypeFromUrl(actualUrl),
+        url: actualUrl,
+        preview: actualUrl,
+        id: imageId, 
+        isExisting: true,
+        size: 0, 
+        toString: function() { return this.url; }
+      };
+    },
 
-    //   return {
-    //     name: finalFilename,
-    //     type: this.getImageTypeFromUrl(url),
-    //     url: url,
-    //     preview: url,
-    //     isExisting: true,
-    //     size: 0, // Unknown size for existing images
-    //     toString: function() { return this.url; }
-    //   };
-    // },
-createImageObject(url, index = 0) {
-  // Handle different URL formats based on index
-  let urlParts;
-  let actualUrl;
-  
-  if (index == 0) {
-    // For first index, url is a string
-    urlParts = url.split('/');
-    actualUrl = url;
-  } else {
-    // For other indices, url is an object with image property
-    urlParts = url.image.split('/');
-    actualUrl = url.image;
-  }
-  
-  // Extract filename from URL or create a default one
-  const filename = urlParts[urlParts.length - 1] || `image-${index}.jpg`;
-  
-  // Ensure the filename has a proper extension
-  const hasExtension = /\.(jpg|jpeg|png|gif|webp)$/i.test(filename);
-  const finalFilename = hasExtension ? filename : `${filename}.jpg`;
-  
-  return {
-    name: finalFilename,
-    type: this.getImageTypeFromUrl(actualUrl),
-    url: actualUrl,
-    preview: actualUrl,
-    id: url.id || null, 
-    isExisting: true,
-    size: 0, 
-    toString: function() { return this.url; }
-  };
-},
     // Determine MIME type from URL or default to JPEG
     getImageTypeFromUrl(url) {
       const extension = url.split('.').pop()?.toLowerCase();
@@ -357,238 +377,258 @@ createImageObject(url, index = 0) {
     },
 
     async loadProduct() {
-      try {
-        this.loading = true;
-        console.log("Loading product with ID:", this.productId);
+  try {
+    this.loading = true;
+    console.log("Loading product with ID:", this.productId);
 
-        const response = await axios.get(`/market/${this.productId}`);
-        const productData = response.data;
-        console.log("API returned product data:", productData);
+    const response = await axios.get(`/market/${this.productId}`);
+    const productData = response.data;
+    console.log("API returned product data:", productData);
 
-        // Load basic product data
-        this.editedProduct = {
-          name: productData.data.name || "",
-          description: productData.data.description || "",
-          price: productData.data.price || "",
-          quantity: productData.data.quantity || "",
-          in_stock: productData.data.in_stock || 1,
-          on_discount: productData.data.on_discount || 0,
-          discount_price: productData.data.discount_price || 0,
-          condition: productData.data.condition || "",
-          is_service: productData.data.is_service || 0,
-          status: productData.data.status || 1,
-          kg: productData.data.kg || "",
-          tax_amount: productData.data.tax_amount || "0"
-        };
+    // Load basic product data
+    this.editedProduct = {
+      name: productData.data.name || "",
+      description: productData.data.description || "",
+      price: productData.data.price || "",
+      quantity: productData.data.quantity || "",
+      in_stock: productData.data.in_stock || 1,
+      on_discount: productData.data.on_discount || 0,
+      discount_price: productData.data.discount_price || 0,
+      condition: productData.data.condition || "",
+      is_service: productData.data.is_service || 0,
+      status: productData.data.status || 1,
+      kg: productData.data.kg || "",
+      tax_amount: productData.data.tax_amount || "0"
+    };
 
-        // Handle existing images
-        this.existingImageUrls = [];
-        this.selectedImagesPrv = [];
+    // Handle existing images
+    this.existingImageUrls = [];
+    this.selectedImagesPrv = [];
 
-        // if (productData.data.picture) {
-        //   const mainImageObj = this.createImageObject(productData.data.picture, 0);
-        //   this.selectedImagesPrv.push(mainImageObj);
-        //   this.existingImageUrls.push(productData.data.picture);
-        // }
-
-        // Handle additional images
-        if (productData.data.images && Array.isArray(productData.data.images)) {
-          this.originalImages = [...productData.data.images]; 
-          productData.data.images.forEach((url, index) => {
-            if (url && url.image !== productData.data.picture) { // Avoid duplicating main image
-              const imageObj = this.createImageObject(url, index + 1);
-              this.selectedImagesPrv.push(imageObj);
-              this.existingImageUrls.push(url);
-            }
-          });
-        }
-
-        console.log("Loaded images:", this.selectedImagesPrv);
-        console.log("Existing image URLs:", this.existingImageUrls);
-
-        // Handle existing video
-        if (productData.data.video) {
-          this.existingVideoUrl = productData.data.video;
-          this.productVideo = {
-            name: "Current video",
-            type: "video/mp4",
-            url: productData.data.video,
-            isExisting: true
-          };
-          this.videoPreview = productData.data.video;
-          this.videoFileName = "Current video";
-        }
-
-        // Handle categories, subcategories, and filters
-        if (productData.data.categories && productData.data.categories.length > 0) {
-          this.multiselecvalue = productData.data.categories[0];
-          this.subcategories();
-
-          setTimeout(() => {
-            if (productData.data.subcategories && productData.data.subcategories.length > 0) {
-              this.filterselectvalue = productData.data.subcategories;
-            }
-            if (productData.data.filters && productData.data.filters.length > 0) {
-              this.select_filterss = productData.data.filters.map(filter => filter.id);
-            }
-          }, 1000);
-        }
-
-        this.loading = false;
-      } catch (error) {
-        console.error('Error loading product data:', error);
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t("businessowner.Error_loading_product"),
-        });
-      }
-    },
-
-    // Fixed editProduct method
-    editProduct() {
-      this.loading = true;
-      let fd = new FormData();
-
-      // Add basic product info
-      fd.append('name', this.editedProduct.name);
-      fd.append('description', this.editedProduct.description);
-      fd.append('price', this.editedProduct.price);
-      fd.append('on_discount', this.editedProduct.on_discount);
-      fd.append('discount_price', this.editedProduct.discount_price || 0);
-      fd.append('condition', this.editedProduct.condition);
-      fd.append('is_service', this.editedProduct.is_service);
-      fd.append('in_stock', this.editedProduct.in_stock);
-      fd.append('status', this.editedProduct.status);
-      fd.append('quantity', this.editedProduct.quantity);
-      fd.append('kg', this.editedProduct.kg);
-      fd.append('tax_amount', parseInt(this.editedProduct.tax_amount) || 0);
-      fd.append('slug', this.businessSlug);
-
-      // Add category and subcategory
-      if (this.multiselecvalue && this.multiselecvalue.id) {
-        fd.append('categoryId', this.multiselecvalue.id);
-      }
-
-      if (this.filterselectvalue && this.filterselectvalue.length > 0) {
-        fd.append('subCategoryId', this.filterselectvalue.map(el => el.subcategory_id).join());
-      }
-
-      fd.append('filterId', this.select_filterss.join());
-
-      // Handle images properly
-      if (this.selectedImagesPrv.length === 0) {
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t("businessowner.Please_select_at_least_one_image"),
-        });
-        this.loading = false;
-        return;
-      }
-
-      // Separate new files from existing URLs
-      const newImageFiles = [];
-      const existingImageUrls = [];
-
-      this.selectedImagesPrv.forEach((image, index) => {
-        if (image instanceof File) {
-          // New uploaded file
-          newImageFiles.push({ file: image, index });
-        } else if (image.isExisting && image.url) {
-          // Existing image URL
-          existingImageUrls.push(image.url);
-        } else if (typeof image === 'string') {
-          // String URL
-          existingImageUrls.push(image);
-        }
-      });
-      console.log(",,,,,,,,,,,,,", this.imagesToDeleteIds);
-      if(this.imagesToDeleteIds.length > 0)
-      {
-        fd.append('imagesToDeleteIds', this.imagesToDeleteIds);
-      }
-      // Add main image (first image)
-      const firstImage = this.selectedImagesPrv[0];
-      if (firstImage instanceof File) {
-        fd.append('picture', firstImage);
-      }
-      //  else if (firstImage.isExisting || typeof firstImage === 'string') {
-      //   fd.append('picture', firstImage.url || firstImage);
+    // FIXED: Handle the main picture first if it exists
+    if (productData.data.picture) {
+      const mainImageObj = this.createImageObject(productData.data.picture, 0);
+      // Set the ID for the main image - you might need to get this from the API response
+      // Assuming the main image ID is available in the response
+      // if (productData.data.picture_id) {
+      //   mainImageObj.id = productData.data.picture_id;
       // }
+      this.selectedImagesPrv.push(mainImageObj);
+      // this.existingImageUrls.push(productData.data.picture);
+    }
 
-      // Add all images (new files)
-      newImageFiles.forEach(({ file }) => {
-        fd.append('images[]', file);
-      });
-
-      // Add existing image URLs
-      // existingImageUrls.forEach(url => {
-      //   fd.append('images[]', url);
-      // });
-
-      // Handle additional new images
-      // if (newImageFiles.length > 1) {
-      //   newImageFiles.slice(1).forEach(({ file }) => {
-      //     fd.append('additional_images[]', file);
-      //   });
-      // }
-
-      // Handle video
-      if (this.productVideo) {
-        if (this.productVideo instanceof File) {
-          fd.append('video', this.productVideo);
-        } 
-      }
-      else
-      {
-        fd.append('video', "");
-      }
-
-      // Debug FormData
-      console.log('FormData contents:');
-      for (let pair of fd.entries()) {
-        console.log(pair[0] + ':', pair[1] instanceof File ? `File: ${pair[1].name}` : pair[1]);
-      }
-
-      // Send the update request
-      axios.post(`/market/${this.productId}`, fd, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then(res => {
-        console.log('API Response:', res);
-        this.loading = false;
-        this.success = true;
-        this.val = "success";
-        this.msg = this.$t("businessowner.Product_updated_successfully");
-
-        this.flashMessage.show({
-          status: "success",
-          message: this.msg,
-        });
-
-        setTimeout(() => {
-          this.goBack();
-        }, 1500);
-      })
-      .catch(err => {
-        console.error('API Error:', err);
-        this.loading = false;
-        
-        if (err.response && err.response.status === 422) {
-          this.flashMessage.show({
-            status: "error",
-            message: err.response.data.message,
-          });
-        } else {
-          this.flashMessage.show({
-            status: "error",
-            message: this.$t("businessowner.Something_went_wrong"),
-          });
+    // Handle additional images
+    if (productData.data.images && Array.isArray(productData.data.images)) {
+      this.originalImages = [...productData.data.images]; 
+      productData.data.images.forEach((imageData, index) => {
+        if (imageData && imageData.image !== productData.data.picture) { // Avoid duplicating main image
+          const imageObj = this.createImageObject(imageData, index + 1);
+          this.selectedImagesPrv.push(imageObj);
+          this.existingImageUrls.push(imageData);
         }
       });
-    },
+    }
+console.log("#################", this.selectedImagesPrv);
+    // FIXED: Set the original primary image ID properly
+    if (this.selectedImagesPrv.length > 0) {
+      if (this.selectedImagesPrv[0].id) {
+        this.originalPrimaryImageId = this.selectedImagesPrv[0].id;
+      } else if (productData.data.picture_id) {
+        this.originalPrimaryImageId = productData.data.picture_id;
+        this.selectedImagesPrv[0].id = productData.data.picture_id; // Ensure first image has the ID
+      }
+      this.currentPrimaryImageId = this.originalPrimaryImageId;
+    }
+
+    console.log('Original primary image ID:', this.originalPrimaryImageId);
+    console.log('Current primary image ID:', this.currentPrimaryImageId);
+    console.log("Loaded images:", this.selectedImagesPrv);
+
+    // Handle existing video
+    if (productData.data.video) {
+      this.existingVideoUrl = productData.data.video;
+      this.productVideo = {
+        name: "Current video",
+        type: "video/mp4",
+        url: productData.data.video,
+        isExisting: true
+      };
+      this.videoPreview = productData.data.video;
+      this.videoFileName = "Current video";
+    }
+
+    // Handle categories, subcategories, and filters
+    if (productData.data.categories && productData.data.categories.length > 0) {
+      this.multiselecvalue = productData.data.categories[0];
+      this.subcategories();
+
+      setTimeout(() => {
+        if (productData.data.subcategories && productData.data.subcategories.length > 0) {
+          this.filterselectvalue = productData.data.subcategories;
+        }
+        if (productData.data.filters && productData.data.filters.length > 0) {
+          this.select_filterss = productData.data.filters.map(filter => filter.id);
+        }
+      }, 1000);
+    }
+
+    this.loading = false;
+  } catch (error) {
+    console.error('Error loading product data:', error);
+    this.loading = false;
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Error_loading_product"),
+    });
+  }
+},
+editProduct() {
+  this.loading = true;
+  let fd = new FormData();
+
+  // Add basic product info (keeping existing code)
+  fd.append('name', this.editedProduct.name);
+  fd.append('description', this.editedProduct.description);
+  fd.append('price', this.editedProduct.price);
+  fd.append('on_discount', this.editedProduct.on_discount);
+  fd.append('discount_price', this.editedProduct.discount_price || 0);
+  fd.append('condition', this.editedProduct.condition);
+  fd.append('is_service', this.editedProduct.is_service);
+  fd.append('in_stock', this.editedProduct.in_stock);
+  fd.append('status', this.editedProduct.status);
+  fd.append('quantity', this.editedProduct.quantity);
+  fd.append('kg', this.editedProduct.kg);
+  fd.append('tax_amount', parseInt(this.editedProduct.tax_amount) || 0);
+  fd.append('slug', this.businessSlug);
+
+  // Add category and subcategory (keeping existing code)
+  if (this.multiselecvalue && this.multiselecvalue.id) {
+    fd.append('categoryId', this.multiselecvalue.id);
+  }
+
+  if (this.filterselectvalue && this.filterselectvalue.length > 0) {
+    fd.append('subCategoryId', this.filterselectvalue.map(el => el.subcategory_id).join());
+  }
+
+  fd.append('filterId', this.select_filterss.join());
+
+  // Handle images properly
+  if (this.selectedImagesPrv.length === 0) {
+    this.flashMessage.show({
+      status: "error",
+      message: this.$t("businessowner.Please_select_at_least_one_image"),
+    });
+    this.loading = false;
+    return;
+  }
+
+  // Separate new files from existing URLs
+  const newImageFiles = [];
+  const existingImageUrls = [];
+
+  this.selectedImagesPrv.forEach((image, index) => {
+    if (image instanceof File) {
+      // New uploaded file
+      newImageFiles.push({ file: image, index });
+    } else if (image.isExisting && image.url) {
+      // Existing image URL
+      existingImageUrls.push(image.url);
+    } else if (typeof image === 'string') {
+      // String URL
+      existingImageUrls.push(image);
+    }
+  });
+
+  console.log('=== PRIMARY IMAGE CHANGE DETECTION ===');
+  console.log('Primary image changed:', this.primaryImageChanged);
+  console.log('Original primary image ID:', this.originalPrimaryImageId);
+  console.log('Current primary image ID:', this.currentPrimaryImageId);
+  console.log('First image details:', this.selectedImagesPrv[0]);
+
+  // FIXED: Add new_picture_id when primary image changed to an existing image
+  if (this.primaryImageChanged && this.currentPrimaryImageId) {
+    fd.append('new_picture_id', this.currentPrimaryImageId);
+    console.log('✅ Sending new_picture_id:', this.currentPrimaryImageId);
+  } else if (this.primaryImageChanged && !this.currentPrimaryImageId) {
+    console.log('✅ Primary image changed to new uploaded file (will be handled by picture field)');
+  } else {
+    console.log('ℹ️ Primary image not changed, not sending new_picture_id');
+  }
+
+  // Handle deleted images
+  if (this.imagesToDeleteIds.length > 0) {
+    fd.append('imagesToDeleteIds', this.imagesToDeleteIds);
+    console.log('Deleting images with IDs:', this.imagesToDeleteIds);
+  }
+
+  // Add main image (first image) if it's a new file
+  const firstImage = this.selectedImagesPrv[0];
+  if (firstImage instanceof File) {
+    fd.append('picture', firstImage);
+    console.log('Adding new primary image file:', firstImage.name);
+  }
+
+  // Add all new image files
+  newImageFiles.forEach(({ file }, index) => {
+    fd.append('images[]', file);
+    console.log(`Adding new image file ${index + 1}:`, file.name);
+  });
+
+  // Handle video (keeping existing code)
+  if (this.productVideo) {
+    if (this.productVideo instanceof File) {
+      fd.append('video', this.productVideo);
+    } 
+  } else {
+    fd.append('video', "");
+  }
+
+  // Debug FormData
+  console.log('=== FORM DATA CONTENTS ===');
+  for (let pair of fd.entries()) {
+    console.log(pair[0] + ':', pair[1] instanceof File ? `File: ${pair[1].name}` : pair[1]);
+  }
+
+  // Send the update request (keeping existing code)
+  axios.post(`/market/${this.productId}`, fd, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then(res => {
+    console.log('API Response:', res);
+    this.loading = false;
+    this.success = true;
+    this.val = "success";
+    this.msg = this.$t("businessowner.Product_updated_successfully");
+
+    this.flashMessage.show({
+      status: "success",
+      message: this.msg,
+    });
+
+    setTimeout(() => {
+      this.goBack();
+    }, 1500);
+  })
+  .catch(err => {
+    console.error('API Error:', err);
+    this.loading = false;
+    
+    if (err.response && err.response.status === 422) {
+      this.flashMessage.show({
+        status: "error",
+        message: err.response.data.message,
+      });
+    } else {
+      this.flashMessage.show({
+        status: "error",
+        message: this.$t("businessowner.Something_went_wrong"),
+      });
+    }
+  });
+},
+
     flashErrors(errors) {
       let err = "";
       Object.values(errors).forEach(element => {

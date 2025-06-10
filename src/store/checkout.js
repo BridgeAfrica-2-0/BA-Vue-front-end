@@ -133,7 +133,7 @@ const actions = {
             min: daysDiff,
             max: daysDiff + 2 // Add buffer of 2 days
           };
-          commit("setShippingFee", product.totalPrice[0].price);
+          commit("setShippingFee", 0.0);
           commit("setEstimatedDeliveryDays", deliveryDays);
           commit("setShippingMethod", product.productName);
         }

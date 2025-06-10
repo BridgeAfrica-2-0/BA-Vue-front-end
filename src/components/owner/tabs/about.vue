@@ -1,141 +1,240 @@
 <template>
-  <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon
-    >{{ $t("profileowner.About") }}
+  <div class="profile-container">
+    <div class="profile-content">
+      <!-- Header Section -->
+      <div class="profile-header">
+        <h1 class="profile-title">About Easter Howard</h1>
+      </div>
 
-    <hr />
+      <!-- Bio Section -->
+      <div class="bio-section">
+         <!-- Location Info -->
+        <div class="location-info">
+          <div class="location-item">
+            <img
+              src="../../../assets/img/updates/icons/home-orange.png"
+              alt="Location Icon"
+              class="location-icon"
+            />
+            <div class="location-details">
+              <span class="location-label">Home town</span>
+              <span class="location-value">{{ profile.homeTown }}</span>
+            </div>
+          </div>
 
-    <b-card v-if="window.width < 768" no-body class="mobile p-2 ml-0">
-      <b-tabs pills card justified>
-        <b-tab :title="$t('profileowner.BIOGRAPHY')" active
-          ><Biography
-        /></b-tab>
-        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"
-          ><ContactandInfo />
-        </b-tab>
-        <b-tab :title="$t('profileowner.WORK_EDUCATION')"
-          ><WorkAndEducation
-        /></b-tab>
-      </b-tabs>
-    </b-card>
-
-    <b-card v-else no-body class="desktop">
-      <b-tabs pills card vertical>
-        <b-tab :title="$t('profileowner.BIOGRAPHY')" active
-          ><Biography
-        /></b-tab>
-        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"
-          ><ContactandInfo />
-        </b-tab>
-        <b-tab :title="$t('profileowner.WORK_EDUCATION')"
-          ><WorkAndEducation
-        /></b-tab>
-      </b-tabs>
-    </b-card>
+          <div class="location-item">
+            <img
+              src="../../../assets/img/updates/icons/location-orange.png"
+              alt="Location Icon"
+              class="location-icon"
+            />
+            <div class="location-details">
+              <span class="location-label">Current Location</span>
+              <span class="location-value">{{ profile.currentLocation }}</span>
+            </div>
+          </div>
+        </div>
+        <h2 class="bio-title">Bio</h2>
+        <div class="bio-content">
+          <p
+            v-for="(paragraph, index) in profile.bio"
+            :key="index"
+            class="bio-paragraph"
+          >
+            {{ paragraph }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Biography from "../biography";
-import ContactandInfo from "../contactandbasicinfo";
-import WorkAndEducation from "../workandeducation";
 export default {
-  components: {
-    Biography,
-    ContactandInfo,
-    WorkAndEducation,
-  },
+  name: "About",
   data() {
     return {
-      size: 0,
-      mobile: null,
-      profile_about: null,
-
-      window: {
-        width: 0,
-        height: 0,
-      },
+      profile: {
+        homeTown: "Geneva",
+        currentLocation: "Buea",
+        bio: [
+          "Lorem ipsum dolor sit amet consectetur. Vel nunc sit morth sagittis lectus. Vel venenatis ornet turpis odio elementum. Cras integer eget ultricies sagittis sit aliquam facilisis. Convallis et sagittis rhoncusan elit condimentum pretium.",
+          "Lorem ipsum dolor sit amet consectetur. Vel nunc sit morth sagittis lectus. Vel venenatis ornet turpis odio elementum. Cras integer eget ultricies sagittis sit aliquam facilisis. Convallis et sagittis rhoncusan elit condimentum pretium.",
+          "Lorem ipsum dolor sit amet consectetur. Vel nunc sit morth sagittis lectus. Vel venenatis ornet turpis odio elementum. Cras integer eget ultricies sagittis sit aliquam facilisis. Convallis et sagittis rhoncusan elit condimentum pretium."
+        ]
+      }
     };
-  },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
-
-    this.profile_about = JSON.parse(
-      JSON.stringify(this.$store.getters["profile/getProfileAbout"])
-    );
-    console.log("Load User Profile About start ++++++", this.profile_about);
-    this.$store
-      .dispatch("profile/loadUserProfileAbout", null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log("Error from server or from browser error (2) ++++", error);
-      })
-      .finally(() => {
-        this.profile_about = JSON.parse(
-          JSON.stringify(this.$store.getters["profile/getProfileAbout_"])
-        );
-        console.log("Load User Profile About end ++++++", this.profile_about);
-      });
-  },
-  computed: {
-    vertical() {
-      if (this.size > 768) return true;
-      return false;
-    },
-    card() {
-      if (this.size > 992) return true;
-      return false;
-    },
-  },
-  mounted() {
-    var that = this;
-    window.onresize = function() {
-      that.size = window.innerWidth;
-    };
-  },
-
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
-  },
-
-  methods: {
-    handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
-    },
-  },
+  }
 };
 </script>
 
 <style scoped>
-.mobile {
-  display: none;
+.profile-container {
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #ffffff;
 }
 
-.icon {
-  height: 24px;
-  width: 24px;
-}
-.primary-bg {
-  background-color: rgb(242, 242, 242);
-  border: none;
+.profile-content {
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-span {
-  margin-left: 8px;
+.profile-header {
+  margin-bottom: 40px;
+  width: 70%;
 }
 
-@media only screen and (max-width: 768px) {
-  .desktop {
-    display: none;
+.profile-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+  line-height: 1.3;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-icon {
+  background-color: #ff6b35;
+}
+
+.current-icon {
+  background-color: #4ade80;
+}
+
+.location-details {
+  display: flex;
+  gap: 100px;
+}
+
+.location-label {
+  font-size: 13px;
+  color: #666666;
+  font-weight: 400;
+}
+
+.location-value {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.bio-section {
+  padding-top: 20px;
+}
+
+.bio-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.bio-content {
+  line-height: 1.6;
+}
+
+.bio-paragraph {
+  font-size: 14px;
+  color: #4a4a4a;
+  margin: 0 0 16px 0;
+  text-align: justify;
+}
+
+.bio-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 16px;
+    max-width: 100%;
   }
 
-  .mobile {
-    display: block;
+  .profile-content {
+    flex-direction: column;
   }
-  span {
-    margin-left: 6px;
+
+  .profile-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .location-info {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .location-item {
+    gap: 10px;
+  }
+
+  .location-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .location-label {
+    font-size: 18px;
+  }
+
+  .location-value {
+    font-size: 13px;
+  }
+
+  .bio-section {
+    padding-top: 24px;
+  }
+
+  .bio-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .bio-paragraph {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .profile-header {
+    margin-bottom: 32px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 12px;
+  }
+
+  .profile-title {
+    font-size: 18px;
+  }
+
+  .bio-title {
+    font-size: 16px;
+  }
+
+  .bio-paragraph {
+    font-size: 12px;
+    text-align: left;
   }
 }
 </style>

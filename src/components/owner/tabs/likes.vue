@@ -321,6 +321,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-direction: row; /* Ensure horizontal alignment */
 }
 
 .current-market-price {
@@ -350,8 +351,23 @@ export default {
 @media (max-width: 600px) {
   .bazaar-product-showcase {
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 15px;
+    gap: 10px;
+    margin-left: -11px;
+    padding-right: 15px;
+    padding: 0;
+  }
+  .artisan-product-tile {
+    border-radius: 8px;
+    margin: 0;
+  }
+  .marketplace-product-info {
+    padding: 12px;
+  }
+  .current-market-price {
+    font-size: 16px;
+  }
+  .original-retail-price {
+    font-size: 16px;
   }
 }
 </style>

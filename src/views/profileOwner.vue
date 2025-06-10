@@ -2,6 +2,7 @@
   <div class="mx-auto" style="overflow-x: clip;">
     <navbar></navbar>
     <head-page></head-page>
+    <ProfileCover />
     <div class="container text-justify corps prof center-content wahala">
       <b-row class="">
         <b-col cols="12" class="p-3">
@@ -43,8 +44,10 @@ import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 import Likes from "../components/owner/tabs/likes.vue";
 import Boutique from "../components/owner/tabs/boutique.vue";
+import ProfileCover from "../components/site/profile-cover.vue";
 import SiteFooter from "../components/site/siteFooter.vue";
 import CustomTabs from "../components/site/customTabs.vue";
+import boutique from "../components/owner/tabs/boutique.vue";
 import { mapGetters, mapMutations } from "vuex";
 
 import { WhoIsIt } from "@/mixins";
@@ -55,6 +58,7 @@ export default {
   components: {
     Following,
     navbar,
+    ProfileCover,
     headPage,
     Post,
     About,
@@ -62,7 +66,7 @@ export default {
     Likes,
     SiteFooter,
     Boutique,
-    CustomTabs
+    CustomTabs,
   },
   data() {
     return {

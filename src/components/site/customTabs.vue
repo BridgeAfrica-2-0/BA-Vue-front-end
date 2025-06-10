@@ -37,6 +37,11 @@ export default {
 .tab-list {
   display: flex;
   margin-bottom: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #000 #eee;
 }
 .tab-btn {
   background: none;
@@ -49,6 +54,8 @@ export default {
   border-bottom: 3px solid transparent;
   font-weight: normal;
   transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .tab-btn.active {
   font-weight: bold;
@@ -57,9 +64,20 @@ export default {
   background: none;
 }
 .tab-btn:not(.active):hover {
-  color:  black;
+  color: black;
 }
 .tab-content {
   padding-top: 1rem;
+}
+
+/* Hide scrollbar for a cleaner look on mobile */
+@media (max-width: 768px) {
+  .tab-list {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  .tab-list::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+  }
 }
 </style>

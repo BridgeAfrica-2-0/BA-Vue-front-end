@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-8 col-sm-9 col-md-6">
           <b-form-input
-            placeholder="237 6XX XXX XXX"
+            placeholder="6XX XXX XXX"
             id="number"
             v-model="number"
             type="tel"

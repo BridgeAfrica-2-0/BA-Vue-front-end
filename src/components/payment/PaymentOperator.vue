@@ -133,7 +133,7 @@
                     id="phone-input"
                     type="tel"
                     required
-                    placeholder="237 6XX XXX XXX"
+                    placeholder="6XX XXX XXX"
                   ></b-form-input>
                 </div>
               </div>

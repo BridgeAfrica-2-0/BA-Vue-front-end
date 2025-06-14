@@ -1,439 +1,288 @@
 <template>
-  <div>
-    <fas-icon
-      class="violet mr-2 pt-1 icon-size primary"
-      :icon="['fas', 'file-image']"
-    />{{ $t("profileowner.Media") }}
-
-    <hr />
-    <b-card-text v-if="!isPremium && type == 'business'"> {{$t('general.PREMIUM_ACCOUNT_FEATURE')}} </b-card-text>
-
-    <b-tabs content-class="mt-3" v-model="tabIndex" v-if="isPremium || type !== 'business'" pills>
-      <b-tab :title="$t('profileowner.Posts')" @click="getImages">
-        <div v-if="!hasLoadPicture">
-          <b-spinner
-            class="load"
-            :label="$t('profileowner.Large_Spinner')"
-          ></b-spinner>
+  <div class="album-gallery">
+    <!-- Albums Grid Section (5 items per row on desktop) -->
+    <div class="albums-grid-section">
+      <div class="albums-grid">
+        <!-- Create Album Card as first grid item -->
+        <div class="album-card create-album-card" @click="createAlbum">
+          <div class="create-icon">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="create-title">Create Album</h3>
         </div>
-
-        <Images
-          :isEditor="isEditor"
-          :canUpload="true"
-          :showCreateForm="false"
-          :hasLoadPicture="!hasLoadPicture"
-          :images="all()"
-          :albumName="'notFound'"
-          :showAlbum="showAlbum"
-          :type="type"
-          v-else
-        />
-        
-      </b-tab>
-
-      <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
-        <div v-if="!hasLoadAlbum">
-          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
+        <!-- Album Cards -->
+        <div
+          v-for="album in albums"
+          :key="album.id"
+          class="album-card"
+          @click="openAlbum(album)"
+        >
+          <div class="album-cover">
+            <img :src="album.coverImage" :alt="album.title" />
+          </div>
+          <div class="album-info">
+            <span class="item-count">{{ album.itemCount }} Items</span>
+          </div>
         </div>
-        <Album
-          :isEditor="isEditor"
-          :type="type"
-          :key="forReload"
-          
-          :getAlbums="getAlbums"
-          :getImages="getImages"
-          :showCoverAlbum="showCoverAlbum"
-        />
-      </b-tab>
-    </b-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Album from "./album";
-import Images from "./images";
-import { mapGetters, mapMutations } from "vuex";
-import { isGuestUser } from '@/helpers';
-import { isPremium } from '@/helpers';
-
-import _ from "lodash";
-
+import Media1 from '../../../assets/img/updates/media1.png'
 export default {
-  props: {
-    type: {
-      type: String,
-      validator: function(value) {
-        return ["profile", "network", "business"].indexOf(value) !== -1;
-      },
-    },
-
-    showCoverAlbum: {
-      type: Boolean,
-      default: () => false,
-    },
-
-    isEditor: {
-      type: Boolean,
-      default: () => true,
-    },
-
-    isablum: {
-      type: Boolean,
-    },
-  },
-
-  watch: {
-      
-    "$store.state.notification.updateAlbum": function(canBeUpload){
-      
-      if (canBeUpload){
-        this.getAlbums()
-        this.forReload = this.forReload ++
-      }
-    },
-
-    showCoverAlbum: function(newValue){
-      if (newValue){
-        this.tabIndex = 1
-      }else{
-        this.tabIndex = 0;
-      }
-    },
-
-    tabIndex: function(newValue){
-      if (newValue){
-        this.getAlbums()
-      }else{
-        this.getImages()
-      }
-    }
-
-  },
-
-  data: function() {
+  name: "AlbumGallery",
+  data() {
     return {
-      loading: false,
-      hasLoadAlbum: false,
-      hasLoadPicture: false,
-      showAlbum: false,
-      strategy: null,
-      tabIndex: 0,
-      addItem: false,
-      isGuestUser: isGuestUser(),
-      forReload:0,
-      isPremium: isPremium()
+      albums: [
+        {
+          id: 1,
+          title: "Bridge Africa",
+          description: "Community development projects across the continent",
+          coverImage:
+           Media1,
+          itemCount: 3
+        },
+        {
+          id: 2,
+          title: "DIY Crafts",
+          description: "Handmade projects and creative tutorials",
+          coverImage:
+            Media1,
+          itemCount: 3
+        },
+        {
+          id: 3,
+          title: "Starry Night Collection",
+          description: "Inspired by Van Gogh's masterpiece",
+          coverImage: Media1,
+          itemCount: 3
+        },
+        {
+          id: 4,
+          title: "Modern Art Gallery",
+          description: "Contemporary artistic expressions",
+         coverImage: Media1,
+          itemCount: 3
+        }
+      ]
     };
   },
-
-  components: {
-    Album,
-    Images,
-  },
-
-
-  computed: {
-    ...mapGetters({
-      getProfilePictures: "UserProfileOwner/getImages",
-      getNetworkPictures: "networkProfileMedia/getImages",
-      profile: "auth/profilConnected",
-    }),
-
-    getBusinessPictures(){
-      return this.isGuestUser ? this.$store.getters["businessGuest/getAllImages"] : this.$store.getters["businessOwner/getAllImages"]
-    }
-
-  },
-
   methods: {
-    ...mapMutations({
-      updateAllAlbums: "notification/UPDATE_ALBUM",
-    }),
-
-    all() {
-      const wrapper = (data) => {
-        const newData = data
-          .filter((img) => img.media.length)
-          .map((img) => {
-            let render = img.media.map((picture) => {
-              return {
-                id: img.id,
-                content: img.content,
-                media: { 
-                  path: picture.path, 
-                  type: picture.type, 
-                  id: picture.id,
-                  preview_url: picture.preview_url 
-                },
-              };
-            });
-            return render;
-          });
-        return _.flatten(newData);
-      };
-
-      return wrapper(this.strategy[this.type]().pictures);
+    createAlbum() {
+      console.log("Creating new album...");
+      // Add your create album logic here
     },
-
-    getAlbums() {
-      try {
-        const type = this.strategy[this.type]();
-        this.hasLoadAlbum = false;
-        //if (!this.hasLoadAlbum) {
-        this.$store
-          .dispatch(type.album, this.urlData)
-          .then(() => {
-            this.hasLoadAlbum = true;
-            this.addItem = true;
-          })
-          .catch((err) => {
-            this.hasLoadAlbum = true;
-          })
-          .finally(() => {
-            console.log("End load album")
-            this.updateAllAlbums(false)
-          });
-        //}
-      } catch (error) {
-        console.log(error);
-        throw new Error("Invalid type", this.type);
-      }
-    },
-
-    getImages() {
-      try {
-        const type = this.strategy[this.type]();
-        //if (!this.hasLoadPicture) {
-        this.$store
-          .dispatch(type.image, this.urlData)
-          .then(() => {
-            this.hasLoadPicture = true;
-            this.addItem = true;
-          })
-          .catch((err) => {
-            this.hasLoadPicture = true;
-            this.hasLoadAlbum = true;
-          })
-          .finally(() => console.log("End load images"));
-        //}
-      } catch (error) {
-        console.log(error);
-        throw new Error("Invalid type", this.type);
-      }
-    },
-  },
-
-  created() {
-    
-    this.urlData = this.$route.params.id
-      ? this.$route.params.id
-      : this.profile.slug;
-
-    if (this.isablum) {
-      this.tabIndex = 1;
+    openAlbum(album) {
+      console.log("Opening album:", album.title);
+      // Add your open album logic here
     }
-    const dispatchMethod = this.isGuestUser ? 'businessGuest' : 'businessOwner';
-    if (this.showCoverAlbum) this.tabIndex = 1;
-
-    this.strategy = {
-      business: () => ({
-        album: dispatchMethod+"/getAlbums",
-        image: dispatchMethod+"/getImages",
-        pictures: this.getBusinessPictures,
-      }),
-      profile: () => ({
-        album: "UserProfileOwner/getAlbums",
-        image: "UserProfileOwner/getImages",
-        pictures: this.getProfilePictures,
-      }),
-      network: () => ({
-        album: "networkProfileMedia/getAlbums",
-        image: "networkProfileMedia/getImages",
-        pictures: this.getNetworkPictures,
-      }),
-    };
-
-    if (this.showCoverAlbum){
-      this.tabIndex = 1;
-      this.getAlbums()
-    }else{
-      this.getImages();
-    }
-
-  },
+  }
 };
 </script>
 
 <style scoped>
-.load {
-  width: 4rem;
-  height: 4rem;
-  color: rgb(231, 92, 24);
-  align-self: center;
-  margin: auto;
-  display: block;
-}
-.text-design {
-  align-items: first baseline;
+.album-gallery {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0rem;
+  box-sizing: border-box;
 }
 
-.drop-color {
-  color: black;
+/* Albums Grid Section */
+.albums-grid-section {
+  width: 100%;
 }
 
-@media (min-width: 960px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
-
-  .image-wrap {
-    border: 4px dashed #e75c18;
-    position: relative;
-
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 46.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
-
-  .img-gall {
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 20%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
-
-  @media (min-width: 1400px) {
-    .lb-grid {
-      height: 274px;
-      margin-bottom: 8px;
-    }
-  }
-
-  .img-gall {
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 19.1%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
-
-  .image-wrap {
-    border: 4px dashed #e75c18;
-    position: relative;
-
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 46.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 27px;
+  align-items: stretch;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1331px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
-
-  .img-gall {
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 31%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
-
-  .image-wrap {
-    border: 4px dashed #e75c18;
-    position: relative;
-
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 46.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
+/* Album Card (including Create Album) */
+.album-card {
+  border-radius: 9px;
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 320px;
+  justify-content: flex-start;
+  border: none;
 }
 
-@media (max-width: 762px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
-
-  .img-gall {
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 46.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
-
-  .image-wrap {
-    border: 4px dashed #e75c18;
-    position: relative;
-
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 46.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-  }
+.album-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.13);
 }
 
-.drag-textt {
+.create-album-card {
+  background: rgba(231, 91, 23, 0.06);
+  border-radius: 20px;
+  padding: 3rem 2rem 2rem 2rem;
   text-align: center;
-  font-weight: 100;
-  text-transform: uppercase;
-  color: #000;
+  border: 2px dashed #ff6500;
+  height: 100%;
+  min-height: 320px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  grid-column: auto;
+}
+
+.create-album-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 1);
+}
+
+.create-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E75B17;
+  transition: all 0.3s ease;
+}
+
+.create-album-card:hover .create-icon {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.create-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #333;
+  background: linear-gradient(135deg, #ff6500, #ff8f40);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Album Cover Image */
+.album-cover {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  background: #f5f5f5;
+}
+
+.album-card:hover .album-cover img {
+  transform: scale(1.05);
+}
+
+/* Album Info */
+.album-info {
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.item-count {
+  color: black;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .albums-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 900px) {
+  .albums-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .album-gallery {
+    padding: 1rem;
+  }
+  .albums-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .album-card,
+  .create-album-card {
+    min-height: 220px;
+    height: 100%;
+  }
+  .album-cover {
+    height: 100%;
+  }
+  .album-info {
+    padding: 0.8rem;
+  }
+  .create-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .create-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .album-gallery {
+    padding: 0.5rem;
+  }
+  .albums-grid {
+    gap: 21px;
+  }
+  .album-card,
+  .create-album-card {
+    min-height: 160px;
+  }
+  .album-cover {
+    height: 100%;
+  }
+  .album-info {
+    padding: 0.5rem;
+  }
+  .create-title {
+    font-size: 1rem;
+  }
 }
 </style>

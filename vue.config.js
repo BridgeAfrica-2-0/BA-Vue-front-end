@@ -21,5 +21,10 @@ module.exports = {
         "core-js/es6": "core-js/es"
       }
     }
+  },
+  devServer: {
+    host: "0.0.0.0", // allow access from ngrok
+    port: 8080,
+    allowedHosts: ["eager-lynx-tight.ngrok-free.app", "all"]
   }
 };

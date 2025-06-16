@@ -8,7 +8,7 @@
         <div class="header-img-text text-light font-rob">
           <p>BRIDGE AFRICA</p>
           <p>VENTURES</p>
-          <router-link to='/profile_owner'>Profile Section</router-link>
+          <router-link to="/profile_owner">Profile Section</router-link>
         </div>
       </div>
     </div>
@@ -20,19 +20,30 @@
     </div>
 
     <!-- Welcome -->
-    <h2 class="text-center font-poppin header-welcome my-4 welcome-heading">{{$t("about.Welcome_To_Bridge_Africa_Ventures")}}</h2>
+    <h2 class="text-center font-poppin header-welcome my-4 welcome-heading">
+      {{ $t("about.Welcome_To_Bridge_Africa_Ventures") }}
+    </h2>
     <div class="row justify-content-center p-2">
       <div class="col-md-7 text-center font-source welcome-text">
-        {{$t("about.We_are_a_technology_firm")}}, 
-        {{$t("about.on_a_mission_to_digitalise_businesses_and_consumers_in_Africa")}}. 
-        {{$t("about.Through_our_bridgeafrica_com_platform")}} , 
-        {{$t("about.we_help_SMEs_create_websites")}}, 
-        {{$t("about.gain_database_visibility")}}, 
-        {{$t("about.sell_online_and_network")}}. 
-        {{$t("about.We_equally_manage_an_online_artisanal_platform_cameroongallery_com")}}, 
-        {{$t("about.which_helps_craft_artists_sell_their_goods_globally")}}. 
-        {{$t("about.Through_our_consulting_services")}}, 
-        {{$t("about.we_provide_expert_support_to_public_and_private_entities")}}.
+        {{ $t("about.We_are_a_technology_firm") }},
+        {{
+          $t(
+            "about.on_a_mission_to_digitalise_businesses_and_consumers_in_Africa"
+          )
+        }}. {{ $t("about.Through_our_bridgeafrica_com_platform") }} ,
+        {{ $t("about.we_help_SMEs_create_websites") }},
+        {{ $t("about.gain_database_visibility") }},
+        {{ $t("about.sell_online_and_network") }}.
+        {{
+          $t(
+            "about.We_equally_manage_an_online_artisanal_platform_cameroongallery_com"
+          )
+        }},
+        {{ $t("about.which_helps_craft_artists_sell_their_goods_globally") }}.
+        {{ $t("about.Through_our_consulting_services") }},
+        {{
+          $t("about.we_provide_expert_support_to_public_and_private_entities")
+        }}.
       </div>
     </div>
     <div class="my-5">
@@ -48,16 +59,35 @@
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="py-2 px-3" role="tab">
                 <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span v-b-toggle.accordion-1 class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                  >{{$t("about.Our_Mission")}}</span
+                <span
+                  v-b-toggle.accordion-1
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                  >{{ $t("about.Our_Mission") }}</span
                 >
               </b-card-header>
-              <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+              <b-collapse
+                id="accordion-1"
+                visible
+                accordion="my-accordion"
+                role="tabpanel"
+              >
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
-                    {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
+                    {{
+                      $t(
+                        "about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online"
+                      )
+                    }},
+                    {{
+                      $t(
+                        "about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa"
+                      )
+                    }}.
+                    {{
+                      $t(
+                        "about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online"
+                      )
+                    }}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -65,16 +95,35 @@
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="py-2 px-3" role="tab">
                 <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span v-b-toggle.accordion-2 class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                  >{{$t("about.Our_Vision")}}</span
+                <span
+                  v-b-toggle.accordion-2
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                  >{{ $t("about.Our_Vision") }}</span
                 >
               </b-card-header>
-              <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
+              <b-collapse
+                id="accordion-2"
+                visible
+                accordion="my-accordion"
+                role="tabpanel"
+              >
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
-                    {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
+                    {{
+                      $t(
+                        "about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online"
+                      )
+                    }},
+                    {{
+                      $t(
+                        "about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa"
+                      )
+                    }}.
+                    {{
+                      $t(
+                        "about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online"
+                      )
+                    }}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -82,16 +131,34 @@
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="py-2 px-3" role="tab">
                 <!-- <b-button block  variant="info">Accordion 1</b-button> -->
-                <span v-b-toggle.accordion-3 class="my-5 mx-3 color-black font-weight-bold text-uppercase"
-                  >{{$t("about.Our_Strategy")}}</span
+                <span
+                  v-b-toggle.accordion-3
+                  class="my-5 mx-3 color-black font-weight-bold text-uppercase"
+                  >{{ $t("about.Our_Strategy") }}</span
                 >
               </b-card-header>
-              <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+              <b-collapse
+                id="accordion-3"
+                accordion="my-accordion"
+                role="tabpanel"
+              >
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
-                    {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
+                    {{
+                      $t(
+                        "about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online"
+                      )
+                    }},
+                    {{
+                      $t(
+                        "about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa"
+                      )
+                    }}.
+                    {{
+                      $t(
+                        "about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online"
+                      )
+                    }}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -102,25 +169,45 @@
     </div>
 
     <div class="container my-4">
-      <h1 class="color-black text-center font-arvo functionality-heading">{{$t("about.Our_Functionalities")}}</h1>
+      <h1 class="color-black text-center font-arvo functionality-heading">
+        {{ $t("about.Our_Functionalities") }}
+      </h1>
       <div class="my-3 row">
         <div class="col-md-6">
-          <h3 class="color-black font-arvo site-text mt-5">{{$t("about.WELCOME_TO_BridgeAfrica_com")}}</h3>
+          <h3 class="color-black font-arvo site-text mt-5">
+            {{ $t("about.WELCOME_TO_BridgeAfrica_com") }}
+          </h3>
           <p class="link-text font-poppin color-black">
-            {{$t("about.Bridgeafrica_com_is_a_cross_engineered_problems_meet_solutions_platform")}}, 
-            {{$t("about.which_helps_economic_actors_in_Africa_to_join_the_digital_economy")}}. 
-            {{$t("about.We_help_businesses_to_create_their_websites")}}, 
-            {{$t("about.buy_and_sell_online")}}, 
-            {{$t("about.and_to_gain_database_visibility")}}. 
-            {{$t("about.Our_platform_works_offline_via_SMS_for_actors_in_zones_of_low_or_no_internet_penetration")}}. 
-            {{$t("about.In_addition_to_solving_tech_issues")}}, 
-            {{$t("about.we_solve_digital_literacy_issues_faced_by_the_majority_of_businesses")}}
+            {{
+              $t(
+                "about.Bridgeafrica_com_is_a_cross_engineered_problems_meet_solutions_platform"
+              )
+            }},
+            {{
+              $t(
+                "about.which_helps_economic_actors_in_Africa_to_join_the_digital_economy"
+              )
+            }}. {{ $t("about.We_help_businesses_to_create_their_websites") }},
+            {{ $t("about.buy_and_sell_online") }},
+            {{ $t("about.and_to_gain_database_visibility") }}.
+            {{
+              $t(
+                "about.Our_platform_works_offline_via_SMS_for_actors_in_zones_of_low_or_no_internet_penetration"
+              )
+            }}. {{ $t("about.In_addition_to_solving_tech_issues") }},
+            {{
+              $t(
+                "about.we_solve_digital_literacy_issues_faced_by_the_majority_of_businesses"
+              )
+            }}
           </p>
         </div>
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-6 p-0">
-              <div class="card container border-0 rounded-0 functionality-div first pb-5 mt-md-5">
+              <div
+                class="card container border-0 rounded-0 functionality-div first pb-5 mt-md-5"
+              >
                 <p class="mt-5 pt-2 text-right">
                   <img
                     src="../assets/img/about/about-web-design-iconimg2.png"
@@ -129,18 +216,28 @@
                   />
                 </p>
                 <div class="pl-4">
-                  <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.WEBSITE_CREATION")}}
+                  <h6
+                    class="font-weight-bold font-mont functionality-div-headings"
+                  >
+                    {{ $t("about.WEBSITE_CREATION") }}
                   </h6>
                   <p class="text-left font-14">
-                    {{$t("about.We_help_businesses_and_institutions_easily_create_websites_in_under_5_minutes")}}, 
-                    {{$t("about.with_little_or_no_technical_expertise_required")}}
+                    {{
+                      $t(
+                        "about.We_help_businesses_and_institutions_easily_create_websites_in_under_5_minutes"
+                      )
+                    }},
+                    {{
+                      $t("about.with_little_or_no_technical_expertise_required")
+                    }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="col-md-6 p-0">
-              <div class="card container border-0 rounded-0 functionality-div second pb-5">
+              <div
+                class="card container border-0 rounded-0 functionality-div second pb-5"
+              >
                 <p class="mt-5 pt-2 text-right">
                   <img
                     src="../assets/img/about/about-phone-book-img3.png"
@@ -149,15 +246,25 @@
                   />
                 </p>
                 <div class="pl-4">
-                  <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.A_LOCALISED_BUSINESS_DIRECTORY")}}
+                  <h6
+                    class="font-weight-bold font-mont functionality-div-headings"
+                  >
+                    {{ $t("about.A_LOCALISED_BUSINESS_DIRECTORY") }}
                   </h6>
                   <p class="text-left font-14">
-                    {{$t("about.Our_localised_business_directory_helps_to_make_businesses_visible_and_locatable")}}, 
-                    {{$t("about.and_enables_consumers_to_search_for_and_compare_product_prices")}}. 
-                    {{$t("about.Customers_can_search_based_on_location")}},
-                    {{$t("about.Category")}} 
-                    {{$t("about.price")}}
+                    {{
+                      $t(
+                        "about.Our_localised_business_directory_helps_to_make_businesses_visible_and_locatable"
+                      )
+                    }},
+                    {{
+                      $t(
+                        "about.and_enables_consumers_to_search_for_and_compare_product_prices"
+                      )
+                    }}.
+                    {{ $t("about.Customers_can_search_based_on_location") }},
+                    {{ $t("about.Category") }}
+                    {{ $t("about.price") }}
                   </p>
                 </div>
               </div>
@@ -165,7 +272,9 @@
           </div>
           <div class="row">
             <div class="col-md-6 p-0">
-              <div class="card container border-0 rounded-0 functionality-div third pb-5">
+              <div
+                class="card container border-0 rounded-0 functionality-div third pb-5"
+              >
                 <p class="mt-5 pt-2 text-right">
                   <img
                     src="../assets/img/about/about-group-img4.png"
@@ -174,18 +283,28 @@
                   />
                 </p>
                 <div class="pl-4">
-                  <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.COMMUNITY_ENGAGEMENT")}}
+                  <h6
+                    class="font-weight-bold font-mont functionality-div-headings"
+                  >
+                    {{ $t("about.COMMUNITY_ENGAGEMENT") }}
                   </h6>
                   <p class="text-left font-14">
-                    {{$t("about.Our_platform_provides_community_engagement_functionalities_enabling_businesses_and_consumers_to_follow_one_another")}}, 
-                    {{$t("about.receive_notifications_and_send_direct_messages")}}
+                    {{
+                      $t(
+                        "about.Our_platform_provides_community_engagement_functionalities_enabling_businesses_and_consumers_to_follow_one_another"
+                      )
+                    }},
+                    {{
+                      $t("about.receive_notifications_and_send_direct_messages")
+                    }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="col-md-6 p-0">
-              <div class="card container border-0 rounded-0 functionality-div forth pb-5 mt-md-4">
+              <div
+                class="card container border-0 rounded-0 functionality-div forth pb-5 mt-md-4"
+              >
                 <p class="mt-5 pt-2 text-right">
                   <img
                     src="../assets/img/about/about-sms-img5.png"
@@ -194,12 +313,22 @@
                   />
                 </p>
                 <div class="pl-4">
-                  <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.OFFLINE_ACCESS")}}
+                  <h6
+                    class="font-weight-bold font-mont functionality-div-headings"
+                  >
+                    {{ $t("about.OFFLINE_ACCESS") }}
                   </h6>
                   <p class="text-left font-14">
-                    {{$t("about.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration")}}, 
-                    {{$t("about.our_platform_works_offline_via_SMS_and_soon_by_USSD")}}
+                    {{
+                      $t(
+                        "about.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration"
+                      )
+                    }},
+                    {{
+                      $t(
+                        "about.our_platform_works_offline_via_SMS_and_soon_by_USSD"
+                      )
+                    }}
                   </p>
                 </div>
               </div>
@@ -208,7 +337,11 @@
         </div>
       </div>
     </div>
-    <h1 class="color-black text-center font-arvo functionality-heading text-center">{{$t("about.Our_SERVICES")}}</h1>
+    <h1
+      class="color-black text-center font-arvo functionality-heading text-center"
+    >
+      {{ $t("about.Our_SERVICES") }}
+    </h1>
     <div class="row">
       <div class="col-md-8 px-md-0">
         <div class="row">
@@ -221,12 +354,18 @@
           </div>
           <div class="col-md-6 px-md-0 py-5">
             <div class="container my-md-5">
-              <h3 class="text-center color-black font-arvo production-heading font-weight-bold">
-                {{$t("about.Media_production")}}
+              <h3
+                class="text-center color-black font-arvo production-heading font-weight-bold"
+              >
+                {{ $t("about.Media_production") }}
               </h3>
               <p class="text-md-left text-center production-text color-black">
-                {{$t("about.Content_is_king")}}. 
-                {{$t("about.This_is_why_we_create_innovative_media_content_to_connect_businesses")}}.
+                {{ $t("about.Content_is_king") }}.
+                {{
+                  $t(
+                    "about.This_is_why_we_create_innovative_media_content_to_connect_businesses"
+                  )
+                }}.
               </p>
             </div>
           </div>
@@ -234,7 +373,9 @@
         <div class="row">
           <div class="col-md-6 p-0">
             <div class="container pt-5 px-5 mt-md-5">
-              <h3 class="text-left color-black font-arvo production-heading font-weight-bold">
+              <h3
+                class="text-left color-black font-arvo production-heading font-weight-bold"
+              >
                 Bridge <br />
                 Africa.com
               </h3>
@@ -263,26 +404,41 @@
     </div>
     <div class="row">
       <div class="col-md-4 p-0">
-        <img src="../assets/img/about/blocks-image-73-1-img8.jpg" alt="Yello Image" />
+        <img
+          src="../assets/img/about/blocks-image-73-1-img8.jpg"
+          alt="Yello Image"
+        />
       </div>
       <div class="col-md-4 p-0">
         <div class="container my-md-5 px-5">
-          <h3 class="text-center color-black font-arvo production-heading font-weight-bold">
-            {{$t("about.Cameroon_Gallery")}}
+          <h3
+            class="text-center color-black font-arvo production-heading font-weight-bold"
+          >
+            {{ $t("about.Cameroon_Gallery") }}
           </h3>
           <p class="text-md-left text-center production-text color-black">
-            {{$t("about.Connecting_the_world_to_authentic")}}, 
-            {{$t("about.meticulously_made_cultural_arts_and_crafts_from_Cameroon")}}.
+            {{ $t("about.Connecting_the_world_to_authentic") }},
+            {{
+              $t(
+                "about.meticulously_made_cultural_arts_and_crafts_from_Cameroon"
+              )
+            }}.
           </p>
         </div>
       </div>
       <div class="col-md-4 p-0 bg-primary">
         <div class="container my-md-5 px-5">
-          <h3 class="text-center text-light font-arvo production-heading font-weight-bold pt-5">
-            {{$t("about.Consulting")}}
+          <h3
+            class="text-center text-light font-arvo production-heading font-weight-bold pt-5"
+          >
+            {{ $t("about.Consulting") }}
           </h3>
           <p class="text-md-left text-center production-text text-light">
-            {{$t("about.We_provide_media_and_management_consulting_services_to_both_public_and_private_entities")}}.
+            {{
+              $t(
+                "about.We_provide_media_and_management_consulting_services_to_both_public_and_private_entities"
+              )
+            }}.
           </p>
         </div>
       </div>
@@ -293,8 +449,16 @@
       <div class="row">
         <div class="col-md-6 pt-md-5">
           <div class="my-5">
-            <h1 class="color-black text-center font-arvo about-heading text-center pt-4">{{$t("about.ABOUT")}}</h1>
-            <h1 class="color-black mt-md-4 text-center font-arvo about-heading text-center">bridgeafrica.com</h1>
+            <h1
+              class="color-black text-center font-arvo about-heading text-center pt-4"
+            >
+              {{ $t("about.ABOUT") }}
+            </h1>
+            <h1
+              class="color-black mt-md-4 text-center font-arvo about-heading text-center"
+            >
+              bridgeafrica.com
+            </h1>
           </div>
           <div class="video pl-md-5 py-5">
             <video
@@ -307,12 +471,19 @@
               controlslist="nodownload"
             ></video>
             <p class="text-center color-black font-weight-bold video-desc pt-5">
-              {{$t("about.A_3_in_1_platform_that_integrates_SMEs_into_the_Digital_Economy_through_website_creation")}}, 
-              {{$t("about.database_integration")}}, 
-              {{$t("about.and_networking")}}. 
-              {{$t("about.Currently_in_its_3rd_iteration")}}, 
-              {{$t("about.we_are_rebuilding_to_turn_bridgeafrica_com")}}
-              {{$t("about.into_a_4_in_1_tool_by_adding_an_online_market_place_and_improve_the_user_interface")}}.
+              {{
+                $t(
+                  "about.A_3_in_1_platform_that_integrates_SMEs_into_the_Digital_Economy_through_website_creation"
+                )
+              }}, {{ $t("about.database_integration") }},
+              {{ $t("about.and_networking") }}.
+              {{ $t("about.Currently_in_its_3rd_iteration") }},
+              {{ $t("about.we_are_rebuilding_to_turn_bridgeafrica_com") }}
+              {{
+                $t(
+                  "about.into_a_4_in_1_tool_by_adding_an_online_market_place_and_improve_the_user_interface"
+                )
+              }}.
             </p>
           </div>
         </div>
@@ -325,16 +496,30 @@
             />
           </div>
           <div class="our-wins bg-black">
-            <h4 class="font-arvo text-center font-weight-bold text-light py-4">{{$t("about.Our_Wins")}}</h4>
+            <h4 class="font-arvo text-center font-weight-bold text-light py-4">
+              {{ $t("about.Our_Wins") }}
+            </h4>
             <div class="container pb-3">
               <p class="text-left text-light">
-                {{$t("about.Bridgeafrica_com_was_voted")}} <b>{{$t("about.App_of_the_Year")}}</b> {{$t("about.by_the_International_Telecommunication_Union_for_its_contribution_towards_the_realisation_of_SDGs_1_and_8")}}.
+                {{ $t("about.Bridgeafrica_com_was_voted") }}
+                <b>{{ $t("about.App_of_the_Year") }}</b>
+                {{
+                  $t(
+                    "about.by_the_International_Telecommunication_Union_for_its_contribution_towards_the_realisation_of_SDGs_1_and_8"
+                  )
+                }}.
               </p>
               <p class="text-left text-light">
-                {{$t("about.We_have_worked_with_the_United_Nation_s_IFAD_to")}} <b>{{$t("about.digitalise_750_agricultural_SMEs")}}</b> {{$t("about.across_4_regions_in_Cameroon")}}.
+                {{
+                  $t("about.We_have_worked_with_the_United_Nation_s_IFAD_to")
+                }}
+                <b>{{ $t("about.digitalise_750_agricultural_SMEs") }}</b>
+                {{ $t("about.across_4_regions_in_Cameroon") }}.
               </p>
               <p class="text-left text-light">
-                {{$t("about.We_currently_have_over")}} <b>{{$t("about.7,000_users")}}</b> {{$t("about.and_are_working_to_expand_to_Africa")}}.
+                {{ $t("about.We_currently_have_over") }}
+                <b>{{ $t("about.7,000_users") }}</b>
+                {{ $t("about.and_are_working_to_expand_to_Africa") }}.
               </p>
             </div>
           </div>
@@ -342,15 +527,32 @@
         <div class="col-md-3 pl-md-0">
           <div class="specific-main-div px-3">
             <h5 class="text-md-left text-center  specific-heading">bridge</h5>
-            <h5 class="text-md-left text-center specific-heading">africa.com</h5>
-            <h5 class="text-md-left text-center specific-heading">{{$t("about.SPECIFIC_INFO")}}</h5>
+            <h5 class="text-md-left text-center specific-heading">
+              africa.com
+            </h5>
+            <h5 class="text-md-left text-center specific-heading">
+              {{ $t("about.SPECIFIC_INFO") }}
+            </h5>
             <p>
-              {{$t("about.Businesses_in_Africa_still_suffer_from_the_digital_divide")}}, 
-              {{$t("about.which_limits_their_integration_into_the_digital_economy")}}. 
-              {{$t("about.To_break_these_barriers")}}, 
-              {{$t("about.bridge_about_info")}}; 
-              {{$t("about.our_localised_business_directory_makes_them_visible")}}. 
-              {{$t("about.Our_online_marketplace_will_also_enable_the_99%_of_businesses_that_had_never_sold_online_to_engage_in_e_commerce")}}.
+              {{
+                $t(
+                  "about.Businesses_in_Africa_still_suffer_from_the_digital_divide"
+                )
+              }},
+              {{
+                $t(
+                  "about.which_limits_their_integration_into_the_digital_economy"
+                )
+              }}. {{ $t("about.To_break_these_barriers") }},
+              {{ $t("about.bridge_about_info") }};
+              {{
+                $t("about.our_localised_business_directory_makes_them_visible")
+              }}.
+              {{
+                $t(
+                  "about.Our_online_marketplace_will_also_enable_the_99%_of_businesses_that_had_never_sold_online_to_engage_in_e_commerce"
+                )
+              }}.
             </p>
           </div>
           <div class="d-none d-md-block yellow-img">
@@ -366,51 +568,71 @@
 
     <!-- Our Resources -->
     <section class="resources bg-black py-5 px-4">
-      <h1 class="text-center font-arvo text-light">{{$t("about.Our_Resources")}}</h1>
+      <h1 class="text-center font-arvo text-light">
+        {{ $t("about.Our_Resources") }}
+      </h1>
       <div class="row justify-content-center my-5">
         <div class="col-md-8">
           <div class="d-flex justify-content-around tabs-resource">
             <b-button
               pill
-              :variant="selectedResource == 'all' ? 'primary' : 'outline-primary'"
+              :variant="
+                selectedResource == 'all' ? 'primary' : 'outline-primary'
+              "
               @click="changeResource('all')"
-              >{{$t("about.Show_All")}}</b-button
+              >{{ $t("about.Show_All") }}</b-button
             >
             <b-button
               pill
-              :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
+              :variant="
+                selectedResource == 'bridgeafrica'
+                  ? 'primary'
+                  : 'outline-primary'
+              "
               @click="changeResource('bridgeafrica')"
               >bridgeafrica.com</b-button
             >
             <b-button
               pill
-              :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
+              :variant="
+                selectedResource == 'cameroon' ? 'primary' : 'outline-primary'
+              "
               @click="changeResource('cameroon')"
               >Cameroon Gallery</b-button
             >
             <b-button
               pill
-              :variant="selectedResource == 'cunsulting' ? 'primary' : 'outline-primary'"
+              :variant="
+                selectedResource == 'cunsulting' ? 'primary' : 'outline-primary'
+              "
               @click="changeResource('cunsulting')"
-              >{{$t("about.Consulting")}}</b-button
+              >{{ $t("about.Consulting") }}</b-button
             >
             <b-button
               pill
-              :variant="selectedResource == 'media' ? 'primary' : 'outline-primary'"
+              :variant="
+                selectedResource == 'media' ? 'primary' : 'outline-primary'
+              "
               @click="changeResource('media')"
-              >{{$t("about.Media_Production")}}</b-button
+              >{{ $t("about.Media_Production") }}</b-button
             >
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div v-for="resource in getResources" :key="resource.id" class="col-md-4 mt-4 resource-div">
+        <div
+          v-for="resource in getResources"
+          :key="resource.id"
+          class="col-md-4 mt-4 resource-div"
+        >
           <div class="resource-img-div">
             <img :src="resource.img_url" alt="..." class="resource-img" />
           </div>
           <div class="resource-title">
-            <p v-if="resource.title.length > 25">{{ resource.title.substring(0, 25) }}...</p>
+            <p v-if="resource.title.length > 25">
+              {{ resource.title.substring(0, 25) }}...
+            </p>
             <p v-else>
               {{ resource.title }}
             </p>
@@ -422,12 +644,23 @@
     </section>
     <!-- WELCOME TO BIZ KONNECT -->
     <section class="mt-4 p-3">
-      <h1 class="color-black text-center font-arvo functionality-heading text-center">{{$t("about.WELCOME_TO_BIZ_CONNECT")}}</h1>
+      <h1
+        class="color-black text-center font-arvo functionality-heading text-center"
+      >
+        {{ $t("about.WELCOME_TO_BIZ_CONNECT") }}
+      </h1>
       <div class="container text-center">
-        {{$t("about.Our_weekly_Biz_connect_TV_show")}}, 
-        {{$t("about.running_for_more_than_1_year_now_and_aired_on_Cameroon_s_national_television_channel")}}(CRTV), 
-        {{$t("about.promotes_SMEs_that_are_on_bridgeafrica_com")}}, 
-        {{$t("about.and_is_an_ideal_vitrine_to_give_nation_wide_visibility_to_entrepreneurs")}}
+        {{ $t("about.Our_weekly_Biz_connect_TV_show") }},
+        {{
+          $t(
+            "about.running_for_more_than_1_year_now_and_aired_on_Cameroon_s_national_television_channel"
+          )
+        }}(CRTV), {{ $t("about.promotes_SMEs_that_are_on_bridgeafrica_com") }},
+        {{
+          $t(
+            "about.and_is_an_ideal_vitrine_to_give_nation_wide_visibility_to_entrepreneurs"
+          )
+        }}
       </div>
       <div class="biz-konnect-video">
         <iframe
@@ -489,10 +722,12 @@
     <!-- Team -->
 
     <div class="mt-5">
-      <h1 class="color-black text-center font-arvo functionality-heading text-center letter-spacing">{{$t("about.MEET_OUR_TEAM")}}</h1>
+      <h1
+        class="color-black text-center font-arvo functionality-heading text-center letter-spacing"
+      >
+        {{ $t("about.MEET_OUR_TEAM") }}
+      </h1>
       <div class="row justify-content-center p-5">
-        
-
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
             src="../assets/img/team/maxine.png"
@@ -502,7 +737,9 @@
 
           <p class="text-center team-name color-black mt-5">Maxine Moffet</p>
 
-          <p class="text-center team-position color-black">{{$t("about.Co_founder")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.Co_founder") }}
+          </p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -512,7 +749,9 @@
             class="rounded-circle d-block m-auto team-img"
           />
           <p class="text-center team-name color-black mt-5">Ittia Bruno</p>
-          <p class="text-center team-position color-black">{{$t("about.COO")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.COO") }}
+          </p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -522,7 +761,9 @@
             class="rounded-circle d-block m-auto team-img"
           />
           <p class="text-center team-name color-black mt-5">Lengweh Blaise</p>
-          <p class="text-center team-position color-black">{{$t("about.CTO")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.CTO") }}
+          </p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -532,7 +773,9 @@
             class="rounded-circle d-block m-auto team-img"
           />
           <p class="text-center team-name color-black mt-5">Arlette Moussang</p>
-          <p class="text-center team-position color-black">{{$t("about.Editor")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.Editor") }}
+          </p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -542,7 +785,9 @@
             class="rounded-circle d-block m-auto team-img"
           />
           <p class="text-center team-name color-black mt-5">Abre Eunice</p>
-          <p class="text-center team-position color-black">{{$t("about.Administrative_Assistant")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.Administrative_Assistant") }}
+          </p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -552,7 +797,9 @@
             class="rounded-circle d-block m-auto team-img"
           />
           <p class="text-center team-name color-black mt-5">Lorenzo Tencati</p>
-          <p class="text-center team-position color-black">{{$t("about.Advisory_Board_to_CEO")}}</p>
+          <p class="text-center team-position color-black">
+            {{ $t("about.Advisory_Board_to_CEO") }}
+          </p>
         </div>
       </div>
     </div>
@@ -562,20 +809,33 @@
     <section class="subscribe container">
       <div class="row">
         <div class="col-md-4 px-md-0 d-none d-md-block">
-          <img src="../assets/img/about/contact2-img18.png" alt="Women" class="sub-img" />
+          <img
+            src="../assets/img/about/contact2-img18.png"
+            alt="Women"
+            class="sub-img"
+          />
         </div>
         <div class="col-md-4 px-md-0">
-          <div class="bg-black sub-div d-flex flex-column justify-content-center">
-            <h5 class="text-light font-arvo text-center">{{$t("about.SUBSCRIBE_FOR_NEWSLETTER")}}</h5>
-            <h2 class="text-light font-arvo text-center sub-heading">{{$t("about.STAY_IN_TOUCH")}}</h2>
+          <div
+            class="bg-black sub-div d-flex flex-column justify-content-center"
+          >
+            <h5 class="text-light font-arvo text-center">
+              {{ $t("about.SUBSCRIBE_FOR_NEWSLETTER") }}
+            </h5>
+            <h2 class="text-light font-arvo text-center sub-heading">
+              {{ $t("about.STAY_IN_TOUCH") }}
+            </h2>
             <b-form-input
               v-model="subEmail"
               :placeholder="$t('about.Your_Email_Address')"
               class="sub-input d-block mx-auto my-3"
             ></b-form-input>
 
-            <b-button pill variant="primary" class="font-arvo sub-btn d-block mx-auto py-md-2 mt-md-3"
-              >{{$t("about.Subscribe_To_News")}}</b-button
+            <b-button
+              pill
+              variant="primary"
+              class="font-arvo sub-btn d-block mx-auto py-md-2 mt-md-3"
+              >{{ $t("about.Subscribe_To_News") }}</b-button
             >
           </div>
         </div>
@@ -596,40 +856,60 @@
     <!-- Social Icons -->
 
     <section class="social-icons py-5">
-      <h2 class="text-light font-arvo text-center font-weight-bold text-capitalize">
-        {{$t("about.Visit_us_on_social_media_platforms")}}
+      <h2
+        class="text-light font-arvo text-center font-weight-bold text-capitalize"
+      >
+        {{ $t("about.Visit_us_on_social_media_platforms") }}
       </h2>
       <div class="row justify-content-center my-5">
         <div class="col-md-7">
           <p class="text-center font-mont text-light font-weight-bold">
-            {{$t("about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you")}}. 
-            {{$t("about.If_you_have_any_questions_or_comments")}}, 
-            {{$t("about.please_don_t_hesitate_to_contact_us")}}
-            {{$t("about.via_the_media_below")}}
+            {{
+              $t(
+                "about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you"
+              )
+            }}. {{ $t("about.If_you_have_any_questions_or_comments") }},
+            {{ $t("about.please_don_t_hesitate_to_contact_us") }}
+            {{ $t("about.via_the_media_below") }}
           </p>
         </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-md-4">
           <div class="d-flex flex-row justify-content-around">
-            <a href="https://twitter.com/bridgeafricacom" target="_blank" class="social-icon">
+            <a
+              href="https://twitter.com/bridgeafricacom"
+              target="_blank"
+              class="social-icon"
+            >
               <i class="fab fa-twitter-square"></i>
             </a>
-            <a href="http://facebook.com/bridgeafricacom" target="_blank" class="social-icon">
+            <a
+              href="http://facebook.com/bridgeafricacom"
+              target="_blank"
+              class="social-icon"
+            >
               <i class="fab fa-facebook-square"></i>
             </a>
-            <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank" class="social-icon">
+            <a
+              href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA"
+              target="_blank"
+              class="social-icon"
+            >
               <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://twitter.com/bridgeafricacom" target="_blank" class="social-icon">
+            <a
+              href="https://twitter.com/bridgeafricacom"
+              target="_blank"
+              class="social-icon"
+            >
               <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
       </div>
     </section>
-    <div>
-        </div>
+    <div></div>
 
     <!-- Footer -->
 
@@ -637,66 +917,61 @@
   </div>
 </template>
 <script>
-
 /**
- * this component is for the about us information 
+ * this component is for the about us information
  */
-import Contact from '../components/site/contact';
-import SiteFooter from '../components/site/siteFooter';
-import SiteHeader from '../components/site/siteHeader';
+import Contact from "../components/site/contact";
+import SiteFooter from "../components/site/siteFooter";
+import SiteHeader from "../components/site/siteHeader";
 export default {
   components: {
     Contact,
     SiteFooter,
-    SiteHeader,
+    SiteHeader
   },
   data() {
     return {
-      subEmail: '',
-      selectedResource: 'all',
+      subEmail: "",
+      selectedResource: "all",
       resources: [
         {
-          id: '1',
-          title: this.$t('general.HOW_TO_USE_BRIDGEAFRICA'),
-          img_url:
-            require('../assets/img/about/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry-img11.png'),
-          tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
+          id: "1",
+          title: this.$t("general.HOW_TO_USE_BRIDGEAFRICA"),
+          img_url: require("../assets/img/about/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry-img11.png"),
+          tag: ["bridgeafrica", "cameroon", "cunsulting", "media"]
         },
         {
-          id: '2',
+          id: "2",
           title: this.$t("general.BETA_LAUNCH_OF_BRIDGEAFRICA"),
-          img_url:
-            require('../assets/img/about/THINDFDF-1024x743-1-thegem-portfolio-masonry-img12.png'),
-          tag: ['bridgeafrica', 'cameroon'],
+          img_url: require("../assets/img/about/THINDFDF-1024x743-1-thegem-portfolio-masonry-img12.png"),
+          tag: ["bridgeafrica", "cameroon"]
         },
         {
-          id: '3',
-          title: this.$t('general.Partners_with_Pea'),
-          img_url:
-            require('../assets/img/about/mapoure-1024x576-1-thegem-portfolio-masonry-14.png'),
-          tag: ['bridgeafrica', 'media'],
+          id: "3",
+          title: this.$t("general.Partners_with_Pea"),
+          img_url: require("../assets/img/about/mapoure-1024x576-1-thegem-portfolio-masonry-14.png"),
+          tag: ["bridgeafrica", "media"]
         },
         {
-          id: '4',
+          id: "4",
 
-          title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
-          img_url: require('../assets/img/about/000000-img15.png'),
+          title: "BridgeAfrica.com Gives Digital Literacy Training (Demo)",
+          img_url: require("../assets/img/about/000000-img15.png"),
 
-          tag: ['cunsulting', 'media'],
+          tag: ["cunsulting", "media"]
         },
         {
-          id: '5',
-          title: this.$t('general.Cameroon_Gallery_Commercial'),
-          img_url:
-            require('../assets/img/about/caeroon-gallery-thegem-portfolio-masonry-16.jpg'),
-          tag: ['cameroon', 'media'],
-        },
-      ],
+          id: "5",
+          title: this.$t("general.Cameroon_Gallery_Commercial"),
+          img_url: require("../assets/img/about/caeroon-gallery-thegem-portfolio-masonry-16.jpg"),
+          tag: ["cameroon", "media"]
+        }
+      ]
     };
   },
   computed: {
     getResources() {
-      if (this.selectedResource == 'all') {
+      if (this.selectedResource == "all") {
         return this.resources;
       }
       return this.resources.filter(res => {
@@ -704,26 +979,25 @@ export default {
           return res;
         }
       });
-    },
+    }
   },
   methods: {
-
     /**
-     * this fuction is for change ressources 
+     * this fuction is for change ressources
      * @private
      */
     changeResource(resource) {
       this.selectedResource = resource;
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .balogo {
   width: 170px;
@@ -745,7 +1019,7 @@ export default {
 }
 .bg-img {
   background-color: #010000;
-  background-image: url('../assets/img/empower.jpg');
+  background-image: url("../assets/img/empower.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -882,9 +1156,9 @@ export default {
   margin-top: -8px;
 }
 
-.pl-md-0, .px-md-0 {
-    
-    margin-top: 14px;
+.pl-md-0,
+.px-md-0 {
+  margin-top: 14px;
 }
 .specific-heading {
   font-size: 24px;
@@ -972,7 +1246,7 @@ export default {
 .contact-us-form {
   width: 100%;
   min-height: 100vh;
-  background-image: url('../assets/img/about/blocks-image-05-img20.jpg');
+  background-image: url("../assets/img/about/blocks-image-05-img20.jpg");
 }
 .contact-img {
   margin-top: 5.5rem;
@@ -993,13 +1267,13 @@ export default {
   width: 100%;
 }
 .contact-input.name {
-  background-image: url('../assets/icons/user.png');
+  background-image: url("../assets/icons/user.png");
 }
 .contact-input.email {
-  background-image: url('../assets/icons/envelope.png');
+  background-image: url("../assets/icons/envelope.png");
 }
 .contact-input.website {
-  background-image: url('../assets/icons/world-wide-web.png');
+  background-image: url("../assets/icons/world-wide-web.png");
 }
 .contact-msg {
   width: 100%;
@@ -1008,7 +1282,7 @@ export default {
   width: 100%;
 }
 .social-icons {
-  background-image: url('../assets/img/about/shiny.jpg');
+  background-image: url("../assets/img/about/shiny.jpg");
   width: 100%;
   min-height: 50vh;
 }
@@ -1095,7 +1369,7 @@ export default {
   font-size: 20px;
   letter-spacing: 0px;
   font-weight: 700;
-  font-family: 'Arvo';
+  font-family: "Arvo";
 }
 .resource-line {
   border: 1px solid black;
@@ -1105,8 +1379,9 @@ export default {
   transition: 0.3s ease-in-out;
 }
 
-.mt-md-4, .my-md-4 {
-    margin-top: 0rem !important;
+.mt-md-4,
+.my-md-4 {
+  margin-top: 0rem !important;
 }
 
 @media only screen and (max-width: 660px) {

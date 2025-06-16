@@ -8,6 +8,7 @@
         <div class="header-img-text text-light font-rob">
           <p>BRIDGE AFRICA</p>
           <p>VENTURES</p>
+          <router-link to='/profile_owner'>Profile Section</router-link>
         </div>
       </div>
     </div>

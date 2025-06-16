@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: "/BA-Vue-front-end/",
   pluginOptions: {
     i18n: {
       locale: "en",

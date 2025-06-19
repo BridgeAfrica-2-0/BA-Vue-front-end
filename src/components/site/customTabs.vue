@@ -42,6 +42,7 @@ export default {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: #000 #eee;
+  margin-left: -6%;
 }
 .tab-btn {
   background: none;

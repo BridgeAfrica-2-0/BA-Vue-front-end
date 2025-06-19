@@ -93,8 +93,12 @@ export default {
 <style scoped>
 .bazaar-product-showcase {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  padding-left: 10px; /* Add padding to reduce space from left */
+  padding-right: 10px; /* Add padding to reduce space from right */
+  margin-left: -7%; /* Remove any negative margin if present */
+  margin-right: -7%; /* Remove any negative margin if present */
 }
 
 .artisan-product-tile {
@@ -104,6 +108,7 @@ export default {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
 }
 
 .artisan-product-tile:hover {
@@ -338,23 +343,24 @@ export default {
 
 @media (max-width: 1200px) {
   .bazaar-product-showcase {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 900px) {
   .bazaar-product-showcase {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .bazaar-product-showcase {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-left: -11px;
-    padding-right: 15px;
-    padding: 0;
+    gap: 20px;
+    padding: 0; /* Add horizontal padding to prevent overflow */
+    margin-left: -3%; /* Remove negative margin */
+    margin-right: -2%; /* Remove negative margin */
+    box-sizing: border-box;
   }
   .artisan-product-tile {
     border-radius: 8px;

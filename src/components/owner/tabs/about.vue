@@ -8,7 +8,7 @@
 
       <!-- Bio Section -->
       <div class="bio-section">
-         <!-- Location Info -->
+        <!-- Location Info -->
         <div class="location-info">
           <div class="location-item">
             <img
@@ -101,12 +101,21 @@ export default {
   flex-direction: column;
   gap: 10px;
   margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .location-item {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.location-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  background: none;
 }
 
 .home-icon {
@@ -119,34 +128,45 @@ export default {
 
 .location-details {
   display: flex;
-  gap: 100px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .location-label {
   font-size: 13px;
   color: #666666;
   font-weight: 400;
+  min-width: 110px; /* Ensures all labels start at same point */
+  text-align: left;
+  display: inline-block;
 }
 
 .location-value {
   font-size: 14px;
   color: #1a1a1a;
   font-weight: 500;
-}
-
-.bio-section {
-  padding-top: 20px;
+  text-align: right;
+  min-width: 90px; /* Ensures all values end at same point */
+  display: inline-block;
+  margin-left: 16px;
 }
 
 .bio-title {
   font-size: 20px;
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0 0 20px 0;
+  margin: 30px 0 20px 0;
 }
 
 .bio-content {
-  line-height: 1.6;
+  line-height: 1.7;
+  min-width: 600px;
+  margin: 0 auto;
+  text-align: justify; /* Ensures text is justified */
+  word-break: break-word; /* Prevents overflow on long words */
+  hyphens: auto; /* Adds hyphenation for better justification */
 }
 
 .bio-paragraph {
@@ -154,6 +174,9 @@ export default {
   color: #4a4a4a;
   margin: 0 0 16px 0;
   text-align: justify;
+  word-break: break-word;
+  hyphens: auto;
+  letter-spacing: 0.01em;
 }
 
 .bio-paragraph:last-child {
@@ -162,6 +185,13 @@ export default {
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
+  .bio-content {
+    min-width: 0; /* Remove fixed min-width */
+    width: 100%; /* Ensure it fits container */
+    padding: 0; /* Remove extra padding */
+    margin: 0; /* Remove auto margin */
+    box-sizing: border-box; /* Prevent overflow */
+  }
   .profile-container {
     padding: 16px;
     max-width: 100%;
@@ -180,6 +210,7 @@ export default {
     flex-direction: column;
     gap: 16px;
     margin-bottom: 12px;
+    max-width: 100%;
   }
 
   .location-item {
@@ -187,16 +218,19 @@ export default {
   }
 
   .location-icon {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
   }
 
   .location-label {
-    font-size: 18px;
+    min-width: 90px;
+    font-size: 12px;
   }
 
   .location-value {
-    font-size: 13px;
+    min-width: 70px;
+    font-size: 12px;
+    margin-left: 10px;
   }
 
   .bio-section {
@@ -220,6 +254,13 @@ export default {
 
 /* Extra small screens */
 @media (max-width: 480px) {
+  .bio-content {
+    min-width: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
   .profile-container {
     padding: 12px;
   }

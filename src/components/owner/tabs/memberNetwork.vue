@@ -3,7 +3,7 @@
     <!-- Header Section -->
     <div class="community-header">
       <h1 class="community-title">35 Community</h1>
-      
+
       <!-- Stats Tabs -->
       <div class="stats-tabs">
         <div class="tab active">
@@ -19,7 +19,7 @@
           <span class="tab-count">11</span>
         </div>
       </div>
-      
+
       <!-- Navigation Tabs -->
       <div class="tabs-nav">
         <div class="nav-tab active">
@@ -45,9 +45,9 @@
           </div>
           <div class="post-menu">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="1" fill="currentColor"/>
-              <circle cx="19" cy="12" r="1" fill="currentColor"/>
-              <circle cx="5" cy="12" r="1" fill="currentColor"/>
+              <circle cx="12" cy="12" r="1" fill="currentColor" />
+              <circle cx="19" cy="12" r="1" fill="currentColor" />
+              <circle cx="5" cy="12" r="1" fill="currentColor" />
             </svg>
           </div>
         </div>
@@ -58,32 +58,35 @@
 
 <script>
 export default {
-  name: 'Following',
+  name: "Following",
   data() {
     return {
       posts: [
         {
           id: 1,
-          username: 'Jhon',
-          date: 'May 02, 2025',
-          avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K'
+          username: "Jhon",
+          date: "May 02, 2025",
+          avatar:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K"
         },
         {
           id: 2,
-          username: 'Jhon',
-          date: 'May 02, 2025',
-          avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K'
+          username: "Jhon",
+          date: "May 02, 2025",
+          avatar:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K"
         },
         {
           id: 3,
-          username: 'Jhon',
-          date: 'May 02, 2025',
-          avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K'
+          username: "Jhon",
+          date: "May 02, 2025",
+          avatar:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGNUY1RjUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTAgMzBjMC00IDQtOCAxMC04czEwIDQgMTAgOCIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>
@@ -91,7 +94,7 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   background: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .community-header {
@@ -135,7 +138,7 @@ export default {
 }
 
 .tab-count {
-  background: #FF6B35;
+  background: #ff6b35;
   color: #ffffff;
   font-size: 12px;
   font-weight: 500;
@@ -231,13 +234,12 @@ export default {
 }
 
 .post-menu:hover {
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 
 @media screen and (max-width: 768px) {
   .nav-tab {
     min-width: 170px;
   }
-  
 }
 </style>

@@ -388,7 +388,7 @@ export default {
 /* Original desktop footer styles */
 .terminus-wrapper {
   display: flex;
-  min-height: 300px;
+  min-height: 150px;
   width: 100%;
 }
 
@@ -398,7 +398,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 20px 10px;
 }
 
 .brand-emblem {
@@ -422,27 +422,36 @@ export default {
 .nav-pillar {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .pillar-heading {
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
+  text-align: left;
+  width: 100%;
+  padding-left: 0;
 }
 
 .pillar-menu {
   list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%;                /* Ensure full width for alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;     /* Align all items to the left */
 }
 
 .pillar-menu li {
   margin-bottom: 12px;
+  width: 100%;                /* Make each li take full width */
+  text-align: left;           /* Ensure text is left-aligned */
 }
-
 .nav-anchor {
   color: #cccccc;
   text-decoration: none;
@@ -450,6 +459,9 @@ export default {
   transition: color 0.3s ease;
   font-family: "Roboto", sans-serif;
   line-height: 1.4;
+  display: block;             /* Make anchor fill the li for alignment */
+  width: 100%;
+  text-align: left;
 }
 
 .nav-anchor:hover {
@@ -460,7 +472,11 @@ export default {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  margin-top: 5px;
+  margin-top: 0;
+  margin-left: 0;
+  padding-left: 0;
+  width: 100%;
+  justify-content: flex-start; /* Align icons to the left */
 }
 
 .platform-link {
@@ -566,6 +582,11 @@ export default {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+  }
+  .social-hub {
+    justify-content: flex-start;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 

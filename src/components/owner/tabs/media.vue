@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Media1 from '../../../assets/img/updates/media1.png'
+import Media1 from "../../../assets/img/updates/media1.png";
 export default {
   name: "AlbumGallery",
   data() {
@@ -50,16 +50,14 @@ export default {
           id: 1,
           title: "Bridge Africa",
           description: "Community development projects across the continent",
-          coverImage:
-           Media1,
+          coverImage: Media1,
           itemCount: 3
         },
         {
           id: 2,
           title: "DIY Crafts",
           description: "Handmade projects and creative tutorials",
-          coverImage:
-            Media1,
+          coverImage: Media1,
           itemCount: 3
         },
         {
@@ -73,7 +71,7 @@ export default {
           id: 4,
           title: "Modern Art Gallery",
           description: "Contemporary artistic expressions",
-         coverImage: Media1,
+          coverImage: Media1,
           itemCount: 3
         }
       ]
@@ -163,7 +161,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #E75B17;
+  color: #e75b17;
   transition: all 0.3s ease;
 }
 

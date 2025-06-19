@@ -17,26 +17,27 @@
           @click="showPostOptions = !showPostOptions"
         />
       </div>
-
-      <div class="post-actions" v-if="showPostOptions">
-        <button class="action-btn photo-btn">
-          <img
-            src="../../../assets/img/updates/icons/camera.png"
-            alt="Photo Icon"
-            width="16"
-            height="16"
-          />
-          Photo
-        </button>
-        <button class="action-btn video-btn">
-          <img
-            src="../../../assets/img/updates/icons/video.png"
-            alt="Video Icon"
-            width="16"
-            height="16"
-          />
-          Video
-        </button>
+      <div class="post-actions">
+        <div class="post-actions-row">
+          <button class="action-btn photo-btn">
+            <img
+              src="../../../assets/img/updates/icons/camera.png"
+              alt="Photo Icon"
+              width="16"
+              height="16"
+            />
+            Photo
+          </button>
+          <button class="action-btn video-btn">
+            <img
+              src="../../../assets/img/updates/icons/video.png"
+              alt="Video Icon"
+              width="16"
+              height="16"
+            />
+            Video
+          </button>
+        </div>
         <button class="add-post-btn">Add Post</button>
       </div>
     </div>
@@ -300,9 +301,15 @@ export default {
 
 .post-actions {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.post-actions-row {
+  display: flex;
   gap: 15px;
-  flex-wrap: wrap;
+  width: auto;
 }
 
 .action-btn {
@@ -337,8 +344,10 @@ export default {
   padding: 10px 20px;
   border-radius: 10px;
   font-weight: 600;
-  margin-left: auto;
   border: none;
+  width: auto;
+  align-self: flex-start; /* ensures left alignment */
+  margin-top: 10px;
 }
 
 .add-post-btn:hover {
@@ -355,7 +364,7 @@ export default {
 /* Post Card Styles */
 .post-card {
   background: white;
-  border: 1.07px solid #0000001F;
+  border: 1.07px solid #0000001f;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -511,6 +520,12 @@ export default {
   .social-feed {
     padding: 0;
     background: white;
+  }
+  .add-post-btn {
+    align-self: center !important; /* Center the button on mobile */
+    margin-left: 0 !important; /* Remove any left margin */
+    margin-right: 0 !important; /* Remove any right margin */
+    display: block;
   }
 
   .post-creator {

@@ -92,10 +92,11 @@ export default {
 
 <style scoped>
 .album-gallery {
-  width: 100%;
+  width: 90vw;
   min-height: 100vh;
-  padding: 0rem;
+  padding: 0;
   box-sizing: border-box;
+  margin-left: -5%;
 }
 
 /* Albums Grid Section */
@@ -105,9 +106,11 @@ export default {
 
 .albums-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 27px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
   align-items: stretch;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* Album Card (including Create Album) */

@@ -92,7 +92,7 @@ export default {
 <style scoped>
 .community-profile {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: -4.5%;
   background: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }

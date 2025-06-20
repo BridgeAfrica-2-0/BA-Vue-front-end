@@ -96,6 +96,7 @@ export default {
 
 <style scoped>
 .boutique-container {
+  margin-left: -6.5%;
   max-width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }

@@ -70,10 +70,10 @@ export default {
 
 <style scoped>
 .profile-container {
-  margin: 0 auto;
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #ffffff;
+  margin-left: -6.5%;
 }
 
 .profile-content {

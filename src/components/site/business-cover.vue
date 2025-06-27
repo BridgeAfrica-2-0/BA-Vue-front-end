@@ -118,6 +118,7 @@ export default {
     Boutique,
     Reviews,
     About,
+    Posts
   },
   data() {
     return {

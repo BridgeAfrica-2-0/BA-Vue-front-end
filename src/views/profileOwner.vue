@@ -66,7 +66,7 @@ export default {
     Likes,
     SiteFooter,
     Boutique,
-    CustomTabs,
+    CustomTabs
   },
   data() {
     return {

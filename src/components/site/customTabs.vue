@@ -1,9 +1,6 @@
 <template>
   <div class="custom-tabs">
-    <div
-      class="tab-list"
-      :style="{ marginLeft: tabListMarginLeft }"
-    >
+    <div class="tab-list" :style="{ marginLeft: tabListMarginLeft }">
       <button
         v-for="(tab, idx) in tabs"
         :key="tab.title"
@@ -22,9 +19,16 @@
           v-model="searchValue"
         />
         <span class="search-icon">
-          <svg width="16" height="16" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="7"/>
-            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="#888"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="21" y2="21" />
           </svg>
         </span>
       </div>
@@ -38,14 +42,28 @@
         v-model="searchValue"
       />
       <span class="search-icon">
-        <svg width="16" height="16" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="7"/>
-          <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="#888"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <line x1="16.5" y1="16.5" x2="21" y2="21" />
         </svg>
       </span>
       <button class="filter-btn" type="button">
-        <svg width="18" height="18" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M4 6h16M6 12h12M10 18h4"/>
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          stroke="#888"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M4 6h16M6 12h12M10 18h4" />
         </svg>
         Filter
       </button>
@@ -67,7 +85,7 @@ export default {
     },
     tabListMarginLeft: {
       type: String,
-      default: '-12%'
+      default: "-12%"
     },
     showSearch: {
       type: Boolean,
@@ -148,7 +166,7 @@ export default {
   justify-content: flex-start;
 }
 .filter-btn {
-  background: rgba(204,204,204,1);
+  background: rgba(204, 204, 204, 1);
   border: none;
   border-radius: 16px;
   padding: 4px 12px;

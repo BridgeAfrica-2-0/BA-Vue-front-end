@@ -1,6 +1,11 @@
 <template>
   <div>
-    <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
+    <form
+      novalidate
+      autocomplete="off"
+      class="md-layout"
+      @submit.prevent="validateUser"
+    >
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
@@ -9,7 +14,6 @@
         </md-card-header>
 
         <md-card-content>
-        
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -40,7 +44,9 @@
           <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("auth.email") }} / {{ $t("auth.Tel") }} </label>
+            <label for="email">
+              {{ $t("auth.email") }} / {{ $t("auth.Tel") }}
+            </label>
             <md-input
               type="text"
               name="email"
@@ -62,7 +68,7 @@
             <md-input
               type="password"
               name="password"
-               autocomplete="off"
+              autocomplete="off"
               id="password"
               v-model="form.password"
               :disabled="sending"
@@ -124,7 +130,7 @@
           <label class="f-12">
             {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
           </label>
-          <br /> 
+          <br />
 
           <label class="f-12">
             <b-link href="#"> {{ $t("auth.terms_and_conditions") }} </b-link> &
@@ -136,24 +142,22 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("auth.the_user") }} {{ lastUser }} {{ $t("auth.was_saved_with_success") }} !
+        {{ $t("auth.the_user") }} {{ lastUser }}
+        {{ $t("auth.was_saved_with_success") }} !
       </md-snackbar>
     </form>
 
     <hr class="localfoter" />
 
     <p class="text-center">
-
-
       <span class="display-inline">
-        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span> 
-        <b-link class="ml-2"  @click="setLang('fr')">
+        <b-link @click="setLang('en')"> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="setLang('fr')">
           {{ $t("auth.french") }}
         </b-link>
       </span>
 
-      
       Bridge Africa © 2021
     </p>
   </div>
@@ -188,19 +192,18 @@ export default {
       },
       email: {
         required
-        
       }
     }
   },
 
-   created(){
-   if(this.$store.getters["auth/isLogged"]){
-       this.$router.push({ name: "dashboard" });
-   }
+  created() {
+    if (this.$store.getters["auth/isLogged"]) {
+      this.$router.push({ name: "dashboard" });
+    }
   },
 
   methods: {
-    getValidationClass(fieldName) { 
+    getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
@@ -209,20 +212,18 @@ export default {
       }
     },
 
-    setLang(data){
-        
-         console.log(data);
-          this.$i18n.locale = data;
-         this.$store.commit("auth/setAppLanguage", data);
+    setLang(data) {
+      console.log(data);
+      this.$i18n.locale = data;
+      this.$store.commit("auth/setAppLanguage", data);
     },
 
     flashErrors(errors) {
       let err = "";
-      if(errors){   
-      Object.values(errors).forEach((element) => {
-        err = element[0];
-      });
-
+      if (errors) {
+        Object.values(errors).forEach(element => {
+          err = element[0];
+        });
       }
 
       return err;
@@ -236,7 +237,7 @@ export default {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch(err => {  
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -248,19 +249,17 @@ export default {
           console.log(data);
 
           this.$store.commit("auth/setUserData", data.data);
-           this.$store.dispatch("auth/profilePackage")
+          this.$store.dispatch("auth/profilePackage");
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t('auth.Successfully_Register')
+            message: this.$t("auth.Successfully_Register")
           });
 
-          
-            this.$router.push({ name: "dashboard" });
-          
+          this.$router.push({ name: "dashboard" });
         })
         .catch(err => {
-          console.log({ err: err });   
+          console.log({ err: err });
         });
     },
 
@@ -284,46 +283,43 @@ export default {
         })
         .then(() => {
           this.sending = false;
-
-          // if (this.$store.state.auth.user.user.profile_complete == null) {
-          //   this.$router.push({ name: "welcome" });
-          // } else {
-          //   this.$router.push({ name: "dashboard" });
-          // }
-
-
-           this.$store.dispatch("auth/profilePackage")
-
-           this.$router.push(this.$route.query.redirect || '/dashboard')
-
+          this.$store.dispatch("auth/profilePackage");
+          this.$router.push(this.$route.query.redirect || "/dashboard");
         })
         .catch(err => {
           console.log(err);
           this.sending = false;
 
+          if (!err.response) {
+            // Network error or timeout
+            this.flashMessage.show({
+              status: "error",
+              message: this.$t("auth.Unable_to_connect_to_server")
+            });
+            return;
+          }
+
           if (err.response.status == 422) {
             console.log({ err: err });
-
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
+              message:
+                err.response.data.message +
+                " " +
+                this.flashErrors(err.response.data.errors)
             });
           } else if (err.response.status == 403) {
-            
-            console.log(err.response.data); 
-           this.$store.commit("auth/setSignupData",err.response.data.data);
+            console.log(err.response.data);
+            this.$store.commit("auth/setSignupData", err.response.data.data);
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message, 
+              message: err.response.data.message
             });
-
             this.$router.push({ name: "verifyAccount" });
-          }
-           else {
+          } else {
             this.flashMessage.show({
               status: "error",
-
-              message: this.$t('auth.An_error_has_occured')
+              message: this.$t("auth.An_error_has_occured")
             });
           }
         });
@@ -377,7 +373,7 @@ export default {
   padding-bottom: 80px;
 }
 .b-div {
- background-image: url("/assets/home/login-ban.jpg");
+  background-image: url("/assets/home/login-ban.jpg");
   background-position: center;
   background-size: cover;
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="boutique-container">
-    <h1 class="section-title">{{ sectionTitle }}</h1>
 
     <div class="boutique-card">
       <div class="boutique-logo">
@@ -96,7 +95,7 @@ export default {
 
 <style scoped>
 .boutique-container {
-  margin-left: -6.5%;
+  margin-left: -12%;
   max-width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -249,6 +248,9 @@ export default {
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
+  .boutique-container{
+    margin-left: 0; /* Reset margin for mobile */
+  }
   .section-title {
     font-size: 20px;
     padding: 0 16px;

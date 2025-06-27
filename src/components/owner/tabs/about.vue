@@ -11,11 +11,13 @@
         <!-- Location Info -->
         <div class="location-info">
           <div class="location-item">
-            <img
-              src="../../../assets/img/updates/icons/home-orange.png"
-              alt="Location Icon"
-              class="location-icon"
-            />
+            <!-- Home (black) icon SVG -->
+            <span class="location-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12L12 3l9 9"/>
+                <path d="M9 21V12h6v9"/>
+              </svg>
+            </span>
             <div class="location-details">
               <span class="location-label">Home town</span>
               <span class="location-value">{{ profile.homeTown }}</span>
@@ -23,11 +25,13 @@
           </div>
 
           <div class="location-item">
-            <img
-              src="../../../assets/img/updates/icons/location-orange.png"
-              alt="Location Icon"
-              class="location-icon"
-            />
+            <!-- Location (black) icon SVG -->
+            <span class="location-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10.5c0 7.5-9 12-9 12s-9-4.5-9-12a9 9 0 1 1 18 0z"/>
+                <circle cx="12" cy="10.5" r="3"/>
+              </svg>
+            </span>
             <div class="location-details">
               <span class="location-label">Current Location</span>
               <span class="location-value">{{ profile.currentLocation }}</span>
@@ -73,7 +77,7 @@ export default {
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #ffffff;
-  margin-left: -6.5%;
+  margin-left: -12%;
 }
 
 .profile-content {
@@ -195,6 +199,7 @@ export default {
   .profile-container {
     padding: 16px;
     max-width: 100%;
+    margin-left: 0; /* Reset margin for mobile */
   }
 
   .profile-content {

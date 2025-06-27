@@ -238,9 +238,9 @@ export default {
 <style scoped>
 .social-feed {
   max-width: 800px;
-  margin: 0 auto;
   background: #f8f9fa;
   min-height: 100vh;
+  margin-left: -10%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -520,6 +520,7 @@ export default {
   .social-feed {
     padding: 0;
     background: white;
+    margin-left: 0; /* Reset margin for mobile */
   }
   .add-post-btn {
     align-self: center !important; /* Center the button on mobile */

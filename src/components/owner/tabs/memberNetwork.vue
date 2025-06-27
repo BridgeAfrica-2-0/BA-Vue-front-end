@@ -92,7 +92,7 @@ export default {
 <style scoped>
 .community-profile {
   max-width: 1200px;
-  margin-left: -4.5%;
+  margin-left: -10.5%;
   background: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -240,6 +240,9 @@ export default {
 @media screen and (max-width: 768px) {
   .nav-tab {
     min-width: 170px;
+  }
+  .community-profile{
+    margin-left: 0; /* Reset margin for mobile */
   }
 }
 </style>

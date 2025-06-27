@@ -96,7 +96,7 @@ export default {
   min-height: 100vh;
   padding: 0;
   box-sizing: border-box;
-  margin-left: -5%;
+  margin-left: -11%;
 }
 
 /* Albums Grid Section */
@@ -241,6 +241,7 @@ export default {
 @media (max-width: 768px) {
   .album-gallery {
     padding: 1rem;
+    margin-left: 0; /* Reset margin for mobile */
   }
   .albums-grid {
     grid-template-columns: repeat(2, 1fr);

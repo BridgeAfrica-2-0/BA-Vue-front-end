@@ -280,7 +280,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
     meta: {
-      auth: true,
+      auth: false
     },
   },
 

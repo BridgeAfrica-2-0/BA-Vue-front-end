@@ -76,6 +76,9 @@ Vue.use(ReadMore);
 
 Vue.prototype.$axios = axios;
 
+// Set default timeout
+axios.defaults.timeout = 30000; // 30 seconds
+
 Vue.use(VueSocialauth, {
   providers: {
     facebook: {

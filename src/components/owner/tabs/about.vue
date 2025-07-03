@@ -77,7 +77,7 @@ export default {
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #ffffff;
-  margin-left: -12%;
+  margin-left: -14%; /* Adjusted for better alignment */
 }
 
 .profile-content {

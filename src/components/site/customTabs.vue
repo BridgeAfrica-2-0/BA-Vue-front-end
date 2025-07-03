@@ -85,7 +85,7 @@ export default {
     },
     tabListMarginLeft: {
       type: String,
-      default: "-12%"
+      default: "-14%"
     },
     showSearch: {
       type: Boolean,

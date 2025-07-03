@@ -1,37 +1,22 @@
 <template>
   <div class="section-row">
     <div class="col-3">
-      <h2 class="section-title">About Bridge Africa</h2>
+      <h2 class="section-title">Reviews</h2>
     </div>
     <div class="col-10">
-      <div class="slider-container">
-        <img :src="images[currentImage]" alt="" class="slider-image" />
-        <!-- Desktop navigation buttons -->
-        <button
-          v-if="images.length > 1"
-          class="slider-btn slider-btn-left"
-          @click="prevImage"
-        >
-          &#8592;
-        </button>
-        <button
-          v-if="images.length > 1"
-          class="slider-btn slider-btn-right"
-          @click="nextImage"
-        >
-          &#8594;
-        </button>
-        <!-- Mobile dots -->
-        <div class="slider-dots" v-if="images.length > 1">
-          <span
-            v-for="(img, idx) in images"
-            :key="idx"
-            :class="['slider-dot', { active: idx === currentImage }]"
-            @click="goToImage(idx)"
-          ></span>
-        </div>
-      </div>
-      <h1 class="section-heading">Bio</h1>
+      <h1 class="section-heading">
+        Kaneka Taylor <span class="heading-date">on 19 May, 2025</span>
+      </h1>
+      <img
+        class="review-img"
+        src="../../../../../assets/img/updates/reviews.png"
+        alt=""
+      />
+      <img
+        src="../../../../../assets/img/updates/5star.png"
+        alt="5 star"
+        class="stars-5"
+      />
       <p class="section-description">
         Bridge Africa is a community development project that aims to empower
         local artisans and promote sustainable practices across the continent.
@@ -42,13 +27,13 @@
         sagittis maecenas elit condimentum pretium.
       </p>
 
-      <h1 class="section-heading">Vision</h1>
-      <p class="section-description">
-        Our vision is to create a thriving ecosystem where local artisans can
-        showcase their talents and connect with a global audience. We strive to
-        foster creativity, sustainability, and economic growth in every
-        community we touch.
-      </p>
+      <div class="review-sub">
+        <img src="../../../../../assets/img/updates/review-sub.png" alt="" />
+        <p class="review-sub-description">
+          Waterproof Elastic Chair Cover for Dining Room Kitchen Wedding Hotel
+          Banquet Restaurant Anti - dirty Seat Cover Housse De Chaise
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -81,81 +66,61 @@ export default {
 </script>
 
 <style scoped>
+.col-10 {
+  display: flex;
+  flex-direction: column;
+}
 .section-row {
   display: flex;
   flex-direction: row;
-  margin-left: -15%;
+  margin-left: -22%;
   margin-top: 20px;
 }
-.section-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
+.review-sub {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  width: 80%;
 }
-.section-heading {
+
+.review-sub-description {
+  font-size: 15px;
+  color: black;
+  line-height: 150%;
+}
+
+.section-title {
   font-size: 20px;
   font-weight: bold;
   color: #000;
-  margin-top: 40px;
+}
+.review-img {
+  margin: 10px 0;
+  width: 300px;
+  height: 300px;
+}
+.stars-5 {
+  width: 120px;
+}
+.section-heading {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+.heading-date {
+  color: #666;
+  margin-left: 10px;
+  font-weight: normal;
+  text-decoration: none;
 }
 .section-description {
   font-size: 16px;
   color: #333;
   margin-top: 10px;
   line-height: 1.5;
-}
-
-/* Slider styles */
-.slider-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 24px;
-}
-.slider-image {
-  width: 100%;
-  border-radius: 10px;
-  display: block;
-}
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.8);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.slider-btn-left {
-  left: 10px;
-}
-.slider-btn-right {
-  right: 10px;
-}
-.slider-dots {
-  display: none;
-  justify-content: center;
-  margin-top: 12px;
-  gap: 8px;
-}
-.slider-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
-  display: inline-block;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.slider-dot.active {
-  background: #e75c18;
 }
 
 /* Responsive: show dots on mobile, hide arrows */
@@ -183,6 +148,18 @@ export default {
   }
   .section-description {
     text-align: justify;
+  }
+  .review-sub-description {
+    width: 100%;
+    font-size: 14px;
+    line-height: 130%;
+  }
+  .review-sub {
+    width: 100%;
+    gap: 15px;
+  }
+  .stars-5 {
+    margin: 10px 0;
   }
 }
 </style>

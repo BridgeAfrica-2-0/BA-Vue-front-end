@@ -240,7 +240,7 @@ export default {
   max-width: 800px;
   background: #f8f9fa;
   min-height: 100vh;
-  margin-left: -14%;
+  margin-left: -5.5%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 

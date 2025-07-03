@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-        <div class="pagination-bar">
+    <div class="pagination-bar">
       <button class="pagination-circle" :disabled="currentPage === 1" @click="prevPage">
         &lt;
       </button>
@@ -166,11 +166,11 @@ export default {
   justify-content: space-between;
   gap: 40px;
   box-sizing: border-box;
-  margin-left: -12%;
+  margin-left: -13%;
 }
 .filter-container {
   background: white;
-  width: 313px;
+  width: 20%;
   padding: 0;
 }
 
@@ -195,18 +195,18 @@ export default {
 
 .contact-button {
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px;
   background: white;
   color: #333;
   border: 2px solid #333;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: 20px;
 }
 
@@ -257,7 +257,7 @@ export default {
   flex: 1;
   min-width: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   box-sizing: border-box;
 }
@@ -269,7 +269,7 @@ export default {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 330px;
+  width: 270px;
 }
 
 .artisan-product-tile:hover {

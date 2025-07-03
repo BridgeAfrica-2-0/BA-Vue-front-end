@@ -97,7 +97,7 @@ export default {
   gap: 20px;
   padding-left: 10px; /* Add padding to reduce space from left */
   padding-right: 10px; /* Add padding to reduce space from right */
-  margin-left: -12%; /* Remove any negative margin if present */
+  margin-left: -14%; /* Remove any negative margin if present */
   margin-right: -7%; /* Remove any negative margin if present */
 }
 

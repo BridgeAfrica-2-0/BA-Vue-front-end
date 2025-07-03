@@ -96,7 +96,7 @@ export default {
   min-height: 100vh;
   padding: 0;
   box-sizing: border-box;
-  margin-left: -11%;
+  margin-left: -13%;
 }
 
 /* Albums Grid Section */

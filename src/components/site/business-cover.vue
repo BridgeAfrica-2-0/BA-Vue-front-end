@@ -68,32 +68,32 @@
             v-model="tabIndex"
             :tabs="[
               { title: 'Boutique', slot: 'boutique' },
-              { title: 'Reviews', slot: 'reviews' },
               { title: $t('profileowner.About'), slot: 'about' },
+              { title: 'Reviews', slot: 'reviews' },
               { title: $t('profileowner.Posts'), slot: 'posts' },
               { title: $t('profileowner.Media'), slot: 'media' },
               { title: $t('profileowner.Community'), slot: 'community' },
-              { title: 'Network', slot: 'network' }
+              { title: 'Networks', slot: 'network' }
             ]"
-            :tabListMarginLeft="'-14%'"
+            tabListMarginLeft="-13%"
             :showSearch="true"
             searchPlaceholder="Search all 20 items"
           >
             <template #boutique>
               <Boutique />
             </template>
-            <template #reviews>
-                <Reviews />
-            </template>
             <template #about>
                 <About />
+            </template>
+            <template #reviews>
+                <Reviews />
             </template>
             <template #posts>
                 <Posts />
             </template>
-            <template #media></template>
-            <template #community></template>
-            <template #network></template>
+            <template #media> <Media /></template>
+            <template #community><Following /></template>
+            <template #network><Networks /></template>
           </CustomTabs>
         </b-col>
       </b-row>
@@ -105,11 +105,14 @@
 <script>
 import SiteFooter from "./siteFooter.vue";
 import CustomTabs from "./customTabs.vue";
+import Following from "@/components/owner/tabs/memberNetwork";
 import { mapGetters, mapMutations } from "vuex";
 import Boutique from "../owner/tabs/businesses/tabs/boutique.vue";
 import About from "../owner/tabs/businesses/tabs/about.vue";
 import Reviews from "../owner/tabs/businesses/tabs/reviews.vue";
+import Networks from "../owner/tabs/businesses/tabs/networks.vue";
 import Posts from "../owner/tabs/posts.vue";
+import Media from "@/components/owner/tabs/media";
 export default {
   name: "BusinessCover",
   components: {
@@ -118,15 +121,18 @@ export default {
     Boutique,
     Reviews,
     About,
-    Posts
+    Posts,
+    Media,
+    Following,
+    Networks
   },
   data() {
     return {
       tabIndex: 0,
       tabs: [
         "#boutique",
-        "#reviews",
         "#about",
+        "#reviews",
         "#posts",
         "#media",
         "#community",
